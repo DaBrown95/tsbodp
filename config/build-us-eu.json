@@ -877,14 +877,14 @@
       "source": "src/transition/transition_fade_black_in_fast.c",
       "symbols": {
         "transition_frame_update_08001168": "0x08001169",
-        "transition_background_update_0800d17c": "0x0800d17d",
         "transition_palette_update_080117d4": "0x080117d5",
         "transition_stage_0802d054": "0x0802d055",
-        "irq_wait_vblank": "0x0801f971"
+        "irq_wait_vblank": "0x0801f971",
+        "display_step_backgrounds": "0x0800d17d"
       },
       "thumb_symbols": [
         "transition_frame_update_08001168",
-        "transition_background_update_0800d17c",
+        "display_step_backgrounds",
         "transition_palette_update_080117d4",
         "transition_stage_0802d054",
         "irq_wait_vblank"
@@ -901,14 +901,14 @@
       "source": "src/transition/transition_fade_black_in_refresh_twice.c",
       "symbols": {
         "transition_frame_update_08001168": "0x08001169",
-        "transition_background_update_0800d17c": "0x0800d17d",
         "transition_palette_update_080117d4": "0x080117d5",
         "transition_stage_0802d054": "0x0802d055",
-        "irq_wait_vblank": "0x0801f971"
+        "irq_wait_vblank": "0x0801f971",
+        "display_step_backgrounds": "0x0800d17d"
       },
       "thumb_symbols": [
         "transition_frame_update_08001168",
-        "transition_background_update_0800d17c",
+        "display_step_backgrounds",
         "transition_palette_update_080117d4",
         "transition_stage_0802d054",
         "irq_wait_vblank"
@@ -925,14 +925,14 @@
       "source": "src/transition/transition_fade_black_out_fast.c",
       "symbols": {
         "transition_frame_update_08001168": "0x08001169",
-        "transition_background_update_0800d17c": "0x0800d17d",
         "transition_palette_update_080117d4": "0x080117d5",
         "transition_stage_0802d054": "0x0802d055",
-        "irq_wait_vblank": "0x0801f971"
+        "irq_wait_vblank": "0x0801f971",
+        "display_step_backgrounds": "0x0800d17d"
       },
       "thumb_symbols": [
         "transition_frame_update_08001168",
-        "transition_background_update_0800d17c",
+        "display_step_backgrounds",
         "transition_palette_update_080117d4",
         "transition_stage_0802d054",
         "irq_wait_vblank"
@@ -949,14 +949,14 @@
       "source": "src/transition/transition_fade_black_out_refresh_twice.c",
       "symbols": {
         "transition_frame_update_08001168": "0x08001169",
-        "transition_background_update_0800d17c": "0x0800d17d",
         "transition_palette_update_080117d4": "0x080117d5",
         "transition_stage_0802d054": "0x0802d055",
-        "irq_wait_vblank": "0x0801f971"
+        "irq_wait_vblank": "0x0801f971",
+        "display_step_backgrounds": "0x0800d17d"
       },
       "thumb_symbols": [
         "transition_frame_update_08001168",
-        "transition_background_update_0800d17c",
+        "display_step_backgrounds",
         "transition_palette_update_080117d4",
         "transition_stage_0802d054",
         "irq_wait_vblank"
@@ -973,14 +973,14 @@
       "source": "src/transition/transition_fade_black_out_windows.c",
       "symbols": {
         "transition_frame_update_08001168": "0x08001169",
-        "transition_background_update_0800d17c": "0x0800d17d",
         "transition_palette_update_080117d4": "0x080117d5",
         "transition_stage_0802d054": "0x0802d055",
-        "irq_wait_vblank": "0x0801f971"
+        "irq_wait_vblank": "0x0801f971",
+        "display_step_backgrounds": "0x0800d17d"
       },
       "thumb_symbols": [
         "transition_frame_update_08001168",
-        "transition_background_update_0800d17c",
+        "display_step_backgrounds",
         "transition_palette_update_080117d4",
         "transition_stage_0802d054",
         "irq_wait_vblank"
@@ -997,14 +997,14 @@
       "source": "src/transition/transition_fade_white_in_fast.c",
       "symbols": {
         "transition_frame_update_08001168": "0x08001169",
-        "transition_background_update_0800d17c": "0x0800d17d",
         "transition_palette_update_080117d4": "0x080117d5",
         "transition_stage_0802d054": "0x0802d055",
-        "irq_wait_vblank": "0x0801f971"
+        "irq_wait_vblank": "0x0801f971",
+        "display_step_backgrounds": "0x0800d17d"
       },
       "thumb_symbols": [
         "transition_frame_update_08001168",
-        "transition_background_update_0800d17c",
+        "display_step_backgrounds",
         "transition_palette_update_080117d4",
         "transition_stage_0802d054",
         "irq_wait_vblank"
@@ -1021,14 +1021,14 @@
       "source": "src/transition/transition_fade_white_out_fast.c",
       "symbols": {
         "transition_frame_update_08001168": "0x08001169",
-        "transition_background_update_0800d17c": "0x0800d17d",
         "transition_palette_update_080117d4": "0x080117d5",
         "transition_stage_0802d054": "0x0802d055",
-        "irq_wait_vblank": "0x0801f971"
+        "irq_wait_vblank": "0x0801f971",
+        "display_step_backgrounds": "0x0800d17d"
       },
       "thumb_symbols": [
         "transition_frame_update_08001168",
-        "transition_background_update_0800d17c",
+        "display_step_backgrounds",
         "transition_palette_update_080117d4",
         "transition_stage_0802d054",
         "irq_wait_vblank"
@@ -1586,6 +1586,471 @@
       "negative_control": {
         "before": "<= 1",
         "after": "<= 2"
+      }
+    },
+    {
+      "name": "frame_draw_sequence",
+      "rom_offset": 10592,
+      "size": 720,
+      "source": "src/frame/frame_draw_sequence.c",
+      "thumb_symbols": [
+        "frame_sprite_dimensions",
+        "frame_append_oam",
+        "frame_note_oam"
+      ],
+      "symbols": {
+        "frame_sprite_dimensions": "0x0800a939",
+        "frame_append_oam": "0x0802cef1",
+        "frame_note_oam": "0x0802cf41",
+        "g_frame_round_bias": "0x030017d0",
+        "g_frame_display_channel": "0x03004400",
+        "g_frame_queue": "0x030015b8"
+      },
+      "negative_control": {
+        "before": "screen_y + 64",
+        "after": "screen_y + 63"
+      }
+    },
+    {
+      "name": "frame_update_bounds",
+      "rom_offset": 13220,
+      "size": 92,
+      "source": "src/frame/frame_update_bounds.c",
+      "symbols": {
+        "g_frame_registration": "0x03004330",
+        "frame_locate_bounds": "0x08048af9",
+        "frame_unregister_bounds": "0x0803b929",
+        "frame_register_bounds": "0x0803b905"
+      },
+      "thumb_symbols": [
+        "frame_locate_bounds",
+        "frame_unregister_bounds",
+        "frame_register_bounds"
+      ],
+      "negative_control": {
+        "before": "object->flags & 0x10000000",
+        "after": "object->flags & 0x08000000"
+      }
+    },
+    {
+      "name": "display_configure_background",
+      "rom_offset": 54676,
+      "size": 52,
+      "source": "src/display/configure_background.c",
+      "symbols": {
+        "g_background_states": "0x03002ef8"
+      },
+      "negative_control": {
+        "before": "background->flags |= 0x20;",
+        "after": "background->flags |= 0x40;"
+      }
+    },
+    {
+      "name": "display_enable_layers",
+      "rom_offset": 54924,
+      "size": 28,
+      "source": "src/display/enable_display_layers.c",
+      "symbols": {
+        "g_display_control": "0x03002ef0"
+      },
+      "negative_control": {
+        "before": "g_display_control.flags |= 2;",
+        "after": "g_display_control.flags |= 4;"
+      }
+    },
+    {
+      "name": "display_disable_layers",
+      "rom_offset": 54896,
+      "size": 28,
+      "source": "src/display/disable_display_layers.c",
+      "symbols": {
+        "g_display_control": "0x03002ef0"
+      },
+      "negative_control": {
+        "before": "g_display_control.flags |= 2;",
+        "after": "g_display_control.flags |= 4;"
+      }
+    },
+    {
+      "name": "display_commit_backgrounds",
+      "rom_offset": 54192,
+      "size": 320,
+      "source": "src/display/commit_backgrounds.c",
+      "symbols": {
+        "g_display_commit_context": "0x03004280",
+        "g_background_states": "0x03002ef8",
+        "g_display_control": "0x03002ef0",
+        "display_cpu_copy": "0x0804c8c5"
+      },
+      "thumb_symbols": [
+        "display_cpu_copy"
+      ],
+      "negative_control": {
+        "before": "i < 4",
+        "after": "i < 3"
+      }
+    },
+    {
+      "name": "display_tile_resource_codec",
+      "rom_offset": 43260,
+      "size": 52,
+      "source": "src/display/tile_resource_codec.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "record->flags & 0x20",
+        "after": "record->flags & 0x10"
+      }
+    },
+    {
+      "name": "display_update_tile_resource",
+      "rom_offset": 292900,
+      "size": 124,
+      "source": "src/display/update_tile_resource.c",
+      "symbols": {
+        "display_tile_resource_codec": "0x0800a8fd",
+        "display_cpu_copy_fast": "0x0804c8c1",
+        "display_lz77_vram": "0x0804c8e5",
+        "g_display_tile_decompress": "0x03003360",
+        "_call_via_r3": "0x0804ccfd"
+      },
+      "thumb_symbols": [
+        "display_tile_resource_codec",
+        "display_cpu_copy_fast",
+        "display_lz77_vram",
+        "_call_via_r3"
+      ],
+      "negative_control": {
+        "before": "0x06010000",
+        "after": "0x06010020"
+      }
+    },
+    {
+      "name": "display_update_tile_sequence",
+      "rom_offset": 293024,
+      "size": 100,
+      "source": "src/display/update_tile_sequence.c",
+      "symbols": {
+        "display_tile_resource_codec": "0x0800a8fd",
+        "display_cpu_copy_fast": "0x0804c8c1",
+        "display_lz77_vram": "0x0804c8e5",
+        "g_display_tile_decompress": "0x03003360",
+        "_call_via_r3": "0x0804ccfd"
+      },
+      "thumb_symbols": [
+        "display_tile_resource_codec",
+        "display_cpu_copy_fast",
+        "display_lz77_vram",
+        "_call_via_r3"
+      ],
+      "negative_control": {
+        "before": "0x06010000",
+        "after": "0x06010020"
+      }
+    },
+    {
+      "name": "display_copy_tile_resource",
+      "rom_offset": 292460,
+      "size": 184,
+      "source": "src/display/copy_tile_resource.c",
+      "symbols": {
+        "display_bios_div": "0x0804c8c9",
+        "display_lz77_vram": "0x0804c8e5",
+        "display_cpu_copy": "0x0804c8c5",
+        "g_display_tile_decompress": "0x03003360",
+        "_call_via_r3": "0x0804ccfd"
+      },
+      "thumb_symbols": [
+        "display_bios_div",
+        "display_lz77_vram",
+        "display_cpu_copy",
+        "_call_via_r3"
+      ],
+      "negative_control": {
+        "before": "record->flags & 0x40",
+        "after": "record->flags & 0x80"
+      }
+    },
+    {
+      "name": "display_step_backgrounds",
+      "rom_offset": 53628,
+      "size": 564,
+      "source": "src/display/step_backgrounds.c",
+      "symbols": {
+        "g_background_states": "0x03002ef8",
+        "display_divide": "0x0804cd2d",
+        "display_add_point": "0x080273a1",
+        "display_offset_background": "0x0800d4f1",
+        "display_matrix_sine": "0x080272a9",
+        "display_matrix_cosine": "0x080272bd",
+        "display_fixed_multiply": "0x080272d1"
+      },
+      "thumb_symbols": [
+        "display_divide",
+        "display_add_point",
+        "display_offset_background",
+        "display_matrix_sine",
+        "display_matrix_cosine",
+        "display_fixed_multiply"
+      ],
+      "negative_control": {
+        "before": "index < 4",
+        "after": "index < 3"
+      }
+    },
+    {
+      "name": "display_offset_background",
+      "rom_offset": 54512,
+      "size": 116,
+      "source": "src/display/offset_background.c",
+      "symbols": {
+        "g_background_states": "0x03002ef8",
+        "display_scroll_sine": "0x0802725d",
+        "display_scroll_cosine": "0x08027219"
+      },
+      "thumb_symbols": [
+        "display_scroll_sine",
+        "display_scroll_cosine"
+      ],
+      "negative_control": {
+        "before": "phase_x >> 8",
+        "after": "phase_x >> 7"
+      }
+    },
+    {
+      "name": "display_upload_background_tiles",
+      "rom_offset": 55204,
+      "size": 64,
+      "source": "src/display/upload_background_tiles.c",
+      "symbols": {
+        "g_background_states": "0x03002ef8",
+        "display_cpu_copy": "0x0804c8c5"
+      },
+      "thumb_symbols": [
+        "display_cpu_copy"
+      ],
+      "negative_control": {
+        "before": "first * 32",
+        "after": "first * 64"
+      }
+    },
+    {
+      "name": "display_fill_background_map",
+      "rom_offset": 54984,
+      "size": 104,
+      "source": "src/display/fill_background_map.c",
+      "symbols": {
+        "g_background_states": "0x03002ef8",
+        "g_display_screen_block_counts": "0x0804f808",
+        "display_cpu_copy": "0x0804c8c5",
+        "display_fill_background_tile": "0x0800d731"
+      },
+      "thumb_symbols": [
+        "display_cpu_copy",
+        "display_fill_background_tile"
+      ],
+      "negative_control": {
+        "before": "background->flags |= 0x20;",
+        "after": "background->flags |= 0x40;"
+      }
+    },
+    {
+      "name": "display_write_incrementing_map_rectangle",
+      "rom_offset": 55440,
+      "size": 80,
+      "source": "src/display/write_incrementing_map_rectangle.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "(y + row) * 64",
+        "after": "(y + row) * 128"
+      }
+    },
+    {
+      "name": "display_fill_background_rectangle",
+      "rom_offset": 55396,
+      "size": 44,
+      "source": "src/display/fill_background_rectangle.c",
+      "symbols": {
+        "g_background_states": "0x03002ef8",
+        "display_write_incrementing_map_rectangle": "0x0800d891"
+      },
+      "thumb_symbols": [
+        "display_write_incrementing_map_rectangle"
+      ],
+      "negative_control": {
+        "before": "x, y, width, height, tile",
+        "after": "x + 1, y, width, height, tile"
+      }
+    },
+    {
+      "name": "transition_fade_black_in_record",
+      "rom_offset": 234604,
+      "size": 140,
+      "source": "src/transition/transition_fade_black_in_record.c",
+      "symbols": {
+        "g_game_flags": "0x03004310",
+        "g_irq_context": "0x03004280",
+        "g_transition_frame_period": "0x0300430c",
+        "transition_link_update": "0x0803d6c1",
+        "transition_record_event": "0x0803a41d",
+        "transition_frame_update_08001168": "0x08001169",
+        "transition_stage_0802d054": "0x0802d055",
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "transition_link_update",
+        "transition_record_event",
+        "transition_frame_update_08001168",
+        "transition_stage_0802d054",
+        "irq_wait_vblank"
+      ],
+      "negative_control": {
+        "before": "level=16",
+        "after": "level=15"
+      }
+    },
+    {
+      "name": "transition_fade_black_out_record",
+      "rom_offset": 234744,
+      "size": 144,
+      "source": "src/transition/transition_fade_black_out_record.c",
+      "symbols": {
+        "g_game_flags": "0x03004310",
+        "g_irq_context": "0x03004280",
+        "g_transition_frame_period": "0x0300430c",
+        "transition_link_update": "0x0803d6c1",
+        "transition_record_event": "0x0803a41d",
+        "transition_frame_update_08001168": "0x08001169",
+        "transition_stage_0802d054": "0x0802d055",
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "transition_link_update",
+        "transition_record_event",
+        "transition_frame_update_08001168",
+        "transition_stage_0802d054",
+        "irq_wait_vblank"
+      ],
+      "negative_control": {
+        "before": "level<16",
+        "after": "level<15"
+      }
+    },
+    {
+      "name": "display_hide_background",
+      "rom_offset": 54748,
+      "size": 20,
+      "source": "src/display/display_hide_background.c",
+      "symbols": {
+        "display_disable_layers": "0x0800d671"
+      },
+      "thumb_symbols": [
+        "display_disable_layers"
+      ],
+      "negative_control": {
+        "before": "0x01000000U",
+        "after": "0x00800000U"
+      }
+    },
+    {
+      "name": "transition_record_event",
+      "rom_offset": 238620,
+      "size": 244,
+      "source": "src/transition/transition_record_event.c",
+      "symbols": {
+        "g_event_sequence": "0x03007300",
+        "g_event_record": "0x030072f0",
+        "g_event_vector_a": "0x03003960",
+        "g_event_vector_b": "0x03003968",
+        "g_event_vector_c": "0x03003970",
+        "g_game_flags": "0x03004310",
+        "memory_fill": "0x08027a49",
+        "memory_copy": "0x08027ab5",
+        "event_get_link_slot": "0x0803e439"
+      },
+      "thumb_symbols": [
+        "memory_fill",
+        "memory_copy",
+        "event_get_link_slot"
+      ],
+      "negative_control": {
+        "before": "g_game_flags |= 0x40",
+        "after": "g_game_flags |= 0x80"
+      }
+    },
+    {
+      "name": "transition_object_set_state",
+      "rom_offset": 7172,
+      "size": 36,
+      "source": "src/transition/transition_object_set_state.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "object->pending |= 1",
+        "after": "object->pending |= 2"
+      }
+    },
+    {
+      "name": "display_show_background",
+      "rom_offset": 54648,
+      "size": 28,
+      "source": "src/display/display_show_background.c",
+      "symbols": {
+        "display_configure_background": "0x0800d595",
+        "display_enable_layers": "0x0800d68d"
+      },
+      "thumb_symbols": [
+        "display_configure_background",
+        "display_enable_layers"
+      ],
+      "negative_control": {
+        "before": "0x01000000U",
+        "after": "0x00800000U"
+      }
+    },
+    {
+      "name": "background_animation_configure_alpha",
+      "rom_offset": 43036,
+      "size": 24,
+      "source": "src/animation/background_animation_configure_alpha.c",
+      "symbols": {
+        "transition_configure_alpha": "0x0803919d",
+        "transition_set_alpha": "0x080391b5"
+      },
+      "thumb_symbols": [
+        "transition_configure_alpha",
+        "transition_set_alpha"
+      ],
+      "negative_control": {
+        "before": "transition_set_alpha(8, 8)",
+        "after": "transition_set_alpha(7, 8)"
+      }
+    },
+    {
+      "name": "transition_object_tick_alpha",
+      "rom_offset": 99996,
+      "size": 244,
+      "source": "src/transition/transition_object_tick_alpha.c",
+      "symbols": {
+        "g_game_flags": "0x03004310",
+        "g_background_animation": "0x03002ec0",
+        "transition_object_set_state": "0x08001c05",
+        "transition_set_layers": "0x0800ad99",
+        "transition_set_alpha": "0x080391b5",
+        "background_animation_load": "0x0800a6c1",
+        "background_animation_configure_alpha": "0x0800a81d"
+      },
+      "thumb_symbols": [
+        "transition_object_set_state",
+        "transition_set_layers",
+        "transition_set_alpha",
+        "background_animation_load",
+        "background_animation_configure_alpha"
+      ],
+      "negative_control": {
+        "before": "object->flags |= 2",
+        "after": "object->flags |= 4"
       }
     }
   ],

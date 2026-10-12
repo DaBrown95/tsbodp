@@ -7,7 +7,7 @@ void transition_fade_white_out_fast(unsigned short targets) {
  for (level = 0; level <= 16; level += 2) {
   REG16(0x04000054) = level;
   transition_frame_update_08001168();
-  transition_background_update_0800d17c();
+  display_step_backgrounds();
   transition_palette_update_080117d4();
   transition_stage_0802d054();
   irq_wait_vblank();

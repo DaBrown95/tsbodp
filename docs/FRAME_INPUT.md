@@ -86,13 +86,38 @@ signed rates and signed amplitudes; `frame_integrate_velocity` at `0x23C8`
 (32 bytes) adds acceleration and combines velocity with current position.
 The last name replaces the earlier unsupported pending-flags description.
 
-All 23 accepted extents in this path compile and link to their complete original
-bytes, including literal pools and zero alignment: 3,364 bytes (2,012 frame,
+All 25 accepted extents in this path compile and link to their complete original
+bytes, including literal pools and zero alignment: 4,176 bytes (2,824 frame,
 1,352 input). Function-specific changed-source controls were rejected for every
 extent. Raw source snapshots, compiler output, linked objects, expected and
 candidate bytes, useful failed attempts and comparison reports remain under
 ignored `reports/agents/frame-input/`. Pool-free helpers declare zero alignment
 explicitly; no original instructions are embedded in C.
+
+`frame_draw_sequence` at `0x2960` matches all 720 bytes, including its literal
+pools and padding. It is a substantive shared renderer dependency: a selected
+frame locates packed four-byte sprite parts after six-byte collider records and
+two-byte attachment records. Those part bitfields are signed nine-bit x and y,
+two-bit size, two-bit shape and ten-bit tile displacement, in that order. The
+OAM view carries GBA attribute bits; the local OAM copy uses word-sized bitfield
+operations, while the object's stored hardware view exposes byte and halfword
+fields. Affine modes transform the part center using object scale at `+0xE8`
+and `+0xEC`, the rounding bias at `0x030017D0`, and signed/unsigned fixed-point
+rounding. Normal modes mirror offsets by sprite dimensions. Flag two requests
+vertical mirroring plus the queue's deferred layer at `+0x20C`. Only screen y
+positions from -64 through 192 are appended; options masked by three trigger
+the associated channel marker after the append. The marker argument is an
+integer: the original channel-minus-one call is not truncated to eight bits.
+These are static access and exact compiler findings, not runtime validation.
+
+`frame_update_bounds` at `0x33A4` matches 92 bytes. For objects with flag
+`0x10000000`, it derives signed integer coordinates from the high halves of
+current position, requests a four-byte registration key through `0x48AF8` and
+compares its low halfword with object `+0xC4`. A changed key causes unregister
+and register calls at `0x3B928` / `0x3B904`, with argument 16, followed by a
+four-byte key update. The two-word union captures the independently evidenced
+comparison width and copied key width; the meaning of each key half remains
+uncertain.
 
 The 1,400-byte renderer at `0x23E8` is an active semantic C candidate and remains
 unverified. Its multipart packed records, object hardware OAM view and nested

@@ -2,10 +2,12 @@
 
 # Frame-synchronised transitions and background animation
 
-The first connected transition batch reconstructs **23 functions, 1,888
+The connected transition batches reconstruct **28 functions, 2,696
 bytes** at their original addresses, including pools and padding. The
-VBlank-connected background animation path adds **five functions, 276 bytes**,
-comprising the tick and four lifecycle routines.
+VBlank-connected background animation path adds **six functions, 300 bytes**,
+comprising the tick, four lifecycle routines and alpha defaults. Two background
+visibility wrappers add **48 bytes**. The combined batch inventory is **36
+functions, 3,044 bytes**.
 Every candidate in this batch is compiled with the pinned agbcc backend at
 `-O2 -mthumb-interwork`, linked at its original address and compared over the
 complete extent. Every function has a changed-source negative control that
@@ -15,7 +17,7 @@ validation is implied.
 ## Connected paths
 
 The callers of `irq_wait_vblank` expose a family of transitions from ROM
-`0x38588` through `0x39B10`. The first batch contains four connected window
+`0x38588` through `0x39B10`. The initial batch contains four connected window
 sweeps/split-window routines, seven fades that also refresh frame stages,
 three blocking alpha ramps, two indirect dispatch wrappers and seven alpha
 configuration/update helpers. Additional window variants and refresh
@@ -77,6 +79,39 @@ VBlank state. Stop clears the low four flag bits; forced reload sets bit
 eight when transfers are enabled. The complete flag meanings and the resource
 handle lifetime remain unresolved. The loader at `0xA6C0` is a retained
 candidate with a differing instruction schedule and is not accepted coverage.
+
+## Object handoff and recorded fades
+
+The callback at ROM `0x1869C` uses the same frame-object prefix as the frame
+subsystem, with transition state at `+0x4D`, pending flag at `+0x4F`, signed
+countdown at `+0x58`, reset period at `+0x64`, endpoint at `+0x68` and alpha
+bytes at `+0x72/+0x73`. The partial transition view leaves all unrelated fields
+explicitly unknown. The helper at `0x1C04` changes state only when needed and
+sets pending bit one. The callback advances or reverses alpha on countdown
+expiry, applies coefficients unless game bit `0x100000` blocks them, and
+restores the background animation when an endpoint is reached. The group
+activation callee at `0xAD98` is still named provisionally; its two arguments
+select resource object and command groups rather than proven hardware layers.
+
+The paced fade controllers at `0x3946C/0x394F8` update link coordination, record
+an event, run the frame stages and wait until the absolute VBlank-counter
+difference reaches the configured period at `0x0300430C`. Their recorder at
+`0x3A41C` has an eight-byte payload ABI and a twelve-byte record: kind and
+sequence bytes, reserved halfword and an eight-byte data union. Its bounded
+switch covers kinds one through thirteen. Kind three samples `KEYINPUT`;
+other kinds consume a word, selected bytes, or one of three global vectors.
+The callback increments the sequence, copies the record to `0x030072F0` and
+sets game flag `0x40`. The fixed destination alone does not establish a queue.
+
+Kind one ignores the payload, and these fade callers assign only its first
+word; the original upper word remains unspecified. The source preserves that
+representation rather than inventing an initialized argument. An aligned byte
+view reproduces the by-value ABI; the exact original typedef remains unknown.
+The code matches do not prove the event consumer or link protocol.
+
+Alignment-only `asm(".align 2, 0")` directives explicitly retain original zero
+tails where the assembler would otherwise emit Thumb NOP fill. They contain
+no original instruction body. The instruction bodies remain semantic C.
 
 ## Retained comparison evidence
 

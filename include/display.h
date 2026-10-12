@@ -19,24 +19,29 @@ struct WindowState {
 extern struct WindowState g_window_states[2];
 #define DISPLAY_REG16(a) (*(volatile unsigned short *)(a))
 struct BackgroundState {
-    unsigned short control;
-    unsigned char unknown_02[6];
+    union { unsigned int control_word; unsigned short control; } registers;
+    unsigned char unknown_04[4];
     void *tilemap_source;
-    unsigned int unknown_0c;
+    void *tilemap_buffer;
     void *tilemap_destination;
-    unsigned int unknown_14;
+    void *character_destination;
     unsigned int flags;
     int scroll_x, scroll_y;
-    unsigned char unknown_24[0x2a];
+    int position_x, position_y, velocity_x, velocity_y, target_x, target_y;
+    unsigned short scroll_duration;
+    short scale, scale_step, minimum_scale, maximum_scale;
+    unsigned short angle, angle_step;
+    short center_x, center_y;
     unsigned short pa, pb, pc, pd;
     short unknown_56;
     int reference_x, reference_y;
-    unsigned char unknown_60[0x0c];
+    unsigned short phase_x, phase_y;
+    short phase_step_x, phase_step_y, amplitude_x, amplitude_y;
 };
 extern struct BackgroundState g_background_states[4];
 struct DisplayControlState {
     unsigned int flags;
-    unsigned short control;
+    volatile unsigned int control : 16;
 };
 extern struct DisplayControlState g_display_control;
 extern void display_cpu_copy(const void *, void *, unsigned int);
@@ -130,7 +135,30 @@ struct DisplayTileLayout {
     unsigned char unknown_08[4];
     unsigned short record_offsets[1];
 };
-extern void (*g_display_tile_decompress_table[])(const void *, void *, unsigned int *);
-/* Explicit interworking handoff; the target is passed in the fourth register. */
-extern void display_call_decoder(const void *, void *, unsigned int *,
-                                void (*)(const void *, void *, unsigned int *));
+extern void display_configure_background(unsigned int, unsigned int);
+extern void display_enable_layers(unsigned short);
+extern void display_disable_layers(unsigned short);
+extern unsigned char display_tile_resource_codec(const struct DisplayTileLayout *, unsigned short);
+extern void display_cpu_copy_fast(const void *, void *, unsigned int);
+struct DisplayTileObject {
+    unsigned char unknown_00[0xd1];
+    unsigned char unknown_d1_low : 5;
+    signed char double_tile_size : 1;
+    unsigned char unknown_d1_high : 2;
+    unsigned char unknown_d2[9];
+    unsigned char frame_index;
+    struct DisplayTileResource *resource;
+    unsigned char unknown_e0[0x1c];
+    unsigned short bytes, first_tile;
+};
+
+struct DisplayPoint { int x, y; };
+extern int display_divide(int, int);
+extern int display_matrix_sine(int), display_matrix_cosine(int);
+extern int display_fixed_multiply(short, short);
+extern int display_scroll_sine(int), display_scroll_cosine(int);
+extern void display_add_point(struct DisplayPoint *, const struct DisplayPoint *, struct DisplayPoint *);
+extern void display_offset_background(unsigned int);
+extern const unsigned char g_display_screen_block_counts[4];
+extern void display_fill_background_tile(unsigned int, unsigned short, unsigned short);
+extern void display_write_incrementing_map_rectangle(void *, int, int, int, int, unsigned short);

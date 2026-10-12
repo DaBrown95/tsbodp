@@ -111,3 +111,6 @@ void frame_recycle_object(struct FrameObject **, struct FrameObjectList *, struc
 
 int frame_sine(int);
 int frame_cosine(int);
+
+void frame_locate_bounds(void *, struct FramePoint *, void *);
+void frame_register_bounds(void *, void *, int);
