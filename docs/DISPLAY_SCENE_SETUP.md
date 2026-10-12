@@ -123,8 +123,11 @@ observed address, not a buffer size or a string-length bound. The word's
 `text_id` name is inferred from its handoff to the unconverted routine at
 `0x0801B1CC`. Label resources use the adjacent ROM word table at `0x0804F81C`;
 its six observed indices come from navigation, and its original data remains
-unconverted. The text lookup at `0x08045008` and label factory retain inferred
-types and are explicit unconverted dependencies.
+unconverted. The text lookup at `0x08045008` retains inferred types and remains
+an explicit unconverted dependency. The label factory and its text-object
+allocator are reconstructed in the [connected lifecycle batch](DISPLAY_SCENE_LIFECYCLE.md).
+That batch's table clear extends the observed pointer prefix to seventeen
+slots, while retaining unsized declarations and no allocation-bound claim.
 
 Label redraw changes nonnull old objects at slots thirteen/fourteen by clearing
 flag bit one and setting bit two, then replaces both pointers and assigns state

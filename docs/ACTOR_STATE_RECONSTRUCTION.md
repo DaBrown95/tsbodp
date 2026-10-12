@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 48 Thumb C functions spanning 7,568 verified bytes. The
+This batch reconstructs 52 Thumb C functions spanning 8,608 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -57,6 +57,10 @@ no runtime or gameplay test is claimed here.
 | `0x34A0` | `frame_begin_position_move` | 56 |
 | `0x4533C` | `frame_set_centered_integer_position` | 28 |
 | `0x14B0` | `frame_set_velocity` | 8 |
+| `0x70E0` | `frame_actor_state_36` | 928 |
+| `0x2B9A0` | `frame_actor_need_value` | 8 |
+| `0x3D1F4` | `frame_read_signed_parameter` | 12 |
+| `0x2B3D4` | `frame_actor_refresh_terrain` | 92 |
 
 ## Dispatch evidence
 
@@ -278,24 +282,56 @@ results use C register bindings to retain the original allocation; these emit
 no instruction bodies and are compiler constraints, not runtime evidence.
 Numeric handler names retain uncertainty about the gameplay entity involved.
 
+State 36 joins the first view's actor with two value checks before dispatching
+substates 2 through 44 through a 43-entry table at `0x712C`. Its work at `+0x58`
+contains a signed countdown, followed by cue-count and cue-timer halfwords at
+`+0x5C/+0x5E`. It chooses waiting or walking, turns toward the view actor, reacts
+to contact and coordinates paired animations 40–43. One branch activates
+condition triple `(3,4,2)` through the accepted condition path. Audio cues 227,
+228 and 229 follow the observed cue counter and animation completions. The final
+wait can select state 37 on the view actor, closing the scene handoff reached
+by states 25 and 45. Repeated motion-stop calls and zeroing both cue fields are
+retained as observed; no gameplay purpose is asserted beyond these static steps.
+
+The probe block at `0x030039E8` aliases game state `+0x98`. The generic signed
+reader at `0x3D1F4` returns a sign-extended byte at `index*4+3`. State 36 compares
+that return as an unsigned word against 5, preserving the original unsigned
+branch even for a negative byte. Its need check uses the unsigned reader at
+`0x2B9A0`, which reads the high byte of the accepted need values with 24 fractional
+bits. The signed parameter block's broader domain is unspecified. Both reader
+functions use integer-address accumulation to retain the original addition
+register; they contain no embedded instructions.
+
+Terrain refresh converts the actor's next-position coordinates to signed integer
+components, then calls the still-unconverted `0x2ABB0` classifier using a two-word
+point by value. That inferred point prototype matches the caller; the two scalar
+prototype candidate differs in its first address-register allocation. The
+classifier result is stored at actor byte `+0x85`. Class 1 enables flags bit
+`0x4000`, and other classes clear it; the accepted velocity refresh runs only
+when that bit changes. The velocity builder already uses this bit to select its
+restricted direction table. Specific terrain labels and the classifier's packed
+edge records remain provisional and unconverted.
+
 ## Local proofs and remaining boundaries
 
 Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`,
 `reports/agents/vblank-wrapper/actor-route-batch-manifest.json`,
 `reports/agents/vblank-wrapper/actor-route-update-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-scene-batch-manifest.json`.
+`reports/agents/vblank-wrapper/actor-scene-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-social-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
 `actor-state-route-types13-*`, `actor-route-path-layout13-*` and
-`actor-route-updates-current10-*` and `actor-scene-current12-*` in the same ignored
+`actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` in the same ignored
 agent report tree. Original CFG scans and all 29 handler entry summaries remain
 local. Mutations change the dispatcher flags, animation IDs, countdown, wait
 factor, direction update flag, group offset, record stride, state target, point
 arithmetic, route limit, slot bound, active-count decrement, probe-vector length, mode transition,
 path-copy argument, destination direction, flags argument, search-status field, scene timer/request ID, scene-counter increment,
 activation mask, factory flags, allocation size, proximity cue, transition duration, special-subtype selection,
-centered-width divisor, velocity arithmetic and move countdown.
+centered-width divisor, velocity arithmetic, move countdown, social countdown,
+value-reader field and terrain class.
 
-Twelve of the 29 direct handler functions are reconstructed here. Useful next
+Thirteen of the 29 direct handler functions are reconstructed here. Useful next
 connected targets are the need target selector `0x6F20`, action-target selector
 `0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`. State 46
 (`0x6874`) is a retained near-match joining proximity, relation values, facing,
