@@ -1,8 +1,8 @@
 # Resource condition reconstruction evidence
 
-This connected continuation of resource commands 36 and 37 now contains 15
-verified C functions covering 1,756 bytes. The latest activation and actor-context
-batch adds four functions and 732 bytes. Complete extents match at their original ROM
+This connected continuation of resource commands 36 and 37 now contains 16
+verified C functions covering 2,280 bytes. The latest context updater adds one
+function and 524 bytes. Complete extents match at their original ROM
 addresses, including literal pools and zero tail alignment. Every replacement
 has a compiled, linked changed-source control that is rejected. These are static
 and compiler results; condition behaviour has not been tested during gameplay.
@@ -23,6 +23,7 @@ and compiler results; condition behaviour has not been tested during gameplay.
 | `0802A06C` | `condition_activate_entry` | 380 |
 | `0802A94C` | `condition_publish_row_displays` | 40 |
 | `08020AC8` | `condition_record_actor_selection` | 124 |
+| `08029DA4` | `condition_update_actor_context` | 524 |
 | `08029FB0` | `condition_finish_actor_context` | 188 |
 
 The serialized cells share the game-state base at `03003950` with the accepted
@@ -97,7 +98,7 @@ the display bounds checks do not guard these state writes. Adding validation
 would change the original behavior. The function submits the narrowed selection
 bytes to the context at game-state `DC`, updates and finishes the separate context
 at `10`, checks the byte at `E0` against four and 29, and refreshes valid entries.
-The 524-byte context updater at `08029DA4` remains original ROM code.
+The 524-byte context updater at `08029DA4` is now reconstructed.
 
 The selection recorder scans 13 groups, whose destination slots begin at context
 `1C` with stride eight and a pointer at four. Definitions at `080535A4` have stride
@@ -124,9 +125,23 @@ publisher's loop allocation. Their compiled controls change the view flag, loop
 limit, group count and counter threshold; each is rejected. Canonical raw
 comparisons remain under `reports/audio-root/condition-continuation-canonical/`.
 
+The context updater reads a signed halfword at context `22`, an unsigned count
+at `24`, and value bytes at `29`, `31`, `39`, `3D`, `41`, `49`, `4D`, `59`, `79`
+and `7D`. The four-byte record stride and byte-one value access support the partial
+`ConditionMeter` view; names such as `total`, `count` and `meters` are provisional.
+The count checks are nested at zero, three, seven and twelve; total checks are
+nested at 24, 49 and 59. Meter values are explicitly narrowed to signed bytes.
+Negative checks use minus 50 and reject the minus 128 sentinel. Four completion
+and activation pairs select condition triples or display kinds 97, 101 and 104.
+The updater reloads the values at `41` and `3D` after intervening calls while
+retaining their pointers. Ordinary scoped C reproduces those lifetimes without
+register bindings. The complete 524-byte comparison includes all five pool words
+and two zero alignment bytes; its changed count threshold is rejected. Raw
+positive, control and useful failed trials remain in ignored local reports.
+
 Useful failed candidates and raw comparisons remain in ignored local reports.
 The refresh at `0802A688`, group completion at `0802A3C8`, initialization at
-`0802A49C` and context updater at `08029DA4` remain unconverted. Close candidates
+`0802A49C` remain unconverted. Close candidates
 receive no C coverage credit. They are
 the next connected targets before assigning broader semantics to this system.
 No output patch, difference mask or reference change was used.

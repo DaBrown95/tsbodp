@@ -612,3 +612,22 @@ without establishing runtime map correctness. A scoped R4 coordinate binding
 preserves its lifetime across the dimensions call; it is a C allocation constraint,
 not instruction glue. Exact and mutated comparisons remain under
 `reports/agents/frame-input/actor-needs/layer-resume-2*`.
+
+The connected `frame_update_actor_state` wrapper at `0x2B2FC` is now matching
+C for its complete 44-byte extent. Its retained name is provisional: the only
+observed operation applies the layer lookup result to the two OAM layer bits.
+A `FramePoint` aggregate initialized from the signed high halfwords at object
+`+0x22` and `+0x26` reproduces the original argument loads. The lookup at
+`0x2B478` also remains exactly 96 bytes with the corresponding by-value point
+prototype. This is static ABI and compiler evidence for a point argument, not a
+claim that the original source declaration has been recovered uniquely.
+
+The lookup still converts these signed pixels to unsigned coordinates before
+its unsigned map-bound checks. Negative coordinates therefore select its
+fallback value 3; equality with a map dimension is accepted by its strict `>`
+checks. The returned values 2 through 5 are truncated by the wrapper's two-bit
+OAM field. Neither the edge policy nor a gameplay layer interpretation has been
+validated at runtime. Changing the wrapper's y coordinate to the x high
+halfword rejects the match by six bytes, and the lookup's changed layer-result
+control still rejects by one byte. Raw comparisons remain in ignored local
+reports; no candidate renderer bytes are counted as matching C.

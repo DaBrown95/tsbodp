@@ -43,6 +43,7 @@ unsigned int frame_grid_occupancy(void *, const int *);
 unsigned char frame_actor_direction_available(struct FrameObject *, unsigned char);
 void frame_set_actor_direction(struct FrameObject *, unsigned char);
 unsigned char frame_direction_toward(struct FrameObject *, struct FrameObject *);
+unsigned char frame_direction_to_destination(struct FramePoint, struct FramePoint, int);
 void frame_clear_animation_pending(struct FrameObject *);
 void frame_add_points(const struct FramePoint *, const struct FramePoint *, struct FramePoint *);
 void frame_point_to_integer(const struct FramePoint *, struct FramePoint *);

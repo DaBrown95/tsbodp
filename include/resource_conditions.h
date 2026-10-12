@@ -26,6 +26,7 @@ unsigned int condition_refresh(unsigned int,unsigned int);
 void condition_activate_entry(unsigned int,unsigned int,unsigned int);
 void condition_complete_if_active(unsigned int,unsigned int,unsigned int);
 void condition_refresh_thresholds(void *);
+void condition_update_actor_context(void *);
 void condition_publish_row_displays(unsigned int);
 void condition_clear_display_bits(void);
 #endif

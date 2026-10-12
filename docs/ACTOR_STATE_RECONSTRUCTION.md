@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 26 Thumb C functions spanning 4,672 verified bytes. The
+This batch reconstructs 36 Thumb C functions spanning 5,684 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -35,6 +35,16 @@ no runtime or gameplay test is claimed here.
 | `0x37498` | `frame_route_enable_destination` | 60 |
 | `0x374D4` | `frame_route_set_limit` | 60 |
 | `0x37510` | `frame_release_actor_route` | 88 |
+| `0x1A08` | `frame_direction_to_destination` | 92 |
+| `0x37028` | `frame_update_actor_routes` | 168 |
+| `0x371B4` | `frame_steer_actor_route` | 156 |
+| `0x37250` | `frame_find_actor_route` | 292 |
+| `0x37374` | `frame_follow_actor_route` | 208 |
+| `0x37444` | `frame_reset_actor_routes` | 32 |
+| `0x37568` | `frame_finish_actor_route` | 28 |
+| `0x3C0D8` | `frame_grid_search_status` | 20 |
+| `0x1C68` | `frame_enable_object_flags` | 8 |
+| `0x1C70` | `frame_disable_object_flags` | 8 |
 
 ## Dispatch evidence
 
@@ -159,7 +169,8 @@ The route handoff uses three 280-byte jobs at `0x03005A30`, with its active coun
 byte at `0x03005A20`. Each job stores its actor, destination, two delta words,
 a status-word pointer, a word mode and saved flags mask `0x10240`. Its final bytes
 at `+0x114..+0x117` store a limit, style, destination-use flag and an unknown byte.
-The central route scratch at `+0x20..+0x113` remains unspecified. Beginning a route
+The route path occupies `+0x20..+0x10F` as 30 two-word integer points; a
+path-index byte follows at `+0x110`, with three unspecified bytes after it. Beginning a route
 chooses the first free job, initializes those fields, enables actor flag
 `0x1000000`, sets the caller's status to 2 and increments the count. It returns
 zero when all three slots are occupied. The fourth parameter is a full word and
@@ -168,23 +179,53 @@ callers still match after this prototype refinement. The limit setter also
 narrows its input to a byte. Both setters stop after their first matching actor.
 Cancel checks all slots; release clears the route flag, reapplies the saved flag
 mask, resets the status word, clears all 280 job bytes and decrements the count.
-These handoffs connect the reconstructed state handlers, but route solving and
-per-frame route processing remain unconverted.
+The eight-entry mode table at `0x08D71FE4` resolves the indirect transfer in
+`frame_update_actor_routes`: modes 0/5 call path search, 2/3/4 steering, 6 path
+following and 1 final positioning; mode 7 has no callback. Each descriptor also
+provides a next-mode word. The update loop processes occupied slots, releases
+jobs when the caller status leaves 2/3, and writes callback results back through
+the status pointer. Its observed actor-flags-bit-2 branch releases a job and
+then continues reading its cleared status pointer. That branch remains explicit
+in C; static matching does not prove whether it can occur during gameplay.
+
+The destination-direction helper compares each coordinate against destination
+plus/minus speed tolerance, returning one of eight directions or 8 for arrival.
+Steering handles arrival/style, contact and descriptor-driven next mode, then
+updates the actor's direction/velocity and records its previous position. Path
+search clears actor flag `0x10000`, converts start/destination points to packed
+grid cells, and calls the still-unconverted grid search at `0x3BCF4`. The search
+status accessor reads byte `+0x199` of the shared state at `0x03001FD0`; its return
+is a full word even though that storage is one byte. Different search results
+select path following, arrival handling or descriptor fallback. A flag at job
+`+0x117` records one status-2 destination fallback and alters later completion
+reporting; its broader route meaning is provisional.
+
+Path following advances the path index when a point is reached. The first pair
+of zero coordinates terminates the path; style 1 selects another steering mode,
+and other styles return completion. Contact returns status 3. Final positioning
+sets the actor to the original destination and stops motion. Reset clears the
+active count and all three jobs. The flag helpers are semantic OR/AND updates
+called by beginning, searching and releasing routes. The core grid search and
+reverse-order path extraction at `0x3C08C` remain unconverted; bounded candidate
+proofs do not make those algorithms reconstructed.
 
 ## Local proofs and remaining boundaries
 
-Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-route-batch-manifest.json`.
+Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`,
+`reports/agents/vblank-wrapper/actor-route-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-route-update-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
-`actor-state-route-types13-*` and `actor-route-current13-*` in the same ignored
+`actor-state-route-types13-*`, `actor-route-path-layout13-*` and
+`actor-route-updates-current10-*` in the same ignored
 agent report tree. Original CFG scans and all 29 handler entry summaries remain
 local. Mutations change the dispatcher flags, animation IDs, countdown, wait
 factor, direction update flag, group offset, record stride, state target, point
-arithmetic, route limit, slot bound, active-count decrement and probe-vector length.
+arithmetic, route limit, slot bound, active-count decrement, probe-vector length, mode transition,
+path-copy argument, destination direction, flags argument and search-status field.
 
 Nine of the 29 direct handler functions are reconstructed here. Useful next
 connected targets are the need target selector `0x6F20`, action-target selector
-`0x7DC4`, route steering `0x371B4` and the remaining route update family. State 46
+`0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`. State 46
 (`0x6874`) is a retained near-match joining proximity, relation values, facing,
 animation and audio; its inferred relation/descriptor layouts still need matching
 confirmation. State 16 (`0x5CA4`) joins input, interaction choices, needs and
