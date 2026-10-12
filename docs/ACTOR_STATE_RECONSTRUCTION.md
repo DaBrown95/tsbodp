@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 13 Thumb C functions spanning 3,512 verified bytes. The
+This batch reconstructs 26 Thumb C functions spanning 4,672 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -22,6 +22,19 @@ no runtime or gameplay test is claimed here.
 | `0x5BA0` | `frame_actor_state_24` | 260 |
 | `0x6230` | `frame_actor_state_35` | 1,220 |
 | `0x8994` | `frame_actor_choose_walk_direction` | 412 |
+| `0x8BEC` | `frame_actor_direction_available` | 232 |
+| `0x188C` | `frame_direction_toward` | 60 |
+| `0x273A0` | `frame_add_points` | 24 |
+| `0x273DC` | `frame_point_to_integer` | 16 |
+| `0x273EC` | `frame_point_to_fixed` | 16 |
+| `0x1BD4` | `frame_clear_animation_pending` | 12 |
+| `0x7480` | `frame_actor_state_45` | 260 |
+| `0x3A614` | `frame_find_scene_target` | 52 |
+| `0x370D0` | `frame_begin_actor_route` | 228 |
+| `0x37464` | `frame_cancel_actor_route` | 52 |
+| `0x37498` | `frame_route_enable_destination` | 60 |
+| `0x374D4` | `frame_route_set_limit` | 60 |
+| `0x37510` | `frame_release_actor_route` | 88 |
 
 ## Dispatch evidence
 
@@ -67,7 +80,7 @@ R0 through its return sequence. A void output-pointer trial differed at that
 return sequence and is retained.
 
 The waypoint handlers shift the returned coordinates left by 16 and pass the
-point to the unconverted route initializer at `0x370D0`. A result word at actor
+point to the route initializer at `0x370D0`. A result word at actor
 `+0x54` records route status; the unsigned branch in state 34 establishes its
 unsigned view. The timer at `+0x58` is signed and expires at -1. A byte at `+0x66`
 sets wait duration in units of 30 frames. The names in `FrameActorStateWork`
@@ -77,7 +90,8 @@ State 7 chooses a waypoint different from the previous index, starts a route
 with argument 3 and cycles through walking/waiting substates. State 26 starts
 with route argument 0, waits and then asks the unconverted `0x6F20` selector for
 a need-related target/action; the selected action is attempted by `0x2E0B8`.
-State 34 obtains a scene target from `0x3A614`, starts a route and branches on
+State 34 obtains the first primary-list object with ID 15 as a scene target
+from `0x3A614`, starts a route and branches on
 route results 1/2/3 before advancing into state 43. These names are provisional;
 there is no claim that the route and target subsystems are fully reconstructed.
 
@@ -104,7 +118,7 @@ the shared registration/context pointer at `0x03004330`. It first tests two
 successive neighboring cells, requiring classification bit 2 and no bits from
 mask `0x3D`; its second pass tests one neighbor. It advances direction by two
 and wraps values above eight, remembering the initial direction to bound each
-loop. A further actor-specific availability check at `0x8BEC` determines success.
+loop. The actor-specific availability check at `0x8BEC` determines success.
 The chooser keeps both fallback directions and returns a byte success value.
 These call shapes and tests support its name more closely than the earlier
 need-selector context alias `frame_actor_need_bit2_effect`; helper and bit
@@ -120,20 +134,61 @@ expressions remain typed pointer/record operations, and no instruction body is
 embedded. Their first natural C candidates and subsequent raw mismatches remain
 local. The full extent and changed-source controls verify these constraints.
 
+The availability check first predicts the actor's next position using its speed
+and selected direction. It probes that position with three successive direction
+vectors of length `0x40000`, converts the resulting point to integer coordinates
+and asks the shared grid context for a cell. A changed low-halfword cell identifier
+must have classification bit 2 and no occupancy bits in `0x3D`. The upper halfword
+is retained as unknown, and these bit meanings remain provisional. Two fixed C
+register variables constrain the loaded cell identifiers to R0/R2 before applying
+a local `0xFFFF` mask. The complete 232-byte proof includes both mask loads, its
+literal pool and zero tail alignment; a plain integer-cell trial, short-field and
+bitfield variants, and failed allocation trials remain local. The bindings are
+compiler constraints and do not establish runtime behavior.
+
+`frame_direction_toward` converts two actors' fixed-point positions to signed
+integer points and passes their difference to the accepted eight-direction
+classifier. The conversion helpers read signed high halfwords or shift integer
+coordinates left by 16. `frame_add_points` adds both coordinates. State 45 makes
+two actors face each other and stops their motion, then coordinates animations
+40/43, completion flags, cues 228/229, and a 90-frame countdown before selecting
+state 37. The repeated motion-stop calls remain explicit because they are present
+in the original control flow; their broader gameplay reason is uncertain.
+
+The route handoff uses three 280-byte jobs at `0x03005A30`, with its active count
+byte at `0x03005A20`. Each job stores its actor, destination, two delta words,
+a status-word pointer, a word mode and saved flags mask `0x10240`. Its final bytes
+at `+0x114..+0x117` store a limit, style, destination-use flag and an unknown byte.
+The central route scratch at `+0x20..+0x113` remains unspecified. Beginning a route
+chooses the first free job, initializes those fields, enables actor flag
+`0x1000000`, sets the caller's status to 2 and increments the count. It returns
+zero when all three slots are occupied. The fourth parameter is a full word and
+the fifth is narrowed to an unsigned byte; all published constant-argument
+callers still match after this prototype refinement. The limit setter also
+narrows its input to a byte. Both setters stop after their first matching actor.
+Cancel checks all slots; release clears the route flag, reapplies the saved flag
+mask, resets the status word, clears all 280 job bytes and decrements the count.
+These handoffs connect the reconstructed state handlers, but route solving and
+per-frame route processing remain unconverted.
+
 ## Local proofs and remaining boundaries
 
-Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`.
+Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-route-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
-`reports/agents/vblank-wrapper/actor-state-current13-*`. Original CFG scans and
-all 29 handler entry summaries remain in the same ignored agent report tree.
-Mutations change the dispatcher flags, animation IDs, countdown, wait factor,
-direction update flag, group offset, record stride and state transition target.
+`actor-state-route-types13-*` and `actor-route-current13-*` in the same ignored
+agent report tree. Original CFG scans and all 29 handler entry summaries remain
+local. Mutations change the dispatcher flags, animation IDs, countdown, wait
+factor, direction update flag, group offset, record stride, state target, point
+arithmetic, route limit, slot bound, active-count decrement and probe-vector length.
 
-Eight of the 29 direct handler functions are reconstructed here. Useful next
+Nine of the 29 direct handler functions are reconstructed here. Useful next
 connected targets are the need target selector `0x6F20`, action-target selector
-`0x7DC4`, actor direction-availability helper `0x8BEC`, and the route initializer/
-cancel family at `0x370D0/0x37464`. State 16 (`0x5CA4`) joins input, interaction choices,
-needs and world-condition checks but has a larger substate table. Their scanned
-CFGs are closed; those scans alone do not establish C coverage, final function
-boundaries or runtime reachability. Other handlers and route bodies remain
-explicit unconverted ROM regions in the full build.
+`0x7DC4`, route steering `0x371B4` and the remaining route update family. State 46
+(`0x6874`) is a retained near-match joining proximity, relation values, facing,
+animation and audio; its inferred relation/descriptor layouts still need matching
+confirmation. State 16 (`0x5CA4`) joins input, interaction choices, needs and
+world-condition checks but has a larger substate table. Their scanned CFGs are
+closed; those scans alone do not establish C coverage, final function boundaries
+or runtime reachability. These bodies remain explicit unconverted ROM regions
+in the full build.
