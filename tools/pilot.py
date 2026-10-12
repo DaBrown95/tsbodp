@@ -12,6 +12,7 @@ import uuid
 
 from elftools.elf.elffile import ELFFile
 from project import ROOT, audit, compare_bytes, write_report
+from toolchain import load_profile, verify_native
 
 
 def run(command, commands):
@@ -87,7 +88,7 @@ def main():
     run_folder = ROOT / "build/pilot/runs" / run_id
     target = json.loads((ROOT / "config/targets/us-eu.json").read_text())
     manifest = json.loads((ROOT / "pilot/manifest.json").read_text())
-    lock = json.loads((ROOT / "config/pilot-toolchain.json").read_text())
+    lock, profile_path = load_profile(ROOT)
     rom, identity = audit(ROOT / target["rom_path"], target)
     if not identity["accepted"]:
         return 1
@@ -95,6 +96,8 @@ def main():
     commit = run(["git", "-C", ROOT / "toolchains/agbcc", "rev-parse", "HEAD"], commands).strip()
     if commit != manifest["compiler_source_commit"]:
         raise RuntimeError("agbcc source commit differs from the pilot pin")
+    if commit != lock['compiler']['source_commit']:
+        raise RuntimeError("agbcc source commit differs from the public toolchain pin")
     dirty = run(["git", "-C", ROOT / "toolchains/agbcc", "status", "--porcelain",
                  "--untracked-files=no"], commands).strip()
     if dirty:
@@ -106,16 +109,15 @@ def main():
               "whole_rom_build_verified": False, "historical_compiler_proven": False}
     report["helper_sha256"] = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                                 for name in ("tools/pilot.py", "tools/project.py", "pilot/manifest.json",
-                                             "config/pilot-toolchain.json", "config/targets/us-eu.json", "include/irq.h")}
-    for name in ("toolchains/agbcc/gcc/agbcc", "toolchains/binutils/bin/arm-none-eabi-as",
-                 "toolchains/binutils/bin/arm-none-eabi-ld"):
+                                             "tools/toolchain.py", "config/pilot-toolchain.json",
+                                             "config/targets/us-eu.json", "include/irq.h")}
+    if profile_path:
+        report['helper_sha256'][str(profile_path)] = hashlib.sha256((ROOT / profile_path).read_bytes()).hexdigest()
+    report["host_clang"] = run(["xcrun", "clang", "--version"], commands).strip()
+    verify_native(ROOT, lock, report['host_clang'])
+    for name in lock['native_tool_sha256']:
         path = ROOT / name
         report.setdefault("tool_sha256", {})[name] = hashlib.sha256(path.read_bytes()).hexdigest()
-        if report["tool_sha256"][name] != lock["native_tool_sha256"][name]:
-            raise RuntimeError(f"Tool binary differs from the verified local pin: {name}")
-    report["host_clang"] = run(["xcrun", "clang", "--version"], commands).strip()
-    if report["host_clang"] != lock["host_clang"]:
-        raise RuntimeError("Host preprocessor differs from the verified local pin")
     for function in manifest["functions"]:
         name = function["name"]
         source = ROOT / function.get("source", "pilot/candidates/" + name + ".c")

@@ -28,8 +28,9 @@
   "native_tool_sha256": {
     "toolchains/agbcc/gcc/agbcc": "24a3e70f53c2db5629bab622b927edc77492d6010ec6005e4f734dacbec303f9",
     "toolchains/binutils/bin/arm-none-eabi-as": "8c3a2e65f98f39c4e520c40ef88b1d79bbc6c3fb27d32e9220df9bbe19107809",
-    "toolchains/binutils/bin/arm-none-eabi-ld": "c0bdf4ee07f660aac90f7949c2505c2d29784b6f9b6c9737ef54bc5b458d326b"
+    "toolchains/binutils/bin/arm-none-eabi-ld": "c0bdf4ee07f660aac90f7949c2505c2d29784b6f9b6c9737ef54bc5b458d326b",
+    "toolchains/binutils/bin/arm-none-eabi-objcopy": "51ed1c4d3166322216ecaff6490b9833eae8389cf339244c8e24171b166a716f"
   },
   "host_clang": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
-  "scope": "Local pilot toolchain pin; does not prove the historical compiler version or whole-ROM build."
+  "scope": "Public source pins and original macOS native fingerprints. Setup records machine-local fingerprints separately; only fresh matching gates verify output. Does not prove the historical compiler version."
 }

@@ -36,119 +36,43 @@ strengthen the map without awarding matching-source credit.
 
 ## Building
 
-The current build is verified on macOS with the local tool profile in
-[`config/pilot-toolchain.json`](config/pilot-toolchain.json). It requires
-Python 3.13, Git, Make and Xcode's compiler tools. ROM auditing and the
-synthetic safeguard tests need only Python 3.10 or later.
-
-A fresh checkout does not yet provision the toolchain automatically. The
-runner checks the compiler source revision, native tool hashes and complete
-Apple Clang version against the profile. Builds on another host need reviewed
-tool pins and a fresh matching run; portable setup is still in progress.
-
-<details>
-<summary>Set up the local toolchain</summary>
-
-Run these commands from the repository root. First create the Python environment:
+On macOS, install Python 3.10 or later and Xcode's command line tools, then run
+from the repository root:
 
 ```sh
-python3.13 -m venv toolchains/analysis-venv
-toolchains/analysis-venv/bin/python -m pip install -r config/analysis-requirements.txt
+make setup
 ```
 
-Build the matching Thumb compiler from its pinned public source:
+Setup downloads and builds the pinned public compiler tools and installs the
+Python dependencies. It only needs to run once; rerunning it checks and reuses
+an existing setup. Other operating systems are not yet supported by this helper.
 
-```sh
-git clone https://github.com/pret/agbcc.git toolchains/agbcc
-git -C toolchains/agbcc checkout da598c1d918402c42c0c0d7128ba14567f3175e9
-make -C toolchains/agbcc/gcc -j1
-```
-
-Build GNU binutils 2.43.1 into `toolchains/binutils/`. Verify the source archive
-before extracting it:
-
-```sh
-curl --fail --location --output toolchains/binutils-2.43.1.tar.xz \
-  https://ftp.gnu.org/gnu/binutils/binutils-2.43.1.tar.xz
-printf '%s  %s\n' \
-  13f74202a3c4c51118b797a39ea4200d3f6cfbe224da6d1d95bb938480132dfd \
-  toolchains/binutils-2.43.1.tar.xz | shasum -a 256 -c -
-tar -xf toolchains/binutils-2.43.1.tar.xz -C toolchains
-```
-
-Use a separate build directory. From the repository root:
-
-```sh
-project_root="$PWD"
-mkdir -p toolchains/binutils-build-host
-cd toolchains/binutils-build-host
-CFLAGS='-O2 -std=gnu11' ../binutils-2.43.1/configure \
-  --target=arm-none-eabi --prefix="$project_root/toolchains/binutils" \
-  --disable-nls --disable-werror --disable-gdb --disable-gdbserver \
-  --disable-gprofng --disable-sim --disable-gold --without-zstd \
-  --with-system-zlib
-make -j6 MAKEINFO=true all-binutils all-gas all-ld
-make MAKEINFO=true install-binutils install-gas install-ld
-cd "$project_root"
-```
-
-Only the Thumb compiler and binutils are required for the current matching
-functions; the complete agbcc runtime libraries are not built. Rebuilding on
-another host can change native binary hashes. Those changes require review
-and matching verification before updating the local profile.
-
-</details>
-
-Supply your own original USA/Europe ROM at:
+Put your own USA/Europe ROM here:
 
 ```text
 baseroms/Sims, The - Bustin' Out (USA, Europe) (En,Fr,De,Es,It,Nl).gba
 ```
 
-Expected size: **16,777,216 bytes**. Expected SHA-1:
-`fb5662172fadebf4577f6f6f163741fc041c11e6`.
-USA revision 1 is a separate comparison reference, not the current build target.
-
-With the local toolchain configured:
+Expected SHA-1: `fb5662172fadebf4577f6f6f163741fc041c11e6` (16 MiB).
+Then build:
 
 ```sh
-make audit
-make doctor
 make build
-make compare
 ```
 
-The output is `build/us-eu/bustin-out.gba`. Every byte must match the reference;
-there are no masks, ignored differences or output repairs. The build also
-requires changed-source negative controls to fail comparison.
-
-Other commands:
+The result is `build/us-eu/bustin-out.gba`. The build checks the ROM identity,
+recompiles the accepted C functions and requires an exact whole-ROM match,
+including changed-source failure controls. Unconverted regions still come
+from your ROM and do not count as reconstructed source.
 
 | Command | Purpose |
 | --- | --- |
-| `make test` | Test identity, layout, comparison and progress safeguards without a ROM. |
-| `make pilot` | Compile and compare the accepted C functions independently. |
-| `make ram-map` | Verify copied RAM regions and export local analysis images. |
-| `make analyze` | Reproduce the bounded startup analysis. |
-| `make audit-all` | Also audit USA revision 1, when its separate dump is present. |
-| `make inventory` | Audit the ROM and refresh the full static entry and extent map. |
-| `make progress` | Refresh the treemap from current inventory and verified build evidence. |
+| `make test` | Run the verification safeguards; no ROM needed. |
+| `make progress` | Rebuild, refresh the full map and render the treemap. |
+| `make audit-all` | Also check a separate USA revision 1 dump, if present. |
 
-Use `make test PYTHON=toolchains/analysis-venv/bin/python` to also run the
-scanner controls; plain `make test` skips them when Capstone is unavailable.
-
-Rendering the treemap additionally needs Pillow:
-
-```sh
-toolchains/analysis-venv/bin/python -m pip install -r config/progress-requirements.txt
-make inventory
-make progress
-```
-
-Run `make build` again after source or build-helper changes before refreshing
-progress. Run `make inventory` again after changes to the scanner or its map
-inputs. The renderer rejects stale evidence. The public snapshot contains
-addresses, sizes and verification metadata, without ROM bytes or local paths.
+Public source versions stay pinned in `config/pilot-toolchain.json`. Setup
+records native tool fingerprints locally; builds reject changed tools.
 
 ## Repository
 
