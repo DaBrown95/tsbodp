@@ -73,7 +73,7 @@ class ScannerTests(unittest.TestCase):
         scanner = self.scanner('00bf7047')
         result = scanner.results[(BASE, 'Thumb')]
         self.assertEqual(result['instructions'], {})
-        self.assertIn('non-ARM7 instruction', result['issues'])
+        self.assertIn('invalid or non-ARM7 instruction', result['issues'])
 
     def test_ram_alias_uses_original_rom_offset(self):
         scanner = Scanner(bytes.fromhex('000000007047'), [

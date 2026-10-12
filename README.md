@@ -23,10 +23,16 @@ padding. Green means verified matching C, including its literal pools
 and alignment. Unconverted regions never count as reconstructed source.
 
 The [full inventory](assets/rom-inventory.json) records addresses, discovery
-evidence, estimated sizes, calls and unresolved indirect transfers. Copied RAM
-code is counted once at its ROM location. Indirect calls, jump tables and
-self-modifying audio code still need review; the inventory makes those gaps
-visible rather than claiming complete code discovery.
+evidence, body bounds, calls and indirect transfers. Guarded switch tables are
+checked before their case blocks join the containing body; weak interior labels
+are folded back into that body. Copied RAM code is counted once at its ROM
+location, with ARM and Thumb mode conflicts recorded explicitly.
+
+A bounded code body has closed static control flow. Its alignment, literal-pool
+ownership, stack balance and runtime reachability may still need review.
+Callback call sites and shared dispatch stubs are counted separately; observed
+IRQ/audio tables do not establish every possible runtime target. These checks
+strengthen the map without awarding matching-source credit.
 
 ## Building
 

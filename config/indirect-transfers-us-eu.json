@@ -1,0 +1,62 @@
+{
+  "target": "us-eu",
+  "observed_dispatch_tables": [
+    {
+      "name": "audio_mix_kernels",
+      "rom_offset": 14087332,
+      "count": 16,
+      "pointer_literal_rom_offset": 16626928,
+      "consumer_sites": [
+        16626260,
+        16626380,
+        16626452
+      ],
+      "index_load_runtime_address": 50334984,
+      "targets_complete": false,
+      "limitation": "Index comes from runtime channel fields; bounds and writes are not exhaustively proven. Null slots are retained.",
+      "entries": [
+        50333480,
+        50333188,
+        50333480,
+        50333316,
+        50333348,
+        0,
+        0,
+        134519792,
+        50334128,
+        50333632,
+        50334128,
+        50333860,
+        50333896,
+        0,
+        0,
+        134519792
+      ]
+    },
+    {
+      "name": "default_irq_handlers",
+      "rom_offset": 341336,
+      "count": 13,
+      "consumer_sites": [
+        604
+      ],
+      "targets_complete": false,
+      "limitation": "Default table is copied to writable RAM and callback setters can replace handlers.",
+      "entries": [
+        134347401,
+        134346369,
+        134347305,
+        50331652,
+        134347249,
+        134347361,
+        134347441,
+        134347441,
+        134347441,
+        134347441,
+        134347441,
+        134347441,
+        134347441
+      ]
+    }
+  ]
+}

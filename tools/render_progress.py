@@ -81,6 +81,10 @@ def inventory():
             'rom_bytes': target['size'], 'unconverted_rom_bytes': target['size'] - total_c,
             'whole_rom_identical': True, 'complete_code_inventory': False,
             'complete_rom_partition': True, 'discovered_entries': discovered['entry_count'],
+            'bounded_control_flow_bodies': len({r['entry_rom_offset'] for r in discovered['rows'] if r['boundary_confidence'] == 'control_flow_bounded'}),
+            'bounded_switch_tables': sum(r['kind'] == 'bounded_switch' for r in discovered['transfer_records']),
+            'unresolved_dispatch_sites': len(discovered['unresolved_transfer_sites']),
+            'unresolved_callback_call_sites': len(discovered['unresolved_indirect_call_sites']),
             'mapped_extent_bytes': sum(r['size'] for r in rows),
             'scope': discovered['method'],
             'rows': [{k: r[k] for k in ('name', 'group', 'rom_offset', 'size', 'status')} for r in rows],
@@ -134,7 +138,7 @@ def render(data, output):
     draw.text((24, 18), "The Sims: Bustin' Out — Matching Progress", fill=FOREGROUND, font=title)
     draw.text((24, 58), 'USA / Europe  ·  ROM-wide static inventory  ·  Function boundaries provisional', fill=MUTED, font=body)
     x = 24
-    for label, color in (('Exact C', COLORS['exact_c']), ('Code entries', COLORS['mapped_code']), ('Candidate entries', COLORS['candidate']), ('Header / initialized data', COLORS['mapped_data']), ('Unresolved ROM', COLORS['unresolved'])):
+    for label, color in (('Exact C', COLORS['exact_c']), ('Code entries', COLORS['mapped_code']), ('Candidate entries', COLORS['candidate']), ('Mapped data', COLORS['mapped_data']), ('Unresolved ROM', COLORS['unresolved'])):
         draw.rectangle((x, 92, x + 12, 104), fill=color)
         draw.text((x + 21, 88), label, fill=FOREGROUND, font=body)
         x += 21 + draw.textlength(label, font=body) + 34
@@ -151,7 +155,13 @@ def render(data, output):
     boxes = binary_layout(main_groups, (24, 163, 1552, 405))
     boxes += binary_layout(other_groups, (24, 580, 1552, 110)) if other_groups else []
     for group, (x, y, w, h) in boxes:
-        draw.text((round(x + 6), round(y + 3)), group['name'] + f"  ·  {sum(r['size'] for r in group['rows']):,} B", fill=FOREGROUND, font=heading)
+        group_label = group['name'] + f"  ·  {sum(r['size'] for r in group['rows']):,} B"
+        label_font = heading if draw.textlength(group_label, font=heading) <= w-12 else small
+        if draw.textlength(group_label, font=label_font) > w-12:
+            while group_label and draw.textlength(group_label+'…', font=label_font) > w-12:
+                group_label = group_label[:-1]
+            group_label += '…'
+        draw.text((round(x+6), round(y+3)), group_label, fill=FOREGROUND, font=label_font)
         for r, (rx, ry, rw, rh) in binary_layout([(r, r['size']) for r in group['rows']], (x + 3, y + 33, w - 6, h - 37)):
             left, top = round(rx), round(ry)
             right, bottom = max(left, round(rx+rw)-2), max(top, round(ry+rh)-2)
@@ -169,7 +179,7 @@ def render(data, output):
                     detail = f"{r['size']} bytes"
                 if draw.textlength(detail, font=small) <= rw - 14:
                     draw.text((round(rx + 7), round(ry + 24)), detail, fill=color, font=small)
-    draw.text((24, 705), 'Main code and startup/audio use separate scales. Tile area follows estimated extents; indirect paths may hide code.', fill=MUTED, font=body)
+    draw.text((24, 705), f"{data['bounded_switch_tables']} switch tables checked  ·  {data['bounded_control_flow_bodies']:,} bounded code bodies  ·  Runtime targets remain at {data['unresolved_dispatch_sites']} dispatch and {data['unresolved_callback_call_sites']} callback call sites", fill=MUTED, font=body)
     # Whole-ROM strip preserves the full denominator, including every gap.
     for r in data['partition']:
         left = 24 + 1552*r['rom_offset']/data['rom_bytes']
@@ -178,7 +188,8 @@ def render(data, output):
     draw.text((24, 725), 'Entire 16 MiB ROM — every byte accounted for', fill=MUTED, font=small)
     draw.text((24, 785), 'Complete ROM: identical to reference  ·  Source reconstruction: incomplete', fill=FOREGROUND, font=heading)
     draw.text((24, 816), f"{data['compiled_c_bytes']:,} reconstructed bytes  /  {data['rom_bytes']:,} total ROM bytes  ·  {data['unconverted_rom_bytes']:,} remain unconverted", fill=MUTED, font=body)
-    draw.text((24, 866), 'Verified build: ' + data['verified_at'], fill=MUTED, font=small)
+    draw.text((24, 851), 'Tile area follows estimated extents; main code and startup/audio use separate scales.', fill=MUTED, font=small)
+    draw.text((24, 877), 'Verified build: ' + data['verified_at'], fill=MUTED, font=small)
     output.parent.mkdir(parents=True, exist_ok=True)
     image.save(output, format='PNG', compress_level=6)
 
