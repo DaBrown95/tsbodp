@@ -64,5 +64,7 @@ Output: `build/us-eu/bustin-out.gba`. The build fails if any byte differs.
 This project does not accept contributions, pull requests, issues or support
 requests. ROMs, extracted assets and game binaries are not included.
 
+## Licence and credits
+
 Our own contributions are available under the [MIT licence](LICENSE.md).
 See [licensing and credits](NOTICE.md) for its scope and third-party attribution.
