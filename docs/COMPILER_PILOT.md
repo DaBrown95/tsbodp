@@ -5,8 +5,8 @@
 ## Initial five-function result (historical)
 
 The first pilot passes five linked function comparisons, covering 124 bytes
-including their pools and padding. The current `make pilot` checks all 19
-accepted functions; `make pilot-matrix` adds optimisation trials. The tested
+including their pools and padding. At the initial pilot milestone, `make pilot`
+checked all 19 accepted functions; `make pilot-matrix` adds optimisation trials. The tested
 `-O2 -mthumb-interwork` configuration passes all five; `-O3` and `-Os` also pass.
 `-O0` fails all five, and `-O1` fails the conditional bit update. These results
 support the agbcc backend without uniquely identifying historical options.
@@ -29,7 +29,7 @@ and an all-byte matching partial reconstruction of the complete ROM.
 The analysis environment uses Python 3.13 and the packages pinned in
 `config/analysis-requirements.txt`. The native compiler was built from the pinned
 pret/agbcc commit with `make -C toolchains/agbcc/gcc -j1`, without changing its
-source. Only the Thumb compiler is built, not agbcc's complete runtime libraries.
+source. That initial setup built the Thumb compiler, not agbcc's complete runtime libraries.
 
 GNU binutils 2.43.1 was built from the official source archive whose SHA-256 is
 recorded in the toolchain pin. Use a separate build directory, the documented
@@ -41,6 +41,36 @@ built normally. Build commands and logs are under `reports/toolchains/`.
 
 This manual setup has been superseded by `make setup`, which records native
 fingerprints locally. Public source pins stay fixed and fresh builds check matching.
+
+## Copied ARM source support
+
+The tile allocator at ROM offset `0xB77C` executes at `0x03007390` after a
+200-byte BIOS word copy. Its matching C extent is 196 bytes; the final copied
+word belongs to the following frame-copy source and remains separately owned.
+The accepted allocator uses `-O2 -mthumb-interwork -fomit-frame-pointer` and four
+explicit C register constraints. They influence allocation without embedding
+instructions or changing compiled output. The byte bitmap, run search and
+failure value are expressed as C operations.
+
+`config/arm-toolchain.json` pins agbcc's ARM backend from the same unchanged
+source revision as Thumb. `make setup` provisions it when the build manifest
+contains ARM C; `make setup-arm` verifies or provisions it directly. Its native
+host profile is separate from the existing Thumb profile. Existing changed
+binaries are rejected rather than silently enrolled.
+
+Copied functions declare both a ROM storage offset and a RAM execution address,
+with the named installation map in `config/ram-map-us-eu.json`. The pilot checks
+mode, alignment, copy containment, installation literals and overlapping virtual
+extents. The full linker uses the RAM address for relocations and the original
+ROM address for storage, then checks both in the final ELF. Binary conversion
+uses those load addresses; no bytes are moved or repaired after conversion.
+Tests include an authored ARM branch whose encoding depends on its RAM address,
+incorrect copy/address/mode declarations, overlapping extents, unexpected
+allocated source data and an independently invalidated ARM compiler profile.
+
+Copied C receives coverage only after its complete linked extent matches and
+its changed-source control rejects. The interrupt dispatcher remains explicitly
+separate assembly glue. Other copied regions remain unconverted.
 
 ## 1. Establish the reference
 

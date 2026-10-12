@@ -44,9 +44,17 @@ returned range allocated, and optionally copies a tile resource. The installer
 at `0x08047724` uses CpuSet to copy 50 words from `0x0800b77c` to that RAM
 address. The validated 200-byte copy includes the first word of the following
 frame-copy source at ROM `0xB840`; copy length is not a function boundary.
-The copied ARM search routine remains
-unconverted; its bytes are not included in C coverage. Its mode argument is
-zero at this caller, and the failure sentinel is `0xffff`.
+The copied ARM search routine now has an exact 196-byte semantic C replacement,
+compiled in ARM mode and linked at its RAM execution address. Its installer
+continues to copy the original 200-byte extent, including the separately explicit
+word from the next region. The signed remaining count, zero/full-byte fast paths,
+and bit-by-bit backtracking follow the original search behavior, including its
+unaligned-byte fast paths. Four C register-bound locals preserve the ARM compiler
+allocation; the labels express the run search without instruction assembly.
+The pinned ARM compiler uses `-O2 -mthumb-interwork -fomit-frame-pointer`.
+The caller supplies zero as the initial tile index; the failure sentinel is
+`0xffff`. The standalone linked proof and a compiled changed-bound control
+are preserved, independently of whole-ROM and runtime claims.
 
 Background resource loading connects scene resource descriptors to the same
 palette and display work. The descriptor begins with a flags byte and palette
@@ -135,7 +143,7 @@ The queued palette flush at `0x08011834` traverses 8-byte records at
 Its transfer at `0x080119c8` copies a halfword range into the staging buffer
 and immediately sends that range to the destination with DMA3. The selected
 buffer pair is the second record at `0x030018d0`. The queue record carries
-first/count bytes and a source pointer; the addressing expression follows
+first/count halfwords and a source pointer; the addressing expression follows
 the observed 8-byte stride. These close the queued palette path from VBlank
 through staging copy and hardware transfer. The immediate transfer and flush
 have separate compiled mutation controls.
@@ -159,6 +167,43 @@ the interval. Byte fields 1/2 are therefore named interval/delay, while byte 7
 stores the original count in the producer. The allocation counter at
 `0x03003164` increments without an observed limit in `0x08011a10`. The immediate
 palette loader at `0x080116f8` selects the first buffer pair and calls the now
-matching transfer. The scene-linked range descriptor loader at `0x08011634`
-still differs in compiler scheduling; its count/header and four-byte entries
-are inferred from static accesses. `0x030032e0` is the enabled-range mask.
+matching transfer. The scene-linked range descriptor loader at `0x08011634` now matches. Its
+halfword count/header and four-byte entries are inferred from static accesses;
+entry fields are first/count/delay/flags. It captures the initial zero index
+for delay initialization, creates each job and sets its bit in the enabled-range
+mask at `0x030032e0`. No bounds check is added to the observed counter path.
+
+The scene resource group path now reaches the matching factory walker at
+`0x0800a964`. The table root at `0x03002ed8` points to a halfword offset directory;
+each selected group has a byte count and another halfword offset directory.
+Each entry stores an object pointer at offset 0 and a factory index at 8. The
+walker invokes the indexed function pointer in the ROM table at `0x0804f278`
+only when the entry is empty, records the group/slot in object bytes `0x10/0x11`,
+installs the default before-step callback at `0x08001ae0` when absent, and sets
+object flag `0x80000000`. These names follow the connected scene group activator
+at `0x0800ad98` and the existing frame object layout. Three C register-bound
+locals preserve offset evaluation and factory-table scheduling without embedding
+instructions. The interworking transfer helper remains explicit original glue.
+Factory table targets and their higher-level roles remain provisional.
+
+The renderer's dimensions lookup at `0x0800a938` reads the first two words from
+12-byte records at `0x0804f1e8`, indexed with a 48-byte group stride and 12-byte
+variant stride. The third word's meaning is not inferred here. Its dimension
+name follows the connected frame renderer callers, rather than table adjacency.
+The frame allocation coordinator's pixel accessor at `0x0800186c` reads the
+resource/layout at object `0xdc`, frame index at `0xdb`, then the shared relative
+frame offset table and halfword data offset. It returns a byte pointer into the
+resource's data. An integer address accumulator preserves the original pointer
+addition order; the inferred record layout is the same one used by the matching
+tile upload functions. Descriptor accessors with no mapped callers remain
+unconverted pending a connected use.
+
+The connected palette producer at `0x08011718` appends a source pointer at
+record offset 4 followed by first/count halfwords at offsets 0/2, then increments
+the word queue count at `0x03003160`. The VBlank flush reads its low halfword
+before clearing the word. Its byte-address accumulator and C register-bound
+count pointer preserve the observed store order. The variant setter at
+`0x08000be8` chooses this producer or the immediate second-buffer loader at
+`0x08011708` according to the frame update flags. Both have matching C and
+compiled mutation controls, connecting object palette selection to the same
+VBlank queue and DMA transfer already reconstructed.

@@ -4,9 +4,12 @@ PROGRESS_PYTHON ?= $(ANALYSIS_PYTHON)
 TEST_PYTHON ?= $(if $(wildcard $(ANALYSIS_PYTHON)),$(ANALYSIS_PYTHON),$(PYTHON))
 .DEFAULT_GOAL := build
 
-.PHONY: setup audit audit-all compare doctor test build pilot analyze pilot-matrix ram-map inventory progress
+.PHONY: setup setup-arm audit audit-all compare doctor test build pilot analyze pilot-matrix ram-map inventory progress
 setup:
 	$(PYTHON) tools/setup.py
+
+setup-arm:
+	$(PYTHON) tools/setup_arm.py
 
 audit:
 	$(PYTHON) tools/project.py audit

@@ -10,14 +10,21 @@ from project import ROOT, audit, compare_bytes, write_report
 from pilot import compile_function, run
 from rom_layout import layout
 from source_symbols import declarations
+from source_addresses import execution_address, validate_execution_layout
 
 
 
 
-def link_rom(manifest, reference, pilot_folder, folder, overrides=None):
+def link_rom(manifest, reference, pilot_folder, folder, overrides=None, copies=None):
     folder.mkdir(parents=True, exist_ok=True)
     commands, objects, script, gaps = [], [], ['SECTIONS {'], []
     sources = manifest['functions'] + manifest.get('assembly', [])
+    entries = ()
+    if copies is None:
+        ram = json.loads((ROOT / 'config/ram-map-us-eu.json').read_text())
+        copies, entries = ram['copies'], ram['entries']
+    validate_execution_layout(manifest['functions'], copies, entries)
+    source_by_name = {f['name']: f for f in sources}
     regions = layout(sources, manifest['rom_size'])
     overrides = overrides or {}
     names = {f['name'] for f in sources if f.get('defines_symbol', True)}
@@ -39,7 +46,9 @@ def link_rom(manifest, reference, pilot_folder, folder, overrides=None):
     objects.append(extern_obj)
     for index, region in enumerate(regions):
         section = f'.rom_{index}'
-        start = 0x08000000 + region['offset']
+        storage = 0x08000000 + region['offset']
+        start = (execution_address(source_by_name[region['name']], copies)
+                 if region['kind'] == 'compiled_c' else storage)
         if region['kind'] != 'unconverted':
             obj = overrides.get(region['name'], pilot_folder / region['name'] / 'source.o')
             with obj.open('rb') as stream:
@@ -52,7 +61,7 @@ def link_rom(manifest, reference, pilot_folder, folder, overrides=None):
             gaps += [f'.section .gap_{index}, "a", %progbits',
                      f'.incbin {json.dumps(str(reference))}, {region["offset"]}, {region["size"]}']
             body = f'*(.gap_{index})'
-        script += [f'{section} {start:#x} : {{ {body} }} = 0',
+        script += [f'{section} {start:#x} : AT({storage:#x}) {{ {body} }} = 0',
                    f'ASSERT(SIZEOF({section}) == {region["size"]}, "extent {index} changed")']
     script += ['/DISCARD/ : { *(.comment) *(.note*) *(.ARM.attributes) }', '}']
     gap_source, gap_obj = folder / 'unconverted.s', folder / 'unconverted.o'
@@ -70,8 +79,16 @@ def link_rom(manifest, reference, pilot_folder, folder, overrides=None):
         if len(allocated) != len(regions):
             raise ValueError('Unexpected extra allocated ROM section')
         for section, region in zip(allocated, regions):
-            if section['sh_addr'] != 0x08000000 + region['offset'] or section['sh_size'] != region['size']:
+            storage = 0x08000000 + region['offset']
+            address = (execution_address(source_by_name[region['name']], copies)
+                       if region['kind'] == 'compiled_c' else storage)
+            if section['sh_addr'] != address or section['sh_size'] != region['size']:
                 raise ValueError('Final ELF layout differs from declared coverage')
+            loads = [segment for segment in elf.iter_segments() if segment['p_type'] == 'PT_LOAD'
+                     and segment['p_vaddr'] <= address
+                     and address + region['size'] <= segment['p_vaddr'] + segment['p_filesz']]
+            if len(loads) != 1 or loads[0]['p_paddr'] + address - loads[0]['p_vaddr'] != storage:
+                raise ValueError('Final ELF load address differs from ROM storage')
         if any(s['sh_type'] in ('SHT_REL', 'SHT_RELA') and s['sh_size'] for s in elf.iter_sections()):
             raise ValueError('Final ELF contains relocations')
     run([ROOT / 'toolchains/binutils/bin/arm-none-eabi-objcopy', '-O', 'binary', linked, output], commands)
@@ -122,7 +139,8 @@ def main():
               'negative_compile_commands': negative_compile_commands,
               'negative_link_commands': bad_commands,
               'helper_sha256': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-                                for name in ('tools/build_rom.py', 'tools/rom_layout.py')},
+                                for name in ('tools/build_rom.py', 'tools/rom_layout.py',
+                                             'tools/source_addresses.py', 'config/ram-map-us-eu.json')},
               'accepted': comparison['identical'] and rejected}
     (folder / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     write_report('build', report)

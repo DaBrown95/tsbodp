@@ -9,7 +9,7 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 from setup import PENDING, pending_profile, verify_archive
-from toolchain import PIN, PROFILE, load_profile, sha, validate_profile, verify_native
+from toolchain import PIN, PROFILE, ARM_PIN, ARM_PROFILE, load_profile, sha, validate_profile, verify_native
 
 
 class ToolchainTests(unittest.TestCase):
@@ -49,6 +49,20 @@ class ToolchainTests(unittest.TestCase):
         (self.root / PIN).write_text(json.dumps({**self.pins, 'compiler': {'source_commit': 'changed'}}))
         with self.assertRaises(RuntimeError):
             load_profile(self.root)
+
+    def test_arm_profile_is_independent_and_cannot_replace_thumb_profile(self):
+        (self.root / ARM_PIN).write_text(json.dumps(self.pins))
+        arm = {**self.profile, 'source_pin_sha256': sha(self.root / ARM_PIN)}
+        (self.root / ARM_PROFILE).write_text(json.dumps(arm))
+        lock, local = load_profile(self.root, ARM_PIN, ARM_PROFILE)
+        self.assertEqual(local, ARM_PROFILE)
+        verify_native(self.root, lock, 'new host')
+        thumb, local = load_profile(self.root)
+        self.assertIsNone(local)
+        verify_native(self.root, thumb, 'original host')
+        (self.root / ARM_PIN).write_text(json.dumps({**self.pins, 'compiler': {'source_commit': 'changed'}}))
+        with self.assertRaises(RuntimeError):
+            load_profile(self.root, ARM_PIN, ARM_PROFILE)
 
     def test_every_native_tool_including_objcopy_is_checked(self):
         for name in self.names:

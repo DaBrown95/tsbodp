@@ -176,6 +176,9 @@ def main():
         temporary.write_text(json.dumps(profile, indent=2) + '\n')
         temporary.replace(ROOT / PROFILE)
     (ROOT / PENDING).unlink(missing_ok=True)
+    manifest = json.loads((ROOT / 'config/build-us-eu.json').read_text())
+    if any(f.get('mode', 'Thumb') == 'ARM' for f in manifest['functions']):
+        subprocess.run([sys.executable, ROOT / 'tools/setup_arm.py'], check=True)
     print('Setup complete. Put your USA/Europe ROM in baseroms/, then run make build.')
     print('Native tool fingerprints are local; exact matching is checked on every build.')
     return 0

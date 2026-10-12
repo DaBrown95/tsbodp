@@ -2635,6 +2635,621 @@
         "before": "flags &= 0x7f",
         "after": "flags &= 0xbf"
       }
+    },
+    {
+      "rom_offset": 3048,
+      "size": 132,
+      "symbols": {
+        "frame_set_animation_resource": "0x08001479",
+        "g_frame_flags": "0x03004310",
+        "display_load_palette_alternate": "0x08011709",
+        "display_queue_palette": "0x08011719"
+      },
+      "thumb_symbols": [
+        "frame_set_animation_resource",
+        "display_load_palette_alternate",
+        "display_queue_palette"
+      ],
+      "name": "frame_set_animation_variant",
+      "source": "src/frame/frame_set_animation_variant.c",
+      "negative_control": {
+        "before": "g_frame_flags & 0x10",
+        "after": "g_frame_flags & 0x20"
+      }
+    },
+    {
+      "name": "frame_set_animation_frame",
+      "rom_offset": 3180,
+      "size": 296,
+      "symbols": {
+        "frame_refresh_part_colliders": "0x08002299"
+      },
+      "thumb_symbols": [
+        "frame_refresh_part_colliders"
+      ],
+      "source": "src/frame/frame_set_animation_frame.c",
+      "negative_control": {
+        "before": "object->flags &= ~0x400000",
+        "after": "object->flags &= ~0x200000"
+      }
+    },
+    {
+      "name": "frame_part_dimensions",
+      "rom_offset": 3476,
+      "size": 152,
+      "symbols": {},
+      "thumb_symbols": [],
+      "source": "src/frame/frame_part_dimensions.c",
+      "negative_control": {
+        "before": "dimensions->x=record->width",
+        "after": "dimensions->x=record->height"
+      }
+    },
+    {
+      "name": "frame_part_pixels",
+      "rom_offset": 3628,
+      "size": 144,
+      "symbols": {},
+      "thumb_symbols": [],
+      "source": "src/frame/frame_part_pixels.c",
+      "negative_control": {
+        "before": "offset+16",
+        "after": "offset+18"
+      }
+    },
+    {
+      "rom_offset": 5240,
+      "size": 36,
+      "symbols": {
+        "frame_set_animation_frame": "0x08000c6d"
+      },
+      "thumb_symbols": [
+        "frame_set_animation_frame"
+      ],
+      "name": "frame_set_animation_resource",
+      "source": "src/frame/frame_set_animation_resource.c",
+      "negative_control": {
+        "before": "object->flags |= 0x80",
+        "after": "object->flags |= 0x40"
+      }
+    },
+    {
+      "name": "display_object_tile_pixels",
+      "rom_offset": 6252,
+      "size": 32,
+      "source": "src/display/object_tile_pixels.c",
+      "symbols": {},
+      "negative_control": {
+        "before": "record->data_offset",
+        "after": "record->data_offset + 2"
+      }
+    },
+    {
+      "rom_offset": 13768,
+      "size": 136,
+      "symbols": {
+        "frame_ensure_affine_slot": "0x08003715",
+        "g_frame_affine_parameters": "0x03004410",
+        "__divsi3": "0x0804cd2d"
+      },
+      "thumb_symbols": [
+        "frame_ensure_affine_slot",
+        "__divsi3"
+      ],
+      "name": "frame_set_affine_scale",
+      "source": "src/frame/frame_set_affine_scale.c",
+      "negative_control": {
+        "before": "0x1000000 / x",
+        "after": "0x800000 / x"
+      }
+    },
+    {
+      "rom_offset": 13904,
+      "size": 64,
+      "symbols": {
+        "frame_get_affine_slot": "0x0802cf65",
+        "frame_set_affine_slot": "0x0802cf71",
+        "frame_free_affine_slot": "0x0802cfc9"
+      },
+      "thumb_symbols": [
+        "frame_get_affine_slot",
+        "frame_set_affine_slot",
+        "frame_free_affine_slot"
+      ],
+      "name": "frame_destroy_affine",
+      "source": "src/frame/frame_destroy_affine.c",
+      "negative_control": {
+        "before": "object->display.display_mode = 0",
+        "after": "object->display.display_mode = 2"
+      }
+    },
+    {
+      "rom_offset": 13968,
+      "size": 60,
+      "symbols": {
+        "__divsi3": "0x0804cd2d"
+      },
+      "thumb_symbols": [
+        "__divsi3"
+      ],
+      "name": "frame_start_affine_transition",
+      "source": "src/frame/frame_start_affine_transition.c",
+      "negative_control": {
+        "before": "if (frames)",
+        "after": "if (frames > 1)"
+      }
+    },
+    {
+      "rom_offset": 14028,
+      "size": 72,
+      "symbols": {
+        "frame_set_affine_scale": "0x080035c9"
+      },
+      "thumb_symbols": [
+        "frame_set_affine_scale"
+      ],
+      "name": "frame_update_affine",
+      "source": "src/frame/frame_update_affine.c",
+      "negative_control": {
+        "before": "object->frames--",
+        "after": "object->frames++"
+      }
+    },
+    {
+      "name": "frame_ensure_affine_slot",
+      "rom_offset": 14100,
+      "size": 60,
+      "symbols": {
+        "frame_get_affine_slot": "0x0802cf65",
+        "frame_set_affine_slot": "0x0802cf71",
+        "frame_allocate_affine_slot": "0x0802cf85",
+        "g_frame_affine_slots": "0x03004d30",
+        "g_frame_affine_slot_count": "0x03005860"
+      },
+      "thumb_symbols": [
+        "frame_get_affine_slot",
+        "frame_set_affine_slot",
+        "frame_allocate_affine_slot"
+      ],
+      "source": "src/frame/frame_ensure_affine_slot.c",
+      "negative_control": {
+        "before": "object->display.display_mode == 3",
+        "after": "object->display.display_mode == 2"
+      }
+    },
+    {
+      "name": "display_sprite_dimensions",
+      "rom_offset": 43320,
+      "size": 44,
+      "source": "src/display/sprite_dimensions.c",
+      "symbols": {
+        "g_display_sprite_dimensions": "0x0804f1e8"
+      },
+      "negative_control": {
+        "before": "group * 48",
+        "after": "group * 36"
+      }
+    },
+    {
+      "name": "resource_spawn_group",
+      "rom_offset": 43364,
+      "size": 140,
+      "source": "src/display/spawn_resource_group.c",
+      "symbols": {
+        "g_resource_object_data": "0x03002ed8",
+        "g_resource_object_factories": "0x0804f278",
+        "resource_object_before_step": "0x08001ae1",
+        "_call_via_r2": "0x0804ccf9"
+      },
+      "thumb_symbols": [
+        "resource_object_before_step",
+        "_call_via_r2"
+      ],
+      "negative_control": {
+        "before": "0x80000000",
+        "after": "0x40000000"
+      }
+    },
+    {
+      "name": "display_find_tile_run",
+      "rom_offset": 46972,
+      "size": 196,
+      "source": "src/display/find_tile_run.c",
+      "symbols": {},
+      "negative_control": {
+        "before": "1024",
+        "after": "1023"
+      },
+      "mode": "ARM",
+      "ram_address": 50361232,
+      "ram_copy": "display_tile_allocator_iwram",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer"
+      ]
+    },
+    {
+      "name": "display_load_palette_ranges",
+      "rom_offset": 71220,
+      "size": 128,
+      "source": "src/display/load_palette_ranges.c",
+      "symbols": {
+        "g_palette_range_jobs": "0x030032f0",
+        "g_palette_range_enabled_mask": "0x030032e0",
+        "display_next_palette_range": "0x08011a11"
+      },
+      "thumb_symbols": [
+        "display_next_palette_range"
+      ],
+      "negative_control": {
+        "before": "++entry;",
+        "after": "entry += 2;"
+      }
+    },
+    {
+      "name": "display_load_palette_alternate",
+      "rom_offset": 71432,
+      "size": 16,
+      "source": "src/display/load_palette_alternate.c",
+      "symbols": {
+        "g_palette_buffer_pairs": "0x030018d0",
+        "display_transfer_palette": "0x080119c9"
+      },
+      "thumb_symbols": [
+        "display_transfer_palette"
+      ],
+      "negative_control": {
+        "before": "g_palette_buffer_pairs[1]",
+        "after": "g_palette_buffer_pairs[0]"
+      }
+    },
+    {
+      "name": "display_queue_palette",
+      "rom_offset": 71448,
+      "size": 52,
+      "source": "src/display/queue_palette.c",
+      "symbols": {
+        "g_palette_queue": "0x03003260",
+        "g_palette_queue_count": "0x03003160"
+      },
+      "negative_control": {
+        "before": "++index;",
+        "after": "index += 2;"
+      }
+    },
+    {
+      "name": "frame_get_affine_slot",
+      "rom_offset": 184164,
+      "size": 12,
+      "symbols": {
+        "frame_set_affine_slot": "0x0802cf71",
+        "frame_allocate_affine_slot": "0x0802cf85",
+        "g_frame_affine_slots": "0x03004d30",
+        "g_frame_affine_slot_count": "0x03005860"
+      },
+      "thumb_symbols": [
+        "frame_set_affine_slot",
+        "frame_allocate_affine_slot"
+      ],
+      "source": "src/frame/frame_get_affine_slot.c",
+      "negative_control": {
+        "before": "31 &",
+        "after": "15 &"
+      }
+    },
+    {
+      "name": "frame_set_affine_slot",
+      "rom_offset": 184176,
+      "size": 20,
+      "symbols": {
+        "frame_get_affine_slot": "0x0802cf65",
+        "frame_allocate_affine_slot": "0x0802cf85",
+        "g_frame_affine_slots": "0x03004d30",
+        "g_frame_affine_slot_count": "0x03005860"
+      },
+      "thumb_symbols": [
+        "frame_get_affine_slot",
+        "frame_allocate_affine_slot"
+      ],
+      "source": "src/frame/frame_set_affine_slot.c",
+      "negative_control": {
+        "before": "0xc1ff",
+        "after": "0xc0ff"
+      }
+    },
+    {
+      "name": "frame_allocate_affine_slot",
+      "rom_offset": 184196,
+      "size": 68,
+      "symbols": {
+        "frame_get_affine_slot": "0x0802cf65",
+        "frame_set_affine_slot": "0x0802cf71",
+        "g_frame_affine_slots": "0x03004d30",
+        "g_frame_affine_slot_count": "0x03005860"
+      },
+      "thumb_symbols": [
+        "frame_get_affine_slot",
+        "frame_set_affine_slot"
+      ],
+      "source": "src/frame/frame_allocate_affine_slot.c",
+      "negative_control": {
+        "before": "remaining=32",
+        "after": "remaining=31"
+      }
+    },
+    {
+      "name": "frame_free_affine_slot",
+      "rom_offset": 184264,
+      "size": 72,
+      "symbols": {
+        "frame_get_affine_slot": "0x0802cf65",
+        "frame_set_affine_slot": "0x0802cf71",
+        "frame_allocate_affine_slot": "0x0802cf85",
+        "g_frame_affine_slots": "0x03004d30",
+        "g_frame_affine_slot_count": "0x03005860"
+      },
+      "thumb_symbols": [
+        "frame_get_affine_slot",
+        "frame_set_affine_slot",
+        "frame_allocate_affine_slot"
+      ],
+      "source": "src/frame/frame_free_affine_slot.c",
+      "negative_control": {
+        "before": "g_frame_affine_slots[slot] = 0",
+        "after": "g_frame_affine_slots[slot] = 1"
+      }
+    },
+    {
+      "name": "frame_commit_affine",
+      "rom_offset": 184336,
+      "size": 68,
+      "symbols": {
+        "g_frame_affine_slot_count": "0x03005860",
+        "g_oam_previous": "0x03004d20",
+        "g_frame_affine_parameters": "0x03004410",
+        "frame_write_affine_matrices": "0x0804c8e1"
+      },
+      "thumb_symbols": [
+        "frame_write_affine_matrices"
+      ],
+      "source": "src/frame/frame_commit_affine.c",
+      "negative_control": {
+        "before": "g_oam_previous+0x406",
+        "after": "g_oam_previous+0x408"
+      }
+    },
+    {
+      "name": "resource_group_is_enabled",
+      "rom_offset": 44580,
+      "size": 44,
+      "source": "src/resource/resource_group_is_enabled.c",
+      "symbols": {
+        "g_resource_group_flags": "0x03002ed4"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "group != 1",
+        "after": "group != 2"
+      }
+    },
+    {
+      "name": "resource_activate_groups",
+      "rom_offset": 44440,
+      "size": 52,
+      "source": "src/resource/resource_activate_groups.c",
+      "symbols": {
+        "resource_group_is_enabled": "0x0800ae25",
+        "resource_spawn_group": "0x0800a965",
+        "resource_execute_group": "0x0800adcd"
+      },
+      "thumb_symbols": [
+        "resource_group_is_enabled",
+        "resource_spawn_group",
+        "resource_execute_group"
+      ],
+      "negative_control": {
+        "before": "resource_spawn_group(objects)",
+        "after": "resource_spawn_group(program)"
+      }
+    },
+    {
+      "name": "resource_execute_group",
+      "rom_offset": 44492,
+      "size": 88,
+      "source": "src/resource/resource_execute_group.c",
+      "symbols": {
+        "g_resource_program_data": "0x03002ee4",
+        "g_resource_current_program": "0x03002ed0",
+        "g_resource_program_handlers": "0x08051b18",
+        "g_resource_program_lengths": "0x080528e0",
+        "_call_via_r1": "0x0804ccf5"
+      },
+      "thumb_symbols": [
+        "_call_via_r1"
+      ],
+      "negative_control": {
+        "before": "position+=step",
+        "after": "position-=step"
+      }
+    },
+    {
+      "name": "resource_copy_object_payload",
+      "rom_offset": 45040,
+      "size": 40,
+      "source": "src/resource/resource_copy_object_payload.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "destination+=8",
+        "after": "destination+=4"
+      }
+    },
+    {
+      "name": "resource_offset_table_bytes",
+      "rom_offset": 45216,
+      "size": 32,
+      "source": "src/resource/resource_offset_table_bytes.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "count*=2",
+        "after": "count*=4"
+      }
+    },
+    {
+      "name": "resource_align_word",
+      "rom_offset": 45248,
+      "size": 40,
+      "source": "src/resource/resource_align_word.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "bytes&3",
+        "after": "bytes&1"
+      }
+    },
+    {
+      "name": "resource_object_before_step",
+      "rom_offset": 6880,
+      "size": 104,
+      "source": "src/resource/resource_object_before_step.c",
+      "symbols": {
+        "g_resource_projection_context": "0x03004330",
+        "resource_project_point": "0x08048bf9"
+      },
+      "thumb_symbols": [
+        "resource_project_point"
+      ],
+      "negative_control": {
+        "before": "flags&0x40000",
+        "after": "flags&0x80000"
+      }
+    },
+    {
+      "name": "resource_allocate_arena",
+      "rom_offset": 44292,
+      "size": 24,
+      "source": "src/resource/resource_allocate_arena.c",
+      "symbols": {
+        "g_resource_arena": "0x03002ee8",
+        "resource_allocate": "0x08027865"
+      },
+      "thumb_symbols": [
+        "resource_allocate"
+      ],
+      "negative_control": {
+        "before": "8192",
+        "after": "4096"
+      }
+    },
+    {
+      "name": "resource_copy_arena_header",
+      "rom_offset": 44968,
+      "size": 72,
+      "source": "src/resource/resource_copy_arena_header.c",
+      "symbols": {
+        "g_resource_arena": "0x03002ee8"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "index++",
+        "after": "index+=2"
+      }
+    },
+    {
+      "name": "resource_build_object_groups",
+      "rom_offset": 43504,
+      "size": 220,
+      "source": "src/resource/resource_build_object_groups.c",
+      "symbols": {
+        "g_resource_group_flags": "0x03002ed4",
+        "g_resource_object_data": "0x03002ed8",
+        "resource_build_object_group": "0x0800aacd",
+        "resource_offset_table_bytes": "0x0800b0a1"
+      },
+      "thumb_symbols": [
+        "resource_build_object_group",
+        "resource_offset_table_bytes"
+      ],
+      "negative_control": {
+        "before": "count+1",
+        "after": "count+2"
+      }
+    },
+    {
+      "name": "resource_build_program_groups",
+      "rom_offset": 44072,
+      "size": 220,
+      "source": "src/resource/resource_build_program_groups.c",
+      "symbols": {
+        "g_resource_group_flags": "0x03002ed4",
+        "g_resource_program_data": "0x03002ee4",
+        "resource_build_program_group": "0x0800b05d",
+        "resource_offset_table_bytes": "0x0800b0a1"
+      },
+      "thumb_symbols": [
+        "resource_build_program_group",
+        "resource_offset_table_bytes"
+      ],
+      "negative_control": {
+        "before": "count+1",
+        "after": "count+2"
+      }
+    },
+    {
+      "name": "resource_build_object_group",
+      "rom_offset": 43724,
+      "size": 132,
+      "source": "src/resource/resource_build_object_group.c",
+      "symbols": {
+        "resource_align_word": "0x0800b0c1",
+        "resource_offset_table_bytes": "0x0800b0a1",
+        "resource_copy_object_payload": "0x0800aff1"
+      },
+      "thumb_symbols": [
+        "resource_align_word",
+        "resource_offset_table_bytes",
+        "resource_copy_object_payload"
+      ],
+      "negative_control": {
+        "before": "stride+=8",
+        "after": "stride+=4"
+      }
+    },
+    {
+      "name": "resource_build_word_groups",
+      "rom_offset": 43856,
+      "size": 216,
+      "source": "src/resource/resource_build_word_groups.c",
+      "symbols": {
+        "g_resource_group_flags": "0x03002ed4",
+        "g_resource_word_data": "0x03002ee0",
+        "resource_build_word_group": "0x0800b019",
+        "resource_offset_table_bytes": "0x0800b0a1"
+      },
+      "thumb_symbols": [
+        "resource_build_word_group",
+        "resource_offset_table_bytes"
+      ],
+      "negative_control": {
+        "before": "base_count+1",
+        "after": "base_count+2"
+      }
+    },
+    {
+      "name": "resource_build_program_group",
+      "rom_offset": 45148,
+      "size": 68,
+      "source": "src/resource/resource_build_program_group.c",
+      "symbols": {
+        "g_resource_program_lengths": "0x080528e0"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "while(record->command)",
+        "after": "while(!record->command)"
+      }
     }
   ],
   "assembly": [

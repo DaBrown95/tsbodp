@@ -230,7 +230,9 @@ def main():
     scanner.seed(BASE+0xec, 'Thumb', 'startup', 'Thumb startup')
     scanner.seed(BASE+0x25c0c, 'Thumb', 'startup main pointer', 'Entry routine')
     for row in bounded['unconverted_extents'] + source_code:
-        scanner.seed(BASE+row['rom_offset'], row.get('mode', 'ARM' if row['name'].startswith('ARM') else 'Thumb'), 'bounded audit', row['name'])
+        scanner.seed(row.get('ram_address', BASE+row['rom_offset']),
+                     row.get('mode', 'ARM' if row['name'].startswith('ARM') else 'Thumb'),
+                     'bounded audit', row['name'])
     for entry in ram['entries']:
         scanner.seed(entry['ram_address'], entry['mode'], 'audited RAM entry', entry['name'])
     dispatch_config = json.loads((ROOT/'config/indirect-transfers-us-eu.json').read_text())

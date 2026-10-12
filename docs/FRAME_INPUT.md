@@ -177,3 +177,101 @@ from the command pointers; all offsets agree with `frame_animation.h`. Its
 direct byte fields and explicit resource-field pointer preserve the observed
 compiler aliasing and address reuse. Useful failed field-grouping candidates
 and their complete raw comparisons remain in ignored local reports.
+
+The affine display continuation adds ten matching C replacements, 632 bytes:
+scale setup (`0x35C8`, 136), destruction (`0x3650`, 64), transition setup
+(`0x3690`, 60), frame update (`0x36CC`, 72), slot acquisition (`0x3714`, 60),
+slot extraction (`0x2CF64`, 12), slot insertion (`0x2CF70`, 20), allocation
+(`0x2CF84`, 68), release (`0x2CFC8`, 72), and double-buffer matrix commit
+(`0x2D010`, 68). This follows the already matching frame step, removal and
+scheduler calls into a complete scale/slot/commit path. Together the local
+frame/input batch has 39 exact replacements covering 6,340 bytes; this is a
+batch subtotal, not a game inventory or a runtime validation claim.
+
+`frame_affine.h` gives the display at object `+0xD0` the same OAM layout used
+by the sequence renderer. Modes 1 and 3 already own an affine slot; acquisition
+otherwise allocates one and writes it into bits 9 through 13 of the OAM X
+halfword. These bits overlap the ordinary sprite flip fields. The existing
+three-bit `affine_index` renderer name remains provisional; the slot accessors
+prove a five-bit hardware field for this path. The 32 slot-use bytes begin at
+RAM `0x03004D30`; the byte at `0x03005860` records the high-water count.
+Allocation scans exactly 32 entries and returns 32 when every entry is used.
+Acquisition preserves the original lack of an explicit failure check. Release
+clears a slot and trims trailing unused entries. These are static observations
+of the original code, not assurances that every caller safely handles exhaustion.
+
+Scale setup stores signed X/Y values at `+0xE8` and `+0xEC`, a narrowed
+16-bit angle at `+0xF8`, and reciprocal values computed by signed division
+of `0x1000000` by each scale. A reciprocal that narrows to zero becomes one.
+The eight-byte records at `0x03004410` contain the two reciprocals and angle.
+The transition helper computes signed per-frame steps at `+0xF0` and `+0xF4`
+when its duration is nonzero; the duration is narrowed to the halfword at
+`+0xFA`. The frame helper decrements this halfword, accumulates both steps,
+and passes the scales shifted right by eight to scale setup. The signed
+halfword load of the angle establishes that the caller transfers its signed
+value before the setup function narrows it. The inferred public argument type
+is `int`, with that explicit narrowing retained in the source.
+
+Matrix commit calls the original Thumb helper at `0x4C8E0` (a software
+interrupt 15 wrapper) twice. It uses the parameter array and count above and
+writes at byte 6 in each of the two OAM banks selected by the pointer at
+`0x03004D20`, with an eight-byte destination stride. This is connected to
+`frame_prepare_oam_transfer`, which disables unused entries in both banks and
+sets the interrupt transfer-ready byte. The getter and frame update retain
+explicit zero alignment directives; no original instruction body is embedded.
+All ten final linked extents and their changed-source negative controls are
+preserved under the ignored `reports/agents/frame-input/affine-final/` and
+`negative-controls/` directories. Alternative field views, loop layouts and
+compiler padding failures remain under the local affine report directories.
+
+The allocation/upload continuation now includes two further exact C readers:
+`frame_part_dimensions` (`0xD94`, 152 bytes) and `frame_part_pixels`
+(`0xE2C`, 144 bytes). The local frame/input subtotal is 41 functions and 6,636
+bytes. Both select a part's variant record, then use the object's current frame
+or the preceding frame. Part flag 4 wraps a preceding frame below zero to the
+sequence's last frame; flag 8 clamps that case to frame zero. The dimension
+reader sign-extends the object group and variant bytes at `+0x134` and `+0x135`,
+while the pixel reader zero-extends them. This difference is retained explicitly.
+
+The 16-byte variant record exposes pixel data at `+0`, a sequence pointer at
+`+4`, an optional palette pointer at `+8`, and a frame delay byte at `+12` in
+other local readers. The pixel reader proves that the halfword at frame `+4`
+is a pixel-data offset. Earlier `tile_bytes`/`bytes` names for this halfword in
+the provisional render/animation views should therefore be read as unresolved
+labels, not a demonstrated size. The frame allocation code derives upload byte
+counts from width times height. The dimension and pixel matches retain raw
+comparisons in `part-access-matrix/` and final `parts-final/` local reports, and
+their changed-source controls reject. The direct frame-switch routine at
+`0xC6C` remains unconverted: its current C candidate matches the bounds and
+collider operations, but still differs in the final flag-clear instruction and
+literal pool. It receives no coverage credit.
+
+The direct frame switch and its resource/variant setters now close the manual
+animation setup path with three more exact C functions: `frame_set_animation_frame`
+(`0xC6C`, 296 bytes), `frame_set_animation_resource` (`0x1478`, 36), and
+`frame_set_animation_variant` (`0xBE8`, 132). The local subtotal is 44 functions
+and 7,100 bytes. All final extents match and all corresponding changed-source
+controls reject. The previous frame-switch candidate's final mask was decoded
+incorrectly during analysis: the raw little-endian pool word is `0xFFBFFFFF`,
+so the operation clears the already established animation-complete flag
+`0x400000`. Correcting that semantic reading resolves the entire match; compiler
+padding and mask-synthesis alternatives remain preserved as failed evidence.
+
+The frame switch refreshes only when the requested frame differs or flag
+`0x80` is set. It stores the frame and copies the frame-delay byte into the
+countdown, then conditionally rebuilds primary bounds and colliders and the
+multipart collider contribution. It clears animation completion even when the
+frame and bounds do not change. The typed `FrameTickObject` view retains the
+same direct delay/frame fields used by the matched tick function. Resource
+assignment compares the pointer at `+0xDC`, marks flag `0x80` on change, and
+selects frame zero through this setter.
+
+Variant selection uses signed indices for its two-dimensional variant table,
+while storing the original byte arguments at object `+0x134` and `+0x135`.
+It copies the selected record's frame delay and assigns that record as the
+animation resource. An optional palette pointer at record `+8` transfers 16
+entries to the object's OAM palette bank: frame flag `0x10` selects the alternate
+immediate loader at `0x11708`, otherwise the queue producer at `0x11718` is used.
+These destinations are distinguished by the connected palette code, not by an
+assumption that both calls upload immediately. Final proofs are retained under
+`setters-final/`; the accepted list contains only the exact replacements.

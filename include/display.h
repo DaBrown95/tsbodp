@@ -92,7 +92,7 @@ extern unsigned int g_display_allocated_tiles[32], g_display_pending_free_tiles[
 extern void display_mark_tiles_free(unsigned short, unsigned short);
 struct DisplayTileResource;
 extern void display_copy_tile_resource(struct DisplayTileResource *, unsigned short);
-extern unsigned int display_find_tile_run(unsigned int *, unsigned int, unsigned int);
+extern unsigned int display_find_tile_run(const unsigned char *, int, unsigned int);
 extern unsigned char g_display_tile_allocator_rom[], g_display_tile_allocator_ram[];
 extern void *display_fill_bytes(void *, int, unsigned int);
 extern void display_mark_tiles_allocated(unsigned short, unsigned short);
@@ -176,3 +176,8 @@ extern unsigned int display_next_palette_range(void);
 extern void display_load_palette_ranges(const struct PaletteRangeConfig *);
 extern void display_load_palette(const void *, unsigned int, unsigned int);
 extern void display_step_palette_range(struct PaletteRangeJob *);
+extern const unsigned char g_display_sprite_dimensions[];
+extern void display_sprite_dimensions(unsigned int, unsigned int, struct DisplayPoint *);
+extern const unsigned char *display_object_tile_pixels(struct DisplayTileObject *);
+extern void display_load_palette_alternate(const void *, unsigned int, unsigned int);
+extern void display_queue_palette(const void *, unsigned int, unsigned int);

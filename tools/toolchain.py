@@ -5,6 +5,8 @@ from pathlib import Path
 
 PROFILE = Path('toolchains/host-profile.json')
 PIN = Path('config/pilot-toolchain.json')
+ARM_PIN = Path('config/arm-toolchain.json')
+ARM_PROFILE = Path('toolchains/arm-host-profile.json')
 
 
 def sha(path):
@@ -24,15 +26,15 @@ def validate_profile(profile, pins, pin_digest):
         raise RuntimeError('Setup profile is missing the host preprocessor version')
 
 
-def load_profile(root):
-    pins = json.loads((root / PIN).read_text())
-    profile_path = root / PROFILE
+def load_profile(root, pin=PIN, local=PROFILE):
+    pins = json.loads((root / pin).read_text())
+    profile_path = root / local
     if not profile_path.exists():
         return pins, None
     profile = json.loads(profile_path.read_text())
-    validate_profile(profile, pins, sha(root / PIN))
+    validate_profile(profile, pins, sha(root / pin))
     return {**pins, 'native_tool_sha256': profile['native_tool_sha256'],
-            'host_clang': profile['host_clang']}, PROFILE
+            'host_clang': profile['host_clang']}, local
 
 
 def verify_native(root, profile, host_clang):

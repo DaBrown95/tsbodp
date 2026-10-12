@@ -1,0 +1,23 @@
+{
+  "compiler": {
+    "source_url": "https://github.com/pret/agbcc.git",
+    "source_commit": "da598c1d918402c42c0c0d7128ba14567f3175e9",
+    "source_subdirectory": "gcc_arm",
+    "reported_backend": "gcc 2.9-arm-000512 for ARM/elf",
+    "configure_options": [
+      "--target=arm-elf",
+      "--host=i386-linux-gnu"
+    ],
+    "build_options": [
+      "cc1",
+      "-j4",
+      "CC=clang",
+      "CFLAGS=-g -std=gnu89 -Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-deprecated-non-prototype"
+    ]
+  },
+  "native_tool_sha256": {
+    "toolchains/agbcc-arm-build/cc1": "da186f4d33df3e45939bdec7f25e0352ac24cf2cc836272058a208c3eaa01313"
+  },
+  "host_clang": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "scope": "Additional ARM C backend from the same pinned public source; native fingerprints remain separate from the Thumb tool profile. This does not establish the historical compiler or an exact source match."
+}

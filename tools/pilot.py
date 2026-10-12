@@ -9,12 +9,15 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 import uuid
+import struct
 
 from elftools.elf.elffile import ELFFile
 from project import ROOT, audit, compare_bytes, write_report
-from toolchain import load_profile, verify_native
+from toolchain import load_profile, verify_native, ARM_PIN, ARM_PROFILE
 from source_symbols import declarations
 from source_controls import mutate
+from source_addresses import execution_address, validate_execution_layout
+from ram_copies import validate_copy
 
 
 def run(command, commands):
@@ -25,7 +28,7 @@ def run(command, commands):
     return result.stdout
 
 
-def compile_function(function, source, folder, flags):
+def compile_function(function, source, folder, flags, copies=None):
     folder.mkdir(parents=True, exist_ok=True)
     commands = []
     header_folder = folder / "include"
@@ -36,12 +39,21 @@ def compile_function(function, source, folder, flags):
     assembly = folder / "source.s"
     obj = folder / "source.o"
     linked = folder / "linked.elf"
-    address = 0x08000000 + function["rom_offset"]
+    entries = ()
+    if copies is None:
+        ram = json.loads((ROOT / 'config/ram-map-us-eu.json').read_text())
+        copies, entries = ram['copies'], ram['entries']
+    address = execution_address(function, copies, entries)
+    is_arm = function.get('mode', 'Thumb') == 'ARM'
+    compiler = ROOT / ('toolchains/agbcc-arm-build/cc1' if is_arm else 'toolchains/agbcc/gcc/agbcc')
+    flags = function.get('compiler_flags', flags)
+    if is_arm and '-mthumb' in flags:
+        raise ValueError('ARM backend cannot compile Thumb instructions')
     run(["xcrun", "clang", "--target=arm-none-eabi", "-E", "-P", "-undef",
          "-nostdinc", "-std=gnu89", "-I", header_folder, source, "-o", preprocessed], commands)
-    run([ROOT / "toolchains/agbcc/gcc/agbcc", *flags, preprocessed, "-o", assembly], commands)
+    run([compiler, *flags, preprocessed, "-o", assembly], commands)
     run([ROOT / "toolchains/binutils/bin/arm-none-eabi-as", "-mcpu=arm7tdmi",
-         "-mthumb", "--no-pad-sections", assembly, "-o", obj], commands)
+         *([] if is_arm else ['-mthumb']), "--no-pad-sections", assembly, "-o", obj], commands)
     # Mark external function addresses as Thumb, so the linker does not invent
     # ARM interworking veneers for absolute ROM symbols.
     externs = folder / "externs.s"
@@ -115,6 +127,12 @@ def main():
     rom, identity = audit(ROOT / target["rom_path"], target)
     if not identity["accepted"]:
         return 1
+    ram = json.loads((ROOT / 'config/ram-map-us-eu.json').read_text())
+    copies = ram['copies']
+    validate_execution_layout(manifest['functions'], copies, ram['entries'])
+    if any('ram_address' in f for f in manifest['functions']):
+        for copy in copies:
+            validate_copy(copy, lambda off: struct.unpack_from('<I', rom, off)[0])
     commands = []
     commit = run(["git", "-C", ROOT / "toolchains/agbcc", "rev-parse", "HEAD"], commands).strip()
     if commit != manifest["compiler_source_commit"]:
@@ -133,13 +151,24 @@ def main():
     report["helper_sha256"] = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                                 for name in ("tools/pilot.py", "tools/project.py", "config/build-us-eu.json",
                                              "tools/toolchain.py", "tools/source_symbols.py", "tools/source_controls.py", "config/pilot-toolchain.json",
-                                             "config/targets/us-eu.json", "include/irq.h")}
+                                             "config/targets/us-eu.json", "include/irq.h",
+                                             "tools/source_addresses.py", "tools/ram_copies.py",
+                                             "config/ram-map-us-eu.json")}
     report['helper_sha256'].update({str(header.relative_to(ROOT)): hashlib.sha256(header.read_bytes()).hexdigest()
                                     for header in (ROOT / 'include').glob('*.h')})
     if profile_path:
         report['helper_sha256'][str(profile_path)] = hashlib.sha256((ROOT / profile_path).read_bytes()).hexdigest()
     report["host_clang"] = run(["xcrun", "clang", "--version"], commands).strip()
     verify_native(ROOT, lock, report['host_clang'])
+    if any(f.get('mode', 'Thumb') == 'ARM' for f in manifest['functions']):
+        arm_lock, arm_profile = load_profile(ROOT, ARM_PIN, ARM_PROFILE)
+        if arm_lock['compiler']['source_commit'] != commit:
+            raise RuntimeError('ARM compiler source differs from the checked source pin')
+        verify_native(ROOT, arm_lock, report['host_clang'])
+        report['helper_sha256'][str(ARM_PIN)] = hashlib.sha256((ROOT / ARM_PIN).read_bytes()).hexdigest()
+        if arm_profile:
+            report['helper_sha256'][str(arm_profile)] = hashlib.sha256((ROOT / arm_profile).read_bytes()).hexdigest()
+        lock = {**lock, 'native_tool_sha256': {**lock['native_tool_sha256'], **arm_lock['native_tool_sha256']}}
     for name in lock['native_tool_sha256']:
         path = ROOT / name
         report.setdefault("tool_sha256", {})[name] = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -160,14 +189,17 @@ def main():
         # This result is backed by source compilation and a checked linked extent.
         result["source_reconstruction_verified"] = result["identical"] and is_c
         result["assembly_glue_verified"] = result["identical"] and not is_c
-        result.update({**function, "address": f"{0x08000000 + function['rom_offset']:#010x}",
+        address = execution_address(function, copies) if is_c else 0x08000000 + function['rom_offset']
+        result.update({**function, "address": f"{address:#010x}",
+                       'rom_address': f"{0x08000000 + function['rom_offset']:#010x}",
                        "source_sha256": hashlib.sha256(snapshot.read_bytes()).hexdigest(),
                        "commands": compile_commands, "expected_sha256": hashlib.sha256(expected).hexdigest()})
         if args.matrix and is_c:
             result["optimization_trials"] = []
             for flag in ("-O0", "-O1", "-O2", "-O3", "-Os"):
+                trial_function = {**function, 'compiler_flags': [flag, '-mthumb-interwork']}
                 trial_data, trial_commands = compile_function(
-                    function, snapshot, folder / flag[1:], [flag, "-mthumb-interwork"])
+                    trial_function, snapshot, folder / flag[1:], [flag, "-mthumb-interwork"])
                 trial = compare_bytes(expected, trial_data)
                 trial.update({"flags": [flag, "-mthumb-interwork"], "commands": trial_commands})
                 result["optimization_trials"].append(trial)
