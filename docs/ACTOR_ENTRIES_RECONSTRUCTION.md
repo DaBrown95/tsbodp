@@ -1,6 +1,6 @@
 # Actor entry list lifecycle and condition handoff
 
-Fifteen connected replacements add 1,256 bytes of matching C. Their complete
+Seventeen connected replacements add 1,644 bytes of matching C. Their complete
 linked extents, pools and alignment match at the original addresses. Every
 replacement has an actual compiled changed-source control that rejects. The
 list setup, reset, insertion and selection paths connect to the previously
@@ -24,6 +24,8 @@ static and compiler results; no gameplay behavior is claimed.
 | `actor_entry_choose_195` | `0802074C` | 96 |
 | `actor_entry_choose_209` | `080207AC` | 96 |
 | `actor_entry_choose_201` | `0802080C` | 96 |
+| `actor_entry_clear_collection_group` | `08020234` | 172 |
+| `actor_entry_publish_collection_group` | `08020614` | 216 |
 
 ## Shared storage evidence
 
@@ -89,9 +91,36 @@ the earlier 149-entry name scan. The shared array declaration is now unsized;
 The selection-mode meaning and termination for arbitrary table contents have
 not been established by runtime evidence.
 
+## Separate record collection
+
+The pointer at context `31C` addresses the separate `84C`-byte allocation.
+Its observed layout contains a halfword count at zero, an unknown halfword at
+two, 160 twelve-byte records beginning at four, and 50 four-byte group headers
+beginning at `784`. Each record begins with the existing four-byte actor entry;
+its two following words remain unknown. A group header supplies byte-sized
+start and count fields. The capacity test in the unconverted insertion routine,
+the `49` bounds in deletion/clearing, and the reset's `84C` clear agree on these
+extents. This is evidence for this allocation, not the complete context size.
+
+Group clearing copies any following records down with the accepted heap copy,
+clears the vacated tail, reduces the later groups' starting indices, subtracts
+the removed count and zeroes the selected group count. The scoped later-group
+loop matches in ordinary C without register constraints. Overlapping-copy
+direction is inherited from the matching heap helper.
+
+Group publication consumes records while the active list has space. It skips
+records whose catalog word at `0C`, provisionally named `category`, is six and
+otherwise calls the matching actor-entry insertion path with the three entry
+bytes. A second handoff inspects game-state `43C`, writes 50 and attempts an
+entry with ID `195 + game[43D]`; when no slot is available it also clears `43E`.
+The function then clears the collection group, including records that were not
+published. Those byte accesses are preserved; a timer or notification gameplay
+interpretation is provisional. Indices, count consistency and destination
+capacity remain unchecked except for the observed active-list comparison.
+
 ## Matching and remaining path
 
-Ordinary C reproduces fourteen functions. Reset uses one semantic `r0` binding
+Ordinary C reproduces sixteen functions. Reset uses one semantic `r0` binding
 for the game-state base so the compiler retains the original base literal plus
 `F0` address calculation. It contains no instruction-body assembly. Zero-filled
 Thumb tail alignment is explicit where present. Changed limits, sentinels,
@@ -101,12 +130,16 @@ different/missing/extra bytes. The adjustment control changes the upper-bound
 test and also rejects; its separate proof index is
 `reports/audio-root/actor-entry-counter-canonical/1791848102323039000/ready.json`. The original private proof index is
 `reports/audio-root/actor-entry-canonical/1791847197727325000/ready.json`.
+The two collection controls change the later-group bound and the catalog
+category filter, rejecting by two and one bytes respectively. Their proof index
+is `reports/audio-root/actor-entry-collection-canonical/1791849007996878000/ready.json`.
 
 The central definition-driven refresh at `08020368` remains unconverted. Static
 analysis shows a retained-slot cleanup, seed records and random fallback
 selection, including a packed `(5,6,5)` condition marker. A revised 328-byte
 trial matches the selection/condition handoff but still differs in the cleanup
-loop; it receives no coverage credit. The separate twelve-byte record collection
-at context `31C` is a further connected target. Useful
+loop; it receives no coverage credit. Collection insertion at `080204B0`,
+single-record removal at `08020574` and secondary-flag reconciliation at
+`0802005C` remain connected targets. Useful
 failed bodies and raw comparisons remain in ignored local reports. Whole-ROM
 equality, partial storage mapping and runtime behavior remain separate claims.

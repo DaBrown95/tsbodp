@@ -887,14 +887,15 @@ and reading the control register after every write. These are static register
 accesses and a compiler match; hardware execution has not been tested.
 
 The copied code accesses coordinate pairs at record `+0x18` and staged words
-at `+0x40`. The unchanged `0x900`-byte record therefore now gives names to five
-coordinate pairs and 280 pairs of 32-bit staged words in its former unknown
-span. The staging interpretation is provisional but its offsets, eight-byte
-pair stride and 80-byte row stride are directly observed. The argument is
-narrowed to its low byte; the source has no local check against the five
-coordinate slots represented by this partial layout. Valid caller indices and
-runtime bounds remain unresolved. All twenty previously accepted map and
-decoder callers and their negative controls were reverified with this layout.
+at `+0x40`. The unchanged `0x900`-byte record gives names to four view-coordinate pairs,
+a fractional-scroll pair at `+0x38`, and 280 pairs of 32-bit staged words. The
+camera writer described below distinguishes the fractional-scroll pair from
+the initially inferred fifth coordinate slot. The staging interpretation is
+provisional but its offsets, eight-byte pair stride and 80-byte row stride are
+directly observed. The argument is narrowed to its low byte; the source has
+no local check against this partial layout. Valid caller indices and runtime
+bounds remain unresolved. All twenty previously accepted map and decoder
+callers and their negative controls were reverified with the initial layout.
 
 Two semantic values retain explicit register bindings: the source-layout
 pointer and the screen-block offset. Removing the initially tested iterator,
@@ -912,3 +913,49 @@ bytes are reconstructed at this point. The staging body at `0xB564` and the
 16- and 12-byte following prefixes remain explicit original code, excluded
 from C coverage. The selected-tile consumer at `0x39CF0` and central renderer
 at `0x23E8` also remain unmatched candidates.
+
+
+The camera update and scroll publication path adds three exact C functions
+and 516 bytes: `transition_get_view_position` at `0xEA44` (36),
+`frame_update_map_view` at `0x39B10` (316), and
+`frame_publish_map_scroll` at `0x39C4C` (164). The reader copies the two
+position words at offsets `+4/+8` of the selected 48-byte view-motion record.
+The camera update centers that fixed-point position by subtracting 120 and
+80 pixels plus a ROM byte's vertical adjustment, shifts the coordinates to
+integer pixels, and clamps them against the map dimensions minus the
+240-by-160 viewport. The lower-bound test precedes the upper-bound test;
+maps smaller than the viewport can still produce a negative upper bound.
+No extra validation is inserted into the matching source.
+
+The computed origin is stored in the independent view-origin array and in
+both map records. For the local player, flags `0x110000` instead clear the
+map-record origins and fractional offsets; the independent view-origin array
+retains the computed coordinates. Otherwise local updates store `x & 7` and
+`y & 7` at record `+0x38/+0x3C` and invoke the installed staging callback.
+These writes establish the four origin slots followed by a separate
+`fractional_scroll` pair, while preserving each record's `0x900` size.
+The staging callback is still original ARM code; reconstructing its caller
+does not establish a C match for that body.
+
+Scroll publication runs only when the shared interrupt context's
+`transfer_ready` halfword at `+0x38` equals one. It invokes the installed row
+transfer callback with the local player, then writes the second and first
+records' fractional offsets to display registers `0x04000014..0x0400001A`.
+When the background animation's flags contain bit zero, its byte `+0x0F`
+selects either an x-only write at `0x0400001C`, or x/y writes at
+`0x0400001C/0x0400001E`, using the first record's full local-player origin.
+The background-animation field's existing `transfer_enabled` name remains
+provisional: this caller distinguishes values greater than one. These are
+static accesses and exact compiler results, without runtime display tests.
+
+The publisher's original return and final literal end at `0x39CF0`, making
+its extent 164 bytes. An early 172-byte comparison accidentally included
+eight bytes from the next function; that overlong raw comparison is retained
+locally and was never credited. The three canonical functions match their
+complete extents, pools and alignment. Changed-source controls alter the
+first record's fractional x mask, the interrupt-ready condition and the
+reader's y source; they reject by 132, 108 and 20 bytes respectively. All
+21 previously accepted camera/map and decoder functions retain their matches
+and reject their controls after the same-layout refinement. Raw linked
+images and comparisons are under `camera-map/map-camera-promoted/` and
+`camera-map/map-camera-layout-revalidation/`.

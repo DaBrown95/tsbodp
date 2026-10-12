@@ -19,7 +19,7 @@ void display_scene_create_objects(void)
     text = g_display_scene_text_state.buffer;
     g_display_scene_objects[11] = display_scene_stage_080282d4(0xbd, &text);
     transition_object_set_state((void *)g_display_scene_objects[11], 8);
-    display_scene_stage_0801b1cc(g_display_scene_text_state.text_id);
+    display_text_number_field_zero(g_display_scene_text_state.text_id);
     text = display_scene_lookup_text(0x25);
     g_display_scene_objects[12] = display_scene_stage_080282d4(0xbe, &text);
     transition_object_set_state((void *)g_display_scene_objects[12], 8);

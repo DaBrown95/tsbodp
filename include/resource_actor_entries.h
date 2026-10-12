@@ -6,11 +6,25 @@
 #include "resource_conditions.h"
 #include "heap.h"
 #include "display_catalog_text.h"
-/* Fifteen embedded list headers are observed; the complete context is unknown. */
+/* Partial context through +31C; the complete context allocation is unknown. */
+struct ActorEntryCollectionRecord {
+ struct ConditionActorEntry entry;
+ unsigned int unknown04, unknown08;
+};
+struct ActorEntryCollectionGroup {
+ unsigned char start, count, unknown02[2];
+};
+struct ActorEntryCollection {
+ unsigned short count, unknown02;
+ struct ActorEntryCollectionRecord records[160];
+ struct ActorEntryCollectionGroup groups[50];
+};
 struct ActorEntryContext {
     unsigned char unknown00[0x14];
     struct ConditionActorEntries *secondary, *active;
     struct ConditionActorEntries lists[15];
+    unsigned char unknown94[0x31c - 0x94];
+    struct ActorEntryCollection *collection;
 };
 extern unsigned char g_actor_entry_initial_values[][2];
 extern void *g_actor_entry_buffer;
@@ -38,4 +52,6 @@ unsigned char actor_entry_choose_201(void);
 void actor_entry_refresh_list(struct ActorEntryContext *, unsigned int);
 void actor_entry_empty_hook(void *);
 void resource_set_triple(unsigned int, unsigned int, unsigned int);
+void actor_entry_clear_collection_group(struct ActorEntryContext *, unsigned int);
+void actor_entry_publish_collection_group(struct ActorEntryContext *, unsigned int);
 #endif

@@ -1,6 +1,7 @@
 #ifndef DISPLAY_SCENE_REDRAW_H
 #define DISPLAY_SCENE_REDRAW_H
 #include "display_text_raster.h"
+#include "display_text_fields.h"
 #include "display_scene_setup.h"
 #include "input.h"
 extern struct DisplaySceneOwner *g_display_scene_objects[];
@@ -15,7 +16,6 @@ struct FrameObject;
 extern struct FrameObject *frame_create_scene_object(unsigned int, unsigned int, unsigned int, unsigned int);
 extern const char *display_scene_lookup_text(unsigned int);
 extern struct DisplaySceneOwner *display_scene_stage_080282d4(unsigned int, const char **);
-extern void display_scene_stage_0801b1cc(unsigned int);
 struct TransitionObject;
 extern void transition_object_set_state(struct TransitionObject *, unsigned char);
 extern unsigned char display_scene_item_enabled(const unsigned int *, unsigned int);

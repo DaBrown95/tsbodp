@@ -297,3 +297,93 @@ height. Progress, valid buffer capacity and safe text inputs remain runtime
 questions. These three bodies use ordinary C without register constraints or
 assembly, and the row reader and rasterizer remain explicit unconverted
 dependencies.
+
+## Staging fields and expansion consumers
+
+Eleven connected functions add 972 matching C bytes. Public positives and real
+compiled controls, including the 308-byte scene object constructor's renamed
+callee closure, are indexed by the local
+`reports/agents/display_audio/background_motion/scene/redraw/text-fields-ready.json`.
+Every positive matches its complete linked extent; every control rejects.
+
+| Function | ROM address | Bytes | Control differences |
+| --- | --- | ---: | ---: |
+| `display_text_copy_field` | `0x0801B12C` | 36 | 1 |
+| `display_text_copy_field_zero` | `0x0801B150` | 32 | 1 |
+| `display_text_copy_field_one` | `0x0801B170` | 36 | 1 |
+| `display_text_copy_field_two` | `0x0801B194` | 36 | 1 |
+| `display_text_number_field` | `0x0801B1B8` | 20 | 21 |
+| `display_text_number_field_zero` | `0x0801B1CC` | 16 | 17 |
+| `display_text_number_field_one` | `0x0801B1DC` | 20 | 9 |
+| `display_text_number_field_two` | `0x0801B1F0` | 20 | 9 |
+| `display_text_copy_expanded` | `0x0801AEC8` | 96 | 1 |
+| `display_text_expand_resource` | `0x0801B21C` | 148 | 1 |
+| `display_text_format_number` | `0x08044D00` | 512 | 1 |
+
+The copy/number producers address 64-byte slots beginning at `0x03001A60`,
+immediately after the previously observed raster state. Generic producers
+use their supplied slot index; specialized forms target slots zero, one and
+two. Copying includes a zero terminator and adds no capacity check. Number
+formatting delegates to the accepted decimal formatter at `0x08044D00`;
+its negative-sign/digit stores and original-destination return support the
+provisional formatter name and pointer return. The shared
+inline address helper retains the ordinary C byte-offset calculation in
+the specialized copy forms. These bodies require no register constraints.
+
+The producer bank differs from the active substitutions at `0x03000E20`
+read by measurement, glyph rasterization and both new expansion consumers.
+Separate unsized declarations preserve that distinction. The transfer or
+selection between these banks remains unconverted; adjacency, equal slot
+stride and matching source do not establish a runtime handoff. The scene
+object constructor at `0x0800F168` supplies its state word at offset four
+to the slot-zero number producer before loading text ID `0x25`. Renaming
+that former address-only callee leaves the constructor and its actual
+changed-source control intact; the state's earlier `text_id` field name
+does not establish that the formatter argument itself is a text resource ID.
+
+Copy expansion scans a source string, replacing each `@` plus following
+byte with the selected active slot string. It appends a terminator and
+returns the copied byte count. The two observed length calls are retained
+because a string-copy callee lies before them, and the source slot index is
+read again before each call. Replacement text is copied without recursively
+expanding its markers. Ordinary characters advance destination before source,
+which reproduces the original source schedule without assembly.
+
+Resource expansion obtains the shared lookup buffer, tests for a marker and
+modifies that buffer in place. It moves the trailing text including its zero
+terminator before copying the replacement, then continues at the end of that
+replacement. A mutable access view follows the lookup implementation's
+observed writable global buffer; other lookup callers keep their existing
+read-only pointer view. The move/copy, character search, string copy/length
+dependencies remain explicit unconverted calls. The signed
+temporary for the next index and grouped destination offset preserve the
+observed calculation and register lifetimes; earlier reassociated forms and
+raw mismatch evidence remain local.
+
+Neither consumer checks lookup failure, marker termination, slot extent,
+destination capacity or overlap beyond the move helper's role. Replacement
+markers are not rescanned here, in contrast with recursive measurement.
+These are static and compiler findings; no safe-input or gameplay claim is
+added. The only assembly in the two larger sources requests zero-filled
+alignment separately from their C bodies.
+
+The formatter covers 512 bytes: instructions end at the return through
+`0x08044EC6`, and fourteen literal words occupy `0x08044EC8` through
+`0x08044EFC` before the next prologue at `0x08044F00`. The source uses one
+semantic decimal-place macro for powers from one billion through ten,
+retaining a minus-one digit sentinel to suppress leading zeroes. Once a
+leading digit is written, lower places are emitted even when zero. The
+configured separator byte at `0x030021F9` follows the billion, million and
+thousand places. The ones digit and terminator finish the buffer; there is
+no capacity check. Signed division/remainder helpers at `0x0804CD2C` and
+`0x0804CE08` remain unconverted dependencies.
+
+For negative inputs the explicit unsigned subtraction followed by the
+target's signed word view preserves wrapping negation without introducing
+a signed-negation overflow in the C expression. It does not add a correction
+for the most-negative word's retained sign. A cursor initialized before the
+local value copy produces the observed entry register lifetime naturally;
+the prior equivalent parameter-use form differed in five bytes. The macro
+and wrapping form both match independently, and the public source control
+changing the negative guard to include zero rejects by one byte. No register
+constraints, output changes or embedded instruction bodies are used.

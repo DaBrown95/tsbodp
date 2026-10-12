@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 78 C functions spanning 14,708 verified bytes. The
+This batch reconstructs 82 C functions spanning 15,756 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,10 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x85C0` | `frame_actor_state_8` | 256 |
+| `0x86C0` | `frame_actor_state_9` | 368 |
+| `0x66F4` | `frame_actor_terrain_step` | 236 |
+| `0x8B30` | `frame_actor_follow_target` | 188 |
 | `0x5CA4` | `frame_actor_state_16` | 1,420 |
 | `0x7F88` | `frame_actor_input_velocity` | 116 |
 | `0x1BC8C` | `frame_reduce_actor_scene_counter` | 68 |
@@ -540,6 +544,48 @@ substate 3, 5 marks outer state 1 and 8 is an explicit no-op. The four complete
 extents add 296 ordinary-C bytes and reject changed animation, countdown,
 destination direction and fixed-point shift controls.
 
+## Distance movement and terrain handoff
+
+States 8 and 9 add 624 bytes of complete, matching C. State 8 reads its target
+pointer at `+0x68`, wait byte at `+0x77` and range byte at `+0x7A`. A missing
+target enters substate 7. With a target, it computes the fixed-point distance,
+shifts it by 16, follows outside the configured range and waits inside it.
+Distance above 220 with flag `0x1000` clear tests the target position shifted
+85 integer units along Y against the camera-margin predicate. Only a successful
+predicate copies that complete position to the actor. Substates 7 and 13 have
+separate zero and `-1` countdown rules. Aggregate position copies preserve the
+original field evaluation and remove duplicate component lifetimes.
+
+State 9 reads the selected view's actor and has distinct halfword enter and
+leave ranges at `+0x6A` and `+0x68`. Entering substate 9 saves the actor speed at
+`+0x64`, doubles it, selects direction 0 through 7 and starts a random countdown.
+Leaving that range restores the saved speed. Substates 3 and 7 alternate timed
+movement and wait phases; substate 5 responds to animation completion by marking
+outer state 1 and clearing flag `0x10`. A shared full-word distance local matches
+both comparisons in ordinary C; no fixed-register binding is used in either
+handler. These inferred roles do not establish the in-game identity of the states.
+
+The connected 236-byte terrain step computes direction/speed velocity, adds the
+actor position and shifts to integer coordinates. Its eight direction cases
+adjust the sample using signed bound bytes `+0xBD/+0xBE/+0xBF` before querying
+`frame_map_terrain_at` and masking its result to six bits. A semantic inline
+point-field copy expresses the by-value aggregate handoff. The query's return
+prototype is refined to a word from its un-narrowed result and this mask; the
+callee itself remains unconverted. The accepted refresh caller still stores
+the result to a byte and was reverified with its changed-terrain control.
+
+The connected 188-byte follower first tries the direct target direction. Terrain
+values 0, 1 and 36 pass. Other values select one of two directions per facing
+from the original byte table at `0x08052888`, then try its alternate if blocked.
+Two blocked alternatives enter substate 7 with timer 10; a passable alternative
+enters substate 13 with timer 20. Two C argument variables constrained to `r1`
+preserve the original ordering of register moves at those calls; these are
+compiler constraints, with no instruction statements or byte bodies. The table
+and the larger terrain query remain explicit original data/code. Camera predicate
+`0x67E0` has an inspected 148-byte extent and a retained near-match, so it receives
+no source credit. Full comparisons and changed distance, saved-speed, terrain-mask
+and timer controls pass for all four accepted extents.
+
 ## Local proofs and remaining boundaries
 
 Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`,
@@ -550,11 +596,12 @@ Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manif
 `reports/agents/vblank-wrapper/actor-interaction-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-actions-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-carry-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-idle-batch-manifest.json`.
+`reports/agents/vblank-wrapper/actor-idle-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-distance-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
 `actor-state-route-types13-*`, `actor-route-path-layout13-*` and
 `actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` and `actor-interaction-current2-*` and `actor-actions-canonical7-*` and `actor-carry-canonical5-*` and
-`actor-carry-shared-layout6-*` and `actor-idle-canonical12-*` in the same ignored
+`actor-carry-shared-layout6-*`, `actor-idle-canonical12-*`, `actor-distance-canonical4-*` and `actor-distance-word-return1-*` in the same ignored
 agent report tree. Original CFG scans and all 29 handler entry summaries remain
 local. Mutations change the dispatcher flags, animation IDs, countdown, wait
 factor, direction update flag, group offset, record stride, state target, point
@@ -565,14 +612,14 @@ centered-width divisor, velocity arithmetic, move countdown, social countdown,
 value-reader field, terrain class, option ID range, condition action ID, descriptor lookup bound, action notification ID,
 game-value ceiling, parameter level bound, state-41 animation ID, sequence mode and state-42 cue threshold, effect flags, completion mode and state-43 countdown and state-47 bound adjustment.
 
-Twenty-one of the 29 direct handler functions are reconstructed here. Useful next
+Twenty-three of the 29 direct handler functions are reconstructed here. Useful next
 connected targets are the need target selector `0x6F20`, action-target selector
 `0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`. State 46
 (`0x6874`) is a retained near-match joining proximity, relation values, facing,
 animation and audio; its inferred relation/descriptor layouts still need matching
-confirmation. States 8 and 9 (`0x85C0` and `0x86C0`) follow movement-distance and timed
-handshake dependencies, while state 27 (`0x97D8`) joins display objects, input
-and audio with a larger remaining body. Their scanned CFGs are
+confirmation. Camera-margin predicate `0x67E0` and terrain query `0x2ABB0` remain connected
+next targets. State 27 (`0x97D8`) joins display objects, input and audio with a
+larger remaining body. The scanned CFGs for those retained candidates are
 closed; those scans alone do not establish C coverage, final function boundaries
 or runtime reachability. These bodies remain explicit unconverted ROM regions
 in the full build.
