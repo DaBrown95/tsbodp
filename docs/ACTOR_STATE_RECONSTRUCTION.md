@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 36 Thumb C functions spanning 5,684 verified bytes. The
+This batch reconstructs 48 Thumb C functions spanning 7,568 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -45,6 +45,18 @@ no runtime or gameplay test is claimed here.
 | `0x3C0D8` | `frame_grid_search_status` | 20 |
 | `0x1C68` | `frame_enable_object_flags` | 8 |
 | `0x1C70` | `frame_disable_object_flags` | 8 |
+| `0x59D8` | `frame_actor_state_37` | 144 |
+| `0x5A68` | `frame_actor_state_38` | 152 |
+| `0x1BC74` | `frame_advance_actor_scene_counter` | 24 |
+| `0x34B8C` | `frame_activate_actor_scene_request` | 44 |
+| `0x27EE4` | `frame_create_scene_object` | 240 |
+| `0x1128` | `frame_allocate_scene_object` | 64 |
+| `0x8830` | `frame_actor_state_44` | 356 |
+| `0x27FD4` | `frame_scene_object_tick` | 608 |
+| `0x3400` | `frame_step_position_move` | 160 |
+| `0x34A0` | `frame_begin_position_move` | 56 |
+| `0x4533C` | `frame_set_centered_integer_position` | 28 |
+| `0x14B0` | `frame_set_velocity` | 8 |
 
 ## Dispatch evidence
 
@@ -59,8 +71,8 @@ The no-op case 0 remains explicit in C: removing it makes the compiler build a
 47-entry table with a subtract-one index. The retained failed candidate differs
 in the dispatcher prefix/table. State 37 and state 38 call handlers without an
 actor argument; inspection of both callees confirms they access global game
-state and do not consume the incoming actor. Their broader side effects remain
-unconverted.
+state and do not consume the incoming actor. Their scene handoff bodies now match; the broader scene request and
+pool and broader scene request paths remain partly unconverted.
 
 The C case order follows the observed block layout. It does not contain original
 instructions or table bytes. The only assembly directive emits zero tail
@@ -209,21 +221,81 @@ called by beginning, searching and releasing routes. The core grid search and
 reverse-order path extraction at `0x3C08C` remain unconverted; bounded candidate
 proofs do not make those algorithms reconstructed.
 
+State 37 reads the global timer at game state `+0x74C`. Values above -2 submit
+scene request 37 with mode byte 0. Otherwise, stage word `+0x440` selects request
+28 or 36, sets ready byte `+0x750`, and sets mode byte 1 or 2. The latter branch
+increments the halfword counter at `+0x744` by 20. All branches reset the actor
+needs block at game state `+0xB0` through the already reconstructed need reset.
+State 38 either submits request 37 with a 360-frame timer or creates a scene
+object with ID 193, subtype 244, palette 15 and layer 0. The variant byte at
+`+0x749` selects result halfword 304/305 at `0x030059F0`. A bounded record view
+for that halfword matches the original compiler allocation; a scalar halfword
+view emitted an extra move. This supports a field view, while the full record's
+extent and broader result meaning remain uncertain.
+
+The scene request at `0x03005A00` has an active byte at `+4` and an object pointer
+at `+8`. Activation sets that byte, sets object flag `0x200000`, clears flag 1,
+and calls scene stage 2. The factory allocates a 320-byte object, sets its ID,
+subtype, flags, display layer/palette and callback, and positions it using an
+8-byte signed-coordinate descriptor at `0x08057ACC`. It selects a 16-byte
+animation record from `0x08058154`; subtype 267 instead loads a palette and
+optionally installs special command streams for IDs 110/111. The allocation
+wrapper calls the still-unconverted pool operation at `0x24D50`, initializes
+ID and display-index halfwords to `0xFFFF`, and fills the list tail if empty.
+The pool operation, descriptor arrays and command streams remain explicit
+original regions; reconstructing the factory does not establish the pool
+algorithm or asset contents.
+
+The scene object's callback handles outer states 14 and 8. State 14 bounds
+its substate by 58 and uses a 59-entry table at `0x28004`: substate 0 sets the
+first descriptor position, 58 sets the second, 56/57 move between those positions,
+and 3 advances a pending move. All other table slots return. The explicit empty
+C cases retain that table's range and compiler form; the source contains neither
+original table words nor instruction bodies. State 8 sets substate 11 when its
+current substate is zero. Subtype 315 uses a centered integer position that
+subtracts half the display width at `+0xD8`; other subtypes use fixed-point
+coordinates directly. The move setup stores destination words at `+0x38/+0x3C`
+and narrows duration to the halfword at `+0x5E`.
+
+Move stepping decrements that halfword, computes absolute coordinate differences
+and signed byte directions, and either snaps both coordinates when each remaining
+difference is below one integer pixel or divides the differences by the remaining
+timer through the unconverted BIOS division veneer. It sets the resulting
+velocity; a separate accepted setter writes the two velocity words. No new
+zero-duration guard is invented. The original path can pass zero to the division
+veneer, and matching alone does not establish whether callers avoid that state.
+The six decoded bytes of the setter have two original zero tail bytes before
+the next entry; the source emits explicit zero alignment for the full 8-byte
+extent. The callback and these helpers are ordinary C except for that alignment.
+
+State 44 uses the selected local view's actor and fixed-point distance to switch
+between proximity movement and timed random turns. Entry/exit distances are
+halfwords at `+0x6A`/`+0x68`; turn/wait bounds are at `+0x6C`/`+0x6E`. Entering
+substate 4 saves and doubles speed, plays cue 179 and chooses a random direction.
+Leaving it restores speed and switches to substate 7. Substates 3/7 alternate
+on an unsigned halfword countdown reaching `0xFFFF`. Two short-lived distance
+results use C register bindings to retain the original allocation; these emit
+no instruction bodies and are compiler constraints, not runtime evidence.
+Numeric handler names retain uncertainty about the gameplay entity involved.
+
 ## Local proofs and remaining boundaries
 
 Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`,
-`reports/agents/vblank-wrapper/actor-route-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-route-update-batch-manifest.json`.
+`reports/agents/vblank-wrapper/actor-route-batch-manifest.json`,
+`reports/agents/vblank-wrapper/actor-route-update-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-scene-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
 `actor-state-route-types13-*`, `actor-route-path-layout13-*` and
-`actor-route-updates-current10-*` in the same ignored
+`actor-route-updates-current10-*` and `actor-scene-current12-*` in the same ignored
 agent report tree. Original CFG scans and all 29 handler entry summaries remain
 local. Mutations change the dispatcher flags, animation IDs, countdown, wait
 factor, direction update flag, group offset, record stride, state target, point
 arithmetic, route limit, slot bound, active-count decrement, probe-vector length, mode transition,
-path-copy argument, destination direction, flags argument and search-status field.
+path-copy argument, destination direction, flags argument, search-status field, scene timer/request ID, scene-counter increment,
+activation mask, factory flags, allocation size, proximity cue, transition duration, special-subtype selection,
+centered-width divisor, velocity arithmetic and move countdown.
 
-Nine of the 29 direct handler functions are reconstructed here. Useful next
+Twelve of the 29 direct handler functions are reconstructed here. Useful next
 connected targets are the need target selector `0x6F20`, action-target selector
 `0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`. State 46
 (`0x6874`) is a retained near-match joining proximity, relation values, facing,

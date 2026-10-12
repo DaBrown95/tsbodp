@@ -1,8 +1,8 @@
 # Resource condition reconstruction evidence
 
-This connected continuation of resource commands 36 and 37 now contains 16
-verified C functions covering 2,280 bytes. The latest context updater adds one
-function and 524 bytes. Complete extents match at their original ROM
+This connected continuation of resource commands 36 and 37 now contains 18
+verified C functions covering 2,720 bytes. The latest group completion and
+prior-row initialization batch adds two functions and 440 bytes. Complete extents match at their original ROM
 addresses, including literal pools and zero tail alignment. Every replacement
 has a compiled, linked changed-source control that is rejected. These are static
 and compiler results; condition behaviour has not been tested during gameplay.
@@ -23,6 +23,8 @@ and compiler results; condition behaviour has not been tested during gameplay.
 | `0802A06C` | `condition_activate_entry` | 380 |
 | `0802A94C` | `condition_publish_row_displays` | 40 |
 | `08020AC8` | `condition_record_actor_selection` | 124 |
+| `0802A3C8` | `condition_finish_group` | 212 |
+| `0802A49C` | `condition_initialize_prior_rows` | 228 |
 | `08029DA4` | `condition_update_actor_context` | 524 |
 | `08029FB0` | `condition_finish_actor_context` | 188 |
 
@@ -139,9 +141,35 @@ register bindings. The complete 524-byte comparison includes all five pool words
 and two zero alignment bytes; its changed count threshold is rejected. Raw
 positive, control and useful failed trials remain in ignored local reports.
 
+The group completer at `0802A3C8` writes the group-complete byte without an
+active check. For row two, column zero it queries actor property `7C`, narrows the
+result to a signed byte and reloads the actor pointer for the updating call.
+It then checks the first five group-complete bytes in that row. When all are
+truthy and the requested column is not five, other rows publish a non-`FF` word
+kind from `08059AF0`, while row four activates entries zero through three in
+column five. The word table remains unconverted data. Property `7C`, its actor
+callees and the broader meaning of this final-group handoff remain provisional.
+Its exact 212-byte extent includes the three-word pool inside the function and
+zero tail alignment. Changing the queried property rejects by one byte.
+
+The prior-row initializer at `0802A49C` sets group active/complete and entry
+active/complete bytes to one for every definition in each row below the selected
+row, then calls the accepted row selector. Its three loop indices are unsigned
+bytes, while the selected-row argument is a full word. The source retains this
+narrowing and the original absence of range checks. Definition counts are
+reloaded after potentially aliasing byte stores. Shared scoped addresses, rather
+than separate repeated accessor expressions, reproduce the compiler's lifetimes;
+no fixed register variables are needed. Its complete 228-byte extent ends at
+`0802A580`, including all six literal words and zero alignment. Changing one
+group-complete write to zero rejects with a 224-byte output and 144 differing,
+missing or extra bytes. The next function begins at `0802A580` and ends at
+`0802A688`; its 264-byte semantic candidate remains unconverted. The earlier
+492-byte envelope is not credited as one reconstructed initializer. Raw public
+positive/control comparisons are under `reports/audio-root/condition-groups-canonical/`.
+
 Useful failed candidates and raw comparisons remain in ignored local reports.
-The refresh at `0802A688`, group completion at `0802A3C8`, initialization at
-`0802A49C` remain unconverted. Close candidates
+The refresh at `0802A688` and selected-group initializer at `0802A580`
+remain unconverted. Close candidates
 receive no C coverage credit. They are
 the next connected targets before assigning broader semantics to this system.
 No output patch, difference mask or reference change was used.

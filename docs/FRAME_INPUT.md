@@ -631,3 +631,64 @@ validated at runtime. Changing the wrapper's y coordinate to the x high
 halfword rejects the match by six bytes, and the lookup's changed layer-result
 control still rejects by one byte. Raw comparisons remain in ignored local
 reports; no candidate renderer bytes are counted as matching C.
+
+The renderer and the accepted sequence drawer now share two exact OAM staging
+helpers: `frame_append_oam` (`0x2CEF0`, 80 bytes) and the provisionally named
+`frame_note_oam` (`0x2CF40`, 36 bytes). The append helper checks the byte at
+`0x03004400` as signed: values with bit 7 set reject with return value -1.
+Otherwise it copies the eight-byte OAM record into the requested index of both
+banks through `0x03004D20`, separated by 128 entries (1024 bytes), increments
+that byte, and returns zero. Its byte-sized index is independent of the count
+check; there is no separate index-range check. The source reloads the record for
+the second copy, preserving the reference's observed copy order and possible
+aliasing rather than assuming that the two writes share a cached value.
+
+The companion changes only the second bank's two display-mode bits to value 2,
+which disables that entry in the GBA OAM encoding. The accepted sequence drawer
+calls it after appending, with the count minus one, when the sharing option
+requires the alternate entry to be hidden. These names and buffer roles are
+static inferences. The helper's signed index has no local bounds check, and no
+runtime capacity or aliasing behavior has been established. Together with the
+already matching `frame_prepare_oam_transfer`, which disables unused entries
+in both banks and sets the IRQ transfer-ready field, this closes the drawing
+caller's staging handoff without accepting the still-unmatched renderer.
+
+The append declaration now records its observed integer return, replacing the
+old provisional void declaration. The drawing caller still matches all 720
+bytes and its changed-coordinate control rejects. Changing the append's second
+bank offset from 128 to 127 rejects by two bytes; changing the hide mode from 2
+to 1 rejects by one. Full linked extents, literal pools, alignment and these
+compiled controls are preserved under the ignored
+`reports/agents/frame-input/oam-staging/canonical/` and `negative/` directories.
+
+The staging path's adjacent lifecycle now has seven further exact replacements,
+totalling 376 bytes: initialization at `0x2CE7C` (44), allocation at `0x2CEA8`
+(56), release at `0x2CEE0` (16), OAM reset at `0x2D0B8` (120), affine-slot reset
+at `0x2D130` (36), enable at `0x2D154` (48), and disable at `0x2D184` (56).
+Initialization points the paired OAM buffer at `0x03004520`, resets its contents
+and affine ownership, and records an auxiliary pointer at `0x03004510` to
+`0x03004D60`. The auxiliary pointer's later consumers and storage extent remain
+uncertain; its name does not establish a sprite or matrix layout.
+
+OAM reset copies the eight-byte record at `0x080616C4` into all 128 entries of
+both banks. Its first attribute is `0x0200`, disabling the entry, and its remaining
+six bytes are zero. It then uses DMA3 to copy the first bank's 256 words to
+hardware OAM at `0x07000000` with control `0x84000100`, reads back the control,
+and clears the staging count. The template's C view intentionally has no const
+qualifier: the reference reloads the record for both writes on every iteration.
+Adding const allows this compiler to hoist and cache its words, producing a
+108-byte mismatch instead of the original 120-byte extent. This is compiler and
+aliasing evidence for the selected view, not a claim that the physical ROM is
+writable or that the original declaration is uniquely known. That failed source,
+linked bytes and comparison are retained in `reset-const-view-failed/`.
+
+Allocation scans the first bank with a byte index until its signed interpretation
+becomes negative, covering entries 0 through 127. It selects the first entry
+whose display mode is exactly 2, changes that entry in both banks to mode 0, and
+returns its index; no free entry returns `0xFF`. Release narrows its argument to
+a byte before disabling both entries with mode 2. The enable and disable helpers
+accept a full integer index and have no local bounds check. The separate affine
+reset clears the existing 32 ownership bytes and their high-water count. These
+operations preserve the reference's limits and unchecked cases without a runtime
+allocation claim. Each new function's changed-source control rejects, and all
+linked extents, pools and padding remain in the ignored OAM staging proof folder.

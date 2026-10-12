@@ -84,7 +84,7 @@ struct FrameRenderObject {
 };
 extern FrameU8 g_frame_display_channel;
 void frame_sprite_dimensions(int, int, struct FramePoint *);
-void frame_append_oam(FrameU8, struct FrameOam *);
+int frame_append_oam(FrameU8, struct FrameOam *);
 void frame_note_oam(int);
 void frame_draw_sequence(struct FrameSpriteSequence *, FrameU16, FrameU8,
     struct FramePoint *, FrameU16, struct FrameOam *, struct FrameObject *);
