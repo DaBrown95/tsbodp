@@ -289,9 +289,7 @@
         "frame_update": "0x080008a1",
         "_call_via_r0": "0x0804ccf1"
       }
-    }
-  ],
-  "unmatched_candidates": [
+    },
     {
       "name": "irq_wait_vblank",
       "rom_offset": 129392,
@@ -308,6 +306,105 @@
         "irq_noop": "0x0801fab1",
         "frame_update": "0x080008a1",
         "_call_via_r0": "0x0804ccf1"
+      },
+      "negative_control": {
+        "before": "mask = 1;",
+        "after": "mask = 2;"
+      }
+    },
+    {
+      "name": "irq_vblank",
+      "rom_offset": 128640,
+      "size": 468,
+      "source": "src/irq/irq_vblank.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_vblank_depth": "0x03001da4",
+        "g_oam_buffer_index": "0x03001da8",
+        "g_oam_current": "0x03004510",
+        "g_oam_buffer_a": "0x03004520",
+        "g_oam_buffer_b": "0x03004d60",
+        "g_oam_previous": "0x03004d20",
+        "g_render_pending": "0x03004400",
+        "g_render_consumed": "0x03004d50",
+        "g_irq_flags": "0x03001da0",
+        "g_audio_control": "0x03007360",
+        "display_flush_palette_queue": "0x08011835",
+        "background_animation_tick": "0x0800a789",
+        "display_flush_pending_block": "0x08046f85",
+        "display_commit_backgrounds": "0x0800d3b1",
+        "display_commit_windows": "0x080486b9",
+        "display_commit_palette_jobs": "0x080117e5",
+        "vblank_audio_step": "0x0804c875",
+        "_call_via_r0": "0x0804ccf1"
+      },
+      "thumb_symbols": [
+        "display_flush_palette_queue",
+        "background_animation_tick",
+        "display_flush_pending_block",
+        "display_commit_backgrounds",
+        "display_commit_windows",
+        "display_commit_palette_jobs",
+        "vblank_audio_step",
+        "_call_via_r0"
+      ],
+      "negative_control": {
+        "before": "index << 10",
+        "after": "index << 9"
+      }
+    }
+  ],
+  "assembly": [
+    {
+      "name": "irq_cpu_enable",
+      "rom_offset": 304,
+      "size": 24,
+      "source": "src/irq/irq_cpu_enable.s",
+      "kind": "assembly_glue",
+      "mode": "ARM",
+      "negative_control": {
+        "before": "#0x80",
+        "after": "#0x40"
+      }
+    },
+    {
+      "name": "irq_cpu_disable",
+      "rom_offset": 328,
+      "size": 24,
+      "source": "src/irq/irq_cpu_disable.s",
+      "kind": "assembly_glue",
+      "mode": "ARM",
+      "negative_control": {
+        "before": "#0x80",
+        "after": "#0x40"
+      }
+    },
+    {
+      "name": "irq_dispatcher",
+      "rom_offset": 352,
+      "size": 296,
+      "source": "src/irq/irq_dispatcher.s",
+      "kind": "assembly_glue",
+      "mode": "ARM",
+      "negative_control": {
+        "before": "next_irq 0xc0",
+        "after": "next_irq 0x80"
+      }
+    },
+    {
+      "name": "irq_dispatcher_literals",
+      "rom_offset": 672,
+      "size": 8,
+      "source": "src/irq/irq_dispatcher_literals.s",
+      "kind": "assembly_glue",
+      "mode": "data",
+      "defines_symbol": false,
+      "symbols": {
+        "g_irq_table": "0x03004290"
+      },
+      "negative_control": {
+        "before": ".word 0x20f4",
+        "after": ".word 0x20f0"
       }
     }
   ]

@@ -5,6 +5,8 @@ struct IrqContext {
     unsigned int timer0_count, unknown_10, unknown_14;
     unsigned int timer3_serial_count, vblank_count, previous_vblank_count;
     unsigned int hblank_count, vcount_count;
+    unsigned int frame_60_count, frame_work_count, previous_frame_work_count;
+    unsigned short transfer_ready;
 };
 extern struct IrqContext *g_irq_context;
 extern struct IrqContext g_irq_context_storage;

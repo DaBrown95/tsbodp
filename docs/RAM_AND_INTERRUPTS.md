@@ -59,10 +59,29 @@ from the BIOS flags at `0x03007FF8`. The combined Timer 3/serial table entry's
 recovered handler acknowledges `0x40`; it must not be “corrected” to `0xC0`.
 These names are authored descriptions, not recovered original identifiers.
 
-The VBlank wrapper at ROM `0x1F680` remains unconverted. The wait routine at
-`0x1F970` has an unmatched C candidate explicitly outside accepted coverage;
-its original bytes remain in an unconverted gap. Audio ARM code and the ARM
-IRQ dispatcher are mapped but not reconstructed in this milestone.
+The subsequent interrupt milestone adds the VBlank wrapper at ROM `0x1F680`
+(468 bytes) and wait at `0x1F970` (40 bytes): **21 matching C functions,
+1,184 bytes**. [Wrapper evidence](VBLANK_RECONSTRUCTION.md) records the
+DMA0 OAM handoff, nested-entry guard, context counters and audio coordination.
+The wait clears software VBlank bit zero and spins on volatile halfword reads;
+an explicit loop mask assigned after the clear reproduces the original
+register lifetime. Earlier loop candidates and complete raw comparisons are
+retained locally. Changing the mask from one to two is rejected.
+
+The ARM dispatcher, CPU IRQ enable/disable helpers and distant shared literal
+pool are now explicit assembly: **352 verified glue bytes**, excluded from C
+coverage. The priority macro expresses the observed handler-table order.
+The dispatcher saves SPSR/IE/IME, acknowledges one selected source, enables
+nested sources masked by `0x20F4`, switches to system mode for the handler,
+then restores the IRQ context. The Game Pak branch writes its selected value
+to the sound register and loops. No runtime execution is claimed.
+
+The dispatcher code owns only `0x160..0x288`; its separate pool owns
+`0x2A0..0x2A8`. The intervening Thumb startup copy helper remains unconverted.
+The pool aliases preserve the same PC-relative displacements in ROM and after
+the 512-byte IWRAM copy; the full-ROM link compares both source extents.
+Real source mutations of each glue region must fail comparison. Audio ARM
+code remains unconverted, including the self-modifying mixer.
 
 External Thumb function symbols are declared as Thumb to avoid invented ARM
 interworking veneers. The two pool-free callback units express zero alignment
@@ -78,8 +97,9 @@ using explicit addresses and size assertions. There is no post-link byte
 repair, mask, header fix, or substitution of compiled function extents. The
 final ELF layout and unresolved relocations are checked before binary output.
 
-The complete **16,777,216-byte** output matches the reference. **16,776,540 bytes
-remain unconverted**, including code, header, assets and padding. This count
+The complete **16,777,216-byte** output matches the reference. At the interrupt
+milestone **16,775,680 bytes remain unconverted**, including code, header,
+assets and padding. This count
 is not a code decompilation percentage. Final output is
 `build/us-eu/bustin-out.gba`; retained runs include the linker map, script,
 objects, coverage ledger and report. A real brightness-clamp source change
@@ -111,5 +131,9 @@ compile/link/all-byte gates. Official guidance:
 The IRQ register interpretation follows the primary
 [Tonc interrupt reference](https://gbadev.net/tonc/interrupts.html).
 
-The next connected targets are the VBlank wrapper and ARM dispatcher, followed
-by the audio mixer callers using the established execution-address map.
+The next connected targets are the installed frame callback, input polling,
+background and palette transfers, frame-synchronized display transitions,
+and audio coordination using the established execution-address map. The fixed
+comparison baseline for this goal is **319,640 mapped extent bytes**, measured
+on 12 October 2026. It is an earlier static estimate, not a complete inventory
+of game code or a source coverage denominator.

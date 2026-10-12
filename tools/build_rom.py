@@ -9,6 +9,7 @@ from elftools.elf.elffile import ELFFile
 from project import ROOT, audit, compare_bytes, write_report
 from pilot import compile_function, run
 from rom_layout import layout
+from source_symbols import declarations
 
 
 
@@ -16,21 +17,20 @@ from rom_layout import layout
 def link_rom(manifest, reference, pilot_folder, folder, overrides=None):
     folder.mkdir(parents=True, exist_ok=True)
     commands, objects, script, gaps = [], [], ['SECTIONS {'], []
-    regions = layout(manifest['functions'], manifest['rom_size'])
+    sources = manifest['functions'] + manifest.get('assembly', [])
+    regions = layout(sources, manifest['rom_size'])
     overrides = overrides or {}
-    names = {f['name'] for f in manifest['functions']}
+    names = {f['name'] for f in sources if f.get('defines_symbol', True)}
     symbols = {}
-    for f in manifest['functions']:
+    for f in sources:
         for name, value in f.get('symbols', {}).items():
             if name not in names:
                 if name in symbols and symbols[name] != value:
                     raise ValueError('Conflicting external symbol address')
                 symbols[name] = value
-    externs = []
-    for name, value in symbols.items():
-        externs += [f'.global {name}']
-        externs += ([f'.type {name}, %function', f'.thumb_set {name}, {value}']
-                    if name in ('frame_update', '_call_via_r0') else [f'.set {name}, {value}'])
+    thumb_symbols = {name for f in sources for name in f.get('thumb_symbols', ())
+                     if name not in names}
+    externs = declarations(symbols, thumb_symbols)
     extern_path = folder / 'externs.s'
     extern_path.write_text('\n'.join(externs) + '\n')
     extern_obj = folder / 'externs.o'
@@ -40,14 +40,14 @@ def link_rom(manifest, reference, pilot_folder, folder, overrides=None):
     for index, region in enumerate(regions):
         section = f'.rom_{index}'
         start = 0x08000000 + region['offset']
-        if region['kind'] == 'compiled_c':
+        if region['kind'] != 'unconverted':
             obj = overrides.get(region['name'], pilot_folder / region['name'] / 'source.o')
             with obj.open('rb') as stream:
                 elf = ELFFile(stream)
                 if any(s['sh_flags'] & 2 and s['sh_size'] and s.name != '.text' for s in elf.iter_sections()):
                     raise ValueError('Unexpected allocated source section')
             objects.append(obj)
-            body = f'{obj}(.text) . = ALIGN(4);'
+            body = f'{obj}(.text)' + (' . = ALIGN(4);' if region['kind'] == 'compiled_c' else '')
         else:
             gaps += [f'.section .gap_{index}, "a", %progbits',
                      f'.incbin {json.dumps(str(reference))}, {region["offset"]}, {region["size"]}']
@@ -114,6 +114,7 @@ def main():
               'comparison': comparison, 'negative_control': negative, 'negative_control_rejected': rejected,
               'compiled_c_functions': len(manifest['functions']),
               'compiled_c_bytes_including_pools_and_alignment': sum(f['size'] for f in manifest['functions']),
+              'assembly_glue_bytes': sum(f['size'] for f in manifest.get('assembly', [])),
               'unconverted_bytes': sum(r['size'] for r in regions if r['kind'] == 'unconverted'),
               'full_source_reconstruction': False, 'regions': regions, 'commands': commands,
               'negative_source': str(changed),
@@ -131,6 +132,7 @@ def main():
     (ROOT / 'build/us-eu/bustin-out.gba').write_bytes(output.read_bytes())
     print(f"Whole ROM: MATCH; {report['compiled_c_functions']} C functions, "
           f"{report['compiled_c_bytes_including_pools_and_alignment']} source bytes; "
+          f"{report['assembly_glue_bytes']} assembly glue bytes; "
           f"{report['unconverted_bytes']} explicitly unconverted bytes")
     print('Changed-source whole-ROM negative control: REJECTED')
     return 0

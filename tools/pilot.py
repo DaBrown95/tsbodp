@@ -13,6 +13,8 @@ import uuid
 from elftools.elf.elffile import ELFFile
 from project import ROOT, audit, compare_bytes, write_report
 from toolchain import load_profile, verify_native
+from source_symbols import declarations
+from source_controls import mutate
 
 
 def run(command, commands):
@@ -43,14 +45,8 @@ def compile_function(function, source, folder, flags):
     # Mark external function addresses as Thumb, so the linker does not invent
     # ARM interworking veneers for absolute ROM symbols.
     externs = folder / "externs.s"
-    declarations = []
-    for name, value in function.get("symbols", {}).items():
-        if name in ("irq_noop", "frame_update", "_call_via_r0"):
-            declarations += [f".global {name}", f".type {name}, %function",
-                             f".thumb_set {name}, {value}"]
-        else:
-            declarations += [f".global {name}", f".set {name}, {value}"]
-    externs.write_text("\n".join(declarations) + "\n")
+    externs.write_text("\n".join(declarations(function.get('symbols', {}),
+                                            function.get('thumb_symbols', ()))) + "\n")
     extern_obj = folder / "externs.o"
     run([ROOT / "toolchains/binutils/bin/arm-none-eabi-as", externs, "-o", extern_obj], commands)
     script = folder / "function.ld"
@@ -76,6 +72,33 @@ def compile_function(function, source, folder, flags):
         if ((symbol["st_value"] & ~1) != address or len(functions) != 1
                 or not 0 <= tail_size < section["sh_addralign"]):
             raise RuntimeError("Function does not own the complete linked text extent")
+    return data, commands
+
+
+def assemble_glue(region, source, folder):
+    """Assemble explicit low-level glue. It is never matching C coverage."""
+    folder.mkdir(parents=True, exist_ok=True)
+    commands = []
+    assembler = ROOT / 'toolchains/binutils/bin/arm-none-eabi-as'
+    obj, linked = folder / 'source.o', folder / 'linked.elf'
+    run([assembler, '-mcpu=arm7tdmi', '--no-pad-sections', source, '-o', obj], commands)
+    externs = folder / 'externs.s'
+    externs.write_text('\n'.join(declarations(region.get('symbols', {})))+'\n')
+    extern_obj = folder / 'externs.o'
+    run([assembler, externs, '-o', extern_obj], commands)
+    address = 0x08000000 + region['rom_offset']
+    script = folder / 'function.ld'
+    script.write_text(f'SECTIONS {{ .text {address:#x} : {{ *(.text) }} }}\n')
+    run([ROOT / 'toolchains/binutils/bin/arm-none-eabi-ld', '-T', script,
+         obj, extern_obj, '-o', linked], commands)
+    with linked.open('rb') as stream:
+        elf = ELFFile(stream)
+        allocated = [s for s in elf.iter_sections() if s['sh_flags'] & 2 and s['sh_size']]
+        if len(allocated) != 1 or allocated[0].name != '.text' or allocated[0]['sh_addr'] != address:
+            raise ValueError('Glue has unexpected allocated sections or address')
+        if any(s['sh_type'] in ('SHT_REL', 'SHT_RELA') and s['sh_size'] for s in elf.iter_sections()):
+            raise ValueError('Glue retains unresolved relocations')
+        data = allocated[0].data()
     return data, commands
 
 
@@ -109,8 +132,10 @@ def main():
               "whole_rom_build_verified": False, "historical_compiler_proven": False}
     report["helper_sha256"] = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                                 for name in ("tools/pilot.py", "tools/project.py", "config/build-us-eu.json",
-                                             "tools/toolchain.py", "config/pilot-toolchain.json",
+                                             "tools/toolchain.py", "tools/source_symbols.py", "tools/source_controls.py", "config/pilot-toolchain.json",
                                              "config/targets/us-eu.json", "include/irq.h")}
+    report['helper_sha256'].update({str(header.relative_to(ROOT)): hashlib.sha256(header.read_bytes()).hexdigest()
+                                    for header in (ROOT / 'include').glob('*.h')})
     if profile_path:
         report['helper_sha256'][str(profile_path)] = hashlib.sha256((ROOT / profile_path).read_bytes()).hexdigest()
     report["host_clang"] = run(["xcrun", "clang", "--version"], commands).strip()
@@ -118,22 +143,27 @@ def main():
     for name in lock['native_tool_sha256']:
         path = ROOT / name
         report.setdefault("tool_sha256", {})[name] = hashlib.sha256(path.read_bytes()).hexdigest()
-    for function in manifest["functions"]:
+    for function in manifest["functions"] + manifest.get('assembly', []):
         name = function["name"]
         source = ROOT / function["source"]
         folder = run_folder / name
         folder.mkdir(parents=True, exist_ok=True)
         snapshot = folder / "source.c"
         snapshot.write_bytes(source.read_bytes())
-        data, compile_commands = compile_function(function, snapshot, folder, manifest["compiler_flags"])
+        is_c = function.get('kind', 'compiled_c') == 'compiled_c'
+        data, compile_commands = (compile_function(function, snapshot, folder, manifest["compiler_flags"])
+                                  if is_c else assemble_glue(function, snapshot, folder))
         expected = rom[function["rom_offset"]:function["rom_offset"] + function["size"]]
+        (folder / 'expected.bin').write_bytes(expected)
+        (folder / 'candidate.bin').write_bytes(data)
         result = compare_bytes(expected, data)
         # This result is backed by source compilation and a checked linked extent.
-        result["source_reconstruction_verified"] = result["identical"]
+        result["source_reconstruction_verified"] = result["identical"] and is_c
+        result["assembly_glue_verified"] = result["identical"] and not is_c
         result.update({**function, "address": f"{0x08000000 + function['rom_offset']:#010x}",
-                       "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+                       "source_sha256": hashlib.sha256(snapshot.read_bytes()).hexdigest(),
                        "commands": compile_commands, "expected_sha256": hashlib.sha256(expected).hexdigest()})
-        if args.matrix:
+        if args.matrix and is_c:
             result["optimization_trials"] = []
             for flag in ("-O0", "-O1", "-O2", "-O3", "-Os"):
                 trial_data, trial_commands = compile_function(
@@ -141,11 +171,29 @@ def main():
                 trial = compare_bytes(expected, trial_data)
                 trial.update({"flags": [flag, "-mthumb-interwork"], "commands": trial_commands})
                 result["optimization_trials"].append(trial)
+        if args.negative_control and 'negative_control' in function:
+            control_folder = folder / 'negative-control'
+            control_folder.mkdir()
+            changed = control_folder / ('changed.c' if is_c else 'changed.s')
+            changed.write_text(mutate(snapshot.read_text(), function['negative_control']))
+            control_data, control_commands = (compile_function(function, changed, control_folder, manifest['compiler_flags'])
+                                             if is_c else assemble_glue(function, changed, control_folder))
+            (control_folder / 'candidate.bin').write_bytes(control_data)
+            control = compare_bytes(expected, control_data)
+            control.update({'rejected': not control['identical'], 'commands': control_commands,
+                            'source_edit': function['negative_control'],
+                            'source_sha256': hashlib.sha256(changed.read_bytes()).hexdigest()})
+            result['negative_control'] = control
         report["functions"].append(result)
         print(f"{name}: {'MATCH' if result['identical'] else 'MISMATCH'} ({len(data)} / {len(expected)} bytes)")
-    report["matched_functions"] = sum(r["identical"] for r in report["functions"])
-    report["matched_bytes_including_pools_and_padding"] = sum(r["size"] for r in report["functions"] if r["identical"])
-    accepted = report["matched_functions"] == len(manifest["functions"])
+    report["matched_functions"] = sum(r["source_reconstruction_verified"] for r in report["functions"])
+    report["matched_bytes_including_pools_and_padding"] = sum(r["size"] for r in report["functions"] if r["source_reconstruction_verified"])
+    report['assembly_glue_bytes'] = sum(r['size'] for r in report['functions'] if r['assembly_glue_verified'])
+    accepted = all(r['identical'] and r.get('negative_control', {}).get('rejected', True)
+                   for r in report['functions'])
+    if any(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != digest
+           for name, digest in report['helper_sha256'].items()):
+        raise ValueError('Source helpers changed during the run; retry with stable inputs')
     if args.negative_control:
         function = manifest["functions"][0]
         folder = run_folder / "negative-control"

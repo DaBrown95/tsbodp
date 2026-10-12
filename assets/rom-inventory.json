@@ -6488,7 +6488,7 @@
       "group": "Startup / ARM"
     },
     {
-      "name": "ARM interrupt enable",
+      "name": "irq_cpu_enable",
       "rom_offset": 304,
       "mode": "ARM",
       "runtime_addresses": [
@@ -6516,7 +6516,7 @@
       "group": "Startup / ARM"
     },
     {
-      "name": "ARM interrupt disable",
+      "name": "irq_cpu_disable",
       "rom_offset": 328,
       "mode": "ARM",
       "runtime_addresses": [
@@ -6544,7 +6544,7 @@
       "group": "Startup / ARM"
     },
     {
-      "name": "ARM IRQ dispatcher",
+      "name": "irq_dispatcher",
       "rom_offset": 352,
       "mode": "ARM",
       "runtime_addresses": [
@@ -38480,7 +38480,7 @@
       "group": "ROM 0801xxxx"
     },
     {
-      "name": "VBlank wrapper",
+      "name": "irq_vblank",
       "rom_offset": 128640,
       "mode": "Thumb",
       "runtime_addresses": [
@@ -38730,7 +38730,7 @@
       "group": "ROM 0801xxxx"
     },
     {
-      "name": "VBlank wait",
+      "name": "irq_wait_vblank",
       "rom_offset": 129392,
       "mode": "Thumb",
       "runtime_addresses": [
@@ -92510,19 +92510,19 @@
       "status": "mapped_code"
     },
     {
-      "name": "ARM interrupt enable",
+      "name": "irq_cpu_enable",
       "rom_offset": 304,
       "size": 24,
       "status": "mapped_code"
     },
     {
-      "name": "ARM interrupt disable",
+      "name": "irq_cpu_disable",
       "rom_offset": 328,
       "size": 24,
       "status": "mapped_code"
     },
     {
-      "name": "ARM IRQ dispatcher",
+      "name": "irq_dispatcher",
       "rom_offset": 352,
       "size": 296,
       "status": "mapped_code"
@@ -100046,7 +100046,7 @@
       "status": "unresolved"
     },
     {
-      "name": "VBlank wrapper",
+      "name": "irq_vblank",
       "rom_offset": 128640,
       "size": 468,
       "status": "mapped_code"
@@ -100094,7 +100094,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "VBlank wait",
+      "name": "irq_wait_vblank",
       "rom_offset": 129392,
       "size": 40,
       "status": "mapped_code"
@@ -112161,13 +112161,13 @@
     }
   ],
   "input_sha256": {
-    "tools/inventory_rom.py": "78032df8473b3f90219c6c73a5c531746600f50f6e16f8c6369498d564f7d04e",
+    "tools/inventory_rom.py": "83aafa3fcd85a41fdc713d29613abb066f0b9f41a37948ac0ef03c69d2a51211",
     "tools/control_flow.py": "225048329459429d84b7e44472833d05c7593ae14873ce0c36bc97653f5d97f9",
     "tools/inventory_partition.py": "bc77da39abf1f092066c258dd6dadb1606a772d563deac4a37b86d0b0bffd10d",
     "config/ram-map-us-eu.json": "fa755636ff76a0e11a892cfb395d4864dd9ad712a53ba9806d5c69a67c2844c4",
     "config/indirect-transfers-us-eu.json": "dc9210b69442a00065139807b282e30b1c5d261695bd440762a88b11bc39afc3",
-    "config/progress-regions-us-eu.json": "793cf658347c25b053cd9fe2c6273149404052b7c4f98cf654a09ac07288e91e",
-    "config/build-us-eu.json": "28bfb8e4e8ed64ec087d0959b5f8bc5914e1bcf1290cbf9d0eaea75235dad77c",
+    "config/progress-regions-us-eu.json": "fd5ff50e29e7bd3e2605573d07458b7ea43e0e058f9922667d7d8e0987969067",
+    "config/build-us-eu.json": "648f794695f65ed0cff72816bba6116f5d041c8256cf642ed64b035c12e57f7c",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c"
   }
 }

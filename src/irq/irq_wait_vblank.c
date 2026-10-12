@@ -1,11 +1,11 @@
 #include "irq.h"
 
-/* Unmatched WIP. Not part of the accepted source coverage or ROM link. */
-
 void irq_wait_vblank(void) {
  volatile unsigned short *flags;
+ unsigned int mask;
  g_irq_flags &= 0xFFFE;
  flags = &g_irq_flags;
+ mask = 1;
 again:
- if (!(*flags & 1)) goto again;
+ if (!(*flags & mask)) goto again;
 }

@@ -214,6 +214,7 @@ def main():
     ram = json.loads((ROOT/'config/ram-map-us-eu.json').read_text())
     bounded = json.loads((ROOT/'config/progress-regions-us-eu.json').read_text())
     manifest = json.loads((ROOT/'config/build-us-eu.json').read_text())
+    source_code = manifest['functions'] + [r for r in manifest.get('assembly', []) if r.get('mode') != 'data']
     word = lambda off: struct.unpack_from('<I', data, off)[0]
     for copy in ram['copies']:
         if 'startup_literal_offset' in copy:
@@ -237,8 +238,8 @@ def main():
     scanner.seed(BASE+0xc0, 'ARM', 'startup', 'ARM startup')
     scanner.seed(BASE+0xec, 'Thumb', 'startup', 'Thumb startup')
     scanner.seed(BASE+0x25c0c, 'Thumb', 'startup main pointer', 'Entry routine')
-    for row in bounded['unconverted_extents'] + manifest['functions']:
-        scanner.seed(BASE+row['rom_offset'], 'ARM' if row['name'].startswith('ARM') else 'Thumb', 'bounded audit', row['name'])
+    for row in bounded['unconverted_extents'] + source_code:
+        scanner.seed(BASE+row['rom_offset'], row.get('mode', 'ARM' if row['name'].startswith('ARM') else 'Thumb'), 'bounded audit', row['name'])
     for entry in ram['entries']:
         scanner.seed(entry['ram_address'], entry['mode'], 'audited RAM entry', entry['name'])
     dispatch_config = json.loads((ROOT/'config/indirect-transfers-us-eu.json').read_text())
@@ -374,7 +375,7 @@ def main():
             continue  # Uncorroborated pointer/prologue coincidences stay unresolved.
         rows.append(row)
     audited = []
-    for known in bounded['unconverted_extents'] + manifest['functions']:
+    for known in overlay(bounded['unconverted_extents'], source_code):
         off = known['rom_offset']
         discovered = merged.get(off, {})
         audited.append({**discovered, **{k: known[k] for k in ('name', 'rom_offset', 'size')},

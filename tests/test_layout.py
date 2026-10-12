@@ -22,3 +22,13 @@ class LayoutTests(unittest.TestCase):
                           [{'name': 'a', 'rom_offset': 0, 'size': 4}, {'name': 'a', 'rom_offset': 8, 'size': 4}]):
             with self.subTest(functions=functions), self.assertRaises(ValueError):
                 module.layout(functions, 20)
+
+    def test_glue_is_separate_and_cannot_overlap_c(self):
+        c = {'name': 'c', 'rom_offset': 4, 'size': 8}
+        glue = {'name': 'arm', 'rom_offset': 12, 'size': 4, 'kind': 'assembly_glue'}
+        regions = module.layout([c, glue], 20)
+        self.assertEqual(regions[2]['kind'], 'assembly_glue')
+        with self.assertRaises(ValueError):
+            module.layout([c, {**glue, 'rom_offset': 8}], 20)
+        with self.assertRaises(ValueError):
+            module.layout([{**glue, 'kind': 'unknown'}], 20)

@@ -10,7 +10,7 @@ from zoneinfo import ZoneInfo
 from project import ROOT
 from rom_layout import layout
 
-COLORS = {'exact_c': '#00b800', 'mapped_code': '#373a3e', 'candidate': '#292c30', 'unresolved': '#202226', 'mapped_data': '#44505a'}
+COLORS = {'exact_c': '#00b800', 'exact_glue': '#b08030', 'mapped_code': '#373a3e', 'candidate': '#292c30', 'unresolved': '#202226', 'mapped_data': '#44505a'}
 BACKGROUND, FOREGROUND, MUTED = '#141619', '#f0f2f5', '#a5aeb8'
 
 
@@ -26,12 +26,13 @@ def verify_functions(functions, receipts, source_hash):
     result = []
     for f in functions:
         r = by_name[f['name']]
-        if (not r.get('identical') or not r.get('source_reconstruction_verified')
+        is_c = f.get('kind', 'compiled_c') == 'compiled_c'
+        if (not r.get('identical') or not r.get('source_reconstruction_verified' if is_c else 'assembly_glue_verified')
                 or r['source_sha256'] != source_hash(f)
                 or any(r[k] != f[k] for k in ('rom_offset', 'size'))
                 or r['reference_size'] != f['size'] or r['candidate_size'] != f['size']):
             raise ValueError(f"Unverified or stale source: {f['name']}")
-        result.append({**f, 'status': 'exact_c',
+        result.append({**f, 'status': 'exact_c' if is_c else 'exact_glue',
                        'group': 'Interrupts' if f.get('source', '').startswith('src/irq/')
                        or f['name'] == 'set_irq_table_entry' else 'Utilities'})
     return result
@@ -54,13 +55,16 @@ def inventory():
                 raise ValueError(f'Stale helper proof: {name}; run make build')
     if sha(Path(build['output'])) != target['sha256']:
         raise ValueError('Retained linked ROM differs from verified identity')
-    exact = verify_functions(manifest['functions'], pilot['functions'],
+    sources = manifest['functions'] + manifest.get('assembly', [])
+    exact = verify_functions(sources, pilot['functions'],
                              lambda f: sha(ROOT / f['source']))
-    total_c = sum(f['size'] for f in exact)
-    if (build['compiled_c_functions'] != len(exact)
+    total_c = sum(f['size'] for f in exact if f['status'] == 'exact_c')
+    total_glue = sum(f['size'] for f in exact if f['status'] == 'exact_glue')
+    if (build['compiled_c_functions'] != len(manifest['functions'])
             or build['compiled_c_bytes_including_pools_and_alignment'] != total_c
-            or build['unconverted_bytes'] != target['size'] - total_c
-            or build['regions'] != layout(manifest['functions'], target['size'])):
+            or build.get('assembly_glue_bytes', 0) != total_glue
+            or build['unconverted_bytes'] != target['size'] - total_c - total_glue
+            or build['regions'] != layout(sources, target['size'])):
         raise ValueError('Source credit differs from full-ROM layout')
     discovered = json.loads((ROOT / 'assets/rom-inventory.json').read_text())
     from inventory_partition import partition, overlay, verify_discovery
@@ -77,8 +81,9 @@ def inventory():
     stamp = datetime.fromisoformat(build['recorded_at_utc'].replace('Z', '+00:00'))
     return {'target': 'us-eu', 'reference_sha256': target['sha256'],
             'verified_at': stamp.astimezone(ZoneInfo('Europe/London')).strftime('%d %b %Y, %H:%M %Z'),
-            'compiled_c_functions': len(exact), 'compiled_c_bytes': total_c,
-            'rom_bytes': target['size'], 'unconverted_rom_bytes': target['size'] - total_c,
+            'compiled_c_functions': len(manifest['functions']), 'compiled_c_bytes': total_c,
+            'assembly_glue_bytes': total_glue,
+            'rom_bytes': target['size'], 'unconverted_rom_bytes': target['size'] - total_c - total_glue,
             'whole_rom_identical': True, 'complete_code_inventory': False,
             'complete_rom_partition': True, 'discovered_entries': discovered['entry_count'],
             'bounded_control_flow_bodies': len({r['entry_rom_offset'] for r in discovered['rows'] if r['boundary_confidence'] == 'control_flow_bounded'}),
@@ -138,7 +143,7 @@ def render(data, output):
     draw.text((24, 18), "The Sims: Bustin' Out — Matching Progress", fill=FOREGROUND, font=title)
     draw.text((24, 58), 'USA / Europe  ·  ROM-wide static inventory  ·  Function boundaries provisional', fill=MUTED, font=body)
     x = 24
-    for label, color in (('Exact C', COLORS['exact_c']), ('Code entries', COLORS['mapped_code']), ('Candidate entries', COLORS['candidate']), ('Mapped data', COLORS['mapped_data']), ('Unresolved ROM', COLORS['unresolved'])):
+    for label, color in (('Exact C', COLORS['exact_c']), ('ARM glue', COLORS['exact_glue']), ('Code entries', COLORS['mapped_code']), ('Candidates', COLORS['candidate']), ('Mapped data', COLORS['mapped_data']), ('Unresolved', COLORS['unresolved'])):
         draw.rectangle((x, 92, x + 12, 104), fill=color)
         draw.text((x + 21, 88), label, fill=FOREGROUND, font=body)
         x += 21 + draw.textlength(label, font=body) + 34
@@ -187,7 +192,7 @@ def render(data, output):
         draw.rectangle((left, 744, right, 768), fill=COLORS[r['status']])
     draw.text((24, 725), 'Entire 16 MiB ROM — every byte accounted for', fill=MUTED, font=small)
     draw.text((24, 785), 'Complete ROM: identical to reference  ·  Source reconstruction: incomplete', fill=FOREGROUND, font=heading)
-    draw.text((24, 816), f"{data['compiled_c_bytes']:,} reconstructed bytes  /  {data['rom_bytes']:,} total ROM bytes  ·  {data['unconverted_rom_bytes']:,} remain unconverted", fill=MUTED, font=body)
+    draw.text((24, 816), f"{data['compiled_c_bytes']:,} C bytes + {data['assembly_glue_bytes']:,} ARM glue bytes  /  {data['rom_bytes']:,} total ROM bytes  ·  {data['unconverted_rom_bytes']:,} remain unconverted", fill=MUTED, font=body)
     draw.text((24, 851), 'Tile area follows estimated extents; main code and startup/audio use separate scales.', fill=MUTED, font=small)
     draw.text((24, 877), 'Verified build: ' + data['verified_at'], fill=MUTED, font=small)
     output.parent.mkdir(parents=True, exist_ok=True)

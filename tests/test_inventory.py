@@ -30,6 +30,13 @@ class AccountingTests(unittest.TestCase):
         parts = partition(overlay(rows, exact), 20)
         self.assertEqual([(p['size'], p['status']) for p in parts], [(4, 'candidate'), (8, 'exact_c'), (8, 'candidate')])
 
+    def test_compiler_extent_replaces_prior_bounded_map_once(self):
+        old = {'name': 'VBlank wrapper', 'rom_offset': 4, 'size': 8, 'status': 'mapped_code'}
+        source = {**old, 'name': 'irq_vblank'}
+        rows = overlay([old], [source])
+        self.assertEqual(rows, [source])
+        self.assertEqual(sum(r['size'] for r in partition(rows, 16)), 16)
+
     def test_scanner_cannot_forge_green_tiles(self):
         rows = [{'name': 'fake', 'rom_offset': 0, 'size': 10, 'status': 'exact_c'}]
         data = {'reference_sha256': 'ref', 'rom_bytes': 10,

@@ -17,6 +17,14 @@ class ProgressTests(unittest.TestCase):
         rows = verify_functions([self.function], [self.receipt], lambda f: 'original')
         self.assertEqual(rows[0]['status'], 'exact_c')
 
+    def test_glue_cannot_receive_green_c_credit(self):
+        glue = {**self.function, 'kind': 'assembly_glue'}
+        with self.assertRaises(ValueError):
+            verify_functions([glue], [self.receipt], lambda f: 'original')
+        receipt = {**self.receipt, 'source_reconstruction_verified': False, 'assembly_glue_verified': True}
+        rows = verify_functions([glue], [receipt], lambda f: 'original')
+        self.assertEqual(rows[0]['status'], 'exact_glue')
+
     def test_changed_source_does_not_reuse_green_credit(self):
         with self.assertRaises(ValueError):
             verify_functions([self.function], [self.receipt], lambda f: 'changed')
