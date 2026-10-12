@@ -31,8 +31,8 @@ The tables themselves remain original, explicit unconverted data.
 | 6 | `080120CC` | `resource_command_resume_audio` | 12 | 4 |
 | 7 | `080120D8` | `resource_command_select_sequence` | 32 | 8 |
 | 8 | `080120F8` | `resource_command_play_cue` | 12 | 8 |
-| 9 | `08012104` | `resource_command_set_audio_tempo` | 12 | 8 |
-| 10 | `08012110` | `resource_command_set_audio_volume` | 12 | 8 |
+| 9 | `08012104` | `resource_command_set_sequence_volume` | 12 | 8 |
+| 10 | `08012110` | `resource_command_set_sample_volume` | 12 | 8 |
 | 11 | `0801211C` | `resource_command_start_delay` | 36 | 8 |
 | 12 | `08012140` | `resource_command_decrement_counter` | 36 | 8 |
 | 13 | `08012164` | `resource_command_increment_counter` | 36 | 8 |
@@ -113,10 +113,11 @@ two command-supplied resource group pairs through `resource_activate_groups`.
 
 Display commands hand off to the accepted background-animation and transition
 paths. Audio commands select a sequence, play an animation cue, pause/resume,
-set tempo/volume or stop a handle. Canonical names from `audio_game.h` are used
-for the cue and sequence calls. The other game-audio aliases describe observed
-call roles, and their implementations remain unconverted; this batch does not
-claim the entire audio engine. Scene submission, actor selection and several
+set sample/sequence volume or stop a handle. Canonical names from `audio_game.h` are used
+for the cue and sequence calls. The connected audio continuation also replaces
+the game-facing pause, resume, volume and stop helpers; their lower-level player
+and mixer dependencies remain unconverted. This does not claim the entire audio
+engine. Scene submission, actor selection and several
 display configuration callees also remain explicit unconverted dependencies.
 
 `resource_command_follow_object` uses one fixed C register binding for its

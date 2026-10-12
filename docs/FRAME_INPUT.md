@@ -423,3 +423,176 @@ subtype to the original bookkeeping helper. Generic state handling, actor moveme
 interaction/indicator creation, actor-state initialization and spawn/removal
 bookkeeping remain unconverted dependencies; their provisional names indicate
 call context rather than tested gameplay behavior.
+
+Eight connected actor meter routines add 648 exact C bytes:
+`frame_initialize_actor_state` (`0x2C7D4`, 128), `frame_adjust_actor_needs`
+(`0x2B824`, 244), `frame_low_need_mask` (`0x2B9E8`, 96),
+`frame_empty_need_mask` (`0x2BA48`, 44), `frame_actor_need_delta`
+(`0x2B97C`, 36), `frame_reset_actor_needs` (`0x2B918`, 28), and the
+save/load pair (`0x2B958` / `0x2B934`, 36 each). The local subtotal is
+71 functions and 12,236 bytes. Their final raw comparisons are under
+`actor-needs/canonical/`; all 71 changed-source controls reject. An earlier
+message overcounted this eight-function gain as 748 bytes; the exact sum is 648.
+
+The factory's state pointer at actor `+0x60` addresses a 44-byte record containing
+eight signed fixed-point values at `+0..+28`, an action countdown at `+32`, and
+selection/start masks at `+36/+40`. Constructor indexing subtracts 32 from the
+actor id and initializes each value with an independent random value shifted by
+24 bits. It leaves the tail fields untouched. Reset copies the complete 44-byte
+record from `0x08059BBC` and then clears the selected-action mask. Save/load pass
+only two bytes per value through the original serialization helpers, shifting by
+16; they do not serialize the tail fields. The meter/need names are inferred
+from the bounded values, threshold masks and downstream action/indicator logic;
+individual need labels and any on-screen meanings remain unverified.
+
+The normal change getter selects one of two eight-word rate tables according to
+object id zero; its state argument is unused. The low-value query respects the
+local view flag `4` and its caller's enabled mask, and sets a bit for values below
+`20 << 24`. The empty-value query sets bits only for values exactly zero. Need
+adjustment uses the eight-column table at `0x08059C28` and multiplier table at
+`0x0806475C`. Positive changes use the fixed multiply helper after shifting both
+operands by eight; the result is shifted back by eight. Each updated value is
+clamped to `0..100 << 24`. When the affected record matches the first view's
+actor state and the base adjustment is positive, the routine sets `0x400 << meter`
+in the 56-byte UI record selected by `local_player` at `0x03004134`. This identifies a concrete state
+and display coordination edge without claiming a runtime UI test.
+
+The pointer in the first local-view record and the local-player byte at `+0x31`
+share the input configuration at `0x030040E0`; treating them as independent
+globals initially produced an extra literal/load. The explicit shared input view
+preserves the exact 244-byte adjustment extent. Separate assignment of the fixed
+multiply result and its subsequent shift also preserves the original rounding
+and compiler allocation. Raw failed alternatives remain under `actor-needs/`.
+
+The next meter tick (`0x2B4D8`, 204) and action selector (`0x2B5A4`, 640) remain
+unconverted despite semantic candidates. The tick is the multipart updater's
+previously provisional `frame_update_actor_movement` dependency: it updates the
+eight meters and clears remembered action bits when values recover above
+`20 << 24`. Its original conditional expression calls the rate getter up to
+three times for a meter; candidates retain that call count. The selector consumes
+the threshold and empty masks, starts animations and variant states, creates
+indicators/effects and dispatches audio cues. The actor callback's
+`frame_update_actor_state` dependency at `0x2B2FC` actually applies OAM layer bits
+from the world attribute grid via `0x2B478`; both candidates remain mismatched.
+Those corrected interpretations supersede the older movement/state labels,
+without counting the unmatched candidates toward coverage.
+
+The meter tick at `0x2B4D8` now matches all 204 bytes as
+`frame_update_actor_needs`, bringing the local subtotal to 72 functions and
+12,440 bytes. Its proof is under `actor-needs/canonical/frame_update_actor_needs/`,
+and the changed pause-exception index is rejected. The earlier unmatched status
+above is superseded for this routine only. The caller's old provisional
+`frame_update_actor_movement` symbol still denotes this address until its alias
+is updated during integration.
+
+A separate `FrameActorNeedTickState` view marks only the eight value words
+volatile, leaving the ordinary storage/persistence view unchanged. This expresses
+the observed tick's access pattern: it rereads a meter after each opaque rate
+call rather than retaining an earlier value. The same conditional assignment can
+invoke the rate getter three times. The qualifier is an explicit source access
+view, not proof of recovered original declarations or asynchronous modification.
+While paused it still updates meter index 6; after the loop it clears remembered
+start bits for values above `20 << 24`. The local view flag and variant state 6
+skip both loops. Candidate comparisons that changed induction pointers or
+collapsed reads remain preserved under `actor-needs/`.
+
+The zero-meter response at `0x2BA74` now matches 108 bytes as
+`frame_handle_actor_empty_needs`. It tests the empty mask's low bits while
+excluding bit `0x20`, and avoids restarting variant states 69 or 6. Its accepted
+path switches state to 47, variant to 69 and animation to 72, then dispatches cue
+30 and a second cue chosen from 151/152 by byte `+0x20` of the settings block at
+`0x03003950`. The settings byte is named only as a cue variant; its user-facing
+meaning remains uncertain. The modified mask control is rejected, with full raw
+comparisons under `actor-needs/canonical/frame_handle_actor_empty_needs/`.
+
+Five constructor dependencies now match 236 bytes: enabling four object parts
+(`0x1384`, 104), setting a part's order byte (`0x156C`, 24), setting both position
+copies (`0x14A4`, 12), refreshing velocity (`0x1524`, 36) and setting directional
+acceleration (`0x14E8`, 60). Together with the meter response, the local subtotal
+is 78 functions and 12,784 bytes. All 78 changed-source controls reject. The part
+initializer enables sharing flag `0x40`, sets each part index to `0xFFFF`, copies
+the object's palette and clears its variant pointer; other part fields remain
+untouched. The velocity consumer calls the independently reconstructed
+`frame_make_velocity` helper; the acceleration setter reads signed fixed-point
+pairs from the 16-direction table at `0x0804EB80`, a pair view of that helper's
+extended component table. These call and field relationships are static evidence,
+not a runtime motion test. Raw constructor comparisons and failed alternatives
+remain under `actor-construction/`.
+
+The 640-byte selector at `0x2B5A4` now matches as
+`frame_actor_choose_need_action`, bringing the local subtotal to 79 functions and
+13,424 bytes. All 79 controls reject after the shared actor-header refinement.
+The exact selector and changed-countdown proofs are preserved under
+`action-header-revalidation/` and `negative-controls/`; hundreds of useful
+unmatched selector alternatives remain under `actor-needs/`.
+
+This closes a connected meter path: initialization/persistence and adjustment
+feed the regular tick and threshold masks; the selector consumes those masks,
+starts animations, changes actor variant states, creates indicators/effects and
+dispatches audio cues. In actor states 16 or 22 it selects an eligible low-meter
+action after the countdown expires, remembers selected/started bits, and reloads
+the countdown to 450. Its 24-byte action records at `0x0805A468` contain the
+variant byte, animation word (consumed as its low byte), indicator, duration and
+cue pair. The original object duration field is a halfword at `+0x5E`, now named
+`need_timer` in the actor view. The zero-mask path clears selection/countdown;
+empty meters take priority paths for bits `0x20`, `4` and `1`. Names for individual
+meters, effects and the world-dependent prohibition remain provisional.
+
+A semantic local `bit = 1 << i` is explicitly bound to Thumb register `r1` for
+the two shared eligibility tests. This preserves construction and reuse of the
+bit value rather than the compiler's alternative shift-test of the mask; the
+source contains the action algorithm and no original instruction bodies. The
+binding is a compiler allocation constraint, not a gameplay claim or evidence
+of the original source declarations. It also restores the reference's distinct
+animation/counter stores and the duration load order. The actor view's field
+refinement leaves all prior 78 local replacements byte-identical, including the
+corrected sine/cosine aliases in the position helper.
+
+The selector's indicator branch now has two exact replacements totalling 256
+bytes: `frame_create_actor_indicator` (`0xB960`, 164) and its installed
+`frame_indicator_tick` callback (`0xBA04`, 92). The local subtotal is 81 functions
+and 13,680 bytes, with all 81 changed-source controls rejected. The creator
+allocates object kind 25, copies the actor's position and OAM layer, selects a
+16-byte animation record from `0x0804F2D8`, and records its actor pointer at
+`+0x94`. It installs the shared resource before-step callback and its own tick.
+A nonzero duration enables a halfword countdown; duration zero instead follows
+the actor's removal flag. The callback changes state to 1 when the countdown
+wraps to `0xFFFF` or the linked actor has flag 2, then marks its own flag 2 on the
+following state-1 tick. The countdown is captured as a halfword before allocation,
+which preserves the original input narrowing and call order. Exact and changed
+proofs are under `indicator/canonical/` and `negative-controls/`. Display enabling
+at `0x30220` remains an explicit original dependency.
+
+The indicator's `0x30220` dependency now matches all 56 bytes as
+`frame_acquire_palette_slot`, correcting the earlier provisional display-enable
+interpretation. It sets the object's four-bit OAM palette slot, increments byte
+6 of the selected eight-byte slot record at `0x03001E48`, and sets object flag
+`0x08000000`. The creator requests slot 1. The slot counter is an unsigned byte
+with no range or saturation check in this routine; ownership and release behavior
+beyond this path remain uncertain. Its changed flag control rejects, and the
+renamed creator call still matches 164 bytes. The local subtotal is 82 functions
+and 13,736 bytes, with all 82 changed controls rejected.
+
+The empty-meter bit-`0x20` effect branch now has an exact 424-byte constructor,
+`frame_spawn_need_effect` at `0x2D618`. It allocates kind 5, sets direction 3,
+initial position/state and flags, and creates a linked effect-state record.
+Nonzero optional byte parameters override that state's fields at `+0x72`,
+`+0x70` (shifted by eight) and `+0x5F`; the final enable byte is written at
+`+0x62`. The object stores the state at `+0x64`, and the state records its object
+at `+0x54` and subtype at `+8`. The constructor initializes the descriptor's
+callback through the existing helper, sets layer 3 for requested kind 135 and
+sets sharing/part flags for that kind after the update call. Requested kinds
+195..200 share subtype/kind 139. These numbers are preserved without inventing
+unverified gameplay labels.
+
+The separate object/state views follow observed offsets; the callback at
+`0x2E1E8` is installed in `on_remove`, `0x3698C` is the conditional step callback,
+and `0x2DC0C` is the default step callback. The earlier candidate's swapped names
+and a four-byte position-layout mistake were corrected from assignments and
+raw differences, with those failed attempts preserved locally. The state pointer
+is written through before the later conditional callback check, so this code
+alone does not establish allocation failure behavior. Exact/changed proofs are
+under `need-effect/canonical/` and `negative-controls/`. The local subtotal is 83
+functions and 14,160 bytes, all 83 changed-source controls rejected. Effect update,
+placement and commit at `0x2D7C0`/`0x2D8E4`/`0x2D9AC` remain explicit original
+dependencies under active reconstruction.

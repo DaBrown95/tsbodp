@@ -2,7 +2,7 @@
 #define AUDIO_GAME_H
 #include "audio_vblank.h"
 /* Partial options and descriptor views inferred from game audio callers. */
-struct AudioGameOptions { unsigned char unknown[8], samples_enabled, sequences_enabled; };
+struct AudioGameOptions { unsigned char unknown[8], samples_volume, sequences_volume; };
 extern struct AudioGameOptions g_audio_game_options;
 struct AudioSequenceDescriptor {
  const void *sequence;
@@ -13,6 +13,12 @@ extern volatile unsigned int g_audio_scene_word;
 extern void audio_start_sequence(const void *, int, int);
 extern void audio_sync_game_state(void);
 void audio_select_sequence(unsigned char);
+void audio_game_set_sample_volume(unsigned int);
+void audio_game_set_sequence_volume(unsigned int);
+void audio_game_pause(void);
+void audio_game_resume(void);
+void audio_game_stop_sequence(void);
+void audio_game_stop_sample(unsigned int);
 struct AudioCueDescriptor { unsigned short kind, sample_id; };
 struct AudioSampleParameters { unsigned short sample_id, pitch; };
 extern struct AudioCueDescriptor g_audio_cue_descriptors[];

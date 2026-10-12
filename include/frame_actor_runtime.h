@@ -8,7 +8,8 @@ struct FrameActorObject {
  struct FramePoint position, next_position, velocity, acceleration, destination;
  FrameU8 unknown_40[12];
  FrameU8 actor_id, state, variant_state, pending_updates, unknown_50, default_state;
- FrameU8 unknown_52[14];
+ FrameU8 unknown_52[12];
+ FrameU16 need_timer;
  void *actor_state;
  FrameU8 reset, unknown_65[35];
  void (*on_step)(struct FrameObject *);

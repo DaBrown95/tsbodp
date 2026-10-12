@@ -22,14 +22,13 @@ extern int resource_scale_value(short);
 extern void resource_prepare_object(struct FrameObject *);
 extern void resource_submit_scene(unsigned int,unsigned int,unsigned int);
 extern void resource_scene_event(unsigned int);
-extern void resource_set_triple(unsigned char,unsigned char,unsigned char);
-extern void resource_set_display_kind(unsigned char);
+extern void resource_set_triple(unsigned int,unsigned int,unsigned int);
+extern void resource_set_display_kind(unsigned int);
 extern void resource_prepare_display(unsigned char);
 extern unsigned char resource_select_actor(void *,unsigned char);
 extern struct FrameObject *resource_create_transition(unsigned char);
 extern void audio_game_pause(void),audio_game_resume(void);
-extern void audio_game_set_tempo(unsigned char),audio_game_set_volume(unsigned char);
-extern void audio_game_stop(void *);
+
 extern void background_animation_load(int),background_animation_configure_alpha(void);
 
 extern unsigned int g_game_flags;

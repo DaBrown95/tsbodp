@@ -37,6 +37,7 @@ extern unsigned int g_transition_view_configuration[2];
 typedef void (*TransitionHandler)(unsigned short);
 extern TransitionHandler g_transition_first_handlers[], g_transition_second_handlers[];
 extern void transition_set_view_mode(unsigned int, unsigned char);
-extern void transition_set_view_position(int, int, unsigned char);
+struct FramePoint;
+extern void transition_set_view_position(struct FramePoint, unsigned char);
 extern void transition_configure_view(struct TransitionViewObject *, unsigned int, unsigned int, unsigned char);
 extern void transition_clear_game_flags(unsigned int);

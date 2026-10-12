@@ -10,7 +10,7 @@ claims; no runtime or audible-output test has been performed.
 
 The animation command decoder's `0xF6` operation calls the cue dispatcher.
 The dispatcher reads a four-byte record at `0x08D73B9C`, checks the sample
-enable byte at `0x03005D98`, and dispatches record kinds 1 and 2. Kind 1
+volume byte at `0x03005D98`, and dispatches record kinds 1 and 2. Kind 1
 uses a four-byte sample/step record at `0x08D73708`; kind 2 selects one of
 eight such records per group at `0x08D73A7C`, with sample ID 255 suppressing
 playback. The helper at `0x08035450` narrows its limit to 16 bits and scales
@@ -43,3 +43,31 @@ one remaining instruction mismatch and receives no coverage credit.
 Further connected targets are that selector, sequence start `0x4A808`,
 the VBlank frame mixer and the channel/envelope timing routines. Failed
 compiler and structure experiments are retained in ignored local reports.
+
+## Game volume and playback controls
+
+Six further functions at `0x412EC`, `0x41308`, `0x41340`, `0x41398`,
+`0x413C8` and `0x413FC` contribute 228 verified C bytes. The two volume
+setters narrow their input to a byte, call the mixer/player volume
+implementation, and save the result in the game options at offsets 8 and
+9. The sample mixer clamps its global volume to 255; the sequence setter
+passes a zero fade argument. Inspection of those callees corrects the
+earlier provisional enable/tempo interpretation: these are volume levels,
+and zero also suppresses their respective playback/control operations.
+The two resource command names and shared option fields now reflect that
+evidence, with unchanged exact command extents.
+
+Pause checks the sequence volume and the player's paused state, sets game
+control bit 1 and calls player pause. Resume clears that bit and calls
+resume only while it is set. Sequence stop clears the same bit and calls
+player stop when sequence volume is nonzero. Sample stop instead checks
+sample volume and passes the unsigned sample handle through the `0x4C888`
+Thumb thunk to the copied ARM implementation at `0x03000320`. The view
+effect stop command uses this sample handle; it is distinct from sequence
+stop. Each new complete extent and the renamed existing callers passed
+positive byte comparison and a compiling changed-source rejection.
+
+The accepted game audio total is eight functions and 488 bytes. The player
+and mixer bodies called by these controls remain explicit original
+regions, except where separately reconstructed and counted. No audible or
+gameplay behavior is claimed by these compiler comparisons.

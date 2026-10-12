@@ -3,7 +3,7 @@
 unsigned int audio_play_animation_cue(unsigned int id)
 {
     unsigned int handle = 0;
-    if (g_audio_game_options.samples_enabled) {
+    if (g_audio_game_options.samples_volume) {
         struct AudioCueDescriptor *table = g_audio_cue_descriptors;
         struct AudioCueDescriptor *cue = (struct AudioCueDescriptor *)((id << 2) + (unsigned int)table);
         switch (cue->kind) {

@@ -230,3 +230,65 @@ The target setter at `0x0800dd80` writes signed scroll coordinates to offsets
 flag 1. The already matching background frame step reads those same fields
 for interpolation, connecting the producer and consumer. These names follow
 that shared field use; the setters' game-level event meanings remain provisional.
+
+`display_load_background_resource_dma` at `0x0800ce14` is the 232-byte alternate
+resource transfer entry, paired with the 56-byte `display_load_background_dma`
+coordinator at `0x0800da5c`. Unlike the palette-loading entry at `0x0800cd4c`, its
+first stage advances over the embedded palette: flag 1 selects 512 bytes, flag
+2 selects 32 bytes. Flag 4 uploads the length-prefixed block through DMA3, with
+halfword count and enable bit `0x80000000`, including the original control
+readback. Its remaining map header, tile-size selection and codec dispatch
+agree with the existing resource decoder path. The coordinator supplies a map
+to `display_write_background_map` when the resource entry returns one; that
+640-byte writer remains explicitly unconverted.
+
+The C uses an inline character-bank address helper and register-bound locals
+for the compiler's original address formation. These remain ordinary typed C
+calculations, with no original instruction bodies or output changes. The full
+232-byte comparison owns its two literal pools and its original return; the
+coordinator owns all 56 bytes. Independently compiled changes to the DMA enable
+bit and the coordinator's map-null condition reject the replacements. Local
+failed variants and raw positive/control comparisons are retained under the
+ignored display-agent reports. These are compiler and static-link findings;
+no additional runtime or gameplay claim is made.
+
+The copied pass at ROM `0x0800b0e8`, installed by `0x0800109c` at
+`0x03002a20`, now has 640 bytes of matching ARM C named
+`frame_dispatch_collisions`. The scheduler at `0x08000618` invokes that copied
+entry with an unsigned object count and an object-pointer table. The complete
+extent ends in a return at RAM `0x03002c9c` and has no literal pool; its 640-byte
+copy extent is also the independently compared function boundary here. The
+installer and indirect caller establish the static RAM mapping, while the
+byte comparison uses the RAM execution address and the physical ROM bytes.
+
+The pass tests each object's bounds against later objects in the table and
+calls the per-bound callbacks on overlap. Object offsets `0x22/0x26` supply
+signed X/Y positions, `0xaf` supplies the bounds count, and `0xd3` bit `0x10`
+mirrors horizontal endpoints. Six-byte records begin at `0xb0`; their four
+coordinate bytes are interpreted as signed left/right/top/bottom endpoints,
+followed by a signed kind byte whose zero value skips the record. The C keeps
+an explicit two-halfword coordinate access view because the original performs
+one unsigned and one signed halfword load, then extracts the four signed
+bytes. The halfword packing uses an unsigned shift, preserving negative
+endpoint bit patterns without shifting a negative signed C value.
+
+Callback pointers begin at `0xc8`. The first-bound callback runs at most once for each later object even when
+several of its bounds overlap; distinct first-bound callbacks can each run
+once for that object. The later object's matching callback can run for each
+overlap. The code rechecks active
+flag `4` after callbacks and stops a bounds scan when the first object sets
+flag `0x400`. Shared flag `0x20000` suppresses a pair; for a nonzero first-bound
+index, the later object's flag `0x400` also suppresses the pair. Those bit
+meanings follow this control flow and remain provisional beyond it. The
+original byte index truncation and count-minus-one condition are retained;
+no new bounds limit or empty-input guard is claimed.
+
+The compiler profile is ARM `-O2 -mthumb-interwork -fomit-frame-pointer`.
+Register-bound C values preserve offset, coordinate and rectangle lifetimes;
+there is no instruction assembly in this replacement. A changed overlap test
+from `<` to `<=` produces different linked bytes and rejects the replacement.
+All failed layout, eligibility and reload variants, plus the complete positive
+and changed-source raw comparisons, are retained locally. Existing collider
+writer names and the higher-level meaning of the kind byte still require
+connected evidence. This is static mapping and compiler evidence; no new
+runtime or gameplay claim is made.

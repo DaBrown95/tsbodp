@@ -1,7 +1,7 @@
 /* Partial scene-request/state layouts inferred from the connected load sequence. */
 #include "display.h"
 struct PaletteRangeConfig;
-struct SceneRequest { unsigned int unknown_00, mode, scene; };
+struct SceneRequest { unsigned int unknown_00, mode, scene, parameter; };
 struct SceneContext { unsigned int flags; void *resource; unsigned int unknown_08; void *palette; };
 struct SceneModeFlags { unsigned int unknown_00, flags; };
 struct ScenePaletteRangeConfig { const struct PaletteRangeConfig *resource; unsigned int unknown_04, unknown_08; };
