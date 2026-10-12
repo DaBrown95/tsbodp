@@ -52,17 +52,16 @@ struct PaletteBufferPair {
 extern struct PaletteBufferPair g_palette_buffer_pairs[2];
 struct PaletteRangeJob {
     unsigned char flags;
-    unsigned char unknown_01[2];
+    unsigned char interval, delay;
     unsigned char source_first, destination_first, destination_last, count;
-    unsigned char unknown_07;
+    unsigned char original_count;
 };
 struct PaletteBlockJob {
     unsigned char flags;
-    unsigned char unknown_01[4];
-    unsigned char first;
-    unsigned char unknown_06;
-    unsigned char count;
-    unsigned char unknown_08[12];
+    unsigned char duration, remaining, delay, interval;
+    unsigned char first, last, count, palette_count, palette_index;
+    unsigned char unknown_0a[2];
+    const unsigned short *palettes, *target;
 };
 struct PaletteQueueEntry {
     unsigned short first, count;
@@ -162,3 +161,18 @@ extern void display_offset_background(unsigned int);
 extern const unsigned char g_display_screen_block_counts[4];
 extern void display_fill_background_tile(unsigned int, unsigned short, unsigned short);
 extern void display_write_incrementing_map_rectangle(void *, int, int, int, int, unsigned short);
+
+extern unsigned int g_palette_block_count;
+extern void *display_set_bytes(void *, int, unsigned int);
+extern unsigned int display_find_palette_block(void);
+extern void display_step_palette_block(struct PaletteBlockJob *);
+extern void display_reset_palette_block(struct PaletteBlockJob *);
+extern unsigned int display_create_palette_block(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, const unsigned short *);
+
+struct PaletteRangeConfigEntry { unsigned char first, count, delay, flags; };
+struct PaletteRangeConfig { unsigned short count, unknown_02; struct PaletteRangeConfigEntry entries[1]; };
+extern unsigned int g_palette_range_count, g_palette_range_enabled_mask;
+extern unsigned int display_next_palette_range(void);
+extern void display_load_palette_ranges(const struct PaletteRangeConfig *);
+extern void display_load_palette(const void *, unsigned int, unsigned int);
+extern void display_step_palette_range(struct PaletteRangeJob *);

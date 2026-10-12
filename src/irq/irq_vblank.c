@@ -1,16 +1,12 @@
 /* Provisional names; the layout and handoff sequence follow original accesses. */
 #include "irq.h"
+#include "audio_vblank.h"
 
-struct AudioVBlankControl {
- unsigned char unknown[6];
- unsigned char flags : 8;
-};
 extern volatile unsigned int g_vblank_depth;
 extern unsigned int g_oam_buffer_index;
 extern unsigned char *g_oam_current, *g_oam_previous;
 extern unsigned char g_oam_buffer_a[], g_oam_buffer_b[];
 extern unsigned char g_render_pending, g_render_consumed;
-extern volatile struct AudioVBlankControl g_audio_control;
 extern void display_flush_palette_queue(void), background_animation_tick(void);
 extern void display_flush_pending_block(void), display_commit_backgrounds(void);
 extern void display_commit_windows(void), display_commit_palette_jobs(void);

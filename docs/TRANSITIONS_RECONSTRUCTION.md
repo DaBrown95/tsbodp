@@ -4,10 +4,12 @@
 
 The connected transition batches reconstruct **28 functions, 2,696
 bytes** at their original addresses, including pools and padding. The
-VBlank-connected background animation path adds **six functions, 300 bytes**,
-comprising the tick, four lifecycle routines and alpha defaults. Two background
-visibility wrappers add **48 bytes**. The combined batch inventory is **36
-functions, 3,044 bytes**.
+VBlank-connected background animation path adds **seven functions, 500 bytes**,
+comprising the tick, loader, four lifecycle routines and alpha defaults. Five
+background visibility/reset routines add **188 bytes**. Nine scene/character
+animation routines add **1,176 bytes**, and the two frame handoff wrappers add
+**132 bytes**. The combined batch inventory is **51 functions, 4,592 bytes**.
+The scene batch is described in [SCENE_RECONSTRUCTION.md](SCENE_RECONSTRUCTION.md).
 Every candidate in this batch is compiled with the pinned agbcc backend at
 `-O2 -mthumb-interwork`, linked at its original address and compared over the
 complete extent. Every function has a changed-source negative control that
@@ -77,8 +79,8 @@ resource-handle type. The 16-byte clear at `0xA87C`, forced reload at `0xA844`
 and conditional stop at `0xA864` connect initialization and shutdown to the
 VBlank state. Stop clears the low four flag bits; forced reload sets bit
 eight when transfers are enabled. The complete flag meanings and the resource
-handle lifetime remain unresolved. The loader at `0xA6C0` is a retained
-candidate with a differing instruction schedule and is not accepted coverage.
+handle lifetime remain unresolved. The 200-byte loader at `0xA6C0` now matches and closes that dependency. Its
+twenty-byte descriptors and display calls are documented with the scene batch.
 
 ## Object handoff and recorded fades
 

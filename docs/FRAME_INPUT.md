@@ -124,3 +124,56 @@ unverified. Its multipart packed records, object hardware OAM view and nested
 frame-selection behavior are being resolved against static accesses. Animation
 tick and bounds, affine, render-order and display allocation dependencies are
 further connected targets. Compiler equality does not establish gameplay.
+
+The object animation path now includes three additional exact replacements:
+`frame_decode_animation_commands` at `0x0800201C` (388 bytes),
+`frame_refresh_animation_bounds` at `0x080021A0` (248 bytes), and
+`frame_refresh_part_colliders` at `0x08002298` (304 bytes). These 940 bytes
+bring this local batch to 28 functions and 5,116 matching C bytes.
+Changed-source controls alter the command threshold, dirty flag and part collider
+flag respectively; all fail the full extent comparison. The frame tick caller
+at `0x08001DCC` also matches its full 592-byte extent. It brings this local
+batch to 29 functions and 5,708 matching C bytes. A changed-source control
+reverses its delay decrement and is rejected.
+
+The command reader gives static evidence for the animation state at object
+`+0xD8`: delay, reset delay, previous frame and current frame occupy four bytes;
+resource, current command and command start pointers follow. Commands are two
+bytes. Values through `0xF2` choose a frame and delay; `0xFD` jumps relative to
+the command start, `0xFE` waits one tick and `0xFF` marks completion. Movement
+commands use signed byte offsets, with mirroring read from display byte
+`+0xD3`; velocity commands scale unsigned byte magnitudes and then apply the
+mirror sign. `0xF6` calls `0x08040FFC`, provisionally named `audio_play_animation_cue`.
+The callee checks audio enable byte `0x03005D98`, selects a four-byte cue
+descriptor at `0x08D73B9C`, then resolves either a direct sample or a random
+variant. It calls the copied RAM audio start and pitch wrappers at
+`0x0804C878` and `0x0804C88C`, followed by coordination at `0x08041534`.
+The static return value is retained as an unsigned handle; this caller ignores
+it. These are static call and data findings, not runtime observations.
+The random branch calls `0x0803542C` and may request animation 2 or 3 using
+object byte `+0x103`, flags `0x10` and pending-update byte `+0x4F` bit 2.
+The otherwise undefined command cases retain the observed repeat behavior.
+
+A frame header contains two halfword bounds at bytes 6 and 8. They are copied
+into byte bounds at object `+0xBC` through `+0xBF`, with width and height added
+for the opposite endpoints. Attachment entries use two bytes each; collider
+entries follow and use six bytes: x, y, width, height, kind and one unknown byte.
+The object collider array begins at `+0xB0` and its count is at `+0xAF`.
+The array view has two slots because the clearing loop stops after slot 1; the
+copy loop trusts the sequence count, so this does not prove all data is bounded
+to two entries. Part flag 2 supplies collider overrides, while flags 4 and 8
+select the previous frame with wrap or clamp. The header bounds for an override
+come from sequence bytes 2 through 5. Signed kind tests and unsigned variant
+indices are preserved. Names and the independent `frame_animation.h` view are
+provisional static interpretations; no rebuilt gameplay claim is made.
+
+The frame tick decrements its nonzero delay only when flag `0x10` is set.
+It advances a plain frame index with wrap and completion flag `0x400000`, or
+advances the two-byte command cursor and invokes the command decoder. Both
+branches inline the same bounds/collider refresh algorithm. The accepted
+source keeps that algorithm as a semantic C inline helper. The independent
+`frame_tick.h` record view groups the eight-byte core at `+0xD8` separately
+from the command pointers; all offsets agree with `frame_animation.h`. Its
+direct byte fields and explicit resource-field pointer preserve the observed
+compiler aliasing and address reuse. Useful failed field-grouping candidates
+and their complete raw comparisons remain in ignored local reports.

@@ -10,4 +10,6 @@ struct BackgroundAnimation {
 };
 extern struct BackgroundAnimation g_background_animation;
 extern unsigned int g_game_flags;
-extern void display_load_background_resource(unsigned int, const void *, unsigned int, unsigned int);
+struct BackgroundResource;
+extern const unsigned short *display_load_background_resource(unsigned int, const struct BackgroundResource *, unsigned short, unsigned short);
+extern void background_animation_load(int), background_animation_configure_alpha(void);

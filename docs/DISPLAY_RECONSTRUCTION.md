@@ -6,9 +6,7 @@ no runtime or gameplay claim follows from these matches.
 
 The VBlank wrapper calls the window register commit at `0x080486b8`, pending
 block copy at `0x08046f84`, palette job commit at `0x080117e4`, queued palette
-flush at `0x08011834`, and background register commit at `0x0800d3b0`. The first
-three have exact C replacements. The latter two remain explicit original
-regions while their semantic candidates are being refined.
+flush at `0x08011834`, and background register commit at `0x0800d3b0`. All five have exact C replacements.
 
 `display_commit_windows` reads two 60-byte records at `0x03007460`; its four
 signed coordinates come from offsets `0x0a`, `0x0e`, `0x26`, `0x2a`. It writes
@@ -46,8 +44,8 @@ returned range allocated, and optionally copies a tile resource. The installer
 at `0x08047724` uses CpuSet to copy 50 words from `0x0800b77c` to that RAM
 address. The validated 200-byte copy includes the first word of the following
 frame-copy source at ROM `0xB840`; copy length is not a function boundary.
-This copied ARM search routine and the tile copy candidate remain
-unconverted; their bytes are not included in C coverage. Its mode argument is
+The copied ARM search routine remains
+unconverted; its bytes are not included in C coverage. Its mode argument is
 zero at this caller, and the failure sentinel is `0xffff`.
 
 Background resource loading connects scene resource descriptors to the same
@@ -131,3 +129,36 @@ across rows with a 32-entry stride; `0x0800d864` selects the background's map
 destination. These provide a connected map initialization/upload/edit path.
 The more general dimension-prefixed map upload at `0x0800cefc` remains an
 unconverted region with a preserved semantic candidate and comparison evidence.
+
+The queued palette flush at `0x08011834` traverses 8-byte records at
+`0x03003260`, using a halfword count at `0x03003160`, then resets the count.
+Its transfer at `0x080119c8` copies a halfword range into the staging buffer
+and immediately sends that range to the destination with DMA3. The selected
+buffer pair is the second record at `0x030018d0`. The queue record carries
+first/count bytes and a source pointer; the addressing expression follows
+the observed 8-byte stride. These close the queued palette path from VBlank
+through staging copy and hardware transfer. The immediate transfer and flush
+have separate compiled mutation controls.
+
+The palette block lifecycle now has matching producers and management at
+`0x080118dc` (create), `0x08011b90` (find free record), `0x08011bf8` (reset),
+and `0x08011c18` (step active records). The 20-byte record fields follow its
+initialization stores: duration/remaining at bytes 1/2, delay/interval at 3/4,
+first/last/count at 5/6/7, palette count/index at 8/9, and palette pointers at
+12/16. The free search returns 12 when all slots are active; the creator does
+not add a bounds guard. The active count at `0x03003350` is updated by free
+selection/reset. The manager preserves its observed `visited <= active_count`
+condition. These static names do not establish safe behavior for exhausted
+records. The per-record RGB interpolation at `0x08011c60` remains unconverted,
+with its semantic candidate and raw comparison evidence retained locally.
+
+The matching palette range step at `0x08011a74` rotates a range forward or
+backward when its byte countdown expires. Flag `0x10` reverses at endpoints;
+flag `0x20` selects direction. It schedules a transfer with flag 2 and reloads
+the interval. Byte fields 1/2 are therefore named interval/delay, while byte 7
+stores the original count in the producer. The allocation counter at
+`0x03003164` increments without an observed limit in `0x08011a10`. The immediate
+palette loader at `0x080116f8` selects the first buffer pair and calls the now
+matching transfer. The scene-linked range descriptor loader at `0x08011634`
+still differs in compiler scheduling; its count/header and four-byte entries
+are inferred from static accesses. `0x030032e0` is the enabled-range mask.
