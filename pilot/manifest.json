@@ -1,0 +1,309 @@
+{
+  "target": "us-eu",
+  "compiler_source_commit": "da598c1d918402c42c0c0d7128ba14567f3175e9",
+  "compiler_flags": [
+    "-O2",
+    "-mthumb-interwork"
+  ],
+  "functions": [
+    {
+      "name": "set_word_0300217c",
+      "rom_offset": 255048,
+      "size": 12
+    },
+    {
+      "name": "get_word_0300217c",
+      "rom_offset": 255060,
+      "size": 12
+    },
+    {
+      "name": "set_irq_table_entry",
+      "rom_offset": 129220,
+      "size": 16,
+      "symbols": {
+        "g_irq_table": "0x03004290"
+      }
+    },
+    {
+      "name": "configure_blending",
+      "rom_offset": 234452,
+      "size": 40
+    },
+    {
+      "name": "set_word_03002180_bit0",
+      "rom_offset": 255072,
+      "size": 44
+    },
+    {
+      "name": "irq_init",
+      "rom_offset": 129108,
+      "size": 84,
+      "source": "src/irq/irq_init.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "irq_enable_defaults",
+      "rom_offset": 129192,
+      "size": 28,
+      "source": "src/irq/irq_enable_defaults.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "restore_irq_table_entry",
+      "rom_offset": 129236,
+      "size": 24,
+      "source": "src/irq/restore_irq_table_entry.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "irq_set_vcount",
+      "rom_offset": 129432,
+      "size": 36,
+      "source": "src/irq/irq_set_vcount.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "irq_disable_vcount",
+      "rom_offset": 129468,
+      "size": 40,
+      "source": "src/irq/irq_disable_vcount.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "irq_default_vblank_callback",
+      "rom_offset": 129508,
+      "size": 12,
+      "source": "src/irq/irq_default_vblank_callback.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "irq_noop",
+      "rom_offset": 129712,
+      "size": 4,
+      "source": "src/irq/irq_noop.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "set_vblank_callback",
+      "rom_offset": 129260,
+      "size": 44,
+      "source": "src/irq/set_vblank_callback.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "set_hblank_callback",
+      "rom_offset": 129304,
+      "size": 44,
+      "source": "src/irq/set_hblank_callback.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "set_vcount_callback",
+      "rom_offset": 129348,
+      "size": 44,
+      "source": "src/irq/set_vcount_callback.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "irq_hblank",
+      "rom_offset": 129520,
+      "size": 56,
+      "source": "src/irq/irq_hblank.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "irq_vcount",
+      "rom_offset": 129576,
+      "size": 56,
+      "source": "src/irq/irq_vcount.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "irq_timer0_handler",
+      "rom_offset": 129632,
+      "size": 40,
+      "source": "src/irq/irq_timer0_handler.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    },
+    {
+      "name": "irq_timer3_serial",
+      "rom_offset": 129672,
+      "size": 40,
+      "source": "src/irq/irq_timer3_serial.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    }
+  ],
+  "unmatched_candidates": [
+    {
+      "name": "irq_wait_vblank",
+      "rom_offset": 129392,
+      "size": 40,
+      "source": "src/irq/irq_wait_vblank.c",
+      "symbols": {
+        "g_irq_context": "0x03004280",
+        "g_irq_context_storage": "0x030042d0",
+        "g_irq_table": "0x03004290",
+        "g_irq_defaults": "0x08053558",
+        "g_irq_dispatcher_rom": "0x08000160",
+        "g_irq_dispatcher_ram": "0x03001ba0",
+        "g_irq_flags": "0x03001da0",
+        "irq_noop": "0x0801fab1",
+        "frame_update": "0x080008a1",
+        "_call_via_r0": "0x0804ccf1"
+      }
+    }
+  ]
+}

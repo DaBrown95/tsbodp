@@ -1,0 +1,159 @@
+{
+  "target": "us-eu",
+  "copies": [
+    {
+      "name": "audio_iwram",
+      "phase": "startup",
+      "rom_offset": 16622712,
+      "ram_address": 50331648,
+      "size": 5552,
+      "startup_literal_offset": 276,
+      "classification": "mixed ARM audio code, literal pools, tables and zero initialization",
+      "exports": "audio_iwram.bin"
+    },
+    {
+      "name": "initial_ewram",
+      "phase": "startup",
+      "rom_offset": 16628264,
+      "ram_address": 33554432,
+      "size": 10232,
+      "startup_literal_offset": 288,
+      "classification": "initial data; no executable entry established",
+      "exports": "initial_ewram.bin"
+    },
+    {
+      "name": "irq_dispatcher",
+      "phase": "irq_init at 0x0801f854",
+      "rom_offset": 352,
+      "ram_address": 50338720,
+      "size": 512,
+      "classification": "mixed copy: ARM dispatcher, Thumb startup helper, pools and following bytes",
+      "exports": "irq_dispatcher.bin"
+    }
+  ],
+  "entries": [
+    {
+      "ram_address": 50331652,
+      "mode": "ARM",
+      "evidence": "default IRQ table index 3 at ROM 0x53564",
+      "name": "audio_timer_irq"
+    },
+    {
+      "ram_address": 50335872,
+      "mode": "ARM",
+      "pointer_rom_offset": 313500,
+      "name": "audio_frame",
+      "evidence": "ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50332396,
+      "mode": "ARM",
+      "pointer_rom_offset": 313504,
+      "name": "audio_start_wrapper",
+      "evidence": "ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50331796,
+      "mode": "ARM",
+      "pointer_rom_offset": 313508,
+      "name": "audio_start",
+      "evidence": "ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50332448,
+      "mode": "ARM",
+      "pointer_rom_offset": 313512,
+      "name": "audio_control_320",
+      "evidence": "ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50332648,
+      "mode": "ARM",
+      "pointer_rom_offset": 313516,
+      "name": "audio_control_3e8",
+      "evidence": "ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50332724,
+      "mode": "ARM",
+      "pointer_rom_offset": 313520,
+      "name": "audio_control_434",
+      "evidence": "ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50332852,
+      "mode": "ARM",
+      "pointer_rom_offset": 313524,
+      "name": "audio_control_4b4",
+      "evidence": "ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50333048,
+      "mode": "ARM",
+      "pointer_rom_offset": 313528,
+      "name": "audio_control_578",
+      "evidence": "ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50334388,
+      "mode": "ARM",
+      "pointer_rom_offset": 302500,
+      "name": "audio_mix_ab4",
+      "evidence": "ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50334704,
+      "mode": "ARM",
+      "pointer_rom_offset": 301524,
+      "name": "audio_set_shift",
+      "evidence": "ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50338720,
+      "mode": "ARM",
+      "name": "irq_dispatcher",
+      "evidence": "DMA destination installed into IRQ vector by irq_init"
+    }
+  ],
+  "irq_default_table_rom_offset": 341336,
+  "irq_table_ram_address": 50348688,
+  "irq_context_pointer": 50348672,
+  "irq_context_storage": 50348752,
+  "software_irq_flags": 50339232,
+  "bios_irq_flags": 50364408,
+  "irq_vector": 50364412,
+  "dispatcher_arm_size": 296,
+  "self_modifying_code": [
+    {
+      "writer": 50331764,
+      "targets": [
+        50331724
+      ],
+      "effect": "replace an instruction with the existing bx lr instruction loaded at 0x03000078; one-time IRQ path"
+    },
+    {
+      "writer_range": [
+        50334704,
+        50334788
+      ],
+      "targets": [
+        50334576,
+        50334580,
+        50334604,
+        50334608,
+        50334640,
+        50334644,
+        50334668,
+        50334672
+      ],
+      "effect": "update ARM instruction shift fields from argument bits"
+    }
+  ],
+  "limitations": [
+    "Static original-image map; no runtime trace or complete code/data partition.",
+    "Not every byte within a copy or between entries is executable.",
+    "Self-modifying instruction state differs after execution; keep original and runtime state distinct.",
+    "No executable entry found in initial EWRAM copy; later code installation remains possible.",
+    "Audio function names are reconstructed, some intentionally address-based."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "compiler": {
+    "source_url": "https://github.com/pret/agbcc.git",
+    "source_commit": "da598c1d918402c42c0c0d7128ba14567f3175e9",
+    "build_command": "make -C toolchains/agbcc/gcc -j1",
+    "reported_backend": "gcc 2.9-arm-000512 for Thumb/elf"
+  },
+  "binutils": {
+    "source_url": "https://ftp.gnu.org/gnu/binutils/binutils-2.43.1.tar.xz",
+    "source_sha256": "13f74202a3c4c51118b797a39ea4200d3f6cfbe224da6d1d95bb938480132dfd",
+    "configure_options": [
+      "--target=arm-none-eabi",
+      "--disable-nls",
+      "--disable-werror",
+      "--disable-gdb",
+      "--disable-gdbserver",
+      "--disable-gprofng",
+      "--disable-sim",
+      "--disable-gold",
+      "--without-zstd",
+      "--with-system-zlib",
+      "CFLAGS=-O2 -std=gnu11"
+    ],
+    "build_options": "make -j6 MAKEINFO=true all-binutils all-gas all-ld",
+    "assembler_version": "GNU assembler (GNU Binutils) 2.43.1",
+    "linker_version": "GNU ld (GNU Binutils) 2.43.1"
+  },
+  "native_tool_sha256": {
+    "toolchains/agbcc/gcc/agbcc": "24a3e70f53c2db5629bab622b927edc77492d6010ec6005e4f734dacbec303f9",
+    "toolchains/binutils/bin/arm-none-eabi-as": "8c3a2e65f98f39c4e520c40ef88b1d79bbc6c3fb27d32e9220df9bbe19107809",
+    "toolchains/binutils/bin/arm-none-eabi-ld": "c0bdf4ee07f660aac90f7949c2505c2d29784b6f9b6c9737ef54bc5b458d326b"
+  },
+  "host_clang": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "scope": "Local pilot toolchain pin; does not prove the historical compiler version or whole-ROM build."
+}
