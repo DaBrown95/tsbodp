@@ -1,90 +1,42 @@
-# The Sims: Bustin' Out — GBA matching decompilation
+# The Sims: Bustin' Out
 
-The first target is the original multilingual USA/Europe release. The goal is
-readable source that builds an **exactly identical ROM**, including code, data,
-addresses, header and padding.
+A work-in-progress matching decompilation of *The Sims: Bustin' Out* for the
+Game Boy Advance, initially targeting the multilingual USA/Europe release.
 
-Both supplied ROMs have passed the identity audit. The USA/Europe build now
-links **19 matching C functions (676 bytes including pools and alignment)**
-with explicitly unconverted original regions and produces a complete ROM
-with zero byte differences. This remains a partial source reconstruction.
-The original compiler version and options are not uniquely established.
-See [the current milestone](docs/RAM_AND_INTERRUPTS.md).
+This is deliberately an **almost entirely AI-driven experiment**. Virtually
+all project analysis, reconstructed code, custom tooling and documentation
+are produced by AI coding agents. The owner sets the direction and uses the
+project to explore what these tools can achieve. Compilation and exact byte comparison
+check the results; AI-generated explanations remain subject to verification.
 
-## Put your dump here
+## Status
 
-The supplied USA/Europe dump is configured at:
+19 C functions match exactly, covering 676 bytes including literal pools and
+alignment. The complete 16 MiB ROM matches the reference, with the remaining
+regions retained as explicitly unconverted inputs. Full source reconstruction
+is incomplete.
 
-```text
-baseroms/Sims, The - Bustin' Out (USA, Europe) (En,Fr,De,Es,It,Nl).gba
-```
+See [RAM and interrupts](docs/RAM_AND_INTERRUPTS.md) for the current milestone.
 
-Then run from this project directory:
+## Building
+
+Supply your own USA/Europe ROM. Expected SHA-1:
+`fb5662172fadebf4577f6f6f163741fc041c11e6`.
+
+Follow [build setup and verification](docs/BUILD.md) to place the ROM and
+configure the pinned toolchain. Setup is currently verified on the project's
+macOS environment. With the tools configured:
 
 ```sh
 make audit
-make audit-all
-make doctor
+make build
+make compare
 ```
 
-Python 3.10 or later is sufficient for these commands. The audit checks the
-entire file against the target's catalogue SHA-1 and size, records SHA-256,
-and checks the GBA game code, revision, fixed header byte and header checksum.
-SHA-256 is now pinned to the verified dump; MD5 and CRC32 are also checked
-against the catalogue values. `make audit-all` additionally verifies USA revision 1.
-It writes local metadata to `reports/us-eu/audit.json` and exits unsuccessfully
-on a mismatch. It never patches, trims or rewrites the input.
+## About
 
-Expected size: **16,777,216 bytes**. Expected SHA-1:
-`fb5662172fadebf4577f6f6f163741fc041c11e6`.
+Results are shared for inspection and reproducibility. External contributions,
+pull requests, issues and support requests are not accepted.
 
-Identity source: [No-Intro metadata mirrored by libretro](https://github.com/libretro/libretro-database/blob/master/metadat/no-intro/Nintendo%20-%20Game%20Boy%20Advance.dat).
-The filename and cartridge label alone do not establish this identity. USA
-revision 1 is an audited comparison reference; Japan remains a future target.
-
-## Exact-match acceptance
-
-`make build` produces `build/us-eu/bustin-out.gba`.
-Run `make compare` to audit the reference again and compare every output byte.
-There is no ignored region, masked difference or automatic header repair.
-Comparison writes `reports/us-eu/compare.json` and fails on any difference.
-
-Whole-ROM equality is separate from source reconstruction progress. Original
-bytes retained during analysis, assembly placeholders, and copied data do not
-count as matching C/C++. The current build links 19 matching C functions (676 bytes including pools and
-alignment) with explicitly unconverted regions extracted locally from the
-reference. Those regions contain 16,776,540 bytes and do not count as recovered
-source. The complete linked ROM matches; full source reconstruction remains
-incomplete. A same-size changed-source control must fail whole-ROM comparison.
-
-Original intentional assembly can remain assembly when supported by evidence.
-Track recovered game code, library code, assembly and assets separately; do not
-use total ROM size as the denominator for a code decompilation percentage.
-
-## Next work
-
-`make analyze` reproduces the bounded startup map using the isolated analysis
-environment. `make pilot` compiles the 19 accepted C candidates, links each at its
-original address, checks its entire text extent, and compiles a changed-source
-negative control that must fail comparison. `make pilot-matrix` also compares
-optimisation levels. Each run retains source snapshots, intermediate files,
-commands and a report in a separate ignored directory under `build/pilot/runs/`.
-The latest summary is `reports/us-eu/pilot.json`.
-
-Follow [the audit and compiler pilot](pilot/README.md) and the
-[RAM map and interrupt milestone](docs/RAM_AND_INTERRUPTS.md). `make ram-map`
-verifies the three copied regions and exports local RAM images for analysis. `make doctor` reports local tools
-and evidence status. `make test` checks the audit and comparison safeguards
-using synthetic data, without a game ROM.
-
-The project uses one shared source tree with target-specific configuration,
-symbols, layouts and reports. Add other releases only after independently
-identifying their ROMs and comparing their differences.
-
-## Local content
-
-`baseroms/`, `build/`, `reports/`, `extracted/`, `analysis/` and `toolchains/`
-are ignored. Keep original ROMs, extracted assets, private disassembly databases,
-save files and proprietary tools local. Source control should contain authored
-source, extraction/build scripts, configuration and research notes with evidence.
-No remote repository or publication is configured.
+ROMs, extracted assets and generated game binaries stay local. Original game
+and third-party rights remain with their respective owners.
