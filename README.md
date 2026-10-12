@@ -14,10 +14,19 @@ verification.
 
 ![Matching progress treemap](assets/progress.png)
 
-The treemap covers established code extents; the full function inventory is
-still incomplete. Green means verified matching C, including its literal
-pools and alignment. Unconverted ROM regions do not count as reconstructed
-source, even when the complete build matches.
+The code treemap comes from a ROM-wide static scan, including code copied
+into RAM. Tiles show discovered entries and candidates, weighted by estimated
+extents; they are not yet a proven function census. Darker tiles are candidates.
+The main code banks and startup/audio panels use separate scales. The strip
+below accounts for every byte of the ROM, including unresolved code, data and
+padding. Green means verified matching C, including its literal pools
+and alignment. Unconverted regions never count as reconstructed source.
+
+The [full inventory](assets/rom-inventory.json) records addresses, discovery
+evidence, estimated sizes, calls and unresolved indirect transfers. Copied RAM
+code is counted once at its ROM location. Indirect calls, jump tables and
+self-modifying audio code still need review; the inventory makes those gaps
+visible rather than claiming complete code discovery.
 
 ## Building
 
@@ -116,17 +125,23 @@ Other commands:
 | `make ram-map` | Verify copied RAM regions and export local analysis images. |
 | `make analyze` | Reproduce the bounded startup analysis. |
 | `make audit-all` | Also audit USA revision 1, when its separate dump is present. |
-| `make progress` | Refresh the treemap from current verified build evidence. |
+| `make inventory` | Audit the ROM and refresh the full static entry and extent map. |
+| `make progress` | Refresh the treemap from current inventory and verified build evidence. |
+
+Use `make test PYTHON=toolchains/analysis-venv/bin/python` to also run the
+scanner controls; plain `make test` skips them when Capstone is unavailable.
 
 Rendering the treemap additionally needs Pillow:
 
 ```sh
 toolchains/analysis-venv/bin/python -m pip install -r config/progress-requirements.txt
+make inventory
 make progress
 ```
 
 Run `make build` again after source or build-helper changes before refreshing
-progress. The renderer rejects stale evidence. The public snapshot contains
+progress. Run `make inventory` again after changes to the scanner or its map
+inputs. The renderer rejects stale evidence. The public snapshot contains
 addresses, sizes and verification metadata, without ROM bytes or local paths.
 
 ## Repository

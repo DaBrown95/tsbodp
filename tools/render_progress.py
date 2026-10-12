@@ -10,7 +10,7 @@ from zoneinfo import ZoneInfo
 from project import ROOT
 from rom_layout import layout
 
-COLORS = {'exact_c': '#00b800', 'unconverted': '#373a3e'}
+COLORS = {'exact_c': '#00b800', 'mapped_code': '#373a3e', 'candidate': '#292c30', 'unresolved': '#202226', 'mapped_data': '#44505a'}
 BACKGROUND, FOREGROUND, MUTED = '#141619', '#f0f2f5', '#a5aeb8'
 
 
@@ -62,30 +62,32 @@ def inventory():
             or build['unconverted_bytes'] != target['size'] - total_c
             or build['regions'] != layout(manifest['functions'], target['size'])):
         raise ValueError('Source credit differs from full-ROM layout')
-    # Remove retired grey regions only after a source replacement owns that
-    # complete extent. Partial overlaps require an explicit map update.
-    rows = list(exact)
-    for r in regions['unconverted_extents']:
-        start, end = r['rom_offset'], r['rom_offset'] + r['size']
-        replacements = [f for f in exact if f['rom_offset'] < end and f['rom_offset'] + f['size'] > start]
-        if replacements:
-            if len(replacements) != 1 or replacements[0]['rom_offset'] != start or replacements[0]['size'] != r['size']:
-                raise ValueError('Update the bounded map after a partial source replacement')
-        else:
-            rows.append({**r, 'status': 'unconverted'})
-    layout(rows, target['size'])  # Every mapped extent must be disjoint.
+    discovered = json.loads((ROOT / 'assets/rom-inventory.json').read_text())
+    from inventory_partition import partition, overlay, verify_discovery
+    verify_discovery(discovered, target['size'], target['sha256'])
+    for name, digest in discovered['input_sha256'].items():
+        if sha(ROOT / name) != digest:
+            raise ValueError(f'Stale inventory: {name}; run make inventory')
+    # Green intervals come only from compiler/build receipts, never the scanner.
+    for f in exact:
+        f['group'] = next((r['group'] for r in discovered['rows']
+                           if r['rom_offset'] == f['rom_offset']), 'Verified source')
+    rows = overlay(discovered['rows'], exact)
+    layout(rows, target['size'])
     stamp = datetime.fromisoformat(build['recorded_at_utc'].replace('Z', '+00:00'))
     return {'target': 'us-eu', 'reference_sha256': target['sha256'],
             'verified_at': stamp.astimezone(ZoneInfo('Europe/London')).strftime('%d %b %Y, %H:%M %Z'),
             'compiled_c_functions': len(exact), 'compiled_c_bytes': total_c,
             'rom_bytes': target['size'], 'unconverted_rom_bytes': target['size'] - total_c,
             'whole_rom_identical': True, 'complete_code_inventory': False,
+            'complete_rom_partition': True, 'discovered_entries': discovered['entry_count'],
             'mapped_extent_bytes': sum(r['size'] for r in rows),
-            'scope': regions['scope'],
+            'scope': discovered['method'],
             'rows': [{k: r[k] for k in ('name', 'group', 'rom_offset', 'size', 'status')} for r in rows],
+            'partition': partition([{k: r[k] for k in ('name', 'rom_offset', 'size', 'status')} for r in rows] + discovered['data_regions'], target['size']),
             'input_sha256': {name: sha(ROOT / name) for name in
-                             ('pilot/manifest.json', 'config/progress-regions-us-eu.json',
-                              'tools/render_progress.py', 'config/progress-requirements.txt')}}
+                             ('pilot/manifest.json', 'assets/rom-inventory.json',
+                              'tools/render_progress.py', 'tools/inventory_partition.py', 'config/progress-requirements.txt')}}
 
 
 def binary_layout(items, box):
@@ -130,24 +132,30 @@ def render(data, output):
 
     title, heading, body, small = (font(s) for s in (28, 18, 16, 13))
     draw.text((24, 18), "The Sims: Bustin' Out — Matching Progress", fill=FOREGROUND, font=title)
-    draw.text((24, 58), 'USA / Europe  ·  Established code extents  ·  Inventory incomplete', fill=MUTED, font=body)
+    draw.text((24, 58), 'USA / Europe  ·  ROM-wide static inventory  ·  Function boundaries provisional', fill=MUTED, font=body)
     x = 24
-    for label, color in (('Exact C', COLORS['exact_c']), ('Unconverted mapped code', COLORS['unconverted'])):
+    for label, color in (('Exact C', COLORS['exact_c']), ('Code entries', COLORS['mapped_code']), ('Candidate entries', COLORS['candidate']), ('Header / initialized data', COLORS['mapped_data']), ('Unresolved ROM', COLORS['unresolved'])):
         draw.rectangle((x, 92, x + 12, 104), fill=color)
         draw.text((x + 21, 88), label, fill=FOREGROUND, font=body)
         x += 21 + draw.textlength(label, font=body) + 34
-    draw.text((24, 122), f"{data['compiled_c_functions']} matching C functions  ·  {data['compiled_c_bytes']:,} bytes including pools and alignment", fill=FOREGROUND, font=heading)
+    draw.text((24, 122), f"{data['discovered_entries']:,} entries / candidates  ·  {data['compiled_c_functions']} matching C functions  ·  {data['compiled_c_bytes']:,} verified bytes", fill=FOREGROUND, font=heading)
     groups = []
-    for name in ('Interrupts', 'Startup and runtime', 'Utilities'):
+    for name in sorted({r['group'] for r in data['rows']}):
         members = [r for r in data['rows'] if r['group'] == name]
         if members:
             groups.append(({'name': name, 'rows': members}, sum(r['size'] for r in members)))
     if sum(len(g['rows']) for g, _ in groups) != len(data['rows']):
         raise ValueError('Unhandled treemap group')
-    for group, (x, y, w, h) in binary_layout(groups, (24, 163, 1552, 528)):
-        draw.text((round(x + 6), round(y + 3)), group['name'], fill=FOREGROUND, font=heading)
+    main_groups = [(g, n) for g, n in groups if g['name'].startswith('ROM ')]
+    other_groups = [(g, n) for g, n in groups if not g['name'].startswith('ROM ')]
+    boxes = binary_layout(main_groups, (24, 163, 1552, 405))
+    boxes += binary_layout(other_groups, (24, 580, 1552, 110)) if other_groups else []
+    for group, (x, y, w, h) in boxes:
+        draw.text((round(x + 6), round(y + 3)), group['name'] + f"  ·  {sum(r['size'] for r in group['rows']):,} B", fill=FOREGROUND, font=heading)
         for r, (rx, ry, rw, rh) in binary_layout([(r, r['size']) for r in group['rows']], (x + 3, y + 33, w - 6, h - 37)):
-            draw.rectangle((round(rx), round(ry), round(rx + rw) - 2, round(ry + rh) - 2), fill=COLORS[r['status']])
+            left, top = round(rx), round(ry)
+            right, bottom = max(left, round(rx+rw)-2), max(top, round(ry+rh)-2)
+            draw.rectangle((left, top, right, bottom), fill=COLORS[r['status']])
             if rw > 94 and rh > 40:
                 label = r['name'].replace('_', ' ')
                 if draw.textlength(label, font=small) > rw - 14:
@@ -161,10 +169,15 @@ def render(data, output):
                     detail = f"{r['size']} bytes"
                 if draw.textlength(detail, font=small) <= rw - 14:
                     draw.text((round(rx + 7), round(ry + 24)), detail, fill=color, font=small)
-    draw.text((24, 710), 'Tile area follows recorded byte length. Unmapped code and assets are outside this treemap.', fill=MUTED, font=body)
-    draw.text((24, 750), 'Complete ROM: identical to reference  ·  Source reconstruction: incomplete', fill=FOREGROUND, font=heading)
-    draw.text((24, 784), f"{data['compiled_c_bytes']:,} reconstructed bytes  /  {data['rom_bytes']:,} total ROM bytes  ·  {data['unconverted_rom_bytes']:,} remain unconverted", fill=MUTED, font=body)
-    draw.text((24, 819), 'Audio RAM image: mapped entries and instruction writes; complete function boundaries pending.', fill=MUTED, font=body)
+    draw.text((24, 705), 'Main code and startup/audio use separate scales. Tile area follows estimated extents; indirect paths may hide code.', fill=MUTED, font=body)
+    # Whole-ROM strip preserves the full denominator, including every gap.
+    for r in data['partition']:
+        left = 24 + 1552*r['rom_offset']/data['rom_bytes']
+        right = 24 + 1552*(r['rom_offset']+r['size'])/data['rom_bytes']
+        draw.rectangle((left, 744, right, 768), fill=COLORS[r['status']])
+    draw.text((24, 725), 'Entire 16 MiB ROM — every byte accounted for', fill=MUTED, font=small)
+    draw.text((24, 785), 'Complete ROM: identical to reference  ·  Source reconstruction: incomplete', fill=FOREGROUND, font=heading)
+    draw.text((24, 816), f"{data['compiled_c_bytes']:,} reconstructed bytes  /  {data['rom_bytes']:,} total ROM bytes  ·  {data['unconverted_rom_bytes']:,} remain unconverted", fill=MUTED, font=body)
     draw.text((24, 866), 'Verified build: ' + data['verified_at'], fill=MUTED, font=small)
     output.parent.mkdir(parents=True, exist_ok=True)
     image.save(output, format='PNG', compress_level=6)

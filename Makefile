@@ -2,7 +2,7 @@ PYTHON ?= python3
 ANALYSIS_PYTHON ?= toolchains/analysis-venv/bin/python
 PROGRESS_PYTHON ?= $(ANALYSIS_PYTHON)
 
-.PHONY: audit audit-all compare doctor test build pilot analyze pilot-matrix ram-map progress
+.PHONY: audit audit-all compare doctor test build pilot analyze pilot-matrix ram-map inventory progress
 audit:
 	$(PYTHON) tools/project.py audit
 audit-all: audit
@@ -31,6 +31,9 @@ build:
 
 ram-map:
 	$(PYTHON) tools/map_ram.py
+
+inventory:
+	$(ANALYSIS_PYTHON) tools/inventory_rom.py
 
 progress:
 	$(PROGRESS_PYTHON) tools/render_progress.py
