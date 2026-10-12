@@ -1,0 +1,101 @@
+# Internal AI scratch: frame queue and input evidence
+
+These reconstructed names are descriptions supported by static original-image
+accesses and compiler matches. They are not recovered original identifiers.
+No runtime or gameplay validation is claimed here.
+
+`frame_update` at ROM `0x8A0` is installed as the IRQ context VBlank callback by
+`irq_init`. It runs only when the halfword at context offset `0x38` equals one.
+The context is now the shared interrupt-module `IrqContext`: its
+`transfer_ready` halfword is the handoff flag at `+0x38`. A value of one permits
+transfer work; the scheduler observes the same field. The name describes its
+producer/consumer role rather than a recovered original identifier. The writable queue at `0x030015B8` has an 8-bit
+count at `+8` and object pointers from `+12`. Flag `2` requests allocation
+release; flag `0x80` updates the ten-bit field at object `+0xD4` from the
+halfword at `+0xFE`. The queue count is cleared and the deferred allocation
+bitmap is flushed via ROM `0x4796C`.
+
+`frame_release_display` at `0xF74` declines flag `0x100` objects. The low two
+bits of the byte at object `+0x101` select shared allocation handling. Bit zero
+selects shared slot zero; otherwise the slot comes from `+0xDA`. The group
+comes from `+0x102` and addresses a 52-byte record through `0x030017C8`.
+Record halfword allocation indices start at `+8`; reference counters start at
+`+32`. A counter reaching zero schedules the range release through `0x47924`.
+The object allocation index and byte count at `+0xFE` and `+0xFC` are cleared.
+In the unshared path, bit `0x40` at `+0x101` selects four more 12-byte records
+starting at `+0x108`. Object bit five at `+0xD1` controls the byte-to-tile shift
+used by the range-release helper. The physical allocation interpretation is
+supported by that helper's `>>5` / `>>6` conversion and bitmap dependency;
+precise original type names remain uncertain.
+
+`input_poll` at `0x1F168` and `input_clear` at `0x1F0E4` reconstruct an independent
+connected input path. Input uses four-entry halfword arrays. Current state at
+`0x03004220`, previous state at `0x03004270`, pressed at `0x03004228` and released
+at `0x03004230` are paired with local-only arrays at `0x03004238`, `0x03004248`,
+`0x03004250` and `0x03004218`. Config bytes at `0x03004110` and `0x03004111`
+select participant count and local participant. When the count exceeds one,
+current participant input comes from the mutable receive array at
+`0x03004268`; the local-only state still reads GBA KEYINPUT at `0x04000130` and
+XORs the ten active-low key bits with `0x3FF`. The single-participant path updates
+both state sets from KEYINPUT. Idle-frame count at `0x03004240` increments only
+when the selected participant has no key bits set. Only the first disable
+halfword at `0x03004258` is read by the polling entry; the enable and disable
+helpers write all four slots. Writes and bounds should not be broadened on the
+basis of inferred intent.
+
+The connected direction helpers use ROM table `0x53548` and left/right masks
+`0x20` / `0x10`. Their 16-value rotation returns sentinel 16 when neither key
+is held. Seven selection helpers consume held, pressed or local pressed state,
+move a bounded unsigned value, and optionally wrap. These helpers are included
+for the complete recovered input path, not as an isolated-function byte target.
+Input callers and the producer of the receive array remain further targets.
+
+The frame scheduler at ROM `0x618` is a matched 648-byte bridge from object
+updates into render work and the VBlank queue. Its reverse traversal follows
+`FrameObject.previous` at `+4` from the primary list's `last` pointer at `+4`.
+The recycle helper at `0x24D84` calls the doubly linked unlink helper `0x24DD8`
+and head insertion helper `0x24DC0`; this supports the direction of the inferred
+links and replaces the earlier ambiguous active-list names. The scheduler calls
+the copied ARM dispatcher at `0x03002A20`, constructs object work, invokes the
+copied sort entry at `0x03002900`, applies updates, prepares render entries and
+coordinates display completion. Numeric typed function pointers keep these
+RAM calls explicit and preserve the original interworking thunks. Their bodies
+remain unconverted ARM code and receive no C credit.
+
+The initializer at `0x109C` provides static source and size evidence for both
+RAM copies: ROM `0xB840` to RAM `0x03002900`, 71 words / 284 bytes; ROM `0xB0E8`
+to RAM `0x03002A20`, 160 words / 640 bytes. Each call passes the corresponding
+word count plus CpuFastSet control bit `0x04000000`. This establishes copy
+mapping, not runtime execution or a decompiled dispatcher.
+
+`frame_step_object` at `0x1CCC` is a matched 256-byte object update coordinator.
+It branches between removal, visibility, callbacks, animation, affine updates,
+velocity, bounds and render ordering. `frame_remove_object` at `0x928` is a
+matched 140-byte removal path: it handles the remove callback, callback cleanup,
+conditional owner release and affine teardown before the doubly linked recycle
+operation. `frame_check_visibility` at `0x9B4` is a matched 300-byte projection
+and 240 by 160 viewport test. Bounds are signed bytes at `+0xBC` through `+0xBF`,
+and visible participants and the selected local participant set separate object
+flags. Forced visibility and fixed-screen placement remain distinct branches.
+
+Three further connected dependencies match: `frame_prepare_animation` at
+`0x31E4` (100 bytes) copies the source object's next position and display layer,
+with one-pixel vertical offsets selected by shared-display flags; the 104-byte
+`frame_advance_position` at `0x34D8` adds sine/cosine motion using 16-bit phases,
+signed rates and signed amplitudes; `frame_integrate_velocity` at `0x23C8`
+(32 bytes) adds acceleration and combines velocity with current position.
+The last name replaces the earlier unsupported pending-flags description.
+
+All 23 accepted extents in this path compile and link to their complete original
+bytes, including literal pools and zero alignment: 3,364 bytes (2,012 frame,
+1,352 input). Function-specific changed-source controls were rejected for every
+extent. Raw source snapshots, compiler output, linked objects, expected and
+candidate bytes, useful failed attempts and comparison reports remain under
+ignored `reports/agents/frame-input/`. Pool-free helpers declare zero alignment
+explicitly; no original instructions are embedded in C.
+
+The 1,400-byte renderer at `0x23E8` is an active semantic C candidate and remains
+unverified. Its multipart packed records, object hardware OAM view and nested
+frame-selection behavior are being resolved against static accesses. Animation
+tick and bounds, affine, render-order and display allocation dependencies are
+further connected targets. Compiler equality does not establish gameplay.

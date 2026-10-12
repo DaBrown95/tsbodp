@@ -29,6 +29,36 @@
       "size": 512,
       "classification": "mixed copy: ARM dispatcher, Thumb startup helper, pools and following bytes",
       "exports": "irq_dispatcher.bin"
+    },
+    {
+      "name": "frame_draw_iwram",
+      "phase": "frame initialization at0x0800109c",
+      "rom_offset": 47168,
+      "ram_address": 50342144,
+      "size": 284,
+      "word_copy_literal_offsets": [
+        4332,
+        4336,
+        4340
+      ],
+      "word_copy_control": 67108935,
+      "classification": "copied ARM frame drawing code and literals; exact instruction ownership remains provisional",
+      "exports": "frame_draw_iwram.bin"
+    },
+    {
+      "name": "frame_emit_iwram",
+      "phase": "frame initialization at0x0800109c",
+      "rom_offset": 45288,
+      "ram_address": 50342432,
+      "size": 640,
+      "word_copy_literal_offsets": [
+        4344,
+        4348,
+        4352
+      ],
+      "word_copy_control": 67109024,
+      "classification": "copied ARM frame emission code and literals; exact instruction ownership remains provisional",
+      "exports": "frame_emit_iwram.bin"
     }
   ],
   "entries": [
@@ -113,6 +143,18 @@
       "mode": "ARM",
       "name": "irq_dispatcher",
       "evidence": "DMA destination installed into IRQ vector by irq_init"
+    },
+    {
+      "ram_address": 50342144,
+      "mode": "ARM",
+      "name": "frame_draw_iwram",
+      "evidence": "literal copy installation by0x0800109c and typed indirect call from frame scheduler0x08000618"
+    },
+    {
+      "ram_address": 50342432,
+      "mode": "ARM",
+      "name": "frame_emit_iwram",
+      "evidence": "literal copy installation by0x0800109c and typed indirect call from frame scheduler0x08000618"
     }
   ],
   "irq_default_table_rom_offset": 341336,

@@ -14,6 +14,7 @@ from capstone.arm import ARM_OP_MEM, ARM_REG_PC, ARM_REG_LR, ARM_CC_AL, ARM_CC_I
 from project import ROOT, audit
 from inventory_partition import partition, overlay
 from control_flow import thumb_switch, constant_result, stack_return
+from ram_copies import validate_copy
 
 BASE = 0x08000000
 
@@ -217,17 +218,7 @@ def main():
     source_code = manifest['functions'] + [r for r in manifest.get('assembly', []) if r.get('mode') != 'data']
     word = lambda off: struct.unpack_from('<I', data, off)[0]
     for copy in ram['copies']:
-        if 'startup_literal_offset' in copy:
-            off = copy['startup_literal_offset']
-            actual = [word(off+i) for i in (0, 4, 8)]
-            expected = [BASE+copy['rom_offset'], copy['ram_address'], copy['ram_address']+copy['size']]
-        else:
-            actual = [word(off) for off in (0x1f88c, 0x1f890, 0x1f894)]
-            expected = [BASE+copy['rom_offset'], copy['ram_address'], 0x84000080]
-            if copy['size'] != 512:
-                raise ValueError('IRQ copy size differs from DMA count')
-        if actual != expected:
-            raise ValueError('RAM copy map differs from ROM literals')
+        validate_copy(copy, word)
     for entry in ram['entries']:
         if 'pointer_rom_offset' in entry and word(entry['pointer_rom_offset']) != entry['ram_address']:
             raise ValueError('RAM entry pointer differs from ROM')
@@ -420,7 +411,7 @@ def main():
               'mapped_extent_bytes': sum(r['size'] for r in rows), 'rows': rows,
               'data_regions': data_regions, 'partition': partition(rows+data_regions, len(data)),
               'input_sha256': {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in
-                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt')}}
+                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt')}}
     out = ROOT/'assets/rom-inventory.json'
     out.write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps({k: result[k] for k in ('entry_count', 'initial_connected_entries', 'whole_rom_prologue_hits', 'sweep_seed_count', 'mapped_extent_bytes')}, indent=2))

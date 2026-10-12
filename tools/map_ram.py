@@ -4,6 +4,7 @@ import hashlib
 import json
 import struct
 from project import ROOT, audit, write_report
+from ram_copies import validate_copy
 
 
 def main():
@@ -18,15 +19,7 @@ def main():
     copies = []
     for copy in mapping['copies']:
         start, address, size = copy['rom_offset'], copy['ram_address'], copy['size']
-        if 'startup_literal_offset' in copy:
-            off = copy['startup_literal_offset']
-            if [word(off), word(off + 4), word(off + 8)] != [0x08000000 + start, address, address + size]:
-                raise ValueError('Startup copy literals do not match map')
-        else:
-            if [word(o) for o in (0x1f88c, 0x1f890, 0x1f894)] != [0x08000000 + start, address, 0x84000080]:
-                raise ValueError('IRQ DMA literals differ')
-            if size != 128 * 4:
-                raise ValueError('DMA word count differs')
+        validate_copy(copy, word)
         data = rom[start:start + size]
         if len(data) != size:
             raise ValueError('Truncated copy')
@@ -54,6 +47,7 @@ def main():
     report = {**mapping, 'copies': copies, 'entries': entries, 'irq_default_entries': defaults,
               'reference_sha256': identity['sha256'], 'accepted': True,
               'helper_sha256': hashlib.sha256((ROOT / 'tools/map_ram.py').read_bytes()).hexdigest(),
+              'validation_helper_sha256': hashlib.sha256((ROOT / 'tools/ram_copies.py').read_bytes()).hexdigest(),
               'map_sha256': hashlib.sha256((ROOT / 'config/ram-map-us-eu.json').read_bytes()).hexdigest()}
     (folder / 'map.json').write_text(json.dumps(report, indent=2) + '\n')
     write_report('ram-map', report)
