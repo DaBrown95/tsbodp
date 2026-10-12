@@ -42,9 +42,9 @@ after the OAM size assignment preserves the original lifetime and ordering.
 The raw failures and exact comparison are preserved locally. The allocation
 calls distinguish the fixed work buffer and variable pixel buffer. The
 [reconstructed heap lifecycle](HEAP_RECONSTRUCTION.md) now supplies the general
-allocator at `0x08027864` and release at `0x08027988`; the zeroed allocator at
-`0x080278E4`, sizing, buffer setup, and text drawing remain explicit unconverted
-dependencies. This compiler
+allocator at `0x08027864`, zeroed allocation at `0x080278E4`, and release at
+`0x08027988`; sizing and buffer setup remain explicit unconverted dependencies.
+The connected line selection and alignment consumers are reconstructed below. This compiler
 match does not independently prove runtime or gameplay behavior.
 
 ## Catalog text selection
@@ -58,8 +58,8 @@ byte. The receipt index is
 `reports/agents/display_audio/background_motion/scene/redraw/catalog-text-ready.json`.
 
 The name helper preserves its first three drawing arguments and supplied
-style, resolves a string, forwards it to the unconverted drawing routine at
-`0x0801A958`, then returns the full word from the width routine at
+style, resolves a string, forwards it to the reconstructed alignment routine
+`display_text_draw_line` at `0x0801A958`, then returns the full word from the width routine at
 `0x0801AF28`. For item IDs `0x52` and `0x20` with index other than minus one,
 it reads the type byte at offset two of a four-byte record and selects one of
 twelve literal string IDs. The two semantic switches generate the original
@@ -75,8 +75,11 @@ The context pointer is read at offset `0xF0` from `0x03003950`, the same state
 base used by the scene label text buffer. Its pointee's word at offset four
 addresses the four-byte type records. The new state/context views retain all
 unknown gaps and do not assert complete allocation bounds. The existing
-catalog loops observe 149 records beginning at `0x080616CC`; this is an
-accessed prefix, and the name helper itself does not enforce this limit.
+catalog loops scan 149 records beginning at `0x080616CC`; this is a loop
+limit, and the name helper itself does not enforce it. Connected selectors
+also access indices 195 through 215 in that same 24-byte record array, so
+149 is not a storage bound. The declaration is unsized and the full table
+extent remains unknown.
 The type numbering and string IDs are static observations without asset or
 gameplay meaning assigned to them.
 
@@ -123,3 +126,52 @@ This describes an observed access, without asserting the original qualifier
 or asynchronous mutation. Width and glyph width each have separate explicit
 two-byte zero-filled alignment directives; all algorithm bodies remain C with
 no fixed register constraints. Word-result signedness remains provisional.
+
+## Line selection and drawing alignment
+
+Two connected consumers add 688 matching C bytes: `display_text_draw` at
+`0x0801A7C8` (400) and `display_text_draw_line` at `0x0801A958` (288). Both
+complete linked extents, their intervening literal pools and final alignment
+match after public source/header compilation. Changing the newline break to
+carriage return and center style from one to three each rejects by one byte.
+Fresh closure and control receipts are indexed by the local
+`reports/agents/display_audio/background_motion/scene/redraw/text-draw-ready.json`.
+
+Line selection scans until zero, newline, or a signed maximum width is exceeded.
+It records the last space and the last hyphen endpoint whose width fits. A
+newline or fitting terminator supplies the split; otherwise it uses the space
+or hyphen, returning the original first word if neither exists. It measures
+`@` substitutions with the shared font-width operation and consumes two-byte
+font prefixes. It copies the chosen prefix into a 96-byte local line while the
+caller limit is nonzero, decrementing that limit per copied byte. A final `@`
+causes its following index byte to be copied without another decrement. The
+source does not add a capacity check or check that the line is nonempty before
+reading its preceding byte. These unchecked paths remain faithful to the
+observed body; safe input bounds are not established by this match.
+
+After terminating the line, it updates the caller's text cursor, calls the
+alignment consumer, then consumes one newline and any following spaces. Both
+functions return the first word supplied by the tile-rendering dependency at
+`0x0801AA78`. That still-unconverted body advances it after tile-row writes,
+supporting a provisional tile index/cursor role. Existing callers that ignore
+this return remain byte-identical. Coordinate and maximum-width declarations
+use signed words, supported by the signed comparisons and division in the
+bodies; earlier unsigned callers pass the same register words.
+
+Alignment compares the complete style word against one for horizontal center,
+two for right alignment, four for vertical center, and eight for bottom
+alignment. It subtracts `(width + 1) / 2`, width, `(height + 1) / 2`, or height
+as appropriate, then forwards to the explicit unconverted tile renderer.
+These are equality tests, not independently combinable style bits. The shared
+inline measurement header produces the observed expanded C loops naturally.
+The separately callable width (84) and height (28) wrappers still match; real
+wrapper cursor-offset controls reject by 24 and one bytes. Canonical naming
+replaces the prior address-only alignment alias, and fresh catalog/text update
+positives and controls both pass. All these algorithm bodies use ordinary C
+without fixed registers or embedded instruction bodies. Earlier loop-break,
+local initialization and register-lifetime failures remain in ignored reports.
+
+This closes line selection and alignment feeding the text update's transfer
+path. Tile rasterization, row initialization/emission, font loading, sizing and
+buffer setup remain connected reconstruction targets. Full-ROM equality,
+static data roles and runtime/gameplay behavior remain separate evidence.

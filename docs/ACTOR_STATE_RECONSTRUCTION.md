@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 61 C functions spanning 10,960 verified bytes. The
+This batch reconstructs 66 C functions spanning 12,496 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,11 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x1B4A4` | `frame_create_actor_effect` | 288 |
+| `0x1B5C4` | `frame_actor_effect_tick` | 108 |
+| `0x8088` | `frame_actor_state_43` | 96 |
+| `0x7C0C` | `frame_actor_state_47` | 264 |
+| `0x7900` | `frame_actor_state_42` | 780 |
 | `0x6A48` | `frame_actor_state_19` | 292 |
 | `0x8294` | `frame_find_actor_action` | 40 |
 | `0x8228` | `frame_note_actor_action` | 108 |
@@ -390,6 +395,81 @@ miss call. All no-op table entries remain explicit. Its call to state 46 stays
 an unconverted dependency, and no paired-animation gameplay behaviour is
 claimed from the compiler match.
 
+State 42 connects attachment coordinates, input-driven movement and view-effect
+coordination. Substates 65 and 66 stop motion, set facing directions 1 and 3,
+and use attachment 0 to align or offset the actor's fixed-point position.
+Substate 67 stores attachment-adjusted integer coordinates in halfwords
+`+0x68/+0x6A`; byte `+0x6C` marks a one-shot alignment and creation of an
+attached effect through `frame_create_actor_effect` at `0x1B4A4`. The factory's
+observed arguments are `(actor, 200, 3, 1)`; its result enters outer state 5
+and receives the actor position. The precise effect role remains provisional.
+A countdown cycles at 19 and triggers animation cue 30.
+
+Movement uses the player's direction and current-key bit 2, with speed factors
+1.1 and 0.6 before the accepted velocity constructor. Animation 55 is requested
+in both moving and stationary phases. Substate 68 checks the shared forty-byte
+view-effect record's mode at `+0x24`; mode 1 suppresses a new movement phase.
+Both phases call the accepted empty-need handler and adjust need index 50 by 1.
+The existing identical `ResourceViewEffect` type now lives in guarded
+`resource_view_effects.h`, shared with the command and view-motion sources.
+Six existing consumers recompiled exactly and rejected their real source
+controls after that type extraction.
+
+The 780-byte handler preserves the original literal pool and complete extent.
+A C register binding for the flags temporary retains the original `r4`
+allocation in one movement branch; it is a compiler constraint without any
+instruction assembly. Natural declarations, shared temporaries and alternate
+lifetimes left six differing register bytes in the best unconstrained candidate.
+Its raw comparisons remain local. Sharing the direction-input byte between
+substates and assigning the velocity output pointer after the view-mode load
+also preserve observed scheduling. Changing the cue-cycle threshold from 19 to
+20 rejects the same full-byte comparison. These are compiler and static-access
+claims; the attachment/effect behaviour has not been tested at runtime.
+
+The attached-effect constructor allocates object kind 28 and rejects effect kind
+10 or allocation failure. It obtains an attachment world position, falling back
+to the owner position when that reader does not return 1. It clears callback
+`+0x98`, copies owner word `+0xA4` minus 1 to result `+0xA4/+0x9C`, and copies
+owner word `+0xA8` plus 1 to result `+0xA8/+0xA0`. These four words follow the
+finalizer's provisional spatial-bounds view; their units and full owning
+structure remain uncertain. The constructor stores the owner at `+0x64`, a
+completion-mode byte at `+0x6C`, initializes flags `0x40011` and state 0, and
+loads a sixteen-byte variant resource and palette slot selected by effect kind.
+The resource, palette and cue tables remain external original data. It copies
+the owner's OAM layer, sets sharing flag `0x20` for kinds 1 through 4, and starts
+a cue only when the table value is at most 229, saving the returned sample handle
+at `+0x68`. Values other than 10 receive no added bounds guard.
+
+The installed lifecycle callback enters state 1 on the effect's animation
+completion when mode is 1, or on owner flag 2 for other modes. State 5 also waits
+for the effect's animation-completion flag. State 1 marks effect flag 2 and
+stops its saved sample. The constructor and callback match all 288 and 108 bytes
+with ordinary C, and mutations to initial flags and completion mode reject.
+An explicit switch for effect kinds 1 through 4 preserves the original two
+bounds comparisons and register allocation; a combined range expression in an
+otherwise equivalent candidate produced a shorter, nonmatching extent.
+
+State 43 completes a second direct caller of the same effect constructor.
+Substate 0 stops motion, faces direction 4, requests animation 1 and creates
+attachment 200 / effect kind 5 / completion mode 1. It enters substate 72 with
+countdown 16; countdown `-1` marks outer state 1. Its complete 96-byte extent,
+including zero tail alignment, matches ordinary C and rejects a changed timer.
+If the attachment reader rejects index 200, the constructor falls back to the
+owner position; it receives no fabricated special handling in this source.
+
+State 47 closes the paired-actor handoff from state 41. Substates 46 through
+48, 51 and 73 stop motion and wait for animation completion, clear the pending
+animation flag, then create actor kind 1 facing direction 4 at position offsets
+`(+15,-25)` in sixteen-bit fixed-point units. It copies the owner's upper and
+lower word pairs at `+0xA4` and `+0x9C`, subtracts 10 from each copied y word,
+and clears callback `+0x98`. Substate 69 creates the same actor after completion
+without those bounds copies. Both paths request animation 89 and enter outer
+state 25 / substate 0 on the new actor. The constructor result receives no added
+null guard. The complete 264-byte ordinary-C match includes both literal words
+and rejects an upper-y adjustment changed to 11. An explicit no-op range 0
+through 45 records the scanned default behaviour and preserves the original
+sparse switch; omitting no-op cases produced a nonmatching jump table.
+
 ## Local proofs and remaining boundaries
 
 Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`,
@@ -398,10 +478,12 @@ Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manif
 `reports/agents/vblank-wrapper/actor-scene-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-social-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-interaction-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-actions-batch-manifest.json`.
+`reports/agents/vblank-wrapper/actor-actions-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-carry-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
 `actor-state-route-types13-*`, `actor-route-path-layout13-*` and
-`actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` and `actor-interaction-current2-*` and `actor-actions-canonical7-*` in the same ignored
+`actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` and `actor-interaction-current2-*` and `actor-actions-canonical7-*` and `actor-carry-canonical5-*` and
+`actor-carry-shared-layout6-*` in the same ignored
 agent report tree. Original CFG scans and all 29 handler entry summaries remain
 local. Mutations change the dispatcher flags, animation IDs, countdown, wait
 factor, direction update flag, group offset, record stride, state target, point
@@ -410,9 +492,9 @@ path-copy argument, destination direction, flags argument, search-status field, 
 activation mask, factory flags, allocation size, proximity cue, transition duration, special-subtype selection,
 centered-width divisor, velocity arithmetic, move countdown, social countdown,
 value-reader field, terrain class, option ID range, condition action ID, descriptor lookup bound, action notification ID,
-game-value ceiling, parameter level bound, state-41 animation ID and sequence mode.
+game-value ceiling, parameter level bound, state-41 animation ID, sequence mode and state-42 cue threshold, effect flags, completion mode and state-43 countdown and state-47 bound adjustment.
 
-Sixteen of the 29 direct handler functions are reconstructed here. Useful next
+Nineteen of the 29 direct handler functions are reconstructed here. Useful next
 connected targets are the need target selector `0x6F20`, action-target selector
 `0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`. State 46
 (`0x6874`) is a retained near-match joining proximity, relation values, facing,

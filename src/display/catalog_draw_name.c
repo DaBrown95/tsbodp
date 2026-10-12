@@ -35,6 +35,6 @@ int display_catalog_draw_name(unsigned int layer, int x, int y,
             case 11: text = display_scene_lookup_text(0x217); break;
         }
     } else text = display_scene_lookup_text(g_display_scene_catalog[item].text_id);
-    display_scene_stage_0801a958(layer, x, y, text, style);
+    display_text_draw_line(layer, x, y, text, style);
     return display_text_measure_width(text);
 }

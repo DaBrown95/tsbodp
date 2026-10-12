@@ -828,3 +828,47 @@ full comparison records remain under `camera-map/neighbors/`. The original
 208-byte dispatcher remains exact after the header extension. These are static
 and compiler results only; allocation validity, malformed-resource handling,
 copied-code execution and gameplay remain untested.
+
+
+The map buffer lifecycle at `0x39E78..0x39F58` adds four exact C extents and
+224 bytes: copied-routine installation (72), the two-source setter (20),
+display-memory snapshot (92), and restore (40). The setter writes pointers at
+container offsets `+4` and `+0x904`, establishing the first word of each
+`0x900`-byte record as a source pointer. The pending selected-tile consumer
+reads source metadata, and copied routines test this pointer before operating
+on a record. This refines the partial record's former unknown word without
+changing its layout; the precise serialized source type remains unresolved.
+The initial setter candidate incorrectly wrote the primary buffers at record
+`+4`; that failed comparison is retained and the accepted name is
+`frame_set_map_sources`.
+
+Snapshot first frees and clears both combined buffers, then allocates `0xC000`
+bytes into the container prefix and copies display memory `0x06000000` through
+the SWI `0x0C` wrapper with word count `0x3000`. It restores the current local
+player's default view origin after that copy. Restore copies the prefix buffer
+back with the same count, frees it and clears the pointer. The matching source
+has no allocation-failure or null-prefix guard; adding such behavior would not
+be supported by these linked bytes. The snapshot and loaded combined resource
+reuse the same prefix pointer, but their runtime sequencing remains untested.
+The heap names now follow the separately reconstructed allocation lifecycle.
+
+The installer copies 336 bytes from `0x0800B564` to `0x03007160` with word
+control `0x04000054`, and 228 bytes from `0x0800B6A4` to `0x03005E60` with
+`0x04000039`. It publishes the entries at pointer locations `0x03001FC8` and
+`0x03001FCC`. Their provisional single argument selects an eight-byte view
+coordinate pair within a map record. Static ARM disassembly finds 320- and
+216-byte spans ending in returns, so the install copies also include 16 and
+12 bytes from the next ARM entries respectively. The second following entry
+is the tile allocator already reconstructed separately. These copy sizes are
+installation facts, not additional reconstructed C coverage. Raw disassembly,
+literal triples and provisional signatures are retained in the ignored
+`map-copy-evidence.json` and `map-copy-original.txt`.
+
+All four accepted linked images match, including pools and alignment. Their
+changed-source controls reject by 19, 1, 1 and 1 bytes respectively. The prior
+sixteen camera/map and decoder replacements and their controls were recompiled
+against the refined record and canonical heap declarations; all retained their
+matches and rejected their edits. Evidence is under `camera-map/map-lifecycle/`.
+The larger selected-tile consumer at `0x39CF0` remains a semantic C candidate
+with mismatching bytes and is excluded from coverage, alongside the copied ARM
+map bodies. No runtime display-memory restore or map drawing has been validated.

@@ -7,7 +7,7 @@
 
 /* Partial map views inferred from the allocation and cell-access path. */
 struct FrameMapRecord {
-    unsigned int unknown00;
+    const void *source;
     void *primary, *combined, *secondary;
     unsigned int unknown10;
     unsigned short width, height;
@@ -32,5 +32,15 @@ void frame_write_map_cell(unsigned int, unsigned short, unsigned short, unsigned
 void frame_release_map_resources(void);
 unsigned short display_get_mode(void);
 
+
+void frame_set_map_sources(const void *, const void *);
+void frame_snapshot_map_vram(void);
+void frame_restore_map_vram(void);
+void frame_install_map_routines(void);
+/* Provisional one-argument copied ARM routines; installed bodies remain original. */
+extern void (*g_frame_map_draw_routine)(unsigned int);
+extern void (*g_frame_map_scroll_routine)(unsigned int);
+extern unsigned char g_frame_map_draw_rom[], g_frame_map_draw_ram[];
+extern unsigned char g_frame_map_scroll_rom[], g_frame_map_scroll_ram[];
 
 #endif

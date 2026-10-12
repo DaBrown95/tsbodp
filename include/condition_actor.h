@@ -6,7 +6,7 @@ struct ConditionActorValue {
     unsigned char value, unknown01[3], row, column, entry, unknown07;
 };
 struct ConditionActorDefinition {
-    unsigned char unknown00, count, unknown02[2];
+    unsigned char capacity, count, retained, fallback;
     struct ConditionActorValue *values;
 };
 struct ConditionActorGroup {

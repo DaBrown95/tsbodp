@@ -1,7 +1,6 @@
-#include "display_text_measure.h"
+#include "display_text_measure_inline.h"
+
 int display_text_measure_height(const char *text)
 {
-    int height=0;
-    if(*text) height=g_display_fonts[0]->height;
-    return height;
+    return display_text_height_inline(text);
 }

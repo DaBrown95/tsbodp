@@ -1,0 +1,40 @@
+#ifndef RESOURCE_ACTOR_ENTRIES_H
+#define RESOURCE_ACTOR_ENTRIES_H
+#include "resource_condition_entries.h"
+#include "condition_actor.h"
+#include "resource_commands.h"
+#include "resource_conditions.h"
+#include "heap.h"
+#include "display_catalog_text.h"
+/* Fifteen embedded list headers are observed; the complete context is unknown. */
+struct ActorEntryContext {
+    unsigned char unknown00[0x14];
+    struct ConditionActorEntries *secondary, *active;
+    struct ConditionActorEntries lists[15];
+};
+extern unsigned char g_actor_entry_initial_values[][2];
+extern void *g_actor_entry_buffer;
+extern struct ConditionActorEntries g_actor_entry_alias_list;
+extern unsigned int g_actor_entry_seen_words[];
+unsigned short frame_random_bounded(unsigned short);
+unsigned char frame_random_chance(unsigned char);
+void actor_entry_prepare(struct ActorEntryContext *);
+void actor_entry_reset(struct ActorEntryContext *);
+void actor_entry_reset_values(struct ActorEntryContext *);
+unsigned int actor_entry_add(struct ConditionActorEntries *, unsigned int,
+                            unsigned char, unsigned char);
+int actor_entry_find_capacity(struct ConditionActorEntries *, int);
+int actor_entry_is_empty(struct ConditionActorEntries *);
+int actor_entry_is_full(struct ConditionActorEntries *);
+int actor_entry_has_space(struct ConditionActorEntries *);
+unsigned char actor_entry_clear_counter(void *, int);
+void actor_entry_mark_seen(unsigned int *, unsigned int);
+unsigned char actor_entry_choose_base(void);
+unsigned char actor_entry_choose_195(void);
+unsigned char actor_entry_choose_209(void);
+unsigned char actor_entry_choose_201(void);
+/* Connected bodies still original; their roles/signatures remain provisional. */
+void actor_entry_refresh_list(struct ActorEntryContext *, unsigned int);
+void actor_entry_empty_hook(void *);
+void resource_set_triple(unsigned int, unsigned int, unsigned int);
+#endif

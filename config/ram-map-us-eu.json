@@ -104,6 +104,36 @@
       "phase": "resource decoder initialization at 0x08016a48",
       "classification": "Copied ARM decoder with provisional 812-byte body/helper span and 36-byte following Thumb prefix; entire copied body remains unconverted",
       "exports": "resource_background_decoder_iwram.bin"
+    },
+    {
+      "name": "frame_map_draw_iwram",
+      "rom_offset": 46436,
+      "ram_address": 50360672,
+      "size": 336,
+      "word_copy_literal_offsets": [
+        237216,
+        237220,
+        237224
+      ],
+      "word_copy_control": 67108948,
+      "phase": "map routine initialization at 0x08039e78",
+      "classification": "Copied ARM map routine with provisional 320-byte body and 16-byte following ARM prefix; entire copied body remains unconverted",
+      "exports": "frame_map_draw_iwram.bin"
+    },
+    {
+      "name": "frame_map_scroll_iwram",
+      "rom_offset": 46756,
+      "ram_address": 50355808,
+      "size": 228,
+      "word_copy_literal_offsets": [
+        237228,
+        237232,
+        237236
+      ],
+      "word_copy_control": 67108921,
+      "phase": "map routine initialization at 0x08039e78",
+      "classification": "Copied ARM map routine with provisional 216-byte body and 12-byte following ARM prefix; entire copied body remains unconverted",
+      "exports": "frame_map_scroll_iwram.bin"
     }
   ],
   "entries": [
@@ -220,6 +250,20 @@
       "mode": "ARM",
       "pointer_rom_offset": 92804,
       "evidence": "Matching installer 0x08016a48 publishes destination to callback word 0x030036c0; copy literals establish source, destination and count; inferred signature void(const void *input, void *destination, unsigned int *decoded_size); original ARM body remains unconverted"
+    },
+    {
+      "name": "frame_map_draw_iwram",
+      "ram_address": 50360672,
+      "mode": "ARM",
+      "pointer_rom_offset": 237220,
+      "evidence": "Matching installer 0x08039e78 publishes destination to callback word 0x03001fc8; source/destination/control literals establish copy extent; inferred signature void(unsigned int view_index) [provisional narrowed byte-index interpretation]; original ARM body remains unconverted"
+    },
+    {
+      "name": "frame_map_scroll_iwram",
+      "ram_address": 50355808,
+      "mode": "ARM",
+      "pointer_rom_offset": 237232,
+      "evidence": "Matching installer 0x08039e78 publishes destination to callback word 0x03001fcc; source/destination/control literals establish copy extent; inferred signature void(unsigned int view_index) [provisional narrowed byte-index interpretation]; original ARM body remains unconverted"
     }
   ],
   "irq_default_table_rom_offset": 341336,
