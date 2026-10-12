@@ -1,3 +1,5 @@
+> Internal AI scratch notes. Reader-facing setup and project information belong in the root README.
+
 # Copied RAM map and interrupt milestone
 
 Target: USA/Europe revision 0, SHA-1

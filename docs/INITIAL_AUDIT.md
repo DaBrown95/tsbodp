@@ -1,3 +1,5 @@
+> Internal AI scratch notes. Reader-facing setup and project information belong in the root README.
+
 > Historical first pilot. The later [RAM and interrupt milestone](RAM_AND_INTERRUPTS.md)
 > adds a matching complete ROM layout and 14 further C functions.
 
