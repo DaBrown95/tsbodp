@@ -1,3 +1,6 @@
+#ifndef FRAME_OAM_H
+#define FRAME_OAM_H
+
 #include "frame_affine.h"
 
 extern struct FrameOam g_oam_empty;
@@ -16,3 +19,5 @@ struct FrameOamDma {
     unsigned int source, destination, control;
 };
 #define FRAME_OAM_DMA3 ((volatile struct FrameOamDma *)0x040000D4)
+
+#endif

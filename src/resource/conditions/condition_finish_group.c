@@ -1,9 +1,8 @@
 #include "resource_commands.h"
 #include "resource_conditions.h"
+#include "resource_condition_entries.h"
 
 extern unsigned int g_condition_group_display_kinds[];
-extern int condition_query_actor(void *, int);
-extern void condition_update_actor(void *, int, int);
 
 static inline unsigned int group_address(unsigned int row, unsigned int column)
 {

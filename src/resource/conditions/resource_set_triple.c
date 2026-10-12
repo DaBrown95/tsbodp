@@ -1,12 +1,11 @@
 #include "resource_commands.h"
 #include "resource_conditions.h"
+#include "resource_condition_entries.h"
 
 struct ConditionSelection {
     unsigned char unknown00[0x751], row, columns;
 };
 extern struct SceneModeFlags g_scene_mode_flags;
-extern int condition_query_actor(void *, int);
-extern void condition_update_actor(void *, int, int);
 extern unsigned char condition_notification_active(unsigned int);
 
 static inline unsigned int value_address(unsigned int row, unsigned int column,

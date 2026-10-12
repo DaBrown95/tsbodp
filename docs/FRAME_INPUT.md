@@ -692,3 +692,90 @@ reset clears the existing 32 ownership bytes and their high-water count. These
 operations preserve the reference's limits and unchecked cases without a runtime
 allocation claim. Each new function's changed-source control rejects, and all
 linked extents, pools and padding remain in the ignored OAM staging proof folder.
+
+The camera and map resource path now adds eleven exact C extents, totalling
+592 bytes: view-origin read/write (`0x39FDC`, 28; `0x39FF8`, 32), map dimension
+readers (`0x3A018`, 52; `0x3A04C`, 36), display-mode read (`0xD5F0`, 16), decoded
+size read (`0x16A90`, 8), separate and combined map loaders (`0x3A070`, 92;
+`0x3A0CC`, 92), map cell address/write (`0x3A170`, 52; `0x3A128`, 52), and
+resource release (`0x39F58`, 132). These are connected to the accepted renderer
+view-origin dependency and the actor terrain/layer dimension lookups. The
+renderer itself remains unmatched and excluded from C coverage.
+
+The two-word signed view origins start at `0x03001FA8`; the byte selector has no
+local range check. The map container starts at `0x03005F50` with a separately
+freed pointer, followed at `0x03005F54` by two records with observed stride
+`0x900`. Each partial record has pointers at `+4`, `+8`, and `+0xC`, and unsigned
+halfword width/height at `+0x14` and `+0x16`. The remaining bytes and most
+pointer roles are uncertain. The names primary, combined and secondary follow
+their allocation and read order; they do not establish an original type or
+complete map format. Clearing `0x1204` bytes establishes the container extent
+for this path, not a complete inventory of other game state.
+
+The first dimension reader uses the low three bits of the display shadow's
+control halfword: modes 0 through 2 return the first map's dimensions multiplied
+by 32, while other modes return 240 by 160. The second reader always returns
+the second map's dimensions multiplied by 32. Loading the primary resource
+initializes width and height from its first two decoded halfwords. The combined
+loader reserves the sum of the reported sizes, decodes the optional secondary
+stream at primary-size minus four first, then decodes the primary at the base.
+The resource size reader returns the upper 24 bits of its first word. The
+connected 208-byte codec dispatcher at `0x16978` was matched in the same batch,
+as detailed below; raw useful failed comparisons remain private.
+
+Cell lookup shifts the full unsigned x/y arguments by five, truncates the
+resulting column and row to halfwords, computes a halfword cell index, and
+addresses primary data after its four-byte dimension prefix. Thus truncation is
+after shifting, not a sixteen-bit input bound. It has no local coordinate or
+record-index check. The writer reads a halfword at secondary index plus two,
+adds the first combined word, and narrows the sum into the chosen primary cell.
+Release frees combined, secondary and primary for each of the two records,
+frees the container's prefix pointer, clears the whole container, and restores
+the current local player's view origin from `0x08057974` unless frame flag
+`0x20000` is set. The allocation/free/clear callees remain explicit original linked
+dependencies. None of this establishes runtime map validity or
+gameplay behavior.
+
+All eleven replacements match linked bytes including pools and alignment with
+the promoted shared partial views. Each deliberate source edit rejects:
+view-origin read/write 19/1 differing bytes, dimension readers 1/34, display
+mode and decoded size 1 each, both loaders 1 each, cell address/write 2/1, and
+release 57. The failed sixteen-bit coordinate view and expression-order trials
+are preserved alongside the canonical and negative proofs in ignored
+`reports/agents/frame-input/camera-map/`. The OAM header now has an inclusion
+guard; no OAM implementation or layout changed.
+
+The connected resource codec dispatcher at `0x16978` adds another 208 exact C
+bytes, bringing this camera/map batch to twelve functions and 800 bytes. It
+extracts a four-bit codec from header bits 4 through 7 and a 24-bit size from
+bits 8 through 31. Codec bit 3 selects the connected second pass at `0x16B78`,
+whose body remains original. The low four header bits remain unidentified.
+Masking out the second-pass bit leaves selectors 0 through 7: selector 0 copies
+word data after the four-byte header through the SWI `0x0B` wrapper; 1, 2, and 3
+call wrappers with observed SWI numbers `0x11`, `0x13`, and `0x14`; 4 dispatches
+through the existing tile-decoder pointer; and 6 dispatches the payload after
+the header through the existing background-decoder pointer. Selectors 5 and 7
+perform no first-pass operation. Wrapper names intentionally identify observed
+SWI numbers without inferring an unsupported algorithm from their address.
+
+The raw-copy control uses the nonnegative 24-bit size divided by four, masks
+its word count to 21 bits, and sets control bit 26. A signed intermediate for
+that division preserves the reference's separate size extraction and control
+calculation; an unsigned shift allowed this compiler to merge those stages and
+changed the instructions. Only the loaded metadata word retains an explicit
+register binding. Removing the initially tested input, output, header and
+payload bindings preserved the full match; no original instruction body or
+output manipulation is used. This is evidence for a matching C expression and
+compiler allocation, not a uniquely recovered original declaration.
+
+The first indirect pointer's literal is `0x03003360`, matching the tile resource
+upload path's existing global. An initial provisional `0x03003660` address was
+incorrect and is retained in the failed one-byte-difference trial. The background
+pointer is `0x030036C0`. Both callbacks receive the address of the local decoded
+size and may change the size passed to the second pass. The return value reloads
+the header's upper 24 bits. The pointed-to copied decoder bodies remain original;
+this dispatch match does not establish their formats, accepted input bounds or
+runtime decoding behavior. The corrected dispatcher matches all 208 linked
+bytes, including its nine-entry jump table and literal pools. Changing the
+codec mask from `~8` to `~4` rejects by one byte. Its canonical/control proofs and
+the unchanged wrong-address trial remain under the ignored camera/map reports.

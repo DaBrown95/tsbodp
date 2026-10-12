@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 52 Thumb C functions spanning 8,608 verified bytes. The
+This batch reconstructs 54 Thumb C functions spanning 9,344 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,8 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x6B6C` | `frame_actor_state_22` | 628 |
+| `0x8158` | `frame_note_interaction_condition` | 108 |
 | `0x5804` | `frame_run_actor_state` | 468 |
 | `0x7FFC` | `frame_actor_state_23` | 84 |
 | `0x80E8` | `frame_actor_state_25` | 112 |
@@ -312,16 +314,43 @@ when that bit changes. The velocity builder already uses this bit to select its
 restricted direction table. Specific terrain labels and the classifier's packed
 edge records remain provisional and unconverted.
 
+State 22 connects the accepted input direction and pressed-key arrays to a need
+effect interaction. Its selector-specific work stores the effect object at
+`+0x64`, a mode byte at `+0x68` and an option index at `+0x6C`. Substate 0
+requests animation 49, optionally constructs the effect from a four-byte option
+record, enables its flags and hands it to the unconverted interaction controller.
+Substate 18 cancels on key bit 2 or empty-need mask `0x25`; key bit 1 confirms.
+The confirm path calls the accepted world-condition helper, records selected
+worlds for IDs 195 through 200, and uses the word at `+0x0C` in a 24-byte action
+definition to select animation 67 / substate 74. Direction selection enters
+substate 11 until the input returns to direction 8. All completion paths reset
+the outer state to 16; the normal completion requests animation 1 / substate 2.
+
+The option list pointer at game state `+0xF0` aliases local need state
+`0x03003A00 + 0x40`; its record pointer is at list `+4`. The selected-world byte
+is at local need state `+0x38C`. These are bounded overlays of observed accesses,
+not claims about the full owning structures. A word-width player local preserves
+the original narrowed input handoff, and sharing the option-record pointer local
+between initialization and confirmation preserves the original register choice.
+The complete 628-byte match uses ordinary C without register constraints.
+
+`frame_note_interaction_condition` only acts in worlds 16 and 17: action IDs 30,
+49, 4, 63 and 54 activate triples `(0,2,0)` through `(0,2,4)`, while ID 109
+activates `(1,1,2)`. This name follows the observed condition updates. The
+interaction begin/cancel/confirm/step/select/idle bodies at `0x2F4EC` through
+`0x2F8FC` remain unconverted and retain address-based provisional names.
+
 ## Local proofs and remaining boundaries
 
 Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`,
 `reports/agents/vblank-wrapper/actor-route-batch-manifest.json`,
 `reports/agents/vblank-wrapper/actor-route-update-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-scene-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-social-batch-manifest.json`.
+`reports/agents/vblank-wrapper/actor-social-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-interaction-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
 `actor-state-route-types13-*`, `actor-route-path-layout13-*` and
-`actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` in the same ignored
+`actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` and `actor-interaction-current2-*` in the same ignored
 agent report tree. Original CFG scans and all 29 handler entry summaries remain
 local. Mutations change the dispatcher flags, animation IDs, countdown, wait
 factor, direction update flag, group offset, record stride, state target, point
@@ -329,9 +358,9 @@ arithmetic, route limit, slot bound, active-count decrement, probe-vector length
 path-copy argument, destination direction, flags argument, search-status field, scene timer/request ID, scene-counter increment,
 activation mask, factory flags, allocation size, proximity cue, transition duration, special-subtype selection,
 centered-width divisor, velocity arithmetic, move countdown, social countdown,
-value-reader field and terrain class.
+value-reader field, terrain class, option ID range and condition action ID.
 
-Thirteen of the 29 direct handler functions are reconstructed here. Useful next
+Fourteen of the 29 direct handler functions are reconstructed here. Useful next
 connected targets are the need target selector `0x6F20`, action-target selector
 `0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`. State 46
 (`0x6874`) is a retained near-match joining proximity, relation values, facing,

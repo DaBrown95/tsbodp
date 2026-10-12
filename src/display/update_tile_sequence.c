@@ -10,7 +10,7 @@ void display_update_tile_sequence(const struct DisplayTileLayout *layout, const 
         display_cpu_copy_fast(source, destination, bytes >> 3);
         break;
     case 1:
-        display_lz77_vram(source, destination);
+        display_bios_swi_15(source, destination);
         break;
     case 2:
         g_display_tile_decompress(source, destination, &scratch);

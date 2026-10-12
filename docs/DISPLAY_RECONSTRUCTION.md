@@ -61,7 +61,16 @@ palette and display work. The descriptor begins with a flags byte and palette
 bank byte. Flags 1/2 select a 512-byte full palette or 32-byte bank palette;
 bit 4 describes character data, bit 3 an embedded dimension-prefixed map, and
 bit 7 chooses 64-byte rather than 32-byte tile offsets. Codec bits 5-6 select
-CpuSet, LZ77-to-VRAM, Huffman, or an indirect callback stored at `0x030036c0`.
+CpuSet, BIOS service `0x15`, BIOS service `0x12`, or an indirect callback stored
+at `0x030036c0`. The old inferred LZ77/Huffman names were corrected after
+checking the wrappers: `0x0804C8E4` issues service `0x15`, while `0x0804C8D8`
+issues service `0x12`. Neutral service names keep this static evidence separate
+from format identification.
+The corrected declarations and all four calling sources were recompiled at
+their pinned addresses: 100, 184, 124 and 100 bytes remain exact. Their actual
+changed-source controls reject by three, one, one and one bytes respectively;
+the new receipts are indexed locally by
+`reports/agents/display_audio/background_motion/scene/redraw/bios-rename-proof.json`.
 The background state's control bits 2-3 select the character base, shifted
 by 14 into VRAM. These bit positions are verified by exact compiler matches;
 the descriptor's semantic flags and dimensions remain inferred.
@@ -98,7 +107,8 @@ byte count at `0xfc`, first tile at `0xfe`, and one signed flag bit at `0xd1`.
 The latter takes the equivalent layout/source/index/count information as
 arguments. Their shared descriptor codec helper at `0x0800a8fc` reads a
 halfword offset table beginning at offset `0x0c`, then checks descriptor bits
-`0x20` (LZ77) and `0x40` (custom callback). Raw uploads use CpuFastSet; the
+`0x20` (BIOS service `0x15`) and `0x40` (custom callback). Raw uploads use
+CpuFastSet; the
 object's flag selects whether the byte count is halved first. Both calculate
 the destination as `0x06010000 + first_tile * 32`. The custom callback slot is
 `0x03003360`; its concrete target remains unresolved.

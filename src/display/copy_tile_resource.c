@@ -18,7 +18,7 @@ void display_copy_tile_resource(struct DisplayTileResource *resource, unsigned s
             (*decoder)(resource->data + record->data_offset, destination, &scratch);
         }
         else if (record->flags & 0x20)
-            display_lz77_vram(resource->data + record->data_offset, destination);
+            display_bios_swi_15(resource->data + record->data_offset, destination);
         else
             display_cpu_copy(resource->data + record->data_offset, destination,
                              ((offset << 9) >> 11) | 0x04000000);

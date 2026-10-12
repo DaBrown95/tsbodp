@@ -34,8 +34,9 @@ resource-index checks or handles an allocation failure.
 The text allocator calls the still-unconverted `frame_allocate_object(24)`.
 It sets flags to nine, forced visibility to one, the observed tile-size bit
 to zero, OAM layer/palette to zero, the ten-bit tile field from the allocated
-index, and the two attribute bits at `0xD1:6..7` to one. It calls the still-
-unconverted text update at `0x080451A8`. The existing `FrameObject` view's
+index, and the two attribute bits at `0xD1:6..7` to one. It calls the
+[reconstructed text update](DISPLAY_TEXT_RECONSTRUCTION.md) at `0x080451A8`.
+The existing `FrameObject` view's
 halfword tile field matches this assignment naturally; the separate wider
 `FrameOam` field view produced a nonmatching register copy. This is evidence
 for the compiler's access view, not proof of the original declaration.
@@ -67,8 +68,9 @@ the byte count by five or six for nonzero/zero tile-size flags, narrows the
 count to a halfword, and calls the reconstructed allocated-mask release at
 `0x080479E4`. Its immediate target is distinct from the deferred free-mask
 handoff at `0x08047A3C`. These dependencies connect text layout and scene
-objects to the copied ARM allocator and frame/VBlank transfer path; the text
-layout and drawing bodies themselves remain unconverted.
+objects to the copied ARM allocator and frame/VBlank transfer path. The text
+transfer controller is reconstructed separately; its layout and drawing
+dependencies remain unconverted.
 
 ## Comparison evidence and limits
 

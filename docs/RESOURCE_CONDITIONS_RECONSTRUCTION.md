@@ -1,8 +1,8 @@
 # Resource condition reconstruction evidence
 
-This connected continuation of resource commands 36 and 37 now contains 18
-verified C functions covering 2,720 bytes. The latest group completion and
-prior-row initialization batch adds two functions and 440 bytes. Complete extents match at their original ROM
+This connected continuation of resource commands 36 and 37 now contains 21
+verified C functions covering 2,980 bytes. The latest entry-group refresh and
+actor-entry lookup/removal add three functions and 260 bytes. Complete extents match at their original ROM
 addresses, including literal pools and zero tail alignment. Every replacement
 has a compiled, linked changed-source control that is rejected. These are static
 and compiler results; condition behaviour has not been tested during gameplay.
@@ -27,6 +27,9 @@ and compiler results; condition behaviour has not been tested during gameplay.
 | `0802A49C` | `condition_initialize_prior_rows` | 228 |
 | `08029DA4` | `condition_update_actor_context` | 524 |
 | `08029FB0` | `condition_finish_actor_context` | 188 |
+| `0802A688` | `condition_refresh` | 132 |
+| `08020A98` | `condition_query_actor` | 48 |
+| `080209CC` | `condition_update_actor` | 80 |
 
 The serialized cells share the game-state base at `03003950` with the accepted
 resource command predicates. Rows have stride 144 and columns stride 24.
@@ -44,10 +47,12 @@ definition and lookup tables remain explicit unconverted ROM data.
 
 `resource_set_triple` returns immediately only when the complete byte equals
 one. For row four, column four, entry two, it obtains the actor pointer at
-game-state offset `F0`, queries property `91` through `08020A98`, narrows the
-answer to a signed byte, reloads the actor pointer after that call and submits
-the answer with flag one through `080209CC`. The original callees and the
-meaning of property `91` remain unresolved.
+game-state offset `F0`, finds entry ID `91` through `08020A98`, narrows the
+returned index to a signed byte, reloads the list pointer after that call and
+removes that entry with compaction enabled through `080209CC`. Those callees
+are now reconstructed; the list's gameplay role and meaning of ID `91` remain
+unresolved. The earlier property-query interpretation is superseded by their
+actual four-byte entry accesses.
 
 The function writes the complete byte to one, then scans the definition's entry
 count while requiring a truthy group-active byte and truthy completion bytes.
@@ -61,7 +66,7 @@ is at `030040E0 + 31`; flag records begin at `03004130`, have observed stride
 the access helper rather than represented as an inferred whole record size.
 
 An entry kind other than `FF` sets a display bit, and the function calls the
-still-unconverted refresh at `0802A688`. `condition_lookup_kind` accumulates
+reconstructed refresh at `0802A688`. `condition_lookup_kind` accumulates
 earlier row counts, selects an eight-byte record at `0805FAB4`, indexes the
 word ID table at `0805F860`, and subtracts 18. Its result feeds the notification
 predicate at `08040E08`. These call roles motivate the names but do not recover
@@ -142,15 +147,16 @@ and two zero alignment bytes; its changed count threshold is rejected. Raw
 positive, control and useful failed trials remain in ignored local reports.
 
 The group completer at `0802A3C8` writes the group-complete byte without an
-active check. For row two, column zero it queries actor property `7C`, narrows the
-result to a signed byte and reloads the actor pointer for the updating call.
+active check. For row two, column zero it finds entry ID `7C`, narrows the
+index to a signed byte and reloads the list pointer for the removal call.
 It then checks the first five group-complete bytes in that row. When all are
 truthy and the requested column is not five, other rows publish a non-`FF` word
 kind from `08059AF0`, while row four activates entries zero through three in
-column five. The word table remains unconverted data. Property `7C`, its actor
-callees and the broader meaning of this final-group handoff remain provisional.
+column five. The word table remains unconverted data. The meaning of entry ID `7C` and
+the broader purpose of this final-group handoff remain provisional; its lookup
+and removal callees are now reconstructed.
 Its exact 212-byte extent includes the three-word pool inside the function and
-zero tail alignment. Changing the queried property rejects by one byte.
+zero tail alignment. Changing the queried entry ID rejects by one byte.
 
 The prior-row initializer at `0802A49C` sets group active/complete and entry
 active/complete bytes to one for every definition in each row below the selected
@@ -167,9 +173,51 @@ missing or extra bytes. The next function begins at `0802A580` and ends at
 492-byte envelope is not credited as one reconstructed initializer. Raw public
 positive/control comparisons are under `reports/audio-root/condition-groups-canonical/`.
 
+The refresh at `0802A688` scans the definition's byte count, requiring both
+the complete byte at `449` and active byte at `448` for every four-byte entry.
+It retains a false result after any failing entry and keeps scanning. A zero
+count returns true. If all entries pass, including an empty group, it reloads
+the definition and publishes its byte-two display kind unless it is `FF`.
+It does not write the group-complete byte or validate the supplied row and column.
+This closes the refresh dependency of activation and triple completion.
+
+The source separates the initial count's lifetime from the entry walk and uses
+four semantic register constraints for state and entry addresses and their
+shared offset. The constraints emit no instruction bodies. Ordinary C retains
+the result, count and loop index, avoiding the overlapping register lifetimes
+seen in rejected earlier trials. The exact 132-byte extent includes all three
+literal words. Moving the shared complete-byte offset from `449` to `44A`
+produces a real 132-byte control with one differing byte, which is rejected.
+Positive and control comparisons are retained under
+`reports/audio-root/condition-refresh-canonical/`.
+
+The two callees refine the partial list reached through game-state `F0`.
+Its byte-zero count bounds the lookup; byte-one capacity bounds the removal
+shift, and its pointer at four addresses four-byte records. Lookup compares
+record byte zero with the full-word supplied ID, returns the first matching
+index narrowed to a signed byte, and returns minus one if no entry matches.
+The original caller names are retained as provisional aliases; this evidence
+identifies list operations rather than a general actor property API.
+
+With a nonzero low-byte compaction flag, removal copies each following whole
+four-byte record through the capacity-bounded suffix. It then writes `FF` to
+the vacated entry's byte zero, clears bytes one and two, retains byte three,
+and decrements the byte-zero count. Without compaction it clears the supplied
+entry directly and still decrements the count. Neither function validates an
+index, count, capacity or failed lookup result. These are accessed layouts,
+not a recovered complete allocation or a proof that every caller is valid.
+
+Both extents use ordinary C with explicit zero tail alignment and no register
+bindings. Saving the previous decrement value in the removal loop preserves
+the original full-word test; a compact countdown expression produced different
+bytes. The typed list argument reproduces the observed register order.
+Changing lookup failure from minus one to minus two rejects by one byte;
+changing the vacated-entry sentinel from `FF` to `FE` rejects by fourteen bytes.
+Raw positive/control and useful failed comparisons remain under
+`reports/audio-root/condition-actor-entries-canonical/`.
+
 Useful failed candidates and raw comparisons remain in ignored local reports.
-The refresh at `0802A688` and selected-group initializer at `0802A580`
-remain unconverted. Close candidates
-receive no C coverage credit. They are
-the next connected targets before assigning broader semantics to this system.
+The selected-group initializer at `0802A580` remains unconverted. Close
+candidates receive no C coverage credit. It is the next connected target before
+assigning broader semantics to this system.
 No output patch, difference mask or reference change was used.

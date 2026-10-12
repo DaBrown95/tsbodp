@@ -13,7 +13,7 @@ void display_update_tile_resource(struct DisplayTileObject *object, const void *
         display_cpu_copy_fast(source, destination, bytes >> 2);
         break;
     case 1:
-        display_lz77_vram(source, destination);
+        display_bios_swi_15(source, destination);
         break;
     case 2:
         g_display_tile_decompress(source, destination, &bytes);
