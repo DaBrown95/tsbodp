@@ -275,3 +275,151 @@ immediate loader at `0x11708`, otherwise the queue producer at `0x11718` is used
 These destinations are distinguished by the connected palette code, not by an
 assumption that both calls upload immediately. Final proofs are retained under
 `setters-final/`; the accepted list contains only the exact replacements.
+
+The scheduler's display-update stage is now reconstructed as exact C:
+`frame_apply_update` (`0x2C98`, 1,356 bytes). This brings the local frame/input
+subtotal to 45 functions and 8,456 verified bytes. The routine connects the
+already matched scheduler, animation-frame readers, tile allocator, release
+queue and raw/compressed upload wrappers. Its complete extent and changed-source
+control are retained under `apply-final/` and `negative-controls/`; useful failed
+variants remain under `apply-*` report directories. No runtime claim is added.
+
+The update requires argument 1, visible flag `0x40000000`, neither blocking flag
+`0x100` nor removal flag 2, and either dirty flag `0x80` or an unallocated tile
+index. It obtains width and height from the selected frame and retains their
+product as a 16-bit byte count. Sharing mode 1 maintains one resource/frame tile
+entry, reusing the entry when its resource, reference count and frame match, or
+when its epoch equals the current allocation epoch. Sharing mode 2 indexes 12
+tile/reference-count entries by frame, acquires the current entry and releases
+the preceding frame when its final reference disappears. The shared record is
+52 bytes: resource at `+4`, 12 halfword indices at `+8`, 12 byte counts at `+32`,
+frame at `+44`, and epoch at `+48`. These offsets corroborate the earlier release
+path's shared-layout view; the epoch's broader lifecycle is still unconverted.
+
+For private allocation, sharing bit `0x40` adds four independently sized parts.
+Failed allocation writes index `0xFFFF` and zero bytes, and a failed primary
+allocation suppresses upload. Newly allocated parts upload the current frame,
+or the preceding frame with flag-4 wrapping or flag-8 clamping. The primary
+index is also narrowed into OAM's ten-bit tile field. Dirty flag `0x80` is set
+only when this update stage runs; the preceding-frame byte is updated even when
+it does not. The direct `FrameApplyObject` view and its ordinary part fields
+preserve the observed compiler lifetimes without imposing experimental volatile
+fields from the unresolved renderer. The scheduler's pointer cast is a type
+clarification and revalidates to its original bytes. A separate integer address
+base with the reconstructed record's `sizeof` reproduces both shared-table
+address calculations; no original instruction body or output adjustment is used.
+
+Seven connected readers and setup routines add 548 exact C bytes, bringing this
+local subtotal to 52 functions and 9,004 bytes: `frame_object_dimensions`
+(`0x16F0`, 36), `frame_read_sequence_attachment` (`0x1C8C`, 64),
+`frame_read_attachment` (`0x1724`, 72), `frame_attachment_position`
+(`0x176C`, 100), `frame_part_attachment_position` (`0x17D0`, 156),
+`frame_set_animation_commands` (`0x15BC`, 56), and
+`frame_set_animation_program` (`0x15F4`, 64). Final extents and all prior frame
+replacements revalidate under `attachment-final/`; changed-source controls reject.
+
+The primary dimension reader follows resource `+4`, then the sequence's current
+frame offset, and reads width and height at frame `+2/+3`. Attachment count is
+sequence `+10`; each attachment occupies two signed coordinate bytes beginning
+at frame `+10`. Both raw readers reject attachment indices at or above this
+count. Their world-position wrappers scale the signed values by 16 bits and add
+the object's world position, reflecting the x contribution for direction byte
+`+0x12` above 4, or above 8 when object flag `0x20000000` is set. The multipart
+wrapper selects the part resource using signed requested-animation `+0x103` and
+variant `+0x135` indices. That choice differs from the group-index reader at
+`+0x134` and is retained explicitly rather than merged into one assumed role.
+
+The command setter writes both command pointers at `+0xE4/+0xE0`, advances them
+by twice its byte argument, and decodes commands and refreshes bounds only for a
+non-null program. The combined resource/program setter always runs those two
+stages; when its resource changes, it sets both frame bytes `+0xDA/+0xDB` to
+`0xFF` before decoding. These functions demonstrate that the skip argument is
+measured in two-byte command units. Names and the direction flag's wider meaning
+remain provisional, and these compiler matches do not establish gameplay tests.
+
+Four frame command targets add 252 verified bytes: `frame_stop_motion`
+(`0x1548`, 12), `frame_request_animation` (`0x1B5C`, 120),
+`frame_set_variant_state` (`0x1BE0`, 36), and `frame_find_objects`
+(`0x1A8C`, 84). The local subtotal is 56 functions and 9,256 bytes. These close
+calls from the connected animation command table; final comparisons are under
+`commands-final/` and their controls reject.
+
+Stopping motion clears both acceleration and velocity components. Variant-state
+assignment changes byte `+0x4E` and marks pending-update bit 2 only on change.
+The animation request compares its byte argument against signed byte `+0x103`,
+preserves a request for animation 1 when object id is 0 or 7 and the old request
+is 2 or 3, otherwise stores the request, marks flag `0x10` and pending-update
+bit 4, and clears animation completion `0x400000`. Object id 7 with subtype at
+most 31 delegates to `0x2C004`, whose actor-specific behavior remains unconverted.
+The direct typed command-object view is an observed layout, not a complete game
+object type. Object search preserves the next pointer before writing its output
+array, matches both 16-bit ids against byte arguments, and stops at the byte
+capacity. The original completion mask is again retained as `0xFFBFFFFF`.
+
+The actor-specific animation branch now closes with two more exact C extents:
+`frame_request_actor_animation` (`0x2C004`, 1,128 bytes) and
+`frame_set_animation_record` (`0x132C`, 88). The local subtotal is 58 functions
+and 10,472 bytes. Final proofs are under `actor-final/`, including the switch
+jump table generated by the compiler from semantic C cases. The initial generic
+object-view attempt and its raw mismatch are retained under `actor-animation/`.
+Changed-source controls reject, including a changed world-condition value.
+
+The actor routine follows the generic request helper's id-7/subtype-at-most-31
+handoff. It skips an unchanged request unless pending-update bit `0x10` marks a
+direction change. It chooses one of seven 8-byte records per subtype at
+`0x0805C2F8`; each record contains a directional variant-table pointer and an
+animation-command pointer. The case table spans animation ids 1 through 102 and
+also has a default selecting record 1. Cases 19 and 20 only accept subtypes 22,
+26, 28 or 19. Animation 6 chooses record 2 for subtype 31 when byte
+`0x03002EDC` equals 1 and word `0x03004334` equals 28, otherwise record 0.
+The special-event/world labels are provisional interpretations of these checks,
+not established gameplay meanings or a complete table inventory.
+
+After selecting a record, the routine uses direction byte `+0x12` through the
+byte mapping at `0x0804F1B0` to choose a 16-byte variant resource. The resource
+setter copies its delay byte, invokes the exact frame-zero resource setter and
+routes its optional 16-entry palette through the immediate or queued palette
+path. The actor then starts the selected commands at offset zero, stores the
+request, marks flag `0x10` and pending bit 4, and clears completion. All of these
+calls now reach matching C except for the original data tables themselves,
+which remain explicit unconverted ROM regions.
+
+Five connected actor lifecycle routines add 1,116 exact C bytes:
+`frame_create_actor` (`0x2BDAC`, 600), `frame_actor_tick` (`0x2C46C`, 172),
+`frame_update_actor_parts` (`0x2C518`, 256), `frame_update_actor_animation`
+(`0x2C77C`, 76), and `frame_actor_remove` (`0x2C7C8`, 12). The local subtotal is
+63 functions and 11,588 bytes. All previous local extents revalidate under
+`actor-runtime-final/`; the cleaned table indexing remains exact under
+`actor-runtime-clean/`. Their changed-source controls reject. The earlier factory
+size estimate was corrected by subtracting its actual adjacent boundaries:
+`0x2C004 - 0x2BDAC = 600`, rather than the initial 856-byte estimate.
+
+The factory acquires a frame object, sets id 7, subtype, actor byte `+0x4C`,
+direction, position, speed and flags, and installs the known before-step and actor
+callbacks. Subtypes above 31 use multipart resource definitions; the remaining
+subtypes use one of the previously reconstructed seven-record animation sets.
+Subtype 25 adds sharing bit `0x20`. Factory and update callers prove that the
+variant setter's arguments are signed bytes; refining that setter's definition
+from unsigned to signed byte preserves its entire 132-byte extent. The direction
+mapping is also read as signed at these callers. The same bytes remain unsigned
+indices in the single-resource actor request, so both table views are explicit.
+
+The eight-byte multipart definitions start at `0x0805A680` and use subtype minus
+32. Their first byte selects between two command tables. The compiler folds the
+subtraction into the earlier literal `0x0805A580` for the group-binding call, then
+recovers the actual table base for the kind read. Treating those literals as two
+independent assets initially produced an extra load; the connected access pattern
+resolves them to one table without an output patch or fabricated body.
+
+Actor tick delegates state handling, updates single or multipart animation,
+maintains an optional indicator pointer at `+0x90`, reflects OAM x according to
+direction and clears the pending-update byte before refreshing actor state.
+Multipart update uses pending mask `0x16`; selected variant states request moving
+animation 6 and recompute velocity, while three other states request animation 1
+and stop motion. Pending mask `0x14` rebinds directional parts and starts the
+appropriate command table. The single-resource update restarts an animation on
+direction changes and either recomputes or clears motion. Removal delegates its
+subtype to the original bookkeeping helper. Generic state handling, actor movement,
+interaction/indicator creation, actor-state initialization and spawn/removal
+bookkeeping remain unconverted dependencies; their provisional names indicate
+call context rather than tested gameplay behavior.

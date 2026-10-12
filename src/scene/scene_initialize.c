@@ -9,7 +9,7 @@ void scene_initialize(void) {
  g_scene_id = g_scene_request.scene;
  if (g_link_flags & 0x8000) {
   scene_stage_0803e3a8();
-  g_transition_view_context.unknown_30 = 1;
+  g_transition_view_context.count = 1;
   g_transition_view_context.current_view = 0;
   if (!(g_link_flags & 0x80000)) g_scene_mode_flags.flags |= 0x800000;
   g_link_flags &= ~0x8000;
@@ -63,11 +63,11 @@ void scene_initialize(void) {
   display_load_palette_ranges(g_scene_palette_range_configs[g_scene_id].resource);
  g_game_flags &= ~0x100000;
  if((g_game_flags&0x40020)!=0x40020) {
-  for(index=0;index<g_transition_view_context.unknown_30;index++) {
+  for(index=0;index<g_transition_view_context.count;index++) {
    scene_initialize_view(index,0);
    scene_update_view(index);
   }
-  for(index=0;index<g_transition_view_context.unknown_30;index++) {
+  for(index=0;index<g_transition_view_context.count;index++) {
    scene_show_view(index);
    scene_stage_0800e3a8(index);
   }

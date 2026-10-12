@@ -35,3 +35,11 @@ struct FrameTickObject {
     struct FrameAnimationPart parts[4];
     FrameU8 variant_group, variant;
 };
+
+/* Animation program and attachment readers connected to the frame update. */
+void frame_set_animation_commands(struct FrameObject *, FrameU8 *, FrameU8);
+void frame_set_animation_program(struct FrameObject *, struct FrameSpriteResource *, FrameU8 *, FrameU8);
+FrameU8 frame_read_sequence_attachment(struct FrameObject *, struct FrameSpriteSequence *, FrameU8, struct FramePoint *);
+FrameU8 frame_read_attachment(struct FrameObject *, FrameU8, struct FramePoint *);
+FrameU8 frame_attachment_position(struct FrameObject *, FrameU8, struct FramePoint *);
+FrameU8 frame_part_attachment_position(struct FrameObject *, FrameU8, FrameU8, struct FramePoint *);

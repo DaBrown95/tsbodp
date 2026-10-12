@@ -25,11 +25,12 @@ struct TransitionViewObject {
 };
 struct TransitionViewSlot {
  struct TransitionViewObject *object;
- unsigned int unknown_04, unknown_08;
+ unsigned short flags, unknown_06;
+ unsigned int unknown_08;
 };
 struct TransitionViewContext {
  struct TransitionViewSlot views[4];
- unsigned char unknown_30, current_view;
+ unsigned char count, current_view;
 };
 extern struct TransitionViewContext g_transition_view_context;
 extern unsigned int g_transition_view_configuration[2];

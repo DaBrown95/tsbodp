@@ -207,3 +207,26 @@ count pointer preserve the observed store order. The variant setter at
 `0x08011708` according to the frame update flags. Both have matching C and
 compiled mutation controls, connecting object palette selection to the same
 VBlank queue and DMA transfer already reconstructed.
+
+The scene/map producer at `0x0800da20` connects resource loading at `0x0800cd4c`
+to the dimension-prefixed map writer at `0x0800cefc` when the resource supplies
+a map. It returns that map pointer and preserves the two 16-bit tile/palette
+arguments and destination coordinates. The general writer remains unconverted;
+this wrapper's independent match does not credit its original callee.
+
+The constant rectangle writer at `0x0800d828` writes a fixed tile across signed
+width/height ranges with a 32-entry screen-map stride. Its background selector at
+`0x0800d7fc` uses the state's map destination at offset `0x10`. Together they
+complement the previously matching incrementing tile rectangle writer. The
+palette rectangle selector at `0x0800d8e0` reaches the still unconverted writer
+at `0x0800d90c`; its candidate preserves the low 12 map-entry bits and substitutes
+the palette-bank bits. The selector is independently matching but the remaining
+92-byte writer is not credited. Rectangle writers and the resource wrapper own
+the two zero alignment bytes before the following entries, alongside their
+58-byte instruction extents where applicable.
+
+The target setter at `0x0800dd80` writes signed scroll coordinates to offsets
+`0x34/0x38`, truncates its duration argument to the halfword at `0x3c`, and sets
+flag 1. The already matching background frame step reads those same fields
+for interpolation, connecting the producer and consumer. These names follow
+that shared field use; the setters' game-level event meanings remain provisional.

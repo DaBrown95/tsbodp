@@ -181,3 +181,8 @@ extern void display_sprite_dimensions(unsigned int, unsigned int, struct Display
 extern const unsigned char *display_object_tile_pixels(struct DisplayTileObject *);
 extern void display_load_palette_alternate(const void *, unsigned int, unsigned int);
 extern void display_queue_palette(const void *, unsigned int, unsigned int);
+extern void display_write_background_map(unsigned int, const unsigned short *, unsigned short, unsigned short, unsigned int, unsigned int);
+extern void display_write_constant_map_rectangle(void *, int, int, int, int, unsigned short);
+extern void display_write_map_palette_rectangle(void *, int, int, int, int, unsigned short);
+extern const unsigned short *display_load_background_resource_dma(unsigned int,
+    const struct BackgroundResource *, unsigned short);

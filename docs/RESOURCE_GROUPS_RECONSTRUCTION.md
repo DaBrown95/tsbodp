@@ -27,8 +27,10 @@ through `0800AD98`. The activation predicate excludes group zero and also group
 one when the resource flags contain bit zero. The object factory walker at
 `0800A964` and command walker at `0800ADCC` consume offset tables from RAM bases
 `03002ED8` and `03002EE4`. Factory and command callback arrays at `0804F278` and
-`08051B18` account for the indirect calls; their complete entry inventory and
-callback semantics remain incomplete.
+`08051B18` account for the indirect calls. The factory table's complete entry
+inventory and callback semantics remain incomplete. All 47 nonzero command callbacks
+are now reconstructed in the connected continuation documented in
+[RESOURCE_COMMANDS_RECONSTRUCTION.md](RESOURCE_COMMANDS_RECONSTRUCTION.md).
 
 The arena allocator reserves 8,192 bytes and stores the pointer at `03002EE8`.
 The selected resource controller at `0800AD1C` clears this arena and chains the
@@ -70,5 +72,6 @@ in the ignored local agent reports. In particular, the controller `0800AD1C`
 and word-group copy `0800B018` remain explicit unconverted regions. The latter
 is the next connected builder dependency; its current candidate differs only
 in the final arithmetic register allocation and is not counted as source.
-The remaining command callbacks and resource selection/cleanup operations are
-next connected targets.
+The resource selection/cleanup operations, object lookup and view effect
+updates remain next connected targets. The group object-count reader at
+`0800AE50` is now accepted with the command continuation.

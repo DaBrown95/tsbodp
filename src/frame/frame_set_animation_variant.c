@@ -3,7 +3,7 @@ struct FramePartRecord { const FrameU8 *data; struct FrameSpriteSequence *sequen
 void frame_set_animation_resource(struct FrameObject *, struct FrameSpriteResource *);
 void display_load_palette_alternate(const void *, FrameU32, FrameU32);
 void display_queue_palette(const void *, FrameU32, FrameU32);
-void frame_set_animation_variant(struct FrameObject *base, FrameU8 group, FrameU8 variant)
+void frame_set_animation_variant(struct FrameObject *base, signed char group, signed char variant)
 {
  struct FrameTickObject *object=(struct FrameTickObject *)base;
  struct FramePartRecord *resource=(struct FramePartRecord *)&object->parts[0].variants[(signed char)group][(signed char)variant];

@@ -44,7 +44,7 @@ int frame_schedule(struct FrameObjectList *list, FrameU8 update_display)
     for (i = 0; i < g_frame_count; i++) {
         object = g_frame_objects[i];
         if (!(object->flags & 0x100))
-            frame_apply_update(object, update_display);
+            frame_apply_update((struct FrameApplyObject *)object, update_display);
         if (update_display == 1) {
             FrameU8 result = frame_render_object(object);
             if (object->display_layer != layer)

@@ -7,7 +7,8 @@ struct ResourceObjectEntry {
  unsigned int unknown_04;
  unsigned short factory;
 };
-struct ResourceProgramRecord { unsigned int command; };
+/* Variable-length serialized commands have a word selector and byte arguments. */
+struct ResourceProgramRecord { unsigned int command; unsigned char parameters[0]; };
 typedef struct FrameObject *(*ResourceObjectFactory)(unsigned char, unsigned char);
 typedef void (*ResourceProgramHandler)(struct ResourceProgramRecord *);
 extern unsigned char *g_resource_object_data, *g_resource_program_data;
@@ -21,4 +22,6 @@ extern unsigned char resource_group_is_enabled(unsigned char);
 extern void resource_spawn_group(unsigned char);
 extern void resource_execute_group(unsigned char);
 extern void resource_activate_groups(unsigned char,unsigned char);
+extern struct FrameObject *resource_get_object(unsigned char,unsigned char);
+extern unsigned short resource_group_object_count(unsigned char);
 #endif
