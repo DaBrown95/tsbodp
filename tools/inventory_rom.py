@@ -213,7 +213,7 @@ def main():
         return 1
     ram = json.loads((ROOT/'config/ram-map-us-eu.json').read_text())
     bounded = json.loads((ROOT/'config/progress-regions-us-eu.json').read_text())
-    manifest = json.loads((ROOT/'pilot/manifest.json').read_text())
+    manifest = json.loads((ROOT/'config/build-us-eu.json').read_text())
     word = lambda off: struct.unpack_from('<I', data, off)[0]
     for copy in ram['copies']:
         if 'startup_literal_offset' in copy:
@@ -419,7 +419,7 @@ def main():
               'mapped_extent_bytes': sum(r['size'] for r in rows), 'rows': rows,
               'data_regions': data_regions, 'partition': partition(rows+data_regions, len(data)),
               'input_sha256': {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in
-                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'pilot/manifest.json', 'config/analysis-requirements.txt')}}
+                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt')}}
     out = ROOT/'assets/rom-inventory.json'
     out.write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps({k: result[k] for k in ('entry_count', 'initial_connected_entries', 'whole_rom_prologue_hits', 'sweep_seed_count', 'mapped_extent_bytes')}, indent=2))

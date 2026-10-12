@@ -54,7 +54,6 @@ Output: `build/us-eu/bustin-out.gba`. The build fails if any byte differs.
 ├── config/         ROM hashes, tool versions and mapped regions
 ├── include/        C headers
 ├── src/            Decompiled C
-├── pilot/          Compiler matching candidates and manifest
 ├── tools/          Build and analysis scripts
 ├── tests/          Tests
 └── docs/           Internal AI scratch notes

@@ -1,10 +1,12 @@
+> Internal AI scratch notes. Historical compiler-pilot plan; current build instructions are in the root README.
+
 # Audit and compiler pilot
 
 ## Initial five-function result (historical)
 
 The first pilot passes five linked function comparisons, covering 124 bytes
-including their pools and padding. Run `make pilot` to reproduce them with the
-local tools. `make pilot-matrix` adds the optimisation trials. The tested
+including their pools and padding. The current `make pilot` checks all 19
+accepted functions; `make pilot-matrix` adds optimisation trials. The tested
 `-O2 -mthumb-interwork` configuration passes all five; `-O3` and `-Os` also pass.
 `-O0` fails all five, and `-O1` fails the conditional bit update. These results
 support the agbcc backend without uniquely identifying historical options.
@@ -19,7 +21,7 @@ Tool source pins, native binary hashes and host preprocessor identity are in
 `config/pilot-toolchain.json`. The runner checks those pins and clean compiler
 source before compiling. It records hashes of the runner, verifier, manifests,
 sources and tools with every run. The current integration milestone is documented in
-[RAM and interrupts](../docs/RAM_AND_INTERRUPTS.md): 19 accepted C functions
+[RAM and interrupts](RAM_AND_INTERRUPTS.md): 19 accepted C functions
 and an all-byte matching partial reconstruction of the complete ROM.
 
 ## Local tool setup used for this pilot
@@ -37,8 +39,8 @@ incompatibility between bundled zlib and the current Apple toolchain.
 `MAKEINFO=true` skips optional manual generation; the assembler and linker are
 built normally. Build commands and logs are under `reports/toolchains/`.
 
-The local tools can be rebuilt on another host, but their binary/preprocessor
-pins need an explicit review and fresh matching run before adopting them.
+This manual setup has been superseded by `make setup`, which records native
+fingerprints locally. Public source pins stay fixed and fresh builds check matching.
 
 ## 1. Establish the reference
 

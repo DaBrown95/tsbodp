@@ -25,7 +25,7 @@ def main():
         {"name": "Thumb startup copy helper", "offset": 0x288, "size": 0x16, "mode": "Thumb"},
         {"name": "Thumb entry routine", "offset": 0x25C0C, "size": 0xC4, "mode": "Thumb"},
     ]
-    manifest = json.loads((ROOT / "pilot/manifest.json").read_text())
+    manifest = json.loads((ROOT / "config/build-us-eu.json").read_text())
     for function in manifest["functions"]:
         regions.append({"name": function["name"], "offset": function["rom_offset"],
                         "size": function["size"], "mode": "Thumb", "includes_literal_data": True})

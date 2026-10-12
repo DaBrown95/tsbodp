@@ -38,7 +38,7 @@ def verify_functions(functions, receipts, source_hash):
 
 
 def inventory():
-    manifest = json.loads((ROOT / 'pilot/manifest.json').read_text())
+    manifest = json.loads((ROOT / 'config/build-us-eu.json').read_text())
     regions = json.loads((ROOT / 'config/progress-regions-us-eu.json').read_text())
     pilot = json.loads((ROOT / 'reports/us-eu/pilot.json').read_text())
     build = json.loads((ROOT / 'reports/us-eu/build.json').read_text())
@@ -55,7 +55,7 @@ def inventory():
     if sha(Path(build['output'])) != target['sha256']:
         raise ValueError('Retained linked ROM differs from verified identity')
     exact = verify_functions(manifest['functions'], pilot['functions'],
-                             lambda f: sha(ROOT / f.get('source', 'pilot/candidates/' + f['name'] + '.c')))
+                             lambda f: sha(ROOT / f['source']))
     total_c = sum(f['size'] for f in exact)
     if (build['compiled_c_functions'] != len(exact)
             or build['compiled_c_bytes_including_pools_and_alignment'] != total_c
@@ -90,7 +90,7 @@ def inventory():
             'rows': [{k: r[k] for k in ('name', 'group', 'rom_offset', 'size', 'status')} for r in rows],
             'partition': partition([{k: r[k] for k in ('name', 'rom_offset', 'size', 'status')} for r in rows] + discovered['data_regions'], target['size']),
             'input_sha256': {name: sha(ROOT / name) for name in
-                             ('pilot/manifest.json', 'assets/rom-inventory.json',
+                             ('config/build-us-eu.json', 'assets/rom-inventory.json',
                               'tools/render_progress.py', 'tools/inventory_partition.py', 'config/progress-requirements.txt')}}
 
 

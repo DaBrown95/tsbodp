@@ -87,7 +87,7 @@ def main():
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
     run_folder = ROOT / "build/pilot/runs" / run_id
     target = json.loads((ROOT / "config/targets/us-eu.json").read_text())
-    manifest = json.loads((ROOT / "pilot/manifest.json").read_text())
+    manifest = json.loads((ROOT / "config/build-us-eu.json").read_text())
     lock, profile_path = load_profile(ROOT)
     rom, identity = audit(ROOT / target["rom_path"], target)
     if not identity["accepted"]:
@@ -108,7 +108,7 @@ def main():
               "compiler_flags": manifest["compiler_flags"], "functions": [],
               "whole_rom_build_verified": False, "historical_compiler_proven": False}
     report["helper_sha256"] = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-                                for name in ("tools/pilot.py", "tools/project.py", "pilot/manifest.json",
+                                for name in ("tools/pilot.py", "tools/project.py", "config/build-us-eu.json",
                                              "tools/toolchain.py", "config/pilot-toolchain.json",
                                              "config/targets/us-eu.json", "include/irq.h")}
     if profile_path:
@@ -120,7 +120,7 @@ def main():
         report.setdefault("tool_sha256", {})[name] = hashlib.sha256(path.read_bytes()).hexdigest()
     for function in manifest["functions"]:
         name = function["name"]
-        source = ROOT / function.get("source", "pilot/candidates/" + name + ".c")
+        source = ROOT / function["source"]
         folder = run_folder / name
         folder.mkdir(parents=True, exist_ok=True)
         snapshot = folder / "source.c"
@@ -150,7 +150,7 @@ def main():
         function = manifest["functions"][0]
         folder = run_folder / "negative-control"
         folder.mkdir(parents=True, exist_ok=True)
-        original = (ROOT / "pilot/candidates" / (function["name"] + ".c")).read_text()
+        original = (ROOT / function["source"]).read_text()
         if "= value;" not in original:
             raise RuntimeError("Negative control edit no longer applies")
         source = folder / "changed.c"

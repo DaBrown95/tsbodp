@@ -84,7 +84,7 @@ def main():
     pilot = json.loads((ROOT / 'reports/us-eu/pilot.json').read_text())
     if not pilot['accepted']:
         raise ValueError('Source gate failed')
-    manifest = json.loads((ROOT / 'pilot/manifest.json').read_text())
+    manifest = json.loads((ROOT / 'config/build-us-eu.json').read_text())
     target = json.loads((ROOT / 'config/targets/us-eu.json').read_text())
     manifest['rom_size'] = target['size']
     reference = ROOT / target['rom_path']
