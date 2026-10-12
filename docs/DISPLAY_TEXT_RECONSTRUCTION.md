@@ -39,10 +39,12 @@ All body logic is ordinary C with no register constraints or assembly glue.
 An earlier separately named view pointer created an extra copy and a
 308-byte mismatch; initializing the taller transfer's source and destination
 after the OAM size assignment preserves the original lifetime and ordering.
-The raw failures and exact comparison are preserved locally. The provisional
-allocator names distinguish the fixed work buffer and variable pixel buffer;
-their implementations at `0x08027864` and `0x080278E4`, sizing, buffer setup,
-and text drawing remain explicit unconverted dependencies. This compiler
+The raw failures and exact comparison are preserved locally. The allocation
+calls distinguish the fixed work buffer and variable pixel buffer. The
+[reconstructed heap lifecycle](HEAP_RECONSTRUCTION.md) now supplies the general
+allocator at `0x08027864` and release at `0x08027988`; the zeroed allocator at
+`0x080278E4`, sizing, buffer setup, and text drawing remain explicit unconverted
+dependencies. This compiler
 match does not independently prove runtime or gameplay behavior.
 
 ## Catalog text selection
@@ -86,3 +88,38 @@ returns produced a five-byte branch-layout mismatch; ordinary success-first
 C matches naturally. Earlier switch, return-width and branch-order failures
 remain local. Catalog description/page rendering and text sizing remain
 unconverted connected targets.
+
+## Font measurement
+
+Three connected measurement routines add 160 matching C bytes: width at
+`0x0801AF28` (84), height at `0x0801AF7C` (28), and glyph width at
+`0x0801B450` (48). Width is used by the catalog name helper, both measurements
+feed the unconverted text sizing routine, and the width loop directly calls
+the glyph helper. Changing the substitution marker, height font slot, and
+fallback width index each rejects by one byte after public closure compilation.
+Their receipts share
+`reports/agents/display_audio/background_motion/scene/redraw/heap-measure-ready.json`
+with the connected heap batch.
+
+Width sums glyph advances until a zero byte. Marker `@` consumes the next byte
+as an index into 64-byte substitution records beginning at `0x03000E20` and
+recursively measures that record. A byte above `0xEF` consumes the following
+glyph through the second font pointer; other bytes use the first pointer at
+`0x03001A20`. Height returns zero for an empty string and otherwise the first
+font's leading height byte. These routines do not check null strings,
+substitution indices or recursion cycles; asset validation is a separate task.
+
+The glyph helper narrows its argument to a halfword. Zero has width zero;
+otherwise it subtracts the font's first glyph and uses the indexed width byte
+when the signed difference is in range, falling back to width byte one when
+outside the first/last interval. The partial font view identifies height at
+zero, first/last halfwords at two/four and the width pointer at twelve. The
+rest of the font record and glyph encoding are unknown.
+
+The width source uses one `volatile const unsigned char` access view for the
+second observed read that selects the font prefix. Ordinary C removed that
+read and produced 80 bytes; preserving it matches the complete 84-byte extent.
+This describes an observed access, without asserting the original qualifier
+or asynchronous mutation. Width and glyph width each have separate explicit
+two-byte zero-filled alignment directives; all algorithm bodies remain C with
+no fixed register constraints. Word-result signedness remains provisional.

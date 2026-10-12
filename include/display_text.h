@@ -1,6 +1,7 @@
 #ifndef DISPLAY_TEXT_H
 #define DISPLAY_TEXT_H
 #include "frame_scene_motion.h"
+#include "heap.h"
 /* Partial view used by text objects; gaps and the full allocation are unknown. */
 struct DisplayTextObject {
     FrameU8 unknown_00[12];
@@ -18,11 +19,8 @@ struct DisplayTextDma {
 #define DISPLAY_TEXT_DMA ((volatile struct DisplayTextDma *)0x040000d4)
 extern void display_text_update(struct FrameObject *, const char **);
 extern void display_scene_set_text_size(struct FrameObject *, const char *);
-extern void *display_text_allocate_metrics(unsigned int);
-extern void *display_text_allocate_pixels(unsigned int);
 extern void display_text_set_buffers(void *, void *, unsigned int);
 extern void display_text_draw(unsigned int, unsigned int, unsigned int,
                               unsigned int, const char **, unsigned int,
                               unsigned int *);
-extern void display_text_free_buffer(void *);
 #endif

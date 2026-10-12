@@ -2,13 +2,13 @@
 void display_text_update(struct FrameObject *object, const char **text)
 {
     unsigned int limit = 0x7fffffff;
-    void *metrics;
+    void *work_buffer;
     unsigned char *pixels;
     display_scene_set_text_size(object, *text);
-    metrics = display_text_allocate_metrics(120);
-    pixels = display_text_allocate_pixels(
+    work_buffer = heap_allocate(120);
+    pixels = heap_allocate_zeroed(
         (((struct DisplayTextObject *)object)->oam.double_tile_size + 1) * 1920);
-    display_text_set_buffers(metrics, pixels,
+    display_text_set_buffers(work_buffer, pixels,
         ((struct DisplayTextObject *)object)->oam.double_tile_size);
     display_text_draw(0, 0, 0, 240, text, 0, &limit);
     if (((struct DisplayTextObject *)object)->height <= 8) {
@@ -45,6 +45,6 @@ void display_text_update(struct FrameObject *object, const char **text)
             destination += 128;
         }
     }
-    display_text_free_buffer(pixels);
-    display_text_free_buffer(metrics);
+    heap_free(pixels);
+    heap_free(work_buffer);
 }

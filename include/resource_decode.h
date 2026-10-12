@@ -17,7 +17,18 @@ void resource_bios_swi_0b(const void *, void *, unsigned int);
 void resource_bios_swi_11(const void *, void *);
 void resource_bios_swi_13(const void *, void *);
 void resource_bios_swi_14(const void *, void *);
-/* Connected second-pass body remains unconverted. */
+/* In-place halfword prefix reconstruction. */
 void resource_decode_delta(void *, unsigned int);
+
+void resource_decode_delta_alternate(void *, unsigned int);
+unsigned int resource_decode_alternate(const void *, void *);
+void resource_install_decoders(void);
+
+/* These copied ARM bodies remain unconverted. */
+extern unsigned char g_resource_tile_decoder_rom[], g_resource_tile_decoder_ram[];
+extern unsigned char g_resource_background_decoder_rom[], g_resource_background_decoder_ram[];
+void resource_bios_swi_0c(const void *, void *, unsigned int);
+void resource_bios_swi_12(const void *, void *);
+void resource_bios_swi_15(const void *, void *);
 
 #endif

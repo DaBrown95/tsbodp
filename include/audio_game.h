@@ -13,6 +13,7 @@ extern volatile unsigned int g_audio_scene_word;
 extern void audio_start_sequence(const void *, int, int);
 extern void audio_sync_game_state(void);
 void audio_select_sequence(unsigned char);
+void audio_play_sequence_notification(unsigned char);
 void audio_game_set_sample_volume(unsigned int);
 void audio_game_set_sequence_volume(unsigned int);
 void audio_game_pause(void);

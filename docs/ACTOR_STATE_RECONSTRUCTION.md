@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 54 Thumb C functions spanning 9,344 verified bytes. The
+This batch reconstructs 61 C functions spanning 10,960 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,13 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x6A48` | `frame_actor_state_19` | 292 |
+| `0x8294` | `frame_find_actor_action` | 40 |
+| `0x8228` | `frame_note_actor_action` | 108 |
+| `0x1BC1C` | `frame_add_game_value` | 76 |
+| `0x3D0E8` | `frame_advance_parameter_level` | 136 |
+| `0x7584` | `frame_actor_state_41` | 892 |
+| `0x41424` | `audio_play_sequence_notification` | 72 |
 | `0x6B6C` | `frame_actor_state_22` | 628 |
 | `0x8158` | `frame_note_interaction_condition` | 108 |
 | `0x5804` | `frame_run_actor_state` | 468 |
@@ -340,6 +347,49 @@ activates `(1,1,2)`. This name follows the observed condition updates. The
 interaction begin/cancel/confirm/step/select/idle bodies at `0x2F4EC` through
 `0x2F8FC` remain unconverted and retain address-based provisional names.
 
+State 19 connects timed or animation-complete actions to need adjustment and
+scene notification. Its twelve-byte action descriptors at `0x0804EDA0` contain
+a word ID, a duration halfword, animation/substate bytes and two need-adjustment
+bytes. The lookup checks 36 records and returns a signed byte index or `-1`;
+the caller deliberately narrows that result to an unsigned byte, with no added
+missing-ID guard. Work fields are a countdown at `+0x58`, action ID/variation at
+`+0x64/+0x66` and a sample handle at `+0x68`. Action 170 offsets the descriptor
+index by the variation byte. Substates 59 and 60 apply the descriptor's need
+adjustment until countdown or animation completion; completion stops the saved
+sample and returns to outer state 16 / substate 2. Descriptor index 21 also
+writes scene-result ID `0x1639` and activates the accepted scene request.
+
+The action notification narrows its ID to a halfword. ID 209 adds 5,000 to the
+signed word at game state `+4`; its helper clamps that word to 0 through 999,999,
+marks bit 2 in the selected local view's 56-byte display flags and returns the
+stored value. Its gameplay unit remains provisional. IDs 211 through 216 map
+to parameter indices 5, 0, 1, 3, 4 and 2 in the probe block. Parameter advancement
+adds `0x01000000` only when the old unsigned high byte is at most 9. A signed
+high-byte increase resets the lower 24 bits and calls the already-published
+`condition_finish_actor_context` with context base `0x03003960`, then prepares
+text notification ID `0x123`. Width and height measurements place its byte
+coordinates at scene request `+1/+2` before display stage 2 and sequence 56.
+The context overlaps game state `+0x10` and its counters overlap the probe
+block at `+0x98`; these views do not establish complete allocation extents.
+
+`audio_play_sequence_notification` gates playback on the nonzero sequences
+volume byte, sets bit `0x80` in the volatile audio-control byte at `+6`, reads
+the sequence pointer at descriptor offset 0 and parameter byte at offset 5,
+starts it with mode argument 4 and synchronizes the game audio state. The mode's
+precise playback meaning remains uncertain. A C register binding for the
+32-bit descriptor parameter retains the original temporary register; this is
+a compiler constraint and contains no instruction assembly. The full 72-byte
+extent and a changed mode argument pass their positive/rejection comparisons.
+
+State 41 uses the first view's actor and a full 65-entry substate table. It
+connects wandering and accepted route outcomes to terrain refresh, paired
+animations 70 and 93–95, the view actor's indicator and an outer-state-47 handoff.
+An expired waiting phase selects a new walk direction even after switching back
+to substate 7; the shared random-delay tail establishes this otherwise easy-to-
+miss call. All no-op table entries remain explicit. Its call to state 46 stays
+an unconverted dependency, and no paired-animation gameplay behaviour is
+claimed from the compiler match.
+
 ## Local proofs and remaining boundaries
 
 Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`,
@@ -347,10 +397,11 @@ Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manif
 `reports/agents/vblank-wrapper/actor-route-update-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-scene-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-social-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-interaction-batch-manifest.json`.
+`reports/agents/vblank-wrapper/actor-interaction-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-actions-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
 `actor-state-route-types13-*`, `actor-route-path-layout13-*` and
-`actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` and `actor-interaction-current2-*` in the same ignored
+`actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` and `actor-interaction-current2-*` and `actor-actions-canonical7-*` in the same ignored
 agent report tree. Original CFG scans and all 29 handler entry summaries remain
 local. Mutations change the dispatcher flags, animation IDs, countdown, wait
 factor, direction update flag, group offset, record stride, state target, point
@@ -358,9 +409,10 @@ arithmetic, route limit, slot bound, active-count decrement, probe-vector length
 path-copy argument, destination direction, flags argument, search-status field, scene timer/request ID, scene-counter increment,
 activation mask, factory flags, allocation size, proximity cue, transition duration, special-subtype selection,
 centered-width divisor, velocity arithmetic, move countdown, social countdown,
-value-reader field, terrain class, option ID range and condition action ID.
+value-reader field, terrain class, option ID range, condition action ID, descriptor lookup bound, action notification ID,
+game-value ceiling, parameter level bound, state-41 animation ID and sequence mode.
 
-Fourteen of the 29 direct handler functions are reconstructed here. Useful next
+Sixteen of the 29 direct handler functions are reconstructed here. Useful next
 connected targets are the need target selector `0x6F20`, action-target selector
 `0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`. State 46
 (`0x6874`) is a retained near-match joining proximity, relation values, facing,

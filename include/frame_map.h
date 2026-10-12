@@ -3,6 +3,7 @@
 
 #include "frame.h"
 #include "resource_decode.h"
+#include "heap.h"
 
 /* Partial map views inferred from the allocation and cell-access path. */
 struct FrameMapRecord {
@@ -31,9 +32,5 @@ void frame_write_map_cell(unsigned int, unsigned short, unsigned short, unsigned
 void frame_release_map_resources(void);
 unsigned short display_get_mode(void);
 
-/* Original linked helpers; these bodies remain unconverted. */
-void *frame_map_allocate_bytes(unsigned int);
-void frame_map_free_bytes(void *);
-void frame_map_clear_bytes(void *, int, unsigned int);
 
 #endif

@@ -74,6 +74,36 @@
       "word_copy_control": 67108914,
       "classification": "copied ARM tile-range search: 196-byte matching C extent plus first word of following frame-copy source at 0xB840; the 200-byte installation and C extent are distinct",
       "exports": "display_tile_allocator_iwram.bin"
+    },
+    {
+      "name": "resource_tile_decoder_iwram",
+      "rom_offset": 45932,
+      "ram_address": 50345680,
+      "size": 528,
+      "word_copy_literal_offsets": [
+        92784,
+        92788,
+        92792
+      ],
+      "word_copy_control": 67108996,
+      "phase": "resource decoder initialization at 0x08016a48",
+      "classification": "Copied ARM decoder with provisional 504-byte body/helper span and 24-byte following ARM prefix; entire copied body remains unconverted",
+      "exports": "resource_tile_decoder_iwram.bin"
+    },
+    {
+      "name": "resource_background_decoder_iwram",
+      "rom_offset": 748,
+      "ram_address": 50344816,
+      "size": 848,
+      "word_copy_literal_offsets": [
+        92800,
+        92804,
+        92808
+      ],
+      "word_copy_control": 67109076,
+      "phase": "resource decoder initialization at 0x08016a48",
+      "classification": "Copied ARM decoder with provisional 812-byte body/helper span and 36-byte following Thumb prefix; entire copied body remains unconverted",
+      "exports": "resource_background_decoder_iwram.bin"
     }
   ],
   "entries": [
@@ -176,6 +206,20 @@
       "mode": "ARM",
       "name": "display_tile_allocator_iwram",
       "evidence": "source/destination/count literals at 0x47734..0x4773c in the matching installer; fixed ARM function pointer in display_allocate_tile_bytes"
+    },
+    {
+      "name": "resource_tile_decoder_iwram",
+      "ram_address": 50345680,
+      "mode": "ARM",
+      "pointer_rom_offset": 92788,
+      "evidence": "Matching installer 0x08016a48 publishes destination to callback word 0x03003360; copy literals establish source, destination and count; inferred signature void(const void *input, void *destination, unsigned int *decoded_size); original ARM body remains unconverted"
+    },
+    {
+      "name": "resource_background_decoder_iwram",
+      "ram_address": 50344816,
+      "mode": "ARM",
+      "pointer_rom_offset": 92804,
+      "evidence": "Matching installer 0x08016a48 publishes destination to callback word 0x030036c0; copy literals establish source, destination and count; inferred signature void(const void *input, void *destination, unsigned int *decoded_size); original ARM body remains unconverted"
     }
   ],
   "irq_default_table_rom_offset": 341336,

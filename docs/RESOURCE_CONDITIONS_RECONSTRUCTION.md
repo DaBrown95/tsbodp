@@ -221,3 +221,12 @@ The selected-group initializer at `0802A580` remains unconverted. Close
 candidates receive no C coverage credit. It is the next connected target before
 assigning broader semantics to this system.
 No output patch, difference mask or reference change was used.
+
+The actor-action notification continuation simplifies `condition_finish_actor_context`
+without adding coverage. A pointer to each four-byte counter record followed by
+its signed high-byte access retains the original address split and conditional
+scheduling in ordinary C. The earlier inline helper with an `r0` register binding
+is removed. The complete 188-byte comparison remains exact, and the existing
+`value > 6` to `value > 7` negative control still differs by one byte. Canonical
+`ConditionCounter` / `ConditionActorCounters` layouts are retained. The private
+source-only proof is under `actor-condition-simplification-current1-*`.

@@ -749,7 +749,8 @@ The connected resource codec dispatcher at `0x16978` adds another 208 exact C
 bytes, bringing this camera/map batch to twelve functions and 800 bytes. It
 extracts a four-bit codec from header bits 4 through 7 and a 24-bit size from
 bits 8 through 31. Codec bit 3 selects the connected second pass at `0x16B78`,
-whose body remains original. The low four header bits remain unidentified.
+whose body is reconstructed in the connected follow-up below. The low four
+header bits remain unidentified.
 Masking out the second-pass bit leaves selectors 0 through 7: selector 0 copies
 word data after the four-byte header through the SWI `0x0B` wrapper; 1, 2, and 3
 call wrappers with observed SWI numbers `0x11`, `0x13`, and `0x14`; 4 dispatches
@@ -779,3 +780,51 @@ runtime decoding behavior. The corrected dispatcher matches all 208 linked
 bytes, including its nine-entry jump table and literal pools. Changing the
 codec mask from `~8` to `~4` rejects by one byte. Its canonical/control proofs and
 the unchanged wrong-address trial remain under the ignored camera/map reports.
+
+The decoder lifecycle follow-up adds four complete exact C extents, 332 bytes:
+halfword second pass at `0x16B78` (36), its identical neighboring copy at
+`0x16A98` (36), alternate dispatcher at `0x16ABC` (188), and RAM installation at
+`0x16A48` (72). The second pass leaves the first halfword alone and adds each
+preceding reconstructed halfword into the next, narrowing each sum to 16 bits.
+It processes size shifted right by one; sizes below four perform no writes and
+an odd final byte is ignored. The duplicate entry has the same static body but
+no direct Thumb call or aligned entry pointer was found in the bounded local
+reference scan; its higher-level role remains uncertain. Both dispatchers call
+`0x16B78`, and no runtime second-pass output has been validated.
+
+The alternate dispatcher shares the header, indirect callbacks and second pass,
+but selector 0 uses the SWI `0x0C` wrapper with the masked word count alone;
+selector 1 uses SWI `0x12`, selector 3 uses SWI `0x15`, and selector 2 has no
+first-pass operation. Its observed direct callers at `0x2986E` and `0x2987C`
+connect it to another resource consumer, whose complete format remains
+unresolved. This establishes a distinct dispatch path without assuming from
+its name that all destinations are hardware display memory.
+
+Installation uses the SWI `0x0B` word-copy control `0x04000084` to copy 528 bytes
+from `0x0800B36C` to `0x030036D0`, then publishes that ARM entry through the
+pointer at `0x03003360`. Its second copy uses control `0x040000D4`, copying 848
+bytes from `0x080002EC` to `0x03003370` and publishing the entry through
+`0x030036C0`. The source/destination/control literal triples are at ROM
+`0x16A70/74/78` and `0x16A80/84/88`. These installation and callback facts
+resolve the copied addresses for the accepted dispatchers. They do not add C
+coverage for the installed bodies.
+
+Static disassembly places the first decoder's return at `0xB560`, followed by
+another ARM prologue at `0xB564`: a provisional 504-byte body within a 528-byte
+copy that includes 24 following bytes. The second decoder's terminal return is
+at `0x614`, followed by the accepted Thumb frame scheduler at `0x618`: its
+provisional 812-byte code/helper span is copied with 36 bytes from that next
+function. The second span contains internal register-based helper calls and
+carry-sensitive bit-reader operations, so its entry boundaries and internal
+interfaces require separate reconstruction. Neither code span is represented
+by an embedded instruction body or credited as matching C. Raw copy words,
+ARM disassembly, inferred entry signatures and boundary distinctions are retained
+in the ignored `decoder-copy-evidence.json` and accompanying raw files.
+
+Each of the four follow-up source changes rejects by one byte: halving the
+second-pass element count again, changing the alternate raw-copy count shift,
+and reducing the first install count. Canonical linked images, controls and
+full comparison records remain under `camera-map/neighbors/`. The original
+208-byte dispatcher remains exact after the header extension. These are static
+and compiler results only; allocation validity, malformed-resource handling,
+copied-code execution and gameplay remain untested.
