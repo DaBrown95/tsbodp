@@ -596,3 +596,19 @@ under `need-effect/canonical/` and `negative-controls/`. The local subtotal is 8
 functions and 14,160 bytes, all 83 changed-source controls rejected. Effect update,
 placement and commit at `0x2D7C0`/`0x2D8E4`/`0x2D9AC` remain explicit original
 dependencies under active reconstruction.
+
+The renderer-connected map lookup `frame_layer_at_position` at `0x2B478` now
+matches its complete 96-byte extent, bringing this local subtotal to 84 functions
+and 14,256 bytes. Its changed return-offset control rejects. It saves unsigned
+input coordinates across the dimensions call at `0x3A018`, then rejects coordinates
+strictly greater than the signed dimensions (converted by the unsigned comparison).
+Equality is accepted by the original code; no additional map-edge check is added.
+Negative signed inputs become unsigned coordinates and follow the fallback value
+three. The lookup selects a 32-pixel block through the halfword pointer at
+`03001DE0`, then one of sixteen eight-pixel cells through the byte pointer at
+`03001DDC`. It returns the cell's high two bits plus two. The still-unconverted
+caller narrows the result into the OAM layer's two bits. This motivates the name
+without establishing runtime map correctness. A scoped R4 coordinate binding
+preserves its lifetime across the dimensions call; it is a C allocation constraint,
+not instruction glue. Exact and mutated comparisons remain under
+`reports/agents/frame-input/actor-needs/layer-resume-2*`.

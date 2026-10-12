@@ -1,7 +1,8 @@
 # Resource condition reconstruction evidence
 
-This connected continuation of resource commands 36 and 37 adds 11 verified C
-functions covering 1,024 bytes. Complete extents match at their original ROM
+This connected continuation of resource commands 36 and 37 now contains 15
+verified C functions covering 1,756 bytes. The latest activation and actor-context
+batch adds four functions and 732 bytes. Complete extents match at their original ROM
 addresses, including literal pools and zero tail alignment. Every replacement
 has a compiled, linked changed-source control that is rejected. These are static
 and compiler results; condition behaviour has not been tested during gameplay.
@@ -19,6 +20,10 @@ and compiler results; condition behaviour has not been tested during gameplay.
 | `0802C934` | `condition_clear_display_bits` | 28 |
 | `0802C950` | `resource_set_display_kind` | 28 |
 | `0802CA30` | `condition_lookup_kind` | 68 |
+| `0802A06C` | `condition_activate_entry` | 380 |
+| `0802A94C` | `condition_publish_row_displays` | 40 |
+| `08020AC8` | `condition_record_actor_selection` | 124 |
+| `08029FB0` | `condition_finish_actor_context` | 188 |
 
 The serialized cells share the game-state base at `03003950` with the accepted
 resource command predicates. Rows have stride 144 and columns stride 24.
@@ -72,7 +77,7 @@ the current scene is five and `(1, 7, scene)` otherwise, then refreshes the
 selected row's scene. In the other branch it selects an actor using context
 `03003A2C`, writes the row's scene byte to request word `0C`, submits event
 `1A` and refreshes. Both branches write the row's mode byte to `03004114`, save
-the row word at game-state offset `440` and call the original row-display
+the row word at game-state offset `440` and call the reconstructed row-display
 publisher at `0802A94C`. The four-byte row scene/mode table at `08059ADC` remains
 unconverted data. The shared `SceneRequest` now exposes the observed word at
 `0C`; its name `parameter` remains deliberately general.
@@ -84,9 +89,44 @@ The 68-byte lookup extent includes its three literal words and ends at
 `0802CA74`; the 44-byte threshold extent includes two zero alignment bytes.
 Full comparisons, not estimated scanner boundaries, determine coverage.
 
+The activation path writes row one to the selected-row word for `(1, 0, *)`.
+For an inactive entry within the observed definition bounds, it sets current-view
+flag `00100000`. An inactive group within those bounds publishes its group display
+kind unless the kind is `FF`. It then writes both active bytes unconditionally;
+the display bounds checks do not guard these state writes. Adding validation
+would change the original behavior. The function submits the narrowed selection
+bytes to the context at game-state `DC`, updates and finishes the separate context
+at `10`, checks the byte at `E0` against four and 29, and refreshes valid entries.
+The 524-byte context updater at `08029DA4` remains original ROM code.
+
+The selection recorder scans 13 groups, whose destination slots begin at context
+`1C` with stride eight and a pointer at four. Definitions at `080535A4` have stride
+eight, a byte count at one and a value-table pointer at four. Each eight-byte
+value record holds a value at zero and row/column/entry bytes at four through six.
+An equal triple copies the value byte to the corresponding four-byte destination
+record. These accessed layouts motivate `ConditionActorSelectionContext`; they
+do not identify this context with the shared frame-object layout.
+
+The finishing helper reads six signed-byte counters in four-byte records beginning
+at context `88`. Thresholds submit these condition triples: counter zero, above
+zero and four, `(2,2,3)` and `(3,3,1)`; counter one, above zero and one, `(0,3,0)` and
+`(2,0,1)`; counter two, above three, `(2,1,1)`, and above two with counter five above
+one, `(3,2,2)`; counter three above one, `(2,1,0)`; counter four above three and six,
+`(3,0,2)` and `(4,3,2)`. Values cached across calls remain cached in C. Their
+gameplay meanings remain uncertain. Its inline accessor binds the record pointer
+to R0 to preserve the pinned compiler's base-plus-three signed load; this is a
+semantic pointer constraint, with no instruction body embedded.
+
+The row-display publisher indexes five display kinds from the row definition.
+The activation and selection-recorder matches use natural typed C without fixed
+register variables. Array indexing rather than a pointer walk preserves the
+publisher's loop allocation. Their compiled controls change the view flag, loop
+limit, group count and counter threshold; each is rejected. Canonical raw
+comparisons remain under `reports/audio-root/condition-continuation-canonical/`.
+
 Useful failed candidates and raw comparisons remain in ignored local reports.
-The activation path at `0802A06C`, refresh at `0802A688`, group completion at
-`0802A3C8`, initialization at `0802A49C` and row-display publisher at `0802A94C`
-remain unconverted. Close candidates receive no C coverage credit. They are
+The refresh at `0802A688`, group completion at `0802A3C8`, initialization at
+`0802A49C` and context updater at `08029DA4` remain unconverted. Close candidates
+receive no C coverage credit. They are
 the next connected targets before assigning broader semantics to this system.
 No output patch, difference mask or reference change was used.

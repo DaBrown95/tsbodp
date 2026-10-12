@@ -42,7 +42,7 @@ void frame_actor_choose_need_action(struct FrameActorNeedState *state, struct Fr
    state->countdown = 450;
   } else if (mask & 4) {
    frame_set_variant_state((struct FrameObject *)object, 53);
-   frame_actor_need_bit2_effect((struct FrameObject *)object);
+   frame_actor_choose_walk_direction((struct FrameObject *)object);
    frame_request_animation((struct FrameCommandObject *)object, 83);
    state->countdown = 450;
   } else if ((mask & 1) && object->variant_state != 51 && object->variant_state != 6) {

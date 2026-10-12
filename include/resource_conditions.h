@@ -23,6 +23,7 @@ unsigned char condition_is_complete(unsigned int,unsigned int,unsigned int);
 unsigned char condition_group_active(unsigned int,unsigned int);
 unsigned char condition_group_complete(unsigned int,unsigned int);
 unsigned int condition_refresh(unsigned int,unsigned int);
+void condition_activate_entry(unsigned int,unsigned int,unsigned int);
 void condition_complete_if_active(unsigned int,unsigned int,unsigned int);
 void condition_refresh_thresholds(void *);
 void condition_publish_row_displays(unsigned int);

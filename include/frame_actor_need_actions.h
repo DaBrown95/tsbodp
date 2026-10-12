@@ -18,7 +18,7 @@ FrameU8 frame_need_action_forbidden(FrameU32);
 struct FrameObject *frame_spawn_need_effect(int, int, int, int, int);
 FrameU8 frame_configure_need_effect(struct FrameObject *, int, int, int);
 void frame_commit_need_effect(struct FrameObject *, FrameU8);
-void frame_actor_need_bit2_effect(struct FrameObject *);
+unsigned char frame_actor_choose_walk_direction(struct FrameObject *);
 void frame_actor_choose_need_action(struct FrameActorNeedState *, struct FrameActorObject *);
 
 #endif

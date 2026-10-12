@@ -18,6 +18,7 @@ from source_symbols import declarations
 from source_controls import mutate
 from source_addresses import execution_address, validate_execution_layout
 from ram_copies import validate_copy
+from header_snapshots import snapshot_headers
 
 
 def run(command, commands):
@@ -32,9 +33,7 @@ def compile_function(function, source, folder, flags, copies=None):
     folder.mkdir(parents=True, exist_ok=True)
     commands = []
     header_folder = folder / "include"
-    header_folder.mkdir(exist_ok=True)
-    for header in (ROOT / "include").glob("*.h"):
-        (header_folder / header.name).write_bytes(header.read_bytes())
+    snapshot_headers(source, header_folder, ROOT / 'include')
     preprocessed = folder / "source.i"
     assembly = folder / "source.s"
     obj = folder / "source.o"
@@ -152,10 +151,10 @@ def main():
                                 for name in ("tools/pilot.py", "tools/project.py", "config/build-us-eu.json",
                                              "tools/toolchain.py", "tools/source_symbols.py", "tools/source_controls.py", "config/pilot-toolchain.json",
                                              "config/targets/us-eu.json", "include/irq.h",
-                                             "tools/source_addresses.py", "tools/ram_copies.py",
+                                             "tools/source_addresses.py", "tools/ram_copies.py", "tools/header_snapshots.py",
                                              "config/ram-map-us-eu.json")}
     report['helper_sha256'].update({str(header.relative_to(ROOT)): hashlib.sha256(header.read_bytes()).hexdigest()
-                                    for header in (ROOT / 'include').glob('*.h')})
+                                    for header in (ROOT / 'include').rglob('*.h')})
     if profile_path:
         report['helper_sha256'][str(profile_path)] = hashlib.sha256((ROOT / profile_path).read_bytes()).hexdigest()
     report["host_clang"] = run(["xcrun", "clang", "--version"], commands).strip()

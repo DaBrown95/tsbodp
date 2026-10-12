@@ -144,3 +144,19 @@ source coverage and later behavioural understanding as distinct measures.
 The pilot succeeds when representative functions match under a reproducibly
 pinned toolchain and the integration method preserves their final bytes. A
 full-game decompilation remains a separate, subsequent milestone.
+
+## Standalone trial headers
+
+The pilot snapshots the source's literal include closure in each trial directory,
+including both sides of conditional includes. Macro includes, `include_next`,
+missing headers and source-local dependencies conservatively retain all project
+headers for the real preprocessor to resolve. Reused trial directories lose stale
+header snapshots before copying; a hash receipt records the retained inputs.
+All project headers still participate in the full gate's freshness fingerprint.
+
+Eight benchmark compilations (four positive candidates and their changed-source
+controls) produced identical outputs with the old and new snapshot methods.
+Header copies fell from 344 to 48. Measured compilation time stayed approximately
+0.39 seconds in both cases; the established benefit is reduced file/disk growth,
+not faster compilation. Tests cover unresolved includes, relative cycles, inactive
+branches, comments, line splicing, deleted headers and snapshot independence.
