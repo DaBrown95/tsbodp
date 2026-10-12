@@ -12,7 +12,7 @@ void display_initialize_scrolling_scene(void)
     control = g_display_scrolling_layer_control0;
     display_show_background(0, control);
     display_fill_background(0, 0);
-    display_scene_stage_0801ae2c(control);
+    display_text_set_background_control(control);
     display_load_background(3, &g_display_scrolling_resource3, 0, 1, 0, 0);
     display_load_background(1, &g_display_scrolling_resource1, 1, 2, 0, 0);
     palette = &g_display_scrolling_palette;

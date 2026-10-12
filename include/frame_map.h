@@ -5,13 +5,15 @@
 #include "resource_decode.h"
 #include "heap.h"
 
-/* Partial map views inferred from the allocation and cell-access path. */
+/* Partial map views inferred from the allocation, cell and copied transfer paths. */
+struct FrameMapWordPair { unsigned int first, second; };
 struct FrameMapRecord {
     const void *source;
     void *primary, *combined, *secondary;
     unsigned int unknown10;
     unsigned short width, height;
-    unsigned char unknown18[0x900 - 0x18];
+    struct FramePoint origins[5];
+    struct FrameMapWordPair staging[280];
 };
 struct FrameMapStore {
     void *default_resource;
@@ -42,5 +44,7 @@ extern void (*g_frame_map_draw_routine)(unsigned int);
 extern void (*g_frame_map_scroll_routine)(unsigned int);
 extern unsigned char g_frame_map_draw_rom[], g_frame_map_draw_ram[];
 extern unsigned char g_frame_map_scroll_rom[], g_frame_map_scroll_ram[];
+
+void frame_transfer_map_tiles(unsigned int);
 
 #endif

@@ -132,7 +132,7 @@
       ],
       "word_copy_control": 67108921,
       "phase": "map routine initialization at 0x08039e78",
-      "classification": "Copied ARM map routine with provisional 216-byte body and 12-byte following ARM prefix; entire copied body remains unconverted",
+      "classification": "Copied ARM map transfer: 216-byte body verified matching C at its original RAM execution address; following 12-byte ARM prefix remains unconverted",
       "exports": "frame_map_scroll_iwram.bin"
     }
   ],
@@ -263,7 +263,7 @@
       "ram_address": 50355808,
       "mode": "ARM",
       "pointer_rom_offset": 237232,
-      "evidence": "Matching installer 0x08039e78 publishes destination to callback word 0x03001fcc; source/destination/control literals establish copy extent; inferred signature void(unsigned int view_index) [provisional narrowed byte-index interpretation]; original ARM body remains unconverted"
+      "evidence": "Matching installer 0x08039e78 publishes destination 0x03005e60 to callback word 0x03001fcc; source/destination/control literals establish 228-byte copy. The first 216 bytes are matching C frame_transfer_map_tiles at the RAM execution address; copied following ARM prefix remains unconverted. View argument is narrowed to a byte; allowed indices remain unresolved."
     }
   ],
   "irq_default_table_rom_offset": 341336,

@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 66 C functions spanning 12,496 verified bytes. The
+This batch reconstructs 78 C functions spanning 14,708 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,18 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x5CA4` | `frame_actor_state_16` | 1,420 |
+| `0x7F88` | `frame_actor_input_velocity` | 116 |
+| `0x1BC8C` | `frame_reduce_actor_scene_counter` | 68 |
+| `0x1BCEC` | `frame_add_actor_scene_counter_rate` | 44 |
+| `0x269F4` | `frame_world_in_idle_exclusion_set` | 168 |
+| `0x3C608` | `frame_set_actor_need_step_mode` | 12 |
+| `0x302AC` | `frame_get_actor_palette_slot` | 8 |
+| `0x3840C` | `frame_cycle_idle_actor_palette` | 80 |
+| `0x8464` | `frame_actor_state_13` | 160 |
+| `0x7D7C` | `frame_actor_step_wait_phase` | 68 |
+| `0x8D78` | `frame_actor_face_destination` | 52 |
+| `0x8DAC` | `frame_set_actor_destination` | 16 |
 | `0x1B4A4` | `frame_create_actor_effect` | 288 |
 | `0x1B5C4` | `frame_actor_effect_tick` | 108 |
 | `0x8088` | `frame_actor_state_43` | 96 |
@@ -470,6 +482,64 @@ and rejects an upper-y adjustment changed to 11. An explicit no-op range 0
 through 45 records the scanned default behaviour and preserves the original
 sparse switch; omitting no-op cases produced a nonmatching jump table.
 
+State 16 connects input movement, the view-effect mode, timed animations,
+needs, world-condition checks and scene handoffs. Signed tick bytes at game
+state `+0x741/+0x742` trigger counter reduction above 10 and counter addition
+above 4, then reset. Reduction truncates `counter - counter * 0.1` through a
+signed integer conversion before storing the halfword at `+0x744`; addition
+uses a halfword rate table at `0x08D70D58` indexed by stage word `+0x440`.
+The counter's gameplay unit remains provisional. A first compound-assignment
+candidate selected a different unsigned soft-float conversion and failed to
+link under the supported helper set; its source and compiler artifacts remain
+local. The accepted expression reproduces the observed signed conversion.
+
+The handler's 75-entry substate table spans selectors 1 through 75, with every
+other entry leading to the default exit. Substates 2 and 3 use direction input,
+the accepted velocity constructor and current-key bit 2. The connected input
+velocity helper applies speed factor 1.8 and animation 4 while that bit is set;
+otherwise it uses integer speed and animation 6. View-effect mode 1 prevents a
+new movement phase. Substates 7, 8 and 32 through 39 use halfword countdowns;
+8 initializes movement flag `0x20` and halfwords 6 and 15. Substates 23 and 74
+wait for animation completion, with 74 also adjusting need index 55. Substate
+5 submits the current world to the scene handoff unless game flag `0x20` is
+set, and clears actor flag `0x10`. It reloads actor flags after the scene call,
+but retains the original flags when that call is skipped, preserving the
+observed aliasing behaviour.
+
+Substates 52 and 53 compare need words 5 and 2 against `100 << 24`; these accesses
+use game state `+0xB0`, which aliases the local need state at `0x03003A00`.
+Substate 52 combines an excluded-world predicate, world IDs 6, 28, 37 and 36,
+completed condition group `(1,3)` and a random 1-through-100 result at most 50
+before handing the first view's actor to outer state 38. The predicate returns
+1 for worlds 16, 17, 18, 21, 23, 24, 25, 39, 40, 46, 47 and 48; its name follows
+this caller's exclusion role, not a proven geographic or gameplay category.
+The alternative plays cue 121 or 122 and enters substate 23. The incomplete
+need paths adjust indices 44 and 45, and 53 writes need-step mode 1 to the byte
+at `0x0300216C`. The byte's wider effects remain unconverted. Substate 75 waits
+for countdown `-1` or key bit 2; only timeout without that input cycles the
+first subtype-13 object in the primary list through OAM palette slots 1 to 6,
+records the palette at game state `+0x42D` and acquires it. The getter reads the
+high nibble of OAM byte `+0xD5`.
+
+The full 1,420-byte handler and its seven dependencies match ordinary C.
+Separate event-selection and direction-input locals preserve original register
+lifetimes; there are no fixed-register bindings or instruction bodies in this
+batch. Controls change a tick threshold, speed factor, counter rate and lookup,
+world-set member, mode arithmetic, OAM field and subtype selection.
+
+State 13 uses an integer point at object `+0x64/+0x68` to initialize its fixed-
+point destination and enters movement substate 3. Its direction helper calls
+the accepted by-value destination-direction calculation with object speed,
+retains the current facing when that returns direction 8, always updates
+facing and reports completion. Completion restores the default outer state,
+substate 2, saved direction byte `+0x70`, flags word `+0x6C`, and activates the
+object/program groups at `+0x71/+0x72`. Actor ID 0 also stops and requests
+animation 1; while still moving it refreshes velocity. Other substates share
+the accepted wait-phase helper: 7 and 11 count down to `-1` before returning to
+substate 3, 5 marks outer state 1 and 8 is an explicit no-op. The four complete
+extents add 296 ordinary-C bytes and reject changed animation, countdown,
+destination direction and fixed-point shift controls.
+
 ## Local proofs and remaining boundaries
 
 Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`,
@@ -479,11 +549,12 @@ Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manif
 `reports/agents/vblank-wrapper/actor-social-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-interaction-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-actions-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-carry-batch-manifest.json`.
+`reports/agents/vblank-wrapper/actor-carry-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-idle-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
 `actor-state-route-types13-*`, `actor-route-path-layout13-*` and
 `actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` and `actor-interaction-current2-*` and `actor-actions-canonical7-*` and `actor-carry-canonical5-*` and
-`actor-carry-shared-layout6-*` in the same ignored
+`actor-carry-shared-layout6-*` and `actor-idle-canonical12-*` in the same ignored
 agent report tree. Original CFG scans and all 29 handler entry summaries remain
 local. Mutations change the dispatcher flags, animation IDs, countdown, wait
 factor, direction update flag, group offset, record stride, state target, point
@@ -494,13 +565,14 @@ centered-width divisor, velocity arithmetic, move countdown, social countdown,
 value-reader field, terrain class, option ID range, condition action ID, descriptor lookup bound, action notification ID,
 game-value ceiling, parameter level bound, state-41 animation ID, sequence mode and state-42 cue threshold, effect flags, completion mode and state-43 countdown and state-47 bound adjustment.
 
-Nineteen of the 29 direct handler functions are reconstructed here. Useful next
+Twenty-one of the 29 direct handler functions are reconstructed here. Useful next
 connected targets are the need target selector `0x6F20`, action-target selector
 `0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`. State 46
 (`0x6874`) is a retained near-match joining proximity, relation values, facing,
 animation and audio; its inferred relation/descriptor layouts still need matching
-confirmation. State 16 (`0x5CA4`) joins input, interaction choices, needs and
-world-condition checks but has a larger substate table. Their scanned CFGs are
+confirmation. States 8 and 9 (`0x85C0` and `0x86C0`) follow movement-distance and timed
+handshake dependencies, while state 27 (`0x97D8`) joins display objects, input
+and audio with a larger remaining body. Their scanned CFGs are
 closed; those scans alone do not establish C coverage, final function boundaries
 or runtime reachability. These bodies remain explicit unconverted ROM regions
 in the full build.

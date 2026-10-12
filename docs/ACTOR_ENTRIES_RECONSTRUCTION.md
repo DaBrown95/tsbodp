@@ -1,6 +1,6 @@
 # Actor entry list lifecycle and condition handoff
 
-Fourteen connected replacements add 1,208 bytes of matching C. Their complete
+Fifteen connected replacements add 1,256 bytes of matching C. Their complete
 linked extents, pools and alignment match at the original addresses. Every
 replacement has an actual compiled changed-source control that rejects. The
 list setup, reset, insertion and selection paths connect to the previously
@@ -17,6 +17,7 @@ static and compiler results; no gameplay behavior is claimed.
 | `actor_entry_is_empty` | `08020A5C` | 20 |
 | `actor_entry_is_full` | `08020A70` | 20 |
 | `actor_entry_has_space` | `08020A84` | 20 |
+| `actor_entry_adjust_counter` | `08020A1C` | 48 |
 | `actor_entry_clear_counter` | `08020A4C` | 16 |
 | `actor_entry_mark_seen` | `0800EB48` | 32 |
 | `actor_entry_choose_base` | `080206EC` | 96 |
@@ -69,7 +70,12 @@ interpretation for every record.
 The capacity lookup returns the first matching index or minus one, unlike the
 existing count-bounded lookup. The empty/full/space predicates normalize their
 byte comparisons to zero or one. Clearing an indexed counter byte at input
-`4 + index` returns its old value. Bounds, duplicate entries and count/capacity
+`4 + index` returns its old value. The connected indexed adjustment adds a signed change to that byte, clamps the
+result to zero through 250, stores its narrowed value, calls the accepted
+condition threshold refresh, and returns the clamped value. Two temporary
+cell-pointer scopes preserve the original recomputation around the clamp in
+ordinary C.
+Bounds, duplicate entries and count/capacity
 consistency remain unchecked in these functions.
 
 The four selection routines read the shared catalog at `080616CC` with stride
@@ -85,20 +91,22 @@ not been established by runtime evidence.
 
 ## Matching and remaining path
 
-Ordinary C reproduces thirteen functions. Reset uses one semantic `r0` binding
+Ordinary C reproduces fourteen functions. Reset uses one semantic `r0` binding
 for the game-state base so the compiler retains the original base literal plus
 `F0` address calculation. It contains no instruction-body assembly. Zero-filled
 Thumb tail alignment is explicit where present. Changed limits, sentinels,
 field selection, initialization values and notification IDs each reject by one
 byte, except the altered random spread in reset-values, which rejects by 32
-different/missing/extra bytes. The private proof index is
+different/missing/extra bytes. The adjustment control changes the upper-bound
+test and also rejects; its separate proof index is
+`reports/audio-root/actor-entry-counter-canonical/1791848102323039000/ready.json`. The original private proof index is
 `reports/audio-root/actor-entry-canonical/1791847197727325000/ready.json`.
 
 The central definition-driven refresh at `08020368` remains unconverted. Static
 analysis shows a retained-slot cleanup, seed records and random fallback
-selection, including a packed `(5,6,5)` condition marker. The 312/320/336-byte
-trials do not match its 328-byte original and receive no coverage credit.
-The indexed-counter adjustment at `08020A1C` and the separate twelve-byte
-record collection at context `31C` are further connected targets. Useful
+selection, including a packed `(5,6,5)` condition marker. A revised 328-byte
+trial matches the selection/condition handoff but still differs in the cleanup
+loop; it receives no coverage credit. The separate twelve-byte record collection
+at context `31C` is a further connected target. Useful
 failed bodies and raw comparisons remain in ignored local reports. Whole-ROM
 equality, partial storage mapping and runtime behavior remain separate claims.

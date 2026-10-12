@@ -872,3 +872,43 @@ matches and rejected their edits. Evidence is under `camera-map/map-lifecycle/`.
 The larger selected-tile consumer at `0x39CF0` remains a semantic C candidate
 with mismatching bytes and is excluded from coverage, alongside the copied ARM
 map bodies. No runtime display-memory restore or map drawing has been validated.
+
+
+The copied row-transfer entry stored at `0xB6A4` now adds 216 verified C bytes,
+linked at its installed execution address `0x03005E60`. It considers both map
+records and skips records without a source pointer. For the selected view, it
+divides each signed coordinate by eight with truncation toward zero and masks
+the quotient to two bits. The source halfword offset combines x with forty
+times y. It reads the source header's byte `+1`, masks it to five bits, and
+uses that value times `0x800` as the destination offset from display memory
+`0x06000000`. DMA channel zero then transfers 22 rows with observed control
+`0x8000001F`, advancing the source 80 bytes and destination 64 bytes each time
+and reading the control register after every write. These are static register
+accesses and a compiler match; hardware execution has not been tested.
+
+The copied code accesses coordinate pairs at record `+0x18` and staged words
+at `+0x40`. The unchanged `0x900`-byte record therefore now gives names to five
+coordinate pairs and 280 pairs of 32-bit staged words in its former unknown
+span. The staging interpretation is provisional but its offsets, eight-byte
+pair stride and 80-byte row stride are directly observed. The argument is
+narrowed to its low byte; the source has no local check against the five
+coordinate slots represented by this partial layout. Valid caller indices and
+runtime bounds remain unresolved. All twenty previously accepted map and
+decoder callers and their negative controls were reverified with this layout.
+
+Two semantic values retain explicit register bindings: the source-layout
+pointer and the screen-block offset. Removing the initially tested iterator,
+source-address and row-counter bindings retained the match; removing either
+remaining binding changed the generated instructions. The source contains C
+address calculations, signed coordinate division, loops and volatile DMA
+accesses, without an embedded ARM body or output alteration. It matches the
+complete 216-byte body including the literal word and its branch around the
+pool. Reducing the row count to 21 rejects by one byte. Public-source canonical
+and control proofs are under `camera-map/copied-layout-revalidation-v2/`.
+
+The two installed map copies total 564 bytes, while the separately bounded
+staging and transfer bodies total 536 bytes. Only the transfer body's 216
+bytes are reconstructed at this point. The staging body at `0xB564` and the
+16- and 12-byte following prefixes remain explicit original code, excluded
+from C coverage. The selected-tile consumer at `0x39CF0` and central renderer
+at `0x23E8` also remain unmatched candidates.

@@ -12,7 +12,7 @@ void display_scene_create_objects(void)
     g_display_scene_objects[5] = (void *)frame_create_scene_object(0xb7, 0x10c, 2, 1);
     for (i = 3; i >= 0; --i)
         g_display_scene_objects[i + 6] = (void *)frame_create_scene_object(i + 0xb8, 0xe2, i + 3, 0);
-    display_scene_stage_0801ae74(3, 0, 0);
+    display_text_select_font(3, 0, 0);
     text = display_scene_lookup_text(0x24);
     g_display_scene_objects[10] = display_scene_stage_080282d4(0xbc, &text);
     transition_object_set_state((void *)g_display_scene_objects[10], 8);

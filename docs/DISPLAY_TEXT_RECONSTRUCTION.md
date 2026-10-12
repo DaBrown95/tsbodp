@@ -43,7 +43,8 @@ The raw failures and exact comparison are preserved locally. The allocation
 calls distinguish the fixed work buffer and variable pixel buffer. The
 [reconstructed heap lifecycle](HEAP_RECONSTRUCTION.md) now supplies the general
 allocator at `0x08027864`, zeroed allocation at `0x080278E4`, and release at
-`0x08027988`; sizing and buffer setup remain explicit unconverted dependencies.
+`0x08027988`; sizing remains an explicit unconverted dependency. Buffer setup
+is reconstructed with the tile row path below.
 The connected line selection and alignment consumers are reconstructed below. This compiler
 match does not independently prove runtime or gameplay behavior.
 
@@ -172,6 +173,127 @@ without fixed registers or embedded instruction bodies. Earlier loop-break,
 local initialization and register-lifetime failures remain in ignored reports.
 
 This closes line selection and alignment feeding the text update's transfer
-path. Tile rasterization, row initialization/emission, font loading, sizing and
-buffer setup remain connected reconstruction targets. Full-ROM equality,
+path. Tile rasterization, row reading, sizing and further setup callers remain
+connected reconstruction targets; the row emission and font producers are
+reconstructed below. Full-ROM equality,
 static data roles and runtime/gameplay behavior remain separate evidence.
+
+## Font setup and tile row emission
+
+Nine connected producers and consumers add 676 matching C bytes. Their whole
+linked extents match at their original addresses, with the two explicit
+zero-filled alignment directives separated from the C bodies. Public closure
+receipts and compiled controls are indexed by the local
+`reports/agents/display_audio/background_motion/scene/redraw/text-raster-ready.json`.
+
+| Function | ROM address | Bytes | Control differences |
+| --- | --- | ---: | ---: |
+| `display_text_load_font` | `0x0801AD2C` | 100 | 2 |
+| `display_text_flip_tile` | `0x0801AD90` | 104 | 1 |
+| `display_text_initialize` | `0x0801ADF8` | 52 | 2 |
+| `display_text_set_background_control` | `0x0801AE2C` | 48 | 1 |
+| `display_text_set_buffers` | `0x0801AE5C` | 24 | 1 |
+| `display_text_select_font` | `0x0801AE74` | 72 | 1 |
+| `display_text_fill_rows` | `0x0801B2B0` | 80 | 1 |
+| `display_text_emit_rows` | `0x0801B38C` | 160 | 1 |
+| `display_text_map_position` | `0x0801B42C` | 36 | 2 |
+
+Font loading reads an eight-byte resource record beginning at `0x08052E08`,
+containing a serialized font pointer and line-advance word. It fills a
+20-byte runtime font record: height byte at zero, first/last halfwords at
+two/four, line advance byte at six, glyph-offset pointer at eight, width
+pointer at twelve and pixel pointer at sixteen. The serialized first/last
+values are read as halfwords at zero/two, height as byte four, and each
+pointer offset is assembled high-byte first from six/seven, ten/eleven and
+fourteen/fifteen. Pointer offsets, glyph tables and serialized data bounds are
+not validated here. The partial font header now represents these observed
+fields; no game assets are included in the source or documentation.
+
+Runtime bank records begin at `0x03001980`; each bank contains two 20-byte
+fonts. Initialization loads slot zero of banks zero through three, then
+clears 60 bytes of raster state at `0x03001A20` and allocates 2048 work bytes.
+It does not initialize the second slots, free an existing work allocation or
+check allocation success. Other loader callsites and full resource count
+remain unaudited. Both resource and bank declarations keep their outer extent
+unsized; the four-iteration initialization loop is not a general index bound.
+The state begins with the same two font-pointer words already exposed by
+`g_display_fonts`, rather than a separate copy of those pointers.
+
+Font selection installs both pointers for the chosen bank, copies the first
+font's line-advance byte to the state's line-height word, and stores the fill
+argument. For color mode one it retains the complete palette argument and
+clears palette bits; otherwise it retains the low nibble as color base and
+shifts the signed high part into the map palette position. The left shift
+uses an unsigned value after the observed arithmetic right shift, retaining
+word wrapping without a signed left-shift overflow. Buffer setup installs
+map/current-map and tile pointers and derives tile byte size as
+`(mode + 1) * 32`. No mode validation has been added.
+
+The background-control producer derives map base
+`0x06000000 + map_block * 0x800`, tile base
+`0x06000000 + tile_block * 0x4000` and 32/64-byte tile size from control bits
+eight through twelve, two through three and seven. Its local union records
+only those consumed bitfields, leaving other bits unnamed. The mixed
+halfword/word bitfield view produces the observed separate mode extraction;
+it does not embed original instructions. Prior arithmetic and bitfield
+layout failures remain local. Canonical names replace the prior address-only
+aliases in the scrolling scene and group-label callers. Those callers still
+match 252, 308 and 204 bytes, and their real controls reject by 104, one and
+100 bytes respectively, including changed candidate lengths.
+
+Map positioning divides signed x/y by eight with truncation toward zero,
+then computes the halfword at `row * 32 + column`; it adds no coordinate
+clamp. Row fill repeats a supplied value across 64 bytes per row in mode one,
+or repeats its low nibble across 32 bytes otherwise. Row emission copies
+`tile_bytes / 4` words for each consecutive tile index, updates a map
+halfword and advances the map by 32 halfwords per row. In mode one it writes
+the tile index directly. Otherwise fill minus one preserves the existing
+high palette nibble; other fill values use the configured palette bits.
+It does not mask the tile index to ten bits or validate pointers, stride,
+count or storage bounds. These are CPU copies through configured pointers,
+separate from the DMA transfer performed by the text object update.
+
+Tile flipping reverses eight rows of eight bytes in mode one. Otherwise it
+reverses four packed bytes per row and swaps each byte's nibbles, preserving
+the corresponding eight-pixel horizontal flip. This is the direct dependency
+of the still-unconverted row reader when map flip bit `0x400` is set. The
+remaining row reader at `0x0801B300` (140) and rasterizer at `0x0801AA78` (692)
+remain outside coverage; their semantic candidates and raw mismatches are
+retained locally. All nine accepted bodies are ordinary C without fixed
+register constraints. Fresh font measurement, line selection, alignment,
+transfer and catalog closures also match after the shared font refinement,
+and their actual controls remain preserved. This compiler evidence does not
+independently establish safe runtime inputs or gameplay behavior.
+
+## Height and line-limit consumers
+
+Three callers of the accepted line-selection path add another 260 matching C
+bytes, bringing the connected font/row/consumer batch to 12 functions and 936
+bytes. Fresh public-source proofs and real compiled controls for all 12 new
+functions and ten affected existing closures are indexed by the same local
+receipt. Every positive has zero differing bytes; every control rejects.
+
+| Function | ROM address | Bytes | Control differences |
+| --- | --- | ---: | ---: |
+| `display_text_draw_block` | `0x0801AF98` | 112 | 2 |
+| `display_text_draw_limited_line` | `0x0801B008` | 68 | 1 |
+| `display_text_draw_all_lines` | `0x0801B04C` | 80 | 1 |
+
+The block consumer draws while the pointed-to string is nonempty and the
+remaining signed height is at least the current line height. It advances y
+and subtracts that line height after each call, reloading the state after the
+callee. The limited-line consumer applies the same height guard once and
+passes its caller's count pointer through. The all-lines consumer advances a
+local string pointer through repeated calls and advances y without a height
+bound. The block and all-lines variants initialize their shared count to
+`0x7FFFFFFF`; the limited-line variant retains the supplied count.
+
+All three return the resulting tile cursor. The shared prototypes now expose
+their observed signed coordinate and dimension arguments and word return;
+this refinement adds no checks absent from the original. In particular the
+all-lines loop does not detect a line-selection call that leaves the string
+pointer unchanged, and the height loop does not validate a positive line
+height. Progress, valid buffer capacity and safe text inputs remain runtime
+questions. These three bodies use ordinary C without register constraints or
+assembly, and the row reader and rasterizer remain explicit unconverted
+dependencies.

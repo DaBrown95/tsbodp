@@ -12,7 +12,7 @@ void display_scene_redraw_group_labels(unsigned char group)
         if (group > 0) { next = group; group = next - 1; }
     } else if (group == 5) { next = 5; group = 4; }
     else next = group + 1;
-    display_scene_stage_0801ae74(3, 0, 0);
+    display_text_select_font(3, 0, 0);
     text = display_scene_lookup_text(g_display_scene_group_text_ids[group]);
     g_display_scene_objects[13] = display_scene_stage_080282d4(0xbf, &text);
     transition_object_set_state((void *)g_display_scene_objects[13], 8);

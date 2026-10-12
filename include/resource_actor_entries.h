@@ -27,6 +27,7 @@ int actor_entry_find_capacity(struct ConditionActorEntries *, int);
 int actor_entry_is_empty(struct ConditionActorEntries *);
 int actor_entry_is_full(struct ConditionActorEntries *);
 int actor_entry_has_space(struct ConditionActorEntries *);
+int actor_entry_adjust_counter(void *, int, int);
 unsigned char actor_entry_clear_counter(void *, int);
 void actor_entry_mark_seen(unsigned int *, unsigned int);
 unsigned char actor_entry_choose_base(void);

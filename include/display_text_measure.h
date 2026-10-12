@@ -3,9 +3,11 @@
 /* Partial font view; complete storage and glyph encoding remain provisional. */
 struct DisplayFont {
     unsigned char height, unknown_01;
-    unsigned short first, last, unknown_06;
-    unsigned int unknown_08;
+    unsigned short first, last;
+    unsigned char line_advance, unknown_07;
+    const unsigned short *glyph_offsets;
     const unsigned char *widths;
+    const unsigned char *glyph_pixels;
 };
 extern const struct DisplayFont *g_display_fonts[2];
 extern unsigned char g_display_text_substitutions[][64];
