@@ -3,8 +3,8 @@
 The three object/label functions cover 576 verified matching C bytes. Their
 connected input consumer adds another 484 bytes, bringing this path to four
 functions and 1,060 bytes. The connected close and marker lifecycle add three
-functions and 340 bytes. The detail drawer adds another 432 bytes, for eight
-functions and 1,832 bytes:
+functions and 340 bytes. The detail drawer adds another 432 bytes and its setup adds 460 bytes, for
+nine functions and 2,292 bytes:
 
 | Function | ROM address | Complete extent |
 | --- | --- | ---: |
@@ -16,14 +16,15 @@ functions and 1,832 bytes:
 | `condition_marker_create` | `0x0801D9A0` | 120 bytes |
 | `condition_marker_step` | `0x0801DA18` | 172 bytes |
 | `condition_panel_draw_details` | `0x0801D580` | 432 bytes |
+| `condition_panel_initialize` | `0x0801D1D0` | 460 bytes |
 
-The 460-byte setup at `0x0801D1D0` calls all three functions and the matching
-detail drawer at `0x0801D580`. It configures backgrounds, invokes the
-matching selected resource loader at `0x0803AFF0`, and selects a condition row
+The matching 460-byte setup at `0x0801D1D0` calls the three object/label functions
+and the matching detail drawer at `0x0801D580`. It configures backgrounds and
+invokes the matching selected resource loader at `0x0803AFF0`, and selects a condition row
 and cell before these display operations. This direct call path and the shared
 condition-definition/cell accesses motivate the provisional panel names. The
-setup remains an original ROM region; its private C trials have no
-source-coverage credit.
+setup is a verified C replacement over its complete original extent. Useful
+failed setup and detail candidates remain preserved locally.
 
 The creator writes exactly fifteen object-pointer slots from `0x030043B0`:
 six column objects at indices 0 through 5, four fixed/selected controls at
@@ -84,13 +85,13 @@ panel return-argument alias is distinct from the existing `g_resource_scene_arg`
 word at `0x03004370`; these are separate observed addresses. Preserving
 these two array roots resolves the otherwise missing final halfword read.
 Direct C input expressions retain the original mask-register choices without
-register bindings or volatile qualifiers. The setup routine remains an explicit
-original, and useful failed detail and setup attempts remain local.
+register bindings or volatile qualifiers. The connected setup now matches, and
+useful failed detail and setup attempts remain local.
 
-All eight complete original extents, including literal pools and alignment,
+All nine complete original extents, including literal pools and alignment,
 match independently. Real changed-source loop/column-bound, close-parameter,
-marker-variant, marker-flag and detail-tail-bound controls produce different
-bytes. Source objects and linked extents contain only allocated `.text`, with
+marker-variant, marker-flag, detail-tail-bound and setup-default-mode controls
+produce different bytes. Source objects and linked extents contain only allocated `.text`, with
 one function span and no unresolved linked relocations. Useful failed attempts
 and the actual comparison bytes remain in ignored local reports. These compile
 and byte results are separate from runtime/UI behavior and whole-ROM equality.
@@ -172,14 +173,60 @@ original type declarations or a boolean-only field domain were recovered.
 
 # Connected selected-group initialization
 
-The panel setup at `0x0801D1D0` remains unconverted. The initializer at
-`0x0802A580` is now a separate exact 264-byte C replacement over the same
-condition storage; a direct caller edge from the panel setup is not established.
-It marks earlier columns for rows zero and one, then marks the requested group and entries and
-publishes non-`FF` display kinds. This connects the panel/marker observations to
+The matching panel setup at `0x0801D1D0` and initializer at `0x0802A580` are
+separate replacements. The latter is an exact 264-byte C replacement over the
+same condition storage; a direct caller edge from the panel setup is not established.
+It marks earlier columns for rows zero and one, then marks the requested group
+and entries and publishes non-`FF` display kinds. This connects the panel/marker observations to
 the reconstructed condition initialization and refresh path. The complete
 extent, literal pool and alignment match; an actual changed-row-threshold
 control is rejected. The caller's unchecked row/column/count contracts and the
-broader setup candidate remains unresolved. See
+broader runtime validity contracts remain unresolved. See
 [the condition evidence](RESOURCE_CONDITIONS_RECONSTRUCTION.md) for the storage
 alias, full-word counters and compiler-lifetime constraints.
+
+# Connected panel setup
+
+The existing scene-phase table at `0x0805797C` stores setup, input and close
+at row 14's begin, step and end pointers: `0x0801D1D1`, `0x0801D39D` and
+`0x0801D971`. The matching queue dispatchers use their existing `void(void)`
+callback interface. The setup consumes no incoming argument before writing its
+own call arguments, so its canonical interface agrees with that observed table
+contract. Arbitrary request-kind bounds and actual callback invocation remain
+separate runtime questions.
+
+Setup configures four backgrounds and the text background control, clears the
+shared request's selected column to zero, copies the world row at `+0x440` into
+the full-word request parameter, and selects mode one. It tests the initial
+cell's second byte at world `+0x445`. While that byte remains nonzero, it
+checks the next column's first byte at `+0x444`, publishes the next full-word
+column, and stops when it equals the row's count byte at `ConditionRow +6`
+minus one. The row count is distinct from the pointed detail-definition count
+at `+3` used by the drawer. The 144-byte cell-row stride, 24-byte cell stride
+and 32-byte condition-row stride are the same observed strides as the connected
+panel consumers. The original has no selected-row, column or count guard;
+zero counts and unchecked access domains have not been assigned new behavior.
+
+The setup then loads its background resources and selected resource, palettes
+and palette-range configuration. It draws a heading and a number-substitution
+line, creates the panel objects, draws row labels, updates column objects and
+invokes the detail drawer before the existing first transition dispatcher.
+The resource contents, display appearance and complete transition behavior are
+not claimed from these static calls.
+
+The matching source separates the initial row-address calculation from the
+saved selection-loop values and keeps the current next-cell address for its
+second-byte test. It reloads the shared selected column and row count as the
+original does. The address helper, row multiplier, request, world, loop roots,
+strides and tile values all use ordinary C. One `r5` binding carries the real
+second-line style argument across the intervening drawing, font, number-field
+and lookup calls; it is a callee-saved value and contains no instruction glue.
+Earlier constraints were removed after these semantic lifetimes were separated.
+
+The entire 460-byte original extent matches with sixteen literal words and its
+original two-byte zero alignment before the pool. Source and linked objects
+contain only allocated `.text`, one complete function span and no remaining
+linked relocations. Changing the actual default request mode from one to zero
+produces different compiled bytes. These compiler/byte results establish no
+new world-state bounds, complete original type declarations or runtime UI
+claim.
