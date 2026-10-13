@@ -1,0 +1,55 @@
+--- a/gcc/config/arm/arm.c
++++ b/gcc/config/arm/arm.c
+@@ -8961,7 +8961,7 @@
+ 	      )
+ 	    continue;
+ 
+-	  DECL_RTL (sym) = new;
++	  SET_DECL_RTL (sym, new);
+ 	}
+       
+       replace_symbols_in_block (BLOCK_SUBBLOCKS (block), orig, new);
+--- a/gcc/recog.h
++++ b/gcc/recog.h
+@@ -209,7 +209,7 @@
+ 
+ typedef int (*insn_operand_predicate_fn) PARAMS ((rtx, enum machine_mode));
+ typedef const char * (*insn_output_fn) PARAMS ((rtx *, rtx));
+-typedef rtx (*insn_gen_fn) PARAMS ((rtx, ...));
++typedef rtx (*insn_gen_fn) ();
+ 
+ struct insn_operand_data
+ {
+--- a/gcc/dominance.c
++++ b/gcc/dominance.c
+@@ -242,7 +242,7 @@
+ 	      /* If the next node BN is either already visited or a border
+ 	         block the current edge is useless, and simply overwritten
+ 	         with the next edge out of the current node.  */
+-	      if (di->dfs_order[bn->index] || bn == ex_block)
++	      if (bn == ex_block || di->dfs_order[bn->index])
+ 		{
+ 		  e = e->pred_next;
+ 		  continue;
+@@ -253,7 +253,7 @@
+ 	  else
+ 	    {
+ 	      bn = e->dest;
+-	      if (di->dfs_order[bn->index] || bn == ex_block)
++	      if (bn == ex_block || di->dfs_order[bn->index])
+ 		{
+ 		  e = e->succ_next;
+ 		  continue;
+--- a/gcc/hwint.h
++++ b/gcc/hwint.h
+@@ -8,6 +8,10 @@
+ 
+ #ifndef __HWINT_H__
+ #define __HWINT_H__
++
++/* Native LP64 host with original ILP32 compiler integer arithmetic. */
++#define HOST_BITS_PER_WIDE_INT 32
++#define HOST_WIDE_INT int
+ 
+ /* Only do all of this if both of these macros are defined, otherwise
+    they'll evaluate to zero, which is not what you want. */

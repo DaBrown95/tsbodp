@@ -1,0 +1,51 @@
+{
+  "compiler": {
+    "source_url": "https://ftp.gnu.org/gnu/gcc/gcc-3.0.2/gcc-core-3.0.2.tar.gz",
+    "source_sha256": "c5ed14a927f489a63f5bf68be4454032bf649133455c829c5b34664d986a9e45",
+    "source_version": "3.0.2",
+    "source_directory": "toolchains/gcc302-hwi32-source",
+    "build_directory": "toolchains/gcc302-hwi32-build",
+    "compatibility_patch": "tools/patches/gcc302-hwi32-host-compat.patch",
+    "compatibility_patch_sha256": "e43a6aa09c305ca11820ddda9d4df691bd05638b6534929d648d1128df214bb0",
+    "configure_options": [
+      "--target=arm-elf",
+      "--host=alpha-linux-gnu",
+      "--build=alpha-linux-gnu",
+      "--enable-languages=c",
+      "--disable-nls"
+    ],
+    "reported_backend": "gcc 3.0.2 (ARM/Thumb)",
+    "host_model": "The native process uses LP64 pointers and long. A separate hwint.h override selects HOST_BITS_PER_WIDE_INT=32 and HOST_WIDE_INT=int, matching compiler-integer arithmetic on an ILP32 host; target backend logic is unchanged.",
+    "source_tree_sha256": "92a2e290a333742fbf8ddde0049a3a7d30a5ac19ed12be86225ba53fb2cdf79b",
+    "configure_environment": [
+      "CC=clang",
+      "CFLAGS=-g -O2 -std=gnu89 -Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-deprecated-non-prototype -Wno-implicit-int"
+    ],
+    "install_directory": "toolchains/gcc302-hwi32-install",
+    "build_steps": [
+      {
+        "directory": "libiberty",
+        "options": [
+          "-j4",
+          "all",
+          "CC=clang",
+          "CFLAGS=-g -O2 -std=gnu89 -Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-deprecated-non-prototype -Wno-implicit-int"
+        ]
+      },
+      {
+        "directory": "gcc",
+        "options": [
+          "-j4",
+          "cc1",
+          "CC=clang",
+          "CFLAGS=-g -O2 -std=gnu89 -Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-deprecated-non-prototype -Wno-implicit-int"
+        ]
+      }
+    ]
+  },
+  "native_tool_sha256": {
+    "toolchains/gcc302-hwi32-build/gcc/cc1": "a75e365a3530564da406b6447cabbfe019330dc31d1788489891892429267b88"
+  },
+  "host_clang": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "scope": "Separately selected public GCC3.0.2 source plus host compatibility patch with 32-bit compiler integers. Fresh native fingerprints, source verification and matching gates are required; historical compiler identity remains unproven."
+}

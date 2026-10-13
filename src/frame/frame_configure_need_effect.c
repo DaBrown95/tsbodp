@@ -19,7 +19,7 @@ unsigned char frame_configure_need_effect(struct FrameObject *base, int directio
   if(neighbor)frame_need_effect_handoff_bounds((struct FrameObject *)object,neighbor,1);
  }
  frame_enable_object_flags((struct FrameObject *)object,1);
- result=frame_need_effect_register_3b12c(g_frame_registration,(struct FrameObject *)object,1);
+ result=frame_register_need_effect(g_frame_registration,(struct FrameObject *)object,1);
  frame_update_need_effect((struct FrameObject *)object);
  if(object->direction>4)object->oam.flip_x=1;
  else object->oam.flip_x=0;

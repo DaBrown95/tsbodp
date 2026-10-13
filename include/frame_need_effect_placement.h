@@ -40,8 +40,8 @@ void frame_need_effect_increment_counter(struct FrameNeedEffectState *,
                                          struct FrameNeedEffectState *);
 void frame_need_effect_decrement_counter(struct FrameNeedEffectState *,
                                          struct FrameNeedEffectState *);
-/* Direct-callee roles below remain provisional until independently reconstructed. */
-unsigned char frame_need_effect_register_3b12c(void *, struct FrameObject *, unsigned char);
+/* Returns zero for a failed projection or unavailable pattern cell. */
+unsigned char frame_register_need_effect(void *, struct FrameObject *, unsigned char);
 unsigned char frame_configure_need_effect(struct FrameObject *, int, int, int);
 
 #endif

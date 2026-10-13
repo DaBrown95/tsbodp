@@ -56,15 +56,15 @@ def prepare_source(root, pins, runner):
     return source
 
 
-def provision(root, pins, host, runner):
+def provision(root, pins, host, runner, pin=GCC302_PIN, local=GCC302_PROFILE):
     """Only a fresh build may enroll new native fingerprints."""
-    binary = root / 'toolchains/gcc302-build/gcc/cc1'
     build = root / pins['compiler']['build_directory']
-    if binary.parent.parent != build:
-        raise RuntimeError('GCC302 build directory differs from the selected compiler')
-    profile_path = root / GCC302_PROFILE
+    binary = build / 'gcc/cc1'
+    if set(pins['native_tool_sha256']) != {binary.relative_to(root).as_posix()}:
+        raise RuntimeError('GCC302 native pin differs from the selected build directory')
+    profile_path = root / local
     if profile_path.exists() or binary.exists():
-        lock, _ = load_profile(root, GCC302_PIN, GCC302_PROFILE)
+        lock, _ = load_profile(root, pin, local)
         verify_native(root, lock, host)
         verify_gcc302_source(root, lock)
         return False
@@ -81,7 +81,7 @@ def provision(root, pins, host, runner):
     verify_gcc302_source(root, pins)
     if not binary.is_file():
         raise RuntimeError('GCC302 build did not produce the selected compiler')
-    profile = {'source_pin_sha256': sha(root / GCC302_PIN),
+    profile = {'source_pin_sha256': sha(root / pin),
                'native_tool_sha256': {name: sha(root / name) for name in pins['native_tool_sha256']},
                'host_clang': host,
                'scope': 'Fresh public archive plus pinned host patch; exact matching requires make build.'}

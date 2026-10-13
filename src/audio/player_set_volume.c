@@ -15,6 +15,7 @@
  * A PARTICULAR PURPOSE. See licenses/Krawall-LGPL-2.1.txt for the licence.
  */
 #include "audio_player.h"
+#include "audio_sample.h"
 
 void audio_player_set_volume(unsigned int volume, int fade)
 {

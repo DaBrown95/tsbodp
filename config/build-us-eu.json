@@ -13205,12 +13205,12 @@
         "frame_set_position": "0x080014a5",
         "frame_grid_point_to_cell": "0x08048af9",
         "frame_enable_object_flags": "0x08001c69",
-        "frame_need_effect_register_3b12c": "0x0803b12d",
         "frame_update_need_effect": "0x0802d7c1",
         "frame_grid_project_effect_point": "0x0803ba55",
         "frame_need_effect_action_available": "0x0802ecc1",
         "frame_need_effect_find_neighbor": "0x0802e5ed",
-        "frame_need_effect_handoff_bounds": "0x08007e69"
+        "frame_need_effect_handoff_bounds": "0x08007e69",
+        "frame_register_need_effect": "0x0803b12d"
       },
       "thumb_symbols": [
         "frame_grid_project_effect_point",
@@ -13220,7 +13220,7 @@
         "frame_need_effect_find_neighbor",
         "frame_need_effect_handoff_bounds",
         "frame_enable_object_flags",
-        "frame_need_effect_register_3b12c",
+        "frame_register_need_effect",
         "frame_update_need_effect"
       ],
       "negative_control": {
@@ -14209,6 +14209,193 @@
       "negative_control": {
         "before": "display_text_copy_string(cursor, in);",
         "after": "display_text_copy_string(cursor + 1, in);"
+      }
+    },
+    {
+      "name": "audio_player_tick",
+      "rom_offset": 304984,
+      "size": 176,
+      "source": "src/audio/player_tick.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "g_audio_player_volume_step": "0x020025b0",
+        "g_audio_player_volume_current": "0x02001640",
+        "g_audio_player_volume_target": "0x020025ac",
+        "g_audio_player_callback": "0x020025b4",
+        "audio_set_global_volume": "0x08049aa1",
+        "audio_update_channel_volumes": "0x08049ba5",
+        "audio_player_process_row": "0x08049f65",
+        "audio_player_process_between_row": "0x0804a3c9",
+        "audio_player_process_instruments": "0x0804a451",
+        "_call_via_r3": "0x0804ccfd"
+      },
+      "thumb_symbols": [
+        "audio_set_global_volume",
+        "audio_update_channel_volumes",
+        "audio_player_process_row",
+        "audio_player_process_between_row",
+        "audio_player_process_instruments",
+        "_call_via_r3"
+      ],
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "compiler_id": "gcc302",
+      "negative_control": {
+        "before": "++g_audio_player.tick",
+        "after": "(g_audio_player.tick += 2)"
+      }
+    },
+    {
+      "name": "audio_player_process_between_row",
+      "rom_offset": 304072,
+      "size": 136,
+      "source": "src/audio/player_process_between_row.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "g_audio_volume_effects": "0x08d6f77c",
+        "g_audio_track_effects": "0x08d6f518",
+        "_call_via_r2": "0x0804ccf9",
+        "_call_via_r3": "0x0804ccfd"
+      },
+      "thumb_symbols": [
+        "_call_via_r2",
+        "_call_via_r3"
+      ],
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "compiler_id": "gcc302",
+      "negative_control": {
+        "before": "if (c->effect) {",
+        "after": "if (c->effect > 1) {"
+      }
+    },
+    {
+      "name": "audio_player_process_instruments",
+      "rom_offset": 304208,
+      "size": 776,
+      "source": "src/audio/player_process_instruments.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "audio_set_channel_volume": "0x03000434",
+        "audio_set_channel_pan": "0x030004b4",
+        "audio_set_sample_step": "0x030003e8",
+        "audio_sample_release": "0x03000320",
+        "_call_via_r1": "0x0804ccf5",
+        "_call_via_r2": "0x0804ccf9",
+        "_call_via_r3": "0x0804ccfd"
+      },
+      "thumb_symbols": [
+        "_call_via_r1",
+        "_call_via_r2",
+        "_call_via_r3"
+      ],
+      "compiler_id": "gcc302_hwi32",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "c->i_vol_fade -= ins->volFade",
+        "after": "c->i_vol_fade += ins->volFade"
+      }
+    },
+    {
+      "name": "frame_register_need_effect",
+      "rom_offset": 241964,
+      "size": 964,
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "g_need_effect_action_sets": "0x08062b24",
+        "heap_clear": "0x08027a49",
+        "frame_grid_point_to_cell": "0x08048af9",
+        "frame_need_effect_pattern_cell": "0x0803bc71",
+        "frame_grid_need_effect_cell_available": "0x0803bba5",
+        "frame_register_bounds": "0x0803b905",
+        "frame_unregister_bounds": "0x0803b929",
+        "frame_need_effect_find_neighbor": "0x0802e5ed",
+        "frame_grid_occupancy": "0x0803b8ed",
+        "frame_grid_cell_extents": "0x08048d75",
+        "frame_need_effect_increment_counter": "0x0802ec89",
+        "frame_need_effect_handoff_bounds": "0x08007e69"
+      },
+      "thumb_symbols": [
+        "heap_clear",
+        "frame_grid_point_to_cell",
+        "frame_need_effect_pattern_cell",
+        "frame_grid_need_effect_cell_available",
+        "frame_register_bounds",
+        "frame_unregister_bounds",
+        "frame_need_effect_find_neighbor",
+        "frame_need_effect_increment_counter",
+        "frame_need_effect_handoff_bounds",
+        "frame_grid_occupancy",
+        "frame_grid_cell_extents"
+      ],
+      "source": "src/frame/frame_register_need_effect.c",
+      "negative_control": {
+        "before": "frame_register_bounds(context,cell_pointer,8);",
+        "after": "frame_register_bounds(context,cell_pointer,16);"
+      }
+    },
+    {
+      "name": "display_catalog_draw_selection",
+      "rom_offset": 137148,
+      "size": 312,
+      "source": "src/display/catalog_draw_selection.c",
+      "symbols": {
+        "g_display_scene_request_state": "0x03004350",
+        "g_display_catalog_state": "0x03003950",
+        "display_text_set_line_height": "0x0801aebd",
+        "display_fill_background_constant_rectangle": "0x0800d7fd",
+        "display_text_select_font": "0x0801ae75",
+        "display_catalog_draw_name": "0x0802d1bd",
+        "display_catalog_draw_details": "0x0802d379",
+        "display_text_copy_field_zero": "0x0801b151",
+        "display_scene_lookup_text": "0x08045009",
+        "display_text_draw_line": "0x0801a959",
+        "display_text_draw_all_lines": "0x0801b04d"
+      },
+      "thumb_symbols": [
+        "display_text_set_line_height",
+        "display_fill_background_constant_rectangle",
+        "display_text_select_font",
+        "display_catalog_draw_name",
+        "display_catalog_draw_details",
+        "display_text_copy_field_zero",
+        "display_scene_lookup_text",
+        "display_text_draw_line",
+        "display_text_draw_all_lines"
+      ],
+      "negative_control": {
+        "before": "scene > 4",
+        "after": "scene > 5"
+      }
+    },
+    {
+      "name": "display_text_set_line_height",
+      "rom_offset": 110268,
+      "size": 12,
+      "source": "src/display/text_set_line_height.c",
+      "symbols": {
+        "g_display_text_state": "0x03001a20"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "line_height = height;",
+        "after": "line_height = height + 1;"
       }
     }
   ],

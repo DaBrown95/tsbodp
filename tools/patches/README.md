@@ -18,6 +18,16 @@ The patch changes host compilation and execution. It does not establish the
 historical game compiler. Compiler outputs and source matches require the
 repository's matching gates.
 
+The separate `gcc302-hwi32-host-compat.patch` retains those three changes and
+overrides `HOST_BITS_PER_WIDE_INT` to 32 and `HOST_WIDE_INT` to `int` in
+`gcc/hwint.h` (Free Software Foundation, 1998). That file and this derived patch
+also use GPL version 2 or later. This selects the compiler integer arithmetic
+of an ILP32 host while retaining the native process's LP64 pointers and `long`.
+ARM instruction selection is not edited. The ordinary LP64 compiler remains
+separately pinned. Signed high-bit constants can naturally generate different
+Thumb instructions; complete matching comparisons and actual changed-source
+controls still decide whether a source replacement is accepted.
+
 The `binutils2101-host-compat.patch` file changes one host declaration in
 [GNU binutils 2.10.1](https://ftp.gnu.org/gnu/binutils/binutils-2.10.1.tar.gz):
 `libiberty/strerror.c` declares `sys_nerr` as `const`, matching current macOS

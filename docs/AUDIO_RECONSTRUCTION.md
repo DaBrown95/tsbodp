@@ -458,3 +458,58 @@ Source/header snapshots and complete compared bytes remain in the ignored
 `player-controls-canonical/` reports. Player start/stop, row/effect processing,
 tick scheduling and instrument envelopes still have excluded candidates;
 no audible, timing or gameplay claim follows from these matches.
+
+## Sequence ticks, between-row effects and instrument envelopes
+
+Three connected C extents add 1,088 bytes: tick callback `0x4A758` (176),
+between-row effect dispatcher `0x4A3C8` (136), and instrument-envelope updater
+`0x4A450` (776). Together they complete the timing callback installed by the
+published resume control and called by the accepted frame mixer. The main
+row decoder remains unconverted at `0x49F64`; it is an explicit dependency,
+so this is not a claim that the entire sequence player is reconstructed.
+
+The tick increments an unsigned byte at player `+0x0F`, compares the wrapped
+value with speed at `+0x0E`, and selects row or between-row processing. A flag
+at `+0x20` gates instrument processing, using the song's first byte as its
+count. During a fade it updates the current volume, refreshes the global and
+channel volumes, and clears the signed step when the target is reached. The
+notification callback receives code one and a zero second argument, as observed
+in the ROM; this differs from the pinned current Krawall source. The real tick
+source control increments by two and changes one byte.
+
+The between-row dispatcher advances through 96-byte track records. Its volume
+column byte is at `+0x5D`; the high nibble indexes eight-byte descriptors at
+`0x08D6F77C`. The ordinary effect byte at `+8` indexes twelve-byte descriptors
+at `0x08D6F518`. Enabled callbacks and optional second callbacks run with a zero
+second argument. The effect byte is reloaded after the first callback, preserving
+its possible mutation. Neither index gets a newly invented clamp. Changing the
+nonzero effect condition to greater than one changes two bytes.
+
+The instrument path observes the handle at track zero, signed volume/gain/pan
+at four/five/six, period at `+0x0E`, instrument pointer at `+0x14`, vibrato table
+at `+0x24`, active flag at `+0x4B`, volume-envelope fields at `+0x4C` through
+`+0x55`, pan-envelope fields at `+0x56` through `+0x5C`, and vibrato phase at
+`+0x5E`. The player frequency converter is an indirect call through `+0x28`.
+The track array is represented without an asserted allocation count. Other
+track and player bytes remain explicit unknown fields.
+
+Instrument envelopes use naturally aligned four-byte node records and
+52-byte envelope views at instrument `+0xC0` and `+0xF4`. The preceding 192
+bytes remain unclassified in the public view. Fade/sustain/loop transitions,
+volume and pan application, inactive-handle release and sample vibrato follow
+the complete observed path. Pan addition narrows to a signed byte before the
+minus/plus 64 clamp. The source uses ordinary C and inline semantic helpers,
+without register constraints or instruction assembly. Changing fade subtraction
+to addition produces a one-byte mismatch. The accepted ARM mixer functions are
+called through explicit long-transfer declarations at their real RAM addresses.
+
+These algorithms and layout names adapt the pinned Krawall `lib/player.c` and
+`lib/mtypes.h`, preserving its LGPL notices and recording game-specific changes.
+The tick and between-row bodies use the ordinary GCC 3.0.2 profile at `-O3`;
+the envelope body explicitly selects the separately pinned 32-bit compiler
+integer profile described in [the host-width note](GCC302_HOST_WIDTH.md).
+Fresh canonical source controls, complete expected/candidate bytes, commands
+and shared-header caller proofs remain under `reports/audio-root/`.
+The five published player controls remain exact after the field refinements.
+Player start/stop, row decoding and individual effect callbacks remain excluded
+where unmatched. No audible or gameplay validation is claimed.

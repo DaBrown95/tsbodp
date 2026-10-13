@@ -10,6 +10,8 @@ ARM_PIN = Path('config/arm-toolchain.json')
 ARM_PROFILE = Path('toolchains/arm-host-profile.json')
 GCC302_PIN = Path('config/gcc302-toolchain.json')
 GCC302_PROFILE = Path('toolchains/gcc302-host-profile.json')
+GCC302_HWI32_PIN = Path('config/gcc302-hwi32-toolchain.json')
+GCC302_HWI32_PROFILE = Path('toolchains/gcc302-hwi32-host-profile.json')
 BINUTILS2101_PIN = Path('config/binutils2101-toolchain.json')
 BINUTILS2101_PROFILE = Path('toolchains/binutils2101-host-profile.json')
 
@@ -53,6 +55,8 @@ def compiler_selection(function, flags):
         'agbcc': ('toolchains/agbcc/gcc/agbcc', PIN, PROFILE, ('Thumb',)),
         'agbcc_arm': ('toolchains/agbcc-arm-build/cc1', ARM_PIN, ARM_PROFILE, ('ARM',)),
         'gcc302': ('toolchains/gcc302-build/gcc/cc1', GCC302_PIN, GCC302_PROFILE, ('Thumb', 'ARM')),
+        'gcc302_hwi32': ('toolchains/gcc302-hwi32-build/gcc/cc1', GCC302_HWI32_PIN,
+                        GCC302_HWI32_PROFILE, ('Thumb', 'ARM')),
     }
     if not isinstance(compiler_id, str) or compiler_id not in compilers:
         raise ValueError('Unknown compiler_id')
@@ -65,9 +69,9 @@ def compiler_selection(function, flags):
         raise ValueError('Compiler flags must be a list of nonempty strings')
     if mode == 'ARM' and '-mthumb' in selected_flags:
         raise ValueError('ARM backend cannot compile Thumb instructions')
-    if compiler_id == 'gcc302' and mode == 'Thumb' and '-mthumb' not in selected_flags:
+    if compiler_id in ('gcc302', 'gcc302_hwi32') and mode == 'Thumb' and '-mthumb' not in selected_flags:
         raise ValueError('GCC302 Thumb selection requires explicit -mthumb')
-    if compiler_id == 'gcc302' and mode == 'ARM' and '-marm' not in selected_flags:
+    if compiler_id in ('gcc302', 'gcc302_hwi32') and mode == 'ARM' and '-marm' not in selected_flags:
         raise ValueError('GCC302 ARM selection requires explicit -marm')
     if mode == 'Thumb' and '-marm' in selected_flags:
         raise ValueError('Thumb selection cannot request ARM instructions')

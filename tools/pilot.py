@@ -14,7 +14,8 @@ import struct
 from elftools.elf.elffile import ELFFile
 from project import ROOT, audit, compare_bytes, write_report
 from toolchain import (load_profile, verify_native, ARM_PIN, ARM_PROFILE,
-                       GCC302_PIN, GCC302_PROFILE, compiler_selection,
+                       GCC302_PIN, GCC302_PROFILE, GCC302_HWI32_PIN,
+                       GCC302_HWI32_PROFILE, compiler_selection,
                        verify_gcc302_source, optimization_flags, assembler_selection,
                        BINUTILS2101_PIN, BINUTILS2101_PROFILE, verify_binutils2101_source,
                        modern_assembler_abi_flags)
@@ -188,18 +189,24 @@ def main():
             report['helper_sha256'][str(arm_profile)] = hashlib.sha256((ROOT / arm_profile).read_bytes()).hexdigest()
         lock = {**lock, 'native_tool_sha256': {**lock['native_tool_sha256'], **arm_lock['native_tool_sha256']}}
         report['compiler_profiles']['agbcc_arm'] = {'pin': str(ARM_PIN), 'compiler': arm_lock['compiler']}
-    gcc302_lock = None
-    if 'gcc302' in selected_ids:
-        gcc302_lock, gcc302_profile = load_profile(ROOT, GCC302_PIN, GCC302_PROFILE)
+    gcc302_locks = []
+    for compiler_id, pin, local, setup in (
+            ('gcc302', GCC302_PIN, GCC302_PROFILE, 'tools/setup_gcc302.py'),
+            ('gcc302_hwi32', GCC302_HWI32_PIN, GCC302_HWI32_PROFILE,
+             'tools/setup_gcc302_hwi32.py')):
+        if compiler_id not in selected_ids:
+            continue
+        gcc302_lock, gcc302_profile = load_profile(ROOT, pin, local)
         verify_native(ROOT, gcc302_lock, report['host_clang'])
         verify_gcc302_source(ROOT, gcc302_lock)
-        for path in (GCC302_PIN, Path('tools/setup_gcc302.py'),
+        gcc302_locks.append(gcc302_lock)
+        for path in (pin, Path(setup), Path('tools/setup_gcc302.py'),
                      Path(gcc302_lock['compiler']['compatibility_patch'])):
             report['helper_sha256'][str(path)] = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
         if gcc302_profile:
             report['helper_sha256'][str(gcc302_profile)] = hashlib.sha256((ROOT / gcc302_profile).read_bytes()).hexdigest()
         lock = {**lock, 'native_tool_sha256': {**lock['native_tool_sha256'], **gcc302_lock['native_tool_sha256']}}
-        report['compiler_profiles']['gcc302'] = {'pin': str(GCC302_PIN), 'compiler': gcc302_lock['compiler']}
+        report['compiler_profiles'][compiler_id] = {'pin': str(pin), 'compiler': gcc302_lock['compiler']}
     selected_assembler_ids = {assembler_selection(f)['assembler_id'] for f in manifest['functions']}
     report['assembler_profiles'] = {'binutils': {'pin': 'config/pilot-toolchain.json',
                                                 'object_abi_flags': modern_assembler_abi_flags()}}
@@ -318,7 +325,7 @@ def main():
            for name, digest in report['helper_sha256'].items()):
         raise ValueError('Source helpers changed during the run; retry with stable inputs')
     verify_native(ROOT, lock, report['host_clang'])
-    if gcc302_lock:
+    for gcc302_lock in gcc302_locks:
         verify_gcc302_source(ROOT, gcc302_lock)
     if binutils2101_lock:
         verify_binutils2101_source(ROOT, binutils2101_lock)

@@ -1572,6 +1572,71 @@ Both new sources compile and link identically, and both changed-source controls
 reject by one byte. Ten existing consumers were rechecked at 1,112 identical
 bytes, with ten rejected controls, including the accepted removal wrapper at
 `0x2E1E8` (56 bytes). The 24 positive/control receipts are under
-`reports/agents/frame-input/camera-map/need-unregister-promoted/`. Registration,
-the larger renderer and selected map-tile loading remain excluded candidates.
+`reports/agents/frame-input/camera-map/need-unregister-promoted/`. The larger
+renderer and selected map-tile loading remain excluded candidates. Registration
+is reconstructed in the next batch below.
 This closes the statically observed removal path; it adds no runtime claim.
+
+
+### Registering need-effect cells and publishing their points
+
+| Address | Function | Verified C bytes |
+| --- | --- | ---: |
+| `0x0803B12C` | `frame_register_need_effect` | 964 |
+
+This closes the forward path from the accepted `frame_configure_need_effect`
+caller through cell transformation, availability, grid masks, neighbor counters,
+point handoff and the reverse removal path above. The same byte-return ABI and
+address now replace the caller's earlier `frame_need_effect_register_3b12c`
+alias. Names describe the observed data flow; they do not identify a gameplay
+need or action. The entry at `0x3B4F0` and the complete comparison establish its
+964-byte extent, including the original switch table, literal pool and alignment.
+
+Mode 1 first calls the same function in mode 0 and requires result 1. That
+validation pass also records target coordinates at state `+0xA4`; it is not a
+read-only predicate. On success the outer call clears 104 bytes at `+0x74` and
+sets the object's mode byte at `+0x82`. Both calls convert the signed high halves
+of object position into a packed grid anchor, then walk a pointed 5 by 5 action
+pattern through the already matched direction transform. Failed projection or
+an unavailable cell returns zero at the observed stage. No rollback is added.
+
+Action 1 and action 5 register mask 1. Action 2 increments an action-3 neighbor's
+`+0xDC` counter when one is found, copies the neighbor object's state point at
+`+0xCC` into that object's `+0xA4`, then performs the existing point handoff; it
+registers mask 8 and removes mask 4. Action 3 uses occupancy bit 8 to choose an
+action-2 neighbor and counter increment, or registers mask 4. Its occupied branch
+preserves the original unchecked neighbor use. Action 4 registers mask 2 and
+appends candidate coordinates at `+0x74`. Actions 1, 2, 3 and 5 append target
+coordinates at `+0xA4`, including during mode 0. Action 0 and out-of-range action
+values add no mask. These numeric masks remain the strongest supported labels.
+
+After committing, the function reads cell extents for target coordinates, or
+candidate coordinates if no target was recorded. The point at `+0xCC` receives
+maximum x and minimum y; the point at `+0xD4` receives minimum x and maximum y.
+The empty-set values remain `(0, 5000)` and `(5000, 0)`. The guarded registration
+header records these observed offsets, twelve four-byte candidate records and
+ten four-byte target records. Clearing lengths and existing membership readers
+support those access views; this function adds no capacity clamp, and the
+serialized patterns' count invariants and complete state allocation remain
+unresolved. The words retain provisional `far_bounds` and `near_bounds` names.
+
+Ordinary local near/far point records, initialized by component assignments and
+published as complete points, reproduce the original paired transfers. Their
+lifetimes also give the observed register and spill layout. The cell output
+pointer is explicitly bound to callee-saved `r5` across the scan calls; candidate
+x/y and target x use that pointer, while target y reads the packed local cell.
+The equivalent unbound source remains a useful 964-byte candidate with 22
+comparison differences. A small semantic table-access helper keeps the row and
+column index calculation separate. No original instruction body or alignment
+bytes are embedded in the C. The earlier 960-, 940- and 964-byte failed candidates,
+raw mismatches, corrected post-counter neighbor reload and final lifetime trials
+remain under the ignored camera-map reports.
+
+The canonical replacement compiles and links identically. Changing the action-2
+registration mask from 8 to 16 rejects by one byte. Eleven accepted consumers
+of the placement header were rechecked at 1,448 identical bytes, and all eleven
+of their real changed-source controls also reject by one byte. The 24 receipts
+are under `reports/agents/frame-input/camera-map/need-registration-promoted/`.
+This is a static and compiler-verified registration/removal subsystem path;
+no runtime or gameplay claim is added. The larger renderer and selected map-tile
+loading still retain excluded candidates.

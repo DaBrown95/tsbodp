@@ -183,6 +183,8 @@ def main():
         subprocess.run([sys.executable, ROOT / 'tools/setup_arm.py'], check=True)
     if 'gcc302' in selected_ids:
         subprocess.run([sys.executable, ROOT / 'tools/setup_gcc302.py'], check=True)
+    if 'gcc302_hwi32' in selected_ids:
+        subprocess.run([sys.executable, ROOT / 'tools/setup_gcc302_hwi32.py'], check=True)
     if any(assembler_selection(f)['assembler_id'] == 'binutils2101' for f in manifest['functions']):
         subprocess.run([sys.executable, ROOT / 'tools/setup_binutils2101.py'], check=True)
     print('Setup complete. Put your USA/Europe ROM in baseroms/, then run make build.')
