@@ -1,16 +1,26 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 31 C functions and 3,768 bytes:
+The connected route-search path reconstructs 40 C functions and 5,392 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
-and six further variant/job-73 and shared value/random functions. Every complete
+and six further variant/job-73 and shared value/random functions, followed by
+the nine-function variant controller and parameter-indicator closure. Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
 Neither these matches nor the full-ROM equality gate establish runtime behaviour.
 
 | ROM offset | Function | Verified bytes |
 | --- | --- | ---: |
+| `0x3CB14` | `frame_step_variant_attachment_job` | 1016 |
+| `0x3D00C` | `frame_dispatch_variant_attachment_job` | 24 |
+| `0x3D02C` | `frame_update_attachment_parameter` | 188 |
+| `0x3D200` | `frame_read_parameter_percentage` | 20 |
+| `0x2B9D8` | `frame_clear_attachment_need_countdown` | 16 |
+| `0x1A660` | `frame_create_attachment_parameter_indicator` | 156 |
+| `0x1A6FC` | `frame_complete_attachment_parameter_indicator` | 112 |
+| `0x1A76C` | `frame_set_attachment_parameter_indicator` | 64 |
+| `0x1A7AC` | `frame_attachment_parameter_indicator_tick` | 28 |
 | `0x3CF84` | `frame_begin_variant_attachment_job` | 136 |
 | `0x3D3D4` | `frame_begin_attachment_job_73` | 64 |
 | `0x3D214` | `frame_step_attachment_job_73` | 388 |
@@ -376,8 +386,8 @@ Six further matching functions add 748 bytes. Effect-definition rows 35 and 36
 store the job-73 initializer and dispatcher in slots `+0xC/+0x10`. The direct
 388-byte step is called by that dispatcher rather than appearing as a word
 pointer in the bounded ROM scan. Rows 10, 46, 47, 48, 94 and 103 store the
-variant initializer at `+0xC`; their corresponding original dispatcher and
-configuration callback remain explicit unconverted regions. The raw aligned
+variant initializer at `+0xC`; their dispatcher is now matching C, while the configuration callback at
+`0x3CF38` remains an explicit unconverted region. The raw aligned
 pointer references and row arithmetic are retained in
 `dependencies/attachment-job73-definition-slots.json`. These are static
 connections, without runtime reachability evidence.
@@ -391,7 +401,7 @@ requests route mode five with status flag one and animation six. Its result
 reports allocation success; attachment and route results are not propagated.
 The table stride and signed byte are established by its loads, multiply shift
 and signed comparison. Other row field names in the bounded header reflect
-observed accesses in the still unmatched 1,016-byte controller, and stay
+observed accesses in the now matching 1,016-byte controller, and stay
 provisional. The initializer's ordinary integer address accumulator retains
 that table/stride calculation without register bindings or instruction glue.
 
@@ -441,6 +451,102 @@ one compared byte and rejects. Thirteen previously accepted random-range
 callers were reverified with their own real controls after the new definition
 was introduced. Complete bytes, commands and current-header snapshots are in
 `actor-attachment-job73-canonical/`; ready metadata is
-`actor-attachment-job73-batch-manifest.json`. The larger variant controller,
-its parameter-indicator lifecycle, the neighbor producer and target selector
+`actor-attachment-job73-batch-manifest.json`. The variant configuration callback, neighbor producer and target selector
 remain unconverted and receive no C coverage.
+
+
+## Variant attachment controller and parameter indicator
+
+Nine further functions add 1,624 matching C bytes. The 24-byte dispatcher finds
+an attachment record and immediately passes it to the 1,016-byte controller;
+there is no added null check. The aligned definition-row evidence already
+recorded above connects that dispatcher to kinds 10, 46, 47, 48, 94 and 103.
+The phase table embedded in the controller maps zero, six, nine, eight and one
+to active bodies; other values return the unchanged result one. The unmatched
+72-byte configuration selector at `0x3CF38` remains outside source coverage.
+
+At phase zero, kind 47 tests the world exclusion predicate or the primary-actor
+value gate with amount 20. A failed gate requests animation five, selects phase
+eight and chooses cue 85/86 from the attachment option. A low selected need
+instead requests direction four and animation 85 with cue 136/137. Otherwise
+the row's optional bounds handoff runs, and a parameter other than seven reads
+its current signed high-byte level. A level other than ten creates an indicator
+with variant one and faces the owner center. Kinds 47 and 10 face the owner's
+reversed direction; other kinds use the center calculation. The controller
+requests the row animation, selects phase six, writes actor timer 90 and
+commits owner mode three. Variant zero clears owner flag one. Other variants
+except three play a non-255 row cue and save its handle at owner `+0xE0`.
+The owner's halfword phase counter at `+0x5E` starts at 15.
+
+Phase six uses a post-increment of that halfword: variants zero and three play
+the row cue after the previous counter exceeds 28, then clear it. A selected
+parameter's signed level is read before computing its fractional percentage,
+updating the indicator and advancing the parameter. That row index retains one
+local lifetime across those three calls. A selected adjustment need other than
+eight uses definition byte `+0x23`. Completion is selected when the level rises
+by one; level ten instead decrements the actor word timer and adjusts need 49.
+The shared need/timer helper's false low byte selects phase one; kind 103 also
+requests animation six and a mode-five route to the saved owner position. A
+nonzero row wait-animation byte then overrides that selection with phase nine.
+Phase nine waits for actor flag `0x400000`. Phase eight waits for that same flag,
+then selects one, requests animation one and clears need countdown `+0x20`.
+Phase one requests animation one and commits mode two, marks a retained
+indicator state one and clears its pointer, restores owner flag one for kind
+94, optionally reinstalls the resource callback and stops the saved sample.
+Only this phase returns two; the remaining paths return one.
+
+The 32-byte row keeps the same offsets. Its animation view at `+4` is now a
+full word narrowed by the byte animation API. A byte-plus-padding trial produced
+incorrect temporary lifetimes in the controller; the word view produced the
+complete original extent with ordinary C. This is compiler/type evidence,
+not independent proof of a serialized field width. The row's other observed
+words are initial code `+8`, timer need `+0xC`, adjustment need `+0x10` and
+parameter index `+0x14`; its cue, signed attachment and option bytes occupy
+`+0x18..+0x1C`. The stored indicator pointer `+0x58`, saved position `+0x64/+0x68`
+and sample handle `+0xE0` remain bounded access views, with unrelated fields
+explicit. No units or original gameplay labels are assigned to these states.
+
+The 188-byte parameter updater indexes words at `0x030039E8` and a ten-column
+rate table at `0x0807F580`. For initial high-byte values zero through nine,
+key bit one for the local input player multiplies the increment by eight.
+Otherwise the plain increment is added. A signed high byte read after the
+write detects crossing into the next level. The code then stores exactly
+`(previous + 1) << 24`, refreshes actor counters, sets local UI word flag
+`0x40000` in a 56-byte row at `0x03004130`, creates a completion transient and
+plays sequence notification 56. The 20-byte percentage helper extracts the
+low 24 bits, multiplies by 100 with word arithmetic and returns the upper byte
+of that product. One semantic `r0` value lifetime is required for this leaf's
+code generation. It adds no instruction assembly and supplies no runtime
+proof. The word-wrap behavior and the separate signed/unsigned high-byte uses
+are retained rather than unified into a speculative numeric type.
+
+The 156-byte indicator factory allocates object kind 26 without a new failure
+check, retains the owner at object `+0x90`, places it at owner position minus
+`0x70000/0x310000`, installs flags `0x100009`, state zero, a variant resource and
+palette, the 28-byte state callback and the resource pre-step callback. Its
+variant formal is a full word; the actor-id store narrows it. The resource and
+palette tables remain explicit at `0x08052DE0` and `0x08052E00`. The setter
+computes an 8-bit `100 / (frame_count - 1)` divisor, calls the distinct unsigned
+division backend for percentage/divisor, and changes the animation frame only
+when it differs from the stored previous frame. The initial promoted operands
+use the signed backend at `0x0804CD2C`; the second call uses the unsigned backend
+at `0x0804CED8`. Resource validity, nonzero divisors and variant bounds remain
+caller preconditions. The completion factory creates transient kind six,
+group zero, index three, retaining owner and position, phase three, flags
+`0x248A`, height 60, countdown one and offsets five/twenty. The indicator callback
+sets flag two in state one and otherwise leaves the object alone.
+
+All nine complete linked extents match under the existing pinned agbcc profile.
+Only the percentage value has a semantic register constraint; three leaf
+sources contain alignment-only directives. Every actual changed-source control
+rejects, including controller timer 90 to 91, parameter level limit nine to
+eight and indicator flags/height/divisor changes. The six existing attachment
+header consumers remain exact with their own controls after the same-layout
+animation refinement. The 128-byte map-registration source correction also
+remains exact with its control and adds zero coverage. Positive/control bytes,
+commands and current-header snapshots are retained under
+`actor-attachment-controller-canonical/`, with ready metadata in
+`actor-attachment-controller-batch-manifest.json`. The configuration selector,
+neighbor producer, target selector, underlying random generator and wider
+allocation/lookup guarantees remain unresolved. Full-ROM equality and static
+callback mapping are separate from runtime behavior, which was not tested.

@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 150 C functions spanning 24,772 verified bytes. The
+This batch reconstructs 159 C functions spanning 26,396 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -556,14 +556,16 @@ sparse switch; omitting no-op cases produced a nonmatching jump table.
 
 State 16 connects input movement, the view-effect mode, timed animations,
 needs, world-condition checks and scene handoffs. Signed tick bytes at game
-state `+0x741/+0x742` trigger counter reduction above 10 and counter addition
-above 4, then reset. Reduction truncates `counter - counter * 0.1` through a
-signed integer conversion before storing the halfword at `+0x744`; addition
-uses a halfword rate table at `0x08D70D58` indexed by stage word `+0x440`.
-The counter's gameplay unit remains provisional. A first compound-assignment
-candidate selected a different unsigned soft-float conversion and failed to
-link under the supported helper set; its source and compiler artifacts remain
-local. The accepted expression reproduces the observed signed conversion.
+state `+0x741/+0x742` trigger a proportional counter adjustment above 10 and
+table-rate addition above 4, then reset. The proportional operation truncates
+`counter + counter * 0.1` through the unsigned-word conversion before storing
+the halfword at `+0x744`; the table addition uses the halfword rate table at
+`0x08D70D58` indexed by stage word `+0x440`. The counter's gameplay unit remains
+provisional. The earlier inferred name `frame_reduce_actor_scene_counter` is
+retained as a historical label; direct helper inspection establishes addition,
+not the previously inferred reduction. The source and helper metadata now
+reflect that observation, preserving every original byte and source control.
+Useful earlier failed candidates remain local.
 
 The handler's 75-entry substate table spans selectors 1 through 75, with every
 other entry leading to the default exit. Substates 2 and 3 use direction input,
@@ -1055,3 +1057,50 @@ previous random-range consumers remain exact with their own controls. Table
 stride, callback rows, ignored helper results, double timer decrement and
 remaining controller/indicator/RNG uncertainties are recorded in
 `ACTOR_ROUTE_SEARCH.md`. There is no runtime or gameplay claim.
+
+
+## Double helper identities and corrected actor expressions
+
+The connected menu text renderer exposed two incorrect earlier helper aliases.
+Direct inspection identifies `0x0804D49C` as double addition and `0x0804D4CC` as
+double subtraction. Both unpack two operands, call the same addition core at
+`0x0804D230`, then pack the result at `0x0804D010`; only the second entry flips
+the unpacked second operand's sign at `+4`. This agrees with the inspected local
+compiler's `fp-bit.c` add/sub structure. These helper bodies remain unconverted
+and receive no C coverage from the alias audit.
+
+The entry at `0x0804CDC4` is an unsigned double-to-word conversion wrapper. It
+compares its input with `2^31`; below that threshold it calls the signed core
+at `0x0804DCA4`, otherwise it adds `-2^31`, calls that core and applies the high
+bit bias. It is now named `__fixunsdfsi` consistently. The speed factors in
+state 42 and the input-velocity helper retain explicit unsigned conversion
+followed by signed word interpretation. Their caller-valid finite speed range
+remains a precondition; the casts do not establish portable behavior for all
+negative, overflowing or non-finite double inputs.
+
+The proportional scene-counter expression now uses addition and unsigned word
+conversion. State 27's turn timer likewise uses `speed_term * 0.4 + 2.0`, matching
+the addition entry actually called by the original. The former C subtraction
+expressions linked exactly only because their compiler helper names were
+incorrectly aliased; those source meanings and aliases have been corrected.
+All four complete extents still match and their existing real source controls
+reject: state 42 (780 bytes), input velocity (116), counter adjustment (68) and
+state 27 (1,116). This refinement adds zero functions and zero coverage bytes.
+Raw backend instructions, immutable reference bytes, revised source, commands
+and comparisons are retained under the ignored `reports/float-alias-audit/`.
+It is a static and compiler finding, with no actor/gameplay test claimed.
+
+
+## Variant attachment parameter coordination
+
+Nine connected controller, dispatcher, parameter and indicator functions add
+1,624 verified C bytes. The six previously reconstructed variant/job-73 helpers
+now join the 1,016-byte variant phase controller and its indicator lifecycle.
+The shared 32-byte row retains every offset while its animation word is narrowed
+through the byte API. Complete extents and all nine real controls pass; six old
+header consumers also remain exact and reject their own controls. The fraction
+helper uses one semantic register lifetime, while the larger controller and
+indicator bodies use ordinary C. The phase table, callback-row connections,
+word/high-byte arithmetic, partial layouts and unresolved configuration-selector
+preconditions are recorded in `ACTOR_ROUTE_SEARCH.md`. No runtime or gameplay
+behavior is inferred from these static and compiler matches.

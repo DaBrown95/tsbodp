@@ -62,10 +62,10 @@ void frame_actor_state_42(struct FrameObject *object)
    out=&velocity;
    if(fast) {
     flags=object->flags; direction=((struct FrameActorObject *)object)->direction;
-    speed=(int)(((struct FrameActorObject *)object)->speed*1.1);
+    speed=(int)(unsigned int)(((struct FrameActorObject *)object)->speed*1.1);
    } else {
     flags=object->flags; direction=((struct FrameActorObject *)object)->direction;
-    speed=(int)(((struct FrameActorObject *)object)->speed*0.6);
+    speed=(int)(unsigned int)(((struct FrameActorObject *)object)->speed*0.6);
    }
    frame_make_velocity(out,flags,direction,speed);
    frame_request_animation((struct FrameCommandObject *)object,55);
@@ -91,10 +91,10 @@ void frame_actor_state_42(struct FrameObject *object)
    }
    if(idle==0) {
     if(g_input_current[g_frame_actor_need_input.local_player]&2) {
-     frame_make_velocity(out,object->flags,((struct FrameActorObject *)object)->direction,(int)(((struct FrameActorObject *)object)->speed*1.1));
+     frame_make_velocity(out,object->flags,((struct FrameActorObject *)object)->direction,(int)(unsigned int)(((struct FrameActorObject *)object)->speed*1.1));
      frame_request_animation((struct FrameCommandObject *)object,55);
     } else {
-     frame_make_velocity(out,object->flags,((struct FrameActorObject *)object)->direction,(int)(((struct FrameActorObject *)object)->speed*0.6));
+     frame_make_velocity(out,object->flags,((struct FrameActorObject *)object)->direction,(int)(unsigned int)(((struct FrameActorObject *)object)->speed*0.6));
      frame_request_animation((struct FrameCommandObject *)object,55);
     }
     frame_set_variant_state(object,67);

@@ -159,7 +159,7 @@ def render(data, output):
     draw.text((24, 18), "The Sims: Bustin' Out — Matching Progress", fill=FOREGROUND, font=title)
     draw.text((24, 58), 'USA / Europe  ·  ROM-wide static inventory  ·  Function boundaries provisional', fill=MUTED, font=body)
     x = 24
-    for label, color in (('Exact C', COLORS['exact_c']), ('ARM glue', COLORS['exact_glue']), ('Code entries', COLORS['mapped_code']), ('Candidates', COLORS['candidate']), ('Mapped data', COLORS['mapped_data']), ('Unresolved', COLORS['unresolved'])):
+    for label, color in (('Exact C', COLORS['exact_c']), ('ARM/Thumb glue', COLORS['exact_glue']), ('Code entries', COLORS['mapped_code']), ('Candidates', COLORS['candidate']), ('Mapped data', COLORS['mapped_data']), ('Unresolved', COLORS['unresolved'])):
         draw.rectangle((x, 92, x + 12, 104), fill=color)
         draw.text((x + 21, 88), label, fill=FOREGROUND, font=body)
         x += 21 + draw.textlength(label, font=body) + 34
@@ -208,7 +208,7 @@ def render(data, output):
         draw.rectangle((left, 744, right, 768), fill=COLORS[r['status']])
     draw.text((24, 725), 'Entire 16 MiB ROM — every byte accounted for', fill=MUTED, font=small)
     draw.text((24, 785), 'Complete ROM: identical to reference  ·  Source reconstruction: incomplete', fill=FOREGROUND, font=heading)
-    draw.text((24, 816), f"{data['compiled_c_bytes']:,} C bytes + {data['assembly_glue_bytes']:,} ARM glue bytes  /  {data['rom_bytes']:,} total ROM bytes  ·  {data['unconverted_rom_bytes']:,} remain unconverted", fill=MUTED, font=body)
+    draw.text((24, 816), f"{data['compiled_c_bytes']:,} C bytes + {data['assembly_glue_bytes']:,} ARM/Thumb glue bytes  /  {data['rom_bytes']:,} total ROM bytes  ·  {data['unconverted_rom_bytes']:,} remain unconverted", fill=MUTED, font=body)
     draw.text((24, 851), 'Tile area follows estimated extents; main code and startup/audio use separate scales.', fill=MUTED, font=small)
     draw.text((24, 877), 'Verified build: ' + data['verified_at'], fill=MUTED, font=small)
     output.parent.mkdir(parents=True, exist_ok=True)

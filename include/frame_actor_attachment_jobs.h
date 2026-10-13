@@ -7,10 +7,11 @@
 #include "frame_actor_actions.h"
 #include "audio_game.h"
 
-/* A 32-byte ROM row; names describe the observed attachment controller reads. */
+/* A 32-byte ROM row. The animation word is narrowed by the animation API.
+ * Names describe observed controller reads, rather than a complete format. */
 struct FrameAttachmentRouteVariant {
     unsigned int kind;
-    unsigned char animation, unknown05[3];
+    unsigned int animation;
     unsigned int initial_code, timer_need, adjustment_need, parameter;
     unsigned char cue;
     signed char attachment;

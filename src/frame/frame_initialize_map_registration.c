@@ -1,8 +1,8 @@
 #include "frame_grid_math.h"
 unsigned char frame_initialize_map_registration(struct FrameMapRegistration *registration, unsigned short width,unsigned short height,unsigned char cell_size) {
  struct FramePoint coordinates, point, origin;
- unsigned short columns=(unsigned int)width/cell_size;
- unsigned short rows=(unsigned int)height/cell_size;
+ unsigned short columns=width/cell_size;
+ unsigned short rows=height/cell_size;
  unsigned int extent=columns/2+rows;
  registration->data=0;
  registration->cell_size=cell_size;

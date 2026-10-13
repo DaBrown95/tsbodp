@@ -1,5 +1,5 @@
 /*
- * Adapted from FastIntDivide and FastIntDivideRem in Krawall's lib/tools.h.
+ * Adapted from FastIntDivide, FastIntDivideRem and FastIntRem in Krawall's lib/tools.h.
  * Copyright (C) 2001-2005, 2013 Sebastian Kienzl.
  * Source: https://github.com/sebknzl/krawall/tree/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0
  * Changes: separate ARM and Thumb wrappers, project names and coverage markers.
@@ -44,6 +44,26 @@ static __inline__ void audio_bios_divide_thumb(int numerator, int denominator,
   ".Ltsbodp_divide_skip_%=:\n"
   " ldr r2,%0\n"
   " str r0,[r2]\n"
+  "__tsbodp_glue_audio_divide_end_%=:\n"
+  : "=m" (result)
+  : "r" (numerator), "r" (denominator)
+  : "r0", "r1", "r2", "r3"
+ );
+}
+/* Explicit Thumb BIOS remainder glue, with the same zero-denominator branch.
+ * The result is read from r1 and this twelve-byte span is counted separately. */
+static __inline__ void audio_bios_remainder_thumb(int numerator, int denominator,
+                                                int *result)
+{
+ __asm__ volatile (
+  "__tsbodp_glue_audio_divide_begin_%=:\n"
+  " mov r0,%1\n"
+  " mov r1,%2\n"
+  " beq .Ltsbodp_remainder_skip_%=\n"
+  " swi 6\n"
+  ".Ltsbodp_remainder_skip_%=:\n"
+  " ldr r2,%0\n"
+  " str r1,[r2]\n"
   "__tsbodp_glue_audio_divide_end_%=:\n"
   : "=m" (result)
   : "r" (numerator), "r" (denominator)

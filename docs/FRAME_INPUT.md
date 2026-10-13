@@ -1640,3 +1640,21 @@ are under `reports/agents/frame-input/camera-map/need-registration-promoted/`.
 This is a static and compiler-verified registration/removal subsystem path;
 no runtime or gameplay claim is added. The larger renderer and selected map-tile
 loading still retain excluded candidates.
+
+
+## Registration division helper identity refinement
+
+The 128-byte `frame_initialize_map_registration` (`0x48B78`) now uses ordinary
+signed integer promotions for its `unsigned short` width/height and
+`unsigned char` cell-size parameters. Inspection distinguishes signed division
+at `0x0804CD2C` from the unsigned backend at `0x0804CED8`; the old
+`__udivsi3` alias incorrectly described the signed callee. Removing the two
+unsigned casts and binding `__divsi3` to the actual signed entry preserves every
+linked byte and rejects the existing origin-offset changed-source control.
+For the observed formal domains (width/height at most 65,535 and a nonzero
+cell size at most 255), signed and unsigned quotients agree. Nonzero cell size
+remains a caller precondition; no new zero check or runtime claim is added.
+This source/alias correction contributes zero functions and zero coverage bytes.
+The bounded raw helper comparison and before/after source proofs are retained
+under ignored `reports/agents/vblank-wrapper/division-alias-audit/` and the fresh
+`actor-attachment-controller-canonical/` receipts.

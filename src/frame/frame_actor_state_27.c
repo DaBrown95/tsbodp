@@ -75,7 +75,7 @@ void frame_actor_state_27(struct FrameObject *object)
      if(--g_frame_actor_turn_timer==255) {
       frame_set_actor_turn_direction(object,direction);
       if(g_frame_actor_controlled_speed<=0x10000&&g_frame_actor_turn_ready==1) {g_frame_actor_turn_timer=1;g_frame_actor_controlled_speed=1;}
-      else g_frame_actor_turn_timer=(unsigned char)(((g_frame_actor_controlled_speed/2)>>16)*0.4-2.0);
+      else g_frame_actor_turn_timer=(unsigned char)(((g_frame_actor_controlled_speed/2)>>16)*0.4+2.0);
      }
      if(g_frame_actor_controlled_speed==0x80000&&g_frame_actor_restart_ready) {
       if(!audio_game_sample_active(g_frame_actor_restart_cue)&&g_frame_actor_speed_frames>11) {g_frame_actor_restart_cue=audio_play_animation_cue(72);g_frame_actor_restart_ready=0;}

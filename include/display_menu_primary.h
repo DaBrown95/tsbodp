@@ -9,7 +9,8 @@ struct DisplayStoredMap;
 struct DisplayMenuObjects {
     unsigned int unknown_00[2];
     struct FrameObject *hint;
-    unsigned int unknown_0c[2];
+    unsigned int unknown_0c;
+    struct FrameObject *scroll;
     struct FrameObject *first, *second;
 };
 extern struct DisplayMenuObjects g_display_menu_objects;

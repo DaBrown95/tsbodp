@@ -726,7 +726,7 @@ The original table at `08D6F518` has 12-byte entries: the primary function point
 at `+0`, a possible second callback at `+4`, and the between-row enable word at
 `+8`. The listed slot pointers are static evidence for these boundaries and
 roles. Slot 24 additionally points its second callback at the accepted note-slide
-entry; its volume-slide callback remains unconverted. The decoder invokes
+entry; its volume-slide callback is now reconstructed below. The decoder invokes
 on-row callbacks with a true argument, while the accepted between-row processor
 uses a false argument for enabled entries. The table data remains an explicit
 ROM region and is not counted as reconstructed source.
@@ -798,3 +798,69 @@ claim follows from these finite matches.
 
 The whole pitch/timing/modulation batch comprises **22 functions / 2,508 C
 bytes**, with **24 additional BIOS glue bytes** kept outside that source count.
+
+## Volume/pan slides, tremor, retrigger and arpeggio
+
+Eight further connected callbacks add **1,972 matching C bytes** and **12 explicit
+BIOS remainder-glue bytes**. The original table entries establish the roles and
+connections to the accepted row and between-row processors:
+
+| Effect slots | Entry | Inferred role | C bytes | Glue bytes |
+| --- | --- | --- | ---: | ---: |
+| 6, 23, 24 | `0804ADC8` | S3M volume slide and combined pitch effects | 376 | 0 |
+| 7, 49, 50 | `0804AF40` | XM volume slide and combined pitch effects | 184 | 0 |
+| 33 | `0804AFF8` | Global volume slide | 184 | 0 |
+| 26 | `0804B0B0` | Channel volume slide | 156 | 0 |
+| 28 | `0804B14C` | Pan slide | 304 | 0 |
+| 21 | `0804B788` | Tremor | 148 | 0 |
+| 29 | `0804B81C` | Retrigger | 368 | 12 |
+| 22 | `0804B998` | Arpeggio | 252 | 0 |
+
+The shared semantic helpers in `audio_volume_effects.h` retain signed-byte base
+volume, channel volume and pan. Compound updates narrow before clipping; regular
+volume multiplication shifts arithmetically by 12 bits, distinct from the
+earlier temporary tremolo helper's observed six-bit shift. Regular pan narrows
+the base/envelope sum to a signed byte before clipping to `-64..64`. Global
+slides use player bytes `+1D/+1E` and coordinate the global mixer volume with the
+accepted channel-volume update. No cached track fields are invented.
+
+The S3M callback remembers nonzero operands, recognizes row fine slides from
+the `F` nibbles, and permits ordinary row slides when player byte `+21` enables
+them. The XM callback retains ordinary between-row slides. Their combined
+vibrato reset handoffs inspect the current/previous effect and reset flag.
+Pan slide preserves the observed low-nibble fine-slide branch that sets the
+volume-slide flag at track `+3F`, rather than the pan-slide flag at `+41`; this
+is also present in the inspected upstream source and is not silently repaired.
+Pan slide requires the verified GCC 3.0.2 HWI32 profile; the normal host-width
+candidate differed in 216 bytes. Other callbacks match the normal profile.
+
+Tremor uses track bytes `+39/+3A/+3B` as count, audible interval and total
+interval, with both operand nibbles gaining one. It mutes through the explicit
+temporary-volume helper, restores the regular volume at the total boundary,
+and preserves the note-reset handoff.
+
+Retrigger remembers track byte `+47`, resets the copied ARM channel position
+when needed, and tests the tick remainder against the **full byte operand**.
+Unlike the later upstream code, the original does not mask the denominator
+to the low nibble. Its six-instruction Thumb BIOS remainder span at entry
+`+84..+96` reads `r1`; it is separately marked and excluded from C coverage.
+The zero-denominator branch remains explicit glue. Volume changes retain the
+original nibble-directed powers of two, half/double, three-halves and
+`342 * volume >> 9` forms, including signed-byte narrowing before clipping.
+
+Arpeggio remembers bytes `+42/+43`, cycles the count through three values,
+selects base/high-nibble/low-nibble notes and clips the unsigned halfword to
+119. It inlines the observed linear period/frequency arithmetic and original
+frequency table lookup, then calls the accepted RAM sample-step routine.
+It does not call the public linear calculator entries or claim those original
+tables as C. Valid sample pointers, note inputs and table/shift bounds remain
+caller preconditions; audible output and complete playback are unverified.
+
+All complete extents, pools and alignment match; eight meaningful source edits
+and the BIOS `swi 6` to `swi 7` control reject. The three previous inline BIOS
+callers also retain their full positives, source controls and glue controls
+after the header extension. Raw attempts and comparisons remain in ignored
+`reports/audio-root/volume-slide-effects/`, `retrigger-arpeggio/` and
+`volume-slide-canonical/`. Sources are adapted from the pinned LGPL Krawall
+files with their notices retained. Volume-column effects, the remaining table
+callbacks and envelope consumers are the next connected audio targets.
