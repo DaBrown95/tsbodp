@@ -1,13 +1,14 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 44 C functions and 6,160 bytes:
+The connected route-search path reconstructs 49 C functions and 6,492 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
 and six further variant/job-73 and shared value/random functions, followed by
 the nine-function variant controller and parameter-indicator closure, and its
-three-function random refill/seed/reader dependency and its adjoining
-attachment-neighbor producer. Every complete
+three-function random refill/seed/reader dependency, its adjoining
+attachment-neighbor producer, and five allocation, seed-coordination and
+secondary-reader functions. Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
 Neither these matches nor the full-ROM equality gate establish runtime behaviour.
@@ -16,8 +17,13 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | --- | --- | ---: |
 | `0x3B640` | `frame_find_attachment_neighbor` | 284 |
 | `0x351B0` | `frame_random_refill` | 348 |
+| `0x3530C` | `frame_initialize_random_buffer` | 28 |
+| `0x35328` | `frame_refresh_random_seed` | 124 |
+| `0x353A4` | `frame_set_random_seed` | 52 |
+| `0x35404` | `frame_random_secondary_range` | 40 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
+| `0x355AC` | `frame_next_random_secondary_word` | 88 |
 | `0x3CB14` | `frame_step_variant_attachment_job` | 1016 |
 | `0x3D00C` | `frame_dispatch_variant_attachment_job` | 24 |
 | `0x3D02C` | `frame_update_attachment_parameter` | 188 |
@@ -574,8 +580,8 @@ The partial IWRAM storage consists of a buffer-address word at `0x03001F10`,
 a next-word pointer at `0x03001F14`, signed remaining count at `0x03001F18`,
 seed at `0x03001F28` and last-byte destination at `0x03005A0C`. The buffer
 address is kept as an ordinary word view, converted at the observed pointer
-loads; no volatile qualifier is needed. The allocator at `0x3530C` remains
-original and requests 2,500 bytes, or 625 words. That extra word permits the
+loads; no volatile qualifier is needed. The matching initializer at `0x3530C`
+requests 2,500 bytes, or 625 words. That extra word permits the
 second loop's final ahead-pointer read, whose value is overwritten before use.
 The state must already have a valid allocation. Allocation failure handling,
 initialization ordering and reentrancy are not established by these three
@@ -648,3 +654,63 @@ control rejected. Proofs and useful earlier failures remain under ignored
 `attachment-neighbor-canonical/` and its predecessor trial directories; ready
 metadata is `attachment-neighbor-batch-manifest.json`. No runtime behavior was
 tested. The adjoining 356-byte target selector remains unconverted.
+
+## Seed coordination and secondary random stream
+
+Five connected functions add 332 verified C bytes. Their sources use ordinary
+C without register bindings or instruction assembly. The initializer stores
+the result of canonical `resource_allocate(2500)` in the observed buffer-address
+word. This proves the allocation request's size, rather than allocator success
+or initialization of every allocated byte. No new failure check is inserted.
+
+The secondary reader uses a cursor at `0x03001F1C` and signed remaining count at
+`0x03001F20`. After predecrement, a negative count resets it to 623 and sets the
+cursor to the shared buffer's second word. It reads and advances this cursor,
+applying the same four tempering operations as the primary reader. It neither
+invokes the primary refill nor updates the primary last-byte destination. The
+name identifies a separate cursor; it does not claim statistically independent
+randomness. Its range wrapper always advances this cursor, including for equal
+endpoints, while the primary range returns immediately in that case. Both use
+the observed low-fifteen-bit value and signed span/product/right shift. Valid
+caller bounds and signed-overflow preconditions remain inferred.
+
+The secondary range extent is 40 bytes at `0x35404`, including its pool and zero
+alignment through `0x3542B`. The next function begins with PUSH at `0x3542C`.
+An initial 44-byte estimate included four bytes of that next function; the failed
+comparison and corrected boundary evidence remain local. The multiplication
+operand order `value * span` gives the original allocation; the earlier reversed
+expression differed in two bytes. This is a compiler finding, not a different
+runtime algorithm.
+
+The seed refresh sets both remaining counts to minus one. It mixes the stored
+seed with the established IRQ context's VBlank count and the first input-current
+halfword. A zero intermediate seed obtains a primary random word, takes unsigned
+remainder by `0x000FFF1F`, and adds one. The original helper at `0x4CF50` uses
+unsigned comparisons and subtractions; its Thumb execution symbol is
+`__umodsi3` at `0x0804CF51`. The refresh then increments a full-word counter at
+`0x03001F24` and combines seed shifted eight, VBlank count shifted six, counter
+shifted four, and the input halfword before calling the seed writer. These roles
+follow shared IRQ/input views and observed offsets; entropy quality is untested.
+The explicit seed setter stores its argument, calls the seed writer, then sets
+the primary remaining count to 623 and primary cursor to the second word. It
+does not reset the secondary cursor or count.
+
+The buffer's final word remains uncertain. Seed and refill paths write 624 words
+at indices 0 through 623. The secondary reset and immediate second-word read
+permit 624 reads, at indices 1 through 624, before wrapping again. Index 624 is
+inside the observed 625-word allocation, but its initialization and intended
+content have not been established. The source preserves the original counter
+and allocation; no fabricated writer or default value closes this gap. Allocation
+ordering, reader preconditions and runtime behavior remain separate questions.
+
+All five full extents match. Controls alter allocation size 2,500 to 2,496,
+refresh divisor `0xFFF1F` to `0xFFF1E`, seed/secondary remaining 623 to 622, and
+range mask `0x7FFF` to `0x3FFF`. Every control rejects; four differ by one byte,
+while the changed allocation compiles to 24 bytes with 18 compared differences.
+All 27 previously accepted consumers of the shared random header, spanning
+6,692 bytes, remain exact and reject their actual controls, including the
+1,372-byte transient emitter. Saved source/header bundles, actual preprocessing
+dependencies, complete positive/control bytes and useful failures remain under
+ignored `secondary-rng-1791885100/`; the integration manifest is
+`frame-random-secondary-batch-manifest.json`. This batch supplies compiler and
+static mapping evidence without a runtime/gameplay experiment.

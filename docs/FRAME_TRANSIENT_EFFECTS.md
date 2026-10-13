@@ -141,3 +141,66 @@ one byte each. The ten existing direct transient/emission-header consumers
 also retain fresh positive and negative-control proofs. Names and cleanup
 roles follow these static calls and field accesses; runtime behavior remains
 unverified by this batch.
+
+## Definition producers and tile replacement
+
+Three connected ordinary C bodies add 412 matching bytes, including literal
+pools and alignment. They supply the definition table consumed by the published
+transient factory and emitter, and connect its tile contents to the release path
+above. The selected sources use no fixed-register declarations.
+
+| Entry | Function | Extent bytes |
+| --- | --- | ---: |
+| `0x080303D8` | `frame_initialize_transient_definition` | 184 |
+| `0x08030490` | `frame_reload_transient_definition` | 188 |
+| `0x08047944` | `display_recopy_tile_bytes` | 40 |
+
+Both producers use the resource's sequence pointer at `+0x04`, halfword frame
+count at sequence `+0x06`, and halfword offset table at `+0x0C`. Each selected
+frame contributes the product of its width and height bytes to a halfword
+accumulator. The initializer stores each preceding accumulated value shifted
+right by six; the reload stores the preceding accumulated value directly.
+Those indexed halfword stores establish the definition's offset view as sixteen
+halfwords at `+0x04`, replacing the earlier 32-byte view without changing its
+storage. Sixteen describes the space before the index at `+0x24`; neither body
+checks that the resource count fits that space. The byte iterator, halfword
+accumulation and unchecked source count retain the original narrowing and caller
+preconditions. No count guard or resource-format limit is inferred.
+
+The observed table root is `0x030058A0`, with 40-byte slots and eight slots per
+320-byte group. The initializer calls the existing byte allocator at
+`0x080477B8` with flag zero. It stores the low byte of the returned allocation
+at `+0x26`, narrows the source frame count into `+0x27`, installs the resource
+pointer, then copies the byte at `+0x26` into the halfword index at `+0x24`.
+The reload writes the same resource and frame-count fields, but stores the low
+byte of accumulated area at `+0x26` and retains the existing index. These two
+different writes justify splitting the old two-byte tail into a neutral
+`unknown26` byte and a `frame_count` byte; they do not establish one broader role
+for the neutral byte.
+
+The reload calls `display_recopy_tile_bytes` with the resource, complete area,
+flag zero and existing index. That helper narrows its flag to a byte and its
+index to a halfword. A nonnull resource causes either flag branch to call the
+same existing tile-copy routine at `0x0804766C`; the area argument is unused in
+this body. It returns the narrowed index without allocating or releasing tiles.
+The source preserves both branches. These accesses establish the local transfer
+contract, not the pixel encoding or valid runtime allocation domains.
+
+The source resolves each frame from its serialized offset and forms the
+definition address from the observed slot and group strides. A named table
+address after the allocation preserves the initializer's observed lifetime.
+Earlier byte-array casts, pointer-first address expressions and alternative
+scopes remain in ignored reports with their raw mismatches. The final matches
+contain semantic C and explicit zero tail alignment, with no instruction-body
+transcription or output modification.
+
+The canonical initializer control changes the shift from six to seven and
+rejects one byte; the reload control adds one to each frame height and rejects
+89 bytes; the replacement control changes the returned index by one and rejects
+one byte. `transient-definition-ready.json` indexes the three fresh public-source
+proofs, retained source/header inputs, compiler commands and raw expected and
+candidate bytes. A separate fresh closure proof verifies all thirteen existing
+transient/emission consumers, totaling 2,644 bytes, with every real control
+rejected. That total includes the three cleanup functions once and includes the
+1,372-byte emitter. These are source and static-call findings; full-ROM
+integration and runtime behavior remain separate claims.

@@ -9,8 +9,14 @@ struct FrameTransientEffect {
  unsigned short unknown34,unknown36,index;unsigned char phase,direction,enabled,unknown3d;
  unsigned short countdown;unsigned char offset_x,offset_y,unknown42,unknown43,mode,unknown45[3];
 };
-/* Definitions have a 40-byte stride, with eight entries per group. */
-struct FrameTransientDefinition {const void *resource;unsigned char frames[32];unsigned short index;unsigned char unknown26[2];};
+/* Forty-byte definitions have eight entries per group and sixteen stored
+ * halfword offsets. The serialized frame count is not validated here. */
+struct FrameTransientDefinition {
+ const void *resource;
+ unsigned short frames[16];
+ unsigned short index;
+ unsigned char unknown26,frame_count;
+};
 extern unsigned char g_frame_transient_free_pool[];
 extern struct FrameObjectList g_frame_transient_active_list;
 extern unsigned short g_frame_transient_count,g_frame_transient_maximum;

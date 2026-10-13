@@ -18995,6 +18995,151 @@
         "before": "flags & 0x20",
         "after": "flags & 0x10"
       }
+    },
+    {
+      "name": "frame_initialize_transient_definition",
+      "rom_offset": 197592,
+      "size": 184,
+      "symbols": {
+        "g_frame_transient_definitions": "0x030058a0",
+        "display_allocate_tile_bytes": "0x080477b9"
+      },
+      "thumb_symbols": [
+        "display_allocate_tile_bytes"
+      ],
+      "negative_control": {
+        "before": "bytes >> 6",
+        "after": "bytes >> 7"
+      },
+      "source": "src/display/initialize_transient_definition.c"
+    },
+    {
+      "name": "frame_reload_transient_definition",
+      "rom_offset": 197776,
+      "size": 188,
+      "symbols": {
+        "g_frame_transient_definitions": "0x030058a0",
+        "display_recopy_tile_bytes": "0x08047945"
+      },
+      "thumb_symbols": [
+        "display_recopy_tile_bytes"
+      ],
+      "negative_control": {
+        "before": "bytes += record->width * record->height;",
+        "after": "bytes += record->width * (record->height + 1);"
+      },
+      "source": "src/display/reload_transient_definition.c"
+    },
+    {
+      "name": "display_recopy_tile_bytes",
+      "rom_offset": 293188,
+      "size": 40,
+      "symbols": {
+        "display_copy_tile_resource": "0x0804766d"
+      },
+      "thumb_symbols": [
+        "display_copy_tile_resource"
+      ],
+      "negative_control": {
+        "before": "return first;",
+        "after": "return first + 1;"
+      },
+      "source": "src/display/recopy_tile_bytes.c"
+    },
+    {
+      "name": "frame_next_random_secondary_word",
+      "rom_offset": 218540,
+      "size": 88,
+      "symbols": {
+        "g_frame_random_secondary_next": "0x03001f1c",
+        "g_frame_random_secondary_remaining": "0x03001f20",
+        "g_frame_random_buffer_address": "0x03001f10"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "remaining = 623",
+        "after": "remaining = 622"
+      },
+      "source": "src/frame/frame_next_random_secondary_word.c"
+    },
+    {
+      "name": "frame_random_secondary_range",
+      "rom_offset": 218116,
+      "size": 40,
+      "symbols": {
+        "frame_next_random_secondary_word": "0x080355ad"
+      },
+      "thumb_symbols": [
+        "frame_next_random_secondary_word"
+      ],
+      "negative_control": {
+        "before": "0x7fff",
+        "after": "0x3fff"
+      },
+      "source": "src/frame/frame_random_secondary_range.c"
+    },
+    {
+      "name": "frame_set_random_seed",
+      "rom_offset": 218020,
+      "size": 52,
+      "symbols": {
+        "g_frame_random_seed": "0x03001f28",
+        "frame_seed_random_words": "0x08035525",
+        "g_frame_random_remaining": "0x03001f18",
+        "g_frame_random_next": "0x03001f14",
+        "g_frame_random_buffer_address": "0x03001f10"
+      },
+      "thumb_symbols": [
+        "frame_seed_random_words"
+      ],
+      "negative_control": {
+        "before": "remaining = 623",
+        "after": "remaining = 622"
+      },
+      "source": "src/frame/frame_set_random_seed.c"
+    },
+    {
+      "name": "frame_refresh_random_seed",
+      "rom_offset": 217896,
+      "size": 124,
+      "symbols": {
+        "g_frame_random_remaining": "0x03001f18",
+        "g_frame_random_secondary_remaining": "0x03001f20",
+        "g_frame_random_seed": "0x03001f28",
+        "g_irq_context": "0x03004280",
+        "g_input_current": "0x03004220",
+        "g_frame_random_seed_refresh_count": "0x03001f24",
+        "frame_next_random_word": "0x0803555d",
+        "frame_seed_random_words": "0x08035525",
+        "__umodsi3": "0x0804cf51"
+      },
+      "thumb_symbols": [
+        "frame_next_random_word",
+        "frame_seed_random_words",
+        "__umodsi3"
+      ],
+      "negative_control": {
+        "before": "% 0xfff1f",
+        "after": "% 0xfff1e"
+      },
+      "source": "src/frame/frame_refresh_random_seed.c"
+    },
+    {
+      "name": "frame_initialize_random_buffer",
+      "rom_offset": 217868,
+      "size": 28,
+      "symbols": {
+        "g_frame_random_buffer_address": "0x03001f10",
+        "resource_allocate": "0x08027865"
+      },
+      "thumb_symbols": [
+        "resource_allocate"
+      ],
+      "negative_control": {
+        "before": "resource_allocate(2500)",
+        "after": "resource_allocate(2496)"
+      },
+      "source": "src/frame/frame_initialize_random_buffer.c"
     }
   ],
   "assembly": [
