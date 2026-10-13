@@ -18,10 +18,11 @@ unsigned int frame_step_optional_choice_attachment_job(struct FrameNeedEffectSta
 void frame_optional_choice_begin(void);
 void frame_optional_choice_open_secondary(void);
 void frame_optional_choice_refresh(void);
-/* Explicit original remaining helper boundaries; no body coverage claimed. */
+/* Connected application interfaces. The return from completion is discarded
+ * by this attachment-job caller; the provider returns the created object. */
 void frame_optional_choice_apply(unsigned char, struct FrameActorAttachmentRecord *);
 void frame_optional_choice_apply_special(void);
 void frame_optional_choice_apply_page(unsigned char, struct FrameActorAttachmentRecord *);
-void frame_optional_choice_complete(unsigned int);
+struct FrameObject *frame_optional_choice_complete(unsigned int);
 
 #endif

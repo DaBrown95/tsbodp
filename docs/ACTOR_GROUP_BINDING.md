@@ -213,8 +213,11 @@ library alias.
 Fresh canonical proofs under `reports/audio-root/palette-menu-canonical/`
 include controls for flags 17 to 25, the final selector's source word and an
 advanced string pointer. All three reject actual source changes. The incomplete
-inventory records constructor callers `0x08015CB8`/`0x08015DE8`, still
-unconverted. The updater caller `0x08014340` is reconstructed below. Static
+inventory splits the unconverted constructor-calling routine at `0x08015CB8`
+and an internal literal word at `0x08015DE8`. Direct branches from the former
+continue through the latter region to the return at `0x08015F50`; these are one
+connected routine, not two established function entries. The updater caller
+`0x08014340` is reconstructed below. Static
 connectivity, full-ROM byte equality and runtime menu behavior remain separate
 claims.
 

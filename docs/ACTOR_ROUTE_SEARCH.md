@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 98 C functions and 12,952 bytes:
+The connected route-search path reconstructs 106 C functions and 13,708 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -14,7 +14,8 @@ plus its five parameter and retained-effect producers, parameter consumer and
 two attachment-job controllers and five connected selection/setup/dispatch/capacity callbacks,
 followed by six mode-two selection functions, a three-function optional activity path,
 and fourteen connected completion, parameter-job and choice functions, followed by
-five choice-list setup, filtering, clock classification and refresh helpers.
+five choice-list setup, filtering, clock classification and refresh helpers,
+and eight connected choice application, completion and value readers.
 Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
@@ -77,6 +78,14 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x43F08` | `frame_optional_choice_build_available` | 148 |
 | `0x4423C` | `frame_optional_choice_refresh` | 32 |
 | `0x2CCA8` | `frame_optional_choice_classify` | 232 |
+| `0x44020` | `frame_optional_choice_apply_page` | 244 |
+| `0x44114` | `frame_optional_choice_install_value` | 120 |
+| `0x4418C` | `frame_optional_choice_apply_special` | 176 |
+| `0x4425C` | `frame_optional_choice_apply` | 104 |
+| `0x443B0` | `frame_optional_choice_apply_failure` | 44 |
+| `0x2C720` | `frame_optional_choice_complete` | 48 |
+| `0x1BC68` | `frame_read_game_value` | 12 |
+| `0x36064` | `display_menu_read_relation_average` | 8 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
 | `0x355AC` | `frame_next_random_secondary_word` | 88 |
@@ -1242,11 +1251,10 @@ state-word switch closed the initial 796-byte/285-difference candidate using
 ordinary C with no register bindings. The complete 800-byte extent includes
 two zero tail-alignment bytes omitted by the provisional 798-byte CFG extent.
 
-Original helpers at `0x43F9C`, `0x4425C`, `0x4418C`, `0x44020` and `0x2C720`
-remain explicit external dependencies; the connected setup and refresh interfaces
-are reconstructed by the following batch. Their broader
-contracts and unused return declarations are provisional; no body bytes are
-credited for them. All fourteen accepted extents have changed-source controls,
+The choice helpers were explicit original dependencies at that milestone;
+the following batches reconstruct setup, application and completion. The page
+builder at `0x43F9C` remains unconverted. Broader input contracts are provisional.
+All fourteen accepted extents have changed-source controls,
 including a real halfword-countdown edit in the choice controller. Current
 activity-header consumers are reverified after its comment-only clarification.
 Failed source variants, complete candidate/expected bytes and callback evidence
@@ -1315,9 +1323,76 @@ All five extents have real source controls and fresh public-header proofs. The
 existing 800-byte choice caller is reverified after the helper-status comment
 change. The page builder remains excluded: a natural cached-limit form is
 132 bytes with three differing bytes, while earlier pointer forms differed
-more substantially. The original apply, special, page-apply and completion
-bodies also remain explicit. Publication metadata is
+more substantially. Application and completion are reconstructed below.
+Publication metadata is
 `frame-optional-choice-list-batch-manifest.json`; raw complete disassemblies,
 source variants, candidate/expected bytes and controls remain private. Whole-ROM
 and source-byte equality do not establish UI, clock, relationship or gameplay
 behaviour.
+
+## Optional choice application and completion
+
+Eight further complete C extents cover 756 bytes and connect the previously
+reconstructed 800-byte job controller to scene requests and actor creation.
+The 104-byte apply helper reads a signed cost word from the table at
+`0x0804EF50`, using the game-state stage at +0x440 and a 24-byte row stride.
+Its current job caller supplies kinds zero, two and three. It compares the
+signed game-value reader against that cost, then either installs the choice
+and sets timer 19/animation 31, or invokes the failure request and sets selection
+four, timer 18 and animation 30. No arbitrary stage or kind bounds are established.
+The 12-byte reader returns the signed word at game-state +4 through the existing
+`FrameActorValueWorld` view; its broader game role remains provisional.
+
+The 120-byte installer switches on the narrowed kind. Zero, two and three set
+text IDs 1148, 1147 and 1146 and create scene objects with values 263, 264 and
+265. Other kinds preserve the text and request object. All paths activate the
+request. The 44-byte failure helper writes text 500, creates value 112, and
+activates the same request. These paths reuse the published scene factory and
+request storage at `0x03005A00`; they do not infer defaults for preserved fields.
+
+The 244-byte page application reads a signed byte from the available list,
+calls the classifier with a word and two separate byte outputs, and adjusts
+the corresponding relation value by one. Unless the classifier word is 50,
+it computes a narrowed halfword interval from the returned bytes and current
+clock. The raw comparison is between the returned last byte and the clock's
+signed day halfword, with no normalization added. Interval values through 90,
+91 through 179, and the remaining halfword values choose text 1149, 1150 and
+1151 for substitution field zero. It then stores classifier word plus 1092
+as the first text halfword, creates a scene object using the signed list byte
+plus 239, and activates the request. The day, hour and minute widths, wrapping
+halfword conversion and reload of the list byte are preserved.
+
+The relation-state pointer survives its adjustment call. The clock view uses
+that pointer's 32-bit address minus 16, which is the observed game-state base.
+Integer address arithmetic avoids subtracting outside the relation object's
+C array. Capturing the last byte before deriving this pointer and evaluating
+the first byte before the hour subtraction reproduces the original lifetimes
+with ordinary C. Earlier reordered expressions and uncached global-address
+forms remain useful failed comparisons. No register bindings are required.
+
+The 176-byte special path requires condition `(4,0,2)` and unsigned game-state
+byte +0xE0 greater than 29 for its first test, then condition `(4,0,3)` and the
+signed relation average greater than 39 for its second test. Failed tests set
+text 1143 or 1144. If both pass and `(4,0,1)` is incomplete, it sets text 1145,
+completes that condition and decrements byte +0xE0 by 30. It always activates
+the request. The byte's `budget` name describes the observed threshold and
+decrement only. The eight-byte average getter reuses `DisplayMenuRelationMetrics`
+at relation-state base plus 0x20 and returns its sign-extended halfword +2;
+no duplicate relation layout is introduced.
+
+The 48-byte completion helper initializes a null result, requests two integer
+coordinates, and creates an actor with direction zero only when the narrowed
+target-query result equals one. Its returned `FrameObject *` corrects the older
+provisional void declaration. The existing job discards that pointer, and all
+six previously accepted importers of the changed header are reverified with
+their actual source controls: 1,396 bytes, including that 800-byte caller.
+
+All eight new providers have fresh current-header positive and negative proofs.
+Their changed thresholds, timer, text IDs, selected source word and average
+increment are rejected. The sources use ordinary C, with zero tail alignment
+kept explicit where needed. The page builder remains an explicit original
+132-byte region, with its strongest candidate still three bytes different.
+Publication metadata is `frame-optional-choice-apply-batch-manifest.json`;
+raw disassemblies, useful source failures and full candidate/expected/control
+bytes are retained privately. UI, clock, relationship and gameplay behaviour
+remain untested.

@@ -1908,3 +1908,42 @@ their actual changed-source controls rejected. These rechecks add no coverage.
 Fresh sources, controls, complete raw comparisons and boundary evidence are
 retained under the local `resource-spawn-canonical-*` reports. This is static
 and compiler evidence; runtime and gameplay behavior remain unverified.
+
+### Resource payload to saved-effect construction
+
+`resource_get_object_payload` at `0x0800AEBC` and
+`frame_create_scene_saved_resource_effect` at `0x08033580` add 80 verified C
+bytes together. The accessor narrows its argument words to group and slot
+bytes, walks the same two halfword offset tables as the owner-slot getter and
+setter, then returns the selected entry plus eight bytes. Unlike the object
+getter, it has no special `0xFF` path. The entry's first eight bytes hold the
+runtime owner pointer and an uninterpreted word; the returned region begins
+at the already observed factory selector. No table bounds, full record length
+or additional alignment guarantees are inferred.
+
+The saved-effect caller reads signed x/y halfwords at payload offsets four and
+six and the kind byte at offset eight. It converts the coordinates to the
+observed 16.16 word representation and passes those values to the already
+matched `frame_create_scene_saved_effect` constructor. The local partial
+payload view names only these reads; its first four bytes remain uninterpreted.
+Returning the constructor's pointer preserves the observed R0 result, while
+the original caller's source-level return spelling remains provisional.
+
+Separate group and slot byte offsets and scoped table views reproduce the
+accessor's register allocation without bindings. Its complete 40-byte extent
+includes 34 instruction bytes, two zero alignment bytes and the resource-root
+literal at `0x0800AEE0`; `resource_get_object` begins at `0x0800AEE4`.
+The connected caller's 40 bytes are all instructions, ending before the next
+entry at `0x080335A8`. It also matches without bindings. Changing the returned
+payload offset from eight to ten rejects by one byte; increasing the passed
+kind rejects by 31 bytes. Both controls are compiled source changes.
+
+The current static inventory records 30 direct callers of the payload
+accessor. This batch converts the saved-effect caller among them; the other
+29 bodies remain explicit unconverted regions. That inventory is incomplete,
+and these counts describe its current mapped evidence rather than all game
+callers. The new guarded declaration header changes no existing accepted
+header closure. Canonical sources, raw comparisons, boundaries, caller rows
+and real controls are retained under the local `resource-payload-canonical-*`
+reports. This closes an offset-table-to-payload-to-constructor path using
+static and compiler evidence; it establishes no runtime or gameplay claim.

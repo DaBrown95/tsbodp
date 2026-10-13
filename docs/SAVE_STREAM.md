@@ -2,8 +2,8 @@
 
 The reconstructed path connects the published menu-choice and actor-need
 save/load callers to a shared byte/bit cursor, record views, slot transfers,
-header initialization and audio/display-status handoff. It has 43 matching C
-functions covering 3,184 bytes. Each full extent, pool and alignment was linked
+header initialization and audio/display-status handoff. It has 46 matching C
+functions covering 3,308 bytes. Each full extent, pool and alignment was linked
 at its original ROM address and compared with the fixed reference. Each also
 has a compiled changed-source control. These are static and compiler results;
 no runtime save/load or EEPROM compatibility claim is made.
@@ -222,3 +222,28 @@ controls against the final union/header closure. The buffer builder, nibble
 writer, grouped subrecord loader/serializer and retained condition module
 remain explicit unconverted interfaces. Static transfer order and compiler
 equality do not establish save compatibility or gameplay behaviour.
+
+## Condition display-bit transfer and completion
+
+The paired 20-byte routines at `0x0802C90C/0x0802C920` write and read fifteen
+bytes of the existing `g_condition_display_bits` view at `0x03001E00`. The
+still-unconverted 140-byte condition modules at `0x08029D18/0x08029C8C` call
+these direct children after transferring their row and cell bits. The already
+accepted clear/set routines use this same byte array; the accepted menu fallback
+indicator also reads it. The transfer length establishes a 120-bit storage span,
+not a checked valid-kind range.
+
+The 84-byte completion handler at `0x0802C96C` traverses eight-byte ROM rows at
+`0x0805FAB4`, matching the full-word kind before calling the existing group
+completer with row and column bytes. A full-word kind of 119 terminates the
+scan. Its index is a wrapping byte, and the source preserves that narrowing and
+sentinel termination. After processing the table it clears the requested bit
+with an unchecked byte index and low-three-bit shift. The two unused row bytes,
+the complete table extent and the gameplay meaning of completion remain
+provisional; the code supplies no kind-range check or independent table bound.
+
+All three ordinary C sources match their original addresses, complete extents,
+literal pools and alignment. Their real changed-source controls reject. The
+five accepted byte-transfer and condition providers were also rebuilt with
+controls against current headers. The larger row/cell modules, complete game
+loader and grouped record loader remain excluded from matching coverage.
