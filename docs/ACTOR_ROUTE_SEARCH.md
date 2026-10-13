@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 65 C functions and 8,432 bytes:
+The connected route-search path reconstructs 70 C functions and 8,692 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -11,7 +11,7 @@ attachment-neighbor producer, and five allocation, seed-coordination and
 secondary-reader functions, followed by six bounded-output, signed-offset and
 threshold APIs, and the secondary threshold's optional need-effect/cue consumer
 plus its five parameter and retained-effect producers, parameter consumer and
-two attachment-job controllers.
+two attachment-job controllers and five connected selection/setup/dispatch/capacity callbacks.
 Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
@@ -38,6 +38,11 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x2EEF0` | `frame_need_effect_set_optional_two` | 48 |
 | `0x2EF20` | `frame_need_effect_begin_optional_three` | 92 |
 | `0x2EF7C` | `frame_need_effect_play_optional_cue` | 508 |
+| `0x2F178` | `frame_need_effect_optional_one_ready` | 36 |
+| `0x18430` | `frame_select_optional_attachment_kind` | 32 |
+| `0x18458` | `frame_begin_optional_attachment_job` | 72 |
+| `0x184A0` | `frame_dispatch_optional_attachment_job` | 44 |
+| `0x2F348` | `frame_check_optional_attachment_capacity` | 76 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
 | `0x355AC` | `frame_next_random_secondary_word` | 88 |
@@ -973,7 +978,55 @@ with alignment-only glue kept explicit. Changed cost 43 to 44, animation 45 to
 44 and countdown 90 to 91 each produce one differing byte and are rejected.
 Canonical comparisons, current header snapshots and failed candidates remain
 in ignored `need-optional-state-followup/`; ready metadata is
-`frame-need-optional-jobs-batch-manifest.json`. The direct dispatcher at
-`0x184A0`, its setup/eligibility helpers and other optional predicates are next
-connected targets. Runtime cancellation, ownership, sample validity and
-gameplay effects have not been tested.
+`frame-need-optional-jobs-batch-manifest.json`. Runtime cancellation, ownership,
+sample validity and gameplay effects have not been tested.
+
+## Optional attachment callback selection and capacity
+
+One observed 36-byte definition row at `0x62EA0`, row one relative to the
+published table base `0x62E7C`, connects the matching optional jobs. Its pointer
+at `+4` selects attachment kind 29 or 45, `+12` begins that attachment job,
+`+16` dispatches it, and `+28` checks capacity. The accepted allocator copies
+these pointers to need-state `+0xE8`, `+0xF0`, `+0xF4` and `+0xE4`, respectively.
+The row's initial callback and its other callbacks remain explicit original
+dependencies. This single row does not establish a bound for the whole table.
+
+The 36-byte predicate at `0x2F178` returns one exactly when optional is one and
+the parameter halfword, read as signed 16 bits, is nonnegative. The 32-byte
+selector at `0x18430` observes the predicate's low byte and writes kind 45 on
+success or 29 otherwise. These attachment kinds differ from the definition's
+row index. Both functions return words, and the inferred signatures preserve
+the caller's observed narrowing rather than assuming a byte return ABI.
+
+The 72-byte setup at `0x18458` requests an attachment record and returns zero
+on allocation failure. On success it stores the complete supplied kind word,
+reads attachment position zero from the associated object, begins an actor
+route with arguments four and one using the record's status word as output,
+requests animation six and returns one. A positive success branch retains the
+original null-case placement; an equivalent early-return candidate differed
+in its branch layout. The 44-byte dispatcher at `0x184A0` obtains the existing
+record and sends kind 29 to the animation/countdown job and kind 45 to the
+parameter-consumption job. Other kinds return zero. The record lookup has no
+null check in the original path, and this replacement introduces none.
+
+The 76-byte capacity callback at `0x2F348` counts nonnull actor pointers in the
+three 24-byte records starting at need-state `+0x0C`. It rejects a count greater
+than or equal to the byte at state `+0x5D`. The accepted allocator copies that
+byte from definition `+0x20`, so its capacity role is supported by both its
+producer and this comparison. It also rejects an actor with a nonzero observed
+attachment count when state byte `+0x60` is one; otherwise it returns one. The
+capacity and mode bytes retain their bounded existing field views. No default
+capacity, allocation policy or valid actor domain is inferred beyond these
+accesses. A nearby 40-byte helper at `0x18408` repeats the second predicate but
+has no resolved inbound reference; its matching private trial contributes no
+public coverage.
+
+All five complete extents match as ordinary C without register constraints.
+The predicate, selector and capacity callback include their original zero
+tail alignment. Changed comparison, selected kind, animation, dispatch case
+and capacity relation each reject a real source mutation. The three published
+job consumers remain exact and reject their controls under the extended
+prototype header. Table-word search results, callback-copy evidence, raw
+comparisons and failed candidates remain in ignored reports; the ready batch
+is `frame-need-optional-dispatch-batch-manifest.json`. Other optional-mode
+predicates and the initial callback's callers remain useful connected targets.

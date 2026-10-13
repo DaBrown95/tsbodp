@@ -2,8 +2,8 @@
 
 The reconstructed path connects the published menu-choice and actor-need
 save/load callers to a shared byte/bit cursor, record views, slot transfers,
-header initialization and audio/display-status handoff. It has 26 matching C
-functions covering 1,788 bytes. Each full extent, pool and alignment was linked
+header initialization and audio/display-status handoff. It has 31 matching C
+functions covering 2,308 bytes. Each full extent, pool and alignment was linked
 at its original ROM address and compared with the fixed reference. Each also
 has a compiled changed-source control. These are static and compiler results;
 no runtime save/load or EEPROM compatibility claim is made.
@@ -80,7 +80,7 @@ in `r5` and the high-nibble scalar in `r1`. They are actual algorithm values and
 are not live across function calls. The cursor is four bytes before the bit
 position in the observed eight-byte view. Its inline low-nibble reader is a
 semantic byte accessor. There are no original instruction-body transcriptions,
-output patches or comparison masks. The other 25 functions use ordinary C.
+output patches or comparison masks. The other 30 functions use ordinary C.
 
 Function boundaries include return paths, referenced literal pools and alignment
 up to the next mapped entry. The checksum's instruction body is 34 bytes and its
@@ -91,6 +91,55 @@ These remain bounded static claims, not a complete code inventory.
 Useful failed approaches, original/actual bytes, assembly, source snapshots and
 real negative controls remain in ignored local reports. The 108-byte buffer
 builder and 148-byte nibble writer are still unconverted; candidates are excluded
-from coverage. The library transfer bodies, full game-state serializer and the
+from coverage. The library transfer bodies, several game-state subserializers and the
 unconverted header-refresh branch also remain explicit. Next connected targets
 are those producers and the higher game-state load/save consumers.
+
+## Game-state producer and header representation
+
+The header prefix is now a named 16-byte union with byte and eight-halfword
+views, including the checksum at byte fourteen. The initializer and validator
+sum its bounded halfword array directly. This preserves all following state
+offsets and replaces traversal through a cast of the larger state object. The
+representation does not expand the identified format or establish library
+transfer success. All 66 previously accepted functions importing this header
+were rebuilt with their actual changed-source controls after the refinement.
+
+The 280-byte producer at `0x0801B928` writes the marker, then accesses a separate
+partial world-state view at `0x03003950`. It writes four bytes at `+0`, six clock
+bytes at `+8`, and three low bytes of the word at `+4`, then serializes records
+starting at `+0x10` and `+0xDC`. The clock occupies the already-established
+eight-byte `DisplayTimeRecord` at `0x03003958`; this producer omits its reserved
+halfword. The other word meanings remain uncertain. The world pointer is
+initialized after the marker write, matching the observed call/literal order
+without register constraints.
+
+The producer also writes five bytes starting at `0x030040E7` as lengths one,
+two and two. Its unchecked selector at that address plus 42 chooses the first
+bit of a 56-byte row at `0x03004130`. This overlaps the published input and
+clock-selection views; it does not establish a separate allocation or table
+bound. One-bit fields at world `+0x747/+0x749`, byte fields at
+`+0x741/+0x742/+0x746/+0x726/+0x72E`, and a halfword at `+0x744` follow. After
+three retained unconverted module serializers and two accepted serializers, it
+writes byte `+0x740`. Their content roles remain provisional.
+
+The connected 128-byte record producer at `0x08031F7C` writes its first sixteen
+bytes, two pairs and six nibbles, then invokes child serializers at offsets
+`+0x18/+0x20/+0x88/+0xA0`. The final child is the already accepted
+`frame_save_actor_needs` at `0x0802B958`, which writes the shifted high halves
+of eight values from its 32-byte input span. The partial source view covers
+that observed span through `+0xBF`; it does not establish the complete record
+size. The `+0x20/+0x88` child bodies remain unconverted. The 28-byte child at
+`0x08032020` writes five nibble values at `+2` before the value at `+0`. The
+32-byte module at `0x080293A0` writes eight nibbles at `0x03004085` followed by
+one byte. The 52-byte module at `0x08010AE0` writes four words at
+`0x03004064`; nearby bit-mask readers support the flag-word name. These four
+functions are direct producer dependencies, with their own full-extent matches
+and real negative controls. The nibble writer and the remaining child/module
+serializers stay unconverted.
+
+The first decoded record's two pair bytes and six nibble bytes also form an
+eight-byte selector view at `0x03005DC4`, with subsequent records forty bytes
+apart. This is shared storage used by actor-group selection, not a new buffer.
+The accepted transfer/record view and the separate selector view retain the
+same addresses and strides.

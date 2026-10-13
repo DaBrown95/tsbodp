@@ -1,6 +1,6 @@
 # Actor group resources and palette composition
 
-Eight connected C functions reconstruct 692 bytes, including literal pools and
+Nine connected C functions reconstruct 940 bytes, including literal pools and
 alignment. They close the resource and palette dependencies of the accepted
 actor factory, actor-part updater and scene-player factory. Names describe the
 observed part indices and transfers; this is static/compiler evidence, without
@@ -11,6 +11,7 @@ a runtime or gameplay experiment.
 | `0x08001400` | `frame_clear_part_variants` | 24 |
 | `0x08001450` | `frame_set_part_variants` | 40 |
 | `0x080161AC` | `frame_load_actor_palette_pair` | 32 |
+| `0x080256A4` | `frame_create_palette_scene_actor` | 248 |
 | `0x0803AD64` | `frame_bind_actor_group` | 164 |
 | `0x0803AE08` | `frame_compose_actor_group_palette` | 116 |
 | `0x0803AE7C` | `frame_compose_actor_group_alternate_palette` | 76 |
@@ -106,8 +107,44 @@ The incomplete static inventory records alternate-wrapper calls from
 `0x03003970` through the ordinary wrapper into slot 1, then through the alternate
 wrapper into slot 2. This base is the existing scene-player group and overlaps
 game-state `+0x20`; the declaration is an access view, without establishing a new
-allocation or definition-array bound. The other three callers remain unconverted.
+allocation or definition-array bound. Two other callers remain unconverted;
+the scene actor factory at `0x080256A4` is reconstructed below.
 The inventory records no calls to either standalone composer. These are shared
 palette operations connected through the same row layouts and accepted copy and
 display-transfer dependencies; the standalone composers' active uses, row-index
 domains, output alignment and visual effects remain uncertain.
+
+The 248-byte scene actor factory tests one byte from the resource pointer at
+`0x03001DB4`, offset four plus the selection word at `0x03004350 + 0xC`. A value
+of one allocates an object with allocator argument zero and stores its pointer
+at `0x030043B0`. The position argument indexes signed-halfword coordinate pairs
+at `0x08056324`; conversion to an unsigned word before shifting preserves the
+observed 16.16 positions without a signed-left-shift assumption. The factory
+stores flags 25, direction four and OAM palette two, selects its definition,
+loads the ordinary/alternate palettes into slots two/three, enables parts and
+requests animation zero. Part zero selects a variants table by definition byte
+zero at `0x08D70CE8`. Part one additionally selects by byte two at `0x08D70D40`.
+Their palette bytes are two/three. The factory then sets the animation variant
+from the signed animation byte and direction table, and part zero's order to
+four. It adds no allocation-failure or index-validation behavior.
+
+The definition base `0x03005DC4` is the accepted save state `0x03005D90 + 0x34`:
+the first decoded record's `+0x20` tail. Its 40-byte stride selects each record's
+two pair bytes followed by six nibble bytes. The new access view exposes those
+eight selectors, then 32 bytes solely to express the observed stride; those
+following bytes overlap later record/state fields and are not read by this
+factory. This connects the record decoder to actor parts and palette ranges
+without claiming a separate allocation or a complete appearance format. The
+selection word also overlaps the accepted scene-request parameter field, and
+the stored object pointer overlaps the first scene-object slot. Names and valid
+index domains remain provisional.
+
+The factory matches in ordinary C without register bindings. Naming the actual
+resource base, then the scene-selection pointer, then advancing the base by
+four closes a two-instruction scheduling difference. Earlier folded-offset
+candidates and the four-byte mismatch retain raw evidence. The current header
+and complete 248-byte extent, including all literal words, are verified under
+`reports/audio-root/actor-palette-scene-canonical/`; changing flags 25 to 17
+produces one differing byte. The incomplete inventory records direct callers
+at `0x08024E18` and `0x08025038`, both still unconverted. No runtime visibility,
+animation or save-to-scene round-trip experiment has been performed.

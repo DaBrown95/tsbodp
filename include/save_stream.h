@@ -8,9 +8,16 @@ struct SaveStreamRecord {
     unsigned char unknown10[16], pairs[2], nibbles[6];
 };
 /* Four records fit the observed region; unchecked slot arguments stay unchecked. */
+union SaveStreamHeader {
+    struct {
+        unsigned char bytes[14];
+        unsigned short checksum;
+    } fields;
+    unsigned char bytes[16];
+    unsigned short words[8];
+};
 struct SaveStreamState {
-    unsigned char header[14];
-    unsigned short header_checksum;
+    union SaveStreamHeader header;
     unsigned char *buffer;
     struct SaveStreamRecord records[4];
     unsigned char valid[4];

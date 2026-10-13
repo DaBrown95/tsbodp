@@ -20063,10 +20063,254 @@
         "save_current_header_option_44ffc"
       ],
       "negative_control": {
-        "before": "header[11] = 1;",
-        "after": "header[11] = 0;"
+        "before": "header.bytes[11] = 1;",
+        "after": "header.bytes[11] = 0;"
       },
       "source": "src/save/update_header_option.c"
+    },
+    {
+      "name": "frame_create_palette_scene_actor",
+      "source": "src/frame/frame_create_palette_scene_actor.c",
+      "rom_offset": 153252,
+      "size": 248,
+      "symbols": {
+        "g_frame_actor_palette_scene_resource": "0x03001db4",
+        "g_frame_actor_palette_scene_selection": "0x03004350",
+        "g_frame_actor_palette_scene_object": "0x030043b0",
+        "g_frame_actor_palette_scene_positions": "0x08056324",
+        "g_frame_actor_palette_scene_rows": "0x03005dc4",
+        "g_frame_actor_palette_scene_part0": "0x08d70ce8",
+        "g_frame_actor_palette_scene_part1": "0x08d70d40",
+        "g_frame_actor_direction_variants_signed": "0x0804f1b0",
+        "frame_allocate_object": "0x08001109",
+        "frame_set_position": "0x080014a5",
+        "frame_load_actor_group_palette": "0x0803aec9",
+        "frame_load_actor_group_alternate_palette": "0x0803af59",
+        "frame_enable_parts": "0x08001385",
+        "frame_request_animation": "0x08001b5d",
+        "frame_set_part_variants": "0x08001451",
+        "frame_set_animation_variant": "0x08000be9",
+        "frame_set_part_order": "0x0800156d"
+      },
+      "thumb_symbols": [
+        "frame_allocate_object",
+        "frame_set_position",
+        "frame_load_actor_group_palette",
+        "frame_load_actor_group_alternate_palette",
+        "frame_enable_parts",
+        "frame_request_animation",
+        "frame_set_part_variants",
+        "frame_set_animation_variant",
+        "frame_set_part_order"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "object->flags = 25",
+        "after": "object->flags = 17"
+      }
+    },
+    {
+      "name": "frame_need_effect_optional_one_ready",
+      "rom_offset": 192888,
+      "size": 36,
+      "symbols": {},
+      "thumb_symbols": [],
+      "source": "src/frame/frame_need_effect_optional_one_ready.c",
+      "negative_control": {
+        "before": "parameter >= 0",
+        "after": "parameter > 0"
+      }
+    },
+    {
+      "name": "frame_select_optional_attachment_kind",
+      "rom_offset": 99376,
+      "size": 32,
+      "symbols": {
+        "frame_need_effect_optional_one_ready": "0x0802f179"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_optional_one_ready"
+      ],
+      "source": "src/frame/frame_select_optional_attachment_kind.c",
+      "negative_control": {
+        "before": "*out = 29",
+        "after": "*out = 28"
+      }
+    },
+    {
+      "name": "frame_begin_optional_attachment_job",
+      "rom_offset": 99416,
+      "size": 72,
+      "symbols": {
+        "frame_allocate_actor_attachment_record": "0x0802e3c5",
+        "frame_attachment_position": "0x0800176d",
+        "frame_begin_actor_route": "0x080370d1",
+        "frame_request_animation": "0x08001b5d"
+      },
+      "thumb_symbols": [
+        "frame_allocate_actor_attachment_record",
+        "frame_attachment_position",
+        "frame_begin_actor_route",
+        "frame_request_animation"
+      ],
+      "source": "src/frame/frame_begin_optional_attachment_job.c",
+      "negative_control": {
+        "before": "actor, 6)",
+        "after": "actor, 7)"
+      }
+    },
+    {
+      "name": "frame_dispatch_optional_attachment_job",
+      "rom_offset": 99488,
+      "size": 44,
+      "symbols": {
+        "frame_find_actor_attachment_record": "0x0802ed61",
+        "frame_step_optional_animation_attachment_job": "0x080182d5",
+        "frame_step_optional_attachment_job": "0x08018229"
+      },
+      "thumb_symbols": [
+        "frame_find_actor_attachment_record",
+        "frame_step_optional_animation_attachment_job",
+        "frame_step_optional_attachment_job"
+      ],
+      "source": "src/frame/frame_dispatch_optional_attachment_job.c",
+      "negative_control": {
+        "before": "case 29:",
+        "after": "case 28:"
+      }
+    },
+    {
+      "name": "frame_check_optional_attachment_capacity",
+      "rom_offset": 193352,
+      "size": 76,
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "source": "src/frame/frame_check_optional_attachment_capacity.c",
+      "negative_control": {
+        "before": "count >= owner->unknown_58[5]",
+        "after": "count > owner->unknown_58[5]"
+      }
+    },
+    {
+      "name": "save_stream_serialize_game_state",
+      "rom_offset": 112936,
+      "size": 280,
+      "source": "src/save/serialize_game_state.c",
+      "symbols": {
+        "frame_write_save_value": "0x08037e21",
+        "save_stream_write_bits": "0x08037b39",
+        "g_save_world_view": "0x03003950",
+        "g_save_selection_prefix": "0x030040e7",
+        "g_save_world_rows": "0x03004130",
+        "g_save_world_event": "0x03002edc",
+        "save_stream_write_world_record": "0x08031f7d",
+        "save_world_write_region_1fecc": "0x0801fecd",
+        "save_world_write_module_29d18": "0x08029d19",
+        "save_stream_write_nibble_state": "0x080293a1",
+        "save_world_write_module_383a4": "0x080383a5",
+        "save_world_write_module_333c4": "0x080333c5",
+        "save_stream_write_flag_words": "0x08010ae1",
+        "g_save_serialized_marker": "0x03004334"
+      },
+      "thumb_symbols": [
+        "frame_write_save_value",
+        "save_stream_write_bits",
+        "save_stream_write_world_record",
+        "save_world_write_region_1fecc",
+        "save_world_write_module_29d18",
+        "save_stream_write_nibble_state",
+        "save_world_write_module_383a4",
+        "save_world_write_module_333c4",
+        "save_stream_write_flag_words"
+      ],
+      "negative_control": {
+        "before": "&world->unknown00, 4",
+        "after": "&world->unknown00, 5"
+      }
+    },
+    {
+      "name": "save_stream_write_world_record",
+      "rom_offset": 204668,
+      "size": 128,
+      "source": "src/save/write_world_record.c",
+      "symbols": {
+        "frame_write_save_value": "0x08037e21",
+        "save_stream_write_pairs": "0x08037aa1",
+        "save_stream_write_nibbles": "0x08037a0d",
+        "save_stream_write_six_nibbles": "0x08032021",
+        "save_subrecord_35f2c": "0x08035f2d",
+        "save_subrecord_3d198": "0x0803d199",
+        "frame_save_actor_needs": "0x0802b959"
+      },
+      "thumb_symbols": [
+        "frame_write_save_value",
+        "save_stream_write_pairs",
+        "save_stream_write_nibbles",
+        "save_stream_write_six_nibbles",
+        "save_subrecord_35f2c",
+        "save_subrecord_3d198",
+        "frame_save_actor_needs"
+      ],
+      "negative_control": {
+        "before": "record->bytes, 16",
+        "after": "record->bytes, 15"
+      }
+    },
+    {
+      "name": "save_stream_write_six_nibbles",
+      "rom_offset": 204832,
+      "size": 28,
+      "source": "src/save/write_six_nibbles.c",
+      "symbols": {
+        "save_stream_write_nibbles": "0x08037a0d"
+      },
+      "thumb_symbols": [
+        "save_stream_write_nibbles"
+      ],
+      "negative_control": {
+        "before": "record->values, 5",
+        "after": "record->values, 4"
+      }
+    },
+    {
+      "name": "save_stream_write_nibble_state",
+      "rom_offset": 168864,
+      "size": 32,
+      "source": "src/save/write_nibble_state.c",
+      "symbols": {
+        "frame_write_save_value": "0x08037e21",
+        "save_stream_write_nibbles": "0x08037a0d",
+        "g_save_nibble_bytes": "0x03004085"
+      },
+      "thumb_symbols": [
+        "frame_write_save_value",
+        "save_stream_write_nibbles"
+      ],
+      "negative_control": {
+        "before": "g_save_nibble_bytes.values, 8",
+        "after": "g_save_nibble_bytes.values, 7"
+      }
+    },
+    {
+      "name": "save_stream_write_flag_words",
+      "rom_offset": 68320,
+      "size": 52,
+      "source": "src/save/write_flag_words.c",
+      "symbols": {
+        "frame_write_save_value": "0x08037e21",
+        "g_save_flag_words": "0x03004064"
+      },
+      "thumb_symbols": [
+        "frame_write_save_value"
+      ],
+      "negative_control": {
+        "before": "&g_save_flag_words[0], 4",
+        "after": "&g_save_flag_words[0], 3"
+      }
     }
   ],
   "assembly": [

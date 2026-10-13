@@ -14,4 +14,16 @@ unsigned int frame_step_optional_attachment_job(struct FrameNeedEffectState *,
 unsigned int frame_step_optional_animation_attachment_job(struct FrameNeedEffectState *,
                                                           struct FrameActorAttachmentRecord *);
 
+/* Row-one definition callbacks select and dispatch attachment kinds 29/45.
+ * The parameter predicate returns a word; its caller observes the low byte. */
+unsigned int frame_need_effect_optional_one_ready(struct FrameNeedEffectState *);
+unsigned int frame_select_optional_attachment_kind(struct FrameNeedEffectState *,
+                                                   unsigned char *);
+unsigned int frame_begin_optional_attachment_job(struct FrameNeedEffectState *,
+                                                 struct FrameObject *, unsigned int);
+unsigned int frame_dispatch_optional_attachment_job(struct FrameNeedEffectState *,
+                                                    struct FrameObject *);
+unsigned int frame_check_optional_attachment_capacity(struct FrameNeedEffectState *,
+                                                       struct FrameObject *);
+
 #endif

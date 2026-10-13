@@ -2,7 +2,7 @@
 
 unsigned char save_stream_validate_header(void)
 {
-    unsigned short *source = (unsigned short *)&g_save_stream_state;
+    unsigned short *source = g_save_stream_state.header.words;
     unsigned short sum;
     int count;
     int byte;
@@ -14,7 +14,7 @@ unsigned char save_stream_validate_header(void)
     } while (--count > 0);
     if (sum != 0) return 0;
     for (byte = 0; byte < 8; ++byte)
-        if (g_save_stream_state.header[byte] != g_save_header_template[byte]) return 0;
+        if (g_save_stream_state.header.bytes[byte] != g_save_header_template[byte]) return 0;
     return 1;
 }
 asm(".align 2, 0");
