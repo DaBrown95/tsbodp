@@ -12,7 +12,7 @@ struct ActorEntryCollectionRecord {
  unsigned int unknown04, unknown08;
 };
 struct ActorEntryCollectionGroup {
- unsigned char start, count, unknown02[2];
+ unsigned char start, count, flags, unknown03;
 };
 struct ActorEntryCollection {
  unsigned short count, unknown02;
@@ -30,6 +30,11 @@ extern unsigned char g_actor_entry_initial_values[][2];
 extern void *g_actor_entry_buffer;
 extern struct ConditionActorEntries g_actor_entry_alias_list;
 extern unsigned int g_actor_entry_seen_words[];
+/* Alternate view of each eight-byte definition value: entry plus condition key. */
+struct ActorEntrySeed {
+ struct ConditionActorEntry entry;
+ unsigned char row, column, index, unknown07;
+};
 unsigned short frame_random_bounded(unsigned short);
 unsigned char frame_random_chance(unsigned char);
 void actor_entry_prepare(struct ActorEntryContext *);
@@ -48,12 +53,14 @@ unsigned char actor_entry_choose_base(void);
 unsigned char actor_entry_choose_195(void);
 unsigned char actor_entry_choose_209(void);
 unsigned char actor_entry_choose_201(void);
-/* Connected bodies still original; their roles/signatures remain provisional. */
 void actor_entry_refresh_list(struct ActorEntryContext *, unsigned int);
+/* Original no-op hook; its role remains provisional. */
 void actor_entry_empty_hook(void *);
 void resource_set_triple(unsigned int, unsigned int, unsigned int);
 void actor_entry_clear_collection_group(struct ActorEntryContext *, unsigned int);
 void actor_entry_publish_collection_group(struct ActorEntryContext *, unsigned int);
 void actor_entry_remove_collection_record(struct ActorEntryContext *, unsigned int,
                                           unsigned int);
+struct ActorEntryCollectionRecord *actor_entry_reserve_collection_record(
+ struct ActorEntryContext *, unsigned int);
 #endif

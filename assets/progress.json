@@ -1,21 +1,21 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "13 Oct 2026, 01:30 BST",
-  "compiled_c_functions": 604,
-  "compiled_c_bytes": 71124,
+  "verified_at": "13 Oct 2026, 01:40 BST",
+  "compiled_c_functions": 613,
+  "compiled_c_bytes": 72540,
   "assembly_glue_bytes": 352,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16705740,
+  "unconverted_rom_bytes": 16704324,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2559,
-  "bounded_control_flow_bodies": 1868,
+  "bounded_control_flow_bodies": 1859,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 17,
   "unresolved_callback_call_sites": 92,
-  "mapped_extent_bytes": 322804,
+  "mapped_extent_bytes": 322808,
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointer and Thumb prologue sweeps; estimated extents",
   "rows": [
     {
@@ -222,11 +222,11 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08001108",
+      "name": "frame_allocate_object",
       "group": "ROM 0800xxxx",
       "rom_offset": 4360,
-      "size": 30,
-      "status": "mapped_code"
+      "size": 32,
+      "status": "exact_c"
     },
     {
       "name": "frame_allocate_scene_object",
@@ -4793,11 +4793,11 @@
       "status": "candidate"
     },
     {
-      "name": "sub_08016C04",
+      "name": "frame_scene_read_spawn",
       "group": "ROM 0801xxxx",
       "rom_offset": 93188,
-      "size": 74,
-      "status": "mapped_code"
+      "size": 76,
+      "status": "exact_c"
     },
     {
       "name": "sub_08016C50",
@@ -6508,11 +6508,11 @@
       "status": "candidate"
     },
     {
-      "name": "sub_0801DE1C",
+      "name": "frame_scene_player_actor",
       "group": "ROM 0801xxxx",
       "rom_offset": 122396,
       "size": 456,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_0801DFE4",
@@ -7026,18 +7026,18 @@
       "status": "candidate"
     },
     {
-      "name": "sub_08020368",
+      "name": "actor_entry_refresh_list",
       "group": "ROM 0802xxxx",
       "rom_offset": 131944,
       "size": 328,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080204B0",
+      "name": "actor_entry_reserve_collection_record",
       "group": "ROM 0802xxxx",
       "rom_offset": 132272,
       "size": 196,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "actor_entry_remove_collection_record",
@@ -7173,11 +7173,11 @@
       "status": "candidate"
     },
     {
-      "name": "sub_08020B60",
+      "name": "actor_entry_mark_scene_collection",
       "group": "ROM 0802xxxx",
       "rom_offset": 133984,
       "size": 32,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08020B80",
@@ -7187,11 +7187,11 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08020BF8",
+      "name": "actor_entry_restore_scene_collection",
       "group": "ROM 0802xxxx",
       "rom_offset": 134136,
       "size": 92,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08020C54",
@@ -7201,11 +7201,11 @@
       "status": "candidate"
     },
     {
-      "name": "sub_08020C70",
+      "name": "actor_entry_restore_collection_effect",
       "group": "ROM 0802xxxx",
       "rom_offset": 134256,
       "size": 92,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08020CCC",
@@ -10729,11 +10729,11 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0802FAD0",
+      "name": "frame_create_scene_primary_actor",
       "group": "ROM 0802xxxx",
       "rom_offset": 195280,
       "size": 112,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_0802FB40",
@@ -18171,16 +18171,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08001108",
+      "name": "frame_allocate_object",
       "rom_offset": 4360,
-      "size": 30,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_001126",
-      "rom_offset": 4390,
-      "size": 2,
-      "status": "unresolved"
+      "size": 32,
+      "status": "exact_c"
     },
     {
       "name": "frame_allocate_scene_object",
@@ -22791,16 +22785,10 @@
       "status": "candidate"
     },
     {
-      "name": "sub_08016C04",
+      "name": "frame_scene_read_spawn",
       "rom_offset": 93188,
-      "size": 74,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_016C4E",
-      "rom_offset": 93262,
-      "size": 2,
-      "status": "unresolved"
+      "size": 76,
+      "status": "exact_c"
     },
     {
       "name": "sub_08016C50",
@@ -24651,10 +24639,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_0801DE1C",
+      "name": "frame_scene_player_actor",
       "rom_offset": 122396,
       "size": 456,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_0801DFE4",
@@ -25149,16 +25137,16 @@
       "status": "candidate"
     },
     {
-      "name": "sub_08020368",
+      "name": "actor_entry_refresh_list",
       "rom_offset": 131944,
       "size": 328,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080204B0",
+      "name": "actor_entry_reserve_collection_record",
       "rom_offset": 132272,
       "size": 196,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "actor_entry_remove_collection_record",
@@ -25275,10 +25263,10 @@
       "status": "candidate"
     },
     {
-      "name": "sub_08020B60",
+      "name": "actor_entry_mark_scene_collection",
       "rom_offset": 133984,
       "size": 32,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08020B80",
@@ -25293,10 +25281,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_08020BF8",
+      "name": "actor_entry_restore_scene_collection",
       "rom_offset": 134136,
       "size": 92,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08020C54",
@@ -25311,10 +25299,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_08020C70",
+      "name": "actor_entry_restore_collection_effect",
       "rom_offset": 134256,
       "size": 92,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08020CCC",
@@ -29079,10 +29067,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_0802FAD0",
+      "name": "frame_create_scene_primary_actor",
       "rom_offset": 195280,
       "size": 112,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_0802FB40",
@@ -36814,8 +36802,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "1230c92eb43822d6a884676d595dbf289e97957b17fa79de2113258b1be7b48a",
-    "assets/rom-inventory.json": "285659e469d390ee5c93ef0b31780cc77aa8edd4203366b45fa768ee9b33f969",
+    "config/build-us-eu.json": "42e7a71cbf95c7c906c69503203c8068525e445c279d1bc544e60aacb7ae3c64",
+    "assets/rom-inventory.json": "7d085de775f6cab07ef248cac2a060b95c0e1c873ce35ab8a2d9cb0e735010f6",
     "tools/render_progress.py": "ed5189bb4d5f18971b07e5a01c51b5f9d204b1fb1558037dc00ea45aa88eeff6",
     "tools/inventory_partition.py": "bc77da39abf1f092066c258dd6dadb1606a772d563deac4a37b86d0b0bffd10d",
     "config/progress-requirements.txt": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"

@@ -1118,3 +1118,61 @@ control still rejects. The older arena/group loader candidate at `0xAD1C` was
 inspected before extending it; it remains unconverted under the provisional
 name `resource_prepare`. The initializer's compiler match and the static
 argument/layout evidence do not establish runtime actor selection or gameplay.
+
+The scene setup continuation adds seven exact C extents, 892 bytes:
+`frame_allocate_object` (`0x1108`, 32), `frame_scene_read_spawn` (`0x16C04`, 76),
+`frame_create_scene_primary_actor` (`0x2FAD0`, 112),
+`actor_entry_mark_scene_collection` (`0x20B60`, 32),
+`actor_entry_restore_scene_collection` (`0x20BF8`, 92),
+`actor_entry_restore_collection_effect` (`0x20C70`, 92), and
+`frame_scene_player_actor` (`0x1DE1C`, 456). Every complete linked extent,
+including local literal islands and alignment, matches. Their actual controls
+all reject; canonical and changed-source bytes are retained in
+`camera-map/scene-dependencies-promoted/`. The 400-byte setup is reverified with
+its same control after adopting the established restoration/factory names and
+byte-sized spawn-index declaration.
+
+The typed allocation wrapper calls the existing 320-byte object allocator,
+returns null unchanged on failure, and otherwise writes the narrowed id and
+clears the byte at `+0x84`. The spawn lookup traverses the primary object list,
+searching for id 18 and the supplied byte-sized subtype. It optionally writes
+the direction byte and always writes the two position words on success. Its
+boundary includes two final alignment bytes, extending the prior 74-byte CFG
+envelope to the complete 76-byte compiler extent. The primary actor factory
+allocates id 27, sets flags `0x00100018`, clears actor byte `+0x4C`, initializes
+position/state/animation and palette slot six, installs its step and resource
+callbacks and clears the display layer. The step callback itself remains an
+original routine.
+
+The saved-entry routines use the existing `ActorEntryContext` pointer at
+`+0x31C`, 12-byte collection records, and four-byte groups at collection
+`+0x784`. The mark helper establishes bit zero of group byte `+2` as a flag;
+the canonical group view now names this byte `flags` and retains its previous
+four-byte layout. The restoration loop creates each group's saved effects
+then clears the group using the matching existing collection helper. For each
+record, the effect constructor consumes the first four bytes and argument one,
+then effect byte `+0x83` is set while its saved packed cell is projected to a
+grid corner. The low byte of record `+8` and the projected coordinates narrowed
+to signed halfwords go to the original placement helper at `0x2D8E4`. That
+helper remains unconverted. The temporary `linked` interpretation of byte
+`+0x83` and the record names remain provisional; allocation and projection
+failures are not checked by this path.
+
+The player actor constructor allocates id zero and configures the shared
+actor/frame fields, group palette, animation variants, commands and part
+orders. The game-state mode byte at `+0x42E` selects one or two times the spawn
+direction, a direction-table variant, and an unsigned flip threshold of four
+or eight. An unsigned-byte local for the multiplier produces the exact
+branch/lifetime behavior; the earlier signed-word local did not match. This
+supports that type for the reconstruction without proving the original source
+declaration. The constructor reads either a resource spawn's two signed
+halfwords and direction byte or fallback fields at configuration offsets
+`+8/+0x0A/+7`. It writes its pointer into the observed 12-byte player-view
+slot, installs the two-object callback at object `+0xC8` and resource callback
+at `+0x98`, assigns the state pointer at `+0x60`, and invokes the matching actor
+state updater. The `+0xC8` callback is distinct from the normal actor callback
+view at `+0xCC`; its type follows the original two-object consumer. The byte at
+`+0xAE` is set to eight and used by that original callback as a fixed-point
+spatial threshold; the byte at `+0x84` is set to three. Their wider roles remain
+under analysis. These compiler and static-layout findings do not establish
+runtime multiplayer or scene-restoration behavior.

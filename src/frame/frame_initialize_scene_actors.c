@@ -18,9 +18,9 @@ void frame_initialize_scene_actors(unsigned int scene) {
  resource_execute_group(0);
  if(g_resource_group_flags&1) {resource_spawn_group(1);resource_execute_group(1);}
  entries=(struct FrameSceneEntrySnapshot *)g_scene_entry_data;
- frame_scene_stage_08020bf8(entries,g_scene_id);
- frame_scene_stage_08020b60(entries,g_scene_id);
- g_frame_scene_active_actor=frame_scene_primary_actor();
+ actor_entry_restore_scene_collection((struct ActorEntryContext *)entries,g_scene_id);
+ actor_entry_mark_scene_collection((struct ActorEntryContext *)entries,g_scene_id);
+ g_frame_scene_active_actor=frame_create_scene_primary_actor();
  if(entries->world==scene && !entries->exit_flag)frame_create_speed_exit_actor(1,entries->position.x,entries->position.y);
  selection=&g_frame_scene_actor_selection;
  if(selection->world==scene)frame_scene_stage_08033674(selection->position.x,selection->position.y);

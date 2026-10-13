@@ -11341,9 +11341,6 @@
         "transition_configure_view": "0x0800e9e9",
         "resource_spawn_group": "0x0800a965",
         "resource_execute_group": "0x0800adcd",
-        "frame_scene_stage_08020bf8": "0x08020bf9",
-        "frame_scene_stage_08020b60": "0x08020b61",
-        "frame_scene_primary_actor": "0x0802fad1",
         "frame_create_speed_exit_actor": "0x08038091",
         "frame_scene_stage_08033674": "0x08033675",
         "frame_scene_read_spawn": "0x08016c05",
@@ -11351,7 +11348,10 @@
         "frame_create_actor": "0x0802bdad",
         "transition_object_set_state": "0x08001c05",
         "frame_set_variant_state": "0x08001be1",
-        "resource_prepare": "0x0800ad1d"
+        "resource_prepare": "0x0800ad1d",
+        "frame_create_scene_primary_actor": "0x0802fad1",
+        "actor_entry_restore_scene_collection": "0x08020bf9",
+        "actor_entry_mark_scene_collection": "0x08020b61"
       },
       "thumb_symbols": [
         "resource_prepare",
@@ -11361,9 +11361,9 @@
         "transition_configure_view",
         "resource_spawn_group",
         "resource_execute_group",
-        "frame_scene_stage_08020bf8",
-        "frame_scene_stage_08020b60",
-        "frame_scene_primary_actor",
+        "actor_entry_restore_scene_collection",
+        "actor_entry_mark_scene_collection",
+        "frame_create_scene_primary_actor",
         "frame_create_speed_exit_actor",
         "frame_scene_stage_08033674",
         "frame_scene_read_spawn",
@@ -11445,6 +11445,205 @@
       "negative_control": {
         "before": "timer=60",
         "after": "timer=61"
+      }
+    },
+    {
+      "name": "frame_create_scene_primary_actor",
+      "rom_offset": 195280,
+      "size": 112,
+      "symbols": {
+        "frame_set_position": "0x080014a5",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_animation_record": "0x0800132d",
+        "frame_acquire_palette_slot": "0x08030221",
+        "g_frame_scene_primary_animation": "0x080694d0",
+        "frame_scene_primary_tick": "0x0802fb81",
+        "resource_object_before_step": "0x08001ae1",
+        "frame_allocate_object": "0x08001109"
+      },
+      "thumb_symbols": [
+        "frame_allocate_object",
+        "frame_set_position",
+        "transition_object_set_state",
+        "frame_set_animation_record",
+        "frame_acquire_palette_slot",
+        "frame_scene_primary_tick",
+        "resource_object_before_step"
+      ],
+      "negative_control": {
+        "before": "object->flags=0x00100018;",
+        "after": "object->flags=0x00100010;"
+      },
+      "source": "src/frame/frame_create_scene_primary_actor.c"
+    },
+    {
+      "name": "frame_scene_read_spawn",
+      "rom_offset": 93188,
+      "size": 76,
+      "symbols": {
+        "g_frame_scene_spawn_list": "0x030024f0"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "object->id==18",
+        "after": "object->id==19"
+      },
+      "source": "src/frame/frame_scene_read_spawn.c"
+    },
+    {
+      "name": "actor_entry_mark_scene_collection",
+      "rom_offset": 133984,
+      "size": 32,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "group->flags|=1;",
+        "after": "group->flags|=2;"
+      },
+      "source": "src/frame/actor_entry_mark_scene_collection.c"
+    },
+    {
+      "name": "actor_entry_restore_scene_collection",
+      "rom_offset": 134136,
+      "size": 92,
+      "symbols": {
+        "actor_entry_restore_collection_effect": "0x08020c71",
+        "actor_entry_clear_collection_group": "0x08020235"
+      },
+      "thumb_symbols": [
+        "actor_entry_restore_collection_effect",
+        "actor_entry_clear_collection_group"
+      ],
+      "negative_control": {
+        "before": "index++",
+        "after": "index+=2"
+      },
+      "source": "src/frame/actor_entry_restore_scene_collection.c"
+    },
+    {
+      "name": "frame_allocate_object",
+      "rom_offset": 4360,
+      "size": 32,
+      "symbols": {
+        "frame_allocate_scene_object": "0x08001129"
+      },
+      "thumb_symbols": [
+        "frame_allocate_scene_object"
+      ],
+      "negative_control": {
+        "before": "object->id=id;",
+        "after": "object->id=id+1;"
+      },
+      "source": "src/frame/frame_allocate_object.c"
+    },
+    {
+      "name": "actor_entry_restore_collection_effect",
+      "rom_offset": 134256,
+      "size": 92,
+      "symbols": {
+        "frame_spawn_need_effect": "0x0802d619",
+        "frame_grid_cell_corner": "0x08048db5",
+        "g_frame_registration": "0x03004330",
+        "frame_configure_need_effect": "0x0802d8e5"
+      },
+      "thumb_symbols": [
+        "frame_spawn_need_effect",
+        "frame_grid_cell_corner",
+        "frame_configure_need_effect"
+      ],
+      "negative_control": {
+        "before": "effect->linked=1;",
+        "after": "effect->linked=2;"
+      },
+      "source": "src/frame/actor_entry_restore_collection_effect.c"
+    },
+    {
+      "name": "frame_scene_player_actor",
+      "rom_offset": 122396,
+      "size": 456,
+      "symbols": {
+        "frame_allocate_object": "0x08001109",
+        "g_frame_scene_player_mode": "0x03003950",
+        "g_frame_actor_direction_variants_signed": "0x0804f1b0",
+        "g_frame_scene_double_direction_variants": "0x0804f1b8",
+        "g_scene_mode_bytes": "0x03004114",
+        "frame_scene_player_spawn_resource": "0x0800ae69",
+        "g_frame_scene_player_fallback": "0x030040e0",
+        "frame_set_position": "0x080014a5",
+        "frame_scene_initialize_player_state": "0x0801e1bd",
+        "frame_enable_parts": "0x08001385",
+        "g_frame_scene_player_group": "0x03003970",
+        "frame_load_actor_group_palette": "0x0803aec9",
+        "frame_acquire_palette_slot": "0x08030221",
+        "frame_bind_actor_group": "0x0803ad65",
+        "frame_set_animation_variant": "0x08000be9",
+        "g_frame_actor_commands_kind1": "0x08d729d8",
+        "g_frame_scene_player_commands_kind2": "0x08d734cc",
+        "frame_set_animation_commands": "0x080015bd",
+        "frame_set_part_order": "0x0800156d",
+        "frame_enable_animation_part": "0x08001585",
+        "g_frame_scene_player_slots": "0x030040e0",
+        "frame_scene_player_collision": "0x0801123d",
+        "resource_object_before_step": "0x08001ae1",
+        "g_frame_actor_local_need_state": "0x03003a00",
+        "frame_update_actor_state": "0x0802b2fd"
+      },
+      "thumb_symbols": [
+        "frame_allocate_object",
+        "frame_scene_player_spawn_resource",
+        "frame_set_position",
+        "frame_scene_initialize_player_state",
+        "frame_enable_parts",
+        "frame_load_actor_group_palette",
+        "frame_acquire_palette_slot",
+        "frame_bind_actor_group",
+        "frame_set_animation_variant",
+        "frame_set_animation_commands",
+        "frame_set_part_order",
+        "frame_enable_animation_part",
+        "frame_scene_player_collision",
+        "resource_object_before_step",
+        "frame_update_actor_state"
+      ],
+      "negative_control": {
+        "before": "object->default_state=16;",
+        "after": "object->default_state=17;"
+      },
+      "source": "src/frame/frame_scene_player_actor.c"
+    },
+    {
+      "name": "actor_entry_refresh_list",
+      "rom_offset": 131944,
+      "size": 328,
+      "symbols": {
+        "g_resource_game_state": "0x03003950",
+        "actor_entry_choose_base": "0x080206ed",
+        "actor_entry_choose_195": "0x0802074d",
+        "actor_entry_choose_201": "0x0802080d",
+        "actor_entry_choose_209": "0x080207ad",
+        "g_condition_actor_definitions": "0x080535a4"
+      },
+      "thumb_symbols": [
+        "actor_entry_choose_base",
+        "actor_entry_choose_195",
+        "actor_entry_choose_201",
+        "actor_entry_choose_209"
+      ],
+      "source": "src/resource/actor_entries/actor_entry_refresh_list.c",
+      "negative_control": {
+        "before": "list->count>definition->retained",
+        "after": "list->count>=definition->retained"
+      }
+    },
+    {
+      "name": "actor_entry_reserve_collection_record",
+      "rom_offset": 132272,
+      "size": 196,
+      "source": "src/resource/actor_entries/actor_entry_reserve_collection_record.c",
+      "symbols": {},
+      "negative_control": {
+        "before": "collection->count>159",
+        "after": "collection->count>160"
       }
     }
   ],

@@ -1,6 +1,6 @@
 # Actor entry list lifecycle and condition handoff
 
-Eighteen connected replacements add 1,804 bytes of matching C. Their complete
+Twenty connected replacements add 2,328 bytes of matching C. Their complete
 linked extents, pools and alignment match at the original addresses. Every
 replacement has an actual compiled changed-source control that rejects. The
 list setup, reset, insertion and selection paths connect to the previously
@@ -27,6 +27,8 @@ static and compiler results; no gameplay behavior is claimed.
 | `actor_entry_clear_collection_group` | `08020234` | 172 |
 | `actor_entry_publish_collection_group` | `08020614` | 216 |
 | `actor_entry_remove_collection_record` | `08020574` | 160 |
+| `actor_entry_refresh_list` | `08020368` | 328 |
+| `actor_entry_reserve_collection_record` | `080204B0` | 196 |
 
 ## Shared storage evidence
 
@@ -40,8 +42,9 @@ Context pointers at `18` and `14` select headers thirteen and fourteen.
 The definition table is the same table already used by
 `condition_record_actor_selection`. Its shared declaration now names byte zero
 `capacity`, byte two `retained` and byte three `fallback`; byte one remains
-`count`. Static accesses in the unconverted refresh routine motivate the latter
-two names. The pointer at four and all field types/offsets remain the same.
+`count`. The matching refresh uses that count as the minimum regenerated list
+size; the selection publisher uses it as its seed scan bound. The pointer at
+four and all field types/offsets remain the same.
 Thirteen definitions are used by the selection publisher and reset-value loop;
 fifteen are used by setup. Those loop bounds are distinct from total table size.
 
@@ -99,7 +102,8 @@ Its observed layout contains a halfword count at zero, an unknown halfword at
 two, 160 twelve-byte records beginning at four, and 50 four-byte group headers
 beginning at `784`. Each record begins with the existing four-byte actor entry;
 its two following words remain unknown. A group header supplies byte-sized
-start and count fields. The capacity test in the unconverted insertion routine,
+start and count fields, followed by flags and an unknown byte. The scene marker
+sets flag bit zero at group `+2` without changing its four-byte layout. The capacity test in insertion,
 the `49` bounds in deletion/clearing, and the reset's `84C` clear agree on these
 extents. This is evidence for this allocation, not the complete context size.
 
@@ -132,9 +136,46 @@ underflow remain unchecked as in the original. A changed loop comparison
 extends the shift by one record and rejects one byte. Its positive/control
 proof index is `reports/audio-root/collection-remove-canonical/1791850297820779000/ready.json`.
 
+Collection reservation now matches the complete 196-byte extent at `080204B0`
+in ordinary C. It rejects a total above 159, chooses the record at group start
+plus count, shifts subsequent twelve-byte records up in descending index order,
+increments later group starts and both counts, then returns the reserved slot.
+The separate copy-reference scope preserves the compiler's pointer lifetime
+while its structure copy uses three word transfers. The selected count byte is
+addressed through the typed group-zero count plus the verified four-byte group
+stride. It neither initializes the returned record nor adds unchecked-group
+bounds. Changing the capacity rejection from 159 to 160 rejects one byte.
+The canonical proof index is
+`reports/audio-root/collection-reserve-canonical/1791851836572880000/ready.json`.
+
+## Definition-driven refresh
+
+The central refresh at `08020368` now matches all 328 bytes. When the current
+count exceeds the definition's retained count, it scans from the retained index
+through capacity, marks occupied kinds `FF`, zeroes their two value bytes and
+decrements the byte count. It then fills from the resulting count through the
+definition's count bound. Four seed kinds `FE`, `FD`, `FC` and `FB` call the
+accepted base/195/201/209 selectors. Other seeds copy their complete first word
+when their packed condition key is `(5,6,5)`, or when the addressed condition is
+active and incomplete. Otherwise those four fallback kinds choose the entry.
+Every generated record clears value bytes one and two and increments the count;
+an unrecognized fallback leaves its kind unchanged, as in the original.
+
+The eight-byte seed is an alternate view of the existing definition value:
+the first four bytes are `ConditionActorEntry`, followed by row, column, index
+and an unknown byte. Its condition state address is game-state `+448`, with
+strides 144, 24 and four respectively; the completion byte follows at `+449`.
+The shared `ConditionActorDefinition` and canonical table name are reused.
+Four C register bindings preserve the cleanup array, record pointer and
+byte-to-word kind return lifetimes. A byte return versus a widened return
+changes the old compiler's narrowing and allocation; the retained ordinary
+variants and wrong matches remain local. No instruction body is embedded.
+The real retained-count comparison mutation rejects one byte. Its proof index is
+`reports/audio-root/actor-entry-refresh-canonical/1791851640877264000/ready.json`.
+
 ## Matching and remaining path
 
-Ordinary C reproduces sixteen functions. The collection removal constraint is
+Ordinary C reproduces seventeen functions. The refresh and collection removal constraints are
 recorded above. Reset uses one semantic `r0` binding
 for the game-state base so the compiler retains the original base literal plus
 `F0` address calculation. It contains no instruction-body assembly. Zero-filled
@@ -149,11 +190,6 @@ The two collection controls change the later-group bound and the catalog
 category filter, rejecting by two and one bytes respectively. Their proof index
 is `reports/audio-root/actor-entry-collection-canonical/1791849007996878000/ready.json`.
 
-The central definition-driven refresh at `08020368` remains unconverted. Static
-analysis shows a retained-slot cleanup, seed records and random fallback
-selection, including a packed `(5,6,5)` condition marker. A revised 328-byte
-trial matches the selection/condition handoff but still differs in the cleanup
-loop; it receives no coverage credit. Collection insertion at `080204B0` and secondary-flag reconciliation at
-`0802005C` remain connected targets. Useful
+Secondary-flag reconciliation at `0802005C` remains a connected target. Useful
 failed bodies and raw comparisons remain in ignored local reports. Whole-ROM
 equality, partial storage mapping and runtime behavior remain separate claims.
