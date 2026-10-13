@@ -1,0 +1,22 @@
+/*
+ * Adapted from Krawall lib/player.c and lib/mtypes.h.
+ * Copyright (C) 2001-2005, 2013 Sebastian Kienzl.
+ * Source: https://github.com/sebknzl/krawall/tree/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0
+ * Changes: observed game layouts, direct RAM mixer transfers and the earlier
+ * order-jump, callback and channel-stop behavior. Ordinary C at original entries.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the GNU Lesser General Public License as published by the Free Software
+ * Foundation; either version 2.1 of the License, or (at your option) any later
+ * version.
+ * This library is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See licenses/Krawall-LGPL-2.1.txt for the licence.
+ */
+#include "audio_pitch.h"
+
+unsigned short audio_period_linear(unsigned int note, const void *sample)
+{
+    const struct AudioSample *s = sample;
+    return (note << 6) + 2 * 768 + (s->fine_tune >> 1);
+}

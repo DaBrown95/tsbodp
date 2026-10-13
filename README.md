@@ -12,7 +12,7 @@ Almost all code, analysis and tooling are AI-generated.
 
 Green tiles are matching C. Function boundaries in the
 [ROM map](assets/rom-inventory.json) are provisional.
-Amber tiles are verified low-level ARM glue, counted separately from C.
+Amber tiles are verified low-level ARM/Thumb glue, counted separately from C.
 The build matches the original ROM, but most regions are still copied from
 the original dump.
 

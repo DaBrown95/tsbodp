@@ -636,7 +636,8 @@ RAM addresses: extended start `0x03000094`, release `0x03000320`, sample step
 These are accepted compiled C callees within the audited copy map. The direct
 function declarations use long transfers; this does not add assembly glue bytes
 to the row decoder. Effect and period callbacks are represented as typed C
-function pointers and still retain explicit unconverted table targets.
+function pointers. The following batches reconstruct the period callbacks and
+some effect targets; remaining effect entries stay explicitly unconverted.
 
 All current consumers of the refined player, instrument and sample views are
 freshly compiled with their real controls, including existing copied ARM sample
@@ -646,3 +647,154 @@ difference. Raw comparisons and header snapshots are retained locally. The
 low-five-bit track selector and serialized instrument/sample/note indices have
 no invented clamps; this path does not validate every module or prove audible
 playback, runtime execution or complete audio reconstruction.
+
+## Connected pitch calculation and tick timing
+
+The decoder's two period callbacks and two final-frequency callbacks now compile
+at their original entries. The startup path selects each pair according to the
+module's linear-slides flag. The tempo setter completes the existing startup,
+row-advance and jingle-resume calls into the tick scheduler.
+
+| Entry | Inferred role | Full extent | Matching C | Explicit BIOS glue |
+| --- | --- | ---: | ---: | ---: |
+| `0804BDD0` | Amiga period from note and sample fine tune | 36 | 36 | 0 |
+| `0804BDF4` | Amiga frequency from period | 40 | 28 | 12 |
+| `0804BE1C` | Linear period from note and sample fine tune | 24 | 24 | 0 |
+| `0804BE34` | Linear frequency from period | 40 | 40 | 0 |
+| `08049ADC` | Tick interval from BPM | 72 | 60 | 12 |
+
+This adds **five functions / 188 C bytes**, plus **24 separately counted Thumb
+BIOS glue bytes**. Ordinary GCC 3.0.2 Thumb C with the pinned binutils 2.10.1
+assembler matches all five complete extents, including literal pools and
+alignment. No register bindings or output changes are needed. Changed C source
+controls reject all five; changing each new BIOS service number also rejects
+its containing extent. The previously accepted ARM mixer, both of its marked
+BIOS divisions, its C control and its hardware-glue control still match or reject
+as appropriate with the shared header extension.
+
+The Amiga period calculation reads the original unsigned halfword tables at
+`08D6F9CC` and `08D6FABC`, scales their product by 15 bits and returns the low
+16 bits. Sample offset `+0C` is signed fine tune; this path shifts it by two
+before adding the 32-entry lookup bias. The Amiga frequency path divides
+`8363 * 1712` by period through BIOS service 6. The linear period path instead
+adds `(note << 6)`, `2 * 768` and the signed fine tune shifted by one. Its final
+frequency path derives an octave with the observed unsigned reciprocal
+multiplication, computes the remainder for the original word table at
+`08D6FB3C`, and shifts by `23 - octave`. These ROM tables remain explicit data,
+not reconstructed assets. Their names follow the inspected Krawall source and
+these concrete loads; they do not establish provenance for the whole engine.
+
+The tempo setter clamps signed BPM to at least 384, divides `15 * 16384` by
+that BPM using the same Thumb BIOS handoff, and shifts the result left by two.
+It stores the low 16 bits in the tick period at `0200163C`, the active sample
+count at `0200163E`, and the saved count at `02000E34`. Existing player calls
+supply `24 * tempo`. This is static and compiler evidence for scheduler
+coordination; no audible timing measurement is claimed.
+
+`audio_bios_divide_thumb` is a small explicitly marked hardware wrapper adapted
+from Krawall's `FastIntDivide`, with the original licence and pinned-source
+notice retained. Its six instructions and zero-denominator branch are outside
+C coverage. Non-emitting labels prove each 12-byte glue span in the linked ELF;
+the separate ARM remainder wrapper remains unchanged. Valid note/table indices,
+linear frequency shifts and serialized sample inputs are caller preconditions.
+No new bounds checks, period clamp or synthesized division behavior has been
+introduced to make a candidate match.
+
+## Connected pitch slides and vibrato
+
+Eleven effect callbacks add **1,644 matching C bytes** to the pitch path. All use
+ordinary GCC 3.0.2 Thumb C, the shared 96-byte track view and typed long transfers
+to the accepted copied ARM sample-step and sample-release routines. Each complete
+extent and its changed-source control are checked independently before full-ROM
+integration; no register bindings or instruction bodies are added.
+
+| Effect slot | Original entry | Inferred role | Verified bytes |
+| --- | --- | --- | ---: |
+| 15 | `0804B27C` | S3M upward pitch slide | 228 |
+| 11 | `0804B360` | S3M downward pitch slide | 176 |
+| 19 | `0804B410` | Slide toward the pending note | 332 |
+| 31 | `0804B55C` | Fine vibrato | 204 |
+| 14 | `0804C014` | XM upward period slide | 76 |
+| 16 | `0804C060` | Fine upward period slide | 72 |
+| 17 | `0804C0A8` | Extra-fine upward period slide | 72 |
+| 10 | `0804C0F0` | XM downward period slide | 100 |
+| 12 | `0804C154` | Fine downward period slide | 100 |
+| 13 | `0804C1B8` | Extra-fine downward period slide | 96 |
+| 20 | `0804C218` | Vibrato | 188 |
+
+The original table at `08D6F518` has 12-byte entries: the primary function pointer
+at `+0`, a possible second callback at `+4`, and the between-row enable word at
+`+8`. The listed slot pointers are static evidence for these boundaries and
+roles. Slot 24 additionally points its second callback at the accepted note-slide
+entry; its volume-slide callback remains unconverted. The decoder invokes
+on-row callbacks with a true argument, while the accepted between-row processor
+uses a false argument for enabled entries. The table data remains an explicit
+ROM region and is not counted as reconstructed source.
+
+The eight direct pitch-slide variants now establish the meanings of the stored
+ordinary, fine and extra-fine operands at track `+44/+45/+46`. The note slide
+uses the signed period at `+0C`, signed increment/destination at `+1A/+1C`, and
+signed glissando note at `+1E`. It clips movement to the destination, walks the
+original note-period table when glissando is enabled, and sends either the period
+or selected semitone period through the current frequency callback. The S3M
+variants interpret high-nibble `E/F` operands as extra-fine/fine row slides and
+retain ordinary slides for between-row calls. Lowering variants release a
+sample when the narrowed signed period is non-positive, exactly where observed;
+no additional stop or clamp is invented. The conventional XM names follow the
+inspected upstream effect vocabulary: these upward variants increase period,
+and the downward variants decrease it. Converter direction remapping and audible
+pitch direction are not independently verified here.
+
+Both vibrato callbacks use track `+20/+21/+22/+23/+24` as position, speed, depth,
+retrigger flag and signed-halfword waveform pointer. A new note with retrigger
+reads the player's offset byte at `+1F`. The low/high effect nibbles independently
+update depth/speed; fine vibrato then divides a newly supplied depth by four.
+Between rows, signed waveform multiplication adjusts a temporary 16-bit period,
+sends that frequency to the mixer, wraps position to 64 steps and marks the note
+for later reset. The stored reset flag also preserves the observed handoff from
+combined volume-slide/vibrato. Waveform selection, arpeggio, volume coordination
+and other table consumers remain connected reconstruction targets. Table bounds
+and valid module/track state remain caller preconditions; these matches provide
+no runtime or audible-output evidence.
+
+## Modulation waveforms and temporary volume/pan handoffs
+
+A further six callbacks add **676 matching C bytes** to the same effect path:
+glissando enable `0804C300` (24), vibrato waveform `0804C318` (100), tremolo
+waveform `0804C37C` (100), panbrello waveform `0804C3E0` (100), tremolo
+`0804B628` (184), and panbrello `0804B6E0` (168). Their table slots are respectively
+37, 38, 39, 40, 30 and 35. Each has a complete matching extent and an independently
+rejected source control. Extending the shared C helper header also preserves all
+eleven pitch-slide/vibrato positives and their real controls.
+
+The waveform callbacks select the original signed-halfword tables at
+`08D6F7CC`, `08D6F84C`, `08D6F8CC` and `08D6F94C` using the low two operand bits.
+The sine/ramp/square/random names follow the inspected upstream source and the
+observed pointer selection, with the table data still explicitly unconverted.
+Operands below four enable note retrigger; the others disable it. Glissando is
+enabled exactly when the effect operand is nonzero.
+
+Tremolo and panbrello establish the corresponding position/speed/depth/retrigger
+and waveform-pointer groups at `+28..+2C` and `+30..+34`. On-row calls update
+speed and depth from separate operand nibbles and reset position only for a new
+note with retrigger enabled. Between-row tremolo adds a signed-byte waveform
+delta to base volume, narrows the temporary result to a signed byte, and clips
+it to `0..64`. The earlier game helper takes that temporary value as an unsigned
+word, multiplies by channel and envelope volume, and shifts logically by **six**
+bits before the ARM volume call. This observed scaling differs from the later
+inspected upstream helper's 12-bit scaling; it is preserved without inventing a
+volume-cache field or changing the result. Audible behavior is unverified.
+
+Panbrello indexes the waveform with position divided by four, adds its signed
+byte delta to base pan, narrows the temporary pan to a signed byte, then adds the
+signed envelope pan through a separate signed-halfword helper and clips to
+`-64..64`. Both routines advance their byte position and request a later note
+reset. Tremolo wraps to 64 positions; panbrello's byte assignment wraps to 256.
+The unsigned volume argument, narrowed pan temporary and helper argument widths
+are supported by complete compiler comparisons, including preserved failed
+signed-volume and wide-pan attempts. Remaining combined volume-slide callbacks,
+tremor, retrigger and arpeggio are connected targets; no runtime or complete-audio
+claim follows from these finite matches.
+
+The whole pitch/timing/modulation batch comprises **22 functions / 2,508 C
+bytes**, with **24 additional BIOS glue bytes** kept outside that source count.

@@ -87,8 +87,50 @@ slots, without claiming the complete scene-object structure.
 The primary stage and row producer use ordinary C without register bindings.
 Separate candidate scopes preserve the actual reloads. Earlier flat scopes,
 loop forms and unsigned shift spellings failed; their raw comparisons remain
-available. The unconverted indicator readers, normal-row readers, relation
-loader, hint, restore and notice operations remain explicit dependencies.
+available. The primary indicator reader, normal-row readers, relation loader,
+hint, restore and notice operations remain explicit dependencies.
+
+## Fallback indicator closure
+
+The connected `display_menu_fallback_indicator` extent at `0x0802C854` adds 184
+matching C bytes, ending at `0x0802C90C`. It reads the same condition display-bit
+array at `0x03001E00` used by the accepted condition publisher and selector paths.
+The observed game-state word at `+440` selects mode 3 or mode 4; its broader role
+remains provisional. The actor argument is narrowed to a byte by this extent.
+All returns are complete words, including sentinel 255.
+
+For mode 3, bits 4 and 5 of condition byte 13 choose the following indicators.
+The signed state byte at `+69` selects a variant for actor 12. This address also
+corresponds to relation record 12's signed value in the existing partial
+relation-state view; the explicit serialized offset avoids implying a complete
+record-array bound.
+
+| Enabled bits | Actor / signed value | Returned indicator |
+| --- | --- | ---: |
+| Bit 4 alone | Actor 12, value at most 29 / greater than 29 | 110 / 111 |
+| Bit 4 alone | Other actor | 108 |
+| Bit 5 alone | Actor 13 / other actor | 112 / 109 |
+| Both bits | Actor 12, value at most 69 / greater than 69 | 114 / 115 |
+| Both bits | Actor 13 / other actor | 116 / 113 |
+
+For mode 4, condition byte 14's bit 5 enables indicator 118 for actor 15 and
+117 for other actors. Other modes and the disabled cases return 255. These are
+observed branch contracts, without a claim about the original indicator names
+or gameplay meanings.
+
+The loaded flags byte has one semantic `r2` binding within mode 3, and the extent
+makes no calls. The first mask retains its numeric bit value; the second is
+narrowed to a byte and then normalized to a truth value. Earlier ordinary local
+variants differed in register allocation, and direct boolean spellings changed
+the emitted normalization. Their raw comparisons remain private. This source
+contains semantic C and no embedded instruction body.
+
+The canonical 184-byte source and the accepted 328-byte primary-row caller both
+match with current headers. Changing the strict relation threshold from 69 to
+68 differs in one byte; the caller's real changed-source control also rejects.
+The additional ready metadata is `menu-fallback-ready.json` in the same ignored
+evidence directory. Together, the documented primary and fallback additions
+cover five functions and 832 complete-extent C bytes.
 
 ## Shared field refinement and verification
 

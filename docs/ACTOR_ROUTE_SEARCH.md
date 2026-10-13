@@ -1,15 +1,22 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 25 C functions and 3,020 bytes:
+The connected route-search path reconstructs 31 C functions and 3,768 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
-target-route and interaction consumers plus their eight-function job lifecycle. Every complete
+target-route and interaction consumers plus their eight-function job lifecycle,
+and six further variant/job-73 and shared value/random functions. Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
 Neither these matches nor the full-ROM equality gate establish runtime behaviour.
 
 | ROM offset | Function | Verified bytes |
 | --- | --- | ---: |
+| `0x3CF84` | `frame_begin_variant_attachment_job` | 136 |
+| `0x3D3D4` | `frame_begin_attachment_job_73` | 64 |
+| `0x3D214` | `frame_step_attachment_job_73` | 388 |
+| `0x3D414` | `frame_dispatch_attachment_job_73` | 64 |
+| `0x2F20C` | `frame_gate_attachment_game_value` | 52 |
+| `0x353D8` | `frame_random_range` | 44 |
 | `0x3BCF4` | `frame_grid_search` | 720 |
 | `0x3BFC4` | `frame_search_initialize_buffers` | 100 |
 | `0x3C028` | `frame_search_reset` | 100 |
@@ -361,3 +368,79 @@ The snapshot and comparison receipt is `actor-attachment-jobs-canonical/`;
 ready metadata is `actor-attachment-jobs-batch-manifest.json`. The unmatched
 284-byte neighbor producer and 356-byte target selector remain explicit ROM
 regions and receive no C coverage. No runtime test is claimed.
+
+
+## Variant initialization and attachment job 73
+
+Six further matching functions add 748 bytes. Effect-definition rows 35 and 36
+store the job-73 initializer and dispatcher in slots `+0xC/+0x10`. The direct
+388-byte step is called by that dispatcher rather than appearing as a word
+pointer in the bounded ROM scan. Rows 10, 46, 47, 48, 94 and 103 store the
+variant initializer at `+0xC`; their corresponding original dispatcher and
+configuration callback remain explicit unconverted regions. The raw aligned
+pointer references and row arithmetic are retained in
+`dependencies/attachment-job73-definition-slots.json`. These are static
+connections, without runtime reachability evidence.
+
+The variant initializer saves owner byte `+0x5E` before record allocation.
+It stores the full input kind at record `+4` and selects a 32-byte row at
+`0x0807F4C0`. A negative signed attachment byte at row `+0x19` uses the existing
+target-route requester. Otherwise it saves the actor's position at owner
+`+0x64/+0x68`, obtains the selected attachment from owner object `+0x54`, and
+requests route mode five with status flag one and animation six. Its result
+reports allocation success; attachment and route results are not propagated.
+The table stride and signed byte are established by its loads, multiply shift
+and signed comparison. Other row field names in the bounded header reflect
+observed accesses in the still unmatched 1,016-byte controller, and stay
+provisional. The initializer's ordinary integer address accumulator retains
+that table/stride calculation without register bindings or instruction glue.
+
+The job-73 initializer uses the target-route requester, animation six and actor
+word timer `+0x58 = 60`. Its dispatcher dereferences the found record without a
+null check, updates direction for phase zero before testing kind, and calls the
+step only for full-word kind 73. The lookup precondition and the direction
+update for other kinds are retained.
+
+The step uses phases zero, 61, 89, nine and one. Phase zero faces the owner center
+and calls the value gate with amount five; success requests animation 58,
+commits owner mode one, selects phase 61 and plays cue 54. Failure requests
+animation five and phase nine. At phase 61, actor flag `0x400000` applies need
+51 using owner-definition byte `+0x23`, commits mode three, requests animation
+one and writes timer 60 before selecting phase 89. Phase 89 first calls the
+shared need/timer helper, then decrements the actor timer again. This second
+decrement is present in the original and is preserved. When it reaches minus
+one, the random result from range zero through 100 is compared with up to five
+packed two-byte rows at `0x0807F670`. The first strict threshold match supplies
+a negated byte amount to the value gate, cue 55, animation 67 and phase nine.
+No matched threshold selects phase one. The helper's false low-byte result
+also selects one. Phase nine repeats need 51 until the completion flag selects
+one and requests animation one. Phase one commits mode two and returns two;
+other phases return one. Cue, kind and phase numbers are observed values rather
+than assigned gameplay roles.
+
+The 52-byte value gate compares the job actor with the first pointer stored at
+`0x030040E0`. Only a match tests signed game-state value `+4` against the full
+signed input amount. Insufficient value returns zero; otherwise it calls the
+matching clamped game-value adjustment with the negated amount and plays cue
+five. Other actors return one without an adjustment. Negative amounts therefore
+reach an additive adjustment through the same code. This evidence supports the
+bounded game-value name but does not establish the value's original label.
+
+The 44-byte random-range definition closes the previously named external at
+`0x353D8`. Equal endpoints return directly without calling the original word
+generator at `0x3555C`. Otherwise it masks the result to 15 bits, multiplies it
+by the signed inclusive span, shifts right by 15 and adds the first endpoint.
+The source adds no endpoint-order or overflow checks. Its underlying generator
+and state/refill path remain original ROM code; no distribution or runtime
+claim is made.
+
+All six complete extents match under the existing agbcc profile. Three sources
+specify only zero tail alignment; none has register constraints or instruction
+assembly. Each route, timer, phase, kind, comparison or mask mutation changes
+one compared byte and rejects. Thirteen previously accepted random-range
+callers were reverified with their own real controls after the new definition
+was introduced. Complete bytes, commands and current-header snapshots are in
+`actor-attachment-job73-canonical/`; ready metadata is
+`actor-attachment-job73-batch-manifest.json`. The larger variant controller,
+its parameter-indicator lifecycle, the neighbor producer and target selector
+remain unconverted and receive no C coverage.

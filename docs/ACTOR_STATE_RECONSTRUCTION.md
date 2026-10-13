@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 144 C functions spanning 24,024 verified bytes. The
+This batch reconstructs 150 C functions spanning 24,772 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,12 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x3CF84` | `frame_begin_variant_attachment_job` | 136 |
+| `0x3D3D4` | `frame_begin_attachment_job_73` | 64 |
+| `0x3D214` | `frame_step_attachment_job_73` | 388 |
+| `0x3D414` | `frame_dispatch_attachment_job_73` | 64 |
+| `0x2F20C` | `frame_gate_attachment_game_value` | 52 |
+| `0x353D8` | `frame_random_range` | 44 |
 | `0x16C68` | `frame_interaction_step_16c68` | 280 |
 | `0x16918` | `frame_begin_target_attachment_job` | 56 |
 | `0x16E04` | `frame_dispatch_attachment_job_49` | 32 |
@@ -1037,3 +1043,15 @@ preconditions are recorded in `ACTOR_ROUTE_SEARCH.md`. Sixty-five affected
 functions spanning 9,652 bytes remain exact after the field-label refinement,
 and all actual source controls reject. No reachability or gameplay result is
 inferred from those compiler matches.
+
+
+Six further attachment/value/random functions add 748 verified bytes. The
+variant initializer's signed table selector and saved-position route handoff
+join the effect-definition path; the job-73 initializer, kind dispatcher and
+388-byte phase controller close its value/need/timer/cue coordination. The
+52-byte primary-actor game-value gate and 44-byte canonical random-range
+definition are now matching C. All six actual controls reject, and thirteen
+previous random-range consumers remain exact with their own controls. Table
+stride, callback rows, ignored helper results, double timer decrement and
+remaining controller/indicator/RNG uncertainties are recorded in
+`ACTOR_ROUTE_SEARCH.md`. There is no runtime or gameplay claim.
