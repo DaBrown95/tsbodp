@@ -52,7 +52,7 @@ void frame_configure_deferred_display(unsigned char), display_reset(void);
 void set_vblank_callback(IrqCallback), irq_default_vblank_callback(void);
 /* Connected providers; signatures are bounded by these calls. */
 void scene_refresh_environment(void), scene_refresh_period_audio(void);
-void scene_stage_0803c598(void);
+void frame_step_local_need_effect_selection(void);
 unsigned char scene_step_early_exit(void);
 void scene_stage_0800e3a8(unsigned char), scene_update_view(unsigned int);
 void scene_stage_080202e0(unsigned char *, unsigned int);

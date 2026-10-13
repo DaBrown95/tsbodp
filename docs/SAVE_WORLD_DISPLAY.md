@@ -113,7 +113,8 @@ Three direct children of the unconverted 816-byte view coordinator add 364
 matching C bytes: `save_world_show_row_notice` at `0x0801EC9C` (152),
 `save_world_show_row_flag_notice` at `0x0801ED34` (124), and
 `save_world_show_notice` at `0x0801EDB0` (88). This selected-row display path now
-contains ten verified functions and 1,128 bytes; the coordinator stays explicit
+contained ten verified functions and 1,128 bytes before the pending providers
+below; the coordinator stays explicit
 and receives no coverage credit. All three use ordinary C and share a semantic
 inline centering helper that emits no additional out-of-line function.
 
@@ -134,3 +135,33 @@ byte stores and repeated lookup calls are preserved; no clamp or text-bound
 guard is introduced. The final call uses the already matching canonical
 `scene_submit_default_request(2)` provider at `0x08027DC0`. Shared representation
 and source controls are verified without assuming a runtime notice was shown.
+
+## Pending notification providers
+
+Two further direct children of the unconverted view coordinator add 124 matching
+C bytes: `save_world_show_pending_column` at `0x0802A920` (44) and
+`save_world_show_pending_event` at `0x0804560C` (80). The connected selected-row
+display path now contains twelve verified functions and 1,252 bytes. Both use
+ordinary C without register bindings. Their full extents, literal pools and
+alignment match, and their actual changed-source controls reject.
+
+The column provider passes its unchanged word row and column arguments to the
+matching `condition_lookup_kind`, adds 6,025 to the returned text index, copies
+that lookup into text field one, stores result id 299, then activates the existing
+actor scene request. It introduces no row, column or lookup bound. The original
+next prologue at `0x0802A94C` belongs to the already matching
+`condition_publish_row_displays`; its `resource_set_display_kind` child is also
+already reconstructed. Those existing providers receive no additional credit.
+
+The event provider compares world byte `+0x748` with four, selects result id 307
+or 306, stores the return from `frame_create_scene_object(193, 266, 15, 0)` in the
+existing request's object slot, then activates that request. The selector is
+`SaveWorldInitState.prefix.unknown748`, distinct from the aligned countdown
+word at world `+0x74C` in `SaveWorldInitState.pending`. Byte `+0x750`, pending row
+`+0x751` and pending-column mask `+0x752` are separate observed fields. The
+initializer's matching countdown store already uses `+0x74C` and is unchanged.
+An earlier private coordinator attempt confused these two offsets; its raw
+failure is retained and excluded from coverage. The ordinary event provider
+matches after the byte-offset correction. No object-allocation guard, text or
+audio-content meaning, complete state boundary or runtime notice is inferred.
+Its extent ends at the next original prologue `0x0804565C`.

@@ -5,6 +5,7 @@
 struct PaletteRangeConfig;
 #include "scene_request.h"
 #include "scene_retention.h"
+#include "frame_scene_actor_schedule.h"
 struct SceneContext { unsigned int flags, period; unsigned int unknown_08; void *palette; };
 struct SceneModeFlags { unsigned int unknown_00, flags; };
 struct ScenePaletteRangeConfig { const struct PaletteRangeConfig *resource; unsigned int unknown_04, unknown_08; };
@@ -20,7 +21,7 @@ extern void scene_vblank_callback(void), set_vblank_callback(void (*)(void));
 extern void scene_stage_0803e3a8(void), scene_stage_08026b24(void);
 extern void *scene_palette_source(void);
 extern void display_load_palette(const void *, unsigned int, unsigned int);
-extern void frame_load_scene_map_resources(unsigned int), scene_stage_0802cd90(void), frame_initialize_scene_actors(unsigned int), scene_stage_08037444(void);
+extern void frame_load_scene_map_resources(unsigned int), frame_reset_scene_actor_schedule(void), frame_initialize_scene_actors(unsigned int), scene_stage_08037444(void);
 extern void display_configure_tile_allocation(unsigned char), display_reset_tile_allocation(void);
 extern void scene_stage_080012dc(void), scene_stage_08000b78(void);
 extern void scene_copy_palette_alternate(const void *, unsigned int, unsigned int), scene_stage_08009e18(void);

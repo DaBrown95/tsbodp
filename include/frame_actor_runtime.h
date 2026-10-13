@@ -53,14 +53,14 @@ void frame_update_actor_state(struct FrameObject *);
 void *frame_initialize_actor_state(FrameU32);
 int frame_refresh_interaction_choices(void);
 void transition_object_set_state(struct FrameObject *, FrameU8);
-void frame_actor_note_spawn(FrameU16);
+void frame_actor_note_spawn(unsigned int);
 
 void frame_run_actor_state(struct FrameObject *);
 void frame_update_actor_parts(struct FrameObject *);
 void frame_update_actor_animation(struct FrameObject *);
 unsigned int frame_actor_indicator_kind(FrameU8);
 struct FrameObject *frame_create_actor_indicator(struct FrameObject *, int, int);
-void frame_actor_note_remove(FrameU16);
+void frame_actor_note_remove(unsigned int);
 void frame_update_actor_movement(void *, struct FrameObject *);
 void frame_refresh_velocity(struct FrameObject *);
 #define g_frame_actor_multi_kinds g_frame_actor_definitions

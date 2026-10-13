@@ -4,7 +4,7 @@ void scene_primary_step(void)
  struct ScenePrimaryViews *context=&g_scene_primary_views;
  unsigned char selected=context->current_view;
  struct FrameActorObject *actor=context->slots[selected].object;
- if(!(g_scene_primary_view_flags[selected].flags&0x1c0000))scene_stage_0803c598();
+ if(!(g_scene_primary_view_flags[selected].flags&0x1c0000))frame_step_local_need_effect_selection();
  if(scene_step_early_exit()==1){g_game_flags&=~0x20u;return;}
  {
   unsigned char i=0;

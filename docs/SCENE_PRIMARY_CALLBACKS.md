@@ -105,3 +105,10 @@ The later cleanup closure replaces the original `0x0802EB9C` alias with
 positive and changed-source proofs after that declaration change. Their byte
 credit stays at the original 672; the 104-byte provider is counted once in its
 own connected batch.
+
+The local-selection ingress at `0x0803C598` is now connected through
+`frame_step_local_need_effect_selection`. The step's gated call retains its
+original address and signature; the provider adds 112 bytes in the selection
+and schedule batch. Both primary callbacks receive fresh positive and actual
+changed-source proofs against the updated declarations, with no additional
+credit for their already accepted 672 bytes.

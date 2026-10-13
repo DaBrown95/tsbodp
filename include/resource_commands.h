@@ -4,6 +4,7 @@
 #include "resource_groups.h"
 #include "audio_game.h"
 #include "transition_object.h"
+#include "frame_scene_actor_schedule.h"
 
 /* Offsets are relative to the serialized selector word, not a native pointer. */
 #define COMMAND_BYTE(n) (command->parameters[(n)-4])
@@ -24,7 +25,7 @@ extern void resource_submit_scene(unsigned int,unsigned int,unsigned int);
 extern void resource_scene_event(unsigned int);
 extern void resource_set_triple(unsigned int,unsigned int,unsigned int);
 extern void resource_set_display_kind(unsigned int);
-extern void resource_prepare_display(unsigned char);
+
 extern unsigned char resource_select_actor(unsigned int,unsigned int);
 extern struct FrameObject *resource_create_transition(unsigned char);
 extern void audio_game_pause(void),audio_game_resume(void);

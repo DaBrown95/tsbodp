@@ -41,7 +41,7 @@ void scene_initialize(void) {
  frame_load_scene_map_resources(g_scene_id);
  if(!g_scene_request.mode) {
   g_scene_world_state[0x736]=0;
-  scene_stage_0802cd90();
+  frame_reset_scene_actor_schedule();
   frame_initialize_scene_actors(g_scene_id);
   scene_stage_08037444();
   if((g_scene_context.flags&1) && g_scene_id<=14) background_animation_load(1);
