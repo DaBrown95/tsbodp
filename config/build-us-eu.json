@@ -24783,6 +24783,141 @@
         "before": "limited_palette = palette;",
         "after": "limited_palette = palette ^ 1;"
       }
+    },
+    {
+      "name": "frame_search_take_lowest_cost",
+      "source": "src/frame/frame_search_take_lowest_cost.c",
+      "rom_offset": 246828,
+      "size": 108,
+      "symbols": {
+        "g_frame_search_queues": "0x03007310",
+        "g_frame_search_free_nodes": "0x03007320",
+        "frame_pool_release": "0x08024d85"
+      },
+      "thumb_symbols": [
+        "frame_pool_release"
+      ],
+      "negative_control": {
+        "before": "node->record.cost < best->record.cost",
+        "after": "node->record.cost > best->record.cost"
+      }
+    },
+    {
+      "name": "display_time_reset_hour_interval",
+      "source": "src/display/time_reset_hour_interval.c",
+      "rom_offset": 247096,
+      "size": 84,
+      "symbols": {
+        "g_display_hour_interval": "0x03004074",
+        "display_fill_bytes": "0x0804e8b9",
+        "frame_random_range": "0x080353d9"
+      },
+      "thumb_symbols": [
+        "display_fill_bytes",
+        "frame_random_range"
+      ],
+      "negative_control": {
+        "before": "frame_random_range(0, 99) <= 29",
+        "after": "frame_random_range(0, 99) <= 28"
+      }
+    },
+    {
+      "name": "display_time_day_event",
+      "source": "src/display/time_day_event.c",
+      "rom_offset": 248428,
+      "size": 168,
+      "symbols": {
+        "g_display_daily_world": "0x03003950",
+        "display_time_add_cycle_value": "0x0801bcd1",
+        "display_time_reset_daily_counters": "0x08010a81",
+        "actor_entry_reset_values": "0x08020949",
+        "display_menu_relax_relation_values": "0x08035e9d",
+        "display_time_reset_hour_interval": "0x0803c539",
+        "__modsi3": "0x0804ce09",
+        "display_time_weekly_entries": "0x0802005d"
+      },
+      "thumb_symbols": [
+        "display_time_add_cycle_value",
+        "display_time_reset_daily_counters",
+        "actor_entry_reset_values",
+        "display_menu_relax_relation_values",
+        "display_time_reset_hour_interval",
+        "__modsi3",
+        "display_time_weekly_entries"
+      ],
+      "negative_control": {
+        "before": "state->cycle = 7;",
+        "after": "state->cycle = 6;"
+      }
+    },
+    {
+      "name": "condition_panel_create_objects",
+      "rom_offset": 120968,
+      "size": 232,
+      "source": "src/display/condition_panel_create_objects.c",
+      "symbols": {
+        "g_condition_panel_world": "0x03003950",
+        "g_display_scene_request_state": "0x03004350",
+        "frame_create_scene_object": "0x08027ee5",
+        "g_condition_panel_definition_columns": "0x08059a44",
+        "g_condition_panel_objects": "0x030043b0"
+      },
+      "thumb_symbols": [
+        "frame_create_scene_object"
+      ],
+      "negative_control": {
+        "before": "for (index = 5, world =",
+        "after": "for (index = 4, world ="
+      }
+    },
+    {
+      "name": "condition_panel_draw_row_labels",
+      "rom_offset": 120796,
+      "size": 172,
+      "source": "src/display/condition_panel_draw_row_labels.c",
+      "symbols": {
+        "g_condition_panel_world": "0x03003950",
+        "g_display_scene_request_state": "0x03004350",
+        "display_text_select_font": "0x0801ae75",
+        "display_scene_lookup_text": "0x08045009",
+        "display_text_draw_line": "0x0801a959",
+        "display_text_number_field_zero": "0x0801b1cd",
+        "g_condition_panel_objects": "0x030043b0",
+        "frame_set_variant_state": "0x08001be1",
+        "g_condition_panel_label_coordinates": "0x0805344c"
+      },
+      "thumb_symbols": [
+        "display_text_select_font",
+        "display_scene_lookup_text",
+        "display_text_draw_line",
+        "display_text_number_field_zero",
+        "frame_set_variant_state"
+      ],
+      "negative_control": {
+        "before": "index <= 4",
+        "after": "index <= 3"
+      }
+    },
+    {
+      "name": "condition_panel_update_column_objects",
+      "rom_offset": 120624,
+      "size": 172,
+      "source": "src/display/condition_panel_update_column_objects.c",
+      "symbols": {
+        "g_condition_panel_world": "0x03003950",
+        "g_condition_panel_definition_columns": "0x08059a44",
+        "g_condition_panel_objects": "0x030043b0",
+        "frame_set_variant_state": "0x08001be1",
+        "display_scene_refresh_item": "0x08028321"
+      },
+      "thumb_symbols": [
+        "frame_set_variant_state",
+        "display_scene_refresh_item"
+      ],
+      "negative_control": {
+        "before": "index <= 5",
+        "after": "index <= 4"
+      }
     }
   ],
   "assembly": [
