@@ -7,7 +7,7 @@ void display_menu_resolve_selected_kind(unsigned int kind, int quantity)
         int multiplier = 20 * quantity;
         frame_add_game_value(parameter * multiplier + 30);
     } else if (kind == 144) {
-        if (!condition_is_complete(3, 1, 2)) {
+        if (!(unsigned char)condition_is_complete(3, 1, 2)) {
             frame_add_game_value(5000);
             resource_set_triple(3, 1, 2);
             --quantity;

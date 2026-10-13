@@ -10,7 +10,7 @@ void frame_refresh_scene_actor_schedule(unsigned int world,const struct DisplayT
    struct FrameObject *marker;
    do {
     unsigned char allowed;
-    if(id==31 && condition_is_complete(4,4,2)==1)goto next;
+    if(id==31 && (unsigned char)condition_is_complete(4,4,2)==1)goto next;
     allowed=frame_scene_actor_allowed(id,world,clock);
     if(allowed!=g_frame_scene_actor_presence[id-18]) {
      if(allowed==0) {

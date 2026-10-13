@@ -24,7 +24,7 @@ unsigned int frame_step_optional_activity_attachment_job(struct FrameNeedEffectS
     case 0:
         frame_set_actor_direction(job->actor, g_actor_reverse_directions[((struct FrameActorObject *)owner->object)->direction]);
         job->timer = 6;
-        if (condition_is_complete(0, 4, 0)) {
+        if ((unsigned char)condition_is_complete(0, 4, 0)) {
             switch (job->kind) {
             case 28: case 30: case 32:
                 if (frame_gate_attachment_game_value(owner, job, g_frame_world_id == 28 ? 40 : 20) == 1) {

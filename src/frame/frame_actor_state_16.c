@@ -93,7 +93,7 @@ void frame_actor_state_16(struct FrameObject *object)
   if(((struct FrameActorIdleNeedView *)&g_resource_game_state)->needs.values[5]==0x64000000) {
    selected=0;
    frame_request_animation((struct FrameCommandObject *)object,5);
-   if(!frame_world_in_idle_exclusion_set(g_frame_world_id)&&g_frame_world_id!=6&&g_frame_world_id!=28&&g_frame_world_id!=37&&g_frame_world_id!=36&&condition_group_complete(1,3)&&frame_random_range(1,100)<=50)selected=1;
+   if(!frame_world_in_idle_exclusion_set(g_frame_world_id)&&g_frame_world_id!=6&&g_frame_world_id!=28&&g_frame_world_id!=37&&g_frame_world_id!=36&&(unsigned char)condition_group_complete(1,3)&&frame_random_range(1,100)<=50)selected=1;
    if(selected) {
     ((struct FrameActorIdleGlobals *)&g_resource_game_state)->variant=0;
     g_actor_scene_request_active=0;

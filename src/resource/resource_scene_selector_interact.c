@@ -62,7 +62,7 @@ void resource_scene_selector_interact(struct FrameObject *base, struct FrameObje
                             goto submit_scene;
                         goto subtype_five;
                     }
-                    if (condition_is_complete(2, 4, 2)) {
+                    if ((unsigned char)condition_is_complete(2, 4, 2)) {
                         audio_play_animation_cue(47);
                         frame_set_variant_state((struct FrameObject *)selector_view(base), 11);
                         frame_enable_object_flags((struct FrameObject *)selector_view(base), 16);

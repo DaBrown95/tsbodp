@@ -230,3 +230,13 @@ is removed. The complete 188-byte comparison remains exact, and the existing
 `value > 6` to `value > 7` negative control still differs by one byte. Canonical
 `ConditionCounter` / `ConditionActorCounters` layouts are retained. The private
 source-only proof is under `actor-condition-simplification-current1-*`.
+
+The connected condition-marker callback at `0x0801DA18` distinguishes the
+getters' full-word return from a caller's low-byte truth test. The four canonical
+getter return formals now use `unsigned int`: their original byte loads already
+zero-extend all 32 return bits, so the complete provider bodies remain unchanged.
+The underlying group/entry fields remain bytes with the full 0..255 domain.
+Previously matching direct consumers explicitly retain their observed byte
+narrowing, and all current shared-header consumers have fresh positive matches
+and actual changed-source control comparisons. Names and original source types
+remain inferred; no runtime validity or boolean-only domain is established.

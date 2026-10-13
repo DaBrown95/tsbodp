@@ -13,7 +13,8 @@ struct DisplayDailyWorld {
     unsigned char unknown10[0x440 - 0x10];
     unsigned int stage;
     unsigned char unknown444[0x714 - 0x444];
-    unsigned int daily_counters[4];
+    /* Four saved flag words; first/second pairs are read by flag objects. */
+    unsigned int daily_flag_words[4];
     unsigned char unknown724[0x741 - 0x724];
     unsigned char counter_a, counter_b, unknown743;
     unsigned short cycle_value;

@@ -57,8 +57,8 @@ void resource_set_triple(unsigned int row, unsigned int column, unsigned int ent
     }
     for (index = 0; index < g_condition_definitions[row].columns[column]->count;
          index++) {
-        if (!condition_group_active(row, column)) { all = 0; break; }
-        if (!condition_is_complete(row, column, index)) { all = 0; break; }
+        if (!(unsigned char)condition_group_active(row, column)) { all = 0; break; }
+        if (!(unsigned char)condition_is_complete(row, column, index)) { all = 0; break; }
     }
     if (column < g_condition_definitions[row].count &&
         entry < g_condition_definitions[row].columns[column]->count) {

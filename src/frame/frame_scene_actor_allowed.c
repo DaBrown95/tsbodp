@@ -6,7 +6,7 @@ unsigned char frame_scene_actor_allowed(unsigned int actor,unsigned int world,co
  const unsigned char **table;
  unsigned char slot;
  if(!g_frame_scene_actor_eligibility_enabled) return 1;
- if(actor==31 && condition_is_complete(4,4,2)==1) {
+ if(actor==31 && (unsigned char)condition_is_complete(4,4,2)==1) {
   if(world==37) return 1;
   return 0;
  }

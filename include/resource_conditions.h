@@ -18,10 +18,12 @@ struct ConditionKindRecord { unsigned int index,unknown04; };
 extern unsigned int g_condition_kind_ids[];
 extern struct ConditionKindRecord g_condition_kind_records[];
 unsigned int condition_lookup_kind(unsigned int,unsigned int);
-unsigned char condition_is_active(unsigned int,unsigned int,unsigned int);
-unsigned char condition_is_complete(unsigned int,unsigned int,unsigned int);
-unsigned char condition_group_active(unsigned int,unsigned int);
-unsigned char condition_group_complete(unsigned int,unsigned int);
+/* Raw byte fields are zero-extended into the complete return word. Callers
+ * retain explicit low-byte consumption where the original code narrows it. */
+unsigned int condition_is_active(unsigned int,unsigned int,unsigned int);
+unsigned int condition_is_complete(unsigned int,unsigned int,unsigned int);
+unsigned int condition_group_active(unsigned int,unsigned int);
+unsigned int condition_group_complete(unsigned int,unsigned int);
 unsigned int condition_refresh(unsigned int,unsigned int);
 void condition_activate_entry(unsigned int,unsigned int,unsigned int);
 void condition_finish_group(unsigned int,unsigned int);

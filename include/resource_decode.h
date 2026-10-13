@@ -12,7 +12,7 @@ unsigned int resource_decode_bytes(const void *, void *);
 extern void (*g_display_tile_decompress)(const void *, void *, unsigned int *);
 extern void (*g_display_background_decompress)(const void *, void *, unsigned int *);
 
-/* Names identify the observed SWI numbers; wrapper bodies remain original. */
+/* Observed SWI numbers. Providers are explicit glue with zero C coverage. */
 void resource_bios_swi_0b(const void *, void *, unsigned int);
 void resource_bios_swi_11(const void *, void *);
 void resource_bios_swi_13(const void *, void *);

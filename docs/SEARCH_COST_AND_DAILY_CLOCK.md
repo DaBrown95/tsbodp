@@ -30,7 +30,7 @@ A cycle other than the signed sentinel -1 decrements, calls the original
 cycle-value provider on reaching zero and resets to seven. Explicit byte and
 signed-byte reads retain the original differing widths.
 
-The second phase clears flag `+0x747`, invokes the original daily counter
+The second phase clears flag `+0x747`, invokes the original four-word flag
 reset, resets accepted actor-entry values rooted at world `+0xDC`, invokes the
 original relation-value adjustment at world `+0x30`, clears byte `+0x73D`, and
 resets the hour interval. On a signed day divisible by seven it calls the
@@ -71,7 +71,7 @@ Three further directly called providers add 168 complete matching C bytes:
 
 The first adds 500 to the unsigned halfword at world `+0x744`, retaining the
 observed narrowing on its store. Its cycle-reset caller motivates `cycle_value`;
-the value's gameplay role is unresolved. The second clears four word counters
+the value's gameplay role is unresolved. The second clears four saved flag words
 at `+0x714`, `+0x718`, `+0x71C` and `+0x720`. These offsets refine unknown
 bytes in the same access view without moving any previously observed field.
 Neither function receives an argument. The old unnamed child aliases remain
@@ -92,7 +92,7 @@ name, not a tested daily relationship or probability model.
 
 The three children plus the earlier queue/clock batch comprise six functions
 and 528 distinct C bytes. The new child controls change the increment, final
-counter store and record loop bound, rejecting by 18, 16 and one byte
+flag-word store and record loop bound, rejecting by 18, 16 and one byte
 respectively. Both previous daily-header consumers remain exact and each
 rejects its real control by one byte after the final header refinement.
 The weekly actor-entry reconciliation at `0x0802005C` remains original code.
@@ -100,3 +100,55 @@ Its observed scan reconciles flag bits with kind-125 secondary records and
 clears at most one bit per invocation, but its private compiler trials receive
 no coverage. Runtime invocation, list consistency and table/index domains
 remain unproved.
+
+## Daily flag object handoff
+
+Two further connected functions add 320 complete matching C bytes:
+
+| Function | ROM address | Extent |
+| --- | --- | ---: |
+| `frame_step_daily_flag_object` | `0x08010974` | 268 bytes |
+| `frame_test_daily_flag` | `0x08010B14` | 52 bytes |
+
+The original factory at `0x08010874` installs the first function at object
+`+0x88`, and calls the second with the payload-derived index stored at object
+`+0x68`. This factory remains explicit unconverted code. The query returns the
+actual masked word from world `+0x714` for indices up to 31 and `+0x718` after
+subtracting 32 otherwise, without normalizing to a Boolean. The update clears
+a bit in the corresponding second pair at `+0x71C/+0x720`. Existing save
+read/write functions serialize these same four words through the alias
+`g_save_flag_words` at `0x03004064`. This evidence corrects the shared field
+label to `daily_flag_words`; the previously published reset function retains
+its historical `display_time_reset_daily_counters` name and clears those flags.
+No gameplay counter interpretation is asserted.
+
+The callback's state one delegates to the matching actor dispatcher. In state
+18, variant zero stops its owner, sets the owner's state to zero, faces the
+owner toward this object, requests animation 32 and enters variant 14 with an
+eight-count timer. Variant 14 decrements the timer until -1, adjusts the entry
+counter rooted at world `+0xDC` for this object's halfword subtype, clears
+object flag one, emits cue 48 and enters variant 15. Variant 15 waits for the
+owner's observed animation-completion flag `0x00400000`, clears the indexed bit
+in the second flag pair, then restores this object's state one and flag two,
+and the owner's state 16 and animation one. Other observed states and variants
+perform no action. The owner field at `+0x64` and index at `+0x68` are a
+selector-specific view and do not replace the differently used fields in the
+shared actor view.
+
+The query uses ordinary C with no register constraints. The callback has two
+branch-local semantic R2 constraints for the actual world base address; these
+lifetimes end before any ABI call. Integer address construction retains the
+observed separate base and field-offset calculations. No instruction body,
+output edits, artificial volatility or fabricated data are used. The full
+extents include original literal pools and explicit zero alignment. Real source
+controls change the timer initialization and query's bank boundary. All five
+previous importers of the refined daily header are recompiled with their real
+controls; their bytes remain unchanged.
+
+This path adds static creator/callback evidence, not gameplay observation.
+Owner validity, subtype table bounds and an overall index domain of zero
+through 63 remain unproved; no new guards are invented. The unsigned source
+shift describes the bank operation within that domain, while the complete
+pinned-compiler comparison preserves the original machine bytes. The adjacent
+flag setters, factory and interaction callback remain explicit next targets,
+alongside the weekly reconciliation's retained one-byte compiler mismatch.

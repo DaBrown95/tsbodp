@@ -2,7 +2,8 @@
 
 The three object/label functions cover 576 verified matching C bytes. Their
 connected input consumer adds another 484 bytes, bringing this path to four
-functions and 1,060 bytes:
+functions and 1,060 bytes. The connected close and marker lifecycle add three
+functions and 340 bytes, for seven functions and 1,400 bytes:
 
 | Function | ROM address | Complete extent |
 | --- | --- | ---: |
@@ -10,6 +11,9 @@ functions and 1,060 bytes:
 | `condition_panel_draw_row_labels` | `0x0801D7DC` | 172 bytes |
 | `condition_panel_update_column_objects` | `0x0801D730` | 172 bytes |
 | `condition_panel_step_input` | `0x0801D39C` | 484 bytes |
+| `condition_panel_close` | `0x0801D970` | 48 bytes |
+| `condition_marker_create` | `0x0801D9A0` | 120 bytes |
+| `condition_marker_step` | `0x0801DA18` | 172 bytes |
 
 The 460-byte setup at `0x0801D1D0` calls all three functions and the still
 unconverted detail drawer at `0x0801D580`. It configures backgrounds, invokes the
@@ -81,9 +85,52 @@ Direct C input expressions retain the original mask-register choices without
 register bindings or volatile qualifiers. The detail provider, setup routine
 and their useful failed matches remain explicit originals.
 
-All four complete original extents, including literal pools and alignment,
-match independently. Real changed-source loop/column-bound controls produce different
-bytes. Source objects and linked extents contain only allocated `.text`, with
+All seven complete original extents, including literal pools and alignment,
+match independently. Real changed-source loop/column-bound, close-parameter, marker-variant and
+marker-flag controls produce different bytes. Source objects and linked extents contain only allocated `.text`, with
 one function span and no unresolved linked relocations. Useful failed attempts
 and the actual comparison bytes remain in ignored local reports. These compile
 and byte results are separate from runtime/UI behavior and whole-ROM equality.
+
+The close operation resets the shared full-word request parameter to -1, runs
+the existing second transition dispatcher with 63 and zero, and releases the
+primary object list before resetting display state and clearing scene slots.
+The original transition dispatcher and display stage at `0x080117BC` remain
+explicit unconverted providers. The five cleanup calls also appear in the
+already matching scene-close path; the extra parameter reset establishes this
+panel-specific entry.
+
+Entry 22 of the existing factory table at `0x0804F278` contains this marker
+constructor, and its literal pool supplies the step callback at `0x0801DA18`.
+These observed pointers connect the matching resource-spawn dispatcher to the
+constructor and callback without establishing the table's complete bounds.
+The constructor agrees with the existing two-byte-argument resource-factory
+interface. The marker factory obtains the existing group/slot payload, allocates the object
+from its ID, positions it from two signed halfwords, and installs its own step
+callback in the shared object callback field. It initializes state zero and
+variant seven, copies row, column, entry and completion-selection bytes into
+object offsets `+0x64` through `+0x67`, and enables flag eight. It retains the
+original allocation-null test and the absence of a payload-null test. The
+unsigned fixed-point shifts preserve the halfword bit patterns without adding
+a signed-negative left shift. The payload view observes fourteen bytes; its C
+alignment does not prove an allocation size or record stride. The state overlay
+ends at `+0x67` and does not declare a complete object allocation.
+
+In state zero, the marker chooses complete or active condition fields from its
+completion-selection byte. Entry 255 selects the group-level field; other
+entries select the entry-level field. It tests only the result's low byte and
+requests state one when that byte is nonzero. State one sets object flag two,
+reloads the object's payload through owner ID and slot, and activates the group
+and slot at payload `+0x0C/+0x0D`. Other states perform no work. No condition
+index bound, callback invocation guarantee or rendering behavior is inferred.
+
+This path exposed a return-interface refinement in the four existing condition
+getters. Each original getter uses a byte load which produces a complete
+zero-extended return word. The canonical C return model now expresses that word;
+the stored fields remain bytes and can hold any value from zero through 255.
+Ten previously matching direct callers retain explicit observed low-byte casts.
+The merged marker result likewise narrows at its final truth test. All four
+provider definitions, ten direct callers and the remaining current shared-header
+consumers have fresh complete-extent matches and real changed-source controls.
+This is a consistent ABI/access model supported by the bytes, not a claim that
+original type declarations or a boolean-only field domain were recovered.

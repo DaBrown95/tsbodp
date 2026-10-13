@@ -1,7 +1,7 @@
 #include "resource_commands.h"
 #include "resource_conditions.h"
 
-unsigned char condition_group_active(unsigned int row, unsigned int column)
+unsigned int condition_group_active(unsigned int row, unsigned int column)
 {
     unsigned char *state = (unsigned char *)&g_resource_game_state;
     unsigned int offset = column*24;
