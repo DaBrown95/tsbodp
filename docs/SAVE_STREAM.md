@@ -2,8 +2,8 @@
 
 The reconstructed path connects the published menu-choice and actor-need
 save/load callers to a shared byte/bit cursor, record views, slot transfers,
-header initialization and audio/display-status handoff. It has 50 matching C
-functions covering 3,476 bytes. Each full extent, pool and alignment was linked
+header initialization and audio/display-status handoff. It has 51 matching C
+functions covering 3,624 bytes. Each full extent, pool and alignment was linked
 at its original ROM address and compared with the fixed reference. Each also
 has a compiled changed-source control. These are static and compiler results;
 no runtime save/load or EEPROM compatibility claim is made.
@@ -79,8 +79,9 @@ The nibble reader uses two scoped C register bindings: the shared cursor pointer
 in `r5` and the high-nibble scalar in `r1`. They are actual algorithm values and
 are not live across function calls. The cursor is four bytes before the bit
 position in the observed eight-byte view. Its inline low-nibble reader is a
-semantic byte accessor. There are no original instruction-body transcriptions,
-output patches or comparison masks. The remaining functions use ordinary C.
+semantic byte accessor. The connected nibble writer's register roles are
+described below. There are no original instruction-body transcriptions, output
+patches or comparison masks. The remaining functions use ordinary C.
 
 Function boundaries include return paths, referenced literal pools and alignment
 up to the next mapped entry. The checksum's instruction body is 34 bytes and its
@@ -90,8 +91,8 @@ These remain bounded static claims, not a complete code inventory.
 
 Useful failed approaches, original/actual bytes, assembly, source snapshots and
 real negative controls remain in ignored local reports. The 108-byte buffer
-builder and 148-byte nibble writer are still unconverted; candidates are excluded
-from coverage. The library transfer bodies, several game-state subserializers and the
+builder is still unconverted; its candidates are excluded from coverage.
+The library transfer bodies, several game-state subserializers and the
 unconverted header-refresh branch also remain explicit. Next connected targets
 are those producers and the higher game-state load/save consumers.
 
@@ -146,8 +147,8 @@ The 28-byte child at
 one byte. The 52-byte module at `0x08010AE0` writes four words at
 `0x03004064`; nearby bit-mask readers support the flag-word name. These four
 functions are direct producer dependencies, with their own full-extent matches
-and real negative controls. The nibble writer and the remaining child/module
-serializers stay unconverted.
+and real negative controls. The remaining child/module serializers stay
+unconverted.
 
 The first decoded record's two pair bytes and six nibble bytes also form an
 eight-byte selector view at `0x03005DC4`, with subsequent records forty bytes
@@ -282,3 +283,34 @@ alignment with real changed-source controls. All accepted consumers of the
 changed save header, both old option callers and the text/heap providers were
 reproved against the current shared declarations. Larger game-state and
 condition-module candidates remain private and excluded.
+
+## Nibble producer closure
+
+The direct writer at `0x08037A0C` now matches its complete 148-byte extent,
+including both referenced literal words and their embedded pool alignment.
+Its pointer and full-word count interface is unchanged. Capturing the source
+pointer and then the count before alignment preserves their observed lifetimes;
+no aggregate argument or new external interface is needed.
+
+Alignment happens before the zero-count check. For a partial nibble, the code
+preserves only bits below the signed bit position, then rounds positions up to
+four or advances the cursor and resets the position. The source adds no bit
+position checks. At position zero, it overwrites the destination byte with the
+input's low nibble, clearing the old high nibble. At the other loop position,
+it preserves the destination's low nibble, replaces the high nibble, advances
+the byte cursor and resets the position. Input bytes and the full-word count
+remain unchecked. These operations do not establish a valid cursor range or
+make the shift expressions portable outside the original bit-position domain.
+
+Seven C register bindings retain meaningful algorithm values: the source
+snapshot, input cursor, bit-position pointer, nibble mask, low-branch input
+value, retained destination byte and high-nibble value. The source snapshot's
+last use precedes reuse of its register for the bit-position pointer. Branch
+value bindings have disjoint scopes, and the routine makes no function calls.
+The compiled entry and return preserve all four used callee-saved registers.
+There are no embedded original instructions, output modifications or artificial
+volatile accesses. A real mask change from fifteen to fourteen changes the
+compiled bytes. All current accepted save-header consumers are recompiled with
+their own source controls after removing the old unconverted-writer comment.
+The main game-state loader, grouped region readers/writers, condition modules,
+buffer builder and lower library transfers remain explicit unconverted paths.

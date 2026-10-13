@@ -1947,3 +1947,81 @@ header closure. Canonical sources, raw comparisons, boundaries, caller rows
 and real controls are retained under the local `resource-payload-canonical-*`
 reports. This closes an offset-table-to-payload-to-constructor path using
 static and compiler evidence; it establishes no runtime or gameplay claim.
+
+## Timed resource-object factory and callbacks
+
+The six connected replacements at `0x0800A258`, `0x0800A3D8`,
+`0x0800A534`, `0x0800A624`, `0x0800A65C` and `0x0800193C` add
+1,188 verified C bytes: 384, 348, 240, 56, 100 and 60 respectively.
+The factory occupies observed pointer-table slot 21 at `0x0804F278` and installs
+the tick and interaction callbacks. These names describe observed clock,
+resource and movement handoffs; they do not establish a gameplay character's
+identity or a complete factory-table inventory.
+
+The factory uses the accepted two-offset-table payload reader and the 320-byte
+object allocator. Its partial payload has an ID word, signed X/Y halfwords at
+`+4/+6`, kind/direction bytes at `+8/+9` and activation group/slot bytes at
+`+10/+11`. It initializes the two callback pointers, direction and animation,
+then chooses a destination offset using two random values from 1 through 25.
+The unsigned direction quadrant selects signs in pairs 0/1, 2/3, 4/5 and the
+remaining values. No index or quadrant clamp is introduced. Coordinates are
+stored through unsigned fixed-point arithmetic, retaining the original word
+wrapping behavior.
+
+Kind zero copies twelve uninterpreted bytes from `0x0804F128` to object `+0x40`,
+sets flags `0x80000011`, speed `0x20000` and palette slot six, then checks the
+start/end records at `0x0804F134`/`0x0804F13C` against the accepted world clock
+at `0x03003958` with minute/hour mask six. A false byte result disables flag
+one. Kind one sets flags `0x80050651`, palette slot two, state nine and variant
+state seven, initializes observed halfword timers at `+0x5E` and `+0x68..+0x6E`,
+and clears the interaction callback. Other kinds retain the common setup.
+Both successful branches finish through the accepted actor-state update.
+The animation table has two variant-record pointers per observed eight-byte
+kind row; its complete length remains unknown.
+
+The tick routes nonzero kinds through the accepted actor dispatcher. Kind zero
+state zero repeats the clock gate before patrol; state one sets flag two and
+activates the group/slot read from the same resource payload, then returns.
+The common path captures direction and the initial pending mask eight, retains
+the actual pending-byte pointer across calls, rebuilds velocity if needed,
+selects idle or moving animation and refreshes/stops motion for masks four and
+`0x12`, updates OAM X-flip according to direction greater than four, and clears
+the pending byte. A separate initial-mask snapshot matches the original
+pre-call load while later tests reload the byte after calls.
+
+Patrol handles variant states seven, nine and two. State seven decrements its
+signed countdown and, at minus one, measures distance to the object selected
+through `0x030040E0`; distance's integer part at most 49 begins movement state
+nine with countdown 60, otherwise countdown becomes 20. State nine compares
+its destination direction with the current byte, records a changed direction
+and pending bit 16, or chooses another destination when the countdown expires.
+Direction eight changes to state seven and chooses a new destination away from
+the selected object. State two resets to state seven and a random destination.
+The paired 60-byte direction helper subtracts the second integer-position
+snapshot from the first, unlike the accepted direction-toward helper at
+`0x0800188C`. An initial private trial incorrectly reused the toward name for
+`0x0800193C`; raw subtraction evidence corrected that alias before publication.
+
+The two-object interaction callback compares next-position distance, accepts
+only target ID zero and changes variant state to nine when the distance is
+within `(object_byte_AE << 16) + 20`. The byte at `+0xAE` remains neutrally named;
+its role in the general object/collision layout is not established here. The
+partial timed-object view ends after observed OAM bytes at `+0xD0..+0xD7` and
+does not redefine the allocation size or prove limits for the copied work,
+kind table, active object pointers or signed countdown.
+
+All six sources match without register bindings. Expressing kind/state as
+switches preserves the original branch layout; sharing the actual chosen
+quadrant across two patrol branches preserves the original result lifetime.
+The factory includes 40 literal bytes and two zero alignment bytes; the tick
+includes 28 literal bytes and four internal zero alignment bytes; patrol
+includes eight literal bytes. The interaction and direction helpers each
+include two trailing zero alignment bytes. The destination extent is all code.
+Complete raw expected/linked bytes, local header snapshots, compile receipts,
+useful failures and changed-source controls remain under the ignored
+`reports/agents/frame-input/renderer-resume/resource-time-factory-*/` path.
+Controls change initialization flags, pending-mask selection, distance limit,
+interaction threshold, destination range and subtraction direction; all
+compile and reject. Static connectivity and exact full-ROM replacement remain
+separate from runtime execution and gameplay behavior, which have not been
+validated for this path.

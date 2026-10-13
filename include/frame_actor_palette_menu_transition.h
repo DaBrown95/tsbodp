@@ -16,7 +16,7 @@ extern const unsigned short g_frame_actor_palette_menu_entry_palette[];
 void frame_scene_object_tick(struct FrameObject *);
 void frame_begin_position_move(struct FrameObject *, int, int, unsigned short);
 unsigned char frame_step_position_move(struct FrameObject *);
-/* Unconverted menu/scene wrapper at the observed ROM entry. */
+/* Legacy alias of reconstructed scene_submit_default_request. */
 void display_scene_stage_08027dc0(unsigned int);
 void frame_step_palette_menu_transition(void);
 

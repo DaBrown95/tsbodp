@@ -54,8 +54,9 @@ font and line height, draws a bounded block through the accepted text API and
 restores the background control. A null text pointer takes the accepted primary
 menu setup path. The reset wrapper calls the accepted choice-text producer.
 The background DMA, cue, relation-gauge and notice callees retain their separate
-conversion status; the gauge at `0x40AB4` and notice producer at `0x27DD0` remain
-unconverted.
+conversion status. The gauge at `0x40AB4` remains unconverted; the notice
+producer at `0x27DD0` is now the accepted `resource_submit_scene` alias described
+in [the queued handoff](SCENE_REQUEST_HANDOFF.md).
 
 ## Layout and boundaries
 
@@ -115,5 +116,6 @@ attempts and raw comparison files are retained as failed or superseded evidence.
 
 The connected next targets are the unconverted relation gauge `0x40AB4/692`,
 secondary menu preparation `0x3F908/1112`, footer/indicator producer
-`0x401B8/512`, and notice handoff `0x27DD0`. Their analysis and unsuccessful
-source trials remain outside C coverage.
+`0x401B8/512`. Their analysis and unsuccessful source trials remain outside
+C coverage. The connected notice handoff `0x27DD0` is reconstructed in the
+queued scene-request path.

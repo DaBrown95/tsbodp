@@ -42,7 +42,6 @@ void frame_load_save_value(void *, int);
 void frame_write_save_value(const void *, int);
 void save_stream_read_bits(unsigned char *, unsigned int);
 void save_stream_write_bits(const unsigned char *, unsigned int);
-/* The connected nibble writer remains unconverted. */
 void save_stream_write_nibbles(const unsigned char *, unsigned int);
 void save_stream_read_pairs(unsigned char *, unsigned int);
 void save_stream_write_pairs(const unsigned char *, unsigned int);

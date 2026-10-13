@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 115 C functions and 14,224 bytes:
+The connected route-search path reconstructs 130 C functions and 16,132 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -16,7 +16,8 @@ followed by six mode-two selection functions, a three-function optional activity
 and fourteen connected completion, parameter-job and choice functions, followed by
 five choice-list setup, filtering, clock classification and refresh helpers,
 and eight connected choice application, completion and value readers, followed by
-eight context and attachment callbacks and their connected page builder.
+eight context and attachment callbacks and their connected page builder, followed by
+twelve playback callbacks and jobs and their adjoining three-function view factory.
 Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
@@ -139,6 +140,21 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x3C298` | `frame_search_remove_cell` | 104 |
 | `0x3C300` | `frame_search_cell_cost` | 68 |
 | `0x3C344` | `frame_search_build_path` | 232 |
+| `0x44900` | `frame_initialize_optional_playback_context` | 56 |
+| `0x44938` | `frame_optional_playback_context_available` | 40 |
+| `0x44960` | `frame_select_optional_playback_attachment_kind` | 80 |
+| `0x449B8` | `frame_begin_optional_playback_attachment_job` | 96 |
+| `0x44A18` | `frame_dispatch_optional_playback_attachment_job` | 116 |
+| `0x44A8C` | `frame_optional_playback_publish_completion` | 80 |
+| `0x44ADC` | `frame_optional_playback_play_cue` | 60 |
+| `0x44B18` | `frame_optional_playback_select_sequence` | 64 |
+| `0x445D0` | `frame_step_optional_playback_job_45` | 180 |
+| `0x44684` | `frame_step_optional_playback_job_1_6` | 164 |
+| `0x44728` | `frame_step_optional_playback_job_56_57` | 208 |
+| `0x447F8` | `frame_step_optional_playback_job_62` | 264 |
+| `0x443DC` | `frame_create_optional_view_object` | 168 |
+| `0x44484` | `frame_optional_view_step` | 296 |
+| `0x445AC` | `frame_optional_view_interact` | 36 |
 
 ## Static layout and connection evidence
 
@@ -1483,3 +1499,105 @@ metadata is `frame-optional-choice-context-batch-manifest.json`; table-slot and
 boundary evidence, source variants, raw comparisons and controls remain private.
 The names and input contracts remain provisional. Source matching and the
 full-ROM gate do not establish callback, UI, audio or gameplay behaviour.
+
+
+## Optional playback jobs and view factory
+
+Fifteen further ordinary C functions cover 1,908 complete extent bytes: twelve
+playback initialization, selection, attachment, audio and job functions, and a
+three-function view-object factory with its installed update and interaction
+callbacks. Both guarded headers retain bounded overlays; established need-effect,
+actor and generic object layouts are unchanged. Every positive extent and real
+changed-source control is rechecked against the current canonical headers.
+
+Rows 44, 45 and 49 of the observed 36-byte need-effect definition table share
+initializer `0x44901`, selector `0x44961`, kind-check `0x449B1`, begin `0x449B9`,
+dispatcher `0x44A19`, completion/tick `0x44A8D` and capacity `0x2F349`.
+Their four tail bytes are respectively `1,0,1,5`, `1,0,1,3` and `1,1,1,2`.
+The accepted allocator installs these words at the previously established state
+callback slots. These rows establish pointer connections and the void tick
+contract; they do not establish the complete table count or runtime invocation.
+No aligned pointer in the fixed ROM, or direct caller in the current mapped
+inventory, was found for the adjoining availability function at `0x44938`.
+It is retained as a matching adjacent API, with that inbound uncertainty explicit.
+
+The bounded playback view reads the existing +0x70 halfword as signed and uses
+byte +0x64 as `completed`. Initialization sets that byte and selects a sequence
+when optional is not one and the parameter is 256 or 512. Selection writes kind
+57 for parameter zero; otherwise it writes 56 and 62, with an additional kind
+1 or 6 for owner kind 44. The optional-one predicate narrowed to a byte instead
+selects kind 45. These byte writers establish no arbitrary output capacity.
+Begin allocates the existing 24-byte attachment record, stores the full kind
+word, routes kind 62 through the matched target-route helper, and routes other
+kinds toward the owner's attachment position with route limit three. A null
+allocation returns zero; success requests animation six and returns one.
+
+The dispatcher retains six full-word cases: 57/56 share one job with variant
+zero/one, 1/6 share another, and 62 and 45 call their respective providers.
+Other kinds return zero. The kind-45 job requests animation 46, creates and
+consumes the existing parameter indicator, coordinates its sample handle and
+resource triple, and returns two at completion. The 1/6 and 56/57 paths use
+animation 58 and timer 51; they set the parameter to 256, 512 or the observed
+zero result, publish need-effect modes and coordinate cue/sequence playback.
+They return two specifically when timer equals one, otherwise one.
+The local signed-short direction in the 1/6 path carries a byte read in the
+0..255 domain; it does not change the memory access width.
+
+Kind 62 partitions the unsigned timer into phases zero, eight and 50. Phase
+zero either uses need six with animation 85 and cue 136/137, or enters phase
+50 with animation eight, timer 150 and coordinated audio. Phase 50 uses the
+36-byte definition's +0x23 byte for need adjustment 33 and delegates its timer
+to the existing need helper. Phase eight waits for the actor's completion flag,
+restores animation one and clears the need countdown. A named row-address
+calculation and explicit phase partition reproduce the original scheduling in
+ordinary C; they do not add instruction assembly or fixed register bindings.
+
+Cue playback selects an inclusive index zero through nine, then overwrites
+that local with a halfword from `0x08D74174` for parameter 256 or `0x08D74188`
+otherwise. The value is passed to the established animation-cue API. Those ten
+reads establish the consumed span, not wider table ownership. Sequence selection
+chooses 68/69 through the secondary random range for parameter 256, otherwise
+70, then sets the existing volatile audio-control flag eight. The alternate
+56/57 path restores the scene's clock-period sequence. The completion callback
+clears byte +0x64 and publishes modes based on direction three/five and the
+kind-44, parameter-512 combination. These are observed coordination roles,
+not verified audio or gameplay behaviour.
+
+The accepted resource-group walker reads the factory table at `0x0804F278`.
+Its row 14 pointer at ROM `0x4F2B0` targets the new `0x443DC` constructor.
+That constructor reads a twenty-byte payload span, allocates a scene object,
+sets fixed-point position from signed halfword coordinates, and stores view
+coordinates, direction and two transition bytes. It installs the update at
+object +0x88 and the two-argument interaction callback at +0xC8. Its signed
+bound endpoints are at +0xB0..+0xB3, distinct from the generic object's
++0xBC..+0xBF view. Separate byte writes at +0xAF and +0xB4 are both one; their
+broader roles remain provisional. The initial +0xBC trial differs by one byte
+and is preserved. Actual serialized instances and payload ownership remain
+unresolved.
+
+Interaction requires the actor's halfword ID to be zero, then sets object state
+four, disables flag four and stores the actor pointer. Update state zero is
+idle; state one sets flags `0x82`. State four runs the first stored transition,
+sets the actor variant, moves current and next positions to the stored view
+point, changes view mode/direction, and activates resource groups once. Payload bytes
++0x10/+0x11 select an object group and a program group respectively, as proved
+by the accepted activation callee, rather than an object slot. State
+five waits for a halfword countdown to underflow before restoring configuration
+`16,16`, running the second transition, clearing the actor pointer/state and
+reenabling flag four. A shared actor local plus an addressed position and a
+separate configuration aggregate recover the two stack point lifetimes without
+register constraints. The position assignment copies next and current with
+one pair read. Natural scalar and aggregate alternatives are retained as failed
+full comparisons.
+
+The original eight-byte kind check at `0x449B0` still returns word one with LR
+preservation; ordinary leaf C is shorter, so it remains explicit original code.
+The adjoining `0x44B58..0x44D00` activation API has useful private matches, but
+no incoming pointer connection is established; it is not public source coverage.
+The new guarded headers do not change existing headers. Four unchanged connected
+consumers—the factory walker, state allocator, attachment tick and mode publisher—
+are also rechecked with their real controls, covering 1,336 bytes without adding
+coverage. Publication metadata is `frame-optional-playback-batch-manifest.json`;
+raw disassembly, bounded table scans, useful source failures and complete
+positive/negative comparisons remain private. Whole-ROM equality, these source
+matches and the static callback map remain separate from runtime evidence.
