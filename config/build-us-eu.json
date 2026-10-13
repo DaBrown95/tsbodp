@@ -13981,6 +13981,235 @@
         "before": "&cell,61",
         "after": "&cell,60"
       }
+    },
+    {
+      "name": "audio_player_pause",
+      "rom_offset": 310144,
+      "size": 52,
+      "source": "src/audio/player_pause.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "audio_mark_channels": "0x08049b25",
+        "audio_set_tick_callback": "0x08049ab5"
+      },
+      "thumb_symbols": [
+        "audio_mark_channels",
+        "audio_set_tick_callback"
+      ],
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "g_audio_player.state = 1",
+        "after": "g_audio_player.state = 0"
+      }
+    },
+    {
+      "name": "audio_player_resume",
+      "rom_offset": 310196,
+      "size": 56,
+      "source": "src/audio/player_resume.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "audio_resume_channels": "0x08049b5d",
+        "audio_set_tick_callback": "0x08049ab5",
+        "audio_player_tick": "0x0804a759"
+      },
+      "thumb_symbols": [
+        "audio_resume_channels",
+        "audio_set_tick_callback",
+        "audio_player_tick"
+      ],
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "g_audio_player.state = 2",
+        "after": "g_audio_player.state = 3"
+      }
+    },
+    {
+      "name": "audio_player_is_paused",
+      "rom_offset": 310252,
+      "size": 24,
+      "source": "src/audio/player_is_paused.c",
+      "symbols": {
+        "g_audio_player": "0x02001644"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "== 1",
+        "after": "== 0"
+      }
+    },
+    {
+      "name": "audio_player_set_volume",
+      "rom_offset": 310276,
+      "size": 120,
+      "source": "src/audio/player_set_volume.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "g_audio_player_volume_step": "0x020025b0",
+        "g_audio_player_volume_current": "0x02001640",
+        "g_audio_player_volume_target": "0x020025ac",
+        "audio_set_global_volume": "0x08049aa1",
+        "audio_update_channel_volumes": "0x08049ba5"
+      },
+      "thumb_symbols": [
+        "audio_set_global_volume",
+        "audio_update_channel_volumes"
+      ],
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": ">> 13",
+        "after": ">> 12"
+      }
+    },
+    {
+      "name": "audio_player_set_callback",
+      "rom_offset": 310132,
+      "size": 12,
+      "source": "src/audio/player_set_callback.c",
+      "symbols": {
+        "g_audio_player_callback": "0x020025b4"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "g_audio_player_callback = callback",
+        "after": "g_audio_player_callback = 0"
+      }
+    },
+    {
+      "name": "display_text_copy_bytes",
+      "rom_offset": 321488,
+      "size": 96,
+      "source": "src/display/text_copy_bytes.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2"
+      ],
+      "negative_control": {
+        "before": "bytes -= 16;",
+        "after": "bytes -= 12;"
+      }
+    },
+    {
+      "name": "display_text_move_bytes",
+      "rom_offset": 321584,
+      "size": 136,
+      "source": "src/display/text_move_bytes.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2"
+      ],
+      "negative_control": {
+        "before": "bytes -= 16;",
+        "after": "bytes -= 12;"
+      }
+    },
+    {
+      "name": "display_fill_bytes",
+      "rom_offset": 321720,
+      "size": 84,
+      "source": "src/display/fill_bytes.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2"
+      ],
+      "negative_control": {
+        "before": "value &= 255;",
+        "after": "value &= 254;"
+      }
+    },
+    {
+      "name": "display_text_copy_string",
+      "rom_offset": 322016,
+      "size": 76,
+      "source": "src/display/text_copy_string.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2"
+      ],
+      "negative_control": {
+        "before": "DISPLAY_WORD_HAS_ZERO(*words_in)",
+        "after": "DISPLAY_WORD_HAS_ZERO(*words_in ^ 1U)"
+      }
+    },
+    {
+      "name": "display_text_string_length",
+      "rom_offset": 322092,
+      "size": 68,
+      "source": "src/display/text_string_length.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2"
+      ],
+      "negative_control": {
+        "before": "++words;",
+        "after": "words += 2;"
+      }
+    },
+    {
+      "name": "display_text_append_string",
+      "rom_offset": 321804,
+      "size": 72,
+      "source": "src/display/text_append_string.c",
+      "symbols": {
+        "display_text_copy_string": "0x0804e9e1"
+      },
+      "thumb_symbols": [
+        "display_text_copy_string"
+      ],
+      "compiler_flags": [
+        "-O2"
+      ],
+      "negative_control": {
+        "before": "display_text_copy_string(cursor, in);",
+        "after": "display_text_copy_string(cursor + 1, in);"
+      }
     }
   ],
   "assembly": [

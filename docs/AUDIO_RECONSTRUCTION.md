@@ -415,3 +415,46 @@ reject their actual source controls. Canonical source/header snapshots,
 expected and candidate bytes and commands remain in ignored
 `sample-allocation-canonical/` reports. Lower-level mixer primitives, Thumb
 transfer thunks and the sequence player remain explicit unconverted regions.
+
+## Sequence-player pause, resume and volume handoff
+
+Five matching Thumb functions add 264 C bytes: callback setter `0x4BB74`
+(12), pause `0x4BB80` (52), resume `0x4BBB4` (56), paused-state query
+`0x4BBEC` (24), and volume setter `0x4BC04` (120). They use ordinary C
+without instruction assembly or register constraints. The pinned GCC 3.0.2
+Thumb profile at `-O3` reproduces their instruction choices; the separately
+pinned GNU assembler 2.10.1 reproduces the zero alignment before their literal
+pools. Those choices do not establish the historical toolchain.
+
+The partial player prefix starts at `0x02001644`: its flags word is at zero,
+state word at four, song pointer at eight and signed volume byte at `+0x1D`.
+Pause acts only in state two, changes it to one, marks channels in slot two
+or three according to flag four, and disables the tick callback. Resume acts
+only in state one, changes it to two, resumes the corresponding channel slot,
+and installs the still-unconverted tick callback at `0x0804A758`. The query
+returns whether state is one. These paths connect the published game pause
+and resume controls to the reconstructed mixer channel controls.
+
+The fade branch compares the request with the current volume word at
+`0x02001640`, writes a new target at `0x020025AC`, and selects a signed step
+of minus or plus one at `0x020025B0`. This corrects the reversed word roles
+in the first private experiment; instruction and literal-pool evidence agree.
+Without an active fade request, the function clears the step and stores both
+volume words immediately. It multiplies current volume by the song's byte at
+`+0x163` and the player's signed volume, shifts by thirteen, calls the accepted
+mixer-volume setter, then refreshes channel volumes. A null song instead uses
+128 times 64. No new clamp or bounds check is added. The callback setter stores
+the notification function pointer taking two integer arguments at `0x020025B4`; its invocations
+remain in the unconverted tick/fade path.
+
+These sources adapt `krapPause`, `krapUnpause`, `krapIsPaused`,
+`krapSetMusicVol` and `krapCallback` from the pinned Krawall `lib/player.c`,
+retaining its LGPL 2.1-or-later notices and recording the observed partial game
+layout and addresses. State, query, shift and callback-assignment mutations
+all compile and reject; the volume shift changes two bytes and the callback
+assignment changes seven, while the three other controls change one each.
+Four existing direct game callers also remain exact and reject their controls.
+Source/header snapshots and complete compared bytes remain in the ignored
+`player-controls-canonical/` reports. Player start/stop, row/effect processing,
+tick scheduling and instrument envelopes still have excluded candidates;
+no audible, timing or gameplay claim follows from these matches.
