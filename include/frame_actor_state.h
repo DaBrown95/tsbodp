@@ -37,7 +37,7 @@ void frame_route_enable_destination(struct FrameObject *);
 void frame_route_set_limit(struct FrameObject *, unsigned char);
 unsigned char frame_find_action_target(struct FrameObject *, unsigned char, void **);
 unsigned char frame_random_chance(unsigned char);
-void frame_grid_neighbor(void *, const int *, int *, unsigned char);
+unsigned char frame_grid_neighbor(void *, const int *, int *, unsigned char);
 unsigned int frame_grid_terrain(void *, const int *);
 unsigned int frame_grid_occupancy(void *, const int *);
 unsigned char frame_actor_direction_available(struct FrameObject *, unsigned char);

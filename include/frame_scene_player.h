@@ -39,4 +39,25 @@ struct FrameSceneSpawnList {struct FrameSceneSpawnObject *first,*last;};
 extern struct FrameSceneSpawnList g_frame_scene_spawn_list;
 unsigned char frame_scene_read_spawn(unsigned char,unsigned char *,int *,int *);
 
+/* Partial shared scene selection state. The selected actor at +0x740 is
+ * distinct from the selection field at +0x748 used by other actor paths. */
+struct FrameSceneActorSelection {
+ unsigned char unknown00[10],current_world,unknown0b[0x430-11];
+ struct FramePoint position;
+ unsigned int saved_effect_value;
+ unsigned char world,saved_effect_kind,unknown43e[0x740-0x43e],actor;
+};
+extern struct FrameSceneActorSelection g_frame_scene_actor_selection;
+struct FrameSceneWorldContext {unsigned char unknown00[2];signed char row;};
+extern unsigned char g_frame_scene_actor_eligibility_enabled;
+extern const unsigned char *g_frame_scene_actor_world_tables[];
+unsigned char frame_scene_actor_world_slot(const struct FrameSceneWorldContext *);
+unsigned char frame_scene_actor_allowed(unsigned int,unsigned int,const struct FrameSceneWorldContext *);
+struct FrameSceneSavedEffect {
+ unsigned char unknown00[100];struct FrameObject *owner;
+ unsigned int unknown68,value;
+};
+struct FrameSceneSavedEffect *frame_create_scene_saved_effect(unsigned char,int,int);
+struct FrameSceneSavedEffect *frame_spawn_saved_scene_effect(int,int);
+
 #endif

@@ -1176,3 +1176,37 @@ view at `+0xCC`; its type follows the original two-object consumer. The byte at
 spatial threshold; the byte at `+0x84` is set to three. Their wider roles remain
 under analysis. These compiler and static-layout findings do not establish
 runtime multiplayer or scene-restoration behavior.
+
+Two further direct scene-setup dependencies add exact extents of 160 and 64
+bytes: `frame_scene_actor_allowed` at `0x2CC08` and
+`frame_spawn_saved_scene_effect` at `0x33674`. Their canonical and actual
+changed-source comparisons are retained in `camera-map/scene-tail-promoted/`.
+Changing the eligibility cutoff from five to four rejects one byte; adding
+one to the saved effect value rejects twelve. The five existing functions
+that include the player/scene header closure were recompiled exactly and their
+existing controls rejected, including the 400-byte setup caller.
+
+The eligibility predicate returns one when its enable byte at `0x03001E2C`
+is zero. It preserves the actor-31 condition/world-37 exception, the selected
+actor's existing world-exclusion query, the unsigned wrapped actor-minus-six
+table index, null table handling, and an eight-byte row stride. The context
+row is read as a signed byte at `+2`; its column comes from the original
+helper at `0x10808`. Neither the table index nor row/column is bounds checked
+by this routine. The formal actor value is kept as an unsigned word: its
+entry copies the complete argument and does not narrow it. The caller already
+supplies a loaded byte. An ordinary integer address accumulator for the ROM
+pointer table preserves the original address-addition order without an
+assembly body or register binding.
+
+The shared selection view retains its layout and now exposes the observed
+current-world byte at `+0x0A`, saved-effect value at `+0x438` and saved-effect
+kind at `+0x43D`. Its position, world byte at `+0x43C` and selected actor at
+`+0x740` remain at their previous offsets. The effect helper calls the
+original factory at `0x332C8` with that kind and the two position words. On
+success it writes the first player slot's object pointer to effect `+0x64`
+and the saved value to `+0x6C`, then returns the pointer. Null is returned
+unchanged. The setup caller ignores the return. Effect field names and the
+eligibility context's row/column interpretation remain provisional; the
+original factory and column helper are explicit unconverted dependencies.
+These matches establish source bytes and static data access, not runtime
+scene eligibility or effect behavior.

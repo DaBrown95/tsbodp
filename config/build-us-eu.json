@@ -11342,7 +11342,6 @@
         "resource_spawn_group": "0x0800a965",
         "resource_execute_group": "0x0800adcd",
         "frame_create_speed_exit_actor": "0x08038091",
-        "frame_scene_stage_08033674": "0x08033675",
         "frame_scene_read_spawn": "0x08016c05",
         "frame_scene_actor_allowed": "0x0802cc09",
         "frame_create_actor": "0x0802bdad",
@@ -11351,7 +11350,8 @@
         "resource_prepare": "0x0800ad1d",
         "frame_create_scene_primary_actor": "0x0802fad1",
         "actor_entry_restore_scene_collection": "0x08020bf9",
-        "actor_entry_mark_scene_collection": "0x08020b61"
+        "actor_entry_mark_scene_collection": "0x08020b61",
+        "frame_spawn_saved_scene_effect": "0x08033675"
       },
       "thumb_symbols": [
         "resource_prepare",
@@ -11365,7 +11365,7 @@
         "actor_entry_mark_scene_collection",
         "frame_create_scene_primary_actor",
         "frame_create_speed_exit_actor",
-        "frame_scene_stage_08033674",
+        "frame_spawn_saved_scene_effect",
         "frame_scene_read_spawn",
         "frame_scene_actor_allowed",
         "frame_create_actor",
@@ -11644,6 +11644,214 @@
       "negative_control": {
         "before": "collection->count>159",
         "after": "collection->count>160"
+      }
+    },
+    {
+      "name": "frame_grid_cell_data_pointer",
+      "rom_offset": 244608,
+      "size": 36,
+      "source": "src/frame/frame_grid_cell_data_pointer.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "x>=extent",
+        "after": "x>extent"
+      }
+    },
+    {
+      "name": "frame_actor_owner_cell_count",
+      "rom_offset": 189804,
+      "size": 128,
+      "source": "src/frame/frame_actor_owner_cell_count.c",
+      "symbols": {
+        "g_frame_actor_owner_descriptors": "0x08062b24"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "maximum=12",
+        "after": "maximum=11"
+      }
+    },
+    {
+      "name": "frame_grid_neighbor",
+      "source": "src/frame/frame_grid_neighbor.c",
+      "rom_offset": 244520,
+      "size": 88,
+      "symbols": {
+        "display_text_copy_bytes": "0x0804e7d1",
+        "g_frame_grid_neighbor_offsets": "0x0807f410"
+      },
+      "thumb_symbols": [
+        "display_text_copy_bytes"
+      ],
+      "negative_control": {
+        "before": "return 1",
+        "after": "return 2"
+      }
+    },
+    {
+      "name": "frame_scene_actor_allowed",
+      "rom_offset": 183304,
+      "size": 160,
+      "symbols": {
+        "condition_is_complete": "0x0802a7c5",
+        "frame_world_in_idle_exclusion_set": "0x080269f5",
+        "frame_scene_actor_world_slot": "0x08010809",
+        "g_frame_scene_actor_eligibility_enabled": "0x03001e2c",
+        "g_frame_scene_actor_selection": "0x03003950",
+        "g_frame_scene_actor_world_tables": "0x08d7162c"
+      },
+      "thumb_symbols": [
+        "condition_is_complete",
+        "frame_world_in_idle_exclusion_set",
+        "frame_scene_actor_world_slot"
+      ],
+      "negative_control": {
+        "before": "if(actor<=5)",
+        "after": "if(actor<=4)"
+      },
+      "source": "src/frame/frame_scene_actor_allowed.c"
+    },
+    {
+      "name": "frame_spawn_saved_scene_effect",
+      "rom_offset": 210548,
+      "size": 64,
+      "symbols": {
+        "frame_create_scene_saved_effect": "0x080332c9",
+        "g_frame_scene_actor_selection": "0x03003950",
+        "g_frame_scene_player_slots": "0x030040e0"
+      },
+      "thumb_symbols": [
+        "frame_create_scene_saved_effect"
+      ],
+      "negative_control": {
+        "before": "effect->value=g_frame_scene_actor_selection.saved_effect_value;",
+        "after": "effect->value=g_frame_scene_actor_selection.saved_effect_value+1;"
+      },
+      "source": "src/frame/frame_spawn_saved_scene_effect.c"
+    },
+    {
+      "name": "frame_interaction_step_31",
+      "rom_offset": 62684,
+      "size": 464,
+      "source": "src/display/interaction_step_31.c",
+      "symbols": {
+        "g_frame_interaction_settings": "0x03003950",
+        "g_frame_need_effect_definitions": "0x08062e7c",
+        "frame_attachment_position": "0x0800176d",
+        "frame_begin_actor_route": "0x080370d1",
+        "frame_request_animation": "0x08001b5d",
+        "frame_commit_need_effect": "0x0802d9ad",
+        "frame_clear_animation_pending": "0x08001bd5",
+        "audio_play_animation_cue": "0x08040ffd",
+        "frame_adjust_actor_needs": "0x0802b825",
+        "frame_step_attachment_need_timer": "0x0802eddd"
+      },
+      "thumb_symbols": [
+        "frame_attachment_position",
+        "frame_begin_actor_route",
+        "frame_request_animation",
+        "frame_commit_need_effect",
+        "frame_clear_animation_pending",
+        "audio_play_animation_cue",
+        "frame_adjust_actor_needs",
+        "frame_step_attachment_need_timer"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(65)",
+        "after": "audio_play_animation_cue(64)"
+      }
+    },
+    {
+      "name": "frame_interaction_begin_31",
+      "rom_offset": 63208,
+      "size": 72,
+      "source": "src/display/interaction_begin_31.c",
+      "symbols": {
+        "frame_attachment_position": "0x0800176d",
+        "frame_begin_actor_route": "0x080370d1",
+        "frame_request_animation": "0x08001b5d",
+        "frame_allocate_actor_attachment_record": "0x0802e3c5"
+      },
+      "thumb_symbols": [
+        "frame_attachment_position",
+        "frame_begin_actor_route",
+        "frame_request_animation",
+        "frame_allocate_actor_attachment_record"
+      ],
+      "negative_control": {
+        "before": "job->unknown04 = kind",
+        "after": "job->unknown04 = kind + 1"
+      }
+    },
+    {
+      "name": "frame_interaction_dispatch_31",
+      "rom_offset": 63280,
+      "size": 32,
+      "source": "src/display/interaction_dispatch_31.c",
+      "symbols": {
+        "frame_find_actor_attachment_record": "0x0802ed61",
+        "frame_interaction_step_31": "0x0800f4dd"
+      },
+      "thumb_symbols": [
+        "frame_find_actor_attachment_record",
+        "frame_interaction_step_31"
+      ],
+      "negative_control": {
+        "before": "job->unknown04 == 49",
+        "after": "job->unknown04 == 48"
+      }
+    },
+    {
+      "name": "frame_interaction_can_begin_31",
+      "rom_offset": 63152,
+      "size": 40,
+      "source": "src/display/interaction_can_begin_31.c",
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "negative_control": {
+        "before": "unknown_60[0] == 1",
+        "after": "unknown_60[0] == 2"
+      }
+    },
+    {
+      "name": "frame_find_actor_attachment_record",
+      "rom_offset": 191840,
+      "size": 52,
+      "source": "src/display/find_actor_attachment_record.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "i < 3",
+        "after": "i < 2"
+      }
+    },
+    {
+      "name": "frame_allocate_actor_attachment_record",
+      "rom_offset": 189380,
+      "size": 88,
+      "source": "src/display/allocate_actor_attachment_record.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "i < 3",
+        "after": "i < 2"
+      }
+    },
+    {
+      "name": "frame_release_actor_attachment_record",
+      "rom_offset": 191892,
+      "size": 72,
+      "source": "src/display/release_actor_attachment_record.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "record->timer = 94",
+        "after": "record->timer = 93"
       }
     }
   ],

@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 113 C functions spanning 20,540 verified bytes. The
+This batch reconstructs 116 C functions spanning 20,792 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,9 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x3BB28` | `frame_grid_neighbor` | 88 |
+| `0x3BB80` | `frame_grid_cell_data_pointer` | 36 |
+| `0x2E56C` | `frame_actor_owner_cell_count` | 128 |
 | `0x6874` | `frame_actor_state_46` | 468 |
 | `0x9E40` | `frame_actor_state_31_32_33` | 364 |
 | `0xA030` | `frame_find_pending_action` | 116 |
@@ -815,6 +818,54 @@ cue 51, accepted action code 45, failure request ID 503, callback acceptance val
 The category labels, target search roles and failure names describe static code
 relationships rather than established gameplay identities.
 
+## Target-cell count and bounded grid lookup
+
+The accepted route-to-target helper calls the still-unconverted selector at
+`0x3B75C`. That selector calls these two matching dependencies. The owner counter
+uses the word at owner `+8` to select a descriptor from `0x08062B24`. For modes
+other than one and four, a non-null descriptor supplies a five-by-five byte
+array after a two-byte prefix; the result counts bytes equal to the requested
+mode. The prefix's meaning and the descriptor table's full extent remain unknown.
+
+Modes four and one instead count contiguous nonzero low halfwords in twelve
+words at owner `+0x74` and ten words at `+0xA4`, respectively. The selector reads
+the first slice as candidate cells and compares coordinates against the second
+slice when its restriction argument is set. The C view uses one contiguous
+22-word array so the counter's twelve-word offset stays inside that array.
+These names describe that static
+use; they do not establish gameplay meaning. The counter preserves the zero
+sentinel and the two array limits. One unsigned-halfword register binding keeps
+the mask's original value lifetime; six unnecessary bindings were removed after
+the exact match.
+
+The lookup reuses the canonical map-registration layout: data pointer at zero
+and unsigned extent at `+0x10`. It reads only the two low bytes of the packed
+cell. Either coordinate at or beyond the extent returns null; otherwise it
+returns the byte at `data + y*extent + x`. A local extent serves both bounds
+checks, while the accepted valid branch reloads the extent for multiplication.
+One C pointer binding preserves the context's lifetime. No instruction bodies
+are embedded. Changing the X boundary or the twelve-cell limit rejects one
+byte in each complete original extent.
+
+The neighbor helper copies sixteen bytes from `0x0807F410` into eight local
+coordinate pairs, then selects a pair using the byte-sized direction argument.
+It adds and stores the two low coordinate bytes before checking them against the
+same registration extent. The result is zero or one. The direction index remains
+unchecked, and the writes precede the validity result; those input assumptions
+are preserved. The shared prototype now uses a sufficient unsigned-byte result
+instead of the earlier provisional void return. The accepted 412-byte walk
+direction caller still matches, and its real changed-source control rejects.
+The neighbor body uses ordinary C and zero alignment; changing its success value
+from one to two rejects one byte.
+
+Private comparison evidence is retained under `actor-target-cell-canonical4-contiguous-*`
+and `actor-target-neighbor-return-consumers-*`.
+Earlier width, loop-order and register-lifetime trials remain under
+`actor-target-*`. The 356-byte selector itself still differs and receives no C
+coverage. It appears to prefer the actor's current cell or a nearest usable
+candidate, with optional matching on either restricted axis; its outputs and
+failure assumptions remain under investigation.
+
 ## State 46 relation, facing and audio handoff
 
 State 46 joins the first player's position, a distance threshold, facing,
@@ -858,7 +909,8 @@ Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manif
 `reports/agents/vblank-wrapper/actor-effect-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-speed-exit-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-attachment-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-choice-batch-manifest.json`.
+`reports/agents/vblank-wrapper/actor-choice-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-target-cell-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
 `actor-state-route-types13-*`, `actor-route-path-layout13-*` and
 `actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` and `actor-interaction-current2-*` and `actor-actions-canonical7-*` and `actor-carry-canonical5-*` and
