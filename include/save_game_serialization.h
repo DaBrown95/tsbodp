@@ -2,11 +2,16 @@
 #define SAVE_GAME_SERIALIZATION_H
 #include "save_stream.h"
 #include "display_time.h"
+#include "display_menu_relation.h"
+#include "save_stream_fields.h"
 
 /* Observed prefix/child offsets; these views do not establish full record sizes. */
 struct SaveStreamWorldRecord {
     unsigned char bytes[16], pairs[2], nibbles[6];
-    unsigned char region18[8], region20[104], region88[24], regiona0[32];
+    unsigned char region18[8];
+    struct DisplayMenuRelationValues region20;
+    int region88[6];
+    unsigned char regiona0[32];
 };
 struct SaveStreamSixNibbles {
     unsigned char first, unknown01, values[5];
@@ -36,14 +41,11 @@ void save_stream_write_world_record(struct SaveStreamWorldRecord *);
 void save_stream_write_six_nibbles(struct SaveStreamSixNibbles *);
 void save_stream_write_nibble_state(void);
 void save_stream_write_flag_words(void);
+void save_stream_write_relation_values(struct DisplayMenuRelationValues *);
+void save_stream_write_six_value_words(const int *);
 struct FrameActorNeedState;
 void frame_save_actor_needs(struct FrameActorNeedState *);
 /* Explicit unconverted input serializers; their full contracts remain unknown. */
-void save_stream_write_nibbles(const unsigned char *, unsigned int);
-void save_subrecord_35f2c(void *);
-void save_subrecord_3d198(void *);
 void save_world_write_region_1fecc(void *);
 void save_world_write_module_29d18(void);
-void save_world_write_module_383a4(void);
-void save_world_write_module_333c4(void);
 #endif

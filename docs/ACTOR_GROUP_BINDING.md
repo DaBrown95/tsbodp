@@ -1,6 +1,6 @@
 # Actor group resources and palette composition
 
-Nine connected C functions reconstruct 940 bytes, including literal pools and
+Twelve connected C functions reconstruct 1,588 bytes, including literal pools and
 alignment. They close the resource and palette dependencies of the accepted
 actor factory, actor-part updater and scene-player factory. Names describe the
 observed part indices and transfers; this is static/compiler evidence, without
@@ -10,6 +10,8 @@ a runtime or gameplay experiment.
 | --- | --- | ---: |
 | `0x08001400` | `frame_clear_part_variants` | 24 |
 | `0x08001450` | `frame_set_part_variants` | 40 |
+| `0x080140CC` | `frame_create_palette_menu_actors` | 396 |
+| `0x08014258` | `frame_update_palette_menu_actor` | 232 |
 | `0x080161AC` | `frame_load_actor_palette_pair` | 32 |
 | `0x080256A4` | `frame_create_palette_scene_actor` | 248 |
 | `0x0803AD64` | `frame_bind_actor_group` | 164 |
@@ -17,6 +19,7 @@ a runtime or gameplay experiment.
 | `0x0803AE7C` | `frame_compose_actor_group_alternate_palette` | 76 |
 | `0x0803AEC8` | `frame_load_actor_group_palette` | 144 |
 | `0x0803AF58` | `frame_load_actor_group_alternate_palette` | 96 |
+| `0x08045328` | `display_text_set_object_string` | 20 |
 
 The existing 12-byte animation-part record starts at object `+0x104`. The setter
 writes its variants pointer at part `+8` and palette byte at `+1`; the clearer
@@ -107,8 +110,8 @@ The incomplete static inventory records alternate-wrapper calls from
 `0x03003970` through the ordinary wrapper into slot 1, then through the alternate
 wrapper into slot 2. This base is the existing scene-player group and overlaps
 game-state `+0x20`; the declaration is an access view, without establishing a new
-allocation or definition-array bound. Two other callers remain unconverted;
-the scene actor factory at `0x080256A4` is reconstructed below.
+allocation or definition-array bound. The other callers are reconstructed below
+as the scene actor factory and palette-menu constructor/updater.
 The inventory records no calls to either standalone composer. These are shared
 palette operations connected through the same row layouts and accepted copy and
 display-transfer dependencies; the standalone composers' active uses, row-index
@@ -148,3 +151,65 @@ and complete 248-byte extent, including all literal words, are verified under
 produces one differing byte. The incomplete inventory records direct callers
 at `0x08024E18` and `0x08025038`, both still unconverted. No runtime visibility,
 animation or save-to-scene round-trip experiment has been performed.
+
+Three further functions add 648 bytes and close the menu constructor/update
+path through the already accepted text renderer. The 396-byte constructor
+allocates a primary object and stores it in slot zero of the existing scene
+object array. Its signed-halfword position comes from `0x08051FB0`; it sets
+direction four, palette one and flags 17. The current definition at
+`0x03003970` supplies the same two variants-table selections, palette transfers
+to slots one/two, animation request zero and part-zero order four as the other
+actor factories. It then creates these scene objects through the accepted
+four-word interface, preserving the observed creation order:
+
+| Stored slot | ID | Subtype | Palette | Layer |
+| ---: | ---: | ---: | ---: | ---: |
+| 1 | 10 | 0 | 3 | 1 |
+| 2 | 0 | 4 | 10 | 1 |
+| 3 | 16 | 7 | 4 | 1 |
+| 6 | 11 | 1 | 7 | 0 |
+| 4 | 23 | 7 | 5 | 1 |
+| 5 | 21 | 6 | 9 | 1 |
+| 8 | 8 | 234 | 8 | 1 |
+| 9 | 31 | 235 | 8 | 1 |
+
+These are observed IDs and arguments, without assigning names to their visual
+content. A retained ROM palette at `0x080DA6A0` is transferred at halfword 96
+with count 16. The constructor copies the game-state text prefix at `+0x10`
+to text field zero, selects font `(1, 0, 0)`, looks up token `0x184F`, creates
+label ID nine into slot seven and requests state fourteen. The background
+control word is read from `0x08051F60`. Explicit unsigned address subtraction
+recovers the text prefix from the retained definition address; it is an access
+to the same game-state storage, not a separate text allocation.
+
+The 232-byte updater compares the old selector byte at game `+0x20` with the
+full choice word at `0x03001918`. On a difference it selects the same font,
+updates slot seven's text and restores the background control. It then copies
+the low bytes of seven choice words into game `+0x20..+0x26`, leaving the eighth
+selector untouched. Both palettes and part-zero/part-one variant pointers are
+refreshed, followed by the signed animation and direction variant. The initial
+comparison does not narrow the choice word, even though the later store does;
+no choice, object-slot, string-termination or table bounds are added.
+
+Named current-selector and selected-variant values preserve the observed load
+and pointer setup order. Stores through the game-state fields preserve the
+retained base and byte-pointer lifetimes; an earlier compact pointer form was
+212 bytes and differed by 178, and a later 232-byte form still differed by six.
+The final source matches in ordinary C without register bindings. The
+constructor includes its literal words and zero alignment; the updater includes
+its 32-byte literal pool and two-byte zero alignment.
+
+The 20-byte string wrapper stores its string argument on the stack and passes
+that pointer's address to the accepted 304-byte `display_text_update`. Its
+18-byte instruction body has two zero alignment bytes before the next entry.
+This closes the observed single-string to string-pointer handoff into text
+sizing, drawing and tile transfers; those previously accepted bytes are not
+counted again. The provider's declaration is retained without a new provisional
+library alias.
+
+Fresh canonical proofs under `reports/audio-root/palette-menu-canonical/`
+include controls for flags 17 to 25, the final selector's source word and an
+advanced string pointer. All three reject actual source changes. The incomplete
+inventory records constructor callers `0x08015CB8`/`0x08015DE8` and updater caller
+`0x08014340`, still unconverted. Static connectivity, full-ROM byte equality and
+runtime menu behavior remain separate claims.

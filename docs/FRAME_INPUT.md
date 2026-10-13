@@ -59,8 +59,9 @@ links and replaces the earlier ambiguous active-list names. The scheduler calls
 the copied ARM dispatcher at `0x03002A20`, constructs object work, invokes the
 copied sort entry at `0x03002900`, applies updates, prepares render entries and
 coordinates display completion. Numeric typed function pointers keep these
-RAM calls explicit and preserve the original interworking thunks. Their bodies
-remain unconverted ARM code and receive no C credit.
+RAM calls explicit and preserve the original interworking thunks. The copied
+collision dispatcher now has a verified 640-byte semantic ARM C replacement;
+the 284-byte sort body remains unconverted and receives no C credit.
 
 The initializer at `0x109C` provides static source and size evidence for both
 RAM copies: ROM `0xB840` to RAM `0x03002900`, 71 words / 284 bytes; ROM `0xB0E8`
@@ -1820,3 +1821,63 @@ Source, linked bytes, boundary evidence and actual control receipts are retained
 under `reports/agents/frame-input/renderer-resume/affine-svc-glue-current-*`.
 This adds four verified glue bytes and zero C bytes; it establishes no runtime
 or gameplay claim.
+
+### Resource owner-slot handoff
+
+`resource_set_object` at `0x0800AF34` adds 44 verified C bytes. Starting from
+the resource root stored at `0x03002ED8`, it reads a halfword offset from
+`root + 2 + group * 2`, then a second halfword offset from the selected group's
+`data + 2 + slot * 2`. It stores its object pointer in the selected entry's
+first word. Both indices are observed byte arguments. The function performs
+no bounds check or special handling for index `0xFF`; storage size and entry
+alignment remain caller and data-format preconditions.
+
+The existing `frame_remove_object` calls this setter with a null pointer when
+the object's flags have their signed high bit set, using the owner group and
+slot bytes. The former `frame_drop_owner` name described that one use rather
+than the callee's general operation. The canonical setter name and pointer
+argument now reflect the actual word store. Resource builders and the paired
+`resource_get_object` accessor below support this owner-slot interpretation.
+No object or resource layout changed.
+
+The accepted extent contains 38 instruction bytes, two zero alignment bytes
+and the four-byte root literal. The next function begins at `0x0800AF60`.
+Separate group and slot offset values, with table pointer views scoped to their
+respective lookups, reproduce the original allocation without register
+bindings. The real slot-stride control changes `slot << 1` to `slot << 2` and
+rejects by one byte. The existing removal function also matches all 140 bytes
+with its current header closure, and its existing source control rejects by
+one byte. That caller recheck adds no C coverage.
+
+Complete source, raw comparisons, boundary evidence and actual controls are
+retained under `reports/agents/frame-input/renderer-resume/resource-owner-*`.
+This is static and compiler evidence only; no runtime or gameplay behavior has
+been verified for this handoff.
+
+The paired `resource_get_object` at `0x0800AEE4` adds 80 verified C bytes. Its
+entry explicitly narrows both argument words to bytes. The canonical C formal
+spelling is now unsigned word, with observed byte indices retained locally;
+the original source's formal spelling remains provisional. Ordinary entries
+read the same two halfword offset tables as the setter, then return the first
+pointer word. Group zero and byte slot `0xFF` instead select the view context
+at `0x030040E0`, with the observed `(unsigned char)(0xFF - slot)` index and
+12-byte slot stride. For that branch the narrowed index is zero; no additional
+view-index validation or resource-table bounds are inferred.
+
+One shared data pointer represents both paths. Its view address is expressed
+as an unsigned 32-bit offset plus the context address, consistent with the
+fixed ARM address space. Word local indices retain the argument-narrowing
+order and avoid redundant narrowing after the context lookup. The final
+source matches without register bindings. Failed byte-formal candidates,
+separate pointer views and bound-pointer minimization attempts remain local
+evidence rather than accepted source.
+
+The getter's complete 80 bytes include both original literals and two separate
+two-byte zero alignment spans. Changing the special-path threshold from
+`0xFE` to `0xFD` rejects by one byte. All 106 previously accepted consumers of
+the changed resource header, totaling 10,080 bytes and including 22 direct
+getter callers, were recompiled with their actual changed-source controls;
+every positive matches and every control rejects. Fresh setter, getter and
+removal proofs also pass, totaling 124 new C bytes across the paired entries.
+These receipts are under the adjacent `resource-owner-pair-canonical-*`
+reports. Header and caller rechecks add no coverage or runtime evidence.

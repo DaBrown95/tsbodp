@@ -723,16 +723,6 @@
       "reason": "fallthrough interior label"
     },
     {
-      "address": 134300082,
-      "mode": "Thumb",
-      "reason": "fallthrough interior label"
-    },
-    {
-      "address": 134300322,
-      "mode": "Thumb",
-      "reason": "fallthrough interior label"
-    },
-    {
       "address": 134300600,
       "mode": "Thumb",
       "reason": "fallthrough interior label"
@@ -5153,7 +5143,7 @@
     311970,
     312686
   ],
-  "initial_connected_entries": 1298,
+  "initial_connected_entries": 1315,
   "connected_main_last_instruction": 134539884,
   "unresolved_transfer_sites": [
     604,
@@ -5175,10 +5165,10 @@
     16627112
   ],
   "whole_rom_prologue_hits": 15021,
-  "sweep_seed_count": 1028,
+  "sweep_seed_count": 1011,
   "entry_count": 2552,
   "extent_count": 2554,
-  "mapped_extent_bytes": 323006,
+  "mapped_extent_bytes": 323018,
   "rows": [
     {
       "name": "ROM entry",
@@ -13889,13 +13879,14 @@
       "group": "ROM 0800xxxx"
     },
     {
-      "name": "sub_0800AEE4",
+      "name": "resource_get_object",
       "rom_offset": 44772,
       "mode": "Thumb",
       "runtime_addresses": [
         134262500
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -13906,24 +13897,25 @@
         44844
       ],
       "size": 80,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 44772,
       "body_rom_start": 44772,
       "body_rom_end": 44846,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 68,
       "referenced_literal_bytes": 8,
       "status": "mapped_code",
       "group": "ROM 0800xxxx"
     },
     {
-      "name": "sub_0800AF34",
+      "name": "resource_set_object",
       "rom_offset": 44852,
       "mode": "Thumb",
       "runtime_addresses": [
         134262580
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -13934,11 +13926,11 @@
         44888
       ],
       "size": 44,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 44852,
       "body_rom_start": 44852,
       "body_rom_end": 44890,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 38,
       "referenced_literal_bytes": 4,
       "status": "mapped_code",
@@ -25386,15 +25378,15 @@
       "group": "ROM 0801xxxx"
     },
     {
-      "name": "sub_080140CC",
+      "name": "frame_create_palette_menu_actors",
       "rom_offset": 82124,
       "mode": "Thumb",
       "runtime_addresses": [
         134299852
       ],
       "evidence": [
-        "candidate call",
-        "prologue candidate"
+        "bounded audit",
+        "candidate call"
       ],
       "issues": [],
       "call_targets": [
@@ -25422,26 +25414,26 @@
         82476
       ],
       "size": 396,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 82124,
       "body_rom_start": 82124,
       "body_rom_end": 82478,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 354,
       "referenced_literal_bytes": 40,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0801xxxx"
     },
     {
-      "name": "sub_08014258",
+      "name": "frame_update_palette_menu_actor",
       "rom_offset": 82520,
       "mode": "Thumb",
       "runtime_addresses": [
         134300248
       ],
       "evidence": [
-        "candidate call",
-        "prologue candidate"
+        "bounded audit",
+        "candidate call"
       ],
       "issues": [],
       "call_targets": [
@@ -25459,14 +25451,14 @@
         82716
       ],
       "size": 232,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 82520,
       "body_rom_start": 82520,
       "body_rom_end": 82718,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 198,
       "referenced_literal_bytes": 32,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0801xxxx"
     },
     {
@@ -31832,15 +31824,14 @@
       "group": "ROM 0801xxxx"
     },
     {
-      "name": "sub_0801A38C",
+      "name": "frame_select_optional_attachment_kinds_1a38c",
       "rom_offset": 107404,
       "mode": "Thumb",
       "runtime_addresses": [
         134325132
       ],
       "evidence": [
-        "pointer candidate",
-        "prologue candidate"
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -31851,15 +31842,15 @@
       "return_offsets": [
         107440
       ],
-      "size": 38,
-      "extent_basis": "CFG envelope estimate",
+      "size": 40,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 107404,
       "body_rom_start": 107404,
       "body_rom_end": 107442,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 38,
       "referenced_literal_bytes": 0,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0801xxxx"
     },
     {
@@ -48090,15 +48081,14 @@
       "group": "ROM 0802xxxx"
     },
     {
-      "name": "sub_08028764",
+      "name": "frame_select_optional_attachment_kinds_28764",
       "rom_offset": 165732,
       "mode": "Thumb",
       "runtime_addresses": [
         134383460
       ],
       "evidence": [
-        "pointer candidate",
-        "prologue candidate"
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -48111,15 +48101,15 @@
       "return_offsets": [
         165844
       ],
-      "size": 114,
-      "extent_basis": "CFG envelope estimate",
+      "size": 116,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 165732,
       "body_rom_start": 165732,
       "body_rom_end": 165846,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 110,
       "referenced_literal_bytes": 4,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0802xxxx"
     },
     {
@@ -54595,7 +54585,8 @@
       ],
       "evidence": [
         "bounded audit",
-        "candidate call"
+        "candidate call",
+        "direct call"
       ],
       "issues": [],
       "call_targets": [],
@@ -55359,7 +55350,7 @@
       ],
       "evidence": [
         "bounded audit",
-        "candidate call"
+        "direct call"
       ],
       "issues": [],
       "call_targets": [
@@ -55471,15 +55462,15 @@
       "group": "ROM 0802xxxx"
     },
     {
-      "name": "sub_0802F19C",
+      "name": "frame_need_effect_optional_two_ready",
       "rom_offset": 192924,
       "mode": "Thumb",
       "runtime_addresses": [
         134410652
       ],
       "evidence": [
-        "candidate call",
-        "prologue candidate"
+        "bounded audit",
+        "direct call"
       ],
       "issues": [],
       "call_targets": [],
@@ -55488,27 +55479,27 @@
       "return_offsets": [
         192956
       ],
-      "size": 34,
-      "extent_basis": "CFG envelope estimate",
+      "size": 36,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 192924,
       "body_rom_start": 192924,
       "body_rom_end": 192958,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 34,
       "referenced_literal_bytes": 0,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0802xxxx"
     },
     {
-      "name": "sub_0802F1C0",
+      "name": "frame_need_effect_try_reset_timer",
       "rom_offset": 192960,
       "mode": "Thumb",
       "runtime_addresses": [
         134410688
       ],
       "evidence": [
-        "candidate call",
-        "prologue candidate"
+        "bounded audit",
+        "direct call"
       ],
       "issues": [],
       "call_targets": [
@@ -55521,14 +55512,14 @@
         193034
       ],
       "size": 76,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 192960,
       "body_rom_start": 192960,
       "body_rom_end": 193036,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 68,
       "referenced_literal_bytes": 8,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0802xxxx"
     },
     {
@@ -55573,7 +55564,7 @@
       ],
       "evidence": [
         "candidate call",
-        "prologue candidate"
+        "direct call"
       ],
       "issues": [],
       "call_targets": [],
@@ -55590,7 +55581,7 @@
       "boundary_confidence": "control_flow_bounded",
       "decoded_instruction_bytes": 56,
       "referenced_literal_bytes": 0,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0802xxxx"
     },
     {
@@ -55601,8 +55592,7 @@
         134410872
       ],
       "evidence": [
-        "candidate call",
-        "prologue candidate"
+        "direct call"
       ],
       "issues": [],
       "call_targets": [],
@@ -55619,7 +55609,7 @@
       "boundary_confidence": "control_flow_bounded",
       "decoded_instruction_bytes": 56,
       "referenced_literal_bytes": 0,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0802xxxx"
     },
     {
@@ -59277,13 +59267,14 @@
       "group": "ROM 0803xxxx"
     },
     {
-      "name": "sub_080333C4",
+      "name": "save_stream_write_auxiliary_fields",
       "rom_offset": 209860,
       "mode": "Thumb",
       "runtime_addresses": [
         134427588
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -59296,11 +59287,11 @@
         209948
       ],
       "size": 96,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 209860,
       "body_rom_start": 209860,
       "body_rom_end": 209950,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 90,
       "referenced_literal_bytes": 4,
       "status": "mapped_code",
@@ -62562,15 +62553,14 @@
       "group": "ROM 0803xxxx"
     },
     {
-      "name": "sub_08035C3C",
+      "name": "frame_select_optional_attachment_kinds_35c3c",
       "rom_offset": 220220,
       "mode": "Thumb",
       "runtime_addresses": [
         134437948
       ],
       "evidence": [
-        "pointer candidate",
-        "prologue candidate"
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -62583,15 +62573,15 @@
       "return_offsets": [
         220308
       ],
-      "size": 90,
-      "extent_basis": "CFG envelope estimate",
+      "size": 92,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 220220,
       "body_rom_start": 220220,
       "body_rom_end": 220310,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 86,
       "referenced_literal_bytes": 4,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0803xxxx"
     },
     {
@@ -62844,13 +62834,14 @@
       "group": "ROM 0803xxxx"
     },
     {
-      "name": "sub_08035F2C",
+      "name": "save_stream_write_relation_values",
       "rom_offset": 220972,
       "mode": "Thumb",
       "runtime_addresses": [
         134438700
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -62864,11 +62855,11 @@
         221046
       ],
       "size": 76,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 220972,
       "body_rom_start": 220972,
       "body_rom_end": 221048,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 76,
       "referenced_literal_bytes": 0,
       "status": "mapped_code",
@@ -65812,13 +65803,14 @@
       "group": "ROM 0803xxxx"
     },
     {
-      "name": "sub_080383A4",
+      "name": "save_stream_write_world_fields",
       "rom_offset": 230308,
       "mode": "Thumb",
       "runtime_addresses": [
         134448036
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -65833,11 +65825,11 @@
         230392
       ],
       "size": 104,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 230308,
       "body_rom_start": 230308,
       "body_rom_end": 230394,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 86,
       "referenced_literal_bytes": 16,
       "status": "mapped_code",
@@ -68591,15 +68583,14 @@
       "group": "ROM 0803xxxx"
     },
     {
-      "name": "sub_0803A994",
+      "name": "frame_select_optional_attachment_kinds_3a994",
       "rom_offset": 240020,
       "mode": "Thumb",
       "runtime_addresses": [
         134457748
       ],
       "evidence": [
-        "pointer candidate",
-        "prologue candidate"
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -68612,14 +68603,14 @@
         240074
       ],
       "size": 56,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 240020,
       "body_rom_start": 240020,
       "body_rom_end": 240076,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 56,
       "referenced_literal_bytes": 0,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0803xxxx"
     },
     {
@@ -69232,7 +69223,6 @@
       ],
       "evidence": [
         "bounded audit",
-        "candidate call",
         "direct call"
       ],
       "issues": [],
@@ -71241,13 +71231,14 @@
       "group": "ROM 0803xxxx"
     },
     {
-      "name": "sub_0803D198",
+      "name": "save_stream_write_six_value_words",
       "rom_offset": 250264,
       "mode": "Thumb",
       "runtime_addresses": [
         134467992
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -71260,11 +71251,11 @@
         250298
       ],
       "size": 36,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 250264,
       "body_rom_start": 250264,
       "body_rom_end": 250300,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 36,
       "referenced_literal_bytes": 0,
       "status": "mapped_code",
@@ -75666,8 +75657,7 @@
         134493000
       ],
       "evidence": [
-        "candidate call",
-        "prologue candidate"
+        "direct call"
       ],
       "issues": [],
       "call_targets": [
@@ -75691,7 +75681,7 @@
       "boundary_confidence": "control_flow_bounded",
       "decoded_instruction_bytes": 146,
       "referenced_literal_bytes": 8,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0804xxxx"
     },
     {
@@ -75702,8 +75692,7 @@
         134493156
       ],
       "evidence": [
-        "candidate call",
-        "prologue candidate"
+        "direct call"
       ],
       "issues": [],
       "call_targets": [
@@ -75729,19 +75718,19 @@
       "boundary_confidence": "control_flow_bounded",
       "decoded_instruction_bytes": 168,
       "referenced_literal_bytes": 4,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0804xxxx"
     },
     {
-      "name": "sub_08043490",
+      "name": "frame_step_optional_activity_attachment_job",
       "rom_offset": 275600,
       "mode": "Thumb",
       "runtime_addresses": [
         134493328
       ],
       "evidence": [
-        "candidate call",
-        "prologue candidate"
+        "bounded audit",
+        "direct call"
       ],
       "issues": [],
       "call_targets": [
@@ -75803,15 +75792,15 @@
       "return_offsets": [
         276396
       ],
-      "size": 798,
-      "extent_basis": "CFG envelope estimate",
+      "size": 800,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 275600,
       "body_rom_start": 275600,
       "body_rom_end": 276398,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 502,
       "referenced_literal_bytes": 284,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0804xxxx"
     },
     {
@@ -75951,15 +75940,14 @@
       "group": "ROM 0804xxxx"
     },
     {
-      "name": "sub_080438CC",
+      "name": "frame_dispatch_optional_activity_attachment_job",
       "rom_offset": 276684,
       "mode": "Thumb",
       "runtime_addresses": [
         134494412
       ],
       "evidence": [
-        "pointer candidate",
-        "prologue candidate"
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -75994,14 +75982,14 @@
         276898
       ],
       "size": 216,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 276684,
       "body_rom_start": 276684,
       "body_rom_end": 276900,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 76,
       "referenced_literal_bytes": 140,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0804xxxx"
     },
     {
@@ -76040,8 +76028,7 @@
         134494636
       ],
       "evidence": [
-        "candidate call",
-        "prologue candidate"
+        "direct call"
       ],
       "issues": [],
       "call_targets": [
@@ -76064,7 +76051,7 @@
       "boundary_confidence": "control_flow_bounded",
       "decoded_instruction_bytes": 120,
       "referenced_literal_bytes": 4,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0804xxxx"
     },
     {
@@ -78042,7 +78029,6 @@
       ],
       "evidence": [
         "bounded audit",
-        "candidate call",
         "direct call"
       ],
       "issues": [],
@@ -78132,15 +78118,16 @@
       "group": "ROM 0804xxxx"
     },
     {
-      "name": "sub_08045328",
+      "name": "display_text_set_object_string",
       "rom_offset": 283432,
       "mode": "Thumb",
       "runtime_addresses": [
         134501160
       ],
       "evidence": [
+        "bounded audit",
         "candidate call",
-        "prologue candidate"
+        "direct call"
       ],
       "issues": [],
       "call_targets": [
@@ -78151,15 +78138,15 @@
       "return_offsets": [
         283448
       ],
-      "size": 18,
-      "extent_basis": "CFG envelope estimate",
+      "size": 20,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 283432,
       "body_rom_start": 283432,
       "body_rom_end": 283450,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 18,
       "referenced_literal_bytes": 0,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0804xxxx"
     },
     {
@@ -79207,15 +79194,14 @@
       "group": "ROM 0804xxxx"
     },
     {
-      "name": "sub_08046200",
+      "name": "frame_select_optional_attachment_kinds_46200",
       "rom_offset": 287232,
       "mode": "Thumb",
       "runtime_addresses": [
         134504960
       ],
       "evidence": [
-        "pointer candidate",
-        "prologue candidate"
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -79228,14 +79214,14 @@
         287286
       ],
       "size": 56,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 287232,
       "body_rom_start": 287232,
       "body_rom_end": 287288,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 56,
       "referenced_literal_bytes": 0,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0804xxxx"
     },
     {
@@ -93026,13 +93012,13 @@
       "status": "candidate"
     },
     {
-      "name": "sub_0800AEE4",
+      "name": "resource_get_object",
       "rom_offset": 44772,
       "size": 80,
       "status": "mapped_code"
     },
     {
-      "name": "sub_0800AF34",
+      "name": "resource_set_object",
       "rom_offset": 44852,
       "size": 44,
       "status": "mapped_code"
@@ -95522,16 +95508,16 @@
       "status": "candidate"
     },
     {
-      "name": "sub_080140CC",
+      "name": "frame_create_palette_menu_actors",
       "rom_offset": 82124,
       "size": 396,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
-      "name": "sub_08014258",
+      "name": "frame_update_palette_menu_actor",
       "rom_offset": 82520,
       "size": 232,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08014340",
@@ -96980,16 +96966,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_0801A38C",
+      "name": "frame_select_optional_attachment_kinds_1a38c",
       "rom_offset": 107404,
-      "size": 38,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_01A3B2",
-      "rom_offset": 107442,
-      "size": 2,
-      "status": "unresolved"
+      "size": 40,
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A3B4",
@@ -100478,16 +100458,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_08028764",
+      "name": "frame_select_optional_attachment_kinds_28764",
       "rom_offset": 165732,
-      "size": 114,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_0287D6",
-      "rom_offset": 165846,
-      "size": 2,
-      "status": "unresolved"
+      "size": 116,
+      "status": "mapped_code"
     },
     {
       "name": "sub_080287D8",
@@ -101948,22 +101922,16 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0802F19C",
+      "name": "frame_need_effect_optional_two_ready",
       "rom_offset": 192924,
-      "size": 34,
-      "status": "candidate"
+      "size": 36,
+      "status": "mapped_code"
     },
     {
-      "name": "Unresolved_02F1BE",
-      "rom_offset": 192958,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_0802F1C0",
+      "name": "frame_need_effect_try_reset_timer",
       "rom_offset": 192960,
       "size": 76,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_gate_attachment_game_value",
@@ -101975,13 +101943,13 @@
       "name": "sub_0802F240",
       "rom_offset": 193088,
       "size": 56,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802F278",
       "rom_offset": 193144,
       "size": 56,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802F2B0",
@@ -102740,7 +102708,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_080333C4",
+      "name": "save_stream_write_auxiliary_fields",
       "rom_offset": 209860,
       "size": 96,
       "status": "mapped_code"
@@ -103496,16 +103464,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_08035C3C",
+      "name": "frame_select_optional_attachment_kinds_35c3c",
       "rom_offset": 220220,
-      "size": 90,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_035C96",
-      "rom_offset": 220310,
-      "size": 2,
-      "status": "unresolved"
+      "size": 92,
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035C98",
@@ -103568,7 +103530,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08035F2C",
+      "name": "save_stream_write_relation_values",
       "rom_offset": 220972,
       "size": 76,
       "status": "mapped_code"
@@ -104186,7 +104148,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_080383A4",
+      "name": "save_stream_write_world_fields",
       "rom_offset": 230308,
       "size": 104,
       "status": "mapped_code"
@@ -104702,10 +104664,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_0803A994",
+      "name": "frame_select_optional_attachment_kinds_3a994",
       "rom_offset": 240020,
       "size": 56,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803A9CC",
@@ -105290,7 +105252,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0803D198",
+      "name": "save_stream_write_six_value_words",
       "rom_offset": 250264,
       "size": 36,
       "status": "mapped_code"
@@ -106211,25 +106173,19 @@
       "name": "sub_08043348",
       "rom_offset": 275272,
       "size": 156,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080433E4",
       "rom_offset": 275428,
       "size": 172,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
-      "name": "sub_08043490",
+      "name": "frame_step_optional_activity_attachment_job",
       "rom_offset": 275600,
-      "size": 798,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_0437AE",
-      "rom_offset": 276398,
-      "size": 2,
-      "status": "unresolved"
+      "size": 800,
+      "status": "mapped_code"
     },
     {
       "name": "sub_080437B0",
@@ -106268,10 +106224,10 @@
       "status": "candidate"
     },
     {
-      "name": "sub_080438CC",
+      "name": "frame_dispatch_optional_activity_attachment_job",
       "rom_offset": 276684,
       "size": 216,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080439A4",
@@ -106289,7 +106245,7 @@
       "name": "sub_080439AC",
       "rom_offset": 276908,
       "size": 126,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_043A2A",
@@ -106778,16 +106734,10 @@
       "status": "candidate"
     },
     {
-      "name": "sub_08045328",
+      "name": "display_text_set_object_string",
       "rom_offset": 283432,
-      "size": 18,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_04533A",
-      "rom_offset": 283450,
-      "size": 2,
-      "status": "unresolved"
+      "size": 20,
+      "status": "mapped_code"
     },
     {
       "name": "frame_set_centered_integer_position",
@@ -107006,10 +106956,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_08046200",
+      "name": "frame_select_optional_attachment_kinds_46200",
       "rom_offset": 287232,
       "size": 56,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046238",
@@ -109600,7 +109550,7 @@
     "config/ram-map-us-eu.json": "723df744e6016ee7519f61c916a42bc9f11e1de4a0d6e2c314a76ff34a1451ec",
     "config/indirect-transfers-us-eu.json": "76ee665ee1931d5d3ad18353a9fcc913f02e549d965b7be5692240b46fd98d2e",
     "config/progress-regions-us-eu.json": "fd5ff50e29e7bd3e2605573d07458b7ea43e0e058f9922667d7d8e0987969067",
-    "config/build-us-eu.json": "e2dde7ad466447721c3012734c5b7cb740b11dc767bfc5f8eaee3e9ec41e4e2c",
+    "config/build-us-eu.json": "5dcc3d675406278c9d62fef55f3b19ddf20473c14551cfb5cc330be060f606aa",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c"
   }
 }

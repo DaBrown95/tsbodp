@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 70 C functions and 8,692 bytes:
+The connected route-search path reconstructs 79 C functions and 10,180 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -11,7 +11,8 @@ attachment-neighbor producer, and five allocation, seed-coordination and
 secondary-reader functions, followed by six bounded-output, signed-offset and
 threshold APIs, and the secondary threshold's optional need-effect/cue consumer
 plus its five parameter and retained-effect producers, parameter consumer and
-two attachment-job controllers and five connected selection/setup/dispatch/capacity callbacks.
+two attachment-job controllers and five connected selection/setup/dispatch/capacity callbacks,
+followed by six mode-two selection functions and a three-function optional activity path.
 Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
@@ -43,6 +44,15 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x18458` | `frame_begin_optional_attachment_job` | 72 |
 | `0x184A0` | `frame_dispatch_optional_attachment_job` | 44 |
 | `0x2F348` | `frame_check_optional_attachment_capacity` | 76 |
+| `0x2F19C` | `frame_need_effect_optional_two_ready` | 36 |
+| `0x1A38C` | `frame_select_optional_attachment_kinds_1a38c` | 40 |
+| `0x28764` | `frame_select_optional_attachment_kinds_28764` | 116 |
+| `0x35C3C` | `frame_select_optional_attachment_kinds_35c3c` | 92 |
+| `0x3A994` | `frame_select_optional_attachment_kinds_3a994` | 56 |
+| `0x46200` | `frame_select_optional_attachment_kinds_46200` | 56 |
+| `0x2F1C0` | `frame_need_effect_try_reset_timer` | 76 |
+| `0x43490` | `frame_step_optional_activity_attachment_job` | 800 |
+| `0x438CC` | `frame_dispatch_optional_activity_attachment_job` | 216 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
 | `0x355AC` | `frame_next_random_secondary_word` | 88 |
@@ -1030,3 +1040,91 @@ prototype header. Table-word search results, callback-copy evidence, raw
 comparisons and failed candidates remain in ignored reports; the ready batch
 is `frame-need-optional-dispatch-batch-manifest.json`. Other optional-mode
 predicates and the initial callback's callers remain useful connected targets.
+
+## Mode-two selectors and optional activity
+
+The 36-byte predicate at `0x2F19C` checks optional two and compares the signed
+parameter halfword with a full signed-word threshold. All five reconstructed
+direct selectors call it with 10,240, observe its low return byte and conditionally
+write attachment kind twelve. They return one rather than an output count;
+unwritten output bytes retain their old contents. Their writable buffer bounds
+are unknown, and the replacements introduce no terminator or clearing pass.
+
+| Selector | Other observed output selection |
+| --- | --- |
+| `0x1A38C` | Kinds 60 and 23, followed by optional twelve |
+| `0x28764` | Optional-one ready selects 45; otherwise periods zero/one/two select 33 followed by 28/32/30, while period three writes 31 |
+| `0x35C3C` | Optional-one ready selects 45; otherwise periods zero through two select 33 and period three selects 31 |
+| `0x3A994` | Optional-one ready selects 45; otherwise 53 |
+| `0x46200` | Optional-one ready selects 45; otherwise 59 |
+
+The first period selector leaves its append index zero on the period-three
+path, so optional twelve overwrites the 31 it just wrote. This observed behavior
+is preserved. The other period selector retains its explicit default-zero
+branch even though the accepted period helper returns zero through three.
+The clock pointer is the established view at `0x03003958`. Pointer-word searches
+place all five selectors at observed definition `+4` positions, copied to
+state `+0xE8` by the accepted allocator. The names retain address suffixes where
+the broader object role is uncertain; arithmetic row positions do not define
+the complete table's extent. For the 53/59 selectors, advancing the count in
+each branch reproduces the original register lifetime naturally. An equivalent
+single count initialization produced a 52-byte candidate instead of 56 and
+remains excluded. No register constraints are needed.
+
+The 76-byte helper at `0x2F1C0` proceeds only when enabled and the actor equals
+the established player pointer. It calls the primary chance API with fifteen
+minus signed parameter zero, narrowed to the API's unsigned halfword. The
+accepted parameter reader returns a signed byte promoted to a word, so this
+subtraction itself has a bounded domain. Success clears the associated
+object's word at `+0x58`, using the existing need-effect timer view. The name
+describes that observed store; timer units, object ownership and the original
+return declaration remain provisional. Its caller explicitly observes a byte
+result.
+
+The 800-byte controller at `0x43490` connects the helper to need updates,
+conditions, animation, samples and the published optional producers. A record
+byte `+0x0C` equal to one first forces phase one. Phase zero faces the actor
+opposite the associated object and enters phase six. When condition `(0,4,0)`
+is complete, kinds 28/30/32 gate game value 20 or 40 and, on success, call the
+optional predicate and increment producer; kinds 31/33 gate ten or twenty.
+The larger amounts apply in world 28. A failed gate requests animation five,
+plays cue 86 or 85 and enters phase eight, which waits for the animation flag
+before requesting phase one. The inline failure helper is ordinary semantic
+C shared by those branches.
+
+Phase six requests animation 61, publishes need-effect state three, plays cue
+166, sets the actor's halfword countdown to 300 and enters phase 54. That phase
+plays cue 22 when the old countdown's low five bits are zero and decrements it.
+At its 65,535 underflow sentinel, a failed timer-reset attempt enters phase 25,
+sets 150, starts animation 23/cue 20 and publishes need-effect state zero.
+Success instead starts optional three and enters phase nine. Phase 25 adjusts
+need seven by the definition's byte `+35`; its timeout enters phase nine and
+sets triple `(0,1,0)`. Phase nine requests phase one for a later invocation.
+Phase one stops the saved sample, publishes state zero, requests animation one
+and returns two. Phase ten can also return two on the animation flag without
+that cleanup sequence. Other paths return one. These distinct completion paths
+and the halfword wrap are preserved rather than treated as one generic exit.
+
+The controller's unsigned phase switch retains eight explicit cases in the
+observed zero-through-54 jump-table range; other phases take the original
+default path. Its nested kind switch covers 28 through 33, with 29 falling
+through without work. Ordering source cases ten before nine closed the last
+24 differing bytes in the initial natural-C candidate. The complete extent
+includes generated switch tables, literals and tail alignment, without embedded
+instruction bodies or comparison masks.
+
+The 216-byte direct dispatcher at `0x438CC` obtains an unchecked attachment
+record. Kinds 28/30/31/32 enter the new controller; twelve, 45 and 22 retain
+explicit original handlers at `0x43348`, `0x433E4` and `0x439AC`. Other kinds
+return zero. Its complete 12-through-45 switch table matches. This wrapper
+does not pass kind 33, although the controller preserves that original nested
+case; no runtime-unreachability conclusion follows from this one caller.
+
+All nine complete extents match ordinary C and reject real controls. Eight
+previously accepted optional job/callback consumers remain exact with their
+controls under the current shared headers. Raw branch/table evidence, source
+snapshots and failed candidates remain in ignored reports; ready metadata is
+`frame-need-optional-selection-batch-manifest.json`. The three original
+dispatcher children and callers of the initial definition callbacks are next
+connected targets. Runtime actor, output-buffer, sample and cancellation
+validity remain untested.

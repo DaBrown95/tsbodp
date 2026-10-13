@@ -6,7 +6,7 @@ void frame_remove_object(struct FrameObject *object)
             object->on_remove(object);
         frame_release_object_palette(object);
         if ((int)object->flags < 0)
-            frame_drop_owner(0, object->owner_id, object->owner_slot);
+            resource_set_object(0, object->owner_id, object->owner_slot);
         object->id |= 0xffff;
         if (object->display_mode == 1 || object->display_mode == 3)
             frame_destroy_affine(object);

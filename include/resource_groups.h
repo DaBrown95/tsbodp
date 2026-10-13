@@ -22,6 +22,7 @@ extern unsigned char resource_group_is_enabled(unsigned char);
 extern void resource_spawn_group(unsigned char);
 extern void resource_execute_group(unsigned char);
 extern void resource_activate_groups(unsigned char,unsigned char);
-extern struct FrameObject *resource_get_object(unsigned char,unsigned char);
+extern struct FrameObject *resource_get_object(unsigned int,unsigned int);
+extern void resource_set_object(struct FrameObject *,unsigned char,unsigned char);
 extern unsigned short resource_group_object_count(unsigned char);
 #endif

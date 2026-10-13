@@ -107,7 +107,7 @@ void frame_project_point(struct FramePoint *, struct FramePoint *);
 
 extern FrameU8 g_frame_release_immediately;
 void frame_release_object_palette(struct FrameObject *);
-void frame_drop_owner(int, FrameU8, FrameU8);
+void resource_set_object(struct FrameObject *, FrameU8, FrameU8);
 void frame_destroy_affine(struct FrameObject *);
 void frame_recycle_object(struct FrameObject **, struct FrameObjectList *, struct FrameObject *);
 

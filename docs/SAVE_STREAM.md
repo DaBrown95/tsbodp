@@ -2,8 +2,8 @@
 
 The reconstructed path connects the published menu-choice and actor-need
 save/load callers to a shared byte/bit cursor, record views, slot transfers,
-header initialization and audio/display-status handoff. It has 31 matching C
-functions covering 2,308 bytes. Each full extent, pool and alignment was linked
+header initialization and audio/display-status handoff. It has 35 matching C
+functions covering 2,620 bytes. Each full extent, pool and alignment was linked
 at its original ROM address and compared with the fixed reference. Each also
 has a compiled changed-source control. These are static and compiler results;
 no runtime save/load or EEPROM compatibility claim is made.
@@ -80,7 +80,7 @@ in `r5` and the high-nibble scalar in `r1`. They are actual algorithm values and
 are not live across function calls. The cursor is four bytes before the bit
 position in the observed eight-byte view. Its inline low-nibble reader is a
 semantic byte accessor. There are no original instruction-body transcriptions,
-output patches or comparison masks. The other 30 functions use ordinary C.
+output patches or comparison masks. The other 34 functions use ordinary C.
 
 Function boundaries include return paths, referenced literal pools and alignment
 up to the next mapped entry. The checksum's instruction body is 34 bytes and its
@@ -120,7 +120,7 @@ bit of a 56-byte row at `0x03004130`. This overlaps the published input and
 clock-selection views; it does not establish a separate allocation or table
 bound. One-bit fields at world `+0x747/+0x749`, byte fields at
 `+0x741/+0x742/+0x746/+0x726/+0x72E`, and a halfword at `+0x744` follow. After
-three retained unconverted module serializers and two accepted serializers, it
+one retained unconverted module serializer and four accepted serializers, it
 writes byte `+0x740`. Their content roles remain provisional.
 
 The connected 128-byte record producer at `0x08031F7C` writes its first sixteen
@@ -129,7 +129,18 @@ bytes, two pairs and six nibbles, then invokes child serializers at offsets
 `frame_save_actor_needs` at `0x0802B958`, which writes the shifted high halves
 of eight values from its 32-byte input span. The partial source view covers
 that observed span through `+0xBF`; it does not establish the complete record
-size. The `+0x20/+0x88` child bodies remain unconverted. The 28-byte child at
+size. The `+0x20` child at `0x08035F2C` traverses the already-established
+104-byte relation-values view in three passes: 24 signed value bytes, 24 flag
+nibbles and 24 first bytes from each record's retained delay area as nibbles.
+The source uses the existing four-byte relation-record layout without changing
+its neutral field names. The `+0x88` child at `0x0803D198` takes six signed
+words, shifts each arithmetically by sixteen and writes its two low bytes.
+This establishes a 24-byte input span; the original value roles remain
+provisional. These two child extents are 76 and 36 bytes including alignment,
+with ordinary C and compiled changed-source controls. The typed child views
+preserve offsets `+0x20/+0x88/+0xA0` and the observed span through `+0xBF`.
+All 71 existing save-header consumers were rechecked after that refinement.
+The 28-byte child at
 `0x08032020` writes five nibble values at `+2` before the value at `+0`. The
 32-byte module at `0x080293A0` writes eight nibbles at `0x03004085` followed by
 one byte. The 52-byte module at `0x08010AE0` writes four words at
@@ -143,3 +154,24 @@ eight-byte selector view at `0x03005DC4`, with subsequent records forty bytes
 apart. This is shared storage used by actor-group selection, not a new buffer.
 The accepted transfer/record view and the separate selector view retain the
 same addresses and strides.
+
+## Remaining world-field transfer branches
+
+The direct producer at `0x080383A4` snapshots halfwords at world
+`+0x426/+0x42A` into local halfwords, writes the bit at `+0x42E`, the nibble at
+`+0x42D` and the byte at `+0x42C`, then writes both captured halfwords. Its
+104-byte extent includes alignment and four literal words. The second branch
+at `0x080333C4` writes bytes at `0x03003D8E/0x03003D8D/0x03003D8C`, captures
+halfwords at `0x03003D82/0x03003D86`, writes those local halfwords and finally
+captures and writes the byte at `0x03003D8B`. Its extent is 96 bytes.
+
+Both use bounded prefix structures and shared semantic inline accessors. The
+auxiliary byte cursor starts inside the full declared partial object, so its
+backward offsets stay within that representation. These source views overlap
+the established world RAM: `g_save_world_fields` starts at `0x03003950` and
+`g_save_auxiliary_fields` at `0x03003D80`. The field names describe observed
+storage and transfer order; their gameplay roles and full owning allocation
+are unknown. Both ordinary C sources match their full original extents and
+their real changed-source controls reject. The main producer's two call aliases
+now use those canonical interfaces. All 71 pre-existing save-header consumers
+were rebuilt with their controls against the final shared header closure.

@@ -27,8 +27,8 @@ void save_stream_serialize_game_state(void)
     frame_write_save_value(&g_save_world_event, 1);
     save_world_write_module_29d18();
     save_stream_write_nibble_state();
-    save_world_write_module_383a4();
-    save_world_write_module_333c4();
+    save_stream_write_world_fields();
+    save_stream_write_auxiliary_fields();
     save_stream_write_flag_words();
     frame_write_save_value(&world->byte740, 1);
 }
