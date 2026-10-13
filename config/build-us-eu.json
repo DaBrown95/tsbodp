@@ -19188,6 +19188,54 @@
         "after": "value * 100"
       },
       "source": "src/frame/frame_random_chance.c"
+    },
+    {
+      "name": "frame_random_signed_offset",
+      "rom_offset": 218228,
+      "size": 44,
+      "symbols": {
+        "frame_next_random_word": "0x0803555d"
+      },
+      "thumb_symbols": [
+        "frame_next_random_word"
+      ],
+      "negative_control": {
+        "before": "radius * 2 + 1",
+        "after": "radius * 3 + 1"
+      },
+      "source": "src/frame/frame_random_signed_offset.c"
+    },
+    {
+      "name": "frame_random_secondary_signed_offset",
+      "rom_offset": 218272,
+      "size": 44,
+      "symbols": {
+        "frame_next_random_secondary_word": "0x080355ad"
+      },
+      "thumb_symbols": [
+        "frame_next_random_secondary_word"
+      ],
+      "negative_control": {
+        "before": "radius * 2 + 1",
+        "after": "radius * 3 + 1"
+      },
+      "source": "src/frame/frame_random_secondary_signed_offset.c"
+    },
+    {
+      "name": "frame_random_secondary_chance",
+      "rom_offset": 218360,
+      "size": 44,
+      "symbols": {
+        "frame_next_random_secondary_word": "0x080355ad"
+      },
+      "thumb_symbols": [
+        "frame_next_random_secondary_word"
+      ],
+      "negative_control": {
+        "before": "value * 101",
+        "after": "value * 100"
+      },
+      "source": "src/frame/frame_random_secondary_chance.c"
     }
   ],
   "assembly": [

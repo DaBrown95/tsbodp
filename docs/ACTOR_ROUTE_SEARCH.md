@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 52 C functions and 6,608 bytes:
+The connected route-search path reconstructs 55 C functions and 6,740 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -8,7 +8,8 @@ and six further variant/job-73 and shared value/random functions, followed by
 the nine-function variant controller and parameter-indicator closure, and its
 three-function random refill/seed/reader dependency, its adjoining
 attachment-neighbor producer, and five allocation, seed-coordination and
-secondary-reader functions, followed by three bounded-output and threshold APIs.
+secondary-reader functions, followed by six bounded-output, signed-offset and
+threshold APIs.
 Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
@@ -24,7 +25,10 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x35404` | `frame_random_secondary_range` | 40 |
 | `0x3542C` | `frame_random_bounded` | 36 |
 | `0x35450` | `game_random_inclusive` | 36 |
+| `0x35474` | `frame_random_signed_offset` | 44 |
+| `0x354A0` | `frame_random_secondary_signed_offset` | 44 |
 | `0x354CC` | `frame_random_chance` | 44 |
+| `0x354F8` | `frame_random_secondary_chance` | 44 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
 | `0x355AC` | `frame_next_random_secondary_word` | 88 |
@@ -706,6 +710,11 @@ inside the observed 625-word allocation, but its initialization and intended
 content have not been established. The source preserves the original counter
 and allocation; no fabricated writer or default value closes this gap. Allocation
 ordering, reader preconditions and runtime behavior remain separate questions.
+The matching allocator alias at `0x27864` is the ordinary heap allocator: its
+shared first-fit allocation body splits and unlinks blocks without clearing
+payload memory. That rules out automatic zeroing by this inspected allocation
+path as an explanation for the extra word; it does not establish another writer
+or its runtime contents.
 
 All five full extents match. Controls alter allocation size 2,500 to 2,496,
 refresh divisor `0xFFF1F` to `0xFFF1E`, seed/secondary remaining 623 to 622, and
@@ -760,3 +769,43 @@ Private widened-header comparisons, canonical positives and controls, source
 bundles and useful failures are retained under ignored `secondary-rng-1791885100/`;
 the integration manifest is `frame-random-api-batch-manifest.json`. Whole-ROM
 equality and gameplay behavior remain separate claims.
+
+## Paired signed-offset and secondary threshold functions
+
+Three further direct reader consumers close the adjoining 88-byte offset gap
+and the 44-byte secondary threshold wrapper. Each signed-offset function first
+narrows its formal argument to unsigned 16 bits, retains that value through the
+reader call, then interprets it as a signed 16-bit radius. It scales the masked
+low-fifteen-bit sample by twice that radius plus one using unsigned word
+multiplication and a logical right shift, subtracts the radius, and narrows the
+result to signed 16 bits. The name describes the observed signed output. Valid
+radius bounds, intended range and distribution are not established for arbitrary
+16-bit inputs. The two functions use the already matched primary and secondary
+readers respectively.
+
+The source retains a mutable word-sized radius until after the call, then applies
+the signed narrowing. This natural C lifetime matches both complete 44-byte
+extents without register constraints. A separately initialized short variable
+gave 44 bytes with 20 differences because the compiler fused sign extension
+with doubling and kept the original unsigned limit for the final subtraction.
+Unsigned word multiplication and final short narrowing preserve the observed
+machine arithmetic; the target's signed conversion rules remain part of the
+pinned compiler profile.
+
+The secondary threshold wrapper uses the same inclusive 0 through 100 comparison
+as the primary predicate and advances the secondary reader. Its mapped direct
+caller at `0x2E688` remains unconverted; no gameplay role is inferred from that
+connection. No mapped direct caller of either signed-offset function was found
+in the inspected inventory, whose coverage is incomplete. The paired reader and
+adjacent API structure supply the static subsystem boundary, rather than a claim
+that every wrapper is used during gameplay.
+
+All three sources use ordinary C, match their full extents and reject real
+controls. Radius scaling two to three produces 48-byte candidates with 22
+compared differences; threshold multiplier 101 to 100 differs by one byte.
+All 197 existing random-header consumers, spanning 37,852 bytes, remain exact
+and reject their actual source controls under the extended header.
+Complete raw proofs, the initial type/lifetime failures and source snapshots
+remain under ignored `secondary-rng-1791885100/`; ready integration metadata is
+`frame-random-paired-batch-manifest.json`. The unresolved extra secondary state
+word and runtime behavior remain unchanged questions.

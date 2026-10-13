@@ -26,5 +26,9 @@ unsigned short frame_random_bounded(unsigned short);
 unsigned int game_random_inclusive(unsigned short);
 /* Inclusive threshold sample0..100; this is not a probability-quality claim. */
 unsigned char frame_random_chance(unsigned short);
+/* The limit enters unsigned16, then the offset radius is interpreted signed16. */
+short frame_random_signed_offset(unsigned short);
+short frame_random_secondary_signed_offset(unsigned short);
+unsigned char frame_random_secondary_chance(unsigned short);
 
 #endif
