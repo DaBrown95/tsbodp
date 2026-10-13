@@ -38,11 +38,11 @@ void scene_initialize(void) {
  g_scene_context.resource=scene_lookup_resource(g_scene_world_state);
  display_load_palette(scene_palette_source(),0,256);
  g_palette_range_enabled_mask=0;
- scene_load_definition(g_scene_id);
+ frame_load_scene_map_resources(g_scene_id);
  if(!g_scene_request.mode) {
   g_scene_world_state[0x736]=0;
   scene_stage_0802cd90();
-  scene_stage_08026520(g_scene_id);
+  frame_initialize_scene_actors(g_scene_id);
   scene_stage_08037444();
   if((g_scene_context.flags&1) && g_scene_id<=14) background_animation_load(1);
  } else if(g_scene_request.mode==2) {

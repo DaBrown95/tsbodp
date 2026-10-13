@@ -4,7 +4,7 @@
 #include "display_text_resource.h"
 /* Partial catalog/state views inferred from observed word and byte accesses. */
 struct DisplayCatalogItem {
-    unsigned int id, unknown_04, text_id, category, unknown_10, description;
+    unsigned int id, unknown_04, text_id, category, unknown_10, number_value;
 };
 struct DisplayCatalogType {
     unsigned char unknown_00[2], type, unknown_03;

@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 100 C functions spanning 18,528 verified bytes. The
+This batch reconstructs 113 C functions spanning 20,540 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,19 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x6874` | `frame_actor_state_46` | 468 |
+| `0x9E40` | `frame_actor_state_31_32_33` | 364 |
+| `0xA030` | `frame_find_pending_action` | 116 |
+| `0xA1C8` | `frame_actor_show_action_failure` | 144 |
+| `0x2E0B8` | `frame_actor_use_target` | 56 |
+| `0x8CFC` | `frame_actor_route_to_target` | 124 |
+| `0x166C` | `frame_attach_actor` | 76 |
+| `0x16B8` | `frame_detach_actor` | 36 |
+| `0x1A64` | `frame_count_actor_attachments` | 40 |
+| `0x5B00` | `frame_actor_state_17` | 160 |
+| `0x8504` | `frame_actor_state_39` | 188 |
+| `0x2EE78` | `frame_finish_actor_attachment` | 64 |
+| `0x2E41C` | `frame_actor_attachment_status` | 176 |
 | `0x38090` | `frame_create_speed_exit_actor` | 216 |
 | `0x3845C` | `frame_speed_exit_tick` | 32 |
 | `0x3847C` | `frame_speed_exit_interact` | 120 |
@@ -425,8 +438,8 @@ connects wandering and accepted route outcomes to terrain refresh, paired
 animations 70 and 93–95, the view actor's indicator and an outer-state-47 handoff.
 An expired waiting phase selects a new walk direction even after switching back
 to substate 7; the shared random-delay tail establishes this otherwise easy-to-
-miss call. All no-op table entries remain explicit. Its call to state 46 stays
-an unconverted dependency, and no paired-animation gameplay behaviour is
+miss call. All no-op table entries remain explicit. Its call to state 46 now
+joins the matching relation/facing/audio handoff below; no paired-animation gameplay behaviour is
 claimed from the compiler match.
 
 State 42 connects attachment coordinates, input-driven movement and view-effect
@@ -720,6 +733,116 @@ meaning of this activity remain inferred rather than established by gameplay.
 Controls alter factory flags, the callback state test, interacting actor ID and
 the return timer. All four reject with one differing byte.
 
+## Actor attachments, target callbacks and completion
+
+Seven ordinary-C functions add 740 bytes and connect handlers 17 and 39. The
+registrar `0x166C` fills the first free pointer among the two slots at object
+`+0x138/+0x13C`. It switches outer state to 17 and marks pending bit 1 only when
+the state differed. A full pair returns zero. Removal `0x16B8` clears the first
+matching pointer, and the byte counter `0x1A64` counts non-null slots. These
+fields are a bounded overlapping view rather than a claim that all actor kinds
+share one complete structure. A semantic inline state setter and explicit
+32-bit base/index arithmetic reproduce the compiler's loop lifetimes without
+fixed-register constraints. Earlier differently grouped loops remain local.
+
+Handler 17 polls each non-null attachment through `0x2E41C`; returns 2 and 0
+remove that slot. With no attachments and outer state other than 23, it requests
+animation 1, restores the default outer state, selects substate 2 and snaps the
+next-position coordinates through the canonical grid-center helper. The fixed
+and integer conversion calls and the ignored grid helper result are retained.
+Handler 39 waits for route status 2, cancels failed status 3 and processes status
+1 through the action-target selector. The target's owner pointer at `+0x64`
+provides callbacks at owner `+0xE4` and `+0xF0`, returning bytes; the second receives
+the actor's mode byte at `+0x6A`. Accepted callbacks register the owner attachment
+and select substate 41; rejection selects 19, which restores the default state.
+The compiled calls use the existing register-call veneers explicitly declared in
+metadata. Possible callback targets remain unresolved static transfers.
+
+The status helper's owner view contains three twenty-four-byte records at `+0x0C`.
+Each record names an actor pointer, timer `+8`, running byte `+0x0C` and status
+word `+0x10`. Status 2 clears running and returns 1; status 3 clears running,
+finishes the actor and returns 2; status 1 cancels its route and returns 1. Other
+values invoke the full-word callback at owner `+0xF4`. A return of 0 or 2 clears
+the matching record's actor and sets its timer to 94. The initial search's null
+result is dereferenced without a guard in the original path, so a matching owner
+record is an original caller invariant, not a new safety or runtime claim.
+Completion `0x2EE78` selects outer state 23 / substate 0 for actor ID 0, otherwise
+its default outer state / substate 7, then cancels the route.
+
+Full extents include the original zero alignment. Real controls change the new
+outer state, removed pointer, count increment, state-17 exception, state-39
+substate, primary actor ID and record timer. All reject; their differing-byte
+counts are 2, 9, 1, 1, 1, 1 and 1 respectively. The entry/record roles and callback
+names describe these static handoffs; their gameplay meaning is still provisional.
+
+## Queued choices and routes for states 31/32/33
+
+The combined handler at `0x9E40` and four connected helpers add 804 ordinary-C
+bytes. Substate 2 consumes pending choices using the category byte selected by
+actor ID. Accepted owner callbacks enter the target route and set actor byte
+`+0x64`; actor ID 4 also requests cue 51. A failed choice scan calls the still
+unconverted world-choice cleanup routine, marks that byte when cleanup succeeds
+and shows a failure request only when it remains zero. Actor subtype 4 finds
+object ID 5 / subtype 50, performs the retained integer conversion and attempts
+a route to its position; successful routes enter substate 71, and failed or
+finished routes enter outer state 43 / substate 0. Other subtypes apply the
+negative penalty from the six-word row indexed by game stage and actor ID,
+request cue 5 and enter outer state 34 / substate 0. Substate 7 re-enters 2.
+
+The 116-byte lookup walks the next pointers at list-head base `0x03005868`,
+caching the next node before inspecting the action byte at `+0x5C`. Category 1
+accepts codes 12 or 27; category 2 accepts 45; category 3 accepts 22. A match
+writes the action as a word, clears its pending byte and returns the target
+pointer at node `+0x54`. No match returns zero. The larger cleanup at `0xA0A4`
+also touches serialized world records, but remains an explicit unconverted
+extent; its best failed candidate and raw comparisons receive no C credit.
+
+The previously canonical `frame_actor_use_target` alias is retained at `0x2E0B8`:
+its first argument is the choice target and its second is the actor. It accepts
+only owner callback `+0xE4` return byte 1, then calls the new route helper at
+`0x8CFC` with actor first. That helper requests a target cell through `0x3B75C`,
+converts the cell to a point and then to fixed coordinates, starts the route,
+selects substate 3 / outer state 39, requests animation 6 and saves the action
+byte at `+0x6A`. The route-start result is intentionally ignored, matching the
+original handoff. The target-cell search remains a separate unconverted boundary.
+The failure helper assigns request IDs 502, 503, 501 or 500 by subtype, creates
+scene object 193 with definitions 263–265 for subtypes 0, 2 and 3 and activates
+the scene request. Subtype 4 assigns ID 501 without creating a new object.
+
+All five complete extents and pools match current headers. Real controls change
+cue 51, accepted action code 45, failure request ID 503, callback acceptance value
+1 and routed substate 3; their differing-byte counts are 1, 1, 17, 1 and 1.
+The category labels, target search roles and failure names describe static code
+relationships rather than established gameplay identities.
+
+## State 46 relation, facing and audio handoff
+
+State 46 joins the first player's position, a distance threshold, facing,
+relation records, animation and audio. It saves the actor subtype before calls
+that may change actor state, then reloads the current halfword only after the
+distance, flag and object-ID guards pass. The positive-relation branch compares
+the widened current value; the negative branch explicitly narrows its separate
+copy. The saved subtype remains a full unsigned word for the adjacent-ID test.
+Keeping these widths and lifetimes separate closes the complete 468-byte extent,
+including its three literal pools and zero alignment.
+
+The partial relation view reads a signed byte at game-state `+0x39`, with stride
+four and index `actor_id-18`. The ROM descriptor at `0x080612A4` has stride 44,
+a cue-record pointer at `+0x20` and a variant byte at `+0x25`; the positive branch
+reads cue word seven. The negative branch chooses among cues 138, 139, 147 and
+148. These layouts follow the loads and address arithmetic; their relation and
+greeting names remain provisional. Bounds and unchecked indexing are preserved.
+
+Three local register bindings preserve the late-loaded halfword, its distinct
+negative-branch copy and the unsigned narrowing intermediate. They express C
+value lifetimes and conversion; no instruction bodies are embedded. Ordinary
+cast/helper variants remain locally with their raw mismatches. The canonical
+positive matches all bytes; changing timer 60 to 61 rejects one byte. Private
+evidence is retained under `reports/audio-root/actor46-canonical/` and the
+`actor46-load-lifetimes`, `actor46-copy-aliases` and `actor46-minimize` trials.
+This closes all directly dispatched handler bodies as matching C, without a
+runtime or gameplay claim.
+
 ## Local proofs and remaining boundaries
 
 Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`,
@@ -733,11 +856,13 @@ Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manif
 `reports/agents/vblank-wrapper/actor-idle-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-distance-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-effect-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-speed-exit-batch-manifest.json`.
+`reports/agents/vblank-wrapper/actor-speed-exit-batch-manifest.json`
+`reports/agents/vblank-wrapper/actor-attachment-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-choice-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
 `actor-state-route-types13-*`, `actor-route-path-layout13-*` and
 `actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` and `actor-interaction-current2-*` and `actor-actions-canonical7-*` and `actor-carry-canonical5-*` and
-`actor-carry-shared-layout6-*`, `actor-idle-canonical12-*`, `actor-distance-canonical4-*` and `actor-distance-word-return1-*`, `actor-effect-canonical9-*`, `actor-effect-speed-canonical14-*`, `actor-pool-header-shared1-*` and `actor-speed-exit-canonical4-*` in the same ignored
+`actor-carry-shared-layout6-*`, `actor-idle-canonical12-*`, `actor-distance-canonical4-*` and `actor-distance-word-return1-*`, `actor-effect-canonical9-*`, `actor-effect-speed-canonical14-*`, `actor-pool-header-shared1-*`, `actor-speed-exit-canonical4-*`, `actor-attachment-canonical7-*` and `actor-choice-canonical5-*` in the same ignored
 agent report tree. Original CFG scans and all 29 handler entry summaries remain
 local. Mutations change the dispatcher flags, animation IDs, countdown, wait
 factor, direction update flag, group offset, record stride, state target, point
@@ -748,16 +873,11 @@ centered-width divisor, velocity arithmetic, move countdown, social countdown,
 value-reader field, terrain class, option ID range, condition action ID, descriptor lookup bound, action notification ID,
 game-value ceiling, parameter level bound, state-41 animation ID, sequence mode and state-42 cue threshold, effect flags, completion mode and state-43 countdown and state-47 bound adjustment.
 
-Twenty-five of the 29 direct handler functions are reconstructed here. Useful next
+All 29 direct handler functions are reconstructed here. Useful next
 connected targets are the need target selector `0x6F20`, action-target selector
-`0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`. State 46
-(`0x6874`) is a retained near-match joining proximity, relation values, facing,
-animation and audio; its inferred relation/descriptor layouts still need matching
-confirmation. Camera-margin predicate `0x67E0` and terrain query `0x2ABB0` remain connected
-next targets. State 17 (`0x5B00`) follows two attachment slots; state 39 (`0x8504`) connects
-target callbacks and route completion; and the combined state 31/32/33 handler
-(`0x9E40`) connects action targeting and resource choices. The scanned CFGs for
-those retained candidates are
-closed; those scans alone do not establish C coverage, final function boundaries
+`0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`.
+Camera-margin predicate `0x67E0` and terrain query `0x2ABB0` remain connected
+next targets. World-choice cleanup `0xA0A4` and target-cell search `0x3B75C` are additional
+connected next targets. The retained CFGs are closed; those scans alone do not establish C coverage, final function boundaries
 or runtime reachability. These bodies remain explicit unconverted ROM regions
 in the full build.

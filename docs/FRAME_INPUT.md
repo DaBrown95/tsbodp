@@ -1076,3 +1076,45 @@ evidence for the two axes; the upper bytes remain unspecified. The inverse
 projection and point-to-cell converter themselves remain unconverted. These
 are compiler and static data findings, not runtime assertions about pathfinding
 or complete map input coverage.
+
+The scene actor/view initializer `frame_initialize_scene_actors` at `0x26520`
+adds one exact 400-byte C extent, including its first literal island and final
+pool. It normalizes a zero or single-player count to one, clears the local
+player index, prepares the selected serialized resource groups, and resets
+and configures each player view. It then spawns and executes group zero and,
+when the resource-group flag permits it, group one. Its remaining calls consume
+the saved scene-entry record, install the primary actor pointer, conditionally
+create a scene exit and restore the selected actor at the recorded spawn.
+Several called scene-entry and actor-selection helpers remain unconverted;
+this match establishes the coordinating code rather than complete actor setup.
+
+The accepted source uses an eight-byte `FramePoint` by value for the view
+configuration call at `0xE9E8`. The original caller loads the two consecutive
+ROM words at `0x08053504` into argument registers one and two and the view byte
+into register three. This aggregate argument preserves those loads inside the
+player loop; the earlier four-scalar declaration allowed the compiler to hoist
+the ROM pointer, changed register lifetimes and produced a nonmatching
+404-byte candidate. The declaration is corrected in `transition_object.h`.
+The unconverted window-transition candidate was updated to the same signature
+and recompiled, but still differs and receives no coverage. No accepted direct
+caller of that declaration required a behavior change.
+
+`FrameSceneEntrySnapshot` is a partial view rooted at `0x03003A2C`, with saved
+position words at `+0x348/+0x34C`, world byte at `+0x350` and exit flag at
+`+0x352`. `FrameSceneActorSelection`, rooted at `0x03003950`, has position
+words at `+0x430/+0x434`, world byte at `+0x43C` and selected actor byte at
+`+0x740`. The last offset follows the observed `232 << 3` address calculation;
+it is distinct from the previously inspected actor selector at `+0x748`.
+These overlapping game-state views and names remain provisional. The source
+keeps the explicit unset-actor value 42, byte-sized helper result comparisons
+against one, and state 24/variant state two assigned after construction.
+
+Final full-byte and changed-state controls are retained in
+`camera-map/scene-actors-promoted/`; changing state 24 to 25 rejects the match.
+The accepted `scene_initialize` caller now uses the established
+`frame_load_scene_map_resources` and `frame_initialize_scene_actors` names at
+the same addresses. Its 808-byte extent remains exact and its actual existing
+control still rejects. The older arena/group loader candidate at `0xAD1C` was
+inspected before extending it; it remains unconverted under the provisional
+name `resource_prepare`. The initializer's compiler match and the static
+argument/layout evidence do not establish runtime actor selection or gameplay.

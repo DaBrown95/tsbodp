@@ -11,7 +11,7 @@ unsigned char display_scene_next_group(void)
     display_scene_stage_0800f034(0);
     g_display_scene_byte2 = 0;
     display_scene_stage_0800f478();
-    display_scene_stage_0800ef2c(0);
+    display_scene_redraw_details(0);
     audio_play_animation_cue(0);
     return 1;
 }

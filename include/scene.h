@@ -19,7 +19,7 @@ extern void scene_stage_0803e3a8(void), scene_stage_08026b24(void), scene_stage_
 extern void *scene_lookup_resource(void *);
 extern void *scene_palette_source(void);
 extern void display_load_palette(const void *, unsigned int, unsigned int);
-extern void scene_load_definition(unsigned int), scene_stage_0802cd90(void), scene_stage_08026520(unsigned int), scene_stage_08037444(void);
+extern void frame_load_scene_map_resources(unsigned int), scene_stage_0802cd90(void), frame_initialize_scene_actors(unsigned int), scene_stage_08037444(void);
 extern void display_configure_tile_allocation(unsigned char), display_reset_tile_allocation(void);
 extern void scene_stage_0800125c(void), scene_stage_080012dc(void), scene_stage_08001298(unsigned int), scene_stage_08000b78(void);
 extern void scene_copy_palette_alternate(const void *, unsigned int, unsigned int), scene_stage_08009e18(void);

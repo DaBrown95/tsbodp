@@ -46,7 +46,7 @@ void display_update_scrolling_scene(void)
                 --state->parameter;
                 g_display_scene_owner_link.owner->id = 0xb8 + state->parameter;
                 frame_set_variant_state((void *)g_display_scene_owner_link.owner, 0x3a);
-                display_scene_stage_0800ef2c(g_display_scene_byte2);
+                display_scene_redraw_details(g_display_scene_byte2);
                 audio_play_animation_cue(0);
             }
         } else if (g_input_pressed[g_input_config.local_player] & 0x10) {
@@ -54,14 +54,14 @@ void display_update_scrolling_scene(void)
                 ++state->parameter;
                 g_display_scene_owner_link.owner->id = 0xb8 + state->parameter;
                 frame_set_variant_state((void *)g_display_scene_owner_link.owner, 0x3a);
-                display_scene_stage_0800ef2c(g_display_scene_byte2);
+                display_scene_redraw_details(g_display_scene_byte2);
                 audio_play_animation_cue(0);
             }
         } else if (g_input_pressed[g_input_config.local_player] & 0x40) {
             if (g_display_scene_byte2) {
                 --g_display_scene_byte2;
                 display_scene_stage_0800f034(g_display_scene_byte2);
-                display_scene_stage_0800ef2c(g_display_scene_byte2);
+                display_scene_redraw_details(g_display_scene_byte2);
                 audio_play_animation_cue(0);
                 display_scene_stage_0800f478();
             } else
@@ -73,7 +73,7 @@ void display_update_scrolling_scene(void)
             if (page < limit) {
                 g_display_scene_byte2 = page + 1;
                 display_scene_stage_0800f034(g_display_scene_byte2);
-                display_scene_stage_0800ef2c(g_display_scene_byte2);
+                display_scene_redraw_details(g_display_scene_byte2);
                 audio_play_animation_cue(0);
                 display_scene_stage_0800f478();
             } else
@@ -101,7 +101,7 @@ change_selection_mode:
                 g_display_scene_byte0 = 0;
                 display_scene_stage_0800f034(0);
                 display_scene_stage_0800f478();
-                display_scene_stage_0800ef2c(0);
+                display_scene_redraw_details(0);
             } else {
                 g_display_scene_request_state.unknown_10 = 1;
                 g_display_scene_owner_link.first_owner->flags |= 1;

@@ -490,13 +490,60 @@ first four arguments and the final style argument to the reconstructed
 position. Its public return type is therefore void. The first argument's
 precise role remains provisional, as it does for the connected drawing API.
 
-The static caller at `0x0800EF2C` scans the scene's catalog selection and calls
+The caller at `0x0800EF2C` scans the scene's catalog selection and calls
 this consumer after the name consumer and a separate text line. That caller
-remains unconverted; its retained source and comparisons are excluded from
-coverage. This addition closes a text consumer used by that catalog path,
-without claiming that the whole scene redraw path has been reconstructed.
+was unconverted when this consumer was first verified; its subsequent
+reconstruction is recorded below. The complete scene redraw path still has
+unconverted producers.
 An out-of-range type still leaves a null text pointer and reaches the drawing
 call. There are no added catalog index, type, resource or pointer checks.
 The switches are ordinary semantic C, with no register constraints or embedded
 instruction bodies. This compiler match establishes neither runtime safety
 nor gameplay behavior.
+
+
+## Scene catalog detail redraw
+
+`display_scene_redraw_details` at `0x0800EF2C` adds 264 matching C bytes and
+connects the scrolling scene's accepted setup, navigation and input controller
+to both catalog text consumers. Public source and header closure compilation
+matches its entire extent, including the literal pool and two final zero
+alignment bytes. The alignment is explicit assembler glue after the C
+function; no original instruction body is embedded. Changing the scan limit
+from 148 to 147 rejects by one byte. The four existing callers were renamed
+to the canonical symbol and their page argument refined to a byte. Their
+unchanged positive extents and real controls were reverified, as were both
+catalog consumer header closures. The ignored receipt index is
+`reports/agents/display_audio/background_motion/scene/redraw/scene-details-ready.json`.
+
+The function clears the detail background, selects font three with palette
+zero and fill minus one, and scans the same 149 catalog records used by the
+scene's name path. This count remains a scan limit rather than a storage
+bound. It skips record ID `0x13D`, selects the current scene category, and
+uses the accepted bit-mask reader to count enabled entries. These indices
+address five words; the public mask declaration remains unsized. The page
+contribution is `(page << 2)` narrowed to a byte; the selected parameter and
+enabled-entry ordinal remain word values. Once the ordinal reaches that
+selection, it draws the catalog name, stages the record's word at `+20` in
+numeric field zero, looks up text resource `0x184D` and draws that line after
+the measured name, then selects font one and draws the catalog detail text
+with width 224. It exits after that selected entry. No match leaves the
+cleared background without drawing a selected detail.
+
+The shared catalog word at `+20` is now called `number_value`, replacing the
+unsupported inferred name `description`: its observed use here is a decimal
+formatter argument. Its gameplay meaning remains unknown. The name consumer
+reads text word `+8`, while the multiline detail consumer reads text word
+`+4`; these roles are separate from the numeric word. The accepted drawing
+and numeric routines expose the inputs, but do not establish that the staging
+and substitution banks are connected at runtime.
+
+A small inline helper reads the category using its typed field address and a
+separate byte offset, while the record cursor advances by one 24-byte record.
+Named default style and no-index values retain their original lifetimes
+across drawing calls. Earlier indexed-field expressions, pointer forms and
+variable initialization orders failed; their sources, complete comparisons
+and control binaries remain local. The accepted logic uses ordinary C with
+no register constraints, without adding catalog, mask, resource or pointer
+checks. Matching the connected source does not prove runtime or gameplay
+behavior.

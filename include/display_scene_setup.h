@@ -15,6 +15,7 @@ extern unsigned char g_display_scene_byte0, g_display_scene_byte1, g_display_sce
 extern void display_set_mode(unsigned short), display_show_background(unsigned int, unsigned int);
 extern void display_fill_background(unsigned int, unsigned short);
 extern const unsigned short *display_load_background(unsigned int, const struct BackgroundResource *, unsigned short, unsigned short, unsigned int, unsigned int);
-extern void display_scene_stage_0800f168(void), display_scene_stage_0800f034(unsigned int), display_scene_stage_0800ef2c(unsigned int), display_scene_stage_0800f478(void);
+extern void display_scene_stage_0800f168(void), display_scene_stage_0800f034(unsigned int), display_scene_stage_0800f478(void);
+extern void display_scene_redraw_details(unsigned char);
 extern void display_initialize_scrolling_scene(void);
 #endif
