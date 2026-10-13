@@ -12,7 +12,7 @@ void frame_update_need_effect(struct FrameObject *base)
  if(g_need_effect_resources[((struct FrameNeedEffectObject *)base)->kind]) {
   unsigned int palette;
   frame_commit_need_effect(base,((struct FrameNeedEffectObject *)base)->requested_animation);
-  if(((struct FrameNeedEffectObject *)base)->subtype==117&&frame_need_effect_world_test(g_frame_world_id,1))
+  if(((struct FrameNeedEffectObject *)base)->subtype==117&&save_world_scene_in_selected_row(g_frame_world_id,1))
    frame_set_animation_frame((struct FrameTickObject *)base,game_flag()!=0);
   palette=g_need_effect_palettes[((struct FrameNeedEffectObject *)base)->kind][state->mode];
   if(palette!=253)frame_acquire_palette_slot(base,palette);

@@ -37,3 +37,24 @@ are retained under ignored `reports/audio-root/transition-link-lifetimes/` and
 connected callers receive fresh positive and changed-source proofs when their
 shared declarations are updated. This establishes compiler and byte equality,
 not link gameplay, hardware timing or runtime coverage of the provider.
+
+## Signed endpoint slot
+
+The connected `event_get_link_slot` dependency at `0x0803E438` adds sixteen
+matching C bytes. It reads the existing unsigned slot byte at endpoint `+5`
+and returns its signed-byte interpretation as an integer; `0xFF` therefore becomes minus
+one. The field remains unsigned in the shared partial endpoint view. The
+existing event-record producer receives a fresh match and changed-source
+proof against this provider. The original received-event caller compares the
+returned word directly; a byte-return declaration adds redundant caller-side
+widening. The integer-return model retains the same sixteen-byte callee while
+matching that observed ABI use. All existing header consumers are reproved.
+The getter control selects the adjacent active
+byte and is rejected; no instructions or original literal bytes are embedded
+in the source.
+
+The received-event dispatcher at `0x0803A1A4/632` and completion poll at
+`0x0803D850/408` remain unconverted. Private semantic dispatcher and polling
+trials, including complete original extents, are retained under
+`reports/audio-root/link-event-apply-evidence/`, `link-events-trial/` and
+`link-transfer-finished-*`; their mismatches receive no source credit.

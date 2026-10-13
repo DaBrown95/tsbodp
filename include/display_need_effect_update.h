@@ -1,6 +1,7 @@
 #ifndef DISPLAY_NEED_EFFECT_UPDATE_H
 #define DISPLAY_NEED_EFFECT_UPDATE_H
 #include "display_need_effect_lifecycle.h"
+#include "save_world_scene_selection.h"
 #include "display_object_palette.h"
 
 struct FrameTickObject;
@@ -45,7 +46,6 @@ extern struct DisplayNeedEffectSavedObject g_need_effect_saved_objects[];
 
 /* Commit consumes a complete word, including sign-extended requests. */
 void frame_commit_need_effect(struct FrameObject *, unsigned int);
-unsigned char frame_need_effect_world_test(unsigned int, int);
 void frame_set_animation_frame(struct FrameTickObject *, FrameU8);
 void frame_acquire_palette_slot(struct FrameObject *, int);
 void frame_need_effect_interact(struct FrameObject *, struct FrameObject *);

@@ -49,7 +49,8 @@ declared pure and no cached-value substitution is introduced.
 
 Game flag `0x20000` causes `0x100000` to be set. The accepted selected-row
 object cleanup runs before the request-mode branches. For request mode zero, the exit
-runs the original audio/resource providers, releases the primary object list,
+runs the original audio provider, releases the primary object list,
+clears the accepted active need-effect states,
 passes the registration pointer to accepted `frame_destroy_map_registration`, clears it, and clears
 the audio-control bit eight. The shared volatile eight-bit field retains both
 original reads around that update. Mode two resets tile allocation; other
@@ -98,3 +99,9 @@ Next connected targets are the original per-view updates, retained scene-state
 providers, the remaining scene-phase families and the transfer-completion provider. Names
 and types reflect static accesses and compiler matches. No runtime, gameplay
 or physical-save claim is made.
+
+The later cleanup closure replaces the original `0x0802EB9C` alias with
+`frame_clear_need_effect_states`. The accepted step and exit receive current
+positive and changed-source proofs after that declaration change. Their byte
+credit stays at the original 672; the 104-byte provider is counted once in its
+own connected batch.

@@ -17,10 +17,12 @@ extern const struct SaveWorldIndicatorCoordinate g_save_world_indicator_coordina
 extern struct FrameVariantResource g_save_world_indicator_animation;
 
 extern const struct DisplayStoredMap *g_save_world_gauge_map;
+extern const unsigned short *g_save_world_transition_map;
 extern unsigned char g_frame_actor_local_need_state[];
 
 void save_world_refresh_row_palette(unsigned int);
 void save_world_update_row_gauges(void);
+void save_world_finish_transition(unsigned int, unsigned char);
 /* Allocation and slot validity are caller preconditions in the observed body. */
 void save_world_create_row_indicator(struct SaveWorldTransitionRow *, unsigned char);
 int save_world_scale_gauge(short, unsigned short, unsigned char);

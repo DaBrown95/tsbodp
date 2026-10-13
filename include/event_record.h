@@ -21,4 +21,5 @@ extern unsigned int g_game_flags;
 extern void transition_record_event(unsigned int, struct EventPayload);
 extern void *memory_fill(void *, int, unsigned int);
 extern void *memory_copy(void *, const void *, unsigned int);
-extern signed char event_get_link_slot(void);
+/* The slot is interpreted as a signed byte and returned as a full word. */
+extern int event_get_link_slot(void);

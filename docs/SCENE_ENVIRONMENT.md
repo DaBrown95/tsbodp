@@ -32,8 +32,8 @@ and complete world storage remain unknown. The names `first` and `second` reflec
 the observed order of comparisons rather than an established gameplay event.
 
 The refresh captures a null palette result before reading the clock period.
-A changed period updates scene context `0x03004320 + 4`, then queries the original
-palette selector. For an unchanged period with the enable byte set, the accepted
+A changed period updates scene context `0x03004320 + 4`, then queries the
+reconstructed palette selector. For an unchanged period with the enable byte set, the accepted
 time-equality helper compares hour and minute through mask six. A first-clock
 match sets context flag one and can load background animation one; a second-clock
 match clears that flag and can stop the default animation. Game flag `0x10` gates
@@ -73,12 +73,12 @@ one function.
 
 The separate cleanup runs only with game flag eight. It clears that flag,
 restores the retained primary objects through `0x125C`, releases that linked list and
-calls original provider `0x2EB9C`, then clears both reconstructed transient-effect
-families. It clears audio-control bits one and eight, destroys map registration
+calls the reconstructed need-state cleanup at `0x2EB9C`, then clears both
+reconstructed transient-effect families. It clears audio-control bits one and eight, destroys map registration
 through the canonical grid helper, clears the registration pointer, and calls
 the short release's two providers. The volatile audio-control field retains its
-observed read/update accesses. The `0x2EB9C` provider remains explicit original
-code; its call-site signature does not establish its full body.
+observed read/update accesses. The separate provider now has a complete compiler
+match, as described below.
 
 The primary-step early-exit query is exactly four bytes at `0x269F0..0x269F4`
 and returns byte zero. The following PUSH at `0x269F4` begins a separate dispatch
@@ -95,18 +95,14 @@ mutation: palette-job duration, audio gate, allocation size, request mode,
 release provider, cleanup gate or query result. No comparison was masked and
 no output was patched.
 
-The connected 192-byte `scene_palette_source` at `0x26794` remains unconverted.
-It selects among four pointers in sixteen-byte records at `0x0805747C`, with a
-fallback word at offset `0x40` in the existing 72-byte scene-resource records.
-The retained best complete-size attempt differs in 85 bytes; the initial
-188-byte attempt, pointer-lifetime variants and raw originals remain private.
-A declaration-after-statement compiler rejection is also preserved. Neither
-matching prefixes nor the original palette provider receive C credit.
+The earlier complete-size palette-selector attempt differed in 85 bytes. Its
+initial 188-byte attempt, pointer-lifetime variants, raw original and rejected
+compiler diagnostic remain private; a later connected replacement closes the
+complete 192-byte extent as described below. Failed prefixes receive no C credit.
 
-Next targets are that selector and the original retain/release providers, while
-the central object renderer and copied ARM sort remain difficult explicit
-candidates. Today's fixed 319,640 mapped-extent comparison baseline is not a
-claim of complete game coverage.
+The central object renderer and copied ARM sort remain difficult explicit
+candidates. The fixed 319,640 mapped-extent comparison baseline is not a claim
+of complete game coverage.
 
 ## Primary-list, cache, background and cue providers
 
@@ -162,3 +158,63 @@ source, assembly and raw bytes are retained without output editing. Fresh contro
 change that mask, switch the flag update operation, alter the reset provider or
 change the cue's mode condition. The exact providers and all affected callers are
 recorded in the ignored `scene-retention-ready.json` and its current proof tree.
+
+## Palette selection and need-state exit cleanup
+
+Two further connected replacements add 296 matching C bytes. This documented
+clock and retained-display path now contains fifteen matching functions and
+1,188 bytes. Both new complete extents, pools and alignment match under their
+recorded compiler and assembler profiles. Both use ordinary C with no register
+bindings. Fresh actual changed-source controls reject; the existing environment
+functions and accepted scene-initialization palette caller also receive fresh
+positive and changed-source comparisons, without additional C coverage.
+
+| Function | ROM offset | Bytes | Changed-source differences |
+| --- | --- | ---: | ---: |
+| `scene_palette_source` | `0x26794` | 192 | 70 |
+| `frame_clear_need_effect_states` | `0x2EB9C` | 104 | 1 |
+
+The palette table at `0x0805747C` has an observed sixteen-byte stride with four
+pointer slots. Period zero chooses slot three when context flag one is set and
+slot zero otherwise. Period one chooses slot three only with that flag; periods
+two and three choose slots one and two. Other periods take the fallback directly.
+Any selected null pointer also takes the fallback word at `+0x40` in the existing
+72-byte scene-resource record at `0x08056414`. That shared word keeps its neutral
+name: this caller's use as an address does not establish all serialized uses.
+Neither table's complete bound or possible scene-ID domain is established here.
+The complete selector boundary is `0x26794..0x26854`, including its literal pools;
+the next PUSH begins the already matching period-audio function.
+
+The exact selector uses a named integer table address and a retained scene-ID
+pointer, then reads the selected real pointer slot. Its explicit missing-palette
+switch block keeps the shared default scene-ID load before the flag-false period
+one branch. Placing that block last instead produced a 196-byte mismatch, retained
+alongside the earlier failures. Changing the second pointer-slot offset from four
+to eight makes the control's compiled case sharing differ; the resulting 172-byte
+candidate rejects against the full 192-byte expected extent. No output bytes were
+edited or ignored.
+
+The exit helper traverses the need-effect active list at `0x03005868`, caching
+the next node before calls. It uses the existing 256-byte state access view and
+three observed 24-byte actor records at state `+0x0C`. A nonnull auxiliary object
+at `+0x58` receives state one through the accepted transition helper, then its
+pointer is cleared. Each nonnull actor in those three records is detached using
+the existing legacy object ABI cast. If the current node is the active tail, the
+helper updates the tail to its previous pointer, then releases the node through
+the accepted pool helper and free-pool root at `0x03001E34`. The casts do not assert
+that this 256-byte state has the complete layout or semantics of a frame object.
+
+The helper adds no bounds, callbacks or guards absent from the original. Its
+complete boundary is `0x2EB9C..0x2EC04`, including literal words at `0x2EBFC` and
+`0x2EC00`; the next PUSH is a distinct entry. The current retained-display caller
+uses its canonical `void(void)` interface. The primary-scene exit is a separate
+caller whose alias and verification are maintained with that module. Changing
+auxiliary state one to two compiles and rejects by one byte.
+
+The public `scene_palette.h` owns only the bounded four-pointer record and its
+provider declarations. The public `frame_need_effect_clear.h` owns only the
+cleanup prototype. Their source files import the existing role/layout headers
+separately, avoiding repeated definitions from legacy unguarded scene/frame
+headers. Current source/header hashes, complete raw comparisons and actual
+controls are recorded in the ignored `palette-need-cleanup-ready.json`. These
+are static and compiler findings, separate from runtime or gameplay evidence.
