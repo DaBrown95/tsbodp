@@ -10,7 +10,7 @@ import tempfile
 import venv
 
 from project import ROOT
-from toolchain import PIN, PROFILE, load_profile, sha, verify_native
+from toolchain import PIN, PROFILE, load_profile, sha, verify_native, compiler_selection, assembler_selection
 
 PENDING = Path('toolchains/setup-pending.json')
 
@@ -177,8 +177,14 @@ def main():
         temporary.replace(ROOT / PROFILE)
     (ROOT / PENDING).unlink(missing_ok=True)
     manifest = json.loads((ROOT / 'config/build-us-eu.json').read_text())
-    if any(f.get('mode', 'Thumb') == 'ARM' for f in manifest['functions']):
+    selected_ids = {compiler_selection(f, manifest['compiler_flags'])['compiler_id']
+                    for f in manifest['functions']}
+    if 'agbcc_arm' in selected_ids:
         subprocess.run([sys.executable, ROOT / 'tools/setup_arm.py'], check=True)
+    if 'gcc302' in selected_ids:
+        subprocess.run([sys.executable, ROOT / 'tools/setup_gcc302.py'], check=True)
+    if any(assembler_selection(f)['assembler_id'] == 'binutils2101' for f in manifest['functions']):
+        subprocess.run([sys.executable, ROOT / 'tools/setup_binutils2101.py'], check=True)
     print('Setup complete. Put your USA/Europe ROM in baseroms/, then run make build.')
     print('Native tool fingerprints are local; exact matching is checked on every build.')
     return 0
@@ -187,6 +193,6 @@ def main():
 if __name__ == '__main__':
     try:
         sys.exit(main())
-    except (OSError, RuntimeError, subprocess.CalledProcessError) as error:
+    except (OSError, ValueError, RuntimeError, subprocess.CalledProcessError) as error:
         print(f'Setup failed: {error}', file=sys.stderr)
         sys.exit(1)

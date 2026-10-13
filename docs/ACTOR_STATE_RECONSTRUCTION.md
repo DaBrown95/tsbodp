@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 116 C functions spanning 20,792 verified bytes. The
+This batch reconstructs 119 C functions spanning 21,004 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,9 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x7DC4` | `frame_find_action_target` | 164 |
+| `0x3B8EC` | `frame_grid_occupancy` | 24 |
+| `0x3B964` | `frame_grid_terrain` | 24 |
 | `0x3BB28` | `frame_grid_neighbor` | 88 |
 | `0x3BB80` | `frame_grid_cell_data_pointer` | 36 |
 | `0x2E56C` | `frame_actor_owner_cell_count` | 128 |
@@ -933,3 +936,44 @@ next targets. World-choice cleanup `0xA0A4` and target-cell search `0x3B75C` are
 connected next targets. The retained CFGs are closed; those scans alone do not establish C coverage, final function boundaries
 or runtime reachability. These bodies remain explicit unconverted ROM regions
 in the full build.
+
+## Action-target list and cell-property queries
+
+The matching selector at `0x7DC4` traverses the same list head at `0x03005868`
+used by the pending-action path, preserving each next link before invoking
+callbacks. Its separate partial node view observes a word selector at `+8`,
+target pointer at `+0x54`, a byte-returning predicate at `+0xE4`, and an
+ordered-action-list producer at `+0xE8`. A 36-byte descriptor table at
+`0x08062E7C` supplies the enabling byte at row `+34`; its other fields and full
+extent remain unspecified. Enabled nodes whose predicate accepts the actor
+receive a zeroed seven-byte local list. The search stops at its first zero byte,
+compares each preceding byte against the requested action, and returns the
+matching node's target. It returns zero without changing the output if no node
+matches. Both indirect calls retain the explicit `r2` transfer veneer.
+
+The request parameter is an unsigned word: the original preserves all of `r1`
+and compares it with zero-extended list bytes. The former byte declaration was
+therefore too narrow. The accepted state35 and state39 callers still match after
+this refinement, and their controls fail. The `FramePendingAction` global
+pointer declaration is reused through an explicit bounded node-view cast.
+Ordinary C matches the full 164-byte extent; filling six instead of seven bytes
+changes one compared byte. The conditional scan's source structure selects the
+original branch layout without register bindings.
+
+The null-safe cell-property helpers at `0x3B8EC` and `0x3B964` call the accepted
+cell-data lookup and return the upper six or lower two bits of its byte,
+respectively. Both return zero for a null lookup. Their names and gameplay roles
+remain inferred from the movement callers and bit tests. A packed byte view
+produces the observed accesses without a wider memory read. These two helpers
+match using the separately pinned GCC3.0.2 backend at `-O1`, with explicit Thumb
+flags; other tested optimization settings and the default agbcc backend did
+not match. This is compiler-output evidence, not a claim about the historical
+compiler. The only assembly directive in these sources specifies zero tail
+alignment. Null-return mutations each differ by one byte.
+
+Current-header receipts are `actor-action-target-canonical1-*`; affected state35,
+state39, walk-direction and direction-availability consumers all remain exact
+with their real controls rejected in `actor-action-target-consumers-canonical1-*`.
+The ready manifest is `actor-action-target-batch-manifest.json`. The larger
+candidate-cell selector at `0x3B75C` remains unconverted; its contiguous-array
+private view and best failed comparison remain explicit.

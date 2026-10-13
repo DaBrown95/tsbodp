@@ -10,7 +10,8 @@ from project import ROOT, audit, compare_bytes, write_report
 from pilot import compile_function, run
 from rom_layout import layout
 from source_symbols import declarations
-from source_addresses import execution_address, validate_execution_layout
+from source_addresses import execution_address, validate_execution_layout, validate_symbol_definitions
+from toolchain import modern_assembler_abi_flags
 
 
 
@@ -24,6 +25,7 @@ def link_rom(manifest, reference, pilot_folder, folder, overrides=None, copies=N
         ram = json.loads((ROOT / 'config/ram-map-us-eu.json').read_text())
         copies, entries = ram['copies'], ram['entries']
     validate_execution_layout(manifest['functions'], copies, entries)
+    validate_symbol_definitions(manifest, copies, entries)
     source_by_name = {f['name']: f for f in sources}
     regions = layout(sources, manifest['rom_size'])
     overrides = overrides or {}
@@ -42,7 +44,7 @@ def link_rom(manifest, reference, pilot_folder, folder, overrides=None, copies=N
     extern_path.write_text('\n'.join(externs) + '\n')
     extern_obj = folder / 'externs.o'
     assembler = ROOT / 'toolchains/binutils/bin/arm-none-eabi-as'
-    run([assembler, extern_path, '-o', extern_obj], commands)
+    run([assembler, *modern_assembler_abi_flags(), extern_path, '-o', extern_obj], commands)
     objects.append(extern_obj)
     for index, region in enumerate(regions):
         section = f'.rom_{index}'
@@ -66,7 +68,7 @@ def link_rom(manifest, reference, pilot_folder, folder, overrides=None, copies=N
     script += ['/DISCARD/ : { *(.comment) *(.note*) *(.ARM.attributes) }', '}']
     gap_source, gap_obj = folder / 'unconverted.s', folder / 'unconverted.o'
     gap_source.write_text('\n'.join(gaps) + '\n')
-    run([assembler, gap_source, '-o', gap_obj], commands)
+    run([assembler, *modern_assembler_abi_flags(), gap_source, '-o', gap_obj], commands)
     objects.append(gap_obj)
     script_path = folder / 'rom.ld'
     script_path.write_text('\n'.join(script) + '\n')
@@ -140,7 +142,8 @@ def main():
               'negative_link_commands': bad_commands,
               'helper_sha256': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                                 for name in ('tools/build_rom.py', 'tools/rom_layout.py',
-                                             'tools/source_addresses.py', 'config/ram-map-us-eu.json')},
+                                             'tools/source_addresses.py', 'tools/toolchain.py',
+                                             'config/ram-map-us-eu.json')},
               'accepted': comparison['identical'] and rejected}
     (folder / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     write_report('build', report)

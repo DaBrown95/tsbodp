@@ -1,0 +1,51 @@
+{
+  "compiler": {
+    "source_url": "https://ftp.gnu.org/gnu/gcc/gcc-3.0.2/gcc-core-3.0.2.tar.gz",
+    "source_sha256": "c5ed14a927f489a63f5bf68be4454032bf649133455c829c5b34664d986a9e45",
+    "source_version": "3.0.2",
+    "source_directory": "toolchains/gcc302-source",
+    "build_directory": "toolchains/gcc302-build",
+    "compatibility_patch": "tools/patches/gcc302-host-compat.patch",
+    "compatibility_patch_sha256": "e56c1721d96b60a8d58e15954ce9094bee805182088aacb4182f0cfeb9bea1ba",
+    "configure_options": [
+      "--target=arm-elf",
+      "--host=alpha-linux-gnu",
+      "--build=alpha-linux-gnu",
+      "--enable-languages=c",
+      "--disable-nls"
+    ],
+    "reported_backend": "gcc 3.0.2 (ARM/Thumb)",
+    "host_model": "The alpha-linux-gnu configure model selects LP64 host widths; Clang builds the native macOS executable.",
+    "source_tree_sha256": "66a5337d70937a2cfc08abd14520164e876bf0fd1700dcbfb376773f717c13e4",
+    "configure_environment": [
+      "CC=clang",
+      "CFLAGS=-g -O2 -std=gnu89 -Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-deprecated-non-prototype -Wno-implicit-int"
+    ],
+    "install_directory": "toolchains/gcc302-install",
+    "build_steps": [
+      {
+        "directory": "libiberty",
+        "options": [
+          "-j4",
+          "all",
+          "CC=clang",
+          "CFLAGS=-g -O2 -std=gnu89 -Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-deprecated-non-prototype -Wno-implicit-int"
+        ]
+      },
+      {
+        "directory": "gcc",
+        "options": [
+          "-j4",
+          "cc1",
+          "CC=clang",
+          "CFLAGS=-g -O2 -std=gnu89 -Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-deprecated-non-prototype -Wno-implicit-int"
+        ]
+      }
+    ]
+  },
+  "native_tool_sha256": {
+    "toolchains/gcc302-build/gcc/cc1": "2cc1727f811001ba67fcd97ec24891a6339866f0062fd0ba7860aa0af6668c26"
+  },
+  "host_clang": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "scope": "Separately selected public GCC3.0.2 backend plus host compatibility patch; fresh matching gates verify output. Does not prove the historical compiler version."
+}

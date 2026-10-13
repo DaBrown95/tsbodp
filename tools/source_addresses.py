@@ -38,3 +38,35 @@ def validate_execution_layout(functions, copies=(), entries=()):
     for (start, size), (next_start, _) in zip(ranges, ranges[1:]):
         if start + size > next_start:
             raise ValueError('Compiled source execution extents overlap')
+
+
+def validate_symbol_definitions(manifest, copies=(), entries=()):
+    """An external alias must agree with a definition that supersedes it."""
+    sources = manifest['functions'] + manifest.get('assembly', [])
+    definitions = {}
+    for function in sources:
+        if function.get('defines_symbol', True):
+            name = function['name']
+            if name in definitions:
+                raise ValueError('Duplicate source symbol definition')
+            definitions[name] = (execution_address(function, copies, entries),
+                                 function.get('mode', 'Thumb'))
+    for source in sources:
+        thumb_symbols = set(source.get('thumb_symbols', ()))
+        for name, value in source.get('symbols', {}).items():
+            if name not in definitions:
+                continue
+            address, mode = definitions[name]
+            declared = int(str(value), 0)
+            if mode == 'Thumb':
+                # Direct branch aliases may omit the mode bit. Explicit Thumb
+                # declarations and pointers retain it; compare the code address.
+                matches = (declared & ~1) == address
+                if name in thumb_symbols and not declared & 1:
+                    raise ValueError('Thumb definition alias is missing its mode bit')
+            else:
+                matches = declared == address
+                if name in thumb_symbols:
+                    raise ValueError('Thumb alias refers to an ARM definition')
+            if not matches:
+                raise ValueError(f'External symbol {name} differs from its source execution address')

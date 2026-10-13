@@ -1,0 +1,39 @@
+{
+  "assembler": {
+    "source_url": "https://ftp.gnu.org/gnu/binutils/binutils-2.10.1.tar.gz",
+    "source_sha256": "94b300e16a2c17d4c8a5754c11b8c70a5c2113dff23c7724c8a5a1abd852eab5",
+    "source_version": "2.10.1",
+    "source_directory": "toolchains/binutils-2.10.1",
+    "build_directory": "toolchains/binutils2101-build",
+    "install_directory": "toolchains/binutils2101-install",
+    "compatibility_patch": "tools/patches/binutils2101-host-compat.patch",
+    "compatibility_patch_sha256": "75b525ebd86c656242d75dfb4b3e088615e53ad1a420bb62cc15dca4a36e0d51",
+    "source_tree_sha256": "efcbd3dc3f686fab6db522d3e40b97ff45f5cad5f7c6868b4dad46796c1ccd24",
+    "configure_environment": [
+      "CC=clang",
+      "CFLAGS=-O2 -std=gnu89 -fcommon -Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-deprecated-non-prototype -Wno-implicit-int",
+      "ac_cv_exeext="
+    ],
+    "configure_options": [
+      "--target=arm-elf",
+      "--host=alpha-unknown-linux-gnu",
+      "--build=alpha-unknown-linux-gnu",
+      "--disable-nls",
+      "--disable-shared"
+    ],
+    "build_options": [
+      "-j4",
+      "all-gas",
+      "MAKEINFO=true",
+      "CC=clang",
+      "CFLAGS=-O2 -std=gnu89 -fcommon -Wno-implicit-function-declaration -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-deprecated-non-prototype -Wno-implicit-int"
+    ],
+    "reported_version": "GNU assembler 2.10.1",
+    "host_model": "The alpha-linux-gnu configure model selects LP64 host widths; Clang builds the native macOS executable."
+  },
+  "native_tool_sha256": {
+    "toolchains/binutils2101-build/gas/as-new": "7aca006c5b705254391c810c6085582e0fd58662c0fd47566c18118948134b2e"
+  },
+  "host_clang": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "scope": "Separately selected GNU2.10.1 assembler, with only a public-domain host declaration patch. Assembly and output are not rewritten. Matching gates verify output; the historical compiler remains unproven."
+}

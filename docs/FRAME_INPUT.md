@@ -1207,6 +1207,94 @@ success it writes the first player slot's object pointer to effect `+0x64`
 and the saved value to `+0x6C`, then returns the pointer. Null is returned
 unchanged. The setup caller ignores the return. Effect field names and the
 eligibility context's row/column interpretation remain provisional; the
-original factory and column helper are explicit unconverted dependencies.
+original factory and column helper were unconverted at this checkpoint;
+both are reconstructed below.
 These matches establish source bytes and static data access, not runtime
 scene eligibility or effect behavior.
+
+The eligibility dependency `frame_scene_actor_world_slot` at `0x10808` is now
+an exact 20-byte C replacement. The original signed halfword load at context
+`+0`, signed remainder helper call with divisor seven, and final halfword sign
+extension establish a signed `short` return. The context's `column` name follows
+its use as the remainder input and subsequent table-column index; that semantic
+name remains provisional. Its signed row byte at `+2` and all observed offsets
+stay unchanged. The accepted eligibility caller explicitly narrows the returned
+value to an unsigned byte; no bounds clamp has been added for negative inputs.
+The previous unsigned-byte declaration described only that caller's use and has
+been corrected to the observed callee return.
+
+Changing `% 7` to `% 6` produces a one-byte mismatch. The canonical helper,
+eligibility caller, scene setup, player factory, primary actor factory, spawn
+reader, and current scene-object allocator all match under the refined header;
+their real changed-source controls all reject. Raw linked outputs and comparisons
+are retained in `reports/agents/frame-input/camera-map/world-slot-promoted/`.
+This closes one direct eligibility dependency. The central renderer and
+selected-tile loader remain excluded; the saved-effect factory is reconstructed
+in the following connected batch.
+
+The saved scene-effect path now adds seven exact C functions totaling 820 bytes:
+`frame_scene_actor_world_slot` (`0x10808`, 20),
+`frame_create_scene_saved_effect` (`0x332C8`, 252),
+`frame_scene_effect_tick` (`0x33424`, 140),
+`frame_scene_effect_interact` (`0x334B0`, 208),
+`frame_scene_effect_refresh` (`0x335A8`, 64),
+`frame_scene_effect_configure` (`0x335E8`, 40), and
+`frame_scene_effect_remove` (`0x336D0`, 96). These close the factory and all three
+callbacks installed by the previously matched saved-effect restore wrapper.
+They are compiler/static results; no runtime scene, input or effect behavior
+is claimed.
+
+The factory allocates class six and snaps the two integer coordinates through
+the existing grid-center helper before restoring fixed-point position words.
+It sets the observed kind/subtype, direction four, default state 29, callback
+pointers, sprite bits, kind-indexed speed, script, and before-step callback.
+The owner pointer at `+0x64` is initially null and the value word at `+0x6C`
+starts at `0x32000000`. The later restore wrapper overwrites these two fields.
+The value's units remain unspecified. The original makes no allocation-null
+check; this replacement preserves that behavior.
+
+Animation refresh indexes a kind-specific pointer table at `0x08D71FCC`, a
+signed requested-animation byte at object `+0x103`, and the existing direction
+variant table before calling the matched animation-record setter. Configure
+compares its unsigned byte argument with that signed field; on change it writes
+the byte and marks pending bit four. Tick dispatches state 29 and 30 to original
+bodies at `0x8E14` and `0x91F4`, then calls the original updater at `0x950C`.
+These three children remain explicit unconverted dependencies, with address-based
+provisional aliases. It refreshes velocity and animation from the observed
+pending bits, selects horizontal flip from the saved direction, and clears
+pending state. The descriptor dimensions and permitted animation indices are
+not established by these matches.
+
+The interaction callback takes two object arguments. It requires effect state
+29, excludes variants 52 and 30, and requires other-object state 16. It obtains
+the active player via the 12-byte slot records and local-player byte at `+0x31`
+from the shared `0x030040E0` base also used by `InputConfig`. That overlap is
+represented by a bounded view over the same base, avoiding a second symbolic
+literal for the same address. The player's pressed-input index is loaded from
+object `+0x13`, distinct from the generic owner-slot field at `+0x11`; its
+`input_slot` name is inferred from these accesses. On an eligible bit-zero press
+it aligns both objects, changes animation/state, stores the second object at
+effect `+0x68`, and clears that bit in the input halfword. The shared effect
+view therefore exposes `partner` as an object pointer without changing owner,
+value or any offsets. The facing-availability body at `0xEBC` remains original.
+The generic actor view still declares a one-argument `on_interact` field; the
+factory's explicit function-pointer cast preserves that legacy view while the
+new callback itself has the evidenced two-argument signature. The copied
+collision dispatcher supplies both arguments at this callback offset.
+
+Remove only records the position, current world and effect kind when the owner
+equals the first player-slot object and the stored world is not 50. This is a
+connected producer for the scene selection fields consumed by the restore path.
+The inline byte-valued ownership predicate is semantic C and preserves the
+original boolean materialization and literal placement.
+
+The interaction extent ends at `0x33580`, where the next original entry begins
+with its own `PUSH`. The first 248-byte trial mistakenly included that adjacent
+function; its source, metadata and raw comparison remain unchanged under
+`camera-map/effect-interact-0/`. The corrected 208-byte range includes the
+callback's three final literals and alignment. All seven canonical sources and
+real changed-source controls are retained under `camera-map/scene-effect-promoted/`;
+each control rejects one byte. Every previously accepted source in the changed
+player-header closure was recompiled and its control rechecked. Neither the
+1,400-byte central renderer nor 392-byte selected-tile loader candidate is
+accepted by this batch.

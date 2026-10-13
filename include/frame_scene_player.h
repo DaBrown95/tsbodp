@@ -48,14 +48,14 @@ struct FrameSceneActorSelection {
  unsigned char world,saved_effect_kind,unknown43e[0x740-0x43e],actor;
 };
 extern struct FrameSceneActorSelection g_frame_scene_actor_selection;
-struct FrameSceneWorldContext {unsigned char unknown00[2];signed char row;};
+struct FrameSceneWorldContext {short column;signed char row;};
 extern unsigned char g_frame_scene_actor_eligibility_enabled;
 extern const unsigned char *g_frame_scene_actor_world_tables[];
-unsigned char frame_scene_actor_world_slot(const struct FrameSceneWorldContext *);
+short frame_scene_actor_world_slot(const struct FrameSceneWorldContext *);
 unsigned char frame_scene_actor_allowed(unsigned int,unsigned int,const struct FrameSceneWorldContext *);
 struct FrameSceneSavedEffect {
  unsigned char unknown00[100];struct FrameObject *owner;
- unsigned int unknown68,value;
+ struct FrameObject *partner;unsigned int value;
 };
 struct FrameSceneSavedEffect *frame_create_scene_saved_effect(unsigned char,int,int);
 struct FrameSceneSavedEffect *frame_spawn_saved_scene_effect(int,int);

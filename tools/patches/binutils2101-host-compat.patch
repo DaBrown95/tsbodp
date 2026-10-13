@@ -1,0 +1,11 @@
+--- a/libiberty/strerror.c
++++ b/libiberty/strerror.c
+@@ -462,7 +462,7 @@
+ 
+ #else
+ 
+-extern int sys_nerr;
++extern const int sys_nerr;
+ extern char *sys_errlist[];
+ 
+ #endif

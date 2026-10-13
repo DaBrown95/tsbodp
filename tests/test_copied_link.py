@@ -5,9 +5,11 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
+from toolchain import modern_assembler_abi_flags
 try:
     from build_rom import link_rom
 except ModuleNotFoundError as error:
@@ -31,7 +33,8 @@ class CopiedLinkTests(unittest.TestCase):
         source.write_text('.text\n.global copied_code\n.type copied_code,%function\n'
                           'copied_code: b branch_target\n.size copied_code,.-copied_code\n')
         subprocess.run([ROOT / 'toolchains/binutils/bin/arm-none-eabi-as',
-                        '-mcpu=arm7tdmi', '--no-pad-sections', source, '-o', objfolder / 'source.o'], check=True)
+                        '-mcpu=arm7tdmi', '--no-pad-sections', *modern_assembler_abi_flags(),
+                        source, '-o', objfolder / 'source.o'], check=True)
         self.copies = [{'name': 'fixture', 'rom_offset': 16, 'ram_address': 0x03001000, 'size': 4}]
         self.manifest = {'rom_size': 32, 'functions': [{'name': 'copied_code', 'rom_offset': 16,
                          'size': 4, 'ram_address': 0x03001000, 'ram_copy': 'fixture', 'mode': 'ARM',
@@ -58,7 +61,27 @@ class CopiedLinkTests(unittest.TestCase):
         source = objfolder / 'source.s'
         source.write_text(source.read_text() + '.data\n.word 123\n')
         subprocess.run([ROOT / 'toolchains/binutils/bin/arm-none-eabi-as',
-                        '-mcpu=arm7tdmi', '--no-pad-sections', source, '-o', objfolder / 'source.o'], check=True)
+                        '-mcpu=arm7tdmi', '--no-pad-sections', *modern_assembler_abi_flags(),
+                        source, '-o', objfolder / 'source.o'], check=True)
         with self.assertRaisesRegex(ValueError, 'allocated source section'):
             link_rom(self.manifest, self.reference, self.pilot,
                      self.folder / 'extra-data', copies=self.copies)
+
+    def test_incompatible_object_abi_is_rejected_by_linker(self):
+        objfolder = self.pilot / 'copied_code'
+        # Generate an incompatible object directly; production never rewrites
+        # its flags or suppresses the linker's ABI checks.
+        subprocess.run([ROOT / 'toolchains/binutils/bin/arm-none-eabi-as',
+                        '-mcpu=arm7tdmi', '--no-pad-sections', '-meabi=5',
+                        objfolder / 'source.s', '-o', objfolder / 'source.o'], check=True)
+        with self.assertRaisesRegex(RuntimeError, 'EABI version'):
+            link_rom(self.manifest, self.reference, self.pilot,
+                     self.folder / 'wrong-abi', copies=self.copies)
+
+    def test_wrong_copied_callee_alias_rejects_before_assembler_or_linker_runs(self):
+        self.manifest['functions'][0]['symbols']['copied_code'] = '0x08000010'
+        with patch('build_rom.run') as run:
+            with self.assertRaisesRegex(ValueError, 'execution address'):
+                link_rom(self.manifest, self.reference, self.pilot,
+                         self.folder / 'wrong-callee', copies=self.copies)
+            run.assert_not_called()

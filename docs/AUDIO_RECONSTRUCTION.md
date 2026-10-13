@@ -24,15 +24,16 @@ Both cases look up a sample pointer in `0x08D54690`, call the Thumb
 handle plus a 16-bit step value through `0x4C88C` to `0x030003E8`. The
 latter validates the handle against a 44-byte channel record, shifts the
 step left by two, and preserves its direction sign. Sample, pitch and
-handle names remain provisional; these copied ARM bodies and thunks are
-still explicit original regions and receive no C credit.
+handle names remain provisional. The copied ARM step setter is now separately
+reconstructed below; the playback body and Thumb thunks remain explicit
+original regions and receive no C credit.
 
 Before playback, the dispatcher sets bit `0x80` in the shared control
 byte at `0x03007366`. VBlank defers the audio step while that bit is set
 and records the deferral in bit `0x40`. The accepted synchronization helper
 runs `vblank_audio_step` if bit `0x40` is set, then clears bit `0x80`.
 That step thunk enters the copied frame mixer at `0x03001080`; the mixer
-and its ring-buffer acquisition function remain unmatched candidates.
+remains unmatched; its ring-buffer acquisition function is reconstructed below.
 The control view preserves a volatile eight-bit bitfield only for the
 flags. Ordinary bytes at offsets 4 and 5 are the pacing and sequence ID
 views observed by scene/audio callers. These are partial views, not a
@@ -62,7 +63,8 @@ control bit 1 and calls player pause. Resume clears that bit and calls
 resume only while it is set. Sequence stop clears the same bit and calls
 player stop when sequence volume is nonzero. Sample stop instead checks
 sample volume and passes the unsigned sample handle through the `0x4C888`
-Thumb thunk to the copied ARM implementation at `0x03000320`. The view
+Thumb thunk to the copied ARM implementation at `0x03000320`, reconstructed
+below. The view
 effect stop command uses this sample handle; it is distinct from sequence
 stop. Each new complete extent and the renamed existing callers passed
 positive byte comparison and a compiling changed-source rejection.
@@ -83,17 +85,99 @@ Its semantic parameter register constraint preserves the observed lifetime;
 this does not establish the complete descriptor table extent or mode meaning.
 
 The handle-status wrapper at ROM `0x4146C` contributes 16 matching C bytes.
-It calls the original validator at `0x49A10` and narrows its result to eight
+It calls the validator at `0x49A10` and narrows its result to eight
 bits. A changed-handle control compiles and rejects 13 bytes. Static inspection
 of the validator shows a 44-byte channel stride at `0x020008B4`: the low byte
 of the handle selects a channel, the stored word at `+0x18` must equal the
 full handle, and the active byte at `+2` determines the zero/one result.
-Neither this validator nor the copied ARM release body at `0x03000320` is
-accepted C yet. Failed semantic candidates and their raw comparisons remain
-in local reports. No range check for indices 32 through 255 is observed.
+The validator and copied ARM release body at `0x03000320` are now separately
+reconstructed below. Failed semantic candidates and their
+raw comparisons remain in local reports. No range check for indices 32
+through 255 is observed.
 
 The wrapper closes the actor speed handler's status-call edge. Together these
 ten accepted game audio coordination functions cover 576 bytes. They do not
 establish the mixer, complete channel lifetime, audible output or gameplay
 behavior. The next connected audio targets remain the handle validator,
-copied release/pitch routines, sequence start and VBlank mixing path.
+sequence start and VBlank mixing path.
+
+## Sample-channel backend
+
+Eleven connected backend functions contribute 812 matching C bytes:
+handle validation at `0x49A10` (48), global volume at `0x49AA0` (20),
+channel marking/resuming/clearing at `0x49B24`, `0x49B5C`, `0x49B80`
+(56, 36, 36), mixing-mode configuration at `0x498E0` (104), channel
+volume calculation at `0x49BA4` (76), and the copied ARM step setter
+at ROM `0xFDA860`, executing at `0x030003E8` (76), copied sample release
+at ROM `0xFDA798`, executing at `0x03000320` (200), and frame-buffer
+acquisition at `0x497F8` (120), and tick-callback configuration at `0x49AB4`
+(40). Each full extent,
+including alignment and literal pools, has a compiling changed-source
+rejection. The existing game status caller remains exact after sharing the
+backend declaration. The game sample-volume caller uses a separate mixer
+entry at `0x49948`, whose body remains unmatched.
+
+The common view is a 44-byte record at `0x020008B4`, with 32 records in
+the observed bulk loops. It preserves the full handle at `+0x18`, active
+byte at `+2`, signed step at `+0x14`, volume byte at `+0`, signed pan
+at `+1`, left/right volumes at `+0x1E/+0x1F`, mixing mode at `+0x20`,
+and flags at `+0x22`. The byte at `+0x24` selects a volume-table entry
+during playback; unmatched stop/fade code also reuses that location.
+Unknown fields remain explicit. Handle validation still indexes by the
+low eight bits without a bounds check. Marking only changes state-one
+channels and, unless its first argument is nonzero, requires `+0x24`
+to be zero. These names describe observed accesses rather than a complete
+channel or lifetime specification.
+
+Volume calculation multiplies the channel volume by the selected byte from
+`0x03000090`, scales it by `64-pan` and `64+pan`, and shifts both results
+right by thirteen. The global-volume setter writes the first byte of this
+same address after clamping an unsigned word to 255. Mixing configuration
+stores option bit four at `0x03000093`, limits the low four-bit mode to
+zero through two at `0x03000092`, and updates each active channel's mode
+from that value and its flags. Meanings beyond these operations remain
+provisional. The step setter preserves the sign of the existing step when
+writing the new value shifted left by two. Release validates the same handle,
+then clears the active byte immediately unless fade is enabled, state is one
+and volume exceeds five. That fade branch reuses `+0x24` as a counter of
+sixteen, derives two halfwords from the sample cursor, resets cursor to start,
+clears step/mode/handle, and sets the byte at `+0x21` to seven. The subsequent
+fade execution is still unmatched.
+
+Frame-buffer acquisition writes both output pointers only while the ring
+enabled word is nonzero. Its offset selects matching regions in the two
+1104-byte buffers at `0x02000000` and `0x02000450`. Equal current/previous
+stamp words permit acquisition directly; a changed stamp is saved and permits
+it only when the phase minus one is at most one as an unsigned word. A
+successful acquisition advances by 276 bytes, increments the phase, wraps
+both phase and offset after phase three, and returns 276. The stamp is a
+volatile access view because the original rereads it; other views retain
+their ordinary accesses. Buffer size follows the four observed phases and
+the spacing between the two bases, not a claim about the entire audio arena.
+
+Tick-callback configuration stores the callback at `0x02001638`. With a
+nonnull callback it restores the current tick samples at `0x0200163E` from
+the saved halfword at `0x02000E34`; with a null callback it copies the current
+samples to that saved halfword instead. The three literal addresses establish
+this direction. An earlier failed candidate confused this operation with
+the separate tick-period word and remains retained as local failed evidence.
+
+These functions use explicitly selected GNU GCC 3.0.2 with pinned public
+source, a documented host compatibility patch, and a fingerprinted native
+build. Five functions also select GNU binutils 2.10.1, whose unmodified
+ARM emitter naturally supplies the zero-filled alignment in the reference.
+Later GNU assemblers fill that alignment with Thumb NOPs. No emitted
+assembly or output bytes are rewritten. This establishes a reproducible
+matching compiler configuration, not the historical game's toolchain.
+Both assemblers use a consistent GNU object ABI and software floating-point
+convention for the full link; their code bytes remain checked against the
+fixed reference, with ordinary linker compatibility checks enabled.
+An inspected Krawall source revision helped form the compiler hypothesis;
+its channel layout differs, and it does not establish the game's source
+revision. The accepted bodies were reconstructed from the reference's
+operations, without importing its instruction bodies or substantial
+upstream source. No runtime or audible-output evidence is claimed.
+
+The next connected backend targets are the VBlank frame mixer, sample
+allocation, fade execution and sequence timing. Their partial
+candidates remain excluded from C coverage.

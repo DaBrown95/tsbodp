@@ -32,7 +32,7 @@ unsigned int frame_interaction_step_31(struct FrameNeedEffectState *owner,
         break;
     case 43:
         frame_adjust_actor_needs(needs, 22, g_frame_need_effect_definitions[owner->kind].unknown_04[31]);
-        if (!frame_step_attachment_need_timer(job, needs, 4,
+        if (!(unsigned char)frame_step_attachment_need_timer(job, needs, 4,
                                              (int *)((unsigned char *)job->actor + 0x58))) {
             job->timer = 1;
             frame_request_animation((struct FrameCommandObject *)job->actor, 6);

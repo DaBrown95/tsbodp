@@ -1,6 +1,7 @@
 #ifndef AUDIO_GAME_H
 #define AUDIO_GAME_H
 #include "audio_vblank.h"
+#include "audio_sample.h"
 /* Partial options and descriptor views inferred from game audio callers. */
 struct AudioGameOptions { unsigned char unknown[8], samples_volume, sequences_volume; };
 extern struct AudioGameOptions g_audio_game_options;

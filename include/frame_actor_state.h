@@ -35,7 +35,7 @@ unsigned char frame_actor_choose_walk_direction(struct FrameObject *);
 void frame_actor_refresh_terrain(struct FrameObject *);
 void frame_route_enable_destination(struct FrameObject *);
 void frame_route_set_limit(struct FrameObject *, unsigned char);
-unsigned char frame_find_action_target(struct FrameObject *, unsigned char, void **);
+unsigned char frame_find_action_target(struct FrameObject *, unsigned int, void **);
 unsigned char frame_random_chance(unsigned char);
 unsigned char frame_grid_neighbor(void *, const int *, int *, unsigned char);
 unsigned int frame_grid_terrain(void *, const int *);

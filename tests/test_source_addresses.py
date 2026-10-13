@@ -5,7 +5,7 @@ import sys
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
-from source_addresses import execution_address, validate_execution_layout
+from source_addresses import execution_address, validate_execution_layout, validate_symbol_definitions
 
 
 class SourceAddressTests(unittest.TestCase):
@@ -52,3 +52,52 @@ class SourceAddressTests(unittest.TestCase):
         entries = [{'ram_address': 0x03001020, 'mode': 'ARM'}]
         with self.assertRaisesRegex(ValueError, 'instruction mode'):
             execution_address({**self.function, 'mode': 'Thumb'}, self.copies, entries)
+
+    def test_external_alias_must_match_defined_rom_callee(self):
+        definition = {'name': 'callee', 'rom_offset': 0x1000, 'size': 4}
+        caller = {'name': 'caller', 'rom_offset': 0x2000, 'size': 4,
+                  'symbols': {'callee': '0x08003001'}, 'thumb_symbols': ['callee']}
+        with self.assertRaisesRegex(ValueError, 'callee.*execution address'):
+            validate_symbol_definitions({'functions': [definition, caller]})
+        for address, explicit in [('0x08001001', True), ('0x08001000', False)]:
+            caller['symbols']['callee'] = address
+            caller['thumb_symbols'] = ['callee'] if explicit else []
+            validate_symbol_definitions({'functions': [definition, caller]})
+
+    def test_copied_definition_alias_uses_ram_execution_address(self):
+        definition = {**self.function, 'name': 'copied_callee'}
+        caller = {'name': 'caller', 'rom_offset': 0x2000, 'size': 4,
+                  'symbols': {'copied_callee': '0x08001020'}}
+        with self.assertRaisesRegex(ValueError, 'execution address'):
+            validate_symbol_definitions({'functions': [definition, caller]}, self.copies)
+        caller['symbols']['copied_callee'] = '0x03001020'
+        validate_symbol_definitions({'functions': [definition, caller]}, self.copies)
+
+    def test_alias_mode_is_checked_against_c_and_glue_definitions(self):
+        caller = {'name': 'caller', 'rom_offset': 0x2000, 'size': 4,
+                  'symbols': {'callee': '0x08001001'}, 'thumb_symbols': ['callee']}
+        definition = {'name': 'callee', 'rom_offset': 0x1000, 'size': 4,
+                      'kind': 'assembly_glue', 'mode': 'ARM'}
+        with self.assertRaisesRegex(ValueError, 'ARM definition'):
+            validate_symbol_definitions({'functions': [caller], 'assembly': [definition]})
+        caller['thumb_symbols'] = []
+        with self.assertRaisesRegex(ValueError, 'execution address'):
+            validate_symbol_definitions({'functions': [caller], 'assembly': [definition]})
+        caller['symbols']['callee'] = '0x08001000'
+        validate_symbol_definitions({'functions': [caller], 'assembly': [definition]})
+        definition['mode'] = 'Thumb'
+        caller['thumb_symbols'] = ['callee']
+        with self.assertRaisesRegex(ValueError, 'mode bit'):
+            validate_symbol_definitions({'functions': [caller], 'assembly': [definition]})
+
+    def test_unconverted_alias_and_nondefining_storage_remain_explicit(self):
+        definition = {'name': 'unconverted_entry', 'rom_offset': 0x1000, 'size': 4,
+                      'defines_symbol': False}
+        caller = {'name': 'caller', 'rom_offset': 0x2000, 'size': 4,
+                  'symbols': {'unconverted_entry': '0x03001020', 'original': '0x08004001'}}
+        validate_symbol_definitions({'functions': [definition, caller]})
+
+    def test_duplicate_definition_rejects_before_symbol_resolution(self):
+        function = {'name': 'callee', 'rom_offset': 0x1000, 'size': 4}
+        with self.assertRaisesRegex(ValueError, 'Duplicate'):
+            validate_symbol_definitions({'functions': [function, function]})

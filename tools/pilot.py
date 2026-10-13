@@ -13,10 +13,14 @@ import struct
 
 from elftools.elf.elffile import ELFFile
 from project import ROOT, audit, compare_bytes, write_report
-from toolchain import load_profile, verify_native, ARM_PIN, ARM_PROFILE
+from toolchain import (load_profile, verify_native, ARM_PIN, ARM_PROFILE,
+                       GCC302_PIN, GCC302_PROFILE, compiler_selection,
+                       verify_gcc302_source, optimization_flags, assembler_selection,
+                       BINUTILS2101_PIN, BINUTILS2101_PROFILE, verify_binutils2101_source,
+                       modern_assembler_abi_flags)
 from source_symbols import declarations
 from source_controls import mutate
-from source_addresses import execution_address, validate_execution_layout
+from source_addresses import execution_address, validate_execution_layout, validate_symbol_definitions
 from ram_copies import validate_copy
 from header_snapshots import snapshot_headers
 
@@ -43,23 +47,22 @@ def compile_function(function, source, folder, flags, copies=None):
         ram = json.loads((ROOT / 'config/ram-map-us-eu.json').read_text())
         copies, entries = ram['copies'], ram['entries']
     address = execution_address(function, copies, entries)
-    is_arm = function.get('mode', 'Thumb') == 'ARM'
-    compiler = ROOT / ('toolchains/agbcc-arm-build/cc1' if is_arm else 'toolchains/agbcc/gcc/agbcc')
-    flags = function.get('compiler_flags', flags)
-    if is_arm and '-mthumb' in flags:
-        raise ValueError('ARM backend cannot compile Thumb instructions')
+    selected = compiler_selection(function, flags)
+    selected_assembler = assembler_selection(function)
+    compiler = ROOT / selected['executable']
+    flags = selected['flags']
     run(["xcrun", "clang", "--target=arm-none-eabi", "-E", "-P", "-undef",
          "-nostdinc", "-std=gnu89", "-I", header_folder, source, "-o", preprocessed], commands)
     run([compiler, *flags, preprocessed, "-o", assembly], commands)
-    run([ROOT / "toolchains/binutils/bin/arm-none-eabi-as", "-mcpu=arm7tdmi",
-         *([] if is_arm else ['-mthumb']), "--no-pad-sections", assembly, "-o", obj], commands)
+    assembler = ROOT / selected_assembler['executable']
+    run([assembler, *selected_assembler['source_flags'], assembly, "-o", obj], commands)
     # Mark external function addresses as Thumb, so the linker does not invent
     # ARM interworking veneers for absolute ROM symbols.
     externs = folder / "externs.s"
     externs.write_text("\n".join(declarations(function.get('symbols', {}),
                                             function.get('thumb_symbols', ()))) + "\n")
     extern_obj = folder / "externs.o"
-    run([ROOT / "toolchains/binutils/bin/arm-none-eabi-as", externs, "-o", extern_obj], commands)
+    run([assembler, *selected_assembler['extern_flags'], externs, "-o", extern_obj], commands)
     script = folder / "function.ld"
     script.write_text(f"SECTIONS {{ .text {address:#x} : {{ *(.text) . = ALIGN(4); }} = 0 }}\n")
     run([ROOT / "toolchains/binutils/bin/arm-none-eabi-ld", "-T", script,
@@ -92,11 +95,12 @@ def assemble_glue(region, source, folder):
     commands = []
     assembler = ROOT / 'toolchains/binutils/bin/arm-none-eabi-as'
     obj, linked = folder / 'source.o', folder / 'linked.elf'
-    run([assembler, '-mcpu=arm7tdmi', '--no-pad-sections', source, '-o', obj], commands)
+    run([assembler, '-mcpu=arm7tdmi', '--no-pad-sections', *modern_assembler_abi_flags(),
+         source, '-o', obj], commands)
     externs = folder / 'externs.s'
     externs.write_text('\n'.join(declarations(region.get('symbols', {})))+'\n')
     extern_obj = folder / 'externs.o'
-    run([assembler, externs, '-o', extern_obj], commands)
+    run([assembler, *modern_assembler_abi_flags(), externs, '-o', extern_obj], commands)
     address = 0x08000000 + region['rom_offset']
     script = folder / 'function.ld'
     script.write_text(f'SECTIONS {{ .text {address:#x} : {{ *(.text) }} }}\n')
@@ -129,6 +133,7 @@ def main():
     ram = json.loads((ROOT / 'config/ram-map-us-eu.json').read_text())
     copies = ram['copies']
     validate_execution_layout(manifest['functions'], copies, ram['entries'])
+    validate_symbol_definitions(manifest, copies, ram['entries'])
     if any('ram_address' in f for f in manifest['functions']):
         for copy in copies:
             validate_copy(copy, lambda off: struct.unpack_from('<I', rom, off)[0])
@@ -159,7 +164,11 @@ def main():
         report['helper_sha256'][str(profile_path)] = hashlib.sha256((ROOT / profile_path).read_bytes()).hexdigest()
     report["host_clang"] = run(["xcrun", "clang", "--version"], commands).strip()
     verify_native(ROOT, lock, report['host_clang'])
-    if any(f.get('mode', 'Thumb') == 'ARM' for f in manifest['functions']):
+    selected_ids = {compiler_selection(f, manifest['compiler_flags'])['compiler_id']
+                    for f in manifest['functions']}
+    report['compiler_profiles'] = {'agbcc': {'pin': 'config/pilot-toolchain.json',
+                                            'compiler': lock['compiler']}}
+    if 'agbcc_arm' in selected_ids:
         arm_lock, arm_profile = load_profile(ROOT, ARM_PIN, ARM_PROFILE)
         if arm_lock['compiler']['source_commit'] != commit:
             raise RuntimeError('ARM compiler source differs from the checked source pin')
@@ -168,6 +177,36 @@ def main():
         if arm_profile:
             report['helper_sha256'][str(arm_profile)] = hashlib.sha256((ROOT / arm_profile).read_bytes()).hexdigest()
         lock = {**lock, 'native_tool_sha256': {**lock['native_tool_sha256'], **arm_lock['native_tool_sha256']}}
+        report['compiler_profiles']['agbcc_arm'] = {'pin': str(ARM_PIN), 'compiler': arm_lock['compiler']}
+    gcc302_lock = None
+    if 'gcc302' in selected_ids:
+        gcc302_lock, gcc302_profile = load_profile(ROOT, GCC302_PIN, GCC302_PROFILE)
+        verify_native(ROOT, gcc302_lock, report['host_clang'])
+        verify_gcc302_source(ROOT, gcc302_lock)
+        for path in (GCC302_PIN, Path('tools/setup_gcc302.py'),
+                     Path(gcc302_lock['compiler']['compatibility_patch'])):
+            report['helper_sha256'][str(path)] = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+        if gcc302_profile:
+            report['helper_sha256'][str(gcc302_profile)] = hashlib.sha256((ROOT / gcc302_profile).read_bytes()).hexdigest()
+        lock = {**lock, 'native_tool_sha256': {**lock['native_tool_sha256'], **gcc302_lock['native_tool_sha256']}}
+        report['compiler_profiles']['gcc302'] = {'pin': str(GCC302_PIN), 'compiler': gcc302_lock['compiler']}
+    selected_assembler_ids = {assembler_selection(f)['assembler_id'] for f in manifest['functions']}
+    report['assembler_profiles'] = {'binutils': {'pin': 'config/pilot-toolchain.json',
+                                                'object_abi_flags': modern_assembler_abi_flags()}}
+    binutils2101_lock = None
+    if 'binutils2101' in selected_assembler_ids:
+        binutils2101_lock, local = load_profile(ROOT, BINUTILS2101_PIN, BINUTILS2101_PROFILE)
+        verify_native(ROOT, binutils2101_lock, report['host_clang'])
+        verify_binutils2101_source(ROOT, binutils2101_lock)
+        for path in (BINUTILS2101_PIN, Path('tools/setup_binutils2101.py'),
+                     Path('tools/setup_gcc302.py'),
+                     Path(binutils2101_lock['assembler']['compatibility_patch'])):
+            report['helper_sha256'][str(path)] = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+        if local:
+            report['helper_sha256'][str(local)] = hashlib.sha256((ROOT / local).read_bytes()).hexdigest()
+        lock = {**lock, 'native_tool_sha256': {**lock['native_tool_sha256'], **binutils2101_lock['native_tool_sha256']}}
+        report['assembler_profiles']['binutils2101'] = {'pin': str(BINUTILS2101_PIN),
+                                                        'assembler': binutils2101_lock['assembler']}
     for name in lock['native_tool_sha256']:
         path = ROOT / name
         report.setdefault("tool_sha256", {})[name] = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -193,14 +232,19 @@ def main():
                        'rom_address': f"{0x08000000 + function['rom_offset']:#010x}",
                        "source_sha256": hashlib.sha256(snapshot.read_bytes()).hexdigest(),
                        "commands": compile_commands, "expected_sha256": hashlib.sha256(expected).hexdigest()})
+        if is_c:
+            selection = compiler_selection(function, manifest['compiler_flags'])
+            result.update({'compiler_id': selection['compiler_id'], 'compiler_flags': selection['flags']})
+            result['assembler_id'] = assembler_selection(function)['assembler_id']
         if args.matrix and is_c:
             result["optimization_trials"] = []
             for flag in ("-O0", "-O1", "-O2", "-O3", "-Os"):
-                trial_function = {**function, 'compiler_flags': [flag, '-mthumb-interwork']}
+                trial_flags = optimization_flags(selection['flags'], flag)
+                trial_function = {**function, 'compiler_flags': trial_flags}
                 trial_data, trial_commands = compile_function(
-                    trial_function, snapshot, folder / flag[1:], [flag, "-mthumb-interwork"])
+                    trial_function, snapshot, folder / flag[1:], trial_flags)
                 trial = compare_bytes(expected, trial_data)
-                trial.update({"flags": [flag, "-mthumb-interwork"], "commands": trial_commands})
+                trial.update({"flags": trial_flags, "commands": trial_commands})
                 result["optimization_trials"].append(trial)
         if args.negative_control and 'negative_control' in function:
             control_folder = folder / 'negative-control'
@@ -222,9 +266,6 @@ def main():
     report['assembly_glue_bytes'] = sum(r['size'] for r in report['functions'] if r['assembly_glue_verified'])
     accepted = all(r['identical'] and r.get('negative_control', {}).get('rejected', True)
                    for r in report['functions'])
-    if any(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != digest
-           for name, digest in report['helper_sha256'].items()):
-        raise ValueError('Source helpers changed during the run; retry with stable inputs')
     if args.negative_control:
         function = manifest["functions"][0]
         folder = run_folder / "negative-control"
@@ -243,6 +284,14 @@ def main():
         report["negative_control"] = control
         accepted = accepted and control["rejected"]
         print(f"Changed-source negative control: {'REJECTED' if control['rejected'] else 'UNEXPECTED MATCH'}")
+    if any(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != digest
+           for name, digest in report['helper_sha256'].items()):
+        raise ValueError('Source helpers changed during the run; retry with stable inputs')
+    verify_native(ROOT, lock, report['host_clang'])
+    if gcc302_lock:
+        verify_gcc302_source(ROOT, gcc302_lock)
+    if binutils2101_lock:
+        verify_binutils2101_source(ROOT, binutils2101_lock)
     report["accepted"] = accepted
     (run_folder / "report.json").write_text(json.dumps(report, indent=2) + "\n")
     write_report("pilot", report)
@@ -252,6 +301,6 @@ def main():
 if __name__ == "__main__":
     try:
         sys.exit(main())
-    except (OSError, RuntimeError) as error:
+    except (OSError, ValueError, RuntimeError) as error:
         print(error, file=sys.stderr)
         sys.exit(2)

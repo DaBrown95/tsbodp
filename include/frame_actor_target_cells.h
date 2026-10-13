@@ -13,6 +13,13 @@ struct FrameActorOwnerKind {
 };
 extern unsigned char *g_frame_actor_owner_descriptors[];
 
+/* Low two bits and upper six bits are observed cell properties. */
+struct FrameGridCellProperties {
+ unsigned char terrain:2, occupied:6;
+} __attribute__((packed));
+unsigned int frame_grid_terrain(void *, const int *);
+unsigned int frame_grid_occupancy(void *, const int *);
+
 unsigned int frame_actor_owner_cell_count(void *, unsigned int);
 unsigned char *frame_grid_cell_data_pointer(void *, const int *);
 unsigned char frame_grid_neighbor(void *, const int *, int *, unsigned char);

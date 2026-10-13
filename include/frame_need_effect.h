@@ -43,7 +43,7 @@ void frame_need_effect_special_tick(struct FrameObject *);
 void frame_need_effect_tick(struct FrameObject *);
 void frame_need_effect_remove(struct FrameObject *);
 void frame_need_effect_before_step(struct FrameObject *);
-struct FrameNeedEffectState *frame_allocate_need_effect_state(FrameU8);
+struct FrameNeedEffectState *frame_allocate_need_effect_state(FrameU32);
 void frame_need_effect_initialize(struct FrameNeedEffectState *,void *);
 void frame_update_need_effect(struct FrameObject *);
 

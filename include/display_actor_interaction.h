@@ -15,11 +15,14 @@ void frame_adjust_actor_needs(struct FrameActorNeedState *,unsigned int,unsigned
 struct FrameActorAttachmentRecord *frame_allocate_actor_attachment_record(struct FrameActorAttachmentOwner *,struct FrameObject *);
 struct FrameActorAttachmentRecord *frame_find_actor_attachment_record(struct FrameActorAttachmentOwner *,struct FrameObject *);
 unsigned char frame_release_actor_attachment_record(struct FrameActorAttachmentOwner *,struct FrameObject *);
-/* Need/timer helper remains unconverted; its result is narrowed by this caller. */
-unsigned char frame_step_attachment_need_timer(struct FrameActorAttachmentRecord *,struct FrameActorNeedState *,unsigned int,int *);
+/* The step caller observes only the low byte of the timer result. */
+unsigned int frame_step_attachment_need_timer(struct FrameActorAttachmentRecord *,struct FrameActorNeedState *,unsigned int,int *);
 unsigned int frame_interaction_step_31(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
 unsigned int frame_interaction_dispatch_31(struct FrameNeedEffectState *,struct FrameObject *);
 unsigned char frame_interaction_begin_31(struct FrameNeedEffectState *,struct FrameObject *,unsigned int);
 unsigned char frame_interaction_can_begin_31(struct FrameNeedEffectState *,struct FrameObject *);
 unsigned int audio_play_animation_cue(unsigned int);
+unsigned char frame_actor_need_value(struct FrameActorNeedState *,unsigned int);
+unsigned char frame_actor_need_average(struct FrameActorNeedState *);
+unsigned char frame_attachment_need_is_low(struct FrameActorNeedState *,unsigned int);
 #endif
