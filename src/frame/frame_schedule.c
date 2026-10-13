@@ -77,7 +77,7 @@ int frame_schedule(struct FrameObjectList *list, FrameU8 update_display)
         for (; layer < 4; layer++)
             frame_finish_layer(layer);
         if (update_display == 1)
-            frame_finish_display();
+            frame_commit_affine();
     }
     return changed;
 }

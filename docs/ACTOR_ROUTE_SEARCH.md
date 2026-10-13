@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 55 C functions and 6,740 bytes:
+The connected route-search path reconstructs 57 C functions and 7,352 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -9,7 +9,7 @@ the nine-function variant controller and parameter-indicator closure, and its
 three-function random refill/seed/reader dependency, its adjoining
 attachment-neighbor producer, and five allocation, seed-coordination and
 secondary-reader functions, followed by six bounded-output, signed-offset and
-threshold APIs.
+threshold APIs, and the secondary threshold's optional need-effect/cue consumer.
 Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
@@ -29,6 +29,8 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x354A0` | `frame_random_secondary_signed_offset` | 44 |
 | `0x354CC` | `frame_random_chance` | 44 |
 | `0x354F8` | `frame_random_secondary_chance` | 44 |
+| `0x2E688` | `frame_need_effect_try_optional` | 104 |
+| `0x2EF7C` | `frame_need_effect_play_optional_cue` | 508 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
 | `0x355AC` | `frame_next_random_secondary_word` | 88 |
@@ -794,8 +796,8 @@ pinned compiler profile.
 
 The secondary threshold wrapper uses the same inclusive 0 through 100 comparison
 as the primary predicate and advances the secondary reader. Its mapped direct
-caller at `0x2E688` remains unconverted; no gameplay role is inferred from that
-connection. No mapped direct caller of either signed-offset function was found
+caller at `0x2E688` is now reconstructed in the connected optional path below.
+No mapped direct caller of either signed-offset function was found
 in the inspected inventory, whose coverage is incomplete. The paired reader and
 adjacent API structure supply the static subsystem boundary, rather than a claim
 that every wrapper is used during gameplay.
@@ -809,3 +811,43 @@ Complete raw proofs, the initial type/lifetime failures and source snapshots
 remain under ignored `secondary-rng-1791885100/`; ready integration metadata is
 `frame-random-paired-batch-manifest.json`. The unresolved extra secondary state
 word and runtime behavior remain unchanged questions.
+
+## Optional need-effect and cue handoff
+
+The 104-byte secondary-threshold consumer reuses the published need-effect state
+view: kind word `+8`, associated object `+0x54`, enabled byte `+0x62`, parameter
+halfword `+0x70` and optional byte `+0x72`. It returns zero when disabled, already
+optional, or the secondary threshold does not return one. Its kind indexes
+four-byte ROM rows at `0x08064370`; only each row's byte `+2` is interpreted as
+the threshold here. Row count, the other three bytes and arbitrary index safety
+remain unestablished.
+
+On success the function sets optional to one and parameter to 25,600, selects a
+cue, and examines an object-pointer slot at associated object `+0x90`. A nonnull
+slot is passed to the matching state setter with state one and then cleared.
+This selector-specific partial overlay does not give that slot a broader
+ownership or lifetime meaning. The state object pointer is loaded again after
+the call, preserving the original side-effect ordering. A named unsigned-short
+amount before the two stores reproduces their original register scheduling;
+the source needs no register binding. Direct constant-store and early-return
+alternatives remain locally at 104/11 and 104/62 differences.
+
+The cue helper at `0x2EF7C` selects canonical `audio_play_animation_cue(36)` for
+kinds 1 through 8, 43, 44, 45, 49, 89, 104, 106, 107, 108 and 112. It selects
+cue 37 for kinds 69, 71, 73, 105, 109, 110, 111, 114 and 115; other kinds do
+nothing. Ordinary C switch labels generate the original 115-entry jump table,
+including its linked target addresses. The complete extent is 508 bytes through
+`0x2F177`; an initial CFG estimate of 506 omitted two zero alignment bytes before
+the next PUSH at `0x2F178`. Standalone alignment-only source glue expresses those
+bytes separately from the C body. No instruction body or address table is
+embedded in the claimed reconstruction.
+
+Both complete extents match. Real controls change amount 25,600 to 25,599 and
+cue 36 to 35, producing 51 and one compared byte differences respectively.
+The secondary-threshold predicate, optional-advance function, cue player and
+object state setter remain exact across 552 existing bytes, with all four
+actual source controls rejected. Saved raw table evidence, type/lifetime
+trials and canonical source comparisons are in ignored local reports; ready
+metadata is `frame-need-optional-batch-manifest.json`. These findings establish
+the static cue/optional connection and compiler equality. Trigger rates, object
+slot validity and gameplay behavior have not been tested.

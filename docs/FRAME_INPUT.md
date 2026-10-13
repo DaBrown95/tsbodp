@@ -1788,3 +1788,35 @@ object renderer remains excluded.
 Five prior direct consumers of the transient header were also rechecked at
 604 identical bytes, and all five existing changed-source controls reject.
 Their fresh receipts are under the adjacent `transient-prior-current/` reports.
+
+### Scheduler affine commit handoff
+
+The scheduler's former `frame_finish_display` alias names the already matched
+`frame_commit_affine` at `0x0802D010`. The canonical call retains the observed
+`void (void)` ABI. After completing four display layers, the scheduler commits
+the active affine parameter slots into both OAM banks through that routine.
+This is a static connection between existing replacements and adds no C
+coverage or runtime evidence. The shared frame header's layout is unchanged.
+
+Both accepted sources that refer to either old or canonical identifier were
+recompiled at their complete original extents: the scheduler's 648 bytes and
+the affine commit's 68 bytes. Both match; their actual existing source controls
+reject by 54 and 25 bytes. Receipts are retained under
+`reports/agents/frame-input/renderer-resume/scheduler-affine-alias-current-*`.
+The copied ARM sorter at `0x0800B840` and normal object renderer remain
+unconverted candidates.
+
+The connected `frame_write_affine_matrices` wrapper at `0x0804C8E0` is now
+explicit Thumb assembly glue: the observed `SVC 0x0F` handoff followed by return.
+Its complete extent is four bytes, ending before the next wrapper at
+`0x0804C8E4`; it contains no literal pool or alignment tail. The existing
+four-word ABI is inferred from the commit routine's two calls, which supply
+the parameter table, destination, slot count and stride eight. The BIOS
+implementation itself is outside the game ROM and remains unexamined here.
+
+The linked four-byte extent is identical at its original ROM address, and
+changing the service identifier from `0x0F` to `0x0E` rejects by one byte.
+Source, linked bytes, boundary evidence and actual control receipts are retained
+under `reports/agents/frame-input/renderer-resume/affine-svc-glue-current-*`.
+This adds four verified glue bytes and zero C bytes; it establishes no runtime
+or gameplay claim.

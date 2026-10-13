@@ -642,7 +642,7 @@
         "frame_apply_update",
         "frame_render_object",
         "frame_finish_layer",
-        "frame_finish_display",
+        "frame_commit_affine",
         "_call_via_sl"
       ],
       "symbols": {
@@ -662,8 +662,8 @@
         "frame_apply_update": "0x08002c99",
         "frame_render_object": "0x080023e9",
         "frame_finish_layer": "0x08031165",
-        "frame_finish_display": "0x0802d011",
-        "_call_via_sl": "0x0804cd19"
+        "_call_via_sl": "0x0804cd19",
+        "frame_commit_affine": "0x0802d011"
       },
       "negative_control": {
         "before": "g_frame_flags & 0x10008",
@@ -19236,6 +19236,43 @@
         "after": "value * 100"
       },
       "source": "src/frame/frame_random_secondary_chance.c"
+    },
+    {
+      "name": "frame_need_effect_try_optional",
+      "rom_offset": 190088,
+      "size": 104,
+      "source": "src/frame/frame_need_effect_try_optional.c",
+      "symbols": {
+        "frame_random_secondary_chance": "0x080354f9",
+        "g_frame_need_optional_thresholds": "0x08064370",
+        "frame_need_effect_play_optional_cue": "0x0802ef7d",
+        "transition_object_set_state": "0x08001c05"
+      },
+      "thumb_symbols": [
+        "frame_random_secondary_chance",
+        "frame_need_effect_play_optional_cue",
+        "transition_object_set_state"
+      ],
+      "negative_control": {
+        "before": "amount = 25600",
+        "after": "amount = 25599"
+      }
+    },
+    {
+      "name": "frame_need_effect_play_optional_cue",
+      "rom_offset": 192380,
+      "size": 508,
+      "source": "src/frame/frame_need_effect_play_optional_cue.c",
+      "symbols": {
+        "audio_play_animation_cue": "0x08040ffd"
+      },
+      "thumb_symbols": [
+        "audio_play_animation_cue"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(36)",
+        "after": "audio_play_animation_cue(35)"
+      }
     }
   ],
   "assembly": [
@@ -19289,6 +19326,18 @@
       "negative_control": {
         "before": ".word 0x20f4",
         "after": ".word 0x20f0"
+      }
+    },
+    {
+      "name": "frame_write_affine_matrices",
+      "rom_offset": 313568,
+      "size": 4,
+      "source": "src/frame/frame_write_affine_matrices.s",
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "negative_control": {
+        "before": "svc #0x0f",
+        "after": "svc #0x0e"
       }
     }
   ]
