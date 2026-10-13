@@ -94,8 +94,8 @@ the six-word palette rows are at `0x08066FC4`. The three special palette slots
 at `0x08062E70`, `0x08062E74` and `0x08062E78` are passed by address. Table storage
 bounds and those slots' wider meanings are unknown. The callback slot is described
 through an explicit access at `+0xC8`; it does not silently adopt the existing
-partial actor view's callback at `+0xCC`. The callback at `0x11328`, palette setter
-at `0x30168` remain unconverted.
+partial actor view's callback at `+0xCC`. The callback at `0x11328` is reconstructed below; the palette setter
+at `0x30168` remains unconverted.
 
 The incoming commit parameter is a complete word. This caller performs a signed
 byte load without narrowing its argument before the call; the matching commit
@@ -275,7 +275,7 @@ failed views remain local; accepted metadata is
 ### Attachment-count boundary
 
 `frame_need_effect_attachment_count` at `0x0802ECA0` is a 32-byte matching C
-replacement used by the unconverted choice builder at `0x0802DCE8`. It advances
+replacement used by the connected choice builder at `0x0802DCE8`. It advances
 through exactly three 24-byte records beginning at state `+0x0C` and counts
 nonnull actor pointers. The return value is a word; this does not establish a
 wider attachment capacity beyond this loop and the corresponding observed state
@@ -284,5 +284,77 @@ are initialized before the record cursor, preserving the observed initialization
 order. A compiled control changing the record count from three to two rejects the
 match. The published progress step, optional progression and tick were freshly
 verified with their own changed-source controls after the declaration was added.
-The choice builder remains unconverted; its preserved candidates are excluded
-from source coverage.
+Failed choice-builder candidates remain excluded from source coverage; the
+verified replacement and its boundaries are described below.
+
+### Choice builder and menu handoff
+
+`frame_need_effect_build_choices` at `0x0802DCE8` now reproduces its complete
+412-byte extent, including the shared literal pool and alignment. It obtains the
+state's callback at `+0xE8` and passes the embedded choice buffer at object `+0x7A`;
+the callback's return value is unused. The callback view does not establish what
+other producers write. After clearing the 14-byte title buffer at object `+0x6C`,
+the builder scans up to seven choice bytes and stops on zero. Each nonzero code
+indexes a four-byte row at `0x080645C4`, reading its second halfword as the title
+identifier. This row interpretation follows the loads and the menu handoff; the
+first halfword and the complete table length remain unknown.
+
+The builder may append choice 40 when the need effect is enabled, or choice 34
+when the world exclusion predicate returns one. Each append requires space, no
+attached actors, optional value other than three, and a kind other than
+133/135/146/147. The first append increments the scan index; the second does not.
+When at least one choice exists, it clears bytes `+4`, `+1` and `+2` at
+`0x03005A00`, copies seven title halfwords to `0x030059F0`, updates text field two
+from the game-state halfword at `+0x744` for kind 117, invokes the still-unconverted
+scene-stage handoff at `0x08027DC0` with two, and changes the object state to 15 and
+variant to zero. The counter view overlaps existing scene-request storage, and
+the title view overlaps the scene-result storage. These are access roles, not
+claims about distinct allocations or complete storage bounds. The existing
+choice consumer at `0x0802DE84` supplies the next action/attachment handoff.
+
+The replacement uses semantic C register views to preserve the observed
+lifetimes: the choices, values and secondary cursor occupy callee-saved registers
+through external calls; the scan's table, code and short byte offset occupy
+`r3`, `r2` and `r1` only within the scan. Its offset scope ends before the inline
+title reader uses `r0` for its offset/result. Each append's constrained code and
+pointer are consumed before further work. No unrelated values overlap those
+register views, and no caller-saved constrained value survives an external call.
+The explicit scan label preserves the observed exit structure. Independent
+source/destination views in the final copy and sequential address accumulation
+preserve the title-buffer arithmetic. All of these operations remain C; the only
+assembly directive specifies zero-filled alignment. Earlier loop-peeling,
+register-allocation and literal-sharing mismatches are retained in ignored raw
+reports and receive no coverage.
+
+The formatted public source matches all 412 bytes. A real compiled control
+changing the first excluded kind from 133 to 134 differs by one byte and is
+rejected. The published tick, attachment count and action consumer were freshly
+recompiled and checked with their own changed-source controls. Matching and the
+static menu connection do not establish runtime correctness or gameplay coverage.
+
+### Two-object callback and movement reset
+
+The installed callback `frame_need_effect_interact` at `0x08011328` matches its
+20-byte extent. Its body preserves the incoming second argument, then invokes
+`frame_need_effect_stop_at_position` on each of the two objects. This supports a
+two-object signature for the callback address and corrects the earlier provisional
+single-object declaration. The updater's explicit slot `+0xC8` view now uses that
+same signature. This body and the installation do not establish which objects an
+unconverted indirect caller supplies; the actor view's separate callback field at
+`+0xCC` remains separate.
+
+The connected helper at `0x0802B3B8` matches all 28 bytes. It copies the two current
+position words at `+0x18/+0x1C` to next position at `+0x20/+0x24`, clears velocity
+at `+0x28/+0x2C`, and sets bit zero in the halfword at `+0xAC`. The movement-field
+names reuse the existing actor access view. The wider halfword and the precise
+meaning of that bit remain provisional. Two word-sized C temporaries preserve
+its load/mask/store order without register constraints; the cast on the final
+halfword store preserves all other flag bits. The wrapper is ordinary C too.
+
+The helper's compiled flag-mask control (one to two) rejects one byte; changing
+the wrapper's second object to the first also rejects one byte. The updater,
+tick, action consumer and newly reconstructed choice builder were freshly
+recompiled and rejected their own changed-source controls after the signature
+refinement. The failed initial halfword-expression and bitfield candidates remain
+in ignored raw reports. These static type and matching findings make no claim
+about actual indirect-call or gameplay behavior.

@@ -13,9 +13,9 @@ unsigned int audio_sample_release(unsigned int handle)
             unsigned int zero = 0;
             /* The playback table-index byte becomes the fade counter here. */
             channel->volume_table_index = 16;
-            channel->fade_initial = *channel->cursor << 4;
-            channel->fade_remaining = 128 - *channel->cursor;
-            channel->unknown21 = 7;
+            channel->tail.fade.initial = *channel->cursor << 4;
+            channel->tail.fade.remaining = 128 - *channel->cursor;
+            channel->mix_function = 7;
             channel->cursor = channel->start;
             channel->step = zero;
             channel->mixing_mode = zero;

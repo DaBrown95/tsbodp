@@ -4,7 +4,7 @@ from pathlib import Path
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
-from render_progress import binary_layout, verify_functions
+from render_progress import binary_layout, verify_functions, source_group
 
 
 class ProgressTests(unittest.TestCase):
@@ -29,6 +29,21 @@ class ProgressTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             verify_functions([self.function], [self.receipt], lambda f: 'changed')
 
+    def test_inline_glue_requires_current_span_receipt_and_rejected_control(self):
+        f = {**self.function, 'mode': 'ARM', 'inline_glue': {
+            'source': 'include/bios.h', 'begin_prefix': '__tsbodp_glue_bios_begin_',
+            'end_prefix': '__tsbodp_glue_bios_end_', 'spans': [{'offset': 4, 'size': 4}]}}
+        r = {**self.receipt, 'inline_glue': f['inline_glue'], 'inline_glue_verified': True,
+             'inline_glue_control': {'rejected': True}}
+        rows = verify_functions([f], [r], lambda f: 'original')
+        self.assertEqual([row['status'] for row in rows], ['exact_c', 'exact_glue', 'exact_c'])
+        for change in ({'inline_glue': {}}, {'inline_glue_verified': False},
+                       {'inline_glue_control': {'rejected': False}}):
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                verify_functions([f], [{**r, **change}], lambda f: 'original')
+        with self.assertRaisesRegex(ValueError, 'Stale inline glue coverage'):
+            verify_functions([self.function], [r], lambda f: 'original')
+
     def test_binary_only_or_partial_match_rejected(self):
         for change in ({'source_reconstruction_verified': False}, {'identical': False},
                        {'candidate_size': 8}, {'size': 8}, {'rom_offset': 8}):
@@ -47,6 +62,14 @@ class ProgressTests(unittest.TestCase):
             x, y, w, h = boxes[name]
             self.assertAlmostEqual(w*h, weight*1000)
             self.assertTrue(0 <= x < x+w <= 100 and 0 <= y < y+h <= 100)
+
+    def test_copied_audio_and_split_glue_keep_the_verified_execution_group(self):
+        rows = [{'rom_offset': 100, 'size': 48, 'group': 'ROM 08FDxxxx'}]
+        for offset in (100, 108, 132):
+            self.assertEqual(source_group({'rom_offset': offset, 'ram_copy': 'audio_iwram'}, rows),
+                             'Copied audio / ARM')
+        self.assertEqual(source_group({'rom_offset': 108}, rows), 'ROM 08FDxxxx')
+        self.assertEqual(source_group({'rom_offset': 200}, rows), 'Verified source')
 
     def test_fake_zero_weight_tiles_rejected(self):
         with self.assertRaises(ValueError):

@@ -9,6 +9,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 from project import ROOT
 from rom_layout import layout
+from source_coverage import inline_glue, coverage_rows
 
 COLORS = {'exact_c': '#00b800', 'exact_glue': '#b08030', 'mapped_code': '#373a3e', 'candidate': '#292c30', 'unresolved': '#202226', 'mapped_data': '#44505a'}
 BACKGROUND, FOREGROUND, MUTED = '#141619', '#f0f2f5', '#a5aeb8'
@@ -32,10 +33,26 @@ def verify_functions(functions, receipts, source_hash):
                 or any(r[k] != f[k] for k in ('rom_offset', 'size'))
                 or r['reference_size'] != f['size'] or r['candidate_size'] != f['size']):
             raise ValueError(f"Unverified or stale source: {f['name']}")
-        result.append({**f, 'status': 'exact_c' if is_c else 'exact_glue',
-                       'group': 'Interrupts' if f.get('source', '').startswith('src/irq/')
-                       or f['name'] == 'set_irq_table_entry' else 'Utilities'})
+        if r.get('inline_glue') != f.get('inline_glue'):
+            raise ValueError(f"Stale inline glue coverage: {f['name']}")
+        if inline_glue(f):
+            if (r.get('inline_glue') != f['inline_glue'] or not r.get('inline_glue_verified')
+                    or not r.get('inline_glue_control', {}).get('rejected')):
+                raise ValueError(f"Unverified or stale inline glue: {f['name']}")
+        verified = {**f, 'status': 'exact_c' if is_c else 'exact_glue',
+                    'group': 'Interrupts' if f.get('source', '').startswith('src/irq/')
+                    or f['name'] == 'set_irq_table_entry' else 'Utilities'}
+        result.extend(coverage_rows(verified))
     return result
+
+
+def source_group(function, discovered):
+    # The verified copy identity is stronger than a scanner's fallback ROM group.
+    if function.get('ram_copy') == 'audio_iwram':
+        return 'Copied audio / ARM'
+    return next((r['group'] for r in discovered
+                 if r['rom_offset'] <= function['rom_offset'] < r['rom_offset']+r['size']),
+                'Verified source')
 
 
 def inventory():
@@ -74,8 +91,7 @@ def inventory():
             raise ValueError(f'Stale inventory: {name}; run make inventory')
     # Green intervals come only from compiler/build receipts, never the scanner.
     for f in exact:
-        f['group'] = next((r['group'] for r in discovered['rows']
-                           if r['rom_offset'] == f['rom_offset']), 'Verified source')
+        f['group'] = source_group(f, discovered['rows'])
     rows = overlay(discovered['rows'], exact)
     layout(rows, target['size'])
     stamp = datetime.fromisoformat(build['recorded_at_utc'].replace('Z', '+00:00'))
@@ -96,7 +112,7 @@ def inventory():
             'partition': partition([{k: r[k] for k in ('name', 'rom_offset', 'size', 'status')} for r in rows] + discovered['data_regions'], target['size']),
             'input_sha256': {name: sha(ROOT / name) for name in
                              ('config/build-us-eu.json', 'assets/rom-inventory.json',
-                              'tools/render_progress.py', 'tools/inventory_partition.py', 'config/progress-requirements.txt')}}
+                              'tools/render_progress.py', 'tools/source_coverage.py', 'tools/inventory_partition.py', 'config/progress-requirements.txt')}}
 
 
 def binary_layout(items, box):

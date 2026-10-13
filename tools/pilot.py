@@ -23,6 +23,7 @@ from source_controls import mutate
 from source_addresses import execution_address, validate_execution_layout, validate_symbol_definitions
 from ram_copies import validate_copy
 from header_snapshots import snapshot_headers
+from source_coverage import byte_counts, inline_glue, verify_inline_glue_symbols
 
 
 def run(command, commands):
@@ -33,11 +34,17 @@ def run(command, commands):
     return result.stdout
 
 
-def compile_function(function, source, folder, flags, copies=None):
+def compile_function(function, source, folder, flags, copies=None, header_overrides=None):
     folder.mkdir(parents=True, exist_ok=True)
     commands = []
     header_folder = folder / "include"
-    snapshot_headers(source, header_folder, ROOT / 'include')
+    headers = snapshot_headers(source, header_folder, ROOT / 'include')
+    for name, text in (header_overrides or {}).items():
+        if name not in headers['headers']:
+            raise ValueError('Header control is outside the source include closure')
+        (header_folder / name).write_text(text)
+        headers['headers'][name] = hashlib.sha256(text.encode()).hexdigest()
+    (folder / 'header-snapshot.json').write_text(json.dumps(headers, indent=2) + '\n')
     preprocessed = folder / "source.i"
     assembly = folder / "source.s"
     obj = folder / "source.o"
@@ -86,6 +93,9 @@ def compile_function(function, source, folder, flags, copies=None):
         if ((symbol["st_value"] & ~1) != address or len(functions) != 1
                 or not 0 <= tail_size < section["sh_addralign"]):
             raise RuntimeError("Function does not own the complete linked text extent")
+        verify_inline_glue_symbols(function,
+                                   {s.name: s['st_value'] for s in symtab.iter_symbols()
+                                    if s['st_shndx'] == elf.get_section_index('.text')}, address)
     return data, commands
 
 
@@ -156,7 +166,7 @@ def main():
                                 for name in ("tools/pilot.py", "tools/project.py", "config/build-us-eu.json",
                                              "tools/toolchain.py", "tools/source_symbols.py", "tools/source_controls.py", "config/pilot-toolchain.json",
                                              "config/targets/us-eu.json", "include/irq.h",
-                                             "tools/source_addresses.py", "tools/ram_copies.py", "tools/header_snapshots.py",
+                                             "tools/source_addresses.py", "tools/source_coverage.py", "tools/ram_copies.py", "tools/header_snapshots.py",
                                              "config/ram-map-us-eu.json")}
     report['helper_sha256'].update({str(header.relative_to(ROOT)): hashlib.sha256(header.read_bytes()).hexdigest()
                                     for header in (ROOT / 'include').rglob('*.h')})
@@ -227,6 +237,8 @@ def main():
         # This result is backed by source compilation and a checked linked extent.
         result["source_reconstruction_verified"] = result["identical"] and is_c
         result["assembly_glue_verified"] = result["identical"] and not is_c
+        result['inline_glue_verified'] = result['identical'] and bool(inline_glue(function))
+        result['compiled_c_bytes'], result['assembly_glue_bytes'] = byte_counts(function)
         address = execution_address(function, copies) if is_c else 0x08000000 + function['rom_offset']
         result.update({**function, "address": f"{address:#010x}",
                        'rom_address': f"{0x08000000 + function['rom_offset']:#010x}",
@@ -259,12 +271,30 @@ def main():
                             'source_edit': function['negative_control'],
                             'source_sha256': hashlib.sha256(changed.read_bytes()).hexdigest()})
             result['negative_control'] = control
+        if args.negative_control and function.get('inline_glue'):
+            spec = function['inline_glue']
+            control_folder = folder / 'inline-glue-control'
+            control_folder.mkdir()
+            header_name = Path(spec['source']).relative_to('include').as_posix()
+            original_header = (folder / 'include' / header_name).read_text()
+            changed_header = mutate(original_header, spec['negative_control'])
+            control_data, control_commands = compile_function(
+                function, snapshot, control_folder, manifest['compiler_flags'],
+                header_overrides={header_name: changed_header})
+            (control_folder / 'candidate.bin').write_bytes(control_data)
+            control = compare_bytes(expected, control_data)
+            control.update({'rejected': not control['identical'], 'commands': control_commands,
+                            'source_edit': spec['negative_control'],
+                            'header': spec['source'],
+                            'source_sha256': hashlib.sha256(changed_header.encode()).hexdigest()})
+            result['inline_glue_control'] = control
         report["functions"].append(result)
         print(f"{name}: {'MATCH' if result['identical'] else 'MISMATCH'} ({len(data)} / {len(expected)} bytes)")
     report["matched_functions"] = sum(r["source_reconstruction_verified"] for r in report["functions"])
-    report["matched_bytes_including_pools_and_padding"] = sum(r["size"] for r in report["functions"] if r["source_reconstruction_verified"])
-    report['assembly_glue_bytes'] = sum(r['size'] for r in report['functions'] if r['assembly_glue_verified'])
+    report["matched_bytes_including_pools_and_padding"] = sum(r['compiled_c_bytes'] for r in report["functions"] if r["source_reconstruction_verified"])
+    report['assembly_glue_bytes'] = sum(r['assembly_glue_bytes'] for r in report['functions'] if r['identical'])
     accepted = all(r['identical'] and r.get('negative_control', {}).get('rejected', True)
+                   and r.get('inline_glue_control', {}).get('rejected', True)
                    for r in report['functions'])
     if args.negative_control:
         function = manifest["functions"][0]

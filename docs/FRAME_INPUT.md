@@ -1447,3 +1447,42 @@ raw comparison files are under
 `reports/agents/frame-input/camera-map/need-placement-dependencies-promoted/`.
 Grid registration at `0x3B12C` and the target handoff at `0x7E68` remain explicit
 original bodies. This evidence does not establish runtime or gameplay behavior.
+
+### Placement cell rules and pattern rotation
+
+| Address | Function | Verified C bytes |
+| --- | --- | ---: |
+| `0x0803BBA4` | `frame_grid_need_effect_cell_available` | 204 |
+| `0x0803BC70` | `frame_need_effect_pattern_cell` | 132 |
+
+These helpers are direct dependencies of the still-unconverted registration
+body at `0x3B12C`. The cell rule reads the grid byte through two separate
+`frame_grid_cell_data_pointer` calls. Its upper six bits are the existing
+`occupied` view and its lower two bits the `terrain` view. Action 4 succeeds
+before other tests. Other actions require terrain bit 0 or the incoming linked
+flag; actions 1 and 3 reject occupied masks 61 and 21, action 2 requires occupied
+mask 4 or the linked flag, and action 5 permits restricted terrain or linking
+after its occupied-mask test. These are observed numeric rules, not inferred
+gameplay labels for the action or terrain values. The restricted-terrain local
+uses a semantic `r2` binding after both calls, across call-free tests only.
+
+Rotation subtracts the pointed pattern's first two bytes from the supplied
+column and row, calls `0x2F430` for two byte outputs, then applies direction
+cases 1, 3, 5 and 7 before adding the packed anchor's two coordinate bytes.
+Only the first dimension output affects this body. Direction remains a word
+argument; the two result stores narrow to bytes. The dimensions helper and
+pointed pattern allocation remain unconverted and have provisional types.
+Initializing the row from the input before subtracting its pattern offset
+preserves the original saved-register lifetimes without any register binding.
+Earlier 132-byte candidates with 10, 4 and 2 differing bytes are retained.
+
+The following entry points at `0x3BC70` and `0x3BCF4` establish the complete
+204- and 132-byte extents, including their two-byte alignment tails. The pinned
+historical assembler reproduces both tails naturally; neither C source embeds
+alignment bytes or an instruction body. Each new source has a compiled and
+linked one-byte negative control, changing an occupied mask or the direction-7
+offset. All three existing direct header consumers were rechecked at 412
+matching bytes with three rejected controls. The ten comparison receipts are
+under `reports/agents/frame-input/camera-map/need-validator-rotation-promoted/`.
+Registration, the dimensions helper, and the central renderer remain explicit
+unconverted dependencies. This adds static and compiler evidence only.

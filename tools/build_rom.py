@@ -12,6 +12,7 @@ from rom_layout import layout
 from source_symbols import declarations
 from source_addresses import execution_address, validate_execution_layout, validate_symbol_definitions
 from toolchain import modern_assembler_abi_flags
+from source_coverage import byte_counts
 
 
 
@@ -132,8 +133,8 @@ def main():
               'reference_sha256': identity['sha256'], 'pilot_report': str(pilot_folder / 'report.json'),
               'comparison': comparison, 'negative_control': negative, 'negative_control_rejected': rejected,
               'compiled_c_functions': len(manifest['functions']),
-              'compiled_c_bytes_including_pools_and_alignment': sum(f['size'] for f in manifest['functions']),
-              'assembly_glue_bytes': sum(f['size'] for f in manifest.get('assembly', [])),
+              'compiled_c_bytes_including_pools_and_alignment': sum(byte_counts(f)[0] for f in manifest['functions']),
+              'assembly_glue_bytes': sum(byte_counts(f)[1] for f in manifest['functions'] + manifest.get('assembly', [])),
               'unconverted_bytes': sum(r['size'] for r in regions if r['kind'] == 'unconverted'),
               'full_source_reconstruction': False, 'regions': regions, 'commands': commands,
               'negative_source': str(changed),
@@ -142,7 +143,7 @@ def main():
               'negative_link_commands': bad_commands,
               'helper_sha256': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                                 for name in ('tools/build_rom.py', 'tools/rom_layout.py',
-                                             'tools/source_addresses.py', 'tools/toolchain.py',
+                                             'tools/source_addresses.py', 'tools/source_coverage.py', 'tools/toolchain.py',
                                              'config/ram-map-us-eu.json')},
               'accepted': comparison['identical'] and rejected}
     (folder / 'report.json').write_text(json.dumps(report, indent=2) + '\n')

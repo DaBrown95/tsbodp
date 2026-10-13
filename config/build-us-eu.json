@@ -13497,6 +13497,154 @@
         "before": "while(index<3)",
         "after": "while(index<2)"
       }
+    },
+    {
+      "name": "audio_mix_channels",
+      "rom_offset": 16625856,
+      "size": 1080,
+      "ram_address": 50334792,
+      "source": "src/audio/mix_channels.c",
+      "mode": "ARM",
+      "ram_copy": "audio_iwram",
+      "compiler_id": "gcc302",
+      "symbols": {
+        "audio_mix_clear": "0x03000afc",
+        "g_audio_mix_buffer": "0x0300115c",
+        "g_audio_sample_channels": "0x020008b4",
+        "audio_mix_downsample": "0x03000b38",
+        "g_audio_volume_sum_left": "0x03000b30",
+        "g_audio_volume_sum_right": "0x03000b34",
+        "g_audio_mix_functions": "0x08d6f4a4",
+        "audio_mix_bias": "0x03000ab4"
+      },
+      "compiler_flags": [
+        "-O3",
+        "-marm",
+        "-mthumb-interwork",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "i = 32",
+        "after": "i = 31"
+      },
+      "inline_glue": {
+        "source": "include/audio_bios_divide.h",
+        "begin_prefix": "__tsbodp_glue_audio_divide_begin_",
+        "end_prefix": "__tsbodp_glue_audio_divide_end_",
+        "spans": [
+          {
+            "offset": 288,
+            "size": 28
+          },
+          {
+            "offset": 684,
+            "size": 28
+          }
+        ],
+        "negative_control": {
+          "before": "swine 0x60000",
+          "after": "swine 0x70000"
+        }
+      }
+    },
+    {
+      "name": "frame_grid_need_effect_cell_available",
+      "rom_offset": 244644,
+      "size": 204,
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "frame_grid_cell_data_pointer": "0x0803bb81"
+      },
+      "thumb_symbols": [
+        "frame_grid_cell_data_pointer"
+      ],
+      "negative_control": {
+        "before": "mask = 61",
+        "after": "mask = 60"
+      },
+      "source": "src/frame/frame_grid_need_effect_cell_available.c"
+    },
+    {
+      "name": "frame_need_effect_pattern_cell",
+      "rom_offset": 244848,
+      "size": 132,
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "frame_need_effect_pattern_dimensions_2f430": "0x0802f431"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_pattern_dimensions_2f430"
+      ],
+      "negative_control": {
+        "before": "case 7: dx = column - width + 1",
+        "after": "case 7: dx = column - width + 2"
+      },
+      "source": "src/frame/frame_need_effect_pattern_cell.c"
+    },
+    {
+      "name": "frame_need_effect_build_choices",
+      "rom_offset": 187624,
+      "size": 412,
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "heap_clear": "0x08027a49",
+        "g_need_effect_action_text": "0x080645c4",
+        "frame_need_effect_enabled": "0x0802e285",
+        "frame_need_effect_attachment_count": "0x0802eca1",
+        "frame_world_in_idle_exclusion_set": "0x080269f5",
+        "g_frame_world_id": "0x03004334",
+        "g_need_effect_choice_counters": "0x03005a00",
+        "g_need_effect_choice_text": "0x030059f0",
+        "g_need_effect_game_state": "0x03003950",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_variant_state": "0x08001be1",
+        "display_text_number_field_two": "0x0801b1f1",
+        "display_scene_stage_08027dc0": "0x08027dc1"
+      },
+      "thumb_symbols": [
+        "_call_via_r2",
+        "heap_clear",
+        "frame_need_effect_enabled",
+        "frame_need_effect_attachment_count",
+        "frame_world_in_idle_exclusion_set",
+        "display_text_number_field_two",
+        "display_scene_stage_08027dc0",
+        "transition_object_set_state",
+        "frame_set_variant_state"
+      ],
+      "source": "src/display/build_need_effect_choices.c",
+      "negative_control": {
+        "before": "state->kind != 133",
+        "after": "state->kind != 134"
+      }
+    },
+    {
+      "name": "frame_need_effect_stop_at_position",
+      "rom_offset": 177080,
+      "size": 28,
+      "symbols": {},
+      "thumb_symbols": [],
+      "source": "src/display/need_effect_stop_at_position.c",
+      "negative_control": {
+        "before": "unsigned int changed = 1",
+        "after": "unsigned int changed = 2"
+      }
+    },
+    {
+      "name": "frame_need_effect_interact",
+      "rom_offset": 70440,
+      "size": 20,
+      "symbols": {
+        "frame_need_effect_stop_at_position": "0x0802b3b9"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_stop_at_position"
+      ],
+      "source": "src/display/need_effect_interact.c",
+      "negative_control": {
+        "before": "frame_need_effect_stop_at_position(second)",
+        "after": "frame_need_effect_stop_at_position(first)"
+      }
     }
   ],
   "assembly": [

@@ -4,17 +4,21 @@
 struct AudioSampleChannel {
  unsigned char volume;
  signed char pan;
- unsigned char active, unknown03;
+ unsigned char active, loop_mode;
  const unsigned char *start, *cursor;
- unsigned int unknown0c[2];
+ const unsigned char *end;
+ unsigned int loop_length;
  int step;
  unsigned int handle;
- unsigned short unknown1c;
- unsigned char volume_left, volume_right, mixing_mode, unknown21;
+ unsigned short fraction;
+ unsigned char volume_left, volume_right, mixing_mode, mix_function;
  unsigned char mixing_flags, unknown23;
  /* +24 selects the volume table while playing; stop/fade code reuses it. */
  unsigned char volume_table_index, unknown25[3];
- unsigned short fade_initial, fade_remaining;
+ union {
+  const unsigned char *loop_start;
+  struct { unsigned short initial, remaining; } fade;
+ } tail;
 };
 extern struct AudioSampleChannel g_audio_sample_channels[32];
 extern unsigned char g_audio_sample_fade_enabled, g_audio_sample_mix_mode;

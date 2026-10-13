@@ -178,7 +178,7 @@ revision. The accepted bodies were reconstructed from the reference's
 operations, without importing its instruction bodies or substantial
 upstream source. No runtime or audible-output evidence is claimed.
 
-The next connected backend targets are channel mixing, sample
+The next connected backend targets are sample mixing primitives, sample
 allocation, fade execution and sequence timing. Their partial
 candidates remain excluded from C coverage.
 
@@ -206,8 +206,8 @@ shared buffer declarations. GNU GCC 3.0.2 and GNU binutils 2.10.1 reproduce the
 entire extent, including both intervening pools and zero alignment. A changed
 sound-control constant compiles and differs by one byte. Both existing accepted
 functions that directly include the shared frame header also passed fresh
-positive comparisons and their compiled negative controls. The channel mixing
-loop and remaining sequencer bodies still receive no C credit.
+positive comparisons and their compiled negative controls. The sample mixing
+primitives and remaining sequencer bodies still receive no C credit.
 
 ## Activation and channel lifetime dependencies
 
@@ -230,7 +230,7 @@ Channel counting walks the same 32 records and counts only active-state byte
 one, rather than every nonzero state accepted by the handle validator. Indexed
 clearing sets that byte to zero only where both the reused `+0x24` byte is
 nonzero and the state is one. The subsequent interpretation of other states and
-the reused counter still requires the unmatched mixer/fade bodies.
+the reused counter still requires the unmatched fade bodies.
 
 The sample-volume setter clamps an unsigned word to 255 and writes byte one
 of the table at `0x03000090`. This is distinct from the accepted global setter
@@ -244,7 +244,7 @@ audible output or gameplay behavior.
 
 ## Copied ARM frame-audio coordinator
 
-The 220-byte function stored at ROM `0xFDAFF8` and executed at RAM `0x03001080`
+The 220-byte function stored at ROM `0xFDB4F8` and executed at RAM `0x03001080`
 now matches as C, including its literal pool. The separately audited audio
 copy establishes that address relation. It acquires left and right output
 buffers, divides the available samples at tick boundaries, invokes the
@@ -255,7 +255,8 @@ one when buffers were acquired and zero otherwise.
 
 The callback at `0x02001638`, tick period at `0x0200163C`, and current sample
 count at `0x0200163E` agree with the accepted buffer and callback functions.
-The channel mixer called at ARM address `0x03000C48` remains unconverted.
+The channel mixer called at ARM address `0x03000C48` is covered in the following
+batch, with its inline BIOS glue accounted for separately.
 The acquisition function at Thumb address `0x080497F9` uses GNU's `long_call`
 attribute on both its declaration and definition: the copied ARM coordinator
 loads its address and transfers through `BX`, while the acquisition body's
@@ -276,5 +277,58 @@ address. Changing the tick comparison from `<=` to `<` compiles and produces
 a one-byte mismatch. All five previously accepted direct consumers of the
 frame-audio header also passed fresh positive comparisons and their existing
 changed-source controls. This closes the frame scheduling handoff from the
-VBlank path, with the channel-mixing body still explicit and unconverted.
+VBlank path. Its lower-level sample mixing calls remain explicit and unconverted.
 Timing, audible output and gameplay have not been verified.
+
+## Channel mixing and explicit inline BIOS glue
+
+The complete 1,080-byte mixer at ROM `0xFDB0C0`, copied to ARM address
+`0x03000C48`, now compiles and links identically. Its C portion contributes
+1,024 bytes. Two inlined BIOS divide-with-remainder wrappers each contribute
+28 separately reported assembly-glue bytes. Neither wrapper receives C credit
+or a green C interval in the public treemap.
+
+The mixer clears the stereo intermediate buffer, visits the 32 shared 44-byte
+channel records, and processes only active state one. A zero-volume channel
+advances its cursor without mixing; normal and bidirectional loops wrap or
+reverse its signed step. Other channels accumulate their left/right volumes,
+select the mixer callback from the sum of the `+0x20` and `+0x21` bytes, and
+mix until the buffer is complete or the sample stops. Near a sample boundary,
+the BIOS operation computes the number of output samples that fit. That number
+is rounded to a multiple of four before mixing, wrapping or applying the bias
+tail. Finally the downsampling callback writes the two output buffers.
+
+The reference's sample estimate multiplies the signed step shifted by eight
+with the remaining output count, shifts that product by eight, and adds one
+for forward movement. This differs from the inspected upstream estimate, which
+shifts the step directly by sixteen. The game-specific estimate and 44-byte
+record layout are retained. Names for the end pointer, loop length, fractional
+position, loop mode and dispatch index follow their observed loads and uses.
+At `+0x28`, the loop-start pointer overlaps the two fade halfwords already
+observed by release: the shared header now expresses that storage as a union,
+and the accepted release function retains its identical bytes.
+
+Literal pools establish the intermediate buffer at `0x0300115C`, channels at
+`0x020008B4`, volume accumulators at `0x03000B30` and `0x03000B34`, and mixer
+dispatch table at `0x08D6F4A4`. The clear (`0x03000AFC`), downsample
+(`0x03000B38`) and bias (`0x03000AB4`) operations remain explicit calls into
+unconverted ARM routines. Resolving their callback table entries and sample
+primitives is the next connected backend work; the observed algorithm does
+not establish audible or gameplay behavior.
+
+This function adapts `mixReal` from the same pinned Krawall revision as the
+coordinator. The explicit hardware wrapper adapts `FastIntDivideRem` from
+`lib/tools.h`; its ARM register setup, conditional BIOS operation and result
+stores remain in a separate licensed header. Non-emitting begin/end labels
+prove each wrapper's linked byte span at offsets `0x120` and `0x2AC`. The
+verification tools reject missing, shifted, overlapping, out-of-range or
+unclaimed marker spans. Source receipts and the full build use those checked
+spans to split C and glue coverage without altering any output byte.
+
+Reducing the channel count from 32 to 31 compiles and differs by one byte.
+Changing BIOS operation six to seven in the retained header compiles and
+differs by two bytes, one per wrapper. The canonical mixer, all 153 accepted
+consumers of its shared audio headers, and their changed-source controls were
+reverified. The tooling suite adds failure cases for span accounting, stale
+treemap credit and controls outside a retained include closure. No reference
+hash, instruction body or compared range was changed.

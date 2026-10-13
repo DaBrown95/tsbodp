@@ -85,7 +85,7 @@ publisher or Nintendo.
 Dependencies are installed separately under their own licences. The table lists
 their main licences; bundled components retain their upstream notices.
 Pinned versions are recorded in [config/](config/).
-The adapted audio frame coordinator retains its [Krawall licence](licenses/Krawall-LGPL-2.1.txt)
+The adapted audio coordinator, channel mixer and BIOS division wrapper retain their [Krawall licence](licenses/Krawall-LGPL-2.1.txt)
 and source notice.
 
 | Dependency | Use | Licence |
@@ -97,7 +97,7 @@ and source notice.
 | [Capstone](https://www.capstone-engine.org/) 5.0.7, by Nguyen Anh Quynh and contributors | Disassembly | BSD-3-Clause |
 | [pyelftools](https://github.com/eliben/pyelftools) 0.32, by Eli Bendersky and contributors | ELF inspection | Unlicense/public-domain dedication |
 | [Pillow](https://python-pillow.github.io/) 12.3.0, by Alex Clark and contributors, based on PIL | Progress images | MIT-CMU |
-| [Krawall](https://github.com/sebknzl/krawall/tree/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0), by Sebastian Kienzl | Adapted audio frame coordinator | LGPL-2.1-or-later |
+| [Krawall](https://github.com/sebknzl/krawall/tree/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0), by Sebastian Kienzl | Adapted audio coordinator, channel mixer and BIOS division wrapper | LGPL-2.1-or-later |
 
 The selected historical tools use documented [host compatibility patches](tools/patches/README.md)
 under their respective upstream licences. Their selection does not establish
