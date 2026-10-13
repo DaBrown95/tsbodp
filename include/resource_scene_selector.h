@@ -1,6 +1,6 @@
 #ifndef RESOURCE_SCENE_SELECTOR_H
 #define RESOURCE_SCENE_SELECTOR_H
-#include "frame_actor_runtime.h"
+#include "frame_scene_player.h"
 #include "resource_object_payload.h"
 #include "save_stream.h"
 #include "display_time_format.h"
@@ -13,7 +13,7 @@ struct ResourceSceneSelector {
     struct FrameObject *next, *previous;
     unsigned short id, subtype;
     unsigned int flags;
-    unsigned char unknown10[8];
+    unsigned char unknown10[3], player_index, unknown14[4];
     struct FramePoint position, next_position, velocity, acceleration, destination;
     unsigned char unknown40[12];
     unsigned char unknown4c, state, variant_state, pending_updates;
@@ -47,26 +47,38 @@ struct FrameObject *frame_allocate_scene_object(void);
 void frame_enable_object_flags(struct FrameObject *, unsigned int);
 void frame_acquire_palette_slot(struct FrameObject *, int);
 void resource_scene_selector_tick(struct FrameObject *);
-void resource_selector_interact_10c18(struct FrameObject *, struct FrameObject *);
-void resource_selector_interact_27078(struct FrameObject *, struct FrameObject *);
+void resource_scene_selector_interact(struct FrameObject *, struct FrameObject *);
+void resource_scene_selector_interact_alternate(struct FrameObject *, struct FrameObject *);
 union ResourceSelectorClock {
     struct DisplayTimeRecord record;
     unsigned int words[2];
     struct { unsigned int day : 16, hour : 8, minute : 8; unsigned int tail; } fields;
 };
-struct ResourceSelectorWorld { unsigned char unknown00[0x748], selected_actor; };
+/* Same world root as the clock and scene-player views; roles remain provisional. */
+struct ResourceSelectorWorld {
+    unsigned char unknown00[8];
+    struct DisplayTimeRecord clock;
+    unsigned char unknown10[0x41e], mode42e, flag42f;
+    unsigned char unknown430[0x318], selected_actor;
+};
 struct ResourceSelectorNotice { unsigned char unknown00, mode, kind, unknown03, active; };
 extern const struct DisplayTimeRecord g_resource_selector_clock;
 extern struct FrameObject *g_frame_scene_active_actor;
 extern struct ResourceSelectorWorld g_resource_selector_world;
 extern struct ResourceSelectorNotice g_resource_selector_notice;
 extern const unsigned short g_resource_selector_labels[];
-void resource_selector_player_step_2fb74(struct FrameObject *);
-void resource_selector_state_2712c(struct FrameObject *);
+void resource_scene_selector_release_player(struct FrameObject *);
+void resource_scene_selector_complete(struct FrameObject *);
 unsigned char frame_object_has_flags(struct FrameObject *, unsigned int);
 void frame_disable_object_flags(struct FrameObject *, unsigned int);
 void frame_set_variant_state(struct FrameObject *, unsigned char);
 unsigned char resource_select_actor(unsigned int, unsigned int);
 void scene_submit_default_request(unsigned int);
 struct FrameObject *resource_create_scene_selector(unsigned char, unsigned char);
+struct SceneRequest;
+extern struct SceneRequest g_scene_previous_request;
+void frame_stop_motion(struct FrameObject *);
+unsigned char frame_scene_effect_facing_available(struct FrameObject *, struct FrameObject *);
+void resource_scene_selector_activate_player(struct FrameObject *, int, int, unsigned short);
+unsigned int audio_play_animation_cue(unsigned int);
 #endif

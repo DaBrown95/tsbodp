@@ -2067,7 +2067,7 @@ variant eleven flag completion. The latter updates the scene-mode byte,
 resolves the selected actor and submits the selector through the accepted
 queued scene handoff. State one uses the accepted actor dispatcher, state
 three decrements the countdown and restores state zero at minus one, and state
-eighteen uses a still-unconverted selector helper.
+eighteen uses the selector completion helper reconstructed in the handoff follow-up below.
 
 State four substitutes the two work-byte hours into the clock snapshots,
 formats each into a twenty-byte local staging buffer, and copies the strings
@@ -2106,3 +2106,73 @@ Raw complete bytes, include/source snapshots, literal and jump-table evidence,
 ABI observations, useful failed word-update expressions and compiled controls
 remain in the ignored `factory-followup-evidence-*` reports. Exact static and
 compiler findings do not establish runtime execution or gameplay behavior.
+
+## Selector interaction, player activation and completion handoff
+
+Five connected helpers add 828 complete matching C bytes: the primary interaction
+at `0x08010C18` (404), the alternate interaction at `0x08027078` (180), completion
+at `0x0802712C` (180), player activation at `0x0802FB40` (52) and release at
+`0x0802FB74` (12). The accepted selector factory installs the two interactions;
+its tick calls completion and release. Alternate interaction calls activation.
+These caller aliases now use the reconstructed names, with no duplicate coverage.
+
+Primary interaction sets the byte at world `+0x42F` before testing object state
+zero. It accepts ID-zero targets in states sixteen or twenty-seven, and subtypes
+one through three or five additionally require bit zero of the pressed-key
+halfword selected by object byte `+0x13`. A nonzero second-hour byte enables the
+ID-twenty clock-window test: the signed hour is read from the established clock
+at world `+8`, with a separate midnight-wrap comparison when first hour is at
+least second hour. Failed clock gating clears the target state, requests selector
+state four and records the target as its indicator. Equal hour endpoints retain
+the observed wrap-branch behavior; no new interval policy is imposed.
+
+World mode byte `+0x42E` restricts selector values above fourteen. Subtype two
+queries the already reconstructed `condition_is_complete(2,4,2)` at
+`0x0802A7C4`; it does not call the differently addressed condition-completion
+mutator. Subtypes two and five coordinate cue forty-seven, variant eleven,
+flag changes and target motion stop. The subtype-five check reloads the field
+after the subtype-two calls, preserving possible callback mutation. Other
+subtypes resolve the actor and submit the selected scene request. No table,
+input-channel, pointer or allocation bounds are added.
+
+The same-layout partial selector header exposes the input index at `+0x13`,
+the world clock at `+8`, mode/flag bytes `+0x42E/+0x42F`, and the previously known
+selection byte at `+0x748`. Names remain provisional. Alternate interaction
+uses the established shared input root at `0x030040E0`: four twelve-byte player
+slots precede the local-player byte at `+0x31`. A local access view joins these
+already observed overlapping prefixes, without declaring a complete input
+record or adding a local-player bound. It snapshots the low-byte bit-zero key
+press for the selected player's input channel before the facing/ID checks.
+
+Alternate interaction moves the active player to the signed high halfwords of
+the selector's 16.16 X/Y position, activates flag one and assigns OAM layer minus
+one narrowed to a halfword. Activation retains the low two layer bits and shifts
+the coordinate words by sixteen; release clears flag one. The countdown becomes
+three, and a pressed key requests selector state eighteen, sets target state zero,
+records the indicator and clears the input state. Completion first stops the
+indicator's motion, then handles variant zero notice creation or variant
+fifty-five request completion. A previous request parameter of all ones cancels
+and restores selector/indicator states and animation; other values submit the
+selector. Notice/result meanings are inferred from this handoff, not runtime
+UI observations.
+
+Four functions match without register bindings. Primary interaction retains two
+semantic boolean bindings in a small inline input-requirement query: its computed
+result uses R3 and the caller's captured result uses R1. Both values are consumed
+before any call. Removing either binding changes allocation and fails the complete
+comparison; these controls of source form and the remaining ordinary variants are
+preserved locally. This does not establish the original source spelling. Its
+shared exit labels preserve the observed subtype reload and scene-submit routes.
+An inline access view retains the two-`FrameObject *` callback signature without
+requiring an incompatible function-pointer assignment.
+
+All five actual changed-source controls compile and reject. They alter the
+selector restriction, countdown, cancellation decision, activation bit and
+release bit. Whole extents include all pools and zero alignment: primary
+interaction contains two literal-pool groups; completion and alternate interaction
+have their complete tails, and activation includes two trailing zero bytes before
+the next prologue. Static byte boundaries and connection evidence are retained
+with the useful failed attempts under ignored `factory-followup-evidence-*`
+reports. The existing factory/tick are freshly recompiled with their own actual
+controls against the refined header. Compiler/static results remain separate from
+runtime and gameplay behavior, neither of which has been validated for this path.

@@ -19,6 +19,15 @@ from ram_copies import validate_copy
 BASE = 0x08000000
 
 
+def unresolved_callback_sites(rows):
+    """Observed table entries do not prove the runtime index is bounded."""
+    calls = ('register_veneer_call', 'dynamic_call', 'observed_table_call')
+    return sorted({record['rom_offset'] for row in rows
+                   for record in row.get('transfer_records', [])
+                   if record['kind'] in calls
+                   and not record.get('targets_complete', False)})
+
+
 class Scanner:
     def __init__(self, data, copies):
         self.data, self.copies = data, copies
@@ -405,7 +414,7 @@ def main():
                               'Self-modifying audio paths are decoded from the original image only.'],
               'folded_block_entries': folded, 'discarded_mode_candidates': discarded_modes, 'mode_conflicts': mode_conflicts,
               'transfer_records': sorted({r['rom_offset']: r for row in rows for r in row.get('transfer_records', [])}.values(), key=lambda r: r['rom_offset']),
-              'unresolved_indirect_call_sites': sorted({r['rom_offset'] for row in rows for r in row.get('transfer_records', []) if r['kind'] == 'register_veneer_call' and not r['targets_complete']}),
+              'unresolved_indirect_call_sites': unresolved_callback_sites(rows),
               'initial_connected_entries': graph_count, 'connected_main_last_instruction': main_end,
               'unresolved_transfer_sites': sorted({p for r in rows for p in r['unresolved_transfer_offsets']}), 'whole_rom_prologue_hits': len(prologues),
               'sweep_seed_count': len(sweep_candidates),

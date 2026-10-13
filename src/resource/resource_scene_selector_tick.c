@@ -12,7 +12,7 @@ void resource_scene_selector_tick(struct FrameObject *base)
         switch (object->variant_state) {
         case 1:
             if (object->countdown && !--object->countdown)
-                resource_selector_player_step_2fb74(g_frame_scene_active_actor);
+                resource_scene_selector_release_player(g_frame_scene_active_actor);
             break;
         case 11:
             if ((unsigned char)frame_object_has_flags((struct FrameObject *)object, 0x400000)) {
@@ -27,7 +27,7 @@ void resource_scene_selector_tick(struct FrameObject *base)
         }
         break;
     case 18:
-        resource_selector_state_2712c((struct FrameObject *)object);
+        resource_scene_selector_complete((struct FrameObject *)object);
         break;
     case 1:
         frame_run_actor_state((struct FrameObject *)object);

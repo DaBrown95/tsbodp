@@ -18,7 +18,7 @@ struct FrameObject *resource_create_scene_selector(unsigned char group, unsigned
     transition_object_set_state((struct FrameObject *)object, 0);
     object->selector = payload->selector;
     object->parameter = payload->parameter;
-    object->on_interact = resource_selector_interact_10c18;
+    object->on_interact = resource_scene_selector_interact;
     object->collision_y0 = -payload->half_height;
     object->collision_y1 = payload->half_height;
     object->collision_x0 = -payload->half_width;
@@ -62,7 +62,7 @@ struct FrameObject *resource_create_scene_selector(unsigned char group, unsigned
             active = (void *)active->next;
         }
         if (special)
-            object->on_interact = resource_selector_interact_27078;
+            object->on_interact = resource_scene_selector_interact_alternate;
         *first_hour = 0;
         *second_hour = 0;
     }

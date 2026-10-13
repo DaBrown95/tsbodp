@@ -74,12 +74,14 @@ dispatch compiles through the existing `_call_via_r1`, `_call_via_r0` and
 `_call_via_r2` bridges at `0x0804CCF4`, `0x0804CCF0` and `0x0804CCF8`. These
 original low-level bridges remain explicit and add no C or glue coverage here.
 
-A local bounded inspection retains rows 0 through 16, rather than claiming a
-complete table boundary. Row 1 begins at accepted `scene_initialize`; row 15
-begins at accepted `display_menu_initialize`. Most table targets remain
-unconverted, including row 0's distinct no-op entry `0x08027EE0`. No arbitrary
-kind validation or callback-argument contract is inferred. The active-kind
-getter has no established inbound call in the current static map.
+The initial bounded inspection retained rows 0 through 16. The connected
+[primary callbacks](SCENE_PRIMARY_CALLBACKS.md) extend it through row 27, ending
+at adjacent nonpointer data, and add the 84-word physical table to the static
+map. Row 1 begins at accepted `scene_initialize`; row 15 begins at accepted
+`display_menu_initialize`. Most table targets remain unconverted, including
+row 0's distinct no-op entry `0x08027EE0`. No arbitrary kind validation or
+callback-argument contract is inferred. The active-kind getter has no
+established inbound call in the current static map.
 
 ## Verification evidence
 

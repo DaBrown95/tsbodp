@@ -2,8 +2,8 @@
 
 The reconstructed path connects the published menu-choice and actor-need
 save/load callers to a shared byte/bit cursor, record views, slot transfers,
-header initialization and audio/display-status handoff. It has 54 matching C
-functions covering 4,000 bytes. Each full extent, pool and alignment was linked
+header initialization and audio/display-status handoff. It has 59 matching C
+functions covering 4,588 bytes. Each full extent, pool and alignment was linked
 at its original ROM address and compared with the fixed reference. Each also
 has a compiled changed-source control. These are static and compiler results;
 no runtime save/load or EEPROM compatibility claim is made.
@@ -42,9 +42,9 @@ save format has been identified.
 Slots use 255 transfers of eight bytes, with block address `255 * slot + 2`, so
 the working span is 2,040 bytes. The lower interfaces at `0x0804C9BC` and
 `0x0804CCB0` narrow the block argument to 16 bits. The read interface now has
-a matching C body; the write/retry interface remains explicit and unconverted.
-Their returned status
-is discarded by these game loops. The source does not add retries or bounds.
+a matching C body, as does the game write/retry interface. Their returned status
+is discarded by these game loops. The lower write interface performs its own
+observed retries; the game loops add no retries or bounds.
 
 The checksum at `0x08037F30` sums halfwords modulo 65,536. It halves the unsigned
 byte length, then tests the remaining word as signed positive; a trailing odd
@@ -93,7 +93,7 @@ These remain bounded static claims, not a complete code inventory.
 Useful failed approaches, original/actual bytes, assembly, source snapshots and
 real negative controls remain in ignored local reports. The 108-byte buffer
 builder is still unconverted; its candidates are excluded from coverage.
-The library transfer bodies, several game-state subserializers and the
+The short library write-mode gate, several game-state subserializers and the
 unconverted header-refresh branch also remain explicit. Next connected targets
 are those producers and the higher game-state load/save consumers.
 
@@ -220,8 +220,8 @@ not establish separate allocations or a complete world-state size.
 All eight inverse sources use ordinary C, match their full original extents
 including pools and alignment, and have real compiled changed-source controls.
 All 75 previously accepted save-header consumers were also rebuilt with their
-controls against the final union/header closure. The buffer builder, nibble
-writer, grouped subrecord loader/serializer and retained condition module
+controls against the final union/header closure. The buffer builder,
+grouped subrecord loader/serializer and retained condition module
 remain explicit unconverted interfaces. Static transfer order and compiler
 equality do not establish save compatibility or gameplay behaviour.
 
@@ -314,7 +314,7 @@ volatile accesses. A real mask change from fifteen to fourteen changes the
 compiled bytes. All current accepted save-header consumers are recompiled with
 their own source controls after removing the old unconverted-writer comment.
 The main game-state loader, grouped region readers/writers, condition modules,
-buffer builder and lower write/retry transfers remain explicit unconverted paths.
+buffer builder and short write-mode gate remain explicit unconverted paths.
 
 ## Parameter selection, DMA handoff and serial read
 
@@ -374,7 +374,61 @@ compiler output normalized. Real changed-source controls alter
 selector comparison, DMA control and rejected-block status and reject for
 each function. All current accepted save-header consumers are rebuilt with
 their own controls, including the queued scene handoff and current game
-block caller. The serial write core, read-back comparison, retries and timing
-completion path remain unconverted. Whole-ROM equality and these source
-matches do not establish successful physical-media or runtime save/load
-behaviour.
+block caller. The connected write path is described below. Whole-ROM equality
+and these source matches do not establish successful physical-media or runtime
+save/load behaviour.
+
+## Serial write, polling completion and read-back retries
+
+Five more ordinary C functions reconstruct the write core at `0x0804CA80`
+(352 bytes), its wait wrapper at `0x0804CA6C` (20 bytes), comparison at
+`0x0804CBE0` (88 bytes), wait-and-compare retry path at `0x0804CC38`
+(64 bytes) and game write-and-compare retry path at `0x0804CCB0` (64 bytes).
+These extend the same parameter, DMA and read interfaces used by the game
+block loop. All five use explicit `agbcc` Thumb `-O1 -mthumb-interwork` flags.
+
+The core captures its source pointer before narrowing the input block to a
+halfword and its wait argument to a byte. It rejects a block at or beyond the
+selected limit with `0x80FF`. Its 82-halfword stack buffer holds a trailing
+zero, the low bits of four source halfwords, the selected address bits and
+the two-halfword command prefix, constructed backward. The transfer count is
+the address-bit count plus 67. The selected parameter rows' lengths six and
+fourteen fit this buffer; the routine adds no validation for other parameter
+values, source alignment or source capacity.
+
+After DMA, the core polls bit zero at `0x0D000000`. A zero wait byte returns
+at the first observed completion. A nonzero wait byte keeps polling the
+vertical-count register at `0x04000006`, accumulating a positive count
+difference or a wrap difference computed as current plus 228 minus previous.
+After the accumulated word exceeds 136, a still-incomplete low port bit yields
+`0xC001`; otherwise the status remains zero. No elapsed-count update occurs
+while the vertical count stays unchanged, so this is not a general timeout
+against a stalled counter. The source preserves the original access order.
+Volatile stack views of the three halfword polling values and the accumulated
+word retain their observed repeated loads. This is a compiler access view,
+not evidence of asynchronous modification or the original source qualifiers.
+The branch-scoped elapsed pointer exists before each difference calculation;
+no register constraint or embedded instruction is used.
+
+The comparison narrows its block input, reads four halfwords through the
+accepted read provider and returns `0x8000` on the first difference from the
+source. It ignores the read provider's returned status, matching the original
+call. Each retry path permits three attempts, compares only after a zero
+write status, and returns immediately on a successful comparison. The wait
+path calls the matched wait wrapper. The game path calls the still-unconverted
+56-byte mode gate at `0x0804CC78`. That gate's static body rejects byte-size
+512 with `0x8200` and otherwise calls the core with a zero wait argument;
+its constant construction and literal pool have not yet matched and receive
+no C coverage. The game writer's full-word formal is explicitly narrowed in
+its body; its accepted game caller retains the original halfword call-side
+narrowing through an explicit cast.
+
+All five extents, pools and alignment match without register constraints.
+Their source objects and linked objects, including actual changed-source
+controls, have no nonempty allocated section outside `.text`. Changing the
+timeout threshold, wrapper wait value, mismatch status or retry bound rejects
+the corresponding match. All current accepted save-header consumers are
+recompiled with their own controls after the interface refinement. Earlier
+loop, polling-workspace, register-binding and mode-gate failures remain local
+and excluded. Static polling order and byte equality do not prove successful
+physical-media writes, concurrent safety or save-format compatibility.

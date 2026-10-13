@@ -27,7 +27,12 @@ unsigned short save_transfer_configure_4c8f4(unsigned short);
 void save_transfer_dma_copy(const void *, void *, unsigned short);
 /* The word input is explicitly narrowed to a halfword before block checking. */
 unsigned short save_transfer_read_4c9bc(unsigned int, void *);
-/* Connected write/retry providers remain explicit and unconverted. */
-unsigned short save_transfer_write_4ccb0(unsigned short, const void *);
+unsigned short save_transfer_write_core(unsigned int, const void *, unsigned int);
+unsigned short save_transfer_write_wait(unsigned short, const void *);
+unsigned short save_transfer_compare(unsigned int, const void *);
+unsigned short save_transfer_write_retry(unsigned int, const void *);
+unsigned short save_transfer_write_4ccb0(unsigned int, const void *);
+/* The short mode gate at 0x0804CC78 remains explicit and unconverted. */
+unsigned short save_transfer_write_nowait(unsigned int, const void *);
 
 #endif

@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 from inventory_partition import partition, overlay, verify_discovery
 try:
-    from inventory_rom import Scanner, BASE
+    from inventory_rom import Scanner, BASE, unresolved_callback_sites
 except ModuleNotFoundError:
     Scanner = None
 
@@ -49,6 +49,28 @@ class AccountingTests(unittest.TestCase):
 
 @unittest.skipIf(Scanner is None, 'Capstone is needed for scanner controls')
 class ScannerTests(unittest.TestCase):
+    def test_observed_targets_do_not_remove_unproven_callback_bounds(self):
+        records = [
+            {'rom_offset': 4, 'kind': 'register_veneer_call',
+             'targets': [], 'targets_complete': False},
+            {'rom_offset': 8, 'kind': 'observed_table_call',
+             'targets': [BASE + 100], 'targets_complete': False},
+            {'rom_offset': 12, 'kind': 'dynamic_call', 'targets': []},
+            {'rom_offset': 16, 'kind': 'observed_table_call',
+             'targets': [BASE + 100], 'targets_complete': True},
+            {'rom_offset': 20, 'kind': 'register_dispatch',
+             'targets': [], 'targets_complete': False},
+        ]
+        self.assertEqual(unresolved_callback_sites([{'transfer_records': records}]),
+                         [4, 8, 12])
+
+    def test_copied_and_rom_aliases_count_one_callback_site(self):
+        rows = [{'transfer_records': [
+            {'rom_offset': 8, 'site': address, 'kind': 'observed_table_call',
+             'targets': [BASE + 100], 'targets_complete': False}]}
+            for address in (BASE + 8, 0x03001008)]
+        self.assertEqual(unresolved_callback_sites(rows), [8])
+
     def scanner(self, hex_bytes, evidence='startup'):
         scanner = Scanner(bytes.fromhex(hex_bytes), [])
         scanner.seed(BASE, 'Thumb', evidence)
