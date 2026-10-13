@@ -5,9 +5,10 @@
 #include "frame_random.h"
 #include "audio_game.h"
 
-/* Four-byte ROM row; only the byte at +2 is interpreted by this path. */
+/* Four-byte ROM row; the increment is signed, while the chance is a byte. */
 struct FrameNeedOptionalThreshold {
-    unsigned char unknown_00, unknown_01, threshold, unknown_03;
+    short increment;
+    unsigned char threshold, unknown_03;
 };
 extern const struct FrameNeedOptionalThreshold g_frame_need_optional_thresholds[];
 

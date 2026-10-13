@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 57 C functions and 7,352 bytes:
+The connected route-search path reconstructs 62 C functions and 7,772 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -9,7 +9,8 @@ the nine-function variant controller and parameter-indicator closure, and its
 three-function random refill/seed/reader dependency, its adjoining
 attachment-neighbor producer, and five allocation, seed-coordination and
 secondary-reader functions, followed by six bounded-output, signed-offset and
-threshold APIs, and the secondary threshold's optional need-effect/cue consumer.
+threshold APIs, and the secondary threshold's optional need-effect/cue consumer
+plus its five parameter and retained-effect producers.
 Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
@@ -30,6 +31,11 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x354CC` | `frame_random_chance` | 44 |
 | `0x354F8` | `frame_random_secondary_chance` | 44 |
 | `0x2E688` | `frame_need_effect_try_optional` | 104 |
+| `0x2E6F0` | `frame_need_effect_accumulate_optional` | 80 |
+| `0x2E740` | `frame_need_effect_try_actor_effect` | 144 |
+| `0x2EEB8` | `frame_need_effect_set_optional_one` | 56 |
+| `0x2EEF0` | `frame_need_effect_set_optional_two` | 48 |
+| `0x2EF20` | `frame_need_effect_begin_optional_three` | 92 |
 | `0x2EF7C` | `frame_need_effect_play_optional_cue` | 508 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
@@ -818,15 +824,17 @@ The 104-byte secondary-threshold consumer reuses the published need-effect state
 view: kind word `+8`, associated object `+0x54`, enabled byte `+0x62`, parameter
 halfword `+0x70` and optional byte `+0x72`. It returns zero when disabled, already
 optional, or the secondary threshold does not return one. Its kind indexes
-four-byte ROM rows at `0x08064370`; only each row's byte `+2` is interpreted as
-the threshold here. Row count, the other three bytes and arbitrary index safety
-remain unestablished.
+four-byte ROM rows at `0x08064370`; each row's byte `+2` is interpreted as
+the threshold here. The connected increment producer below reads the signed
+halfword at `+0`. Row count, byte `+3` and arbitrary index safety remain
+unestablished.
 
 On success the function sets optional to one and parameter to 25,600, selects a
 cue, and examines an object-pointer slot at associated object `+0x90`. A nonnull
 slot is passed to the matching state setter with state one and then cleared.
-This selector-specific partial overlay does not give that slot a broader
-ownership or lifetime meaning. The state object pointer is loaded again after
+The producers below establish this path's retained actor-effect use of the
+selector-specific slot; its broader lifetime remains uncertain. The state
+object pointer is loaded again after
 the call, preserving the original side-effect ordering. A named unsigned-short
 amount before the two stores reproduces their original register scheduling;
 the source needs no register binding. Direct constant-store and early-return
@@ -851,3 +859,68 @@ trials and canonical source comparisons are in ignored local reports; ready
 metadata is `frame-need-optional-batch-manifest.json`. These findings establish
 the static cue/optional connection and compiler equality. Trigger rates, object
 slot validity and gameplay behavior have not been tested.
+
+## Optional parameter and retained-effect producers
+
+The existing allocator clears optional and parameter, while the existing
+424-byte spawn function copies its narrowed optional, parameter and enabled
+arguments into the state. A nonzero parameter argument is shifted by eight.
+The spawn function's provisionally named initializer at `0x4CCF4` is the
+explicit BX-R1 transfer veneer: it dispatches the definition callback rather
+than implementing another ordinary C initializer. These static paths do not
+establish a default for every retained field or identify every callback writer.
+
+The increment producer at `0x2E6F0` requires enabled and an optional byte other
+than one. It changes optional to two, reads the current parameter as signed 16
+bits and the ROM row's signed halfword increment, and compares their word-sized
+sum with 25,599. A sum above that limit stores 25,600. Otherwise it adds the
+increment to the unsigned old parameter and stores the low halfword; no lower
+bound is imposed. The same four-byte ROM row supplies the chance byte to the
+secondary predicate. Only two aligned references to its exact base were found
+in the inspected image. The table remains an explicit original ROM data region,
+and no reconstructed writer or guessed count is introduced.
+
+A named table base and separate signed parameter/row reads recover the original
+load order. A small word-sized inline addition helper retains the original ADD
+operand order without register constraints; direct expressions were one byte
+away despite identical arithmetic. The full 80-byte extent matches. Changing
+the saturation store from 25,600 to 25,599 gives a 72-byte candidate and 29
+compared differences, which the control rejects.
+
+The 144-byte producer at `0x2E740` operates when the actor equals the published
+player-pointer view. It tests the primary chance predicate using signed
+parameter one plus 15, narrowed to unsigned 16 bits. On success it requests
+state one for any old slot object, clears the slot, and stores the return of
+`frame_create_actor_effect(owner, 200, 8, 1)` in owner `+0x90`. It chooses cue
+153 or 154 from game byte `+0x20` and stores 40 at actor byte `+0x51`, represented
+by the existing provisional default-state view. This directly identifies the
+retained slot as an actor-effect pointer in this path. The existing attachment
+updater also creates actor effects there by optional mode and requests their
+teardown when invisible or no longer needed. Allocation failure and stale-slot
+behavior are not established by the matching C alone.
+
+The mode-one and mode-two setters store optional one or two and the supplied
+parameter halfword, then request state one for a retained effect and clear the
+slot. Mode one additionally invokes the matching cue selector. Their formals
+use an inferred halfword parameter type; the observed stores discard high bits,
+but do not independently prove every original caller's declaration. The
+mode-three entry stores optional three and 12,800, searches for one object with
+ID five and subtype 41, and invokes that object's need-state callback at `+0xF0`
+with its state pointer and two zero words before clearing the retained effect.
+The typed callback view preserves the existing transfer through the R3 veneer;
+the callback role and its unchecked validity remain provisional.
+
+All five complete extents match and reject real source changes. Besides the
+saturation control, cue 153 to 152 and optional-state mutations each differ by
+one byte. Both prior optional functions remain exact with their controls under
+the refined four-byte row layout; allocator, spawn, attachment updater and
+actor-effect creation/tick dependencies also remain exact and reject their
+controls. Raw comparisons and failed type/lifetime attempts are retained in
+ignored `need-optional-state-followup/`; integration metadata is
+`frame-need-optional-state-batch-manifest.json`.
+
+The connected consumption function at `0x2E7D0`, 184 bytes, remains unconverted.
+Its retained semantic candidate differs by five bytes in the remaining pointer
+setup scheduling. Direct callers at `0x18228` and `0x182D4` remain
+further connected targets. No trigger-rate, callback, ownership or gameplay
+behavior claim follows from these static and compiler checks.

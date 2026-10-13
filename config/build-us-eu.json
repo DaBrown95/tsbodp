@@ -19273,6 +19273,166 @@
         "before": "audio_play_animation_cue(36)",
         "after": "audio_play_animation_cue(35)"
       }
+    },
+    {
+      "name": "frame_bind_actor_group",
+      "source": "src/frame/frame_bind_actor_group.c",
+      "rom_offset": 240996,
+      "size": 164,
+      "symbols": {
+        "g_actor_group_part0_tables": "0x08d72028",
+        "g_actor_group_part1_tables": "0x08d72038",
+        "g_actor_group_part2_tables": "0x08d72030",
+        "g_actor_group_part2_palette": "0x0806a250",
+        "g_resource_game_state": "0x03003950",
+        "frame_set_part_variants": "0x08001451",
+        "frame_clear_part_variants": "0x08001401"
+      },
+      "thumb_symbols": [
+        "frame_set_part_variants",
+        "frame_clear_part_variants"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "palette == 254",
+        "after": "palette == 253"
+      }
+    },
+    {
+      "name": "frame_load_actor_group_palette",
+      "source": "src/frame/frame_load_actor_group_palette.c",
+      "rom_offset": 241352,
+      "size": 144,
+      "symbols": {
+        "g_actor_group_palette_rows": "0x080ccffc",
+        "heap_copy": "0x08027ab5",
+        "display_load_palette_alternate": "0x08011709"
+      },
+      "thumb_symbols": [
+        "heap_copy",
+        "display_load_palette_alternate"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "slot << 4, 16",
+        "after": "slot << 4, 15"
+      }
+    },
+    {
+      "name": "frame_set_part_variants",
+      "source": "src/frame/frame_set_part_variants.c",
+      "rom_offset": 5200,
+      "size": 40,
+      "symbols": {},
+      "thumb_symbols": [],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "object->parts[part].palette = palette",
+        "after": "object->parts[part].palette = palette + 1"
+      }
+    },
+    {
+      "name": "frame_clear_part_variants",
+      "source": "src/frame/frame_clear_part_variants.c",
+      "rom_offset": 5120,
+      "size": 24,
+      "symbols": {},
+      "thumb_symbols": [],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "variants = 0",
+        "after": "variants = (struct FrameSpriteVariant **)1"
+      }
+    },
+    {
+      "name": "frame_need_effect_accumulate_optional",
+      "rom_offset": 190192,
+      "size": 80,
+      "source": "src/frame/frame_need_effect_accumulate_optional.c",
+      "symbols": {
+        "g_frame_need_optional_thresholds": "0x08064370"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "state->parameter=25600",
+        "after": "state->parameter=25599"
+      }
+    },
+    {
+      "name": "frame_need_effect_try_actor_effect",
+      "rom_offset": 190272,
+      "size": 144,
+      "source": "src/frame/frame_need_effect_try_actor_effect.c",
+      "symbols": {
+        "g_need_effect_player": "0x030040e0",
+        "g_frame_actor_social_probe": "0x030039e8",
+        "frame_read_signed_parameter": "0x0803d1f5",
+        "frame_random_chance": "0x080354cd",
+        "transition_object_set_state": "0x08001c05",
+        "frame_create_actor_effect": "0x0801b4a5",
+        "g_frame_interaction_settings": "0x03003950",
+        "audio_play_animation_cue": "0x08040ffd"
+      },
+      "thumb_symbols": [
+        "frame_read_signed_parameter",
+        "frame_random_chance",
+        "frame_create_actor_effect",
+        "audio_play_animation_cue"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(153)",
+        "after": "audio_play_animation_cue(152)"
+      }
+    },
+    {
+      "name": "frame_need_effect_set_optional_one",
+      "rom_offset": 192184,
+      "size": 56,
+      "source": "src/frame/frame_need_effect_set_optional_one.c",
+      "symbols": {
+        "frame_need_effect_play_optional_cue": "0x0802ef7d",
+        "transition_object_set_state": "0x08001c05"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_play_optional_cue"
+      ],
+      "negative_control": {
+        "before": "state->optional=1",
+        "after": "state->optional=2"
+      }
+    },
+    {
+      "name": "frame_need_effect_set_optional_two",
+      "rom_offset": 192240,
+      "size": 48,
+      "source": "src/frame/frame_need_effect_set_optional_two.c",
+      "symbols": {
+        "transition_object_set_state": "0x08001c05"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "state->optional=2",
+        "after": "state->optional=3"
+      }
+    },
+    {
+      "name": "frame_need_effect_begin_optional_three",
+      "rom_offset": 192288,
+      "size": 92,
+      "source": "src/frame/frame_need_effect_begin_optional_three.c",
+      "symbols": {
+        "frame_find_objects": "0x08001a8d",
+        "_call_via_r3": "0x0804ccfd",
+        "transition_object_set_state": "0x08001c05"
+      },
+      "thumb_symbols": [
+        "frame_find_objects",
+        "_call_via_r3"
+      ],
+      "negative_control": {
+        "before": "state->optional=3",
+        "after": "state->optional=4"
+      }
     }
   ],
   "assembly": [
