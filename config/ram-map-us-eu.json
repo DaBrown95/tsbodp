@@ -264,6 +264,13 @@
       "mode": "ARM",
       "pointer_rom_offset": 237232,
       "evidence": "Matching installer 0x08039e78 publishes destination 0x03005e60 to callback word 0x03001fcc; source/destination/control literals establish 228-byte copy. The first 216 bytes are matching C frame_transfer_map_tiles at the RAM execution address; copied following ARM prefix remains unconverted. View argument is narrowed to a byte; allowed indices remain unresolved."
+    },
+    {
+      "ram_address": 50333128,
+      "mode": "ARM",
+      "pointer_rom_offset": 306236,
+      "name": "audio_sample_active_ram",
+      "evidence": "Copied audio image from startup installs ROM 0xFDAA40 at RAM 0x030005C8. Standalone instrument starter loads this ARM address and calls it through r7. The complete 56-byte handle/activity check including its pool matches C at the RAM execution address; the following four-byte counter storage remains explicit data."
     }
   ],
   "irq_default_table_rom_offset": 341336,

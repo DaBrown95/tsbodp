@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 159 C functions spanning 26,396 verified bytes. The
+This batch reconstructs 162 C functions spanning 26,880 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,9 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x351B0` | `frame_random_refill` | 348 |
+| `0x35524` | `frame_seed_random_words` | 56 |
+| `0x3555C` | `frame_next_random_word` | 80 |
 | `0x3CF84` | `frame_begin_variant_attachment_job` | 136 |
 | `0x3D3D4` | `frame_begin_attachment_job_73` | 64 |
 | `0x3D214` | `frame_step_attachment_job_73` | 388 |
@@ -1104,3 +1107,18 @@ indicator bodies use ordinary C. The phase table, callback-row connections,
 word/high-byte arithmetic, partial layouts and unresolved configuration-selector
 preconditions are recorded in `ACTOR_ROUTE_SEARCH.md`. No runtime or gameplay
 behavior is inferred from these static and compiler matches.
+
+
+## Random generator dependency of attachment timing
+
+The matching range helper and attachment timing path now connect to three
+matching generator functions, adding 484 C bytes. The 348-byte refill and
+56-byte seed writer are ordinary C; the 80-byte reader preserves two semantic
+register lifetimes. All complete extents and three real controls pass, and
+fifteen previously accepted header consumers remain exact with rejected
+controls. `ACTOR_ROUTE_SEARCH.md` records the 624-word twist, odd seed and
+69,069 recurrence, the stored address and next/count fields, the allocator's
+extra 625th word, signed-count precondition and the refill branch's absence of
+a last-byte write. Wider initialization and allocator code remain original.
+The source reconstruction uses local ROM evidence, with no imported upstream
+instruction body or implementation. This is compiler/static evidence only.

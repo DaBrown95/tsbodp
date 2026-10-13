@@ -2,6 +2,7 @@
 #define FRAME_SCENE_PLAYER_H
 
 #include "frame_actor_runtime.h"
+#include "display_time.h"
 struct FrameScenePlayerMode {unsigned char unknown00[0x42e],mode;};
 extern struct FrameScenePlayerMode g_frame_scene_player_mode;
 extern signed char g_frame_scene_double_direction_variants[];
@@ -48,11 +49,9 @@ struct FrameSceneActorSelection {
  unsigned char world,saved_effect_kind,unknown43e[0x740-0x43e],actor;
 };
 extern struct FrameSceneActorSelection g_frame_scene_actor_selection;
-struct FrameSceneWorldContext {short column;signed char row;};
 extern unsigned char g_frame_scene_actor_eligibility_enabled;
 extern const unsigned char *g_frame_scene_actor_world_tables[];
-short frame_scene_actor_world_slot(const struct FrameSceneWorldContext *);
-unsigned char frame_scene_actor_allowed(unsigned int,unsigned int,const struct FrameSceneWorldContext *);
+unsigned char frame_scene_actor_allowed(unsigned int,unsigned int,const struct DisplayTimeRecord *);
 struct FrameSceneSavedEffect {
  unsigned char unknown00[100];struct FrameObject *owner;
  struct FrameObject *partner;unsigned int value;

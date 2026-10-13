@@ -1,7 +1,7 @@
 #include "frame_scene_player.h"
 #include "resource_conditions.h"
 unsigned char frame_world_in_idle_exclusion_set(unsigned int);
-unsigned char frame_scene_actor_allowed(unsigned int actor,unsigned int world,const struct FrameSceneWorldContext *data) {
+unsigned char frame_scene_actor_allowed(unsigned int actor,unsigned int world,const struct DisplayTimeRecord *data) {
  unsigned char table_index;
  const unsigned char **table;
  unsigned char slot;
@@ -19,7 +19,7 @@ unsigned char frame_scene_actor_allowed(unsigned int actor,unsigned int world,co
  if(actor<=5) return 1;
  {unsigned int base=(unsigned int)g_frame_scene_actor_world_tables; table=(const unsigned char**)((table_index<<2)+base);}
  if(!*table) return 1;
- slot=frame_scene_actor_world_slot(data);
- if(((*table)+data->row*8)[slot]==world) return 1;
+ slot=display_time_weekday(data);
+ if(((*table)+data->hour*8)[slot]==world) return 1;
  return 0;
 }

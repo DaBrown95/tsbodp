@@ -1,17 +1,21 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 40 C functions and 5,392 bytes:
+The connected route-search path reconstructs 43 C functions and 5,876 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
 and six further variant/job-73 and shared value/random functions, followed by
-the nine-function variant controller and parameter-indicator closure. Every complete
+the nine-function variant controller and parameter-indicator closure, and its
+three-function random refill/seed/reader dependency. Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
 Neither these matches nor the full-ROM equality gate establish runtime behaviour.
 
 | ROM offset | Function | Verified bytes |
 | --- | --- | ---: |
+| `0x351B0` | `frame_random_refill` | 348 |
+| `0x35524` | `frame_seed_random_words` | 56 |
+| `0x3555C` | `frame_next_random_word` | 80 |
 | `0x3CB14` | `frame_step_variant_attachment_job` | 1016 |
 | `0x3D00C` | `frame_dispatch_variant_attachment_job` | 24 |
 | `0x3D02C` | `frame_update_attachment_parameter` | 188 |
@@ -547,6 +551,59 @@ remains exact with its control and adds zero coverage. Positive/control bytes,
 commands and current-header snapshots are retained under
 `actor-attachment-controller-canonical/`, with ready metadata in
 `actor-attachment-controller-batch-manifest.json`. The configuration selector,
-neighbor producer, target selector, underlying random generator and wider
+neighbor producer, target selector, wider generator initialization and
 allocation/lookup guarantees remain unresolved. Full-ROM equality and static
 callback mapping are separate from runtime behavior, which was not tested.
+
+
+## Connected random refill, seed and reader
+
+Three dependencies of the accepted inclusive range helper add 484 matching C
+bytes: the 348-byte refill at `0x351B0`, the 56-byte seed writer at `0x35524`
+and the 80-byte tempered word reader at `0x3555C`. These were reconstructed
+from the fixed ROM's loads, stores, control flow and constants; no third-party
+implementation body was imported. The 624-word state, 397-word tap, two loops
+of 227/396 words, masks `0x80000000/0x7fffffff`, conditional `0x9908b0df` xor
+and four tempering operations identify an MT-style generator. This description
+is a static algorithm inference, rather than evidence of randomness quality or
+runtime use beyond the inspected callers.
+
+The partial IWRAM storage consists of a buffer-address word at `0x03001F10`,
+a next-word pointer at `0x03001F14`, signed remaining count at `0x03001F18`,
+seed at `0x03001F28` and last-byte destination at `0x03005A0C`. The buffer
+address is kept as an ordinary word view, converted at the observed pointer
+loads; no volatile qualifier is needed. The allocator at `0x3530C` remains
+original and requests 2,500 bytes, or 625 words. That extra word permits the
+second loop's final ahead-pointer read, whose value is overwritten before use.
+The state must already have a valid allocation. Allocation failure handling,
+initialization ordering and reentrancy are not established by these three
+functions, and no new checks are inserted.
+
+The seed writer forces an odd initial seed, writes that word and 623 further
+words by repeated multiplication by 69,069 with unsigned word arithmetic. It
+sets the remaining count to zero. The refill reseeds from the stored seed only
+when the count is below minus one, then sets count 623 and next to the second
+word. The reader decrements the signed count; a nonnegative count takes the
+next state word, advances the pointer, tempers the word and stores its low byte.
+A negative count returns the refill result directly. The refill returns the
+first newly twisted and tempered word without updating that byte destination.
+This asymmetric side effect is preserved. The signed decrement requires the
+observed initialized/counting domain; arbitrary underflowing counts are not
+claimed to be portable C inputs.
+
+The refill and seed writer now use ordinary C without register bindings. The
+refill's named available/threshold values and comma capture preserve the storage
+address lifetime through the optional seed pass. The final twist deliberately
+stores before the conditional xor and stores again on the odd-word branch.
+The reader retains two semantic value/result register lifetimes, with no
+instruction assembly. An ordinary version was preserved at 80 bytes but 13
+differing bytes; those constraints are compiler requirements, not runtime
+findings. Every positive includes the complete pool and alignment. Controls
+change the first refill count 227 to 226, seed multiplier 69,069 to 69,068 and
+reader shift 18 to 17; all three reject with one differing byte. Fifteen
+previously accepted consumers of the canonical header also remain exact and
+reject their existing controls. Raw failures, compiler allocation dumps, source
+snapshots and positive/control comparisons remain in ignored local reports;
+ready metadata is `frame-random-batch-manifest.json`. Full-ROM validation and
+publication remain separate milestone gates; no runtime/gameplay test is
+claimed here.

@@ -35,7 +35,7 @@ void scene_initialize(void) {
   frame_reset_object_palette_slots();
   g_scene_request.mode=0;
  }
- g_scene_context.resource=scene_lookup_resource(g_scene_world_state);
+ g_scene_context.period=display_time_period((const struct DisplayTimeRecord *)g_scene_world_state);
  display_load_palette(scene_palette_source(),0,256);
  g_palette_range_enabled_mask=0;
  frame_load_scene_map_resources(g_scene_id);
@@ -56,7 +56,7 @@ void scene_initialize(void) {
   scene_stage_08009e18();
  }
  if(!(g_audio_control.flags&8))
-  audio_select_sequence(scene_resource_audio_id(g_scene_context.resource));
+  audio_select_sequence(scene_audio_for_period(g_scene_context.period));
  scene_initialize_objects(g_scene_entry_data,g_scene_id);
  scene_stage_08026bc8();
  if(g_scene_palette_range_configs[g_scene_id].resource)

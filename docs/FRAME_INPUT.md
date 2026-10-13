@@ -1212,7 +1212,7 @@ both are reconstructed below.
 These matches establish source bytes and static data access, not runtime
 scene eligibility or effect behavior.
 
-The eligibility dependency `frame_scene_actor_world_slot` at `0x10808` is now
+The eligibility dependency originally named `frame_scene_actor_world_slot` at `0x10808` is now
 an exact 20-byte C replacement. The original signed halfword load at context
 `+0`, signed remainder helper call with divisor seven, and final halfword sign
 extension establish a signed `short` return. The context's `column` name follows
@@ -1221,7 +1221,13 @@ name remains provisional. Its signed row byte at `+2` and all observed offsets
 stay unchanged. The accepted eligibility caller explicitly narrows the returned
 value to an unsigned byte; no bounds clamp has been added for negative inputs.
 The previous unsigned-byte declaration described only that caller's use and has
-been corrected to the observed callee return.
+been corrected to the observed callee return. Subsequent connected clock
+arithmetic supersedes the coordinate interpretation: this helper is now named
+`display_time_weekday`, reads the signed day component, and returns day modulo
+seven. The byte at `+2` is the hour component; the eligibility table therefore
+uses hour times eight plus the byte-narrowed weekday result. The offsets and
+return narrowing remain unchanged. See [DISPLAY_TIME.md](DISPLAY_TIME.md) for
+the arithmetic and current-header proof. The older raw receipts remain intact.
 
 Changing `% 7` to `% 6` produces a one-byte mismatch. The canonical helper,
 eligibility caller, scene setup, player factory, primary actor factory, spawn
@@ -1233,7 +1239,7 @@ selected-tile loader remain excluded; the saved-effect factory is reconstructed
 in the following connected batch.
 
 The saved scene-effect path now adds seven exact C functions totaling 820 bytes:
-`frame_scene_actor_world_slot` (`0x10808`, 20),
+`display_time_weekday` (`0x10808`, 20; originally `frame_scene_actor_world_slot`),
 `frame_create_scene_saved_effect` (`0x332C8`, 252),
 `frame_scene_effect_tick` (`0x33424`, 140),
 `frame_scene_effect_interact` (`0x334B0`, 208),

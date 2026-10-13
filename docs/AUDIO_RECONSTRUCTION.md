@@ -932,3 +932,116 @@ and the pinned LGPL Krawall vocabulary; original resource/table data remains
 explicit, and runtime/audible behavior remains untested. Remaining envelope
 callers, player/mixer entries and those callers' input domains are the next
 connected audio targets; the core 776-byte instrument processor already matches.
+
+## Standalone instrument lifecycle and activity handoff
+
+Twelve connected extents add **1,400 matching C bytes**, including a copied ARM
+activity check and the ROM ARM fade mixer. All use ordinary C without instruction assembly, register
+constraints or output changes. The instrument processor called here is the
+previously accepted 776-byte routine; it is not counted again.
+
+| Operation | ROM entry | Complete matching C extent |
+| --- | --- | ---: |
+| Standalone instrument start | `0x0804ABC4` | 516 |
+| Instrument envelope release | `0x0804BC88` | 112 |
+| Instrument stop | `0x0804BCF8` | 56 |
+| Process six instrument tracks | `0x0804BD30` | 20 |
+| Instrument handle validation | `0x0804BD44` | 40 |
+| Initialize six instrument tracks | `0x0804BDAC` | 36 |
+| Set/get player channel volume | `0x0804BD6C` / `0x0804BD8C` | 32 / 32 |
+| Copied ARM handle/activity check | `0x08FDAA40` | 56 |
+| Audio initialization coordinator | `0x080496F8` | 32 |
+| Stop the current jingle | `0x0804BB58` | 28 |
+| Mix the stopping sample's fade ramp | `0x08049BF0` | 440 |
+
+### Contextual track identity and allocation
+
+The six standalone records begin at `0x020025B8` with the same observed 96-byte
+stride and envelope fields as the player tracks. Their word at `+34` stores an
+instrument handle. Player panbrello uses that same offset as a waveform pointer;
+the shared view now makes these two contextual meanings an explicit union.
+The existing field offsets and stride remain unchanged. This does not establish
+that an instrument handle and waveform pointer are interchangeable in one
+context, or that every track has either role at every point.
+
+The instrument handle has an eight-bit channel and a 24-bit generation. The
+start routine first compares the selected record's identity with the supplied
+old handle. A match reuses that slot. Otherwise it scans envelope-enabled bytes
+first; only when all six appear enabled does it scan the copied ARM backend's
+handle/activity check. That envelope-first pass belongs to the earlier game
+version and differs from the inspected later upstream's single backend scan.
+The original tests each record before the six-record limit; no extra guard or
+reordered read is added. The interface still requires valid caller handles and
+storage/input domains. Matching does not prove that arbitrary low-byte indices,
+notes or exhausted searches are safe.
+
+The global generation word at `0x030015AC` is incremented and narrowed into the
+24-bit handle field. The routine selects the instrument's sample index, copies
+sample volume/pan defaults, derives a linear period and initializes the earlier
+volume/pan envelope state already observed in the row decoder. A volume envelope
+starts the sample at volume zero; otherwise it uses the sample default. Both
+branches call the accepted extended ARM sample starter and store its handle.
+A zero backend handle clears the instrument identity and returns zero.
+
+Release and stop validate the complete identity first. Release changes volume
+and pan envelope states, including the earlier unconditional pan-state update,
+or releases the backend when no volume envelope is active. Stop clears the
+envelope-enabled byte and releases the backend. Validation calls the accepted
+Thumb activity check after identity validation. Initialization sets channel
+volume to 64 and the sine-table pointer on six records; processing passes those
+same six records to the accepted instrument processor.
+
+### Copied ARM activity and coordination
+
+The startup audio copy places the 56-byte activity-check extent at
+`0x030005C8`. The instrument starter's literal at `0x0804AC3C` and indirect `r7`
+transfer identify this entry. Its C selects a 44-byte backend channel by the
+handle's low byte, compares the stored full handle and returns whether the
+active byte is nonzero. It includes its original literal pool. The following
+four-byte counter storage remains explicit data. The RAM map records this
+additional entry within the existing startup copy; no new copy is claimed.
+
+Player channel-volume accessors bound the channel to 20, clamp a supplied
+unsigned volume to 64 and read/write the signed channel-volume byte. The jingle
+stopper tests observed flag four before calling the accepted finish/restore
+path. The initialization coordinator calls the still-unconverted master-volume
+routine with 128, initializes and activates the accepted hardware path, then
+initializes the six instrument records. Its natural Thumb alignment requires
+the pinned current assembler; old assembler zero alignment differs in two bytes.
+
+The ARM fade mixer closes the sample-release path's backend state consumer.
+It uses the lesser of the remaining fade count and requested sample amount,
+mixes four left and four right samples per iteration and advances the two
+16-bit ramp words with their observed narrowing. The accumulator is interpreted
+as signed before shifting by four; left/right volume products are shifted by
+three. After reducing both counts by four, it clears the active byte when the
+fade count reaches zero and hands any remaining amount to the still-unconverted
+copied ARM bias mixer at `0x03000AB4`. Its return and the following clear
+prologue bound a provisional 72-byte body. The old 316-byte mapped envelope also
+contains a clear helper, counter words and the converter; all remain explicit. The source retains the required four-sample count domain; no remainder
+loop or new count guard is invented. The release routine's reused table-index
+byte and tail words now have an exact matching consumer as well as producer.
+
+### Evidence and remaining boundaries
+
+Every new extent matches and rejects its actual changed-source control.
+Canonical raw comparisons, commands and include snapshots are retained in
+ignored `reports/audio-root/instrument-lifecycle-canonical/`; initial layout,
+unsigned-bound and backend-expression failures remain in `instrument-lifecycle/`
+and `instrument-active-ram/`. All 65 existing shared-track consumers (9,932 C bytes) also match and reject
+their controls. That audit is in `instrument-track-context-audit/`. Sources adapted from the pinned LGPL Krawall
+files retain their notices and licence reference. The common track refinement
+also preserves existing player/effect source controls.
+
+The 124-byte master-volume/clip-table routine at `0x08049968`, its copied shift
+patcher and the bias mixer remain unconverted.
+Private master-volume trials are retained in `master-init-lifecycle/`. The later
+upstream variable-index final write does not reproduce the original. A literal
+minus-1024 index with HWI32 reproduces the original address calculation but
+still emits a store where the reference has a no-op. That unexplained two-byte
+difference is preserved; no store is suppressed, output patched or candidate
+credited. Original sample/instrument/frequency data remains explicit. This
+static and compiler evidence does not establish audible playback or gameplay.
+The fade mixer's adapted LGPL source, full extent and changed-source control
+are retained in `fade-mixer-canonical/`; the independent original-expression
+trials are in `fade-mixer/`. No assembly or value constraints are used there.

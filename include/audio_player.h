@@ -24,7 +24,8 @@ struct AudioPlayerTrack {
     unsigned char trempos, tremspeed, tremdepth, tremretrig;
     const short *tremtable;
     unsigned char panbpos, panbspeed, panbdepth, panbretrig;
-    const short *panbtable;
+    /* +34 is a waveform pointer in player tracks and a handle in six SFX tracks. */
+    union { const short *panbtable; unsigned int instrument_id; };
     unsigned char glissando, trmcnt, trmon, trmtot;
     unsigned char volslide, volslide_fine, cvolslide, volslidefine;
     unsigned char panslide, panslidefine, arpeggio, arpeggiocnt;

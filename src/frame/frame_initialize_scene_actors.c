@@ -24,7 +24,7 @@ void frame_initialize_scene_actors(unsigned int scene) {
  if(entries->world==scene && !entries->exit_flag)frame_create_speed_exit_actor(1,entries->position.x,entries->position.y);
  selection=&g_frame_scene_actor_selection;
  if(selection->world==scene)frame_spawn_saved_scene_effect(selection->position.x,selection->position.y);
- if(selection->actor!=42 && frame_scene_read_spawn(0,&direction,&x,&y)==1 && frame_scene_actor_allowed(selection->actor,scene,(const struct FrameSceneWorldContext *)((const unsigned char *)selection+8))==1) {
+ if(selection->actor!=42 && frame_scene_read_spawn(0,&direction,&x,&y)==1 && frame_scene_actor_allowed(selection->actor,scene,(const struct DisplayTimeRecord *)((const unsigned char *)selection+8))==1) {
   struct FrameObject *object=frame_create_actor(selection->actor,direction,x,y);
   transition_object_set_state(object,24);
   frame_set_variant_state(object,2);

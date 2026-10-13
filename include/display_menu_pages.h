@@ -26,10 +26,13 @@ struct DisplayMenuActorSelection {
 /* This unconverted consumer narrows the requested delta to a signed byte. */
 void display_menu_apply_delta(signed char);
 void display_menu_prepare_state_42(void);
+/* Observed twelve-byte view; surrounding storage and complete bounds are unknown. */
 struct DisplayMenuSelectionState {
     unsigned char enabled, definition, text_kind, unknown_03;
     short major;
     signed char minor, part;
+    signed char second, tick;
+    unsigned short reserved;
 };
 extern struct DisplayMenuSelectionState g_display_menu_selection_state;
 extern unsigned char g_frame_actor_social_probe[];

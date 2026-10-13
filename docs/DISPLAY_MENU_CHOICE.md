@@ -2,8 +2,9 @@
 
 Four connected Thumb extents add 172 matching C bytes. They follow the choice
 record produced by the accepted menu choice-text stage, and the secondary
-stage's explicit stamp-check call. The choice initializer and resource effect
-remain unconverted. Static layouts and compiler matching do not establish
+stage's explicit stamp-check call. The choice initializer remains unconverted;
+its clock-copy/add dependency is reconstructed in [DISPLAY_TIME.md](DISPLAY_TIME.md).
+Static layouts and compiler matching do not establish
 runtime chronology, save-file compatibility or gameplay behavior.
 
 | Function | ROM entry | Complete extent |
@@ -19,11 +20,15 @@ instruction bodies.
 
 ## Partial selection record and stamp comparison
 
-The selection record is observed through eight bytes: enable, definition and
+The persistence/comparison functions observe eight bytes: enable, definition and
 text-kind bytes at `+0/+1/+2`, an unknown byte at `+3`, a signed 16-bit component
 at `+4` and signed byte components at `+6/+7`. This refines the accepted
 choice-text stage's previously partial three-byte access view without changing
-any existing offset. These roles do not prove the complete storage bound.
+any existing offset. The subsequently reconstructed copy/add dependency writes
+eight bytes beginning at `+4`, establishing an observed extent through `+11`.
+The header now captures the observed twelve-byte view: it retains the existing
+ordering fields at `+4/+6/+7` and adds signed second/tick bytes at `+8/+9` and an
+uninterpreted halfword at `+10`. This does not prove the complete storage bound.
 
 The comparison first clears the enable byte. It compares the stored components
 lexicographically against a four-byte current stamp: a signed 16-bit component
@@ -31,17 +36,21 @@ at `+0`, signed byte at `+2`, and byte at `+3` interpreted through a signed-byte
 cast. Equality and greater-than cases return 1; lesser cases return 0. The
 current stamp's final byte retains its unsigned declaration and explicit signed
 conversion, matching the actual byte load and narrowing sequence. The names
-`major`, `minor` and `part` describe ordering only; they do not identify calendar
-units or validated ranges.
+`major`, `minor` and `part` originally described ordering only. The connected
+clock arithmetic now identifies their roles as day, hour and minute respectively,
+from the signed day remainder and 24/60 carry radices. Valid input ranges and
+runtime chronology remain unverified.
 
 The unconverted secondary menu stage calls this comparator with selection
 record `0x03003D68` and current stamp `0x03003958`, then removes selected actor
 entries when the check fails. The accepted choice-text producer already passes
 that same current-stamp address as the initializer's third argument. Thus the
 negative offset of 1040 recorded in the preceding menu evidence connects shared
-RAM storage to this four-byte stamp comparison. The unconverted resource effect
-receives the record's `+4` address, but its complete write contract remains
-unresolved.
+RAM storage to this four-byte stamp comparison. The former “resource effect”
+inference was incorrect: `0x0801074C` copies an eight-byte clock record and adds
+the hour/minute/second/tick offset. Its constant at `0x08D70D48` has hour 24 and
+all other components zero, making this a next-day deadline operation. This is
+static arithmetic evidence, not a runtime chronology claim.
 
 ## Persistence handoff
 
@@ -74,8 +83,8 @@ metadata is `menu-choice-lifecycle-ready.json`. Earlier useful failures remain
 unchanged.
 
 The direct initializer at `0x080180D4` has an exact-size 168-byte private semantic
-candidate with remaining scheduling/register differences. It still receives no
+candidate with six remaining scheduling bytes. It still receives no
 source coverage. It observes the same enable and selector fields, chooses from
-an eight-byte-stride definition table, adds an actor entry and starts the
-unconverted resource effect. Closing this initializer and the 1,112-byte
+an eight-byte-stride definition table, adds an actor entry and invokes the
+now-reconstructed clock-copy/add helper. Closing this initializer and the 1,112-byte
 secondary stage would connect both lifecycle directions more fully.

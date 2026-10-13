@@ -6,6 +6,7 @@
 #include "frame_actor_target_jobs.h"
 #include "frame_actor_actions.h"
 #include "audio_game.h"
+#include "frame_random.h"
 
 /* A 32-byte ROM row. The animation word is narrowed by the animation API.
  * Names describe observed controller reads, rather than a complete format. */
@@ -39,7 +40,4 @@ unsigned int frame_step_attachment_job_73(struct FrameNeedEffectState *,
                                            struct FrameActorAttachmentRecord *);
 unsigned int frame_dispatch_attachment_job_73(struct FrameNeedEffectState *,
                                                struct FrameObject *);
-/* This engine word generator remains original ROM code. */
-unsigned int frame_next_random_word(void);
-
 #endif

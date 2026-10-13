@@ -66,14 +66,8 @@ struct ResourceScriptState {
 
 #include "resource_view_effects.h"
 
-struct ResourceBranchArgument {
-    unsigned int unknown_low : 16;
-    unsigned int row : 8;
-    unsigned int column : 8;
-    unsigned int unknown04;
-};
-extern struct ResourceBranchArgument g_resource_branch_default;
-extern unsigned char resource_compare_arguments(const struct ResourceBranchArgument *,const struct ResourceBranchArgument *,void *,unsigned int);
+#include "display_time.h"
+extern struct DisplayTimeRecord g_resource_branch_default;
 extern unsigned char g_resource_branch_context[];
 
 /* Repeated 24-byte cells have a 144-byte row stride; the outer extent is unknown. */

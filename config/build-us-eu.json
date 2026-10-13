@@ -2150,7 +2150,7 @@
         "display_enable_layers": "0x0800d68d",
         "display_show_background": "0x0800d579",
         "scene_stage_08026b24": "0x08026b25",
-        "scene_lookup_resource": "0x080107e5",
+        "display_time_period": "0x080107e5",
         "scene_palette_source": "0x08026795",
         "scene_stage_0802cd90": "0x0802cd91",
         "scene_stage_08037444": "0x08037445",
@@ -2161,7 +2161,7 @@
         "scene_stage_08000b78": "0x08000b79",
         "scene_copy_palette_alternate": "0x08011719",
         "scene_stage_08009e18": "0x08009e19",
-        "scene_resource_audio_id": "0x08026a9d",
+        "scene_audio_for_period": "0x08026a9d",
         "scene_initialize_objects": "0x08020235",
         "scene_stage_08026bc8": "0x08026bc9",
         "scene_initialize_view": "0x0801e5f5",
@@ -2193,7 +2193,7 @@
         "display_show_background",
         "scene_stage_08026b24",
         "frame_reset_object_palette_slots",
-        "scene_lookup_resource",
+        "display_time_period",
         "scene_palette_source",
         "display_load_palette",
         "frame_load_scene_map_resources",
@@ -2208,7 +2208,7 @@
         "scene_stage_08000b78",
         "scene_copy_palette_alternate",
         "scene_stage_08009e18",
-        "scene_resource_audio_id",
+        "scene_audio_for_period",
         "audio_select_sequence",
         "scene_initialize_objects",
         "scene_stage_08026bc8",
@@ -4385,14 +4385,14 @@
       "symbols": {
         "resource_activate_groups": "0x0800ad99",
         "transition_set_view_mode": "0x0800e8b5",
-        "resource_compare_arguments": "0x0801081d",
+        "display_time_in_range": "0x0801081d",
         "g_resource_branch_default": "0x08051aa4",
         "g_resource_branch_context": "0x03003958"
       },
       "thumb_symbols": [
         "resource_activate_groups",
         "transition_set_view_mode",
-        "resource_compare_arguments"
+        "display_time_in_range"
       ],
       "negative_control": {
         "before": "g_resource_branch_context,6",
@@ -11696,7 +11696,7 @@
       "symbols": {
         "condition_is_complete": "0x0802a7c5",
         "frame_world_in_idle_exclusion_set": "0x080269f5",
-        "frame_scene_actor_world_slot": "0x08010809",
+        "display_time_weekday": "0x08010809",
         "g_frame_scene_actor_eligibility_enabled": "0x03001e2c",
         "g_frame_scene_actor_selection": "0x03003950",
         "g_frame_scene_actor_world_tables": "0x08d7162c"
@@ -11704,7 +11704,7 @@
       "thumb_symbols": [
         "condition_is_complete",
         "frame_world_in_idle_exclusion_set",
-        "frame_scene_actor_world_slot"
+        "display_time_weekday"
       ],
       "negative_control": {
         "before": "if(actor<=5)",
@@ -12184,7 +12184,7 @@
       ]
     },
     {
-      "name": "frame_scene_actor_world_slot",
+      "name": "display_time_weekday",
       "rom_offset": 67592,
       "size": 20,
       "symbols": {
@@ -12197,7 +12197,7 @@
         "before": "% 7",
         "after": "% 6"
       },
-      "source": "src/frame/frame_scene_actor_world_slot.c"
+      "source": "src/display/time_weekday.c"
     },
     {
       "name": "frame_create_scene_saved_effect",
@@ -12887,12 +12887,12 @@
       "rom_offset": 188820,
       "size": 84,
       "symbols": {
-        "scene_resource_audio_id": "0x08026a9d",
+        "scene_audio_for_period": "0x08026a9d",
         "audio_select_sequence": "0x080411bd",
         "g_scene_context": "0x03004320"
       },
       "thumb_symbols": [
-        "scene_resource_audio_id",
+        "scene_audio_for_period",
         "audio_select_sequence"
       ],
       "source": "src/display/restore_need_effect_audio.c",
@@ -17315,6 +17315,480 @@
       "negative_control": {
         "before": "record->enabled",
         "after": "record->definition"
+      }
+    },
+    {
+      "name": "audio_instrument_start",
+      "rom_offset": 306116,
+      "size": 516,
+      "source": "src/audio/instrument_start.c",
+      "symbols": {
+        "audio_start_sample_extended": "0x03000094",
+        "_call_via_r4": "0x0804cd01",
+        "_call_via_r7": "0x0804cd0d",
+        "g_audio_player_samples": "0x08d54690",
+        "g_audio_linear_frequencies": "0x08d6fb3c",
+        "g_audio_instrument_tracks": "0x020025b8",
+        "g_audio_instrument_generation": "0x030015ac",
+        "audio_sample_active_ram": "0x030005c8"
+      },
+      "thumb_symbols": [
+        "_call_via_r4",
+        "_call_via_r7"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "++g_audio_instrument_generation",
+        "after": "(g_audio_instrument_generation += 2)"
+      }
+    },
+    {
+      "name": "audio_instrument_release",
+      "rom_offset": 310408,
+      "size": 112,
+      "source": "src/audio/instrument_release.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_sample_release": "0x03000320",
+        "g_audio_instrument_tracks": "0x020025b8"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->instrument_id!=i.val",
+        "after": "c->instrument_id==i.val"
+      }
+    },
+    {
+      "name": "audio_instrument_stop",
+      "rom_offset": 310520,
+      "size": 56,
+      "source": "src/audio/instrument_stop.c",
+      "symbols": {
+        "_call_via_r1": "0x0804ccf5",
+        "audio_sample_release": "0x03000320",
+        "g_audio_instrument_tracks": "0x020025b8"
+      },
+      "thumb_symbols": [
+        "_call_via_r1"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->instrument_id!=i.val",
+        "after": "c->instrument_id==i.val"
+      }
+    },
+    {
+      "name": "audio_instrument_process",
+      "rom_offset": 310576,
+      "size": 20,
+      "source": "src/audio/instrument_process.c",
+      "symbols": {
+        "audio_player_process_instruments": "0x0804a451",
+        "g_audio_instrument_tracks": "0x020025b8"
+      },
+      "thumb_symbols": [
+        "audio_player_process_instruments"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": ",6)",
+        "after": ",5)"
+      }
+    },
+    {
+      "name": "audio_instrument_handle_valid",
+      "rom_offset": 310596,
+      "size": 40,
+      "source": "src/audio/instrument_handle_valid.c",
+      "symbols": {
+        "audio_sample_active": "0x08049a11",
+        "g_audio_instrument_tracks": "0x020025b8"
+      },
+      "thumb_symbols": [
+        "audio_sample_active"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "audio_sample_active( c->handle )",
+        "after": "audio_sample_active( c->handle + 1 )"
+      }
+    },
+    {
+      "name": "audio_instrument_initialize",
+      "rom_offset": 310700,
+      "size": 36,
+      "source": "src/audio/instrument_initialize.c",
+      "symbols": {
+        "g_audio_sine": "0x08d6f7cc",
+        "g_audio_instrument_tracks": "0x020025b8"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->cvolume = 64",
+        "after": "c->cvolume = 63"
+      }
+    },
+    {
+      "name": "audio_player_set_channel_volume",
+      "rom_offset": 310636,
+      "size": 32,
+      "source": "src/audio/player_set_channel_volume.c",
+      "symbols": {
+        "g_audio_player": "0x02001644"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "vol, 64",
+        "after": "vol, 63"
+      }
+    },
+    {
+      "name": "audio_player_get_channel_volume",
+      "rom_offset": 310668,
+      "size": 32,
+      "source": "src/audio/player_get_channel_volume.c",
+      "symbols": {
+        "g_audio_player": "0x02001644"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "channel >= 20",
+        "after": "channel >= 19"
+      }
+    },
+    {
+      "name": "audio_sample_active_ram",
+      "rom_offset": 16624192,
+      "size": 56,
+      "source": "src/audio/sample_active_ram.c",
+      "symbols": {
+        "g_audio_sample_channels": "0x020008b4"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-marm",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "mode": "ARM",
+      "ram_copy": "audio_iwram",
+      "ram_address": 50333128,
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->active!=0",
+        "after": "c->loop_mode!=0"
+      }
+    },
+    {
+      "name": "audio_initialize",
+      "rom_offset": 300792,
+      "size": 32,
+      "source": "src/audio/initialize.c",
+      "symbols": {
+        "audio_set_master_volume": "0x08049969",
+        "audio_instrument_initialize": "0x0804bdad",
+        "audio_activate_hardware": "0x08049871",
+        "audio_initialize_hardware": "0x08049719"
+      },
+      "thumb_symbols": [
+        "audio_set_master_volume",
+        "audio_instrument_initialize",
+        "audio_activate_hardware",
+        "audio_initialize_hardware"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils",
+      "negative_control": {
+        "before": "audio_set_master_volume(128)",
+        "after": "audio_set_master_volume(127)"
+      }
+    },
+    {
+      "name": "audio_player_stop_jingle",
+      "rom_offset": 310104,
+      "size": 28,
+      "source": "src/audio/player_stop_jingle.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "audio_player_finish_jingle": "0x0804aae5"
+      },
+      "thumb_symbols": [
+        "audio_player_finish_jingle"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "flags & 4",
+        "after": "flags & 8"
+      }
+    },
+    {
+      "name": "audio_mix_sample_fade",
+      "rom_offset": 302064,
+      "size": 440,
+      "source": "src/audio/mix_sample_fade.c",
+      "symbols": {
+        "audio_mix_sample_bias": "0x03000ab4"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-marm",
+        "-mthumb-interwork",
+        "-mcpu=arm7tdmi"
+      ],
+      "mode": "ARM",
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "tail.fade.initial >> 4",
+        "after": "tail.fade.initial >> 5"
+      }
+    },
+    {
+      "name": "display_time_add",
+      "rom_offset": 66264,
+      "size": 344,
+      "source": "src/display/time_add.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "time->tick += 30",
+        "after": "time->tick += 29"
+      }
+    },
+    {
+      "name": "display_time_compare",
+      "rom_offset": 67264,
+      "size": 112,
+      "source": "src/display/time_compare.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "mask & 8",
+        "after": "mask & 16"
+      }
+    },
+    {
+      "name": "display_time_clear",
+      "rom_offset": 67376,
+      "size": 16,
+      "source": "src/display/time_clear.c",
+      "symbols": {
+        "heap_clear": "0x08027a49"
+      },
+      "thumb_symbols": [
+        "heap_clear"
+      ],
+      "negative_control": {
+        "before": "heap_clear(time, 0, 8)",
+        "after": "heap_clear(time, 0, 7)"
+      }
+    },
+    {
+      "name": "display_time_copy",
+      "rom_offset": 67392,
+      "size": 12,
+      "source": "src/display/time_copy.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "*destination = *source",
+        "after": "*destination = *destination"
+      }
+    },
+    {
+      "name": "display_time_copy_add",
+      "rom_offset": 67404,
+      "size": 24,
+      "source": "src/display/time_copy_add.c",
+      "symbols": {
+        "display_time_add": "0x080102d9"
+      },
+      "thumb_symbols": [
+        "display_time_add"
+      ],
+      "negative_control": {
+        "before": "display_time_add(destination, delta)",
+        "after": "display_time_add(destination, source)"
+      }
+    },
+    {
+      "name": "display_time_equal",
+      "rom_offset": 67428,
+      "size": 128,
+      "source": "src/display/time_equal.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "equal = 1",
+        "after": "equal = 0"
+      }
+    },
+    {
+      "name": "display_time_period",
+      "rom_offset": 67556,
+      "size": 36,
+      "source": "src/display/time_period.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "hour > 5",
+        "after": "hour > 4"
+      }
+    },
+    {
+      "name": "display_time_in_range",
+      "rom_offset": 67612,
+      "size": 88,
+      "source": "src/display/time_in_range.c",
+      "symbols": {
+        "display_time_compare": "0x080106c1"
+      },
+      "thumb_symbols": [
+        "display_time_compare"
+      ],
+      "negative_control": {
+        "before": "return 0",
+        "after": "return 1"
+      }
+    },
+    {
+      "name": "frame_random_refill",
+      "rom_offset": 217520,
+      "size": 348,
+      "source": "src/frame/frame_random_refill.c",
+      "symbols": {
+        "g_frame_random_next": "0x03001f14",
+        "g_frame_random_remaining": "0x03001f18",
+        "g_frame_random_seed": "0x03001f28",
+        "g_frame_random_buffer_address": "0x03001f10"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "remaining = 227",
+        "after": "remaining = 226"
+      }
+    },
+    {
+      "name": "frame_seed_random_words",
+      "rom_offset": 218404,
+      "size": 56,
+      "source": "src/frame/frame_seed_random_words.c",
+      "symbols": {
+        "g_frame_random_remaining": "0x03001f18",
+        "g_frame_random_buffer_address": "0x03001f10"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "value *= 69069",
+        "after": "value *= 69068"
+      }
+    },
+    {
+      "name": "frame_next_random_word",
+      "rom_offset": 218460,
+      "size": 80,
+      "source": "src/frame/frame_next_random_word.c",
+      "symbols": {
+        "g_frame_random_remaining": "0x03001f18",
+        "g_frame_random_next": "0x03001f14",
+        "g_frame_random_last_byte": "0x03005a0c",
+        "frame_random_refill": "0x080351b1"
+      },
+      "thumb_symbols": [
+        "frame_random_refill"
+      ],
+      "negative_control": {
+        "before": "value >> 18",
+        "after": "value >> 17"
       }
     }
   ],
