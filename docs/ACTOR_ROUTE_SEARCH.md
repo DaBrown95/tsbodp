@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 106 C functions and 13,708 bytes:
+The connected route-search path reconstructs 115 C functions and 14,224 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -15,7 +15,8 @@ two attachment-job controllers and five connected selection/setup/dispatch/capac
 followed by six mode-two selection functions, a three-function optional activity path,
 and fourteen connected completion, parameter-job and choice functions, followed by
 five choice-list setup, filtering, clock classification and refresh helpers,
-and eight connected choice application, completion and value readers.
+and eight connected choice application, completion and value readers, followed by
+eight context and attachment callbacks and their connected page builder.
 Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
@@ -86,6 +87,15 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x2C720` | `frame_optional_choice_complete` | 48 |
 | `0x1BC68` | `frame_read_game_value` | 12 |
 | `0x36064` | `display_menu_read_relation_average` | 8 |
+| `0x1B48` | `frame_object_has_zero_id` | 20 |
+| `0x442C4` | `frame_initialize_optional_choice_context` | 12 |
+| `0x442D0` | `frame_optional_choice_context_available` | 60 |
+| `0x4430C` | `frame_select_optional_choice_attachment_kind` | 32 |
+| `0x44348` | `frame_begin_optional_choice_attachment_job` | 36 |
+| `0x4436C` | `frame_dispatch_optional_choice_attachment_job` | 64 |
+| `0x43A94` | `frame_step_optional_choice_kind_45` | 156 |
+| `0x443AC` | `frame_optional_choice_context_tick` | 4 |
+| `0x43F9C` | `frame_optional_choice_build_page` | 132 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
 | `0x355AC` | `frame_next_random_secondary_word` | 88 |
@@ -1253,7 +1263,8 @@ two zero tail-alignment bytes omitted by the provisional 798-byte CFG extent.
 
 The choice helpers were explicit original dependencies at that milestone;
 the following batches reconstruct setup, application and completion. The page
-builder at `0x43F9C` remains unconverted. Broader input contracts are provisional.
+builder at `0x43F9C` was unconverted at that milestone and is reconstructed
+in the context closure below. Broader input contracts remain provisional.
 All fourteen accepted extents have changed-source controls,
 including a real halfword-countdown edit in the choice controller. Current
 activity-header consumers are reverified after its comment-only clarification.
@@ -1276,7 +1287,8 @@ the original stage helper with two. The excluded-world branch writes titles
 Secondary setup writes 492, 495 and 493 and writes the fourth halfword to 497
 only when condition `(4,0,0)` is complete and `(4,0,1)` is incomplete. It does
 not invent a default value for that preserved fourth entry. Refresh delegates
-to the still-unconverted page builder at `0x43F9C`, discards its result, and
+to the page builder at `0x43F9C`, subsequently reconstructed below, discards
+its result, and
 performs the same request-byte handoff. The three list-control bytes at
 `0x030021F0/1/2` remain distinct from the request storage at `0x03005A00`.
 
@@ -1321,9 +1333,10 @@ body; explicit zero alignment is separate source glue.
 
 All five extents have real source controls and fresh public-header proofs. The
 existing 800-byte choice caller is reverified after the helper-status comment
-change. The page builder remains excluded: a natural cached-limit form is
-132 bytes with three differing bytes, while earlier pointer forms differed
-more substantially. Application and completion are reconstructed below.
+change. At that milestone the page builder remained excluded: a natural
+cached-limit form was 132 bytes with three differing bytes, while earlier
+pointer forms differed more substantially. The subsequent closure below
+reconstructs it. Application and completion are reconstructed below.
 Publication metadata is
 `frame-optional-choice-list-batch-manifest.json`; raw complete disassemblies,
 source variants, candidate/expected bytes and controls remain private. Whole-ROM
@@ -1390,9 +1403,83 @@ their actual source controls: 1,396 bytes, including that 800-byte caller.
 All eight new providers have fresh current-header positive and negative proofs.
 Their changed thresholds, timer, text IDs, selected source word and average
 increment are rejected. The sources use ordinary C, with zero tail alignment
-kept explicit where needed. The page builder remains an explicit original
-132-byte region, with its strongest candidate still three bytes different.
+kept explicit where needed. The page builder was still an explicit original
+132-byte region at that milestone; the following context closure accepts it.
 Publication metadata is `frame-optional-choice-apply-batch-manifest.json`;
 raw disassemblies, useful source failures and full candidate/expected/control
 bytes are retained privately. UI, clock, relationship and gameplay behaviour
 remain untested.
+
+
+## Optional choice context and page closure
+
+Nine further complete C extents cover 516 bytes. Eight reconstruct the choice
+context's initialization, availability, selection, allocation and dispatch,
+its kind-45 attachment job, the object-ID predicate and the empty tick callback.
+The 132-byte page builder closes the previously reconstructed refresh caller.
+The new guarded context header supplies a bounded view of byte +0x60 and byte
++0x64 without changing the established need-effect state layout.
+
+Static definition rows 93, 112 and 113 in the 36-byte table at `0x08062E7C`
+share these initialization, selector, kind-check, begin, dispatcher and tick
+pointers. The published allocator copies definition byte +0x21 to context
++0x60, named `attachment_mode` here. It installs definition words +4, +8, +12,
++16, +20 and +24 at state +0xE8 through +0xFC, and word +28 at +0xE4.
+Row 93's +28 callback is the existing capacity check; rows 112 and 113 use
+this context's availability check. These inspected rows establish connected
+callback uses, not the complete table's bounds or runtime reachability.
+
+Initialization clears byte +0x64 and returns word one. Begin stores the full
+kind word and sets that byte to one only after successful attachment allocation;
+a null allocation returns zero. Availability rejects the byte specifically
+when it equals one. It also rejects a nonzero attachment count when the mode
+byte equals one, then requires the actor's halfword ID at +8 to be zero.
+The ID predicate returns a byte zero or one; its name does not infer a broader
+player role. Selection writes kind 41 when the optional-one query narrowed to
+a byte is zero, otherwise kind 45, and returns word one.
+
+The dispatcher switches on the allocated record's full kind word, calls the
+existing 800-byte choice job for 41 and the new 156-byte job for 45, and returns
+zero for other kinds. It clears active byte +0x64 only when the result equals
+zero or two. Distinct table pointers at `0x4436D` and `0x443AD` establish the
+64-byte dispatcher extent and the separate four-byte tick callback. The
+published need-effect attachment updater invokes the tick through a void
+callback and discards its return. Its empty C body plus explicit zero tail
+alignment reproduces that complete extent; a real mutation that stores the
+active byte is rejected.
+
+The kind-45 job creates the parameter indicator before turning the actor to
+the owner's reverse direction, requesting animation 45 and entering timer five.
+It starts cue 19, delegates timer five to the existing optional consumer, and
+moves to timer one when that narrowed consumer result equals one. A nonzero
+running field also sets timer one. Completion stops the stored sample handle,
+requests animation one, releases a nonnull indicator through the existing
+state setter, clears its pointer, and returns two. Other paths return one.
+These operations reuse the established +0x58 indicator and +0xE0 sample views.
+
+The page builder writes text 496 as entry zero and starts its byte count at one.
+It begins at the page byte at `0x030021F0`, appends signed list bytes plus 6025
+to the text halfwords at `0x030059F0`, and stops at index 24, the signed-byte
+minus-one sentinel, or the reloaded page plus four. An initial cached limit
+supplies only the first range guard; it is not a loop-carried temporary.
+That natural control-flow distinction closes the former three-byte mismatch
+without register bindings, volatile accesses or assembly instructions. An
+unchanged valid page permits up to four appended entries. The writer's 24-byte
+span and its current job caller's page arithmetic do not prove arbitrary-page
+safety or wider buffer ownership.
+
+The 28-byte kind-check provider at `0x4432C` remains explicit original code.
+It retains its third argument in a saved register although no subsequent use
+is established. The natural predicate wrapper emits 24 bytes and differs from
+the full original extent; no artificial dead-copy constraint is inserted.
+
+All nine accepted providers use ordinary C, with separate zero alignment where
+needed, and have real changed-source controls. All fourteen previously accepted
+choice-header importers, covering 2,152 bytes, pass current-header positive
+proofs and their actual controls. These include the thirteen affected list-header
+importers (1,352 bytes) and the 800-byte inbound controller, after the comment-only
+status correction. Publication
+metadata is `frame-optional-choice-context-batch-manifest.json`; table-slot and
+boundary evidence, source variants, raw comparisons and controls remain private.
+The names and input contracts remain provisional. Source matching and the
+full-ROM gate do not establish callback, UI, audio or gameplay behaviour.

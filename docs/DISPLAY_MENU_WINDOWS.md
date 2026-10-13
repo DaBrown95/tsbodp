@@ -3,8 +3,8 @@
 The connected menu text producer at ROM `0803EFB8` matches its complete 352-byte
 extent. Its scene setup's window producer family also matches: disable at
 `08048854` (24 bytes), configure at `08048884` (112 bytes), and rectangle at
-`080488F4` (80 bytes). The connected scene/menu initializer at `0803E518` matches 744 bytes. The five
-functions add 1,312 verified C bytes. They compile
+`080488F4` (80 bytes). The connected scene/menu initializer at `0803E518` matches 744 bytes. The six
+functions, including the axis starter described below, add 1,360 verified C bytes. They compile
 as Thumb C at their original ROM addresses, including all literal pools and
 alignment. These bodies do not execute from copied RAM.
 
@@ -149,4 +149,30 @@ Names and roles follow the observed callers and fields. Exact linked bytes and
 static connection to scene setup, tile rendering and VBlank transfer do not
 establish runtime execution, gameplay behavior or complete subsystem coverage.
 The unconverted downstream mode stages and other original regions remain
+explicit.
+
+
+## Axis transition handoff
+
+The 48-byte starter at `0x08048944` connects the palette-menu transition to the
+existing 60-byte window records. A 28-byte partial axis view begins at window
+`+4 + 28*axis`: flags/duration are halfwords at `+0`/`+2`, and two target words
+are at `+20`/`+24`. The intervening sixteen bytes remain explicit. The starter
+writes both targets, narrows duration at its halfword store, then sets axis
+flag two. It does not itself mark the whole window's VBlank dirty flag. The
+index/axis arguments remain unchecked; their valid domains are not proven here.
+The duration's word formal is provisional: word and halfword trials compile
+the same bytes, while the stored field width is directly established.
+
+Staging the real window address before adding the axis offset closes the
+producer naturally in ordinary C, without register bindings. The same address
+then supplies the typed field stores. Earlier flattened address expressions
+matched the length but differed by eighteen bytes; swapped addition operands
+in a bound pointer trial differed by two. The final unbound address form
+matches all instructions and the literal word at `0x08048970`, ending at the
+next entry `0x08048974`. Its changed-source control sets flag four instead of
+two and rejects. Full raw evidence remains under
+`reports/audio-root/window-axis-starter-addresses/` and the connected canonical
+palette-menu transition reports. Static handoff and byte equality do not prove
+window animation at runtime; the unconverted axis update dependencies remain
 explicit.

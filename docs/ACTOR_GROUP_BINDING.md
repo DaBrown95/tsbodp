@@ -1,6 +1,6 @@
 # Actor group resources and palette composition
 
-Fifteen connected C functions reconstruct 2,168 bytes, including literal pools and
+Sixteen connected C functions reconstruct 2,856 bytes, including literal pools and
 alignment. They close the resource and palette dependencies of the accepted
 actor factory, actor-part updater and scene-player factory. Names describe the
 observed part indices and transfers; this is static/compiler evidence, without
@@ -15,6 +15,7 @@ a runtime or gameplay experiment.
 | `0x08014340` | `frame_step_palette_menu_choices` | 168 |
 | `0x080143E8` | `frame_draw_palette_menu_row` | 228 |
 | `0x080144CC` | `frame_step_palette_menu` | 184 |
+| `0x08015CB8` | `frame_step_palette_menu_transition` | 688 |
 | `0x080161AC` | `frame_load_actor_palette_pair` | 32 |
 | `0x080256A4` | `frame_create_palette_scene_actor` | 248 |
 | `0x0803AD64` | `frame_bind_actor_group` | 164 |
@@ -212,11 +213,12 @@ library alias.
 
 Fresh canonical proofs under `reports/audio-root/palette-menu-canonical/`
 include controls for flags 17 to 25, the final selector's source word and an
-advanced string pointer. All three reject actual source changes. The incomplete
-inventory splits the unconverted constructor-calling routine at `0x08015CB8`
+advanced string pointer. All three reject actual source changes. The earlier incomplete
+inventory split the constructor-calling routine at `0x08015CB8`
 and an internal literal word at `0x08015DE8`. Direct branches from the former
-continue through the latter region to the return at `0x08015F50`; these are one
-connected routine, not two established function entries. The updater caller
+continue through the latter region to the return at `0x08015F50`; the complete
+688-byte routine is reconstructed below. The interior literal word is not an
+established second function entry. The updater caller
 `0x08014340` is reconstructed below. Static
 connectivity, full-ROM byte equality and runtime menu behavior remain separate
 claims.
@@ -265,3 +267,45 @@ literal pools and zero alignment. Fresh canonical proofs under
 a captured choice value, text token and transition parameter; all reject.
 Affected earlier scene/menu consumers are recompiled with their existing
 controls and add no new coverage.
+
+
+The 688-byte transition routine connects the menu constructor to window bounds,
+background motion, object animation, frame position moves, text-label creation
+and palette transfers. It tests request word `+0x14` at counts 30, 15, 1 and zero,
+then decrements the current global word after all calls. Count 30 configures
+window one, moves backgrounds zero/one, updates object slots 8/10/15/16 with
+IDs 131/132/135/136 and variant state 57, and clears flag one on slots 14/13/12.
+Its byte counter walks pointer slots at `0x03001958` using the count at
+`0x03001978`; each object receives the accepted scene tick callback, state 14,
+a move to Y=199 and variant state three. The observed `+0x5E` halfword is used
+as a transition timer here through the existing actor access view; this does
+not establish that these menu pointers are gameplay actors. The count and
+pointer declarations remain separate partial views, without new bounds checks.
+
+Count 15 hides backgrounds zero/one, changes the window rectangle and axis
+motion, then updates slot eleven with ID 133, timer seven and variant 57. Count
+one hides background two, disables window one, clears the adjacent byte at
+`0x03001979`, copies game-state text at `+0x10`, selects font one and creates the
+label for token `0x184F` in slot seven. At zero, parameter 13 invokes the still
+unconverted scene/menu wrapper; parameters six/seven set transition words,
+with six calling the accepted menu constructor. Both load the background
+resources at `0x08EE6800` and `0x08EE6E38`, transfer sixteen palette halfwords
+from `0x08EE76B8`, move three backgrounds and enable object slot zero's flag one.
+No resources are embedded in source. Unhandled counts/parameters preserve the
+observed decrement, including unsigned wraparound.
+
+The zero branch retains its captured zero as the background-load coordinates,
+which closes the original register lifetime without adding work. Three short
+scopes bind the background layer and X-coordinate arguments to r0/r1 at their
+immediate calls. They finish at each call and no caller-clobbered value crosses
+one. Removing the bindings gives 42 differing bytes; the original direct
+argument form differs by 28 through constant preparation/reuse. The final
+source uses six argument bindings and includes every original literal pool and
+alignment byte. No instruction body is embedded or patched. The connected
+48-byte axis starter is documented in [the window path](DISPLAY_MENU_WINDOWS.md).
+
+Fresh canonical source/control proofs under
+`reports/audio-root/palette-menu-transition-canonical/` change the count-30
+comparison and the axis pending flag. Both changed sources compile and reject.
+The full source extent and linked literal positions settle the earlier split
+without claiming a complete static inventory or runtime menu behavior.

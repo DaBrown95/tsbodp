@@ -18,7 +18,7 @@ void save_stream_initialize(void)
             ++slot;
         } while (slot < 4);
     }
-    save_apply_header_option_44fc0(g_save_stream_state.header.bytes[10]);
+    display_text_select_bank(g_save_stream_state.header.bytes[10]);
     save_stream_load_slots();
 }
 asm(".align 2, 0");

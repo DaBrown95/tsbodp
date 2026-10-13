@@ -2,8 +2,8 @@
 
 The reconstructed path connects the published menu-choice and actor-need
 save/load callers to a shared byte/bit cursor, record views, slot transfers,
-header initialization and audio/display-status handoff. It has 46 matching C
-functions covering 3,308 bytes. Each full extent, pool and alignment was linked
+header initialization and audio/display-status handoff. It has 50 matching C
+functions covering 3,476 bytes. Each full extent, pool and alignment was linked
 at its original ROM address and compared with the fixed reference. Each also
 has a compiled changed-source control. These are static and compiler results;
 no runtime save/load or EEPROM compatibility claim is made.
@@ -58,10 +58,10 @@ blocks, checks the additive sum and compares the first eight bytes with the
 constant. The startup routine allocates a zeroed 2,040-byte buffer. On a failed
 header check it writes the header, clears the buffer and writes only five
 blocks (40 bytes) at each slot's starting block. It then passes header byte
-`+0xA` to an unconverted setting interface and scans the slots. The inverse
+`+0xA` to the text-resource bank selector and scans the slots. The inverse
 setting producer stores a returned word narrowed to that byte, sets byte
 `+0xB` to one and leaves word one in the return register. The setting's original
-meaning and full callee contract are not established here.
+meaning beyond the connected text-resource selection is not established here.
 
 The commit routine invokes the unconverted buffer builder, suspends audio,
 writes and reads a slot, resumes audio, validates and loads or clears its record,
@@ -80,7 +80,7 @@ in `r5` and the high-nibble scalar in `r1`. They are actual algorithm values and
 are not live across function calls. The cursor is four bytes before the bit
 position in the observed eight-byte view. Its inline low-nibble reader is a
 semantic byte accessor. There are no original instruction-body transcriptions,
-output patches or comparison masks. The other 42 functions use ordinary C.
+output patches or comparison masks. The remaining functions use ordinary C.
 
 Function boundaries include return paths, referenced literal pools and alignment
 up to the next mapped entry. The checksum's instruction body is 34 bytes and its
@@ -247,3 +247,38 @@ literal pools and alignment. Their real changed-source controls reject. The
 five accepted byte-transfer and condition providers were also rebuilt with
 controls against current headers. The larger row/cell modules, complete game
 loader and grouped record loader remain excluded from matching coverage.
+
+## Buffer-load wrapper and saved text-resource selection
+
+The 64-byte wrapper at `0x08037C8C` resets the byte cursor to the current
+buffer and clears the signed bit position, calls the still-unconverted game
+loader at `0x0801B704`, then stores the cursor difference as used bytes and
+computes its unsigned percentage of 2,040 bytes. The source preserves the
+word multiplication before division and adds no capacity check. This accepts
+the wrapper, not its larger callee or the complete load transaction.
+
+The saved header option now has a bounded source-level role: the 60-byte
+selector at `0x08044FC0` stores its low byte at `0x030021F8`, uses the original
+full-word argument to index the pointer table at `0x08D7419C`, and passes the
+selected pointer to the accepted `display_text_set_resource`. It then reads
+the stored byte and writes 32 for value two, or 44 otherwise, at `0x030021F9`.
+That derived byte's further meaning and the table's valid index range remain
+unknown. The declaration is unsized and the source adds no index check.
+The old byte formal was an unsupported inference: narrowing occurs at the
+store, while the table lookup uses the complete input word.
+
+The 12-byte getter at `0x08044FFC` zero-extends the stored bank byte into a
+word return. The 32-byte initializer at `0x08044FA0` selects bank zero and
+allocates 1,024 bytes for the existing text-buffer pointer at `0x030021F4`.
+The published lookup consumer uses that pointer with the same 1,024-byte
+limit. Allocation failure is not checked by the initializer. These three
+functions connect the existing save startup/header updater and text-resource
+decoder; they do not establish language names or a complete localization
+format. The old neutral save-option call aliases now use the canonical text
+bank declarations without changing target addresses.
+
+All four ordinary C sources match complete original extents, pools and
+alignment with real changed-source controls. All accepted consumers of the
+changed save header, both old option callers and the text/heap providers were
+reproved against the current shared declarations. Larger game-state and
+condition-module candidates remain private and excluded.

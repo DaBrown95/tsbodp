@@ -30,7 +30,7 @@ unsigned char frame_optional_choice_classify(unsigned int, unsigned int *,
                                              unsigned char *, unsigned char *);
 unsigned char frame_optional_choice_build_available(void);
 
-/* Original page-builder body at 0x43F9C remains explicit and unconverted. */
+/* Connected page builder; arbitrary page values and wider capacity are unknown. */
 unsigned char frame_optional_choice_build_page(void);
 
 #endif

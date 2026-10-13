@@ -547,3 +547,24 @@ and control binaries remain local. The accepted logic uses ordinary C with
 no register constraints, without adding catalog, mask, resource or pointer
 checks. Matching the connected source does not prove runtime or gameplay
 behavior.
+
+## Saved text-resource bank and working buffer
+
+The save header's option byte feeds `display_text_select_bank` at
+`0x08044FC0` (60 bytes). This routine stores the input's low byte at
+`0x030021F8`, indexes the unsized pointer table at `0x08D7419C` with its
+full-word argument, and calls the reconstructed text-resource setter. It
+then stores 32 or 44 at `0x030021F9`, depending on whether the saved byte is
+two. That derived byte's purpose, bank names and valid table index range
+remain provisional. The full-word formal corrects the earlier save-call
+inference of a byte argument; no input truncation is inserted before lookup.
+
+The 12-byte getter at `0x08044FFC` returns the stored byte zero-extended to a
+word. The 32-byte initializer at `0x08044FA0` selects zero and allocates
+1,024 bytes for `g_display_text_buffer` at `0x030021F4`, without checking the
+allocation result. The existing scene-text lookup uses this buffer and the
+same byte limit. All three sources use ordinary C, match their complete
+original extents including literal pools/alignment, and reject actual
+changed-source controls. The save startup and header updater now call the
+canonical interfaces at the same addresses. This is static connected
+evidence, not a runtime language-selection or save-compatibility claim.
