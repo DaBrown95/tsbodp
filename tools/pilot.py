@@ -23,7 +23,8 @@ from source_symbols import declarations
 from source_controls import mutate
 from source_addresses import execution_address, validate_execution_layout, validate_symbol_definitions
 from ram_copies import validate_copy
-from header_snapshots import snapshot_headers
+from header_snapshots import (snapshot_headers, retained_source, verify_snapshot_inputs,
+                              verify_preprocessor_dependencies)
 from source_coverage import byte_counts, inline_glue, verify_inline_glue_symbols
 
 
@@ -59,9 +60,19 @@ def compile_function(function, source, folder, flags, copies=None, header_overri
     selected_assembler = assembler_selection(function)
     compiler = ROOT / selected['executable']
     flags = selected['flags']
+    retained = retained_source(headers, header_folder)
+    dependencies = folder / 'preprocessor.d'
     run(["xcrun", "clang", "--target=arm-none-eabi", "-E", "-P", "-undef",
-         "-nostdinc", "-std=gnu89", "-I", header_folder, source, "-o", preprocessed], commands)
+         "-nostdinc", "-std=gnu89", "-MD", "-MF", dependencies, "-MT", "snapshot",
+         "-I", header_folder, retained, "-o", preprocessed], commands)
+    verify_snapshot_inputs(headers, header_folder)
+    headers['preprocessor_dependencies'] = verify_preprocessor_dependencies(
+        headers, header_folder, dependencies)
+    dependency_digest = hashlib.sha256(dependencies.read_bytes()).hexdigest()
+    headers['preprocessor_dependency_sha256'] = dependency_digest
+    (folder / 'header-snapshot.json').write_text(json.dumps(headers, indent=2) + '\n')
     run([compiler, *flags, preprocessed, "-o", assembly], commands)
+    verify_snapshot_inputs(headers, header_folder)
     assembler = ROOT / selected_assembler['executable']
     run([assembler, *selected_assembler['source_flags'], assembly, "-o", obj], commands)
     # Mark external function addresses as Thumb, so the linker does not invent
@@ -97,6 +108,9 @@ def compile_function(function, source, folder, flags, copies=None, header_overri
         verify_inline_glue_symbols(function,
                                    {s.name: s['st_value'] for s in symtab.iter_symbols()
                                     if s['st_shndx'] == elf.get_section_index('.text')}, address)
+    verify_snapshot_inputs(headers, header_folder)
+    if hashlib.sha256(dependencies.read_bytes()).hexdigest() != dependency_digest:
+        raise ValueError('Preprocessor dependency receipt changed during compilation')
     return data, commands
 
 

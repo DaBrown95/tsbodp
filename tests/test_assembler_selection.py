@@ -170,7 +170,7 @@ except ModuleNotFoundError as error:
 class HistoricalAssemblerSourceTests(unittest.TestCase):
     def test_invalid_assembler_rejects_before_any_native_command(self):
         with tempfile.TemporaryDirectory() as scratch:
-            root = Path(scratch)
+            root = Path(scratch).resolve()
             source = root / 'fixture.c'
             source.write_text('unsigned int assembler_fixture(void) {return 1;}\n')
             function = {'name': 'assembler_fixture', 'rom_offset': 8, 'size': 16,
@@ -182,7 +182,7 @@ class HistoricalAssemblerSourceTests(unittest.TestCase):
 
     def test_unchanged_compiler_assembly_has_historical_zero_alignment_and_links_with_modern_gaps(self):
         with tempfile.TemporaryDirectory() as scratch:
-            root = Path(scratch)
+            root = Path(scratch).resolve()
             source = root / 'fixture.c'
             source.write_text('unsigned int assembler_fixture(unsigned int value) {return value == 0;}\n')
             function = {'name': 'assembler_fixture', 'rom_offset': 8, 'size': 20,
@@ -240,7 +240,7 @@ class HistoricalAssemblerSourceTests(unittest.TestCase):
 
     def test_changed_source_propagates_in_thumb_and_arm(self):
         with tempfile.TemporaryDirectory() as scratch:
-            root = Path(scratch)
+            root = Path(scratch).resolve()
             source = root / 'fixture.c'
             source.write_text('unsigned int assembler_fixture(unsigned int value) {return value + 7;}\n')
             changed = root / 'changed.c'

@@ -46,7 +46,7 @@ it does not replace the complete coordinate type.
 
 The emitter calls `frame_random_secondary_range` at `0x08035404`, which uses
 the separate generator at `0x080355AC`, masks its value to 15 bits, scales it
-by `last - first + 1` and adds the first endpoint. This 44-byte range body
+by `last - first + 1` and adds the first endpoint. This 40-byte range body
 differs from the published `frame_random_range` at `0x080353D8`: the latter
 uses the primary generator and bypasses it for equal endpoints. The secondary
 range and generator remain unconverted dependencies in this batch.
@@ -103,3 +103,41 @@ and header proofs. `transient-update-batch-manifest.json` and
 `transient-lifecycle-ready.json` index the private receipts, including sources,
 header closures, commands and expected/candidate bytes. Whole-ROM integration
 and runtime behavior remain separate claims.
+
+## Definition tile cleanup
+
+Three further connected bodies cover 248 bytes, including their pools and
+alignment: `frame_release_transient_definition_tiles` at `0x08030FB4` (132),
+`frame_release_scene_transient_tiles` at `0x08026C14` (52), and
+`frame_clear_scene_effects` at `0x08029970` (64). These ordinary C replacements
+use no register constraints. They connect the separate transient/render lists
+to the existing tile-release helper rather than claiming new effect gameplay.
+
+The definition table has a 40-byte entry stride and eight entries per group.
+The resource pointer at `+0x00` leads to the existing sequence pointer at resource
+`+0x04`. The release loop reads the sequence's halfword frame count at `+0x06`
+and halfword offsets beginning at `+0x0C`. It resolves each frame relative to
+that offset-table base and adds the product of the width and height bytes at
+frame `+0x02` and `+0x03` into a halfword accumulator. Both accumulation and
+the byte iterator retain the original narrowing; no frame-count bound or
+additional guard is inferred. The definition's halfword tile index at `+0x24`
+and accumulated area are passed to `display_release_tile_bytes_immediately`
+at `0x08047904` with flag zero. That existing helper shifts its size argument
+right by six in this mode; the release loop alone does not establish the
+resource's pixel encoding or its runtime allocation preconditions.
+
+The 52-byte scene wrapper releases group-zero entries three, six, and seven,
+plus entry two when the unsigned scene word at `0x03004334` is at most fourteen.
+The 64-byte wrapper first clears the primary object list and both distinct
+effect families. It then releases entries one and zero only when the shared
+scene view at `0x030043F4` has scene byte `+0x12` equal to zero and flag `0x20`
+in byte `+0x15`. The existing countdown-state view supplies those same offsets;
+using it does not establish the surrounding scene storage or explain the flag.
+
+Canonical public-source proofs and changed-source controls are indexed by
+`definition-release-ready.json` in ignored local reports. Changing the area
+calculation rejects 53 bytes; changing the scene threshold and flag rejects
+one byte each. The ten existing direct transient/emission-header consumers
+also retain fresh positive and negative-control proofs. Names and cleanup
+roles follow these static calls and field accesses; runtime behavior remains
+unverified by this batch.

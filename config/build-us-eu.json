@@ -18934,6 +18934,67 @@
         "after": "direction_limit=(emitter->owner->flags&0x20000000)?8:3"
       },
       "source": "src/frame/frame_emit_transient_render_effect.c"
+    },
+    {
+      "name": "frame_release_transient_definition_tiles",
+      "rom_offset": 200628,
+      "size": 132,
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "g_frame_transient_definitions": "0x030058a0",
+        "display_release_tile_bytes_immediately": "0x08047905"
+      },
+      "thumb_symbols": [
+        "display_release_tile_bytes_immediately"
+      ],
+      "source": "src/frame/frame_release_transient_definition_tiles.c",
+      "negative_control": {
+        "before": "bytes+=data->width*data->height;",
+        "after": "bytes+=data->width*(data->height+1);"
+      }
+    },
+    {
+      "name": "frame_release_scene_transient_tiles",
+      "rom_offset": 158740,
+      "size": 52,
+      "source": "src/frame/frame_release_scene_transient_tiles.c",
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "g_scene_id": "0x03004334",
+        "frame_release_transient_definition_tiles": "0x08030fb5"
+      },
+      "thumb_symbols": [
+        "frame_release_transient_definition_tiles"
+      ],
+      "negative_control": {
+        "before": "g_scene_id <= 14",
+        "after": "g_scene_id <= 13"
+      }
+    },
+    {
+      "name": "frame_clear_scene_effects",
+      "rom_offset": 170352,
+      "size": 64,
+      "source": "src/frame/frame_clear_scene_effects.c",
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "g_frame_primary_list": "0x030024f0",
+        "g_display_countdown_scene": "0x030043f4",
+        "display_release_object_list": "0x08001189",
+        "frame_clear_transient_effects": "0x0803105d",
+        "frame_clear_render_effects": "0x08031099",
+        "frame_release_transient_definition_tiles": "0x08030fb5"
+      },
+      "thumb_symbols": [
+        "display_release_object_list",
+        "frame_clear_transient_effects",
+        "frame_clear_render_effects",
+        "frame_release_transient_definition_tiles"
+      ],
+      "negative_control": {
+        "before": "flags & 0x20",
+        "after": "flags & 0x10"
+      }
     }
   ],
   "assembly": [

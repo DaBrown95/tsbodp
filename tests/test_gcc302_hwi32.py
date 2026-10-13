@@ -95,7 +95,7 @@ class Hwi32NativeTests(unittest.TestCase):
         import pilot
         from capstone import Cs, CS_ARCH_ARM, CS_MODE_THUMB
         with tempfile.TemporaryDirectory() as temporary:
-            folder = Path(temporary)
+            folder = Path(temporary).resolve()
             source = folder / 'fixture.c'
             source.write_text('unsigned fixture(void) { return 0xc0000000U; }\n')
             flags = ['-O3', '-mthumb', '-mthumb-interwork', '-fomit-frame-pointer',

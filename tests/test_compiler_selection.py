@@ -210,7 +210,7 @@ except ModuleNotFoundError as error:
 class CompilerSourceFixtureTests(unittest.TestCase):
     def test_invalid_selection_rejects_before_running_any_native_tool(self):
         with tempfile.TemporaryDirectory() as scratch:
-            root = Path(scratch)
+            root = Path(scratch).resolve()
             source = root / 'fixture.c'
             source.write_text('unsigned int compiler_fixture(void) {return 1;}\n')
             function = {'name': 'compiler_fixture', 'rom_offset': 0x1000, 'size': 16,
@@ -222,7 +222,7 @@ class CompilerSourceFixtureTests(unittest.TestCase):
 
     def test_selected_backend_links_both_modes_and_changed_source_propagates(self):
         with tempfile.TemporaryDirectory() as scratch:
-            root = Path(scratch)
+            root = Path(scratch).resolve()
             for mode, flag in [('Thumb', '-mthumb'), ('ARM', '-marm')]:
                 function = {'name': 'compiler_fixture', 'rom_offset': 0x1000,
                             'size': 16, 'mode': mode, 'compiler_id': 'gcc302',
