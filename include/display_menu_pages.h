@@ -1,5 +1,6 @@
 #ifndef DISPLAY_MENU_PAGES_H
 #define DISPLAY_MENU_PAGES_H
+#include "display_map_fill.h"
 #include "display_menu_primary.h"
 #include "display_scene_setup.h"
 #include "display_catalog_text.h"
@@ -11,8 +12,6 @@ extern unsigned char g_display_menu_page_text_variants[];
 extern struct FrameObject *g_need_effect_player;
 /* Unconverted tile reader: this caller observes a 16-bit return. */
 unsigned short display_read_map_tile(const unsigned short *, int, int, int);
-void display_fill_background_constant_rectangle(unsigned int, int, int, int, int,
-                                                unsigned short);
 void display_load_background_dma(unsigned int, const struct BackgroundResource *,
     unsigned short, unsigned short, unsigned int, unsigned int);
 struct TransitionObject;

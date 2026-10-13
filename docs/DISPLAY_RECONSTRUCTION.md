@@ -226,7 +226,10 @@ this wrapper's independent match does not credit its original callee.
 
 The constant rectangle writer at `0x0800d828` writes a fixed tile across signed
 width/height ranges with a 32-entry screen-map stride. Its background selector at
-`0x0800d7fc` uses the state's map destination at offset `0x10`. Together they
+`0x0800d7fc` uses the state's map destination at offset `0x10`. Its incoming tile
+argument is a complete word; the provider explicitly consumes the low halfword
+before selecting the background state. The later connected view-coordinator
+proof corrected the earlier narrow formal without changing this 44-byte extent. Together they
 complement the previously matching incrementing tile rectangle writer. The
 palette rectangle selector at `0x0800d8e0` reaches the still unconverted writer
 at `0x0800d90c`; its candidate preserves the low 12 map-entry bits and substitutes

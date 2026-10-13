@@ -1,5 +1,6 @@
 #ifndef DISPLAY_TIME_HUD_H
 #define DISPLAY_TIME_HUD_H
+#include "display_map_fill.h"
 #include "display_time_format.h"
 #include "display_text_raster.h"
 
@@ -22,8 +23,6 @@ extern unsigned int g_frame_flags;
 extern struct DisplayCountdownSceneState *g_display_countdown_scene;
 extern const struct DisplayCountdownSceneDefinition g_display_countdown_scenes[];
 extern const struct DisplayCountdownSceneLayout g_display_countdown_layouts[];
-void display_fill_background_constant_rectangle(unsigned int, int, int, int, int,
-                                                unsigned short);
 void display_clear_background_rectangle(unsigned int, int, int, int, int);
 void display_time_step_countdown(void);
 void display_time_update_scene_countdown(void);

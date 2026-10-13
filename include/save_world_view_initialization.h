@@ -1,5 +1,6 @@
 #ifndef SAVE_WORLD_VIEW_INITIALIZATION_H
 #define SAVE_WORLD_VIEW_INITIALIZATION_H
+#include "display_map_fill.h"
 #include "save_world_display.h"
 #include "scene_primary.h"
 #include "display_text_raster.h"
@@ -17,8 +18,6 @@ extern const unsigned int g_scene_background_control0;
 void scene_initialize_view(unsigned int, unsigned int);
 void display_fill_background(unsigned int, unsigned short);
 void display_fill_background_rectangle(unsigned int, int, int, int, int,
-    unsigned short);
-void display_fill_background_constant_rectangle(unsigned int, int, int, int, int,
     unsigned short);
 const unsigned short *display_load_background_resource_dma(unsigned int,
     const struct BackgroundResource *, unsigned short);

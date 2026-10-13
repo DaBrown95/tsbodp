@@ -1,5 +1,6 @@
 #ifndef FRAME_ACTOR_PALETTE_MENU_H
 #define FRAME_ACTOR_PALETTE_MENU_H
+#include "display_map_fill.h"
 
 #include "frame_actor_palette_scene.h"
 
@@ -29,8 +30,6 @@ struct FrameObject *display_scene_create_label(unsigned int, const char **);
 void display_text_set_background_control(unsigned int);
 void display_text_update(struct FrameObject *, const char **);
 void display_text_set_object_string(struct FrameObject *, const char *);
-void display_fill_background_constant_rectangle(unsigned int, int, int, int,
-                                                int, unsigned short);
 
 void frame_create_palette_menu_actors(void);
 void frame_update_palette_menu_actor(void);

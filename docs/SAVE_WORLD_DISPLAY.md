@@ -15,7 +15,7 @@ nullable object teardown to the original view updater at `0x0801E798`. That
 updater tests the row flag `0x400000` before palette refresh, and calls the gauge
 scaler for the selected needs display. The accepted gauge updater at `0x0801EB84` iterates eight entries and calls
 indicator creation only for an empty slot. The main view function ends at the next prologue `0x0801EAC8`;
-its 816-byte body remains unconverted. These static call findings do not add C coverage.
+its complete 816-byte body is reconstructed below. Static call findings alone do not add C coverage.
 
 Palette refresh compares the full incoming row index to the selection byte at
 `0x030040E0 + 0x31`. Only the selected row loads original palette resources at
@@ -109,13 +109,13 @@ roles, arbitrary index bounds and runtime UI behavior remain uncertain.
 
 ## Connected row notifications
 
-Three direct children of the unconverted 816-byte view coordinator add 364
+Three direct children of the 816-byte view coordinator add 364
 matching C bytes: `save_world_show_row_notice` at `0x0801EC9C` (152),
 `save_world_show_row_flag_notice` at `0x0801ED34` (124), and
 `save_world_show_notice` at `0x0801EDB0` (88). This selected-row display path now
 contained ten verified functions and 1,128 bytes before the pending providers
-below; the coordinator stays explicit
-and receives no coverage credit. All three use ordinary C and share a semantic
+below. The coordinator was unconverted at that milestone; its later complete
+match is recorded below. All three use ordinary C and share a semantic
 inline centering helper that emits no additional out-of-line function.
 
 The first row helper tests a single snapshot of its row flags. Flag `0x100000`
@@ -138,7 +138,7 @@ and source controls are verified without assuming a runtime notice was shown.
 
 ## Pending notification providers
 
-Two further direct children of the unconverted view coordinator add 124 matching
+Two further direct children of the view coordinator add 124 matching
 C bytes: `save_world_show_pending_column` at `0x0802A920` (44) and
 `save_world_show_pending_event` at `0x0804560C` (80). The connected selected-row
 display path now contains twelve verified functions and 1,252 bytes. Both use
@@ -169,7 +169,7 @@ Its extent ends at the next original prologue `0x0804565C`.
 ## View initialization producer
 
 `scene_initialize_view` at `0x0801E5F4` adds 420 matching C bytes. The next
-original entry is the still-unconverted coordinator at `0x0801E798`; the accepted
+original entry is the coordinator at `0x0801E798`, reconstructed below; the accepted
 extent includes every intervening literal and alignment byte. The connected
 selected-row display family now contains thirteen verified functions and 1,672
 bytes. A real edit of the redraw mask rejects, and the accepted
@@ -204,8 +204,8 @@ The input index and eight-times-index value are ordinary locals. The helpers
 inline without additional function spans. Failed fixed-stride experiments that
 overwrote a live stride with the row root are retained privately and excluded.
 No instruction body, output fixup or allocated section is added. The main
-816-byte coordinator remains unconverted, with its valid ordinary-C attempts
-and raw comparisons retained separately from coverage. Runtime notices,
+coordinator is reconstructed below; its useful failed C attempts and raw
+comparisons remain private and receive no coverage credit. Runtime notices,
 background appearance, asset meanings and complete state bounds remain unproved.
 
 ## Selected background and palette producer
@@ -241,8 +241,8 @@ path; the chain is not a BIOS-only transfer, and defined C-language behaviour
 for the unwritten colour is not established. Offset-first byte
 address calculations preserve the raw instruction scheduling without changing
 the selected byte windows. A real copy-length edit from 14 to twelve rejects.
-The 816-byte main view coordinator remains unconverted, with useful failed
-trials retained privately.
+The complete coordinator match is recorded below, with useful failed trials
+retained privately.
 
 ## Fixed background resource placement
 
@@ -271,3 +271,94 @@ attempts that emitted extra allocated data
 were rejected rather than stripped; raw failures remain private. The full
 producer extents, pools and source controls pass independently of runtime
 background appearance or complete palette/index bounds.
+
+## Complete selected-view coordinator
+
+`scene_update_view` at `0x0801E798` adds 816 verified matching C bytes, through
+all intervening literals and alignment to the next original prologue at
+`0x0801EAC8`. The connected selected-row display family described here now
+contains sixteen verified functions and 2,772 bytes. The full incoming word
+index remains unchanged. Its two accepted direct callers, `scene_initialize`
+and `scene_primary_step`, retain their existing interfaces and exact bytes.
+All twenty-two distinct direct function providers are already reconstructed;
+this closes their immediate coordination path without claiming their entire
+transitive call graph or the whole game is reconstructed.
+
+The coordinator first refreshes the row palette when flag `0x400000` is set.
+Flags two and one separately redraw the world number and formatted clock text,
+clearing their respective bits. The ordered notice branches then consume
+`0x800000`, `0x40000`, `0x180000` or `0x200000` through the matching notice
+helpers. Otherwise, a single pending-column-mask snapshot searches six low
+bits, shows the first pending column, and clears only its bit. When that mask
+is zero, the separate byte at world `+0x748` may show a pending event and is
+then cleared. The independent byte at `+0x750` stores result text 309,
+coordinates the sequence notification and activates the scene request before
+clearing itself. These names describe the static calls and stores, not the
+meaning of original text/audio contents or demonstrated runtime behavior.
+
+The 56-byte row countdown is queried, decremented and stored as a halfword.
+When its low halfword reaches zero and the row's ready word is zero, the source
+retains that actual zero word as the rectangle tile argument. For the currently
+selected view, and only without game flag `0x100000`, ready values zero and one
+coordinate the matching begin/finish transitions and gauge updater. Both
+transition tests use the existing input halfword table at `0x03004228`, mask
+`0x200`, and object states 16 or 27. The source reuses the canonical
+`g_input_pressed` and the existing result-id object at `0x030059F0`, replacing
+private provisional palette/text aliases. The last need-average query selects
+an original background descriptor from the pointer table at `0x08D70E4C` and
+stores its decoded map result. No arbitrary row, object-slot, text-buffer or
+resource-table bound is inferred, and no allocation, pointer or index guard is
+added.
+
+Unsigned index arithmetic preserves the original eight-times-index value and
+hands it to the later row operations in each completed notice path. The timer
+uses `(eight_index - index) << 3`; the inline ready reader assigns its table
+root first, then uses `(eight_index << 3) - (index << 3)`. These are the same
+56-times-index byte offset modulo the target's 32-bit unsigned word. Expressing
+the two consuming phases separately preserves the original address and saved
+index lifetimes without a new read or control branch. The earlier reassociated
+and cached-index candidates are retained with their raw differences.
+
+Ten necessary semantic C register bindings remain after eight redundant
+bindings were removed and every resulting full extent rechecked. The initial
+byte pointer and its mask snapshot briefly use `r0` and `r2`; the available-mask
+word uses `r1` until the first matching bit. The later actual bit-clear address
+briefly uses `r1` after the notification calls. A pending-byte pointer uses
+callee-saved `r8` across its two calls. Its field offset is expressed in
+eight-byte units through a short `r2` scalar, consumed before the address is
+formed: the observed `0x748` offset is exactly 233 units. The known value fits
+both a byte and a halfword; both private forms matched, while the accepted
+source uses the halfword form. This temporary unit/type choice is an
+implementation view, not evidence for an original array, original declaration
+or new game-state bound. It adds no memory traffic or arithmetic to the linked
+extent. Removing its binding leaves the three preserved address-register
+mismatches. The timer's table root, row byte offset, computed address and ready
+word use short `r1`, `r0`, `r2` and `r1` lifetimes. The root dies before the ready
+snapshot, and these call-clobbered bindings end before calls. No embedded
+instruction body, invented read, volatile qualifier, dummy initialization or
+comparison mask is used.
+
+The connected 44-byte `display_fill_background_constant_rectangle` provider at
+`0x0800D7FC` now declares its observed incoming tile as a full word and explicitly
+narrows it to a halfword before the background-state lookup. The original loads
+the sixth stack argument as a word, then performs that narrowing itself. The
+new coordinator's unmodified ready word is passed without a separate caller
+narrowing, as in the original. The map writer still consumes a halfword. A
+minimal guarded `display_map_fill.h` owns this contract; six existing role
+headers import it in place of their older narrow declarations. This correction
+adds no C-coverage bytes, and all eight earlier direct fill callers retain exact
+bytes. All 43 affected existing functions, totaling 11,648 bytes, are freshly
+compiled against the final literal header closure with their actual source
+controls; each positive matches and each control rejects. The new coordinator's
+notification edit rejects at one byte, and the provider's existing x-coordinate
+edit rejects at sixteen bytes.
+
+The accepted C objects and linked extents contain only their expected allocated
+text sections, resolve at the original Thumb addresses and retain all pools and
+alignment. Raw progression from 195, twelve, eleven and three differences to
+zero, minimal-constraint trials, the failed wide-offset and neighbouring-field
+experiments, and fresh current-header controls remain in ignored local reports.
+The original buffer, unchecked row/object access, shared game-state overlays,
+countdown units and resource bounds retain their stated uncertainties. Source
+byte equality, whole-ROM integration and runtime UI behavior remain separate
+claims.
