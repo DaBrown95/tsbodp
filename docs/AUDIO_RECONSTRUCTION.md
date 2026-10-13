@@ -862,5 +862,73 @@ callers also retain their full positives, source controls and glue controls
 after the header extension. Raw attempts and comparisons remain in ignored
 `reports/audio-root/volume-slide-effects/`, `retrigger-arpeggio/` and
 `volume-slide-canonical/`. Sources are adapted from the pinned LGPL Krawall
-files with their notices retained. Volume-column effects, the remaining table
-callbacks and envelope consumers are the next connected audio targets.
+files with their notices retained. The remaining volume-column and table
+callbacks are reconstructed below; envelope consumers remain connected targets.
+
+## Bounded effect-table callback closure
+
+The final **26 functions / 1,676 matching C bytes** close every nonzero callback
+pointer in the bounded tables at `08D6F518` (51 track entries, stride 12) and
+`08D6F77C` (10 volume-column entries, stride 8). Both callback words of each track
+entry and the single callback word of each volume entry resolve to **51 distinct
+matching C functions**, including those accepted in the earlier connected pitch,
+modulation and slide batches. The two table regions total 692 original data
+bytes and remain explicitly unconverted. This closure concerns these tables,
+not every audio callback, caller input, envelope or runtime playback path.
+
+| Connected operations | Complete matching C bytes |
+| --- | ---: |
+| Speed, BPM and combined speed/BPM | 96 |
+| Mark callback and order/pattern break/loop | 136 |
+| Fine volume slides, global/channel/base volume and pan | 440 |
+| Sample offset, note cut and note delay | 228 |
+| Ten volume-column callbacks | 776 |
+
+Speed/BPM operations preserve nonzero-operand and `0x20` threshold behavior,
+store player tempo and call the accepted tick-period setter with `24 * tempo`.
+The mark operation calls the nullable registered callback with observed event
+number three and the operand. Jump and break write the signed-byte pending order
+or decimal-nibble row. Pattern loop initializes the count once, predecrements
+the signed byte, ends at minus one and otherwise retains the saved row. The
+earlier game uses byte row/count fields, rather than the later upstream widths
+and postdecrement expression. No extra bounds or state checks are introduced.
+
+The sample-offset effect keeps the operand for a new note and otherwise calls
+the copied ARM position setter with a byte position shifted by eight. Note cut
+suppresses an immediate zero-operand note; on the specified later tick it clears
+the envelope flag and releases the sample, rather than setting its volume to
+zero as in the inspected later upstream code. Note delay suppresses immediate
+play for a nonzero operand, then starts the sample on its matching tick. The
+inlined earlier note-start handoff clears the reset flag, uses current-frequency
+conversion, sends base/channel volume shifted by six and base pan to the accepted
+extended ARM sample starter, stores its returned handle and applies a saved
+nonzero position. This finite earlier path does not imply reconstruction of every
+upstream note-start or instrument-envelope operation.
+
+The volume-column callbacks read track byte `+5D`. They provide ordinary/fine
+volume slides, vibrato speed/depth, pan and pan slides, and portamento operand
+coordination. Pan uses the observed `4370 * 128` reciprocal form, with operand
+seven centering it; it retains signed-byte narrowing and clipping through the
+regular helper. The portamento column stores the low nibble shifted by four on
+row, conditional on the ordinary effect operand. Its between-row branch calls
+the accepted note-portamento callback with a true row argument. That apparently
+unusual handoff is present in both the original and inspected upstream and is
+preserved without a behavior correction.
+
+Pan, volume-column pan and both volume-column pan slides use the verified HWI32
+profile. Other entries use normal GCC 3.0.2. The complete 40-byte portamento
+column extent includes natural `mov r8,r8` Thumb alignment from the pinned
+current assembler; the old assembler's zero padding failed the two-byte tail.
+No instruction assembly, padding bytes, output edits, masks or fixed register
+bindings are added to any of these 26 C sources.
+
+Every complete extent and its actual changed-source control passes/rejects
+respectively. Expected bytes, candidates, commands, header snapshots, useful
+failures and the final assembler comparison remain under ignored
+`reports/audio-root/effect-table-closure/`, `portamento-alignment/` and
+`effect-table-canonical/`. `effect-table-pointer-audit.json` records the bounded
+pointer resolution and original table hashes. Names follow observed accesses
+and the pinned LGPL Krawall vocabulary; original resource/table data remains
+explicit, and runtime/audible behavior remains untested. Remaining envelope
+callers, player/mixer entries and those callers' input domains are the next
+connected audio targets; the core 776-byte instrument processor already matches.

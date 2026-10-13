@@ -27,7 +27,9 @@ struct DisplayMenuActorSelection {
 void display_menu_apply_delta(signed char);
 void display_menu_prepare_state_42(void);
 struct DisplayMenuSelectionState {
-    unsigned char unknown_00[2], text_kind;
+    unsigned char enabled, definition, text_kind, unknown_03;
+    short major;
+    signed char minor, part;
 };
 extern struct DisplayMenuSelectionState g_display_menu_selection_state;
 extern unsigned char g_frame_actor_social_probe[];

@@ -16591,6 +16591,731 @@
         "before": "text_id = 2241",
         "after": "text_id = 2240"
       }
+    },
+    {
+      "name": "audio_effect_bpm",
+      "rom_offset": 310900,
+      "size": 32,
+      "source": "src/audio/effect_bpm.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "audio_set_tick_bpm": "0x08049add"
+      },
+      "thumb_symbols": [
+        "audio_set_tick_bpm"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": ">= 0x20",
+        "after": ">= 0x21"
+      }
+    },
+    {
+      "name": "audio_effect_channel_volume",
+      "rom_offset": 311252,
+      "size": 64,
+      "source": "src/audio/effect_channel_volume.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_volume": "0x03000434"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->cvolume, 64",
+        "after": "c->cvolume, 63"
+      }
+    },
+    {
+      "name": "audio_effect_global_volume",
+      "rom_offset": 311176,
+      "size": 76,
+      "source": "src/audio/effect_global_volume.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "g_audio_player_volume_current": "0x02001640",
+        "audio_set_global_volume": "0x08049aa1",
+        "audio_update_channel_volumes": "0x08049ba5"
+      },
+      "thumb_symbols": [
+        "audio_set_global_volume",
+        "audio_update_channel_volumes"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "0x40",
+        "after": "0x3f"
+      }
+    },
+    {
+      "name": "audio_effect_mark",
+      "rom_offset": 310972,
+      "size": 28,
+      "source": "src/audio/effect_mark.c",
+      "symbols": {
+        "_call_via_r3": "0x0804ccfd",
+        "g_audio_player_callback": "0x020025b4"
+      },
+      "thumb_symbols": [
+        "_call_via_r3"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "( 3,",
+        "after": "( 2,"
+      }
+    },
+    {
+      "name": "audio_effect_note_cut",
+      "rom_offset": 312572,
+      "size": 60,
+      "source": "src/audio/effect_note_cut.c",
+      "symbols": {
+        "_call_via_r1": "0x0804ccf5",
+        "g_audio_player": "0x02001644",
+        "audio_sample_release": "0x03000320"
+      },
+      "thumb_symbols": [
+        "_call_via_r1"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->effectop == g_audio_player.tick",
+        "after": "c->effectop != g_audio_player.tick"
+      }
+    },
+    {
+      "name": "audio_effect_note_delay",
+      "rom_offset": 312632,
+      "size": 124,
+      "source": "src/audio/effect_note_delay.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_start_sample_extended": "0x03000094",
+        "g_audio_player": "0x02001644",
+        "_call_via_r4": "0x0804cd01",
+        "audio_set_channel_position": "0x03000578"
+      },
+      "thumb_symbols": [
+        "_call_via_r2",
+        "_call_via_r4"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->effectop == g_audio_player.tick",
+        "after": "c->effectop != g_audio_player.tick"
+      }
+    },
+    {
+      "name": "audio_effect_order_jump",
+      "rom_offset": 312464,
+      "size": 12,
+      "source": "src/audio/effect_order_jump.c",
+      "symbols": {
+        "g_audio_player": "0x02001644"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "= c->effectop",
+        "after": "= c->effectop + 1"
+      }
+    },
+    {
+      "name": "audio_effect_pan",
+      "rom_offset": 312388,
+      "size": 76,
+      "source": "src/audio/effect_pan.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_pan": "0x030004b4"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302_hwi32",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "> 0x80",
+        "after": "> 0x7f"
+      }
+    },
+    {
+      "name": "audio_effect_pattern_break",
+      "rom_offset": 312476,
+      "size": 24,
+      "source": "src/audio/effect_pattern_break.c",
+      "symbols": {
+        "g_audio_player": "0x02001644"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "10 *",
+        "after": "9 *"
+      }
+    },
+    {
+      "name": "audio_effect_pattern_loop",
+      "rom_offset": 312500,
+      "size": 72,
+      "source": "src/audio/effect_pattern_loop.c",
+      "symbols": {
+        "g_audio_player": "0x02001644"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "== -1",
+        "after": "== -2"
+      }
+    },
+    {
+      "name": "audio_effect_sample_offset",
+      "rom_offset": 312020,
+      "size": 44,
+      "source": "src/audio/effect_sample_offset.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_position": "0x03000578"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "setChannelPosH( c, c->effectop )",
+        "after": "setChannelPosH( c, c->effectop + 1 )"
+      }
+    },
+    {
+      "name": "audio_effect_speed",
+      "rom_offset": 310876,
+      "size": 24,
+      "source": "src/audio/effect_speed.c",
+      "symbols": {
+        "g_audio_player": "0x02001644"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->effectop )",
+        "after": "c->effectop > 1 )"
+      }
+    },
+    {
+      "name": "audio_effect_speed_bpm",
+      "rom_offset": 310932,
+      "size": 40,
+      "source": "src/audio/effect_speed_bpm.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "audio_set_tick_bpm": "0x08049add"
+      },
+      "thumb_symbols": [
+        "audio_set_tick_bpm"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": ">= 0x20",
+        "after": ">= 0x21"
+      }
+    },
+    {
+      "name": "audio_effect_volume",
+      "rom_offset": 312756,
+      "size": 48,
+      "source": "src/audio/effect_volume.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_volume": "0x03000434"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->volume = c->effectop",
+        "after": "c->volume = c->effectop + 1"
+      }
+    },
+    {
+      "name": "audio_effect_volume_slide_down_fine",
+      "rom_offset": 311000,
+      "size": 88,
+      "source": "src/audio/effect_volume_slide_down_fine.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_volume": "0x03000434"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "volDown( c, c->volslide_fine )",
+        "after": "volDown( c, c->volslide_fine + 1 )"
+      }
+    },
+    {
+      "name": "audio_effect_volume_slide_up_fine",
+      "rom_offset": 311088,
+      "size": 88,
+      "source": "src/audio/effect_volume_slide_up_fine.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_volume": "0x03000434"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "volUp( c, c->volslide_fine )",
+        "after": "volUp( c, c->volslide_fine + 1 )"
+      }
+    },
+    {
+      "name": "audio_volume_effect_pan",
+      "rom_offset": 313148,
+      "size": 92,
+      "source": "src/audio/volume_effect_pan.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_pan": "0x030004b4"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302_hwi32",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "4370",
+        "after": "4369"
+      }
+    },
+    {
+      "name": "audio_volume_effect_pan_slide_left",
+      "rom_offset": 313240,
+      "size": 88,
+      "source": "src/audio/volume_effect_pan_slide_left.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_pan": "0x030004b4"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302_hwi32",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->volume_effect & 0xf",
+        "after": "c->volume_effect & 0xe"
+      }
+    },
+    {
+      "name": "audio_volume_effect_pan_slide_right",
+      "rom_offset": 313328,
+      "size": 92,
+      "source": "src/audio/volume_effect_pan_slide_right.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_pan": "0x030004b4"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302_hwi32",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->volume_effect & 0xf",
+        "after": "c->volume_effect & 0xe"
+      }
+    },
+    {
+      "name": "audio_volume_effect_slide_down",
+      "rom_offset": 312804,
+      "size": 80,
+      "source": "src/audio/volume_effect_slide_down.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_volume": "0x03000434"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->volume_effect & 0xf",
+        "after": "c->volume_effect & 0xe"
+      }
+    },
+    {
+      "name": "audio_volume_effect_slide_down_fine",
+      "rom_offset": 312968,
+      "size": 76,
+      "source": "src/audio/volume_effect_slide_down_fine.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_volume": "0x03000434"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->volume_effect & 0xf",
+        "after": "c->volume_effect & 0xe"
+      }
+    },
+    {
+      "name": "audio_volume_effect_slide_up",
+      "rom_offset": 312884,
+      "size": 84,
+      "source": "src/audio/volume_effect_slide_up.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_volume": "0x03000434"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->volume_effect & 0xf",
+        "after": "c->volume_effect & 0xe"
+      }
+    },
+    {
+      "name": "audio_volume_effect_slide_up_fine",
+      "rom_offset": 313044,
+      "size": 76,
+      "source": "src/audio/volume_effect_slide_up_fine.c",
+      "symbols": {
+        "_call_via_r2": "0x0804ccf9",
+        "audio_set_channel_volume": "0x03000434"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->volume_effect & 0xf",
+        "after": "c->volume_effect & 0xe"
+      }
+    },
+    {
+      "name": "audio_volume_effect_vibrato",
+      "rom_offset": 309908,
+      "size": 120,
+      "source": "src/audio/volume_effect_vibrato.c",
+      "symbols": {
+        "_call_via_r1": "0x0804ccf5",
+        "_call_via_r2": "0x0804ccf9",
+        "g_audio_player": "0x02001644",
+        "audio_set_sample_step": "0x030003e8"
+      },
+      "thumb_symbols": [
+        "_call_via_r1",
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "0xf ) << 2",
+        "after": "0xf ) << 1"
+      }
+    },
+    {
+      "name": "audio_volume_effect_vibrato_speed",
+      "rom_offset": 313120,
+      "size": 28,
+      "source": "src/audio/volume_effect_vibrato_speed.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->volume_effect & 0xf",
+        "after": "c->volume_effect & 0xe"
+      }
+    },
+    {
+      "name": "audio_volume_effect_portamento",
+      "rom_offset": 313420,
+      "size": 40,
+      "source": "src/audio/volume_effect_portamento.c",
+      "symbols": {
+        "audio_effect_portamento_note": "0x0804b411"
+      },
+      "thumb_symbols": [
+        "audio_effect_portamento_note"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils",
+      "negative_control": {
+        "before": "0xf ) << 4",
+        "after": "0xf ) << 3"
+      }
+    },
+    {
+      "name": "display_menu_test_choice_stamp",
+      "rom_offset": 98684,
+      "size": 68,
+      "source": "src/display/menu_test_choice_stamp.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "record->enabled = 0",
+        "after": "record->enabled = 1"
+      }
+    },
+    {
+      "name": "display_menu_save_choice",
+      "rom_offset": 98752,
+      "size": 48,
+      "source": "src/display/menu_save_choice.c",
+      "symbols": {
+        "frame_write_save_value": "0x08037e21"
+      },
+      "thumb_symbols": [
+        "frame_write_save_value"
+      ],
+      "negative_control": {
+        "before": "definition = 24",
+        "after": "definition = 23"
+      }
+    },
+    {
+      "name": "display_menu_load_choice",
+      "rom_offset": 98800,
+      "size": 52,
+      "source": "src/display/menu_load_choice.c",
+      "symbols": {
+        "frame_load_save_value": "0x08037d19"
+      },
+      "thumb_symbols": [
+        "frame_load_save_value"
+      ],
+      "negative_control": {
+        "before": "text_kind != 24",
+        "after": "text_kind != 23"
+      }
+    },
+    {
+      "name": "display_menu_choice_enabled",
+      "rom_offset": 98852,
+      "size": 4,
+      "source": "src/display/menu_choice_enabled.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "record->enabled",
+        "after": "record->definition"
+      }
     }
   ],
   "assembly": [
