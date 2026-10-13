@@ -58,6 +58,12 @@ calls the original window and palette update providers, and prepares OAM
 transfer. This connects accepted input, display and VBlank transfer functions;
 it does not establish runtime timing or gameplay correctness.
 
+The refresh provider returns a byte, as established by its accepted C body
+at `0x08001168`; this caller discards that result. The shared queue declaration
+is corrected from the initial void return spelling to `unsigned char`, and all
+ten queue consumers retain identical bytes and rejected source controls after
+that type correction. This adds no reconstructed C coverage.
+
 ## Indirect transfer evidence
 
 The three callback fields occupy offsets 0, 4 and 8 of a 12-byte ROM row at

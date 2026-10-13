@@ -1,6 +1,7 @@
 #ifndef SAVE_STREAM_H
 #define SAVE_STREAM_H
 #include "display_text_bank.h"
+#include "save_transfer.h"
 /* Observed 40-byte decoded view; content roles remain provisional. */
 struct SaveStreamRecord {
     unsigned int unknown00;
@@ -65,9 +66,6 @@ unsigned char save_stream_validate_header(void);
 void save_stream_initialize_header(void);
 void save_stream_initialize(void);
 unsigned int save_stream_update_header_option(void);
-/* Explicit unconverted serialization and library interfaces. */
+/* Explicit unconverted buffer serialization interface. */
 void save_stream_build_buffer(void);
-unsigned short save_transfer_read_4c9bc(unsigned short, void *);
-unsigned short save_transfer_write_4ccb0(unsigned short, const void *);
-unsigned short save_transfer_configure_4c8f4(unsigned short);
 #endif

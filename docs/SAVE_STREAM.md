@@ -2,8 +2,8 @@
 
 The reconstructed path connects the published menu-choice and actor-need
 save/load callers to a shared byte/bit cursor, record views, slot transfers,
-header initialization and audio/display-status handoff. It has 51 matching C
-functions covering 3,624 bytes. Each full extent, pool and alignment was linked
+header initialization and audio/display-status handoff. It has 54 matching C
+functions covering 4,000 bytes. Each full extent, pool and alignment was linked
 at its original ROM address and compared with the fixed reference. Each also
 has a compiled changed-source control. These are static and compiler results;
 no runtime save/load or EEPROM compatibility claim is made.
@@ -41,8 +41,9 @@ save format has been identified.
 
 Slots use 255 transfers of eight bytes, with block address `255 * slot + 2`, so
 the working span is 2,040 bytes. The lower interfaces at `0x0804C9BC` and
-`0x0804CCB0` narrow the block argument to 16 bits and perform the library
-transfer; they remain explicit unconverted interfaces. Their returned status
+`0x0804CCB0` narrow the block argument to 16 bits. The read interface now has
+a matching C body; the write/retry interface remains explicit and unconverted.
+Their returned status
 is discarded by these game loops. The source does not add retries or bounds.
 
 The checksum at `0x08037F30` sums halfwords modulo 65,536. It halves the unsigned
@@ -69,7 +70,7 @@ then stores the selected slot. Its two game audio wrappers call the accepted
 `audio_deactivate_hardware` and `audio_activate_hardware` functions. Transfer
 begin saves `DISPSTAT` (`0x04000004`) into `0x03005D80`, writes `0x3FFF` to the
 interrupt acknowledge register (`0x04000202`), clears `DISPSTAT`, and invokes
-the unconverted transfer-configuration interface with 64. Transfer end restores
+the matching transfer-configuration interface with 64. Transfer end restores
 the saved status. This observed ordering does not prove concurrent safety or
 successful physical-media writes.
 
@@ -313,4 +314,67 @@ volatile accesses. A real mask change from fifteen to fourteen changes the
 compiled bytes. All current accepted save-header consumers are recompiled with
 their own source controls after removing the old unconverted-writer comment.
 The main game-state loader, grouped region readers/writers, condition modules,
-buffer builder and lower library transfers remain explicit unconverted paths.
+buffer builder and lower write/retry transfers remain explicit unconverted paths.
+
+## Parameter selection, DMA handoff and serial read
+
+Three connected ordinary C functions close the selector at `0x0804C8F4`
+(72 bytes), DMA handoff at `0x0804C93C` (128 bytes) and read provider at
+`0x0804C9BC` (176 bytes). The selector stores a parameter pointer at
+`0x030074E4`. Inputs four and 64 choose twelve-byte constant rows at
+`0x08D7074C` and `0x08D70758`. Other values choose the first row and return
+one; recognized values return zero. The rows supply byte-size words, block
+limits of 64 and 1,024, wait-control halfwords and address lengths of six
+and fourteen bits. These are observed fields and values, not a copied data
+asset or a complete media-format specification. The three unused tail bytes
+and wider table storage remain provisional. Named nonstorage typed macros
+express the observed RAM pointer address and both constant-row addresses.
+They create no separate C storage or duplicate constant table.
+
+DMA handoff saves the interrupt master-enable halfword at `0x04000208`,
+clears it, masks the wait-control register at `0x04000204` with `0xF8FF`
+and ORs the selected row's wait value. It then writes the source and
+destination pointer registers at `0x040000D4` and `0x040000D8`, and the
+control word at `0x040000DC`, with its halfword count and bit 31 set. It polls
+bit 15 of the high halfword at `0x040000DE` before restoring the saved master
+enable. Both pointer-register lvalues and scalar hardware views are volatile.
+The source's single polling loop reproduces the original initial probe and
+inner probe; it adds no timeout or completion result. Wait-control changes
+remain in place after the routine returns.
+
+The read provider explicitly narrows its full-word block input to a halfword
+before comparing it with the selected block limit. A rejected block returns
+`0x80FF` without a transfer. The accepted game block loop retains its observed
+call-side halfword narrowing through an explicit cast. For an accepted block,
+the provider builds an address command backward in a 68-halfword stack buffer
+and transfers the selected address length plus three halfwords to
+`0x0D000000`. The command count includes one trailing stack halfword that
+this routine does not initialize; the source preserves that observed
+non-clearing behaviour. It then reads 68 halfwords from that same fixed port. After
+skipping four returned halfwords, it packs their low bits into four halfwords
+and stores them backward through the destination. Each shift assignment
+narrows to sixteen bits before the following OR. The destination must permit
+those observed halfword accesses; the code adds no alignment or capacity
+check. The short offset-before-buffer address calculation preserves the
+original pointer lifetime without a fixed register constraint.
+
+All three complete extents, literal pools and alignment match with explicit
+`agbcc` Thumb `-O1 -mthumb-interwork` flags. Retained `-O2` attempts show the
+otherwise different loop and register allocation; no compiler-output change
+or embedded instruction body is used. An initial symbol-address formulation
+matched only the text span: at `-O1`, this compiler emitted unused `.LC`
+address constants into allocated `.rodata`. The full-build gate rejected
+those objects. The compiler's constant-pool marking is conditional on its
+expensive-optimization flag; enabling that flag removed the storage but
+changed DMA instructions and was excluded. The typed numeric-address views
+preserve the same algorithm and exact text with no nonempty allocated
+sections outside `.text`. Both source objects and linked objects, including
+controls, are checked for this restriction. No sections are stripped or
+compiler output normalized. Real changed-source controls alter
+selector comparison, DMA control and rejected-block status and reject for
+each function. All current accepted save-header consumers are rebuilt with
+their own controls, including the queued scene handoff and current game
+block caller. The serial write core, read-back comparison, retries and timing
+completion path remain unconverted. Whole-ROM equality and these source
+matches do not establish successful physical-media or runtime save/load
+behaviour.

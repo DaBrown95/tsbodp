@@ -25,7 +25,7 @@ extern void resource_scene_event(unsigned int);
 extern void resource_set_triple(unsigned int,unsigned int,unsigned int);
 extern void resource_set_display_kind(unsigned int);
 extern void resource_prepare_display(unsigned char);
-extern unsigned char resource_select_actor(void *,unsigned char);
+extern unsigned char resource_select_actor(unsigned int,unsigned int);
 extern struct FrameObject *resource_create_transition(unsigned char);
 extern void audio_game_pause(void),audio_game_resume(void);
 

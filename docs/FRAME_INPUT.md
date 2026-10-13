@@ -2025,3 +2025,84 @@ interaction threshold, destination range and subtraction direction; all
 compile and reject. Static connectivity and exact full-ROM replacement remain
 separate from runtime execution and gameplay behavior, which have not been
 validated for this path.
+
+## Scene-selector resource factory and clock/notice callback
+
+The paired factory at `0x08026C8C` and callback at `0x08026E6C` reconstruct
+480 and 524 complete bytes, adding 1,004 verified C bytes. The observed factory
+pointer is slot three of the same table at `0x0804F278` used by the timed-resource
+path. This identifies a connected selector path, rather than a complete table
+inventory or a proven gameplay identity. The factory payload supplies an ID
+word, signed X/Y halfwords at four/six, half-width/half-height bytes at eight/nine,
+a parameter/selector at ten/eleven and a subtype byte at twelve. No complete
+payload length or subtype-table bound is inferred.
+
+The factory suppresses creation when the current scene word is two, the payload
+selector is thirteen and mask `0x2` of the save-header halfword at `+0xC` is clear.
+Otherwise it uses the accepted scene-object allocator and immediately initializes
+the result, preserving the original absence of an allocation-failure check.
+It assigns ID/subtype, flags `0x000A0404`, state zero, the selector/parameter work
+fields and the step/interaction callbacks. Subtypes two, five, three and four
+independently select the four observed animation records, palette slots and
+OAM layers; subtype four selects the alternate interaction callback. Other
+subtypes retain the common initialization. The active primary list is then
+walked to clear bit zero of each object's byte at `+0x50`, and the two clock-hour
+bytes at `+0x67/+0x68` are cleared. Those work fields are selector-specific.
+
+This constructor writes one collision record: count one at `+0xAF`, signed
+X endpoints at `+0xB0/+0xB1`, signed Y endpoints at `+0xB2/+0xB3`, and kind one
+at `+0xB4`. The endpoints come from the negated and positive serialized
+half-extents. These writes corroborate the copied ARM collision dispatcher's
+six-byte records and first-four-byte endpoint interpretation. They establish
+count one for this constructor, without proving a global count limit. The
+new partial selector view keeps these fields distinct from the registered
+bounds at `+0xBC..+0xBF` in the general frame view and does not alter that layout.
+Its observed view ends after OAM at `+0xD7`; the scene allocator still supplies
+320 bytes. Values outside the signed-byte endpoint range remain unchecked.
+
+The callback copies the eight-byte record at `0x08051AA4` twice and dispatches
+through a nineteen-entry table after guarding its state byte at `+0x4D` against
+values above eighteen. State zero handles variant one countdown completion or
+variant eleven flag completion. The latter updates the scene-mode byte,
+resolves the selected actor and submits the selector through the accepted
+queued scene handoff. State one uses the accepted actor dispatcher, state
+three decrements the countdown and restores state zero at minus one, and state
+eighteen uses a still-unconverted selector helper.
+
+State four substitutes the two work-byte hours into the clock snapshots,
+formats each into a twenty-byte local staging buffer, and copies the strings
+to text fields one and two. The original formatting API supplies no output
+bound; the local buffer size is not a proven formatting limit. It prepares the
+existing result/notice byte views, looks up a text ID through the halfword table
+at `0x080577FC`, copies text field zero, submits default request two, updates
+its indicator's direction/animation/variant and enters state five. That state
+requests indicator state sixteen, clears the pointer, sets countdown sixty and
+enters state three. No missing-pointer check or additional state behavior is
+introduced. The selector-label table length remains unknown.
+
+The clock assignment replaces bits sixteen through twenty-three of the first
+word while preserving the other bits. A local unsigned-word hour bitfield view
+expresses this observed update and matches naturally; it does not establish
+the original source spelling or change the shared signed clock record used by
+the formatter. The entire callback matches without register bindings. The
+factory also matches without bindings. Its complete extent contains 430
+instruction bytes, 48 literal bytes and two internal zero alignment bytes;
+the callback contains 392 instruction bytes, 128 literal/jump-table bytes and
+four internal zero alignment bytes. The next callback begins at `0x08027078`.
+
+The unconverted actor-selection wrapper at `0x0804559C` forwards both argument
+words unchanged to `0x080457F4`. That body retains them in full-word registers,
+performs unsigned scene/selector comparisons and forwards the selector without
+byte narrowing. Accordingly its provisional declaration is refined from
+`(void *, unsigned char)` to `(unsigned int, unsigned int)`. The existing script
+command explicitly casts its retained same-address scene-context value to a
+word; its bytes and behavior remain unchanged. This corrects the call view
+without claiming reconstruction of either callee. All accepted consumers of
+the changed command header, including any indirect consumers, are recompiled
+with their actual changed-source controls.
+
+Both new initialization/tested-flag controls compile and reject by one byte.
+Raw complete bytes, include/source snapshots, literal and jump-table evidence,
+ABI observations, useful failed word-update expressions and compiled controls
+remain in the ignored `factory-followup-evidence-*` reports. Exact static and
+compiler findings do not establish runtime execution or gameplay behavior.

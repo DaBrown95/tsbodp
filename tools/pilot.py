@@ -75,6 +75,14 @@ def compile_function(function, source, folder, flags, copies=None, header_overri
     verify_snapshot_inputs(headers, header_folder)
     assembler = ROOT / selected_assembler['executable']
     run([assembler, *selected_assembler['source_flags'], assembly, "-o", obj], commands)
+    # A matching text body cannot own additional data emitted elsewhere.
+    # Check the object before linking, where orphan sections could otherwise
+    # survive unnoticed until the full-ROM gate.
+    with obj.open("rb") as stream:
+        elf = ELFFile(stream)
+        if any(s['sh_flags'] & 2 and s['sh_size'] and s.name != '.text'
+               for s in elf.iter_sections()):
+            raise ValueError('Unexpected allocated source section')
     # Mark external function addresses as Thumb, so the linker does not invent
     # ARM interworking veneers for absolute ROM symbols.
     externs = folder / "externs.s"

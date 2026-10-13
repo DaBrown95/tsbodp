@@ -18,7 +18,8 @@ unsigned char scene_request_changed(void);
 void scene_run_begin_callback(void), scene_run_step_callback(void);
 void scene_run_end_callback(void), scene_initialize_request_queue(void);
 void scene_step_request_handoff(void);
-void input_poll(void), frame_request_refresh(void), display_step_backgrounds(void);
+void input_poll(void), display_step_backgrounds(void);
+unsigned char frame_request_refresh(void);
 void frame_prepare_oam_transfer(void);
 /* Original providers remain explicit. */
 void scene_stage_08026908(void), scene_stage_0803d6c0(void);
