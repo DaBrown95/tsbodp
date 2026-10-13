@@ -3,7 +3,8 @@
 The three object/label functions cover 576 verified matching C bytes. Their
 connected input consumer adds another 484 bytes, bringing this path to four
 functions and 1,060 bytes. The connected close and marker lifecycle add three
-functions and 340 bytes, for seven functions and 1,400 bytes:
+functions and 340 bytes. The detail drawer adds another 432 bytes, for eight
+functions and 1,832 bytes:
 
 | Function | ROM address | Complete extent |
 | --- | --- | ---: |
@@ -14,14 +15,15 @@ functions and 340 bytes, for seven functions and 1,400 bytes:
 | `condition_panel_close` | `0x0801D970` | 48 bytes |
 | `condition_marker_create` | `0x0801D9A0` | 120 bytes |
 | `condition_marker_step` | `0x0801DA18` | 172 bytes |
+| `condition_panel_draw_details` | `0x0801D580` | 432 bytes |
 
-The 460-byte setup at `0x0801D1D0` calls all three functions and the still
-unconverted detail drawer at `0x0801D580`. It configures backgrounds, invokes the
+The 460-byte setup at `0x0801D1D0` calls all three functions and the matching
+detail drawer at `0x0801D580`. It configures backgrounds, invokes the
 matching selected resource loader at `0x0803AFF0`, and selects a condition row
 and cell before these display operations. This direct call path and the shared
 condition-definition/cell accesses motivate the provisional panel names. The
-setup and detail drawer remain original ROM regions; their private C trials
-have no source-coverage credit.
+setup remains an original ROM region; its private C trials have no
+source-coverage credit.
 
 The creator writes exactly fifteen object-pointer slots from `0x030043B0`:
 six column objects at indices 0 through 5, four fixed/selected controls at
@@ -66,7 +68,7 @@ context `+0x31`. Masks `0x80/0x40` enter or leave mode one and update slot 8's
 visibility flag. Masks `0x20/0x10` move within the six columns in mode one;
 other modes move the requested row from zero through the world row limit. A
 column move redraws details and changes slot 8's ID and variant. A row move
-invokes the matching labels and column objects before the original detail
+invokes the matching labels and column objects before the matching detail
 drawer. Directional cue zero is requested even when a tested limit prevents a
 move, as in the original. The tests establish no general validity guarantee
 for an incoming request value, object slot or definition.
@@ -82,15 +84,48 @@ panel return-argument alias is distinct from the existing `g_resource_scene_arg`
 word at `0x03004370`; these are separate observed addresses. Preserving
 these two array roots resolves the otherwise missing final halfword read.
 Direct C input expressions retain the original mask-register choices without
-register bindings or volatile qualifiers. The detail provider, setup routine
-and their useful failed matches remain explicit originals.
+register bindings or volatile qualifiers. The setup routine remains an explicit
+original, and useful failed detail and setup attempts remain local.
 
-All seven complete original extents, including literal pools and alignment,
-match independently. Real changed-source loop/column-bound, close-parameter, marker-variant and
-marker-flag controls produce different bytes. Source objects and linked extents contain only allocated `.text`, with
+All eight complete original extents, including literal pools and alignment,
+match independently. Real changed-source loop/column-bound, close-parameter,
+marker-variant, marker-flag and detail-tail-bound controls produce different
+bytes. Source objects and linked extents contain only allocated `.text`, with
 one function span and no unresolved linked relocations. Useful failed attempts
 and the actual comparison bytes remain in ignored local reports. These compile
 and byte results are separate from runtime/UI behavior and whole-ROM equality.
+
+The detail drawer clears a background rectangle before reading its selected
+text-ID word. The observed table at `0x08053460` has six words per row, a
+24-byte row stride and a four-byte column stride; its full extent remains
+unknown. A zero selected word skips subsequent detail work. Otherwise the
+selected cell's first byte determines whether to draw its heading. The function
+then reads the pointed definition's count byte at `+3` through the existing
+six-column pointer fields at `ConditionRow +8` and scans that many four-byte
+entry records. Entry bytes at world cell `+4/+5` control text and object
+visibility, then choose animation frame one or zero. The caller's row and
+column are complete words, while the loop index is explicitly a byte.
+
+The function clears remaining detail-object flags through index four after
+the count-driven loop. The creator's five detail slots establish the initialized
+slots, not a proven `count <= 5` precondition: the original drawer does not
+clamp the count, supplied indices, definition pointers or object pointers.
+The reconstruction retains that absence of guards. It does not establish a
+complete object-table allocation, localized text contents or runtime behavior.
+
+The matching C separates the initial cell predicate's two unsigned scale
+factors from their later saved values. The initial pair/block factors and
+column byte offset use short `r3`, `r2` and `r1` bindings, consumed and copied
+before any call. The initial title and world roots are scoped `r10` and `r8`
+pointer values; the returned tile index remains in `r9` across draw calls.
+These are genuine C values, with no synthetic read or guard. The count reader
+and incoming row/column use ordinary C. Row-first title address arithmetic and
+the separate factor lifetimes recover the original argument and loop storage
+choices without long fixed argument bindings. The complete 432-byte extent
+contains eight literal words, including repeated table roots, and the original
+zero alignment before its internal pool. The changed-source tail-bound control
+differs at both comparisons, and the connected 484-byte input consumer remains
+exact with its own actual column-bound control.
 
 The close operation resets the shared full-word request parameter to -1, runs
 the existing second transition dispatcher with 63 and zero, and releases the
@@ -145,6 +180,6 @@ publishes non-`FF` display kinds. This connects the panel/marker observations to
 the reconstructed condition initialization and refresh path. The complete
 extent, literal pool and alignment match; an actual changed-row-threshold
 control is rejected. The caller's unchecked row/column/count contracts and the
-broader setup/detail-drawing candidates remain unresolved. See
+broader setup candidate remains unresolved. See
 [the condition evidence](RESOURCE_CONDITIONS_RECONSTRUCTION.md) for the storage
 alias, full-word counters and compiler-lifetime constraints.

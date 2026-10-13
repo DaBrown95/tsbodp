@@ -25428,6 +25428,34 @@
         "before": "if (row <= 1) {",
         "after": "if (row <= 2) {"
       }
+    },
+    {
+      "name": "condition_panel_draw_details",
+      "rom_offset": 120192,
+      "size": 432,
+      "source": "src/display/condition_panel_draw_details.c",
+      "symbols": {
+        "g_condition_panel_world": "0x03003950",
+        "g_condition_definitions": "0x08059a3c",
+        "display_text_select_font": "0x0801ae75",
+        "display_scene_lookup_text": "0x08045009",
+        "display_text_draw_line": "0x0801a959",
+        "g_condition_panel_objects": "0x030043b0",
+        "g_condition_panel_text_ids": "0x08053460",
+        "frame_set_animation_frame": "0x08000c6d",
+        "display_fill_background_constant_rectangle": "0x0800d7fd"
+      },
+      "thumb_symbols": [
+        "display_text_select_font",
+        "display_scene_lookup_text",
+        "display_text_draw_line",
+        "frame_set_animation_frame",
+        "display_fill_background_constant_rectangle"
+      ],
+      "negative_control": {
+        "before": "while (index <= 4) {",
+        "after": "while (index <= 3) {"
+      }
     }
   ],
   "assembly": [
