@@ -14,7 +14,7 @@ struct FrameActionOwnerCallbacks {
  unsigned char unknowne8[8];unsigned char (*use)(void *,struct FrameObject *,unsigned char);
 };
 struct FrameActorAttachmentRecord {
- struct FrameObject *actor;unsigned int unknown04;int timer;
+ struct FrameObject *actor;unsigned int kind;int timer;
  unsigned char running,unknown0d[3];unsigned int status,unknown14;
 };
 struct FrameActorAttachmentOwner {

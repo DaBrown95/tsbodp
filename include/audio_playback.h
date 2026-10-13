@@ -3,16 +3,7 @@
 #include "audio_sample.h"
 #include "audio_frame.h"
 
-/* Partial sample header observed by the copied ARM playback routines. */
-struct AudioSample {
-    unsigned int loop_length;
-    const unsigned char *end;
-    unsigned int step;
-    unsigned short unknown0c;
-    unsigned char volume;
-    signed char pan;
-    unsigned char loop_mode, mixing_flags, data[1];
-};
+#include "audio_sample_data.h"
 
 extern unsigned int g_audio_channel_counter;
 

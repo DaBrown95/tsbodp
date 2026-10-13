@@ -9,7 +9,7 @@ unsigned char frame_interaction_begin_31(struct FrameNeedEffectState *owner,
     unsigned char result;
     if (!job) result = 0;
     else {
-        job->unknown04 = kind;
+        job->kind = kind;
         frame_attachment_position(owner->object, 2, &point);
         frame_begin_actor_route(object, &point, &job->status, 0, 1);
         frame_request_animation((struct FrameCommandObject *)object, 6);

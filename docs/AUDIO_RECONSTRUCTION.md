@@ -576,7 +576,73 @@ negative signed indices are not given additional behavior. Volume refresh preser
 the argument load before the fade step is cleared and both volume words are
 stored, as in the matched inlined upstream API call.
 
-The row-processing entry `0x49F64`, individual effects, tempo conversion, period
-calculators and zero-byte helper remain explicit unconverted dependencies. Static
+The row-processing entry `0x49F64` is reconstructed in the following batch.
+Individual effects, tempo conversion, period calculators and the zero-byte helper
+remain explicit unconverted dependencies. Static
 and compiler evidence establish these paths and transfers; no audible playback,
 BIOS execution, complete audio subsystem or gameplay validation is claimed.
+
+
+## Connected pattern-row decoder
+
+`audio_player_process_row` at ROM `0x49F64` matches all **1,124 C bytes** through
+`0x4A3C8`, including two literal-pool islands. It closes the row branch of the
+published tick callback and calls the newly accepted row-advance path. The source
+adapts Krawall `processRow`, note playback, envelope initialization/release and
+channel refresh helpers, with the same pinned revision and LGPL notices as above.
+Its shared structs are in [the player header](../include/audio_player.h),
+[sample data header](../include/audio_sample_data.h) and
+[decode handoff header](../include/audio_player_decode.h).
+
+The matching source uses GCC 3.0.2 with the separate 32-bit host-wide-integer
+profile described in [the compiler note](GCC302_HOST_WIDTH.md), Thumb `-O3`, and
+the pinned historical assembler. It contains no register constraints or
+instruction assembly. With the normal profile the shared source produces 1,128
+bytes and differs; the accepted profile reproduces the negative pan-floor
+constant choice as well as every instruction, pool and alignment byte.
+Earlier near-matches that cached the instrument pointer are retained privately.
+The accepted envelope initializer rereads `c->instrument` after the observed
+byte-field writes. Its existing return-value form is preserved even when this
+caller ignores that return; changing it changes compiler allocation, not the
+claimed extent or comparison rules.
+
+The stream's follow byte selects a track with its low five bits. Unlike the
+current upstream encoding, the game consumes **two** note/instrument bytes: the
+first note byte's low bit supplies instrument bit 8, and the remaining seven bits
+supply the note. No third instrument byte is read. Follow bits 6 and 7 supply
+volume and effect/operand bytes. Sample defaults set the track volume directly;
+the earlier game has no extra current-volume or current-pan copies. A normal
+instrument note selects a sample, takes its default pan, and initializes envelopes
+before the period call, rather than delaying that initialization until playback.
+The initializer does not add upstream's later vibrato-rate activation condition.
+The game’s envelope release path sets the pan status to active or active without
+sustain even if its previous status was zero; no nonzero guard was added.
+
+The complete observed call chain is packed stream → instrument/sample tables →
+period callback → row effect callback → copied ARM sample start/position/volume,
+then untouched-track/effect refresh → signed-byte pan clip → row advancement.
+The instrument table at `0x08B18554` and sample table at `0x08D54690` are unsized
+pointer declarations. The first 192 instrument bytes are now a same-layout view
+of 96 halfword sample selectors. The shared sample header splits `+0C/+0D` into
+fine-tune and relative-note bytes; `+0E/+0F` remain volume/pan defaults. Period,
+note and destination track fields are signed halfwords; `+49/+4A` are the note
+play and touched flags. Names for other effect-state bytes follow the upstream
+96-byte layout and remain hypotheses until their individual effect consumers are
+reconstructed. Explicit unknown bytes and unused input preconditions remain.
+
+The copied ARM entry declarations retain the observed calling convention and
+RAM addresses: extended start `0x03000094`, release `0x03000320`, sample step
+`0x030003E8`, volume `0x03000434`, pan `0x030004B4`, and position `0x03000578`.
+These are accepted compiled C callees within the audited copy map. The direct
+function declarations use long transfers; this does not add assembly glue bytes
+to the row decoder. Effect and period callbacks are represented as typed C
+function pointers and still retain explicit unconverted table targets.
+
+All current consumers of the refined player, instrument and sample views are
+freshly compiled with their real controls, including existing copied ARM sample
+start routines and the previous sequencer batches. The decoder control moves
+the packed instrument bit from bit 8 to bit 7 and rejects with a compiled byte
+difference. Raw comparisons and header snapshots are retained locally. The
+low-five-bit track selector and serialized instrument/sample/note indices have
+no invented clamps; this path does not validate every module or prove audible
+playback, runtime execution or complete audio reconstruction.

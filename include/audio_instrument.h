@@ -9,14 +9,14 @@
 #define AUDIO_INSTRUMENT_H
 #include "audio_player.h"
 
-/* Naturally aligned partial views; the first instrument region is unclassified. */
+/* Naturally aligned partial views; row decoding observes 96 sample indices. */
 struct AudioEnvelopeNode { unsigned short coord, inc; };
 struct AudioEnvelope {
     struct AudioEnvelopeNode nodes[12];
     unsigned char max, sus, loopStart, flags;
 };
 struct AudioInstrument {
-    unsigned char unknown00[192];
+    unsigned short samples[96];
     struct AudioEnvelope envVol, envPan;
     unsigned short volFade;
     unsigned char vibType, vibSweep, vibDepth, vibRate;

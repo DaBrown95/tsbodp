@@ -8,7 +8,7 @@ struct FrameActorAttachmentRecord *frame_allocate_actor_attachment_record(
         if (!owner->records[i].actor) {
             owner->records[i].actor = actor;
             owner->records[i].timer = 0;
-            owner->records[i].unknown04 = 0;
+            owner->records[i].kind = 0;
             owner->records[i].running = 0;
             owner->records[i].status = 0;
             *(unsigned char *)&owner->records[i].unknown14 = 0;

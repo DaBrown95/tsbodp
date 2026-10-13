@@ -15,6 +15,7 @@ struct DisplayWindowRectangle {
 };
 extern const unsigned short g_display_window_enable_masks[];
 void display_disable_window(unsigned int);
+void display_enable_window(unsigned int);
 void display_configure_window(unsigned int, unsigned short, unsigned short);
 void display_set_window_rectangle(unsigned int, int, int, int, int);
 

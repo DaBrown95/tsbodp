@@ -1,9 +1,9 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 17 C functions and 2,288 bytes:
+The connected route-search path reconstructs 25 C functions and 3,020 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
-target-route and interaction consumers. Every complete
+target-route and interaction consumers plus their eight-function job lifecycle. Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
 Neither these matches nor the full-ROM equality gate establish runtime behaviour.
@@ -16,6 +16,14 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x3C08C` | `frame_copy_grid_path` | 76 |
 | `0x3BAC0` | `frame_route_attachment_to_target` | 104 |
 | `0x16C68` | `frame_interaction_step_16c68` | 280 |
+| `0x16918` | `frame_begin_target_attachment_job` | 56 |
+| `0x16E04` | `frame_dispatch_attachment_job_49` | 32 |
+| `0x167B8` | `frame_step_attachment_job_7` | 292 |
+| `0x16950` | `frame_dispatch_attachment_job_7` | 32 |
+| `0x18C8` | `frame_direction_to_need_effect_center` | 116 |
+| `0x2F394` | `frame_adjust_attachment_need` | 60 |
+| `0x16DBC` | `frame_begin_attachment_route_4` | 72 |
+| `0x16E3C` | `frame_begin_attachment_route_3` | 72 |
 | `0x24D18` | `frame_pool_initialize` | 56 |
 | `0x24E04` | `frame_pool_count` | 20 |
 | `0x3C0EC` | `frame_search_release_node` | 52 |
@@ -269,10 +277,11 @@ are ignored, so no new failure behavior is invented. Return values are one
 while continuing and two on this completion path. Unknown phases retain their
 phase and return one.
 
-The address-derived interaction name deliberately leaves its specific
-effect-definition role unresolved. No pointer-table entry for this function
-was identified by the bounded aligned/un-aligned word scan; its game reachability
-is not claimed. Both sources use ordinary C, without register constraints or
+The address-derived interaction name preserves uncertainty about its gameplay
+role. Its matching dispatcher at `0x16E04` tests job kind 49 before calling it;
+that dispatcher is stored in observed effect-definition rows 56 and 58. No
+direct pointer-table entry for the step itself was identified. These indirect
+connections are static evidence; runtime reachability remains untested. Both sources use ordinary C, without register constraints or
 assembly. They retain explicit calls into the two unmatched producer/selector
 regions. A restricted-axis one-to-zero mutation changes 33 compared bytes;
 phase 43-to-44 changes one. Both controls reject. Complete positive/control
@@ -280,3 +289,75 @@ bytes, source/header snapshots and toolchain checks are retained in
 `actor-target-consumers-canonical/`; ready metadata is
 `actor-target-consumers-batch-manifest.json`. These matches do not claim
 runtime or gameplay validation.
+
+
+## Attachment-job initialization, dispatch and timed progression
+
+The allocator's 24-byte record has an actor pointer at zero, an unsigned kind
+word at four, the phase/timer word at eight, a running byte at twelve, and a
+routing status word at sixteen. The kind label replaces `unknown04` without
+changing its type or any offset: matching initializers store their entire third
+argument there, and matching dispatchers compare the whole word with seven or
+49. Allocation still clears it to zero. Other record bytes keep their prior
+unknown views.
+
+The 56-byte initializer at `0x16918` allocates a record, stores that full-word
+kind, invokes the matching target-route requester and requests animation six.
+It returns zero only if allocation failed; the requester's own target/route
+failures are not propagated. The 32-byte dispatcher at `0x16950` finds the
+actor's record and invokes the 292-byte timed job only when kind equals seven.
+The 32-byte dispatcher at `0x16E04` similarly calls the already matching
+`0x16C68` step only for kind 49. Both lookup results are dereferenced without a
+null check in the original; the source retains that unresolved caller contract.
+The two 72-byte initializers at `0x16DBC` and `0x16E3C` allocate a record, store
+its kind, obtain owner attachment zero, request route mode four or three with
+that record's status word, and request animation six. They also return one
+regardless of attachment/route helper results once allocation succeeds.
+
+The job-seven step has phases zero, three and one. A running byte equal to one
+forces phase one. Phase zero points the actor toward the owner's projected
+center, requests animation eight, chooses phase three and writes halfword 150
+at actor `+0x5E`. Owner kinds 29/22 commit mode one and request cue 53/47.
+The global option byte at `+0x20` chooses cue 133/132. Owner kinds 20/25 retain
+cue 43/62's full-word result at owner `+0xE0`. Phase three applies a world-selected
+need adjustment using definition byte `+0x23`; decrementing the actor halfword
+through `0xFFFF` selects phase one. The change is handled on a later call rather
+than by falling through immediately. Phase one commits mode two for kinds 29/22,
+stops the retained sample for kinds 20/25 and requests animation one. Returns
+are one while continuing and two for the phase-one completion. Unknown phases
+retain their value and return one. Cue numbers and kind branches are observed;
+the original gameplay meanings are not assigned.
+
+The 116-byte direction helper projects owner point pairs at `+0xD4` and `+0xCC`,
+takes their signed midpoint with truncation toward zero, subtracts the actor's
+integer position and calls the matching by-value direction helper. Projection
+results are ignored. A bounded work view exposes those point pairs and the
+sample word at `+0xE0`; their complete allocation, coordinate units and bounds
+meaning remain provisional. The 60-byte need helper tests the matching world
+exclusion predicate on `0x03004334` and selects need adjustment zero or 56.
+Its second argument is retained as a full word, then narrowed to a byte in each
+branch before the existing need-adjustment call.
+
+Observed 36-byte effect-definition records beginning at `0x08062E7C` store the
+`0x16918` initializer at slot `+0xC` and `0x16950` dispatcher at `+0x10` for rows
+18, 20 through 30, 32 through 34, 83, 101, 136 and 137. Rows 56 and 58 store
+`0x16DBC` and `0x16E04` in the same slots. This establishes a static indirect
+handoff into both job paths and a connection to the existing effect lifecycle;
+it does not establish gameplay execution. The mode-three initializer has no
+pointer reference in the bounded word scan, so its reachability stays uncertain.
+The raw pointer offsets, row arithmetic and complete original comparisons are
+retained locally rather than publishing table contents.
+
+All eight new extents match under the existing agbcc profile. The need helper's
+only assembly is its explicit zero tail alignment; every other new function
+uses ordinary C without register constraints or assembly. Animation requests,
+job kinds, the world-selected need adjustment, timer, midpoint division and
+route-mode mutations provide real changed-source controls, and each rejects. The midpoint divisor-two-to-four
+control changes 101 bytes; the other seven controls change one byte each.
+The label refinement revalidation covers 65 affected functions spanning 9,652
+bytes, including the three previously published record writers/dispatchers.
+All full positive extents match and every actual source control rejects.
+The snapshot and comparison receipt is `actor-attachment-jobs-canonical/`;
+ready metadata is `actor-attachment-jobs-batch-manifest.json`. The unmatched
+284-byte neighbor producer and 356-byte target selector remain explicit ROM
+regions and receive no C coverage. No runtime test is claimed.

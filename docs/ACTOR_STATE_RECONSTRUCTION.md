@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 136 C functions spanning 23,292 verified bytes. The
+This batch reconstructs 144 C functions spanning 24,024 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -10,6 +10,14 @@ no runtime or gameplay test is claimed here.
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
 | `0x16C68` | `frame_interaction_step_16c68` | 280 |
+| `0x16918` | `frame_begin_target_attachment_job` | 56 |
+| `0x16E04` | `frame_dispatch_attachment_job_49` | 32 |
+| `0x167B8` | `frame_step_attachment_job_7` | 292 |
+| `0x16950` | `frame_dispatch_attachment_job_7` | 32 |
+| `0x18C8` | `frame_direction_to_need_effect_center` | 116 |
+| `0x2F394` | `frame_adjust_attachment_need` | 60 |
+| `0x16DBC` | `frame_begin_attachment_route_4` | 72 |
+| `0x16E3C` | `frame_begin_attachment_route_3` | 72 |
 | `0x3BAC0` | `frame_route_attachment_to_target` | 104 |
 | `0x3BCF4` | `frame_grid_search` | 720 |
 | `0x3BFC4` | `frame_search_initialize_buffers` | 100 |
@@ -1017,3 +1025,15 @@ extents match and actual flag/phase controls reject. The detailed phase,
 packed-coordinate, ignored-result and reachability evidence is recorded in
 `ACTOR_ROUTE_SEARCH.md`; the larger 284-byte and 356-byte candidates remain
 unconverted and receive no source credit.
+
+
+The attachment-job closure adds eight functions and 732 verified bytes. Full-word
+job kinds select seven/49 dispatch paths; allocator and existing dispatcher field
+labels now share that evidence-backed kind name without a layout change. The
+new timed step, center direction calculation, world-dependent adjustment and
+initializers join the prior target/neighbor consumers to the effect-definition
+callbacks. Static definition-row references and unresolved helper-result/lookup
+preconditions are recorded in `ACTOR_ROUTE_SEARCH.md`. Sixty-five affected
+functions spanning 9,652 bytes remain exact after the field-label refinement,
+and all actual source controls reject. No reachability or gameplay result is
+inferred from those compiler matches.
