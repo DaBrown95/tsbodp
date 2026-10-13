@@ -93,8 +93,8 @@ queried field, special seed index, fixed average divisor, resource-selection
 bit or footer offset. Eight controls
 reject with one differing byte; replacing the stored value with zero rejects
 with 28 differing bytes. The existing 744-byte menu initializer and its control
-were recompiled without changing its `void *` preparation and signed-byte
-reader contracts. The nine functions, two existing ready consequence
+were recompiled at that milestone without changing its `void *` preparation
+and then-provisional signed-byte reader contract. The nine functions, two existing ready consequence
 functions and caller proof are indexed in the ignored
 `catalog-presentation/menu-secondary-ready.json` receipt: eleven new functions
 and 1,276 C bytes in the combined batch.
@@ -173,3 +173,23 @@ It connects the relation chance/delay helpers and world-clock producer to
 result pairs, background transfers, cue selection and text staging. Its
 serialized result views express the observed row strides without asserting
 complete table bounds.
+
+## Reader word-return refinement
+
+The connected, still unconverted footer at `0x080401B8` uses the result of
+`display_menu_read_relation` directly as a signed word: its call at
+`0x08040214` is followed by a word copy and comparison, without a caller-side
+byte extension. The reader itself uses `LDRSB` and therefore returns a
+sign-extended word. Its C return type and both declaration headers now use
+`int`. This corrects the earlier byte-return inference while retaining the
+four-byte record layout and byte-valued field.
+
+The primary-result probability explicitly narrows the returned word to
+`signed char`; the menu initializer narrows through its existing byte store.
+Fresh exact proofs pass for the reader (12 bytes), initializer (744 bytes),
+and primary-result application (364 bytes). Their actual changed-source
+controls reject with 7, 1, and 1 differing bytes, respectively. This refinement
+adds no coverage. The footer, percentage helpers, and sequence-tile producer
+remain unconverted; their consumer evidence does not establish runtime
+behavior or wider index bounds. The ignored receipt is
+`catalog-presentation/relation-word-return-ready.json`.

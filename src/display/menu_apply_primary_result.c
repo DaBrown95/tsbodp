@@ -8,7 +8,7 @@ static inline void *relation_values(void *pointer)
 
 void display_menu_apply_primary_result(void)
 {
-    signed char probability = display_menu_read_relation(
+    signed char probability = (signed char)display_menu_read_relation(
         relation_values(&g_display_menu_relation_state), g_display_menu_state.definition);
     struct DisplaySceneRequestState *selection = &g_display_scene_request_state;
     const unsigned char *codes = g_display_menu_state.codes;

@@ -45,7 +45,8 @@ int display_menu_adjust_relation(struct DisplayMenuRelationState *, unsigned int
 void display_menu_prepare_relation(void *, unsigned int);
 int display_menu_write_relation(struct DisplayMenuRelationState *, unsigned int,
                                 int);
-signed char display_menu_read_relation(void *, unsigned int);
+/* LDRSB returns a sign-extended word; callers narrow only at byte uses. */
+int display_menu_read_relation(void *, unsigned int);
 unsigned char display_menu_relation_flags(void *, unsigned int);
 int display_menu_initial_relation(struct DisplayMenuRelationState *, unsigned int);
 void display_menu_refresh_relation(void *);

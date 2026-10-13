@@ -1758,3 +1758,33 @@ included only by the drawing source. This is compiler and static subsystem
 evidence, not runtime or gameplay verification. The larger ordinary-object
 renderer, selected map-tile loader and copied staging routine remain excluded
 candidates.
+
+### The adjacent 72-byte transient lifecycle
+
+Three further connected replacements add 216 verified C bytes:
+`frame_clear_transient_effects` at `0x3105C` (60 bytes),
+`frame_step_transient_effects` at `0x310C4` (80 bytes), and
+`frame_step_owner_transient_effects` at `0x3140C` (76 bytes). They use the
+already published 72-byte transient record and its own active head/free pool,
+keeping it separate from the 84-byte family above. The guarded transient header
+adds only canonical declarations; the existing access layout is unchanged.
+
+Clear walks the active head, caches next before releasing each node, and
+reduces the 72-byte count. The general step skips nodes whose `+0x30` flags
+carry `0x8000`, invokes the transient step, and clears that flag. The owner pass
+invokes the step only when the owner pointer at `+0x08` matches its argument,
+then sets `0x8000`. Both passes cache next across the call. They clear the
+shared render pending byte at `0x03001EE0` inside the nonzero-count branch;
+no new reset occurs when the count is zero. These observed calls connect the
+72-byte update path to the separate render pool's pending handoff.
+
+All three complete bodies, including original literal pools and alignment,
+match the production header closure. Their actual changed-source controls
+reject by two, two and one differing bytes. Raw proofs are retained under
+`reports/agents/frame-input/render-collection/transient-promoted/`. This adds
+static and compiler evidence only. The emitter and per-record updater are
+reconstructed separately in the connected transient batch; the larger normal
+object renderer remains excluded.
+Five prior direct consumers of the transient header were also rechecked at
+604 identical bytes, and all five existing changed-source controls reject.
+Their fresh receipts are under the adjacent `transient-prior-current/` reports.

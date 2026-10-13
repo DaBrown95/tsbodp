@@ -18,4 +18,9 @@ extern struct FrameTransientDefinition g_frame_transient_definitions[][8];
 struct FrameTransientEffect *frame_create_transient_effect(unsigned char,unsigned char,unsigned char);
 void frame_destroy_transient_effect(struct FrameTransientEffect *);
 void frame_spawn_counter_effect(struct FrameObject *,signed char);
+void frame_clear_transient_effects(void);
+void frame_step_transient_effects(void);
+void frame_step_owner_transient_effects(struct FrameObject *);
+void frame_step_transient_effect(struct FrameTransientEffect *);
+void frame_emit_transient_render_effect(struct FrameTransientEffect *);
 #endif

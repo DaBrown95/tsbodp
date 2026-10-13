@@ -18813,6 +18813,127 @@
         "before": "local_needs, 46, 1",
         "after": "local_needs, 45, 1"
       }
+    },
+    {
+      "name": "frame_clear_transient_effects",
+      "rom_offset": 200796,
+      "size": 60,
+      "source": "src/frame/frame_clear_transient_effects.c",
+      "symbols": {
+        "frame_pool_release": "0x08024d85",
+        "g_frame_transient_active_list": "0x030059e0",
+        "g_frame_transient_count": "0x03001ee6",
+        "g_frame_transient_free_pool": "0x03001edc"
+      },
+      "negative_control": {
+        "before": "if(g_frame_transient_count)",
+        "after": "if(g_frame_transient_count>1)"
+      },
+      "assembler_id": "binutils2101",
+      "thumb_symbols": [
+        "frame_pool_release"
+      ]
+    },
+    {
+      "name": "frame_step_transient_effects",
+      "rom_offset": 200900,
+      "size": 80,
+      "source": "src/frame/frame_step_transient_effects.c",
+      "symbols": {
+        "frame_step_transient_effect": "0x080307fd",
+        "g_frame_render_effect_pending": "0x03001ee0",
+        "g_frame_transient_active_list": "0x030059e0",
+        "g_frame_transient_count": "0x03001ee6"
+      },
+      "negative_control": {
+        "before": "effect->flags&0x8000",
+        "after": "effect->flags&0x4000"
+      },
+      "assembler_id": "binutils2101",
+      "thumb_symbols": [
+        "frame_step_transient_effect"
+      ]
+    },
+    {
+      "name": "frame_step_owner_transient_effects",
+      "rom_offset": 201740,
+      "size": 76,
+      "source": "src/frame/frame_step_owner_transient_effects.c",
+      "symbols": {
+        "frame_step_transient_effect": "0x080307fd",
+        "g_frame_render_effect_pending": "0x03001ee0",
+        "g_frame_transient_active_list": "0x030059e0",
+        "g_frame_transient_count": "0x03001ee6"
+      },
+      "negative_control": {
+        "before": "effect->owner==owner",
+        "after": "effect->owner!=owner"
+      },
+      "assembler_id": "binutils2101",
+      "thumb_symbols": [
+        "frame_step_transient_effect"
+      ]
+    },
+    {
+      "name": "frame_step_transient_effect",
+      "rom_offset": 198652,
+      "size": 204,
+      "symbols": {
+        "g_frame_transient_free_pool": "0x03001edc",
+        "g_frame_transient_active_list": "0x030059e0",
+        "g_frame_transient_count": "0x03001ee6",
+        "g_frame_render_effect_count": "0x03001ee2",
+        "g_frame_render_effect_pending": "0x03001ee0",
+        "frame_pool_release": "0x08024d85",
+        "frame_emit_transient_render_effect": "0x080308c9"
+      },
+      "thumb_symbols": [
+        "frame_pool_release",
+        "frame_emit_transient_render_effect"
+      ],
+      "negative_control": {
+        "before": "g_frame_render_effect_count<=62",
+        "after": "g_frame_render_effect_count<=61"
+      },
+      "source": "src/frame/frame_step_transient_effect.c"
+    },
+    {
+      "name": "frame_emit_transient_render_effect",
+      "rom_offset": 198856,
+      "size": 1372,
+      "symbols": {
+        "g_frame_render_effect_free_pool": "0x03001ed8",
+        "g_frame_render_effect_head": "0x030059e4",
+        "g_frame_render_effect_count": "0x03001ee2",
+        "g_frame_render_effect_maximum": "0x03001ee4",
+        "frame_pool_allocate_08024d50": "0x08024d51",
+        "frame_pool_release": "0x08024d85",
+        "frame_read_attachment": "0x08001725",
+        "frame_part_attachment_position": "0x080017d1",
+        "frame_fixed_multiply": "0x0802731d",
+        "__divsi3": "0x0804cd2d",
+        "g_frame_transient_cardinal_directions": "0x08052854",
+        "g_actor_reverse_directions": "0x08052858",
+        "g_frame_transient_extended_directions": "0x08052860",
+        "g_frame_transient_velocity_cardinal": "0x0804eae0",
+        "g_frame_velocity_default": "0x0804eb00",
+        "g_frame_velocity_extended": "0x0804eb80",
+        "frame_random_secondary_range": "0x08035405"
+      },
+      "thumb_symbols": [
+        "frame_pool_allocate_08024d50",
+        "frame_pool_release",
+        "frame_read_attachment",
+        "frame_part_attachment_position",
+        "frame_random_secondary_range",
+        "frame_fixed_multiply",
+        "__divsi3"
+      ],
+      "negative_control": {
+        "before": "direction_limit=(emitter->owner->flags&0x20000000)?8:4",
+        "after": "direction_limit=(emitter->owner->flags&0x20000000)?8:3"
+      },
+      "source": "src/frame/frame_emit_transient_render_effect.c"
     }
   ],
   "assembly": [

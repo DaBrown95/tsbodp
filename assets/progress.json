@@ -1,17 +1,17 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "13 Oct 2026, 09:50 BST",
-  "compiled_c_functions": 919,
-  "compiled_c_bytes": 118308,
+  "verified_at": "13 Oct 2026, 10:48 BST",
+  "compiled_c_functions": 924,
+  "compiled_c_bytes": 120100,
   "assembly_glue_bytes": 444,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16658464,
+  "unconverted_rom_bytes": 16656672,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2556,
-  "bounded_control_flow_bodies": 1556,
+  "bounded_control_flow_bodies": 1551,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 17,
   "unresolved_callback_call_sites": 92,
@@ -10897,18 +10897,18 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_080307FC",
+      "name": "frame_step_transient_effect",
       "group": "ROM 0803xxxx",
       "rom_offset": 198652,
       "size": 204,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080308C8",
+      "name": "frame_emit_transient_render_effect",
       "group": "ROM 0803xxxx",
       "rom_offset": 198856,
       "size": 1372,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "frame_step_render_effect_animation",
@@ -10953,11 +10953,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803105C",
+      "name": "frame_clear_transient_effects",
       "group": "ROM 0803xxxx",
       "rom_offset": 200796,
       "size": 60,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_clear_render_effects",
@@ -10967,11 +10967,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_080310C4",
+      "name": "frame_step_transient_effects",
       "group": "ROM 0803xxxx",
       "rom_offset": 200900,
       "size": 80,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "frame_step_uncollected_render_effects",
@@ -11016,11 +11016,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803140C",
+      "name": "frame_step_owner_transient_effects",
       "group": "ROM 0803xxxx",
       "rom_offset": 201740,
       "size": 76,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "sub_08031458",
@@ -11902,7 +11902,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 218116,
       "size": 40,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803542C",
@@ -29080,16 +29080,16 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_080307FC",
+      "name": "frame_step_transient_effect",
       "rom_offset": 198652,
       "size": 204,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080308C8",
+      "name": "frame_emit_transient_render_effect",
       "rom_offset": 198856,
       "size": 1372,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "frame_step_render_effect_animation",
@@ -29128,10 +29128,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803105C",
+      "name": "frame_clear_transient_effects",
       "rom_offset": 200796,
       "size": 60,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_clear_render_effects",
@@ -29140,10 +29140,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_080310C4",
+      "name": "frame_step_transient_effects",
       "rom_offset": 200900,
       "size": 80,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "frame_step_uncollected_render_effects",
@@ -29182,10 +29182,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803140C",
+      "name": "frame_step_owner_transient_effects",
       "rom_offset": 201740,
       "size": 76,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "sub_08031458",
@@ -30109,7 +30109,7 @@
       "name": "sub_08035404",
       "rom_offset": 218116,
       "size": 40,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803542C",
@@ -36485,8 +36485,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "87fe7cb4337e95f79d21b912e9e2c47eab759f9aa58185d04a6c1e9870a93f71",
-    "assets/rom-inventory.json": "4631770977af950d5ffa35ea59533bf21abf9db9710920419b72d27409764e37",
+    "config/build-us-eu.json": "e1ecf247f02740faad2cb769659adb50417bb6a8dbe0ea376393e2db14a40c3e",
+    "assets/rom-inventory.json": "80c62c65c449626da2aad6fa8e4387c764de1f3f78d51f3e5afa94692629527c",
     "tools/render_progress.py": "419354ceff7a7eb3a9e9f520cce14b39dbdc60ea247901091ba834d85e0d32e6",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "bc77da39abf1f092066c258dd6dadb1606a772d563deac4a37b86d0b0bffd10d",

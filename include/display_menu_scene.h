@@ -13,7 +13,7 @@ extern const struct PaletteRangeConfig g_display_menu_palette_ranges;
 /* Unconverted dependencies; stage roles follow this caller's observed uses. */
 void display_menu_clear_effects(void);
 void display_menu_prepare_relation(void *, unsigned int);
-signed char display_menu_read_relation(void *, unsigned int);
+int display_menu_read_relation(void *, unsigned int);
 void display_menu_load_relation_resource(void);
 void display_menu_fill_panel(unsigned int, int, int, unsigned short,
                              unsigned short, const void *);

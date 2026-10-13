@@ -1,0 +1,105 @@
+# Transient-effect emission
+
+Five connected replacements add 1,792 matching C bytes to the 72-byte transient
+effect lifecycle. They connect its published factory and destructor to the
+separate 84-byte render-effect family. Together those seven bodies cover 1,980
+bytes; the shared pool and random helpers have their own coverage. Complete
+extent matching includes literal pools and alignment. Names and record views
+follow static calls and accesses, and do not establish runtime or gameplay
+behavior.
+
+| Entry | Function | Extent bytes |
+| --- | --- | ---: |
+| `0x080307FC` | `frame_step_transient_effect` | 204 |
+| `0x080308C8` | `frame_emit_transient_render_effect` | 1,372 |
+| `0x0803105C` | `frame_clear_transient_effects` | 60 |
+| `0x080310C4` | `frame_step_transient_effects` | 80 |
+| `0x0803140C` | `frame_step_owner_transient_effects` | 76 |
+
+The existing 72-byte factory at `0x0803054C` and destructor at `0x08031038`
+use the free pool at `0x03001EDC`, active head at `0x030059E0`, count at
+`0x03001EE6` and maximum at `0x03001EE8`. The emitter instead allocates an
+84-byte record from `0x03001ED8`, links it through `0x030059E4`, and updates
+the count and maximum at `0x03001EE2` and `0x03001EE4`. These distinct lists
+explain why the neighboring collector and updater use a different flag offset
+and record size. The layouts remain separate in `frame_transient_effect.h`
+and `frame_render_effect.h`; the emission header imports both without changing
+their fields.
+
+The transient updater removes its node when an owner has flag 2, or when
+transient flag 2 enables a halfword countdown whose decrement becomes 65535.
+Otherwise flag `0x8000` suppresses cadence processing. Halfword `+0x36` advances
+against the threshold at `+0x28`; a reached threshold resets that counter and
+attempts the number of emissions specified by byte `+0x3C`. Each attempt
+requires render count at most 62, a clear pending byte at `0x03001EE0`, a clear
+transient flag `0x40`, and either owner flag `0x40000000` or transient flag
+`0x200`. These gates and the original owner dereferences are retained without
+adding a null-owner fallback.
+
+The emitter chooses an integer origin from the owner's OAM coordinates,
+two interpolated attachments, a selected attachment, the transient's signed
+position halves, or the owner's signed next-position halves. Flags and motion
+mode choose those branches. Failed attachment reads release the newly
+allocated 84-byte node and decrement its count. The halfword view in
+`frame_transient_emission.h` models the observed signed high-halfword loads;
+it does not replace the complete coordinate type.
+
+The emitter calls `frame_random_secondary_range` at `0x08035404`, which uses
+the separate generator at `0x080355AC`, masks its value to 15 bits, scales it
+by `last - first + 1` and adds the first endpoint. This 44-byte range body
+differs from the published `frame_random_range` at `0x080353D8`: the latter
+uses the primary generator and bypasses it for equal endpoints. The secondary
+range and generator remain unconverted dependencies in this batch.
+
+For two-attachment interpolation, the source reflects attachment X around the
+owner position when the facing exceeds a limit of four or eight, selected by
+owner flag `0x20000000`. It adds the owner's Y position, interpolates both
+components using one random fixed-point weight, and converts the resulting
+pair to integer coordinates. The halfword at transient `+0x34` supplies the
+origin radius. Independent random offsets within that radius become fixed
+coordinates in the render record's origin pair.
+
+The render record receives the transient's lifetime at `+0x2A`, flags, resource,
+palette byte, tile index, index array, motion mode, amplitude and phase step.
+OAM layer either uses a fixed value or copies/adjusts the owner's layer, with
+the observed field truncation. Animation delay is three for flag 4, otherwise
+one or the signed lifetime divided by the resource sequence's frame count.
+The compiler emits the signed division helper at `0x0804CD2C`; both the signed
+countdown and positive halfword frame count promote to signed `int`. Nonzero
+frame count and consistent owner, resource and pool state remain caller
+preconditions inferred from the original body.
+
+Six motion modes either leave velocity zero, select a mapped direction, choose
+a random direction, or copy the requested direction and switch to mapped mode.
+The three direction-map roots are `0x08052854`, `0x08052858` and `0x08052860`.
+The middle one reuses the existing actor reverse-direction alias. Velocity
+tables at `0x0804EAE0`, `0x0804EB00` and `0x0804EB80` contain consecutive X/Y
+word pairs, with an eight-byte direction stride. The source preserves the
+table roots and observed indexing rather than claiming table bounds for every
+possible direction byte.
+
+The updater matches ordinary C by separating the loaded flags, lifetime mask
+and retained flags snapshot. In the emitter, a saved first-multiply rate and
+a two-component table traversal recover the observed value lifetimes. Its
+only fixed-register declaration binds the address of the render direction
+byte to call-preserved R5 across the two multiply calls. The earlier allocation
+R3 constraint was removed while preserving equality. The remaining binding
+is a compiler constraint, not instruction assembly or runtime evidence.
+Explicit zero tail alignment is kept separate from the C body.
+
+The y-component traversal computes the byte offset before advancing the table
+pointer by one word, then forms the observed 32-bit address with the offset
+first. This is source-level address arithmetic on the pinned target; arbitrary
+host pointer widths, direction values and overflowing coordinate domains are
+not claimed to have equivalent behavior. Failed independent-scalar, coordinate
+pair, component-order and constraint-removal attempts retain complete raw
+comparisons in ignored local reports.
+
+Fresh canonical source and current-header proofs match all 204 and 1,372 bytes.
+Their real controls change the render-count gate from 62 to 61 and the
+four-direction reflection limit from four to three; each is rejected with one
+differing byte. The lifecycle helpers have their own changed-source controls
+and header proofs. `transient-update-batch-manifest.json` and
+`transient-lifecycle-ready.json` index the private receipts, including sources,
+header closures, commands and expected/candidate bytes. Whole-ROM integration
+and runtime behavior remain separate claims.
