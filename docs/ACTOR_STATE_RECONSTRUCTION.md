@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 162 C functions spanning 26,880 verified bytes. The
+This batch reconstructs 163 C functions spanning 27,164 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,7 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x3B640` | `frame_find_attachment_neighbor` | 284 |
 | `0x351B0` | `frame_random_refill` | 348 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
@@ -1122,3 +1123,17 @@ extra 625th word, signed-count precondition and the refill branch's absence of
 a last-byte write. Wider initialization and allocator code remain original.
 The source reconstruction uses local ROM evidence, with no imported upstream
 instruction body or implementation. This is compiler/static evidence only.
+
+
+## Attachment-neighbor handoff
+
+The kind-22 interaction path now includes its 284-byte attachment-neighbor
+producer. Ordinary C selects a numeric scan start from attachment displacement,
+tries eight byte-offset pairs, performs separate occupancy/terrain lookups and
+copies the first acceptable four-byte candidate representation. Only x/y are
+initialized; the upper bytes remain opaque and are copied without an integer
+read. The full source and its mask mutation pass/reject respectively, and the
+existing interaction callback remains exact with its own rejected control.
+`ACTOR_ROUTE_SEARCH.md` records offset-table bounds, null-result behavior,
+unused/conversion preconditions and the unresolved 356-byte target selector.
+This adds source coverage without a runtime/gameplay claim.

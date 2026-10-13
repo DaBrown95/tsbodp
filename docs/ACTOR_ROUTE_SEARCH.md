@@ -1,18 +1,20 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 43 C functions and 5,876 bytes:
+The connected route-search path reconstructs 44 C functions and 6,160 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
 and six further variant/job-73 and shared value/random functions, followed by
 the nine-function variant controller and parameter-indicator closure, and its
-three-function random refill/seed/reader dependency. Every complete
+three-function random refill/seed/reader dependency and its adjoining
+attachment-neighbor producer. Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
 Neither these matches nor the full-ROM equality gate establish runtime behaviour.
 
 | ROM offset | Function | Verified bytes |
 | --- | --- | ---: |
+| `0x3B640` | `frame_find_attachment_neighbor` | 284 |
 | `0x351B0` | `frame_random_refill` | 348 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
@@ -551,7 +553,7 @@ remains exact with its control and adds zero coverage. Positive/control bytes,
 commands and current-header snapshots are retained under
 `actor-attachment-controller-canonical/`, with ready metadata in
 `actor-attachment-controller-batch-manifest.json`. The configuration selector,
-neighbor producer, target selector, wider generator initialization and
+target selector, wider generator initialization and
 allocation/lookup guarantees remain unresolved. Full-ROM equality and static
 callback mapping are separate from runtime behavior, which was not tested.
 
@@ -607,3 +609,42 @@ snapshots and positive/control comparisons remain in ignored local reports;
 ready metadata is `frame-random-batch-manifest.json`. Full-ROM validation and
 publication remain separate milestone gates; no runtime/gameplay test is
 claimed here.
+
+
+## Attachment-neighbor producer
+
+The accepted interaction callback at `0x16C68` now connects to the 284-byte
+neighbor producer at `0x3B640`. It reads the actor attachment position, converts
+attachment and actor positions to integer coordinates and cells, and chooses
+one of four numeric scan groups from their signed displacement. The group is
+doubled and eight consecutive two-byte offsets at `0x0807F3F0` are tried. Only
+the actor cell is used as the candidate anchor; the attachment-cell conversion
+is retained even though its result is unused. These group numbers and offsets
+are not given unproved compass meanings. The largest observed lookup needs the
+first fourteen offset pairs; wider table boundaries remain a mapping question.
+This base has its own `g_frame_attachment_neighbor_offsets` view, distinct from
+the sixteen-byte grid-neighbor table copied from `0x0807F410`.
+
+Each candidate x/y field narrows the byte offset addition to eight bits. The
+code performs one lookup for occupancy and, when mask 13 is clear, a second
+lookup for terrain. Null lookup results supply zero properties. Terrain bit two
+selects the first acceptable candidate. Both queries remain explicit. The
+third word argument is unused, and conversion/resource validity requirements
+are not strengthened with invented checks. The known interaction caller ignores
+the returned success flag before converting its local cell to a point; a valid
+neighbor in that caller context remains an unresolved precondition.
+
+Success transfers a full four-byte candidate representation and returns one;
+failure returns zero and leaves the output alone. Only the low x/y bytes are
+initialized in the candidate. The source uses a four-byte built-in memory copy
+for the original word transfer, avoiding an integer interpretation of the
+indeterminate upper bytes. Those bytes are deliberately opaque, and no game
+meaning or initialized value is claimed for them. The ordinary C source has
+no register constraints: reusing the direction variable for the doubled scan
+start resolved the previous index/table allocation mismatch. Complete extent,
+pool and alignment match, the occupancy mask 13 to 12 control differs by one
+byte, and the connected 280-byte interaction consumer remains exact with its
+control rejected. Proofs and useful earlier failures remain under ignored
+`attachment-neighbor-canonical/` and its predecessor trial directories; ready
+metadata is `attachment-neighbor-batch-manifest.json`. No runtime behavior was
+tested. The adjoining 356-byte target selector remains unconverted.
