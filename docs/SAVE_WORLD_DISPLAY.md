@@ -165,3 +165,44 @@ failure is retained and excluded from coverage. The ordinary event provider
 matches after the byte-offset correction. No object-allocation guard, text or
 audio-content meaning, complete state boundary or runtime notice is inferred.
 Its extent ends at the next original prologue `0x0804565C`.
+
+## View initialization producer
+
+`scene_initialize_view` at `0x0801E5F4` adds 420 matching C bytes. The next
+original entry is the still-unconverted coordinator at `0x0801E798`; the accepted
+extent includes every intervening literal and alignment byte. The connected
+selected-row display family now contains thirteen verified functions and 1,672
+bytes. A real edit of the redraw mask rejects, and the accepted
+`scene_initialize` caller is freshly verified with its own changed-source
+control. Whole-ROM integration remains a separate gate.
+
+The existing two-word calling interface is preserved. The producer explicitly
+consumes the low byte of its mode argument. Mode zero refreshes the row palette;
+when the word row index equals the shared selection byte, it copies eight
+observed need values into row bytes `+0x30..+0x37`, stages five background
+resources, and performs the original map rectangle operations. The loop has
+eight iterations; this does not prove that every incoming row index is valid.
+Nonzero low-byte mode stores all ones in the row flags. It then configures the
+text background/font. Ready value one invokes the already matching immediate
+transition, sets flags `0x3FC`, updates the gauges, and restores that ready word.
+Flags one and two are always added at the end.
+
+The producer establishes the existing gauge-map pointer at `0x03004124` from the
+decoded-word resource result. The explicit pointer cast is a shared access view
+used by the matching gauge consumer, without an asset-format completeness claim.
+The already named row palette descriptor at `0x080D04CC` is reused. Four other
+descriptor letters record only their load order. Their data remains original
+ROM input. Calls at `0x0803AFF0` and `0x08034630` remain explicit unconverted
+providers; the former receives the world child at `+0x20`. This caller alone
+does not establish the child's full extent or either provider's complete role.
+
+Three semantic C register constraints preserve observed lifetimes: a short
+row-index access value in `r1`, the bottom row root in `r6` across the transition
+and gauge calls, and the final flags pointer in `r0` for its one word update.
+The input index and eight-times-index value are ordinary locals. The helpers
+inline without additional function spans. Failed fixed-stride experiments that
+overwrote a live stride with the row root are retained privately and excluded.
+No instruction body, output fixup or allocated section is added. The main
+816-byte coordinator remains unconverted, with its valid ordinary-C attempts
+and raw comparisons retained separately from coverage. Runtime notices,
+background appearance, asset meanings and complete state bounds remain unproved.

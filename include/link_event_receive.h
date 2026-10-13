@@ -12,7 +12,7 @@
 struct LinkReceivedJoin {
     int identifier;
     unsigned int values[4];
-    unsigned char unknown14[100], metadata[4];
+    unsigned char unknown14[100], metadata[4], entry_index;
 };
 struct LinkReceivedPair { struct EventPayload first, second; };
 extern struct EventRecord g_link_received_events[];
@@ -27,6 +27,5 @@ extern unsigned int g_scene_id;
 void link_apply_received_events(void);
 void resource_submit_scene(unsigned int, unsigned int, unsigned int);
 void display_cpu_copy(const void *, void *, unsigned int);
-/* Original providers remain unconverted. */
-void link_stage_080042a4(void), link_stage_0800450c(void);
+void link_apply_received_actor_entry(void), link_show_received_entry_notice(void);
 #endif

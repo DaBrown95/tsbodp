@@ -89,8 +89,8 @@ half. Kind ten assigns an eight-byte payload through the vector view at
 `+0x54`. Their declarations describe observed access roles, not separate
 storage, complete allocations or valid bounds for arbitrary peer counts.
 Kind eleven sets link masks `0x80000` and `0x8000`, clears game bit `0x20`, and
-submits scene request `(1, 2, current_scene)`. Kinds twelve and thirteen call
-explicit unconverted providers at `0x080042A4` and `0x0800450C`.
+submits scene request `(1, 2, current_scene)`. Kinds twelve and thirteen now call
+the connected actor-entry and notice providers described below.
 
 The separate record-halfword input view and word-fill destination preserve
 observed address lifetimes. The vector's integer destination address is
@@ -106,3 +106,62 @@ attempts remain under `link-event-apply-evidence/` and `link-events-*`.
 The completion poll's best private 408-byte candidate still has 101 differing
 bytes and receives no C coverage. Its original body and failed semantic
 attempts remain under `reports/audio-root/link-transfer-finished-*`.
+
+## Actor-entry update and notices
+
+The two received-kind providers add 812 matching C bytes:
+`link_apply_received_actor_entry` at `0x080042A4/616` and
+`link_show_received_entry_notice` at `0x0800450C/196`. The first extent ends at
+the second entry. The second includes two bytes of alignment after its return,
+through the next entry at `0x080045D0`; the static CFG alone had estimated 194
+bytes. Both retain complete literal pools. Their names describe the accepted
+actor-list and display calls, not a fully established exchange protocol.
+
+The offer view at `0x03002E00` exposes four 24-byte records, followed by a
+multiplier word at `+0x60` and a signed selection byte at `+0x64`. Each record
+has an integer cost at `+0x0C` and a count byte at `+0x14`. The update compares
+the integer link slot with that signed selection; when equal, it appends an
+actor entry to the existing game state's list pointer at `+0xF0`, passing the
+three received metadata bytes at `+0x79..+0x7B`. It subtracts the selected
+record's cost plus multiplier times count, shifted arithmetically by sixteen,
+from the game word at `+4`, and selects sequence sixty. When the slot instead
+differs from the received identifier, it selects sequence sixty-one.
+
+A separate identifier comparison selects the removal path. It uses the
+received byte at `+0x7C` as the actor-list index and calls the accepted compacting
+removal function with one. This extends the shared received view's observed
+minimum to `0x7D` bytes; its C structure includes alignment padding and still
+does not establish a complete allocation. The removal path adds the same
+adjustment to the game word and plays cue five. Both amount updates configure
+the text/font and background rectangle according to game bit `0x20`, format
+the updated number, and draw resource 6220. The per-slot pair payload at
+`0x03002D74`, indexed with its sixteen-byte stride, supplies a field-zero string
+before the final notice. String termination, offer-index validity, protocol
+completion and runtime numeric ranges remain uncertain; no guards or invented
+initialization are added.
+
+The companion notice calls the original `0x080057A0` provider, configures the
+font, and chooses resources 292 or 449 according to the signed selection
+comparison. Sequence sixty-one depends on the selection and identifier tests.
+Both functions then choose resource 227 or 225 according to the received
+identifier. These are observed resource IDs; their original text stays private
+and unconverted. The sequence selector at `0x080411BC` also remains an explicit
+original dependency.
+
+The notice uses ordinary C. The update has two short scalar register bindings
+inside each adjustment block: the real product in `r3` and the cost-plus-product
+total in `r1`. They are consumed before any call. Ordinary product variants
+produced 612 bytes with 495 differences, while the product binding produced
+616 bytes with two differing operand-order bytes. A separate real total
+reproduces the complete original extent. The bindings constrain semantic
+integer values; they contain no original instruction body, output patch or
+embedded game data. Earlier typed, address-view, operand-order and helper
+attempts remain local with complete raw comparisons.
+
+Fresh controls change the subtraction into addition and resource 292 into 293;
+both reject. The accepted 632-byte dispatcher receives a fresh positive and
+control after its same-address provider aliases and shared view are updated,
+with no duplicate byte credit. Evidence remains under ignored
+`reports/audio-root/link-receive-kind-actions-evidence/` and
+`link-entry-actions-*`. Compiler equality does not establish gameplay behaviour
+or overflow/invalid-index semantics.

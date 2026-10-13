@@ -72,8 +72,8 @@ void link_apply_received_events(void)
                     *(struct EventPayload *)&record->payload;
                 break;
             }
-            case 12: link_stage_080042a4(); break;
-            case 13: link_stage_0800450c(); break;
+            case 12: link_apply_received_actor_entry(); break;
+            case 13: link_show_received_entry_notice(); break;
             case 0: case 1: case 6: break;
             }
         }

@@ -24553,8 +24553,8 @@
         "resource_submit_scene": "0x08027dd1",
         "display_text_copy_bytes": "0x0804e7d1",
         "display_cpu_copy": "0x0804c8c5",
-        "link_stage_080042a4": "0x080042a5",
-        "link_stage_0800450c": "0x0800450d",
+        "link_apply_received_actor_entry": "0x080042a5",
+        "link_show_received_entry_notice": "0x0800450d",
         "g_link_received_words": "0x030072b0"
       },
       "thumb_symbols": [
@@ -24563,13 +24563,141 @@
         "resource_submit_scene",
         "display_text_copy_bytes",
         "display_cpu_copy",
-        "link_stage_080042a4",
-        "link_stage_0800450c"
+        "link_apply_received_actor_entry",
+        "link_show_received_entry_notice"
       ],
       "assembler_id": "binutils2101",
       "negative_control": {
         "before": "g_link_flags &= ~0x80u",
         "after": "g_link_flags &= ~0x40u"
+      }
+    },
+    {
+      "name": "link_apply_received_actor_entry",
+      "source": "src/transition/link_apply_received_actor_entry.c",
+      "rom_offset": 17060,
+      "size": 616,
+      "symbols": {
+        "g_link_entry_offers": "0x03002e00",
+        "g_link_entry_game_state": "0x03003950",
+        "g_link_received_join": "0x03002d60",
+        "g_link_received_pairs": "0x03002d74",
+        "g_game_flags": "0x03004310",
+        "event_get_link_slot": "0x0803e439",
+        "link_stage_080057a0": "0x080057a1",
+        "display_text_select_font": "0x0801ae75",
+        "display_text_draw_all_lines": "0x0801b04d",
+        "display_text_draw_line": "0x0801a959",
+        "display_scene_lookup_text": "0x08045009",
+        "display_text_number_field_zero": "0x0801b1cd",
+        "display_text_copy_field_zero": "0x0801b151",
+        "display_fill_background_constant_rectangle": "0x0800d7fd",
+        "actor_entry_add": "0x080200c9",
+        "condition_update_actor": "0x080209cd",
+        "audio_select_sequence": "0x080411bd",
+        "audio_play_animation_cue": "0x08040ffd"
+      },
+      "thumb_symbols": [
+        "event_get_link_slot",
+        "link_stage_080057a0",
+        "display_text_select_font",
+        "display_text_draw_all_lines",
+        "display_text_draw_line",
+        "display_scene_lookup_text",
+        "display_text_number_field_zero",
+        "display_text_copy_field_zero",
+        "display_fill_background_constant_rectangle",
+        "actor_entry_add",
+        "condition_update_actor",
+        "audio_select_sequence",
+        "audio_play_animation_cue"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "g_link_entry_game_state.amount -=",
+        "after": "g_link_entry_game_state.amount +="
+      }
+    },
+    {
+      "name": "link_show_received_entry_notice",
+      "source": "src/transition/link_show_received_entry_notice.c",
+      "rom_offset": 17676,
+      "size": 196,
+      "symbols": {
+        "g_link_entry_offers": "0x03002e00",
+        "g_link_received_join": "0x03002d60",
+        "event_get_link_slot": "0x0803e439",
+        "link_stage_080057a0": "0x080057a1",
+        "display_text_select_font": "0x0801ae75",
+        "display_text_draw_all_lines": "0x0801b04d",
+        "display_scene_lookup_text": "0x08045009",
+        "audio_select_sequence": "0x080411bd"
+      },
+      "thumb_symbols": [
+        "event_get_link_slot",
+        "link_stage_080057a0",
+        "display_text_select_font",
+        "display_text_draw_all_lines",
+        "display_scene_lookup_text",
+        "audio_select_sequence"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "display_scene_lookup_text(292)",
+        "after": "display_scene_lookup_text(293)"
+      }
+    },
+    {
+      "name": "scene_initialize_view",
+      "rom_offset": 124404,
+      "size": 420,
+      "source": "src/scene/scene_initialize_view.c",
+      "symbols": {
+        "g_save_world_transition_rows": "0x03004130",
+        "g_save_world_init_state": "0x03003950",
+        "g_scene_primary_views": "0x030040e0",
+        "g_save_world_summary_map": "0x03004120",
+        "g_frame_actor_local_need_state": "0x03003a00",
+        "save_world_refresh_row_palette": "0x0801eee9",
+        "save_world_update_row_gauges": "0x0801eb85",
+        "save_world_finish_transition": "0x0801eac9",
+        "display_fill_background_constant_rectangle": "0x0800d7fd",
+        "display_text_select_font": "0x0801ae75",
+        "display_load_background_resource_dma": "0x0800ce15",
+        "g_save_world_view_background_a": "0x080d03b8",
+        "g_save_world_view_background_c": "0x080d034c",
+        "g_save_world_view_background_d": "0x080d08f4",
+        "g_save_world_view_background_e": "0x080d0920",
+        "g_save_world_transition_map": "0x03004210",
+        "g_scene_background_control0": "0x08056330",
+        "scene_view_original_3aff0": "0x0803aff1",
+        "scene_view_original_34630": "0x08034631",
+        "display_fill_background": "0x0800d6b9",
+        "display_fill_background_rectangle": "0x0800d865",
+        "display_load_background_dma": "0x0800da5d",
+        "display_text_set_background_control": "0x0801ae2d",
+        "frame_actor_need_value": "0x0802b9a1",
+        "g_save_world_gauge_map": "0x03004124",
+        "g_save_world_row_palette_a": "0x080d04cc"
+      },
+      "thumb_symbols": [
+        "save_world_refresh_row_palette",
+        "save_world_update_row_gauges",
+        "save_world_finish_transition",
+        "display_fill_background_constant_rectangle",
+        "display_text_select_font",
+        "display_load_background_resource_dma",
+        "scene_view_original_3aff0",
+        "scene_view_original_34630",
+        "display_fill_background",
+        "display_fill_background_rectangle",
+        "display_load_background_dma",
+        "display_text_set_background_control",
+        "frame_actor_need_value"
+      ],
+      "negative_control": {
+        "before": "|= 0x3fc;",
+        "after": "|= 0x3f8;"
       }
     }
   ],
