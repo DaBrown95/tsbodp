@@ -1,12 +1,15 @@
 # Condition panel object and label path
 
-Three connected functions add 576 verified matching C bytes:
+The three object/label functions cover 576 verified matching C bytes. Their
+connected input consumer adds another 484 bytes, bringing this path to four
+functions and 1,060 bytes:
 
 | Function | ROM address | Complete extent |
 | --- | --- | ---: |
 | `condition_panel_create_objects` | `0x0801D888` | 232 bytes |
 | `condition_panel_draw_row_labels` | `0x0801D7DC` | 172 bytes |
 | `condition_panel_update_column_objects` | `0x0801D730` | 172 bytes |
+| `condition_panel_step_input` | `0x0801D39C` | 484 bytes |
 
 The 460-byte setup at `0x0801D1D0` calls all three functions and the still
 unconverted detail drawer at `0x0801D580`. It configures backgrounds, invokes the
@@ -52,8 +55,34 @@ tail is not interpreted as additional columns. The original operations have
 no guards for the supplied row, definition pointers or created object pointers;
 the reconstruction preserves their behavior rather than adding checks.
 
-All three complete original extents, including literal pools and alignment,
-match independently. Real changed-source loop-bound controls produce different
+The input consumer first gates directional work on the pressed-key array at
+`0x03004228`. Its mode and selection tests use the distinct local pressed-key
+array at `0x03004250`, indexed by the established local-player byte at input
+context `+0x31`. Masks `0x80/0x40` enter or leave mode one and update slot 8's
+visibility flag. Masks `0x20/0x10` move within the six columns in mode one;
+other modes move the requested row from zero through the world row limit. A
+column move redraws details and changes slot 8's ID and variant. A row move
+invokes the matching labels and column objects before the original detail
+drawer. Directional cue zero is requested even when a tested limit prevents a
+move, as in the original. The tests establish no general validity guarantee
+for an incoming request value, object slot or definition.
+
+The final local masks `0x100/0x200` write command 17 or 16 to the byte at world
+`+0x73F`, then submit the corresponding default request and cue 11. This byte
+is a distinct offset from the neighboring world fields used by other paths.
+Its guarded alternate prefix view expresses the observed base-plus-offset
+store without declaring a complete world layout. If neither local command is
+selected, mask `0xA` comes from the pressed-key array at `0x03004228`; it submits
+kind 1, mode 2 and the word at `0x03004334`, followed by cue 2. The neutral
+panel return-argument alias is distinct from the existing `g_resource_scene_arg`
+word at `0x03004370`; these are separate observed addresses. Preserving
+these two array roots resolves the otherwise missing final halfword read.
+Direct C input expressions retain the original mask-register choices without
+register bindings or volatile qualifiers. The detail provider, setup routine
+and their useful failed matches remain explicit originals.
+
+All four complete original extents, including literal pools and alignment,
+match independently. Real changed-source loop/column-bound controls produce different
 bytes. Source objects and linked extents contain only allocated `.text`, with
 one function span and no unresolved linked relocations. Useful failed attempts
 and the actual comparison bytes remain in ignored local reports. These compile

@@ -1,4 +1,5 @@
 #include "scene_primary.h"
+#include "view_motion_step.h"
 void scene_primary_step(void)
 {
  struct ScenePrimaryViews *context=&g_scene_primary_views;
@@ -10,7 +11,7 @@ void scene_primary_step(void)
   unsigned char i=0;
   unsigned char first_count=context->count;
   unsigned char *variant=&actor->variant_state;
-  if(i<first_count){unsigned char *count=&context->count;do {frame_update_map_view(i);scene_stage_0800e3a8(i);++i;}while(i<*count);}
+  if(i<first_count){unsigned char *count=&context->count;do {frame_update_map_view(i);transition_step_view(i);++i;}while(i<*count);}
   frame_step_transient_effects();scene_step_character_animation();
   if(*variant!=5 && (actor->state==16||actor->state==27)) {
    struct ResourceViewEffect *effects=g_resource_view_effects;

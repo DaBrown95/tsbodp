@@ -12,7 +12,9 @@ struct DisplayDailyWorld {
     struct DisplayTimeRecord clock;
     unsigned char unknown10[0x440 - 0x10];
     unsigned int stage;
-    unsigned char unknown444[0x741 - 0x444];
+    unsigned char unknown444[0x714 - 0x444];
+    unsigned int daily_counters[4];
+    unsigned char unknown724[0x741 - 0x724];
     unsigned char counter_a, counter_b, unknown743;
     unsigned short cycle_value;
     signed char cycle;
@@ -29,10 +31,10 @@ extern struct DisplayHourInterval g_display_hour_interval;
 void display_time_reset_hour_interval(void);
 void display_time_day_event(void);
 
-/* Original dependencies remain unconverted in the matching build. */
 void display_time_add_cycle_value(void);
 void display_time_reset_daily_counters(void);
 void display_menu_relax_relation_values(struct DisplayMenuRelationValues *);
+/* Original dependency remains unconverted in the matching build. */
 void display_time_weekly_entries(struct ActorEntryContext *);
 
 /* Existing providers; declarations preserve their established ABI. */

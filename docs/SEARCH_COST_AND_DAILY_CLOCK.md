@@ -36,9 +36,9 @@ original relation-value adjustment at world `+0x30`, clears byte `+0x73D`, and
 resets the hour interval. On a signed day divisible by seven it calls the
 original weekly actor-entry operation. The signed remainder helper is the
 established `__modsi3` at `0x0804CE08`; the explicit signed-short result test
-preserves the observed narrowing. The weekly operation, counter reset,
-cycle-value provider and relation adjustment remain explicit original regions.
-Useful private child candidates receive no source-coverage credit in this batch.
+preserves the observed narrowing. The weekly operation remains an explicit original region. The three other
+direct daily providers are reconstructed below; their historical private
+receipts retain their previous aliases and extent evidence.
 
 The interval reset clears two eight-byte clock records rooted at `0x03004074`.
 A primary-generator draw from zero through 99 at most 29 enables the interval.
@@ -58,3 +58,45 @@ one differing byte.
 Raw source failures, full comparison bytes and native object/link receipts stay
 in ignored reports. These static and compiler results are separate from
 whole-ROM equality and runtime behavior.
+
+## Direct daily providers
+
+Three further directly called providers add 168 complete matching C bytes:
+
+| Function | ROM address | Extent |
+| --- | --- | ---: |
+| `display_time_add_cycle_value` | `0x0801BCD0` | 28 bytes |
+| `display_time_reset_daily_counters` | `0x08010A80` | 44 bytes |
+| `display_menu_relax_relation_values` | `0x08035E9C` | 96 bytes |
+
+The first adds 500 to the unsigned halfword at world `+0x744`, retaining the
+observed narrowing on its store. Its cycle-reset caller motivates `cycle_value`;
+the value's gameplay role is unresolved. The second clears four word counters
+at `+0x714`, `+0x718`, `+0x71C` and `+0x720`. These offsets refine unknown
+bytes in the same access view without moving any previously observed field.
+Neither function receives an argument. The old unnamed child aliases remain
+in historical private receipts; their execution addresses are unchanged.
+
+The relation provider reuses the published 104-byte relation-values view,
+whose 24 four-byte records begin at `+8`. It reads each signed value at
+`+9 + 4 * index`, skips zero and the -128 initialization sentinel, and draws
+zero through two with the established primary generator. Positive values
+decrease; negative values increase; a sign crossing clamps to zero. The cursor
+advances within the actual relation-values storage, and the signed character
+accesses preserve the byte widths without a fabricated scalar representation.
+A named loop sentinel declared before the character cursor recovers the
+original constant initialization order in ordinary C, with no register binding.
+Natural typed-record and other declaration-order attempts remain preserved as
+failed full comparisons. These operations justify the provisional relaxation
+name, not a tested daily relationship or probability model.
+
+The three children plus the earlier queue/clock batch comprise six functions
+and 528 distinct C bytes. The new child controls change the increment, final
+counter store and record loop bound, rejecting by 18, 16 and one byte
+respectively. Both previous daily-header consumers remain exact and each
+rejects its real control by one byte after the final header refinement.
+The weekly actor-entry reconciliation at `0x0802005C` remains original code.
+Its observed scan reconciles flag bits with kind-125 secondary records and
+clears at most one bit per invocation, but its private compiler trials receive
+no coverage. Runtime invocation, list consistency and table/index domains
+remain unproved.

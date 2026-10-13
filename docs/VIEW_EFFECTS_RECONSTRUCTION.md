@@ -138,16 +138,17 @@ The callback role follows the installers and fields; it does not establish the
 complete actor state machine or behaviour during gameplay. Its exact match and
 changed direction-threshold control are recorded with the other accepted proofs.
 
-The controller at `0800E3A8` remains unconverted. Its six-way switch connects
-tracking, movement, delay, return movement and the mode-five resource effects.
-A semantic candidate exists with useful raw comparison evidence, but differences
-in pointer/type evaluation and compiler allocation prevent source coverage.
-The mode setter at `0800E8B4` also remains unconverted: a compact candidate does
-not reproduce the original table and extent. Whole-ROM matching retains their
+The controller at `0800E3A8` now contributes 844 verified matching C bytes. Its
+six-way switch connects tracking, movement, delay, return movement and mode-five
+resource effects. The scene initializer and primary update call its canonical
+name at the same original address. The complete path and remaining numeric/type
+limits are recorded in [the controller evidence](VIEW_MOTION_CONTROLLER.md).
+The mode setter at `0800E8B4` remains unconverted: a compact candidate does
+not reproduce the original table and extent. Whole-ROM matching retains the mode setter's
 original bytes and does not grant them C credit.
 
 Local ignored reports preserve source snapshots, compiler inputs and assembly,
 linked outputs, complete expected/candidate extents and changed-source controls.
-Further connected targets are the controller, the view mode setter and the
-view projection/display handoff. No output
+Further connected targets are the view mode setter and the view
+projection/display handoff. No output
 patches, difference masks or reference changes were used.

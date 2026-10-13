@@ -1,4 +1,5 @@
 #include "scene.h"
+#include "view_motion_step.h"
 #include "transition_object.h"
 #include "background_animation.h"
 #include "link_state.h"
@@ -69,7 +70,7 @@ void scene_initialize(void) {
   }
   for(index=0;index<g_transition_view_context.count;index++) {
    scene_show_view(index);
-   scene_stage_0800e3a8(index);
+   transition_step_view(index);
   }
  } else {
   scene_initialize_view(g_transition_view_context.current_view,1);
