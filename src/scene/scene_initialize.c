@@ -47,9 +47,9 @@ void scene_initialize(void) {
   if((g_scene_context.flags&1) && g_scene_id<=14) background_animation_load(1);
  } else if(g_scene_request.mode==2) {
   display_reset_tile_allocation();
-  if(!(g_game_flags&0x40000)) scene_stage_0800125c();
+  if(!(g_game_flags&0x40000)) frame_restore_primary_objects();
   else scene_stage_080012dc();
-  scene_stage_08001298(128);
+  frame_enable_primary_object_flags(128);
   scene_stage_08000b78();
   scene_copy_palette_alternate(g_scene_context.palette,0,256);
   background_animation_load(g_background_animation.transfer_enabled);

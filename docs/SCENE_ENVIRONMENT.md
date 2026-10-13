@@ -57,27 +57,28 @@ The call uses the accepted `audio_select_sequence` provider.
 ## Retained display connection and boundaries
 
 The allocator obtains 512 zeroed bytes for context `+12` and writes scene ID 50.
-The retain path forces a background-animation reload, calls the explicit original
-provider at `0x9DF0`, and snapshots map VRAM through the accepted map helper.
-Unless game flag `0x20000` is set, it calls the original provider at `0x121C` and
-sets game flag eight. It then sets request mode two and copies 256 halfwords
+The retain path forces a background-animation reload, stops the actor speed cue
+through the accepted provider at `0x9DF0`, and snapshots map VRAM through the
+accepted map helper.
+Unless game flag `0x20000` is set, it retains the primary object list through the
+accepted provider at `0x121C` and sets game flag eight. It then sets request mode two and copies 256 halfwords
 from OBJ palette memory `0x05000200` to the retained palette allocation. The
 BIOS-copy control is the original halfword count, not an inferred byte count.
 
-The short release path calls original provider `0xA834` and the accepted map
-resource release. Its complete boundary is `0x2697C..0x2698C`: the next PUSH at
+The short release path calls the accepted background-animation reset at `0xA834`
+and the accepted map resource release. Its complete boundary is `0x2697C..0x2698C`: the next PUSH at
 `0x2698C` begins a separate 100-byte cleanup function. An earlier raw inspection
 range combined them; that range is retained as evidence and is not credited as
 one function.
 
 The separate cleanup runs only with game flag eight. It clears that flag,
-uses original provider `0x125C`, releases the primary linked object list and
+restores the retained primary objects through `0x125C`, releases that linked list and
 calls original provider `0x2EB9C`, then clears both reconstructed transient-effect
 families. It clears audio-control bits one and eight, destroys map registration
 through the canonical grid helper, clears the registration pointer, and calls
 the short release's two providers. The volatile audio-control field retains its
-observed read/update accesses. Unconverted providers remain explicit; their
-call-site signatures do not establish their full bodies.
+observed read/update accesses. The `0x2EB9C` provider remains explicit original
+code; its call-site signature does not establish its full body.
 
 The primary-step early-exit query is exactly four bytes at `0x269F0..0x269F4`
 and returns byte zero. The following PUSH at `0x269F4` begins a separate dispatch
@@ -106,3 +107,58 @@ Next targets are that selector and the original retain/release providers, while
 the central object renderer and copied ARM sort remain difficult explicit
 candidates. Today's fixed 319,640 mapped-extent comparison baseline is not a
 claim of complete game coverage.
+
+## Primary-list, cache, background and cue providers
+
+A further six connected replacements add 248 matching C bytes, bringing this
+clock and retention path to thirteen functions and 892 bytes. Every new provider
+has a complete linked match and a separately compiled one-byte mutation rejection;
+all use ordinary C without register bindings. Existing callers and shared-header
+consumers receive fresh positive and actual changed-source-control proofs, with
+zero additional coverage credited to those existing functions.
+
+| Function | ROM offset | Bytes |
+| --- | --- | ---: |
+| `frame_retain_primary_objects` | `0x121C` | 64 |
+| `frame_restore_primary_objects` | `0x125C` | 60 |
+| `frame_enable_primary_object_flags` | `0x1298` | 32 |
+| `frame_disable_primary_object_flags` | `0x12B8` | 36 |
+| `background_animation_reset` | `0xA834` | 16 |
+| `scene_stop_actor_speed_cue` | `0x9DF0` | 40 |
+
+The retain helper traverses the primary list, releases each object's display
+allocation through the accepted deferred-release routine, and sets object flag
+`0x02000000`. It reloads each next pointer after those calls, matching the original
+sequence. It then copies the primary first/last pointers into a retained list at
+`0x03002CA0` and clears both primary pointers. The meaning of the flag beyond this
+paired retention/restore use is provisional.
+
+Restore moves those two links back, clears the retained list, clears the same
+flag across the restored primary list, and fills 572 bytes at the existing shared
+display-cache pointer with zero. That observed byte count does not establish a
+record-count bound or the complete cache layout. The separate flag helpers consume
+full unsigned masks and directly update each linked object's flags; they add no
+list, mask or allocation guards. The accepted scene initializer also uses restore
+and the enable helper, preserving its previous ABI and bytes under canonical names.
+
+The background reset calls the already matching stop routine and then the already
+matching 16-byte state clear. Its own body is fourteen instruction bytes followed
+by the original two zero alignment bytes; natural assembly under the pinned
+assembler preserves the complete sixteen-byte extent. The cue helper checks the
+existing scene-player mode byte at world `+0x42E`; mode one passes the existing
+speed-cue handle at `0x03002E94` to the accepted sample-stop routine. No sample
+activity or mode-domain claim is inferred from that static call.
+
+The new `scene_retention.h` is guarded and contains forward declarations, globals
+and prototypes. It imports no structure-bearing legacy headers. Existing scene
+and environment types keep their layouts; `scene.h` only replaces the two obsolete
+provider declarations with this guarded interface. The scene/environment callers
+use canonical names, and their metadata retains the original physical addresses.
+
+The first two private attempts used source mask `0x20000000` and differed by one
+byte each. The original `MOV 128` followed by a shift of eighteen establishes
+`0x02000000`; correcting that source constant closes both comparisons. The failed
+source, assembly and raw bytes are retained without output editing. Fresh controls
+change that mask, switch the flag update operation, alter the reset provider or
+change the cue's mode condition. The exact providers and all affected callers are
+recorded in the ignored `scene-retention-ready.json` and its current proof tree.

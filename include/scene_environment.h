@@ -3,6 +3,7 @@
 
 #include "frame_map_scene.h"
 #include "background_animation.h"
+#include "scene_retention.h"
 
 /* A bounded access view of the current clock and two event clocks. This does
  * not establish the complete world-record extent or all clock ownership. */
@@ -25,7 +26,6 @@ unsigned char scene_step_early_exit(void);
 void background_animation_force_reload(void), background_animation_stop_default(void);
 
 /* These providers remain original, with call-site-only provisional signatures. */
-void scene_stage_0800a834(void), scene_stage_08009df0(void), scene_stage_0800121c(void);
 void scene_stage_0802eb9c(void);
 void display_release_object_list(struct FrameObjectList *);
 extern struct FrameObjectList g_frame_primary_list;

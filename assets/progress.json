@@ -1,21 +1,21 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "13 Oct 2026, 18:42 BST",
-  "compiled_c_functions": 1147,
-  "compiled_c_bytes": 144548,
+  "verified_at": "13 Oct 2026, 19:08 BST",
+  "compiled_c_functions": 1161,
+  "compiled_c_bytes": 145648,
   "assembly_glue_bytes": 448,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16632220,
+  "unconverted_rom_bytes": 16631120,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2532,
-  "bounded_control_flow_bodies": 1331,
+  "bounded_control_flow_bodies": 1317,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 17,
   "unresolved_callback_call_sites": 101,
-  "mapped_extent_bytes": 323534,
+  "mapped_extent_bytes": 323546,
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointer and Thumb prologue sweeps; estimated extents",
   "rows": [
     {
@@ -257,32 +257,32 @@
       "status": "candidate"
     },
     {
-      "name": "sub_0800121C",
+      "name": "frame_retain_primary_objects",
       "group": "ROM 0800xxxx",
       "rom_offset": 4636,
       "size": 64,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0800125C",
+      "name": "frame_restore_primary_objects",
       "group": "ROM 0800xxxx",
       "rom_offset": 4700,
       "size": 60,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08001298",
+      "name": "frame_enable_primary_object_flags",
       "group": "ROM 0800xxxx",
       "rom_offset": 4760,
       "size": 32,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080012B8",
+      "name": "frame_disable_primary_object_flags",
       "group": "ROM 0800xxxx",
       "rom_offset": 4792,
       "size": 36,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_080012DC",
@@ -1419,11 +1419,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08009DF0",
+      "name": "scene_stop_actor_speed_cue",
       "group": "ROM 0800xxxx",
       "rom_offset": 40432,
       "size": 40,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08009E18",
@@ -1524,11 +1524,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0800A834",
+      "name": "background_animation_reset",
       "group": "ROM 0800xxxx",
       "rom_offset": 43060,
-      "size": 14,
-      "status": "mapped_code"
+      "size": 16,
+      "status": "exact_c"
     },
     {
       "name": "background_animation_force_reload",
@@ -6466,11 +6466,11 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0801EB84",
+      "name": "save_world_update_row_gauges",
       "group": "ROM 0801xxxx",
       "rom_offset": 125828,
       "size": 280,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_0801EC9C",
@@ -6522,25 +6522,25 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0801EEE8",
+      "name": "save_world_refresh_row_palette",
       "group": "ROM 0801xxxx",
       "rom_offset": 126696,
       "size": 88,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0801EF40",
+      "name": "save_world_scale_gauge",
       "group": "ROM 0801xxxx",
       "rom_offset": 126784,
-      "size": 54,
-      "status": "mapped_code"
+      "size": 56,
+      "status": "exact_c"
     },
     {
-      "name": "sub_0801EF78",
+      "name": "save_world_create_row_indicator",
       "group": "ROM 0801xxxx",
       "rom_offset": 126840,
       "size": 116,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "save_world_release_row_object",
@@ -8531,18 +8531,18 @@
       "status": "candidate"
     },
     {
-      "name": "sub_08027524",
+      "name": "save_world_scale_percent",
       "group": "ROM 0802xxxx",
       "rom_offset": 161060,
-      "size": 18,
-      "status": "mapped_code"
+      "size": 20,
+      "status": "exact_c"
     },
     {
-      "name": "sub_08027538",
+      "name": "save_world_ratio_percent",
       "group": "ROM 0802xxxx",
       "rom_offset": 161080,
-      "size": 14,
-      "status": "mapped_code"
+      "size": 16,
+      "status": "exact_c"
     },
     {
       "name": "resource_scale_value",
@@ -10183,11 +10183,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0802E4CC",
+      "name": "frame_need_effect_average",
       "group": "ROM 0802xxxx",
       "rom_offset": 189644,
-      "size": 158,
-      "status": "mapped_code"
+      "size": 160,
+      "status": "exact_c"
     },
     {
       "name": "frame_actor_owner_cell_count",
@@ -13620,11 +13620,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803C614",
+      "name": "frame_update_need7_from_effects",
       "group": "ROM 0803xxxx",
       "rom_offset": 247316,
-      "size": 114,
-      "status": "mapped_code"
+      "size": 116,
+      "status": "exact_c"
     },
     {
       "name": "sub_0803C688",
@@ -18076,28 +18076,28 @@
       "status": "candidate"
     },
     {
-      "name": "sub_0800121C",
+      "name": "frame_retain_primary_objects",
       "rom_offset": 4636,
       "size": 64,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0800125C",
+      "name": "frame_restore_primary_objects",
       "rom_offset": 4700,
       "size": 60,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08001298",
+      "name": "frame_enable_primary_object_flags",
       "rom_offset": 4760,
       "size": 32,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080012B8",
+      "name": "frame_disable_primary_object_flags",
       "rom_offset": 4792,
       "size": 36,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_080012DC",
@@ -19192,10 +19192,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08009DF0",
+      "name": "scene_stop_actor_speed_cue",
       "rom_offset": 40432,
       "size": 40,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08009E18",
@@ -19288,16 +19288,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0800A834",
+      "name": "background_animation_reset",
       "rom_offset": 43060,
-      "size": 14,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_00A842",
-      "rom_offset": 43074,
-      "size": 2,
-      "status": "unresolved"
+      "size": 16,
+      "status": "exact_c"
     },
     {
       "name": "background_animation_force_reload",
@@ -24328,10 +24322,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0801EB84",
+      "name": "save_world_update_row_gauges",
       "rom_offset": 125828,
       "size": 280,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_0801EC9C",
@@ -24376,28 +24370,22 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0801EEE8",
+      "name": "save_world_refresh_row_palette",
       "rom_offset": 126696,
       "size": 88,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0801EF40",
+      "name": "save_world_scale_gauge",
       "rom_offset": 126784,
-      "size": 54,
-      "status": "mapped_code"
+      "size": 56,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_01EF76",
-      "rom_offset": 126838,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_0801EF78",
+      "name": "save_world_create_row_indicator",
       "rom_offset": 126840,
       "size": 116,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "save_world_release_row_object",
@@ -26416,28 +26404,16 @@
       "status": "candidate"
     },
     {
-      "name": "sub_08027524",
+      "name": "save_world_scale_percent",
       "rom_offset": 161060,
-      "size": 18,
-      "status": "mapped_code"
+      "size": 20,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_027536",
-      "rom_offset": 161078,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_08027538",
+      "name": "save_world_ratio_percent",
       "rom_offset": 161080,
-      "size": 14,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_027546",
-      "rom_offset": 161094,
-      "size": 2,
-      "status": "unresolved"
+      "size": 16,
+      "status": "exact_c"
     },
     {
       "name": "resource_scale_value",
@@ -28030,16 +28006,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0802E4CC",
+      "name": "frame_need_effect_average",
       "rom_offset": 189644,
-      "size": 158,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_02E56A",
-      "rom_offset": 189802,
-      "size": 2,
-      "status": "unresolved"
+      "size": 160,
+      "status": "exact_c"
     },
     {
       "name": "frame_actor_owner_cell_count",
@@ -31354,16 +31324,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803C614",
+      "name": "frame_update_need7_from_effects",
       "rom_offset": 247316,
-      "size": 114,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_03C686",
-      "rom_offset": 247430,
-      "size": 2,
-      "status": "unresolved"
+      "size": 116,
+      "status": "exact_c"
     },
     {
       "name": "sub_0803C688",
@@ -35747,8 +35711,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "e00bb7907c26dffc12ee6e873231da7138434ed61455eb3e6e7e2efaa8c4cf0b",
-    "assets/rom-inventory.json": "0b20f0fba695067b757f0eca1267fe11a4cfed591d6a653eebef96a4ab688151",
+    "config/build-us-eu.json": "1aede8e90e0e56e0e72fe3fdc699fc66fa5fe58838e90183852f962a3af2ff87",
+    "assets/rom-inventory.json": "28dbf6ad09e0adbb532ce9fea1c111b1e6d98559820d8744201c78865829c89f",
     "tools/render_progress.py": "419354ceff7a7eb3a9e9f520cce14b39dbdc60ea247901091ba834d85e0d32e6",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "bc77da39abf1f092066c258dd6dadb1606a772d563deac4a37b86d0b0bffd10d",
