@@ -14397,6 +14397,531 @@
         "before": "line_height = height;",
         "after": "line_height = height + 1;"
       }
+    },
+    {
+      "name": "audio_player_load_row",
+      "rom_offset": 302504,
+      "size": 132,
+      "source": "src/audio/player_load_row.c",
+      "symbols": {
+        "g_audio_player": "0x02001644"
+      },
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "if (follow & 32)",
+        "after": "if (follow & 16)"
+      }
+    },
+    {
+      "name": "audio_player_stop",
+      "rom_offset": 310028,
+      "size": 76,
+      "source": "src/audio/player_stop.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "audio_sample_release": "0x03000320",
+        "audio_set_tick_callback": "0x08049ab5",
+        "_call_via_r1": "0x0804ccf5",
+        "_call_via_r2": "0x0804ccf9",
+        "_call_via_r3": "0x0804ccfd",
+        "_call_via_r0": "0x0804ccf1",
+        "_call_via_r4": "0x0804cd01",
+        "_call_via_r5": "0x0804cd05",
+        "_call_via_r6": "0x0804cd09",
+        "_call_via_r7": "0x0804cd0d"
+      },
+      "thumb_symbols": [
+        "audio_set_tick_callback",
+        "_call_via_r1",
+        "_call_via_r2",
+        "_call_via_r3",
+        "_call_via_r0",
+        "_call_via_r4",
+        "_call_via_r5",
+        "_call_via_r6",
+        "_call_via_r7"
+      ],
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "->envelope_enabled = 0;",
+        "after": "->envelope_enabled = 1;"
+      }
+    },
+    {
+      "name": "audio_player_advance_row",
+      "rom_offset": 302636,
+      "size": 312,
+      "source": "src/audio/player_advance_row.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "g_audio_player_backup": "0x02001df8",
+        "g_audio_player_volume_current": "0x02001640",
+        "g_audio_player_volume_target": "0x020025ac",
+        "g_audio_player_volume_step": "0x020025b0",
+        "g_audio_player_callback": "0x020025b4",
+        "audio_player_load_row": "0x08049da9",
+        "audio_player_stop": "0x0804bb0d",
+        "audio_player_finish_jingle": "0x0804aae5",
+        "audio_player_tick": "0x0804a759",
+        "audio_set_tick_callback": "0x08049ab5",
+        "audio_set_tick_bpm": "0x08049add",
+        "audio_set_global_volume": "0x08049aa1",
+        "audio_update_channel_volumes": "0x08049ba5",
+        "audio_sample_release": "0x03000320",
+        "display_text_copy_bytes": "0x0804e7d1",
+        "audio_mark_channels": "0x08049b25",
+        "audio_resume_channels": "0x08049b5d",
+        "audio_stop_marked_channels": "0x08049b81",
+        "audio_zero_bytes": "0x0804e7b5",
+        "audio_period_linear": "0x0804be1d",
+        "audio_frequency_linear": "0x0804be35",
+        "audio_period_amiga": "0x0804bdd1",
+        "audio_frequency_amiga": "0x0804bdf5",
+        "g_audio_sine": "0x08d6f7cc",
+        "_call_via_r0": "0x0804ccf1",
+        "_call_via_r1": "0x0804ccf5",
+        "_call_via_r2": "0x0804ccf9",
+        "_call_via_r3": "0x0804ccfd",
+        "_call_via_r4": "0x0804cd01",
+        "_call_via_r5": "0x0804cd05",
+        "_call_via_r6": "0x0804cd09",
+        "_call_via_r7": "0x0804cd0d"
+      },
+      "thumb_symbols": [
+        "audio_player_load_row",
+        "audio_player_stop",
+        "audio_player_finish_jingle",
+        "audio_player_tick",
+        "audio_set_tick_callback",
+        "audio_set_tick_bpm",
+        "audio_set_global_volume",
+        "audio_update_channel_volumes",
+        "display_text_copy_bytes",
+        "audio_mark_channels",
+        "audio_resume_channels",
+        "audio_stop_marked_channels",
+        "audio_zero_bytes",
+        "audio_period_linear",
+        "audio_frequency_linear",
+        "audio_period_amiga",
+        "audio_frequency_amiga",
+        "_call_via_r0",
+        "_call_via_r1",
+        "_call_via_r2",
+        "_call_via_r3",
+        "_call_via_r4",
+        "_call_via_r5",
+        "_call_via_r6",
+        "_call_via_r7"
+      ],
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "g_audio_player_callback(4, 0)",
+        "after": "g_audio_player_callback(3, 0)"
+      }
+    },
+    {
+      "name": "audio_player_finish_jingle",
+      "rom_offset": 305892,
+      "size": 224,
+      "source": "src/audio/player_finish_jingle.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "g_audio_player_backup": "0x02001df8",
+        "g_audio_player_volume_current": "0x02001640",
+        "g_audio_player_volume_target": "0x020025ac",
+        "g_audio_player_volume_step": "0x020025b0",
+        "g_audio_player_callback": "0x020025b4",
+        "audio_player_load_row": "0x08049da9",
+        "audio_player_stop": "0x0804bb0d",
+        "audio_player_tick": "0x0804a759",
+        "audio_set_tick_callback": "0x08049ab5",
+        "audio_set_tick_bpm": "0x08049add",
+        "audio_set_global_volume": "0x08049aa1",
+        "audio_update_channel_volumes": "0x08049ba5",
+        "audio_sample_release": "0x03000320",
+        "display_text_copy_bytes": "0x0804e7d1",
+        "audio_mark_channels": "0x08049b25",
+        "audio_resume_channels": "0x08049b5d",
+        "audio_stop_marked_channels": "0x08049b81",
+        "audio_zero_bytes": "0x0804e7b5",
+        "audio_period_linear": "0x0804be1d",
+        "audio_frequency_linear": "0x0804be35",
+        "audio_period_amiga": "0x0804bdd1",
+        "audio_frequency_amiga": "0x0804bdf5",
+        "g_audio_sine": "0x08d6f7cc",
+        "_call_via_r0": "0x0804ccf1",
+        "_call_via_r1": "0x0804ccf5",
+        "_call_via_r2": "0x0804ccf9",
+        "_call_via_r3": "0x0804ccfd",
+        "_call_via_r4": "0x0804cd01",
+        "_call_via_r5": "0x0804cd05",
+        "_call_via_r6": "0x0804cd09",
+        "_call_via_r7": "0x0804cd0d"
+      },
+      "thumb_symbols": [
+        "audio_player_load_row",
+        "audio_player_stop",
+        "audio_player_tick",
+        "audio_set_tick_callback",
+        "audio_set_tick_bpm",
+        "audio_set_global_volume",
+        "audio_update_channel_volumes",
+        "display_text_copy_bytes",
+        "audio_mark_channels",
+        "audio_resume_channels",
+        "audio_stop_marked_channels",
+        "audio_zero_bytes",
+        "audio_period_linear",
+        "audio_frequency_linear",
+        "audio_period_amiga",
+        "audio_frequency_amiga",
+        "_call_via_r0",
+        "_call_via_r1",
+        "_call_via_r2",
+        "_call_via_r3",
+        "_call_via_r4",
+        "_call_via_r5",
+        "_call_via_r6",
+        "_call_via_r7"
+      ],
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "audio_resume_channels(4)",
+        "after": "audio_resume_channels(3)"
+      }
+    },
+    {
+      "name": "audio_player_start",
+      "rom_offset": 305160,
+      "size": 732,
+      "source": "src/audio/player_start.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "g_audio_player_backup": "0x02001df8",
+        "g_audio_player_volume_current": "0x02001640",
+        "g_audio_player_volume_target": "0x020025ac",
+        "g_audio_player_volume_step": "0x020025b0",
+        "g_audio_player_callback": "0x020025b4",
+        "audio_player_load_row": "0x08049da9",
+        "audio_player_stop": "0x0804bb0d",
+        "audio_player_finish_jingle": "0x0804aae5",
+        "audio_player_tick": "0x0804a759",
+        "audio_set_tick_callback": "0x08049ab5",
+        "audio_set_tick_bpm": "0x08049add",
+        "audio_set_global_volume": "0x08049aa1",
+        "audio_update_channel_volumes": "0x08049ba5",
+        "audio_sample_release": "0x03000320",
+        "display_text_copy_bytes": "0x0804e7d1",
+        "audio_mark_channels": "0x08049b25",
+        "audio_resume_channels": "0x08049b5d",
+        "audio_stop_marked_channels": "0x08049b81",
+        "audio_zero_bytes": "0x0804e7b5",
+        "audio_period_linear": "0x0804be1d",
+        "audio_frequency_linear": "0x0804be35",
+        "audio_period_amiga": "0x0804bdd1",
+        "audio_frequency_amiga": "0x0804bdf5",
+        "g_audio_sine": "0x08d6f7cc",
+        "_call_via_r0": "0x0804ccf1",
+        "_call_via_r1": "0x0804ccf5",
+        "_call_via_r2": "0x0804ccf9",
+        "_call_via_r3": "0x0804ccfd",
+        "_call_via_r4": "0x0804cd01",
+        "_call_via_r5": "0x0804cd05",
+        "_call_via_r6": "0x0804cd09",
+        "_call_via_r7": "0x0804cd0d"
+      },
+      "thumb_symbols": [
+        "audio_player_load_row",
+        "audio_player_stop",
+        "audio_player_finish_jingle",
+        "audio_player_tick",
+        "audio_set_tick_callback",
+        "audio_set_tick_bpm",
+        "audio_set_global_volume",
+        "audio_update_channel_volumes",
+        "display_text_copy_bytes",
+        "audio_mark_channels",
+        "audio_resume_channels",
+        "audio_stop_marked_channels",
+        "audio_zero_bytes",
+        "audio_period_linear",
+        "audio_frequency_linear",
+        "audio_period_amiga",
+        "audio_frequency_amiga",
+        "_call_via_r0",
+        "_call_via_r1",
+        "_call_via_r2",
+        "_call_via_r3",
+        "_call_via_r4",
+        "_call_via_r5",
+        "_call_via_r6",
+        "_call_via_r7"
+      ],
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "if (song >= 64)",
+        "after": "if (song >= 63)"
+      }
+    },
+    {
+      "name": "frame_route_attachment_to_target",
+      "rom_offset": 244416,
+      "size": 104,
+      "source": "src/frame/frame_route_attachment_to_target.c",
+      "symbols": {
+        "frame_point_to_integer": "0x080273dd",
+        "frame_grid_point_to_cell": "0x08048af9",
+        "frame_find_target_cell": "0x0803b75d",
+        "frame_grid_cell_to_point": "0x08048d11",
+        "frame_point_to_fixed": "0x080273ed",
+        "frame_begin_actor_route": "0x080370d1",
+        "frame_request_animation": "0x08001b5d"
+      },
+      "thumb_symbols": [
+        "frame_point_to_integer",
+        "frame_grid_point_to_cell",
+        "frame_find_target_cell",
+        "frame_grid_cell_to_point",
+        "frame_point_to_fixed",
+        "frame_begin_actor_route",
+        "frame_request_animation"
+      ],
+      "negative_control": {
+        "before": "&cell, 1)",
+        "after": "&cell, 0)"
+      }
+    },
+    {
+      "name": "frame_interaction_step_16c68",
+      "rom_offset": 93288,
+      "size": 280,
+      "source": "src/frame/frame_interaction_step_16c68.c",
+      "symbols": {
+        "frame_request_animation": "0x08001b5d",
+        "frame_commit_need_effect": "0x0802d9ad",
+        "frame_need_effect_handoff_bounds": "0x08007e69",
+        "frame_clear_animation_pending": "0x08001bd5",
+        "frame_adjust_actor_needs": "0x0802b825",
+        "frame_step_attachment_need_timer": "0x0802eddd",
+        "frame_find_attachment_neighbor": "0x0803b641",
+        "frame_grid_cell_to_point": "0x08048d11",
+        "resource_object_before_step": "0x08001ae1",
+        "g_frame_need_effect_definitions": "0x08062e7c",
+        "g_frame_registration": "0x03004330"
+      },
+      "thumb_symbols": [
+        "frame_request_animation",
+        "frame_commit_need_effect",
+        "frame_need_effect_handoff_bounds",
+        "frame_clear_animation_pending",
+        "frame_adjust_actor_needs",
+        "frame_step_attachment_need_timer",
+        "frame_find_attachment_neighbor",
+        "frame_grid_cell_to_point",
+        "resource_object_before_step"
+      ],
+      "negative_control": {
+        "before": "job->timer = 43",
+        "after": "job->timer = 44"
+      }
+    },
+    {
+      "name": "display_menu_draw_lines",
+      "rom_offset": 257976,
+      "size": 352,
+      "source": "src/display/menu_draw_lines.c",
+      "symbols": {
+        "g_display_scene_request_state": "0x03004350",
+        "g_display_catalog_state": "0x03003950",
+        "display_text_set_line_height": "0x0801aebd",
+        "display_text_select_font": "0x0801ae75",
+        "display_scene_lookup_text": "0x08045009",
+        "g_display_menu_state": "0x03002198",
+        "g_frame_actor_greetings": "0x080612a4",
+        "g_display_menu_text_records": "0x08d715c8",
+        "display_text_draw": "0x0801a7c9"
+      },
+      "thumb_symbols": [
+        "display_text_set_line_height",
+        "display_text_select_font",
+        "display_scene_lookup_text",
+        "display_text_draw"
+      ],
+      "negative_control": {
+        "before": "if(code!=29)",
+        "after": "if(code!=30)"
+      }
+    },
+    {
+      "name": "display_disable_window",
+      "rom_offset": 297044,
+      "size": 24,
+      "source": "src/display/disable_window.c",
+      "symbols": {
+        "g_display_window_enable_masks": "0x080841f0",
+        "display_disable_layers": "0x0800d671"
+      },
+      "thumb_symbols": [
+        "display_disable_layers"
+      ],
+      "negative_control": {
+        "before": "enable_masks[index]",
+        "after": "enable_masks[index + 1]"
+      }
+    },
+    {
+      "name": "display_configure_window",
+      "rom_offset": 297092,
+      "size": 112,
+      "source": "src/display/configure_window.c",
+      "symbols": {
+        "g_display_window_enable_masks": "0x080841f0",
+        "display_enable_layers": "0x0800d68d"
+      },
+      "thumb_symbols": [
+        "display_enable_layers"
+      ],
+      "negative_control": {
+        "before": "&0xff00",
+        "after": "&0xfe00"
+      }
+    },
+    {
+      "name": "display_set_window_rectangle",
+      "rom_offset": 297204,
+      "size": 80,
+      "source": "src/display/set_window_rectangle.c",
+      "symbols": {
+        "g_window_states": "0x03007460"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "window->bottom.position=bottom;",
+        "after": "window->bottom.position=bottom + 1;"
+      }
+    },
+    {
+      "name": "display_menu_initialize",
+      "rom_offset": 255256,
+      "size": 744,
+      "source": "src/display/menu_initialize.c",
+      "symbols": {
+        "g_display_scene_request_state": "0x03004350",
+        "g_display_catalog_state": "0x03003950",
+        "display_text_set_line_height": "0x0801aebd",
+        "display_text_select_font": "0x0801ae75",
+        "display_scene_lookup_text": "0x08045009",
+        "display_text_draw_line": "0x0801a959",
+        "g_display_menu_state": "0x03002198",
+        "g_frame_actor_greetings": "0x080612a4",
+        "g_display_menu_control0": "0x0807f688",
+        "g_display_menu_control1": "0x0807f68c",
+        "g_display_menu_control2": "0x0807f690",
+        "g_display_menu_control3": "0x0807f694",
+        "g_display_menu_palette_data": "0x08ede3ba",
+        "g_display_menu_palette_resource": "0x08ede3b8",
+        "g_display_menu_panel_resource": "0x08fb82b4",
+        "g_display_menu_palette_ranges": "0x08052e30",
+        "display_menu_clear_effects": "0x0803105d",
+        "display_set_mode": "0x0800d601",
+        "display_enable_layers": "0x0800d68d",
+        "display_show_background": "0x0800d579",
+        "display_fill_background": "0x0800d6b9",
+        "display_text_set_background_control": "0x0801ae2d",
+        "audio_play_animation_cue": "0x08040ffd",
+        "display_menu_prepare_relation": "0x08035f79",
+        "display_menu_read_relation": "0x08035fcd",
+        "display_load_palette_alternate": "0x08011709",
+        "display_load_background": "0x0800da21",
+        "display_load_resource_palette": "0x0800da95",
+        "display_load_palette_ranges": "0x08011635",
+        "display_menu_load_relation_resource": "0x080407ed",
+        "display_set_background_velocity": "0x0800dfcd",
+        "display_menu_fill_panel": "0x0803aff1",
+        "display_menu_prepare_footer": "0x080401b9",
+        "display_configure_window": "0x08048885",
+        "display_set_window_rectangle": "0x080488f5",
+        "display_disable_window": "0x08048855",
+        "display_menu_prepare_primary": "0x0803eefd",
+        "display_menu_prepare_secondary": "0x0803f909",
+        "display_menu_prepare_tertiary": "0x0803ff61",
+        "transition_run_first": "0x080393fd"
+      },
+      "thumb_symbols": [
+        "display_text_set_line_height",
+        "display_text_select_font",
+        "display_scene_lookup_text",
+        "display_text_draw_line",
+        "display_menu_clear_effects",
+        "display_set_mode",
+        "display_enable_layers",
+        "display_show_background",
+        "display_fill_background",
+        "display_text_set_background_control",
+        "audio_play_animation_cue",
+        "display_menu_prepare_relation",
+        "display_menu_read_relation",
+        "display_load_palette_alternate",
+        "display_load_background",
+        "display_load_resource_palette",
+        "display_load_palette_ranges",
+        "display_menu_load_relation_resource",
+        "display_set_background_velocity",
+        "display_menu_fill_panel",
+        "display_menu_prepare_footer",
+        "display_configure_window",
+        "display_set_window_rectangle",
+        "display_disable_window",
+        "display_menu_prepare_primary",
+        "display_menu_prepare_secondary",
+        "display_menu_prepare_tertiary",
+        "transition_run_first"
+      ],
+      "negative_control": {
+        "before": "g_display_menu_state.codes[i]=29",
+        "after": "g_display_menu_state.codes[i]=28"
+      }
     }
   ],
   "assembly": [

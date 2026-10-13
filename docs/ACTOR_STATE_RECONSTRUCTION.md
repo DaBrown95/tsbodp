@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 134 C functions spanning 22,908 verified bytes. The
+This batch reconstructs 136 C functions spanning 23,292 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,8 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x16C68` | `frame_interaction_step_16c68` | 280 |
+| `0x3BAC0` | `frame_route_attachment_to_target` | 104 |
 | `0x3BCF4` | `frame_grid_search` | 720 |
 | `0x3BFC4` | `frame_search_initialize_buffers` | 100 |
 | `0x3C028` | `frame_search_reset` | 100 |
@@ -1005,3 +1007,13 @@ ordinary C and a per-function compiler option, with only explicit alignment
 glue. Its offset-step control and the existing route caller control reject.
 Buffer lifetime/release dependencies and output-capacity guarantees remain
 unresolved; runtime behaviour is not claimed.
+
+
+The two target-route/attachment consumers add 384 verified bytes. The 104-byte
+requester passes restricted-axis flag one to the still unconverted target
+selector; the 280-byte interaction step restores position and the resource
+callback through the still unconverted neighbor producer. Their complete C
+extents match and actual flag/phase controls reject. The detailed phase,
+packed-coordinate, ignored-result and reachability evidence is recorded in
+`ACTOR_ROUTE_SEARCH.md`; the larger 284-byte and 356-byte candidates remain
+unconverted and receive no source credit.

@@ -1,8 +1,9 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 15 C functions and 1,904 bytes:
+The connected route-search path reconstructs 17 C functions and 2,288 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
-and reset functions, and the 76-byte reverse path extractor. Every complete
+and reset functions, the 76-byte reverse path extractor, and two connected
+target-route and interaction consumers. Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
 Neither these matches nor the full-ROM equality gate establish runtime behaviour.
@@ -13,6 +14,8 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x3BFC4` | `frame_search_initialize_buffers` | 100 |
 | `0x3C028` | `frame_search_reset` | 100 |
 | `0x3C08C` | `frame_copy_grid_path` | 76 |
+| `0x3BAC0` | `frame_route_attachment_to_target` | 104 |
+| `0x16C68` | `frame_interaction_step_16c68` | 280 |
 | `0x24D18` | `frame_pool_initialize` | 56 |
 | `0x24E04` | `frame_pool_count` | 20 |
 | `0x3C0EC` | `frame_search_release_node` | 52 |
@@ -234,3 +237,46 @@ and is rejected. The existing 292-byte route caller remains exact and its
 positive and negative bytes, source and header snapshots, commands and pinned
 toolchain checks remain in `path-reverse-canonical/`; the ready manifest is
 `actor-reverse-path-batch-manifest.json`. No execution or gameplay test is claimed.
+
+
+## Target-route and interaction consumers
+
+The 104-byte function at `0x3BAC0` converts its attachment record's actor
+position to integer coordinates and then a packed cell. It invokes the still
+unconverted 356-byte target selector at `0x3B75C` with the record's actor,
+owner's object, the packed cell and restricted-axis flag one. A nonzero byte
+result converts that cell back to a fixed-point position, requests mode-four
+routing with the record's status word, and requests animation six. The initial
+projection result, cell-to-point result and route-start result are ignored in
+the original. Failure of the target selector skips both route and animation
+requests. The remaining validity and initialization preconditions are unknown.
+
+The 280-byte function at `0x16C68` uses the same 24-byte attachment record,
+reinterpreting its word at `+8` as a phase. A running byte equal to one forces
+phase one. Phase zero copies the owner's direction to the actor, requests
+animation 50, stores a 90-frame timer at actor `+0x58`, commits owner mode one,
+and hands off spatial bounds according to direction three/five. Phase 41
+waits for actor flag `0x400000`, clears pending animation and moves to phase 43.
+Phase 43 adjusts need kind 22 using definition byte `+0x23` and tests the
+matching need/timer helper with kind four. A zero narrowed result selects phase
+one. Phase one, reached either directly or by the post-switch check, invokes
+the still unconverted 284-byte neighbor producer at `0x3B640`, projects its
+cell, restores actor fixed-point position, requests animation one, commits
+owner mode zero and restores the matching resource projection callback at
+actor `+0x98`. The neighbor call's third full-word argument is the actor address;
+the inspected callee does not consume it. Both neighbor and projection results
+are ignored, so no new failure behavior is invented. Return values are one
+while continuing and two on this completion path. Unknown phases retain their
+phase and return one.
+
+The address-derived interaction name deliberately leaves its specific
+effect-definition role unresolved. No pointer-table entry for this function
+was identified by the bounded aligned/un-aligned word scan; its game reachability
+is not claimed. Both sources use ordinary C, without register constraints or
+assembly. They retain explicit calls into the two unmatched producer/selector
+regions. A restricted-axis one-to-zero mutation changes 33 compared bytes;
+phase 43-to-44 changes one. Both controls reject. Complete positive/control
+bytes, source/header snapshots and toolchain checks are retained in
+`actor-target-consumers-canonical/`; ready metadata is
+`actor-target-consumers-batch-manifest.json`. These matches do not claim
+runtime or gameplay validation.

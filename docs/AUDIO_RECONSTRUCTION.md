@@ -513,3 +513,70 @@ and shared-header caller proofs remain under `reports/audio-root/`.
 The five published player controls remain exact after the field refinements.
 Player start/stop, row decoding and individual effect callbacks remain excluded
 where unmatched. No audible or gameplay validation is claimed.
+
+
+## Sequence startup, row positioning and jingle restoration
+
+Five further complete extents add **1,476 verified C bytes**:
+
+| Inferred source role | ROM offset | Complete extent |
+| --- | --- | ---: |
+| Load pattern row | `0x49DA8` | 132 |
+| Advance order/row | `0x49E2C` | 312 |
+| Start sequence | `0x4A808` | 732 |
+| Restore interrupted sequence after jingle | `0x4AAE4` | 224 |
+| Stop sequence | `0x4BB0C` | 76 |
+
+These are ordinary C adaptations of Krawall `lib/player.c` and its partial
+`lib/mtypes.h` layouts at revision
+`8d338581bf0ed0afad15b66bf5979ad4c4d15ed0`. The source notices and
+[LGPL licence](../licenses/Krawall-LGPL-2.1.txt) are retained. All five use the
+existing GCC 3.0.2 profile at Thumb `-O3` and the pinned historical assembler;
+none uses register constraints or instruction assembly. Complete literal pools
+and zero alignment are compared. The ordinary LP64 compiler already matches
+these functions; the separate host-wide-integer profile is unnecessary here.
+
+The [partial player view](../include/audio_player.h) still has a 52-byte prefix
+and 96-byte tracks. The calls/accesses expose tempo `+0C`, row/order `+10/+11`,
+stream `+14`, signed pending order/row `+18/+19`, loop bytes `+1A..+1C`, volume
+slide `+1E`, vibrato offset `+1F`, fast-slide flag `+21`, period callback `+24`,
+restart order `+2C` and current pattern `+30`. Unknown bytes stay named as such.
+Names for vibrato/tremolo/panbrello fields follow upstream roles and the game’s
+matching initialization/accesses; the original source names are unproven.
+Eight existing player consumers and their real changed-source controls were
+recompiled after this same-layout refinement.
+
+The [module/pattern view](../include/audio_sequence_player.h) has a byte row
+count at pattern `+20`, hence data begins at `+21`. Sixteen halfword indices select
+a four-row block; zero stream codes finish rows, and flag bits 5/6/7 skip 2/1/2
+payload bytes. Module accesses support 256 order bytes from `+03`, 32 signed pan
+bytes from `+103`, 64 song-start bytes from `+123`, global volume/speed/tempo at
+`+163..+165`, flags at `+166..+168`, and pattern pointers from `+16C`. Pattern
+counts, stream validity and module channel counts remain input preconditions;
+no missing bounds checks or recovery behavior was invented.
+
+The game fork handles a pending order immediately: it clamps it against the
+module order count, resets row zero and reloads the stream. Pending rows clamp
+against the byte row count. This differs from current upstream’s deferred
+order-minus-one/large-row scheme. Marker, completion, loop and restored-jingle
+notifications use observed codes 4, 2, 6 and 5 with a zero second argument; the
+completion notification precedes the stop call. A zero player state returns from
+stop; active tracks clear their envelope byte and call the already accepted ARM
+release routine through its copied-RAM address. A `long_call` declaration supplies
+that transfer, while C coverage remains ordinary source.
+
+Startup distinguishes an existing jingle, a backed-up song and a normal sequence.
+The game conditionally stops pause slots 2 and 4 when leaving a jingle, marks slot
+4 when saving the previous song, and copies **1,972 bytes** to/from the backup at
+`0x02001DF8`. It clears **1,920 track bytes** and initializes the observed per-track
+state. These byte operations support a twenty-track storage region for this path;
+the public track tail remains flexible and does not impose a new validated bound
+on arbitrary serialized channel counts. Only a song index at least 64 is clamped;
+negative signed indices are not given additional behavior. Volume refresh preserves
+the argument load before the fade step is cleared and both volume words are
+stored, as in the matched inlined upstream API call.
+
+The row-processing entry `0x49F64`, individual effects, tempo conversion, period
+calculators and zero-byte helper remain explicit unconverted dependencies. Static
+and compiler evidence establish these paths and transfers; no audible playback,
+BIOS execution, complete audio subsystem or gameplay validation is claimed.

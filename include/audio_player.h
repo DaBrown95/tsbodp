@@ -9,17 +9,22 @@
 #define AUDIO_PLAYER_H
 #include "audio_frame.h"
 
-/* Partial 96-byte track view: handle and envelope flag are observed fields. */
+/* Partial 96-byte track view; sequencer and envelope names are inferred. */
 struct AudioPlayerTrack {
     unsigned int handle;
     signed char volume, cvolume, panning;
     unsigned char unknown07, effect, unknown09[5];
     unsigned short periodc;
-    unsigned char unknown10[4];
+    const void *sample;
     const struct AudioInstrument *instrument;
-    unsigned char unknown18[12];
+    unsigned char unknown18[8];
+    unsigned char vibrpos, vibrspeed, vibrdepth, vibrretrig;
     const short *vibrtable;
-    unsigned char unknown28[35];
+    unsigned char unknown28[3], tremretrig;
+    const short *tremtable;
+    unsigned char unknown30[3], panbretrig;
+    const short *panbtable;
+    unsigned char unknown38[19];
     unsigned char envelope_enabled, i_vol_status;
     signed char i_vol;
     unsigned short i_vol_pos;
@@ -36,16 +41,19 @@ struct AudioPlayerState {
     unsigned int flags;
     int state;
     const unsigned char *song;
-    unsigned char unknown0c[2];
+    unsigned short tempo;
     unsigned char speed, tick;
-    unsigned char unknown10[13];
+    unsigned char row, order, unknown12[2];
+    const unsigned char *stream;
+    signed char pending_order, pending_row, loop_order, loop_count, loop_active;
     signed char volume;
-    unsigned char unknown1e[2];
+    unsigned char volume_slide, vibrato_offset;
     unsigned char instrument_based;
-    unsigned char unknown21[3];
-    unsigned int unknown24;
+    unsigned char fast_volume_slides, unknown22[2];
+    unsigned short (*calc_period)(unsigned int, const void *);
     unsigned int (*calc_final_frequency)(unsigned int);
-    unsigned char unknown2c[8];
+    int restart_order;
+    const struct AudioPattern *pattern;
     struct AudioPlayerTrack tracks[];
 };
 struct AudioVolumeEffect {

@@ -1,9 +1,13 @@
 #ifndef FRAME_ACTOR_RELATION_H
 #define FRAME_ACTOR_RELATION_H
 
-/* Partial ROM descriptor: 44-byte stride, cue record +20, variant +25. */
+/* Partial ROM descriptor: 44-byte stride, text IDs +00, background +0C, cue +20, variant +25. */
+struct BackgroundResource;
 struct FrameActorGreetingDescriptor {
- unsigned char unknown_00[32];
+ const unsigned short *text_ids;
+ unsigned char unknown_04[8];
+ const struct BackgroundResource *background_resource;
+ unsigned char unknown_10[16];
  const unsigned int *cue_record;
  unsigned char unknown_24, cue_variant, unknown_26[6];
 };
