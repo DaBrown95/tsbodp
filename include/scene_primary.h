@@ -50,12 +50,13 @@ void display_reset_tile_allocation(void), frame_clear_transient_effects(void);
 void frame_clear_render_effects(void), frame_release_scene_transient_tiles(void);
 void frame_configure_deferred_display(unsigned char), display_reset(void);
 void set_vblank_callback(IrqCallback), irq_default_vblank_callback(void);
-/* Explicit original providers; signatures are bounded by these calls. */
-void scene_stage_0803c598(void), scene_stage_080266b0(void), scene_stage_08026854(void);
-unsigned char scene_stage_080269f0(void);
+/* Connected providers; signatures are bounded by these calls. */
+void scene_refresh_environment(void), scene_refresh_period_audio(void);
+void scene_stage_0803c598(void);
+unsigned char scene_step_early_exit(void);
 void scene_stage_0800e3a8(unsigned char), scene_update_view(unsigned int);
 void scene_stage_080202e0(unsigned char *, unsigned int);
-void scene_stage_08026928(void), scene_stage_0802697c(void), scene_stage_0801eea8(void);
+void scene_retain_display(void), scene_release_display(void), save_world_clear_row_objects(void);
 void scene_stage_08041374(void), scene_stage_0802eb9c(void);
-void scene_stage_0803b8c0(void *), scene_stage_080117bc(void);
+void scene_stage_080117bc(void);
 #endif

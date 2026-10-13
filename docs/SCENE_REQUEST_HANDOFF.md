@@ -44,7 +44,7 @@ both other views, calls the explicit original provider `0x08026908`, then
 queues kind 12 or 3 according to save-header byte 11. That byte's broader
 meaning remains provisional.
 
-The handoff calls the original `0x0803D6C0` provider and increments the existing
+The handoff calls the accepted 200-byte `transition_link_update` provider at `0x0803D6C0` and increments the existing
 frame allocation epoch. It compares the two complete first words, including
 the queued `0x80` bit, so a request can force a handoff even when its underlying
 kind is unchanged. During a change it sets game flag `0x10`, runs the old phase's
@@ -102,4 +102,4 @@ self-symbol metadata probe produced no accepted coverage. Names and callback
 types follow static accesses and compiler matches; no runtime claim is made.
 
 The next connected targets are the original scene callback families, the
-window/palette update producers and the `0x0803D6C0` coordination provider.
+window/palette update producers and the unconverted `0x0803D850` transfer-completion provider.

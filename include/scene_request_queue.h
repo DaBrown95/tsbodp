@@ -22,6 +22,7 @@ void input_poll(void), display_step_backgrounds(void);
 unsigned char frame_request_refresh(void);
 void frame_prepare_oam_transfer(void);
 /* Original providers remain explicit. */
-void scene_stage_08026908(void), scene_stage_0803d6c0(void);
+int transition_link_update(void);
+void scene_allocate_retained_palette(void);
 void scene_update_windows_080489c4(void), transition_palette_update_080117d4(void);
 #endif

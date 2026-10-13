@@ -1,7 +1,7 @@
 #include "scene_request_queue.h"
 void scene_step_request_handoff(void)
 {
- scene_stage_0803d6c0();
+ transition_link_update();
  ++g_frame_allocation_epoch;
  if(scene_request_changed()) {
   g_game_flags|=0x10;

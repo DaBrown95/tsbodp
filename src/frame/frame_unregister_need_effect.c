@@ -22,17 +22,17 @@ void frame_unregister_need_effect(void *context,struct FrameObject *base)
    switch(action) {
    case 0:break;
    case 1:case 5:
-    frame_unregister_bounds(context,&cell,1);break;
+    frame_grid_remove_occupancy(context,&cell,1);break;
    case 2: {
     struct FrameNeedEffectState *neighbor=frame_need_effect_find_neighbor(&cell,3);
     if((unsigned char)(neighbor!=0)==1) {
      frame_need_effect_decrement_counter(neighbor,object->effect_state);
-     frame_register_bounds(context,&cell,4);
-    }else frame_unregister_bounds(context,&cell,61);
+     frame_grid_add_occupancy(context,&cell,4);
+    }else frame_grid_remove_occupancy(context,&cell,61);
     break;
    }
    case 3:
-    frame_unregister_bounds(context,&cell,13);break;
+    frame_grid_remove_occupancy(context,&cell,13);break;
    case 4: {
     unsigned char shared=0;
     /* Current state is last read before each call; cached next survives it. */
@@ -42,7 +42,7 @@ void frame_unregister_need_effect(void *context,struct FrameObject *base)
      if(((struct DisplayNeedEffectStateView *)state)->object!=(struct FrameObject *)object && frame_need_effect_contains_candidate(state,&cell)==1)shared=1;
      state=next;
     }
-    if(!shared)frame_unregister_bounds(context,&cell,2);
+    if(!shared)frame_grid_remove_occupancy(context,&cell,2);
     break;
    }
    }

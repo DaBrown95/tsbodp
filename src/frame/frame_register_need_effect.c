@@ -42,7 +42,7 @@ unsigned char frame_register_need_effect(void *context,struct FrameObject *base,
    case 0:break;
    case 1:
     available=frame_grid_need_effect_cell_available(context,cell_pointer,1,linked);
-    if(commit==1&&available==1)frame_register_bounds(context,cell_pointer,1);
+    if(commit==1&&available==1)frame_grid_add_occupancy(context,cell_pointer,1);
     break;
    case 2:
     available=frame_grid_need_effect_cell_available(context,cell_pointer,2,linked);
@@ -56,8 +56,8 @@ unsigned char frame_register_need_effect(void *context,struct FrameObject *base,
        ((struct FrameNeedEffectSpatialWork *)((struct FrameNeedEffectObject *)neighbor_object)->effect_state)->far_bounds;
       frame_need_effect_handoff_bounds(((struct DisplayNeedEffectStateView *)state)->object,neighbor,1);
      }
-     frame_register_bounds(context,cell_pointer,8);
-     frame_unregister_bounds(context,cell_pointer,4);
+     frame_grid_add_occupancy(context,cell_pointer,8);
+     frame_grid_remove_occupancy(context,cell_pointer,4);
     }
     break;
    case 3:
@@ -71,13 +71,13 @@ unsigned char frame_register_need_effect(void *context,struct FrameObject *base,
       ((struct FrameNeedObjectBounds *)neighbor_object)->bounds=
        ((struct FrameNeedEffectSpatialWork *)((struct FrameNeedEffectObject *)neighbor_object)->effect_state)->far_bounds;
       frame_need_effect_handoff_bounds(((struct DisplayNeedEffectStateView *)neighbor)->object,neighbor,1);
-     } else frame_register_bounds(context,cell_pointer,4);
+     } else frame_grid_add_occupancy(context,cell_pointer,4);
     }
     break;
    case 4:
     available=frame_grid_need_effect_cell_available(context,cell_pointer,4,linked);
     if(commit==1&&available==1) {
-     frame_register_bounds(context,cell_pointer,2);
+     frame_grid_add_occupancy(context,cell_pointer,2);
      ((struct FrameNeedEffectSpatialWork *)state)->candidates[candidate_count].x=((unsigned char *)cell_pointer)[0];
      ((struct FrameNeedEffectSpatialWork *)state)->candidates[candidate_count].y=((unsigned char *)cell_pointer)[1];
      candidate_count++;
@@ -85,7 +85,7 @@ unsigned char frame_register_need_effect(void *context,struct FrameObject *base,
     break;
    case 5:
     available=frame_grid_need_effect_cell_available(context,cell_pointer,5,linked);
-    if(commit==1&&available==1)frame_register_bounds(context,cell_pointer,1);
+    if(commit==1&&available==1)frame_grid_add_occupancy(context,cell_pointer,1);
     break;
    }
    if(!available)return 0;

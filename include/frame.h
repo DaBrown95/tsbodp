@@ -1,4 +1,5 @@
 #include "irq.h"
+#include "frame_grid_cells.h"
 
 /* Reconstructed layouts. Names are provisional and fields follow ROM accesses. */
 typedef unsigned char FrameU8;
@@ -93,7 +94,6 @@ int frame_finish_layer(FrameU8);
 void frame_commit_affine(void);
 
 extern void *g_frame_registration;
-void frame_unregister_bounds(void *, void *, int);
 void frame_remove_object(struct FrameObject *);
 int frame_check_visibility(struct FrameObject *);
 void frame_tick_animation(struct FrameObject *);
@@ -115,4 +115,3 @@ int frame_sine(int);
 int frame_cosine(int);
 
 void frame_locate_bounds(void *, struct FramePoint *, void *);
-void frame_register_bounds(void *, void *, int);

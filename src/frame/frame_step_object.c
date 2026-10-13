@@ -4,7 +4,7 @@ void frame_step_object(struct FrameObject *object, FrameU8 update_display)
     FrameU32 flags;
     if (object->flags & 2) {
         if (object->flags & 0x10000000)
-            frame_unregister_bounds(g_frame_registration, object->registered_bounds, 16);
+            frame_grid_remove_occupancy(g_frame_registration, object->registered_bounds, 16);
         frame_remove_object(object);
         return;
     }

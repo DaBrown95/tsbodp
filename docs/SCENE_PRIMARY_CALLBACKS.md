@@ -11,7 +11,9 @@ columns of scene-phase row 1; its begin callback is the already accepted
 The step captures the selected actor through four 12-byte view slots. It checks
 the selected 56-byte status row's word at `+4`, calls the original `0x0803C598`
 provider when mask `0x1C0000` is clear, and returns after clearing game flag
-`0x20` when the original `0x080269F0` query returns byte value one.
+`0x20` when the accepted four-byte `scene_step_early_exit` query returns byte value one.
+The query currently returns zero; its call and conditional remain in the matching
+caller.
 
 It then updates each view's map and the original view provider, advances
 transient effects and character animation, and tests the captured actor's
@@ -19,7 +21,7 @@ state/variant. States 16 and 27 can process input unless variant five, view
 effect mode one or game mask `0x810` prevents it. Pressed bit eight queues the
 byte at world `+0x73F`; otherwise bit four in either first input slot queues
 kind 11. Both paths call the accepted cue API with four. The final per-view
-loop runs two original providers for the selected changed view, and updates
+loop runs the accepted environment and period/audio providers for the selected changed view, and updates
 each view only while the queue's change predicate remains zero.
 
 The count is reloaded after calls. Its byte-width loop preserves wrap and
@@ -45,9 +47,10 @@ that ordinary condition with the alternate branch first preserves the original
 branch and pool placement. The five calls remain individual; the getter is not
 declared pure and no cached-value substitution is introduced.
 
-Game flag `0x20000` causes `0x100000` to be set. For request mode zero, the exit
+Game flag `0x20000` causes `0x100000` to be set. The accepted selected-row
+object cleanup runs before the request-mode branches. For request mode zero, the exit
 runs the original audio/resource providers, releases the primary object list,
-passes the registration pointer to original `0x0803B8C0`, clears it, and clears
+passes the registration pointer to accepted `frame_destroy_map_registration`, clears it, and clears
 the audio-control bit eight. The shared volatile eight-bit field retains both
 original reads around that update. Mode two resets tile allocation; other
 modes clear transient effects. The common tail clears render effects, releases
@@ -92,6 +95,6 @@ promotion with an incomplete resource-effect type is retained separately;
 the accepted source uses the existing complete type.
 
 Next connected targets are the original per-view updates, retained scene-state
-providers, registration cleanup and the remaining scene-phase families. Names
+providers, the remaining scene-phase families and the transfer-completion provider. Names
 and types reflect static accesses and compiler matches. No runtime, gameplay
 or physical-save claim is made.

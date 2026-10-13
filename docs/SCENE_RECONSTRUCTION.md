@@ -19,7 +19,7 @@ The code owns two early literal-pool gaps as well as the final pool; neither gap
 is excluded from comparison.
 
 The request at `0x03004350` has word fields for mode at `+4` and scene at `+8`.
-The scene context at `0x03004320` has flags, a resource pointer at `+4`, and a
+The scene context at `0x03004320` has flags, a time-period word at `+4`, and a
 palette pointer at `+12`; `+8` remains unknown. The view context at
 `0x030040E0` contains twelve-byte view slots, a count at `+0x30`, and the selected
 view at `+0x31`. The shared partial view still names the count `unknown_30`.

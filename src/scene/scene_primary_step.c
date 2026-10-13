@@ -5,7 +5,7 @@ void scene_primary_step(void)
  unsigned char selected=context->current_view;
  struct FrameActorObject *actor=context->slots[selected].object;
  if(!(g_scene_primary_view_flags[selected].flags&0x1c0000))scene_stage_0803c598();
- if(scene_stage_080269f0()==1){g_game_flags&=~0x20u;return;}
+ if(scene_step_early_exit()==1){g_game_flags&=~0x20u;return;}
  {
   unsigned char i=0;
   unsigned char first_count=context->count;
@@ -21,7 +21,7 @@ void scene_primary_step(void)
    }
   }
   for(i=0;i<g_scene_primary_views.count;i++){
-   if((g_scene_primary_view_changes[i].changed&1)&&i==g_scene_primary_views.current_view){scene_stage_08026854();scene_stage_080266b0();}
+   if((g_scene_primary_view_changes[i].changed&1)&&i==g_scene_primary_views.current_view){scene_refresh_period_audio();scene_refresh_environment();}
    if(!scene_request_changed())scene_update_view(i);
   }
  }
