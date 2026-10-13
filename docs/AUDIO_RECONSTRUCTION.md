@@ -71,3 +71,29 @@ The accepted game audio total is eight functions and 488 bytes. The player
 and mixer bodies called by these controls remain explicit original
 regions, except where separately reconstructed and counted. No audible or
 gameplay behavior is claimed by these compiler comparisons.
+
+
+## Notification and handle-status handoff
+
+The notification selector at ROM `0x41424` contributes a further 72 matching
+C bytes. It narrows the selector to a byte, checks sequence volume, sets the
+shared handoff bit `0x80`, starts the selected descriptor with mode four and
+its second parameter byte, then calls the accepted synchronization helper.
+Its semantic parameter register constraint preserves the observed lifetime;
+this does not establish the complete descriptor table extent or mode meaning.
+
+The handle-status wrapper at ROM `0x4146C` contributes 16 matching C bytes.
+It calls the original validator at `0x49A10` and narrows its result to eight
+bits. A changed-handle control compiles and rejects 13 bytes. Static inspection
+of the validator shows a 44-byte channel stride at `0x020008B4`: the low byte
+of the handle selects a channel, the stored word at `+0x18` must equal the
+full handle, and the active byte at `+2` determines the zero/one result.
+Neither this validator nor the copied ARM release body at `0x03000320` is
+accepted C yet. Failed semantic candidates and their raw comparisons remain
+in local reports. No range check for indices 32 through 255 is observed.
+
+The wrapper closes the actor speed handler's status-call edge. Together these
+ten accepted game audio coordination functions cover 576 bytes. They do not
+establish the mixer, complete channel lifetime, audible output or gameplay
+behavior. The next connected audio targets remain the handle validator,
+copied release/pitch routines, sequence start and VBlank mixing path.

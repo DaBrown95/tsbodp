@@ -959,3 +959,68 @@ reader's y source; they reject by 132, 108 and 20 bytes respectively. All
 and reject their controls after the same-layout refinement. Raw linked
 images and comparisons are under `camera-map/map-camera-promoted/` and
 `camera-map/map-camera-layout-revalidation/`.
+
+The scene/map loading continuation adds seven exact C replacements, 672 bytes:
+`frame_load_scene_map_resources` (`0x263D8`, 328),
+`frame_configure_deferred_display` (`0x12F4`, 16),
+`frame_initialize_map_palette_slots` (`0x26BA4`, 36),
+`frame_define_palette_slot` (`0x301F0`, 48),
+`frame_decode_map_cell_types` (`0x2B160`, 68),
+`frame_decode_extra_map_cell_types` (`0x2B1A4`, 96), and
+`frame_create_map_registration` (`0x3B0DC`, 80). Each final complete linked
+extent matches, and an actual changed-source compile/link control rejects.
+These are source and static call findings; no gameplay validation follows from
+this batch. Final comparisons and controls remain under the ignored
+`reports/agents/frame-input/camera-map/map-loader-promoted/` directory.
+
+The loader indexes 72-byte records at ROM `0x08056414`. The two selection
+sources at record `+0` and `+4` feed the still unconverted selected-tile loader
+at `0x39CF0`, using the tile resource at `+0x3C` and the two existing background
+control words. Primary/secondary resource pairs at `+8`/`+0x14` and
+`+0x18`/`+0x24` feed the matching two-map resource loader. Combined resources
+at `+0x0C`/`+0x10` and `+0x1C`/`+0x20` load after either initialization or
+VRAM restoration. Record `+0x40` remains unknown. The independent table base
+and initial record pointer are ordinary C locals; their declaration order
+preserves the original compiler's separate base and index allocation.
+Useful failed alternatives and the earlier 31-byte mismatch are retained.
+
+The byte at resource `+0x44` writes the queue field at `+0x20C` in RAM
+`0x030015B8`. An early object-count interpretation is superseded by the
+matching scheduler and multipart renderer: they respectively test this field
+for deferred rendering and copy it into an OAM layer under the special
+mirroring option. The existing `deferred_refresh` field name is retained;
+`deferred_layer` and `frame_configure_deferred_display` express those observed
+uses without claiming an independent count.
+
+The metadata decoder writes decoded bytes to the buffer selected at RAM
+`0x03001DDC` and its byte count at `0x03001DE4`. A second buffer selected at
+`0x03001DD8` has a four-byte header; its decoded halfword count is stored at
+`0x03001DE8`, and its leading halfword is widened into `0x030043F8`.
+The optional extra pair appends data after the first byte span, decodes metadata
+through the scratch pointer at `0x030043FC`, and copies the payload after its
+four-byte header with DMA3 to the pointer at `0x03001DE0`, offset by twice the
+stored count. The `cell_data` and `cell_types` labels are provisional roles
+within this map load path. The buffers' allocation and input size guarantees
+remain unconverted; these helpers retain the original unchecked arithmetic.
+
+The palette reset defines slots 1 through 7 using pointer-array entries from
+ROM `0x0805779C`. Its writer establishes a state header at RAM `0x03001E48`
+with a four-byte palette-frame selector followed by sixteen eight-byte slot
+records. A slot stores its ID, users byte and source-array pointer at record
+`+0`, `+2` and `+4`; this agrees with the existing partial users-byte view,
+whose base includes the four-byte header. Defining a slot loads sixteen palette
+colors from its selected source into `slot << 4` through the existing alternate
+palette loader. The slot selector and source-array range remain unchecked.
+
+The grid constructor allocates and zeroes a 20-byte record, then calls the
+original initializer at `0x48B78` with narrowed width, height and cell size.
+An initializer result of one allocates `extent * extent` bytes and assigns the
+result to the record's first word. The scene loader passes cell size 16,
+installs this record as `g_frame_registration`, and decodes the scene resource
+at `+0x38` into its data. Existing bounds registration, grid terrain and actor
+route consumers support the grid interpretation. The initializer's observed
+fields at `+4`, `+8`, `+0x0C`, `+0x10` and `+0x12` supply the partial origin,
+span, extent and cell-size view; their exact coordinate semantics remain under
+analysis. Allocation failure checks are absent in this path. The initializer,
+selected-tile loader, copied map staging body and central renderer remain
+explicitly unconverted and receive no coverage from this batch.

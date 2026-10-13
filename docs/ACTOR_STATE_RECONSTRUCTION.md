@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 82 C functions spanning 15,756 verified bytes. The
+This batch reconstructs 96 C functions spanning 17,924 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,20 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x97D8` | `frame_actor_state_27` | 1,116 |
+| `0x9C34` | `frame_actor_acceleration_velocity` | 316 |
+| `0x9D70` | `frame_actor_play_speed_cue` | 44 |
+| `0x9D9C` | `frame_actor_set_speed_cue` | 84 |
+| `0x1C48` | `frame_set_actor_turn_direction` | 32 |
+| `0x8050` | `frame_actor_state_28` | 56 |
+| `0x2C618` | `frame_spawn_counter_effect` | 152 |
+| `0x3054C` | `frame_create_transient_effect` | 152 |
+| `0x31038` | `frame_destroy_transient_effect` | 36 |
+| `0x24D50` | `frame_pool_allocate_08024d50` | 52 |
+| `0x24D84` | `frame_pool_release` | 28 |
+| `0x24DA0` | `frame_pool_pop` | 32 |
+| `0x24DC0` | `frame_pool_push` | 24 |
+| `0x24DD8` | `frame_pool_remove` | 44 |
 | `0x85C0` | `frame_actor_state_8` | 256 |
 | `0x86C0` | `frame_actor_state_9` | 368 |
 | `0x66F4` | `frame_actor_terrain_step` | 236 |
@@ -586,6 +600,84 @@ and the larger terrain query remain explicit original data/code. Camera predicat
 no source credit. Full comparisons and changed distance, saved-speed, terrain-mask
 and timer controls pass for all four accepted extents.
 
+## Transient effects and shared intrusive allocation
+
+State 28 reads a signed delta byte at `+0x64` and the indicator pointer at
+`+0x90`. Initial substate 0 invokes the counter-effect producer, then marks outer
+state 16 and substate 2. Negative deltas create kind 6 from definition `(0,6)` and
+play cue 81; positive deltas create kind 1 from `(0,7)` and play cue 82; zero
+creates nothing. Cue playback follows the factory call even when allocation
+returns null. Successful effects retain the owner, copy its position shifted
+60 integer units along Y and initialize the observed flags, timing and phase
+fields. Offset and phase names describe these producer accesses; their wider
+rendering interpretation remains provisional.
+
+The separate effect family allocates 72-byte records. Its factory accepts byte
+kind, group and index, checks the halfword count at `0x03001EE6` against 13,
+increments the count and tracks its maximum at `0x03001EE8`. Definition records
+at `0x030058A0` have a 40-byte stride and eight entries per group; each supplies
+a resource pointer, frame-data address at `+4` and halfword index at `+0x24`.
+The count bound and allocation call are reproduced exactly; a consistent pool
+state remains an assumption of the original caller, not a new runtime claim.
+The destructor releases the node and decrements the count.
+
+Five shared helpers close that allocation path. Allocation returns null for an
+empty free head; otherwise it pops the first node, clears the requested byte
+extent and pushes the node onto the active head. Release removes from the active
+head and pushes to the free head. Pop, push and removal update the intrusive
+`next/previous` pointers at offsets 0 and 4 and handle empty heads and missing
+neighbors as observed. They only require that shared prefix of the larger
+`FrameObject` type; the `FrameObjectList` tail is untouched. The pre-existing
+scene allocator uses the same canonical allocation alias and was reverified
+with its changed-size control after consolidating the header declaration.
+All nine new functions, 576 bytes including alignment, match ordinary C and
+reject changed zero fill, release destination, list link, count, effect rate,
+position offset and state controls. No instruction or fixed-register glue is
+used in this family.
+
+## Controlled speed, turning and effect coordination
+
+State 27 and four connected functions add 1,592 bytes. The 1,116-byte handler
+reads a view slot from actor byte `+0x13` and uses its forty-byte view record's
+mode to suppress input. Initial substate 0 requests animation 86, selects
+substate 2 and sets part 2's draw order to 3. Flag `0x20000000` selects the
+sixteen-direction movement path; initialization doubles the facing only when
+that flag was clear. Resume byte game state `+0x42F` retains controlled speed
+and the prior cue mode. The new transient effect uses definition `(0,2)`, stores
+the actor as owner and receives phase, flags, dimensions and a direction mapped
+through the already named table at `0x08052858`. These observations do not
+identify the in-game object or activity.
+
+Substate 2 accepts the canonical sixteen-direction input rotation helper and
+enters substate 3 when view mode permits. Substate 3 coordinates key bits 1 and
+2, speed, facing countdown, cue restarts and the effect's direction and dimensions.
+It can create an exit actor at `0x38090`, restore eight-direction facing and
+animation 1, record the position and world byte, stop its sample and transfer a
+bounded twenty-byte callback/spatial view at `+0x98`. The exit constructor remains
+unconverted. The switch table proves substate 7 re-enters substate 3, while 4,
+5 and 6 are explicit no-ops. Two C input-argument variables constrained to `r0`
+preserve the original order of argument moves; the typed effect-slot local
+matches naturally. Pools, table entries and the complete extent are compared,
+not substituted or masked.
+
+The 316-byte velocity helper uses the selected view's key bit 1 to accelerate
+by `0x3333` to a maximum `0x80000`; reaching the cap applies need adjustment 34.
+Without that key it subtracts `0x6666` above `0x6665`, otherwise stops. A halfword
+at actor `+0xAC` blocks motion and stops the current cue. Cue IDs 74, 75 and 76
+track the observed speed phases and consult the canonical sample-active wrapper.
+The two cue helpers preserve a second stop call in the default mode and store
+the requested mode after stopping or replacing the handle. They then feed the
+accepted velocity constructor and animation 86. The separate setter at `0x1C48`
+has the same thirty-byte body and two-byte alignment as the published setter at
+`0x1C28`: it changes facing only when needed and marks pending update bit `0x10`.
+The byte-identical separate function is reconstructed at its own address.
+
+All five complete extents and changed cue, acceleration, restart threshold and
+update-bit controls pass. The accepted rotation helper `0x1F364`, part-order
+setter `0x156C` and direction table are reused under their existing canonical
+names; the private exploratory duplicate of the rotation helper receives no
+new credit. The audio sample-active wrapper is owned and verified separately.
+
 ## Local proofs and remaining boundaries
 
 Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`,
@@ -597,11 +689,12 @@ Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manif
 `reports/agents/vblank-wrapper/actor-actions-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-carry-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-idle-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-distance-batch-manifest.json`.
+`reports/agents/vblank-wrapper/actor-distance-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-effect-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
 `actor-state-route-types13-*`, `actor-route-path-layout13-*` and
 `actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` and `actor-interaction-current2-*` and `actor-actions-canonical7-*` and `actor-carry-canonical5-*` and
-`actor-carry-shared-layout6-*`, `actor-idle-canonical12-*`, `actor-distance-canonical4-*` and `actor-distance-word-return1-*` in the same ignored
+`actor-carry-shared-layout6-*`, `actor-idle-canonical12-*`, `actor-distance-canonical4-*` and `actor-distance-word-return1-*`, `actor-effect-canonical9-*`, `actor-effect-speed-canonical14-*` and `actor-pool-header-shared1-*` in the same ignored
 agent report tree. Original CFG scans and all 29 handler entry summaries remain
 local. Mutations change the dispatcher flags, animation IDs, countdown, wait
 factor, direction update flag, group offset, record stride, state target, point
@@ -612,14 +705,16 @@ centered-width divisor, velocity arithmetic, move countdown, social countdown,
 value-reader field, terrain class, option ID range, condition action ID, descriptor lookup bound, action notification ID,
 game-value ceiling, parameter level bound, state-41 animation ID, sequence mode and state-42 cue threshold, effect flags, completion mode and state-43 countdown and state-47 bound adjustment.
 
-Twenty-three of the 29 direct handler functions are reconstructed here. Useful next
+Twenty-five of the 29 direct handler functions are reconstructed here. Useful next
 connected targets are the need target selector `0x6F20`, action-target selector
 `0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`. State 46
 (`0x6874`) is a retained near-match joining proximity, relation values, facing,
 animation and audio; its inferred relation/descriptor layouts still need matching
 confirmation. Camera-margin predicate `0x67E0` and terrain query `0x2ABB0` remain connected
-next targets. State 27 (`0x97D8`) joins display objects, input and audio with a
-larger remaining body. The scanned CFGs for those retained candidates are
+next targets. State 17 (`0x5B00`) follows two attachment slots; state 39 (`0x8504`) connects
+target callbacks and route completion; and the combined state 31/32/33 handler
+(`0x9E40`) connects action targeting and resource choices. The scanned CFGs for
+those retained candidates are
 closed; those scans alone do not establish C coverage, final function boundaries
 or runtime reachability. These bodies remain explicit unconverted ROM regions
 in the full build.

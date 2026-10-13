@@ -387,3 +387,79 @@ the prior equivalent parameter-use form differed in five bytes. The macro
 and wrapping form both match independently, and the public source control
 changing the negative guard to include zero rejects by one byte. No register
 constraints, output changes or embedded instruction bodies are used.
+
+## Compressed resource installation and decoding
+
+The shared string lookup now reaches a reconstructed resource installer and
+decoder, adding two matching C functions and 224 bytes. Fresh public positives
+and compiled controls are indexed by the local
+`reports/agents/display_audio/background_motion/scene/redraw/text-loader-ready.json`.
+The existing 36-byte lookup and 444-byte catalog draw caller also match and
+retain their actual rejecting controls after the shared header refinement.
+
+| Function | ROM address | Bytes | Control differences |
+| --- | --- | ---: | ---: |
+| `display_text_set_resource` | `0x0801F004` | 36 | 17 |
+| `display_text_load_string` | `0x0801F028` | 188 | 108 |
+
+The installer stores the resource base at `0x03001B94`, reads its first word
+as the byte offset to the string-offset table at `0x03001B98`, and installs
+the paired-edge tree immediately following that word at `0x03001B9C`.
+These names describe the pointer roles rather than complete resource bounds.
+Each tree record contains two unsigned halfword edges for a zero or one bit;
+an edge below 256 is an output byte, while an edge at least 256 addresses
+record `edge - 256`. Decoding each byte starts from edge 256, reads input bits
+least significant first and advances the bitstream byte after eight bits.
+It can read the next compressed byte before checking whether the current
+edge is a terminal byte. The serialized tree, offsets and assets remain
+local inputs rather than tracked source.
+
+The decoder returns one if no resource is installed. Otherwise it decodes
+and writes a byte, including a zero terminator, before testing the count:
+zero returns success, while a nonzero byte that reaches the supplied count
+returns two. Thus a terminator at that limit succeeds; capacity zero still
+enters the decoding loop. No ID, tree index, bitstream, output storage or
+malformed-tree bound is checked, and the installer does not validate a null
+or truncated resource. These static failure paths do not constitute runtime
+or gameplay testing.
+
+The cached bitstream byte uses an unsigned-byte type, whose integer promotion
+produces the observed shift and register lifetime naturally. The destination
+and capacity access locals preserve entry scheduling; no register constraints
+or assembly are needed. The installer's advancing word view gives the observed
+header read and tree pointer. Prior word-cache, argument-lifetime and header
+cursor failures remain in raw local receipts. Both linked extents include
+their internal literal pools. The changed-root control produces a 192-byte
+candidate rather than the accepted 188, and the real comparison rejects that
+length and its differing bytes without masking or patching.
+
+## Configured text-map fill spans
+
+The same local receipt also contains two map producers adding 144 matching C
+bytes, bringing the resource/map batch to four functions and 368 bytes. Each
+has a whole-extent public match and a real compiled control excluding the
+single-cell range, rejected by one differing byte.
+
+| Function | ROM address | Bytes |
+| --- | --- | ---: |
+| `display_text_fill_map_span` | `0x0801B09C` | 72 |
+| `display_text_clear_map_span` | `0x0801B0E4` | 72 |
+
+Both use the configured raster state's map pointer and a signed inclusive
+first/last range on the selected row. If first exceeds last they do nothing;
+otherwise the destination is `map + (row * 32 + first)`. The fill variant
+accepts a halfword map value, while the clear variant writes zero through an
+explicit local halfword pointer. Both program DMA3 at `0x040000D4` from that
+local halfword, with control `0x81000000` for an enabled immediate halfword
+transfer with fixed source. The final volatile control read is retained; it
+is not a software completion-poll loop.
+
+The count calculation retains doubled byte count followed by arithmetic
+halving. Unsigned subtraction and shift followed by the target signed-word
+view preserve its wrapping word calculation without signed-shift overflow
+in the C expression. No count mask, clipping, pointer/capacity validation or
+DMA coordination is added. Earlier ungrouped pointer arithmetic and early
+fill initialization produced different code; the accepted grouped index and
+local pointer are ordinary semantic C with no register constraints or
+assembly. Matching these routines does not establish safe concurrent DMA use
+or validated runtime coordinate ranges.

@@ -20,6 +20,7 @@ void audio_game_pause(void);
 void audio_game_resume(void);
 void audio_game_stop_sequence(void);
 void audio_game_stop_sample(unsigned int);
+unsigned char audio_game_sample_active(unsigned int);
 struct AudioCueDescriptor { unsigned short kind, sample_id; };
 struct AudioSampleParameters { unsigned short sample_id, pitch; };
 extern struct AudioCueDescriptor g_audio_cue_descriptors[];

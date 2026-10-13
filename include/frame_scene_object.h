@@ -9,5 +9,5 @@ extern struct FrameScenePosition g_frame_scene_positions[];
 extern struct FrameVariantResource g_frame_scene_resources[];
 extern unsigned char g_frame_scene_special_palette[], g_frame_scene_commands_110[], g_frame_scene_commands_111[];
 extern unsigned char g_frame_object_pool[];
-struct FrameObject *frame_pool_allocate_08024d50(void *, struct FrameObjectList *, unsigned int);
+#include "frame_pool.h"
 #endif
