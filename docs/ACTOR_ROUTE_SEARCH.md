@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 62 C functions and 7,772 bytes:
+The connected route-search path reconstructs 65 C functions and 8,432 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -10,7 +10,8 @@ three-function random refill/seed/reader dependency, its adjoining
 attachment-neighbor producer, and five allocation, seed-coordination and
 secondary-reader functions, followed by six bounded-output, signed-offset and
 threshold APIs, and the secondary threshold's optional need-effect/cue consumer
-plus its five parameter and retained-effect producers.
+plus its five parameter and retained-effect producers, parameter consumer and
+two attachment-job controllers.
 Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
@@ -919,8 +920,60 @@ controls. Raw comparisons and failed type/lifetime attempts are retained in
 ignored `need-optional-state-followup/`; integration metadata is
 `frame-need-optional-state-batch-manifest.json`.
 
-The connected consumption function at `0x2E7D0`, 184 bytes, remains unconverted.
-Its retained semantic candidate differs by five bytes in the remaining pointer
-setup scheduling. Direct callers at `0x18228` and `0x182D4` remain
-further connected targets. No trigger-rate, callback, ownership or gameplay
-behavior claim follows from these static and compiler checks.
+## Optional parameter consumption and attachment jobs
+
+The 184-byte consumer at `0x2E7D0` forms a low-halfword cost from signed parameter
+one multiplied by four plus 43. Pressed input mask one for the local player adds
+25 to that halfword. The source captures the observed modulo-word arithmetic
+with an unsigned conversion before multiplication. It proceeds only when the
+optional byte is one and the parameter, interpreted as signed 16 bits, is
+strictly greater than the signed 16-bit cost. It subtracts that signed cost from
+the unsigned old halfword, stores the low result, adjusts the actor's need 18
+by byte `+35` of its 36-byte definition row, updates the indicator with the low
+byte of `100 - (signed_parameter >> 8)`, and returns zero. Otherwise it clears
+optional and parameter and returns one. Arbitrary parameter ranges, definition
+counts and indicator validity remain unestablished; no additional bounds or
+allocation-failure branch is introduced.
+
+Separate signed and unsigned views preserve the two original halfword loads.
+A named mask result, saved optional pointer and shared zero for the failure
+stores reproduce the input operation, pointer setup order and single zero
+materialization. These are ordinary C lifetimes. Four temporary register
+constraints used while closing the last differences were all removed, with
+complete equality retained. Prior 184/8 and 184/5 candidates and the failed
+pointer/type variants remain in ignored reports. The complete extent includes
+two source-expressed zero alignment bytes after the return.
+
+The 172-byte controller at `0x18228` starts by facing the actor opposite the
+associated object's direction. A successful retained-effect attempt moves the
+job to phase one; otherwise it creates an indicator in need-state work `+0x58`,
+requests animation 45, enters phase five and saves cue 19's sample handle at
+`+0xE0`. Phase five calls the matched parameter consumer and observes its low
+return byte. A nonzero record byte `+0x0C` also requests phase one. Completion
+stops the sample, requests animation one, requests indicator teardown if
+present, clears the indicator and returns two; an active job returns one.
+These fields use the existing bounded job-work and attachment-record views.
+They do not redefine the retained actor-effect pointer at object `+0x90`.
+
+The adjacent 304-byte controller at `0x182D4` calls the secondary optional
+predicate, requests animation 58 and enters phase six. An animation-completion
+flag starts cue 61, animation one and an actor countdown of 90. Phase 55
+decrements that countdown and, at minus one, stops the saved sample, enters
+phase 56 and starts animation/cue 21. Phase 56 adjusts need four and finishes
+on the same animation flag. Only record byte `+0x0C` equal to one requests its
+separate completion path, which stops the saved sample and plays cue 146 or
+145 according to the game selector. The signed countdown and selector names
+remain provisional. The complete extent ends with two zero alignment bytes
+before the distinct entry at `0x18404`; a CFG estimate of 282 bytes omitted
+parts of its complete contiguous body and literals. The preceding controller's
+94-byte CFG estimate likewise does not cover its 172-byte linked extent.
+
+All three complete extents match as ordinary C without register constraints,
+with alignment-only glue kept explicit. Changed cost 43 to 44, animation 45 to
+44 and countdown 90 to 91 each produce one differing byte and are rejected.
+Canonical comparisons, current header snapshots and failed candidates remain
+in ignored `need-optional-state-followup/`; ready metadata is
+`frame-need-optional-jobs-batch-manifest.json`. The direct dispatcher at
+`0x184A0`, its setup/eligibility helpers and other optional predicates are next
+connected targets. Runtime cancellation, ownership, sample validity and
+gameplay effects have not been tested.

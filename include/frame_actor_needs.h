@@ -1,3 +1,4 @@
+#include "save_stream.h"
 #include "frame_actor_runtime.h"
 /* Values use 24 fractional bits. Tail flags select and remember need actions. */
 struct FrameActorNeedState {
@@ -22,8 +23,6 @@ extern struct FrameActorNeedState g_frame_actor_need_defaults;
 int frame_random_range(int, int);
 int frame_fixed_multiply(int, int);
 void frame_copy_bytes(void *, const void *, int);
-void frame_load_save_value(void *, int);
-void frame_write_save_value(const void *, int);
 unsigned int frame_low_need_mask(struct FrameActorNeedState *, unsigned int);
 unsigned int frame_empty_need_mask(struct FrameActorNeedState *);
 int frame_actor_need_delta(struct FrameActorNeedState *, unsigned int, struct FrameObject *);

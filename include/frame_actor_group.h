@@ -28,6 +28,13 @@ extern struct FrameSpriteVariant ***g_actor_group_part1_tables[];
 extern struct FrameSpriteVariant **g_actor_group_part2_tables[];
 extern const unsigned char g_actor_group_part2_palette[];
 extern const unsigned short g_actor_group_palette_rows[];
+extern const unsigned short g_actor_group_alternate_palette_rows[];
+extern unsigned char g_frame_actor_palette_pair_definition[];
+
+void frame_compose_actor_group_palette(const void *, void *);
+void frame_compose_actor_group_alternate_palette(const void *, void *);
+void frame_load_actor_group_alternate_palette(const void *, unsigned int);
+void frame_load_actor_palette_pair(void);
 
 void frame_set_part_variants(struct FrameObject *, unsigned char,
                              struct FrameSpriteVariant **, unsigned int);
