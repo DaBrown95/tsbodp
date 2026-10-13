@@ -1,5 +1,6 @@
 /* Partial scene-request/state layouts inferred from the connected load sequence. */
 #include "display.h"
+#include "display_object_palette.h"
 struct PaletteRangeConfig;
 struct SceneRequest { unsigned int unknown_00, mode, scene, parameter; };
 struct SceneContext { unsigned int flags; void *resource; unsigned int unknown_08; void *palette; };
@@ -15,7 +16,7 @@ extern const unsigned int g_scene_background_control0, g_scene_background_contro
 extern struct ScenePaletteRangeConfig g_scene_palette_range_configs[];
 #include "audio_vblank.h"
 extern void scene_vblank_callback(void), set_vblank_callback(void (*)(void));
-extern void scene_stage_0803e3a8(void), scene_stage_08026b24(void), scene_stage_080301c4(void);
+extern void scene_stage_0803e3a8(void), scene_stage_08026b24(void);
 extern void *scene_lookup_resource(void *);
 extern void *scene_palette_source(void);
 extern void display_load_palette(const void *, unsigned int, unsigned int);

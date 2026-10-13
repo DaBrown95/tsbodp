@@ -1,10 +1,10 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 14 C functions and 1,828 bytes:
-11 support helpers, the central 720-byte search, and two 100-byte buffer setup
-and reset functions. Every complete linked extent matches the fixed reference,
+The connected route-search path reconstructs 15 C functions and 1,904 bytes:
+11 support helpers, the central 720-byte search, two 100-byte buffer setup
+and reset functions, and the 76-byte reverse path extractor. Every complete
+linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
-Reverse path extraction at `0x3C08C` (76 bytes) remains unconverted.
 Neither these matches nor the full-ROM equality gate establish runtime behaviour.
 
 | ROM offset | Function | Verified bytes |
@@ -12,6 +12,7 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x3BCF4` | `frame_grid_search` | 720 |
 | `0x3BFC4` | `frame_search_initialize_buffers` | 100 |
 | `0x3C028` | `frame_search_reset` | 100 |
+| `0x3C08C` | `frame_copy_grid_path` | 76 |
 | `0x24D18` | `frame_pool_initialize` | 56 |
 | `0x24E04` | `frame_pool_count` | 20 |
 | `0x3C0EC` | `frame_search_release_node` | 52 |
@@ -86,7 +87,7 @@ builder stores an 8-bit count and returns whether that count is nonzero.
 
 ## Compiler and verification evidence
 
-All fourteen use the pinned default compiler. The lookup functions each retain a
+All fifteen use the pinned default compiler. The lookup functions each retain a
 semantic unsigned-word `r1` binding for a widened halfword and its explicit
 mask. Removing those lifetimes changes the output. Cell removal needs two
 unsigned comparison intermediates bound to `r1` and `r0`; the input, loaded
@@ -112,9 +113,8 @@ under `path-search-support-canonical/`; the integration manifest is
 `actor-search-support-batch-manifest.json`. Useful failed natural-C and compiler
 lifetime trials remain alongside those proofs.
 
-The next coherent targets are the 76-byte reverse path extraction, buffer
-lifetime and release dependencies, and the 356-byte actor target cell selector
-at `0x3B75C`. The latter remains a separate failed candidate. Static
+The next coherent targets are buffer lifetime and release dependencies and
+the 356-byte actor target cell selector at `0x3B75C`. The latter remains a separate failed candidate. Static
 CFG closure, a matching helper and a byte-identical full-ROM build are different
 claims from execution or gameplay evidence.
 
@@ -150,8 +150,8 @@ Only mode 1 requests path construction. A found result uses the current cell;
 otherwise status 2 may request a chain beginning at its parent. A zero path-builder
 result forces status 1 and return zero. The count is written by the same-cell
 case or path builder; the initial reset clears path words without resetting that
-count. Reverse extraction and its caller buffer-capacity guarantees remain
-separate unfinished work.
+count. Reverse extraction now matches separately; its caller buffer-capacity
+guarantees remain uncertain.
 
 The fourth argument is an unsigned word. The original stores all of `r3` and
 compares its full value against a zero-extended cost byte; it does not narrow
@@ -207,3 +207,30 @@ initializer's 7,200-to-7,168 allocation-size control and the reset's
 Their raw comparisons and source snapshots are included in the same canonical
 receipt as the search and affected callers. No buffer-management runtime test
 is claimed.
+
+## Reverse path extraction
+
+The 76-byte extractor at `0x3C08C` reads the stored byte count and walks the
+100-word saved-cell array backward. Each complete cell word is passed to the
+matching grid-to-point helper, then its two-word result is copied into the next
+output point. An empty count leaves the output untouched. The function returns
+one in both cases; the second full-word argument is unused. The connected
+route caller supplies 30 there, but the extractor performs no capacity check.
+The relationship between the 100-cell storage, the byte count and that caller's
+output capacity remains an unresolved contract. Unknown cell upper bits are
+preserved rather than assigned a new meaning.
+
+The source uses ordinary C with no fixed register bindings. Its inline helper
+forms the saved-cell address from a byte offset and the cell-array address;
+that explicit operand order reproduces the original load scheduling. A
+per-function `-fno-gcse` option prevents a redundant cached stack address that
+otherwise enlarges the function. This is a compiler constraint supported by
+the exact comparison, not proof of the historical compiler options. The only
+assembly is an alignment directive for the original zero tail bytes.
+
+Changing the byte-offset decrement from four to eight changes one compared byte
+and is rejected. The existing 292-byte route caller remains exact and its
+30-to-29 argument control also changes one byte and is rejected. Complete
+positive and negative bytes, source and header snapshots, commands and pinned
+toolchain checks remain in `path-reverse-canonical/`; the ready manifest is
+`actor-reverse-path-batch-manifest.json`. No execution or gameplay test is claimed.

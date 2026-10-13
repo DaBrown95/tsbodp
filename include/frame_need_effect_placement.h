@@ -25,10 +25,15 @@ unsigned char frame_grid_need_effect_cell_available(void *, const struct FrameAc
 void frame_need_effect_pattern_cell(int, int, const unsigned char *, unsigned int,
                                     const struct FrameActorPackedCell *,
                                     struct FrameActorPackedCell *);
+unsigned int frame_need_effect_pattern_dimensions(const unsigned char *,
+                                                  unsigned char *, unsigned char *);
+void frame_need_effect_handoff_bounds(struct FrameObject *, struct FrameNeedEffectState *,
+                                      unsigned char);
+void frame_need_effect_increment_counter(struct FrameNeedEffectState *,
+                                         struct FrameNeedEffectState *);
+void frame_need_effect_decrement_counter(struct FrameNeedEffectState *,
+                                         struct FrameNeedEffectState *);
 /* Direct-callee roles below remain provisional until independently reconstructed. */
-void frame_need_effect_pattern_dimensions_2f430(const unsigned char *,
-                                              unsigned char *, unsigned char *);
-void frame_need_effect_handoff_7e68(struct FrameObject *, struct FrameNeedEffectState *, unsigned char);
 unsigned char frame_need_effect_register_3b12c(void *, struct FrameObject *, unsigned char);
 unsigned char frame_configure_need_effect(struct FrameObject *, int, int, int);
 

@@ -13,7 +13,7 @@ void frame_load_scene_map_resources(unsigned int index) {
   frame_load_map_resources(1,g_frame_map_scene_resources[index].primary1,g_frame_map_scene_resources[index].secondary1);
   frame_decode_map_cell_types(g_frame_map_scene_resources[index].cell_data,g_frame_map_scene_resources[index].cell_types);
   if(g_frame_map_scene_resources[index].extra_cell_types)frame_decode_extra_map_cell_types(g_frame_map_scene_resources[index].extra_cell_data,g_frame_map_scene_resources[index].extra_cell_types);
-  scene_stage_080301c4();
+  frame_reset_object_palette_slots();
   frame_initialize_map_palette_slots();
   frame_get_map_dimensions(&dimensions);
   g_frame_registration=frame_create_map_registration((unsigned short)dimensions.x,(unsigned short)dimensions.y,16);

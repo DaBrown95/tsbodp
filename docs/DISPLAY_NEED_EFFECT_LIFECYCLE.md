@@ -95,7 +95,8 @@ at `0x08062E70`, `0x08062E74` and `0x08062E78` are passed by address. Table stor
 bounds and those slots' wider meanings are unknown. The callback slot is described
 through an explicit access at `+0xC8`; it does not silently adopt the existing
 partial actor view's callback at `+0xCC`. The callback at `0x11328` is reconstructed below; the palette setter
-at `0x30168` remains unconverted.
+at `0x30168` is now reconstructed with its connected slot lifecycle in
+[the object palette evidence](DISPLAY_OBJECT_PALETTE.md).
 
 The incoming commit parameter is a complete word. This caller performs a signed
 byte load without narrowing its argument before the call; the matching commit

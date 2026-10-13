@@ -32,7 +32,7 @@ void scene_initialize(void) {
    { unsigned char *end=g_scene_mode_bytes,*p; p=end+3; do { *p--=mode; } while((int)p>=(int)end); }
   }
   scene_stage_08026b24();
-  scene_stage_080301c4();
+  frame_reset_object_palette_slots();
   g_scene_request.mode=0;
  }
  g_scene_context.resource=scene_lookup_resource(g_scene_world_state);

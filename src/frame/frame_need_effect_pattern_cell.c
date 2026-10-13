@@ -11,7 +11,7 @@ void frame_need_effect_pattern_cell(int x, int y, const unsigned char *pattern,
  row = y;
  column = x - pattern[0];
  row -= pattern[1];
- frame_need_effect_pattern_dimensions_2f430(pattern, &width, &height);
+ frame_need_effect_pattern_dimensions(pattern, &width, &height);
  switch (direction) {
  case 5: dx = -row; dy = -column; break;
  case 1: dx = row; dy = ~column + width; break;

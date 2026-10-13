@@ -1445,8 +1445,9 @@ placement and saved-effect sources were rechecked at 2,884 identical bytes,
 and their eight controls still reject. The 22 canonical/control receipts and
 raw comparison files are under
 `reports/agents/frame-input/camera-map/need-placement-dependencies-promoted/`.
-Grid registration at `0x3B12C` and the target handoff at `0x7E68` remain explicit
-original bodies. This evidence does not establish runtime or gameplay behavior.
+Grid registration at `0x3B12C` remains an explicit original body; the target
+handoff's reconstruction follows below. This evidence does not establish runtime
+or gameplay behavior.
 
 ### Placement cell rules and pattern rotation
 
@@ -1470,8 +1471,8 @@ Rotation subtracts the pointed pattern's first two bytes from the supplied
 column and row, calls `0x2F430` for two byte outputs, then applies direction
 cases 1, 3, 5 and 7 before adding the packed anchor's two coordinate bytes.
 Only the first dimension output affects this body. Direction remains a word
-argument; the two result stores narrow to bytes. The dimensions helper and
-pointed pattern allocation remain unconverted and have provisional types.
+argument; the two result stores narrow to bytes. The dimensions helper's
+reconstruction follows below; pointed pattern allocation types stay provisional.
 Initializing the row from the input before subtracting its pattern offset
 preserves the original saved-register lifetimes without any register binding.
 Earlier 132-byte candidates with 10, 4 and 2 differing bytes are retained.
@@ -1484,5 +1485,52 @@ linked one-byte negative control, changing an occupied mask or the direction-7
 offset. All three existing direct header consumers were rechecked at 412
 matching bytes with three rejected controls. The ten comparison receipts are
 under `reports/agents/frame-input/camera-map/need-validator-rotation-promoted/`.
-Registration, the dimensions helper, and the central renderer remain explicit
-unconverted dependencies. This adds static and compiler evidence only.
+Registration and the central renderer remain explicit unconverted dependencies.
+This adds static and compiler evidence only.
+
+### Pattern dimensions and bounds handoff
+
+| Address | Function | Verified C bytes |
+| --- | --- | ---: |
+| `0x0802F430` | `frame_need_effect_pattern_dimensions` | 188 |
+| `0x08007E68` | `frame_need_effect_handoff_bounds` | 96 |
+| `0x0802EC88` | `frame_need_effect_increment_counter` | 12 |
+| `0x0802EC94` | `frame_need_effect_decrement_counter` | 12 |
+
+The dimensions helper scans the pointed pattern's 5 by 5 action bytes for
+values 1 through 3, retaining the largest column and row. If none exists, a
+second scan uses value 4. It subtracts the first two pattern bytes and stores
+the resulting byte-sized dimensions plus one. Empty and undersized patterns
+retain the observed byte wrap behavior; no validation or capacity assumption
+has been added. The observed constant result is 1. Its word return declaration
+is provisional because the accepted rotation caller ignores it. Preserving the
+column's declaration initializer and an unsigned table index matches all 188
+bytes with ordinary C. The initial candidate and useful 33- and 2-byte
+mismatches remain in the ignored reports.
+
+The handoff clears `before_step` at object `+0x98`. It reads the object pointer
+from the supplied effect state at `+0x54`, adjusts that object's point at
+`+0xA4`, and writes the same point at destination `+0x9C` and `+0xA4`. Nonzero
+mode applies x minus one and y plus one; zero mode reverses those offsets. It
+reuses the existing `FrameActorFinishBounds` view. The lower/upper names and
+coordinate units remain provisional, and the two equal output points alone do
+not establish a complete bounding-box model.
+
+Direct inspection corrects the earlier provisional interpretation of
+`0x2EC88` as a neighbor-link writer: it only increments the state byte at
+`+0xDC`; `0x2EC94` decrements the same byte. Both retain the unused second state
+argument observed at their registration and unregistration call sites. The
+counter's broader ownership role is not inferred. Its zero initialization is
+also visible in the accepted state allocator. The wider state layout remains
+the existing bounded access view.
+
+All four new functions have compiled and linked one-byte negative controls.
+Placement and rotation now call the canonical handoff and dimensions names.
+The scene loader and scene initializer also use the separately reconstructed
+palette reset's canonical name, `frame_reset_object_palette_slots`. Nine
+existing consumers were rechecked at 2,120 identical bytes, with nine rejected
+controls. The 26 canonical/control receipts and raw comparison files are under
+`reports/agents/frame-input/camera-map/need-placement-small-promoted/`.
+These are compiler matches and static data-flow findings. Registration and
+unregistration, the larger renderer, and selected map-tile loading still have
+their own excluded candidates; no runtime or gameplay claim is added.

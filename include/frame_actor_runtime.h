@@ -1,4 +1,5 @@
 #include "frame_actor_animation.h"
+#include "display_object_palette.h"
 struct FrameActorObject {
  struct FrameObject *next, *previous;
  FrameU16 id, subtype;
@@ -43,7 +44,6 @@ void frame_set_animation_variant(struct FrameObject *, signed char, signed char)
 void frame_set_part_order(struct FrameObject *, FrameU8, FrameU8);
 void frame_load_actor_group_palette(const void *, FrameU8);
 void resource_object_before_step(struct FrameObject *);
-void frame_install_actor_script(struct FrameObject *, const void *);
 void frame_actor_tick(struct FrameObject *);
 void frame_actor_remove(struct FrameObject *);
 void frame_actor_interaction_default(struct FrameObject *);

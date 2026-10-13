@@ -16,7 +16,7 @@ unsigned char frame_configure_need_effect(struct FrameObject *base, int directio
   struct FrameNeedEffectState *neighbor;
   frame_grid_point_to_cell(g_frame_registration,&position,&cell);
   neighbor=frame_need_effect_find_neighbor(&cell,3);
-  if(neighbor)frame_need_effect_handoff_7e68((struct FrameObject *)object,neighbor,1);
+  if(neighbor)frame_need_effect_handoff_bounds((struct FrameObject *)object,neighbor,1);
  }
  frame_enable_object_flags((struct FrameObject *)object,1);
  result=frame_need_effect_register_3b12c(g_frame_registration,(struct FrameObject *)object,1);

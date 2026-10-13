@@ -1,6 +1,7 @@
 #ifndef DISPLAY_NEED_EFFECT_UPDATE_H
 #define DISPLAY_NEED_EFFECT_UPDATE_H
 #include "display_need_effect_lifecycle.h"
+#include "display_object_palette.h"
 
 struct FrameTickObject;
 struct FrameCommandObject;
@@ -47,7 +48,6 @@ void frame_commit_need_effect(struct FrameObject *, unsigned int);
 unsigned char frame_need_effect_world_test(unsigned int, int);
 void frame_set_animation_frame(struct FrameTickObject *, FrameU8);
 void frame_acquire_palette_slot(struct FrameObject *, int);
-void frame_set_object_palette(struct FrameObject *, const void *);
 void frame_need_effect_interact(struct FrameObject *, struct FrameObject *);
 void frame_need_effect_stop_at_position(struct FrameObject *);
 void frame_disable_object_flags(struct FrameObject *, unsigned int);

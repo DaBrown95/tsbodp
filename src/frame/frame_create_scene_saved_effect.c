@@ -33,7 +33,8 @@ struct FrameSceneSavedEffect *frame_create_scene_saved_effect(unsigned char kind
  object->oam.double_tile_size=0;
  object->speed=g_frame_scene_effect_speeds[object->actor_id];
  object->flags=0x1005045d;
- frame_install_actor_script((struct FrameObject *)object,g_frame_scene_effect_script);
+ frame_set_subtype_object_palette((struct FrameObject *)object,
+  (const void *const *)g_frame_scene_effect_script);
  frame_update_actor_state((struct FrameObject *)object);
  object->before_step=resource_object_before_step;
  return effect;

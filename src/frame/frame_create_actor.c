@@ -11,7 +11,8 @@ struct FrameObject *frame_create_actor(FrameU32 actor_id, FrameU8 direction, int
  object->speed = g_frame_actor_speeds[object->subtype];
  object->flags = 0x1005045d;
  object->before_step = resource_object_before_step;
- frame_install_actor_script((struct FrameObject *)object, g_frame_actor_script);
+ frame_set_subtype_object_palette((struct FrameObject *)object,
+  (const void *const *)g_frame_actor_script);
  if (object->subtype > 31) {
   frame_enable_parts((struct FrameObject *)object);
   frame_request_animation((struct FrameCommandObject *)object, 1);

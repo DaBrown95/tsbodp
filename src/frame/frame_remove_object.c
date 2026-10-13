@@ -4,7 +4,7 @@ void frame_remove_object(struct FrameObject *object)
     if (object->id != 0xffff) {
         if (object->on_remove)
             object->on_remove(object);
-        frame_cleanup_callbacks(object);
+        frame_release_object_palette(object);
         if ((int)object->flags < 0)
             frame_drop_owner(0, object->owner_id, object->owner_slot);
         object->id |= 0xffff;

@@ -736,7 +736,7 @@
       "source": "src/frame/frame_remove_object.c",
       "thumb_symbols": [
         "_call_via_r1",
-        "frame_cleanup_callbacks",
+        "frame_release_object_palette",
         "frame_drop_owner",
         "frame_destroy_affine",
         "frame_release_display",
@@ -744,14 +744,14 @@
       ],
       "symbols": {
         "_call_via_r1": "0x0804ccf5",
-        "frame_cleanup_callbacks": "0x08030269",
         "frame_drop_owner": "0x0800af35",
         "frame_destroy_affine": "0x08003651",
         "g_frame_release_immediately": "0x030017cc",
         "g_frame_primary_list": "0x030024f0",
         "g_frame_queue": "0x030015b8",
         "frame_release_display": "0x08000f75",
-        "frame_recycle_object": "0x08024d85"
+        "frame_recycle_object": "0x08024d85",
+        "frame_release_object_palette": "0x08030269"
       },
       "negative_control": {
         "before": "g_frame_release_immediately == 1",
@@ -2150,7 +2150,6 @@
         "display_enable_layers": "0x0800d68d",
         "display_show_background": "0x0800d579",
         "scene_stage_08026b24": "0x08026b25",
-        "scene_stage_080301c4": "0x080301c5",
         "scene_lookup_resource": "0x080107e5",
         "scene_palette_source": "0x08026795",
         "scene_stage_0802cd90": "0x0802cd91",
@@ -2180,7 +2179,8 @@
         "display_load_palette_ranges": "0x08011635",
         "display_load_palette": "0x080116f9",
         "frame_load_scene_map_resources": "0x080263d9",
-        "frame_initialize_scene_actors": "0x08026521"
+        "frame_initialize_scene_actors": "0x08026521",
+        "frame_reset_object_palette_slots": "0x080301c5"
       },
       "thumb_symbols": [
         "scene_vblank_callback",
@@ -2192,7 +2192,7 @@
         "display_configure_tile_allocation",
         "display_show_background",
         "scene_stage_08026b24",
-        "scene_stage_080301c4",
+        "frame_reset_object_palette_slots",
         "scene_lookup_resource",
         "scene_palette_source",
         "display_load_palette",
@@ -4496,7 +4496,6 @@
         "frame_set_part_order": "0x0800156d",
         "frame_load_actor_group_palette": "0x0803aec9",
         "resource_object_before_step": "0x08001ae1",
-        "frame_install_actor_script": "0x08030259",
         "frame_actor_tick": "0x0802c46d",
         "frame_actor_remove": "0x0802c7c9",
         "frame_actor_interaction_default": "0x08011275",
@@ -4510,7 +4509,8 @@
         "frame_request_animation": "0x08001b5d",
         "frame_set_animation_record": "0x0800132d",
         "frame_set_variant_state": "0x08001be1",
-        "g_frame_actor_definitions": "0x0805a680"
+        "g_frame_actor_definitions": "0x0805a680",
+        "frame_set_subtype_object_palette": "0x08030259"
       },
       "thumb_symbols": [
         "frame_allocate_object",
@@ -4521,7 +4521,7 @@
         "frame_set_part_order",
         "frame_load_actor_group_palette",
         "resource_object_before_step",
-        "frame_install_actor_script",
+        "frame_set_subtype_object_palette",
         "frame_actor_tick",
         "frame_actor_remove",
         "frame_actor_interaction_default",
@@ -10599,13 +10599,13 @@
         "frame_load_combined_map_resource": "0x0803a0cd",
         "frame_decode_map_cell_types": "0x0802b161",
         "frame_decode_extra_map_cell_types": "0x0802b1a5",
-        "scene_stage_080301c4": "0x080301c5",
         "frame_get_map_dimensions": "0x0803a019",
         "frame_create_map_registration": "0x0803b0dd",
         "resource_decode_bytes": "0x08016979",
         "frame_restore_map_vram": "0x08039f31",
         "frame_configure_deferred_display": "0x080012f5",
-        "frame_initialize_map_palette_slots": "0x08026ba5"
+        "frame_initialize_map_palette_slots": "0x08026ba5",
+        "frame_reset_object_palette_slots": "0x080301c5"
       },
       "thumb_symbols": [
         "frame_configure_deferred_display",
@@ -10615,7 +10615,7 @@
         "frame_load_combined_map_resource",
         "frame_decode_map_cell_types",
         "frame_decode_extra_map_cell_types",
-        "scene_stage_080301c4",
+        "frame_reset_object_palette_slots",
         "frame_initialize_map_palette_slots",
         "frame_get_map_dimensions",
         "frame_create_map_registration",
@@ -12217,9 +12217,9 @@
         "frame_scene_effect_interact": "0x080334b1",
         "g_frame_scene_effect_speeds": "0x08069e3c",
         "g_frame_scene_effect_script": "0x08069e24",
-        "frame_install_actor_script": "0x08030259",
         "frame_update_actor_state": "0x0802b2fd",
-        "resource_object_before_step": "0x08001ae1"
+        "resource_object_before_step": "0x08001ae1",
+        "frame_set_subtype_object_palette": "0x08030259"
       },
       "thumb_symbols": [
         "frame_allocate_object",
@@ -12232,7 +12232,7 @@
         "frame_scene_effect_tick",
         "frame_scene_effect_remove",
         "frame_scene_effect_interact",
-        "frame_install_actor_script",
+        "frame_set_subtype_object_palette",
         "frame_update_actor_state",
         "resource_object_before_step"
       ],
@@ -13204,13 +13204,13 @@
         "g_frame_registration": "0x03004330",
         "frame_set_position": "0x080014a5",
         "frame_grid_point_to_cell": "0x08048af9",
-        "frame_need_effect_handoff_7e68": "0x08007e69",
         "frame_enable_object_flags": "0x08001c69",
         "frame_need_effect_register_3b12c": "0x0803b12d",
         "frame_update_need_effect": "0x0802d7c1",
         "frame_grid_project_effect_point": "0x0803ba55",
         "frame_need_effect_action_available": "0x0802ecc1",
-        "frame_need_effect_find_neighbor": "0x0802e5ed"
+        "frame_need_effect_find_neighbor": "0x0802e5ed",
+        "frame_need_effect_handoff_bounds": "0x08007e69"
       },
       "thumb_symbols": [
         "frame_grid_project_effect_point",
@@ -13218,7 +13218,7 @@
         "frame_need_effect_action_available",
         "frame_grid_point_to_cell",
         "frame_need_effect_find_neighbor",
-        "frame_need_effect_handoff_7e68",
+        "frame_need_effect_handoff_bounds",
         "frame_enable_object_flags",
         "frame_need_effect_register_3b12c",
         "frame_update_need_effect"
@@ -13570,10 +13570,10 @@
       "size": 132,
       "assembler_id": "binutils2101",
       "symbols": {
-        "frame_need_effect_pattern_dimensions_2f430": "0x0802f431"
+        "frame_need_effect_pattern_dimensions": "0x0802f431"
       },
       "thumb_symbols": [
-        "frame_need_effect_pattern_dimensions_2f430"
+        "frame_need_effect_pattern_dimensions"
       ],
       "negative_control": {
         "before": "case 7: dx = column - width + 1",
@@ -13645,6 +13645,269 @@
         "before": "frame_need_effect_stop_at_position(second)",
         "after": "frame_need_effect_stop_at_position(first)"
       }
+    },
+    {
+      "name": "audio_set_channel_volume",
+      "rom_offset": 16623788,
+      "size": 128,
+      "ram_address": 50332724,
+      "source": "src/audio/set_channel_volume.c",
+      "mode": "ARM",
+      "ram_copy": "audio_iwram",
+      "compiler_id": "gcc302",
+      "symbols": {
+        "g_audio_sample_channels": "0x020008b4",
+        "g_audio_sample_volume_table": "0x03000090"
+      },
+      "compiler_flags": [
+        "-O3",
+        "-marm",
+        "-mthumb-interwork",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "64 - channel->pan",
+        "after": "63 - channel->pan"
+      }
+    },
+    {
+      "name": "audio_set_channel_pan",
+      "rom_offset": 16623916,
+      "size": 196,
+      "ram_address": 50332852,
+      "source": "src/audio/set_channel_pan.c",
+      "mode": "ARM",
+      "ram_copy": "audio_iwram",
+      "compiler_id": "gcc302",
+      "symbols": {
+        "g_audio_sample_channels": "0x020008b4",
+        "g_audio_hardware_enabled": "0x03000000",
+        "g_audio_sample_volume_table": "0x03000090"
+      },
+      "compiler_flags": [
+        "-O3",
+        "-marm",
+        "-mthumb-interwork",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "channel->pan = -64",
+        "after": "channel->pan = -63"
+      }
+    },
+    {
+      "name": "audio_set_channel_position",
+      "rom_offset": 16624112,
+      "size": 80,
+      "ram_address": 50333048,
+      "source": "src/audio/set_channel_position.c",
+      "mode": "ARM",
+      "ram_copy": "audio_iwram",
+      "compiler_id": "gcc302",
+      "symbols": {
+        "g_audio_sample_channels": "0x020008b4"
+      },
+      "compiler_flags": [
+        "-O3",
+        "-marm",
+        "-mthumb-interwork",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "channel->fraction = 0",
+        "after": "channel->fraction = 1"
+      }
+    },
+    {
+      "name": "audio_start_sample",
+      "rom_offset": 16623460,
+      "size": 52,
+      "ram_address": 50332396,
+      "source": "src/audio/start_sample.c",
+      "mode": "ARM",
+      "ram_copy": "audio_iwram",
+      "compiler_id": "gcc302",
+      "symbols": {
+        "audio_start_sample_extended": "0x03000094"
+      },
+      "compiler_flags": [
+        "-O3",
+        "-marm",
+        "-mthumb-interwork",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "sample->volume",
+        "after": "sample->mixing_flags"
+      }
+    },
+    {
+      "name": "frame_set_object_palette",
+      "rom_offset": 196968,
+      "size": 92,
+      "symbols": {
+        "frame_find_object_palette_slot": "0x080302e1",
+        "g_frame_map_palette_state": "0x03001e48",
+        "display_load_palette_alternate": "0x08011709"
+      },
+      "thumb_symbols": [
+        "frame_find_object_palette_slot",
+        "display_load_palette_alternate"
+      ],
+      "source": "src/display/set_object_palette.c",
+      "negative_control": {
+        "before": "slot << 4, 16",
+        "after": "slot << 4, 15"
+      }
+    },
+    {
+      "name": "frame_find_object_palette_slot",
+      "rom_offset": 197344,
+      "size": 88,
+      "symbols": {
+        "g_frame_map_palette_state": "0x03001e48"
+      },
+      "thumb_symbols": [],
+      "source": "src/display/find_object_palette_slot.c",
+      "negative_control": {
+        "before": "i = 8; i <= 15",
+        "after": "i = 7; i <= 15"
+      }
+    },
+    {
+      "name": "frame_reset_object_palette_slots",
+      "rom_offset": 197060,
+      "size": 44,
+      "symbols": {
+        "g_frame_map_palette_state": "0x03001e48",
+        "heap_clear": "0x08027a49"
+      },
+      "thumb_symbols": [
+        "heap_clear"
+      ],
+      "source": "src/display/reset_object_palette_slots.c",
+      "negative_control": {
+        "before": "heap_clear(state, 0, 132)",
+        "after": "heap_clear(state, 0, 128)"
+      }
+    },
+    {
+      "name": "frame_set_subtype_object_palette",
+      "rom_offset": 197208,
+      "size": 16,
+      "symbols": {
+        "frame_set_object_palette": "0x08030169"
+      },
+      "thumb_symbols": [
+        "frame_set_object_palette"
+      ],
+      "source": "src/display/set_subtype_object_palette.c",
+      "negative_control": {
+        "before": "resources + object->unknown_0a",
+        "after": "resources + object->unknown_0a + 1"
+      }
+    },
+    {
+      "name": "frame_count_free_object_palettes",
+      "rom_offset": 197300,
+      "size": 44,
+      "symbols": {
+        "g_frame_map_palette_state": "0x03001e48"
+      },
+      "thumb_symbols": [],
+      "source": "src/display/count_free_object_palettes.c",
+      "negative_control": {
+        "before": "i = 8; i <= 15",
+        "after": "i = 7; i <= 15"
+      }
+    },
+    {
+      "name": "frame_release_object_palette",
+      "rom_offset": 197224,
+      "size": 68,
+      "symbols": {
+        "g_frame_map_palette_state": "0x03001e48"
+      },
+      "thumb_symbols": [],
+      "source": "src/display/release_object_palette.c",
+      "negative_control": {
+        "before": "slot > 7",
+        "after": "slot > 6"
+      }
+    },
+    {
+      "name": "frame_need_effect_handoff_bounds",
+      "rom_offset": 32360,
+      "size": 96,
+      "symbols": {},
+      "assembler_id": "binutils2101",
+      "thumb_symbols": [],
+      "source": "src/frame/frame_need_effect_handoff_bounds.c",
+      "negative_control": {
+        "before": "upper.x - 1",
+        "after": "upper.x - 2"
+      }
+    },
+    {
+      "name": "frame_need_effect_increment_counter",
+      "rom_offset": 191624,
+      "size": 12,
+      "symbols": {},
+      "assembler_id": "binutils2101",
+      "thumb_symbols": [],
+      "source": "src/frame/frame_need_effect_increment_counter.c",
+      "negative_control": {
+        "before": "value_dc++",
+        "after": "value_dc+=2"
+      }
+    },
+    {
+      "name": "frame_need_effect_decrement_counter",
+      "rom_offset": 191636,
+      "size": 12,
+      "symbols": {},
+      "assembler_id": "binutils2101",
+      "thumb_symbols": [],
+      "source": "src/frame/frame_need_effect_decrement_counter.c",
+      "negative_control": {
+        "before": "value_dc--",
+        "after": "value_dc-=2"
+      }
+    },
+    {
+      "name": "frame_need_effect_pattern_dimensions",
+      "rom_offset": 193584,
+      "size": 188,
+      "symbols": {},
+      "assembler_id": "binutils2101",
+      "thumb_symbols": [],
+      "source": "src/frame/frame_need_effect_pattern_dimensions.c",
+      "negative_control": {
+        "before": "] - 1) <= 2",
+        "after": "] - 1) <= 1"
+      }
+    },
+    {
+      "name": "frame_copy_grid_path",
+      "rom_offset": 245900,
+      "size": 76,
+      "source": "src/frame/frame_copy_grid_path.c",
+      "symbols": {
+        "g_frame_grid_search": "0x03001fd0",
+        "frame_grid_cell_to_point": "0x08048d11"
+      },
+      "thumb_symbols": [
+        "frame_grid_cell_to_point"
+      ],
+      "negative_control": {
+        "before": "byte_offset -= 4",
+        "after": "byte_offset -= 8"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork",
+        "-fno-gcse"
+      ]
     }
   ],
   "assembly": [

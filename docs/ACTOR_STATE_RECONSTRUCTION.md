@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 133 C functions spanning 22,832 verified bytes. The
+This batch reconstructs 134 C functions spanning 22,908 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -120,6 +120,7 @@ no runtime or gameplay test is claimed here.
 | `0x37028` | `frame_update_actor_routes` | 168 |
 | `0x371B4` | `frame_steer_actor_route` | 156 |
 | `0x37250` | `frame_find_actor_route` | 292 |
+| `0x3C08C` | `frame_copy_grid_path` | 76 |
 | `0x37374` | `frame_follow_actor_route` | 208 |
 | `0x37444` | `frame_reset_actor_routes` | 32 |
 | `0x37568` | `frame_finish_actor_route` | 28 |
@@ -290,7 +291,7 @@ plus/minus speed tolerance, returning one of eight directions or 8 for arrival.
 Steering handles arrival/style, contact and descriptor-driven next mode, then
 updates the actor's direction/velocity and records its previous position. Path
 search clears actor flag `0x10000`, converts start/destination points to packed
-grid cells, and calls the still-unconverted grid search at `0x3BCF4`. The search
+grid cells, and calls the matching grid search at `0x3BCF4`. The search
 status accessor reads byte `+0x199` of the shared state at `0x03001FD0`; its return
 is a full word even though that storage is one byte. Different search results
 select path following, arrival handling or descriptor fallback. A flag at job
@@ -303,8 +304,8 @@ and other styles return completion. Contact returns status 3. Final positioning
 sets the actor to the original destination and stops motion. Reset clears the
 active count and all three jobs. The flag helpers are semantic OR/AND updates
 called by beginning, searching and releasing routes. The core grid search and
-reverse-order path extraction at `0x3C08C` remain unconverted; bounded candidate
-proofs do not make those algorithms reconstructed.
+reverse-order path extraction at `0x3C08C` now match; their queue and output
+capacity contracts remain uncertain.
 
 State 37 reads the global timer at game state `+0x74C`. Values above -2 submit
 scene request 37 with mode byte 0. Otherwise, stage word `+0x440` selects request
@@ -943,7 +944,8 @@ value-reader field, terrain class, option ID range, condition action ID, descrip
 game-value ceiling, parameter level bound, state-41 animation ID, sequence mode and state-42 cue threshold, effect flags, completion mode and state-43 countdown and state-47 bound adjustment.
 
 All 29 direct handler functions are reconstructed here. Useful next
-connected targets are the need target selector `0x6F20` and reverse path extraction `0x3C08C`.
+connected targets include the candidate-cell selector `0x3B75C` and buffer
+lifetime dependencies.
 Camera-margin predicate `0x67E0` and terrain query `0x2ABB0` remain connected
 next targets. World-choice cleanup `0xA0A4` and target-cell search `0x3B75C` are additional
 connected next targets. The retained CFGs are closed; those scans alone do not establish C coverage, final function boundaries
@@ -997,5 +999,9 @@ The eleven matching queue, scoring, parent-chain and pool helpers add 908 bytes.
 Their layout evidence, compiler constraints, source controls and remaining
 preconditions are recorded in [ACTOR_ROUTE_SEARCH.md](ACTOR_ROUTE_SEARCH.md).
 The central 720-byte search and two 100-byte buffer setup/reset functions now
-match, bringing this connected closure to 14 functions and 1,828 bytes. Reverse
-path extraction and buffer lifetime/release dependencies remain unconverted.
+match, and the 76-byte reverse extractor completes the result handoff, bringing
+this connected closure to 15 functions and 1,904 bytes. The extractor uses
+ordinary C and a per-function compiler option, with only explicit alignment
+glue. Its offset-step control and the existing route caller control reject.
+Buffer lifetime/release dependencies and output-capacity guarantees remain
+unresolved; runtime behaviour is not claimed.

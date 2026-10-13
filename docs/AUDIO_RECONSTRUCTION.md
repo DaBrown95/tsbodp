@@ -332,3 +332,42 @@ consumers of its shared audio headers, and their changed-source controls were
 reverified. The tooling suite adds failure cases for span accounting, stale
 treemap credit and controls outside a retained include closure. No reference
 hash, instruction body or compared range was changed.
+
+## Sample handoff and channel controls
+
+Four further copied ARM functions contribute 456 matching C bytes, including
+all literal pools: sample start at RAM `0x030002EC` (52 bytes), volume at
+`0x03000434` (128), pan at `0x030004B4` (196), and position at `0x03000578`
+(80). The audited copy maps these to ROM `0xFDA764`, `0xFDA8AC`, `0xFDA92C`
+and `0xFDA9F0`, respectively. Each compiles identically at its RAM address
+with pinned GNU GCC 3.0.2 and ordinary C, without instruction assembly or
+register constraints.
+
+The three channel setters choose the low-byte handle index, then require the
+record's complete stored handle to match. Volume narrows the requested value
+to a byte. Volume and pan both recompute the left/right byte volumes from the
+selected table entry using `(64 - pan)` and `(64 + pan)`, shifted by thirteen.
+The hardware-enabled byte at `0x03000000` also selects the pan path: a nonzero
+byte derives a mixer index from the requested signed pan; zero forces index
+one and pan minus 64. These exact game values differ from the inspected
+upstream mono path. Position moves the cursor only when the requested offset
+is below the sample end, and clears the fractional position. A valid handle
+returns one even when that position was rejected; this is the observed
+behavior, not an invented error check.
+
+The start wrapper passes the sample header's word at `+8`, volume byte at
+`+0xE` and signed pan byte at `+0xF` to the 600-byte extended allocator at
+`0x03000094`, which remains unconverted. The partial header also records its
+statically observed loop length, end pointer and loop/mixing bytes; these
+names and the fixed-step interpretation remain provisional until the allocator
+and its consumers close that evidence. The Thumb playback thunk still remains
+an explicit original region. The channel setters now connect to the accepted
+channel mixer and release lifecycle; no audible-output claim follows.
+
+These bodies adapt `kramPlay`, `kramSetVol`, `kramSetPan` and `kramSetPos`
+from `lib/mixer.arm.c` at the pinned Krawall revision above. Their source
+notices retain LGPL 2.1-or-later and record game layout, mixer-index and
+parameter differences. Changing the volume factor, mono pan, fractional
+reset and sample-header volume selection each compiles and rejects with a
+one-byte mismatch. Fresh canonical comparisons retain every expected and
+candidate byte plus compiler/link commands in ignored local reports.
