@@ -3,11 +3,10 @@
 #include "display_object_palette.h"
 #include "display_time.h"
 struct PaletteRangeConfig;
-struct SceneRequest { unsigned int unknown_00, mode, scene, parameter; };
+#include "scene_request.h"
 struct SceneContext { unsigned int flags, period; unsigned int unknown_08; void *palette; };
 struct SceneModeFlags { unsigned int unknown_00, flags; };
 struct ScenePaletteRangeConfig { const struct PaletteRangeConfig *resource; unsigned int unknown_04, unknown_08; };
-extern struct SceneRequest g_scene_request;
 extern struct SceneContext g_scene_context;
 extern struct SceneModeFlags g_scene_mode_flags;
 extern unsigned int g_scene_id, g_palette_range_enabled_mask;

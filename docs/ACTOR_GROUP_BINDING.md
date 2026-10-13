@@ -1,6 +1,6 @@
 # Actor group resources and palette composition
 
-Twelve connected C functions reconstruct 1,588 bytes, including literal pools and
+Fifteen connected C functions reconstruct 2,168 bytes, including literal pools and
 alignment. They close the resource and palette dependencies of the accepted
 actor factory, actor-part updater and scene-player factory. Names describe the
 observed part indices and transfers; this is static/compiler evidence, without
@@ -12,6 +12,9 @@ a runtime or gameplay experiment.
 | `0x08001450` | `frame_set_part_variants` | 40 |
 | `0x080140CC` | `frame_create_palette_menu_actors` | 396 |
 | `0x08014258` | `frame_update_palette_menu_actor` | 232 |
+| `0x08014340` | `frame_step_palette_menu_choices` | 168 |
+| `0x080143E8` | `frame_draw_palette_menu_row` | 228 |
+| `0x080144CC` | `frame_step_palette_menu` | 184 |
 | `0x080161AC` | `frame_load_actor_palette_pair` | 32 |
 | `0x080256A4` | `frame_create_palette_scene_actor` | 248 |
 | `0x0803AD64` | `frame_bind_actor_group` | 164 |
@@ -210,6 +213,52 @@ library alias.
 Fresh canonical proofs under `reports/audio-root/palette-menu-canonical/`
 include controls for flags 17 to 25, the final selector's source word and an
 advanced string pointer. All three reject actual source changes. The incomplete
-inventory records constructor callers `0x08015CB8`/`0x08015DE8` and updater caller
-`0x08014340`, still unconverted. Static connectivity, full-ROM byte equality and
-runtime menu behavior remain separate claims.
+inventory records constructor callers `0x08015CB8`/`0x08015DE8`, still
+unconverted. The updater caller `0x08014340` is reconstructed below. Static
+connectivity, full-ROM byte equality and runtime menu behavior remain separate
+claims.
+
+
+The connected input, redraw and outer button handlers add 580 bytes. The input
+handler passes the scene-request word at `0x03004358` to the accepted local
+vertical helper with bounds 0 through 7 and wrapping enabled. It repeats while
+the row is disabled in the byte table at `0x08051FA0`, then uses the horizontal
+helper on that row's word at `0x03001918`, bounded by the count byte at
+`0x08051F70` minus one. Changed rows or choices play cue zero; changing choice
+zero redraws row five before refreshing actor palettes. The unchecked loop and
+count subtraction are preserved; no fallback for an all-disabled table or zero
+count is added. This is source behavior, without a runtime validation claim.
+
+The redraw reads a four-byte coordinate row at `0x08051F80`, with byte x/y
+fields, selects font three and a color from the enabled byte, looks up token
+row plus 24, then invokes the accepted text-block drawer at tile row times 40
+plus one. Row five clears its background rectangle and conditionally uses token
+32. Redrawing row zero can also refresh row five with token 32 or 29 according
+to choice zero when the saved byte at game-state `+0x20` differs. Both literal
+pools are compiled in their original positions, including the pool between the
+conditional text selection branches. Its complete 228-byte extent ends at the
+next entry `0x080144CC`; an initial trial's 232-byte metadata was an arithmetic
+error and supplied no accepted coverage.
+
+The outer handler reads the local player's pressed halfword at `0x03004228`.
+Button masks one/two write transition words eight and thirty at request `+0x10`
+and `+0x14`, select parameter nine/zero and play cue twelve. Direction bits
+`0xF0` call the input handler; a changed row redraws the old and new rows,
+updates object slot two's ID, sets variant state 58, then selects resource index
+five for row seven or four otherwise and invokes the accepted item refresher.
+The request view is shared through `scene_request.h`; its first four words
+retain the previous layout, and the two following words are already observed
+in the display scene-request view. These declarations describe overlapping
+state at `0x03004350`, not separate allocations or an established global size.
+
+All three match in ordinary C without register bindings. Reusing one previous
+selection word across the input phases closes the input handler's register
+lifetimes; expressing the directional mask as a word initialized to `0xF0`
+and then ANDed closes the outer handler's final two operand-register bytes.
+The redraw's explicit enabled-byte load followed by its color decision closes
+its seven-byte scheduling difference. Their complete extents include all
+literal pools and zero alignment. Fresh canonical proofs under
+`reports/audio-root/palette-menu-control-canonical/` preserve controls changing
+a captured choice value, text token and transition parameter; all reject.
+Affected earlier scene/menu consumers are recompiled with their existing
+controls and add no new coverage.

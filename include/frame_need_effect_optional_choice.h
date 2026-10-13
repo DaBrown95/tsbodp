@@ -14,11 +14,11 @@ extern unsigned char g_optional_choice_count;
 unsigned int frame_step_optional_choice_attachment_job(struct FrameNeedEffectState *,
                                                        struct FrameActorAttachmentRecord *);
 
-/* Explicit original helper boundaries; these bodies are not reconstructed.
- * Their unused return declarations and broader input contracts are provisional. */
+/* Connected helper interfaces; broader input contracts remain provisional. */
 void frame_optional_choice_begin(void);
 void frame_optional_choice_open_secondary(void);
 void frame_optional_choice_refresh(void);
+/* Explicit original remaining helper boundaries; no body coverage claimed. */
 void frame_optional_choice_apply(unsigned char, struct FrameActorAttachmentRecord *);
 void frame_optional_choice_apply_special(void);
 void frame_optional_choice_apply_page(unsigned char, struct FrameActorAttachmentRecord *);

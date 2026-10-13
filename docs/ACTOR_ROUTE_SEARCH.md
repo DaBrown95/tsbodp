@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 93 C functions and 12,356 bytes:
+The connected route-search path reconstructs 98 C functions and 12,952 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -13,7 +13,8 @@ threshold APIs, and the secondary threshold's optional need-effect/cue consumer
 plus its five parameter and retained-effect producers, parameter consumer and
 two attachment-job controllers and five connected selection/setup/dispatch/capacity callbacks,
 followed by six mode-two selection functions, a three-function optional activity path,
-and fourteen connected completion, parameter-job and choice functions.
+and fourteen connected completion, parameter-job and choice functions, followed by
+five choice-list setup, filtering, clock classification and refresh helpers.
 Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
@@ -71,6 +72,11 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x46514` | `frame_begin_optional_parameter_attachment_job` | 72 |
 | `0x4655C` | `frame_dispatch_optional_parameter_attachment_job` | 44 |
 | `0x43B30` | `frame_step_optional_choice_attachment_job` | 800 |
+| `0x43E50` | `frame_optional_choice_begin` | 92 |
+| `0x43EAC` | `frame_optional_choice_open_secondary` | 92 |
+| `0x43F08` | `frame_optional_choice_build_available` | 148 |
+| `0x4423C` | `frame_optional_choice_refresh` | 32 |
+| `0x2CCA8` | `frame_optional_choice_classify` | 232 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
 | `0x355AC` | `frame_next_random_secondary_word` | 88 |
@@ -1236,8 +1242,9 @@ state-word switch closed the initial 796-byte/285-difference candidate using
 ordinary C with no register bindings. The complete 800-byte extent includes
 two zero tail-alignment bytes omitted by the provisional 798-byte CFG extent.
 
-Original helpers at `0x43E50`, `0x43EAC`, `0x4423C`, `0x4425C`, `0x4418C`,
-`0x44020` and `0x2C720` remain explicit external dependencies. Their broader
+Original helpers at `0x43F9C`, `0x4425C`, `0x4418C`, `0x44020` and `0x2C720`
+remain explicit external dependencies; the connected setup and refresh interfaces
+are reconstructed by the following batch. Their broader
 contracts and unused return declarations are provisional; no body bytes are
 credited for them. All fourteen accepted extents have changed-source controls,
 including a real halfword-countdown edit in the choice controller. Current
@@ -1247,3 +1254,70 @@ remain in ignored reports; publication metadata is
 `frame-need-optional-completion-batch-manifest.json`. This is static and compiler
 matching evidence, with runtime interaction, UI, sample and cancellation
 behaviour still untested.
+
+
+## Optional choice-list and clock-classifier closure
+
+Five further C replacements cover 596 bytes. The 800-byte choice job calls the
+92-byte initial setup, 92-byte secondary setup and 32-byte refresh wrapper at
+their original addresses. Initial setup records the available-list count in
+the byte at `0x030021F2`; both setup paths write the scene text halfwords at
+`0x030059F0`, clear only request bytes +4, +1 and +2 at `0x03005A00`, then call
+the original stage helper with two. The excluded-world branch writes titles
+488 and 489, while its other branch leaves the second halfword unchanged.
+Secondary setup writes 492, 495 and 493 and writes the fourth halfword to 497
+only when condition `(4,0,0)` is complete and `(4,0,1)` is incomplete. It does
+not invent a default value for that preserved fourth entry. Refresh delegates
+to the still-unconverted page builder at `0x43F9C`, discards its result, and
+performs the same request-byte handoff. The three list-control bytes at
+`0x030021F0/1/2` remain distinct from the request storage at `0x03005A00`.
+
+The 148-byte available-list producer initializes 24 observed bytes at
+`0x030021D8` by reading, ORing with 255 and writing each byte. A packed byte
+bitfield expresses that observed operation and one-byte stride; this is a
+compiler matching view, not proof of the original source type or allocation.
+It then visits indices zero through 23, calls the classifier with a word output
+and two separate byte outputs, and appends qualifying indices. Initialized
+relation entries qualify except index 13 when condition group `(4,4)` is
+complete; an uninitialized relation entry qualifies only at index five. The
+word and two byte temporary objects are separate C locals, matching the stack
+out-argument addresses without padding or register constraints. Early plain
+byte and aggregate-output variants remain preserved as failed comparisons.
+The observed writer span and maximum append count do not establish wider
+buffer ownership or arbitrary-input safety.
+
+The 232-byte classifier indexes the established pointer table at `0x08D7162C`
+with `(unsigned char)(index + 12)` and rejects a null slot. It reads
+the eight-byte clock at game-state +8, the stage word at +0x440 and selected
+actor byte at +0x740. These are a bounded overlay of existing scene storage;
+the byte formerly called `current_world` by a separate scene view is also this
+clock's hour at +0xA. No shared scene layout is changed by this overlay.
+When the narrowed index equals selected actor minus 18, hours nine through 16
+produce word 50; otherwise it returns the stage-indexed byte at `0x0805FBA4`,
+weekday plus one, and first-hour byte nine. Other slots produce the current
+hour/weekday table byte and, unless it is 50, advance the signed hour until
+the table value changes. Hour rollover increments the weekday byte and takes
+its unsigned remainder by seven through the actual `__umodsi3` body at
+`0x4CF50`. Table bounds, termination for malformed tables and the meaning of
+50 remain unproven. Inferred names describe these observed operations only.
+
+Signed-byte hour iteration and pointer-first row address arithmetic closed the
+classifier's main mismatch. Three semantic compiler constraints remain: a
+short-lived unsigned table offset in r0, table base in r1, and table-slot pointer
+in callee-saved r5. The offset's two unsigned shifts compute exactly
+`((unsigned char)(index + 12)) * 4`; they do not copy an instruction body.
+The first two constrained values end before calls, while the r5 pointer survives
+the weekday and remainder calls. Removing each constraint was tested and
+retained as a failed full comparison. There is no instruction assembly in the
+body; explicit zero alignment is separate source glue.
+
+All five extents have real source controls and fresh public-header proofs. The
+existing 800-byte choice caller is reverified after the helper-status comment
+change. The page builder remains excluded: a natural cached-limit form is
+132 bytes with three differing bytes, while earlier pointer forms differed
+more substantially. The original apply, special, page-apply and completion
+bodies also remain explicit. Publication metadata is
+`frame-optional-choice-list-batch-manifest.json`; raw complete disassemblies,
+source variants, candidate/expected bytes and controls remain private. Whole-ROM
+and source-byte equality do not establish UI, clock, relationship or gameplay
+behaviour.

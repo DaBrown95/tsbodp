@@ -1881,3 +1881,30 @@ every positive matches and every control rejects. Fresh setter, getter and
 removal proofs also pass, totaling 124 new C bytes across the paired entries.
 These receipts are under the adjacent `resource-owner-pair-canonical-*`
 reports. Header and caller rechecks add no coverage or runtime evidence.
+
+The connected player spawn lookup at `0x0800AE68` adds 84 verified C bytes.
+It selects an eight-byte default record from `0x08D70AC0` using the slot byte,
+then searches the arena rooted at `0x03002EE8` for the first record with the
+requested group and slot. The arena count is the halfword at offset two;
+records begin at offset four with an eight-byte stride. The already matched
+arena copier at `0x0800AFA8` copies precisely that header and word-pair stride.
+The player constructor reads the returned signed x/y halfwords and direction
+byte, while the lookup proves the group and slot bytes at offsets four and
+five. Those names replace the two unknown bytes without changing the existing
+eight-byte resource layout. The byte at offset seven remains uninterpreted.
+
+The search retains an eight-bit index and its original wrapping behavior. No
+arena count bound, default-table extent or index validation is inferred. Its
+count snapshot is used first by the nonempty check and then retained for the
+loop; this ordinary C lifetime reproduces the original single load without
+register bindings. The complete extent includes 74 instruction bytes, both
+four-byte literals and two zero alignment bytes. `0x0800AEBC` starts a separate
+40-byte accessor and is excluded from this replacement.
+
+Changing the group equality test to inequality rejects by one byte. All 20
+previously accepted consumers of the refined scene player header, totaling
+4,784 bytes and including the 456-byte player constructor, still match with
+their actual changed-source controls rejected. These rechecks add no coverage.
+Fresh sources, controls, complete raw comparisons and boundary evidence are
+retained under the local `resource-spawn-canonical-*` reports. This is static
+and compiler evidence; runtime and gameplay behavior remain unverified.

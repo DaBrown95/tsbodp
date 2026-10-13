@@ -21273,6 +21273,211 @@
         "after": "&g_save_flag_words[0], 3"
       },
       "source": "src/save/read_flag_words.c"
+    },
+    {
+      "name": "frame_step_palette_menu_choices",
+      "source": "src/frame/frame_step_palette_menu_choices.c",
+      "rom_offset": 82752,
+      "size": 168,
+      "symbols": {
+        "g_scene_request": "0x03004350",
+        "g_frame_actor_palette_menu_enabled": "0x08051fa0",
+        "g_frame_actor_palette_menu_counts": "0x08051f70",
+        "g_frame_actor_palette_menu_choices": "0x03001918",
+        "input_step_local_vertical_pressed": "0x0801f5c9",
+        "input_step_local_horizontal_pressed": "0x0801f625",
+        "audio_play_animation_cue": "0x08040ffd",
+        "frame_draw_palette_menu_row": "0x080143e9",
+        "frame_update_palette_menu_actor": "0x08014259"
+      },
+      "thumb_symbols": [
+        "input_step_local_vertical_pressed",
+        "input_step_local_horizontal_pressed",
+        "audio_play_animation_cue",
+        "frame_draw_palette_menu_row",
+        "frame_update_palette_menu_actor"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "previous = choices[state2->scene];",
+        "after": "previous = choices[state2->scene] + 1;"
+      }
+    },
+    {
+      "name": "frame_draw_palette_menu_row",
+      "source": "src/frame/frame_draw_palette_menu_row.c",
+      "rom_offset": 82920,
+      "size": 228,
+      "symbols": {
+        "g_frame_actor_palette_menu_enabled": "0x08051fa0",
+        "g_frame_actor_palette_menu_choices": "0x03001918",
+        "g_frame_actor_palette_menu_text_points": "0x08051f80",
+        "g_frame_actor_palette_menu_state": "0x03003950",
+        "display_text_select_font": "0x0801ae75",
+        "display_scene_lookup_text": "0x08045009",
+        "display_fill_background_constant_rectangle": "0x0800d7fd",
+        "display_text_draw_block": "0x0801af99"
+      },
+      "assembler_id": "binutils2101",
+      "thumb_symbols": [
+        "display_text_select_font",
+        "display_scene_lookup_text",
+        "display_fill_background_constant_rectangle",
+        "display_text_draw_block"
+      ],
+      "negative_control": {
+        "before": "text=display_scene_lookup_text(row+24);",
+        "after": "text=display_scene_lookup_text(row+25);"
+      }
+    },
+    {
+      "name": "frame_step_palette_menu",
+      "source": "src/frame/frame_step_palette_menu.c",
+      "rom_offset": 83148,
+      "size": 184,
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "g_input_pressed": "0x03004228",
+        "g_input_config": "0x030040e0",
+        "g_scene_request": "0x03004350",
+        "g_frame_actor_palette_menu_objects": "0x030043b0",
+        "frame_step_palette_menu_choices": "0x08014341",
+        "frame_draw_palette_menu_row": "0x080143e9",
+        "frame_set_variant_state": "0x08001be1",
+        "display_scene_refresh_item": "0x08028321",
+        "audio_play_animation_cue": "0x08040ffd"
+      },
+      "thumb_symbols": [
+        "frame_step_palette_menu_choices",
+        "frame_draw_palette_menu_row",
+        "frame_set_variant_state",
+        "display_scene_refresh_item",
+        "audio_play_animation_cue"
+      ],
+      "negative_control": {
+        "before": "state->parameter=9;",
+        "after": "state->parameter=10;"
+      }
+    },
+    {
+      "name": "frame_optional_choice_begin",
+      "rom_offset": 278096,
+      "size": 92,
+      "symbols": {
+        "frame_optional_choice_build_available": "0x08043f09",
+        "g_optional_choice_count": "0x030021f2",
+        "g_frame_world_id": "0x03004334",
+        "frame_world_in_idle_exclusion_set": "0x080269f5",
+        "g_need_effect_choice_text": "0x030059f0",
+        "g_need_effect_choice_counters": "0x03005a00",
+        "display_scene_stage_08027dc0": "0x08027dc1"
+      },
+      "thumb_symbols": [
+        "frame_optional_choice_build_available",
+        "frame_world_in_idle_exclusion_set",
+        "display_scene_stage_08027dc0"
+      ],
+      "negative_control": {
+        "before": "text[0]=488",
+        "after": "text[0]=487"
+      },
+      "source": "src/frame/frame_optional_choice_begin.c"
+    },
+    {
+      "name": "frame_optional_choice_open_secondary",
+      "rom_offset": 278188,
+      "size": 92,
+      "symbols": {
+        "g_need_effect_choice_counters": "0x03005a00",
+        "g_need_effect_choice_text": "0x030059f0",
+        "condition_is_complete": "0x0802a7c5",
+        "display_scene_stage_08027dc0": "0x08027dc1"
+      },
+      "thumb_symbols": [
+        "condition_is_complete",
+        "display_scene_stage_08027dc0"
+      ],
+      "negative_control": {
+        "before": "text[2]=493",
+        "after": "text[2]=494"
+      },
+      "source": "src/frame/frame_optional_choice_open_secondary.c"
+    },
+    {
+      "name": "frame_optional_choice_build_available",
+      "rom_offset": 278280,
+      "size": 148,
+      "symbols": {
+        "g_optional_choice_values": "0x030021d8",
+        "frame_optional_choice_classify": "0x0802cca9",
+        "display_menu_relation_initialized": "0x08035fe1",
+        "g_display_menu_relation_values": "0x03003980",
+        "condition_group_complete": "0x0802a815"
+      },
+      "thumb_symbols": [
+        "frame_optional_choice_classify",
+        "display_menu_relation_initialized",
+        "condition_group_complete"
+      ],
+      "negative_control": {
+        "before": "index!=13",
+        "after": "index!=12"
+      },
+      "source": "src/frame/frame_optional_choice_build_available.c"
+    },
+    {
+      "name": "frame_optional_choice_refresh",
+      "rom_offset": 279100,
+      "size": 32,
+      "symbols": {
+        "g_need_effect_choice_counters": "0x03005a00",
+        "frame_optional_choice_build_page": "0x08043f9d",
+        "display_scene_stage_08027dc0": "0x08027dc1"
+      },
+      "thumb_symbols": [
+        "frame_optional_choice_build_page",
+        "display_scene_stage_08027dc0"
+      ],
+      "negative_control": {
+        "before": "display_scene_stage_08027dc0(2)",
+        "after": "display_scene_stage_08027dc0(3)"
+      },
+      "source": "src/frame/frame_optional_choice_refresh.c"
+    },
+    {
+      "name": "frame_optional_choice_classify",
+      "rom_offset": 183464,
+      "size": 232,
+      "symbols": {
+        "g_frame_scene_actor_world_tables": "0x08d7162c",
+        "g_optional_choice_world": "0x03003950",
+        "g_optional_choice_stage_values": "0x0805fba4",
+        "display_time_weekday": "0x08010809",
+        "__umodsi3": "0x0804cf51"
+      },
+      "thumb_symbols": [
+        "display_time_weekday",
+        "__umodsi3"
+      ],
+      "negative_control": {
+        "before": "hour>23",
+        "after": "hour>22"
+      },
+      "source": "src/frame/frame_optional_choice_classify.c"
+    },
+    {
+      "name": "frame_scene_player_spawn_resource",
+      "rom_offset": 44648,
+      "size": 84,
+      "source": "src/frame/frame_scene_player_spawn_resource.c",
+      "symbols": {
+        "g_resource_arena": "0x03002ee8",
+        "g_frame_scene_player_spawn_defaults": "0x08d70ac0"
+      },
+      "negative_control": {
+        "before": "view->records[0].group == group",
+        "after": "view->records[0].group != group"
+      }
     }
   ],
   "assembly": [
