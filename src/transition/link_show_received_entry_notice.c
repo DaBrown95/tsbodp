@@ -2,7 +2,7 @@
 
 void link_show_received_entry_notice(void)
 {
- link_stage_080057a0();
+ display_scene_hide_entry_objects();
  display_text_select_font(1,3,0);
  if(event_get_link_slot()==g_link_entry_offers.selected) {
   display_text_draw_all_lines(71,165,16,136,display_scene_lookup_text(292),1);

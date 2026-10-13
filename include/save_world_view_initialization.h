@@ -3,6 +3,7 @@
 #include "save_world_display.h"
 #include "scene_primary.h"
 #include "display_text_raster.h"
+#include "save_world_view_resources.h"
 
 /* Descriptor letters identify their load order, not recovered asset names. */
 extern const struct BackgroundResource g_save_world_view_background_a;
@@ -25,9 +26,4 @@ const unsigned short *display_load_background_dma(unsigned int,
     const struct BackgroundResource *, unsigned short, unsigned short,
     unsigned int, unsigned int);
 
-/* Original providers remain unconverted. These argument widths follow only
- * this caller; the child at world +20 has no complete contract here. */
-void scene_view_original_3aff0(unsigned int, unsigned int, unsigned int,
-    unsigned int, unsigned int, void *);
-void scene_view_original_34630(unsigned int, unsigned int, unsigned int);
 #endif

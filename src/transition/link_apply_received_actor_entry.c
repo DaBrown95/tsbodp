@@ -3,7 +3,7 @@
 void link_apply_received_actor_entry(void)
 {
  display_text_select_font(1,3,0);
- link_stage_080057a0();
+ display_scene_hide_entry_objects();
  if(event_get_link_slot()==g_link_entry_offers.selected) {
   actor_entry_add(g_link_entry_game_state.entries,g_link_received_join.metadata[1],g_link_received_join.metadata[2],g_link_received_join.metadata[3]);
   {

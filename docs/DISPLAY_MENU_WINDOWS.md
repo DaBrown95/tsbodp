@@ -111,10 +111,15 @@ request mode, loads another palette resource and range definition, and invokes
 another relation-resource stage. Background 3 receives velocity `-65536` on each
 axis, consistent with the accepted signed fixed-point motion fields. Background
 1 receives the panel resource; its returned map pointer is stored as the observed
-32-bit menu word at `+10`. The panel filler receives catalog-state `+20` as its
-resource descriptor pointer. These pointer roles follow actual load/store and
-call shapes; broader asset formats remain unconverted and no assets are copied
-into source.
+32-bit menu word at `+10`. Its formerly provisional panel filler is the matching
+`scene_view_load_selected_resource` at `0x0803AFF0`. The canonical caller now
+uses the same first-five-byte selection view as the world-view initializer,
+through catalog-state `+20`. The provider explicitly narrows the incoming tile
+and palette words; the menu's constant arguments preserve their original bytes.
+All current menu-scene header consumers and their actual changed-source controls
+are freshly verified after this same-address alias correction. Broader asset
+formats remain unconverted and no assets are copied into source; the producer's
+unwritten first palette colour is documented in `SAVE_WORLD_DISPLAY.md`.
 
 The title uses text base `0x1789 + definition`, then footer preparation runs. The
 initializer configures both windows with inside mask `0x3F`, outside mask `0x3E`,

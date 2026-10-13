@@ -192,9 +192,10 @@ decoded-word resource result. The explicit pointer cast is a shared access view
 used by the matching gauge consumer, without an asset-format completeness claim.
 The already named row palette descriptor at `0x080D04CC` is reused. Four other
 descriptor letters record only their load order. Their data remains original
-ROM input. Calls at `0x0803AFF0` and `0x08034630` remain explicit unconverted
-providers; the former receives the world child at `+0x20`. This caller alone
-does not establish the child's full extent or either provider's complete role.
+ROM input. Its resource producers at `0x0803AFF0` and `0x08034630` are
+reconstructed below; the first receives the world child at `+0x20`. This caller
+alone does not establish the child's full extent or either provider's complete
+role.
 
 Three semantic C register constraints preserve observed lifetimes: a short
 row-index access value in `r1`, the bottom row root in `r6` across the transition
@@ -206,3 +207,67 @@ No instruction body, output fixup or allocated section is added. The main
 816-byte coordinator remains unconverted, with its valid ordinary-C attempts
 and raw comparisons retained separately from coverage. Runtime notices,
 background appearance, asset meanings and complete state bounds remain unproved.
+
+## Selected background and palette producer
+
+`scene_view_load_selected_resource` at `0x0803AFF0` adds 236 matching C bytes,
+including its two observed zero alignment bytes before the next original entry
+at `0x0803B0DC`. This brings the selected-row display path to fourteen verified
+functions and 1,908 bytes. The producer and its accepted initializer caller are
+freshly compared with actual changed-source controls. It uses ordinary semantic
+C without register constraints; a standard alignment directive preserves the
+function's trailing alignment rather than adding an instruction body.
+
+The producer selects a resource from the pointer table at `0x08D73650` using
+selection bytes zero and two, stages its background data through the matching
+DMA resource provider, and fills a four-by-four map rectangle. Incoming tile
+and palette words are explicitly narrowed through halfword locals. Its second
+resource lookup occurs after those calls, as in the original. Bytes one, three
+and four select palette segments with a 32-byte stride. The four-byte union
+prefix expresses the original masked word read without traversing beyond a
+declared byte array. Only the first five input bytes are accessed; complete
+storage and index bounds remain unknown.
+
+When the masked group/variant word equals `0x00030000`, the three palette copy
+windows contain 14, eight and eight bytes. Otherwise two windows contain 18 and
+twelve bytes. All copies start at buffer byte two or later. The first palette
+halfword is deliberately unwritten before the full sixteen-colour staging
+call, preserving the original non-clearing behaviour. This establishes neither
+an initialized first colour nor runtime palette appearance. The matching
+palette wrapper stages all 32 bytes through `display_transfer_palette` and the
+existing `heap_copy` address alias, then transfers sixteen halfwords by DMA3.
+That C copy helper reads bytes on its unaligned path and words on its aligned
+path; the chain is not a BIOS-only transfer, and defined C-language behaviour
+for the unwritten colour is not established. Offset-first byte
+address calculations preserve the raw instruction scheduling without changing
+the selected byte windows. A real copy-length edit from 14 to twelve rejects.
+The 816-byte main view coordinator remains unconverted, with useful failed
+trials retained privately.
+
+## Fixed background resource placement
+
+`scene_view_load_fixed_resource` at `0x08034630` adds 48 matching C bytes through
+the next original entry at `0x08034660`. The connected selected-row display
+family now contains fifteen verified functions and 1,956 bytes. This producer
+stores the background word at `0x03001F04`, the tile halfword at `0x03001F08`, and
+the palette halfword at `0x03001F0A`, then reloads the tile and stages the fixed
+resource at `0x080D098C` through the already matching background resource loader.
+These separate global declarations are address views of the same observed
+eight-byte placement record. They do not imply independent storage ownership.
+The descriptor's asset meaning remains unknown.
+
+The incoming word interface is retained. A halfword local bound to `r3` captures
+the palette, and its ordinary word promotion occurs before the stores. That
+short semantic lifetime reproduces the original early zero extension; the
+value is consumed as the loader's fourth argument and is unused after the call.
+No binding spans a call. An actual changed palette assignment rejects, and the
+420-byte initializer is freshly verified after both same-address provider
+renames. The other accepted selected-resource caller, the 744-byte menu
+initializer, now uses the same canonical typed declaration at the same address.
+Its existing constant tile/palette arguments preserve the raw call. All current
+menu-scene header importers are freshly verified with their own actual controls;
+this alias correction adds no source-coverage credit. Genuine compiler-profile
+attempts that emitted extra allocated data
+were rejected rather than stripped; raw failures remain private. The full
+producer extents, pools and source controls pass independently of runtime
+background appearance or complete palette/index bounds.

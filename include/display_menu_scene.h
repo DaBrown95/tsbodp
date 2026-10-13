@@ -1,6 +1,7 @@
 #ifndef DISPLAY_MENU_SCENE_H
 #define DISPLAY_MENU_SCENE_H
 #include "display_menu.h"
+#include "save_world_view_resources.h"
 
 struct BackgroundResource;
 struct PaletteRangeConfig;
@@ -15,8 +16,6 @@ void display_menu_clear_effects(void);
 void display_menu_prepare_relation(void *, unsigned int);
 int display_menu_read_relation(void *, unsigned int);
 void display_menu_load_relation_resource(void);
-void display_menu_fill_panel(unsigned int, int, int, unsigned short,
-                             unsigned short, const void *);
 void display_menu_prepare_footer(void);
 void display_menu_prepare_primary(void);
 void display_menu_prepare_secondary(void);

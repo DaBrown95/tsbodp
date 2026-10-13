@@ -44,9 +44,10 @@ void scene_initialize_view(unsigned int index, unsigned int mode)
                 ++i;
             } while (i <= 7);
             display_fill_background(0, 0);
-            scene_view_original_3aff0(0, 0, 16, 368, 0,
-                (unsigned char *)&g_save_world_init_state + 0x20);
-            scene_view_original_34630(0, 428, 2);
+            scene_view_load_selected_resource(0, 0, 16, 368, 0,
+                (const struct SceneViewResourceSelection *)
+                ((unsigned char *)&g_save_world_init_state + 0x20));
+            scene_view_load_fixed_resource(0, 428, 2);
             map = display_load_background_resource_dma(0, &g_save_world_view_background_a, 54);
             g_save_world_gauge_map = (const struct DisplayStoredMap *)map;
             g_save_world_transition_map = display_load_background_resource_dma(

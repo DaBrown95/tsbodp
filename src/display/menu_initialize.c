@@ -61,7 +61,8 @@ void display_menu_initialize(void) {
  { const unsigned short *map=display_load_background(1,&g_display_menu_panel_resource,278,13,0,0);
  struct DisplayMenuState *menu=(struct DisplayMenuState *)&g_display_menu_state;
  menu->unknown_0c[1]=(unsigned int)map;
- display_menu_fill_panel(1,1,15,426,15,(const unsigned char *)&g_display_catalog_state+0x20);
+ scene_view_load_selected_resource(1,1,15,426,15,
+  (const struct SceneViewResourceSelection *)((const unsigned char *)&g_display_catalog_state+0x20));
  display_text_set_background_control(g_display_menu_control1);
  display_text_select_font(3,0,-1);
  display_text_set_line_height(12);

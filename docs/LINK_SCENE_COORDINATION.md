@@ -140,13 +140,13 @@ before the final notice. String termination, offer-index validity, protocol
 completion and runtime numeric ranges remain uncertain; no guards or invented
 initialization are added.
 
-The companion notice calls the original `0x080057A0` provider, configures the
+The companion notice calls `display_scene_hide_entry_objects` at `0x080057A0`, configures the
 font, and chooses resources 292 or 449 according to the signed selection
 comparison. Sequence sixty-one depends on the selection and identifier tests.
 Both functions then choose resource 227 or 225 according to the received
 identifier. These are observed resource IDs; their original text stays private
-and unconverted. The sequence selector at `0x080411BC` also remains an explicit
-original dependency.
+and unconverted. The sequence selector at `0x080411BC` is now reconstructed;
+its evidence is recorded in [the sequence-selection note](AUDIO_SEQUENCE_SELECTION.md).
 
 The notice uses ordinary C. The update has two short scalar register bindings
 inside each adjustment block: the real product in `r3` and the cost-plus-product
@@ -165,3 +165,16 @@ with no duplicate byte credit. Evidence remains under ignored
 `reports/audio-root/link-receive-kind-actions-evidence/` and
 `link-entry-actions-*`. Compiler equality does not establish gameplay behaviour
 or overflow/invalid-index semantics.
+
+The connected cleanup at `0x080057A0/100` clears background rectangles
+`(9, 0, 21, 14)` on backgrounds one and zero, then clears flag bit one on the
+existing scene-object slot ten and slots six through nine. Each pointer is
+tested before its flag update. The existing seventeen-slot frame-object view
+at `0x030043B0` supplies these access roles; no new object allocation or complete
+scene layout is inferred. Ordinary indexed C reproduces its full extent and
+literal pool, while an explicit cursor version differs in 37 bytes. Changing
+the first background index from one to two rejects. Both 616/196-byte callers
+receive fresh positive and actual controls after the same-address alias update,
+without duplicate credit. Original extent and iterations remain under ignored
+`reports/audio-root/link-entry-post-display-evidence/`,
+`link-entry-display-hide/` and `cleanup-audio-canonical/`.
