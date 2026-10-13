@@ -10,7 +10,7 @@ struct FrameInteractionSettings { unsigned char unknown00[32],attachment_mode; }
 extern struct FrameInteractionSettings g_frame_interaction_settings;
 unsigned char frame_attachment_position(struct FrameObject *,unsigned char,struct FramePoint *);
 void frame_request_animation(struct FrameCommandObject *,unsigned char);
-void frame_commit_need_effect(struct FrameObject *,unsigned char);
+void frame_commit_need_effect(struct FrameObject *,unsigned int);
 void frame_adjust_actor_needs(struct FrameActorNeedState *,unsigned int,unsigned char);
 struct FrameActorAttachmentRecord *frame_allocate_actor_attachment_record(struct FrameActorAttachmentOwner *,struct FrameObject *);
 struct FrameActorAttachmentRecord *frame_find_actor_attachment_record(struct FrameActorAttachmentOwner *,struct FrameObject *);

@@ -181,3 +181,31 @@ upstream source. No runtime or audible-output evidence is claimed.
 The next connected backend targets are the VBlank frame mixer, sample
 allocation, fade execution and sequence timing. Their partial
 candidates remain excluded from C coverage.
+
+## Hardware and buffer initialization
+
+The connected initializer at ROM `0x49718` contributes 224 further matching C
+bytes. It sets the byte at `0x03000000`, enables the sound block at
+`0x04000084`, and writes `0x9A0C` to sound control at `0x04000082`. When the
+input narrows to zero, the two read/modify/write operations also access
+`0x04000082`: they set bit eight and retain the low twelve bits. The literal
+address loaded before the original branch establishes that register; an earlier
+failed candidate instead modified `0x04000084` and is retained locally.
+
+DMA channel one reads the shared buffer at `0x02000000` and writes the FIFO at
+`0x040000A0`; channel two reads `0x02000450` and writes `0x040000A4`. The
+initializer sets channel one's control halfword to `0xB640` and copies that
+halfword to channel two only for a nonzero narrowed input. Timer one receives
+`0xFBCD` and control `0xC4`; timer zero receives `0xFC00`. It then sets the
+buffer phase to two, offset to 552, and both stamp words to zero. These are
+observed operations; the inferred stereo and timer interpretations do not
+establish audible behavior.
+
+The source uses ordinary C with volatile individual MMIO views and the existing
+shared buffer declarations. GNU GCC 3.0.2 and GNU binutils 2.10.1 reproduce the
+entire extent, including both intervening pools and zero alignment. A changed
+sound-control constant compiles and differs by one byte. Both existing accepted
+functions that directly include the shared frame header also passed fresh
+positive comparisons and their compiled negative controls. The copied ARM frame
+mixer, channel mixing loop and remaining sequencer bodies still receive no C
+credit.

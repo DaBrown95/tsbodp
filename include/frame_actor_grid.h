@@ -5,7 +5,9 @@ struct FramePoint;
 struct FrameActorPackedCell;
 struct FrameGridSearchState {
  void *context;
- unsigned char unknown_04[4];
+ /* Only the low two bytes of the saved target word are interpreted here. */
+ unsigned char target_x, target_y;
+ unsigned short unknown_06;
  int cells[100];
  unsigned char count, status, unknown_19a[2];
 };

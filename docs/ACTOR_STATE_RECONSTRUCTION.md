@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 119 C functions spanning 21,004 verified bytes. The
+This batch reconstructs 130 C functions spanning 21,912 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,17 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x24D18` | `frame_pool_initialize` | 56 |
+| `0x24E04` | `frame_pool_count` | 20 |
+| `0x3C0EC` | `frame_search_release_node` | 52 |
+| `0x3C120` | `frame_search_append` | 76 |
+| `0x3C16C` | `frame_search_score` | 64 |
+| `0x3C1AC` | `frame_search_take_minimum` | 108 |
+| `0x3C218` | `frame_search_find` | 60 |
+| `0x3C254` | `frame_search_find_any` | 68 |
+| `0x3C298` | `frame_search_remove_cell` | 104 |
+| `0x3C300` | `frame_search_cell_cost` | 68 |
+| `0x3C344` | `frame_search_build_path` | 232 |
 | `0x7DC4` | `frame_find_action_target` | 164 |
 | `0x3B8EC` | `frame_grid_occupancy` | 24 |
 | `0x3B964` | `frame_grid_terrain` | 24 |
@@ -929,8 +940,7 @@ value-reader field, terrain class, option ID range, condition action ID, descrip
 game-value ceiling, parameter level bound, state-41 animation ID, sequence mode and state-42 cue threshold, effect flags, completion mode and state-43 countdown and state-47 bound adjustment.
 
 All 29 direct handler functions are reconstructed here. Useful next
-connected targets are the need target selector `0x6F20`, action-target selector
-`0x7DC4`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`.
+connected targets are the need target selector `0x6F20`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`.
 Camera-margin predicate `0x67E0` and terrain query `0x2ABB0` remain connected
 next targets. World-choice cleanup `0xA0A4` and target-cell search `0x3B75C` are additional
 connected next targets. The retained CFGs are closed; those scans alone do not establish C coverage, final function boundaries
@@ -977,3 +987,10 @@ with their real controls rejected in `actor-action-target-consumers-canonical1-*
 The ready manifest is `actor-action-target-batch-manifest.json`. The larger
 candidate-cell selector at `0x3B75C` remains unconverted; its contiguous-array
 private view and best failed comparison remain explicit.
+
+## Route-search support closure
+
+The eleven matching queue, scoring, parent-chain and pool helpers add 908 bytes.
+Their layout evidence, compiler constraints, source controls and remaining
+preconditions are recorded in [ACTOR_ROUTE_SEARCH.md](ACTOR_ROUTE_SEARCH.md).
+The central 720-byte search and reverse path extraction remain unconverted.

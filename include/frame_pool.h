@@ -8,4 +8,6 @@ void frame_pool_release(void *,struct FrameObjectList *,struct FrameObject *);
 struct FrameObject *frame_pool_pop(struct FrameObjectList *);
 void frame_pool_push(struct FrameObjectList *,struct FrameObject *);
 void frame_pool_remove(struct FrameObjectList *,struct FrameObject *);
+struct FrameObject *frame_pool_initialize(void *, unsigned int, unsigned int);
+unsigned int frame_pool_count(void *);
 #endif
