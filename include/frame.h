@@ -100,7 +100,7 @@ void frame_tick_animation(struct FrameObject *);
 void frame_update_affine(struct FrameObject *);
 void frame_integrate_velocity(struct FrameObject *);
 void frame_update_bounds(struct FrameObject *);
-void frame_collect_render_order(struct FrameObject *);
+void frame_collect_movement_contacts(struct FrameObject *);
 
 void frame_get_view_origin(struct FramePoint *, FrameU8);
 void frame_project_point(struct FramePoint *, struct FramePoint *);

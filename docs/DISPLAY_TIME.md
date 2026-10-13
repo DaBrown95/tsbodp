@@ -219,3 +219,27 @@ proofs join the formatter in `time-format-ready.json`. The first short-producer
 attempt (124 bytes, six differing scheduling bytes) and first scene-producer
 attempt (192 bytes, seventeen differing bytes) remain intact. No pre-existing
 accepted source requires a prototype or header change for this batch.
+
+## World-clock relation producer
+
+`display_time_step_world` at `0x0803C498` now matches its complete 160-byte
+extent, including final literals and alignment through `0x0803C537`. It takes
+a pointer to the existing eight-byte clock delta and calls `display_time_add`
+on the world clock at `0x03003958`. Its observed carries coordinate a selected
+row's flags, a day-event dependency, the 24-entry relation delay decrement and
+a separate minute timer. The partial views, bounds, unchanged relation-record
+layout and static links are detailed in
+[DISPLAY_MENU_RELATION.md](DISPLAY_MENU_RELATION.md).
+
+An hour carry invokes delay aging at hours 0, 6, 12 and 18; a minute carry
+updates the timer only when its signed value is nonnegative and its pause byte
+is zero. A nonzero carry mask marks the selected row's flags with 3. The fresh
+compiled row-mask control changes 3 to 2 and rejects with one differing byte.
+The matching source uses ordinary C without register constraints; the carry
+mask and clock pointer remain live naturally across the day-event call. This
+function adds one function and 160 bytes to the earlier clock path, yielding
+fourteen matching functions and 1,936 bytes, including the previously accepted
+20-byte weekday rename. It is also the connecting producer within the separate
+five-function / 292-byte relation-events batch and is counted only once in
+source coverage. Whole-ROM equality and runtime callback frequency remain
+separate claims.

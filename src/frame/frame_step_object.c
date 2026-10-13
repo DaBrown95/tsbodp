@@ -25,7 +25,7 @@ void frame_step_object(struct FrameObject *object, FrameU8 update_display)
                 frame_update_affine(object);
             frame_integrate_velocity(object);
             frame_update_bounds(object);
-            frame_collect_render_order(object);
+            frame_collect_movement_contacts(object);
         }
         if (g_frame_flags & 8) {
             if (update_display != 1)

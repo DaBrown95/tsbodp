@@ -104,3 +104,65 @@ pointer-cursor average and serialized-slot average candidates remain intact
 with their raw comparison evidence. The six-byte choice-initializer scheduling
 candidate and substantially differing secondary menu remain excluded. Full-ROM
 matching and runtime behavior are separate claims from these extent matches.
+
+## Delay and world-clock coordination
+
+A further coherent batch adds four relation helpers and their 160-byte clock
+producer, five functions and 292 C bytes. Their guarded role views and
+contracts are in
+[display_menu_relation_events.h](../include/display_menu_relation_events.h).
+The main relation records and existing APIs retain their published layouts.
+
+| Entry | Extent bytes | Observed role |
+| --- | ---: | --- |
+| `0x08035FE0` | 24 | Test that a signed value differs from -128 |
+| `0x08035FF8` | 32 | Decrement each nonzero record byte `+2` across 24 records |
+| `0x08036018` | 20 | Clear flag 8 and store four times the requested delay in record byte `+2` |
+| `0x0803602C` | 56 | Ask the existing chance helper to decide whether to set flag 8 |
+| `0x0803C498` | 160 | Advance the world clock, signal a row and age relation delays |
+
+The byte at record `+2`, still represented as `unknown_02[0]` in the earlier
+shared record, now has an observed countdown role. This does not establish
+its wall-clock unit or meaning in every consumer. The setter takes a full
+unsigned word, multiplies it by four and narrows the product at the byte store,
+clearing flag 8 before that store. It adds no clamp or validation. The decrement scans exactly
+24 four-byte records through a byte cursor, preserves zero, and subtracts one
+from every nonzero delay. Unlike the setter, it does not change flags.
+
+The chance helper divides the signed value by two, narrows that half to a
+signed byte, promotes it for comparison, and supplies either that value or a
+minimum of five to the existing `frame_random_chance`. A nonzero result sets
+flag 8. It does not check for the uninitialized sentinel or delay expiry. The
+existing RNG API's name and observed byte input/return are reused; these calls
+do not independently establish a probability distribution. The separate
+initialized query returns a byte boolean and is statically called by the
+relation access paths at `0x08036534`, `0x0803660C`, `0x08036744` and
+`0x08043F08`; those callers remain unconverted.
+
+The world producer calls the matching clock arithmetic on the eight-byte view
+at `0x03003958`. A nonzero carry mask ORs 3 into flags at `+4` of a selected
+56-byte record in the array at `0x03004130`. The selected row is a byte at
+`0x030040E0 + 0x31`; no row-array length or index check is established. A day
+carry calls the unconverted `0x0803CA6C` dependency, whose entry overwrites the
+incoming argument registers before their use. Its neutral day-event contract
+remains provisional. An hour carry ages the relation getter-view records at
+`0x03003980` only at hours 0, 6, 12 and 18. A minute carry decrements the signed
+word at game base `0x03003950 + 0x74C` if it is nonnegative and the byte at
+`+0x749` is zero. Wider state and the meanings of the row flags and timer are
+unknown. Callback frequency and gameplay scheduling are not tested.
+
+The retained menu stages at `0x0803F3DC` and `0x08040E84` directly call the
+chance helper; the unconverted adjustment path at `0x08040AB4` calls the delay
+setter. These links connect the new helpers to the existing menu and relation
+core rather than treating them as independent byte totals. The world-clock
+producer connects that state to the published clock arithmetic.
+
+All five canonical extents match and all real compiled controls reject with
+one differing byte: sentinel, scan endpoint, delay multiplier, chance threshold
+and row-flag mask mutations. The decrement helper's first record cursor and
+chance helper's first same-size scheduling attempt remain intact and excluded;
+the accepted decrement uses a delay-byte cursor and the chance source keeps a
+separate promoted half. All five sources are ordinary C with no register
+bindings. Raw bytes, commands, snapshots and controls are indexed in the
+ignored `catalog-presentation/menu-relation-events-ready.json` receipt. No
+pre-existing accepted source or shared header needs an ABI change.
