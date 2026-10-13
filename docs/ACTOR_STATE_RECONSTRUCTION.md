@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 130 C functions spanning 21,912 verified bytes. The
+This batch reconstructs 133 C functions spanning 22,832 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,9 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x3BCF4` | `frame_grid_search` | 720 |
+| `0x3BFC4` | `frame_search_initialize_buffers` | 100 |
+| `0x3C028` | `frame_search_reset` | 100 |
 | `0x24D18` | `frame_pool_initialize` | 56 |
 | `0x24E04` | `frame_pool_count` | 20 |
 | `0x3C0EC` | `frame_search_release_node` | 52 |
@@ -940,7 +943,7 @@ value-reader field, terrain class, option ID range, condition action ID, descrip
 game-value ceiling, parameter level bound, state-41 animation ID, sequence mode and state-42 cue threshold, effect flags, completion mode and state-43 countdown and state-47 bound adjustment.
 
 All 29 direct handler functions are reconstructed here. Useful next
-connected targets are the need target selector `0x6F20`, reverse path extraction `0x3C08C`, and grid search `0x3BCF4`.
+connected targets are the need target selector `0x6F20` and reverse path extraction `0x3C08C`.
 Camera-margin predicate `0x67E0` and terrain query `0x2ABB0` remain connected
 next targets. World-choice cleanup `0xA0A4` and target-cell search `0x3B75C` are additional
 connected next targets. The retained CFGs are closed; those scans alone do not establish C coverage, final function boundaries
@@ -993,4 +996,6 @@ private view and best failed comparison remain explicit.
 The eleven matching queue, scoring, parent-chain and pool helpers add 908 bytes.
 Their layout evidence, compiler constraints, source controls and remaining
 preconditions are recorded in [ACTOR_ROUTE_SEARCH.md](ACTOR_ROUTE_SEARCH.md).
-The central 720-byte search and reverse path extraction remain unconverted.
+The central 720-byte search and two 100-byte buffer setup/reset functions now
+match, bringing this connected closure to 14 functions and 1,828 bytes. Reverse
+path extraction and buffer lifetime/release dependencies remain unconverted.

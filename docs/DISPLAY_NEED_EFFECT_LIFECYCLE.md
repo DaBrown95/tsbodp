@@ -244,3 +244,45 @@ function, choice builder, action-availability lookup and adjacent pool initializ
 remain explicit unconverted targets. Raw trials, comparisons and controls remain
 in the ignored interaction reports; accepted metadata is
 `need-effect-progress-ready.json`.
+
+## Action availability
+
+`frame_need_effect_action_available` at `0x2ECC0` matches its full 96-byte extent,
+including its literal and alignment. The configuration caller at `0x2D8E4` queries
+this predicate with action two before searching for an attachment target. The
+canonical interface retains a complete action word and returns a boolean byte;
+its literal zero/one returns do not establish an original source typedef.
+
+Actions one and four test the low halves of the work words at state `+0xA4` and
+`+0x74`, respectively. The source preserves the observed word access and uses an
+unsigned shift to discard the upper half for the nonzero test. Other actions read
+a pointer from `0x08062B24` indexed by state kind. A non-null record contains two
+uninterpreted bytes followed by the observed five groups of five action bytes.
+The predicate scans these 25 slots and accepts an equal byte. The wider table
+storage, record header meaning and valid kind/action ranges remain unknown.
+
+The common present/absent exits express the two flag cases and bounded row scan
+in C. A group-cursor scalar uses `r3`; the routine makes no external calls. The
+32-bit integer row-address addition preserves the required operand allocation
+before resuming byte-pointer traversal. These are semantic accesses to the observed
+record layout, with no instruction body or output alteration. The final public
+source matches; decreasing the inner scan bound from five to four changes one
+byte and is rejected. All three preceding progress sources and their real controls
+were freshly verified with the refined guarded header. Ignored proof inputs and
+failed views remain local; accepted metadata is
+`need-effect-action-available-ready.json`.
+
+### Attachment-count boundary
+
+`frame_need_effect_attachment_count` at `0x0802ECA0` is a 32-byte matching C
+replacement used by the unconverted choice builder at `0x0802DCE8`. It advances
+through exactly three 24-byte records beginning at state `+0x0C` and counts
+nonnull actor pointers. The return value is a word; this does not establish a
+wider attachment capacity beyond this loop and the corresponding observed state
+layout. Ordinary C reproduces the loop and complete extent. The two loop counters
+are initialized before the record cursor, preserving the observed initialization
+order. A compiled control changing the record count from three to two rejects the
+match. The published progress step, optional progression and tick were freshly
+verified with their own changed-source controls after the declaration was added.
+The choice builder remains unconverted; its preserved candidates are excluded
+from source coverage.

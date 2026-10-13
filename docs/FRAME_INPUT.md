@@ -1375,8 +1375,9 @@ arguments, then the accepted position setter stores the coordinates in fixed
 point form. The effect-state pointer at `+0x64` goes to predicate `0x2ECC0` with
 mode 2. If that predicate succeeds, the helper converts the projected point to
 a packed grid cell, looks up a nearby object through `0x2E5EC`, and passes a
-non-null result to `0x7E68` with mode 1. These direct-callee role names remain
-provisional; their original bodies remain explicit until separately verified.
+non-null result to `0x7E68` with mode 1. The direct-callee role names remain
+provisional; their reconstruction status follows the subsequent dependency
+batch and the current manifest.
 
 It enables object flag 1, calls `0x3B12C` with the registration context and mode
 1, and returns that call's low byte after invoking the accepted
@@ -1398,6 +1399,51 @@ negative outputs, header snapshots and command receipts are under
 `reports/agents/frame-input/camera-map/need-placement-promoted/`.
 
 This closes a compiler-verified handoff from the saved-effect state to placement
-and display refresh. Grid registration, projection and nearby-object behavior
-still need their own source and runtime evidence. No additional runtime or
-gameplay validation is claimed.
+and display refresh. Grid registration still needs its own source evidence.
+No additional runtime or gameplay validation is claimed.
+
+### Placement projection and state lookup
+
+| Address | Function | Verified C bytes |
+| --- | --- | ---: |
+| `0x0803BA54` | `frame_grid_project_effect_point` | 108 |
+| `0x0802EC50` | `frame_need_effect_contains_cell` | 56 |
+| `0x0802E5EC` | `frame_need_effect_find_neighbor` | 156 |
+
+Projection first converts the integer point to the low two bytes of a packed
+cell. Directions through 4 multiply each axis by registration `cell_size`;
+larger directions choose the far end of that cell by adding `cell_size-1`.
+The existing coordinate-to-point helper performs the final transform, and
+only its return value 1 is accepted. The C reads the observed byte-sized field
+at registration `+0x12`. Scoped arithmetic products preserve the original
+evaluation order without register bindings; the initial equivalent expression
+had 56 differing bytes, and the useful intermediate 14- and 6-byte mismatches
+remain in the ignored reports.
+
+Membership compares two coordinate bytes in ten records at state `+0xA4`,
+with a four-byte stride. This is a bounded access view, not proof of a complete
+state allocation or a count limit for other writers. Lookup traverses the
+active need-effect state list at `0x03005868`, caches each next pointer, and
+returns the first state whose membership test returns 1 and whose requested
+action is available. It returns a `FrameNeedEffectState *`; kind at `+0x08`
+and the shared pool-node layout establish this distinction. Placement's
+neighbor local and the provisional `0x7E68` handoff target now use that type.
+Those changes preserve placement's complete 200-byte match and its control.
+
+The availability test checks the low halfword of state words at `+0xA4` for
+action 1 and `+0x74` for action 4. Other actions scan five groups of five bytes
+from `g_need_effect_action_sets[kind]+2`. No bound is inferred for `kind` or
+the pointed allocation. Lookup contains the observed inline copy of the same
+predicate reconstructed separately as `frame_need_effect_action_available`.
+Its local group index is bound to `r3` only across call-free arithmetic and
+loads. It uses the historical assembler for its original two-byte alignment
+tail; the C contains no instruction body.
+
+Each new function has a compiled and linked negative control changing a
+direction or loop bound; each rejects one changed byte. All eight previous
+placement and saved-effect sources were rechecked at 2,884 identical bytes,
+and their eight controls still reject. The 22 canonical/control receipts and
+raw comparison files are under
+`reports/agents/frame-input/camera-map/need-placement-dependencies-promoted/`.
+Grid registration at `0x3B12C` and the target handoff at `0x7E68` remain explicit
+original bodies. This evidence does not establish runtime or gameplay behavior.

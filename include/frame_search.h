@@ -10,6 +10,22 @@ struct FrameSearchRecord {
  unsigned short heuristic;
  unsigned char priority, queue, unknown_0e[2];
 };
+/* Alternate local view of the same 16-byte copied payload. */
+union FrameSearchCell {
+ unsigned int word;
+ struct { unsigned short index, unknown; } halfwords;
+ struct { unsigned char x, y; unsigned short unknown; } axes;
+};
+struct FrameSearchWorkingFields {
+ union FrameSearchCell cell, parent;
+ unsigned char cost, unknown_09;
+ unsigned short heuristic;
+ unsigned char priority, queue, unknown_0e[2];
+};
+union FrameSearchWorkingRecord {
+ struct FrameSearchRecord record;
+ struct FrameSearchWorkingFields fields;
+};
 struct FrameSearchNode {
  struct FrameSearchNode *next, *previous;
  struct FrameSearchRecord record;
@@ -18,6 +34,8 @@ struct FrameSearchQueue { struct FrameSearchNode *first, *last; };
 extern struct FrameSearchQueue g_frame_search_queues[2];
 extern struct FrameSearchNode *g_frame_search_free_nodes[2];
 extern struct FrameSearchNode *g_frame_search_node_buffers[2];
+void frame_search_initialize_buffers(void);
+void frame_search_reset(void);
 unsigned int frame_search_release_node(struct FrameSearchNode *);
 struct FrameSearchNode *frame_search_append(const struct FrameSearchRecord *, unsigned int);
 void frame_search_score(struct FrameSearchRecord *, unsigned int);

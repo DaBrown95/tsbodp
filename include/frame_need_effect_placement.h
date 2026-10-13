@@ -4,14 +4,24 @@
 #include "display_need_effect_update.h"
 #include "frame_actor_state.h"
 
-/* Direct-callee roles are provisional until their bodies are reconstructed. */
-unsigned char frame_need_effect_project_point_3ba54(void *, const struct FramePoint *,
-                                                  unsigned char, struct FramePoint *);
-unsigned char frame_need_effect_action_available_2ecc0(struct FrameNeedEffectState *,
-                                                      unsigned int);
-struct FrameObject *frame_need_effect_find_neighbor_2e5ec(const struct FrameActorPackedCell *,
-                                                         unsigned int);
-void frame_need_effect_handoff_7e68(struct FrameObject *, struct FrameObject *, unsigned char);
+struct FrameMapRegistration;
+/* Ten four-byte records are read here; the allocation's complete layout is unknown. */
+struct FrameNeedEffectCell { unsigned char x,y,unknown[2]; };
+struct FrameNeedEffectCells {
+ unsigned char unknown[0xa4];
+ struct FrameNeedEffectCell cells[10];
+};
+extern unsigned char *g_need_effect_action_sets[];
+unsigned char frame_grid_project_effect_point(struct FrameMapRegistration *,
+                                              const struct FramePoint *, unsigned int,
+                                              struct FramePoint *);
+unsigned char frame_need_effect_action_available(struct FrameNeedEffectState *, unsigned int);
+unsigned char frame_need_effect_contains_cell(struct FrameNeedEffectState *,
+                                             const struct FrameActorPackedCell *);
+struct FrameNeedEffectState *frame_need_effect_find_neighbor(const struct FrameActorPackedCell *,
+                                                             unsigned int);
+/* Direct-callee roles below remain provisional until independently reconstructed. */
+void frame_need_effect_handoff_7e68(struct FrameObject *, struct FrameNeedEffectState *, unsigned char);
 unsigned char frame_need_effect_register_3b12c(void *, struct FrameObject *, unsigned char);
 unsigned char frame_configure_need_effect(struct FrameObject *, int, int, int);
 

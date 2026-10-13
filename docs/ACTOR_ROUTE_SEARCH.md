@@ -1,14 +1,17 @@
 # Actor route-search support
 
-The connected support path reconstructs 11 C functions and 908 bytes. Every
-complete linked extent matches the fixed reference, including literal pools and
-alignment. Each real source mutation is rejected. The central search routine at
-`0x3BCF4` (720 bytes) and reverse path extraction at `0x3C08C` (76 bytes) remain
-unconverted; these helper matches do not establish a reconstructed pathfinder or
-runtime behaviour.
+The connected route-search path reconstructs 14 C functions and 1,828 bytes:
+11 support helpers, the central 720-byte search, and two 100-byte buffer setup
+and reset functions. Every complete linked extent matches the fixed reference,
+including literal pools and alignment. Each real source mutation is rejected.
+Reverse path extraction at `0x3C08C` (76 bytes) remains unconverted.
+Neither these matches nor the full-ROM equality gate establish runtime behaviour.
 
 | ROM offset | Function | Verified bytes |
 | --- | --- | ---: |
+| `0x3BCF4` | `frame_grid_search` | 720 |
+| `0x3BFC4` | `frame_search_initialize_buffers` | 100 |
+| `0x3C028` | `frame_search_reset` | 100 |
 | `0x24D18` | `frame_pool_initialize` | 56 |
 | `0x24E04` | `frame_pool_count` | 20 |
 | `0x3C0EC` | `frame_search_release_node` | 52 |
@@ -27,7 +30,7 @@ The central search calls these queue, score, lookup, cost and parent-chain
 helpers. Two queue views at `0x03007310` have first and last node pointers;
 free-list heads at `0x03007320` and backing-buffer pointers at `0x03007328` are
 two-element arrays. The last array is retained explicitly in the header because
-the central setup accesses it; the matching helpers do not use it. Queue indices
+the central search and both buffer helpers access it. Queue indices
 come from parameters or stored node bytes. Their observed two-queue use does not
 prove arbitrary indices safe.
 
@@ -83,7 +86,7 @@ builder stores an 8-bit count and returns whether that count is nonzero.
 
 ## Compiler and verification evidence
 
-All eleven use the pinned default compiler. The lookup functions each retain a
+All fourteen use the pinned default compiler. The lookup functions each retain a
 semantic unsigned-word `r1` binding for a widened halfword and its explicit
 mask. Removing those lifetimes changes the output. Cell removal needs two
 unsigned comparison intermediates bound to `r1` and `r0`; the input, loaded
@@ -109,8 +112,98 @@ under `path-search-support-canonical/`; the integration manifest is
 `actor-search-support-batch-manifest.json`. Useful failed natural-C and compiler
 lifetime trials remain alongside those proofs.
 
-The next coherent targets are the 720-byte central search, its 76-byte reverse
-path extraction, queue-buffer setup dependencies, and the 356-byte actor target
-cell selector at `0x3B75C`. The latter remains a separate failed candidate. Static
+The next coherent targets are the 76-byte reverse path extraction, buffer
+lifetime and release dependencies, and the 356-byte actor target cell selector
+at `0x3B75C`. The latter remains a separate failed candidate. Static
 CFG closure, a matching helper and a byte-identical full-ROM build are different
 claims from execution or gameplay evidence.
+
+## Central search and full-word cost limit
+
+The matching 720-byte search initializes each queue's supplied backing buffer
+as 300 nodes with a 24-byte stride. It clears the path array and sets the context,
+saved target word and status. A matching low-halfword start and target produces
+one path entry and return value 2. A target cost above 99 produces status 3 and
+return value 0. Otherwise the starting record enters queue zero with cost zero.
+
+The main loop selects the minimum-priority record from queue zero, then checks
+its cell against the target and its byte cost against the supplied limit. Four
+four-byte direction records at `0x0807F420` provide the two byte offsets added
+to the current cell. The two other bytes in each record remain unspecified.
+New costs are narrowed to a byte before scoring. A neighbor matching the current
+parent is skipped. An existing entry with an equal or lower priority is kept;
+a more expensive entry is removed. Entries with costs at most 99 enter queue
+zero, others enter queue one, and the processed current record enters queue one.
+A failed neighbor insertion sets status 2 but still proceeds through the current
+record's queue-one handoff, exactly as the original branches do.
+
+The loop cap is 1,000 iterations. Exceeding it returns zero immediately, without
+forcing a new status or path count. The status can otherwise become 1, 2 or 3
+through cost, allocation or path-construction branches; these values are not
+claimed to form a complete exclusive gameplay classification. Byte cost and
+priority wrapping, queue-buffer size guarantees and input-cell upper halfwords
+remain unresolved contracts. Record bytes without observed assignments remain
+explicitly unknown; the source preserves the original partial initialization.
+
+Return value 1 identifies the found branch and zero its other completion paths.
+Only mode 1 requests path construction. A found result uses the current cell;
+otherwise status 2 may request a chain beginning at its parent. A zero path-builder
+result forces status 1 and return zero. The count is written by the same-cell
+case or path builder; the initial reset clears path words without resetting that
+count. Reverse extraction and its caller buffer-capacity guarantees remain
+separate unfinished work.
+
+The fourth argument is an unsigned word. The original stores all of `r3` and
+compares its full value against a zero-extended cost byte; it does not narrow
+that argument. The fifth argument is narrowed to a byte. The existing actor
+route caller supplies an already loaded byte limit and remains exact after the
+canonical prototype refinement. The saved target is now a four-byte union with
+word and byte-coordinate views, preserving every following global offset. A
+local working-record union exposes typed byte/halfword/word cell views and the
+existing copied-record member; calls pass the latter directly rather than
+casting between unrelated record structures.
+
+The central source retains seven minimized C register constraints: the clear
+value (`r1`), saved comparison mask (`r7`), loaded current key (`r0`), target
+comparison result (`r0`), direction-record pointer (`r1`), and two parent-key
+comparison values (`r1`/`r0`). Their source scopes separate the current key and
+later result lifetimes. The ordinary queue pointer, working mask, state pointer,
+status pointer, table base and first comparison value need no constraints after
+minimization. A local direction delta is evaluated inside the coordinate
+assignment to retain its original load order. The clear-value statement
+expression constrains only its C argument value. There is no instruction assembly
+in this function.
+
+The 1,000-to-996 iteration-cap mutation changes one compared byte and is rejected.
+An earlier 1,000-to-1,001 control and every useful failed type/lifetime trial are
+also retained. The final canonical proof covers 24 affected functions spanning
+2,772 bytes, including the new search, all support helpers, existing route/grid
+consumers and the connected pending effect-point projector. All full extents
+match and all real source controls fail. Its local receipt is
+`path-central-canonical/`; ready metadata is
+`actor-central-search-batch-manifest.json`. Runtime and gameplay evidence remain
+unclaimed.
+
+
+## Buffer setup and reset
+
+The initializer at `0x3BFC4` requests two 7,200-byte zeroed buffers through
+the accepted heap allocator. Each buffer is stored before its 300 nodes are
+initialized with a 24-byte stride. The returned free-list head is published at
+the corresponding index, then both links in that queue are cleared. Only the
+two low target-coordinate bytes are reset afterward; the saved target's upper
+halfword and other search-state fields retain their prior values. Allocation
+failure handling and ownership of the two buffers remain unresolved contracts.
+
+The reset function at `0x3C028` reinitializes the existing buffers with the same
+node count and stride, publishes their free-list heads, and clears both queues.
+It also zeros the low target-coordinate bytes and the 400-byte path array. It
+does not clear the stored path count, status or context. This distinction is
+observed in the complete instruction extents and preserved in the matching C.
+
+Both functions use ordinary C without register constraints or assembly. The
+initializer's 7,200-to-7,168 allocation-size control and the reset's
+300-to-298 node-count control each change one compared byte and are rejected.
+Their raw comparisons and source snapshots are included in the same canonical
+receipt as the search and affected callers. No buffer-management runtime test
+is claimed.

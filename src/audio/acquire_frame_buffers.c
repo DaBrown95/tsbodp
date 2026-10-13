@@ -1,6 +1,6 @@
 #include "audio_frame.h"
 
-int audio_acquire_frame_buffers(unsigned char **left, unsigned char **right)
+int __attribute__((long_call)) audio_acquire_frame_buffers(unsigned char **left, unsigned char **right)
 {
     unsigned int offset;
     int amount;

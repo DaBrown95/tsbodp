@@ -32,6 +32,7 @@ extern unsigned int g_frame_world_id;
 extern struct FrameNeedEffectState *g_frame_need_effect_free_pool;
 extern struct FrameObjectList g_frame_need_effect_active_list;
 void frame_unregister_need_effect(void *, struct FrameObject *);
+unsigned int frame_need_effect_attachment_count(struct FrameNeedEffectState *);
 unsigned int frame_release_need_effect_state(struct FrameNeedEffectState *);
 struct FrameNeedEffectState *frame_create_need_effect_state_node(void);
 void frame_reset_need_effect(struct FrameObject *);

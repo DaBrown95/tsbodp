@@ -17,6 +17,9 @@ struct DisplayNeedEffectProgressObject {
     unsigned int count;
 };
 struct FrameMapRegistration;
+extern unsigned char *g_need_effect_action_sets[];
+unsigned char frame_need_effect_action_available(struct FrameNeedEffectState *,
+                                               unsigned int);
 extern unsigned char g_frame_actor_social_probe[];
 /* Only this storage's first word is interpreted as an object pointer here. */
 extern struct FrameObject *g_need_effect_player;

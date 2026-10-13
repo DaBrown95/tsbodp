@@ -13202,22 +13202,22 @@
       "size": 200,
       "symbols": {
         "g_frame_registration": "0x03004330",
-        "frame_need_effect_project_point_3ba54": "0x0803ba55",
         "frame_set_position": "0x080014a5",
-        "frame_need_effect_action_available_2ecc0": "0x0802ecc1",
         "frame_grid_point_to_cell": "0x08048af9",
-        "frame_need_effect_find_neighbor_2e5ec": "0x0802e5ed",
         "frame_need_effect_handoff_7e68": "0x08007e69",
         "frame_enable_object_flags": "0x08001c69",
         "frame_need_effect_register_3b12c": "0x0803b12d",
-        "frame_update_need_effect": "0x0802d7c1"
+        "frame_update_need_effect": "0x0802d7c1",
+        "frame_grid_project_effect_point": "0x0803ba55",
+        "frame_need_effect_action_available": "0x0802ecc1",
+        "frame_need_effect_find_neighbor": "0x0802e5ed"
       },
       "thumb_symbols": [
-        "frame_need_effect_project_point_3ba54",
+        "frame_grid_project_effect_point",
         "frame_set_position",
-        "frame_need_effect_action_available_2ecc0",
+        "frame_need_effect_action_available",
         "frame_grid_point_to_cell",
-        "frame_need_effect_find_neighbor_2e5ec",
+        "frame_need_effect_find_neighbor",
         "frame_need_effect_handoff_7e68",
         "frame_enable_object_flags",
         "frame_need_effect_register_3b12c",
@@ -13305,6 +13305,197 @@
       "negative_control": {
         "before": "(first.x+second.x)/2",
         "after": "(first.x+second.x)/4"
+      }
+    },
+    {
+      "name": "audio_mix_frame",
+      "rom_offset": 16626936,
+      "size": 220,
+      "ram_address": 50335872,
+      "source": "src/audio/mix_frame.c",
+      "symbols": {
+        "g_audio_tick_samples": "0x0200163e",
+        "g_audio_tick_period": "0x0200163c",
+        "g_audio_tick_callback": "0x02001638",
+        "audio_mix_channels": "0x03000c48",
+        "audio_acquire_frame_buffers": "0x080497f9"
+      },
+      "mode": "ARM",
+      "ram_copy": "audio_iwram",
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-marm",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "thumb_symbols": [
+        "audio_acquire_frame_buffers"
+      ],
+      "negative_control": {
+        "before": "count<=remaining",
+        "after": "count<remaining"
+      }
+    },
+    {
+      "name": "frame_grid_search",
+      "rom_offset": 244980,
+      "size": 720,
+      "source": "src/frame/frame_grid_search.c",
+      "symbols": {
+        "g_frame_search_node_buffers": "0x03007328",
+        "g_frame_search_free_nodes": "0x03007320",
+        "g_frame_search_queues": "0x03007310",
+        "g_frame_grid_search": "0x03001fd0",
+        "g_frame_search_neighbor_offsets": "0x0807f420",
+        "frame_pool_initialize": "0x08024d19",
+        "scene_fill_bytes": "0x08027a49",
+        "frame_search_cell_cost": "0x0803c301",
+        "frame_search_score": "0x0803c16d",
+        "frame_search_append": "0x0803c121",
+        "frame_pool_count": "0x08024e05",
+        "frame_search_take_minimum": "0x0803c1ad",
+        "frame_search_find": "0x0803c219",
+        "frame_search_remove_cell": "0x0803c299",
+        "frame_search_build_path": "0x0803c345",
+        "frame_search_find_any": "0x0803c255"
+      },
+      "thumb_symbols": [
+        "frame_pool_initialize",
+        "scene_fill_bytes",
+        "frame_search_cell_cost",
+        "frame_search_score",
+        "frame_search_append",
+        "frame_pool_count",
+        "frame_search_take_minimum",
+        "frame_search_find",
+        "frame_search_remove_cell",
+        "frame_search_build_path",
+        "frame_search_find_any"
+      ],
+      "negative_control": {
+        "before": "iterations>1000",
+        "after": "iterations>996"
+      }
+    },
+    {
+      "name": "frame_search_initialize_buffers",
+      "rom_offset": 245700,
+      "size": 100,
+      "source": "src/frame/frame_search_initialize_buffers.c",
+      "symbols": {
+        "g_frame_search_queues": "0x03007310",
+        "g_frame_search_node_buffers": "0x03007328",
+        "g_frame_search_free_nodes": "0x03007320",
+        "g_frame_grid_search": "0x03001fd0",
+        "frame_pool_initialize": "0x08024d19",
+        "heap_allocate_zeroed": "0x080278e5"
+      },
+      "thumb_symbols": [
+        "frame_pool_initialize",
+        "heap_allocate_zeroed"
+      ],
+      "negative_control": {
+        "before": "heap_allocate_zeroed(7200)",
+        "after": "heap_allocate_zeroed(7168)"
+      }
+    },
+    {
+      "name": "frame_search_reset",
+      "rom_offset": 245800,
+      "size": 100,
+      "source": "src/frame/frame_search_reset.c",
+      "symbols": {
+        "g_frame_search_queues": "0x03007310",
+        "g_frame_search_node_buffers": "0x03007328",
+        "g_frame_search_free_nodes": "0x03007320",
+        "g_frame_grid_search": "0x03001fd0",
+        "frame_pool_initialize": "0x08024d19",
+        "scene_fill_bytes": "0x08027a49"
+      },
+      "thumb_symbols": [
+        "frame_pool_initialize",
+        "scene_fill_bytes"
+      ],
+      "negative_control": {
+        "before": "*buffers++,300,24",
+        "after": "*buffers++,298,24"
+      }
+    },
+    {
+      "name": "frame_grid_project_effect_point",
+      "rom_offset": 244308,
+      "size": 108,
+      "symbols": {
+        "frame_grid_point_to_cell": "0x08048af9",
+        "frame_grid_coordinates_to_point": "0x08048cc5"
+      },
+      "thumb_symbols": [
+        "frame_grid_point_to_cell",
+        "frame_grid_coordinates_to_point"
+      ],
+      "negative_control": {
+        "before": "direction<=4",
+        "after": "direction<=3"
+      },
+      "source": "src/frame/frame_grid_project_effect_point.c"
+    },
+    {
+      "name": "frame_need_effect_contains_cell",
+      "rom_offset": 191568,
+      "size": 56,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "i<=9",
+        "after": "i<=8"
+      },
+      "source": "src/frame/frame_need_effect_contains_cell.c"
+    },
+    {
+      "name": "frame_need_effect_find_neighbor",
+      "rom_offset": 189932,
+      "size": 156,
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "g_frame_need_effect_active_list": "0x03005868",
+        "g_need_effect_action_sets": "0x08062b24",
+        "frame_need_effect_contains_cell": "0x0802ec51"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_contains_cell"
+      ],
+      "negative_control": {
+        "before": "while(group<5)",
+        "after": "while(group<4)"
+      },
+      "source": "src/frame/frame_need_effect_find_neighbor.c"
+    },
+    {
+      "name": "frame_need_effect_action_available",
+      "rom_offset": 191680,
+      "size": 96,
+      "symbols": {
+        "g_need_effect_action_sets": "0x08062b24"
+      },
+      "thumb_symbols": [],
+      "source": "src/display/need_effect_action_available.c",
+      "negative_control": {
+        "before": "for(;i<5;i++)",
+        "after": "for(;i<4;i++)"
+      }
+    },
+    {
+      "name": "frame_need_effect_attachment_count",
+      "rom_offset": 191648,
+      "size": 32,
+      "symbols": {},
+      "thumb_symbols": [],
+      "source": "src/display/need_effect_attachment_count.c",
+      "negative_control": {
+        "before": "while(index<3)",
+        "after": "while(index<2)"
       }
     }
   ],

@@ -178,7 +178,7 @@ revision. The accepted bodies were reconstructed from the reference's
 operations, without importing its instruction bodies or substantial
 upstream source. No runtime or audible-output evidence is claimed.
 
-The next connected backend targets are the VBlank frame mixer, sample
+The next connected backend targets are channel mixing, sample
 allocation, fade execution and sequence timing. Their partial
 candidates remain excluded from C coverage.
 
@@ -206,9 +206,8 @@ shared buffer declarations. GNU GCC 3.0.2 and GNU binutils 2.10.1 reproduce the
 entire extent, including both intervening pools and zero alignment. A changed
 sound-control constant compiles and differs by one byte. Both existing accepted
 functions that directly include the shared frame header also passed fresh
-positive comparisons and their compiled negative controls. The copied ARM frame
-mixer, channel mixing loop and remaining sequencer bodies still receive no C
-credit.
+positive comparisons and their compiled negative controls. The channel mixing
+loop and remaining sequencer bodies still receive no C credit.
 
 ## Activation and channel lifetime dependencies
 
@@ -242,3 +241,40 @@ recompiled with their existing negative controls; their complete bytes remain
 exact. These matches close the observed game volume call and hardware
 activation edges, but do not establish the complete audio implementation,
 audible output or gameplay behavior.
+
+## Copied ARM frame-audio coordinator
+
+The 220-byte function stored at ROM `0xFDAFF8` and executed at RAM `0x03001080`
+now matches as C, including its literal pool. The separately audited audio
+copy establishes that address relation. It acquires left and right output
+buffers, divides the available samples at tick boundaries, invokes the
+channel mixer, and calls the tick callback before reloading the tick period.
+When no callback is active, or the next tick exceeds the available samples,
+it mixes the remaining samples and reduces the current tick count. It returns
+one when buffers were acquired and zero otherwise.
+
+The callback at `0x02001638`, tick period at `0x0200163C`, and current sample
+count at `0x0200163E` agree with the accepted buffer and callback functions.
+The channel mixer called at ARM address `0x03000C48` remains unconverted.
+The acquisition function at Thumb address `0x080497F9` uses GNU's `long_call`
+attribute on both its declaration and definition: the copied ARM coordinator
+loads its address and transfers through `BX`, while the acquisition body's
+existing 120 bytes remain identical. No hardcoded instruction body or emitted
+assembly rewrite supplies that call.
+
+The C coordinator adapts `kramWorker` from
+[Krawall revision 8d338581bf0ed0afad15b66bf5979ad4c4d15ed0](https://github.com/sebknzl/krawall/tree/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0),
+`lib/mixer_private.arm.c`. This adaptation preserves its LGPL 2.1-or-later
+notice and the complete [licence](../licenses/Krawall-LGPL-2.1.txt), and records
+the game-specific globals, explicit tick reload and ARM/Thumb call changes.
+It is an exception to the independently reconstructed bodies described in the
+earlier backend batch; the inspected revision does not establish the game's
+original source revision.
+
+Pinned GNU GCC 3.0.2 reproduces the complete ARM extent at its execution
+address. Changing the tick comparison from `<=` to `<` compiles and produces
+a one-byte mismatch. All five previously accepted direct consumers of the
+frame-audio header also passed fresh positive comparisons and their existing
+changed-source controls. This closes the frame scheduling handoff from the
+VBlank path, with the channel-mixing body still explicit and unconverted.
+Timing, audible output and gameplay have not been verified.
