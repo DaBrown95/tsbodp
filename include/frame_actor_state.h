@@ -51,7 +51,7 @@ void frame_point_to_fixed(const struct FramePoint *, struct FramePoint *);
 /* Availability compares the low halfword; the upper half remains unspecified. */
 struct FrameActorPackedCell { unsigned short index, unknown; };
 struct FrameActorPackedCellView { unsigned char unknown[196]; struct FrameActorPackedCell cell; };
-void frame_grid_point_to_cell(void *, const struct FramePoint *, struct FrameActorPackedCell *);
+unsigned char frame_grid_point_to_cell(void *, const struct FramePoint *, struct FrameActorPackedCell *);
 
 /* Selector-derived names; the handlers' gameplay roles remain provisional. */
 void frame_run_actor_state(struct FrameObject *);

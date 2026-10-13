@@ -84,8 +84,8 @@ extent remains unknown.
 The type numbering and string IDs are static observations without asset or
 gameplay meaning assigned to them.
 
-The lookup uses the pointer stored at `0x030021F4`, calls the explicit
-unconverted loader at `0x0801F028` with capacity 1024, and returns that global
+The lookup uses the pointer stored at `0x030021F4`, calls the reconstructed
+loader at `0x0801F028` with capacity 1024, and returns that global
 pointer on status zero or null otherwise. It reloads the pointer after the
 call, preserving a possible loader update. Reordering the success/error
 returns produced a five-byte branch-layout mismatch; ordinary success-first
@@ -463,3 +463,40 @@ fill initialization produced different code; the accepted grouped index and
 local pointer are ordinary semantic C with no register constraints or
 assembly. Matching these routines does not establish safe concurrent DMA use
 or validated runtime coordinate ranges.
+
+## Catalog multiline detail consumer
+
+`display_catalog_draw_details` at `0x0802D378` adds 452 bytes of matching C.
+Its complete extent through the next prologue at `0x0802D53C`, including two
+12-entry switch tables, literal pools and alignment, matches after compiling
+the public source and its literal header closure. Changing the special item
+ID from `0x52` to `0x53` is a compiled negative control. The ignored receipt
+index is
+`reports/agents/display_audio/background_motion/scene/redraw/text-catalog-detail-ready.json`.
+The existing catalog name consumer and map-position helper were also compiled
+with their real controls after the shared header update. The map-position
+helper's unused external symbol metadata was removed; it has no external
+references.
+
+The detail consumer follows the same catalog context and four-byte type
+records as the reconstructed name consumer. It uses a different set of string
+IDs for each of types zero through eleven of items `0x52` and `0x20`, when the
+supplied index is not minus one. For other items it resolves catalog word
+`+4`, retained as `unknown_04` in the partial shared type. This access supports
+that word's role as a text resource ID at this call site, without assigning
+meaning to other uses of the catalog. It forwards the selected string, the
+first four arguments and the final style argument to the reconstructed
+`display_text_draw_all_lines` at `0x0801B04C`, then discards the returned tile
+position. Its public return type is therefore void. The first argument's
+precise role remains provisional, as it does for the connected drawing API.
+
+The static caller at `0x0800EF2C` scans the scene's catalog selection and calls
+this consumer after the name consumer and a separate text line. That caller
+remains unconverted; its retained source and comparisons are excluded from
+coverage. This addition closes a text consumer used by that catalog path,
+without claiming that the whole scene redraw path has been reconstructed.
+An out-of-range type still leaves a null text pointer and reaches the drawing
+call. There are no added catalog index, type, resource or pointer checks.
+The switches are ordinary semantic C, with no register constraints or embedded
+instruction bodies. This compiler match establishes neither runtime safety
+nor gameplay behavior.

@@ -54,4 +54,6 @@ void actor_entry_empty_hook(void *);
 void resource_set_triple(unsigned int, unsigned int, unsigned int);
 void actor_entry_clear_collection_group(struct ActorEntryContext *, unsigned int);
 void actor_entry_publish_collection_group(struct ActorEntryContext *, unsigned int);
+void actor_entry_remove_collection_record(struct ActorEntryContext *, unsigned int,
+                                          unsigned int);
 #endif

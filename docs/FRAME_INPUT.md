@@ -1024,3 +1024,55 @@ span, extent and cell-size view; their exact coordinate semantics remain under
 analysis. Allocation failure checks are absent in this path. The initializer,
 selected-tile loader, copied map staging body and central renderer remain
 explicitly unconverted and receive no coverage from this batch.
+
+The grid initialization/projection continuation adds seven exact C replacements,
+524 bytes: `frame_initialize_map_registration` (`0x48B78`, 128),
+`frame_grid_coordinates_to_point` (`0x48CC4`, 76),
+`frame_grid_cell_to_point` (`0x48D10`, 100),
+`frame_grid_snap_point_to_center` (`0x48C50`, 52),
+`frame_grid_snap_point_to_corner` (`0x48C84`, 64),
+`frame_grid_cell_corner` (`0x48DB4`, 40), and
+`frame_grid_cell_extents` (`0x48D74`, 64). All complete linked extents match
+and all seven actual changed-source controls reject. Their final proofs are in
+`camera-map/map-grid-promoted/`; failed inverse-projection and point-to-cell
+candidates remain separate and receive no coverage.
+
+The initializer divides width and height by the cell size with unsigned
+division, narrows each quotient to a halfword, and sums half the first quotient
+with the second. The sum supplies the extent halfword and, before that
+narrowing, its product with cell size supplies the word span. It clears the
+data pointer and both origins, transforms the coordinate pair `(height, 0)`,
+then stores the negative projected X and negative projected Y plus eight as
+origins. It returns one without testing the transformation's return value.
+The source preserves this behavior, the halfword narrowing and the full-width
+span product. The scene caller supplies cell size 16; zero-size and invalid
+initialization inputs remain unchecked.
+
+The coordinate transform checks both signed input axes against zero and the
+span word interpreted as signed. It projects X as `origin_x + x + y` and Y as
+`origin_y - x/2 + y/2 + 8`, with signed division toward zero. This establishes
+the two diagonal coordinate axes for the existing grid context. The cell-center
+reader checks the two low bytes of a packed cell against the extent, multiplies
+each byte by cell size, and adds half the cell size before applying the same
+projection. The accepted reader keeps the shared algorithm as an inline C
+helper, which also preserves the original addressable temporary's stack slots.
+Its return is zero for an out-of-range packed cell; after a valid packed-cell
+check it returns one even if the subsequent span check leaves the output
+unchanged. The corner reader omits the half-cell offset. The extents reader
+returns two optional diagonal corners `(x*size, y*size+size-1)` and
+`(x*size+size-1, y*size)` without checking the packed cell against the extent.
+
+The snap wrappers call the original point-to-cell converter at `0x48AF8` and
+use either the matching cell-center reader or corner projection. Raw converter
+exits and the wrapper at `0x48C50` establish byte-sized zero/one return values
+for both `frame_grid_point_to_cell` and `frame_grid_cell_to_point`; their earlier
+void declarations are corrected without changing their existing parameter
+views. Both accepted direct callers, `frame_find_actor_route` and
+`frame_actor_direction_available`, still match exactly and their real controls
+still reject after this declaration refinement. These proofs are retained in
+`camera-map/map-grid-caller-revalidation/`. The packed-cell halfword and upper
+halfword layout is unchanged: the low two bytes now have direct writer/reader
+evidence for the two axes; the upper bytes remain unspecified. The inverse
+projection and point-to-cell converter themselves remain unconverted. These
+are compiler and static data findings, not runtime assertions about pathfinding
+or complete map input coverage.

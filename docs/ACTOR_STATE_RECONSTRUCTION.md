@@ -1,6 +1,6 @@
 # Actor state dispatch and connected handoffs
 
-This batch reconstructs 96 C functions spanning 17,924 verified bytes. The
+This batch reconstructs 100 C functions spanning 18,528 verified bytes. The
 names describe static accesses and call relationships; selector-derived handler
 names deliberately preserve uncertainty about gameplay roles. Each complete
 extent, including pools and zero alignment, matches its fixed ROM address. Real
@@ -9,6 +9,10 @@ no runtime or gameplay test is claimed here.
 
 | ROM offset | C function | Verified bytes |
 | --- | --- | ---: |
+| `0x38090` | `frame_create_speed_exit_actor` | 216 |
+| `0x3845C` | `frame_speed_exit_tick` | 32 |
+| `0x3847C` | `frame_speed_exit_interact` | 120 |
+| `0x38168` | `frame_speed_exit_transition` | 236 |
 | `0x97D8` | `frame_actor_state_27` | 1,116 |
 | `0x9C34` | `frame_actor_acceleration_velocity` | 316 |
 | `0x9D70` | `frame_actor_play_speed_cue` | 44 |
@@ -653,8 +657,8 @@ enters substate 3 when view mode permits. Substate 3 coordinates key bits 1 and
 2, speed, facing countdown, cue restarts and the effect's direction and dimensions.
 It can create an exit actor at `0x38090`, restore eight-direction facing and
 animation 1, record the position and world byte, stop its sample and transfer a
-bounded twenty-byte callback/spatial view at `+0x98`. The exit constructor remains
-unconverted. The switch table proves substate 7 re-enters substate 3, while 4,
+bounded twenty-byte callback/spatial view at `+0x98`. The exit constructor and its connected callback/result path are now reconstructed
+as described below. The switch table proves substate 7 re-enters substate 3, while 4,
 5 and 6 are explicit no-ops. Two C input-argument variables constrained to `r0`
 preserve the original order of argument moves; the typed effect-slot local
 matches naturally. Pools, table entries and the complete extent are compared,
@@ -678,6 +682,44 @@ setter `0x156C` and direction table are reused under their existing canonical
 names; the private exploratory duplicate of the rotation helper receives no
 new credit. The audio sample-active wrapper is owned and verified separately.
 
+## Controlled-speed exit callbacks and scene results
+
+Four ordinary-C functions close the exit branch of state 27, adding 604 bytes:
+constructor `0x38090` (216), per-frame callback `0x3845C` (32), interaction callback
+`0x3847C` (120) and result transition `0x38168` (236). Each full extent, including
+literal pools and zero alignment, passes an independent changed-source control.
+
+The constructor allocates actor kind 13, assigns its position and facing, selects
+a sixteen-byte animation record through byte table `0x0804F1B0`, installs both
+callbacks and enters outer state 0 / substate 7. It clears the graphics-mode and
+double-tile bits, acquires the palette selected at game state `+0x42D`, sets flags
+`0x10040255`, refreshes its layer and sets the horizontal flip bit for facing
+values above 4. The allocation result is used without a null check, preserving
+the caller's original pool assumption. The callback at `+0xCC` receives two
+object arguments; the new bounded callback overlay records this signature without
+changing the broader actor view's still-provisional callback types.
+
+The interaction accepts an exit object in outer state 0 and an interacting actor
+in state 16. It separately requires interacting actor ID 0 and pressed-key bit 1
+for the actor in the selected local view. The source reads the low byte of the
+canonical halfword pressed-input table at `0x03004228`, matching the original byte
+load. This evidence identifies input handling here; an address alias used in
+older scene setup remains a separate interpretation. Success clears input,
+selects outer state 4 / substate 0 and saves the interacting actor at `+0x64`.
+The per-frame callback always refreshes the layer and calls the result transition
+only in outer state 4.
+
+Substate 0 clears the request's active byte and bytes 1 and 2, initializes a
+four-byte result view from `0x08D72024`, requests scene stage 2 and enters substate
+55. Result word `scene-argument base +0x0C` selects the next step: zero restores
+the saved actor to outer state 27, copies facing, sets game byte `+0x42E` and
+marks the exit object with flag 2; one faces the saved actor toward the exit,
+requests animation 28 / substate 75 and sets its timer to 90; minus one resets
+the exit object. Other result values leave it waiting. The game identity and
+meaning of this activity remain inferred rather than established by gameplay.
+Controls alter factory flags, the callback state test, interacting actor ID and
+the return timer. All four reject with one differing byte.
+
 ## Local proofs and remaining boundaries
 
 Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manifest.json`,
@@ -690,11 +732,12 @@ Private ready metadata is `reports/agents/vblank-wrapper/actor-state-batch-manif
 `reports/agents/vblank-wrapper/actor-carry-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-idle-batch-manifest.json`
 `reports/agents/vblank-wrapper/actor-distance-batch-manifest.json`
-and `reports/agents/vblank-wrapper/actor-effect-batch-manifest.json`.
+`reports/agents/vblank-wrapper/actor-effect-batch-manifest.json`
+and `reports/agents/vblank-wrapper/actor-speed-exit-batch-manifest.json`.
 Full positive/control comparisons against the current headers are retained under
 `actor-state-route-types13-*`, `actor-route-path-layout13-*` and
 `actor-route-updates-current10-*` and `actor-scene-current12-*` and `actor-social-current4-*` and `actor-interaction-current2-*` and `actor-actions-canonical7-*` and `actor-carry-canonical5-*` and
-`actor-carry-shared-layout6-*`, `actor-idle-canonical12-*`, `actor-distance-canonical4-*` and `actor-distance-word-return1-*`, `actor-effect-canonical9-*`, `actor-effect-speed-canonical14-*` and `actor-pool-header-shared1-*` in the same ignored
+`actor-carry-shared-layout6-*`, `actor-idle-canonical12-*`, `actor-distance-canonical4-*` and `actor-distance-word-return1-*`, `actor-effect-canonical9-*`, `actor-effect-speed-canonical14-*`, `actor-pool-header-shared1-*` and `actor-speed-exit-canonical4-*` in the same ignored
 agent report tree. Original CFG scans and all 29 handler entry summaries remain
 local. Mutations change the dispatcher flags, animation IDs, countdown, wait
 factor, direction update flag, group offset, record stride, state target, point

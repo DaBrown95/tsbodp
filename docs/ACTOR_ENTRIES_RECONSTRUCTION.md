@@ -1,6 +1,6 @@
 # Actor entry list lifecycle and condition handoff
 
-Seventeen connected replacements add 1,644 bytes of matching C. Their complete
+Eighteen connected replacements add 1,804 bytes of matching C. Their complete
 linked extents, pools and alignment match at the original addresses. Every
 replacement has an actual compiled changed-source control that rejects. The
 list setup, reset, insertion and selection paths connect to the previously
@@ -26,6 +26,7 @@ static and compiler results; no gameplay behavior is claimed.
 | `actor_entry_choose_201` | `0802080C` | 96 |
 | `actor_entry_clear_collection_group` | `08020234` | 172 |
 | `actor_entry_publish_collection_group` | `08020614` | 216 |
+| `actor_entry_remove_collection_record` | `08020574` | 160 |
 
 ## Shared storage evidence
 
@@ -118,9 +119,23 @@ published. Those byte accesses are preserved; a timer or notification gameplay
 interpretation is provisional. Indices, count consistency and destination
 capacity remain unchecked except for the observed active-list comparison.
 
+Single-record removal now matches the complete 160-byte extent at `08020574`.
+It decrements the selected group's byte count and the collection's halfword
+count, shifts later twelve-byte records down, clears the vacated twelve-byte
+tail with the matching heap helper, then decrements later groups' start bytes.
+The record copy uses explicit byte offsets from the collection base: four is
+the documented record-array offset, and twelve is the verified record stride.
+A scoped count reader uses one semantic `r0` pointer lifetime constraint; the
+ordinary clear-reference scope preserves the subsequent pointer recomputation.
+There is no instruction-body assembly. Empty groups, selected indices and
+underflow remain unchecked as in the original. A changed loop comparison
+extends the shift by one record and rejects one byte. Its positive/control
+proof index is `reports/audio-root/collection-remove-canonical/1791850297820779000/ready.json`.
+
 ## Matching and remaining path
 
-Ordinary C reproduces sixteen functions. Reset uses one semantic `r0` binding
+Ordinary C reproduces sixteen functions. The collection removal constraint is
+recorded above. Reset uses one semantic `r0` binding
 for the game-state base so the compiler retains the original base literal plus
 `F0` address calculation. It contains no instruction-body assembly. Zero-filled
 Thumb tail alignment is explicit where present. Changed limits, sentinels,
@@ -138,8 +153,7 @@ The central definition-driven refresh at `08020368` remains unconverted. Static
 analysis shows a retained-slot cleanup, seed records and random fallback
 selection, including a packed `(5,6,5)` condition marker. A revised 328-byte
 trial matches the selection/condition handoff but still differs in the cleanup
-loop; it receives no coverage credit. Collection insertion at `080204B0`,
-single-record removal at `08020574` and secondary-flag reconciliation at
+loop; it receives no coverage credit. Collection insertion at `080204B0` and secondary-flag reconciliation at
 `0802005C` remain connected targets. Useful
 failed bodies and raw comparisons remain in ignored local reports. Whole-ROM
 equality, partial storage mapping and runtime behavior remain separate claims.
