@@ -14,6 +14,8 @@ struct AudioSample {
     unsigned char loop_mode, mixing_flags, data[1];
 };
 
+extern unsigned int g_audio_channel_counter;
+
 unsigned int audio_start_sample(const struct AudioSample *, int, unsigned int);
 unsigned int audio_start_sample_extended(const struct AudioSample *, int,
     unsigned int, unsigned int, unsigned int, int);

@@ -371,3 +371,47 @@ parameter differences. Changing the volume factor, mono pan, fractional
 reset and sample-header volume selection each compiles and rejects with a
 one-byte mismatch. Fresh canonical comparisons retain every expected and
 candidate byte plus compiler/link commands in ignored local reports.
+
+## Extended sample allocation closure
+
+The complete 600-byte ARM allocator at ROM `0xFDA50C`, executed at
+`0x03000094`, now matches as C. It completes the start wrapper above and
+connects handle allocation to the reconstructed release, setters and channel
+mixer. If fade is enabled it first releases the input handle through an
+inlined C helper with the same verified release semantics. It then reuses
+an exactly matching record or scans the 32 channel records for an inactive
+one. Exhaustion returns zero. The selected low-byte index is combined with
+the incremented generation word at `0x03000600` shifted by eight.
+
+The allocator stores the table selector's low bit and new handle, derives
+mixing mode, applies the observed stereo/mono pan selection, narrows volume,
+and sets the signed fixed-point step from the supplied word shifted by two.
+It computes the left/right volumes, then copies the sample's mixing flags,
+data start, loop length, end and loop mode. Fraction is cleared, loop start
+is end minus loop length, and active becomes one. The quality calculation
+reads the record's previous mixing-flags byte before the new sample flags
+are stored; that observed ordering is retained rather than silently corrected.
+
+The reference contains an inlined release path, and the C helper reproduces
+it without an instruction body. The sample-header view in the shared playback
+header is now backed by these loads as well as the start wrapper. No dynamic
+sample bounds, valid-handle range, allocation lifetime or audible behavior is
+established. In particular, the low-byte index is used before any bounds
+check, and the free-channel scan's access/limit order remains as observed.
+
+This adapts `kramPlayExt` from the same pinned `lib/mixer.arm.c`, with its
+LGPL notice retained. The original union handle's low-byte update is expressed
+as a selected index and handle word before installing the new generation.
+Two semantic register bindings retain the channel index in `r4` and the
+bounded scan counter in `r1`. Removing either yields a preserved raw mismatch;
+there is no instruction assembly in the function. Ordinary C selects the
+remaining temporary registers and inlines the release algorithm. Compiler
+options and these constraints are matching evidence, not historical source
+provenance.
+
+Reducing the scan limit from 32 to 31 compiles and changes one compared byte.
+All four existing playback-header consumers retain their exact extents and
+reject their actual source controls. Canonical source/header snapshots,
+expected and candidate bytes and commands remain in ignored
+`sample-allocation-canonical/` reports. Lower-level mixer primitives, Thumb
+transfer thunks and the sequence player remain explicit unconverted regions.

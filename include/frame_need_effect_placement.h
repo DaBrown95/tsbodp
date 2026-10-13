@@ -11,6 +11,11 @@ struct FrameNeedEffectCells {
  unsigned char unknown[0xa4];
  struct FrameNeedEffectCell cells[10];
 };
+/* Twelve four-byte candidate records are scanned from offset 0x74. */
+struct FrameNeedEffectCandidateCells {
+ unsigned char unknown[0x74];
+ struct FrameNeedEffectCell cells[12];
+};
 extern unsigned char *g_need_effect_action_sets[];
 unsigned char frame_grid_project_effect_point(struct FrameMapRegistration *,
                                               const struct FramePoint *, unsigned int,
@@ -18,6 +23,8 @@ unsigned char frame_grid_project_effect_point(struct FrameMapRegistration *,
 unsigned char frame_need_effect_action_available(struct FrameNeedEffectState *, unsigned int);
 unsigned char frame_need_effect_contains_cell(struct FrameNeedEffectState *,
                                              const struct FrameActorPackedCell *);
+unsigned char frame_need_effect_contains_candidate(struct FrameNeedEffectState *,
+                                                   const struct FrameActorPackedCell *);
 struct FrameNeedEffectState *frame_need_effect_find_neighbor(const struct FrameActorPackedCell *,
                                                              unsigned int);
 unsigned char frame_grid_need_effect_cell_available(void *, const struct FrameActorPackedCell *,

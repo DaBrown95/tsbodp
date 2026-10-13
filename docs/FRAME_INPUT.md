@@ -1531,6 +1531,47 @@ palette reset's canonical name, `frame_reset_object_palette_slots`. Nine
 existing consumers were rechecked at 2,120 identical bytes, with nine rejected
 controls. The 26 canonical/control receipts and raw comparison files are under
 `reports/agents/frame-input/camera-map/need-placement-small-promoted/`.
-These are compiler matches and static data-flow findings. Registration and
-unregistration, the larger renderer, and selected map-tile loading still have
+These are compiler matches and static data-flow findings. Registration, the larger renderer, and selected map-tile loading still have
 their own excluded candidates; no runtime or gameplay claim is added.
+
+### Removing need-effect registration
+
+| Address | Function | Verified C bytes |
+| --- | --- | ---: |
+| `0x0803B4F0` | `frame_unregister_need_effect` | 336 |
+| `0x0802EC18` | `frame_need_effect_contains_candidate` | 56 |
+
+The reverse path clears the object's mode byte at `+0x82`, projects its signed
+high-half position onto the grid, and walks the same pointed 5 by 5 action
+pattern and direction transform as registration. A failed projection returns
+before changing grid cells. Actions 1 and 5 remove mask 1, action 3 removes
+mask 13, and action 2 searches for an action-3 neighbor. With a neighbor it
+decrements that neighbor's `+0xDC` counter and registers mask 4; without one it
+removes mask 61. These numeric masks and action roles follow the observed calls;
+they do not identify gameplay concepts.
+
+Action 4 scans the active state list, caching each next pointer before the
+membership call. It excludes the object being removed. Mask 2 is removed only
+when no other object's candidate records contain the cell. The separately
+matched membership helper reads twelve four-byte records from state `+0x74`,
+comparing only their first two coordinate bytes. This is a bounded access view,
+not a complete effect-state allocation type. Registration's observed clearing
+of 48 bytes at the same offset supports the record stride, while the writers'
+count invariants and the wider state layout remain unresolved.
+
+An explicit next-column local, computed after the inner index is initialized,
+reproduces the original spill order. A semantic current-state pointer is bound
+to `r2`; its last use precedes each call and the separately cached next pointer
+survives the call. No instruction body or alignment bytes are embedded in the
+new C. The next entry points at `0x3B640` and `0x2EC50` establish the complete
+336- and 56-byte extents; the reverse path includes its original literal pool.
+The useful 332-, 340- and 336-byte failed attempts and complete byte comparisons
+remain in the ignored reports.
+
+Both new sources compile and link identically, and both changed-source controls
+reject by one byte. Ten existing consumers were rechecked at 1,112 identical
+bytes, with ten rejected controls, including the accepted removal wrapper at
+`0x2E1E8` (56 bytes). The 24 positive/control receipts are under
+`reports/agents/frame-input/camera-map/need-unregister-promoted/`. Registration,
+the larger renderer and selected map-tile loading remain excluded candidates.
+This closes the statically observed removal path; it adds no runtime claim.

@@ -13908,6 +13908,79 @@
         "-mthumb-interwork",
         "-fno-gcse"
       ]
+    },
+    {
+      "name": "audio_start_sample_extended",
+      "rom_offset": 16622860,
+      "size": 600,
+      "ram_address": 50331796,
+      "source": "src/audio/start_sample_extended.c",
+      "mode": "ARM",
+      "ram_copy": "audio_iwram",
+      "compiler_id": "gcc302",
+      "symbols": {
+        "g_audio_sample_channels": "0x020008b4",
+        "g_audio_sample_fade_enabled": "0x03000093",
+        "g_audio_channel_counter": "0x03000600",
+        "g_audio_sample_mix_mode": "0x03000092",
+        "g_audio_hardware_enabled": "0x03000000",
+        "g_audio_sample_volume_table": "0x03000090"
+      },
+      "compiler_flags": [
+        "-O3",
+        "-marm",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "i < 32",
+        "after": "i < 31"
+      }
+    },
+    {
+      "name": "frame_need_effect_contains_candidate",
+      "rom_offset": 191512,
+      "size": 56,
+      "symbols": {},
+      "thumb_symbols": [],
+      "assembler_id": "binutils2101",
+      "source": "src/frame/frame_need_effect_contains_candidate.c",
+      "negative_control": {
+        "before": "i<=11",
+        "after": "i<=10"
+      }
+    },
+    {
+      "name": "frame_unregister_need_effect",
+      "rom_offset": 242928,
+      "size": 336,
+      "symbols": {
+        "g_need_effect_action_sets": "0x08062b24",
+        "frame_grid_point_to_cell": "0x08048af9",
+        "frame_need_effect_pattern_cell": "0x0803bc71",
+        "frame_need_effect_find_neighbor": "0x0802e5ed",
+        "frame_need_effect_decrement_counter": "0x0802ec95",
+        "frame_unregister_bounds": "0x0803b929",
+        "frame_register_bounds": "0x0803b905",
+        "g_frame_need_effect_active_list": "0x03005868",
+        "frame_need_effect_contains_candidate": "0x0802ec19"
+      },
+      "thumb_symbols": [
+        "frame_grid_point_to_cell",
+        "frame_need_effect_pattern_cell",
+        "frame_need_effect_find_neighbor",
+        "frame_need_effect_decrement_counter",
+        "frame_unregister_bounds",
+        "frame_register_bounds",
+        "frame_need_effect_contains_candidate"
+      ],
+      "assembler_id": "binutils2101",
+      "source": "src/frame/frame_unregister_need_effect.c",
+      "negative_control": {
+        "before": "&cell,61",
+        "after": "&cell,60"
+      }
     }
   ],
   "assembly": [
