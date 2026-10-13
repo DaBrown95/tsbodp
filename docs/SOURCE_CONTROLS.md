@@ -22,3 +22,10 @@ The full matching build separately checks each individual C control, the
 standalone and inline low-level glue controls, and its changed-source whole-ROM
 control. Whole-ROM equality still includes explicit unconverted regions and
 does not establish runtime behavior or a complete inventory of game code.
+
+The verifier requires concrete controls for every C function and standalone
+glue body, plus a separate control for inline glue. Missing, empty or unchanged
+mutations fail before compilation. A positive-only comparison is not marked as
+verified reconstruction; acceptance requires both matching original source and
+a compiled control that differs. Tests cover these failure cases, including a
+misleading rejection flag on a control whose bytes still match.

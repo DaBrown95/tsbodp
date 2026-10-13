@@ -3,8 +3,8 @@
 void save_stream_write_world_fields(void)
 {
     struct SaveStreamWorldFields *world = &g_save_world_fields;
-    unsigned short first = save_stream_prefixed_halfword(&world->first);
-    unsigned short second = save_stream_prefixed_halfword(&world->second);
+    unsigned short first = save_stream_prefixed_halfword(&world->first.prefix);
+    unsigned short second = save_stream_prefixed_halfword(&world->second.prefix);
 
     save_stream_write_bits(&world->bit42e, 1);
     save_stream_write_nibbles(&world->nibble42d, 1);

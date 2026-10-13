@@ -2,8 +2,8 @@
 
 The reconstructed path connects the published menu-choice and actor-need
 save/load callers to a shared byte/bit cursor, record views, slot transfers,
-header initialization and audio/display-status handoff. It has 35 matching C
-functions covering 2,620 bytes. Each full extent, pool and alignment was linked
+header initialization and audio/display-status handoff. It has 43 matching C
+functions covering 3,184 bytes. Each full extent, pool and alignment was linked
 at its original ROM address and compared with the fixed reference. Each also
 has a compiled changed-source control. These are static and compiler results;
 no runtime save/load or EEPROM compatibility claim is made.
@@ -80,7 +80,7 @@ in `r5` and the high-nibble scalar in `r1`. They are actual algorithm values and
 are not live across function calls. The cursor is four bytes before the bit
 position in the observed eight-byte view. Its inline low-nibble reader is a
 semantic byte accessor. There are no original instruction-body transcriptions,
-output patches or comparison masks. The other 34 functions use ordinary C.
+output patches or comparison masks. The other 42 functions use ordinary C.
 
 Function boundaries include return paths, referenced literal pools and alignment
 up to the next mapped entry. The checksum's instruction body is 34 bytes and its
@@ -175,3 +175,50 @@ are unknown. Both ordinary C sources match their full original extents and
 their real changed-source controls reject. The main producer's two call aliases
 now use those canonical interfaces. All 71 pre-existing save-header consumers
 were rebuilt with their controls against the final shared header closure.
+
+## Inverse record and field path
+
+The 128-byte inverse record consumer at `0x08031EFC` reads the same sixteen
+prefix bytes, two pairs and six separate nibbles as the producer, then calls
+the inverse children at `+0x18/+0x20/+0x88/+0xA0`. The final child is the
+already accepted `frame_load_actor_needs` at `0x0802B934`; its eight word
+stores cover the same 32-byte span. The higher game-state loader at
+`0x0801B704` remains unconverted, so this batch closes its record/field
+dependencies rather than claiming the complete load path.
+
+The relation consumer at `0x08035D30` reads 24 value bytes, clears prefix
+byte four, reads 24 flag nibbles and counts those with bit two set, then reads
+24 first delay bytes as nibbles before calling the accepted relation metrics
+updater. Prefix byte four of this values view coincides with the established
+`high_count` byte at the relation state base plus `0x24`. Its neutral prefix
+field name is retained. The earlier 102-byte mapped instruction envelope
+ended at its return; two alignment bytes before the next prologue at
+`0x08035D98` make the verified extent 104 bytes.
+
+The 36-byte six-word inverse at `0x0803D174` reads two low bytes into an
+unsigned word temporary and shifts the word left sixteen before each store.
+The source preserves that partial write and unsigned shift: it adds no
+clearing of the temporary. The shifted-out upper bytes are not serialized
+content. This is a match to the observed compiler output, not a portable
+runtime claim about indeterminate temporary bytes. The 28-byte nibble child
+at `0x08032004` reads five values at `+2` before the value at `+0`. The
+32-byte state reader at `0x08029380` reads eight nibbles and one trailing byte;
+the 52-byte flag reader at `0x08010AAC` reads four words separately.
+
+The field consumers at `0x08038350` and `0x08033610` have verified extents of
+84 and 100 bytes. They reverse the corresponding producer transfer order,
+then replace complete aligned words at world `+0x424/+0x428` and auxiliary
+`+0/+4/+8`. Halfword inputs are shifted left sixteen and the final auxiliary
+byte left twenty-four, clearing the lower bits as the original stores do.
+The shared field views now express each four-byte location as a word/prefix
+union. Their high halfwords and byte retain the exact producer offsets;
+following offsets do not change. These overlapping partial views still do
+not establish separate allocations or a complete world-state size.
+
+All eight inverse sources use ordinary C, match their full original extents
+including pools and alignment, and have real compiled changed-source controls.
+All 75 previously accepted save-header consumers were also rebuilt with their
+controls against the final union/header closure. The buffer builder, nibble
+writer, grouped subrecord loader/serializer and retained condition module
+remain explicit unconverted interfaces. Static transfer order and compiler
+equality do not establish save compatibility or gameplay behaviour.

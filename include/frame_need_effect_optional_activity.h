@@ -9,7 +9,7 @@ unsigned int frame_step_optional_activity_attachment_job(struct FrameNeedEffectS
                                                          struct FrameActorAttachmentRecord *);
 unsigned int frame_dispatch_optional_activity_attachment_job(struct FrameNeedEffectState *,
                                                              struct FrameObject *);
-/* Original handler dependencies retained by the dispatcher; not reconstructed. */
+/* Connected child handlers selected by the activity dispatcher. */
 unsigned int frame_step_optional_attachment_kind_12(struct FrameNeedEffectState *,
                                                     struct FrameActorAttachmentRecord *);
 unsigned int frame_step_optional_attachment_kind_45(struct FrameNeedEffectState *,

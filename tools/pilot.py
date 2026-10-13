@@ -20,7 +20,7 @@ from toolchain import (load_profile, verify_native, ARM_PIN, ARM_PROFILE,
                        BINUTILS2101_PIN, BINUTILS2101_PROFILE, verify_binutils2101_source,
                        modern_assembler_abi_flags)
 from source_symbols import declarations
-from source_controls import mutate
+from source_controls import mutate, require_negative_controls, verified_comparison
 from source_addresses import execution_address, validate_execution_layout, validate_symbol_definitions
 from ram_copies import validate_copy
 from header_snapshots import (snapshot_headers, retained_source, verify_snapshot_inputs,
@@ -151,6 +151,7 @@ def main():
     run_folder = ROOT / "build/pilot/runs" / run_id
     target = json.loads((ROOT / "config/targets/us-eu.json").read_text())
     manifest = json.loads((ROOT / "config/build-us-eu.json").read_text())
+    require_negative_controls(manifest['functions'] + manifest.get('assembly', []))
     lock, profile_path = load_profile(ROOT)
     rom, identity = audit(ROOT / target["rom_path"], target)
     if not identity["accepted"]:
@@ -255,10 +256,6 @@ def main():
         (folder / 'expected.bin').write_bytes(expected)
         (folder / 'candidate.bin').write_bytes(data)
         result = compare_bytes(expected, data)
-        # This result is backed by source compilation and a checked linked extent.
-        result["source_reconstruction_verified"] = result["identical"] and is_c
-        result["assembly_glue_verified"] = result["identical"] and not is_c
-        result['inline_glue_verified'] = result['identical'] and bool(inline_glue(function))
         result['compiled_c_bytes'], result['assembly_glue_bytes'] = byte_counts(function)
         address = execution_address(function, copies) if is_c else 0x08000000 + function['rom_offset']
         result.update({**function, "address": f"{address:#010x}",
@@ -309,14 +306,19 @@ def main():
                             'header': spec['source'],
                             'source_sha256': hashlib.sha256(changed_header.encode()).hexdigest()})
             result['inline_glue_control'] = control
+        verified = verified_comparison(result, controls_compiled=args.negative_control)
+        result['source_reconstruction_verified'] = verified and is_c
+        result['assembly_glue_verified'] = verified and not is_c
+        result['inline_glue_verified'] = verified and bool(inline_glue(function))
         report["functions"].append(result)
         print(f"{name}: {'MATCH' if result['identical'] else 'MISMATCH'} ({len(data)} / {len(expected)} bytes)")
     report["matched_functions"] = sum(r["source_reconstruction_verified"] for r in report["functions"])
     report["matched_bytes_including_pools_and_padding"] = sum(r['compiled_c_bytes'] for r in report["functions"] if r["source_reconstruction_verified"])
-    report['assembly_glue_bytes'] = sum(r['assembly_glue_bytes'] for r in report['functions'] if r['identical'])
-    accepted = all(r['identical'] and r.get('negative_control', {}).get('rejected', True)
-                   and r.get('inline_glue_control', {}).get('rejected', True)
-                   for r in report['functions'])
+    report['assembly_glue_bytes'] = sum(r['assembly_glue_bytes'] for r in report['functions']
+                                      if verified_comparison(r, controls_compiled=args.negative_control))
+    accepted = bool(args.negative_control) and all(
+        verified_comparison(r, controls_compiled=args.negative_control)
+        for r in report['functions'])
     if args.negative_control:
         function = manifest["functions"][0]
         folder = run_folder / "negative-control"

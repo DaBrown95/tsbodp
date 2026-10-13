@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 79 C functions and 10,180 bytes:
+The connected route-search path reconstructs 93 C functions and 12,356 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -12,7 +12,8 @@ secondary-reader functions, followed by six bounded-output, signed-offset and
 threshold APIs, and the secondary threshold's optional need-effect/cue consumer
 plus its five parameter and retained-effect producers, parameter consumer and
 two attachment-job controllers and five connected selection/setup/dispatch/capacity callbacks,
-followed by six mode-two selection functions and a three-function optional activity path.
+followed by six mode-two selection functions, a three-function optional activity path,
+and fourteen connected completion, parameter-job and choice functions.
 Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
@@ -39,6 +40,9 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x2EEF0` | `frame_need_effect_set_optional_two` | 48 |
 | `0x2EF20` | `frame_need_effect_begin_optional_three` | 92 |
 | `0x2EF7C` | `frame_need_effect_play_optional_cue` | 508 |
+| `0x2E7D0` | `frame_need_effect_consume_optional` | 184 |
+| `0x18228` | `frame_step_optional_attachment_job` | 172 |
+| `0x182D4` | `frame_step_optional_animation_attachment_job` | 304 |
 | `0x2F178` | `frame_need_effect_optional_one_ready` | 36 |
 | `0x18430` | `frame_select_optional_attachment_kind` | 32 |
 | `0x18458` | `frame_begin_optional_attachment_job` | 72 |
@@ -53,6 +57,20 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x2F1C0` | `frame_need_effect_try_reset_timer` | 76 |
 | `0x43490` | `frame_step_optional_activity_attachment_job` | 800 |
 | `0x438CC` | `frame_dispatch_optional_activity_attachment_job` | 216 |
+| `0x2F240` | `frame_need_effect_consume_optional_two` | 56 |
+| `0x2F278` | `frame_need_effect_consume_optional_three` | 56 |
+| `0x43348` | `frame_step_optional_attachment_kind_12` | 156 |
+| `0x433E4` | `frame_step_optional_attachment_kind_45` | 172 |
+| `0x439AC` | `frame_step_optional_attachment_kind_22` | 128 |
+| `0x2F2B0` | `frame_need_effect_step_parameter` | 92 |
+| `0x2F30C` | `frame_need_effect_optional_percentage` | 60 |
+| `0x46374` | `frame_step_optional_parameter_attachment_job` | 296 |
+| `0x462CC` | `frame_step_optional_attachment_kind_7` | 168 |
+| `0x464C8` | `frame_select_optional_parameter_attachment_kind` | 36 |
+| `0x464EC` | `frame_check_optional_parameter_attachment_kind` | 40 |
+| `0x46514` | `frame_begin_optional_parameter_attachment_job` | 72 |
+| `0x4655C` | `frame_dispatch_optional_parameter_attachment_job` | 44 |
+| `0x43B30` | `frame_step_optional_choice_attachment_job` | 800 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
 | `0x355AC` | `frame_next_random_secondary_word` | 88 |
@@ -1114,8 +1132,8 @@ includes generated switch tables, literals and tail alignment, without embedded
 instruction bodies or comparison masks.
 
 The 216-byte direct dispatcher at `0x438CC` obtains an unchecked attachment
-record. Kinds 28/30/31/32 enter the new controller; twelve, 45 and 22 retain
-explicit original handlers at `0x43348`, `0x433E4` and `0x439AC`. Other kinds
+record. Kinds 28/30/31/32 enter the controller; twelve, 45 and 22 select
+the connected child handlers at `0x43348`, `0x433E4` and `0x439AC`. Other kinds
 return zero. Its complete 12-through-45 switch table matches. This wrapper
 does not pass kind 33, although the controller preserves that original nested
 case; no runtime-unreachability conclusion follows from this one caller.
@@ -1124,7 +1142,108 @@ All nine complete extents match ordinary C and reject real controls. Eight
 previously accepted optional job/callback consumers remain exact with their
 controls under the current shared headers. Raw branch/table evidence, source
 snapshots and failed candidates remain in ignored reports; ready metadata is
-`frame-need-optional-selection-batch-manifest.json`. The three original
-dispatcher children and callers of the initial definition callbacks are next
-connected targets. Runtime actor, output-buffer, sample and cancellation
+`frame-need-optional-selection-batch-manifest.json`. The dispatcher children are completed below; callers of the initial definition
+callbacks remain connected targets. Runtime actor, output-buffer, sample and cancellation
 validity remain untested.
+
+
+## Optional completion, parameter jobs and choice control
+
+Fourteen further ordinary-C functions cover 2,176 bytes. The activity
+wrapper's three child handlers now connect both optional-mode consumers to
+animation, need adjustment and sample cleanup. Kind twelve starts animation
+14/cue 26 and phase four, adjusts need 52 by the definition byte `+35`, and
+waits for the mode-two consumer. Kind 22 starts animation 24/cue 33 and phase
+11, then waits for the mode-three consumer. Each enters phase one when the
+record's running byte is exactly one; phase one stops the saved sample,
+requests animation one and returns two. Other paths return one.
+
+Kind 45 differs: any nonzero running byte requests phase one. Its phase zero
+tries the retained actor effect before creating an indicator, then faces the
+actor opposite the associated object, starts animation 45/cue 19 and enters
+phase five. That phase uses the previously matching parameter consumer.
+Cleanup stops the saved sample, requests animation one and indicator state one when an
+indicator exists, clears its pointer and returns two. This ordering is distinct
+from the earlier job at `0x18228`, which faces the actor before trying the effect.
+
+The mode consumers at `0x2F240` and `0x2F278` load the same halfword both
+unsigned and signed. Matching modes two and three subtract 51 and 128
+respectively only when the signed value is strictly greater than that amount;
+they then return word zero. Otherwise they clear both the mode byte and
+parameter and return word one. This includes negative signed parameter values.
+The child callers explicitly observe the low byte; no timer units or general
+parameter-validity claim follows from these constants.
+
+The percentage callback at `0x2F30C` starts with byte 100. Mode two reads the
+parameter's high byte and returns `100 - value` when it is below 100, otherwise
+zero. Mode one with a positive signed parameter returns 50; other cases retain
+100. Comparing and subtracting the named result preserved the original shared
+constant, whereas the initial constant-expression form differed in 41 bytes.
+Observed definition words at field `+24` of rows 109, 110, 114 and 115 identify
+this callback. The accepted allocator copies that field to state `+0xFC`.
+These row numbers are address arithmetic against the established 36-byte
+stride, not a complete table-bound assertion.
+
+A second complete callback chain selects attachment kind 55 when signed
+parameter one, converted to an unsigned word, is at most one; otherwise it
+selects kind seven. Its eligibility callback permits kind seven and all other
+kinds except 55 when that unsigned parameter is above nine. The matching source
+retains a switch so the original separate seven/55 tests remain explicit.
+The begin callback allocates a record, stores the full kind word, obtains the
+associated object's attachment-zero point, starts route four with the record's
+status byte, requests animation six and returns one; allocation failure returns
+zero. The unchecked dispatcher enters the kind-seven or kind-55 child and
+returns zero for other kinds. Exact pointer words at arithmetic row 138 fields
+`+4/+8/+12/+16` connect this chain. The allocator copies them to state
+`+0xE8/+0xEC/+0xF0/+0xF4`; broader callback and object ownership remain unknown.
+
+The kind-seven job starts direction seven, animation eight, phase three and
+an actor word countdown of 90. It chooses cue 133 or 132 from the interaction
+mode, adjusts the attachment need using definition byte `+35`, and enters phase
+one when the word countdown reaches minus one. Its kind-55 sibling starts an
+indicator and animation 45/cue 19 unless the low-need predicate selects the
+animation-85 path. Phase 52 adjusts need 18 and calls the new 92-byte parameter
+step; phase eight waits for the animation flag before clearing the need
+countdown. Phase one stops the sample, clears the indicator and returns two.
+
+The parameter step deliberately treats the signed reader's result as an
+unsigned word. Values above nine, including negative signed values, return one
+without updating the indicator. Otherwise it publishes the current percentage,
+advances the parameter and returns one only when a fresh read equals the old
+value plus one. Its first formal is unused in the observed body. Existing
+reader, indicator and update declarations are reused rather than duplicated.
+
+The 800-byte choice controller at `0x43B30` preserves its full zero-through-19
+jump table. Nine explicit cases perform work; phase one takes the default body
+and is recognized by the final status test, returning two rather than one.
+Unlike the activity children, this body has no upfront running-byte cancellation
+check. It starts the optional attempt and game-value gate, waits for animation
+flags, and opens the original choice helpers. A signed result word at
+`0x03004370 + 12` is compared as unsigned against zero, one, two, three and
+all-ones values in its nested switches. Cancellation outside the excluded worlds
+and world 28 adds game value one before requesting animation 30 and phase 18.
+Phase 19 decrements the actor halfword counter from its earlier value 30 and
+uses the 65,535 sentinel to enter that same exit path.
+
+Its selection, page and count accesses use three one-byte aliases at
+`0x030021F1`, `0x030021F0` and `0x030021F2`. This storage is distinct from the
+published scene request/choice counters at `0x03005A00`. The page advances by four,
+narrows to a byte, and resets to
+zero when it reaches the observed count. These aliases preserve the original
+literal addresses; they do not establish separate storage ownership or buffer
+capacity. A phase-17 switch and direct selection-byte assignment before the
+state-word switch closed the initial 796-byte/285-difference candidate using
+ordinary C with no register bindings. The complete 800-byte extent includes
+two zero tail-alignment bytes omitted by the provisional 798-byte CFG extent.
+
+Original helpers at `0x43E50`, `0x43EAC`, `0x4423C`, `0x4425C`, `0x4418C`,
+`0x44020` and `0x2C720` remain explicit external dependencies. Their broader
+contracts and unused return declarations are provisional; no body bytes are
+credited for them. All fourteen accepted extents have changed-source controls,
+including a real halfword-countdown edit in the choice controller. Current
+activity-header consumers are reverified after its comment-only clarification.
+Failed source variants, complete candidate/expected bytes and callback evidence
+remain in ignored reports; publication metadata is
+`frame-need-optional-completion-batch-manifest.json`. This is static and compiler
+matching evidence, with runtime interaction, UI, sample and cancellation
+behaviour still untested.
