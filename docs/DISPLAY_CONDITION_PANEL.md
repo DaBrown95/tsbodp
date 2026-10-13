@@ -134,3 +134,17 @@ provider definitions, ten direct callers and the remaining current shared-header
 consumers have fresh complete-extent matches and real changed-source controls.
 This is a consistent ABI/access model supported by the bytes, not a claim that
 original type declarations or a boolean-only field domain were recovered.
+
+# Connected selected-group initialization
+
+The panel setup at `0x0801D1D0` remains unconverted. The initializer at
+`0x0802A580` is now a separate exact 264-byte C replacement over the same
+condition storage; a direct caller edge from the panel setup is not established.
+It marks earlier columns for rows zero and one, then marks the requested group and entries and
+publishes non-`FF` display kinds. This connects the panel/marker observations to
+the reconstructed condition initialization and refresh path. The complete
+extent, literal pool and alignment match; an actual changed-row-threshold
+control is rejected. The caller's unchecked row/column/count contracts and the
+broader setup/detail-drawing candidates remain unresolved. See
+[the condition evidence](RESOURCE_CONDITIONS_RECONSTRUCTION.md) for the storage
+alias, full-word counters and compiler-lifetime constraints.

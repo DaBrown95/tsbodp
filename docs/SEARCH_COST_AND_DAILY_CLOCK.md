@@ -112,7 +112,7 @@ Two further connected functions add 320 complete matching C bytes:
 
 The original factory at `0x08010874` installs the first function at object
 `+0x88`, and calls the second with the payload-derived index stored at object
-`+0x68`. This factory remains explicit unconverted code. The query returns the
+`+0x68`. The factory is reconstructed in the connected closure below. The query returns the
 actual masked word from world `+0x714` for indices up to 31 and `+0x718` after
 subtracting 32 otherwise, without normalizing to a Boolean. The update clears
 a bit in the corresponding second pair at `+0x71C/+0x720`. Existing save
@@ -149,6 +149,78 @@ This path adds static creator/callback evidence, not gameplay observation.
 Owner validity, subtype table bounds and an overall index domain of zero
 through 63 remain unproved; no new guards are invented. The unsigned source
 shift describes the bank operation within that domain, while the complete
-pinned-compiler comparison preserves the original machine bytes. The adjacent
-flag setters, factory and interaction callback remain explicit next targets,
-alongside the weekly reconciliation's retained one-byte compiler mismatch.
+pinned-compiler comparison preserves the original machine bytes. The flag
+setters, factory and interaction callback are reconstructed below; the weekly
+reconciliation retains its unconverted one-byte compiler mismatch.
+
+## Daily flag factory and interaction closure
+
+Five directly connected producers add 480 complete matching C extent bytes:
+
+| Function | ROM address | Extent |
+| --- | --- | ---: |
+| `frame_create_daily_flag_object` | `0x08010874` | 256 bytes |
+| `frame_test_daily_pending_flag` | `0x08010B48` | 52 bytes |
+| `frame_mark_daily_flag` | `0x08010B7C` | 52 bytes |
+| `frame_mark_daily_pending_flag` | `0x08010BB0` | 52 bytes |
+| `frame_daily_flag_interact` | `0x08011414` | 68 bytes |
+
+The factory pointer word at `0x0804F2B8` is slot 16 relative to the established
+factory-table root `0x0804F278`. This identifies one table entry; it does not
+establish the full table's length. The factory obtains a 320-byte scene object
+through the matching allocator and reads a serialized payload prefix: word ID,
+signed halfword positions at `+4/+6`, byte subtype at `+8` and flag index at
+`+9`. It stores the narrowed ID and subtype and keeps the index at object `+0x68`.
+
+The factory uses the first flag pair at world `+0x714/+0x718` to choose between
+reusing a stored result and drawing another chance value. If present, it normalizes the masked result from the second
+pair at `+0x71C/+0x720` into an actual byte Boolean. Otherwise a primary chance call
+using the subtype's byte threshold may set the second pair, and the first pair
+is marked regardless of the draw result. Both queries return masked words,
+not normalized Boolean values. Both setters use unsigned word OR operations
+and retain the original bank-selection and index subtraction.
+
+An active result places and configures the object, sets flags `0x000E0415`,
+installs the matching daily callback at `+0x88`, starts state zero/variant one,
+clears its owner pointer, selects an animation and palette from subtype tables,
+sets OAM byte `+0xD5` bits two and three, and installs the new interaction at
+`+0xC8`. The inactive branch removes the allocated object and returns null.
+The factory has no original null-allocation check, and none is added. Position
+shifts explicitly use unsigned values before their existing signed word ABI,
+retaining the original bit representation without a negative signed shift.
+
+The interaction's original entry saves R1 as its owner. It accepts an owner
+whose ID is zero and state is 16 when player-zero input mask 1 is pressed,
+sets this selector to state 18/variant zero, records the owner and clears input.
+This enters the previously reconstructed timer, cue and completion handoff.
+Its role header therefore uses two `FrameObject *` callback arguments and a
+local selector overlay. The matching copied collision pass also calls its
+`+0xC8/+0xCC` callbacks with two objects. This static handoff supports this path's
+contract; it does not prove every invocation or runtime collision. The generic
+actor role's existing one-argument callback declaration remains provisional
+and is not widened by this batch. The daily `+0x88` callback uses the shared
+single-object declaration.
+
+The chance, animation and palette roots are `0x08051B10`, `0x08051AAC` and
+`0x08051AFC`. Their spacing is consistent with five 16-byte animation entries
+and five palette words before the next roots, but the source leaves the arrays
+unsized. The complete chance-table extent and the payload subtype/index domains
+remain unresolved; no fabricated bounds or extra guards are introduced.
+The C `1u << index` operation is defined only when the normalized count is below
+32. For byte-derived factory indices 64 through 255, that count lies outside the
+C domain whereas the original native variable LSL yields zero. The factory's
+valid index domain remains unestablished; arbitrary full-word query inputs are
+not covered by that native byte-domain observation. The
+nearby second-pair clear helper at `0x08010BE4` remains explicit original code:
+the current mapped graph and a full-ROM Thumb call-pattern scan found no
+inbound caller, which does not prove absence of indirect or runtime use.
+
+The factory, pending query and interaction use ordinary C without register
+constraints. Each setter has two branch-local R2 bindings for its actual world
+base address. Those values end within the chosen bank calculation. Full extents,
+literal pools and original zero tail alignment match; controls changing factory
+flags, bank boundaries and the accepted owner state all reject. The seven-function
+flag-object path totals 800 C extent bytes and joins the daily flag reset and
+save-word accessors. Whole-ROM equality and gameplay behavior remain separate
+claims. The weekly entry reconciliation remains unconverted with its retained
+one-byte mismatch.

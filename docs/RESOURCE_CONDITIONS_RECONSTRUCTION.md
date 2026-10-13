@@ -169,8 +169,9 @@ no fixed register variables are needed. Its complete 228-byte extent ends at
 `0802A580`, including all six literal words and zero alignment. Changing one
 group-complete write to zero rejects with a 224-byte output and 144 differing,
 missing or extra bytes. The next function begins at `0802A580` and ends at
-`0802A688`; its 264-byte semantic candidate remains unconverted. The earlier
-492-byte envelope is not credited as one reconstructed initializer. Raw public
+`0802A688`; its separate 264-byte selected-group initializer is now reconstructed
+as described below. The earlier 492-byte envelope is not credited as one
+reconstructed initializer. Raw public
 positive/control comparisons are under `reports/audio-root/condition-groups-canonical/`.
 
 The refresh at `0802A688` scans the definition's byte count, requiring both
@@ -217,10 +218,8 @@ Raw positive/control and useful failed comparisons remain under
 `reports/audio-root/condition-actor-entries-canonical/`.
 
 Useful failed candidates and raw comparisons remain in ignored local reports.
-The selected-group initializer at `0802A580` remains unconverted. Close
-candidates receive no C coverage credit. It is the next connected target before
-assigning broader semantics to this system.
-No output patch, difference mask or reference change was used.
+Close candidates receive no C coverage credit. No output patch, difference mask
+or reference change was used.
 
 The actor-action notification continuation simplifies `condition_finish_actor_context`
 without adding coverage. A pointer to each four-byte counter record followed by
@@ -240,3 +239,40 @@ Previously matching direct consumers explicitly retain their observed byte
 narrowing, and all current shared-header consumers have fresh positive matches
 and actual changed-source control comparisons. Names and original source types
 remain inferred; no runtime validity or boolean-only domain is established.
+
+The selected-group initializer at `0802A580` closes the adjacent initialization
+path. For rows zero and one, it marks all columns below the supplied column and
+each definition-counted entry active and complete. It then marks the supplied
+column and its entries for every row, publishing each non-`FF` entry kind and
+the final non-`FF` definition display kind through the accepted display-kind
+provider. Inputs and loop indices use full words here, unlike the prior
+row initializer's byte counters. The original code supplies no row, column,
+count or pointer validity checks. In particular, the accessed six-column and
+five-entry cell views do not establish valid count limits for this caller.
+
+The earlier definition lookup uses a byte-root alias at `08059A44`, eight bytes
+into the same definition-row storage rooted at `08059A3C`, with a 32-byte row
+stride and four-byte pointer stride. The selected lookup uses the existing
+definition-row view directly. State rows have the observed 144-byte stride,
+columns 24 bytes, and entries four bytes; group flags are at `444`/`445` and
+entry flags at `448`/`449` relative to the game-state root plus these offsets.
+Counts are reloaded after potentially aliasing byte stores and display calls.
+The nearby `1D1D0` panel setup remains unconverted and accesses the same condition
+storage. A direct caller edge from that setup to this initializer has not been
+established; the grouping rests on shared fields, the adjacent initializer and
+the accepted display-kind callee, rather than a claimed panel invocation.
+
+The C keeps separate row-offset lifetimes for group fields and entry fields in
+the earlier no-call loop, and retains its definition pointer, entry counter and
+shared mark value in semantic register variables. The selected lookup's two
+short pointer bindings describe the first kind byte and the indexed kind byte;
+both end before the display call. Preparing the selected mark value before its
+entry cursor and consuming column offsets before the row-root addition recover
+the original scheduling. These constraints contain no instruction body.
+The formatted public source matches the entire 264-byte extent through
+`0802A688`, including five literal words and zero alignment. Changing the
+earlier-row threshold from one to two produces a real 264-byte control with one
+differing byte. Positive/control objects have only the allocated `.text`
+section. The former 119-, 114- and two-byte candidates and raw comparisons remain
+under ignored local condition-initializer reports. Whole-ROM matching and these
+static layouts do not establish the original source types or gameplay behavior.

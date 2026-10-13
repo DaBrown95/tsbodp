@@ -25158,6 +25158,276 @@
         "before": "index > 31",
         "after": "index > 30"
       }
+    },
+    {
+      "name": "frame_create_daily_flag_object",
+      "source": "src/frame/frame_create_daily_flag_object.c",
+      "rom_offset": 67700,
+      "size": 256,
+      "symbols": {
+        "frame_allocate_scene_object": "0x08001129",
+        "resource_get_object_payload": "0x0800aebd",
+        "frame_test_daily_flag": "0x08010b15",
+        "frame_test_daily_pending_flag": "0x08010b49",
+        "frame_mark_daily_flag": "0x08010b7d",
+        "frame_mark_daily_pending_flag": "0x08010bb1",
+        "frame_random_chance": "0x080354cd",
+        "frame_set_position": "0x080014a5",
+        "frame_step_daily_flag_object": "0x08010975",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_animation_record": "0x0800132d",
+        "frame_acquire_palette_slot": "0x08030221",
+        "frame_daily_flag_interact": "0x08011415",
+        "frame_remove_object": "0x08000929",
+        "frame_set_variant_state": "0x08001be1",
+        "input_clear": "0x0801f0e5",
+        "g_frame_daily_flag_chances": "0x08051b10",
+        "g_frame_daily_flag_animations": "0x08051aac",
+        "g_frame_daily_flag_palettes": "0x08051afc",
+        "g_input_pressed": "0x03004228",
+        "g_display_daily_world": "0x03003950"
+      },
+      "thumb_symbols": [
+        "frame_allocate_scene_object",
+        "resource_get_object_payload",
+        "frame_test_daily_flag",
+        "frame_test_daily_pending_flag",
+        "frame_mark_daily_flag",
+        "frame_mark_daily_pending_flag",
+        "frame_random_chance",
+        "frame_set_position",
+        "frame_step_daily_flag_object",
+        "transition_object_set_state",
+        "frame_set_animation_record",
+        "frame_acquire_palette_slot",
+        "frame_daily_flag_interact",
+        "frame_remove_object",
+        "frame_set_variant_state",
+        "input_clear"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "object->flags = 0xe0415;",
+        "after": "object->flags = 0xe0414;"
+      }
+    },
+    {
+      "name": "frame_test_daily_pending_flag",
+      "source": "src/frame/frame_test_daily_pending_flag.c",
+      "rom_offset": 68424,
+      "size": 52,
+      "symbols": {
+        "frame_allocate_scene_object": "0x08001129",
+        "resource_get_object_payload": "0x0800aebd",
+        "frame_test_daily_flag": "0x08010b15",
+        "frame_mark_daily_flag": "0x08010b7d",
+        "frame_mark_daily_pending_flag": "0x08010bb1",
+        "frame_random_chance": "0x080354cd",
+        "frame_set_position": "0x080014a5",
+        "frame_step_daily_flag_object": "0x08010975",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_animation_record": "0x0800132d",
+        "frame_acquire_palette_slot": "0x08030221",
+        "frame_daily_flag_interact": "0x08011415",
+        "frame_remove_object": "0x08000929",
+        "frame_set_variant_state": "0x08001be1",
+        "input_clear": "0x0801f0e5",
+        "g_frame_daily_flag_chances": "0x08051b10",
+        "g_frame_daily_flag_animations": "0x08051aac",
+        "g_frame_daily_flag_palettes": "0x08051afc",
+        "g_input_pressed": "0x03004228",
+        "g_display_daily_world": "0x03003950"
+      },
+      "thumb_symbols": [
+        "frame_allocate_scene_object",
+        "resource_get_object_payload",
+        "frame_test_daily_flag",
+        "frame_mark_daily_flag",
+        "frame_mark_daily_pending_flag",
+        "frame_random_chance",
+        "frame_set_position",
+        "frame_step_daily_flag_object",
+        "transition_object_set_state",
+        "frame_set_animation_record",
+        "frame_acquire_palette_slot",
+        "frame_daily_flag_interact",
+        "frame_remove_object",
+        "frame_set_variant_state",
+        "input_clear"
+      ],
+      "negative_control": {
+        "before": "index > 31",
+        "after": "index > 30"
+      }
+    },
+    {
+      "name": "frame_mark_daily_flag",
+      "source": "src/frame/frame_mark_daily_flag.c",
+      "rom_offset": 68476,
+      "size": 52,
+      "symbols": {
+        "frame_allocate_scene_object": "0x08001129",
+        "resource_get_object_payload": "0x0800aebd",
+        "frame_test_daily_flag": "0x08010b15",
+        "frame_test_daily_pending_flag": "0x08010b49",
+        "frame_mark_daily_pending_flag": "0x08010bb1",
+        "frame_random_chance": "0x080354cd",
+        "frame_set_position": "0x080014a5",
+        "frame_step_daily_flag_object": "0x08010975",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_animation_record": "0x0800132d",
+        "frame_acquire_palette_slot": "0x08030221",
+        "frame_daily_flag_interact": "0x08011415",
+        "frame_remove_object": "0x08000929",
+        "frame_set_variant_state": "0x08001be1",
+        "input_clear": "0x0801f0e5",
+        "g_frame_daily_flag_chances": "0x08051b10",
+        "g_frame_daily_flag_animations": "0x08051aac",
+        "g_frame_daily_flag_palettes": "0x08051afc",
+        "g_input_pressed": "0x03004228",
+        "g_display_daily_world": "0x03003950"
+      },
+      "thumb_symbols": [
+        "frame_allocate_scene_object",
+        "resource_get_object_payload",
+        "frame_test_daily_flag",
+        "frame_test_daily_pending_flag",
+        "frame_mark_daily_pending_flag",
+        "frame_random_chance",
+        "frame_set_position",
+        "frame_step_daily_flag_object",
+        "transition_object_set_state",
+        "frame_set_animation_record",
+        "frame_acquire_palette_slot",
+        "frame_daily_flag_interact",
+        "frame_remove_object",
+        "frame_set_variant_state",
+        "input_clear"
+      ],
+      "negative_control": {
+        "before": "index <= 31",
+        "after": "index <= 30"
+      }
+    },
+    {
+      "name": "frame_mark_daily_pending_flag",
+      "source": "src/frame/frame_mark_daily_pending_flag.c",
+      "rom_offset": 68528,
+      "size": 52,
+      "symbols": {
+        "frame_allocate_scene_object": "0x08001129",
+        "resource_get_object_payload": "0x0800aebd",
+        "frame_test_daily_flag": "0x08010b15",
+        "frame_test_daily_pending_flag": "0x08010b49",
+        "frame_mark_daily_flag": "0x08010b7d",
+        "frame_random_chance": "0x080354cd",
+        "frame_set_position": "0x080014a5",
+        "frame_step_daily_flag_object": "0x08010975",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_animation_record": "0x0800132d",
+        "frame_acquire_palette_slot": "0x08030221",
+        "frame_daily_flag_interact": "0x08011415",
+        "frame_remove_object": "0x08000929",
+        "frame_set_variant_state": "0x08001be1",
+        "input_clear": "0x0801f0e5",
+        "g_frame_daily_flag_chances": "0x08051b10",
+        "g_frame_daily_flag_animations": "0x08051aac",
+        "g_frame_daily_flag_palettes": "0x08051afc",
+        "g_input_pressed": "0x03004228",
+        "g_display_daily_world": "0x03003950"
+      },
+      "thumb_symbols": [
+        "frame_allocate_scene_object",
+        "resource_get_object_payload",
+        "frame_test_daily_flag",
+        "frame_test_daily_pending_flag",
+        "frame_mark_daily_flag",
+        "frame_random_chance",
+        "frame_set_position",
+        "frame_step_daily_flag_object",
+        "transition_object_set_state",
+        "frame_set_animation_record",
+        "frame_acquire_palette_slot",
+        "frame_daily_flag_interact",
+        "frame_remove_object",
+        "frame_set_variant_state",
+        "input_clear"
+      ],
+      "negative_control": {
+        "before": "index <= 31",
+        "after": "index <= 30"
+      }
+    },
+    {
+      "name": "frame_daily_flag_interact",
+      "source": "src/frame/frame_daily_flag_interact.c",
+      "rom_offset": 70676,
+      "size": 68,
+      "symbols": {
+        "frame_allocate_scene_object": "0x08001129",
+        "resource_get_object_payload": "0x0800aebd",
+        "frame_test_daily_flag": "0x08010b15",
+        "frame_test_daily_pending_flag": "0x08010b49",
+        "frame_mark_daily_flag": "0x08010b7d",
+        "frame_mark_daily_pending_flag": "0x08010bb1",
+        "frame_random_chance": "0x080354cd",
+        "frame_set_position": "0x080014a5",
+        "frame_step_daily_flag_object": "0x08010975",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_animation_record": "0x0800132d",
+        "frame_acquire_palette_slot": "0x08030221",
+        "frame_remove_object": "0x08000929",
+        "frame_set_variant_state": "0x08001be1",
+        "input_clear": "0x0801f0e5",
+        "g_frame_daily_flag_chances": "0x08051b10",
+        "g_frame_daily_flag_animations": "0x08051aac",
+        "g_frame_daily_flag_palettes": "0x08051afc",
+        "g_input_pressed": "0x03004228",
+        "g_display_daily_world": "0x03003950"
+      },
+      "thumb_symbols": [
+        "frame_allocate_scene_object",
+        "resource_get_object_payload",
+        "frame_test_daily_flag",
+        "frame_test_daily_pending_flag",
+        "frame_mark_daily_flag",
+        "frame_mark_daily_pending_flag",
+        "frame_random_chance",
+        "frame_set_position",
+        "frame_step_daily_flag_object",
+        "transition_object_set_state",
+        "frame_set_animation_record",
+        "frame_acquire_palette_slot",
+        "frame_remove_object",
+        "frame_set_variant_state",
+        "input_clear"
+      ],
+      "negative_control": {
+        "before": "state == 16",
+        "after": "state == 15"
+      }
+    },
+    {
+      "name": "condition_initialize_selected_group",
+      "rom_offset": 173440,
+      "size": 264,
+      "source": "src/resource/conditions/condition_initialize_selected_group.c",
+      "symbols": {
+        "g_resource_game_state": "0x03003950",
+        "g_condition_definitions": "0x08059a3c",
+        "g_condition_definition_columns": "0x08059a44",
+        "resource_set_display_kind": "0x0802c951"
+      },
+      "thumb_symbols": [
+        "resource_set_display_kind"
+      ],
+      "negative_control": {
+        "before": "if (row <= 1) {",
+        "after": "if (row <= 2) {"
+      }
     }
   ],
   "assembly": [
