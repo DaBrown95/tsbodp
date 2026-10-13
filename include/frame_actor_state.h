@@ -1,5 +1,6 @@
 #ifndef FRAME_ACTOR_STATE_H
 #define FRAME_ACTOR_STATE_H
+#include "frame_random.h"
 
 struct FrameObject;
 struct FramePoint;
@@ -18,7 +19,6 @@ unsigned char resource_group_point_count(unsigned char);
 struct FrameActorGroupPoint { short x, y; unsigned char unknown_04[4]; };
 extern unsigned char *g_actor_point_group_data;
 struct FramePoint resource_read_group_point(unsigned char, unsigned char);
-int frame_random_range(int, int);
 unsigned char frame_begin_actor_route(struct FrameObject *, struct FramePoint *, unsigned int *, unsigned int, unsigned char);
 void frame_cancel_actor_route(struct FrameObject *);
 unsigned char frame_find_need_target(struct FrameObject *, void **, unsigned int *);
@@ -36,7 +36,6 @@ void frame_actor_refresh_terrain(struct FrameObject *);
 void frame_route_enable_destination(struct FrameObject *);
 void frame_route_set_limit(struct FrameObject *, unsigned char);
 unsigned char frame_find_action_target(struct FrameObject *, unsigned int, void **);
-unsigned char frame_random_chance(unsigned char);
 unsigned char frame_grid_neighbor(void *, const int *, int *, unsigned char);
 unsigned int frame_grid_terrain(void *, const int *);
 unsigned int frame_grid_occupancy(void *, const int *);

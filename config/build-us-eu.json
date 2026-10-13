@@ -19140,6 +19140,54 @@
         "after": "resource_allocate(2496)"
       },
       "source": "src/frame/frame_initialize_random_buffer.c"
+    },
+    {
+      "name": "frame_random_bounded",
+      "rom_offset": 218156,
+      "size": 36,
+      "symbols": {
+        "frame_next_random_word": "0x0803555d"
+      },
+      "thumb_symbols": [
+        "frame_next_random_word"
+      ],
+      "negative_control": {
+        "before": "limit + 1",
+        "after": "limit + 2"
+      },
+      "source": "src/frame/frame_random_bounded.c"
+    },
+    {
+      "name": "game_random_inclusive",
+      "rom_offset": 218192,
+      "size": 36,
+      "symbols": {
+        "frame_next_random_secondary_word": "0x080355ad"
+      },
+      "thumb_symbols": [
+        "frame_next_random_secondary_word"
+      ],
+      "negative_control": {
+        "before": "limit + 1",
+        "after": "limit + 2"
+      },
+      "source": "src/frame/game_random_inclusive.c"
+    },
+    {
+      "name": "frame_random_chance",
+      "rom_offset": 218316,
+      "size": 44,
+      "symbols": {
+        "frame_next_random_word": "0x0803555d"
+      },
+      "thumb_symbols": [
+        "frame_next_random_word"
+      ],
+      "negative_control": {
+        "before": "value * 101",
+        "after": "value * 100"
+      },
+      "source": "src/frame/frame_random_chance.c"
     }
   ],
   "assembly": [

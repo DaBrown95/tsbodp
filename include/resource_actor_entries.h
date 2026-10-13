@@ -6,6 +6,7 @@
 #include "resource_conditions.h"
 #include "heap.h"
 #include "display_catalog_text.h"
+#include "frame_random.h"
 /* Partial context through +31C; the complete context allocation is unknown. */
 struct ActorEntryCollectionRecord {
  struct ConditionActorEntry entry;
@@ -35,8 +36,6 @@ struct ActorEntrySeed {
  struct ConditionActorEntry entry;
  unsigned char row, column, index, unknown07;
 };
-unsigned short frame_random_bounded(unsigned short);
-unsigned char frame_random_chance(unsigned char);
 void actor_entry_prepare(struct ActorEntryContext *);
 void actor_entry_reset(struct ActorEntryContext *);
 void actor_entry_reset_values(struct ActorEntryContext *);

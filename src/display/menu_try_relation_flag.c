@@ -1,6 +1,6 @@
 #include "display_menu_relation_events.h"
 
-extern unsigned char frame_random_chance(unsigned char);
+#include "frame_random.h"
 
 void display_menu_try_relation_flag(void *pointer, unsigned int index)
 {

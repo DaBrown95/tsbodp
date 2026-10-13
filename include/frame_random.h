@@ -21,5 +21,10 @@ unsigned int frame_next_random_word(void);
 int frame_random_range(int, int);
 unsigned int frame_next_random_secondary_word(void);
 int frame_random_secondary_range(int, int);
+unsigned short frame_random_bounded(unsigned short);
+/* Historical game API keeps a word return; the output narrows to16 bits. */
+unsigned int game_random_inclusive(unsigned short);
+/* Inclusive threshold sample0..100; this is not a probability-quality claim. */
+unsigned char frame_random_chance(unsigned short);
 
 #endif

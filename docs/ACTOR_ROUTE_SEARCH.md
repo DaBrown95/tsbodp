@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 49 C functions and 6,492 bytes:
+The connected route-search path reconstructs 52 C functions and 6,608 bytes:
 11 support helpers, the central 720-byte search, two 100-byte buffer setup
 and reset functions, the 76-byte reverse path extractor, and two connected
 target-route and interaction consumers plus their eight-function job lifecycle,
@@ -8,7 +8,8 @@ and six further variant/job-73 and shared value/random functions, followed by
 the nine-function variant controller and parameter-indicator closure, and its
 three-function random refill/seed/reader dependency, its adjoining
 attachment-neighbor producer, and five allocation, seed-coordination and
-secondary-reader functions. Every complete
+secondary-reader functions, followed by three bounded-output and threshold APIs.
+Every complete
 linked extent matches the fixed reference,
 including literal pools and alignment. Each real source mutation is rejected.
 Neither these matches nor the full-ROM equality gate establish runtime behaviour.
@@ -21,6 +22,9 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x35328` | `frame_refresh_random_seed` | 124 |
 | `0x353A4` | `frame_set_random_seed` | 52 |
 | `0x35404` | `frame_random_secondary_range` | 40 |
+| `0x3542C` | `frame_random_bounded` | 36 |
+| `0x35450` | `game_random_inclusive` | 36 |
+| `0x354CC` | `frame_random_chance` | 44 |
 | `0x35524` | `frame_seed_random_words` | 56 |
 | `0x3555C` | `frame_next_random_word` | 80 |
 | `0x355AC` | `frame_next_random_secondary_word` | 88 |
@@ -714,3 +718,45 @@ dependencies, complete positive/control bytes and useful failures remain under
 ignored `secondary-rng-1791885100/`; the integration manifest is
 `frame-random-secondary-batch-manifest.json`. This batch supplies compiler and
 static mapping evidence without a runtime/gameplay experiment.
+
+## Bounded output and threshold API closure
+
+Three direct reader consumers add 116 verified C bytes and close dependencies
+used by actor selection, animation, need effects and audio coordination. Both
+bounded-output functions narrow the incoming limit to 16 bits, mask their
+respective reader's word with `0x7FFF`, scale by limit plus one using unsigned
+word arithmetic, and narrow the result to 16 bits. The primary function keeps
+its established unsigned-short return. The secondary function keeps the existing
+word-returning `game_random_inclusive` API with explicit narrowing in its body;
+that name remains an inferred gameplay label. The latter is a consumer of the
+secondary cursor, rather than evidence for statistical independence or valid
+initialization of the buffer's extra word.
+
+The threshold predicate at `0x354CC` also narrows its argument to 16 bits, then
+returns one when the limit is greater than or equal to the masked sample scaled
+by 101 and shifted right 15. This produces an inclusive sample from 0 through
+100. It does not establish conventional percentage semantics or distribution
+quality; a zero limit can still return one. The formal argument is now declared
+once in the guarded random header. Older callers' byte-argument declarations
+had obscured this observed width.
+
+Eight of nine already accepted threshold callers match unchanged under the
+16-bit formal. The optional need-effect advance explicitly narrows its
+parameter-derived expression to a byte before the call, preserving the observed
+caller conversion. Omitting that cast with the corrected formal changes three
+shift bytes. With the cast, all nine callers and their actual controls pass;
+their 3,356 bytes are existing coverage. All 194 existing functions in the
+changed header closure, spanning 37,736 bytes, remain exact and reject their
+actual source controls. No arbitrary
+parameter-domain or runtime claim follows from the corrected prototype.
+
+Both bounded wrappers retain a single scoped r0 binding for the reader's returned
+working value; no intervening call crosses that lifetime. Ordinary alternatives
+remain at 36 bytes with 14 differing bytes. The threshold predicate is ordinary C
+without bindings or instruction assembly. Every complete extent, literal pool
+and alignment matches. Controls change the bounded limit addition from one to
+two and the threshold multiplier from 101 to 100; each differs by one byte.
+Private widened-header comparisons, canonical positives and controls, source
+bundles and useful failures are retained under ignored `secondary-rng-1791885100/`;
+the integration manifest is `frame-random-api-batch-manifest.json`. Whole-ROM
+equality and gameplay behavior remain separate claims.

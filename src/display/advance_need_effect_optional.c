@@ -9,7 +9,7 @@ unsigned int frame_need_effect_advance_optional(struct FrameNeedEffectState *sta
   *parameter=value+25;
   if(view_point_distance(state->object->position,player->position)<=0x95ffff) {
    if(((struct DisplayNeedEffectProgressObject *)state->object)->count++>89) {
-    ready=frame_random_chance(frame_read_signed_parameter(g_frame_actor_social_probe,3)*2+20);
+    ready=frame_random_chance((unsigned char)(frame_read_signed_parameter(g_frame_actor_social_probe,3)*2+20));
     ((struct DisplayNeedEffectProgressObject *)state->object)->count=0;
    }
   }
