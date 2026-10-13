@@ -27,7 +27,7 @@ void frame_scene_effect_state_8e14(struct FrameObject *base) {
     valid=frame_grid_point_to_cell(g_frame_registration,&point,&cell);
     if(valid==1) {
      if(!(frame_grid_terrain(g_frame_registration,(int*)&cell)&3))valid=0;
-     if(valid==1)valid=frame_scene_effect_place_need(effect,3,((short*)&object->position.x)[1],((short*)&object->position.y)[1]);
+     if(valid==1)valid=frame_configure_need_effect(effect,3,((short*)&object->position.x)[1],((short*)&object->position.y)[1]);
     }
     if(valid!=1) {
      frame_remove_object(effect);
@@ -38,7 +38,7 @@ void frame_scene_effect_state_8e14(struct FrameObject *base) {
     } else {
      effect->flags|=0x80000;
      ((struct FrameSceneNeedRender *)effect)->attribute1_high|=12;
-     frame_scene_effect_publish_need(effect,1);
+     frame_commit_need_effect(effect,1);
      audio_play_animation_cue(35);
      frame_set_variant_state((struct FrameObject *)object,52);
      object->value=0x64000000;

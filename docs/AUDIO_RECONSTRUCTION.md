@@ -209,3 +209,36 @@ functions that directly include the shared frame header also passed fresh
 positive comparisons and their compiled negative controls. The copied ARM frame
 mixer, channel mixing loop and remaining sequencer bodies still receive no C
 credit.
+
+## Activation and channel lifetime dependencies
+
+Five further connected backend functions contribute 176 matching C bytes:
+activation at `0x49870` (48), deactivation at `0x498A0` (28), state-one channel
+counting at `0x498BC` (36), indexed channel clearing at `0x499E4` (44), and the
+actual game sample-volume backend at `0x49948` (20). Each complete extent and
+its compiling changed-source control pass the respective positive/rejection
+gates. They use ordinary C with the pinned GNU GCC 3.0.2 and GNU binutils
+2.10.1 profiles; no instruction bodies or output edits are involved.
+
+Activation sets interrupt-enable bit four at `0x04000200`, writes 128 to timer
+zero control at `0x04000102`, and sets the shared ring-enabled word to one.
+Deactivation clears timer-control bit seven and clears that word. Their leaf
+boundaries include the intervening literal pools and original zero alignment:
+the activation extent ends at the next entry, `0x498A0`, rather than the
+46-byte static envelope ending at its return.
+
+Channel counting walks the same 32 records and counts only active-state byte
+one, rather than every nonzero state accepted by the handle validator. Indexed
+clearing sets that byte to zero only where both the reused `+0x24` byte is
+nonzero and the state is one. The subsequent interpretation of other states and
+the reused counter still requires the unmatched mixer/fade bodies.
+
+The sample-volume setter clamps an unsigned word to 255 and writes byte one
+of the table at `0x03000090`. This is distinct from the accepted global setter
+at `0x49AA0`, which writes byte zero. The original game caller's address
+`0x49948` is retained and its declaration now comes from the shared backend
+header. All currently accepted consumers of the changed audio headers were
+recompiled with their existing negative controls; their complete bytes remain
+exact. These matches close the observed game volume call and hardware
+activation edges, but do not establish the complete audio implementation,
+audible output or gameplay behavior.

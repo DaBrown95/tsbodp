@@ -42,7 +42,7 @@ extern unsigned char g_need_effect_game_state[], g_need_effect_save_state[];
 extern struct DisplayNeedEffectChoiceState g_need_effect_choice_state;
 extern struct DisplayNeedEffectSavedObject g_need_effect_saved_objects[];
 
-/* Unconverted commit consumes a complete word, including sign-extended requests. */
+/* Commit consumes a complete word, including sign-extended requests. */
 void frame_commit_need_effect(struct FrameObject *, unsigned int);
 unsigned char frame_need_effect_world_test(unsigned int, int);
 void frame_set_animation_frame(struct FrameTickObject *, FrameU8);

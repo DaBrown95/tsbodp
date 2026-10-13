@@ -1359,6 +1359,45 @@ report directories. The final renderer still has 18 differing bytes in its
 bodies are excluded from matching C coverage.
 
 This is compiler and static data-flow evidence. It does not establish gameplay
-correctness, complete subsystem behavior, or a complete game inventory. Need
-effect placement/publication at `0x2D8E4` and `0x2D9AC`, along with other called
-bodies not yet accepted, remain explicit original-ROM dependencies.
+correctness, complete subsystem behavior, or a complete game inventory. Other
+called bodies not yet accepted remain explicit original-ROM dependencies.
+
+### Need-effect placement handoff
+
+| Address | Function | Verified C bytes |
+| --- | --- | ---: |
+| `0x0802D8E4` | `frame_configure_need_effect` | 200 |
+
+The placement helper consumes word arguments, stores the low byte of direction
+at object `+0x12`, and narrows the two coordinates to signed halfwords. It asks
+`0x3BA54` for a projected integer point. Failure uses the original narrowed
+arguments, then the accepted position setter stores the coordinates in fixed
+point form. The effect-state pointer at `+0x64` goes to predicate `0x2ECC0` with
+mode 2. If that predicate succeeds, the helper converts the projected point to
+a packed grid cell, looks up a nearby object through `0x2E5EC`, and passes a
+non-null result to `0x7E68` with mode 1. These direct-callee role names remain
+provisional; their original bodies remain explicit until separately verified.
+
+It enables object flag 1, calls `0x3B12C` with the registration context and mode
+1, and returns that call's low byte after invoking the accepted
+`frame_update_need_effect`. The final direction test writes the horizontal
+flip bit at object `+0xD3`. The result is not the projection predicate's result.
+The first candidate copied the requested point during fallback and kept two
+long-lived aliases of the same object, which produced a 192-byte mismatch.
+Explicit fallback values and one object alias match all 200 bytes without
+register bindings. Those failed attempts and raw comparisons are retained in
+the ignored `camera-map/need-placement-*` reports.
+
+The saved-effect idle callback now calls the canonical placement name and
+`frame_commit_need_effect`, whose 608-byte replacement belongs to the display
+path. Its declarations use the observed word argument ABI. Rechecking all
+seven saved-effect sources preserves their 2,684 matching bytes; their seven
+changed-source controls still reject. The new placement control changes the
+flip threshold from 4 to 3 and rejects a one-byte difference. Canonical and
+negative outputs, header snapshots and command receipts are under
+`reports/agents/frame-input/camera-map/need-placement-promoted/`.
+
+This closes a compiler-verified handoff from the saved-effect state to placement
+and display refresh. Grid registration, projection and nearby-object behavior
+still need their own source and runtime evidence. No additional runtime or
+gameplay validation is claimed.

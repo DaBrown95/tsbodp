@@ -25,8 +25,8 @@ struct FrameSceneEffectWork {
 struct FrameSceneNeedFields {unsigned char unknown00[0x83],linked;};
 struct FrameSceneNeedRender {unsigned char unknown00[0xd5],attribute1_high;};
 struct FrameObject *frame_spawn_need_effect(int,int,int,int,int);
-unsigned char frame_scene_effect_place_need(struct FrameObject *,unsigned char,int,int);
-void frame_scene_effect_publish_need(struct FrameObject *,unsigned char);
+unsigned char frame_configure_need_effect(struct FrameObject *,int,int,int);
+void frame_commit_need_effect(struct FrameObject *,unsigned int);
 void frame_scene_effect_configure(struct FrameObject *,unsigned char);
 void frame_scene_effect_walk_972c(struct FrameObject *);
 void frame_scene_effect_replenish_9710(struct FrameObject *);

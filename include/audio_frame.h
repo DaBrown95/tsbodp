@@ -7,6 +7,8 @@ extern unsigned int g_audio_previous_stamp, g_audio_ring_enabled;
 extern volatile unsigned int g_audio_stamp;
 extern unsigned char g_audio_hardware_enabled;
 void audio_initialize_hardware(int);
+void audio_activate_hardware(void);
+void audio_deactivate_hardware(void);
 int audio_acquire_frame_buffers(unsigned char **, unsigned char **);
 extern unsigned short g_audio_tick_samples, g_audio_tick_period;
 extern unsigned short g_audio_saved_tick_samples;

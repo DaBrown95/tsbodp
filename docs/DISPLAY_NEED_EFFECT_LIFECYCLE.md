@@ -181,3 +181,66 @@ sequence selector at `0x411BC`. The two audio callees remain unconverted; these
 call-site roles do not establish their full semantics or runtime behaviour. The
 84-byte restore source uses ordinary C and observed zero alignment. All six sources
 were freshly verified after the alias/header refinement, with real controls.
+
+## Attachment effects and optional progress
+
+A further three connected replacements cover 672 bytes:
+
+| Function | ROM offset | Bytes |
+| --- | --- | ---: |
+| `frame_need_effect_read_center` | `0x2E144` | 80 |
+| `frame_need_effect_advance_optional` | `0x2E888` | 252 |
+| `frame_step_need_effect_attachments` | `0x2E984` | 340 |
+
+The tick's attachment step counts occupied actors in the same three records and
+reads the primary object's visibility bit. It stages an auxiliary effect through
+object pointer slot `+0x90`. Optional one creates the effect only when there are no
+attachments and the primary object is visible. Optional two additionally tests the
+signed parameter against `0x45FF`, and removes an existing effect at or below the
+threshold. Optional three creates an effect, searches for subtype 41 to decide its
+visibility bit, and invokes the progress function. Other optional values retire an
+existing effect; loss of the primary object's visibility also retires it. Finally,
+a non-null state callback at `+0xF8` is called through existing `_call_via_r1` glue.
+The stub remains separate from C coverage, and its wider callback contract is
+provisional.
+
+The program table already consumed by the commit has 28-byte rows. This path reads
+bytes 24 through 27 as effect-factory arguments. A separate view records those four
+byte roles; it does not assert that the seventh word is an animation command pointer.
+The semantic inline record reader uses ordinary allocation and keeps the observed
+literal/index ordering. The full function ends at `0x2EAD8`; an earlier exploratory
+444-byte range crossed the subsequent pool initializers and is not its boundary.
+All embedded literals and alignment within the 340-byte extent are compared.
+
+Optional progress consumes the first word at `0x030040E0` as the current player
+object pointer. This storage is also accessed through input and scene-context
+views elsewhere; the new alias describes a single observed role. Up to signed
+parameter `0x63FF`, it adds 25 to the parameter, compares the accepted point-distance
+result with `0x95FFFF`, and increments the primary object's word at `+0x58`. After
+that word's old value exceeds 89, it asks the existing signed-parameter reader at
+`0x3D1F4` for index three of the social-probe storage at `0x030039E8`, converts twice
+that value plus 20 to a byte for the chance function, and resets the counter. A
+successful chance can send a player in state 16 to state 47 with animation request
+71 and variant 46. The coordinates' units, distance threshold and parameter meanings
+remain provisional; no execution claim follows from these branches.
+
+Beyond the parameter limit, progress retires the primary object, clears its
+parameter and spawns a kind-146 need effect. It sets the new object's linked byte,
+reads the old object's projected bounds midpoint, and calls the existing unconverted
+configuration function. Failed configuration removes the new object. The return
+word reports this completion path. There is no invented null-allocation check.
+The midpoint helper projects the bounds pairs at object `+0x9C` and `+0xA4` through
+the accepted grid-coordinate reader, averages each signed axis with division by
+two, then forms the shifted fixed-point result. Wider bound validity is unknown.
+
+All three complete extents match from current public sources and the guarded
+progress header. Their actual source controls reject: subtype 41 becomes 40,
+the progress limit decreases by one, and the midpoint x divisor changes to four.
+The published tick caller was freshly verified with its control. These new bodies
+use ordinary C without fixed registers; the only assembly directives specify zero
+alignment. Canonical prototypes of the effect factory, point-distance, signed
+parameter and grid-coordinate functions are preserved. The 200-byte configuration
+function, choice builder, action-availability lookup and adjacent pool initializers
+remain explicit unconverted targets. Raw trials, comparisons and controls remain
+in the ignored interaction reports; accepted metadata is
+`need-effect-progress-ready.json`.
