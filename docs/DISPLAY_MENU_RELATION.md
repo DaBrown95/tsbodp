@@ -166,3 +166,10 @@ separate promoted half. All five sources are ordinary C with no register
 bindings. Raw bytes, commands, snapshots and controls are indexed in the
 ignored `catalog-presentation/menu-relation-events-ready.json` receipt. No
 pre-existing accepted source or shared header needs an ABI change.
+
+The connected row-execution and result-presentation path now has eight matching
+C functions / 2,464 bytes, described in [DISPLAY_MENU_RESULTS.md](DISPLAY_MENU_RESULTS.md).
+It connects the relation chance/delay helpers and world-clock producer to
+result pairs, background transfers, cue selection and text staging. Its
+serialized result views express the observed row strides without asserting
+complete table bounds.

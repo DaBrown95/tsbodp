@@ -1664,3 +1664,97 @@ This source/alias correction contributes zero functions and zero coverage bytes.
 The bounded raw helper comparison and before/after source proofs are retained
 under ignored `reports/agents/vblank-wrapper/division-alias-audit/` and the fresh
 `actor-attachment-controller-canonical/` receipts.
+
+
+## Separate render-effect collection, stepping and drawing
+
+Twelve connected replacements add 1,672 verified C bytes. The scheduler's
+existing `frame_collect_objects` call now owns the 148-byte collector at
+`0x305E4`; its `frame_finish_layer` call owns the 92-byte layer pass at
+`0x31164`. The latter returns an integer whose value is narrowed from each
+step's signed byte result. The scheduler ignores that result, so refining its
+old provisional `void` declaration to `int` preserves all 648 scheduler bytes.
+The existing scheduler's changed-source control also still rejects.
+
+| Address | Function | Verified C bytes |
+| --- | --- | ---: |
+| `0x080305E4` | `frame_collect_objects` | 148 |
+| `0x08030678` | `frame_step_render_effect` | 388 |
+| `0x08030E24` | `frame_step_render_effect_animation` | 100 |
+| `0x08030E88` | `frame_step_render_effect_linear` | 116 |
+| `0x08030EFC` | `frame_step_render_effect_linear_alternate` | 116 |
+| `0x08031098` | `frame_clear_render_effects` | 44 |
+| `0x08031114` | `frame_step_uncollected_render_effects` | 80 |
+| `0x08031164` | `frame_finish_layer` | 92 |
+| `0x080311C0` | `frame_allocate_render_effect` | 60 |
+| `0x080311FC` | `frame_destroy_render_effect` | 36 |
+| `0x08031220` | `frame_draw_render_effect` | 428 |
+| `0x080313CC` | `frame_render_effect_terrain` | 64 |
+
+The allocation call passes 84 bytes to the generic intrusive pool. Its free
+pool is `0x03001ED8`, active head is `0x030059E4`, count is `0x03001EE2` and
+maximum is `0x03001EE4`. These differ from the published 72-byte transient
+family's free pool at `0x03001EDC`, head at `0x030059E0`, count at
+`0x03001EE6` and maximum at `0x03001EE8`. The adjacent active-head words are
+separate pool heads; treating the second word as the first family's tail would
+merge distinct allocations. The allocator increments count and maximum even
+if the underlying allocation fails. No new null check or capacity clamp is
+introduced. The pool calls retain explicit list/node view casts: their matched
+implementations access only the intrusive first pointers.
+
+The guarded `frame_render_effect.h` records the observed 84-byte access view.
+It has resource pointer `+0x0C`, fixed-point origin `+0x10`, position `+0x18`,
+velocity `+0x20`, OAM attributes `+0x28`, pointed tile indices `+0x38`, signed
+countdown `+0x3C`, flags `+0x40`, tile base `+0x44`, signed animation counter
+`+0x46`, and byte-sized frame/motion fields at `+0x48` through `+0x4E`.
+The signed high-half position readers establish the pixel view at `+0x1A`
+and `+0x1E`. OAM priority is also read through byte `+0x2D`, bits 2 and 3.
+Unknown bytes and words stay explicit. This is an access layout supported by
+allocation and matched readers; it does not establish a complete gameplay type.
+
+The collector walks four priority bins and skips records carrying flag
+`0x8000`. A record enters its priority bin, or the preceding bin when flag
+`0x4000` permits it, and then receives `0x8000`. The layer pass steps the chosen
+array backwards and clears that flag; the uncollected pass steps remaining
+records and stops on signed result -1. Counts are bytes and destination-array
+capacities remain unproven. Ordinary integer address accumulators retain the
+observed pointer-addition roles; no assembly constraints are needed.
+
+The main step expires countdown -1, advances animation or linear motion, and
+selects stationary, sine-directed or circular position from flags 8 and 32.
+Its direction remap at `0x08052870` indexes the already named component table
+`g_frame_velocity_default` at `0x0804EB00`; the projected x calculation reads
+the table's second component and y reads its first. Separate component locals
+and a byte-offset address view reproduce the original lifetimes without
+register bindings. Flag `0x80` suppresses terrain lookup. Terrain's top two
+bits update OAM priority, while the low six bits are returned; terrain value 3
+removes the record. Global flags `0x110000` suppress drawing. A signed draw
+result -1 sets pending byte `0x03001EE0`.
+
+The drawing function shares the existing sprite sequence/frame/part layouts
+and OAM append path. It converts fixed-point position to signed pixels, applies
+the selected camera origin unless flag `0x200` selects absolute coordinates,
+and returns 2 outside the observed 240 by 160 origin rectangle. It walks the
+frame's low-five-bit part count after its collider and attachment records,
+adds pointed frame tile indices, and submits each OAM part. Its return is the
+last append result narrowed through signed byte; an empty part list returns
+zero and earlier append failures do not stop the loop. The clear function
+caches each next pointer before releasing the current record.
+
+All twelve complete extents, including literal pools and alignment, match.
+The animation, two linear, drawing and terrain replacements use the pinned
+historical GNU assembler profile to reproduce their original zero section
+alignment naturally. The inventory's shorter animation/linear/terrain text
+extents omit those two trailing bytes; the next entry's PUSH and raw comparison
+establish the accepted 100-, 116- and 64-byte boundaries. The duplicated linear
+functions remain two real, separate entry points. Useful modern-assembler and
+ordinary pointer-index mismatches remain in ignored reports.
+
+Fresh production-source proofs and twelve real changed-source controls are
+under `reports/agents/frame-input/render-collection/promoted-current/`, along
+with the 648-byte scheduler proof/control. Every control rejects. The guarded
+new header imports the render layout once; transition camera declarations are
+included only by the drawing source. This is compiler and static subsystem
+evidence, not runtime or gameplay verification. The larger ordinary-object
+renderer, selected map-tile loader and copied staging routine remain excluded
+candidates.

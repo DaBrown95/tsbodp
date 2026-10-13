@@ -89,7 +89,7 @@ void frame_collect_objects(void);
 struct FrameApplyObject;
 void frame_apply_update(struct FrameApplyObject *, FrameU8);
 FrameU8 frame_render_object(struct FrameObject *);
-void frame_finish_layer(FrameU8);
+int frame_finish_layer(FrameU8);
 void frame_finish_display(void);
 
 extern void *g_frame_registration;

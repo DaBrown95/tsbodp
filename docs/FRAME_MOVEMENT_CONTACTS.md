@@ -1,6 +1,6 @@
 # Frame movement contacts
 
-Eight matching Thumb functions reconstruct 920 C bytes of the frame update's
+Nine matching Thumb functions reconstruct 1,200 C bytes of the frame update's
 movement-contact and offset-probe path. These matches include their complete
 literal pools and alignment. The names and access views are inferred from
 calls and memory accesses, and do not establish runtime or gameplay behavior.
@@ -15,6 +15,7 @@ calls and memory accesses, and do not establish runtime or gameplay behavior.
 | `0x0802B430` | 4 | Return the contact argument unchanged |
 | `0x0802AF14` | 240 | Try an offset, restore a rejected position or mark an accepted displacement |
 | `0x0802B434` | 68 | Select the offset sign using the velocity dot product |
+| `0x0802B004` | 280 | Sample four rectangle edges and retain classified terrain/contact words |
 
 The accepted [frame_step_object.c](../src/frame/frame_step_object.c) calls the
 104-byte front end after velocity integration and bounds updating. Its earlier
@@ -36,8 +37,7 @@ The shared filter is a two-word view at `0x03001DF0`. The rectangle refresh
 writes its first word to 255, calls the bounds query, obtains signed integer
 coordinates from the high halfwords of next position, updates the existing
 display-layer bitfield through `frame_layer_at_position`, and applies contact
-state. Object flag `0x01000000` bypasses this work. The original edge scanner
-observes and fills both filter words; its C reconstruction is not yet accepted.
+state. Object flag `0x01000000` bypasses this work. The matching edge scanner observes and fills both filter words.
 
 The bounds query snapshots the next-position pair and direction byte at
 object `+0x12` before calling the flag predicate. Flag `0x8000` chooses the
@@ -85,25 +85,34 @@ operation without a negative signed left shift. These bodies establish the
 observed call convention and return polarity; original source type names and
 arbitrary overflow-domain behavior remain unknown.
 
-Seven sources use ordinary C without register bindings. The bounds query uses
+The 280-byte edge scanner at `0x0802B004` now has a matching ordinary-C reconstruction, including its complete pools and explicit zero tail alignment. It uses the shared four-word bounds order x0, x1, y0, y1 and recognizes even directions 0, 2, 4 and 6. Each case selects a starting corner, the opposite corner of that edge, a cardinal unit increment and the signed edge length. The sampling loop advances by eight coordinate units, retaining each nonzero terrain-classification word and stopping for contact classes 2 through 35. If the retained word lies outside that range, it queries the endpoint and keeps a nonzero result. The shared sentinel 255 initializes the filter first from the endpoint and then from the starting point. Names, coordinate units and terrain-class meanings remain inferred from these calls and accesses.
+
+The source separates each case's initial coordinates from its moving `FramePoint`, and copies the endpoint as a complete aggregate before the by-value terrain call. These ordinary C lifetimes recover the original working-coordinate and step registers, and the endpoint's two stack words; no register variables or instruction assembly are needed. The failed member-copy and independent-scalar attempts are retained privately. The sole assembly declaration expresses zero tail alignment and does not contain the original instruction body.
+
+The switch's original default sets only the length. It still reaches endpoint-dependent work, without initializing the corresponding point locals. The C source preserves that behavior and therefore relies on the inferred valid even-direction caller domain; arbitrary direction values and arbitrary coordinate-overflow domains are not claimed to have defined C behavior. The normal bounds-query call path selects these four edges, but byte equality does not prove all runtime caller inputs or gameplay behavior.
+
+The fresh canonical shared-header proof matches all 280 bytes; its changed-source control changes the step from eight to nine and is rejected with one differing byte. Source, complete header-closure snapshots, commands, expected/candidate bytes and useful failed attempts remain private under movement-edge reports. The ready index is `movement-edge-batch-manifest.json`. The original terrain classifier, three-cell probe and redirection body remain explicit until their own complete C matches are accepted; the edge scanner does not claim their source coverage.
+
+Eight sources use ordinary C without register bindings. The bounds query uses
 one scoped R1 binding for its contact result, assigned after each external call;
 no call-clobbered value is kept across a call. An aggregate next-position
 snapshot recovers the required x/y register pair. Likewise, using a two-word
 displacement argument and a local scaled pair recovers both offset probes;
 the earlier independent-scalar parameter candidates remain excluded.
 
-All eight fresh canonical extent proofs and actual changed-source controls
+All nine fresh canonical extent proofs and actual changed-source controls
 pass. The controls alter the cleared contact, filter sentinel, requested flag,
 pending bit, predicate result, forwarded contact, accepted contact bit or zero
-dot-product result. Seven reject with one differing byte and the requested-flag
+dot-product result; the edge control changes its step from eight to nine. Eight
+reject with one differing byte and the requested-flag
 control rejects with two. Commands, source/header snapshots, expected and
 candidate bytes, controls and useful failed attempts remain in ignored local
 movement reports; `frame-movement-ready.json` indexes the accepted batch.
 
 The three-cell probe at `0x0802AA78` (312 bytes), terrain classifier at
-`0x0802ABB0` (188), redirection body at `0x0802ADF8` (284), and edge scanner at
-`0x0802B004` (280) remain original explicit regions. The grid point converter
+`0x0802ABB0` (188), and redirection body at `0x0802ADF8` (284) remain original
+explicit regions. The grid point converter
 at `0x08048AF8` remains another unconverted dependency. The renderer and its
 finalizer also remain unaccepted. These connected targets receive no C credit
-from the eight matches; byte-identical full-ROM integration is checked
+from the nine matches; byte-identical full-ROM integration is checked
 separately and does not imply their source reconstruction or runtime execution.

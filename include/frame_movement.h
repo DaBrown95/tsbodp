@@ -31,9 +31,10 @@ void frame_apply_movement_contact(struct FrameObject *, unsigned int);
 unsigned char frame_movement_offset_blocked(struct FrameObject *, struct FramePoint);
 unsigned char frame_movement_direction_blocked(struct FrameObject *, struct FramePoint);
 
+unsigned int frame_probe_movement_edge(unsigned int, const int *);
+
 /* Connected original regions remain explicit until their C extent matches. */
 void frame_probe_movement_cells(struct FrameObject *, void *);
-unsigned int frame_probe_movement_edge(unsigned int, const int *);
 void frame_redirect_movement(struct FrameObject *, unsigned int);
 unsigned int frame_map_terrain_at(struct FramePoint);
 void frame_set_variant_state(struct FrameObject *, unsigned char);
