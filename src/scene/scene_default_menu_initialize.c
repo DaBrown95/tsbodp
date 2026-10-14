@@ -66,6 +66,6 @@ void scene_default_menu_initialize(void)
             scene_default_menu_draw_row(slot, g_scene_request.scene);
     }
     transition_run_first(63, 0);
-    scene_default_menu_original_setup_objects();
+    link_initialize_endpoint();
     g_scene_request.scene = 0;
 }

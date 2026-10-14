@@ -37,9 +37,9 @@ void scene_default_menu_draw_row(unsigned int, unsigned int);
 void scene_default_menu_prepare_background(void);
 void scene_default_menu_enter_slots(void), scene_default_menu_accept(void);
 
-/* Original callees remain explicit and receive no recovered-C credit. */
-void scene_default_menu_original_move(void);
-void scene_default_menu_original_setup_objects(void);
+/* Connected menu and endpoint declarations; numeric scene-stage naming remains provisional. */
+void scene_default_menu_change_selection(void);
+void link_initialize_endpoint(void);
 void scene_stage_0803e3a8(void);
 
 void display_configure_tile_allocation(unsigned char);
@@ -52,5 +52,8 @@ void display_enable_background(unsigned int), display_hide_background(unsigned i
 void display_load_palette_ranges(const struct PaletteRangeConfig *);
 void transition_fade_black_out_refresh_twice(unsigned short);
 void scene_submit_default_request(unsigned int);
+unsigned int input_step_vertical_pressed(unsigned int *, unsigned int,
+    unsigned int, unsigned char, unsigned char);
+void frame_set_position(struct FrameObject *, int, int);
 
 #endif

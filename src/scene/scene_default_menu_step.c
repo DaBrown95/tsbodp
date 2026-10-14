@@ -21,7 +21,7 @@ void scene_default_menu_step(void)
 
                 masked &= pressed;
                 if (masked)
-                    scene_default_menu_original_move();
+                    scene_default_menu_change_selection();
             }
         }
         break;
