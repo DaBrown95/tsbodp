@@ -58,8 +58,8 @@ void scene_catalog_initialize(void) {
   display_text_draw_line(tile,188,4,display_scene_lookup_text(g_scene_catalog_state.selector+0x1820),style);}
   scene_catalog_fill_original(0,0);
   scene_catalog_draw_original(0,0);
-  scene_catalog_build_original();
-  scene_catalog_update_original();
+  scene_catalog_build();
+  scene_catalog_update();
  }
  transition_run_first(63,0);
 }

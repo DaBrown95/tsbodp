@@ -18,12 +18,12 @@ void scene_catalog_step(void) {
    }
    scene_catalog_selection();
    audio_play_animation_cue(0);
-   scene_catalog_update_original();
+   scene_catalog_update();
   }
   keys=g_input_pressed[g_input_config.local_player];
   if(keys&1) {
    if(g_scene_request.scene>=g_scene_catalog_action_row)scene_catalog_confirm_original();
-   else if(g_scene_catalog_state.selector==4)scene_catalog_special_original();
+   else if(g_scene_catalog_state.selector==4)scene_catalog_begin_quantity();
    else if(g_scene_catalog_state.selector!=13)scene_catalog_option_original();
    if(g_scene_request.unknown_10!=2)scene_catalog_selection();
    break;
@@ -46,7 +46,7 @@ void scene_catalog_step(void) {
     audio_play_animation_cue(1);
    }
   }
-  scene_catalog_quantity_original();
+  scene_catalog_quantity();
   keys=g_input_local_pressed[g_input_config.local_player];
   confirm=keys&1;
   if(confirm) {
@@ -60,7 +60,7 @@ void scene_catalog_step(void) {
    display_text_set_background_control(g_scene_catalog_bg0);
    g_display_scene_frame_objects[11]->flags&=~1U;
    g_display_scene_frame_objects[12]->flags&=~1U;
-   scene_catalog_build_original();
+   scene_catalog_build();
    scene_catalog_finish_original();
    audio_play_animation_cue(5);
   } else if(keys&2) {
@@ -89,8 +89,8 @@ void scene_catalog_step(void) {
    tile=display_text_draw_line(1,60,4,display_scene_lookup_text(0x181e),phase);
    display_text_draw_line(tile,188,4,display_scene_lookup_text(g_scene_catalog_state.selector+0x1820),phase);
    scene_catalog_fill_original(0,0);
-   scene_catalog_build_original();
-   scene_catalog_update_original();
+   scene_catalog_build();
+   scene_catalog_update();
    transition_run_first(63,0);
   } else if(keys&2) {
    resource_submit_scene(1,2,g_frame_world_id);

@@ -1,9 +1,9 @@
 # Factory slot 11 and scene kind 21
 
-This connected path adds six matching C extents, 2,028 bytes: resource factory
+This connected path has eleven matching C extents, 3,088 bytes: resource factory
 slot 11 creates a contact trigger, its paired collision callback submits scene
-kind 21, and that scene initializes, processes input, refreshes selection and
-shuts down. The names describe observed catalog and selection accesses; they
+kind 21, and that scene initializes, processes input, refreshes selection, manages a
+quantity editor, draws labels and a tile frame, and shuts down. The names describe observed catalog and selection accesses; they
 are provisional. Compiler matching, static ownership and gameplay behavior are
 separate claims. No gameplay run is claimed here.
 
@@ -15,6 +15,11 @@ separate claims. No gameplay run is claimed here.
 | `scene_catalog_step` | `0x41F08` | 876 |
 | `scene_catalog_selection` | `0x42D38` | 200 |
 | `scene_catalog_shutdown` | `0x42FE8` | 36 |
+| `scene_catalog_update` | `0x42274` | 196 |
+| `scene_catalog_begin_quantity` | `0x42E00` | 192 |
+| `scene_catalog_quantity` | `0x42EC0` | 160 |
+| `scene_catalog_build` | `0x430A4` | 80 |
+| `scene_view_draw_frame` | `0x34480` | 432 |
 
 Every extent includes its literal pools and original trailing alignment. The
 constructor ends at the distinct original no-op entry `0x3AD60`; that four-byte
@@ -110,8 +115,8 @@ volatile accesses or dummy dependencies are embedded.
 
 ## Explicit original helper boundary
 
-Only selection is recovered among the directly called local helpers below.
-The other bodies remain original. Their no-result call contracts use `void`
+Selection and the four text/quantity helpers are recovered. The bodies below
+remain original. Their no-result call contracts use `void`
 because these callers consume only effects; this is a scoped declaration, not
 proof of the original source return type. The draw/fill entries retain full
 word arguments: their native prologues preserve incoming words and use word
@@ -121,16 +126,12 @@ the observed paths.
 
 | Original helper | ROM offset | Retained static extent |
 |---|---:|---:|
-| Update labels | `0x42274` | 196 |
 | Draw items | `0x42338` | 208 including two-byte alignment |
 | Fill panel | `0x42408` | 588 |
 | Prepare objects | `0x42654` | 664 |
 | Confirm | `0x42964` | 654 mapped estimate; alignment remains original |
 | Option | `0x42BF4` | 324 |
-| Special selector | `0x42E00` | 192 |
-| Quantity display | `0x42EC0` | 160 |
 | Finish | `0x4300C` | 104 |
-| Build headings | `0x430A4` | 80 |
 | Previous page | `0x431B8` | 60 |
 | Next page | `0x431F4` | 80 |
 
@@ -150,3 +151,70 @@ actual audio prototype fails strict compilation. Native sections, pools,
 alignment, current literal headers, source changes and global aliases are
 audited separately. Whole-ROM integration remains a subsequent publication
 gate, not a claim made by these local proofs.
+
+## Quantity and text continuation
+
+The second connected batch adds five extents, 1,060 bytes. The initializer and
+step now call the four recovered helpers by their own names. These are only
+identifier changes at the existing addresses: update `0x08042275`, headings
+`0x080430A5`, quantity `0x08042EC1` and quantity setup `0x08042E01`. Both callers'
+body constants, control logic, compiler profiles and extents are unchanged;
+the complete affected literal importer closure is refreshed.
+
+Quantity setup reads the selected quantity byte into a word. Zero plays cue 3
+and returns. Otherwise it sets phase 2 and parameter 1, selects the font, loads
+the fixed frame resource and measures text 439. Its unsigned width calculation
+is `((width + 7) >> 3) + 2`; centering also uses an unsigned shift, preserving
+the original word behavior if the measured width is out of range. It selects
+the text layer, stages the captured available quantity, draws texts 438/439,
+refreshes the quantity label and plays cue 1. The captured quantity stays live
+through the opaque display calls.
+
+The quantity label toggles object slots 12 and 11 from parameter==1 and
+parameter==available quantity, clears its tile rectangle, formats the quantity
+and draws it. The 20-byte native stack frame has eight outgoing argument bytes
+and a 12-byte text region. This is not a general formatter capacity guarantee:
+the accepted formatter can produce more than twelve bytes for wider word
+inputs. The recovered setup initializes parameter 1 and the step edits it
+against a byte quantity, but external writers, row validity and gameplay
+coverage are not complete. No new guard or larger stack allocation is added.
+
+The label updater handles the selected row versus the action row, request mode
+and selector 13's object visibility. Its real zero color is assigned within the
+actual rectangle-fill argument and then used as the later label's style. That
+ordinary C lifetime change closes the initial 196/5 mismatch without new
+traffic. The headings helper reads the signed value word at world `+4`, stages
+it as a text substitution and draws text `0x184C`. The separate eight-byte,
+word-aligned access view overlaps the existing world view; it does not claim an
+independent object or complete world structure. The signed word type follows
+the already accepted game-value update provider.
+
+The frame drawer owns `0x34480..0x34630`, including its two-byte original zero
+alignment and three literal words. The adjacent fixed-resource loader remains
+a distinct accepted function. Full word X/Y/width/height arguments are retained;
+only right and bottom endpoints wrap to bytes. It draws the three-by-three
+frame pieces in the original order, with the center last:
+
+| Row | Left | Middle | Right |
+|---|---:|---:|---:|
+| Top | tile+0 | tile+1 | tile+2 |
+| Middle | tile+3 | tile+4 | tile+5 |
+| Bottom | tile+6 | tile+7 | tile+8 |
+
+Each draw reloads the background word, tile halfword and palette halfword from
+`0x03001F04/1F08/1F0A`. Tile addition precedes palette OR and then wraps to a
+halfword; the rectangle provider itself accepts a full word. Separate inner
+width/height values and assignments in their actual draw arguments recover
+the native lifetimes: 412/351 becomes 432/28, then 432/12, 432/10 and 432/0.
+No register binding is needed. Dimensions below two, wrapped endpoints and
+other unchecked geometry retain their original behavior.
+
+The four original incoming frame-drawer sites besides quantity setup remain
+unconverted at `0x21B9C`, `0x343EC`, `0x347EC` and `0x4311C`. Their existence is
+static evidence, not reconstructed source or runtime coverage. The selected
+and fixed frame-resource producers are included in the current proof context.
+The five new functions have real changed-source and strict diagnostic controls;
+layout/type checks distinguish byte equality from a correct word rectangle
+prototype, signed value view and word geometry contract. Prior failed sources,
+the former narrower private rectangle declaration and raw comparisons remain
+local evidence. Whole-ROM equality is checked separately at publication.

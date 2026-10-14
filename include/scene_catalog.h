@@ -32,8 +32,8 @@ void transition_run_first(unsigned short,unsigned int);
 void transition_run_second(unsigned short,unsigned int);
 void display_release_object_list(struct FrameObjectList *);
 void display_reset(void),display_reset_palette_jobs(void),display_scene_clear_object_slots(void);
-/* Unconverted callees; scoped call contracts, not reconstructed bodies. */
-void scene_catalog_prepare_original(void),scene_catalog_update_original(void),scene_catalog_build_original(void);
+/* Original draw/fill/prepare remain explicit; named text helpers are matching C. */
+void scene_catalog_prepare_original(void),scene_catalog_update(void),scene_catalog_build(void);
 void scene_catalog_draw_original(unsigned int,unsigned int),scene_catalog_fill_original(unsigned int,unsigned int);
 extern struct FrameObject *g_display_scene_frame_objects[];
 extern unsigned int g_frame_world_id;
@@ -43,8 +43,8 @@ void resource_submit_scene(unsigned int,unsigned int,unsigned int);
 unsigned int audio_play_animation_cue(unsigned int);
 void display_hide_background(unsigned int);
 void scene_catalog_previous_original(void),scene_catalog_next_original(void),scene_catalog_selection(void);
-void scene_catalog_confirm_original(void),scene_catalog_option_original(void),scene_catalog_special_original(void);
-void scene_catalog_quantity_original(void),scene_catalog_finish_original(void);
+void scene_catalog_confirm_original(void),scene_catalog_option_original(void),scene_catalog_begin_quantity(void);
+void scene_catalog_quantity(void),scene_catalog_finish_original(void);
 void display_scene_refresh_item(struct FrameObject *);
 void frame_set_variant_state(struct FrameObject *,unsigned char);
 void scene_catalog_initialize(void), scene_catalog_step(void), scene_catalog_shutdown(void);

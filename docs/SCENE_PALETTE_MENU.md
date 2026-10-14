@@ -3,7 +3,7 @@
 The audited phase table's row nineteen connects initialization `0x08013F3D`,
 state dispatch `0x08015F69` and shutdown `0x0801405D`. These three ordinary-C
 functions add 564 original extent bytes and connect the previously reconstructed
-[actor/palette menu](ACTOR_GROUP_BINDING.md) and its transition path. Six state
+[actor/palette menu](ACTOR_GROUP_BINDING.md) and its transition path. Two state
 handlers remain explicit original dependencies; matching these scene callbacks
 does not establish complete reconstruction or runtime behavior of this menu.
 
@@ -59,11 +59,11 @@ comparison. The accepted switch needs no manufactured work or register binding.
 | 3 | `frame_step_palette_menu` | Matching C |
 | 4 | `scene_palette_menu_phase_4` | Matching C |
 | 5 | `scene_palette_menu_phase_5` | Matching C |
-| 6 | `0x08014584` | Original |
+| 6 | `scene_palette_menu_phase_6` | Matching C |
 | 7 | Empty case | Part of this dispatcher |
-| 8 | `0x080146E4` | Original |
-| 9 | `0x08014CB0` | Original |
-| 10 | `0x08014F08` | Original |
+| 8 | `scene_palette_menu_phase_8` | Matching C |
+| 9 | `scene_palette_menu_phase_9` | Matching C |
+| 10 | `scene_palette_menu_phase_10` | Matching C |
 | 11 | `0x080152D0` | Original |
 | 12 | `0x080153EC` | Original |
 | 13, 14 | Empty cases | Part of this dispatcher |
@@ -343,3 +343,67 @@ zero through fourteen, initialized object slots, values zero through eleven and
 input indices zero through three bound these checks. Navigation, text, variant,
 palette and audio providers are abstracted; these checks establish no gameplay,
 hardware timing, arbitrary storage validity or complete menu reconstruction.
+
+## Remaining selection transitions
+
+Seven connected C functions add 2,112 complete extent bytes. Four timer handlers
+at `0x14584`, `0x146E4`, `0x14CB0` and `0x14F08` own 352, 336, 600 and
+516 bytes. Their directly called selection-label constructor at `0x16100` owns
+96 bytes; background handoffs at `0x16078` and `0x16160` own 136 and 76.
+All boundaries include their original pools and alignment. The apparent region
+after state ten contains independent entries: the selection-list builder at
+`0x1510C..0x151C4` and release helper through `0x15270` remain original, with
+zero C credit. States eleven and twelve and navigation remain unconverted.
+
+State six acts at timers thirty and fifteen, prepares window/background moves
+and object slots, redraws rows zero through seven, then enters state three at
+zero. State eight reverses those moves and selects request, entry or selection
+handoffs from the parameter word. State nine prepares rows eight through
+fourteen, uses two distinct actual object-table snapshots around the branch's
+variant call and loads the selected pair of palette entries. Its real ID-eleven
+assignment supplies the later palette-offset base; no unused initialization or
+additional read is introduced. At zero it invokes the original list builder
+before checking the fresh owner word and updating slot eight's visibility.
+
+State ten invokes the original list release, reverses object/window movement,
+then selects a queued request, state six or the selected-exit background path.
+Its final three scroll calls need five short register constraints: the first
+and second hold their actual layer and X arguments in R0/R1; the third holds
+only its actual layer in R0. Each value dies at its own call, with no intervening
+call, unused value or added memory traffic. Four other initial constraints were
+removed while preserving all 516 bytes. The other six functions have none.
+Every handler reloads and decrements the real timer at the common exit;
+stores of thirty-one or sixteen therefore become thirty or fifteen there.
+
+The label constructor allocates object kind twenty-four, narrows its word ID
+to the existing halfword, sets flag one and the existing palette/layer bitfields,
+installs the original animation record and scales both incoming word pixel
+coordinates by sixteen bits. Allocation failure and arbitrary coordinate or
+resource validity remain unchecked. The pinned compiler measures both existing
+object access views at 312 bytes with four-byte alignment; the accepted allocator
+reserves 320 bytes. The unused eight-byte tail is not described by either view.
+The mode-seven handoff sets its initial
+background Y to negative one hundred in fixed point, then requests positive
+one hundred as a later scroll target. These are separate observed operations.
+
+The owner remains the existing partial 308-byte access view. Static inspection
+of the still-original builder/release shows pointer slots and byte-derived loop
+counts; no new storage bounds or valid-count guarantee is inferred here.
+The two original helper declarations record only the no-argument, effect-only
+calls. Current canonical source/control proofs cover all seven new functions and
+25 accepted direct callers/providers, with seven additional strict diagnostic
+pairs. Twenty-nine pinned layout/type checks and four mutated-header cases
+establish the actual access views; two missing-provider declarations are rejected
+by the strict diagnostic even when their legacy byte comparisons still match.
+Removing each of the five final scroll argument constraints separately changes
+native bytes while preserving the actual value and scope. These diagnostics do
+not count as additional C coverage.
+
+The 178 finite cases independently execute original and linked bodies against
+normalized call models, check callee-saved state and poison caller-clobbered
+registers. They include zero and maximum-word timers, the observed handoff
+parameters, both owner-count branches and native coordinate wrapping. All seven
+real source controls diverge in these cases; unsupported instructions, missing
+pools and exhausted execution budgets are rejected separately. Called providers,
+allocation, original list operations and window/background hardware are
+abstracted; no complete menu, gameplay or arbitrary capacity claim follows.
