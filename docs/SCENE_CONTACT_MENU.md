@@ -6,7 +6,7 @@ kind 20 through the scene request provider. This identifies a connected scene
 path; the names below describe static accesses and are not recovered original
 identifiers or a claim about gameplay.
 
-This connected path reconstructs thirty-one C functions, totaling 5,460 bytes:
+This connected path reconstructs thirty-two C functions, totaling 5,692 bytes:
 
 | Entry | Bytes | Observed role |
 | --- | ---: | --- |
@@ -28,6 +28,7 @@ This connected path reconstructs thirty-one C functions, totaling 5,460 bytes:
 | `0x08029A00` | 40 | Call the selected secondary activity tick |
 | `0x08029A28` | 16 | Release the primary object list on the alternate activity path |
 | `0x08033940` | 204 | Initialize definition row four's backgrounds, clock, objects and palettes |
+| `0x08033A0C` | 232 | Coordinate moving-event creation, completion, score penalties and activity flags |
 | `0x08033AF4` | 172 | Reset eight primary item slots and accumulate their byte penalties |
 | `0x08033BA0` | 120 | Create the control object at fixed position, initial waiting state and callback |
 | `0x08033C18` | 104 | Create the auxiliary selector object at fixed position and callback |
@@ -47,8 +48,10 @@ literal pools and alignment. Every function has an actual changed-source
 negative control and a separate strict declaration diagnostic. The bodies use ordinary C without added reads, volatile access views or
 fabricated initializers. The primary callback below has one short annotation
 on an actual state-root pointer; the auxiliary callback has three annotations
-on its actual object, shifted selection and flag-field address. The other bodies
-need no register bindings. Source coverage remains separate from whole-ROM
+on its actual object, shifted selection and flag-field address. The activity
+coordinator has three call-free annotations on the actual item-table pointer
+and two object pointers consumed by identifier loads. The other bodies need
+no register bindings. Source coverage remains separate from whole-ROM
 matching and runtime evidence.
 
 # Observed representations and contracts
@@ -291,9 +294,8 @@ records, banks 15 through 9 and 16 colors per call. The completion symbol
 occupies 70 bytes followed by two original zero alignment bytes before the
 independent cleanup entry; the complete 72-byte extent is compared.
 
-The 232-byte activity step at `0x08033A0C` remains original. The three
-connected creators and their primary, control and auxiliary callbacks are
-recovered below.
+The 232-byte activity coordinator at `0x08033A0C` and its three connected
+creators and primary, control and auxiliary callbacks are recovered below.
 Their local declarations describe only the calls made by this batch. The
 five new bodies use ordinary unbound C and have complete native, actual
 changed-source and strict declaration comparisons. Compiler layout and
@@ -443,9 +445,8 @@ stored signed result is nonpositive, and requests cue 189. Other identifiers
 request cue 188. These operations preserve target halfword narrowing and
 the original post-call global reloads. Outside capture, direction byte 2
 retires an event above `0xB7FFFF`; direction 6 retires it at or below zero.
-Other paths copy the actual next-position members into position. The 232-byte
-activity coordinator remains unconverted; this callback closes only the specific
-moving-event handoff.
+Other paths copy the actual next-position members into position. The activity
+coordinator below connects this callback to the creation and scoring path.
 
 Forty-one finite callback cases compare original and freshly linked bytes
 with a bounded model; 27 distinguish the actual removal-mask control. They
@@ -507,8 +508,8 @@ Vertical additions, x bounds and timer subtraction use explicit unsigned-word
 representations before the target's signed interpretation. The source adds no
 signed-overflow dependency or new guard; these casts describe the pinned 32-bit
 target model, without a portable arbitrary conversion claim. The primary and
-auxiliary callbacks are recovered below. Activity tick at `0x08033A0C` and
-the need-adjustment provider remain explicit original bodies.
+auxiliary callbacks and the activity coordinator are recovered below. The
+need-adjustment provider remains an explicit original body.
 
 Fresh complete native comparisons include actual source controls, strict
 provider declarations, current importer proofs and independent layout/type
@@ -580,7 +581,7 @@ flag store; this is input-model evidence, not an asserted gameplay arrangement.
 Audio and animation hooks poison caller-saved registers and check call operands
 without executing those provider bodies. Pointer validity, complete storage,
 arbitrary surrounding capacity and gameplay remain unproved. The auxiliary
-callback is recovered below; the activity coordinator stays original.
+callback and the activity coordinator are recovered below.
 
 # Connected auxiliary selection callback
 
@@ -595,7 +596,7 @@ halfword zero at `0x03004228` gives mask `0x280` priority over mask `0x140`.
 The first mask changes selected halfword zero to 7 and decrements every other
 value. The second changes values above 6 to zero and increments values zero
 through six. No input narrows the selected halfword to a byte or adds a row
-validity guard. If the resulting value differs, it is stored at state byte 14.
+validity guard. If the resulting value differs, it is stored in the state halfword at offset 14.
 Low two bits zero or three select animation frame zero; other values select
 frame one.
 
@@ -635,5 +636,58 @@ exhausted budget. The animation hook poisons caller-saved registers and preserve
 the checked stack and callee-saved protocol; its effects are abstracted rather
 than executed. Three injected post-call effects test the observed reloads
 without asserting that the actual provider produces them. Pointer validity,
-arbitrary storage, gameplay and hardware behavior remain unproved; the activity
-coordinator and need-adjustment provider stay original.
+arbitrary storage, gameplay and hardware behavior remain unproved; the
+need-adjustment provider stays original.
+
+# Definition-row-four activity coordinator
+
+The observed 28-byte definition row at ROM `0x080595CC` contains initializer
+`0x08033941` and coordinator `0x08033A0D`. This is definition row four within
+the kind-20 activity path; it uses the existing `void(void)` callback contract.
+The complete 232-byte coordinator includes its internal literal pool and ends
+at the independent reset-items entry `0x08033AF4`.
+
+The request timer uses unsigned-word subtraction and its `0xFFFFFFFF` sentinel.
+Creating a moving event precedes the actual global-state reload and selected
+row interval read. Completion consumes the low byte of the full-word provider
+result, requests cue 27, reports the signed score and clears/reset objects.
+The low byte of the clock comparison then gates eight paired-slot comparisons.
+Each unmatched or missing secondary subtracts the primary identifier's byte
+penalty from the score halfword; each store preserves the target's low-halfword
+conversion. A nonpositive final signed score becomes 1 before the score call
+and the post-call global reload that sets scene flag 2.
+
+The index begins at zero before an ordinary pointer to the actual global
+state slot is captured. Three annotations retain the real item-table pointer
+in R5 and the two loaded object pointers in R3 and R1. The table is used only
+in the call-free loop; the object pointers die at their identifier reads. No
+caller-saved annotated value crosses a call. Removing each annotation changes
+the native comparison; a hard R6 global-slot annotation is unnecessary and
+its differing predecessor remains private. These lifetimes add no reads,
+guards, volatile operations or placeholder initialization.
+
+Primary object pointers and identifier-indexed ROM entries remain unchecked.
+Eight pointer slots are an observed access boundary, not a capacity or null
+safety claim for arbitrary state. Compiler matches and bounded initialized
+fixtures do not establish gameplay or hardware execution.
+
+Fresh canonical coordinator, direct-provider and indirect-dispatch comparisons
+include actual cue-identifier source controls and a separate strict declaration
+profile. The existing `void(void)` callback, global-slot pointer type, halfword
+score/identifier accesses and record strides have compiler-pinned layout/type
+checks; meaningful signedness, count, width, alignment and callback controls
+reject. Removing the event declaration leaves legacy bytes identical but the
+strict compiler rejects the actual undeclared call.
+
+All 118 finite initialized-memory cases agree for the original, linked and
+independent model; 50 distinguish cue 27 from the actual control cue 26. Cases
+cover unsigned timer sentinels, nullable secondary slots, equal/unequal IDs,
+signed score endpoints and target halfword conversion. Four injected root
+redirections test the original post-call reloads, and high-word provider results
+are synthetic ABI cases for observed low-byte consumption rather than claimed
+outputs of accepted providers. External event, completion, cue, score, cleanup,
+reset and comparison effects are abstract hooks with caller-saved poisoning and
+callee-save/stack checks; these fixtures do not execute those provider bodies.
+Four interpreter failure cases reject an unsupported instruction, truncated
+pool, exhausted budget and uninitialized access through a null primary pointer.
+These are bounded model failures, without a hardware-fault or source-guard claim.
