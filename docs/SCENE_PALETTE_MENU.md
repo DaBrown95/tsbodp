@@ -3,7 +3,7 @@
 The audited phase table's row nineteen connects initialization `0x08013F3D`,
 state dispatch `0x08015F69` and shutdown `0x0801405D`. These three ordinary-C
 functions add 564 original extent bytes and connect the previously reconstructed
-[actor/palette menu](ACTOR_GROUP_BINDING.md) and its transition path. Eight state
+[actor/palette menu](ACTOR_GROUP_BINDING.md) and its transition path. Six state
 handlers remain explicit original dependencies; matching these scene callbacks
 does not establish complete reconstruction or runtime behavior of this menu.
 
@@ -57,8 +57,8 @@ comparison. The accepted switch needs no manufactured work or register binding.
 | 1 | `scene_palette_menu_phase_1` | Matching C |
 | 2 | `frame_step_palette_menu_transition` | Matching C |
 | 3 | `frame_step_palette_menu` | Matching C |
-| 4 | `0x08014B40` | Original |
-| 5 | `0x08015270` | Original |
+| 4 | `scene_palette_menu_phase_4` | Matching C |
+| 5 | `scene_palette_menu_phase_5` | Matching C |
 | 6 | `0x08014584` | Original |
 | 7 | Empty case | Part of this dispatcher |
 | 8 | `0x080146E4` | Original |
@@ -174,7 +174,7 @@ literal current-header dependencies, allocated native sections, symbols, origina
 addresses and pools are pinned; stricter implicit-declaration warning-as-error
 builds run outside the unchanged acceptance profile. These are static and
 compiler/link claims, not gameplay, object-capacity, template-content or complete
-menu reconstruction claims. Eight state targets remain original.
+menu reconstruction claims. Six state targets remain original.
 
 ## Character entry, cursor and object handoff
 
@@ -282,3 +282,64 @@ allocation success, index validity and capacity remain unchecked. In particular,
 the append provider's request for 1,024 bytes after a sixteen-byte clear does not
 establish safe capacity for arbitrary strings. These results do not prove whole
 menu behavior, hardware timing or gameplay.
+
+## Selector input, confirmation and redraw
+
+Three connected functions add 696 matching C extent bytes: selector input at
+`0x14B40..0x14CB0` owns 368, confirmation at `0x15270..0x152D0` owns 96,
+and the redraw helper at `0x14A58..0x14B40` owns 232. The complete extents
+include their literal pools and zero alignment; the adjacent navigation body
+at `0x14834..0x14A58` remains an explicit original dependency with no C credit.
+
+Selector input reads the selected player's linked pressed-input halfword from
+`0x03004228`, separately from the local array used by character entry. Confirm
+mask nine has priority over cancel mask two and directional mask 240. Confirm
+returns without a handoff when the allocation's initial word is nonzero;
+otherwise it selects state ten, timer thirty and parameter five. Cancel selects
+the same state and timer with parameter six. Both play cue twelve. Directional
+input calls original navigation, then redraws the previous and fresh selected
+scenes when they differ. Fresh scene thirteen or fourteen hides slots three,
+four and six and shows five. Other scenes update three IDs and variant 58,
+with fresh object-table reads after variant calls. The selected value supplies
+two original palette entries at byte offsets `2 * (11 - value)` and
+`2 * (value + 1)`, loaded at indices 65 and 81, except on scene thirteen.
+No arbitrary index, value, object-lifetime or palette-capacity check is added.
+
+The redraw helper reads the enabled flag before selecting font three and its
+fill mode. Scenes eight through twelve draw two text resources on a row at
+`20 * (scene - 8) + 43`, using separate resource offsets 460 and 455; the first
+word draw result is narrowed to the observed halfword for the second draw.
+Scene thirteen clears a rectangle and draws the selected resource with offset
+451. Scene fourteen draws resource 31 only when the initial word is zero.
+The enabled declaration now covers the observed fifteen-byte prefix at
+`0x08051FA0..0x08051FAF`, including the actual selector reads through index
+fourteen. The separate count declaration remains eight bytes at `0x08051F70`.
+This extends a partial access view, not an allocator or universal table-capacity
+claim. The original navigation and earlier choice/draw providers corroborate
+these reads; all sixteen accepted literal header importers are rechecked.
+
+Confirmation uses the same linked input snapshot. Mask nine selects state
+twelve, timer fifteen and parameter fourteen; otherwise mask two selects the
+same state and timer with parameter nine. Both play cue twelve. Its three
+semantic register bindings hold the actual input-root pointer, shared mask-nine
+value and computed mask result. The root dies at the indexed read, the shared
+value is last used at the cancel parameter store, and each computed result dies
+at its branch test. All uses precede either mutually exclusive cue call. The
+selector handler's single directional-result binding also dies before its first
+call. Neither function adds synthetic initialization, volatile accesses or
+extra traffic; redraw uses no register bindings.
+
+Fresh positive and changed-source controls cover all three full boundaries and
+current accepted callers/providers. Controls change the real direction mask,
+confirmation parameter and redraw range. Separate strict declaration builds
+reject missing navigation and cue prototypes without changing acceptance flags.
+Pinned compiler checks establish fifteen byte flags and eight byte counts;
+the former eight-flag declaration and a widened flag-element control reject.
+The finite checks execute original and linked bodies with abstracted callees
+that poison caller-clobbered registers. They cover 39 selector, 30 redraw and
+116 confirmation cases, preserve mask priority and reject unsupported
+instructions, missing pools and exhausted execution budgets. Selector values
+zero through fourteen, initialized object slots, values zero through eleven and
+input indices zero through three bound these checks. Navigation, text, variant,
+palette and audio providers are abstracted; these checks establish no gameplay,
+hardware timing, arbitrary storage validity or complete menu reconstruction.

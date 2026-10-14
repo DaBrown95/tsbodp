@@ -13,7 +13,8 @@ struct FrameActorPaletteMenuTextPoint {
 };
 extern struct FrameActorPaletteMenuState g_frame_actor_palette_menu_state;
 extern unsigned int g_frame_actor_palette_menu_choices[];
-extern const unsigned char g_frame_actor_palette_menu_enabled[8];
+/* Observed flag prefix at 0x08051FA0, including selector indices 8..14. */
+extern const unsigned char g_frame_actor_palette_menu_enabled[15];
 extern const unsigned char g_frame_actor_palette_menu_counts[8];
 extern const struct FrameActorPaletteMenuTextPoint g_frame_actor_palette_menu_text_points[8];
 extern struct FrameObject *g_frame_actor_palette_menu_objects[];
