@@ -21,7 +21,7 @@ void frame_apply_movement_contact(struct FrameObject *object,unsigned int contac
    frame_set_variant_state(object,5);break;
   }
  }
- terrain=frame_map_terrain_at((struct FramePoint){((short *)&object->next_position)[1],((short *)&object->next_position)[3]});
+ terrain=frame_map_terrain_at((struct FramePoint){(short)(object->next_position.x >> 16),(short)(object->next_position.y >> 16)});
  ((struct FrameMovementResponse *)object)->terrain=terrain;
  if(terrain&1)object->flags|=0x4000;
  else object->flags&=~0x4000;

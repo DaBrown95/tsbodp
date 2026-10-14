@@ -8,7 +8,7 @@ unsigned int scene_contact_emit_serial_word(void)
     --g_scene_contact_input_setup.prefix.fields.transmit_remaining;
     ++g_scene_contact_input_setup.prefix.fields.transmit_index;
     SCENE_CONTACT_SERIAL_REG32(0x04000154) =
-        (scene_contact_original_fold_word(value) << 24) |
+        (scene_contact_fold_serial_word(value) << 24) |
         ((unsigned int)value << 8) | 0xA0;
     } else {
         g_scene_contact_input_setup.prefix.fields.mode = 9;

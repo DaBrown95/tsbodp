@@ -32601,12 +32601,12 @@
       "size": 376,
       "symbols": {
         "g_scene_contact_input_setup": "0x030040b0",
-        "scene_contact_original_fold_word": "0x080133d5",
+        "scene_contact_fold_serial_word": "0x080133d5",
         "scene_contact_store_serial_word": "0x0801c759",
         "_call_via_r3": "0x0804ccfd"
       },
       "thumb_symbols": [
-        "scene_contact_original_fold_word",
+        "scene_contact_fold_serial_word",
         "scene_contact_store_serial_word",
         "_call_via_r3"
       ],
@@ -32639,10 +32639,10 @@
       "size": 88,
       "symbols": {
         "g_scene_contact_input_setup": "0x030040b0",
-        "scene_contact_original_fold_word": "0x080133d5"
+        "scene_contact_fold_serial_word": "0x080133d5"
       },
       "thumb_symbols": [
-        "scene_contact_original_fold_word"
+        "scene_contact_fold_serial_word"
       ],
       "negative_control": {
         "before": "fields.mode = 7",
@@ -32656,10 +32656,10 @@
       "size": 84,
       "symbols": {
         "g_scene_contact_input_setup": "0x030040b0",
-        "scene_contact_original_fold_word": "0x080133d5"
+        "scene_contact_fold_serial_word": "0x080133d5"
       },
       "thumb_symbols": [
-        "scene_contact_original_fold_word"
+        "scene_contact_fold_serial_word"
       ],
       "negative_control": {
         "before": "fields.mode = 9",
@@ -33029,6 +33029,72 @@
         "after": "display_text_select_font(2, 0, 0)"
       },
       "source": "src/scene/scene_contact_activity_two_draw_score.c"
+    },
+    {
+      "name": "scene_contact_fold_serial_word",
+      "rom_offset": 78804,
+      "size": 112,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "value ^= 0xCC",
+        "after": "value ^= 0xCB"
+      },
+      "source": "src/scene/scene_contact_fold_serial_word.c"
+    },
+    {
+      "name": "scene_contact_dispatch_serial_notice",
+      "rom_offset": 118484,
+      "size": 372,
+      "symbols": {
+        "scene_contact_original_notice_41": "0x0801d049",
+        "scene_contact_original_notice_42": "0x0801d089",
+        "scene_contact_reply_serial_game_word": "0x0801d0c9",
+        "scene_contact_original_notice_81": "0x0801d0d9",
+        "scene_contact_reply_serial_state_word": "0x0801d159",
+        "scene_contact_original_notice_83": "0x0801d169"
+      },
+      "thumb_symbols": [
+        "scene_contact_original_notice_41",
+        "scene_contact_original_notice_42",
+        "scene_contact_reply_serial_game_word",
+        "scene_contact_original_notice_81",
+        "scene_contact_reply_serial_state_word",
+        "scene_contact_original_notice_83"
+      ],
+      "negative_control": {
+        "before": "case 0x43:",
+        "after": "case 0x44:"
+      },
+      "source": "src/scene/scene_contact_dispatch_serial_notice.c"
+    },
+    {
+      "name": "scene_contact_reply_serial_game_word",
+      "rom_offset": 118984,
+      "size": 16,
+      "symbols": {
+        "g_scene_contact_serial_game_word": "0x03003950"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "*length = 4",
+        "after": "*length = 5"
+      },
+      "source": "src/scene/scene_contact_reply_serial_game_word.c"
+    },
+    {
+      "name": "scene_contact_reply_serial_state_word",
+      "rom_offset": 119128,
+      "size": 16,
+      "symbols": {
+        "g_scene_contact_serial_notice_state": "0x03001b70"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "*length = 2",
+        "after": "*length = 3"
+      },
+      "source": "src/scene/scene_contact_reply_serial_state_word.c"
     }
   ],
   "assembly": [

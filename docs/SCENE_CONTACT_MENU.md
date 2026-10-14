@@ -879,18 +879,19 @@ zero. Both receive and transmit return observed word zero or one; the IRQ still
 consumes only the result low byte. Its two call identifiers change at the same
 addresses without changing control flow or register traffic.
 
-The fold helper at `0x080133D4` remains original and receives no C credit.
-Static instructions show incoming low-16 consumption and a byte-valued word
-result; names and declaration models remain provisional. The original notice
-dispatcher and upstream initializer also remain unconverted. Allocated buffers
-are 514 bytes, but neither allocation validity nor arbitrary count/index bounds
-are established by these sources.
+The receive/transmit cohort excluded the fold helper at `0x080133D4` and
+specific notice dispatcher. The connected section below adds their complete
+C bodies; the upstream initializer remains unconverted. Static instructions
+show incoming low-16 consumption and a byte-valued word result; names and
+declaration models remain provisional. Allocated buffers are 514 bytes, but
+neither allocation validity nor arbitrary count/index bounds are established
+by these sources.
 
-Fresh canonical comparisons include all 38 current serial/menu importers and
+That cohort's canonical comparisons included its 38 serial/menu importers and
 three direct heap/IRQ providers, with actual changed-source controls, strict
-new-body diagnostics and genuine missing-provider rejection cases. Finite
-initialized-memory comparisons execute all four bodies and the actual original
-fold helper. The only abstract provider is the specific notice callback with
+new-body diagnostics and genuine missing-provider rejection cases. Its finite
+initialized-memory comparisons executed all four bodies and the original fold
+helper. The only abstract provider was the specific notice callback with
 explicit length/state writes and caller-saved poisoning. Cooperating-callback
 ABI fixtures compare ordered memory events, buffer results, stack restoration
 and callee-saved registers. Two omitted-length cases are separate seeded-stack
@@ -899,3 +900,62 @@ Interpreter null/index failures mean uninitialized-memory rejection within that
 finite model; they are neither hardware-fault claims nor source guards. Numeric
 MMIO, asynchronous IRQ interleaving, general capacity, protocol and gameplay
 remain unproved.
+
+
+# Connected serial fold and specific notices
+
+The complete fold at `0x080133D4` is 112 bytes, and the original installed
+specific notice dispatcher at `0x0801CED4` is 372 bytes including its full
+68-entry switch table and pools. Two direct replies are complete at
+`0x0801D0C8` and `0x0801D158`, each 16 bytes. Their names and access types are
+provisional. This adds four functions and 516 bytes; the three accepted
+receive/store/emit callers change only their same-address fold identifier.
+
+The fold consumes a halfword, processes the low byte followed by the high
+byte from each byte's high bit downward, then appends eight zero bits. It
+returns a word containing only the resulting low byte. One real remaining
+counter uses R3: two, one and zero for the input-byte passes, then one through
+eight for the final pass. Its complete native lifetime is call-free and ends
+before the return, with no added memory traffic. The ordinary predecessor
+has twelve register differences; removing this one annotation has the same
+twelve differences in normal and strict compilation. No other new source
+uses an annotation. The fold and dispatcher retain only their original
+two-byte zero alignment outside their function symbols.
+
+The dispatcher receives the original full-word command and the same specific
+word-result/two-halfword-pointer callback contract as the existing handler.
+Cases `0x40` and `0x43` return one without changing either output. Case `0x80`
+writes the game word at `0x03003950` to the output and produces length four.
+Case `0x82` produces length two, reads the full word at `0x03001B70 + 16`, and
+stores its low halfword. The word-output union is four bytes/alignment four;
+the read-only state prefix is 20 bytes/alignment four with the word at 16.
+These overlapping access views do not establish original declarations,
+complete global storage sizes or new storage ownership.
+
+The game-word output requires a live writable buffer that satisfies its word
+alignment. The actual installer obtains separate 514-byte buffers through
+the accepted heap allocator's aligned HeapBlock access contract. Allocation
+success, arbitrary incoming halfword-pointer alignment and unchecked buffer
+indices remain preconditions, with no new guard or initialization. Cases
+`0x41`, `0x42`, `0x81` and `0x83` still call explicit original children here;
+their discarded-result interfaces are provisional and get no new C credit.
+The final string child ends at `0x0801D1CC`, before an independent four-byte
+return-only leaf, which is also excluded.
+
+Default command `0x84` returns zero without writing either output even when
+the parser's second parameter admits it. The parser's sending callback must
+write its length before the subsequent source read; the parser ignores its
+return and adds no guard. Omitted-length cases are separated seeded-stack
+native diagnostics, without a defined-source or valid-protocol claim.
+
+Exhaustive halfword fixtures compare all 65,536 inputs with the original,
+linked C and an independent eight-bit polynomial model; a genuine polynomial
+edit changes 58,975 results. Separate notice fixtures execute the dispatcher
+and the two real replies, with explicit hooks for the four original children.
+Connected fixtures execute the actual receive body, BX R3 transfer, notice
+dispatcher, replies and fold with no child hooks. Valid `0x80`/`0x82` paths
+produce their lengths before the parser reads them; the two actual default
+`0x84` paths remain native diagnostics. Compiler layout/type failures and
+actual declaration-omission failures supplement complete source controls.
+These bounded fixtures do not establish portable object layout, general
+protocol, asynchronous IRQ interleaving, hardware or gameplay behavior.

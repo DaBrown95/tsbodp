@@ -50,8 +50,7 @@ unsigned int scene_contact_transmit_serial_word(void);
 unsigned int scene_contact_store_serial_word(unsigned int);
 unsigned int scene_contact_emit_serial_word(void);
 
-/* Explicit original fold: low16 input, byte-valued word result. */
-unsigned int scene_contact_original_fold_word(unsigned short);
+#include "scene_contact_serial_words.h"
 
 void set_irq_table_entry(unsigned int, unsigned int);
 

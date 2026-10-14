@@ -44,3 +44,16 @@ the called providers, poisons caller-saved registers and checks callee-save and
 stack restoration. Its 20 control divergences and three interpreter failures are
 finite model evidence; they do not establish gameplay, hardware behavior or
 unbounded capacity and arithmetic domains.
+
+The adjoining accepted `frame_apply_movement_contact` (220 bytes) and
+`frame_refresh_movement_contacts` (88 bytes) read each signed coordinate's high
+half as `(short)(coordinate >> 16)`. This replaces the earlier `short *` alias
+of the two-word point with accesses through its actual `int` fields. The pinned
+target has four-byte signed coordinates and two-byte signed halves; native
+arithmetic right-shift and signed-half conversion behavior is checked separately.
+This is a target-specific source refinement, not a portability claim. All four
+expression changes preserve the full original extents, pools, existing source
+controls, compiler profiles, callback signatures and memory ordering. They add
+no C coverage. The bounded instruction checks include signed high-halfword
+edges and real field reloads after abstract provider mutations; they do not
+establish arbitrary pointer or arithmetic domains, hardware or gameplay.

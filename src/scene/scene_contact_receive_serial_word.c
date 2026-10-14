@@ -34,7 +34,7 @@ unsigned int scene_contact_receive_serial_word(unsigned int word)
                     g_scene_contact_input_setup.prefix.fields.unknown06 = command;
                 }
                 SCENE_CONTACT_SERIAL_REG32(0x04000154) =
-                    (scene_contact_original_fold_word(g_scene_contact_input_setup.prefix.fields.receive_remaining) << 24) |
+                    (scene_contact_fold_serial_word(g_scene_contact_input_setup.prefix.fields.receive_remaining) << 24) |
                     (g_scene_contact_input_setup.prefix.fields.receive_remaining << 8) | command;
             } else if (command > 127 && command <= g_scene_contact_input_setup.prefix.fields.second_parameter) {
                 g_scene_contact_input_setup.prefix.fields.status = 3;
@@ -44,7 +44,7 @@ unsigned int scene_contact_receive_serial_word(unsigned int word)
                 g_scene_contact_input_setup.prefix.fields.transmit_index = 0;
                 g_scene_contact_input_setup.prefix.fields.transmit_remaining = (send_bytes + 1) / 2;
                 SCENE_CONTACT_SERIAL_REG32(0x04000154) =
-                    (scene_contact_original_fold_word(g_scene_contact_input_setup.prefix.fields.transmit_remaining) << 24) |
+                    (scene_contact_fold_serial_word(g_scene_contact_input_setup.prefix.fields.transmit_remaining) << 24) |
                     (g_scene_contact_input_setup.prefix.fields.transmit_remaining << 8) | command;
             }
         } else if (g_scene_contact_input_setup.prefix.fields.unknown06 > 63 &&
@@ -58,7 +58,7 @@ unsigned int scene_contact_receive_serial_word(unsigned int word)
                             g_scene_contact_input_setup.prefix.fields.unknown06, &complete_bytes,
                             g_scene_contact_input_setup.prefix.fields.first_buffer);
                         SCENE_CONTACT_SERIAL_REG32(0x04000154) =
-                            (scene_contact_original_fold_word(0) << 24) |
+                            (scene_contact_fold_serial_word(0) << 24) |
                             g_scene_contact_input_setup.prefix.fields.unknown06;
                         g_scene_contact_input_setup.prefix.fields.status = 4;
                         g_scene_contact_input_setup.prefix.fields.unknown06 = 0;
