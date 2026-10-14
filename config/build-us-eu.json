@@ -33047,20 +33047,20 @@
       "rom_offset": 118484,
       "size": 372,
       "symbols": {
-        "scene_contact_original_notice_41": "0x0801d049",
-        "scene_contact_original_notice_42": "0x0801d089",
+        "scene_contact_receive_serial_game_record": "0x0801d049",
+        "scene_contact_receive_serial_options": "0x0801d089",
         "scene_contact_reply_serial_game_word": "0x0801d0c9",
-        "scene_contact_original_notice_81": "0x0801d0d9",
+        "scene_contact_reply_serial_game_record": "0x0801d0d9",
         "scene_contact_reply_serial_state_word": "0x0801d159",
-        "scene_contact_original_notice_83": "0x0801d169"
+        "scene_contact_reply_serial_text_rows": "0x0801d169"
       },
       "thumb_symbols": [
-        "scene_contact_original_notice_41",
-        "scene_contact_original_notice_42",
+        "scene_contact_receive_serial_game_record",
+        "scene_contact_receive_serial_options",
         "scene_contact_reply_serial_game_word",
-        "scene_contact_original_notice_81",
+        "scene_contact_reply_serial_game_record",
         "scene_contact_reply_serial_state_word",
-        "scene_contact_original_notice_83"
+        "scene_contact_reply_serial_text_rows"
       ],
       "negative_control": {
         "before": "case 0x43:",
@@ -33095,6 +33095,152 @@
         "after": "*length = 3"
       },
       "source": "src/scene/scene_contact_reply_serial_state_word.c"
+    },
+    {
+      "name": "scene_contact_initialize_serial_session",
+      "rom_offset": 117176,
+      "size": 388,
+      "symbols": {
+        "display_set_mode": "0x0800d601",
+        "display_enable_layers": "0x0800d68d",
+        "display_load_resource_palette": "0x0800da95",
+        "display_show_background": "0x0800d579",
+        "display_load_background": "0x0800da21",
+        "display_set_background_velocity": "0x0800dfcd",
+        "display_fill_background": "0x0800d6b9",
+        "scene_contact_original_disable_background": "0x0800d6a9",
+        "display_text_set_background_control": "0x0801ae2d",
+        "display_text_select_font": "0x0801ae75",
+        "display_scene_lookup_text": "0x08045009",
+        "display_text_draw_line": "0x0801a959",
+        "scene_contact_original_prepare_serial_slot": "0x0801cddd",
+        "save_stream_suspend_audio": "0x080412b1",
+        "save_stream_read_slot": "0x08037e9d",
+        "save_stream_resume_audio": "0x080412bd",
+        "save_stream_validate_slot": "0x08037e6d",
+        "save_stream_load_buffer": "0x08037c8d",
+        "heap_allocate_zeroed": "0x080278e5",
+        "transition_run_first": "0x080393fd",
+        "scene_contact_install_serial_irq": "0x0801c809",
+        "audio_select_sequence": "0x080411bd",
+        "scene_contact_dispatch_serial_notice": "0x0801ced5",
+        "g_scene_contact_serial_initializer_palette": "0x08ede3b8",
+        "g_scene_contact_serial_initializer_control3": "0x0805309c",
+        "g_scene_contact_serial_initializer_background": "0x08ee5f28",
+        "g_scene_contact_serial_initializer_control2": "0x080530a0",
+        "g_scene_contact_serial_initializer_first_panel": "0x08ee9b28",
+        "g_scene_contact_serial_initializer_second_panel": "0x08eeaae8",
+        "g_scene_contact_serial_initializer_control0": "0x080530a4",
+        "g_save_stream_state": "0x03005d90",
+        "g_scene_contact_serial_session": "0x03001b70",
+        "g_scene_request": "0x03004350",
+        "g_scene_contact_input_setup": "0x030040b0"
+      },
+      "thumb_symbols": [
+        "display_set_mode",
+        "display_enable_layers",
+        "display_load_resource_palette",
+        "display_show_background",
+        "display_load_background",
+        "display_set_background_velocity",
+        "display_fill_background",
+        "scene_contact_original_disable_background",
+        "display_text_set_background_control",
+        "display_text_select_font",
+        "display_scene_lookup_text",
+        "display_text_draw_line",
+        "scene_contact_original_prepare_serial_slot",
+        "save_stream_suspend_audio",
+        "save_stream_read_slot",
+        "save_stream_resume_audio",
+        "save_stream_validate_slot",
+        "save_stream_load_buffer",
+        "heap_allocate_zeroed",
+        "transition_run_first",
+        "scene_contact_install_serial_irq",
+        "audio_select_sequence",
+        "scene_contact_dispatch_serial_notice"
+      ],
+      "negative_control": {
+        "before": "heap_allocate_zeroed(108)",
+        "after": "heap_allocate_zeroed(109)"
+      },
+      "source": "src/scene/scene_contact_initialize_serial_session.c"
+    },
+    {
+      "name": "scene_contact_receive_serial_game_record",
+      "rom_offset": 118856,
+      "size": 64,
+      "symbols": {
+        "g_scene_contact_serial_session": "0x03001b70",
+        "g_scene_contact_serial_game_word": "0x03003950",
+        "g_scene_request": "0x03004350",
+        "display_text_copy_bytes": "0x0804e7d1"
+      },
+      "thumb_symbols": [
+        "display_text_copy_bytes"
+      ],
+      "negative_control": {
+        "before": "unknown_10=2",
+        "after": "unknown_10=3"
+      },
+      "source": "src/scene/scene_contact_receive_serial_game_record.c"
+    },
+    {
+      "name": "scene_contact_receive_serial_options",
+      "rom_offset": 118920,
+      "size": 64,
+      "symbols": {
+        "g_scene_contact_serial_session": "0x03001b70",
+        "g_scene_contact_serial_options": "0x03003970",
+        "g_scene_request": "0x03004350",
+        "g_scene_contact_serial_request_modes": "0x08053126",
+        "heap_copy": "0x08027ab5"
+      },
+      "thumb_symbols": [
+        "heap_copy"
+      ],
+      "negative_control": {
+        "before": "status04=235",
+        "after": "status04=234"
+      },
+      "source": "src/scene/scene_contact_receive_serial_options.c"
+    },
+    {
+      "name": "scene_contact_reply_serial_game_record",
+      "rom_offset": 119000,
+      "size": 128,
+      "symbols": {
+        "g_scene_contact_serial_capture": "0x03003950",
+        "g_scene_contact_serial_session": "0x03001b70",
+        "g_scene_request": "0x03004350",
+        "heap_copy": "0x08027ab5"
+      },
+      "thumb_symbols": [
+        "heap_copy"
+      ],
+      "negative_control": {
+        "before": "*length=108",
+        "after": "*length=109"
+      },
+      "source": "src/scene/scene_contact_reply_serial_game_record.c"
+    },
+    {
+      "name": "scene_contact_reply_serial_text_rows",
+      "rom_offset": 119144,
+      "size": 100,
+      "symbols": {
+        "g_scene_contact_serial_text_rows": "0x08d70d8c",
+        "display_text_selected_bank": "0x08044ffd"
+      },
+      "thumb_symbols": [
+        "display_text_selected_bank"
+      ],
+      "negative_control": {
+        "before": "*start=8",
+        "after": "*start=7"
+      },
+      "source": "src/scene/scene_contact_reply_serial_text_rows.c"
     }
   ],
   "assembly": [

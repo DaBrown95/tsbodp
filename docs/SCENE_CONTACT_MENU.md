@@ -762,7 +762,7 @@ add three complete ordinary C bodies totaling 324 bytes. Their literal pools,
 internal alignment and independent following entries are retained. No register
 annotations, added guards, placeholder values or extra accesses are needed.
 The receive/transmit children are recovered in the next section; upstream
-scene initializer `0x0801C9B8` remains original. This does not complete the
+scene initializer `0x0801C9B8` is covered by the later connected session group. This does not complete the
 input protocol or scene family.
 
 The fields view now spans the full observed 44-byte prefix within the existing
@@ -937,8 +937,9 @@ alignment. The actual installer obtains separate 514-byte buffers through
 the accepted heap allocator's aligned HeapBlock access contract. Allocation
 success, arbitrary incoming halfword-pointer alignment and unchecked buffer
 indices remain preconditions, with no new guard or initialization. Cases
-`0x41`, `0x42`, `0x81` and `0x83` still call explicit original children here;
-their discarded-result interfaces are provisional and get no new C credit.
+`0x41`, `0x42`, `0x81` and `0x83` originally remained explicit child calls in
+this fold/dispatcher group; the later connected session group covers them
+with their complete discarded-result interfaces and separate C credit.
 The final string child ends at `0x0801D1CC`, before an independent four-byte
 return-only leaf, which is also excluded.
 
@@ -959,3 +960,78 @@ produce their lengths before the parser reads them; the two actual default
 actual declaration-omission failures supplement complete source controls.
 These bounded fixtures do not establish portable object layout, general
 protocol, asynchronous IRQ interleaving, hardware or gameplay behavior.
+
+# Connected serial session initialization and record replies
+
+Five complete bodies add 744 bytes: initialization at `0x0801C9B8` (388),
+receiving game record and option notices at `0x0801D048` and `0x0801D088`
+(64 each), game-record reply at `0x0801D0D8` (128), and text-row reply at
+`0x0801D168` (100). The final body ends at `0x0801D1CC`; the independent
+four-byte return leaf that follows remains original and receives no credit.
+These five sources use ordinary C without register annotations or added
+reads, guards or initializers. The dispatcher changes only its four
+same-address child identifiers.
+
+The fixed phase table's flat row ten at `0x080579F4` contains initialization
+`0x0801C9B9`, original step `0x0801CB3D`, and original shutdown `0x0801CE55`.
+The request-tail stores of 45 in these notices do not identify this table
+row. The two latter callbacks, background-disable provider `0x0800D6A8`,
+and four-slot object preparation provider `0x0801CDDC` remain explicit originals.
+
+Initialization configures the three observed backgrounds and text, reads
+and validates save slot three, and conditionally calls the accepted
+64-byte load-buffer body with a full incoming word of three. That body
+overwrites incoming R0 before reading it. Its declaration and definition
+now consistently accept an unused word; this expresses the actual incoming
+call without recovering an original signedness or parameter declaration.
+The provider contributes zero new C bytes. Its body and its existing source
+control remain unchanged apart from that formal parameter.
+
+The initializer writes the three observed halfwords with `0x1A03`, obtains
+a zeroed 108-byte buffer and stores the word `0xC000`. Request mode zero
+installs the specific notice handler with parameters 68 and 132; other
+modes store that same handler at input setup offset 44 and select sequence
+zero. No allocation guard is added. The separate session access view is
+20 bytes/alignment four with halfwords at 0, 2, 4 and 6, matched byte at 8,
+buffer pointer at 12 and word at 16. It overlaps the previously described
+read-only notice-state prefix at `0x03001B70`.
+
+Receiving `0x41` compares the first input word with the game word and copies
+108 bytes into the session buffer. Receiving `0x42` copies eight option
+bytes and indexes the original request-mode table with input byte eight.
+Both leave the length output untouched and write their observed request
+and status fields. Their readable input, writable session buffer, word
+alignment and unchecked table index remain preconditions. There is no new
+capacity or successful allocation claim.
+
+Reply `0x81` writes two initial words followed by five observed copies,
+produces length 108 and updates request/status fields. The source union is
+a 220-byte/alignment-four access prefix at `0x03003950`, whose byte array
+bounds each offset and whose word view supplies the two initial loads.
+The output union is 108 bytes/alignment four, containing 27 words and the
+same byte span. These are overlapping representation views, not complete
+original global declarations or ownership claims. The existing 44-byte
+need-state capture remains distinct from the 32-byte serialized child view.
+
+Reply `0x83` writes the prefix byte eight, queries the current text bank for
+each of eight rows, copies every terminating zero, and adds one zero byte
+when the final address is odd. Its actual output pointer begins after the
+prefix store; signed row progression reproduces the original loop. The
+pointer difference is stored as a halfword. Valid text pointers, terminating
+strings, buffer capacity and the incoming pointer contract remain unchecked;
+the observed fixed-ROM banks do not establish a general bank limit.
+
+Fresh compiler checks pin all partial sizes, alignments, field offsets,
+widths and actual function definitions. Restoring the old void-input
+load-buffer declaration, wrong child interfaces and wrong representation
+views produces real diagnostic failures. Current header importers and
+actual direct providers have fresh changed-source controls. Bounded native
+fixtures compare initialization, the four children, the dispatcher, bank
+getter and load-buffer body with explicit display, audio, save, allocator,
+copy, division and installation hooks. Caller-saved registers are poisoned
+at those hooks. The receiving branches preserve length, while both reply
+branches write it before the parser's later source read under valid callback
+preconditions. Unsupported `0x84` still has no length write and retains only
+the separate earlier native omission diagnostics. These finite checks do
+not establish asynchronous IRQ behavior, hardware, general protocol,
+arbitrary pointer validity, capacity safety or gameplay behavior.

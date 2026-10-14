@@ -8,22 +8,22 @@ unsigned int scene_contact_dispatch_serial_notice(unsigned int kind,
     case 0x43:
         break;
     case 0x41:
-        scene_contact_original_notice_41(length, buffer);
+        scene_contact_receive_serial_game_record(length, buffer);
         break;
     case 0x42:
-        scene_contact_original_notice_42(length, buffer);
+        scene_contact_receive_serial_options(length, buffer);
         break;
     case 0x80:
         scene_contact_reply_serial_game_word(length, buffer);
         break;
     case 0x81:
-        scene_contact_original_notice_81(length, buffer);
+        scene_contact_reply_serial_game_record(length, buffer);
         break;
     case 0x82:
         scene_contact_reply_serial_state_word(length, buffer);
         break;
     case 0x83:
-        scene_contact_original_notice_83(length, buffer);
+        scene_contact_reply_serial_text_rows(length, buffer);
         break;
     default:
         return 0;

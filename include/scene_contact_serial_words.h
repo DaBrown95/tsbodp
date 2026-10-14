@@ -23,10 +23,10 @@ unsigned int scene_contact_dispatch_serial_notice(unsigned int,
 void scene_contact_reply_serial_game_word(unsigned short *, unsigned short *);
 void scene_contact_reply_serial_state_word(unsigned short *, unsigned short *);
 
-/* Original child calls whose results are discarded here; no C credit. */
-void scene_contact_original_notice_41(unsigned short *, unsigned short *);
-void scene_contact_original_notice_42(unsigned short *, unsigned short *);
-void scene_contact_original_notice_81(unsigned short *, unsigned short *);
-void scene_contact_original_notice_83(unsigned short *, unsigned short *);
+/* Complete direct children; receiving branches do not write their length output. */
+void scene_contact_receive_serial_game_record(unsigned short *, unsigned short *);
+void scene_contact_receive_serial_options(unsigned short *, unsigned short *);
+void scene_contact_reply_serial_game_record(unsigned short *, unsigned short *);
+void scene_contact_reply_serial_text_rows(unsigned short *, unsigned short *);
 
 #endif
