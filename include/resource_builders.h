@@ -5,7 +5,7 @@
 struct ResourceArenaPair { unsigned int first,second; };
 struct ResourceArenaHeader {
  unsigned short bytes,count;
- struct ResourceArenaPair records[1];
+ struct ResourceArenaPair records[0];
 };
 extern struct ResourceArenaHeader *g_resource_arena;
 extern unsigned char *g_resource_word_data;

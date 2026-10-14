@@ -75,3 +75,32 @@ in the final arithmetic register allocation and is not counted as source.
 The resource selection/cleanup operations, object lookup and view effect
 updates remain next connected targets. The group object-count reader at
 `0800AE50` is now accepted with the command continuation.
+
+## Variable arena-header tail
+
+The arena copier at `0800AFA8` indexes eight-byte records up to the observed
+halfword count. Its former one-element `records[1]` declaration did not describe
+that variable tail. The shared header now uses the pinned compiler's GNU89
+zero-length-array extension, `records[0]`. This is a type correction with zero
+new C bytes: the physical prefix remains a size halfword at zero, a count
+halfword at two and records beginning at four. The prefix has size four and
+four-byte alignment; each record has size eight and four-byte alignment. These
+are access-view sizes, while the existing allocator still reserves 8,192 bytes.
+The compiler's header size changes from twelve to four; all field offsets,
+the eight-byte record stride and the arena allocation remain unchanged.
+
+All ten current header importers and the allocation/clear providers have fresh
+positive and changed-source controls; the copier also has a strict declaration
+pair. Pinned layout and API checks reject the old one-element bound, incorrect
+field widths, record stride, packing and return type. The old declaration can
+still compile to the same complete 72 bytes, which demonstrates why byte
+equality alone does not validate a declared array bound. Actual wrong count and
+size-word declarations change native bytes; packing the record introduces an
+unmatched compiler copy-helper call and is rejected without inventing a link
+alias. Original source and diagnostic evidence are retained privately.
+
+The zero-length member describes the observed variable-count access rather
+than a valid-capacity guarantee. Serialized counts, pointers, source alignment,
+byte-size values and the arena's remaining capacity stay unchecked. The original
+controller and 68-byte word-group copier remain unconverted; no runtime,
+hardware or gameplay result follows from this declaration correction.

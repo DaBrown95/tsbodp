@@ -1,6 +1,6 @@
 # Factory slot 11 and scene kind 21
 
-This connected path has twenty-one matching C extents, 4,400 bytes: resource factory
+This connected path has twenty-three matching C extents, 4,880 bytes: resource factory
 slot 11 creates a contact trigger, its paired collision callback submits scene
 kind 21, and that scene initializes, processes input, refreshes selection, manages a
 quantity editor, draws labels and a tile frame, and shuts down. The names describe observed catalog and selection accesses; they
@@ -24,6 +24,8 @@ separate claims. No gameplay run is claimed here.
 | `scene_catalog_basic_value` | `0x428EC` | 120 |
 | `scene_catalog_page_value` | `0x43074` | 48 |
 | `scene_catalog_has_next` | `0x430F4` | 40 |
+| `scene_catalog_option` | `0x42BF4` | 324 |
+| `scene_catalog_notice` | `0x4311C` | 156 |
 | `scene_catalog_previous` | `0x431B8` | 60 |
 | `scene_catalog_next` | `0x431F4` | 80 |
 | `scene_catalog_is_basic_row` | `0x43244` | 32 |
@@ -140,7 +142,6 @@ the observed paths.
 | Draw items | `0x42338` | 208 including two-byte alignment |
 | Prepare objects | `0x42654` | 664 |
 | Confirm | `0x42964` | 654 mapped estimate; alignment remains original |
-| Option | `0x42BF4` | 324 |
 
 These are local static boundary estimates, not an exhaustive inventory. The
 item-drawing source attempts are retained privately: first 220/197, followed
@@ -216,9 +217,9 @@ the native lifetimes: 412/351 becomes 432/28, then 432/12, 432/10 and 432/0.
 No register binding is needed. Dimensions below two, wrapped endpoints and
 other unchecked geometry retain their original behavior.
 
-The four original incoming frame-drawer sites besides quantity setup remain
-unconverted at `0x21B9C`, `0x343EC`, `0x347EC` and `0x4311C`. Their existence is
-static evidence, not reconstructed source or runtime coverage. The selected
+The three original incoming frame-drawer sites besides quantity setup and the
+recovered notice remain unconverted at `0x21B9C`, `0x343EC` and `0x347EC`.
+Their existence is static evidence, not reconstructed source or runtime coverage. The selected
 and fixed frame-resource producers are included in the current proof context.
 The five new functions have real changed-source and strict diagnostic controls;
 layout/type checks distinguish byte equality from a correct word rectangle
@@ -277,7 +278,7 @@ ranges remain unchecked.
 
 The next-page predicate accepts and returns bytes. A zero count returns zero;
 otherwise it tests the first offset against `(count - 1) & 0xFC`. Its full
-forty-byte extent ends at the distinct original entry `0x4311C`, including the
+forty-byte extent ends at the distinct notice entry `0x4311C`, including the
 original zero alignment. It is used by the still-original object preparation
 and the recovered paging path. The value helpers own `0x428EC..0x42964` and
 `0x43074..0x430A4`; their following original confirm entry and already accepted
@@ -335,6 +336,61 @@ changed-source controls and separate strict diagnostics. The existing step's
 previous, next and completion-caption call names change only at their existing
 addresses. Current literal importer and actual caller/provider closures are
 refreshed with the final headers. The original item refresh, object creation,
-confirmation and option handlers remain explicit; useful failed reconstructions
+confirmation handler remains explicit; useful failed reconstructions
 and raw comparisons are kept locally. Static routing, compiler equality and
 runtime behavior remain separate claims.
+
+
+## Entry transfer and notice path
+
+The recovered input step calls `scene_catalog_option`, which indexes the active
+four-byte entry using the full scene word plus the page-start byte. Kind 255
+returns immediately. Kind 63 in selector 0 submits the existing condition
+triple. Selector 5 accepts the byte-wrapped interval for kinds 195 through 200
+and clears the actual world byte at +43E; other selectors except 13 require a
+nonzero recovered basic value. A failed gate draws the recovered notice.
+These inferred role names describe the static routing; they do not establish
+an item category or gameplay outcome.
+
+For selectors through 12, kind 125 updates relation record 12 by -3, then the
+fresh entry kind goes through the value provider and game-value updater. The
+heading is rebuilt and cue 5 plays before choosing the selector's destination
+list. Higher selectors play cue 1 and use observed list 13. A count/capacity
+check precedes the canonical entry-add provider, but the scene's value byte
+increments without examining its return. The canonical compact provider then
+removes the original entry and the scene count decrements. The original
+one-way arrow changes are retained: a failed basic count predicate clears
+slot 12 and a successful page predicate sets slot 14. No extra capacity,
+underflow, object or input guard is introduced.
+
+The local transfer view reuses the accepted `ConditionActorEntry` and
+`ConditionActorEntries` types. Their kind/value1/value2 bytes, count/capacity
+bytes and word pointer follow the accepted add and compact consumers. The
+world prefix spans through the observed +43E byte, contains fourteen observed
+lists at +F8, and has pinned compiler size 1,088 and alignment four. It is an
+overlapping partial view at the existing world root, with the list pointer at
++F0. The byte's provisional availability name follows the accepted add
+producer, which sets it for kinds 195 through 200, and this consumer clearing
+it; complete storage, list contents and pointer validity remain unproved.
+Wrong field widths, a one-list prefix and the wrong +43E offset are rejected
+by separate compiler layout diagnostics.
+
+The notice drawer captures background control, shows and clears background 1,
+loads the existing frame resource and uses measured text width to center a
+four-row frame. It then selects the same text control and font, draws the
+requested line, restores the existing background control, sets transition
+state 3 and plays cue 3. The incoming word is explicitly narrowed to an
+unsigned halfword for text lookup. Current mapped calls supply text IDs 292,
+293, 295 and 297; matching also supports a halfword formal, so this does not
+claim a uniquely recovered historical declaration. The word contract preserves
+the observed low-halfword consumption without changing an original caller.
+
+Both ordinary C bodies match complete extents: `0x42BF4..0x42D38` and
+`0x4311C..0x431B8`, including their pools and alignment. Real changed-source
+controls, strict missing-declaration controls and current accepted literal
+importers and actual providers are verified separately. The existing step's
+option alias is the sole accepted caller source change, at the same address,
+with its constants, body, control and compiler profile retained. The original
+confirmation caller, item drawing and object preparation remain explicit;
+failed source representations and raw comparisons are preserved privately.
+Static mapping, compiler equality and runtime behavior remain separate claims.

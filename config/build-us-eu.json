@@ -29980,7 +29980,7 @@
         "scene_catalog_next": "0x080431f5",
         "scene_catalog_selection": "0x08042d39",
         "scene_catalog_confirm_original": "0x08042965",
-        "scene_catalog_option_original": "0x08042bf5",
+        "scene_catalog_option": "0x08042bf5",
         "scene_catalog_begin_quantity": "0x08042e01",
         "scene_catalog_quantity": "0x08042ec1",
         "scene_catalog_refresh_quantities": "0x0804300d",
@@ -30019,7 +30019,7 @@
         "scene_catalog_next",
         "scene_catalog_selection",
         "scene_catalog_confirm_original",
-        "scene_catalog_option_original",
+        "scene_catalog_option",
         "scene_catalog_begin_quantity",
         "scene_catalog_quantity",
         "scene_catalog_refresh_quantities",
@@ -31373,6 +31373,139 @@
         "before": "display_load_palette(FIELD(palette), 0, 256);",
         "after": "display_load_palette(FIELD(palette), 0, 255);"
       }
+    },
+    {
+      "name": "scene_catalog_option",
+      "source": "src/scene/scene_catalog_option.c",
+      "rom_offset": 273396,
+      "size": 324,
+      "symbols": {
+        "g_scene_request": "0x03004350",
+        "g_scene_catalog_state": "0x030021c8",
+        "g_scene_catalog_transfer_world": "0x03003950",
+        "resource_set_triple": "0x0802a1e9",
+        "scene_catalog_basic_value": "0x080428ed",
+        "scene_catalog_notice": "0x0804311d",
+        "display_menu_adjust_relation": "0x08035d99",
+        "frame_add_game_value": "0x0801bc1d",
+        "scene_catalog_build": "0x080430a5",
+        "audio_play_animation_cue": "0x08040ffd",
+        "actor_entry_add": "0x080200c9",
+        "condition_update_actor": "0x080209cd",
+        "scene_catalog_has_next": "0x080430f5",
+        "g_display_scene_frame_objects": "0x030043b0"
+      },
+      "thumb_symbols": [
+        "resource_set_triple",
+        "scene_catalog_basic_value",
+        "scene_catalog_notice",
+        "display_menu_adjust_relation",
+        "frame_add_game_value",
+        "scene_catalog_build",
+        "audio_play_animation_cue",
+        "actor_entry_add",
+        "condition_update_actor",
+        "scene_catalog_has_next"
+      ],
+      "negative_control": {
+        "before": "value++;",
+        "after": "value+=2;"
+      }
+    },
+    {
+      "name": "scene_catalog_notice",
+      "rom_offset": 274716,
+      "size": 156,
+      "symbols": {
+        "g_scene_catalog_bg1_alt": "0x0807fb34",
+        "g_scene_catalog_bg0": "0x0807fb3c",
+        "g_scene_request": "0x03004350",
+        "display_show_background": "0x0800d579",
+        "display_fill_background": "0x0800d6b9",
+        "scene_view_load_fixed_resource": "0x08034631",
+        "display_scene_lookup_text": "0x08045009",
+        "display_text_measure_width": "0x0801af29",
+        "scene_view_draw_frame": "0x08034481",
+        "display_text_set_background_control": "0x0801ae2d",
+        "display_text_select_font": "0x0801ae75",
+        "display_text_draw_line": "0x0801a959",
+        "audio_play_animation_cue": "0x08040ffd"
+      },
+      "thumb_symbols": [
+        "display_show_background",
+        "display_fill_background",
+        "scene_view_load_fixed_resource",
+        "display_scene_lookup_text",
+        "display_text_measure_width",
+        "scene_view_draw_frame",
+        "display_text_set_background_control",
+        "display_text_select_font",
+        "display_text_draw_line",
+        "audio_play_animation_cue"
+      ],
+      "negative_control": {
+        "before": "unknown_10=3",
+        "after": "unknown_10=4"
+      },
+      "source": "src/scene/scene_catalog_notice.c"
+    },
+    {
+      "name": "scene_contact_initialize",
+      "rom_offset": 166416,
+      "size": 448,
+      "symbols": {
+        "g_scene_contact_state": "0x030043f4",
+        "g_scene_request": "0x03004350",
+        "g_scene_previous_request": "0x03004370",
+        "g_input_pressed": "0x03004228",
+        "g_scene_contact_initial_text_control": "0x08059558",
+        "g_scene_contact_resources": "0x0805971c",
+        "g_scene_contact_palette_resource": "0x08ede3b8",
+        "g_scene_contact_palette_ranges": "0x08052e38",
+        "g_scene_contact_input_setup": "0x030040b0",
+        "resource_bios_swi_0b": "0x0804c8c5",
+        "display_set_mode": "0x0800d601",
+        "display_enable_layers": "0x0800d68d",
+        "display_configure_tile_allocation": "0x08047741",
+        "heap_allocate_zeroed": "0x080278e5",
+        "display_show_background": "0x0800d579",
+        "display_load_background": "0x0800da21",
+        "display_fill_background": "0x0800d6b9",
+        "display_load_resource_palette": "0x0800da95",
+        "display_text_set_background_control": "0x0801ae2d",
+        "display_load_palette_ranges": "0x08011635",
+        "display_text_select_font": "0x0801ae75",
+        "display_scene_lookup_text": "0x08045009",
+        "display_text_draw_line": "0x0801a959",
+        "display_text_draw_block": "0x0801af99",
+        "transition_run_first": "0x080393fd",
+        "scene_contact_handle_input_notice": "0x080293c1",
+        "g_scene_contact_initial_background_control1": "0x08059540"
+      },
+      "thumb_symbols": [
+        "resource_bios_swi_0b",
+        "display_set_mode",
+        "display_enable_layers",
+        "display_configure_tile_allocation",
+        "heap_allocate_zeroed",
+        "display_show_background",
+        "display_load_background",
+        "display_fill_background",
+        "display_load_resource_palette",
+        "display_text_set_background_control",
+        "display_load_palette_ranges",
+        "display_text_select_font",
+        "display_scene_lookup_text",
+        "display_text_draw_line",
+        "display_text_draw_block",
+        "transition_run_first",
+        "scene_contact_handle_input_notice"
+      ],
+      "negative_control": {
+        "before": "heap_allocate_zeroed(420)",
+        "after": "heap_allocate_zeroed(424)"
+      },
+      "source": "src/scene/scene_contact_initialize.c"
     }
   ],
   "assembly": [

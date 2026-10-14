@@ -43,7 +43,7 @@ void resource_submit_scene(unsigned int,unsigned int,unsigned int);
 unsigned int audio_play_animation_cue(unsigned int);
 void display_hide_background(unsigned int);
 void scene_catalog_previous(void),scene_catalog_next(void),scene_catalog_selection(void);
-void scene_catalog_confirm_original(void),scene_catalog_option_original(void),scene_catalog_begin_quantity(void);
+void scene_catalog_confirm_original(void),scene_catalog_option(void),scene_catalog_begin_quantity(void);
 void scene_catalog_quantity(void),scene_catalog_refresh_quantities(void);
 void display_scene_refresh_item(struct FrameObject *);
 void frame_set_variant_state(struct FrameObject *,unsigned char);

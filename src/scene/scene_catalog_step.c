@@ -24,7 +24,7 @@ void scene_catalog_step(void) {
   if(keys&1) {
    if(g_scene_request.scene>=g_scene_catalog_action_row)scene_catalog_confirm_original();
    else if(g_scene_catalog_state.selector==4)scene_catalog_begin_quantity();
-   else if(g_scene_catalog_state.selector!=13)scene_catalog_option_original();
+   else if(g_scene_catalog_state.selector!=13)scene_catalog_option();
    if(g_scene_request.unknown_10!=2)scene_catalog_selection();
    break;
   }
