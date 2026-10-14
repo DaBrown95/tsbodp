@@ -17,6 +17,7 @@ union SaveStreamHeader {
     } fields;
     unsigned char bytes[16];
     unsigned short words[8];
+    unsigned int dwords[4];
 };
 struct SaveStreamState {
     union SaveStreamHeader header;
@@ -66,6 +67,7 @@ unsigned char save_stream_validate_header(void);
 void save_stream_initialize_header(void);
 void save_stream_initialize(void);
 unsigned int save_stream_update_header_option(void);
+unsigned int save_stream_commit_header(void);
 /* Explicit unconverted buffer serialization interface. */
 void save_stream_build_buffer(void);
 #endif

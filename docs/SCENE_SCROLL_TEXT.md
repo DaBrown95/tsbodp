@@ -109,3 +109,9 @@ coverage, and the existing BIOS wrapper remains separate assembly glue.
 Useful failed width, lifetime, byte-mask and padding trials remain in ignored
 local reports. This establishes compiler and byte matches plus static scene
 connections; it does not establish hardware timing or runtime/gameplay behavior.
+
+The palette-provider declarations are now explicit and use their accepted
+word-argument, void-return interfaces. The earlier initializer used C89
+implicit declarations; refreshing all twelve sources and controls with the
+corrected header adds no coverage. See the connected
+[palette-menu lifecycle](SCENE_PALETTE_MENU.md) for this declaration correction.

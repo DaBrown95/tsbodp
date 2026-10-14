@@ -22,13 +22,11 @@ void display_fill_background_map(unsigned int,unsigned short,unsigned short);
 void display_fill_background_rectangle(unsigned int,int,int,int,int,unsigned short);
 void display_set_background_velocity(unsigned int,int,int);
 unsigned int display_load_resource_palette(const struct BackgroundResource *,unsigned short);
-void display_load_palette_alternate(const unsigned short *,unsigned short,unsigned short);
+void display_load_palette_alternate(const void *,unsigned int,unsigned int);
 const unsigned short *display_load_background_dma(unsigned int,const struct BackgroundResource *,unsigned short,unsigned short,unsigned int,unsigned int);
 void display_release_object_list(struct FrameObjectList *),display_reset(void);
 void transition_run_first(unsigned short,unsigned int),transition_run_second(unsigned short,unsigned int);
 void scene_submit_default_request(unsigned int),resource_submit_scene(unsigned int,unsigned int,unsigned int);
-/* Explicit original header-commit provider; its comparison loop is unresolved. */
-unsigned int save_stream_commit_header(void);
 unsigned int audio_play_animation_cue(unsigned int);
 unsigned int input_step_local_vertical_pressed(unsigned int *,unsigned int,unsigned int,unsigned char,unsigned char);
 const char *display_scene_lookup_text(unsigned int);

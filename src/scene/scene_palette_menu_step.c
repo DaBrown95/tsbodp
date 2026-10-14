@@ -1,0 +1,19 @@
+#include "scene_palette_menu.h"
+void scene_palette_menu_step(void){switch(g_scene_request.unknown_10){
+case 0:scene_palette_menu_phase_0();break;
+case 1:scene_palette_menu_phase_1();break;
+case 2:frame_step_palette_menu_transition();break;
+case 3:frame_step_palette_menu();break;
+case 4:scene_palette_menu_phase_4();break;
+case 5:scene_palette_menu_phase_5();break;
+case 6:scene_palette_menu_phase_6();break;
+case 7:break;
+case 8:scene_palette_menu_phase_8();break;
+case 9:scene_palette_menu_phase_9();break;
+case 10:scene_palette_menu_phase_10();break;
+case 11:scene_palette_menu_phase_11();break;
+case 12:scene_palette_menu_phase_12();break;
+case 13:break;
+case 14:break;
+}}
+asm(".align 2,0");

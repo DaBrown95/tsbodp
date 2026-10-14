@@ -13,6 +13,8 @@ extern const struct BackgroundResource g_scene_scroll_background3,g_scene_scroll
 extern const struct BackgroundResource *const g_scene_scroll_text_backgrounds[];
 extern const unsigned short g_scene_scroll_palette[];
 void resource_bios_swi_0b(const void *,void *,unsigned int);
+void display_load_palette(const void *,unsigned int,unsigned int);
+void display_load_palette_alternate(const void *,unsigned int,unsigned int);
 void transition_configure_alpha(unsigned short,unsigned short);
 void transition_set_alpha(unsigned short,unsigned short);
 struct FrameObject *display_scene_create_label(unsigned int,const char **);
