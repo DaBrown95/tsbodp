@@ -21,12 +21,12 @@ void scene_catalog_selection(void) {
    frame_set_variant_state(g_display_scene_frame_objects[0],58);
   }
   scene_catalog_fill(g_scene_catalog_state.page_start,g_scene_catalog_state.row);
-  scene_catalog_draw_original(g_scene_catalog_state.page_start,g_scene_catalog_state.row);
+  scene_catalog_draw(g_scene_catalog_state.page_start,g_scene_catalog_state.row);
  } else {
   g_display_scene_frame_objects[0]->id=g_scene_request.scene+39;
   frame_set_variant_state(g_display_scene_frame_objects[0],58);
   scene_catalog_fill(g_scene_catalog_state.page_start,g_scene_catalog_state.row);
-  scene_catalog_draw_original(g_scene_catalog_state.page_start,g_scene_catalog_state.row);
+  scene_catalog_draw(g_scene_catalog_state.page_start,g_scene_catalog_state.row);
  }
 }
 asm(".align 2,0");

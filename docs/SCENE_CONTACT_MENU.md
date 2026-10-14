@@ -6,7 +6,7 @@ kind 20 through the scene request provider. This identifies a connected scene
 path; the names below describe static accesses and are not recovered original
 identifiers or a claim about gameplay.
 
-This connected path reconstructs sixteen C functions, totaling 2,908 bytes:
+This connected path reconstructs twenty-one C functions, totaling 3,452 bytes:
 
 | Entry | Bytes | Observed role |
 | --- | ---: | --- |
@@ -26,6 +26,11 @@ This connected path reconstructs sixteen C functions, totaling 2,908 bytes:
 | `0x080299B0` | 80 | Initialize the secondary activity and restore its palette |
 | `0x08029A00` | 40 | Call the selected secondary activity tick |
 | `0x08029A28` | 16 | Release the primary object list on the alternate activity path |
+| `0x08033940` | 204 | Initialize definition row four's backgrounds, clock, objects and palettes |
+| `0x08033AF4` | 172 | Reset eight primary item slots and accumulate their byte penalties |
+| `0x080342DC` | 72 | Test the control byte and eight paired object identifiers |
+| `0x08034324` | 52 | Retire nullable secondary objects and clear their slots |
+| `0x08034358` | 44 | Load seven item palettes into descending banks |
 
 Every comparison includes the complete original extent, internal switch tables,
 literal pools and alignment. Every function has an actual changed-source
@@ -214,3 +219,72 @@ cursor handling, callback output writes and the original teardown behavior.
 It adds no capacity guards or allocation failure handling. These are static
 and compiler-matching findings; this batch does not establish complete scene
 formats, hardware execution, save compatibility or gameplay correctness.
+
+# Connected definition-row-four lifecycle
+
+Definition row four at `0x0805955C + 4 * 28` contains initialization word
+`0x08033941` and step word `0x08033A0D`. The accepted activity wrappers reach
+these words through their existing table dispatch. This is a definition-row
+identity within the kind-20 path, not another flat scene-table kind.
+
+The row-specific state access view covers 100 bytes with alignment 4 inside
+the existing 420-byte allocation. It observes the first object at 0, a signed
+score halfword at 12, eight primary pointers at 24, eight secondary pointers
+at 56, a control pointer at 88 and eight selected bytes at 92. These arrays
+express the actual eight-slot loops. They do not establish all allocation
+contents or arbitrary object-pointer validity. The main 24-byte state view
+and its declared global pointer retain their existing types.
+
+Configuration records at `0x08069E54` have a measured 12-byte stride and
+alignment 4: the clock occupies the first eight bytes, count is at 8,
+interval at 9 and a byte used by the original step is at 10. Five consecutive
+record prefixes are observed; the declaration remains unsized. Item records
+at `0x08069E90` have a measured 24-byte stride and alignment 4, with a palette
+pointer at 16 and penalty byte at 20. Seven consecutive prefixes are observed
+and used by the palette loop. This establishes those local accesses without
+proving complete tables or valid arbitrary indices.
+
+Initialization preserves the three background controls and map operands
+390, 1 and 780. The configuration address is first formed at the actual
+clock-copy call, after the background calls. It is read again after item
+reset for the interval word, then objects and palettes are created in their
+original order. An earlier configuration-pointer capture changed the
+compiler's live values and did not match; it remains separate evidence.
+
+Reset assigns the real coordinate pair `(212, 86)` before entering the loop.
+The existing ordinary `FramePoint` is measured as two word members, size 8
+and alignment 4. Its by-value call view occupies the original creator's
+R0/R1 coordinates, while the selected value and slot remain complete words
+in R2/R3. The original creator captures those four incoming words before
+allocation; its later low-halfword and low-byte stores do not justify
+narrowing the call formals. This grouping describes this observed call,
+not a recovered original declaration or a generic callback ABI.
+
+The random result is stored as a byte in the selected array and forwarded as
+a complete word to the original item creator. After each removal or creation,
+the code reloads the actual global state pointer for the slot update. It adds
+the item record's penalty byte, indexed by the created object's halfword at
+offset `0x0A`, to the signed score and stores the halfword result. No null
+guard, capacity check or portable arbitrary narrowing guarantee is added.
+Assigning the coordinate members separately gives the matching register
+lifetimes with no bindings. Aggregate initializer variants emitted an extra
+allocated constant section and were rejected; no section was discarded.
+
+The completion test returns a full word 0 or 1. It requires control byte
+`0x4E` to equal 1 and all eight secondary slots to be nonnull with identifiers
+equal to their primary partners. Control and primary pointers remain
+unchecked. Secondary cleanup preserves nullable-slot removal and the
+post-call global reload before storing null. Palette loading uses seven
+records, banks 15 through 9 and 16 colors per call. The completion symbol
+occupies 70 bytes followed by two original zero alignment bytes before the
+independent cleanup entry; the complete 72-byte extent is compared.
+
+The 232-byte step at `0x08033A0C`, 224-byte item creator at `0x08033C80`,
+120-byte control creator at `0x08033BA0`, 104-byte auxiliary creator at
+`0x08033C18` and 104-byte primary creator at `0x08034384` remain original.
+Their local declarations describe only the calls made by this batch. The
+five new bodies use ordinary unbound C and have complete native, actual
+changed-source and strict declaration comparisons. Compiler layout and
+compatible-type diagnostics reject altered pointer counts, score width,
+record offsets, stride and slot width. These findings do not establish
+hardware execution or a complete activity format.

@@ -1,6 +1,6 @@
 # Factory slot 11 and scene kind 21
 
-This connected path has twenty-three matching C extents, 4,880 bytes: resource factory
+This connected path has twenty-four matching C extents, 5,088 bytes: resource factory
 slot 11 creates a contact trigger, its paired collision callback submits scene
 kind 21, and that scene initializes, processes input, refreshes selection, manages a
 quantity editor, draws labels and a tile frame, and shuts down. The names describe observed catalog and selection accesses; they
@@ -16,6 +16,7 @@ separate claims. No gameplay run is claimed here.
 | `scene_catalog_selection` | `0x42D38` | 200 |
 | `scene_catalog_shutdown` | `0x42FE8` | 36 |
 | `scene_catalog_update` | `0x42274` | 196 |
+| `scene_catalog_draw` | `0x42338` | 208 |
 | `scene_catalog_begin_quantity` | `0x42E00` | 192 |
 | `scene_catalog_quantity` | `0x42EC0` | 160 |
 | `scene_catalog_build` | `0x430A4` | 80 |
@@ -131,7 +132,7 @@ Selection, panel filling, its value providers, the paging predicate and the
 text/quantity helpers are recovered. The bodies below
 remain original. Their no-result call contracts use `void`
 because these callers consume only effects; this is a scoped declaration, not
-proof of the original source return type. The draw/fill entries retain full
+proof of the original source return type. The recovered draw/fill entries retain full
 word arguments: their native prologues preserve incoming words and use word
 index arithmetic, while the reconstructed callers explicitly load bytes or
 pass zero. The remaining original helpers consume no incoming arguments on
@@ -139,7 +140,6 @@ the observed paths.
 
 | Original helper | ROM offset | Retained static extent |
 |---|---:|---:|
-| Draw items | `0x42338` | 208 including two-byte alignment |
 | Prepare objects | `0x42654` | 664 |
 | Confirm | `0x42964` | 654 mapped estimate; alignment remains original |
 
@@ -292,8 +292,7 @@ changed-source controls. Pinned compiler diagnostics check the new partial
 layouts and reject a one-page prefix, wrong field widths or packing and an
 incompatible byte argument for the full-word value provider. Strict diagnostic
 compilation also rejects an actual missing value-provider declaration. Failed
-sources and comparison bytes remain private. Item refresh (208 bytes), object
-preparation (664 bytes) and the other listed original helpers remain explicit
+sources and comparison bytes remain private. Object preparation (664 bytes) and the other listed original helpers remain explicit
 and receive no new C credit.
 
 
@@ -335,8 +334,7 @@ All six ordinary C sources match their entire original extents and have genuine
 changed-source controls and separate strict diagnostics. The existing step's
 previous, next and completion-caption call names change only at their existing
 addresses. Current literal importer and actual caller/provider closures are
-refreshed with the final headers. The original item refresh, object creation,
-confirmation handler remains explicit; useful failed reconstructions
+refreshed with the final headers. The original object preparation and confirmation handlers remain explicit; useful failed reconstructions
 and raw comparisons are kept locally. Static routing, compiler equality and
 runtime behavior remain separate claims.
 
@@ -391,6 +389,61 @@ controls, strict missing-declaration controls and current accepted literal
 importers and actual providers are verified separately. The existing step's
 option alias is the sole accepted caller source change, at the same address,
 with its constants, body, control and compiler profile retained. The original
-confirmation caller, item drawing and object preparation remain explicit;
+confirmation caller and object preparation remain explicit;
 failed source representations and raw comparisons are preserved privately.
 Static mapping, compiler equality and runtime behavior remain separate claims.
+
+
+## Item display refresh
+
+The initializer and selection controller now call the recovered item drawer at
+its existing address. Its complete `0x42338..0x42408` extent is 208 bytes,
+including internal literal pools and the original two-byte zero tail. The
+separate panel provider begins at `0x42408`. The two caller source changes are
+exact alias replacements; their constants, controls, types and profiles remain
+unchanged. An unused old draw-address binding in the step metadata remains a
+same-address compatibility alias, without a caller-body change.
+
+The drawer returns at initial selector 4. Otherwise it visits eight object
+slots in reverse order, from slot 9 through slot 2. Each iteration reloads the
+selector. Ordinary selectors use the first four basic entries and four page
+entries; selector 4, if an opaque callback changes the state during this loop,
+uses five basic entries and three page entries. The actual first record pointer
+and selected page pointer follow the existing context view, with four-byte
+entry strides. The initial offsets are incoming words, and current direct
+callers provide page-start and row bytes. Pointer and offset domains remain
+unchecked; the observed fourteen-page prefix is not a complete capacity claim.
+
+A kind byte of 255 or a descriptor word of 317 clears object flag bit zero.
+Other kinds load the descriptor's full ID word and store its low halfword at
+object +0A, call the existing item refresher, then reload the object pointer,
+set flag bit zero and select variant 58. The source does not rename the
+separate actor ID field at +08. Its two genuine kind-field consumers compile
+to the original single byte load before any opaque call. Object-pointer
+reloads and the full-word descriptor comparison remain as in the original.
+
+The real page pointer-field address is captured at context +12, with page
+stride eight. The helper computes that address before the incoming second
+index's byte offset, then reads the actual pointer field and adds the offset.
+One short R1 annotation applies to this real offset only. The native value is
+defined at `0x4239C`, consumed at `0x423A0` and overwritten by the selected-slot
+phase at `0x423A4`; no opaque call occurs in this interval. Removing the sole
+annotation gives a 98-byte mismatch. Earlier long R7 parameter constraints
+miscompiled values and remain excluded; they are absent from this source.
+
+Pinned compiler diagnostics confirm the existing context size/alignment 120/4,
+page and record 8/4, byte-access entry 4/1, descriptor 24/4, and actual pointer
+field offsets and strides. The generic `FrameObject` declaration measures
+312/4; this drawer directly uses only its +0A halfword and +0C flags word.
+Neither that declaration nor byte equality proves the allocation capacity of
+any particular object. A mistaken 216-byte generic-size assertion was rejected
+and retained privately; no shared object layout was changed to satisfy it.
+Wrong entry stride, pointer-field offsets, provider types and actual missing
+provider declarations fail separate diagnostics.
+
+The complete current literal importer and real caller/provider closures have
+fresh positive and changed-source controls, with strict diagnostics outside
+the acceptance profile. Register allocation evidence, failed source shapes and
+raw comparisons remain private. The object-preparation and confirmation bodies
+remain explicit originals. These findings establish static routing and compiler
+equality; they do not establish complete storage or gameplay behavior.
