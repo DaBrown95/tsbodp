@@ -6,13 +6,14 @@ kind 20 through the scene request provider. This identifies a connected scene
 path; the names below describe static accesses and are not recovered original
 identifiers or a claim about gameplay.
 
-This batch reconstructs nine C functions, totaling 1,616 bytes:
+This connected path reconstructs ten C functions, totaling 1,880 bytes:
 
 | Entry | Bytes | Observed role |
 | --- | ---: | --- |
 | `0x08028BD0` | 556 | Advance phases 0 through 6 and dispatch activity, notice and return operations |
 | `0x08028EBC` | 124 | Refresh the amount text when state flag 8 is set |
 | `0x08028F38` | 184 | Clear display storage and start the selected activity, clock text and transition |
+| `0x08028FF0` | 264 | Load the completion background, selected label and explanatory text |
 | `0x080290F8` | 188 | Check two unsigned parameter results and a signed amount, then write the selected value |
 | `0x080291B4` | 312 | Send condition triples from scene and saved-value tests |
 | `0x080292EC` | 96 | Retire objects or clear state flag 16, then reset display and audio dependencies |
@@ -92,7 +93,7 @@ halfword, invokes the selected original activity initializer, and updates the
 clock and amount text. The SWI provider is existing assembly glue and receives
 zero new C credit. Hardware execution is not established by this match.
 
-Phase 4 tears down the current activity, calls the original completion drawer
+Phase 4 tears down the current activity, calls the completion drawer
 and starts the first transition. Phase 6 stores result 3 and follows one of
 three return paths. Previous request word 1 credits the signed amount, advances
 the world clock, sends condition triples and submits kind 1 using the distinct
@@ -101,9 +102,28 @@ submits kind 5. The condition marker preserves the unconditional final
 `(0,4,0)` call in scene 0, even after an earlier triple. Its paired scene sums
 use saved bytes 3/7, 4/6 and 5/1 exactly as the original accesses do.
 
+The completion drawer has a complete 264-byte extent ending at the independent
+progress-test entry `0x080290F8`. It sets state flag 16 and performs the original
+zero-halfword VRAM transfer, background setup and text calls. Its background
+control word at `0x0805953C` is distinct from the original initializer's control
+word at `0x08059540`. The selected background pointer is read from resource
+offset 4; the label halfword is read from offset 20 plus twice `option + 1`.
+
+The drawer carries the resource address as a 32-bit unsigned word and advances
+that address to the label prefix after drawing the title. This expresses the
+observed address calculation without arithmetic beyond a declared struct
+member. Pinned compiler diagnostics establish four-byte pointers and unsigned
+words, a 32-byte resource prefix with alignment 4, pointer-field offset 4 and
+label offset 20. The fixed resource root `0x0805971C` supplies the corresponding
+word and halfword alignment. These are target-specific address and access
+views, not a portable pointer-conversion contract or a capacity check. The
+code preserves the unchecked scene and option indices and does not establish
+that arbitrary inputs stay within the observed resource or label prefix.
+No register bindings, added reads or fabricated values were needed; the actual
+audio notification 54-to-55 control changes the compiled result.
+
 The initializer `0x08028A10` remains original, with a complete 448-byte extent.
-Completion drawer `0x08028FF0` / 264 bytes and need adjustment
-`0x0802944C` / 100 bytes also remain original. Their
+Need adjustment `0x0802944C` / 100 bytes also remains original. Their
 typed call declarations are local, provisional descriptions of observed
 operands and carry no new C credit. The original primary/secondary activity
 ticks and mode service are likewise explicit. Retained failed candidates and

@@ -32,9 +32,9 @@ void transition_run_first(unsigned short,unsigned int);
 void transition_run_second(unsigned short,unsigned int);
 void display_release_object_list(struct FrameObjectList *);
 void display_reset(void),display_reset_palette_jobs(void),display_scene_clear_object_slots(void);
-/* Original draw/fill/prepare remain explicit; named text helpers are matching C. */
+/* Original draw/prepare remain explicit; panel and named text helpers are matching C. */
 void scene_catalog_prepare_original(void),scene_catalog_update(void),scene_catalog_build(void);
-void scene_catalog_draw_original(unsigned int,unsigned int),scene_catalog_fill_original(unsigned int,unsigned int);
+void scene_catalog_draw_original(unsigned int,unsigned int),scene_catalog_fill(unsigned int,unsigned int);
 extern struct FrameObject *g_display_scene_frame_objects[];
 extern unsigned int g_frame_world_id;
 int frame_add_game_value(int);

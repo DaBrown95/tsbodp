@@ -1,6 +1,6 @@
 # Factory slot 11 and scene kind 21
 
-This connected path has eleven matching C extents, 3,088 bytes: resource factory
+This connected path has fifteen matching C extents, 3,884 bytes: resource factory
 slot 11 creates a contact trigger, its paired collision callback submits scene
 kind 21, and that scene initializes, processes input, refreshes selection, manages a
 quantity editor, draws labels and a tile frame, and shuts down. The names describe observed catalog and selection accesses; they
@@ -20,6 +20,10 @@ separate claims. No gameplay run is claimed here.
 | `scene_catalog_quantity` | `0x42EC0` | 160 |
 | `scene_catalog_build` | `0x430A4` | 80 |
 | `scene_view_draw_frame` | `0x34480` | 432 |
+| `scene_catalog_fill` | `0x42408` | 588 |
+| `scene_catalog_basic_value` | `0x428EC` | 120 |
+| `scene_catalog_page_value` | `0x43074` | 48 |
+| `scene_catalog_has_next` | `0x430F4` | 40 |
 
 Every extent includes its literal pools and original trailing alignment. The
 constructor ends at the distinct original no-op entry `0x3AD60`; that four-byte
@@ -115,7 +119,8 @@ volatile accesses or dummy dependencies are embedded.
 
 ## Explicit original helper boundary
 
-Selection and the four text/quantity helpers are recovered. The bodies below
+Selection, panel filling, its value providers, the paging predicate and the
+text/quantity helpers are recovered. The bodies below
 remain original. Their no-result call contracts use `void`
 because these callers consume only effects; this is a scoped declaration, not
 proof of the original source return type. The draw/fill entries retain full
@@ -127,7 +132,6 @@ the observed paths.
 | Original helper | ROM offset | Retained static extent |
 |---|---:|---:|
 | Draw items | `0x42338` | 208 including two-byte alignment |
-| Fill panel | `0x42408` | 588 |
 | Prepare objects | `0x42654` | 664 |
 | Confirm | `0x42964` | 654 mapped estimate; alignment remains original |
 | Option | `0x42BF4` | 324 |
@@ -218,3 +222,72 @@ layout/type checks distinguish byte equality from a correct word rectangle
 prototype, signed value view and word geometry contract. Prior failed sources,
 the former narrower private rectangle declaration and raw comparisons remain
 local evidence. Whole-ROM equality is checked separately at publication.
+
+
+## Panel, values and paging continuation
+
+Four further connected extents add 796 matching C bytes. Panel filling at
+`0x42408..0x42654` selects either the catalog record's slot array or the
+selector's page slot array, using the same full word offsets as the original.
+It skips item details for selector 4's heading rows or a byte kind of 255,
+draws the name and details, and stages a computed value unless the refreshed
+kind is 255 or selector is 13. Opaque text calls may change memory, so the
+kind and selector reads remain at their observed uses. The captured price-slot
+pointer is a separate real lifetime; the two value branches join before the
+number-field call. These ordinary C lifetimes close the first 572/558 attempt
+through 588/13, then 588/1 and finally exact equality. No register binding is
+used.
+
+For selector 4 the panel draws five quantity captions, advancing the tile
+result after each line. Its captured quantity root and explicit byte address
+calculation preserve the original addition operands. For a selected heading
+row it copies the heading text into the original 32-byte local text region,
+appends the suffix and resource 37, stages the selected value byte and draws
+both heading and explanatory text. The 44-byte native stack frame includes
+twelve outgoing argument bytes. The 32-byte region is a source reconstruction,
+not a proof that every unchecked text expansion fits; no guard, extra storage
+or gameplay claim is added.
+
+The new overlapping world view has quantities at `+0xE0`, values at `+0xE9`,
+a record pointer at `+0xF0` and page records at `+0xF8`. The catalog record has a
+count byte at zero and a word slot pointer at four; each page similarly has a
+value byte and slot pointer at four. Their compiler layouts are eight bytes,
+word aligned. The context from `0x03003A40` contains the record pointer and the
+same page prefix at offset eight. These access views overlap the existing
+world declaration and do not establish independent allocations or a complete
+world object. Slots are four-byte records accessed only through their first
+byte, so their local view has byte alignment. Both page declarations cover the
+observed selector prefix 0 through 13; complete capacity and pointer-target
+validity remain unverified.
+
+The five caption-position records at `0x7FB58` have four-byte stride and byte
+X/Y fields. The value-rate prefix at `0x7FB6C` has two unsigned words per selector.
+Its fourteen observed records end at the separately addressed suffix `0x7FBDC`.
+These are static address/layout findings; no original text or table contents
+are embedded in the recovered source. The page-value helper multiplies the
+catalog's value word by the page rate. The basic-value helper admits kinds
+through 117 except 63, kind 210, and the specific kind/selector combinations
+observed in its branches (143 with 3 or 12, 125 with 8, 63 with 0, and 129 with
+3). Other cases return zero. Both products use unsigned word arithmetic,
+including wrap before the logical shift by sixteen. Catalog kind and selector
+ranges remain unchecked.
+
+The next-page predicate accepts and returns bytes. A zero count returns zero;
+otherwise it tests the first offset against `(count - 1) & 0xFC`. Its full
+forty-byte extent ends at the distinct original entry `0x4311C`, including the
+original zero alignment. It is used by the still-original object preparation
+and paging path. The value helpers own `0x428EC..0x42964` and
+`0x43074..0x430A4`; their following original confirm entry and already accepted
+headings helper are separate extents.
+
+The initializer, step and selection now name the recovered fill provider at
+its existing address `0x08042409`. These are exact identifier replacements;
+body logic, constants, controls, profiles and extents are unchanged. Current
+literal importers and actual accepted providers are reverified with real
+changed-source controls. Pinned compiler diagnostics check the new partial
+layouts and reject a one-page prefix, wrong field widths or packing and an
+incompatible byte argument for the full-word value provider. Strict diagnostic
+compilation also rejects an actual missing value-provider declaration. Failed
+sources and comparison bytes remain private. Item refresh (208 bytes), object
+preparation (664 bytes) and the other listed original helpers remain explicit
+and receive no new C credit.

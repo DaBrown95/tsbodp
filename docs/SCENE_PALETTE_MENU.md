@@ -353,7 +353,8 @@ at `0x14584`, `0x146E4`, `0x14CB0` and `0x14F08` own 352, 336, 600 and
 All boundaries include their original pools and alignment. The apparent region
 after state ten contains independent entries: the selection-list builder at
 `0x1510C..0x151C4` and release helper through `0x15270` remain original, with
-zero C credit. States eleven and twelve and navigation remain unconverted.
+zero C credit. Navigation remains unconverted; the following text-transition
+section covers states eleven and twelve separately.
 
 State six acts at timers thirty and fifteen, prepares window/background moves
 and object slots, redraws rows zero through seven, then enters state three at
@@ -407,3 +408,68 @@ real source controls diverge in these cases; unsupported instructions, missing
 pools and exhausted execution budgets are rejected separately. Called providers,
 allocation, original list operations and window/background hardware are
 abstracted; no complete menu, gameplay or arbitrary capacity claim follows.
+
+## Selected text transitions
+
+States eleven and twelve add two complete C extents, 284 bytes at
+`0x152D0..0x153EC` and 336 at `0x153EC..0x1553C`. Both include all original
+literal pools and alignment; the latter ends at the separately reconstructed
+entry handler. The existing full state dispatcher calls both no-argument,
+effect-only providers. State ten selects eleven with timer sixteen, and state
+five selects twelve with timer fifteen. No navigation or list-helper coverage
+is added by these two functions.
+
+State eleven retains the observed timer-thirty branch without an action. At
+fifteen it moves the window and backgrounds, selects scene zero and font three,
+draws text resources 33, 34 and 35, enables backgrounds one and zero, then
+updates IDs and animation timers in slots eight and nine. The full-word return
+from drawing all lines supplies the first line call; that line's full-word
+return supplies the second. Its actual style-one value is bound to R5 across
+the text lookup and consumed as the all-lines stack argument, then dies before
+the returned tile value reuses R5. The natural unbound spelling remains a
+preserved mismatch. At one the window is disabled; at zero state five is
+selected. The common exit decrements the freshly read timer, including the
+native unsigned wrap from zero.
+
+State twelve starts reverse window/background movement at fifteen, updates the
+same two object timers and variants, and hides the backgrounds/window at one.
+At zero, parameters fourteen and thirteen request default scenes twenty-five
+and five. Parameter nine stores state nine and timer thirty-one, loads the
+mode-seven backgrounds/palette, sets an initial background Y of negative one
+hundred in fixed point, and requests positive one hundred as a later target.
+The window move's observed axis argument is zero in both handlers. Its common
+fresh timer decrement turns the new thirty-one into thirty.
+
+Nine remaining state-twelve register bindings hold only actual position and
+scroll call arguments. The position call and first scroll each bind their layer
+and X values to R0/R1. The next scroll additionally binds its Y argument to R2;
+the final scroll binds only its layer and X values. Every value dies at its own
+call, with no intervening call or added memory traffic. The initial tenth
+binding on the final Y argument was removed while retaining the complete
+extent. Separate removal checks preserve each actual value/scope and change
+native bytes for all nine retained bindings.
+
+Both handlers use the existing object views and halfword timer at byte 94; no
+new aggregate layout or storage capacity is introduced. Object slot nine is an
+observed original access, not a declaration of the complete table extent.
+The text pointers, dimensions and backing buffer capacities remain unchecked.
+Finite instruction checks use initialized slots zero through nine, boundary
+timers and selected parameter words, with abstract text/background providers.
+Three specified full-word all-lines return values exercise the subsequent
+line-return chain. Real timer-fifteen-to-fourteen source controls diverge at
+both thresholds; caller-clobbered registers are poisoned, and unsupported
+instructions, missing pools and exhausted budgets reject. These checks do not
+execute real strings, rendering hardware or gameplay.
+
+Current positive and changed-timer source controls cover both complete extents
+and 22 accepted dispatcher, state-producer and direct-provider functions,
+24 real pairs in total. Two additional strict pairs check the new source's
+explicit declarations. Eighteen pinned compiler layout checks and five
+callback/provider type assignments establish the unchanged word, halfword,
+size and alignment contracts; four mutated-header cases reject. Removing both
+actual lookup declarations or the all-lines declaration can leave legacy bytes
+identical, but the strict diagnostic rejects those missing prototypes. Ten
+separate annotation-removal diagnostics cover the style and nine argument
+values; every retained annotation changes native bytes when removed. All 72
+finite fixtures agree with the normalized call model and both real controls
+change observed behavior. These diagnostics add no C or glue credit.

@@ -52,6 +52,7 @@ typedef unsigned int (*SceneContactNoticeHandler)(unsigned int,
 extern struct SceneContactState *g_scene_contact_state;
 extern const struct DisplayCountdownSceneLayout g_scene_contact_value_layouts[];
 extern const unsigned int g_scene_contact_background_control;
+extern const unsigned int g_scene_contact_completion_background_control1;
 extern const struct BackgroundResource g_scene_contact_palette_resource;
 extern const struct PaletteRangeConfig g_scene_contact_palette_ranges;
 extern struct SceneRequest g_scene_previous_request;
@@ -70,11 +71,11 @@ unsigned int scene_contact_test_progress(void);
 void scene_contact_mark_conditions(void);
 void scene_contact_clear_activity_objects(void);
 void scene_contact_start_activity(void);
+void scene_contact_show_completion(void);
 
 /* Explicit original providers. Their declarations describe observed call
  * operands; these bodies are not new C coverage in this batch. */
 void scene_contact_initialize(void);
-void scene_contact_show_completion(void);
 void scene_contact_apply_need_adjustments(void);
 void scene_contact_original_step_primary(void);
 void scene_contact_original_step_secondary(void);
@@ -88,6 +89,9 @@ void resource_set_triple(unsigned int, unsigned int, unsigned int);
 void display_time_step_world(const struct DisplayTimeRecord *);
 void display_show_background(unsigned int, unsigned int);
 void display_fill_background(unsigned int, unsigned short);
+const unsigned short *display_load_background(unsigned int,
+    const struct BackgroundResource *, unsigned short, unsigned short,
+    unsigned int, unsigned int);
 void display_set_mode(unsigned short);
 void display_configure_tile_allocation(unsigned char);
 void transition_run_first(unsigned short, unsigned int);
