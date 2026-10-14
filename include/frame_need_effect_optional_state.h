@@ -8,7 +8,7 @@
 /* The mode-three entry calls only this slot of another need-effect state. */
 struct FrameNeedOptionalApplyCallbacks {
     unsigned char unknown_00[0xf0];
-    void (*apply)(struct FrameNeedEffectState *, unsigned int, unsigned int);
+    unsigned int (*apply)(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 };
 extern unsigned char g_frame_actor_social_probe[];
 extern struct FrameObject *g_need_effect_player;

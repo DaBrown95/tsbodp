@@ -3,13 +3,14 @@
 
 /* Partial list/callback view derived from the action-target selector. */
 struct FrameObject;
+struct FrameNeedEffectState;
 struct FrameActionSearchNode {
  struct FrameActionSearchNode *next;
  unsigned char unknown04[4];unsigned int kind;
  unsigned char unknown0c[0x48];void *target;
  unsigned char unknown58[0x8c];
  unsigned char (*check)(struct FrameActionSearchNode *,struct FrameObject *);
- void (*actions)(struct FrameActionSearchNode *,unsigned char *);
+ unsigned int (*actions)(struct FrameNeedEffectState *,unsigned char *);
 };
 struct FrameActionSearchDescriptor {unsigned char unknown00[34],enabled,unknown23;};
 struct FramePendingAction;

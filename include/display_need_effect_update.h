@@ -22,7 +22,7 @@ struct DisplayNeedEffectActorView {
 struct DisplayNeedEffectActionState {
     unsigned char unknown_00[0xf0];
     unsigned int (*begin)(struct FrameNeedEffectState *, struct FrameObject *,
-                          unsigned char);
+                          unsigned int);
 };
 struct DisplayNeedEffectSavedObject {
     unsigned int unknown_00, flags;

@@ -14,7 +14,7 @@ void frame_actor_state_39(struct FrameObject *object)
    if(frame_find_action_target(object,((unsigned char*)object)[0x6a],&target)) {
     void *owner=((struct FrameActionTargetOwner *)target)->owner;
     if(((struct FrameActionOwnerCallbacks *)owner)->check(owner,object)) {
-     if(((struct FrameActionOwnerCallbacks *)owner)->use(owner,object,((unsigned char*)object)[0x6a])==1) {
+     if((unsigned char)((struct FrameActionOwnerCallbacks *)owner)->use(owner,object,((unsigned char*)object)[0x6a])==1) {
       frame_attach_actor(object,owner);
       frame_set_variant_state(object,41);
       break;

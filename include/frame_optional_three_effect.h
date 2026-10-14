@@ -18,6 +18,6 @@ struct FrameObject *frame_optional_choice_complete(unsigned int);
 void frame_commit_need_effect(struct FrameObject *,unsigned int);
 unsigned int frame_optional_three_effect_initialize(struct FrameNeedEffectState *);
 /* The concrete mode-three producer passes two zero words; this body ignores them. */
-unsigned int frame_optional_three_effect_begin(struct FrameNeedEffectState *,unsigned int,unsigned int);
+unsigned int frame_optional_three_effect_begin(struct FrameNeedEffectState *,struct FrameObject *,unsigned int);
 void frame_optional_three_effect_tick(struct FrameObject *);
 #endif

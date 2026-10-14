@@ -27,7 +27,7 @@ unsigned char frame_need_effect_build_choices(struct FrameObject *base)
 {
     struct FrameNeedEffectState *state =
         ((struct FrameNeedEffectObject *)base)->effect_state;
-    void (**callback)(struct FrameNeedEffectState *, unsigned char *) =
+    unsigned int (**callback)(struct FrameNeedEffectState *, unsigned char *) =
         &((struct DisplayNeedEffectChoiceCallback *)state)->actions;
     register unsigned char *choices asm("r5") =
         ((struct FrameNeedEffectObject *)base)->effect_choices;

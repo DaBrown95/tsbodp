@@ -1,5 +1,5 @@
 #include "frame_actor_attachment_jobs.h"
-unsigned char frame_begin_attachment_job_73(struct FrameNeedEffectState *owner,struct FrameObject *actor,unsigned int kind)
+unsigned int frame_begin_attachment_job_73(struct FrameNeedEffectState *owner,struct FrameObject *actor,unsigned int kind)
 {
  struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record((struct FrameActorAttachmentOwner *)owner,actor);
  unsigned char result;

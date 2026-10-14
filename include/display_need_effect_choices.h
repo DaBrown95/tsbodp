@@ -6,7 +6,7 @@
 /* The callback receives the embedded choice buffer; its return value is unused here. */
 struct DisplayNeedEffectChoiceCallback {
     unsigned char unknown_00[0xe8];
-    void (*actions)(struct FrameNeedEffectState *, unsigned char *);
+    unsigned int (*actions)(struct FrameNeedEffectState *, unsigned char *);
 };
 struct DisplayNeedEffectActionText {
     unsigned short unknown_00, text;

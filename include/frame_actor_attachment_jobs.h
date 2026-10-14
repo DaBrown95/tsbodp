@@ -32,9 +32,9 @@ extern struct FrameAttachmentChance g_frame_attachment_chances[];
 extern struct FrameObject *g_need_effect_player;
 unsigned char frame_gate_attachment_game_value(struct FrameNeedEffectState *,
                                                 struct FrameActorAttachmentRecord *, int);
-unsigned char frame_begin_variant_attachment_job(struct FrameNeedEffectState *,
+unsigned int frame_begin_variant_attachment_job(struct FrameNeedEffectState *,
                                                    struct FrameObject *, unsigned int);
-unsigned char frame_begin_attachment_job_73(struct FrameNeedEffectState *,
+unsigned int frame_begin_attachment_job_73(struct FrameNeedEffectState *,
                                             struct FrameObject *, unsigned int);
 unsigned int frame_step_attachment_job_73(struct FrameNeedEffectState *,
                                            struct FrameActorAttachmentRecord *);

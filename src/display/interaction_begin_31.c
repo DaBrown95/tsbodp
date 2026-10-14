@@ -1,6 +1,6 @@
 #include "display_actor_interaction.h"
 
-unsigned char frame_interaction_begin_31(struct FrameNeedEffectState *owner,
+unsigned int frame_interaction_begin_31(struct FrameNeedEffectState *owner,
                                          struct FrameObject *object, unsigned int kind)
 {
     struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(

@@ -14,9 +14,9 @@ struct FrameAttachmentEffectWork {
 unsigned char frame_grid_coordinates_to_point(struct FrameMapRegistration *,
                                                const struct FramePoint *,
                                                struct FramePoint *);
-unsigned char frame_begin_target_attachment_job(struct FrameNeedEffectState *,
+unsigned int frame_begin_target_attachment_job(struct FrameNeedEffectState *,
                                                  struct FrameObject *, unsigned int);
-unsigned char frame_begin_attachment_route_4(struct FrameNeedEffectState *,
+unsigned int frame_begin_attachment_route_4(struct FrameNeedEffectState *,
                                                struct FrameObject *, unsigned int);
 unsigned char frame_begin_attachment_route_3(struct FrameNeedEffectState *,
                                                struct FrameObject *, unsigned int);

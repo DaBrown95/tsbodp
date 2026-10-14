@@ -19,7 +19,7 @@ unsigned char frame_release_actor_attachment_record(struct FrameActorAttachmentO
 unsigned int frame_step_attachment_need_timer(struct FrameActorAttachmentRecord *,struct FrameActorNeedState *,unsigned int,int *);
 unsigned int frame_interaction_step_31(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
 unsigned int frame_interaction_dispatch_31(struct FrameNeedEffectState *,struct FrameObject *);
-unsigned char frame_interaction_begin_31(struct FrameNeedEffectState *,struct FrameObject *,unsigned int);
+unsigned int frame_interaction_begin_31(struct FrameNeedEffectState *,struct FrameObject *,unsigned int);
 unsigned char frame_interaction_can_begin_31(struct FrameNeedEffectState *,struct FrameObject *);
 unsigned int audio_play_animation_cue(unsigned int);
 unsigned char frame_actor_need_value(struct FrameActorNeedState *,unsigned int);

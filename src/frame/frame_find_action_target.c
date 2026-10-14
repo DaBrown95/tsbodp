@@ -8,7 +8,7 @@ unsigned char frame_find_action_target(struct FrameObject *actor,unsigned int ac
    unsigned char actions[7];
    unsigned char i;
    scene_fill_bytes(actions,0,7);
-   node->actions(node,actions);
+   node->actions((struct FrameNeedEffectState *)node,actions);
    for(i=0;i<7;i++) {
     unsigned char code=actions[i];
     if(code) {if(code==action){*target=node->target;return 1;}}

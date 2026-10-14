@@ -1,7 +1,7 @@
 #include "display_actor_interaction.h"
 #include "frame_actor_target_jobs.h"
 
-unsigned char frame_begin_target_attachment_job(struct FrameNeedEffectState *owner,
+unsigned int frame_begin_target_attachment_job(struct FrameNeedEffectState *owner,
                                                  struct FrameObject *actor,
                                                  unsigned int kind)
 {
