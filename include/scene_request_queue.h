@@ -3,6 +3,7 @@
 #include "scene_request.h"
 #include "irq.h"
 #include "save_stream.h"
+#include "display_palette_lifecycle.h"
 
 /* Three 24-byte request views; names follow the observed copy order. */
 extern struct SceneRequest g_scene_previous_request, g_scene_queued_request;
@@ -24,5 +25,5 @@ void frame_prepare_oam_transfer(void);
 /* Original providers remain explicit. */
 int transition_link_update(void);
 void scene_allocate_retained_palette(void);
-void scene_update_windows_080489c4(void), transition_palette_update_080117d4(void);
+void scene_update_windows_080489c4(void);
 #endif

@@ -13,5 +13,5 @@ void scene_primary_exit(void)
  save_world_clear_row_objects();
  if(g_scene_request.mode==0){scene_stage_08041374();display_release_object_list(&g_frame_primary_list);frame_clear_need_effect_states();frame_destroy_map_registration(g_frame_registration);g_frame_registration=0;g_audio_control.flags&=~8;}
  if(g_scene_request.mode==2)display_reset_tile_allocation();else frame_clear_transient_effects();
- frame_clear_render_effects();frame_release_scene_transient_tiles();frame_configure_deferred_display(0);scene_stage_080117bc();display_reset();set_vblank_callback(irq_default_vblank_callback);
+ frame_clear_render_effects();frame_release_scene_transient_tiles();frame_configure_deferred_display(0);display_reset_palette_jobs();display_reset();set_vblank_callback(irq_default_vblank_callback);
 }

@@ -4,6 +4,7 @@
 #include "scene_request.h"
 #include "resource_view_effects.h"
 #include "audio_vblank.h"
+#include "display_palette_lifecycle.h"
 
 /* Access view of four 12-byte slots and their shared count/selection bytes. */
 struct ScenePrimarySlot {
@@ -58,5 +59,4 @@ void scene_stage_0800e3a8(unsigned char), scene_update_view(unsigned int);
 void scene_stage_080202e0(unsigned char *, unsigned int);
 void scene_retain_display(void), scene_release_display(void), save_world_clear_row_objects(void);
 void scene_stage_08041374(void), frame_clear_need_effect_states(void);
-void scene_stage_080117bc(void);
 #endif

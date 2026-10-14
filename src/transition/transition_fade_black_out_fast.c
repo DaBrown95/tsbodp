@@ -8,7 +8,7 @@ void transition_fade_black_out_fast(unsigned short targets) {
   REG16(0x04000054) = level;
   transition_frame_update_08001168();
   display_step_backgrounds();
-  transition_palette_update_080117d4();
+  display_step_palette_jobs();
   transition_stage_0802d054();
   irq_wait_vblank();
   irq_wait_vblank();
