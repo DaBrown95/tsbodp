@@ -13,7 +13,7 @@ struct TransitionObject {
  unsigned char first_kind, second_kind;
  unsigned char layer_a, layer_b, alpha_a, alpha_b;
 };
-extern void transition_object_set_state(struct TransitionObject *, unsigned char);
+extern void transition_object_set_state(void *, unsigned char);
 extern void background_animation_load(int);
 extern void background_animation_configure_alpha(void);
 extern void transition_set_alpha(unsigned short, unsigned short);

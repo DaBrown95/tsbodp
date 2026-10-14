@@ -26,7 +26,7 @@ extern void resource_scene_event(unsigned int);
 extern void resource_set_triple(unsigned int,unsigned int,unsigned int);
 extern void resource_set_display_kind(unsigned int);
 
-extern unsigned char resource_select_actor(unsigned int,unsigned int);
+#include "resource_actor_selection.h"
 #include "resource_transition.h"
 extern void audio_game_pause(void),audio_game_resume(void);
 

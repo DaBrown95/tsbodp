@@ -32,8 +32,8 @@ void transition_run_first(unsigned short,unsigned int);
 void transition_run_second(unsigned short,unsigned int);
 void display_release_object_list(struct FrameObjectList *);
 void display_reset(void),display_reset_palette_jobs(void),display_scene_clear_object_slots(void);
-/* Original object preparation remains explicit; connected display providers match C. */
-void scene_catalog_prepare_original(void),scene_catalog_update(void),scene_catalog_build(void);
+/* Connected object preparation and display providers match C. */
+void scene_catalog_prepare(void),scene_catalog_update(void),scene_catalog_build(void);
 void scene_catalog_draw(unsigned int,unsigned int),scene_catalog_fill(unsigned int,unsigned int);
 extern struct FrameObject *g_display_scene_frame_objects[];
 extern unsigned int g_frame_world_id;

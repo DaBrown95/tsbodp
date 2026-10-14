@@ -6,7 +6,7 @@ kind 20 through the scene request provider. This identifies a connected scene
 path; the names below describe static accesses and are not recovered original
 identifiers or a claim about gameplay.
 
-This connected path reconstructs twenty-one C functions, totaling 3,452 bytes:
+This connected path reconstructs twenty-three C functions, totaling 3,728 bytes:
 
 | Entry | Bytes | Observed role |
 | --- | ---: | --- |
@@ -18,6 +18,7 @@ This connected path reconstructs twenty-one C functions, totaling 3,452 bytes:
 | `0x080290F8` | 188 | Check two unsigned parameter results and a signed amount, then write the selected value |
 | `0x080291B4` | 312 | Send condition triples from scene and saved-value tests |
 | `0x080292EC` | 96 | Retire objects or clear state flag 16, then reset display and audio dependencies |
+| `0x0802934C` | 52 | Add an incoming signed-word delta and record its sign in the result byte |
 | `0x080293C0` | 80 | Handle command words `0x82` and `0x43`, with two halfword output pointers |
 | `0x08029410` | 60 | Prepare a background, text control and palette ranges |
 | `0x080297A4` | 180 | Initialize the primary activity's display, selected callback and view |
@@ -28,6 +29,7 @@ This connected path reconstructs twenty-one C functions, totaling 3,452 bytes:
 | `0x08029A28` | 16 | Release the primary object list on the alternate activity path |
 | `0x08033940` | 204 | Initialize definition row four's backgrounds, clock, objects and palettes |
 | `0x08033AF4` | 172 | Reset eight primary item slots and accumulate their byte penalties |
+| `0x08033C80` | 224 | Create a selected item with coordinate words, animation and slot-derived flags |
 | `0x080342DC` | 72 | Test the control byte and eight paired object identifiers |
 | `0x08034324` | 52 | Retire nullable secondary objects and clear their slots |
 | `0x08034358` | 44 | Load seven item palettes into descending banks |
@@ -279,8 +281,8 @@ records, banks 15 through 9 and 16 colors per call. The completion symbol
 occupies 70 bytes followed by two original zero alignment bytes before the
 independent cleanup entry; the complete 72-byte extent is compared.
 
-The 232-byte step at `0x08033A0C`, 224-byte item creator at `0x08033C80`,
-120-byte control creator at `0x08033BA0`, 104-byte auxiliary creator at
+The 232-byte step at `0x08033A0C`, 120-byte control creator at `0x08033BA0`,
+104-byte auxiliary creator at
 `0x08033C18` and 104-byte primary creator at `0x08034384` remain original.
 Their local declarations describe only the calls made by this batch. The
 five new bodies use ordinary unbound C and have complete native, actual
@@ -288,3 +290,52 @@ changed-source and strict declaration comparisons. Compiler layout and
 compatible-type diagnostics reject altered pointer counts, score width,
 record offsets, stride and slot width. These findings do not establish
 hardware execution or a complete activity format.
+
+# Connected item creation and amount update
+
+The item creator retains the complete coordinate words in R0/R1 and selection
+and slot words in R2/R3 before allocation. It stores only the low slot byte
+and selected halfword, but uses the full unsigned slot for animation and flag
+classification. The existing eight-byte, alignment-four `FramePoint` supplies
+the grouped coordinate call view. Its signed members are converted to
+unsigned words before the defined 16-bit shifts; the target then interprets
+those resulting words as coordinates. No input narrowing or bounds guard is
+invented.
+
+The flag access view is rooted at the complete object pointer, covers 216
+bytes and has measured alignment 4. The actual allocator reserves 320 bytes;
+the existing `FrameObject` view is 312 bytes. Compiler-generated initialized
+object representations independently check the bits at `0xD1`, `0xD3` and
+`0xD5`. This is a local access representation, not a complete original object
+format. Palette 3, layer 1, two cleared display flags and the two slot-derived
+render flags preserve the original byte operations.
+
+The actual initial flag-view pointer ends before the position and animation
+calls. Later render operations use direct access casts, so no separate flag
+pointer is carried across calls. A scoped unsigned direction range starts at
+3, is ANDed with the retained direction and then decremented. That real value
+is consumed destructively by the native AND/subtract pair. These ordinary
+scopes close the earlier saved-pointer and scratch-register mismatches without
+bindings, volatile access or extra memory traffic. The full 224-byte extent
+contains a 222-byte symbol and two original zero alignment bytes before the
+independent event creator at `0x08033D60`.
+
+The amount helper at `0x0802934C` ends after 52 bytes, before the already
+accepted 32-byte nibble reader at `0x08029380`; the following nibble writer is
+also an independent accepted 32-byte function. These neighboring functions
+are not part of the helper's new coverage. It consumes the complete signed
+word, adds its unsigned representation to the existing halfword bit pattern,
+sets flag 8 and stores result 1 for a positive input or 2 for a negative
+input. Zero leaves the previous result byte unchanged. The word sign test
+also applies when the low halfword is zero, so an earlier private short-formal
+inference is corrected. Target halfword storage is preserved without a claim
+that arbitrary signed narrowing is portable.
+
+Fifteen finite initialized-memory fixtures cover zero, positive and negative
+word inputs, halfword wrap patterns and sign decisions beyond the halfword
+range. Twelve distinguish the actual changed-source mask control. Their
+Thumb memory model checks the original, matching bytes and bit-pattern model;
+unmapped input, truncated pools, unsupported instructions and exhausted
+budgets are rejected. These are bounded interpreter findings, with no
+hardware-fault, pointer-validity or gameplay claim. The original step remains
+unmatched and explicit.

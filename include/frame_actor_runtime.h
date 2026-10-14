@@ -52,7 +52,7 @@ void frame_actor_interaction_world31(struct FrameObject *);
 void frame_update_actor_state(struct FrameObject *);
 void *frame_initialize_actor_state(FrameU32);
 int frame_refresh_interaction_choices(void);
-void transition_object_set_state(struct FrameObject *, FrameU8);
+void transition_object_set_state(void *, FrameU8);
 void frame_actor_note_spawn(unsigned int);
 
 void frame_run_actor_state(struct FrameObject *);

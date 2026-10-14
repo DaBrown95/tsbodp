@@ -15,7 +15,7 @@ unsigned short display_read_map_tile(const unsigned short *, int, int, int);
 void display_load_background_dma(unsigned int, const struct BackgroundResource *,
     unsigned short, unsigned short, unsigned int, unsigned int);
 struct TransitionObject;
-void transition_object_set_state(struct TransitionObject *, unsigned char);
+void transition_object_set_state(void *, unsigned char);
 void frame_set_variant_state(struct FrameObject *, unsigned char);
 void display_menu_draw_scrolling_text(const char *);
 /* Partial role view of the observed actor-selection byte. */

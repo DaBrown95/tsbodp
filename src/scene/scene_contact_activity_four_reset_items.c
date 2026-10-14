@@ -22,7 +22,7 @@ void scene_contact_activity_four_reset_items(void)
         selected = frame_random_range(1,
             g_scene_contact_activity_four_rows[g_scene_contact_state->option].count);
         STATE->selections[i] = selected;
-        object = scene_contact_original_create_four_item(position, selected, i);
+        object = scene_contact_activity_four_create_item(position, selected, i);
         state = STATE;
         state->first[i] = object;
         state->score +=

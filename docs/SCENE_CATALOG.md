@@ -1,6 +1,6 @@
 # Factory slot 11 and scene kind 21
 
-This connected path has twenty-four matching C extents, 5,088 bytes: resource factory
+This connected path has twenty-five matching C extents, 5,752 bytes: resource factory
 slot 11 creates a contact trigger, its paired collision callback submits scene
 kind 21, and that scene initializes, processes input, refreshes selection, manages a
 quantity editor, draws labels and a tile frame, and shuts down. The names describe observed catalog and selection accesses; they
@@ -22,6 +22,7 @@ separate claims. No gameplay run is claimed here.
 | `scene_catalog_build` | `0x430A4` | 80 |
 | `scene_view_draw_frame` | `0x34480` | 432 |
 | `scene_catalog_fill` | `0x42408` | 588 |
+| `scene_catalog_prepare` | `0x42654` | 664 |
 | `scene_catalog_basic_value` | `0x428EC` | 120 |
 | `scene_catalog_page_value` | `0x43074` | 48 |
 | `scene_catalog_has_next` | `0x430F4` | 40 |
@@ -87,16 +88,15 @@ entry strides at `+0xF8`. The entry member contains the observed 14-entry
 prefix for known selectors 0..13, giving this partial world view size/alignment
 360/4; its complete capacity is unknown. These declared array lengths describe observed
 accesses, not validated capacities. The catalog count is a one-byte,
-`packed, aligned(1)` read view of the pointer target; the unreconstructed
-drawing helper also reveals a word pointer at target `+4`, but this batch does
-not claim a complete target record.
+`packed, aligned(1)` read view of the pointer target; the recovered drawing and preparation helpers also read a word pointer at
+target `+4`; these views do not claim a complete target record.
 
 Initialization captures the requested selector, clears request selection,
 quantity and phase, and derives count/value through those views. Signed clock
 hour comparisons against the ROM records at `0x7FB48/0x7FB50` gate selectors
 7/9. Selector 4 changes the first/action/last row limits and backgrounds;
 selector 13 chooses another background. The phase-one branch draws a notice;
-the other branch prepares objects, draws labels and calls the original panel,
+the other branch prepares objects, draws labels and calls the recovered panel,
 item, heading and refresh helpers. Shutdown runs the second transition,
 releases the object list and resets display, palette jobs and object slots.
 
@@ -128,8 +128,8 @@ volatile accesses or dummy dependencies are embedded.
 
 ## Explicit original helper boundary
 
-Selection, panel filling, its value providers, the paging predicate and the
-text/quantity helpers are recovered. The bodies below
+Selection, object preparation, item drawing, panel filling, its value providers,
+the paging predicate and the text/quantity helpers are recovered. The bodies below
 remain original. Their no-result call contracts use `void`
 because these callers consume only effects; this is a scoped declaration, not
 proof of the original source return type. The recovered draw/fill entries retain full
@@ -140,11 +140,10 @@ the observed paths.
 
 | Original helper | ROM offset | Retained static extent |
 |---|---:|---:|
-| Prepare objects | `0x42654` | 664 |
-| Confirm | `0x42964` | 654 mapped estimate; alignment remains original |
+| Confirm | `0x42964` | 656 bounded envelope, including two original zero alignment bytes |
 
-These are local static boundary estimates, not an exhaustive inventory. The
-item-drawing source attempts are retained privately: first 220/197, followed
+These are local static boundary estimates, not an exhaustive inventory. The failed
+item-drawing source attempts remain private: first 220/197, followed
 by genuine iterator/common-branch/slot-view trials 200/174, 200/177, 192/194.
 They receive no C credit. The unconverted helpers may mutate scene state or
 object pointers. Unchecked player, selector, object, array and resource inputs
@@ -279,7 +278,7 @@ ranges remain unchecked.
 The next-page predicate accepts and returns bytes. A zero count returns zero;
 otherwise it tests the first offset against `(count - 1) & 0xFC`. Its full
 forty-byte extent ends at the distinct notice entry `0x4311C`, including the
-original zero alignment. It is used by the still-original object preparation
+original zero alignment. It is used by the matching object preparation
 and the recovered paging path. The value helpers own `0x428EC..0x42964` and
 `0x43074..0x430A4`; their following original confirm entry and already accepted
 headings helper are separate extents.
@@ -292,7 +291,7 @@ changed-source controls. Pinned compiler diagnostics check the new partial
 layouts and reject a one-page prefix, wrong field widths or packing and an
 incompatible byte argument for the full-word value provider. Strict diagnostic
 compilation also rejects an actual missing value-provider declaration. Failed
-sources and comparison bytes remain private. Object preparation (664 bytes) and the other listed original helpers remain explicit
+sources and comparison bytes remain private. The other listed original helpers remain explicit
 and receive no new C credit.
 
 
@@ -311,7 +310,7 @@ slot 11 follows page_start!=0 and slot 12 follows the count predicate. The
 page-arrow refresher similarly sets slots 13 and 14 from row!=0 and the
 row/value count predicate. These preserve word flag loads and bit-zero changes;
 object pointers are assumed valid by the original code. The special selector
-path and the predicate handoff remain connected to the original object creator.
+path and the predicate handoff remain connected to the accepted object creator.
 
 The quantity-caption refresher draws the same five quantity and position
 records as the panel, following a font selection and tile-rectangle clear.
@@ -334,7 +333,7 @@ All six ordinary C sources match their entire original extents and have genuine
 changed-source controls and separate strict diagnostics. The existing step's
 previous, next and completion-caption call names change only at their existing
 addresses. Current literal importer and actual caller/provider closures are
-refreshed with the final headers. The original object preparation and confirmation handlers remain explicit; useful failed reconstructions
+refreshed with the final headers. The original confirmation handler remains explicit; useful failed reconstructions
 and raw comparisons are kept locally. Static routing, compiler equality and
 runtime behavior remain separate claims.
 
@@ -389,7 +388,7 @@ controls, strict missing-declaration controls and current accepted literal
 importers and actual providers are verified separately. The existing step's
 option alias is the sole accepted caller source change, at the same address,
 with its constants, body, control and compiler profile retained. The original
-confirmation caller and object preparation remain explicit;
+confirmation caller remains explicit;
 failed source representations and raw comparisons are preserved privately.
 Static mapping, compiler equality and runtime behavior remain separate claims.
 
@@ -444,6 +443,83 @@ provider declarations fail separate diagnostics.
 The complete current literal importer and real caller/provider closures have
 fresh positive and changed-source controls, with strict diagnostics outside
 the acceptance profile. Register allocation evidence, failed source shapes and
-raw comparisons remain private. The object-preparation and confirmation bodies
-remain explicit originals. These findings establish static routing and compiler
+raw comparisons remain private. The confirmation body
+remains an explicit original. These findings establish static routing and compiler
 equality; they do not establish complete storage or gameplay behavior.
+
+
+## Catalog object preparation
+
+The initializer and step controller now call the recovered preparation entry
+at the same address. This body owns `0x42654..0x428EC`, all 664 bytes including
+its internal pools and original alignment. Its final literal word already ends
+on the compiler's four-byte section boundary, so no source alignment directive
+is needed. The following basic-value entry remains separate. Only the two
+actual caller identifiers and their same-address metadata aliases change;
+existing caller controls, profiles and constants remain unchanged.
+
+The ordinary-selector path creates the header and both paging-control pairs,
+then tests the accepted page predicate before hiding unavailable arrows. The
+selector-four path uses its distinct header and control IDs and clears the two
+control objects' display-layer bits. Both preserve the original flags updates,
+subtype operands and palette/layer arguments. Pointer returns remain unchecked.
+The record and page predicates use fresh state-byte values after the opaque
+constructor calls rather than cached initial selection values.
+
+For ordinary selectors, the main loop visits eight object slots, nine through
+two, with IDs 46 through 39 and coordinate/palette operands nine through two.
+Each iteration reloads the selector. Ordinary selectors divide four basic and
+four page entries; selector four, if an earlier opaque call changes that byte,
+uses five basic and three page entries. The two source paths keep their actual
+record/page pointer reads and adjusted row indices. A kind byte of 255 creates
+fallback subtype 229 and clears flag bit zero. Other kinds use the descriptor's
+complete word at offset zero as the subtype. There is no additional descriptor
+317 guard in this preparation path; that guard belongs to the item drawer.
+
+The selector-four branch first creates five entries with IDs 123 through 127,
+subtypes 229 through 233 and variant 11. It then processes four page entries in
+reverse order. The native success and empty branches intentionally use different
+slot bases: nonempty entries store at row +2, empty entries at row +6. Empty
+entries clear flag bit zero. The final two control flags are cleared as in the
+original. These accesses preserve the observed behavior without assigning an
+unsupported gameplay purpose to the asymmetric slots.
+
+Two ordinary inline accessors express the real data producers. The selected-page
+accessor starts with the actual pointer-field address at context +12, forms the
+selector stride and row stride separately, reads that pointer field and adds the
+row offset. The descriptor accessor accepts the actual selected entry; its
+catalog-pointer lifetime begins before its real kind-field consumer. This
+recovers the native table-load and kind-copy order. Passing an already captured
+kind to that accessor left a four-byte mismatch. Earlier merged base paths and
+kind snapshots remain preserved as unmatched source and raw comparison evidence.
+No register binding, volatile access, extra read or dummy initializer is used.
+The two genuine kind consumers in each selection branch produce the original
+single byte load before the descriptor word and constructor call.
+
+The constructor at `0x08027EE4` is the already accepted 240-byte
+`frame_create_scene_object` provider; it earns no new credit here. Its canonical
+four-word declaration comes from `frame_actor_scene.h`. It preserves all four
+incoming words before allocation. The first two words are stored as halfwords
+but also select coordinate and animation tables and the special full-word
+subtype 267 and IDs 110/111. Those stores do not justify narrowing the API.
+The accepted 64-byte allocator requests 320 bytes; the existing generic
+`FrameObject` declaration measures 312 bytes with alignment 4. The request and
+measured view do not prove complete storage contents, arbitrary pointer
+validity or allocation success. The accepted 608-byte callback and connected
+position, animation, state, variant and palette providers are rechecked with
+current headers. An earlier private assumption that the constructor was still
+original was corrected against the live accepted manifest and retained as a
+superseded evidence predecessor.
+
+Pinned compiler diagnostics check the four-byte slot stride, eight-byte page
+and record strides, fourteen-page observed prefix, 120-byte context, full-word
+descriptor ID, actual flags fields and the constructor/variant/predicate API
+assignments. The two-bit display layer uses the observed byte +D5 mask;
+changing its width fails layout checks and changes the actual preparation
+bytes. Omitting the real constructor declaration still gives identical bytes
+under the permissive legacy profile, but the separate strict diagnostic rejects
+it. This failure case keeps declaration completeness distinct from byte
+matching. Normal and strict positives and actual changed-source controls are
+fresh, as are the complete current shared-header importer and provider closures.
+The confirmation handler remains an explicit original. These results establish
+static routing and compiler equality, not complete formats or gameplay behavior.

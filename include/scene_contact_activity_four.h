@@ -26,6 +26,20 @@ struct SceneContactActivityFourItem {
     unsigned char penalty, unknown15[3];
 };
 
+/* Whole-object-rooted flag prefix. The pinned byte mapping is checked;
+ * this 216-byte access view does not describe the complete allocation. */
+struct SceneContactActivityFourObjectFlags {
+    unsigned char unknown00[0xd1];
+    unsigned char mode:2, contact_mode:2, unknown_d1_4:1;
+    unsigned char double_size:1, unknown_d1_6:2;
+    unsigned char unknown_d2;
+    unsigned char unknown_d3_0:4;
+    signed char flag4:1;
+    unsigned char flag5:1, unknown_d3_6:2;
+    unsigned char unknown_d4;
+    unsigned char tile_high:2, layer:2, palette:4;
+};
+
 extern const struct SceneContactActivityFourRow
     g_scene_contact_activity_four_rows[];
 extern const struct SceneContactActivityFourItem
@@ -35,20 +49,25 @@ extern const unsigned int g_scene_contact_activity_four_background2;
 extern const struct BackgroundResource g_scene_contact_activity_four_map1;
 extern const struct BackgroundResource g_scene_contact_activity_four_map2;
 extern const struct BackgroundResource g_scene_contact_activity_four_map3;
+extern struct FrameVariantResource g_scene_contact_activity_four_animation_a;
+extern struct FrameVariantResource g_scene_contact_activity_four_animation_b;
 
 void scene_contact_activity_four_initialize(void);
 void scene_contact_activity_four_reset_items(void);
 void scene_contact_activity_four_load_palettes(void);
 void scene_contact_activity_four_clear_secondary(void);
 unsigned int scene_contact_activity_four_complete(void);
+struct FrameObject *scene_contact_activity_four_create_item(struct FramePoint,
+    unsigned int, unsigned int);
+void scene_contact_add_activity_score(int);
 
-/* Explicit original creators. The item call view groups the observed R0/R1
- * coordinate words; it is not a recovered original declaration. Selection
- * and slot remain complete incoming words. */
+struct FrameTickObject;
+void frame_set_animation_record(struct FrameObject *, struct FrameVariantResource *);
+void frame_set_animation_frame(struct FrameTickObject *, unsigned char);
+
+/* Explicit original creators; complete declarations remain provisional. */
 struct FrameObject *scene_contact_original_create_four_primary(void);
 struct FrameObject *scene_contact_original_create_four_control(void);
 struct FrameObject *scene_contact_original_create_four_auxiliary(void);
-struct FrameObject *scene_contact_original_create_four_item(struct FramePoint,
-    unsigned int, unsigned int);
 
 #endif

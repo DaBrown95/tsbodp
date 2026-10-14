@@ -49,7 +49,7 @@ void scene_catalog_initialize(void) {
   display_text_select_font(3,0,-1);
   display_text_draw_all_lines(131,120,16,200,display_scene_lookup_text(301),mode);
  } else {
-  scene_catalog_prepare_original();
+  scene_catalog_prepare();
   mode=1;
   display_text_select_font(3,0,0);
   {const char *label=display_scene_lookup_text(0x181e);

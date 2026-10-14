@@ -84,7 +84,7 @@ void scene_catalog_step(void) {
    display_fill_background(1,0);
    display_fill_background(0,0);
    g_scene_request.unknown_10=0;
-   scene_catalog_prepare_original();
+   scene_catalog_prepare();
    display_text_select_font(3,0,0);
    tile=display_text_draw_line(1,60,4,display_scene_lookup_text(0x181e),phase);
    display_text_draw_line(tile,188,4,display_scene_lookup_text(g_scene_catalog_state.selector+0x1820),phase);

@@ -72,7 +72,7 @@ void resource_scene_selector_complete(struct FrameObject *);
 unsigned char frame_object_has_flags(struct FrameObject *, unsigned int);
 void frame_disable_object_flags(struct FrameObject *, unsigned int);
 void frame_set_variant_state(struct FrameObject *, unsigned char);
-unsigned char resource_select_actor(unsigned int, unsigned int);
+#include "resource_actor_selection.h"
 void scene_submit_default_request(unsigned int);
 struct FrameObject *resource_create_scene_selector(unsigned char, unsigned char);
 struct SceneRequest;

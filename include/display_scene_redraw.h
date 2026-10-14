@@ -17,7 +17,7 @@ extern struct FrameObject *frame_create_scene_object(unsigned int, unsigned int,
 extern const char *display_scene_lookup_text(unsigned int);
 extern struct DisplaySceneOwner *display_scene_stage_080282d4(unsigned int, const char **);
 struct TransitionObject;
-extern void transition_object_set_state(struct TransitionObject *, unsigned char);
+extern void transition_object_set_state(void *, unsigned char);
 extern unsigned char display_scene_item_enabled(const unsigned int *, unsigned int);
 extern void display_scene_create_objects(void), display_scene_redraw_group_labels(unsigned char);
 #endif
