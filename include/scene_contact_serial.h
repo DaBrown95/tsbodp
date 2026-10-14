@@ -8,7 +8,8 @@ struct SceneContactSerialFields {
     volatile unsigned char count:8, pending:8, unknown06:8, unknown07:8, flag8:8;
     unsigned int captured0c, unknown10, captured14;
     unsigned short first_parameter, second_parameter;
-    unsigned char unknown1c[8];
+    volatile unsigned short receive_remaining:16, transmit_remaining:16;
+    volatile unsigned short receive_index:16, transmit_index:16;
     void *first_buffer, *second_buffer;
 };
 
@@ -42,9 +43,15 @@ void scene_contact_install_serial_irq(SceneContactNoticeHandler, unsigned int,
 void scene_contact_handle_serial_irq(void);
 void scene_contact_begin_serial_notice(void);
 
-/* Explicit original children; callers consume only their result low byte. */
-unsigned int scene_contact_original_receive_word(unsigned int);
-unsigned int scene_contact_original_transmit(void);
+/* Complete serial bodies; the IRQ consumes only the result low byte. */
+unsigned int scene_contact_receive_serial_word(unsigned int);
+unsigned int scene_contact_transmit_serial_word(void);
+
+unsigned int scene_contact_store_serial_word(unsigned int);
+unsigned int scene_contact_emit_serial_word(void);
+
+/* Explicit original fold: low16 input, byte-valued word result. */
+unsigned int scene_contact_original_fold_word(unsigned short);
 
 void set_irq_table_entry(unsigned int, unsigned int);
 
