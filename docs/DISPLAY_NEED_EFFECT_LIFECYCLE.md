@@ -340,9 +340,16 @@ The installed callback `frame_need_effect_interact` at `0x08011328` matches its
 `frame_need_effect_stop_at_position` on each of the two objects. This supports a
 two-object signature for the callback address and corrects the earlier provisional
 single-object declaration. The updater's explicit slot `+0xC8` view now uses that
-same signature. This body and the installation do not establish which objects an
-unconverted indirect caller supplies; the actor view's separate callback field at
-`+0xCC` remains separate.
+same signature. The copied matching collision dispatcher supplies two concrete
+`CollisionObject` pointers through its callback array starting at `+0xC8`.
+The resource factory at `0x0800BD68` installs this callback in slot zero. Its
+declaration, formal pointer tags and the updater's explicit storage type now match
+that caller's `CollisionCallback`; real local `FrameObject` access views pass each
+object to the movement helper. These type corrections retain the existing
+20-byte callback and 292-byte updater extents, controls and compiler profiles,
+with no new C credit. The generic actor view's separate provisional field at
+`+0xCC` remains unchanged. See [the factory path](FRAME_COLLISION_VARIANT_RESOURCE.md)
+for the direct producer, field and boundary evidence.
 
 The connected helper at `0x0802B3B8` matches all 28 bytes. It copies the two current
 position words at `+0x18/+0x1C` to next position at `+0x20/+0x24`, clears velocity

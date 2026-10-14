@@ -22,10 +22,10 @@ void frame_update_need_effect(struct FrameObject *base)
    case 132:frame_set_object_palette(base,&g_need_effect_palette_132);break;
   }
   /* This body writes callback slot +C8, independently of the actor view. */
-  if(!*(void **)((unsigned char *)base+0xb0))*(void (**)(struct FrameObject *,struct FrameObject *))((unsigned char *)base+0xc8)=0;
-  else *(void (**)(struct FrameObject *,struct FrameObject *))((unsigned char *)base+0xc8)=frame_need_effect_interact;
+  if(!*(void **)((unsigned char *)base+0xb0))*(void (**)(struct CollisionObject *,struct CollisionObject *))((unsigned char *)base+0xc8)=0;
+  else *(void (**)(struct CollisionObject *,struct CollisionObject *))((unsigned char *)base+0xc8)=frame_need_effect_interact;
  } else {
-  *(void (**)(struct FrameObject *,struct FrameObject *))((unsigned char *)base+0xc8)=0;
+  *(void (**)(struct CollisionObject *,struct CollisionObject *))((unsigned char *)base+0xc8)=0;
   frame_disable_object_flags(base,17);
  }
  if(((struct FrameNeedEffectObject *)base)->direction>4)((struct FrameNeedEffectObject *)base)->oam.flip_x=1;
