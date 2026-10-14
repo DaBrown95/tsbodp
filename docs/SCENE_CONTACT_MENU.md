@@ -6,7 +6,7 @@ kind 20 through the scene request provider. This identifies a connected scene
 path; the names below describe static accesses and are not recovered original
 identifiers or a claim about gameplay.
 
-This connected path reconstructs thirty C functions, totaling 5,264 bytes:
+This connected path reconstructs thirty-one C functions, totaling 5,460 bytes:
 
 | Entry | Bytes | Observed role |
 | --- | ---: | --- |
@@ -35,6 +35,7 @@ This connected path reconstructs thirty C functions, totaling 5,264 bytes:
 | `0x08033D60` | 360 | Create a selected moving event with paired slot, position, speed and animation |
 | `0x08033EC8` | 216 | Update primary x movement, control launch flags and animation completion |
 | `0x08033FA0` | 340 | Advance control phases, vertical motion, paired-slot removal and wait timer |
+| `0x080340F4` | 196 | Change the selected halfword, animation frame and two auxiliary flag bits |
 | `0x080341B8` | 292 | Advance the moving event, fill or update a secondary slot and retire it at a boundary |
 | `0x080342DC` | 72 | Test the control byte and eight paired object identifiers |
 | `0x08034324` | 52 | Retire nullable secondary objects and clear their slots |
@@ -45,7 +46,9 @@ Every comparison includes the complete original extent, internal switch tables,
 literal pools and alignment. Every function has an actual changed-source
 negative control and a separate strict declaration diagnostic. The bodies use ordinary C without added reads, volatile access views or
 fabricated initializers. The primary callback below has one short annotation
-on an actual state-root pointer; the other bodies need no register bindings. Source coverage remains separate from whole-ROM
+on an actual state-root pointer; the auxiliary callback has three annotations
+on its actual object, shifted selection and flag-field address. The other bodies
+need no register bindings. Source coverage remains separate from whole-ROM
 matching and runtime evidence.
 
 # Observed representations and contracts
@@ -289,8 +292,8 @@ occupies 70 bytes followed by two original zero alignment bytes before the
 independent cleanup entry; the complete 72-byte extent is compared.
 
 The 232-byte activity step at `0x08033A0C` remains original. The three
-connected creators are recovered below; the auxiliary object callback
-remains an explicit original dependency.
+connected creators and their primary, control and auxiliary callbacks are
+recovered below.
 Their local declarations describe only the calls made by this batch. The
 five new bodies use ordinary unbound C and have complete native, actual
 changed-source and strict declaration comparisons. Compiler layout and
@@ -440,9 +443,9 @@ stored signed result is nonpositive, and requests cue 189. Other identifiers
 request cue 188. These operations preserve target halfword narrowing and
 the original post-call global reloads. Outside capture, direction byte 2
 retires an event above `0xB7FFFF`; direction 6 retires it at or below zero.
-Other paths copy the actual next-position members into position. The
-232-byte activity coordinator and auxiliary callback remain
-unconverted; this callback closes only the specific moving-event handoff.
+Other paths copy the actual next-position members into position. The 232-byte
+activity coordinator remains unconverted; this callback closes only the specific
+moving-event handoff.
 
 Forty-one finite callback cases compare original and freshly linked bytes
 with a bounded model; 27 distinguish the actual removal-mask control. They
@@ -503,9 +506,9 @@ state 1, sets flag 1, selects the waiting animation and clears scene flag 2.
 Vertical additions, x bounds and timer subtraction use explicit unsigned-word
 representations before the target's signed interpretation. The source adds no
 signed-overflow dependency or new guard; these casts describe the pinned 32-bit
-target model, without a portable arbitrary conversion claim. The primary callback is recovered below; auxiliary callback at
-`0x080340F4`, activity tick at
-`0x08033A0C` and need-adjustment provider remain explicit original bodies.
+target model, without a portable arbitrary conversion claim. The primary and
+auxiliary callbacks are recovered below. Activity tick at `0x08033A0C` and
+the need-adjustment provider remain explicit original bodies.
 
 Fresh complete native comparisons include actual source controls, strict
 provider declarations, current importer proofs and independent layout/type
@@ -576,5 +579,61 @@ initialized aliased-storage case checks the control-address reload after its
 flag store; this is input-model evidence, not an asserted gameplay arrangement.
 Audio and animation hooks poison caller-saved registers and check call operands
 without executing those provider bodies. Pointer validity, complete storage,
-arbitrary surrounding capacity and gameplay remain unproved; the auxiliary
-callback and activity coordinator stay original.
+arbitrary surrounding capacity and gameplay remain unproved. The auxiliary
+callback is recovered below; the activity coordinator stays original.
+
+# Connected auxiliary selection callback
+
+The auxiliary constructor installs the matching one-object callback at
+`0x080340F4..0x080341B8`. Its 194-byte function and original two zero alignment
+bytes form the complete 196-byte extent, including both literal pools. The
+constructor changes only the callback identifier at the same address and keeps
+the standard `void(FrameObject *)` call type.
+
+Scene flag 2 suppresses the callback's writes. Otherwise pressed input
+halfword zero at `0x03004228` gives mask `0x280` priority over mask `0x140`.
+The first mask changes selected halfword zero to 7 and decrements every other
+value. The second changes values above 6 to zero and increments values zero
+through six. No input narrows the selected halfword to a byte or adds a row
+validity guard. If the resulting value differs, it is stored at state byte 14.
+Low two bits zero or three select animation frame zero; other values select
+frame one.
+
+After that animation call, the actual global state and selected halfword are
+reloaded. Selected values above three set object byte `0xD3` bit 4; other values
+clear it. The unsigned expression `((selected >> 1) & 3) - 1` at or below one
+sets bit 5, otherwise clears it. Zero before subtraction deliberately wraps to
+`0xFFFFFFFF`. These are two separate byte stores preserving the other six bits,
+including the original reload between stores. No null or capacity guard is added.
+
+The whole-object access prefix is 212 bytes with alignment four, inside the
+observed 320-byte allocation. Its nested `0xD3` flag field is a packed one-byte,
+alignment-one view. Pinned compiler layout and initialized data checks establish
+the field offset and physical bit mapping. A signed one-bit field receives
+minus one or zero for bit 4; an unsigned one-bit field receives one or zero for
+bit 5. This expresses the observed representation without claiming a complete
+object layout or original source declaration.
+
+Three annotations remain after actual removal trials. The callback object in
+R4 survives the animation call as a real callee-saved pointer. The post-call
+shifted value in R3 and the nested field address in R2 are distinct call-free
+lifetimes; both are assigned after the animation call. The field address is
+captured after the first flag store and used through the second. Native reads,
+writes and call boundaries are checked independently of lexical source scopes.
+Removing the object, shifted-value or field-address annotation changes 78,
+three or four bytes respectively, with no added traffic or fabricated value.
+
+Fresh constructor, complete current header-importer and animation-provider
+proofs include actual changed-source controls and strict declaration checks.
+Separate layout, compatible-type and physical mapping failures reject incorrect
+field widths, offsets, alignment and callback declarations. Bounded initialized
+instruction fixtures and an independent bit-pattern model compare full incoming
+halfwords, ordered input masks, animation operands and both flag stores. All 146
+cases agree; four distinguish the real wrap-value source control. Three separate
+interpreter failures reject an unsupported instruction, a truncated pool and an
+exhausted budget. The animation hook poisons caller-saved registers and preserves
+the checked stack and callee-saved protocol; its effects are abstracted rather
+than executed. Three injected post-call effects test the observed reloads
+without asserting that the actual provider produces them. Pointer validity,
+arbitrary storage, gameplay and hardware behavior remain unproved; the activity
+coordinator and need-adjustment provider stay original.

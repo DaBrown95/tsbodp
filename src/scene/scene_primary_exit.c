@@ -6,7 +6,7 @@ void scene_primary_exit(void)
  g_scene_primary_views.slots[0].saved_direction=g_scene_primary_views.slots[0].object->direction;
  g_scene_primary_views.slots[0].saved_x=g_scene_primary_views.slots[0].object->position.x>>16;
  g_scene_primary_views.slots[0].saved_y=g_scene_primary_views.slots[0].object->position.y>>16;
- scene_stage_080202e0(g_scene_entry_data,g_scene_id);
+ scene_save_need_effect_collection(g_scene_entry_data,g_scene_id);
  if(scene_queued_request_kind()!=5&&scene_queued_request_kind()!=13&&scene_queued_request_kind()!=1&&scene_queued_request_kind()!=20&&scene_queued_request_kind()!=27)scene_retain_display();
  else scene_release_display();
  if(g_game_flags&0x20000)g_game_flags|=0x100000;

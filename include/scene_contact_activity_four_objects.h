@@ -25,8 +25,8 @@ struct FrameObject *scene_contact_activity_four_create_control(void);
 struct FrameObject *scene_contact_activity_four_create_auxiliary(void);
 void scene_contact_activity_four_step_control_object(struct FrameObject *);
 
-/* Specific one-object callback views. The auxiliary body remains original. */
+/* Specific one-object callback views installed by the paired constructors. */
 void scene_contact_activity_four_step_primary_object(struct FrameObject *);
-void scene_contact_original_step_four_auxiliary(struct FrameObject *);
+void scene_contact_activity_four_step_auxiliary_object(struct FrameObject *);
 
 #endif

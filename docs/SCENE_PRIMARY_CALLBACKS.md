@@ -40,7 +40,9 @@ right shifts by 16 naturally compile to the original signed halfword reads at
 actor `+0x1A` and `+0x1E`. A halfword-only access view produced shorter,
 nonmatching unsigned loads and is excluded.
 
-It passes scene entry data and scene ID to original `0x080202E0`. Five distinct
+It passes scene entry data and scene ID to `scene_save_need_effect_collection`
+at `0x080202E0`; that provider is described in
+[the collection snapshot notes](SCENE_NEED_EFFECT_COLLECTION.md). Five distinct
 calls to the queued-kind getter select the retained-state path for kinds 5,
 13, 1, 20 and 27; other kinds use the original alternate provider. Expressing
 that ordinary condition with the alternate branch first preserves the original

@@ -23000,7 +23000,6 @@
         "scene_queued_request_kind": "0x08027db1",
         "transition_fade_black_out_record": "0x080394f9",
         "transition_run_second": "0x08039435",
-        "scene_stage_080202e0": "0x080202e1",
         "scene_retain_display": "0x08026929",
         "scene_release_display": "0x0802697d",
         "save_world_clear_row_objects": "0x0801eea9",
@@ -23016,13 +23015,14 @@
         "display_reset_palette_jobs": "0x080117bd",
         "display_reset": "0x0800dda5",
         "set_vblank_callback": "0x0801f8ed",
-        "irq_default_vblank_callback": "0x0801f9e5"
+        "irq_default_vblank_callback": "0x0801f9e5",
+        "scene_save_need_effect_collection": "0x080202e1"
       },
       "thumb_symbols": [
         "scene_queued_request_kind",
         "transition_fade_black_out_record",
         "transition_run_second",
-        "scene_stage_080202e0",
+        "scene_save_need_effect_collection",
         "scene_retain_display",
         "scene_release_display",
         "save_world_clear_row_objects",
@@ -31987,13 +31987,13 @@
         "frame_set_position": "0x080014a5",
         "frame_set_animation_record": "0x0800132d",
         "g_scene_contact_activity_four_auxiliary_animation": "0x08069fc8",
-        "scene_contact_original_step_four_auxiliary": "0x080340f5"
+        "scene_contact_activity_four_step_auxiliary_object": "0x080340f5"
       },
       "thumb_symbols": [
         "frame_allocate_scene_object",
         "frame_set_position",
         "frame_set_animation_record",
-        "scene_contact_original_step_four_auxiliary"
+        "scene_contact_activity_four_step_auxiliary_object"
       ],
       "source": "src/scene/scene_contact_activity_four_create_auxiliary.c",
       "negative_control": {
@@ -32136,6 +32136,145 @@
         "before": "]==48",
         "after": "]==49"
       }
+    },
+    {
+      "name": "frame_create_scene_target_resource",
+      "rom_offset": 239028,
+      "size": 96,
+      "symbols": {
+        "frame_allocate_scene_object": "0x08001129",
+        "resource_get_object_payload": "0x0800aebd",
+        "frame_set_position": "0x080014a5",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_variant_state": "0x08001be1",
+        "frame_scene_target_resource_step": "0x0803a649"
+      },
+      "thumb_symbols": [
+        "frame_allocate_scene_object",
+        "resource_get_object_payload",
+        "frame_set_position",
+        "transition_object_set_state",
+        "frame_set_variant_state",
+        "frame_scene_target_resource_step"
+      ],
+      "negative_control": {
+        "before": "object->flags=0x22000;",
+        "after": "object->flags=0x22001;"
+      },
+      "source": "src/frame/frame_create_scene_target_resource.c"
+    },
+    {
+      "name": "frame_scene_target_resource_step",
+      "rom_offset": 239176,
+      "size": 24,
+      "symbols": {
+        "frame_run_actor_state": "0x08005805"
+      },
+      "thumb_symbols": [
+        "frame_run_actor_state"
+      ],
+      "negative_control": {
+        "before": "case 1:",
+        "after": "case 2:"
+      },
+      "source": "src/frame/frame_scene_target_resource_step.c"
+    },
+    {
+      "name": "frame_create_spawn_point_resource",
+      "rom_offset": 93084,
+      "size": 104,
+      "symbols": {
+        "frame_allocate_scene_object": "0x08001129",
+        "resource_get_object_payload": "0x0800aebd",
+        "frame_set_position": "0x080014a5",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_variant_state": "0x08001be1",
+        "frame_spawn_point_resource_step": "0x08016c51"
+      },
+      "thumb_symbols": [
+        "frame_allocate_scene_object",
+        "resource_get_object_payload",
+        "frame_set_position",
+        "transition_object_set_state",
+        "frame_set_variant_state",
+        "frame_spawn_point_resource_step"
+      ],
+      "negative_control": {
+        "before": "object->flags=0x22000;",
+        "after": "object->flags=0x22001;"
+      },
+      "source": "src/frame/frame_create_spawn_point_resource.c"
+    },
+    {
+      "name": "frame_spawn_point_resource_step",
+      "rom_offset": 93264,
+      "size": 24,
+      "symbols": {
+        "frame_run_actor_state": "0x08005805"
+      },
+      "thumb_symbols": [
+        "frame_run_actor_state"
+      ],
+      "negative_control": {
+        "before": "case 1:",
+        "after": "case 2:"
+      },
+      "source": "src/frame/frame_spawn_point_resource_step.c"
+    },
+    {
+      "name": "scene_save_need_effect_collection",
+      "rom_offset": 131808,
+      "size": 136,
+      "symbols": {
+        "g_frame_need_effect_active_list": "0x03005868",
+        "g_frame_registration": "0x03004330",
+        "frame_grid_point_to_cell": "0x08048af9",
+        "actor_entry_save_collection_record": "0x08020c55"
+      },
+      "thumb_symbols": [
+        "frame_grid_point_to_cell",
+        "actor_entry_save_collection_record"
+      ],
+      "source": "src/scene/scene_save_need_effect_collection.c",
+      "negative_control": {
+        "before": "if(state->enabled)",
+        "after": "if(!state->enabled)"
+      }
+    },
+    {
+      "name": "actor_entry_save_collection_record",
+      "rom_offset": 134228,
+      "size": 28,
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "actor_entry_reserve_collection_record": "0x080204b1"
+      },
+      "thumb_symbols": [
+        "actor_entry_reserve_collection_record"
+      ],
+      "source": "src/resource/actor_entry_save_collection_record.c",
+      "negative_control": {
+        "before": "if (destination)",
+        "after": "if (!destination)"
+      }
+    },
+    {
+      "name": "scene_contact_activity_four_step_auxiliary_object",
+      "rom_offset": 213236,
+      "size": 196,
+      "symbols": {
+        "g_scene_contact_state": "0x030043f4",
+        "frame_set_animation_frame": "0x08000c6d",
+        "g_input_pressed": "0x03004228"
+      },
+      "thumb_symbols": [
+        "frame_set_animation_frame"
+      ],
+      "negative_control": {
+        "before": "selected = 7",
+        "after": "selected = 6"
+      },
+      "source": "src/scene/scene_contact_activity_four_step_auxiliary_object.c"
     }
   ],
   "assembly": [
