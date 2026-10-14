@@ -153,3 +153,42 @@ nonwriting output paths and high-word inputs; they do not establish hardware
 or gameplay behavior. Pointer validity, arbitrary output capacity and the
 original removal retry's stage/count validity remain unchecked. The scanner
 and complete random-removal body remain explicit original regions.
+
+## Row collection publication
+
+The connected row-selection provider `condition_select_actor` now supplies a
+complete matching 120-byte extent at `0x20B80`, ending before the separate
+`0x20BF8` restore entry. The existing `condition_select_row` call view remains
+`void(void *, unsigned int)`, forwarding the observed context root
+`0x03003A2C` and the full row word. Its local declaration and metadata are
+unchanged. The new isolated header supplies the same provider declaration.
+
+Rows zero, one and every word outside zero through four make no publication
+call. Row two publishes groups 16 and 17; row three publishes 24, 25 and 23;
+row four publishes 46, 48 and 47, in those exact orders. These are collection
+group identifiers, distinct from the caller's row and from the stage group-ID
+producer above. No inferred fallback group, table capacity or row guard is
+added. High-word row values take the default path without low-byte narrowing.
+The unsigned word formal retains the existing consistent interface, without
+claiming a unique original signedness spelling.
+
+The source uses an ordinary switch and an internal context access view, with
+no register bindings, assembly statements, volatile accesses or added reads.
+The context value is held across the actual publication calls and each call
+receives its original full-word group argument. The already recovered
+publication provider, collection clear/add operations and row caller earn no
+new C credit. Their actual controls and current literal headers are checked
+with the new provider. The historical assembler emits the full 118-byte
+function, including its generated table and literals; the unchanged linker
+supplies the original two zero bytes to the complete 120-byte boundary.
+
+Separate strict declarations and layout/API rejection cases check the
+unchanged partial context and group views. Native equality alone cannot
+establish those types because this selector forwards the context without
+reading its fields. Fifty-one finite call-trace fixtures cover full-word
+dispatch, ordered group operands and caller-saved register clobbering; two
+distinguish the changed-source group control. They abstract the publication
+provider's effects and do not execute the collection bodies. Null contexts
+are used only on no-call paths. Context validity, complete storage and the
+providers' arbitrary count/capacity domains remain unchecked. These findings
+do not establish hardware or gameplay behavior.

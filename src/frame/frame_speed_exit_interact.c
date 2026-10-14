@@ -2,8 +2,9 @@
 #include "frame_actor_state.h"
 #include "frame_actor_speed_exit.h"
 #include "input.h"
-void frame_speed_exit_interact(struct FrameObject *object,struct FrameObject *actor)
+void frame_speed_exit_interact(struct CollisionObject *base,struct CollisionObject *other)
 {
+ struct FrameObject *object=(struct FrameObject *)base,*actor=(struct FrameObject *)other;
  unsigned int allowed,primary;
  unsigned char state=((struct FrameActorObject *)object)->state;
  struct FrameObject *selected;

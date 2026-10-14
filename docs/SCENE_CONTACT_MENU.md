@@ -6,7 +6,7 @@ kind 20 through the scene request provider. This identifies a connected scene
 path; the names below describe static accesses and are not recovered original
 identifiers or a claim about gameplay.
 
-This connected path reconstructs twenty-nine C functions, totaling 5,048 bytes:
+This connected path reconstructs thirty C functions, totaling 5,264 bytes:
 
 | Entry | Bytes | Observed role |
 | --- | ---: | --- |
@@ -33,6 +33,7 @@ This connected path reconstructs twenty-nine C functions, totaling 5,048 bytes:
 | `0x08033C18` | 104 | Create the auxiliary selector object at fixed position and callback |
 | `0x08033C80` | 224 | Create a selected item with coordinate words, animation and slot-derived flags |
 | `0x08033D60` | 360 | Create a selected moving event with paired slot, position, speed and animation |
+| `0x08033EC8` | 216 | Update primary x movement, control launch flags and animation completion |
 | `0x08033FA0` | 340 | Advance control phases, vertical motion, paired-slot removal and wait timer |
 | `0x080341B8` | 292 | Advance the moving event, fill or update a secondary slot and retire it at a boundary |
 | `0x080342DC` | 72 | Test the control byte and eight paired object identifiers |
@@ -42,9 +43,9 @@ This connected path reconstructs twenty-nine C functions, totaling 5,048 bytes:
 
 Every comparison includes the complete original extent, internal switch tables,
 literal pools and alignment. Every function has an actual changed-source
-negative control and a separate strict declaration diagnostic. The bodies use
-ordinary C with no register bindings, added reads, volatile access views or
-fabricated initializers. Source coverage remains separate from whole-ROM
+negative control and a separate strict declaration diagnostic. The bodies use ordinary C without added reads, volatile access views or
+fabricated initializers. The primary callback below has one short annotation
+on an actual state-root pointer; the other bodies need no register bindings. Source coverage remains separate from whole-ROM
 matching and runtime evidence.
 
 # Observed representations and contracts
@@ -288,8 +289,8 @@ occupies 70 bytes followed by two original zero alignment bytes before the
 independent cleanup entry; the complete 72-byte extent is compared.
 
 The 232-byte activity step at `0x08033A0C` remains original. The three
-connected creators are recovered below; the primary and auxiliary object
-callbacks remain explicit original dependencies.
+connected creators are recovered below; the auxiliary object callback
+remains an explicit original dependency.
 Their local declarations describe only the calls made by this batch. The
 five new bodies use ordinary unbound C and have complete native, actual
 changed-source and strict declaration comparisons. Compiler layout and
@@ -440,7 +441,7 @@ request cue 188. These operations preserve target halfword narrowing and
 the original post-call global reloads. Outside capture, direction byte 2
 retires an event above `0xB7FFFF`; direction 6 retires it at or below zero.
 Other paths copy the actual next-position members into position. The
-232-byte activity coordinator and primary and auxiliary callbacks remain
+232-byte activity coordinator and auxiliary callback remain
 unconverted; this callback closes only the specific moving-event handoff.
 
 Forty-one finite callback cases compare original and freshly linked bytes
@@ -502,8 +503,8 @@ state 1, sets flag 1, selects the waiting animation and clears scene flag 2.
 Vertical additions, x bounds and timer subtraction use explicit unsigned-word
 representations before the target's signed interpretation. The source adds no
 signed-overflow dependency or new guard; these casts describe the pinned 32-bit
-target model, without a portable arbitrary conversion claim. The primary
-callback at `0x08033EC8`, auxiliary callback at `0x080340F4`, activity tick at
+target model, without a portable arbitrary conversion claim. The primary callback is recovered below; auxiliary callback at
+`0x080340F4`, activity tick at
 `0x08033A0C` and need-adjustment provider remain explicit original bodies.
 
 Fresh complete native comparisons include actual source controls, strict
@@ -518,3 +519,62 @@ They test bounded traces and storage effects, not those provider bodies or
 gameplay. Null, missing-storage and interpreter failure cases retain their
 model-only meaning. Slot capacities, pointer validity and surrounding storage
 remain unchecked.
+
+# Connected primary movement and control launch
+
+The primary constructor now installs the matching callback at
+`0x08033EC8..0x08033FA0`, a complete 216-byte extent including its pools and
+original alignment. The existing constructor changes only the stored callback
+name at the same address. Its standard one-`FrameObject` declaration agrees
+with the installed callback and the established object dispatcher.
+
+Scene flag 2 suppresses the input and control-launch block. Otherwise current
+input halfword zero at `0x03004220` gives mask 16 priority over mask 32. The
+callback adds or subtracts `0x30000` from x using word-wrap arithmetic, stores
+next x, and conditionally copies it to position x. Right movement copies at
+or below `0xA9FFFF`; left movement copies above `0xE0000`. These tests retain
+an already-outside or wrapped coordinate's native behavior, without an added
+clamp or validity guard.
+
+Control state byte `0x4E` equal to 1 allows copying the primary x coordinate
+to control x. Pressed input halfword zero at `0x03004228`, mask 1, then
+requests cue 185, sets flag 16 on both objects, writes control state 3,
+sets vertical velocity to `-0xC0000` and acceleration to `0x8000`. The final
+primary-object animation-flag test runs independently of that scene flag.
+Flag `0x400000` clears itself together with flag 16 and selects frame zero.
+The code adds no null-control or coordinate guard.
+
+The post-cue access view is a 92-byte, alignment-four state prefix. Its named
+union at byte 88 exposes the same four bytes as a `FrameObject` pointer and
+an unsigned address word; the existing 100-byte pointer-array view stays
+unchanged. Pinned compiler layout and representation checks establish word
+and pointer widths, matching field offsets and the target's byte order. The
+source uses the address representation for the actual pointer loads and casts
+back to the declared object view. This is a bounded model of the observed
+32-bit target storage, without an arbitrary portable pointer-conversion claim.
+The prefix remains inside the observed 420-byte state allocation.
+
+Actual control and flag-value snapshots retain each original load and store.
+The first post-cue state root is captured before the control flag read; after
+the state-byte store, the actual global root is reloaded before the velocity
+and acceleration pointer loads. One short R2 annotation applies to that real
+state pointer within the call-free block. The generated native values and uses
+are audited separately: both captures follow the audio call, their last use
+precedes the final animation call, and they cross no ABI clobber boundary.
+An otherwise identical unannotated predecessor differs in nine bytes. A
+second control-pointer annotation was removed without changing bytes.
+
+Complete current constructor/importer/provider proofs include real changed-source
+controls and strict declaration checks. Separate layout, compatible-type and
+pointer-representation diagnostics distinguish the chosen access model from
+byte equality. Ninety-three bounded initialized-memory cases compare original
+bytes, freshly linked C and an independent bit-pattern model; twelve distinguish
+the actual cue-identifier control. Three interpreter failure checks reject an
+unsupported instruction, a truncated supplied extent and an exhausted budget.
+Two injected audio-hook effects check post-call root and flag reloads. One
+initialized aliased-storage case checks the control-address reload after its
+flag store; this is input-model evidence, not an asserted gameplay arrangement.
+Audio and animation hooks poison caller-saved registers and check call operands
+without executing those provider bodies. Pointer validity, complete storage,
+arbitrary surrounding capacity and gameplay remain unproved; the auxiliary
+callback and activity coordinator stay original.
