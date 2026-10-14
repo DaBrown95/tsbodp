@@ -70,16 +70,15 @@ identifier. The result remains a full word; `int` is a supported C model of
 that return, without establishing the original signedness. No new credit is
 assigned to the existing selection or eligibility bodies.
 
-It obtains three signed word group IDs from the original stage-dependent
-provider. The initialized stage-two, stage-three and stage-four outputs select
+It obtains three signed word group IDs from the stage-dependent provider. The initialized stage-two, stage-three and stage-four outputs select
 three, three and two collection groups respectively, with minus one marking
-the end. The original provider leaves the output unwritten for other stages;
+the end. The provider leaves the output unwritten for other stages;
 this count source adds no initialization or stage guard. The count first sums
 the actual byte group counts until the sentinel or three groups. If that sum
 is zero it returns zero. Otherwise it scans the same groups, subtracting one
 for each record rejected by the original kind predicate. The predicate's word
 result is explicitly consumed as a low byte, as observed in the caller.
-The group-ID provider and kind predicate remain explicitly original.
+The matching stage and kind provider closure below now supplies those bodies.
 
 The existing actor-context root is `0x03003A2C`. Its collection pointer field
 at `+0x31C` explains the native `0x03003D48` literals without inventing a new
@@ -106,3 +105,51 @@ actual field and ABI contracts from byte equality. The collection record and
 group capacities, pointer validity, stage validity and arbitrary input lengths
 remain unchecked. Bounded fixtures and static/compiler results do not establish
 whole-game behavior.
+
+
+## Stage and kind provider closure
+
+Three connected providers now supply matching C for 320 bytes: the stage group
+count at `0x456F4` (72 bytes), the three-word group-ID producer at `0x45794`
+(96 bytes), and the kind predicate at `0x4565C` (152 bytes). The existing
+same-address group-ID and kind declarations and all accepted caller spellings
+stay unchanged. Earlier original-dependency descriptions for these three bodies
+are superseded by this closure. The new isolated stage header declares the
+count API used by the still-original random-removal path.
+
+Both stage providers read the complete word at game root `0x03003950 + 0x440`.
+The group count returns zero for stages zero, one and every value outside zero
+through four; stages two and three return three, and stage four returns two.
+The group-ID producer leaves all output words unchanged for stages zero, one
+and the default path. For stages two, three and four it writes respectively
+`23,25,24`, `46,48,47` and `39,40,-1`. An unchanged output is not an initialized
+empty list. The accepted collection count still requires an initialized list;
+no stage guard or fallback initialization has been added.
+
+The kind predicate compares the full incoming word. It returns zero for kinds
+118, 124, 127, 133, 134, 135, 140, 141, 144 and 146, and one for every other
+word. For example, `0x10076` is accepted while 118 is rejected; narrowing the
+input would change that behavior. The existing count and original remover
+consume the observed result's low byte. Full-word return declarations model the
+native constants but do not uniquely establish the original C return widths
+or signedness. The unsigned stage view is likewise a supported model of the
+native word/range operations rather than proof of the original C spelling.
+
+All three sources use ordinary switches without register annotations,
+assembly statements, volatile accesses or extra reads. Their generated tables,
+literal pools and complete boundaries are compared at the fixed original
+addresses. The 72-byte count and 152-byte predicate use the existing pinned
+historical assembler profile: their source-object text is 70 and 150 bytes,
+and the unchanged linker supplies the original two zero bytes of word
+alignment. No assembly output or alignment bytes are edited. The 96-byte
+producer has a complete 96-byte source and linked extent.
+
+Current accepted callers and the existing selection, collection-removal and
+random providers are checked with real changed-source controls. Separate
+strict declaration and layout/API failures enforce the chosen consistent word
+and pointer contracts even where native return constants cannot determine the
+original type spelling. Bounded instruction fixtures cover initialized and
+nonwriting output paths and high-word inputs; they do not establish hardware
+or gameplay behavior. Pointer validity, arbitrary output capacity and the
+original removal retry's stage/count validity remain unchecked. The scanner
+and complete random-removal body remain explicit original regions.

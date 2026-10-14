@@ -65,9 +65,9 @@ struct FrameTickObject;
 void frame_set_animation_record(struct FrameObject *, struct FrameVariantResource *);
 void frame_set_animation_frame(struct FrameTickObject *, unsigned char);
 
-/* Explicit original creators; complete declarations remain provisional. */
-struct FrameObject *scene_contact_original_create_four_primary(void);
-struct FrameObject *scene_contact_original_create_four_control(void);
-struct FrameObject *scene_contact_original_create_four_auxiliary(void);
+/* Reconstructed creators; their allocation and callback roles are bounded. */
+struct FrameObject *scene_contact_activity_four_create_primary(void);
+struct FrameObject *scene_contact_activity_four_create_control(void);
+struct FrameObject *scene_contact_activity_four_create_auxiliary(void);
 
 #endif

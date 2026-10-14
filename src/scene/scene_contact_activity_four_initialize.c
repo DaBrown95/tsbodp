@@ -16,7 +16,7 @@ void scene_contact_activity_four_initialize(void)
     g_scene_request.unknown_14 =
         g_scene_contact_activity_four_rows[g_scene_contact_state->option].interval;
     scene_contact_activity_four_load_palettes();
-    STATE->object = scene_contact_original_create_four_primary();
-    STATE->control = scene_contact_original_create_four_control();
-    scene_contact_original_create_four_auxiliary();
+    STATE->object = scene_contact_activity_four_create_primary();
+    STATE->control = scene_contact_activity_four_create_control();
+    scene_contact_activity_four_create_auxiliary();
 }

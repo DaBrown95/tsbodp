@@ -6,7 +6,7 @@ kind 20 through the scene request provider. This identifies a connected scene
 path; the names below describe static accesses and are not recovered original
 identifiers or a claim about gameplay.
 
-This connected path reconstructs twenty-five C functions, totaling 4,380 bytes:
+This connected path reconstructs twenty-nine C functions, totaling 5,048 bytes:
 
 | Entry | Bytes | Observed role |
 | --- | ---: | --- |
@@ -29,12 +29,16 @@ This connected path reconstructs twenty-five C functions, totaling 4,380 bytes:
 | `0x08029A28` | 16 | Release the primary object list on the alternate activity path |
 | `0x08033940` | 204 | Initialize definition row four's backgrounds, clock, objects and palettes |
 | `0x08033AF4` | 172 | Reset eight primary item slots and accumulate their byte penalties |
+| `0x08033BA0` | 120 | Create the control object at fixed position, initial waiting state and callback |
+| `0x08033C18` | 104 | Create the auxiliary selector object at fixed position and callback |
 | `0x08033C80` | 224 | Create a selected item with coordinate words, animation and slot-derived flags |
 | `0x08033D60` | 360 | Create a selected moving event with paired slot, position, speed and animation |
+| `0x08033FA0` | 340 | Advance control phases, vertical motion, paired-slot removal and wait timer |
 | `0x080341B8` | 292 | Advance the moving event, fill or update a secondary slot and retire it at a boundary |
 | `0x080342DC` | 72 | Test the control byte and eight paired object identifiers |
 | `0x08034324` | 52 | Retire nullable secondary objects and clear their slots |
 | `0x08034358` | 44 | Load seven item palettes into descending banks |
+| `0x08034384` | 104 | Create the primary object at fixed position and callback |
 
 Every comparison includes the complete original extent, internal switch tables,
 literal pools and alignment. Every function has an actual changed-source
@@ -107,7 +111,7 @@ initial store; the actual transfer still consumes the initialized object.
 That ordinary pointer scope reproduces the native argument setup and avoids
 carrying the zero value across later calls. The function then resets display
 mode, layers and tile allocation, clears the first linked pressed-key
-halfword, invokes the selected original activity initializer, and updates the
+halfword, invokes the selected activity initializer, and updates the
 clock and amount text. The SWI provider is existing assembly glue and receives
 zero new C credit. Hardware execution is not established by this match.
 
@@ -283,9 +287,9 @@ records, banks 15 through 9 and 16 colors per call. The completion symbol
 occupies 70 bytes followed by two original zero alignment bytes before the
 independent cleanup entry; the complete 72-byte extent is compared.
 
-The 232-byte step at `0x08033A0C`, 120-byte control creator at `0x08033BA0`,
-104-byte auxiliary creator at
-`0x08033C18` and 104-byte primary creator at `0x08034384` remain original.
+The 232-byte activity step at `0x08033A0C` remains original. The three
+connected creators are recovered below; the primary and auxiliary object
+callbacks remain explicit original dependencies.
 Their local declarations describe only the calls made by this batch. The
 five new bodies use ordinary unbound C and have complete native, actual
 changed-source and strict declaration comparisons. Compiler layout and
@@ -436,7 +440,7 @@ request cue 188. These operations preserve target halfword narrowing and
 the original post-call global reloads. Outside capture, direction byte 2
 retires an event above `0xB7FFFF`; direction 6 retires it at or below zero.
 Other paths copy the actual next-position members into position. The
-232-byte activity coordinator and the other original creators remain
+232-byte activity coordinator and primary and auxiliary callbacks remain
 unconverted; this callback closes only the specific moving-event handoff.
 
 Forty-one finite callback cases compare original and freshly linked bytes
@@ -450,3 +454,67 @@ unbounded item lookup inside the abstract hook unexecuted. Item creation,
 animation-frame selection and audio cues are explicit hook limits. The four
 rejected input/interpreter controls remain model findings, with no hardware
 fault, general asset capacity or gameplay guarantee.
+
+# Connected primary, control and auxiliary objects
+
+The three constructors own complete extents at `0x08033BA0` (120 bytes),
+`0x08033C18` (104 bytes) and `0x08034384` (104 bytes). They allocate through
+the established 320-byte provider, set their actual halfword identifiers and
+flag fields, set fixed coordinate words, select animation records and install
+specific single-object callbacks. The control starts at `(88,140)` with
+identifier 1, palette 1 and flags `0x100001`. The auxiliary starts at
+`(212,30)` with identifier 2, palette 2 and flags 1. The primary starts at
+`(88,152)` with identifier 0, palette 0 and flags 1. Position shifts use small
+positive constants; no allocation guard, extra initializer or arbitrary input
+validation is added. The accepted row-four initializer changes only the three
+callee names at their existing addresses.
+
+The installed control callback owns `0x08033FA0..0x080340F4`, 340 bytes with
+its literal pools. It uses the standard one-`FrameObject` callback interface.
+The separate whole-object access view has size 92 and alignment 4, exposing
+the state byte at `0x4E` and timer word at `0x58` while preserving the
+320-byte allocation. The animation-resource prefix is the existing 16-byte,
+alignment-four provider view. The four observed animation record roots are
+word-aligned; their content and pointers are pinned privately, without a claim
+about complete resource or table capacity.
+
+State 1 is the observed waiting phase: the constructor and two callback paths
+write it, and this callback performs no operation for it. Keeping that real
+phase as an explicit no-op switch case lets the historical compiler reproduce
+the original decision tree. Without it, the same complete body and pools differ
+only in the first nine dispatch bytes. No synthetic state, guard, register
+binding or native operation is introduced.
+
+In state 2, animation flag `0x400000` starts timer 10, moves to state 7,
+clears the observed flags and copies the primary object's x coordinate. In
+state 3, next y advances by velocity y, then velocity y advances by acceleration
+y. Positive resulting velocity writes identifier 1. Above `0x8BFFFF`, the
+callback stops both vertical words, fixes position y to `0x8C0000`, clears the
+identifier, and compares x with the primary-centered inclusive interval of
+plus or minus `0xE0000`. Outside it, cue 187 precedes removal of each nullable
+secondary slot and a post-call global reload before clearing that slot. The
+control changes to state 2, selects the failed animation and sets scene flag 2.
+Inside it, cue 186 changes the control to state 1, clears flag 16 and selects
+frame zero. Before the vertical boundary, it copies actual next y to position y.
+
+In state 7, decrementing the timer to `0xFFFFFFFF` changes the control to
+state 1, sets flag 1, selects the waiting animation and clears scene flag 2.
+Vertical additions, x bounds and timer subtraction use explicit unsigned-word
+representations before the target's signed interpretation. The source adds no
+signed-overflow dependency or new guard; these casts describe the pinned 32-bit
+target model, without a portable arbitrary conversion claim. The primary
+callback at `0x08033EC8`, auxiliary callback at `0x080340F4`, activity tick at
+`0x08033A0C` and need-adjustment provider remain explicit original bodies.
+
+Fresh complete native comparisons include actual source controls, strict
+provider declarations, current importer proofs and independent layout/type
+rejection cases. Nine constructor cases and 51 control-callback cases compare
+original bytes, freshly linked C and a bounded model; ten distinguish the
+actual source controls. One removal hook redirects the global state pointer
+solely to check the original post-call reload, without claiming that the
+accepted removal provider does so at runtime. Finite fixtures use explicit allocator,
+position, animation, audio and removal hooks with caller-saved clobbering.
+They test bounded traces and storage effects, not those provider bodies or
+gameplay. Null, missing-storage and interpreter failure cases retain their
+model-only meaning. Slot capacities, pointer validity and surrounding storage
+remain unchecked.
