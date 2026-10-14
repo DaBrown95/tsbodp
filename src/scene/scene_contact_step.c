@@ -70,5 +70,5 @@ void scene_contact_step(void)
         break;
     }
     if (g_scene_contact_state->return_mode)
-        scene_contact_original_service_mode();
+        scene_contact_poll_input_status();
 }

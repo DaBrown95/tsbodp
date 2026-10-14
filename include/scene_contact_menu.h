@@ -11,6 +11,7 @@
 #include "audio_game.h"
 #include "resource_decode.h"
 #include "scene_contact_activity.h"
+#include "scene_contact_serial.h"
 
 /* Kind-20 scene access views. These are observed prefixes, not recovered
  * original declarations. The initializer allocates 420 bytes. */
@@ -47,16 +48,6 @@ struct SceneContactDefinition {
 struct SceneContactParameterStorage {
     unsigned char unknown00[0x69d], values[8];
 };
-typedef unsigned int (*SceneContactNoticeHandler)(unsigned int,
-    unsigned short *, unsigned short *);
-
-/* Observed input prefix: the specific notice handler is stored at +0x2C.
- * Complete input storage and other callback interfaces remain provisional. */
-struct SceneContactInputSetup {
-    unsigned char unknown00[44];
-    SceneContactNoticeHandler handler;
-};
-extern struct SceneContactInputSetup g_scene_contact_input_setup;
 extern const unsigned int g_scene_contact_initial_text_control;
 
 extern struct SceneContactState *g_scene_contact_state;
@@ -87,7 +78,6 @@ void scene_contact_show_completion(void);
 /* Explicit original providers. Their declarations describe observed call
  * operands; these bodies are not new C coverage in this batch. */
 void scene_contact_apply_need_adjustments(void);
-unsigned int scene_contact_original_service_mode(void);
 
 int frame_read_signed_parameter(const void *, unsigned int);
 int frame_add_game_value(int);

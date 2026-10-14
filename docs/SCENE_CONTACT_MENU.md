@@ -153,8 +153,9 @@ audio notification 54-to-55 control changes the compiled result.
 
 Need adjustment `0x0802944C` / 100 bytes remains original. Its typed call
 declaration is a local, provisional description of observed operands and
-carries no new C credit. The mode service and the original view
-operations at `0x0800EB14` and `0x0800E8B4` are likewise explicit. Retained failed candidates and
+carries no new C credit. The input status service is covered by the
+IRQ-shared reset and polling section below. The original view operations at
+`0x0800EB14` and `0x0800E8B4` remain explicit. Retained failed candidates and
 raw comparisons distinguish genuine source-lifetime improvements from these
 remaining mismatches.
 
@@ -691,3 +692,62 @@ callee-save/stack checks; these fixtures do not execute those provider bodies.
 Four interpreter failure cases reject an unsupported instruction, truncated
 pool, exhausted budget and uninitialized access through a null primary pointer.
 These are bounded model failures, without a hardware-fault or source-guard claim.
+
+# IRQ-shared input reset and polling
+
+The connected 112-byte reset at `0x0801C6E8`, 64-byte counter preparation at
+`0x0801C948` and 52-byte status poll at `0x0801C8A4` reproduce complete original
+extents, pools and alignment. The accepted kind-20 scene step calls the poll
+under its existing return-mode condition. This is three functions and 228 bytes
+of C; the installer and IRQ parser bodies remain explicit original providers.
+
+The existing input root `0x030040B0` retains its 48-byte declaration and notice
+handler at offset 44. Its first 44 bytes now have a union of the original byte
+prefix and an observed 12-byte field view. Status is byte zero, mode is byte
+one, the counter is byte four and pending is byte five. Bytes two, three and
+eight are additional reset fields; other byte roles and the complete protocol
+remain unknown. Pinned compiler diagnostics establish size, alignment, handler
+offset and initialized physical byte mapping independently of matching callers.
+The union expresses one storage object without adding a second global alias.
+
+The volatility has a concrete writer basis. Original initializer `0x0801C808`
+clears 48 bytes, stores the notice handler at offset `0x2C`, invokes the reset,
+installs handler `0x0801C47D` using the accepted IRQ-table setter with index zero,
+and enables interrupt bit `0x80`. The accepted dispatcher routes timer-three
+and serial mask `0xC0` through slot zero. The original handler and its direct
+child write the same status, mode, counter and pending bytes. Their original
+bodies are not C coverage in this batch. Volatile full-byte bitfields preserve
+the raw byte reads before whole-byte stores; they are compiler-specific access
+views rather than a claim about the original headers.
+
+Reset captures IME at `0x04000208`, disables it, conditionally writes `0x8000`
+to `0x04000134` when byte eight is zero, then writes `0xC000` to that register.
+It clears halfword `0x04000158`, performs the original observable word read at
+`0x04000150` with no scalar result use, clears word `0x04000154`, writes
+halfword `0x47` at `0x04000140` and halfword `0x80` at `0x04000202`, clears the
+five observed state bytes, and restores captured IME. Numeric register accesses
+and their ordering are established; protocol effects are not inferred from a
+memory-only fixture.
+
+Preparation first reads the unsigned counter. At or below ten it disables IME,
+increments the byte counter with the original additional reads, writes IME one
+unconditionally and returns word zero. Higher counters set pending one and
+mode three, execute the actual reset and return word one. Poll executes
+preparation before capturing IME, then disables IME, snapshots status, changes
+status four or five to one, restores its captured IME and returns the original
+zero-extended status word. In particular, preparation's low-counter path does
+not preserve incoming IME; the poll's later snapshot does not undo that behavior.
+No interrupt-state guard or normalization is added.
+
+Fresh normal and strict comparisons include actual changed-source controls,
+complete current header importers and direct IRQ/heap providers. Incorrect
+prefix extent, handler offset, storage alignment, byte mapping, field width and
+function declarations have independent diagnostic controls. No register
+annotations or additional traffic are used. All 426 finite initialized-memory
+cases compare the original and linked three-body call chains with an independent
+read/write model; 84 distinguish the actual source controls. These execute the
+real reset and preparation calls with checked stack and callee-saved registers,
+without abstract provider hooks. Three interpreter failures reject unsupported
+instructions, missing pool bytes and an exhausted budget. MMIO is represented
+as initialized memory: hardware side effects, asynchronous IRQ interleaving,
+serial protocol, arbitrary inputs and gameplay remain unproved.

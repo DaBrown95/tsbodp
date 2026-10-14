@@ -30636,7 +30636,7 @@
         "scene_contact_mark_conditions": "0x080291b5",
         "resource_submit_scene": "0x08027dd1",
         "scene_submit_default_request": "0x08027dc1",
-        "scene_contact_original_service_mode": "0x0801c8a5"
+        "scene_contact_poll_input_status": "0x0801c8a5"
       },
       "thumb_symbols": [
         "transition_run_second",
@@ -30656,7 +30656,7 @@
         "scene_contact_mark_conditions",
         "resource_submit_scene",
         "scene_submit_default_request",
-        "scene_contact_original_service_mode"
+        "scene_contact_poll_input_status"
       ],
       "negative_control": {
         "before": "g_scene_request.unknown_14 = 20;",
@@ -32405,6 +32405,78 @@
         "after": "object->flags & 0x2000"
       },
       "source": "src/frame/frame_collision_variant_resource_step.c"
+    },
+    {
+      "name": "frame_map_terrain_at",
+      "rom_offset": 175024,
+      "size": 188,
+      "symbols": {
+        "g_frame_movement_contact_lines": "0x08059b3c",
+        "frame_get_map_dimensions": "0x0803a019",
+        "g_frame_layer_blocks": "0x03001de0",
+        "g_frame_layer_cells": "0x03001ddc"
+      },
+      "thumb_symbols": [
+        "frame_get_map_dimensions"
+      ],
+      "source": "src/frame/frame_map_terrain_at.c",
+      "negative_control": {
+        "before": "kind=g_frame_layer_cells[offset]&63;",
+        "after": "kind=g_frame_layer_cells[offset]&62;"
+      }
+    },
+    {
+      "name": "scene_contact_reset_serial_registers",
+      "rom_offset": 116456,
+      "size": 112,
+      "symbols": {
+        "g_scene_contact_input_setup": "0x030040b0",
+        "scene_contact_prepare_input_counter": "0x0801c949"
+      },
+      "thumb_symbols": [
+        "scene_contact_prepare_input_counter"
+      ],
+      "source": "src/scene/scene_contact_reset_serial_registers.c",
+      "negative_control": {
+        "before": "= 0x47;",
+        "after": "= 0x46;"
+      }
+    },
+    {
+      "name": "scene_contact_prepare_input_counter",
+      "rom_offset": 117064,
+      "size": 64,
+      "symbols": {
+        "g_scene_contact_input_setup": "0x030040b0",
+        "scene_contact_reset_serial_registers": "0x0801c6e9"
+      },
+      "thumb_symbols": [
+        "scene_contact_reset_serial_registers"
+      ],
+      "source": "src/scene/scene_contact_prepare_input_counter.c",
+      "negative_control": {
+        "before": "count <= 10",
+        "after": "count <= 9"
+      }
+    },
+    {
+      "name": "scene_contact_poll_input_status",
+      "rom_offset": 116900,
+      "size": 52,
+      "symbols": {
+        "g_scene_contact_input_setup": "0x030040b0",
+        "scene_contact_reset_serial_registers": "0x0801c6e9",
+        "scene_contact_prepare_input_counter": "0x0801c949"
+      },
+      "thumb_symbols": [
+        "scene_contact_reset_serial_registers",
+        "scene_contact_prepare_input_counter"
+      ],
+      "source": "src/scene/scene_contact_poll_input_status.c",
+      "negative_control": {
+        "before": "g_scene_contact_input_setup.prefix.fields.status = 1",
+        "after": "g_scene_contact_input_setup.prefix.fields.status = 2"
+      }
     }
   ],
   "assembly": [
