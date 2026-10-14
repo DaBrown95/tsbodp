@@ -3,7 +3,7 @@
 #include "frame_search.h"
 void *scene_fill_bytes(void *,int,unsigned int);
 extern unsigned char g_frame_search_neighbor_offsets[];
-unsigned char frame_grid_search(void *context,const struct FrameActorPackedCell *start,const struct FrameActorPackedCell *target,unsigned int limit,unsigned char build_path)
+unsigned int frame_grid_search(void *context,const struct FrameActorPackedCell *start,const struct FrameActorPackedCell *target,unsigned int limit,unsigned char build_path)
 {
  union FrameSearchWorkingRecord current,next;
  unsigned int i,iterations,found;

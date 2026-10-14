@@ -19,20 +19,20 @@ void frame_actor_state_22(struct FrameObject *object)
    ((struct FrameActorInteractionWork *)object)->effect=frame_spawn_need_effect(entry->id,entry->field1,entry->field2,entry->field3,1);
   }
   frame_enable_object_flags(((struct FrameActorInteractionWork *)object)->effect,1);
-  frame_interaction_begin_0802f4ec(g_frame_registration,object,((struct FrameActorInteractionWork *)object)->effect);
+  frame_placement_begin(g_frame_registration,object,((struct FrameActorInteractionWork *)object)->effect);
   frame_set_variant_state(object,18);
   frame_stop_motion(object);
   break;
  case 18:
   if((g_input_pressed[player]&2) || (frame_empty_need_mask((struct FrameActorNeedState *)&g_frame_actor_local_need_state)&0x25)) {
-   frame_interaction_cancel_0802f648();
+   frame_placement_cancel();
    audio_play_animation_cue(2);
    finished=1;
    g_input_pressed[player]&=0xfffd;
    break;
   }
   if(g_input_pressed[player]&1) {
-   if(frame_interaction_confirm_0802f800()==1) {
+   if(frame_placement_confirm()==1) {
     if(((struct FrameActorInteractionWork *)object)->mode==1) {
      entry=&g_frame_actor_local_need_state.options->entries[((struct FrameActorInteractionWork *)object)->option_index];
      frame_note_interaction_condition(entry->id);
@@ -48,21 +48,21 @@ void frame_actor_state_22(struct FrameObject *object)
    break;
   }
   if(g_input_pressed[player]&0x100) {
-   frame_interaction_step_0802f6b0(0); audio_play_animation_cue(10);
+   frame_placement_rotate(0); audio_play_animation_cue(10);
   } else if(g_input_pressed[player]&0x200) {
-   frame_interaction_step_0802f6b0(1); audio_play_animation_cue(10);
+   frame_placement_rotate(1); audio_play_animation_cue(10);
   } else if(direction!=8) {
    direction=g_frame_interaction_directions[direction];
-   frame_interaction_select_0802f724(direction);
+   frame_placement_move(direction);
    audio_play_animation_cue(0);
    frame_set_variant_state(object,11);
-  } else frame_interaction_idle_0802f8fc();
+  } else frame_placement_validate();
   break;
  case 11:
   if(input_direction(player)==8) frame_set_variant_state(object,18);
   break;
  default:
-  frame_interaction_cancel_0802f648();reset_animation=0;finished=1;
+  frame_placement_cancel();reset_animation=0;finished=1;
  }
  if(finished==1) {
   transition_object_set_state(object,16);

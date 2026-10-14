@@ -1,6 +1,7 @@
 #ifndef FRAME_ACTOR_INTERACTION_H
 #define FRAME_ACTOR_INTERACTION_H
 #include "resource_condition_entries.h"
+#include "frame_placement.h"
 struct FrameObject;
 /* Partial option and local need views from selector22. Helper roles are provisional. */
 struct FrameActorInteractionWork {
@@ -21,11 +22,5 @@ extern unsigned char g_frame_interaction_directions[];
 unsigned char input_direction(unsigned char);
 struct FrameObject *frame_spawn_need_effect(int,int,int,int,int);
 void frame_enable_object_flags(struct FrameObject *,unsigned int);
-void frame_interaction_begin_0802f4ec(void *,struct FrameObject *,struct FrameObject *);
-void frame_interaction_cancel_0802f648(void);
-unsigned char frame_interaction_confirm_0802f800(void);
-void frame_interaction_step_0802f6b0(unsigned char);
-void frame_interaction_select_0802f724(unsigned char);
-void frame_interaction_idle_0802f8fc(void);
 void frame_note_interaction_condition(unsigned int);
 #endif

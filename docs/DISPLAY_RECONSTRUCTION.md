@@ -231,10 +231,10 @@ argument is a complete word; the provider explicitly consumes the low halfword
 before selecting the background state. The later connected view-coordinator
 proof corrected the earlier narrow formal without changing this 44-byte extent. Together they
 complement the previously matching incrementing tile rectangle writer. The
-palette rectangle selector at `0x0800d8e0` reaches the still unconverted writer
-at `0x0800d90c`; its candidate preserves the low 12 map-entry bits and substitutes
-the palette-bank bits. The selector is independently matching but the remaining
-92-byte writer is not credited. Rectangle writers and the resource wrapper own
+palette rectangle selector at `0x0800d8e0` reaches the matching 92-byte C writer
+at `0x0800d90c`, which preserves the low 12 map-entry bits and substitutes
+the palette-bank bits. Both have independently verified matching C and actual
+changed-source controls. Rectangle writers and the resource wrapper own
 the two zero alignment bytes before the following entries, alongside their
 58-byte instruction extents where applicable.
 

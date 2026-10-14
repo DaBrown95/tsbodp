@@ -16,7 +16,7 @@ unsigned char frame_find_actor_route(struct FrameActorRouteJob *job)
  frame_grid_point_to_cell(g_frame_registration,&destination,&destination_cell);
  finished=0;result=2;
  if(start_cell.index!=destination_cell.index) {
-  unsigned char search=frame_grid_search(g_frame_registration,&start_cell,&destination_cell,job->limit,1);
+  unsigned char search=(unsigned char)frame_grid_search(g_frame_registration,&start_cell,&destination_cell,job->limit,1);
   unsigned int status=frame_grid_search_status();
   if(search==1 || (status==2 && job->use_destination==1)) {
    if(status==2) job->unknown_117=1;

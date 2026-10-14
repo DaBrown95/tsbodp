@@ -15,7 +15,8 @@ struct FrameGridSearchState {
 };
 extern struct FrameGridSearchState g_frame_grid_search;
 unsigned char frame_grid_cell_to_point(void *, const int *, struct FramePoint *);
-unsigned char frame_grid_search(void *, const struct FrameActorPackedCell *, const struct FrameActorPackedCell *, unsigned int, unsigned char);
+/* Native full-word statuses: 0, 1 and same-cell success 2. */
+unsigned int frame_grid_search(void *, const struct FrameActorPackedCell *, const struct FrameActorPackedCell *, unsigned int, unsigned char);
 unsigned int frame_grid_search_status(void);
 unsigned char frame_copy_grid_path(struct FramePoint *, unsigned int);
 #endif
