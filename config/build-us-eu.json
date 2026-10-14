@@ -32477,6 +32477,90 @@
         "before": "g_scene_contact_input_setup.prefix.fields.status = 1",
         "after": "g_scene_contact_input_setup.prefix.fields.status = 2"
       }
+    },
+    {
+      "name": "frame_redirect_movement",
+      "rom_offset": 175608,
+      "size": 284,
+      "symbols": {
+        "g_frame_movement_filter": "0x03001df0",
+        "g_frame_movement_direction_lines": "0x08059b2c",
+        "g_frame_movement_contact_lines": "0x08059b3c",
+        "frame_movement_direction_blocked": "0x0802b435",
+        "frame_movement_offset_blocked": "0x0802af15"
+      },
+      "thumb_symbols": [
+        "frame_movement_direction_blocked",
+        "frame_movement_offset_blocked"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "if(contact==37)",
+        "after": "if(contact==36)"
+      },
+      "source": "src/frame/frame_redirect_movement.c"
+    },
+    {
+      "name": "scene_contact_install_serial_irq",
+      "rom_offset": 116744,
+      "size": 156,
+      "symbols": {
+        "g_scene_contact_input_setup": "0x030040b0",
+        "g_scene_contact_serial_initial_word": "0x080000ac",
+        "g_scene_contact_serial_second_word": "0x08053094",
+        "heap_clear": "0x08027a49",
+        "heap_allocate": "0x08027865",
+        "scene_contact_reset_serial_registers": "0x0801c6e9",
+        "set_irq_table_entry": "0x0801f8c5",
+        "scene_contact_handle_serial_irq": "0x0801c47d"
+      },
+      "thumb_symbols": [
+        "heap_clear",
+        "heap_allocate",
+        "scene_contact_reset_serial_registers",
+        "set_irq_table_entry",
+        "scene_contact_handle_serial_irq"
+      ],
+      "source": "src/scene/scene_contact_install_serial_irq.c",
+      "negative_control": {
+        "before": "bytes = 514",
+        "after": "bytes = 513"
+      }
+    },
+    {
+      "name": "scene_contact_handle_serial_irq",
+      "rom_offset": 115836,
+      "size": 120,
+      "symbols": {
+        "g_scene_contact_input_setup": "0x030040b0",
+        "scene_contact_original_receive_word": "0x0801c4f5",
+        "scene_contact_original_transmit": "0x0801c66d",
+        "scene_contact_begin_serial_notice": "0x0801c989"
+      },
+      "thumb_symbols": [
+        "scene_contact_original_receive_word",
+        "scene_contact_original_transmit",
+        "scene_contact_begin_serial_notice"
+      ],
+      "source": "src/scene/scene_contact_handle_serial_irq.c",
+      "negative_control": {
+        "before": "fields.status = 6",
+        "after": "fields.status = 7"
+      }
+    },
+    {
+      "name": "scene_contact_begin_serial_notice",
+      "rom_offset": 117128,
+      "size": 48,
+      "symbols": {
+        "g_scene_contact_input_setup": "0x030040b0"
+      },
+      "thumb_symbols": [],
+      "source": "src/scene/scene_contact_begin_serial_notice.c",
+      "negative_control": {
+        "before": "= 0x20;",
+        "after": "= 0x21;"
+      }
     }
   ],
   "assembly": [

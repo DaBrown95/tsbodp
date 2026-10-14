@@ -6,6 +6,7 @@
 /* Four-byte ROM line records expose four unsigned low-halfword nibbles. */
 union FrameTerrainLine {
     unsigned int word;
+    unsigned char bytes[4];
     struct {
         unsigned char x0 : 4, y0 : 4, x1 : 4, y1 : 4;
         unsigned short unknown;

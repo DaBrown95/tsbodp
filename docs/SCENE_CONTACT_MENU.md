@@ -699,24 +699,26 @@ The connected 112-byte reset at `0x0801C6E8`, 64-byte counter preparation at
 `0x0801C948` and 52-byte status poll at `0x0801C8A4` reproduce complete original
 extents, pools and alignment. The accepted kind-20 scene step calls the poll
 under its existing return-mode condition. This is three functions and 228 bytes
-of C; the installer and IRQ parser bodies remain explicit original providers.
+of C. The installer and installed IRQ follow-on appears below; its receive
+and transmit parser children remain explicit original providers.
 
 The existing input root `0x030040B0` retains its 48-byte declaration and notice
 handler at offset 44. Its first 44 bytes now have a union of the original byte
-prefix and an observed 12-byte field view. Status is byte zero, mode is byte
+prefix and an observed 44-byte field view, expanded from the initial reset
+cohort's 12-byte view. Status is byte zero, mode is byte
 one, the counter is byte four and pending is byte five. Bytes two, three and
 eight are additional reset fields; other byte roles and the complete protocol
 remain unknown. Pinned compiler diagnostics establish size, alignment, handler
 offset and initialized physical byte mapping independently of matching callers.
 The union expresses one storage object without adding a second global alias.
 
-The volatility has a concrete writer basis. Original initializer `0x0801C808`
+The volatility has a concrete writer basis. Initializer `0x0801C808`
 clears 48 bytes, stores the notice handler at offset `0x2C`, invokes the reset,
 installs handler `0x0801C47D` using the accepted IRQ-table setter with index zero,
 and enables interrupt bit `0x80`. The accepted dispatcher routes timer-three
-and serial mask `0xC0` through slot zero. The original handler and its direct
-child write the same status, mode, counter and pending bytes. Their original
-bodies are not C coverage in this batch. Volatile full-byte bitfields preserve
+and serial mask `0xC0` through slot zero. The installed handler and its original
+child write the same status, mode, counter and pending bytes. The original
+child remains unconverted. Volatile full-byte bitfields preserve
 the raw byte reads before whole-byte stores; they are compiler-specific access
 views rather than a claim about the original headers.
 
@@ -751,3 +753,68 @@ without abstract provider hooks. Three interpreter failures reject unsupported
 instructions, missing pool bytes and an exhausted budget. MMIO is represented
 as initialized memory: hardware side effects, asynchronous IRQ interleaving,
 serial protocol, arbitrary inputs and gameplay remain unproved.
+
+# Installed IRQ and input-storage construction
+
+The connected installer at `0x0801C808` / 156 bytes, installed IRQ callback at
+`0x0801C47C` / 120 bytes and its direct notice helper at `0x0801C988` / 48 bytes
+add three complete ordinary C bodies totaling 324 bytes. Their literal pools,
+internal alignment and independent following entries are retained. No register
+annotations, added guards, placeholder values or extra accesses are needed.
+The receive/transmit children and upstream scene initializer `0x0801C9B8`
+remain original; this does not complete the input protocol or scene family.
+
+The fields view now spans the full observed 44-byte prefix within the existing
+44-byte union. The setup remains 48 bytes with alignment four and its same
+specific notice callback at offset 44. Word fields at offsets 12 and 20 receive
+fixed-ROM words from `0x080000AC` and `0x08053094`; their interpretation remains
+unknown. The installed IRQ clears a word at offset 16 on its error path.
+Incoming complete-word parameters are stored as halfwords at 24 and 26;
+allocated pointers occupy 36 and 40. Bytes 28 through 35 stay an opaque array.
+Compiler diagnostics check each observed width, offset, alignment and actual
+function-pointer assignment, without treating matching caller bytes as a layout
+proof. The specific notice type preserves the previously accepted unsigned-word
+command/result and two halfword-pointer contract; this is not a generic claim
+about every original callback interface.
+
+The installer captures and disables IME before clearing all 48 bytes. It stores
+the two parameter low halfwords, makes two separate 514-byte heap allocations,
+stores both returned pointers without null checks, and then stores the notice
+handler. It sets byte eight to one before executing the accepted reset, so the
+reset skips its optional `0x8000` write and later clears that byte. Registration
+passes word index zero and the installed Thumb handler address to the accepted
+IRQ-table setter. The installer enables bit `0x80` at `0x04000200`, snapshots
+both fixed-ROM words and restores its original IME. These are target-specific
+word/pointer transfers; allocation validity and arbitrary callback safety are
+not established. Its one mapped incoming original call supplies callback word
+`0x0801CED5` and word values 68 and 132, without implying a complete caller list.
+
+The IRQ snapshots the halfword at `0x04000140`. Mask `2` requests a word read
+from `0x04000150` followed by the original receive child; a zero result low byte
+skips the mask-`4` child and takes the error path. Otherwise mask `4` invokes
+the original transmit child, again testing only its result low byte. Error
+clears halfword `0x04000158`, stores status six, clears bytes two and three and
+clears the word at offset 16. Mask `1` invokes the actual notice helper even
+following an error. The original flags are finally written to `0x04000140`
+and the byte counter is cleared. No attempt is made to infer register side
+effects or a protocol specification from this ordered instruction sequence.
+
+The notice helper preserves the original discarded volatile word read at
+`0x04000150`, writes the captured word from offset 12 to `0x04000154`, writes
+halfword `0x20` at `0x04000158`, clears status and byte two, and stores one to
+byte three. Volatile full-byte bitfields preserve each original read before its
+whole-byte store. The opaque receive/transmit results remain explicit word
+models with observed byte consumption, not recovered original declarations.
+
+Fresh source controls change allocation size 514 to 513, error status six to
+seven and notice value `0x20` to `0x21`. Independent layout and actual-definition
+API controls reject wrong prefix extent, callback offset, alignment, scalar and
+pointer widths and incompatible formals. Finite initialized-memory cases execute
+these bodies and the accepted reset, heap clear and IRQ setter, including the
+real notice call. Only heap allocation and the original receive/transmit children
+are hooks; they poison caller-saved registers. Synthetic high result words test
+observed byte consumption without claiming those original children produce them.
+Allocation-null fixtures establish the unchecked pointer stores only. Ordered
+memory events, stack and callee-saved registers are compared; MMIO is a numeric
+memory model. Hardware side effects, asynchronous IRQ interleaving, protocol,
+arbitrary capacity and gameplay remain unproved.

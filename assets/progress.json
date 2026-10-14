@@ -1,21 +1,21 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "14 Oct 2026, 15:19 BST",
-  "compiled_c_functions": 1444,
-  "compiled_c_bytes": 195512,
+  "verified_at": "14 Oct 2026, 16:11 BST",
+  "compiled_c_functions": 1448,
+  "compiled_c_bytes": 196120,
   "assembly_glue_bytes": 488,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16581216,
+  "unconverted_rom_bytes": 16580608,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2529,
-  "bounded_control_flow_bodies": 1027,
+  "bounded_control_flow_bodies": 1023,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 17,
   "unresolved_callback_call_sites": 101,
-  "mapped_extent_bytes": 323680,
+  "mapped_extent_bytes": 323682,
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointer and Thumb prologue sweeps; estimated extents",
   "rows": [
     {
@@ -4041,7 +4041,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 78804,
       "size": 110,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_create_option_object",
@@ -5997,25 +5997,25 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0801C47C",
+      "name": "scene_contact_handle_serial_irq",
       "group": "ROM 0801xxxx",
       "rom_offset": 115836,
       "size": 120,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "sub_0801C4F4",
       "group": "ROM 0801xxxx",
       "rom_offset": 115956,
       "size": 374,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801C66C",
       "group": "ROM 0801xxxx",
       "rom_offset": 116332,
       "size": 122,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "scene_contact_reset_serial_registers",
@@ -6029,21 +6029,21 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 116568,
       "size": 88,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801C7B0",
       "group": "ROM 0801xxxx",
       "rom_offset": 116656,
       "size": 84,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
-      "name": "sub_0801C808",
+      "name": "scene_contact_install_serial_irq",
       "group": "ROM 0801xxxx",
       "rom_offset": 116744,
       "size": 156,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "scene_contact_poll_input_status",
@@ -6067,11 +6067,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0801C988",
+      "name": "scene_contact_begin_serial_notice",
       "group": "ROM 0801xxxx",
       "rom_offset": 117128,
       "size": 48,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "sub_0801C9B8",
@@ -9385,11 +9385,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0802ADF8",
+      "name": "frame_redirect_movement",
       "group": "ROM 0802xxxx",
       "rom_offset": 175608,
-      "size": 282,
-      "status": "mapped_code"
+      "size": 284,
+      "status": "exact_c"
     },
     {
       "name": "frame_movement_offset_blocked",
@@ -21694,7 +21694,7 @@
       "name": "sub_080133D4",
       "rom_offset": 78804,
       "size": 110,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_013442",
@@ -23707,16 +23707,16 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0801C47C",
+      "name": "scene_contact_handle_serial_irq",
       "rom_offset": 115836,
       "size": 120,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "sub_0801C4F4",
       "rom_offset": 115956,
       "size": 374,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01C66A",
@@ -23728,7 +23728,7 @@
       "name": "sub_0801C66C",
       "rom_offset": 116332,
       "size": 122,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01C6E6",
@@ -23746,13 +23746,13 @@
       "name": "sub_0801C758",
       "rom_offset": 116568,
       "size": 88,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801C7B0",
       "rom_offset": 116656,
       "size": 84,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01C804",
@@ -23761,10 +23761,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_0801C808",
+      "name": "scene_contact_install_serial_irq",
       "rom_offset": 116744,
       "size": 156,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "scene_contact_poll_input_status",
@@ -23785,10 +23785,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0801C988",
+      "name": "scene_contact_begin_serial_notice",
       "rom_offset": 117128,
       "size": 48,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "sub_0801C9B8",
@@ -27073,16 +27073,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0802ADF8",
+      "name": "frame_redirect_movement",
       "rom_offset": 175608,
-      "size": 282,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_02AF12",
-      "rom_offset": 175890,
-      "size": 2,
-      "status": "unresolved"
+      "size": 284,
+      "status": "exact_c"
     },
     {
       "name": "frame_movement_offset_blocked",
@@ -35384,8 +35378,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "4c7c2bb32482ac2b84d800b56787fb91323eabfa16f1c45113b5ca99cb654a7d",
-    "assets/rom-inventory.json": "a647fbcc55187c1d404f6caafc04306f03fdb62d3eb0480170a352bb65980333",
+    "config/build-us-eu.json": "9dc1839a974255e9236babb161482bf1ee995a2e273b86228a17b949b1752253",
+    "assets/rom-inventory.json": "7a0f8126f9abe5f1b36e8a1512c2d737f90fa08fc69a0916aedfb01fe9ce9467",
     "tools/render_progress.py": "419354ceff7a7eb3a9e9f520cce14b39dbdc60ea247901091ba834d85e0d32e6",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "bc77da39abf1f092066c258dd6dadb1606a772d563deac4a37b86d0b0bffd10d",

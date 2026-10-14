@@ -6,6 +6,10 @@
 struct SceneContactSerialFields {
     volatile unsigned char status:8, mode:8, state2:8, state3:8;
     volatile unsigned char count:8, pending:8, unknown06:8, unknown07:8, flag8:8;
+    unsigned int captured0c, unknown10, captured14;
+    unsigned short first_parameter, second_parameter;
+    unsigned char unknown1c[8];
+    void *first_buffer, *second_buffer;
 };
 
 union SceneContactInputPrefix {
@@ -23,6 +27,8 @@ struct SceneContactInputSetup {
 };
 
 extern struct SceneContactInputSetup g_scene_contact_input_setup;
+extern const unsigned int g_scene_contact_serial_initial_word;
+extern const unsigned int g_scene_contact_serial_second_word;
 
 #define SCENE_CONTACT_SERIAL_IME (*(volatile unsigned short *)0x04000208)
 #define SCENE_CONTACT_SERIAL_REG16(a) (*(volatile unsigned short *)(a))
@@ -31,5 +37,15 @@ extern struct SceneContactInputSetup g_scene_contact_input_setup;
 void scene_contact_reset_serial_registers(void);
 unsigned int scene_contact_prepare_input_counter(void);
 unsigned int scene_contact_poll_input_status(void);
+void scene_contact_install_serial_irq(SceneContactNoticeHandler, unsigned int,
+                                     unsigned int);
+void scene_contact_handle_serial_irq(void);
+void scene_contact_begin_serial_notice(void);
+
+/* Explicit original children; callers consume only their result low byte. */
+unsigned int scene_contact_original_receive_word(unsigned int);
+unsigned int scene_contact_original_transmit(void);
+
+void set_irq_table_entry(unsigned int, unsigned int);
 
 #endif
