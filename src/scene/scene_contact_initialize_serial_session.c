@@ -20,7 +20,7 @@ void scene_contact_initialize_serial_session(void)
  display_load_background(2,&g_scene_contact_serial_initializer_second_panel,65,2,0,17);
  control=g_scene_contact_serial_initializer_control0;
  display_show_background(0,control);
- scene_contact_original_disable_background(0);
+ display_clear_background_map(0);
  display_text_set_background_control(control);
  display_text_select_font(3,0,0);
  display_text_draw_line(17,120,13,display_scene_lookup_text(226),1);

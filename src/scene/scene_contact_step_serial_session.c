@@ -17,7 +17,7 @@ void scene_contact_step_serial_session(void)
             unsigned char *destination;
             union SceneContactSerialRecord *input;
             if (!g_scene_contact_serial_session.matched08) {
-                scene_contact_original_prepare_serial_world();
+                save_world_reset_defaults();
                 g_frame_world_id = 6;
                 g_scene_contact_serial_player_input.flags07 = 4;
                 g_scene_contact_serial_player_input.value08 = 348;

@@ -33108,7 +33108,6 @@
         "display_load_background": "0x0800da21",
         "display_set_background_velocity": "0x0800dfcd",
         "display_fill_background": "0x0800d6b9",
-        "scene_contact_original_disable_background": "0x0800d6a9",
         "display_text_set_background_control": "0x0801ae2d",
         "display_text_select_font": "0x0801ae75",
         "display_scene_lookup_text": "0x08045009",
@@ -33134,7 +33133,8 @@
         "g_save_stream_state": "0x03005d90",
         "g_scene_contact_serial_session": "0x03001b70",
         "g_scene_request": "0x03004350",
-        "g_scene_contact_input_setup": "0x030040b0"
+        "g_scene_contact_input_setup": "0x030040b0",
+        "display_clear_background_map": "0x0800d6a9"
       },
       "thumb_symbols": [
         "display_set_mode",
@@ -33144,7 +33144,7 @@
         "display_load_background",
         "display_set_background_velocity",
         "display_fill_background",
-        "scene_contact_original_disable_background",
+        "display_clear_background_map",
         "display_text_set_background_control",
         "display_text_select_font",
         "display_scene_lookup_text",
@@ -33930,7 +33930,6 @@
         "scene_contact_poll_input_status": "0x0801c8a5",
         "scene_contact_draw_serial_session_status": "0x0801ccb1",
         "resource_submit_scene": "0x08027dd1",
-        "scene_contact_original_prepare_serial_world": "0x0801bb15",
         "save_world_initialize": "0x0801b631",
         "heap_copy": "0x08027ab5",
         "heap_clear": "0x08027a49",
@@ -33940,7 +33939,8 @@
         "g_scene_contact_serial_player_input": "0x030040e0",
         "g_scene_contact_serial_session": "0x03001b70",
         "g_frame_world_id": "0x03004334",
-        "g_scene_contact_serial_capture": "0x03003950"
+        "g_scene_contact_serial_capture": "0x03003950",
+        "save_world_reset_defaults": "0x0801bb15"
       },
       "negative_control": {
         "before": "resource_submit_scene(5, 1, 1)",
@@ -33950,7 +33950,7 @@
         "scene_contact_poll_input_status",
         "scene_contact_draw_serial_session_status",
         "resource_submit_scene",
-        "scene_contact_original_prepare_serial_world",
+        "save_world_reset_defaults",
         "save_world_initialize",
         "heap_copy",
         "heap_clear",
@@ -34580,6 +34580,62 @@
       "negative_control": {
         "before": "frame_random_bounded(g_scene_contact_activity_five_rows[STATE->option].subtype_count-1)",
         "after": "frame_random_bounded(g_scene_contact_activity_five_rows[STATE->option].subtype_count-2)"
+      }
+    },
+    {
+      "name": "save_world_reset_defaults",
+      "rom_offset": 113428,
+      "size": 84,
+      "source": "src/save/reset_world_defaults.c",
+      "symbols": {
+        "heap_clear": "0x08027a49",
+        "actor_entry_prepare": "0x0802086d",
+        "save_world_original_reset_hook": "0x0802a70d",
+        "frame_set_game_value": "0x0801bc11",
+        "save_world_original_copy_padded_bytes": "0x0804ea71",
+        "g_resource_game_state": "0x03003950",
+        "g_scene_contact_serial_player_input": "0x030040e0",
+        "g_save_world_default_name": "0x08052f48"
+      },
+      "thumb_symbols": [
+        "heap_clear",
+        "actor_entry_prepare",
+        "save_world_original_reset_hook",
+        "frame_set_game_value",
+        "save_world_original_copy_padded_bytes"
+      ],
+      "negative_control": {
+        "before": "heap_clear(world, 0, 1876)",
+        "after": "heap_clear(world, 0, 1872)"
+      }
+    },
+    {
+      "name": "frame_set_game_value",
+      "rom_offset": 113680,
+      "size": 12,
+      "source": "src/frame/frame_set_game_value.c",
+      "symbols": {
+        "g_resource_game_state": "0x03003950"
+      },
+      "negative_control": {
+        "before": "->value = value",
+        "after": "->value = value + 1"
+      }
+    },
+    {
+      "name": "display_clear_background_map",
+      "rom_offset": 54952,
+      "size": 16,
+      "source": "src/display/clear_background_map.c",
+      "symbols": {
+        "display_fill_background_map": "0x0800d6c9"
+      },
+      "thumb_symbols": [
+        "display_fill_background_map"
+      ],
+      "negative_control": {
+        "before": "map(index, 0, 0)",
+        "after": "map(index, 1, 0)"
       }
     }
   ],

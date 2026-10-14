@@ -2,6 +2,7 @@
 #define SCENE_CONTACT_SERIAL_SESSION_H
 
 #include "scene_contact_serial.h"
+#include "display_background_clear.h"
 
 /* Observed partial access views at existing, overlapping state roots. */
 struct SceneContactSerialSession {
@@ -40,7 +41,5 @@ void scene_contact_initialize_serial_session(void);
 
 void scene_contact_prepare_serial_slot(unsigned int);
 
-/* Original direct provider; no reconstructed C credit in this group. */
-void scene_contact_original_disable_background(unsigned int);
 
 #endif

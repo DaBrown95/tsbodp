@@ -976,8 +976,8 @@ The fixed phase table's flat row ten at `0x080579F4` contains initialization
 `0x0801C9B9`, step `0x0801CB3D`, and shutdown `0x0801CE55`. The latter two
 callbacks and slot preparation at `0x0801CDDC` are covered by the later
 connected session-controller group below. The request-tail stores of 45
-in these notices do not identify this table row. Original background map-fill wrapper
-`0x0800D6A8` remains explicitly original.
+in these notices do not identify this table row. The background map-fill wrapper
+`0x0800D6A8` is covered by the later defaults-provider group below.
 
 Initialization configures the three observed backgrounds and text, reads
 and validates save slot three, and conditionally calls the accepted
@@ -1052,7 +1052,7 @@ The ordinary step calls the status drawer and switches on the existing
 request word at offset 16. Phase zero tests the actual pressed-input table
 at `0x03004228`; phases one through three decrement the unsigned request
 timer and perform their original transitions when it becomes zero. Phase
-two optionally calls original world preparation `0x0801BB14`, writes the
+two optionally calls world preparation `0x0801BB14`, writes the
 observed world/input values, and calls the accepted world initializer.
 Only then does it capture the session buffer and copy the two words and
 five segments into the 220-byte capture. Its clear operation deliberately
@@ -1063,8 +1063,8 @@ the destination byte-array pointer and subsequent offsets stay within the
 the previously described 32-byte serialized needs view. Phase three
 clears the observed 16 bytes and commits without initializing other
 capture storage. Phase four and the default preserve their original lack
-of step actions. Neither original world preparation's complete extent nor
-its gameplay purpose is reconstructed by this group.
+of step actions. World preparation's complete 84-byte body is covered by
+the later defaults-provider group below; its gameplay purpose remains unproved.
 
 The drawer indexes an observed seven-row prefix at `0x080530A8`, with two
 halfwords per four-byte row. Text changes, the halfword delay and indices
@@ -1122,3 +1122,57 @@ diagnostic only, without a hardware fault or defined-source claim. The
 fixtures retain earlier callback output-write preconditions and establish
 no general capacity, protocol, hardware, asynchronous IRQ or gameplay
 result.
+
+
+# Connected world defaults and background map fill
+
+Three complete C bodies add 112 bytes: world defaults at `0x0801BB14`
+(84), a game-value word setter at `0x0801BC10` (12), and the zero map-fill
+wrapper at `0x0800D6A8` (16). The latter has a 14-byte body followed by the
+original two zero alignment bytes before the independent `0x0800D6B8`
+entry. Its source contains only the alignment directive needed for those
+bytes. None of the three bodies uses register annotations, added reads,
+volatile qualifiers, guards or invented initialization.
+
+The default-state body clears 1,876 bytes at the existing world root
+`0x03003950`, prepares the accepted 800-byte actor-entry context at offset
+220, calls the explicit original reset hook, and clears 52 bytes at the
+existing input root `0x030040E0`. It writes one to byte 48, resets the
+complete game-value word at world offset four through the new setter, and
+passes world offset 16, ROM source `0x08052F48` and count 16 to the original
+bounded string-copy routine. The 1,876-byte array is an observed access
+span, not a complete global storage or ownership claim. The existing
+player-input tag is reused; byte 48 is accessed through its character
+representation within the independently checked 52-byte object.
+
+Pinned target-compiler diagnostics establish the world span as 1,876 bytes
+with alignment four, the actor context as 800 bytes with alignment four,
+and the player prefix as 52 bytes with alignment four. The fixed world and
+player roots, and world plus 220, satisfy that alignment. The game-value
+view remains the existing eight-byte, alignment-four partial view with its
+word at offset four. The setter's `int` formal follows accepted signed-word
+consumers; the producer itself stores the complete input word and does not
+establish the original declaration's signedness. The background wrapper
+passes its complete word index and zero halfword tile and palette values
+to the accepted map-fill provider. This does not claim that it disables a
+background layer.
+
+The serial initializer and step change only their two same-address
+provider identifiers. All eleven current importers of the two session
+headers and five additional heap, actor-entry, map-fill and game-value
+providers are recompiled with actual changed-source controls. The original
+return hook at `0x0802A70C` (four bytes) and padded string-copy body at
+`0x0804EA70` (112 bytes) remain explicit originals and receive no new C or
+glue credit. A four-byte mismatch in a separate string-copy candidate is
+preserved and excluded.
+
+Finite checks cover 32 initialized numeric-memory cases, with 32 actual
+source-control divergences and four deliberate interpreter/input failures.
+They execute the original and compiled defaults/setter/map wrapper, the
+accepted heap clear and actor preparation, and the unchanged original hook
+and copy bodies. Allocation and map-fill calls use explicit abstract hooks
+that poison caller-saved values. Existing and failed allocation returns are
+preserved as nullable stored collection pointers; the defaults body does
+not dereference that pointer. The game-value negative fixtures avoid signed
+overflow. These checks do not prove arbitrary pointer validity, allocator
+success, table capacity, hardware/IRQ or protocol behavior, or gameplay.
