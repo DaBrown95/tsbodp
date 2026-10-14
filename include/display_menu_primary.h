@@ -27,7 +27,7 @@ void display_menu_show_hint(unsigned char);
 void display_menu_request_notice(unsigned int, unsigned int, void *);
 unsigned int frame_actor_indicator_kind(unsigned char);
 unsigned int display_menu_fallback_indicator(unsigned char);
-unsigned char display_menu_primary_row_code(unsigned int);
+unsigned int display_menu_primary_row_code(unsigned int);
 unsigned int display_menu_primary_row_parameter(unsigned int);
 unsigned int frame_low_need_mask(struct FrameActorNeedState *, unsigned int);
 

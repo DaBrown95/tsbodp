@@ -20,7 +20,7 @@ extern const struct BackgroundResource g_display_menu_palette_resource;
 
 void scene_link_menu_initialize(void), scene_link_menu_step(void);
 void scene_link_menu_shutdown(void), scene_link_menu_draw_status(void);
-/* Connected original providers; their bodies remain unconverted. */
+/* Connected menu actions; full-word row and selection arguments are observed. */
 void scene_link_menu_draw_row(unsigned int, unsigned int);
 void scene_link_menu_accept(void), scene_link_menu_change_row(void);
 void scene_link_menu_cancel(void);
