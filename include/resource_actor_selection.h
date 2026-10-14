@@ -21,9 +21,14 @@ extern struct ResourceSelectionRelationView g_resource_selection_relation_view;
 unsigned char resource_select_actor(unsigned int, unsigned int);
 unsigned char resource_actor_selection_available(unsigned int, unsigned int);
 
+/* The count provider reads the existing context collection at game +31C. */
+extern unsigned char g_scene_entry_data[];
+int resource_count_selectable_actor_entries(void);
+
 /* Explicit original dependencies; their names and roles remain provisional. */
 unsigned char resource_selection_has_kind_0804573c(void);
 void resource_selection_remove_080454dc(void);
-int resource_selection_count_08045410(void);
+void resource_selection_group_ids_08045794(int *);
+unsigned int resource_selection_kind_available_0804565c(unsigned int);
 
 #endif

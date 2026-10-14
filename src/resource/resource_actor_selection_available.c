@@ -10,7 +10,7 @@ unsigned char resource_actor_selection_available(unsigned int scene,
         !g_resource_selection_world.requested &&
         scene <= 14 && actor > 14 &&
         (unsigned char)save_world_scene_in_selected_row(actor, 0) &&
-        resource_selection_count_08045410() != 0)
+        resource_count_selectable_actor_entries() != 0)
         return 1;
     return 0;
 }

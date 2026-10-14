@@ -6,7 +6,7 @@ kind 20 through the scene request provider. This identifies a connected scene
 path; the names below describe static accesses and are not recovered original
 identifiers or a claim about gameplay.
 
-This connected path reconstructs twenty-three C functions, totaling 3,728 bytes:
+This connected path reconstructs twenty-five C functions, totaling 4,380 bytes:
 
 | Entry | Bytes | Observed role |
 | --- | ---: | --- |
@@ -30,6 +30,8 @@ This connected path reconstructs twenty-three C functions, totaling 3,728 bytes:
 | `0x08033940` | 204 | Initialize definition row four's backgrounds, clock, objects and palettes |
 | `0x08033AF4` | 172 | Reset eight primary item slots and accumulate their byte penalties |
 | `0x08033C80` | 224 | Create a selected item with coordinate words, animation and slot-derived flags |
+| `0x08033D60` | 360 | Create a selected moving event with paired slot, position, speed and animation |
+| `0x080341B8` | 292 | Advance the moving event, fill or update a secondary slot and retire it at a boundary |
 | `0x080342DC` | 72 | Test the control byte and eight paired object identifiers |
 | `0x08034324` | 52 | Retire nullable secondary objects and clear their slots |
 | `0x08034358` | 44 | Load seven item palettes into descending banks |
@@ -257,13 +259,13 @@ Reset assigns the real coordinate pair `(212, 86)` before entering the loop.
 The existing ordinary `FramePoint` is measured as two word members, size 8
 and alignment 4. Its by-value call view occupies the original creator's
 R0/R1 coordinates, while the selected value and slot remain complete words
-in R2/R3. The original creator captures those four incoming words before
+in R2/R3. The creator captures those four incoming words before
 allocation; its later low-halfword and low-byte stores do not justify
 narrowing the call formals. This grouping describes this observed call,
 not a recovered original declaration or a generic callback ABI.
 
 The random result is stored as a byte in the selected array and forwarded as
-a complete word to the original item creator. After each removal or creation,
+a complete word to the item creator. After each removal or creation,
 the code reloads the actual global state pointer for the slot update. It adds
 the item record's penalty byte, indexed by the created object's halfword at
 offset `0x0A`, to the signed score and stores the halfword result. No null
@@ -339,3 +341,112 @@ unmapped input, truncated pools, unsupported instructions and exhausted
 budgets are rejected. These are bounded interpreter findings, with no
 hardware-fault, pointer-validity or gameplay claim. The original step remains
 unmatched and explicit.
+
+# Connected moving-event creation
+
+The event creator at `0x08033D60` owns the complete 360-byte extent through
+`0x08033EC8`, including its seven-entry internal switch table and literal
+pools. It allocates the existing object, writes identifier 4, and compares a
+signed random result from 1 through 100 against the selected configuration's
+chance byte. The below-threshold path stores selected halfword zero; the
+other path requests a value from 1 through the row's count byte.
+
+Selected identifiers 0 through 6 choose one of four adjacent slot pairs:
+0/1, 2/3, 4/5 or 6/7. The switch has no default write. Other identifiers
+retain the existing byte at object offset `0x4C`; no initializer, validity
+check or replacement slot is added. The five observed configuration records
+have counts 2 through 6, but this does not establish complete configuration
+storage, arbitrary option bounds or behavior of an altered provider.
+
+Position records at `0x08069F38` have size 12 and alignment 4, with signed
+word x, y and speed at offsets 0, 4 and 8. Eight consecutive prefixes are
+observed. The declaration remains unsized. The whole-object access prefix
+has size 80 and alignment 4: the speed word is at 20 and slot byte at 76.
+This keeps the speed store within a declared word member while retaining
+the older object view's fields and offsets. The actual allocator reserves
+320 bytes; this prefix does not describe the complete object.
+
+The separate 216-byte, alignment-four flag view preserves the event's
+halfword identifier load before palette subtraction. Its palette field uses
+an unsigned-halfword underlying type, with the same checked four physical
+bits at `0xD5`. The item creator's earlier byte-backed view remains unchanged.
+A byte-backed event predecessor matched all other instructions but differed
+at that load; the final ordinary C has no register bindings, volatile access
+or extra memory traffic. Independent compiler-produced object representations
+check the flag mapping and reject changed widths, offsets and callback types.
+
+The slot selects position and speed, and its low bit selects direction byte
+2 or 6. The existing velocity table and fixed-product provider then supply
+the two velocity words. Coordinate shifts use unsigned words before target
+signed interpretation. The animation call receives the existing 16-byte
+resource prefix of the selected 24-byte item record; its accepted provider
+reads that record. The installed single-object tick is the connected update
+at `0x080341B8`.
+
+Fifty finite initialized-memory cases use the five observed configuration
+rows and in-range abstract provider results. Two additional cases inject an
+out-of-contract random result solely to check the preserved default slot;
+they do not claim that this occurs with the observed configuration. All 52
+compare original bytes, freshly linked C and a bounded model, with actual
+changed-source divergences and caller-saved register poisoning. Position,
+allocation, random, fixed-product and animation hooks are explicit model
+limits; the animation hook is observational here. Missing memory, truncated
+pools, unsupported instructions and exhausted budgets are interpreter
+rejections, not claims about GBA hardware faults or gameplay behavior.
+
+# Connected moving-event update
+
+The installed callback owns `0x080341B8` through `0x080342DC`, a complete
+292-byte extent ending before the independent paired-slot completion test.
+Its standard single-`FrameObject` callback type agrees with the accepted
+object dispatcher and the creator's stored pointer. It first adds each
+velocity word to the position word and stores the two next-position words.
+The arithmetic uses unsigned word representations before the target's signed
+interpretation, preserving modular additions without a portable arbitrary
+signed-conversion claim.
+
+The actual lower and upper coordinate pairs use ordinary eight-byte,
+alignment-four `FramePoint` locals. They preserve the original register and
+stack lifetimes for the control-centered bounds: x plus or minus `0xC0000`
+and y plus or minus `0xA0000`. The bounds are computed before the control
+identifier test. Capture requires control identifier zero and strict
+inequalities in both dimensions; no bound or pointer-validity check is added.
+An aggregate coordinate initializer emitted an extra allocated constant
+section and was rejected. The final source uses explicit real member stores,
+ordinary point values and no register bindings or extra memory traffic.
+
+The callback's row-state view preserves the same 100-byte, alignment-four
+prefix, now exposing the observed unsigned current-slot halfword at 14.
+Score remains signed at 12, the eight nullable secondary pointers at 56 and
+the unchecked control pointer at 88. The current-slot value is unchecked.
+This access view does not alter the established state/global declaration or
+describe the complete 420-byte allocation.
+
+On capture, the callback sets removal mask 2. A null secondary slot creates
+an item at coordinate words `(212, 30)`, forwarding the selected halfword and
+current slot as complete call words. The created pointer is captured before
+reloading the actual global state and storing it. A nonnull slot receives
+the selected low byte through the established animation-frame API, followed
+by a fresh global reload and halfword identifier store. Both paths reload
+the control pointer and mark its identifier 1.
+
+Selected identifier zero decrements the score halfword, sets it to 1 if the
+stored signed result is nonpositive, and requests cue 189. Other identifiers
+request cue 188. These operations preserve target halfword narrowing and
+the original post-call global reloads. Outside capture, direction byte 2
+retires an event above `0xB7FFFF`; direction 6 retires it at or below zero.
+Other paths copy the actual next-position members into position. The
+232-byte activity coordinator and the other original creators remain
+unconverted; this callback closes only the specific moving-event handoff.
+
+Forty-one finite callback cases compare original and freshly linked bytes
+with a bounded model; 27 distinguish the actual removal-mask control. They
+cover capture edges, both secondary-slot paths, score halfword narrowing,
+current slots 0 and 7, and wrapped next-position and bound coordinates. Four
+abstract hook cases change the global pointer to check the observed reloads;
+this does not claim that the accepted callees cause such a change at runtime.
+Two selected-256 cases check operand and store widths while leaving the
+unbounded item lookup inside the abstract hook unexecuted. Item creation,
+animation-frame selection and audio cues are explicit hook limits. The four
+rejected input/interpreter controls remain model findings, with no hardware
+fault, general asset capacity or gameplay guarantee.

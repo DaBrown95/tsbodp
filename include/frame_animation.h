@@ -11,11 +11,11 @@ struct FrameAnimationState {
     FrameU8 *commands, *command_start;
 };
 struct __attribute__((packed, aligned(2))) FrameAnimationBounds { FrameU16 x, y; };
-struct FrameAnimationFrame {
+struct __attribute__((packed, aligned(2))) FrameAnimationFrame {
     FrameU8 count_flags, unknown_01, width, height;
     FrameU16 bytes;
     struct FrameAnimationBounds bounds;
-    FrameU8 following_records[1];
+    FrameU8 following_records[0];
 };
 struct FrameAnimationPart {
     FrameU8 flags, palette, order, unknown_03;

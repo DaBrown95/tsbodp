@@ -29,13 +29,14 @@ struct FrameSpriteSequence {
     FrameU16 frame_count;
     FrameU16 unknown_08;
     FrameU8 attachment_count, collider_count;
-    FrameU16 frame_offsets[1];
+    /* GNU89 variable tail; total serialized capacity is not established here. */
+    FrameU16 frame_offsets[0];
 };
-struct FrameSpriteFrame {
+struct __attribute__((packed, aligned(2))) FrameSpriteFrame {
     FrameU8 count_flags, unknown_01, width, height;
     FrameU16 tile_bytes;
     short bound_x, bound_y;
-    FrameU8 following_records[1];
+    FrameU8 following_records[0];
 };
 struct FrameSpriteResource {
     FrameU32 unknown_00;

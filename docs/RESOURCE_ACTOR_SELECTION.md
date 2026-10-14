@@ -37,8 +37,8 @@ not establish complete game storage or capacity. Actual wrong widths, offsets,
 packing, provider-return types and signedness fail separate diagnostics.
 
 Only the two old selection declarations were replaced with a guarded role
-header import; their argument and result widths remain the same. All 103
-current matching importers were freshly checked with real changed-source
+header import; their argument and result widths remain the same. The initial two-function cohort
+checked all 103 matching importers with real changed-source
 controls, along with the new functions and direct matching providers. Strict
 declaration diagnostics also reject missing provider declarations that ordinary
 C89 compilation can leave byte-identical. The matched source objects contain
@@ -53,9 +53,56 @@ distribution. One negative relation yields a negative random upper argument;
 the fixture checks that argument flow under an abstract return, without adding
 a guard or establishing an interval-validity guarantee.
 
-The kind scanner at `0x0804573C`, remover at `0x080454DC` and count helper at
-`0x08045410` remain explicitly original. The scanner's collection pointer is
+The kind scanner at `0x0804573C` and remover at `0x080454DC` remain explicitly
+original. The connected count helper is recovered below. The scanner's collection pointer is
 the canonical actor-context member at `0x03003A2C + 0x31C`, rather than a new
 independent global. Its incomplete C trials are not credited. Arbitrary scene,
 actor, pointer, capacity, stage and random-interval validity remain unchecked;
 these static and compiler findings do not prove gameplay behavior.
+
+
+## Selectable collection-entry count
+
+The connected count provider owns the complete `0x45410..0x454DC` extent,
+204 bytes including both literal-pool groups. The existing eligibility caller
+now uses its canonical name at the same address; its body changes only that
+identifier. The result remains a full word; `int` is a supported C model of
+that return, without establishing the original signedness. No new credit is
+assigned to the existing selection or eligibility bodies.
+
+It obtains three signed word group IDs from the original stage-dependent
+provider. The initialized stage-two, stage-three and stage-four outputs select
+three, three and two collection groups respectively, with minus one marking
+the end. The original provider leaves the output unwritten for other stages;
+this count source adds no initialization or stage guard. The count first sums
+the actual byte group counts until the sentinel or three groups. If that sum
+is zero it returns zero. Otherwise it scans the same groups, subtracting one
+for each record rejected by the original kind predicate. The predicate's word
+result is explicitly consumed as a low byte, as observed in the caller.
+The group-ID provider and kind predicate remain explicitly original.
+
+The existing actor-context root is `0x03003A2C`. Its collection pointer field
+at `+0x31C` explains the native `0x03003D48` literals without inventing a new
+global. The canonical collection uses twelve-byte records beginning at offset
+four and fifty four-byte group records beginning at `0x784`. Each group has a
+byte start and count. The first sum loads its collection once; the second pass
+retains each actual group pointer while reloading record storage and the group
+count around predicate calls. The real next-group index is captured before
+the inner loop. Capturing the collection field address in that live group
+body recovers the original pool placement and control flow.
+
+Three annotations apply only to actual values: the first sum's R0 group offset
+and R4 group pointer are consumed in a call-free interval, and the second
+pass's R5 entry index is held in a callee-saved register across the predicate
+call. A fourth collection-pointer annotation was removed without changing
+bytes. Removing the remaining annotations gives mismatches; unannotated
+variants and raw comparisons remain private. The source has no embedded
+instruction body, invented fields, additional reads or discarded initializer.
+These annotations establish a supported source form, not the original spelling.
+
+Current importer, caller and provider comparisons include real changed-source
+controls. Separate strict declarations and pinned layout/type checks distinguish
+actual field and ABI contracts from byte equality. The collection record and
+group capacities, pointer validity, stage validity and arbitrary input lengths
+remain unchecked. Bounded fixtures and static/compiler results do not establish
+whole-game behavior.

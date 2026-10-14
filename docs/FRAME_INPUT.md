@@ -2176,3 +2176,31 @@ with the useful failed attempts under ignored `factory-followup-evidence-*`
 reports. The existing factory/tick are freshly recompiled with their own actual
 controls against the refined header. Compiler/static results remain separate from
 runtime and gameplay behavior, neither of which has been validated for this path.
+
+
+### Variable serialized frame tails and alignment
+
+The sprite sequence exposes its variable halfword-offset tail at byte twelve
+using the pinned compiler's GNU89 zero-length-array extension. Its measured
+prefix changes from sixteen bytes to twelve, retaining four-byte alignment
+and every existing scalar offset. The sprite and animation frame views use
+zero-length following-record tails at byte ten. Explicit packed, two-byte
+alignment makes both measured frame prefixes ten bytes rather than the prior
+twelve-byte, four-aligned declarations. Scalar widths and offsets are unchanged;
+this declaration repair earns zero new C bytes.
+
+The alignment change follows actual pointer producers. The accepted scene
+resource constructor indexes sixteen-byte records and passes each record's
+sequence pointer to animation readers. In the observed resource prefix zero
+through 267, all 268 sequence roots are word-aligned. Their 317 frame roots are
+halfword-aligned, and 288 are not word-aligned. The plain four-aligned frame
+views therefore exceeded the alignment of these actual records, even though
+the earlier function bytes matched. Pinned compiler diagnostics reject the
+former declarations at an actual frame address as well as wrong widths and
+packing. These observations are a bounded scene-resource check; they do not
+establish every serialized resource, complete capacity or gameplay behavior.
+
+Every current matching importer of the affected headers is freshly compared
+with its actual changed-source control. Existing bodies and their C credit do
+not change. The renderer remains unconverted; correcting these real type
+relationships does not turn a near-match into a verified function.
