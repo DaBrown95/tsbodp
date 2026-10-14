@@ -36,14 +36,13 @@ before adding its RAM root, preserving the original literal-load scheduling.
 They rely on the pinned target's 32-bit address representation.
 
 Initialization at `0x080116b4` sets the cached curve halfword to `-257`, calls the
-explicit original curve provider with 256, allocates two zeroed 512-byte staging
+curve provider with 256, allocates two zeroed 512-byte staging
 buffers, supplies palette RAM destinations `0x05000000` and `0x05000200`, then
 resets the jobs. The pair initializer at `0x080119b0` retains the original
-unchecked allocation result. The 216-byte lookup-curve provider at `0x0801155c`
-and 400-byte interpolation body at `0x08011c60` remain unconverted. Their byte
-stores, incoming halfword consumption and nominal lookup range are static
-evidence; valid argument domains, complete ownership and runtime behavior are
-not proven by this batch.
+unchecked allocation result. The connected 216-byte lookup-curve provider at
+`0x0801155c` is reconstructed in the next batch described below. The 400-byte interpolation body at
+`0x08011c60` remains unconverted. Valid argument domains, complete ownership
+and runtime behavior are not established by the matching lifecycle sources.
 
 All fifteen source bodies use ordinary C with no register bindings or added
 memory traffic. Each full extent includes its literal pools and alignment up
@@ -56,3 +55,49 @@ comparisons remain local, including the initial root-load order differences
 and the excluded interpolation register collisions. These checks establish
 matching source extents and static connections; they do not establish complete
 palette reconstruction or gameplay behavior.
+
+# Lookup curve and its arithmetic providers
+
+The initialization dependency now has matching C for the complete 216-byte
+curve at `0x0801155c` and its direct 28-byte multiply and 24-byte divide helpers
+at `0x080272d0` and `0x080272ec`: three functions and 268 bytes. The multiply
+also serves the already matching background matrix update. The following
+range loader at `0x08011634` was already accepted; it contributes no new bytes
+to this batch.
+
+The curve consumes the incoming word's low halfword, compares it with the
+signed cached halfword before applying its signed upper clamp, and calculates
+two piecewise byte-output runs. Its accumulators and steps retain their
+observed halfword wrapping. The loop increment is a signed word converted
+from the step before the loop, and the destination address adds the index
+before its RAM root. These value scopes reproduce the native conversions
+without register bindings, extra reads, volatility or added guards. The
+second run uses a shifted unsigned word followed by the observed signed-high
+interpretations; no negative signed left shift is introduced.
+
+The arithmetic providers consume signed low halfwords and return a complete
+sign-extended word after their low-half result. Multiply adds 255 to a negative
+full-word product before its shift by eight, preserving truncation toward
+zero. Divide multiplies the signed numerator by 256, delegates signed division
+to the explicit original runtime helper, then narrows the result. The existing
+`int(short, short)` multiply interface remains unchanged. These are evidence
+based ABI and eight-fractional-bit models, rather than recovered original
+headers or a claim that every caller's numerical domain is established.
+
+Multiply retains one binding for its actual full-word product in `r0`; that
+value is confined to a leaf and crosses no calls. Ordinary unbound predecessors
+and the alternative rounded-value binding remain in local evidence. Divide
+uses ordinary C and explicitly retains its two final zero alignment bytes.
+The curve owns its two literal pools before the independent range-loader
+entry; multiply ends at the divide entry, and divide ends at `0x08027304`.
+Each full extent and its compiled changed-source control is verified, along
+with all accepted importers of the refined cache comment and the existing
+background and initialization callers.
+
+The output is declared as an unsized byte view. The nominal two runs reach
+indices through 31, but negative input values, complete table ownership and
+valid caller domains remain unestablished. The source preserves unchecked
+division and index behavior; it adds no zero-denominator handling, clipping of
+negative inputs or capacity guard. Matching extents and these static data-flow
+connections do not prove palette appearance or gameplay behavior. The
+400-byte interpolation routine remains an explicit original dependency.

@@ -29,8 +29,8 @@ void display_initialize_palette_pair(struct PaletteBufferPair *,
     unsigned short *);
 void display_initialize_palettes(void);
 
-/* Cached halfword written by initialization. The 216-byte curve provider is
-   still original; its low-halfword input and byte lookup stores are static facts. */
+/* Cached halfword written by initialization. The curve consumes the incoming
+   low halfword and writes a byte lookup view; valid caller domains are unproven. */
 extern short g_palette_curve_parameter;
 void display_configure_palette_curve(unsigned int);
 
