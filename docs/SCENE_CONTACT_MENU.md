@@ -973,10 +973,11 @@ reads, guards or initializers. The dispatcher changes only its four
 same-address child identifiers.
 
 The fixed phase table's flat row ten at `0x080579F4` contains initialization
-`0x0801C9B9`, original step `0x0801CB3D`, and original shutdown `0x0801CE55`.
-The request-tail stores of 45 in these notices do not identify this table
-row. The two latter callbacks, background-disable provider `0x0800D6A8`,
-and four-slot object preparation provider `0x0801CDDC` remain explicit originals.
+`0x0801C9B9`, step `0x0801CB3D`, and shutdown `0x0801CE55`. The latter two
+callbacks and slot preparation at `0x0801CDDC` are covered by the later
+connected session-controller group below. The request-tail stores of 45
+in these notices do not identify this table row. Original background map-fill wrapper
+`0x0800D6A8` remains explicitly original.
 
 Initialization configures the three observed backgrounds and text, reads
 and validates save slot three, and conditionally calls the accepted
@@ -1035,3 +1036,89 @@ preconditions. Unsupported `0x84` still has no length write and retains only
 the separate earlier native omission diagnostics. These finite checks do
 not establish asynchronous IRQ behavior, hardware, general protocol,
 arbitrary pointer validity, capacity safety or gameplay behavior.
+
+# Connected serial session controller and shutdown
+
+Six complete bodies add 1,032 bytes: stopping input at `0x0801C8D8` (112),
+the row-ten step at `0x0801CB3C` (372), status drawing at `0x0801CCB0`
+(300), slot preparation at `0x0801CDDC` (120), shutdown at `0x0801CE54`
+(60), and save commit display at `0x0801CE90` (68). Full pools and zero
+alignment are included. The existing initializer changes only its
+same-address slot-provider identifier. Its previous 388 bytes receive no
+new credit. The independently bounded four-byte return leaf at
+`0x0801D1CC` remains original, with no new C or glue credit.
+
+The ordinary step calls the status drawer and switches on the existing
+request word at offset 16. Phase zero tests the actual pressed-input table
+at `0x03004228`; phases one through three decrement the unsigned request
+timer and perform their original transitions when it becomes zero. Phase
+two optionally calls original world preparation `0x0801BB14`, writes the
+observed world/input values, and calls the accepted world initializer.
+Only then does it capture the session buffer and copy the two words and
+five segments into the 220-byte capture. Its clear operation deliberately
+overwrites the upper eight bytes of the first 16-byte segment. The input
+word/byte union bounds all accesses within its 108-byte representation;
+the destination byte-array pointer and subsequent offsets stay within the
+220-byte representation. The 44-byte capture copy stays distinct from
+the previously described 32-byte serialized needs view. Phase three
+clears the observed 16 bytes and commits without initializing other
+capture storage. Phase four and the default preserve their original lack
+of step actions. Neither original world preparation's complete extent nor
+its gameplay purpose is reconstructed by this group.
+
+The drawer indexes an observed seven-row prefix at `0x080530A8`, with two
+halfwords per four-byte row. Text changes, the halfword delay and indices
+two or three control the original drawing and animation calls. It reloads
+object slot two after the animation provider and updates only physical
+bit four at object offset `0xD3`. Both animation uses share the single
+command root `0x08053114`; the drawer passes an explicit offset of two,
+while slot preparation passes the root. When index one marks the saved
+header, one real flags value is constrained to R0. Native instructions at
+`0x0801CD80` through `0x0801CD84` initialize one, combine the loaded flags
+and store a halfword. The value dies before subsequent work and spans no
+call. Removing that sole constraint gives nine differences under both
+normal and strict profiles. The other five bodies use no register hints. These sources add no reads,
+guards, invented volatility or dummy values; the existing volatile setup
+and register accesses preserve their concrete native reads and writes.
+
+Slot preparation allocates object ID 24, stores it in the unchecked slot
+array, sets flags 17 and the slot halfword, updates the palette nibble,
+installs the specific original object callback, and supplies the observed
+coordinates and embedded resource. Four ROM records at `0x080530C4` have
+20-byte stride, byte coordinates and a 16-byte resource at offset four;
+their actual resource pointers are word aligned. The provisional target
+compiler view is 20 bytes/alignment four. The player-input view reaches
+byte offset 49 and aligns to 52 bytes; it is an access prefix, not a
+complete storage claim. The generic FrameObject view is 312 bytes within
+the allocator's actual 320-byte object allocation. Successful allocation,
+live pointers, slot count and message/input-table bounds remain unchecked
+preconditions; no new guard is introduced.
+
+Shutdown reads the queued kind and preserves the original input-stop
+exception for kind twenty, then frees the session buffer and calls the
+accepted transition, list and display cleanup providers. Input stop saves
+and clears IME, performs the observed volatile register writes and discarded
+word read at `0x04000150`, clears interrupt-enable bit seven and the shared
+count byte, restores IME and IRQ table entry zero, frees both setup buffers,
+and clears all 48 setup bytes including its handler at offset 44. These
+numeric register accesses and IRQ-shared views do not establish device
+behavior or asynchronous interleaving. The small commit body draws its
+original message before committing save slot three.
+
+Fresh actual-definition checks cover 35 physical properties and nine APIs;
+ten wrong-width, offset, packing or interface cases reject. Seven real
+provider-declaration omissions remain byte identical under the legacy
+profile and reject under strict declaration diagnostics. All current
+session-header importers and 22 additional direct providers have exact
+positives and actual changed-source controls. Finite fixtures compare
+398 cases with original and linked bytes and a separate semantic model,
+executing all six bodies and seven accepted small providers. Their 124
+control divergences include timer transitions, status thresholds, slot
+flags and interrupt-mask changes. Explicit display, animation, allocator,
+free, world, save and poll hooks poison caller-saved registers; pointer
+replacement probes the actual object and session-buffer reloads. Four
+interpreter failures include an invalid unmapped allocation result as a
+diagnostic only, without a hardware fault or defined-source claim. The
+fixtures retain earlier callback output-write preconditions and establish
+no general capacity, protocol, hardware, asynchronous IRQ or gameplay
+result.

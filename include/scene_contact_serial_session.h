@@ -38,8 +38,9 @@ extern const unsigned int g_scene_contact_serial_initializer_control0;
 
 void scene_contact_initialize_serial_session(void);
 
-/* Original direct providers; no reconstructed C credit in this group. */
+void scene_contact_prepare_serial_slot(unsigned int);
+
+/* Original direct provider; no reconstructed C credit in this group. */
 void scene_contact_original_disable_background(unsigned int);
-void scene_contact_original_prepare_serial_slot(unsigned int);
 
 #endif

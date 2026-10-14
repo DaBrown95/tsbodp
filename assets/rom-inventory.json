@@ -33412,13 +33412,14 @@
       "group": "ROM 0801xxxx"
     },
     {
-      "name": "sub_0801C8D8",
+      "name": "scene_contact_stop_serial_input",
       "rom_offset": 116952,
       "mode": "Thumb",
       "runtime_addresses": [
         134334680
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -33433,11 +33434,11 @@
         117036
       ],
       "size": 112,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 116952,
       "body_rom_start": 116952,
       "body_rom_end": 117038,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 86,
       "referenced_literal_bytes": 24,
       "status": "mapped_code",
@@ -33556,14 +33557,15 @@
       "group": "ROM 0801xxxx"
     },
     {
-      "name": "sub_0801CB3C",
+      "name": "scene_contact_step_serial_session",
       "rom_offset": 117564,
       "mode": "Thumb",
       "runtime_addresses": [
         134335292
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -33601,24 +33603,25 @@
         117918
       ],
       "size": 372,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 117564,
       "body_rom_start": 117564,
       "body_rom_end": 117920,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 292,
       "referenced_literal_bytes": 76,
       "status": "mapped_code",
       "group": "ROM 0801xxxx"
     },
     {
-      "name": "sub_0801CCB0",
+      "name": "scene_contact_draw_serial_session_status",
       "rom_offset": 117936,
       "mode": "Thumb",
       "runtime_addresses": [
         134335664
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -33635,24 +33638,25 @@
         118222
       ],
       "size": 300,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 117936,
       "body_rom_start": 117936,
       "body_rom_end": 118224,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 264,
       "referenced_literal_bytes": 32,
       "status": "mapped_code",
       "group": "ROM 0801xxxx"
     },
     {
-      "name": "sub_0801CDDC",
+      "name": "scene_contact_prepare_serial_slot",
       "rom_offset": 118236,
       "mode": "Thumb",
       "runtime_addresses": [
         134335964
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -33668,25 +33672,26 @@
         118338
       ],
       "size": 120,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 118236,
       "body_rom_start": 118236,
       "body_rom_end": 118340,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 104,
       "referenced_literal_bytes": 16,
       "status": "mapped_code",
       "group": "ROM 0801xxxx"
     },
     {
-      "name": "sub_0801CE54",
+      "name": "scene_contact_shutdown_serial_session",
       "rom_offset": 118356,
       "mode": "Thumb",
       "runtime_addresses": [
         134336084
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -33705,24 +33710,25 @@
         118406
       ],
       "size": 60,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 118356,
       "body_rom_start": 118356,
       "body_rom_end": 118408,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 52,
       "referenced_literal_bytes": 8,
       "status": "mapped_code",
       "group": "ROM 0801xxxx"
     },
     {
-      "name": "sub_0801CE90",
+      "name": "scene_contact_commit_serial_session",
       "rom_offset": 118416,
       "mode": "Thumb",
       "runtime_addresses": [
         134336144
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -33739,11 +33745,11 @@
         118482
       ],
       "size": 68,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 118416,
       "body_rom_start": 118416,
       "body_rom_end": 118484,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 68,
       "referenced_literal_bytes": 0,
       "status": "mapped_code",
@@ -96113,7 +96119,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0801C8D8",
+      "name": "scene_contact_stop_serial_input",
       "rom_offset": 116952,
       "size": 112,
       "status": "mapped_code"
@@ -96137,31 +96143,31 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0801CB3C",
+      "name": "scene_contact_step_serial_session",
       "rom_offset": 117564,
       "size": 372,
       "status": "mapped_code"
     },
     {
-      "name": "sub_0801CCB0",
+      "name": "scene_contact_draw_serial_session_status",
       "rom_offset": 117936,
       "size": 300,
       "status": "mapped_code"
     },
     {
-      "name": "sub_0801CDDC",
+      "name": "scene_contact_prepare_serial_slot",
       "rom_offset": 118236,
       "size": 120,
       "status": "mapped_code"
     },
     {
-      "name": "sub_0801CE54",
+      "name": "scene_contact_shutdown_serial_session",
       "rom_offset": 118356,
       "size": 60,
       "status": "mapped_code"
     },
     {
-      "name": "sub_0801CE90",
+      "name": "scene_contact_commit_serial_session",
       "rom_offset": 118416,
       "size": 68,
       "status": "mapped_code"
@@ -107623,7 +107629,7 @@
     "config/ram-map-us-eu.json": "723df744e6016ee7519f61c916a42bc9f11e1de4a0d6e2c314a76ff34a1451ec",
     "config/indirect-transfers-us-eu.json": "6f26c66ac7bb782fb4cfffeca2e040c654f2d7e8097d7e051aafcceaa522eb10",
     "config/progress-regions-us-eu.json": "fd5ff50e29e7bd3e2605573d07458b7ea43e0e058f9922667d7d8e0987969067",
-    "config/build-us-eu.json": "0bdb1417f6d657c805cfd34e7eafc3e66b23d2e578c23e0cf201fc1e3230ad19",
+    "config/build-us-eu.json": "f9a6b4b0f19924682c3a8c0c005f76401b0c18f99c704afde40c00eacfdb0653",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c"
   }
 }

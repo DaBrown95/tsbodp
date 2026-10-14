@@ -25,7 +25,7 @@ void scene_contact_initialize_serial_session(void)
  display_text_select_font(3,0,0);
  display_text_draw_line(17,120,13,display_scene_lookup_text(226),1);
  display_text_draw_line(177,144,144,display_scene_lookup_text(244),0);
- for(slot=0;slot<4;++slot)scene_contact_original_prepare_serial_slot(slot);
+ for(slot=0;slot<4;++slot)scene_contact_prepare_serial_slot(slot);
  save_stream_suspend_audio();
  save_stream_read_slot(3);
  save_stream_resume_audio();
