@@ -53,7 +53,7 @@ void scene_contact_activity_three_step_row(struct FrameObject *base) {
    if(g_input_pressed[0]&128) {
     if((g_input_pressed[0]&1)&&frame_random_range(1,100)>g_scene_contact_activity_three_row_definitions[OBJECT->subtype].escape_threshold-OBJECT->amount) {
      OBJECT->outcome=9;--STATE->active_rows;EVENT->outcome=3;STATE->event->flags|=1;
-     scene_contact_activity_three_original_mark_selection(CONTROL.selection.word);
+     scene_contact_activity_three_decrement_value(CONTROL.selection.word);
      audio_play_animation_cue(192);audio_select_sequence(28);
     }else {OBJECT->outcome=11;EVENT->outcome=11;OBJECT->direction=32;}
    }else {

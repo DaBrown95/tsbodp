@@ -15,16 +15,16 @@ void scene_contact_activity_three_step(void) {
    value=scene_contact_activity_three_get_value(CONTROL.selection.word);
    if(!value)return;
    CONTROL.phase=1;STATE->primary->flags|=16;
-   scene_contact_activity_three_original_refresh_value(CONTROL.selection.bytes[0],CONTROL.selection.bytes[0]);
+   scene_contact_activity_three_refresh_value(CONTROL.selection.bytes[0],CONTROL.selection.bytes[0]);
    audio_play_animation_cue(197);
   } else if(g_input_pressed[0]&192) {
    value=CONTROL.selection.word;
    CONTROL.selection.word=input_step_vertical_pressed(&CONTROL.selection.word,0,2,1,0);
    {
     register unsigned int selected asm("r4")=(unsigned char)value;
-    scene_contact_activity_three_original_refresh_value(selected,(unsigned char)CONTROL.selection.word);
+    scene_contact_activity_three_refresh_value(selected,(unsigned char)CONTROL.selection.word);
    }
-   scene_contact_activity_three_original_refresh_value(CONTROL.selection.bytes[0],CONTROL.selection.bytes[0]);
+   scene_contact_activity_three_refresh_value(CONTROL.selection.bytes[0],CONTROL.selection.bytes[0]);
    frame_set_position(STATE->cursor,8*65536,112*65536+(CONTROL.selection.word<<20));
    audio_play_animation_cue(197);
   }

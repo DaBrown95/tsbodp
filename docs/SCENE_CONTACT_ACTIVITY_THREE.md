@@ -1,16 +1,15 @@
 # Definition row three: selection controller, moving event and row actors
 
-This connected path has eighteen matching C functions covering 3,332 bytes,
+This connected path has twenty-one matching C functions covering 3,900 bytes,
 including their original literal pools and alignment. It follows selection input
-through object creators and the installed event and row updates, coordinate and
-vector helpers, animation resets, palette requests and temporary-object removal.
-The original initializer at `0x08018B28` (328 bytes), row preparation at
-`0x08019640` (544), value refresh at `0x08019CF0` (144), event drawing at
-`0x08019D80` (368), linked-row update at `0x0801994C` (332), and selection marker
-at `0x08019A98` (96) remain explicit original dependencies and receive no C credit.
+through initialization, value updates, object creators and the installed event
+and row updates, coordinate and vector helpers, animation resets, palette
+requests and temporary-object removal. Row preparation at `0x08019640` (544
+bytes), event drawing at `0x08019D80` (368), and linked-row update at
+`0x0801994C` (332) remain explicit original dependencies and receive no C credit.
 An exact source match does not recover those dependencies or establish gameplay.
 
-The observed definition row at `0x080595B0` installs the original initializer
+The observed definition row at `0x080595B0` installs the reconstructed initializer
 `0x08018B29` and the reconstructed no-argument controller `0x08018C71`.
 The event creator installs `0x080190B1`; the row creator installs `0x0801925D`
 at object offset 136. Both callbacks take one `FrameObject *`. The row creator
@@ -56,7 +55,7 @@ consumed as the first refresh argument at `0x08018D48` and is dead before the
 refresh call at `0x08018D4A`. The second argument is the new low byte; the next
 refresh receives new/new. Both calls, cursor movement and cue happen even when
 the selected values are equal. Removing the binding keeps 576 bytes but differs
-in 41 bytes. No other reconstructed body uses register bindings.
+in 41 bytes. The decrement helper below retains one separate call-free byte-pointer binding.
 
 Five observed 56-byte row definitions begin at `0x08052B60`: speed 44 and four
 byte thresholds at 48..51. Seven eight-byte phase records start at `0x08052C78`:
@@ -99,3 +98,54 @@ the removal abstraction records the observed ID-FFFF tombstone. List, palette,
 free-list and gameplay effects remain outside that abstraction. Direct children
 use explicit provider hooks, with caller-saved poisoning and call effects; this
 is bounded static/compiler evidence, not hardware execution or gameplay proof.
+
+
+The initializer at `0x08018B28` and value refresh at `0x08019CF0` add 328 and
+144 bytes. The actual background tile sequence is 31, 35, 39; the native tile
+increment is four, and the earlier private 31/32/33 hypothesis was wrong.
+An ordinary array-entry loop with a separately scoped doubled row recovers the
+observed background and coordinate lifetimes without hints. The role now
+contains the real `void display_fill_background(unsigned int,unsigned short)`
+prototype. Omitting it still gives a legacy-identical initializer but fails the
+separate strict declaration diagnostic. The refresh uses signed division by
+eight for `114 + 16*lowbyte`, whose full range is 114..4194; the equivalent
+arithmetic shift failed byte comparison despite identical bounded semantics.
+Its first draw argument is tile `43 + 4*lowbyte`; pixel X is 32. The formatter
+initializes its returned 16-byte local buffer before drawing reads any bytes.
+
+The decrement helper at `0x08019A98` adds 96 bytes. It compares the full word
+selector to two and one, selecting those banks and otherwise bank zero. It
+unconditionally decrements an unsigned byte with modulo-256 wrap, tests only
+the low 24 bits of the word at scene offset 88, and sets flag bit zero when all
+three value bytes are zero. Both refresh arguments are the control selection's
+fresh low byte. The published row update calls it at `0x08019486`; the original
+linked-row update calls it at `0x08019A86`. Both load the full control word, so
+a byte formal would change high-word selectors.
+
+A local named union exposes the same 92-byte, four-aligned scene prefix as
+existing state fields and an explicit word at 88. The three values occupy
+88..90; byte 91 is storage read by the native word load and excluded by mask
+`0x00ffffff`, not a fourth value. The actual common initializer requests 420
+bytes from the zeroed allocator, which rounds and clears 432 bytes; this
+establishes initialized word storage on the successful allocated-state path.
+The view does not widen a three-byte array access into an out-of-bounds word
+and does not establish a complete original state type or portable union ABI.
+
+The helper's sole source hint is the real byte-pointer value in R1. Its three
+branch assignments feed the load at `0x08019AC2` and final byte store at
+`0x08019AC6`; R1 is dead before mask scratch reuse at `0x08019ACC` and refresh
+at `0x08019AE2`. There is no intervening call or overlapping live value.
+Removing the hint gives 100 bytes with 77 differing bytes under both compiler
+profiles. A separate root-address R2 hint proved unnecessary and was removed;
+the ordinary root address is consumed by the actual fresh-state reload at
+`0x08019AC8`. The changed decrement control keeps 96 bytes but differs in one.
+
+Private finite evidence for this extension has 1,129 cases: 90 initializer
+cases (30 ordinary, 60 deliberate abstract effects), 189 refresh cases (144
+ordinary, 36 deliberate abstract effects and nine NULL-formatter ABI-only
+cases), and 850 initialized marker cases with an abstract refresh call. The
+marker control diverges in all 850, a low-byte-selector error in 255, and a
+wrong fourth-byte mask in 68. The unbound but byte-mismatching marker remains
+model-equal in all 850. The omitted fourth byte is explicitly rejected. These
+bounded interpreters compare native memory, calls and writes; they do not
+execute rendering hardware or establish gameplay reachability or behaviour.

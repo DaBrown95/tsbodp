@@ -32,7 +32,7 @@ const unsigned short *display_load_background(unsigned int,const struct Backgrou
 struct FrameObject *scene_contact_activity_three_create_primary(void),*scene_contact_activity_three_create_secondary(void),*scene_contact_activity_three_create_observer(void),*scene_contact_activity_three_create_cursor(void);
 void scene_contact_activity_three_clear_slots(void);
 struct FrameObject *scene_contact_activity_three_create_row(unsigned int);
-void scene_contact_activity_three_original_refresh_value(unsigned int,unsigned int);
+void scene_contact_activity_three_refresh_value(unsigned int,unsigned int);
 struct SceneContactActivityThreeObject {
  unsigned char unknown00[8];unsigned short id,subtype;unsigned int flags;
  unsigned char unknown10[2],direction,unknown13;int speed;
@@ -82,10 +82,12 @@ int frame_random_range(int,int);
 void scene_contact_activity_three_queue_row_palette(struct FrameObject*);
 void scene_contact_activity_three_scale_row(struct FrameObject*,int,int);
 void scene_contact_activity_three_original_update_linked_row(struct FrameObject*);
-void scene_contact_activity_three_original_mark_selection(unsigned int);
+void scene_contact_activity_three_decrement_value(unsigned int);
 void scene_contact_activity_three_step(void);
 void scene_contact_activity_three_step_event(struct FrameObject*),scene_contact_activity_three_step_row(struct FrameObject*);
 void scene_contact_activity_three_get_observer_point(struct FramePoint*);
 void scene_contact_activity_three_reset_row(struct FrameObject*);
 void scene_contact_activity_three_remove_slots(void);
+void display_fill_background(unsigned int,unsigned short);
+void scene_contact_activity_three_initialize(void);
 #endif
