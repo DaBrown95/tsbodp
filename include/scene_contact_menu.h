@@ -10,6 +10,7 @@
 #include "frame_contact_action.h"
 #include "audio_game.h"
 #include "resource_decode.h"
+#include "scene_contact_activity.h"
 
 /* Kind-20 scene access views. These are observed prefixes, not recovered
  * original declarations. The original initializer allocates 420 bytes. */
@@ -36,7 +37,7 @@ union SceneContactResource {
     unsigned short halfwords[16];
 };
 struct SceneContactDefinition {
-    const void *unknown00[2];
+    SceneContactActivityCallback initialize, step;
     struct DisplayTimeRecord elapsed;
     unsigned char need_deltas[8], sequence, flags;
     unsigned short unknown1a;
@@ -77,10 +78,6 @@ void scene_contact_show_completion(void);
  * operands; these bodies are not new C coverage in this batch. */
 void scene_contact_initialize(void);
 void scene_contact_apply_need_adjustments(void);
-void scene_contact_original_step_primary(void);
-void scene_contact_original_step_secondary(void);
-void scene_contact_original_initialize_primary(void);
-void scene_contact_original_initialize_secondary(void);
 unsigned int scene_contact_original_service_mode(void);
 
 int frame_read_signed_parameter(const void *, unsigned int);

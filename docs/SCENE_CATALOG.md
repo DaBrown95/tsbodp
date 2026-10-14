@@ -1,6 +1,6 @@
 # Factory slot 11 and scene kind 21
 
-This connected path has fifteen matching C extents, 3,884 bytes: resource factory
+This connected path has twenty-one matching C extents, 4,400 bytes: resource factory
 slot 11 creates a contact trigger, its paired collision callback submits scene
 kind 21, and that scene initializes, processes input, refreshes selection, manages a
 quantity editor, draws labels and a tile frame, and shuts down. The names describe observed catalog and selection accesses; they
@@ -24,6 +24,12 @@ separate claims. No gameplay run is claimed here.
 | `scene_catalog_basic_value` | `0x428EC` | 120 |
 | `scene_catalog_page_value` | `0x43074` | 48 |
 | `scene_catalog_has_next` | `0x430F4` | 40 |
+| `scene_catalog_previous` | `0x431B8` | 60 |
+| `scene_catalog_next` | `0x431F4` | 80 |
+| `scene_catalog_is_basic_row` | `0x43244` | 32 |
+| `scene_catalog_refresh_basic_arrows` | `0x42F60` | 136 |
+| `scene_catalog_refresh_page_arrows` | `0x43264` | 104 |
+| `scene_catalog_refresh_quantities` | `0x4300C` | 104 |
 
 Every extent includes its literal pools and original trailing alignment. The
 constructor ends at the distinct original no-op entry `0x3AD60`; that four-byte
@@ -135,9 +141,6 @@ the observed paths.
 | Prepare objects | `0x42654` | 664 |
 | Confirm | `0x42964` | 654 mapped estimate; alignment remains original |
 | Option | `0x42BF4` | 324 |
-| Finish | `0x4300C` | 104 |
-| Previous page | `0x431B8` | 60 |
-| Next page | `0x431F4` | 80 |
 
 These are local static boundary estimates, not an exhaustive inventory. The
 item-drawing source attempts are retained privately: first 220/197, followed
@@ -276,7 +279,7 @@ The next-page predicate accepts and returns bytes. A zero count returns zero;
 otherwise it tests the first offset against `(count - 1) & 0xFC`. Its full
 forty-byte extent ends at the distinct original entry `0x4311C`, including the
 original zero alignment. It is used by the still-original object preparation
-and paging path. The value helpers own `0x428EC..0x42964` and
+and the recovered paging path. The value helpers own `0x428EC..0x42964` and
 `0x43074..0x430A4`; their following original confirm entry and already accepted
 headings helper are separate extents.
 
@@ -291,3 +294,47 @@ compilation also rejects an actual missing value-provider declaration. Failed
 sources and comparison bytes remain private. Item refresh (208 bytes), object
 preparation (664 bytes) and the other listed original helpers remain explicit
 and receive no new C credit.
+
+
+## Paging and quantity-caption handoffs
+
+Six connected extents add 516 matching C bytes. The input step calls previous
+or next paging, whose byte-return predicate compares the full selected scene
+word with the action-row byte. For a basic row the handlers edit page_start;
+for other rows they edit row. Previous does nothing at offset zero and otherwise
+subtracts four. Next calls the recovered count predicate before adding four.
+Both retain the original byte stores and wrap behavior; an externally written
+nonzero offset below four is not newly guarded.
+
+The basic-arrow refresher clears slots 11 and 12 for selector 4. Otherwise
+slot 11 follows page_start!=0 and slot 12 follows the count predicate. The
+page-arrow refresher similarly sets slots 13 and 14 from row!=0 and the
+row/value count predicate. These preserve word flag loads and bit-zero changes;
+object pointers are assumed valid by the original code. The special selector
+path and the predicate handoff remain connected to the original object creator.
+
+The quantity-caption refresher draws the same five quantity and position
+records as the panel, following a font selection and tile-rectangle clear.
+Each draw's returned tile is the next draw's input. The captured byte root,
+actual byte-address calculation and five-record coordinate cursor require no
+register binding, new traffic or extra storage. The existing input step invokes
+this helper after editing the selected quantity. No additional table capacity
+or pointer validity is inferred.
+
+The paging handlers own `0x431B8..0x431F4` and `0x431F4..0x43244`. Their row
+predicate owns the next 32 bytes through `0x43264`; the page-arrow refresher
+owns `0x43264..0x432CC`, including its internal pools and alignment. The
+separate original entry at `0x432CC` is outside this batch. Basic-arrow refresh
+owns `0x42F60..0x42FE8`, ending at the already recovered shutdown entry; quantity
+captions own `0x4300C..0x43074`, ending at the recovered page-value helper.
+These full boundaries come from local control flow, pools and adjacent entries,
+not from treating the mapped inventory as complete.
+
+All six ordinary C sources match their entire original extents and have genuine
+changed-source controls and separate strict diagnostics. The existing step's
+previous, next and completion-caption call names change only at their existing
+addresses. Current literal importer and actual caller/provider closures are
+refreshed with the final headers. The original item refresh, object creation,
+confirmation and option handlers remain explicit; useful failed reconstructions
+and raw comparisons are kept locally. Static routing, compiler equality and
+runtime behavior remain separate claims.

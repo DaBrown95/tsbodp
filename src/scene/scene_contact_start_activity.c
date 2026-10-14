@@ -14,9 +14,9 @@ void scene_contact_start_activity(void)
     display_configure_tile_allocation(0);
     g_input_pressed[0] = 0;
     if (g_scene_contact_state->scene <= 1)
-        scene_contact_original_initialize_primary();
+        scene_contact_initialize_primary_activity();
     else
-        scene_contact_original_initialize_secondary();
+        scene_contact_initialize_secondary_activity();
     if (g_scene_contact_state->scene != 6)
         audio_select_sequence(g_scene_contact_definitions[g_scene_contact_state->scene].sequence);
     g_scene_contact_state->flags |= 12;

@@ -9,8 +9,8 @@ void scene_catalog_step(void) {
  case 0:
   if(g_input_pressed[g_input_config.local_player]&0xf0) {
    keys=g_input_local_pressed[g_input_config.local_player];
-   if(keys&0x80)scene_catalog_next_original();
-   else if(keys&0x40)scene_catalog_previous_original();
+   if(keys&0x80)scene_catalog_next();
+   else if(keys&0x40)scene_catalog_previous();
    else if(keys&0x20) {
     if(g_scene_request.scene!=g_scene_catalog_first_row)g_scene_request.scene--;
    } else if(keys&0x10) {
@@ -61,7 +61,7 @@ void scene_catalog_step(void) {
    g_display_scene_frame_objects[11]->flags&=~1U;
    g_display_scene_frame_objects[12]->flags&=~1U;
    scene_catalog_build();
-   scene_catalog_finish_original();
+   scene_catalog_refresh_quantities();
    audio_play_animation_cue(5);
   } else if(keys&2) {
    g_scene_request.parameter=confirm;

@@ -3,8 +3,13 @@
 #include "frame_actor_palette_menu_transition.h"
 #include "heap.h"
 #include "display_palette_lifecycle.h"
-/* The observed308-byte allocation owns a word prefix and pointer at+0x130. */
-struct ScenePaletteMenuOwner {unsigned int initial_word;unsigned char unknown04[0x130-4];const void *parameters;};
+/* Observed308-byte storage; byte-derived counts remain unchecked. */
+struct ScenePaletteMenuOwner {
+    unsigned int initial_word;
+    struct FrameObject *available[25];
+    struct FrameObject *groups[5][10];
+    const void *parameters;
+};
 extern struct ScenePaletteMenuOwner *g_scene_palette_menu_owner;
 /* Existing game-state +0x28 storage, viewed only as an address here. */
 extern const unsigned char g_scene_palette_menu_parameter_base[];

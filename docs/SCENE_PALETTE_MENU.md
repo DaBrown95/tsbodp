@@ -16,11 +16,14 @@ does not establish complete reconstruction or runtime behavior of this menu.
 ## Initialization and shared state
 
 Initialization allocates 308 zeroed bytes and stores the pointer at
-`0x03001954`. The observed word at allocation offset zero receives 25; its
-meaning is unknown. The pointer at `+0x130` receives existing game-state
-storage at `0x03003978`, or game-state `+0x28`. The new partial structure
-records these accesses and the observed allocation size without assigning
-roles to the intervening fields or interpreting the pointed-to storage.
+`0x03001954`. The observed word at allocation offset zero receives 25 and
+later bounds the available-object slots; its existing `initial_word` name is
+retained. The pointer at `+0x130` receives existing game-state storage at
+`0x03003978`, or game-state `+0x28`. The partial structure now records the
+twenty-five pointer slots at `+4` and five rows of ten pointers at `+0x68`,
+preserving the 308-byte allocation and four-byte alignment. The parameter
+pointer retains its existing opaque type; its byte interpretation is local
+to the observed count accesses.
 Allocation failure is unchecked, as in the original.
 
 The shared request receives scene zero, transition/state word `+0x10` zero
@@ -352,9 +355,9 @@ at `0x14584`, `0x146E4`, `0x14CB0` and `0x14F08` own 352, 336, 600 and
 96 bytes; background handoffs at `0x16078` and `0x16160` own 136 and 76.
 All boundaries include their original pools and alignment. The apparent region
 after state ten contains independent entries: the selection-list builder at
-`0x1510C..0x151C4` and release helper through `0x15270` remain original, with
-zero C credit. Navigation remains unconverted; the following text-transition
-section covers states eleven and twelve separately.
+`0x1510C..0x151C4` remains original, while the release helper through
+`0x15270` is reconstructed below. Navigation remains unconverted; the following
+text-transition section covers states eleven and twelve separately.
 
 State six acts at timers thirty and fifteen, prepares window/background moves
 and object slots, redraws rows zero through seven, then enters state three at
@@ -366,7 +369,7 @@ assignment supplies the later palette-offset base; no unused initialization or
 additional read is introduced. At zero it invokes the original list builder
 before checking the fresh owner word and updating slot eight's visibility.
 
-State ten invokes the original list release, reverses object/window movement,
+State ten invokes the list release, reverses object/window movement,
 then selects a queued request, state six or the selected-exit background path.
 Its final three scroll calls need five short register constraints: the first
 and second hold their actual layer and X arguments in R0/R1; the third holds
@@ -387,11 +390,11 @@ The mode-seven handoff sets its initial
 background Y to negative one hundred in fixed point, then requests positive
 one hundred as a later scroll target. These are separate observed operations.
 
-The owner remains the existing partial 308-byte access view. Static inspection
-of the still-original builder/release shows pointer slots and byte-derived loop
-counts; no new storage bounds or valid-count guarantee is inferred here.
-The two original helper declarations record only the no-argument, effect-only
-calls. Current canonical source/control proofs cover all seven new functions and
+The owner remains a partial 308-byte access view. The builder and release show
+pointer slots and byte-derived loop counts; neither establishes valid serialized
+counts or guards the represented capacity. The builder remains original and
+both helpers retain their no-argument, effect-only calls. Current canonical
+source/control proofs for this seven-function batch cover all seven functions and
 25 accepted direct callers/providers, with seven additional strict diagnostic
 pairs. Twenty-nine pinned layout/type checks and four mutated-header cases
 establish the actual access views; two missing-provider declarations are rejected
@@ -408,6 +411,42 @@ real source controls diverge in these cases; unsupported instructions, missing
 pools and exhausted execution budgets are rejected separately. Called providers,
 allocation, original list operations and window/background hardware are
 abstracted; no complete menu, gameplay or arbitrary capacity claim follows.
+
+## Selection object release
+
+The independent function at `0x151C4..0x15270` adds 172 complete C extent
+bytes, including its sole owner-pointer literal. Its ordinary C source uses
+no register bindings and makes no calls. It visits five groups, reads each
+count from parameter bytes two through six, sets flag two on the pointed-to
+object and clears that pointer slot. It then does the same for the available
+slots bounded by the owner's word at zero. It does not deallocate objects or
+reset either count source.
+
+The real five-row do-loop and existing parameter-member offset give the
+original allocation without synthetic initialization or additional accesses.
+Both former annotations were removed together while retaining all 172 bytes;
+the earlier mismatches and annotated match are retained privately. The group
+loop reloads the owner at each actual body iteration and rereads its parameter
+pointer/count after the two stores. The available loop likewise reloads the
+owner at each body iteration and rereads its count from that iteration's
+owner snapshot. No interrupt or opaque provider mutation is assumed.
+
+The pinned compiler checks the existing owner size/alignment and all observed
+pointer offsets, row stride and widths. Wrong available prefix, row stride,
+count width and parameter byte interpretation fail the corresponding layout
+checks. The actual changed-source control sets grouped-object flag four instead
+of two and fails the byte comparison. Strict declaration builds also use the
+complete canonical header graph.
+
+Ten finite fixtures execute the original and linked bodies for counts within
+the represented 25 available slots and five rows of ten slots. They include
+zero counts, skipped null slots and repeated valid object pointers. Seven
+fixtures distinguish the changed flag; attempted null accesses are rejected
+as uninitialized-memory inputs in both interpreted bodies, without a new
+source guard or a claim about hardware faults. Native read/write traces pin the real
+root/count reloads. These normalized fixtures do not validate arbitrary
+serialized counts, pointers, aliasing, allocation failure or gameplay. The
+184-byte builder and 548-byte navigation routine remain explicitly original.
 
 ## Selected text transitions
 

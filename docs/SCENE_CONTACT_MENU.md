@@ -6,7 +6,7 @@ kind 20 through the scene request provider. This identifies a connected scene
 path; the names below describe static accesses and are not recovered original
 identifiers or a claim about gameplay.
 
-This connected path reconstructs ten C functions, totaling 1,880 bytes:
+This connected path reconstructs fifteen C functions, totaling 2,460 bytes:
 
 | Entry | Bytes | Observed role |
 | --- | ---: | --- |
@@ -19,6 +19,11 @@ This connected path reconstructs ten C functions, totaling 1,880 bytes:
 | `0x080292EC` | 96 | Retire objects or clear state flag 16, then reset display and audio dependencies |
 | `0x080293C0` | 80 | Handle command words `0x82` and `0x43`, with two halfword output pointers |
 | `0x08029410` | 60 | Prepare a background, text control and palette ranges |
+| `0x080297A4` | 180 | Initialize the primary activity's display, selected callback and view |
+| `0x08029858` | 220 | Load the selected tile, palette, map and cell resources |
+| `0x08029934` | 60 | Update the primary view and effects, then call an optional activity tick |
+| `0x080299B0` | 80 | Initialize the secondary activity and restore its palette |
+| `0x08029A00` | 40 | Call the selected secondary activity tick |
 | `0x08029A28` | 16 | Release the primary object list on the alternate activity path |
 
 Every comparison includes the complete original extent, internal switch tables,
@@ -49,8 +54,11 @@ The observed eight resource pointers are `0x080596BC`, `0x080596C8`,
 `0x08059710`. All are four-byte aligned and spaced by 12 bytes. This supports
 the declared alignment for those observed records without establishing the
 complete resource-table capacity or arbitrary incoming scene values.
-Definition records use a 28-byte stride: an eight-byte clock at `+8`, eight
-delta bytes at `+16`, sequence byte at `+24` and flags at `+25`.
+Definition records use a 28-byte stride: two callback words at `+0` and `+4`,
+an eight-byte clock at `+8`, eight delta bytes at `+16`, sequence byte at `+24`
+and flags at `+25`. The callback view describes the specific effect-only,
+no-argument calls made here. It does not establish the original declarations
+or return types of the unconverted targets, or refine other callback families.
 
 The progress test uses one parameter-root access view at game storage `+0x98`.
 Its value bytes at `+0x69D` are the same bytes as the existing contact-world
@@ -125,10 +133,51 @@ audio notification 54-to-55 control changes the compiled result.
 The initializer `0x08028A10` remains original, with a complete 448-byte extent.
 Need adjustment `0x0802944C` / 100 bytes also remains original. Their
 typed call declarations are local, provisional descriptions of observed
-operands and carry no new C credit. The original primary/secondary activity
-ticks and mode service are likewise explicit. Retained failed candidates and
+operands and carry no new C credit. The mode service and the original view
+operations at `0x0800EB14` and `0x0800E8B4` are likewise explicit. Retained failed candidates and
 raw comparisons distinguish genuine source-lifetime improvements from these
 remaining mismatches.
+
+# Connected activity dispatch and resource loading
+
+The activity wrappers preserve the scene-byte selection and the native
+definition-table stride. Both initializers call the first callback word
+without a null guard. The primary tick first updates map view zero, view
+motion and transient effects, then tests the second callback word before
+calling it. The secondary tick calls that word without a guard. In the
+observed eight-record prefix, the first secondary word is null and the other
+seven are nonzero; all eight initialization words are nonzero Thumb addresses.
+That prefix is evidence for these accesses, not a complete table capacity or
+a valid-scene guarantee. The original BX-R0 call veneer remains a low-level
+handoff with zero new C or glue credit.
+
+The primary initializer installs the accepted scene VBlank callback and uses
+background control `0x08059544` for layer one and `0x08059540` for layer two.
+The top-level original initializer uses `0x08059540` for layer one instead.
+These distinct source operands are retained. After resource setup and the
+initialization callback, the wrapper reads the state prefix's first pointer
+word for the view provider and passes the existing two-word view dimensions
+by value. The eight-byte state access view leaves the second word unnamed;
+it does not describe the remaining allocation or establish a nonnull object.
+
+The resource loader takes an incoming word index and uses a 60-byte record
+stride rooted at `0x0805985C`. Its union represents the observed fifteen
+pointer words as a named prefix and a word array. The two tile streams are
+decoded into `0x06000000` and `0x06008000`, followed by the two map source
+controls, the 256-color palette and primary/combined map resources for views
+zero and one. Cell resources are decoded next. Only the extra type pointer is
+tested for null before the extra decode; the final call resets object palette
+slots. No other pointer, allocation or index guard is introduced.
+
+A small inline accessor adds the row offset to the address of each real
+pointer field and reads that field. Its unsigned address representation is
+specific to the measured four-byte target pointers and words. The table base
+lifetime begins before the row offset; both remain separate across the real
+provider calls. This ordinary C spelling reproduces the full 220-byte extent
+without register bindings or repeated reads. Direct entry-pointer spellings
+produced a shorter, unmatched body and remain preserved as failed candidates.
+The observed record prefix and alignment do not establish arbitrary incoming
+index validity or complete resource capacity.
 
 The source preserves unchecked player, scene and table accesses, nullable
 cursor handling, callback output writes and the original teardown behavior.

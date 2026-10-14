@@ -20,9 +20,9 @@ void scene_contact_step(void)
         display_time_update_scene_countdown();
         scene_contact_refresh_value();
         if (g_scene_contact_state->scene <= 1)
-            scene_contact_original_step_primary();
+            scene_contact_step_primary_activity();
         else
-            scene_contact_original_step_secondary();
+            scene_contact_step_secondary_activity();
         if (cursor && cursor->state == 5)
             break;
         if (g_frame_flags & 16)
