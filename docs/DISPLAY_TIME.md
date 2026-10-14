@@ -73,7 +73,7 @@ as the original control flow does, rather than defining a single-point range.
 Period returns 3 for hours at most 5 or above 19, 0 for 6 through 9, 1 for 10
 through 16, and 2 for 17 through 19. The scene context word at `+4` is therefore
 refined from the prior resource-pointer inference to an unsigned period
-selector. Its unconverted audio getter at `0x08026A9C` explicitly switches on
+selector. Its audio getter at `0x08026A9C` explicitly switches on
 selectors 0 through 3 before accessing scene audio data, and is now named
 `scene_audio_for_period`. The scene initializer and need-effect audio restore
 use that full-word selector without changing any address or layout.
@@ -120,17 +120,19 @@ all original strings follow the apparent doubled-token convention.
 
 The signed division and remainder helpers at `0x0804C8C8` and `0x0804C8CC`
 execute BIOS call 6; the latter moves the remainder from `r1` to the return
-register. Both remain explicit unconverted low-level dependencies and receive
-no C credit here. The formatter returns its original destination pointer,
+register. The quotient wrapper is now explicit matching Thumb glue; the remainder
+wrapper remains original. Both receive zero C credit. The formatter returns its original destination pointer,
 terminates with zero and has no output-length argument. Its reads establish
 signed component access but do not validate negative or oversized values,
 string availability or runtime destination capacity.
 
 Static mapped callers occur at `0x08005724`, `0x0801E798`, `0x08025570`,
-`0x08026E6C`, `0x08028DFC` and `0x08029574`. The first and fifth combine countdown updates with text drawing and now match
-as the connected producers described below. The other callers remain
-unconverted; none of this static linkage establishes runtime execution. The compiler emits the bounded switch from
-the C cases, rather than copying the original table into source.
+`0x08026E6C`, `0x08028DFC` and `0x08029574`. Current source status is recorded
+in the inventory. The first and fifth connect countdown updates and text drawing
+as described below; the contact-action tick at the last address is described in
+[FRAME_CONTACT_ACTION.md](FRAME_CONTACT_ACTION.md). These static connections do
+not establish runtime execution. The compiler emits the bounded switch from the
+C cases without copying the original table into source.
 
 ## Countdown producers and map clearing
 

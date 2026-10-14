@@ -3,7 +3,7 @@
 The audited phase table's row nineteen connects initialization `0x08013F3D`,
 state dispatch `0x08015F69` and shutdown `0x0801405D`. These three ordinary-C
 functions add 564 original extent bytes and connect the previously reconstructed
-[actor/palette menu](ACTOR_GROUP_BINDING.md) and its transition path. Nine state
+[actor/palette menu](ACTOR_GROUP_BINDING.md) and its transition path. Eight state
 handlers remain explicit original dependencies; matching these scene callbacks
 does not establish complete reconstruction or runtime behavior of this menu.
 
@@ -54,7 +54,7 @@ comparison. The accepted switch needs no manufactured work or register binding.
 | State | Observed target | Current source status |
 | ---: | --- | --- |
 | 0 | `scene_palette_menu_phase_0` | Matching C |
-| 1 | `0x080157D0` | Original |
+| 1 | `scene_palette_menu_phase_1` | Matching C |
 | 2 | `frame_step_palette_menu_transition` | Matching C |
 | 3 | `frame_step_palette_menu` | Matching C |
 | 4 | `0x08014B40` | Original |
@@ -70,8 +70,8 @@ comparison. The accepted switch needs no manufactured work or register binding.
 
 The original-target declarations use state-number names until their bodies
 provide semantic evidence. They are address handoffs and receive no C credit.
-The two accepted handlers connect row choice, text drawing, actor resources,
-input and transitions to this lifecycle.
+The accepted handlers connect row choice, character entry, text drawing, actor
+resources, input and transitions to this lifecycle.
 
 Shutdown copies the low bytes of the first seven choice words into the existing
 game-state selectors at `+0x20..+0x26`. The eighth selector is left untouched.
@@ -103,7 +103,8 @@ runtime, hardware-timing and gameplay claims.
 
 Two ordinary C providers add 660 matching extent bytes: state zero at
 `0x0801553C..0x08015728` owns 492 bytes, followed by the 168-byte preparation
-helper through `0x080157D0`. State one remains an independent original entry.
+helper through `0x080157D0`. State one is the independent entry reconstructed
+below.
 The complete pools and alignment belong to these two extents. No register
 bindings, new guards, volatile accesses or extra calls and stores are required.
 The lifecycle above and the previously reconstructed transition/update handlers
@@ -148,7 +149,7 @@ Preparation clears backgrounds zero, one and two, selects font one with fill
 minus one, loads the two original backgrounds and the established entry palette,
 and invokes the original template walker with tile one and word argument 37.
 It sets all three background scroll targets with word duration one before calling
-the original entry-object builder. The template declaration returns a word and
+the entry-object builder reconstructed below. The template declaration returns a word and
 accepts word arguments plus a pointer to eight-byte records containing signed
 halfword x/y, byte width/style and halfword text. The pinned compiler gives this
 eight-byte record four-byte alignment; the template root at `0x08052444` and its
@@ -159,10 +160,10 @@ layout evidence from caller-byte equality. The ignored word result and
 proper record-pointer type retain the original 168-byte helper. The former
 private void/untyped declaration is excluded from canonical interface evidence.
 
-The template walker at `0x08044F00..0x08044FA0` and the 336-byte object builder
-at `0x08015B68` remain explicit original dependencies with zero new C credit.
-The typed template header ships with this batch; it does not represent recovered
-source for that provider. Its accepted text decoder/drawing/font/buffer context,
+The template walker at `0x08044F00..0x08044FA0` remains an explicit original
+dependency with zero new C credit. The typed template header does not represent
+recovered source for that provider. The 336-byte object builder is reconstructed
+as part of the following character-entry path. Its accepted text decoder/drawing/font/buffer context,
 the actual background, window, variant and audio providers, the lifecycle caller
 and incoming background-enable wrapper are verified separately.
 
@@ -173,4 +174,111 @@ literal current-header dependencies, allocated native sections, symbols, origina
 addresses and pools are pinned; stricter implicit-declaration warning-as-error
 builds run outside the unchanged acceptance profile. These are static and
 compiler/link claims, not gameplay, object-capacity, template-content or complete
-menu reconstruction claims. Nine state targets remain original.
+menu reconstruction claims. Eight state targets remain original.
+
+## Character entry, cursor and object handoff
+
+Four connected functions add 1,364 matching C extent bytes. State one is called
+by the accepted state dispatcher, uses the cursor and character-bank helpers,
+and reuses the entry objects created by the state-zero preparation. The object
+builder also handles the mode-seven exit-object handoff into the accepted
+position-movement and scene-object callback path.
+
+| ROM extent | Function | Bytes |
+| --- | --- | ---: |
+| `0x157D0` | `scene_palette_menu_phase_1` | 792 |
+| `0x15AE8` | `scene_palette_menu_refresh_cursor` | 128 |
+| `0x15B68` | `scene_palette_menu_build_entry_objects` | 336 |
+| `0x1600C` | `scene_palette_menu_refresh_character_bank` | 108 |
+
+State one reads the local player's halfword pressed-input value from the
+canonical local array at `0x03004250`, widening it to a word. The linked array
+at `0x03004228` is a separate view. Input priority is confirm, cancel, the two
+bank-toggle bits, then up, down, left and right. One semantic word is bound to
+R1 to preserve native allocation. Every use of that input word precedes the
+first call in its selected branch; it is never expected to survive a call.
+Original control-flow checks and fixtures that poison caller-clobbered registers
+establish this limited lifetime. Both display helpers and the builder use ordinary
+C without register bindings, volatile accesses or added traffic.
+
+Confirm on scene three clears sixteen bytes of the existing game text field,
+then appends the resources identified by each exit object's halfword at `+0x0A`.
+That halfword is distinct from the object ID at `+8`. A nonempty entry selects
+phase two, timer thirty and parameter seven for mode seven or six otherwise;
+empty confirmation plays cue three. On the other scenes, the count-greater-than-
+seven guard applies only to adding a character. It creates a label from the
+word resource table, positions the first at `(67,37)` in fixed-point units and
+places later labels four pixels after resource IDs 93 or 96, or nine pixels after
+other resources. It stores the resource ID, increments the byte count and plays
+cue one. Cancel decrements a nonzero count and marks a nonnull removed object;
+empty cancel selects phase two, timer thirty and parameter thirteen.
+
+The two bank-toggle input branches invert the existing byte at `0x03001979`,
+redraw the character bank and play cue one. Up and down cycle scenes zero through
+three; entry into scene two adjusts the selected parameter to the observed
+first/last range. Left and right wrap within the selected range except on scene
+three. The entry records at `0x08052418` have a four-byte stride, with first and
+last at offsets zero and one and two uninterpreted bytes. The resource table at
+`0x08052694` uses bank, row and entry strides of 208, 52 and four bytes. Its first
+dimension and actual storage capacity remain unbounded declarations rather than
+invented complete tables.
+
+The cursor helper treats scene three separately, clearing flag one in slot
+thirteen and setting it in fourteen. On other scenes its conditional tests
+whether *any bit other than bit zero* is set in slot thirteen, then sets bit zero
+and clears it in slot fourteen. It reads the selected unsigned halfword x and
+byte y coordinates, shifts their native bit patterns into fixed-point arguments
+and plays cue zero. This preserves unchecked index and signed-argument behavior;
+it does not establish portable arbitrary-coordinate arithmetic.
+
+The bank helper clears background zero, selects its text control and font, and
+reads the bank flag after that font call. It chooses the original eight-byte
+entry records at `0x08052444` or `0x0805256C` and passes word arguments `(1,37)`
+to the original template walker. The latter root follows thirty-seven eight-byte
+records; neither root is asserted to own a complete table. Slot twelve's ID
+toggles between 134 and 130, with all other IDs selecting 134. Its fresh pointer
+is then passed to variant state 58.
+
+Outside mode seven the builder creates six scene objects and two labels through
+accepted constructors and text providers. The actual first constructor result
+is obtained before initializing the object-table pointer; a separately scoped
+last-object pointer recovers the native register lifetimes without manufactured
+work. In mode seven a fresh byte count controls each loop iteration. Each exit
+object receives the accepted scene-object callback, state fourteen, an observed
+halfword timer store of eighteen, a position move toward y 37 with duration
+nineteen, one movement step and variant three. The begin provider writes its
+duration over that timer under the established movement protocol; the following
+step reduces it to eighteen in normalized fixtures. The nullable menu object
+in slot seven is marked for removal, and the request scene becomes three. The
+existing actor-field access view is used only for this timer at `+0x5E`; it does
+not classify every created label as a complete actor.
+
+Pinned compiler layout diagnostics establish the four-byte range size and
+alignment, record offsets, word resource strides, eight-byte template with
+four-byte alignment, local-input byte/halfword interfaces, request words and the
+observed object fields. The range and template roots and their strides satisfy
+those alignments. The timer is a genuine two-byte primitive at the existing
+object-base offset, rather than an incorrectly aligned plain one-member
+aggregate. Widening the range field, narrowing resource IDs and imposing
+one-byte range alignment each fail separate layout assertions. These diagnostics
+claim no C coverage and are separate from byte matching.
+
+All four complete extents, including interspersed pools and alignment, have
+current canonical positive and actual changed-source negative proofs. Controls
+change the add guard, the cursor's real flag predicate, the template argument
+and the movement duration. Current accepted callers, input producers and text,
+object, movement, background and audio providers are freshly checked; the
+template walker remains original. Separate strict declaration builds reject
+implicit interfaces without changing acceptance compiler flags. Useful failed
+pointer-lifetime and discarded-control forms remain local.
+
+The finite checks cover 35 input cases, 36 cursor/bank cases and fifteen builder
+cases, using generated normalized objects and abstracted callees. They execute
+the linked functions and original extents, check callee-saved registers and
+reject unsupported instructions, missing bytes and exhausted execution budgets.
+Called-provider models, normalized movement, scenes zero through three and
+counts zero through eight bound these checks. Real label resource lengths,
+allocation success, index validity and capacity remain unchecked. In particular,
+the append provider's request for 1,024 bytes after a sixteen-byte clear does not
+establish safe capacity for arbitrary strings. These results do not prove whole
+menu behavior, hardware timing or gameplay.
