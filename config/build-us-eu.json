@@ -38933,6 +38933,126 @@
         "before": "unknown_0a-32",
         "after": "unknown_0a-31"
       }
+    },
+    {
+      "name": "frame_shared_optional_indicator_step",
+      "rom_offset": 240232,
+      "size": 156,
+      "source": "src/frame/frame_shared_optional_indicator_step.c",
+      "symbols": {
+        "frame_create_attachment_parameter_indicator": "0x801a661",
+        "frame_set_actor_direction": "0x8001c29",
+        "frame_request_animation": "0x8001b5d",
+        "audio_play_animation_cue": "0x8040ffd",
+        "frame_need_effect_consume_optional": "0x802e7d1",
+        "audio_game_stop_sample": "0x8041341",
+        "transition_object_set_state": "0x8001c05",
+        "g_actor_reverse_directions": "0x08052858",
+        "g_frame_need_effect_definitions": "0x08062e7c"
+      },
+      "thumb_symbols": [
+        "frame_create_attachment_parameter_indicator",
+        "frame_set_actor_direction",
+        "frame_request_animation",
+        "audio_play_animation_cue",
+        "frame_need_effect_consume_optional",
+        "audio_game_stop_sample",
+        "transition_object_set_state"
+      ],
+      "negative_control": {
+        "before": "actor,46)",
+        "after": "actor,47)"
+      }
+    },
+    {
+      "name": "frame_shared_optional_timed_step",
+      "rom_offset": 240388,
+      "size": 248,
+      "source": "src/frame/frame_shared_optional_timed_step.c",
+      "symbols": {
+        "frame_need_effect_try_optional": "0x802e689",
+        "frame_set_actor_direction": "0x8001c29",
+        "frame_request_animation": "0x8001b5d",
+        "audio_play_animation_cue": "0x8040ffd",
+        "frame_adjust_actor_needs": "0x802b825",
+        "frame_attachment_position": "0x800176d",
+        "frame_begin_actor_route": "0x80370d1",
+        "audio_game_stop_sample": "0x8041341",
+        "g_actor_reverse_directions": "0x08052858",
+        "g_frame_need_effect_definitions": "0x08062e7c"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_try_optional",
+        "frame_set_actor_direction",
+        "frame_request_animation",
+        "audio_play_animation_cue",
+        "frame_adjust_actor_needs",
+        "frame_attachment_position",
+        "frame_begin_actor_route",
+        "audio_game_stop_sample"
+      ],
+      "negative_control": {
+        "before": "actor,63)",
+        "after": "actor,64)"
+      }
+    },
+    {
+      "name": "frame_shared_optional_choices",
+      "rom_offset": 240680,
+      "size": 32,
+      "source": "src/frame/frame_shared_optional_choices.c",
+      "symbols": {
+        "frame_need_effect_optional_one_ready": "0x802f179"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_optional_one_ready"
+      ],
+      "negative_control": {
+        "before": "*choices=61",
+        "after": "*choices=60"
+      }
+    },
+    {
+      "name": "frame_shared_optional_begin",
+      "rom_offset": 240720,
+      "size": 72,
+      "source": "src/frame/frame_shared_optional_begin.c",
+      "symbols": {
+        "frame_allocate_actor_attachment_record": "0x802e3c5",
+        "frame_attachment_position": "0x800176d",
+        "frame_begin_actor_route": "0x80370d1",
+        "frame_request_animation": "0x8001b5d"
+      },
+      "thumb_symbols": [
+        "frame_allocate_actor_attachment_record",
+        "frame_attachment_position",
+        "frame_begin_actor_route",
+        "frame_request_animation"
+      ],
+      "negative_control": {
+        "before": "actor,6)",
+        "after": "actor,7)"
+      }
+    },
+    {
+      "name": "frame_shared_optional_dispatch",
+      "rom_offset": 240792,
+      "size": 44,
+      "source": "src/frame/frame_shared_optional_dispatch.c",
+      "symbols": {
+        "frame_find_actor_attachment_record": "0x802ed61",
+        "frame_shared_optional_indicator_step": "0x803aa69",
+        "frame_shared_optional_timed_step": "0x803ab05"
+      },
+      "thumb_symbols": [
+        "frame_find_actor_attachment_record",
+        "frame_shared_optional_indicator_step",
+        "frame_shared_optional_timed_step"
+      ],
+      "negative_control": {
+        "before": "case 61:",
+        "after": "case 60:"
+      }
     }
   ],
   "assembly": [

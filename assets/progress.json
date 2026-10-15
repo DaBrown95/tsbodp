@@ -1,21 +1,21 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "15 Oct 2026, 04:30 BST",
-  "compiled_c_functions": 1624,
-  "compiled_c_bytes": 223940,
+  "verified_at": "15 Oct 2026, 04:45 BST",
+  "compiled_c_functions": 1629,
+  "compiled_c_bytes": 224492,
   "assembly_glue_bytes": 500,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16552776,
+  "unconverted_rom_bytes": 16552224,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2523,
-  "bounded_control_flow_bodies": 846,
+  "bounded_control_flow_bodies": 841,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 17,
   "unresolved_callback_call_sites": 101,
-  "mapped_extent_bytes": 323748,
+  "mapped_extent_bytes": 323750,
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointer and Thumb prologue sweeps; estimated extents",
   "rows": [
     {
@@ -13151,18 +13151,18 @@
       "status": "candidate"
     },
     {
-      "name": "sub_0803AA68",
+      "name": "frame_shared_optional_indicator_step",
       "group": "ROM 0803xxxx",
       "rom_offset": 240232,
       "size": 156,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0803AB04",
+      "name": "frame_shared_optional_timed_step",
       "group": "ROM 0803xxxx",
       "rom_offset": 240388,
       "size": 248,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "sub_0803ABFC",
@@ -13179,11 +13179,11 @@
       "status": "candidate"
     },
     {
-      "name": "sub_0803AC28",
+      "name": "frame_shared_optional_choices",
       "group": "ROM 0803xxxx",
       "rom_offset": 240680,
-      "size": 30,
-      "status": "candidate"
+      "size": 32,
+      "status": "exact_c"
     },
     {
       "name": "sub_0803AC48",
@@ -13193,18 +13193,18 @@
       "status": "candidate"
     },
     {
-      "name": "sub_0803AC50",
+      "name": "frame_shared_optional_begin",
       "group": "ROM 0803xxxx",
       "rom_offset": 240720,
       "size": 72,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0803AC98",
+      "name": "frame_shared_optional_dispatch",
       "group": "ROM 0803xxxx",
       "rom_offset": 240792,
       "size": 44,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "sub_0803ACC4",
@@ -30457,16 +30457,16 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_0803AA68",
+      "name": "frame_shared_optional_indicator_step",
       "rom_offset": 240232,
       "size": 156,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0803AB04",
+      "name": "frame_shared_optional_timed_step",
       "rom_offset": 240388,
       "size": 248,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "sub_0803ABFC",
@@ -30487,16 +30487,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_0803AC28",
+      "name": "frame_shared_optional_choices",
       "rom_offset": 240680,
-      "size": 30,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_03AC46",
-      "rom_offset": 240710,
-      "size": 2,
-      "status": "unresolved"
+      "size": 32,
+      "status": "exact_c"
     },
     {
       "name": "sub_0803AC48",
@@ -30505,16 +30499,16 @@
       "status": "candidate"
     },
     {
-      "name": "sub_0803AC50",
+      "name": "frame_shared_optional_begin",
       "rom_offset": 240720,
       "size": 72,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0803AC98",
+      "name": "frame_shared_optional_dispatch",
       "rom_offset": 240792,
       "size": 44,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "sub_0803ACC4",
@@ -35126,8 +35120,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "394089bfb038c952f6d1e94bfb53d56b56f02c5242b4eac2b888bd04ff6c3648",
-    "assets/rom-inventory.json": "aac2028b65bdac0d20601686bd545b5fb8af442f5b7c869d993bd65b36b5daa3",
+    "config/build-us-eu.json": "9cc81533159311fc37dddfe5feccb42133f22f0e80ef5e4449d63bdb732a4269",
+    "assets/rom-inventory.json": "d39ff5b411f1153df4e5cd2da03e1b9e59dbade8253f341dcfeb0462e9bee581",
     "tools/render_progress.py": "419354ceff7a7eb3a9e9f520cce14b39dbdc60ea247901091ba834d85e0d32e6",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "bc77da39abf1f092066c258dd6dadb1606a772d563deac4a37b86d0b0bffd10d",
