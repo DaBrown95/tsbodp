@@ -39956,6 +39956,94 @@
         "before": "((USItype) w.s.low > 0)",
         "after": "((USItype) w.s.low == 0)"
       }
+    },
+    {
+      "name": "__fixunsdfsi",
+      "rom_offset": 314820,
+      "size": 68,
+      "source": "src/runtime/double_to_unsigned.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__gedf2": "0x0804db45",
+        "__adddf3": "0x0804d49d",
+        "__fixdfsi": "0x0804dca5"
+      },
+      "thumb_symbols": [
+        "__gedf2",
+        "__adddf3",
+        "__fixdfsi"
+      ],
+      "negative_control": {
+        "before": "return (USItype) (SItype) (a + LONG_MIN) - (USItype) LONG_MIN;",
+        "after": "return (USItype) (SItype) (a + LONG_MIN) - (USItype) LONG_MIN + 1;"
+      }
+    },
+    {
+      "name": "__gedf2",
+      "rom_offset": 318276,
+      "size": 76,
+      "source": "src/runtime/double_compare_ge.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__unpack_d": "0x0804d159",
+        "__fpcmp_parts_d": "0x0804d935"
+      },
+      "thumb_symbols": [
+        "__unpack_d",
+        "__fpcmp_parts_d"
+      ],
+      "negative_control": {
+        "before": "return __fpcmp_parts_d (&a, &b) ;",
+        "after": "return -__fpcmp_parts_d (&a, &b) ;"
+      }
+    },
+    {
+      "name": "__floatsidf",
+      "rom_offset": 318504,
+      "size": 124,
+      "source": "src/runtime/double_from_signed.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__pack_d": "0x0804d011"
+      },
+      "thumb_symbols": [
+        "__pack_d"
+      ],
+      "negative_control": {
+        "before": "in.normal_exp = FRACBITS + NGARDS;",
+        "after": "in.normal_exp = FRACBITS + NGARDS + 1;"
+      }
+    },
+    {
+      "name": "__fixdfsi",
+      "rom_offset": 318628,
+      "size": 116,
+      "source": "src/runtime/double_to_signed.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__unpack_d": "0x0804d159",
+        "__lshrdi3": "0x0804e6f9"
+      },
+      "thumb_symbols": [
+        "__unpack_d",
+        "__lshrdi3"
+      ],
+      "negative_control": {
+        "before": "if (a.normal_exp > 30)",
+        "after": "if (a.normal_exp > 29)"
+      }
     }
   ],
   "assembly": [

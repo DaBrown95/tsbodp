@@ -4508,7 +4508,7 @@
   "sweep_seed_count": 435,
   "entry_count": 2523,
   "extent_count": 2525,
-  "mapped_extent_bytes": 323758,
+  "mapped_extent_bytes": 323760,
   "rows": [
     {
       "name": "ROM entry",
@@ -87149,13 +87149,14 @@
       "group": "ROM 0804xxxx"
     },
     {
-      "name": "sub_0804CDC4",
+      "name": "__fixunsdfsi",
       "rom_offset": 314820,
       "mode": "Thumb",
       "runtime_addresses": [
         134532548
       ],
       "evidence": [
+        "bounded audit",
         "candidate call",
         "direct call"
       ],
@@ -87171,11 +87172,11 @@
         314878
       ],
       "size": 68,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 314820,
       "body_rom_start": 314820,
       "body_rom_end": 314880,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 52,
       "referenced_literal_bytes": 16,
       "status": "mapped_code",
@@ -87657,13 +87658,14 @@
       "group": "ROM 0804xxxx"
     },
     {
-      "name": "sub_0804DB44",
+      "name": "__gedf2",
       "rom_offset": 318276,
       "mode": "Thumb",
       "runtime_addresses": [
         134536004
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -87677,11 +87679,11 @@
         318350
       ],
       "size": 76,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 318276,
       "body_rom_start": 318276,
       "body_rom_end": 318352,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 76,
       "referenced_literal_bytes": 0,
       "status": "mapped_code",
@@ -87750,13 +87752,14 @@
       "group": "ROM 0804xxxx"
     },
     {
-      "name": "sub_0804DC28",
+      "name": "__floatsidf",
       "rom_offset": 318504,
       "mode": "Thumb",
       "runtime_addresses": [
         134536232
       ],
       "evidence": [
+        "bounded audit",
         "candidate call",
         "direct call"
       ],
@@ -87770,24 +87773,25 @@
         318622
       ],
       "size": 124,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 318504,
       "body_rom_start": 318504,
       "body_rom_end": 318624,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 110,
       "referenced_literal_bytes": 12,
       "status": "mapped_code",
       "group": "ROM 0804xxxx"
     },
     {
-      "name": "sub_0804DCA4",
+      "name": "__fixdfsi",
       "rom_offset": 318628,
       "mode": "Thumb",
       "runtime_addresses": [
         134536356
       ],
       "evidence": [
+        "bounded audit",
         "candidate call",
         "direct call"
       ],
@@ -87801,12 +87805,12 @@
       "return_offsets": [
         318740
       ],
-      "size": 114,
-      "extent_basis": "CFG envelope estimate",
+      "size": 116,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 318628,
       "body_rom_start": 318628,
       "body_rom_end": 318742,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 108,
       "referenced_literal_bytes": 4,
       "status": "mapped_code",
@@ -106272,7 +106276,7 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_0804CDC4",
+      "name": "__fixunsdfsi",
       "rom_offset": 314820,
       "size": 68,
       "status": "mapped_code"
@@ -106392,7 +106396,7 @@
       "status": "candidate"
     },
     {
-      "name": "sub_0804DB44",
+      "name": "__gedf2",
       "rom_offset": 318276,
       "size": 76,
       "status": "mapped_code"
@@ -106422,22 +106426,16 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_0804DC28",
+      "name": "__floatsidf",
       "rom_offset": 318504,
       "size": 124,
       "status": "mapped_code"
     },
     {
-      "name": "sub_0804DCA4",
+      "name": "__fixdfsi",
       "rom_offset": 318628,
-      "size": 114,
+      "size": 116,
       "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_04DD16",
-      "rom_offset": 318742,
-      "size": 2,
-      "status": "unresolved"
     },
     {
       "name": "sub_0804DD18",
@@ -106982,7 +106980,7 @@
     "config/ram-map-us-eu.json": "723df744e6016ee7519f61c916a42bc9f11e1de4a0d6e2c314a76ff34a1451ec",
     "config/indirect-transfers-us-eu.json": "6f26c66ac7bb782fb4cfffeca2e040c654f2d7e8097d7e051aafcceaa522eb10",
     "config/progress-regions-us-eu.json": "fd5ff50e29e7bd3e2605573d07458b7ea43e0e058f9922667d7d8e0987969067",
-    "config/build-us-eu.json": "ef75ccef32bd6767eb600322e400db9689c250bcf85de38b6b887a6d7a72d3b2",
+    "config/build-us-eu.json": "08ce97356092798904f923db147f25b00fa4944b9fde2fde4bf983be6c4c2302",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c"
   }
 }

@@ -42,8 +42,9 @@ The five existing direct consumers are actor state 42, actor input velocity,
 the proportional scene counter, actor state 27 and menu scrolling text. Their
 eight current bindings to add/subtract/multiply all agree with these entries;
 the five accepted consumer extents total 2,372 bytes. This finite binding audit
-is not a complete runtime caller inventory. Comparison wrappers, conversions,
-single-precision arithmetic and other runtime entries remain original.
+is not a complete runtime caller inventory. Other comparison wrappers,
+single-precision arithmetic and remaining runtime entries stay original. The
+connected conversion subset is documented in [RUNTIME_CONVERSIONS.md](RUNTIME_CONVERSIONS.md).
 
 ## Types and ABI
 
