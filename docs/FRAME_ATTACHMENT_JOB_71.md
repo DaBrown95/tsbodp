@@ -35,7 +35,8 @@ call and a separate unconditional center call are both retained; there is no
 kind-48 direction-word lookup. The normal path selects phase 80, animation 40,
 countdown 90 and cue 34, retaining the returned sample handle.
 
-Phase 80 adjusts need 12 from definition byte 35. The non-10 parameter branch
+Phase 80 selects adjustment-table row 12 across eight needs; definition byte 35
+selects the multiplier-table entry. The non-10 parameter branch
 updates the indicator, rereads the parameter and checks advancement and the need
 threshold. The parameter-10 branch only decrements the signed countdown and
 checks minus one. Starting at 90 selects cleanup after 91 direct phase-80 calls;

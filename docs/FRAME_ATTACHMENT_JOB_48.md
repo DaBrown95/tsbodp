@@ -34,9 +34,9 @@ The worker observes the actor's need-state pointer before its phase switch.
 Running byte exactly one forces phase one. Phase zero either enters the existing
 low-need animation path or creates an optional parameter indicator, selects the
 observed direction, enters phase 67, initializes the actor countdown and retains
-the audio sample handle. Phase 67 adjusts need 12 and tracks the signed parameter
-or countdown. Parameter advancement selects phase 68, which copies attachment
-one's position before completion. The need threshold can independently select
+the audio sample handle. Phase 67 selects adjustment-table row 12 across eight
+needs and tracks the signed parameter or countdown. Parameter advancement selects
+phase 68, which copies attachment one's position before completion. The need threshold can independently select
 completion. Phase one stops the sample, restores the animation/effect and
 finishes the retained indicator. Unknown phases retain result one.
 

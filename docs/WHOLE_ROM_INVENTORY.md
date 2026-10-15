@@ -46,8 +46,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,540 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,950 |
-| Unclassified remainder of estimated envelopes | 17,020 |
+| Unclassified inside source/glue-owned extents | 2,954 |
+| Unclassified remainder of estimated envelopes | 17,016 |
 | Other unresolved ROM | 16,433,816 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -100,6 +100,16 @@ alignment bytes move from estimated gaps into compiler-owned extents and remain
 unclassified as instructions. The 270,054 qualified static instruction bytes,
 323,784 inventory mapped extent bytes and fixed 319,640-byte historical comparison
 remain unchanged. The complete game-code denominator remains open.
+
+Milestone 128 adds the [row-99 workers and dispatcher](FRAME_ATTACHMENT_JOBS_42_94.md),
+three matching C functions and 636 C extent bytes. Source coverage reaches
+1,699 functions and 241,084 bytes with the same 500 separate glue bytes. Four
+observed zero alignment bytes move from estimated gaps into compiler-owned
+extents and remain unclassified as instructions. The 270,054 qualified static
+instruction bytes, 323,784 inventory mapped extent bytes, fixed historical
+comparison and open denominator remain unchanged. Earlier worker notes now
+correctly identify adjustment-table rows applied across eight needs; no C body
+or source credit changes from that terminology correction.
 
 Two misleading classifications were investigated explicitly. A presumed return
 from the startup call to main leads a Thumb walk into independently established
