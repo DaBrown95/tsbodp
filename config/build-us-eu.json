@@ -39308,6 +39308,148 @@
         "before": "case 27:",
         "after": "case 26:"
       }
+    },
+    {
+      "name": "frame_optional_two_activity_step",
+      "rom_offset": 239200,
+      "size": 268,
+      "source": "src/frame/frame_optional_two_activity_step.c",
+      "symbols": {
+        "frame_set_actor_direction": "0x8001c29",
+        "frame_request_animation": "0x8001b5d",
+        "audio_play_animation_cue": "0x8040ffd",
+        "frame_adjust_actor_needs": "0x802b825",
+        "frame_need_effect_consume_optional_two": "0x802f241",
+        "audio_game_stop_sample": "0x8041341",
+        "g_actor_reverse_directions": "0x08052858",
+        "g_frame_need_effect_definitions": "0x08062e7c"
+      },
+      "thumb_symbols": [
+        "frame_set_actor_direction",
+        "frame_request_animation",
+        "audio_play_animation_cue",
+        "frame_adjust_actor_needs",
+        "frame_need_effect_consume_optional_two",
+        "audio_game_stop_sample"
+      ],
+      "negative_control": {
+        "before": "actor,27)",
+        "after": "actor,28)"
+      }
+    },
+    {
+      "name": "frame_optional_indicator_activity_step",
+      "rom_offset": 239468,
+      "size": 156,
+      "source": "src/frame/frame_optional_indicator_activity_step.c",
+      "symbols": {
+        "frame_create_attachment_parameter_indicator": "0x801a661",
+        "frame_set_actor_direction": "0x8001c29",
+        "frame_request_animation": "0x8001b5d",
+        "audio_play_animation_cue": "0x8040ffd",
+        "frame_need_effect_consume_optional": "0x802e7d1",
+        "audio_game_stop_sample": "0x8041341",
+        "transition_object_set_state": "0x8001c05",
+        "g_actor_reverse_directions": "0x08052858"
+      },
+      "thumb_symbols": [
+        "frame_create_attachment_parameter_indicator",
+        "frame_set_actor_direction",
+        "frame_request_animation",
+        "audio_play_animation_cue",
+        "frame_need_effect_consume_optional",
+        "audio_game_stop_sample",
+        "transition_object_set_state"
+      ],
+      "negative_control": {
+        "before": "actor,45)",
+        "after": "actor,44)"
+      }
+    },
+    {
+      "name": "frame_optional_effect_activity_step",
+      "rom_offset": 239624,
+      "size": 352,
+      "source": "src/frame/frame_optional_effect_activity_step.c",
+      "symbols": {
+        "frame_attachment_position": "0x800176d",
+        "frame_begin_actor_route": "0x80370d1",
+        "frame_request_animation": "0x8001b5d",
+        "frame_create_actor_effect": "0x801b4a5",
+        "frame_set_actor_direction": "0x8001c29",
+        "audio_play_animation_cue": "0x8040ffd",
+        "frame_adjust_actor_needs": "0x802b825",
+        "frame_step_attachment_need_timer": "0x802eddd",
+        "audio_game_stop_sample": "0x8041341",
+        "transition_object_set_state": "0x8001c05",
+        "frame_need_effect_try_optional": "0x802e689",
+        "frame_need_effect_accumulate_optional": "0x802e6f1",
+        "resource_set_triple": "0x802a1e9",
+        "g_frame_need_effect_definitions": "0x08062e7c"
+      },
+      "thumb_symbols": [
+        "frame_attachment_position",
+        "frame_begin_actor_route",
+        "frame_request_animation",
+        "frame_create_actor_effect",
+        "frame_set_actor_direction",
+        "audio_play_animation_cue",
+        "frame_adjust_actor_needs",
+        "frame_step_attachment_need_timer",
+        "audio_game_stop_sample",
+        "transition_object_set_state",
+        "frame_need_effect_try_optional",
+        "frame_need_effect_accumulate_optional",
+        "resource_set_triple"
+      ],
+      "negative_control": {
+        "before": "actor,48)",
+        "after": "actor,49)"
+      }
+    },
+    {
+      "name": "frame_optional_effect_activity_begin",
+      "rom_offset": 240084,
+      "size": 80,
+      "source": "src/frame/frame_optional_effect_activity_begin.c",
+      "symbols": {
+        "frame_allocate_actor_attachment_record": "0x802e3c5",
+        "frame_attachment_position": "0x800176d",
+        "frame_begin_actor_route": "0x80370d1",
+        "frame_request_animation": "0x8001b5d"
+      },
+      "thumb_symbols": [
+        "frame_allocate_actor_attachment_record",
+        "frame_attachment_position",
+        "frame_begin_actor_route",
+        "frame_request_animation"
+      ],
+      "negative_control": {
+        "before": "actor,6)",
+        "after": "actor,7)"
+      }
+    },
+    {
+      "name": "frame_optional_effect_activity_dispatch",
+      "rom_offset": 240164,
+      "size": 64,
+      "source": "src/frame/frame_optional_effect_activity_dispatch.c",
+      "symbols": {
+        "frame_find_actor_attachment_record": "0x802ed61",
+        "frame_optional_effect_activity_step": "0x803a809",
+        "frame_optional_two_activity_step": "0x803a661",
+        "frame_optional_indicator_activity_step": "0x803a76d"
+      },
+      "thumb_symbols": [
+        "frame_find_actor_attachment_record",
+        "frame_optional_effect_activity_step",
+        "frame_optional_two_activity_step",
+        "frame_optional_indicator_activity_step"
+      ],
+      "negative_control": {
+        "before": "case FRAME_OPTIONAL_ACTIVITY_EFFECT:",
+        "after": "case 54:"
+      }
     }
   ],
   "assembly": [
