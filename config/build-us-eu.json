@@ -40358,6 +40358,47 @@
         "before": "audio_play_animation_cue(80);",
         "after": "audio_play_animation_cue(81);"
       }
+    },
+    {
+      "name": "scene_choice_panel_step",
+      "source": "src/scene/scene_choice_panel_step.c",
+      "rom_offset": 215020,
+      "size": 616,
+      "symbols": {
+        "input_step_vertical_pressed": "0x801f3a9",
+        "audio_play_animation_cue": "0x8040ffd",
+        "display_fill_background_constant_rectangle": "0x800d7fd",
+        "scene_submit_default_request": "0x8027dc1",
+        "scene_view_draw_frame": "0x8034481",
+        "scene_choice_panel_original_window_begin": "0x8048725",
+        "scene_choice_panel_original_configure_windows": "0x80489ed",
+        "scene_choice_panel_original_set_window": "0x8048a15",
+        "scene_choice_panel_begin_close": "0x8034bb9",
+        "g_actor_scene_request": "0x3005a00",
+        "g_scene_request": "0x3004350",
+        "g_scene_choice_panel_size": "0x3001f0c",
+        "g_frame_actor_need_input": "0x30040e0",
+        "g_input_pressed": "0x3004228",
+        "g_resource_scene_arg": "0x3004370",
+        "g_scene_link_catalog_world": "0x3003950",
+        "scene_choice_panel_draw_text_original": "0x8034a55"
+      },
+      "thumb_symbols": [
+        "input_step_vertical_pressed",
+        "audio_play_animation_cue",
+        "display_fill_background_constant_rectangle",
+        "scene_submit_default_request",
+        "scene_view_draw_frame",
+        "scene_choice_panel_original_window_begin",
+        "scene_choice_panel_original_configure_windows",
+        "scene_choice_panel_original_set_window",
+        "scene_choice_panel_draw_text_original",
+        "scene_choice_panel_begin_close"
+      ],
+      "negative_control": {
+        "before": " case 2:\n  if(--g_scene_request.unknown_14==~0U) {",
+        "after": " case 2:\n  if(--g_scene_request.unknown_14==0) {"
+      }
     }
   ],
   "assembly": [

@@ -16,14 +16,7 @@ struct SceneLinkCatalogContext {
     unsigned char unknown00, count, unknown02[2];
     struct DisplayCatalogType *entries;
 };
-struct SceneLinkCatalogWorld {
-    unsigned int unknown00, value;
-    unsigned char unknown08[232];
-    struct SceneLinkCatalogContext *context;
-    unsigned char unknownf4[772];
-    unsigned char *policies;
-    unsigned char unknown3fc[835], requested_kind;
-};
+#include "scene_link_catalog_world.h"
 struct SceneLinkCatalogActor {
     unsigned char unknown00[77], state, unknown4e[26], selected, unknown69[3];
     unsigned int selected_index;
@@ -37,7 +30,6 @@ struct SceneLinkCatalogInput {
 };
 struct SceneLinkCatalogCaption { unsigned char x, y, unknown02[2]; };
 struct SceneLinkCatalogDefinition { unsigned int object_id; unsigned char unknown04[20]; };
-extern struct SceneLinkCatalogWorld g_scene_link_catalog_world;
 extern struct SceneLinkCatalogOwners g_scene_link_catalog_owners;
 extern struct SceneLinkCatalogInput g_scene_link_catalog_input;
 extern unsigned char g_scene_link_catalog_quantity_limit;

@@ -19,8 +19,9 @@ extern unsigned int g_resource_scene_arg;
 extern unsigned char g_actor_scene_request_active;
 struct FrameActorSceneResult { unsigned short id; };
 extern struct FrameActorSceneResult g_actor_scene_result_id;
+/* Provisional byte roles; the same owner is also used by other scenes. */
 struct FrameActorSceneRequest {
- unsigned int unknown_00;
+ unsigned char count, x, y, flags;
  unsigned char active, unknown_05[3];
  struct FrameObject *object;
 };

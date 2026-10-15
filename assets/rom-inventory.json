@@ -58990,14 +58990,15 @@
       "group": "ROM 0803xxxx"
     },
     {
-      "name": "sub_080347EC",
+      "name": "scene_choice_panel_step",
       "rom_offset": 215020,
       "mode": "Thumb",
       "runtime_addresses": [
         134432748
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -59037,11 +59038,11 @@
         215628
       ],
       "size": 616,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 215020,
       "body_rom_start": 215020,
       "body_rom_end": 215630,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 484,
       "referenced_literal_bytes": 120,
       "status": "mapped_code",
@@ -100706,7 +100707,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_080347EC",
+      "name": "scene_choice_panel_step",
       "rom_offset": 215020,
       "size": 616,
       "status": "mapped_code"
@@ -106990,7 +106991,7 @@
     "config/ram-map-us-eu.json": "723df744e6016ee7519f61c916a42bc9f11e1de4a0d6e2c314a76ff34a1451ec",
     "config/indirect-transfers-us-eu.json": "6f26c66ac7bb782fb4cfffeca2e040c654f2d7e8097d7e051aafcceaa522eb10",
     "config/progress-regions-us-eu.json": "fd5ff50e29e7bd3e2605573d07458b7ea43e0e058f9922667d7d8e0987969067",
-    "config/build-us-eu.json": "9f9ed668455605ec506493ac518d06408c9e329802ede62f54efb8d358b22d50",
+    "config/build-us-eu.json": "dec0b817a253eb0af921aae3d8ce972b584c43a2a95e898a967cb9dd74c0c66b",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c"
   }
 }

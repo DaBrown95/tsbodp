@@ -5,15 +5,7 @@ struct FrameActorNeedState {
  int values[8], countdown;
  FrameU32 selected, started;
 };
-struct FrameActorNeedInput {
- struct {
-  struct FrameObject *actor;
-  FrameU16 flags;
-  FrameU8 unknown_06[6];
- } views[4];
- FrameU8 player_count, local_player;
-};
-extern struct FrameActorNeedInput g_frame_actor_need_input;
+#include "frame_actor_need_input.h"
 extern struct FrameActorNeedState *g_frame_actor_need_states;
 extern int g_frame_actor_need_delta_player[], g_frame_actor_need_delta_npc[];
 extern int g_frame_actor_need_adjustments[][8], g_frame_actor_need_multipliers[];

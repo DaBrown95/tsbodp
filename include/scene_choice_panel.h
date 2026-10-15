@@ -9,11 +9,11 @@
 #include "heap.h"
 #include "audio_game.h"
 
-/* Byte consumers of the existing request word; no second struct owner. */
-#define SCENE_CHOICE_PANEL_COUNT (((unsigned char *)&g_actor_scene_request.unknown_00)[0])
-#define SCENE_CHOICE_PANEL_X (((unsigned char *)&g_actor_scene_request.unknown_00)[1])
-#define SCENE_CHOICE_PANEL_Y (((unsigned char *)&g_actor_scene_request.unknown_00)[2])
-#define SCENE_CHOICE_PANEL_FLAGS (((unsigned char *)&g_actor_scene_request.unknown_00)[3])
+/* Byte fields of the sole canonical request owner. */
+#define SCENE_CHOICE_PANEL_COUNT (g_actor_scene_request.count)
+#define SCENE_CHOICE_PANEL_X (g_actor_scene_request.x)
+#define SCENE_CHOICE_PANEL_Y (g_actor_scene_request.y)
+#define SCENE_CHOICE_PANEL_FLAGS (g_actor_scene_request.flags)
 
 /* Observed width/height bytes; this is not a claim about surrounding storage. */
 struct SceneChoicePanelSize { unsigned char width, height; };
@@ -25,8 +25,7 @@ void scene_choice_panel_initialize(void);
 void scene_choice_panel_shutdown(void);
 void scene_choice_panel_begin_close(void);
 
-/* Remaining phase and drawing bodies are original ROM services. */
-void scene_choice_panel_step_original(void);
+/* The text drawer and window services remain original ROM services. */
 void scene_choice_panel_draw_text_original(void);
 void scene_choice_panel_original_window_begin(unsigned short duration);
 void scene_choice_panel_original_window_end(unsigned short duration);
