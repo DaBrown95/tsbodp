@@ -34,7 +34,8 @@ void scene_record_selection_cancel(void);
 void scene_record_selection_create_objects(void);
 void scene_record_selection_draw_choice(unsigned int, unsigned int);
 
-/* Explicit original-ROM dependencies; these declarations earn no C credit. */
+/* Historical same-address declarations retained for existing callers.
+ * The handoffs and panel have separately reconstructed bodies. */
 void scene_record_selection_set_phase_original(unsigned char, unsigned int);
 void scene_record_selection_set_slot_phase_original(unsigned char, unsigned int);
 void scene_record_selection_draw_panel_original(void);

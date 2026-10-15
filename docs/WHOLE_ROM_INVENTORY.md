@@ -45,8 +45,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,540 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,934 |
-| Unclassified remainder of estimated envelopes | 17,036 |
+| Unclassified inside source/glue-owned extents | 2,940 |
+| Unclassified remainder of estimated envelopes | 17,030 |
 | Other unresolved ROM | 16,433,816 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -66,6 +66,15 @@ adds six matching C functions and 1,136 C extent bytes, bringing source coverage
 estimated envelopes into compiler-owned extents; they remain unclassified in this
 census. Static instruction totals, mapped extent totals and denominator limits
 are unchanged. This source gain is separate from the inventory's zero C credit.
+
+Milestone 124 adds four matching C functions and 804 C extent bytes, bringing
+source coverage to 1,688 functions and 238,632 bytes with the same 500 separately
+counted glue bytes. This source gain is separate from inventory discovery and
+does not establish a new code denominator. The regenerated census accounts for
+physical classification changes separately: six zero alignment bytes move from
+estimated gaps into compiler-owned extents, without becoming instruction bytes.
+The historical 319,640-byte comparison and the survey's unresolved-region limits
+remain unchanged.
 
 Two misleading classifications were investigated explicitly. A presumed return
 from the startup call to main leads a Thumb walk into independently established

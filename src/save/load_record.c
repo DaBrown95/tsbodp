@@ -4,7 +4,7 @@ void save_stream_load_record(struct SaveStreamRecord *record)
 {
     frame_load_save_value(&g_save_serialized_marker, 1);
     frame_load_save_value(&record->unknown00, 4);
-    frame_load_save_value(record->unknown04, 6);
+    frame_load_save_value(record->clock_storage.serialized.unknown04, 6);
     frame_load_save_value(&record->signed24, 3);
     if (record->signed24 & 0x800000)
         record->signed24 |= 0xff000000;

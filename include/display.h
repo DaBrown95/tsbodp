@@ -20,7 +20,10 @@ extern struct WindowState g_window_states[2];
 #define DISPLAY_REG16(a) (*(volatile unsigned short *)(a))
 struct BackgroundState {
     union { unsigned int control_word; unsigned short control; } registers;
-    unsigned char unknown_04[4];
+    union {
+        unsigned char unknown_04[4];
+        const unsigned short *map_pointer;
+    } map_storage;
     void *tilemap_source;
     void *tilemap_buffer;
     void *tilemap_destination;

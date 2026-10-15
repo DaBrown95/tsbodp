@@ -8,9 +8,7 @@ struct FrameActorPaletteSceneSelection {
     unsigned char unknown_00[12];
     unsigned int index;
 };
-struct FrameActorPaletteScenePoint {
-    short x, y;
-};
+#include "frame_actor_palette_scene_points.h"
 /* Eight selectors begin at a saved record's +0x20; rows retain its 40-byte
  * stride. The following bytes overlap later record/state fields. */
 struct FrameActorPaletteSceneRow {
@@ -20,7 +18,6 @@ struct FrameActorPaletteSceneRow {
 extern const unsigned char *g_frame_actor_palette_scene_resource;
 extern struct FrameActorPaletteSceneSelection g_frame_actor_palette_scene_selection;
 extern struct FrameObject *g_frame_actor_palette_scene_object;
-extern const struct FrameActorPaletteScenePoint g_frame_actor_palette_scene_positions[];
 extern struct FrameActorPaletteSceneRow g_frame_actor_palette_scene_rows[];
 extern struct FrameSpriteVariant **g_frame_actor_palette_scene_part0[];
 extern struct FrameSpriteVariant ***g_frame_actor_palette_scene_part1[];

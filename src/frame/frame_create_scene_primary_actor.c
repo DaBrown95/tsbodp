@@ -2,7 +2,7 @@
 struct FrameObject *frame_create_scene_primary_actor(void) {
  struct FrameObject *object=frame_allocate_object(27);
  object->flags=0x00100018;
- object->unknown_4c[0]=0;
+ object->motion_storage.bytes[0]=0;
  frame_set_position(object,0,0);
  transition_object_set_state(object,0);
  frame_set_animation_record(object,&g_frame_scene_primary_animation);

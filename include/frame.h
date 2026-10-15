@@ -12,6 +12,14 @@ struct FrameDisplayPart {
 struct FramePoint {
     int x, y;
 };
+union FrameMotionStorage {
+    FrameU8 bytes[60];
+    struct {
+        FrameU8 unknown_00[18];
+        FrameU16 timer;
+        FrameU8 unknown_14[40];
+    } motion;
+};
 struct FrameObject {
     struct FrameObject *next, *previous;
     FrameU16 id, unknown_0a;
@@ -22,7 +30,7 @@ struct FrameObject {
     struct FramePoint velocity, acceleration, destination;
     FrameU16 phase_x, phase_y;
     short rate_x, rate_y, amplitude_x, amplitude_y;
-    FrameU8 unknown_4c[60];
+    union FrameMotionStorage motion_storage;
     void (*on_step)(struct FrameObject *);
     void (*on_remove)(struct FrameObject *);
     FrameU32 unknown_90;

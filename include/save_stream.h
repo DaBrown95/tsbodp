@@ -2,10 +2,14 @@
 #define SAVE_STREAM_H
 #include "display_text_bank.h"
 #include "save_transfer.h"
+#include "display_time.h"
 /* Observed 40-byte decoded view; content roles remain provisional. */
 struct SaveStreamRecord {
     unsigned int unknown00;
-    unsigned char unknown04[6], unknown0a[2];
+    union {
+        struct DisplayTimeRecord time;
+        struct { unsigned char unknown04[6], unknown0a[2]; } serialized;
+    } clock_storage;
     int signed24;
     unsigned char unknown10[16], pairs[2], nibbles[6];
 };
