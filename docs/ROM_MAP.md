@@ -16,8 +16,10 @@ remain recorded. The smaller entry count is map cleanup, not lost source.
 `control_flow_bounded` is an instruction-body result, not a proven compiler
 function extent. Alignment and pool ownership remain estimated; the envelope
 is still clipped at the next surviving entry. Stack balance and runtime
-reachability are not established. The 19 compiler-owned extents remain the only
-green source credit.
+reachability are not established. Only C extents accepted by the current
+matching build receive green source credit. See the
+[bounded follow-up](BOUNDED_INVENTORY.md) for the distinction between reviewed
+instruction paths, pools, alignment and compiler-owned extents.
 
 Remaining dynamic control:
 
