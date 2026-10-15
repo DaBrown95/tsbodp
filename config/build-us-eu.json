@@ -41060,6 +41060,49 @@
         "before": "job->kind=kind;",
         "after": "job->kind=kind+1;"
       }
+    },
+    {
+      "name": "link_start_status_poll",
+      "rom_offset": 251328,
+      "size": 256,
+      "source": "src/link/link_start_status_poll.c",
+      "symbols": {
+        "g_link_word_03002190": "0x03002190",
+        "g_link_flags": "0x03007334",
+        "g_link_setup_state": "0x03002cb0",
+        "g_irq_table": "0x03004290",
+        "link_handshake_irq_original": "0x0803d9e9",
+        "irq_wait_vblank": "0x0801f971",
+        "link_read_status_original": "0x0803e299",
+        "_call_via_r0": "0x0804ccf1"
+      },
+      "thumb_symbols": [
+        "link_handshake_irq_original",
+        "irq_wait_vblank",
+        "link_read_status_original",
+        "_call_via_r0"
+      ],
+      "negative_control": {
+        "before": "return 5;",
+        "after": "return 6;"
+      }
+    },
+    {
+      "name": "link_wait_for_status_confirmation",
+      "rom_offset": 254824,
+      "size": 64,
+      "source": "src/link/link_wait_for_status_confirmation.c",
+      "symbols": {
+        "g_link_flags": "0x03007334",
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "negative_control": {
+        "before": "count<20",
+        "after": "count<19"
+      }
     }
   ],
   "assembly": [

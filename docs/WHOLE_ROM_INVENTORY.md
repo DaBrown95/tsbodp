@@ -46,8 +46,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,540 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,956 |
-| Unclassified remainder of estimated envelopes | 17,016 |
+| Unclassified inside source/glue-owned extents | 2,962 |
+| Unclassified remainder of estimated envelopes | 17,010 |
 | Other unresolved ROM | 16,433,814 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -119,6 +119,15 @@ prior estimated envelope by two bytes: inventory mapped extents are 323,786
 bytes. Owned unclassified bytes rise by two and other unresolved ROM falls by
 two; qualified instruction evidence stays 270,054 bytes. The historical
 319,640-byte comparison and open game-code denominator remain unchanged.
+
+Milestone 130 adds the two connected [link status polling](LINK_STATUS_POLLING.md)
+functions and 320 matching C extent bytes, reaching 1,703 functions and 241,460
+C bytes. Separate glue remains 500 bytes. Six observed zero bytes move from
+estimated gaps into compiler-owned extents; they add no instruction evidence.
+Qualified static instructions remain 270,054 bytes, inventory mapped extents
+remain 323,786 bytes and the complete game-code denominator stays open. The
+original status reader and installed IRQ handler remain explicit boundaries;
+the fixed 319,640-byte historical comparison is unchanged.
 
 Two misleading classifications were investigated explicitly. A presumed return
 from the startup call to main leads a Thumb walk into independently established
