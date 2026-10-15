@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Link matching C objects and explicitly unconverted ROM gaps; never patch output."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -100,8 +101,15 @@ def link_rom(manifest, reference, pilot_folder, folder, overrides=None, copies=N
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--share-project-headers', action='store_true',
+                        help='Share verified project-header bytes within the fresh pilot run')
+    args = parser.parse_args()
     # Fresh compilation verifies pinned compiler, headers, objects and reference.
-    subprocess.run([sys.executable, ROOT / 'tools/pilot.py', '--negative-control'], check=True)
+    pilot_command = [sys.executable, ROOT / 'tools/pilot.py', '--negative-control']
+    if args.share_project_headers:
+        pilot_command.append('--share-project-headers')
+    subprocess.run(pilot_command, check=True)
     pilot = json.loads((ROOT / 'reports/us-eu/pilot.json').read_text())
     if not pilot['accepted']:
         raise ValueError('Source gate failed')
@@ -145,6 +153,7 @@ def main():
               'helper_sha256': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                                 for name in ('tools/build_rom.py', 'tools/rom_layout.py',
                                              'tools/source_addresses.py', 'tools/source_coverage.py', 'tools/toolchain.py',
+                                             'tools/project_header_store.py',
                                              'config/ram-map-us-eu.json')},
               'accepted': comparison['identical'] and rejected}
     (folder / 'report.json').write_text(json.dumps(report, indent=2) + '\n')

@@ -1,6 +1,8 @@
 PYTHON ?= python3
 ANALYSIS_PYTHON ?= toolchains/analysis-venv/bin/python
 PROGRESS_PYTHON ?= $(ANALYSIS_PYTHON)
+SHARE_PROJECT_HEADERS ?= 0
+HEADER_SNAPSHOT_FLAGS = $(if $(filter 1,$(SHARE_PROJECT_HEADERS)),--share-project-headers,)
 TEST_PYTHON ?= $(if $(wildcard $(ANALYSIS_PYTHON)),$(ANALYSIS_PYTHON),$(PYTHON))
 .DEFAULT_GOAL := build
 
@@ -29,13 +31,13 @@ analyze:
 	$(ANALYSIS_PYTHON) tools/analyze.py
 
 pilot:
-	$(ANALYSIS_PYTHON) tools/pilot.py --negative-control
+	$(ANALYSIS_PYTHON) tools/pilot.py --negative-control $(HEADER_SNAPSHOT_FLAGS)
 
 pilot-matrix:
-	$(ANALYSIS_PYTHON) tools/pilot.py --negative-control --matrix
+	$(ANALYSIS_PYTHON) tools/pilot.py --negative-control --matrix $(HEADER_SNAPSHOT_FLAGS)
 
 build:
-	$(ANALYSIS_PYTHON) tools/build_rom.py
+	$(ANALYSIS_PYTHON) tools/build_rom.py $(HEADER_SNAPSHOT_FLAGS)
 
 ram-map:
 	$(PYTHON) tools/map_ram.py

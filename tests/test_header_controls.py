@@ -31,8 +31,8 @@ class HeaderControlTests(unittest.TestCase):
         self.project.mkdir()
         (self.project / 'bios.h').write_text('original\n')
 
-    def snapshot(self, source, destination, include_root):
-        return snapshot_headers(source, destination, self.project)
+    def snapshot(self, source, destination, include_root, **options):
+        return snapshot_headers(source, destination, self.project, **options)
 
     def test_unknown_and_traversing_header_controls_fail_before_compilation(self):
         for name in ('unrelated.h', '../bios.h', '/private/bios.h'):
@@ -53,6 +53,28 @@ class HeaderControlTests(unittest.TestCase):
         self.assertEqual((output / 'include/bios.h').read_text(), 'changed\n')
         receipt = json.loads((output / 'header-snapshot.json').read_text())
         self.assertEqual(receipt['headers']['bios.h'], hashlib.sha256(b'changed\n').hexdigest())
+
+    def test_cached_header_override_detaches_only_the_control_proof(self):
+        with tempfile.TemporaryDirectory(prefix='header-control-store-') as cache:
+            cache = Path(cache).resolve()
+            function = {'name': 'f', 'rom_offset': 0, 'size': 4}
+            positive, control = self.folder / 'positive', self.folder / 'control'
+            with patch('pilot.snapshot_headers', self.snapshot), patch(
+                    'pilot.run', side_effect=RuntimeError('stop before preprocessing')):
+                for output, overrides in [(positive, None), (control, {'bios.h': 'changed\n'})]:
+                    with self.assertRaisesRegex(RuntimeError, 'stop before preprocessing'):
+                        compile_function(function, self.source, output, [], copies=[],
+                                         header_overrides=overrides, project_header_store=cache)
+            retained = positive / 'include/bios.h'
+            changed = control / 'include/bios.h'
+            self.assertEqual(retained.read_text(), 'original\n')
+            self.assertEqual(changed.read_text(), 'changed\n')
+            self.assertNotEqual(retained.stat().st_ino, changed.stat().st_ino)
+            objects = list(cache.glob('*.h'))
+            self.assertEqual(len(objects), 1)
+            self.assertEqual(objects[0].stat().st_ino, retained.stat().st_ino)
+            self.assertEqual(objects[0].read_text(), 'original\n')
+            self.assertEqual(objects[0].stat().st_mode & 0o222, 0)
 
     def private_source(self):
         self.source.write_text('#include "private.h"\nvoid f(void) {}\n')

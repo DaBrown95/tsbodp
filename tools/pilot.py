@@ -27,6 +27,7 @@ from header_snapshots import (snapshot_headers, retained_source, verify_snapshot
                               verify_preprocessor_dependencies)
 from source_coverage import byte_counts, inline_glue, verify_inline_glue_symbols
 from pilot_parallel_process import compile_candidates, validate_jobs
+from project_header_store import write_header_override
 
 
 def run(command, commands):
@@ -37,15 +38,18 @@ def run(command, commands):
     return result.stdout
 
 
-def compile_function(function, source, folder, flags, copies=None, header_overrides=None):
+def compile_function(function, source, folder, flags, copies=None, header_overrides=None,
+                     *, project_header_store=None):
     folder.mkdir(parents=True, exist_ok=True)
     commands = []
     header_folder = folder / "include"
-    headers = snapshot_headers(source, header_folder, ROOT / 'include')
+    store_options = ({} if project_header_store is None else
+                     {'project_header_store': project_header_store})
+    headers = snapshot_headers(source, header_folder, ROOT / 'include', **store_options)
     for name, text in (header_overrides or {}).items():
         if name not in headers['headers']:
             raise ValueError('Header control is outside the source include closure')
-        (header_folder / name).write_text(text)
+        write_header_override(header_folder / name, text)
         headers['headers'][name] = hashlib.sha256(text.encode()).hexdigest()
     (folder / 'header-snapshot.json').write_text(json.dumps(headers, indent=2) + '\n')
     preprocessed = folder / "source.i"
@@ -156,10 +160,14 @@ def main():
     parser.add_argument("--negative-control", action="store_true")
     parser.add_argument("--matrix", action="store_true")
     parser.add_argument("--jobs", type=int, default=4, help="Independent compiler workers (1..8; default 4)")
+    parser.add_argument('--share-project-headers', action='store_true',
+                        help='Share verified project-header bytes within this fresh run')
     args = parser.parse_args()
     validate_jobs(args.jobs)
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
     run_folder = ROOT / "build/pilot/runs" / run_id
+    project_header_store = (run_folder / '.project-header-content'
+                            if args.share_project_headers else None)
     target = json.loads((ROOT / "config/targets/us-eu.json").read_text())
     manifest = json.loads((ROOT / "config/build-us-eu.json").read_text())
     require_negative_controls(manifest['functions'] + manifest.get('assembly', []))
@@ -188,12 +196,14 @@ def main():
               "run_id": run_id, "output_directory": str(run_folder),
               "compiler_source_commit": commit,
               "compiler_flags": manifest["compiler_flags"], "compilation_jobs": args.jobs, "functions": [],
-              "whole_rom_build_verified": False, "historical_compiler_proven": False}
+              "whole_rom_build_verified": False, "historical_compiler_proven": False,
+              "project_header_store": (str(project_header_store)
+                                       if project_header_store is not None else None)}
     report["helper_sha256"] = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                                 for name in ("tools/pilot.py", "tools/project.py", "config/build-us-eu.json",
                                              "tools/toolchain.py", "tools/source_symbols.py", "tools/source_controls.py", "config/pilot-toolchain.json",
                                              "config/targets/us-eu.json", "include/irq.h",
-                                             "tools/source_addresses.py", "tools/source_coverage.py", "tools/ram_copies.py", "tools/header_snapshots.py", "tools/pilot_parallel_process.py",
+                                             "tools/source_addresses.py", "tools/source_coverage.py", "tools/ram_copies.py", "tools/header_snapshots.py", "tools/pilot_parallel_process.py", "tools/project_header_store.py",
                                              "config/ram-map-us-eu.json")}
     report['helper_sha256'].update({str(header.relative_to(ROOT)): hashlib.sha256(header.read_bytes()).hexdigest()
                                     for header in (ROOT / 'include').rglob('*.h')})
@@ -257,7 +267,7 @@ def main():
         manifest["functions"] + manifest.get('assembly', []), run_folder,
         manifest["compiler_flags"], rom, copies, negative_control=args.negative_control,
         matrix=args.matrix, jobs=args.jobs, compile_c=compile_function,
-        assemble_low_level=assemble_glue,
+        assemble_low_level=assemble_glue, project_header_store=project_header_store,
         extra_inputs=[ROOT / name for name in report['helper_sha256']] +
                      [ROOT / name for name in report['tool_sha256']])
     for result in report["functions"]:
@@ -279,7 +289,9 @@ def main():
             raise RuntimeError("Negative control edit no longer applies")
         source = folder / "changed.c"
         source.write_text(original.replace("= value;", "= value + 1;"))
-        data, compile_commands = compile_function(function, source, folder, manifest["compiler_flags"])
+        data, compile_commands = compile_function(
+            function, source, folder, manifest["compiler_flags"],
+            project_header_store=project_header_store)
         expected = rom[function["rom_offset"]:function["rom_offset"] + function["size"]]
         control = compare_bytes(expected, data)
         control.update({"source_edit": "store value + 1 instead of value", "commands": compile_commands,

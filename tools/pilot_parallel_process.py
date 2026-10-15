@@ -7,6 +7,8 @@ optimization matrix member is compiled into a fresh independent directory.
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed
 import multiprocessing
 import copy
+import functools
+import os
 import hashlib
 from pathlib import Path
 import re
@@ -68,11 +70,13 @@ def run_ordered(items, worker, jobs):
     return results
 
 
-def compile_candidate(function, run_folder, flags, rom, copies, *, negative_control, matrix, compile_c, assemble_low_level):
+def compile_candidate(function, run_folder, flags, rom, copies, *, negative_control, matrix,
+                      compile_c, assemble_low_level, project_header_store=None):
     """Original pilot per-function body, with only ordered publication moved out."""
     manifest = {'compiler_flags': flags}
     args = SimpleNamespace(negative_control=negative_control, matrix=matrix)
-    compile_function = compile_c
+    compile_function = (compile_c if project_header_store is None else
+                        functools.partial(compile_c, project_header_store=project_header_store))
     assemble_glue = assemble_low_level
     name = function["name"]
     source = ROOT / function["source"]
@@ -162,7 +166,8 @@ def _process_candidate(function):
         raise ValueError('pilot source changed before worker')
     result = compile_candidate(function, c['run_folder'], c['flags'], c['rom'], c['copies'],
                                negative_control=c['negative_control'], matrix=c['matrix'],
-                               compile_c=c['compile_c'], assemble_low_level=c['assemble_low_level'])
+                               compile_c=c['compile_c'], assemble_low_level=c['assemble_low_level'],
+                               project_header_store=c.get('project_header_store'))
     if _file_digest(source) != c['source_pins'][str(source)]:
         raise ValueError('pilot source changed during worker')
     return result
@@ -185,7 +190,8 @@ def _process_results(functions, context, jobs):
 
 
 def compile_candidates(functions, run_folder, flags, rom, copies, *, negative_control,
-                       matrix, jobs=1, compile_c, assemble_low_level, extra_inputs=()):
+                       matrix, jobs=1, compile_c, assemble_low_level, extra_inputs=(),
+                       project_header_store=None):
     """Fresh private/coordinator API. Caller publishes only the complete result."""
     validate_jobs(jobs)
     functions = copy.deepcopy(list(functions))
@@ -200,6 +206,14 @@ def compile_candidates(functions, run_folder, flags, rom, copies, *, negative_co
     pins, header_inventory = _inputs(functions, extra_inputs)
     _verify_inputs(pins, header_inventory)
     run_folder = Path(run_folder)
+    if project_header_store is not None:
+        store_path = Path(os.path.abspath(project_header_store))
+        run_path = Path(os.path.abspath(run_folder))
+        if (store_path.resolve() != store_path or run_path.resolve() != run_path or
+                store_path != run_path / '.project-header-content' or
+                store_path.exists() or store_path.is_symlink()):
+            raise ValueError('Header store must be a fresh per-run .project-header-content directory')
+        project_header_store = store_path
     if run_folder.exists():
         raise ValueError('pilot output must be a fresh directory')
     run_folder.mkdir(parents=True)
@@ -210,7 +224,8 @@ def compile_candidates(functions, run_folder, flags, rom, copies, *, negative_co
             raise ValueError('pilot source changed before worker')
         result = compile_candidate(function, run_folder, flags, rom, copies,
                                    negative_control=negative_control, matrix=matrix,
-                                   compile_c=compile_c, assemble_low_level=assemble_low_level)
+                                   compile_c=compile_c, assemble_low_level=assemble_low_level,
+                                   project_header_store=project_header_store)
         if _file_digest(source) != pins[str(source)]:
             raise ValueError('pilot source changed during worker')
         return result
@@ -221,6 +236,7 @@ def compile_candidates(functions, run_folder, flags, rom, copies, *, negative_co
         context = dict(run_folder=run_folder, flags=flags, rom=rom, copies=copies,
                        negative_control=negative_control, matrix=matrix,
                        compile_c=compile_c, assemble_low_level=assemble_low_level,
+                       project_header_store=project_header_store,
                        source_pins={str((ROOT / f['source']).resolve()): pins[str((ROOT / f['source']).resolve())]
                                     for f in functions})
         results = _process_results(functions, context, jobs)

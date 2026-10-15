@@ -7,6 +7,8 @@ from pathlib import Path
 import re
 import shutil
 
+from project_header_store import ProjectHeaderStore
+
 
 _TOKENS = re.compile(r'/\*[\s\S]*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'')
 _INCLUDE = re.compile(r'^\s*#\s*(include(?:_next)?)\b([^\n]*)', re.MULTILINE)
@@ -46,7 +48,7 @@ def _digest(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def snapshot_headers(source, destination, include_root):
+def snapshot_headers(source, destination, include_root, *, project_header_store=None):
     """Retain a source/local-header bundle plus the project include closure.
 
     Both conditional branches are scanned. Macro includes, include_next and
@@ -67,6 +69,12 @@ def snapshot_headers(source, destination, include_root):
             for output in generated)
             or any(_inside(source, root) for root in generated)):
         raise ValueError('Snapshot output overlaps a source input root')
+    store_path = None
+    if project_header_store is not None:
+        store_path = _normal(project_header_store)
+        if any(_inside(store_path, output) or _inside(output, store_path)
+               for output in generated):
+            raise ValueError('Header store overlaps generated proof inputs')
     source_data = source.read_bytes()
     if len(source_data) > MAX_LOCAL_BYTES:
         raise ValueError('Source bundle exceeds its byte limit')
@@ -155,12 +163,20 @@ def snapshot_headers(source, destination, include_root):
                 pending.append((dependency, project[dependency]))
             else:
                 add_local(dependency)
+    # Closure resolution identifies the exact original source/local files before
+    # an object can be reused. Only this proof's project-header root may receive
+    # links; source-inputs remains independent ordinary copies below.
+    store = (None if store_path is None else
+             ProjectHeaderStore(store_path, include_root, destination, [source, *local]))
     digests = {}
     for path in sorted(selected):
         relative = path.relative_to(include_root)
         output = destination / relative
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_bytes(project[path])
+        if store is None:
+            output.write_bytes(project[path])
+        else:
+            store.retain(project[path], output, relative.as_posix())
         digests[relative.as_posix()] = _digest(project[path])
     saved_source = bundle_root / source.name
     saved_source.write_bytes(source_data)

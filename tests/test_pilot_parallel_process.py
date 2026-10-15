@@ -145,6 +145,41 @@ class ParallelPilotTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'batch input changed'):
             self.batch(compile_c=compiler,extra_inputs=[extra])
 
+    def test_optional_store_default_preserves_existing_compiler_signature(self):
+        self.assertTrue(self.batch()[0]['source_reconstruction_verified'])
+
+    def test_per_run_store_reaches_compiler_and_spawn_context(self):
+        output = self.root.resolve() / 'stored-proof'
+        store = output / '.project-header-content'
+        observed = []
+        def compiler(*args, project_header_store=None, **kwargs):
+            observed.append(project_header_store)
+            return self.compile(*args, **kwargs)
+        def processes(functions, context, jobs):
+            self.assertEqual(jobs, 4)
+            self.assertEqual(context['project_header_store'], store)
+            self.module._initialize_process(context)
+            return [self.module._process_candidate(f) for f in functions]
+        with patch.object(self.module, '_process_results', side_effect=processes):
+            results = self.batch(run_folder=output, project_header_store=store,
+                                 compile_c=compiler, jobs=4)
+        self.assertTrue(results[0]['source_reconstruction_verified'])
+        self.assertEqual(observed, [store, store])
+
+    def test_shared_global_wrong_named_or_existing_store_is_rejected(self):
+        output = self.root.resolve() / 'proof'
+        for store in [self.root.resolve() / 'global-cache', output / 'fixture',
+                      output / 'nested/.project-header-content']:
+            with self.subTest(store=store), self.assertRaisesRegex(ValueError, 'fresh per-run'):
+                self.batch(run_folder=output, project_header_store=store)
+        self.assertFalse(output.exists())
+        outside = self.root.resolve() / 'outside'
+        outside.mkdir()
+        output.mkdir()
+        (output / '.project-header-content').symlink_to(outside, target_is_directory=True)
+        with self.assertRaisesRegex(ValueError, 'fresh per-run'):
+            self.batch(run_folder=output, project_header_store=output / '.project-header-content')
+
     def test_actual_controls_and_split_glue_classification_preserved(self):
         results=self.batch()
         self.assertTrue(results[0]['source_reconstruction_verified'])
