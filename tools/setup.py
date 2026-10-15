@@ -181,6 +181,8 @@ def main():
                     for f in manifest['functions']}
     if 'agbcc_arm' in selected_ids:
         subprocess.run([sys.executable, ROOT / 'tools/setup_arm.py'], check=True)
+    if 'agbcc_old' in selected_ids:
+        subprocess.run([sys.executable, ROOT / 'tools/setup_old.py'], check=True)
     if 'gcc302' in selected_ids:
         subprocess.run([sys.executable, ROOT / 'tools/setup_gcc302.py'], check=True)
     if 'gcc302_hwi32' in selected_ids:

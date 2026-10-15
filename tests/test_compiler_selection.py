@@ -39,6 +39,17 @@ class SelectionTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'explicit'):
                     compiler_selection({'compiler_id': 'gcc302', 'mode': mode}, ['-O3'])
 
+    def test_old_thumb_backend_has_its_own_path_and_preserves_explicit_flags(self):
+        selection = compiler_selection({'compiler_id': 'agbcc_old',
+                                        'compiler_flags': ['-O2']}, ['-O2', '-mthumb-interwork'])
+        self.assertEqual(selection['executable'], Path('toolchains/agbcc-old-build/old_agbcc'))
+        self.assertEqual(selection['pin'], Path('config/agbcc-old-toolchain.json'))
+        self.assertEqual(selection['profile'], Path('toolchains/agbcc-old-host-profile.json'))
+        self.assertEqual(selection['flags'], ['-O2'])
+        for mode, flags in [('ARM', ['-O2']), ('Thumb', ['-O2', '-marm'])]:
+            with self.subTest(mode=mode), self.assertRaises(ValueError):
+                compiler_selection({'compiler_id': 'agbcc_old', 'mode': mode}, flags)
+
     def test_unknown_paths_modes_and_contradictory_flags_reject(self):
         invalid = [({'compiler_id': '../../untrusted'}, ['-O2']),
                    ({'compiler_id': None}, ['-O2']),

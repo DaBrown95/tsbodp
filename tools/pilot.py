@@ -13,10 +13,10 @@ import struct
 
 from elftools.elf.elffile import ELFFile
 from project import ROOT, audit, compare_bytes, write_report
-from toolchain import (load_profile, verify_native, ARM_PIN, ARM_PROFILE,
+from toolchain import (load_profile, verify_native, ARM_PIN, ARM_PROFILE, OLD_PIN, OLD_PROFILE,
                        GCC302_PIN, GCC302_PROFILE, GCC302_HWI32_PIN,
                        GCC302_HWI32_PROFILE, compiler_selection,
-                       verify_gcc302_source, optimization_flags, assembler_selection,
+                       verify_gcc302_source, verify_agbcc_old_source, optimization_flags, assembler_selection,
                        BINUTILS2101_PIN, BINUTILS2101_PROFILE, verify_binutils2101_source,
                        modern_assembler_abi_flags)
 from source_symbols import declarations
@@ -225,6 +225,19 @@ def main():
             report['helper_sha256'][str(arm_profile)] = hashlib.sha256((ROOT / arm_profile).read_bytes()).hexdigest()
         lock = {**lock, 'native_tool_sha256': {**lock['native_tool_sha256'], **arm_lock['native_tool_sha256']}}
         report['compiler_profiles']['agbcc_arm'] = {'pin': str(ARM_PIN), 'compiler': arm_lock['compiler']}
+    old_lock = None
+    if 'agbcc_old' in selected_ids:
+        old_lock, old_profile = load_profile(ROOT, OLD_PIN, OLD_PROFILE)
+        if old_lock['compiler']['source_commit'] != commit:
+            raise RuntimeError('Old compiler source differs from the checked source pin')
+        old_inputs = verify_agbcc_old_source(ROOT, old_lock)
+        verify_native(ROOT, old_lock, report['host_clang'])
+        for path in (ROOT / OLD_PIN, ROOT / 'tools/setup_old.py', *old_inputs):
+            report['helper_sha256'][str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
+        if old_profile:
+            report['helper_sha256'][str(old_profile)] = hashlib.sha256((ROOT / old_profile).read_bytes()).hexdigest()
+        lock = {**lock, 'native_tool_sha256': {**lock['native_tool_sha256'], **old_lock['native_tool_sha256']}}
+        report['compiler_profiles']['agbcc_old'] = {'pin': str(OLD_PIN), 'compiler': old_lock['compiler']}
     gcc302_locks = []
     for compiler_id, pin, local, setup in (
             ('gcc302', GCC302_PIN, GCC302_PROFILE, 'tools/setup_gcc302.py'),
@@ -304,6 +317,8 @@ def main():
            for name, digest in report['helper_sha256'].items()):
         raise ValueError('Source helpers changed during the run; retry with stable inputs')
     verify_native(ROOT, lock, report['host_clang'])
+    if old_lock:
+        verify_agbcc_old_source(ROOT, old_lock)
     for gcc302_lock in gcc302_locks:
         verify_gcc302_source(ROOT, gcc302_lock)
     if binutils2101_lock:

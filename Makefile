@@ -6,12 +6,15 @@ HEADER_SNAPSHOT_FLAGS = $(if $(filter 1,$(SHARE_PROJECT_HEADERS)),--share-projec
 TEST_PYTHON ?= $(if $(wildcard $(ANALYSIS_PYTHON)),$(ANALYSIS_PYTHON),$(PYTHON))
 .DEFAULT_GOAL := build
 
-.PHONY: setup setup-arm audit audit-all compare doctor test build pilot analyze pilot-matrix ram-map inventory progress
+.PHONY: setup setup-arm setup-old audit audit-all compare doctor test build pilot analyze pilot-matrix ram-map inventory progress
 setup:
 	$(PYTHON) tools/setup.py
 
 setup-arm:
 	$(PYTHON) tools/setup_arm.py
+
+setup-old:
+	$(PYTHON) tools/setup_old.py
 
 audit:
 	$(PYTHON) tools/project.py audit

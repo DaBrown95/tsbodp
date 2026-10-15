@@ -87,6 +87,9 @@ their main licences; bundled components retain their upstream notices.
 Pinned versions are recorded in [config/](config/).
 The adapted audio routines and BIOS division wrapper retain their [Krawall licence](licenses/Krawall-LGPL-2.1.txt)
 and source notice.
+The selected floating-point and integer runtime sources retain their GNU GCC
+notices and [GPL licence](licenses/GCC-GPL-2.0.txt), including the exceptions
+printed in those source files.
 
 | Dependency | Use | Licence |
 | --- | --- | --- |

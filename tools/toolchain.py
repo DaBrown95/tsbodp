@@ -2,12 +2,17 @@
 import hashlib
 import json
 import re
-from pathlib import Path
+import stat
+import subprocess
+from pathlib import Path, PurePosixPath
 
 PROFILE = Path('toolchains/host-profile.json')
 PIN = Path('config/pilot-toolchain.json')
 ARM_PIN = Path('config/arm-toolchain.json')
 ARM_PROFILE = Path('toolchains/arm-host-profile.json')
+OLD_PIN = Path('config/agbcc-old-toolchain.json')
+OLD_PROFILE = Path('toolchains/agbcc-old-host-profile.json')
+OLD_BUILD = Path('toolchains/agbcc-old-build')
 GCC302_PIN = Path('config/gcc302-toolchain.json')
 GCC302_PROFILE = Path('toolchains/gcc302-host-profile.json')
 GCC302_HWI32_PIN = Path('config/gcc302-hwi32-toolchain.json')
@@ -54,6 +59,7 @@ def compiler_selection(function, flags):
     compilers = {
         'agbcc': ('toolchains/agbcc/gcc/agbcc', PIN, PROFILE, ('Thumb',)),
         'agbcc_arm': ('toolchains/agbcc-arm-build/cc1', ARM_PIN, ARM_PROFILE, ('ARM',)),
+        'agbcc_old': ('toolchains/agbcc-old-build/old_agbcc', OLD_PIN, OLD_PROFILE, ('Thumb',)),
         'gcc302': ('toolchains/gcc302-build/gcc/cc1', GCC302_PIN, GCC302_PROFILE, ('Thumb', 'ARM')),
         'gcc302_hwi32': ('toolchains/gcc302-hwi32-build/gcc/cc1', GCC302_HWI32_PIN,
                         GCC302_HWI32_PROFILE, ('Thumb', 'ARM')),
@@ -89,6 +95,95 @@ def source_tree_sha256(folder):
             digest.update(path.relative_to(folder).as_posix().encode() + b'\0')
             digest.update(bytes.fromhex(sha(path)))
     return digest.hexdigest()
+
+
+def _regular_source(path, root):
+    """Do not follow substituted source directories or symbolic links."""
+    for item in (path, *path.parents):
+        if item == root:
+            break
+        if item.is_symlink():
+            raise RuntimeError('Old agbcc source contains an unexpected symbolic link')
+    if not stat.S_ISREG(path.lstat().st_mode):
+        raise RuntimeError('Old agbcc source input is not a regular file')
+
+
+def agbcc_old_source_files(root, pins):
+    """Verify the pinned Git blobs, paths and modes, excluding generated files."""
+    spec = pins['compiler']
+    if (spec['source_subdirectory'] != 'gcc' or
+            spec['build_directory'] != OLD_BUILD.as_posix()):
+        raise RuntimeError('Old agbcc source or build directory differs from its isolated recipe')
+    # The upstream Makefile does not order every RTL object after genrtl.h.
+    # A truly source-only bootstrap must follow upstream build.sh's serial job.
+    if spec['build_options'] != ['old', '-j1']:
+        raise RuntimeError('Old agbcc source-only bootstrap requires the pinned serial recipe')
+    repository = root / 'toolchains/agbcc'
+    if repository.is_symlink():
+        raise RuntimeError('Old agbcc source repository must not be a symbolic link')
+
+    def git(*args):
+        try:
+            return subprocess.check_output(['git', '-C', repository, *args])
+        except subprocess.CalledProcessError as error:
+            raise RuntimeError('Unable to verify old agbcc pinned Git source') from error
+
+    if git('rev-parse', 'HEAD').decode().strip() != spec['source_commit']:
+        raise RuntimeError('Old agbcc source differs from the pinned revision')
+    if git('status', '--porcelain', '--untracked-files=no').strip():
+        raise RuntimeError('Old agbcc source has tracked changes')
+    rows = git('ls-tree', '-rz', '--full-tree', spec['source_commit'], 'gcc/')
+    records = []
+    seen = set()
+    for row in rows.split(b'\0'):
+        if not row:
+            continue
+        information, name = row.split(b'\t', 1)
+        mode, kind, object_id = information.split()
+        path = PurePosixPath(name.decode('utf-8'))
+        if (mode not in (b'100644', b'100755') or kind != b'blob' or
+                not re.fullmatch(b'[0-9a-f]{40}', object_id) or
+                path.is_absolute() or '..' in path.parts or
+                len(path.parts) < 2 or path.parts[0] != 'gcc'):
+            raise RuntimeError('Unexpected old agbcc tracked source entry')
+        relative = Path(*path.parts[1:])
+        if relative in seen:
+            raise RuntimeError('Duplicate old agbcc tracked source entry')
+        seen.add(relative)
+        source = repository / Path(*path.parts)
+        _regular_source(source, root)
+        data = source.read_bytes()
+        blob = hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+        if blob != object_id.decode():
+            raise RuntimeError('Old agbcc live source differs from its pinned Git blob')
+        permissions = int(mode, 8) & 0o777
+        if stat.S_IMODE(source.stat().st_mode) != permissions:
+            raise RuntimeError('Old agbcc source mode differs from its pinned Git mode')
+        records.append((relative, permissions, source, hashlib.sha256(data).hexdigest()))
+    digest = hashlib.sha256()
+    for relative, permissions, source, fingerprint in sorted(records):
+        digest.update(relative.as_posix().encode() + b'\0' +
+                      ('100%03o' % permissions).encode() + b'\0' + bytes.fromhex(fingerprint))
+    if (len(records) != spec['tracked_source_file_count'] or
+            digest.hexdigest() != spec['tracked_source_tree_sha256']):
+        raise RuntimeError('Old agbcc tracked source identity differs from its public pin')
+    return records
+
+
+def verify_agbcc_old_source(root, pins):
+    """Verify the ordinary isolated copies as well as their original Git inputs."""
+    records = agbcc_old_source_files(root, pins)
+    original_inodes = {(p.stat().st_dev, p.stat().st_ino) for _, _, p, _ in records}
+    inputs = []
+    for relative, permissions, source, fingerprint in records:
+        copied = root / OLD_BUILD / relative
+        _regular_source(copied, root)
+        identity = copied.stat()
+        if ((identity.st_dev, identity.st_ino) in original_inodes or
+                stat.S_IMODE(identity.st_mode) != permissions or sha(copied) != fingerprint):
+            raise RuntimeError('Old agbcc isolated source copy changed or aliases the live source')
+        inputs.extend((source, copied))
+    return inputs
 
 
 def optimization_flags(flags, optimization):

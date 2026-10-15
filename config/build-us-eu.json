@@ -39739,6 +39739,223 @@
         "before": "g_link_flags&0x8000",
         "after": "g_link_flags&0x4000"
       }
+    },
+    {
+      "name": "__pack_d",
+      "rom_offset": 315408,
+      "size": 328,
+      "source": "src/runtime/double_pack.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__lshrdi3": "0x0804e6f9"
+      },
+      "thumb_symbols": [
+        "__lshrdi3"
+      ],
+      "negative_control": {
+        "before": "fraction += GARDROUND;",
+        "after": "fraction += GARDROUND - 1;"
+      }
+    },
+    {
+      "name": "__unpack_d",
+      "rom_offset": 315736,
+      "size": 216,
+      "source": "src/runtime/double_unpack.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "dst->normal_exp = exp - EXPBIAS;",
+        "after": "dst->normal_exp = exp - EXPBIAS + 1;"
+      }
+    },
+    {
+      "name": "_fpadd_parts",
+      "rom_offset": 315952,
+      "size": 620,
+      "source": "src/runtime/double_add_parts.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "g_runtime_double_nan": "0x030024c0",
+        "__negdi2": "0x0804e79d"
+      },
+      "thumb_symbols": [
+        "__negdi2"
+      ],
+      "negative_control": {
+        "before": "diff = a_normal_exp - b_normal_exp;",
+        "after": "diff = a_normal_exp - b_normal_exp - 1;"
+      }
+    },
+    {
+      "name": "__adddf3",
+      "rom_offset": 316572,
+      "size": 48,
+      "source": "src/runtime/double_add.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__pack_d": "0x0804d011",
+        "__unpack_d": "0x0804d159",
+        "_fpadd_parts": "0x0804d231"
+      },
+      "thumb_symbols": [
+        "__pack_d",
+        "__unpack_d",
+        "_fpadd_parts"
+      ],
+      "negative_control": {
+        "before": "_fpadd_parts (&a, &b, &tmp)",
+        "after": "_fpadd_parts (&a, &a, &tmp)"
+      }
+    },
+    {
+      "name": "__subdf3",
+      "rom_offset": 316620,
+      "size": 56,
+      "source": "src/runtime/double_subtract.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__pack_d": "0x0804d011",
+        "__unpack_d": "0x0804d159",
+        "_fpadd_parts": "0x0804d231"
+      },
+      "thumb_symbols": [
+        "__pack_d",
+        "__unpack_d",
+        "_fpadd_parts"
+      ],
+      "negative_control": {
+        "before": "b.sign ^= 1;",
+        "after": "b.sign ^= 0;"
+      }
+    },
+    {
+      "name": "__muldf3",
+      "rom_offset": 316676,
+      "size": 680,
+      "source": "src/runtime/double_multiply.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__pack_d": "0x0804d011",
+        "__unpack_d": "0x0804d159",
+        "g_runtime_double_nan": "0x030024c0",
+        "__muldi3": "0x0804e72d"
+      },
+      "thumb_symbols": [
+        "__pack_d",
+        "__unpack_d",
+        "__muldi3"
+      ],
+      "negative_control": {
+        "before": "tmp->normal_exp = a->normal_exp + b->normal_exp;",
+        "after": "tmp->normal_exp = a->normal_exp + b->normal_exp + 1;"
+      }
+    },
+    {
+      "name": "__divdf3",
+      "rom_offset": 317356,
+      "size": 392,
+      "source": "src/runtime/double_divide.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__pack_d": "0x0804d011",
+        "__unpack_d": "0x0804d159",
+        "g_runtime_double_nan": "0x030024c0"
+      },
+      "thumb_symbols": [
+        "__pack_d",
+        "__unpack_d"
+      ],
+      "negative_control": {
+        "before": "a->normal_exp = a->normal_exp - b->normal_exp;",
+        "after": "a->normal_exp = a->normal_exp - b->normal_exp + 1;"
+      }
+    },
+    {
+      "name": "__fpcmp_parts_d",
+      "rom_offset": 317748,
+      "size": 256,
+      "source": "src/runtime/double_compare_parts.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return b->sign - a->sign;",
+        "after": "return a->sign - b->sign;"
+      }
+    },
+    {
+      "name": "__lshrdi3",
+      "rom_offset": 321272,
+      "size": 52,
+      "source": "src/runtime/integer_shift_right.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "w.s.high = 0;",
+        "after": "w.s.high = 1;"
+      }
+    },
+    {
+      "name": "__muldi3",
+      "rom_offset": 321324,
+      "size": 112,
+      "source": "src/runtime/integer_multiply.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "w.s.high +=",
+        "after": "w.s.high -="
+      }
+    },
+    {
+      "name": "__negdi2",
+      "rom_offset": 321436,
+      "size": 24,
+      "source": "src/runtime/integer_negate.c",
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "((USItype) w.s.low > 0)",
+        "after": "((USItype) w.s.low == 0)"
+      }
     }
   ],
   "assembly": [
