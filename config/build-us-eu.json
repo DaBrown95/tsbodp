@@ -40698,6 +40698,56 @@
         "display_scene_clear_object_slots",
         "heap_free"
       ]
+    },
+    {
+      "name": "transition_mosaic_darkening_refresh",
+      "rom_offset": 233536,
+      "size": 324,
+      "source": "src/transition/transition_mosaic_darkening_refresh.c",
+      "symbols": {
+        "g_frame_primary_list": "0x030024f0",
+        "frame_request_refresh": "0x08001169",
+        "display_step_backgrounds": "0x0800d17d",
+        "display_step_palette_jobs": "0x080117d5",
+        "frame_prepare_oam_transfer": "0x0802d055",
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "frame_request_refresh",
+        "display_step_backgrounds",
+        "display_step_palette_jobs",
+        "frame_prepare_oam_transfer",
+        "irq_wait_vblank"
+      ],
+      "negative_control": {
+        "before": "targets | 0xC0",
+        "after": "targets | 0x80"
+      }
+    },
+    {
+      "name": "transition_mosaic_lightening_refresh",
+      "rom_offset": 233196,
+      "size": 340,
+      "source": "src/transition/transition_mosaic_lightening_refresh.c",
+      "symbols": {
+        "g_frame_primary_list": "0x030024f0",
+        "frame_request_refresh": "0x08001169",
+        "display_step_backgrounds": "0x0800d17d",
+        "display_step_palette_jobs": "0x080117d5",
+        "frame_prepare_oam_transfer": "0x0802d055",
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "frame_request_refresh",
+        "display_step_backgrounds",
+        "display_step_palette_jobs",
+        "frame_prepare_oam_transfer",
+        "irq_wait_vblank"
+      ],
+      "negative_control": {
+        "before": "targets | 0xC0",
+        "after": "targets | 0x80"
+      }
     }
   ],
   "assembly": [

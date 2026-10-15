@@ -45,8 +45,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,540 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,940 |
-| Unclassified remainder of estimated envelopes | 17,030 |
+| Unclassified inside source/glue-owned extents | 2,944 |
+| Unclassified remainder of estimated envelopes | 17,026 |
 | Other unresolved ROM | 16,433,816 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -75,6 +75,14 @@ physical classification changes separately: six zero alignment bytes move from
 estimated gaps into compiler-owned extents, without becoming instruction bytes.
 The historical 319,640-byte comparison and the survey's unresolved-region limits
 remain unchanged.
+
+Milestone 125 adds two matching C functions and 664 C extent bytes in the
+[paired mosaic transitions](TRANSITION_MOSAIC_REFRESH.md), bringing source
+coverage to 1,690 functions and 239,296 bytes, with the same 500 separate glue
+bytes. Four further zero alignment bytes move from estimated gaps into
+compiler-owned extents and remain unclassified as instructions. The 270,054
+qualified static instruction bytes, 323,784 mapped extent bytes, open denominator
+and fixed historical comparison remain unchanged.
 
 Two misleading classifications were investigated explicitly. A presumed return
 from the startup call to main leads a Thumb walk into independently established

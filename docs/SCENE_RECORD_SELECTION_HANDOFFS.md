@@ -87,3 +87,11 @@ now use the complete merged owners. These are static and compiler results.
 The historical finite qualification covers only the 708-byte update with its
 declared service abstractions; it does not become a new four-body finite proof.
 Hardware, complete allocator/resource behaviour and gameplay remain untested.
+
+Milestone 125 subsequently reconstructs the kind-12 second handler and its paired
+first handler as the [mosaic transitions](TRANSITION_MOSAIC_REFRESH.md). Each has
+its own matching source/control roles and separately scoped finite execution
+evidence. This closes the shutdown transition boundary described above; the map
+service, text renderer and phase-seven initializer remain unconverted. The
+first-handler kind-12 connection is still static table evidence without an
+observed executed caller.
