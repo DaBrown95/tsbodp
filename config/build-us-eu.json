@@ -41103,6 +41103,50 @@
         "before": "count<20",
         "after": "count<19"
       }
+    },
+    {
+      "name": "link_serial_handshake",
+      "source": "src/link/link_serial_handshake.c",
+      "rom_offset": 252392,
+      "size": 608,
+      "symbols": {
+        "g_link_word_0300218c": "0x0300218c",
+        "g_link_byte_03007338": "0x03007338",
+        "g_link_word_03007350": "0x03007350",
+        "g_link_setup_state": "0x03002cb0",
+        "g_link_flags": "0x03007334",
+        "g_link_last_serial_vblank": "0x03002188",
+        "g_irq_context": "0x03004280",
+        "g_irq_table": "0x03004290",
+        "link_serial_timeout": "0x0803e4ed",
+        "link_serial_interrupt": "0x0803dc49",
+        "link_reset_random_bytes": "0x0803a53d",
+        "link_original_start_connection": "0x0803a551"
+      },
+      "thumb_symbols": [
+        "link_serial_timeout",
+        "link_serial_interrupt",
+        "link_reset_random_bytes",
+        "link_original_start_connection"
+      ],
+      "negative_control": {
+        "before": "g_link_word_0300218c=5;",
+        "after": "g_link_word_0300218c=6;"
+      }
+    },
+    {
+      "name": "link_serial_timeout",
+      "rom_offset": 255212,
+      "size": 44,
+      "symbols": {
+        "g_link_last_serial_vblank": "0x03002188",
+        "g_irq_context": "0x03004280"
+      },
+      "negative_control": {
+        "before": ">300",
+        "after": ">301"
+      },
+      "source": "src/link/link_serial_timeout.c"
     }
   ],
   "assembly": [

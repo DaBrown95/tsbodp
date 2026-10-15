@@ -1,7 +1,8 @@
-# Whole-ROM inventory, 15 October 2026
+# Whole-ROM inventory
 
-This survey follows the published choice-panel milestone: 1,678 matching C
-functions, 236,692 C extent bytes and 500 separately counted glue bytes. Inventory
+The initial 15 October survey followed the choice-panel milestone: 1,678 matching
+C functions, 236,692 C extent bytes and 500 separately counted glue bytes. The
+results table includes subsequent matching milestones described below. Inventory
 discoveries add zero C credit. The reference identity and all matching requirements
 remain unchanged. The 319,640 mapped extent bytes are a fixed historical
 comparison, not the game's complete code denominator.
@@ -42,21 +43,21 @@ through matching source receipts and changed-source negative controls.
 
 | Disjoint physical classification | Bytes |
 | --- | ---: |
-| Qualified rooted instructions | 270,050 |
+| Qualified rooted instructions | 270,604 |
 | Qualified instructions also read as data | 4 |
-| Referenced literal/switch data | 34,540 |
+| Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,962 |
-| Unclassified remainder of estimated envelopes | 17,010 |
-| Other unresolved ROM | 16,433,814 |
+| Unclassified inside source/glue-owned extents | 2,970 |
+| Unclassified remainder of estimated envelopes | 16,262 |
+| Other unresolved ROM | 16,433,812 |
 | **Physical ROM total** | **16,777,216** |
 
-Thus 270,054 bytes have qualified static instruction evidence, under the stated
+Thus 270,608 bytes have qualified static instruction evidence, under the stated
 decoder, mode, original-image and ordinary-call assumptions. This confirms their
 static instruction role; it does not establish that every instruction executes.
-The raw alternative reach is 270,080 bytes. There are 2,321 rooted execution
-entries, while the ordinary map has 2,528 entries/candidates and 323,786 estimated
-extent bytes. Nine corroborated veneer starts were added (six register veneers and three audio
+The raw alternative reach is 270,634 bytes. There are 2,324 rooted execution
+entries, while the ordinary map has 2,528 entries/candidates and 323,788 estimated
+extent bytes. In the initial survey, nine corroborated veneer starts were added (six register veneers and three audio
 stubs), and four prior weak starts were folded as interior blocks, for a net five
 entries and 24 mapped extent bytes.
 The verified C function and byte gains from this inventory are both zero.
@@ -128,6 +129,20 @@ Qualified static instructions remain 270,054 bytes, inventory mapped extents
 remain 323,786 bytes and the complete game-code denominator stays open. The
 original status reader and installed IRQ handler remain explicit boundaries;
 the fixed 319,640-byte historical comparison is unchanged.
+
+Milestone 131 adds the connected [serial handshake IRQ and timeout](SERIAL_HANDSHAKE.md)
+with two matching C functions and 652 extent bytes, reaching 1,705 functions and
+242,112 C bytes. Separate instruction glue remains 500 bytes. Two new compiled
+entry roots promote the existing original start-provider entry through a direct
+call; all three were previously weak candidates. Their combined 554 instruction
+and 188 referenced-data bytes become qualified static evidence, without new
+C credit for the original provider. The instruction union reaches 270,608 bytes
+and the referenced-data union 34,732 bytes; both include the unchanged four-byte
+dual-use word. Eight zero bytes acquire compiler extent ownership, including
+the timeout's two newly bounded trailing bytes. Inventory mapped extents become
+323,788 bytes, with 2,970 owned unclassified bytes, 16,262 estimated unclassified
+bytes and 16,433,812 other unresolved bytes. No new runtime evidence or complete
+code denominator is claimed; the historical 319,640-byte comparison stays fixed.
 
 Two misleading classifications were investigated explicitly. A presumed return
 from the startup call to main leads a Thumb walk into independently established

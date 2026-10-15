@@ -36,10 +36,11 @@ not direct callees of these two bodies. Only the VBlank waiter is an accepted
 direct callee. A raw unsigned-word table store does not establish an original
 `void(void)` IRQ prototype or validate every possible callback population.
 
-The installed IRQ entry at `0x0803D9E8` and status-reader entry at `0x0803E298`
-remain original boundaries with zero new C credit. Their mapped 608-byte and
-124-byte extents include pools and gaps; this batch does not establish their
-compiler-owned boundaries. The 113 static serial findings and held 117
+At milestone 130, the installed IRQ entry at `0x0803D9E8` and status-reader entry
+at `0x0803E298` remained original boundaries with zero new C credit. The
+[subsequent handshake batch](SERIAL_HANDSHAKE.md) reconstructs the IRQ handler
+and its timeout; the status reader remains original. For the polling batch, the mapped 608-byte and 124-byte extents included pools
+and gaps; that batch did not establish their compiler-owned boundaries. The 113 static serial findings and held 117
 scene-controller work supply prior context, alongside the existing IRQ and
 endpoint source history. They do not prove polling gameplay, a complete link
 protocol, portable MMIO semantics, callback lifetime or interrupt completion.
@@ -54,7 +55,7 @@ credit. Deliberately wrong clock return, callback offset, flag width and IRQ-tab
 element width reject for the intended errors. Source controls change busy result
 five to six and the wait threshold twenty to nineteen.
 
-The fresh full-ROM matching build and refreshed progress record 1,703 verified C
+The milestone 130 full-ROM matching build and refreshed progress recorded 1,703 verified C
 functions and 241,460 C extent bytes, a gain of two functions and 320 bytes.
 Separate glue remains 500 bytes. The fixed 16 MiB ROM is byte-identical and the
 changed-source whole-ROM control rejects; 16,535,256 bytes remain explicit
