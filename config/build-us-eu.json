@@ -37409,7 +37409,7 @@
         "display_queue_palette": "0x8011719",
         "scene_contact_activity_three_queue_row_palette": "0x8019be5",
         "scene_contact_activity_three_scale_row": "0x8019c15",
-        "scene_contact_activity_three_original_update_linked_row": "0x801994d",
+        "scene_contact_activity_three_update_linked_row": "0x801994d",
         "scene_contact_activity_three_decrement_value": "0x8019a99",
         "view_point_distance": "0x8027495",
         "scene_contact_activity_three_step": "0x8018c71",
@@ -37460,7 +37460,7 @@
         "display_queue_palette",
         "scene_contact_activity_three_queue_row_palette",
         "scene_contact_activity_three_scale_row",
-        "scene_contact_activity_three_original_update_linked_row",
+        "scene_contact_activity_three_update_linked_row",
         "scene_contact_activity_three_decrement_value",
         "view_point_distance",
         "scene_contact_activity_three_step",
@@ -38092,6 +38092,33 @@
       "negative_control": {
         "before": "actor->id == 7",
         "after": "actor->id == 6"
+      }
+    },
+    {
+      "name": "scene_contact_activity_three_update_linked_row",
+      "source": "src/scene/scene_contact_activity_three_update_linked_row.c",
+      "rom_offset": 104780,
+      "size": 332,
+      "symbols": {
+        "g_scene_contact_state": "0x030043f4",
+        "g_scene_contact_activity_three_row_definitions": "0x08052b60",
+        "g_scene_contact_activity_three_control": "0x03004350",
+        "frame_read_attachment": "0x08001725",
+        "display_load_background": "0x0800da21",
+        "scene_contact_add_activity_score": "0x0802934d",
+        "audio_select_sequence": "0x080411bd",
+        "scene_contact_activity_three_decrement_value": "0x08019a99"
+      },
+      "thumb_symbols": [
+        "frame_read_attachment",
+        "display_load_background",
+        "scene_contact_add_activity_score",
+        "audio_select_sequence",
+        "scene_contact_activity_three_decrement_value"
+      ],
+      "negative_control": {
+        "before": "OBJECT->outcome=5;",
+        "after": "OBJECT->outcome=6;"
       }
     }
   ],

@@ -30,7 +30,7 @@ void scene_contact_activity_three_step_row(struct FrameObject *base) {
      OBJECT->position=OBJECT->next_position;
      event->position=OBJECT->next_position;
     }
-    scene_contact_activity_three_original_update_linked_row(base);
+    scene_contact_activity_three_update_linked_row(base);
   break;
  case 3:
   state=STATE;
@@ -67,7 +67,7 @@ void scene_contact_activity_three_step_row(struct FrameObject *base) {
      OBJECT->position=OBJECT->next_position;
      event->position=OBJECT->next_position;
     }
-    scene_contact_activity_three_original_update_linked_row(base);
+    scene_contact_activity_three_update_linked_row(base);
    }
   }else {
 unavailable_event:

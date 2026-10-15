@@ -1,12 +1,12 @@
 # Definition row three: selection controller, moving event and row actors
 
-This connected path has twenty-one matching C functions covering 3,900 bytes,
+This connected path has twenty-two matching C functions covering 4,232 bytes,
 including their original literal pools and alignment. It follows selection input
 through initialization, value updates, object creators and the installed event
 and row updates, coordinate and vector helpers, animation resets, palette
 requests and temporary-object removal. Row preparation at `0x08019640` (544
-bytes), event drawing at `0x08019D80` (368), and linked-row update at
-`0x0801994C` (332) remain explicit original dependencies and receive no C credit.
+bytes) and event drawing at `0x08019D80` (368) remain explicit original
+dependencies and receive no C credit.
 An exact source match does not recover those dependencies or establish gameplay.
 
 The observed definition row at `0x080595B0` installs the reconstructed initializer
@@ -149,3 +149,50 @@ wrong fourth-byte mask in 68. The unbound but byte-mismatching marker remains
 model-equal in all 850. The omitted fourth byte is explicitly rejected. These
 bounded interpreters compare native memory, calls and writes; they do not
 execute rendering hardware or establish gameplay reachability or behaviour.
+
+
+The linked-row update at 0x0801994C adds 332 bytes of ordinary C with no
+source register bindings. The row callback has two source control-flow uses
+which the compiler tail-merges into one native BL at 0x0801952E; both source
+identifiers receive only the same-address canonical helper name. The helper
+reads the observer attachment and checks the next position against a five-pixel
+vertical band. An on-screen point outside the band returns unchanged. Completion
+clears the linked event and decrements the active-row count; the in-band path
+loads its row background, adds 20 + 5*subtype + amount*(subtype+2), increments
+the completion counter, and coordinates the sequence/timer restore fields.
+Both completion paths then request the full-word-selected value decrement.
+
+This names actual byte 91 as the completion counter, separate from the three
+value bytes. It confirms why the marker's aligned word mask excludes that
+upper byte. The five 56-byte row records occupy 0x08052B60..0x08052C78;
+background pointer 36, unsigned sequence halfword 52 and timer halfword 54 are
+native loads, with an explicit low-byte sequence conversion for the real audio
+formal. Record/scene sizes and all earlier offsets stay unchanged. The count
+0..4, subtype 0..4 and amount 0..255 bound ordinary table and score accesses;
+two count 254/255 fixtures are explicitly ABI-only rather than ordinary game
+states. Complete object/resource reachability remains unproved.
+
+The ordinary source preserves a genuine base-score assignment expression used
+by the actual score argument. Native 20+5*subtype is produced before the amount
+load, then added to the real product. Operand-order and separate local variants
+remained 332/12 or 332/8; the used expression closes the full extent without
+invented dependencies, extra traffic or hints. The changed outcome control
+gives 336 bytes with 226 differing bytes under both profiles.
+
+The actual observer resource has ten frames and attachment zero in each.
+Its provider writes both signed-byte point components before the first C read.
+The native point lives at entry-SP minus 28, after a 20-byte register push and
+16-byte local frame. A first private model used the wrong stack address;
+memory and writes agreed but the attachment call argument exposed the error.
+That failed trace is retained, the model was corrected from the prologue, and
+the wrong-frame model remains a rejection control; no source change caused
+the correction. Arbitrary resources or failed attachment outputs are not
+assumed initialized and receive no new guard in the recovered C.
+
+The 262 bounded model cases include 30 cases from every actual observer frame,
+twelve deliberate abstract provider effects, two ABI-only high counters and
+an initialized object-alias case. The outcome control diverges in 192; early
+returns correctly remain unchanged. Ten invalid model inputs are rejected.
+Background, audio and decrement calls remain abstract hooks, while score
+effects follow its accepted C body as a model. These are not nested native
+provider execution or hardware/gameplay evidence.
