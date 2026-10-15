@@ -3,7 +3,7 @@ unsigned char frame_need_effect_begin_choices(struct FrameObject *base,struct Fr
 {
  struct FrameNeedEffectChoiceObject *object=(struct FrameNeedEffectChoiceObject *)base;
  struct FrameNeedEffectState *owner=object->owner;
- if(((struct FrameActionOwnerCallbacks *)owner)->check(owner,actor)==1 && frame_need_effect_build_choices(base)==1) {
+ if((unsigned char)((struct FrameActionOwnerCallbacks *)owner)->check(owner,actor)==1 && frame_need_effect_build_choices(base)==1) {
   object->actor=actor;
   object->phase=1;
   transition_object_set_state(actor,0);

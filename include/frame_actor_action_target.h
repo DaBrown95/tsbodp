@@ -9,7 +9,7 @@ struct FrameActionSearchNode {
  unsigned char unknown04[4];unsigned int kind;
  unsigned char unknown0c[0x48];void *target;
  unsigned char unknown58[0x8c];
- unsigned char (*check)(struct FrameActionSearchNode *,struct FrameObject *);
+ unsigned int (*check)(struct FrameNeedEffectState *,struct FrameObject *);
  unsigned int (*actions)(struct FrameNeedEffectState *,unsigned char *);
 };
 struct FrameActionSearchDescriptor {unsigned char unknown00[34],enabled,unknown23;};

@@ -11,7 +11,7 @@ unsigned int frame_actor_attachment_status(struct FrameObject *,struct FrameObje
 unsigned char frame_grid_snap_point_to_center(void *,const struct FramePoint *,struct FramePoint *);
 struct FrameActionTargetOwner {unsigned char unknown00[0x64];void *owner;};
 struct FrameActionOwnerCallbacks {
- unsigned char unknown00[0xe4];unsigned char (*check)(void *,struct FrameObject *);
+ unsigned char unknown00[0xe4];unsigned int (*check)(struct FrameNeedEffectState *,struct FrameObject *);
  unsigned char unknowne8[8];unsigned int (*use)(struct FrameNeedEffectState *,struct FrameObject *,unsigned int);
 };
 struct FrameActorAttachmentRecord {

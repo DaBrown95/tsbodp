@@ -38077,6 +38077,22 @@
         "before": "--*value;",
         "after": "*value-=2;"
       }
+    },
+    {
+      "name": "frame_need_effect_check_actor_header",
+      "rom_offset": 52364,
+      "size": 52,
+      "source": "src/frame/frame_need_effect_check_actor_header.c",
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "negative_control": {
+        "before": "actor->id == 7",
+        "after": "actor->id == 6"
+      }
     }
   ],
   "assembly": [

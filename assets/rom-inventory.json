@@ -4588,7 +4588,7 @@
     16626452,
     16627112
   ],
-  "initial_connected_entries": 1877,
+  "initial_connected_entries": 1878,
   "connected_main_last_instruction": 134539998,
   "unresolved_transfer_sites": [
     604,
@@ -4610,7 +4610,7 @@
     16627112
   ],
   "whole_rom_prologue_hits": 15021,
-  "sweep_seed_count": 486,
+  "sweep_seed_count": 485,
   "entry_count": 2526,
   "extent_count": 2528,
   "mapped_extent_bytes": 323714,
@@ -14385,15 +14385,14 @@
       "group": "ROM 0800xxxx"
     },
     {
-      "name": "sub_0800CC8C",
+      "name": "frame_need_effect_check_actor_header",
       "rom_offset": 52364,
       "mode": "Thumb",
       "runtime_addresses": [
         134270092
       ],
       "evidence": [
-        "pointer candidate",
-        "prologue candidate"
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -14405,14 +14404,14 @@
         52414
       ],
       "size": 52,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 52364,
       "body_rom_start": 52364,
       "body_rom_end": 52416,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "decoded_instruction_bytes": 52,
       "referenced_literal_bytes": 0,
-      "status": "candidate",
+      "status": "mapped_code",
       "group": "ROM 0800xxxx"
     },
     {
@@ -91830,10 +91829,10 @@
       "status": "candidate"
     },
     {
-      "name": "sub_0800CC8C",
+      "name": "frame_need_effect_check_actor_header",
       "rom_offset": 52364,
       "size": 52,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800CCC0",
@@ -107324,7 +107323,7 @@
     "config/ram-map-us-eu.json": "723df744e6016ee7519f61c916a42bc9f11e1de4a0d6e2c314a76ff34a1451ec",
     "config/indirect-transfers-us-eu.json": "6f26c66ac7bb782fb4cfffeca2e040c654f2d7e8097d7e051aafcceaa522eb10",
     "config/progress-regions-us-eu.json": "fd5ff50e29e7bd3e2605573d07458b7ea43e0e058f9922667d7d8e0987969067",
-    "config/build-us-eu.json": "c76b465a114aae8e3eb74386f85fa9d7dfe26db4770a5d431d8f21890f8f01d1",
+    "config/build-us-eu.json": "98035b7d416a7f1ae58fa98123cb2ae1b3bfbf55b832fafd0e32d70a83c3c23c",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c"
   }
 }

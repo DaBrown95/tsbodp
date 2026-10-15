@@ -4,7 +4,7 @@ unsigned char frame_find_action_target(struct FrameObject *actor,unsigned int ac
  struct FrameActionSearchNode *node=(struct FrameActionSearchNode *)g_frame_pending_action_head;
  while(node) {
   struct FrameActionSearchNode *next=node->next;
-  if(g_frame_action_search_descriptors[node->kind].enabled && node->check(node,actor)) {
+  if(g_frame_action_search_descriptors[node->kind].enabled && (unsigned char)node->check((struct FrameNeedEffectState *)node,actor)) {
    unsigned char actions[7];
    unsigned char i;
    scene_fill_bytes(actions,0,7);
