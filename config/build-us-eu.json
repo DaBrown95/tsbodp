@@ -39141,6 +39141,40 @@
         "before": "job->kind==49",
         "after": "job->kind==48"
       }
+    },
+    {
+      "name": "frame_resolve_actor_contact",
+      "rom_offset": 69036,
+      "size": 720,
+      "symbols": {
+        "frame_add_points": "0x080273a1"
+      },
+      "thumb_symbols": [
+        "frame_add_points"
+      ],
+      "negative_control": {
+        "before": "offset.x=((struct FrameCollisionMotion*)other)->speed>>3",
+        "after": "offset.x=((struct FrameCollisionMotion*)other)->speed>>2"
+      },
+      "source": "src/frame/frame_resolve_actor_contact.c"
+    },
+    {
+      "name": "frame_scene_player_collision",
+      "rom_offset": 70204,
+      "size": 56,
+      "symbols": {
+        "frame_resolve_actor_contact": "0x08010dad",
+        "view_point_distance": "0x08027495"
+      },
+      "thumb_symbols": [
+        "frame_resolve_actor_contact",
+        "view_point_distance"
+      ],
+      "negative_control": {
+        "before": "->radius<<16",
+        "after": "->radius<<15"
+      },
+      "source": "src/frame/frame_scene_player_collision.c"
     }
   ],
   "assembly": [

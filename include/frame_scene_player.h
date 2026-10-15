@@ -20,9 +20,10 @@ extern unsigned char *g_frame_actor_commands_kind1[],*g_frame_scene_player_comma
 void frame_scene_initialize_player_state(struct FrameObject *,unsigned char);
 void frame_acquire_palette_slot(struct FrameObject *,int);
 void frame_enable_animation_part(struct FrameObject *,unsigned char);
-void frame_scene_player_collision(struct FrameObject *,struct FrameObject *);
+struct CollisionObject;
+void frame_scene_player_collision(struct CollisionObject *,struct CollisionObject *);
 extern unsigned char g_frame_actor_local_need_state[];
-struct FrameScenePlayerCollision {unsigned char unknown00[0xc8];void (*collision)(struct FrameObject *,struct FrameObject *);};
+struct FrameScenePlayerCollision {unsigned char unknown00[0xc8];void (*collision)(struct CollisionObject *,struct CollisionObject *);};
 
 /* Shared allocations return a 320-byte object; this wrapper assigns its id. */
 struct FrameObject *frame_allocate_scene_object(void);
