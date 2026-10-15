@@ -38808,6 +38808,131 @@
         "after": "transition_configure_view_move(target,10*65536,31,0)"
       },
       "source": "src/scene/scene_contact_activity_one_step.c"
+    },
+    {
+      "name": "frame_begin_header_attachment_job",
+      "rom_offset": 78456,
+      "size": 140,
+      "symbols": {
+        "frame_need_effect_nth_attachment": "0x0802ed21",
+        "frame_allocate_actor_attachment_record": "0x0802e3c5",
+        "frame_actor_header_mode": "0x0802c751",
+        "frame_attachment_position": "0x0800176d",
+        "frame_begin_actor_route": "0x080370d1",
+        "frame_request_animation": "0x08001b5d"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_nth_attachment",
+        "frame_allocate_actor_attachment_record",
+        "frame_actor_header_mode",
+        "frame_attachment_position",
+        "frame_begin_actor_route",
+        "frame_request_animation"
+      ],
+      "negative_control": {
+        "before": "kind==50",
+        "after": "kind==51"
+      },
+      "source": "src/frame/frame_begin_header_attachment_job.c"
+    },
+    {
+      "name": "frame_dispatch_header_attachment_job",
+      "rom_offset": 78596,
+      "size": 44,
+      "symbols": {
+        "frame_find_actor_attachment_record": "0x0802ed61",
+        "frame_step_header_attachment_job_49": "0x08012f35",
+        "frame_step_header_attachment_job_50": "0x080130c5"
+      },
+      "thumb_symbols": [
+        "frame_find_actor_attachment_record",
+        "frame_step_header_attachment_job_49",
+        "frame_step_header_attachment_job_50"
+      ],
+      "negative_control": {
+        "before": "case 49:",
+        "after": "case 48:"
+      },
+      "source": "src/frame/frame_dispatch_header_attachment_job.c"
+    },
+    {
+      "name": "frame_step_header_attachment_job_49",
+      "rom_offset": 77620,
+      "size": 400,
+      "source": "src/frame/frame_step_header_attachment_job_49.c",
+      "symbols": {
+        "frame_stop_motion": "0x08001549",
+        "frame_request_animation": "0x08001b5d",
+        "audio_play_animation_cue": "0x08040ffd",
+        "frame_adjust_actor_needs": "0x0802b825",
+        "frame_step_attachment_need_timer": "0x0802eddd",
+        "g_frame_need_effect_definitions": "0x08062e7c"
+      },
+      "thumb_symbols": [
+        "frame_stop_motion",
+        "frame_request_animation",
+        "audio_play_animation_cue",
+        "frame_adjust_actor_needs",
+        "frame_step_attachment_need_timer"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(65)",
+        "after": "audio_play_animation_cue(64)"
+      }
+    },
+    {
+      "name": "frame_step_header_attachment_job_50",
+      "rom_offset": 78020,
+      "size": 272,
+      "source": "src/frame/frame_step_header_attachment_job_50.c",
+      "symbols": {
+        "frame_stop_motion": "0x08001549",
+        "frame_request_animation": "0x08001b5d",
+        "audio_play_animation_cue": "0x08040ffd",
+        "frame_adjust_actor_needs": "0x0802b825",
+        "frame_step_attachment_need_timer": "0x0802eddd",
+        "g_frame_need_effect_definitions": "0x08062e7c",
+        "g_header_attachment_reverse_directions": "0x08051be8",
+        "frame_need_effect_handoff_bounds": "0x08007e69",
+        "frame_clear_animation_pending": "0x08001bd5",
+        "g_need_effect_player": "0x030040e0",
+        "frame_set_actor_need_step_mode": "0x0803c609",
+        "audio_game_stop_sample": "0x08041341",
+        "resource_set_triple": "0x0802a1e9",
+        "resource_object_before_step": "0x08001ae1"
+      },
+      "thumb_symbols": [
+        "frame_stop_motion",
+        "frame_request_animation",
+        "audio_play_animation_cue",
+        "frame_adjust_actor_needs",
+        "frame_step_attachment_need_timer",
+        "frame_need_effect_handoff_bounds",
+        "frame_clear_animation_pending",
+        "frame_set_actor_need_step_mode",
+        "audio_game_stop_sample",
+        "resource_set_triple",
+        "resource_object_before_step"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(66)",
+        "after": "audio_play_animation_cue(67)"
+      }
+    },
+    {
+      "name": "frame_actor_header_mode",
+      "rom_offset": 182096,
+      "size": 44,
+      "source": "src/frame/frame_actor_header_mode.c",
+      "symbols": {
+        "g_frame_actor_definitions": "0x0805a680",
+        "g_frame_interaction_settings": "0x03003950"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "unknown_0a-32",
+        "after": "unknown_0a-31"
+      }
     }
   ],
   "assembly": [
