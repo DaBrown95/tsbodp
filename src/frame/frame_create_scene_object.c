@@ -11,7 +11,7 @@ struct FrameObject *frame_create_scene_object(unsigned int id,unsigned int subty
  object->on_step=frame_scene_object_tick;
  transition_object_set_state(object,14);
  frame_set_variant_state(object,0);
- frame_set_position(object,g_frame_scene_positions[id].x0<<16,g_frame_scene_positions[id].y0<<16);
+ frame_set_position(object,g_frame_scene_positions[id].x0*65536,g_frame_scene_positions[id].y0*65536);
  if(subtype!=267) frame_set_animation_record(object,&g_frame_scene_resources[subtype]);
  else {
   display_load_palette_alternate(g_frame_scene_special_palette,palette*16,16);
