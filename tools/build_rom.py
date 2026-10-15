@@ -35,7 +35,8 @@ def link_rom(manifest, reference, pilot_folder, folder, overrides=None, copies=N
     for f in sources:
         for name, value in f.get('symbols', {}).items():
             if name not in names:
-                if name in symbols and symbols[name] != value:
+                if (name in symbols and
+                        int(str(symbols[name]), 0) != int(str(value), 0)):
                     raise ValueError('Conflicting external symbol address')
                 symbols[name] = value
     thumb_symbols = {name for f in sources for name in f.get('thumb_symbols', ())

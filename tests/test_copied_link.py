@@ -50,6 +50,49 @@ class CopiedLinkTests(unittest.TestCase):
                                 self.folder / 'linked', copies=self.copies)
         self.assertEqual(output.read_bytes(), self.expected)
 
+    def add_external_address_user(self, value):
+        objfolder = self.pilot / 'address_user'
+        objfolder.mkdir()
+        source = objfolder / 'source.s'
+        source.write_text('.text\n.global address_user\n.type address_user,%function\n'
+                          'address_user: .word branch_target\n.size address_user,.-address_user\n')
+        subprocess.run([ROOT / 'toolchains/binutils/bin/arm-none-eabi-as',
+                        '-mcpu=arm7tdmi', '--no-pad-sections', *modern_assembler_abi_flags(),
+                        source, '-o', objfolder / 'source.o'], check=True)
+        self.manifest['functions'].append({'name': 'address_user', 'rom_offset': 0,
+                                          'size': 4, 'mode': 'ARM',
+                                          'symbols': {'branch_target': value}})
+        self.expected[:4] = struct.pack('<I', 0x03001200)
+        self.reference.write_bytes(self.expected)
+
+    def test_equivalent_hexadecimal_external_addresses_link_identically(self):
+        self.add_external_address_user('0x3001200')
+        output, _, _ = link_rom(self.manifest, self.reference, self.pilot,
+                                self.folder / 'equivalent-hex', copies=self.copies)
+        self.assertEqual(output.read_bytes(), self.expected)
+
+    def test_integer_and_string_external_addresses_link_identically(self):
+        self.add_external_address_user(0x03001200)
+        output, _, _ = link_rom(self.manifest, self.reference, self.pilot,
+                                self.folder / 'equivalent-integer', copies=self.copies)
+        self.assertEqual(output.read_bytes(), self.expected)
+
+    def test_different_external_addresses_reject_before_assembler_runs(self):
+        self.add_external_address_user('0x03001204')
+        with patch('build_rom.run') as run:
+            with self.assertRaisesRegex(ValueError, 'Conflicting external symbol address'):
+                link_rom(self.manifest, self.reference, self.pilot,
+                         self.folder / 'conflicting-address', copies=self.copies)
+            run.assert_not_called()
+
+    def test_external_mode_bit_difference_is_a_conflict(self):
+        self.add_external_address_user('0x03001201')
+        with patch('build_rom.run') as run:
+            with self.assertRaisesRegex(ValueError, 'Conflicting external symbol address'):
+                link_rom(self.manifest, self.reference, self.pilot,
+                         self.folder / 'conflicting-mode', copies=self.copies)
+            run.assert_not_called()
+
     def test_wrong_execution_address_fails_before_linking(self):
         self.manifest['functions'][0]['ram_address'] += 4
         with self.assertRaisesRegex(ValueError, 'RAM copy'):
