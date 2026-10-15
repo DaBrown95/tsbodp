@@ -15,8 +15,11 @@ are pinned in `config/targets/`. Follow the user's instructions over this file.
   mean the whole game has been decompiled.
 - Treat inferred names, types and function boundaries as provisional. Distinguish
   static findings, compiler matches and runtime/gameplay evidence.
-- Work in small connected batches. Preserve useful failed attempts and raw
-  comparison evidence in ignored local reports.
+- Work in small connected batches. Keep one latest verified full-build proof,
+  including its changed-source negative controls, and a bounded set of useful
+  failure evidence for active work. Preserve unique source attempts and concise
+  findings; delete obsolete generated payloads and record their retirement.
+  An old hash ledger alone does not require permanent artifact retention.
 
 ## Verification and progress
 

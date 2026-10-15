@@ -45,8 +45,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,540 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,944 |
-| Unclassified remainder of estimated envelopes | 17,026 |
+| Unclassified inside source/glue-owned extents | 2,948 |
+| Unclassified remainder of estimated envelopes | 17,022 |
 | Other unresolved ROM | 16,433,816 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -83,6 +83,14 @@ bytes. Four further zero alignment bytes move from estimated gaps into
 compiler-owned extents and remain unclassified as instructions. The 270,054
 qualified static instruction bytes, 323,784 mapped extent bytes, open denominator
 and fixed historical comparison remain unchanged.
+
+Milestone 126 adds the three connected [attachment job kind 48](FRAME_ATTACHMENT_JOB_48.md)
+bodies and 596 matching C extent bytes, bringing source coverage to 1,693
+functions and 239,892 bytes. Separate glue remains 500 bytes. Four zero alignment
+bytes move from estimated gaps into compiler-owned extents without becoming
+instruction bytes. Qualified instruction evidence remains 270,054 bytes and
+inventory mapped extents remain 323,784 bytes. The historical comparison and open
+denominator remain unchanged.
 
 Two misleading classifications were investigated explicitly. A presumed return
 from the startup call to main leads a Thumb walk into independently established
