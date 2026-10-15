@@ -46,16 +46,16 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,540 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,954 |
+| Unclassified inside source/glue-owned extents | 2,956 |
 | Unclassified remainder of estimated envelopes | 17,016 |
-| Other unresolved ROM | 16,433,816 |
+| Other unresolved ROM | 16,433,814 |
 | **Physical ROM total** | **16,777,216** |
 
 Thus 270,054 bytes have qualified static instruction evidence, under the stated
 decoder, mode, original-image and ordinary-call assumptions. This confirms their
 static instruction role; it does not establish that every instruction executes.
 The raw alternative reach is 270,080 bytes. There are 2,321 rooted execution
-entries, while the ordinary map has 2,528 entries/candidates and 323,784 estimated
+entries, while the ordinary map has 2,528 entries/candidates and 323,786 estimated
 extent bytes. Nine corroborated veneer starts were added (six register veneers and three audio
 stubs), and four prior weak starts were folded as interior blocks, for a net five
 entries and 24 mapped extent bytes.
@@ -110,6 +110,15 @@ instruction bytes, 323,784 inventory mapped extent bytes, fixed historical
 comparison and open denominator remain unchanged. Earlier worker notes now
 correctly identify adjustment-table rows applied across eight needs; no C body
 or source credit changes from that terminology correction.
+
+Milestone 129 completes the [row-99 selection and allocation path](FRAME_ATTACHMENT_JOBS_42_94.md)
+with two matching C functions and 56 extent bytes, reaching 1,701 functions and
+241,140 C bytes. Separate glue remains 500 bytes. The begin callback's two zero
+tail bytes now have full compiler/linker ownership evidence and extend the
+prior estimated envelope by two bytes: inventory mapped extents are 323,786
+bytes. Owned unclassified bytes rise by two and other unresolved ROM falls by
+two; qualified instruction evidence stays 270,054 bytes. The historical
+319,640-byte comparison and open game-code denominator remain unchanged.
 
 Two misleading classifications were investigated explicitly. A presumed return
 from the startup call to main leads a Thumb walk into independently established

@@ -41030,6 +41030,36 @@
         "before": "case 94:",
         "after": "case 95:"
       }
+    },
+    {
+      "name": "frame_select_attachment_jobs_42_94",
+      "source": "src/frame/frame_select_attachment_jobs_42_94.c",
+      "rom_offset": 122280,
+      "size": 28,
+      "symbols": {
+        "g_scene_id": "0x03004334"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "g_scene_id!=41",
+        "after": "g_scene_id!=40"
+      }
+    },
+    {
+      "name": "frame_begin_attachment_jobs_42_94",
+      "source": "src/frame/frame_begin_attachment_jobs_42_94.c",
+      "rom_offset": 122316,
+      "size": 28,
+      "symbols": {
+        "frame_allocate_actor_attachment_record": "0x0802e3c5"
+      },
+      "thumb_symbols": [
+        "frame_allocate_actor_attachment_record"
+      ],
+      "negative_control": {
+        "before": "job->kind=kind;",
+        "after": "job->kind=kind+1;"
+      }
     }
   ],
   "assembly": [
