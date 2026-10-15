@@ -24,10 +24,11 @@ envelopes separately; these include pools and gaps and do not prove compiler
 function ownership. Matching source extents have the stronger compiler/linker
 boundary evidence, including their literal pools and alignment.
 
-The public reproduction is `make progress`. Raw decoder facts, ROM spans,
-source/object joins, failed classifications and comparison controls are retained
-locally under ignored reports. No instruction bodies, ROM payload or extracted
-assets are published as inventory metadata.
+The public reproduction is `make progress`. The current proof and a bounded set
+of useful decoder, source/object, failure and comparison evidence are retained
+locally under ignored reports. Obsolete generated raw evidence is retired;
+historical receipts do not guarantee its continued availability. No instruction
+bodies, ROM payload or extracted assets are published as inventory metadata.
 
 ## Results
 
@@ -45,8 +46,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,540 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,948 |
-| Unclassified remainder of estimated envelopes | 17,022 |
+| Unclassified inside source/glue-owned extents | 2,950 |
+| Unclassified remainder of estimated envelopes | 17,020 |
 | Other unresolved ROM | 16,433,816 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -91,6 +92,14 @@ bytes move from estimated gaps into compiler-owned extents without becoming
 instruction bytes. Qualified instruction evidence remains 270,054 bytes and
 inventory mapped extents remain 323,784 bytes. The historical comparison and open
 denominator remain unchanged.
+
+Milestone 127 adds the three connected [attachment job kind 71](FRAME_ATTACHMENT_JOB_71.md)
+bodies and 556 matching C extent bytes, bringing source coverage to 1,696
+functions and 240,448 bytes. Separate glue remains 500 bytes. Two observed zero
+alignment bytes move from estimated gaps into compiler-owned extents and remain
+unclassified as instructions. The 270,054 qualified static instruction bytes,
+323,784 inventory mapped extent bytes and fixed 319,640-byte historical comparison
+remain unchanged. The complete game-code denominator remains open.
 
 Two misleading classifications were investigated explicitly. A presumed return
 from the startup call to main leads a Thumb walk into independently established
