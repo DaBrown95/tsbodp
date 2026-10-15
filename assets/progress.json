@@ -1,21 +1,21 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "15 Oct 2026, 01:30 BST",
-  "compiled_c_functions": 1588,
-  "compiled_c_bytes": 219016,
+  "verified_at": "15 Oct 2026, 01:56 BST",
+  "compiled_c_functions": 1591,
+  "compiled_c_bytes": 219232,
   "assembly_glue_bytes": 500,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16557700,
+  "unconverted_rom_bytes": 16557484,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2526,
-  "bounded_control_flow_bodies": 882,
+  "bounded_control_flow_bodies": 879,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 17,
   "unresolved_callback_call_sites": 101,
-  "mapped_extent_bytes": 323722,
+  "mapped_extent_bytes": 323724,
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointer and Thumb prologue sweeps; estimated extents",
   "rows": [
     {
@@ -3946,18 +3946,18 @@
       "status": "candidate"
     },
     {
-      "name": "sub_080131D8",
+      "name": "frame_need_effect_check_actor_header_variant",
       "group": "ROM 0801xxxx",
       "rom_offset": 78296,
       "size": 52,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0801320C",
+      "name": "frame_need_effect_select_header_choices",
       "group": "ROM 0801xxxx",
       "rom_offset": 78348,
-      "size": 98,
-      "status": "candidate"
+      "size": 100,
+      "status": "exact_c"
     },
     {
       "name": "sub_08013270",
@@ -10281,11 +10281,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0802ED20",
+      "name": "frame_need_effect_nth_attachment",
       "group": "ROM 0802xxxx",
       "rom_offset": 191776,
       "size": 64,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "frame_find_actor_attachment_record",
@@ -21550,22 +21550,16 @@
       "status": "candidate"
     },
     {
-      "name": "sub_080131D8",
+      "name": "frame_need_effect_check_actor_header_variant",
       "rom_offset": 78296,
       "size": 52,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0801320C",
+      "name": "frame_need_effect_select_header_choices",
       "rom_offset": 78348,
-      "size": 98,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_01326E",
-      "rom_offset": 78446,
-      "size": 2,
-      "status": "unresolved"
+      "size": 100,
+      "status": "exact_c"
     },
     {
       "name": "sub_08013270",
@@ -27814,10 +27808,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0802ED20",
+      "name": "frame_need_effect_nth_attachment",
       "rom_offset": 191776,
       "size": 64,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "frame_find_actor_attachment_record",
@@ -35225,8 +35219,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "1f820544f88b9460fcc7697694036dbbbe5c340c12eed41f15e7a5be80637fe2",
-    "assets/rom-inventory.json": "c4e2a9be804861e4da0919e053de16018735d30caa4199d0ec1a8f3d377729b0",
+    "config/build-us-eu.json": "34b1d703c18afd6c210c11abc047bcd3ddfb151f0b48d964c22c44295d6131db",
+    "assets/rom-inventory.json": "9404ce13fdf922ad9a656e971a353e42adb1ac180bcd51c9f40d7c1d1227791a",
     "tools/render_progress.py": "419354ceff7a7eb3a9e9f520cce14b39dbdc60ea247901091ba834d85e0d32e6",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "bc77da39abf1f092066c258dd6dadb1606a772d563deac4a37b86d0b0bffd10d",

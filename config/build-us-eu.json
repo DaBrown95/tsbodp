@@ -38120,6 +38120,52 @@
         "before": "OBJECT->outcome=5;",
         "after": "OBJECT->outcome=6;"
       }
+    },
+    {
+      "name": "frame_need_effect_check_actor_header_variant",
+      "rom_offset": 78296,
+      "size": 52,
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "negative_control": {
+        "before": "actor->id == 7",
+        "after": "actor->id == 6"
+      },
+      "source": "src/frame/frame_need_effect_check_actor_header_variant.c"
+    },
+    {
+      "name": "frame_need_effect_select_header_choices",
+      "rom_offset": 78348,
+      "size": 100,
+      "symbols": {
+        "frame_need_effect_attachment_count": "0x0802eca1",
+        "frame_need_effect_nth_attachment": "0x0802ed21"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_attachment_count",
+        "frame_need_effect_nth_attachment"
+      ],
+      "negative_control": {
+        "before": "owner->kind == 75",
+        "after": "owner->kind == 74"
+      },
+      "source": "src/frame/frame_need_effect_select_header_choices.c"
+    },
+    {
+      "name": "frame_need_effect_nth_attachment",
+      "rom_offset": 191776,
+      "size": 64,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "index < 3",
+        "after": "index < 2"
+      },
+      "source": "src/frame/frame_need_effect_nth_attachment.c"
     }
   ],
   "assembly": [

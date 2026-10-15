@@ -26,6 +26,7 @@ from ram_copies import validate_copy
 from header_snapshots import (snapshot_headers, retained_source, verify_snapshot_inputs,
                               verify_preprocessor_dependencies)
 from source_coverage import byte_counts, inline_glue, verify_inline_glue_symbols
+from pilot_parallel_process import compile_candidates, validate_jobs
 
 
 def run(command, commands):
@@ -154,7 +155,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--negative-control", action="store_true")
     parser.add_argument("--matrix", action="store_true")
+    parser.add_argument("--jobs", type=int, default=4, help="Independent compiler workers (1..8; default 4)")
     args = parser.parse_args()
+    validate_jobs(args.jobs)
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
     run_folder = ROOT / "build/pilot/runs" / run_id
     target = json.loads((ROOT / "config/targets/us-eu.json").read_text())
@@ -184,13 +187,13 @@ def main():
     report = {"target": "us-eu", "reference_sha256": identity["sha256"],
               "run_id": run_id, "output_directory": str(run_folder),
               "compiler_source_commit": commit,
-              "compiler_flags": manifest["compiler_flags"], "functions": [],
+              "compiler_flags": manifest["compiler_flags"], "compilation_jobs": args.jobs, "functions": [],
               "whole_rom_build_verified": False, "historical_compiler_proven": False}
     report["helper_sha256"] = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
                                 for name in ("tools/pilot.py", "tools/project.py", "config/build-us-eu.json",
                                              "tools/toolchain.py", "tools/source_symbols.py", "tools/source_controls.py", "config/pilot-toolchain.json",
                                              "config/targets/us-eu.json", "include/irq.h",
-                                             "tools/source_addresses.py", "tools/source_coverage.py", "tools/ram_copies.py", "tools/header_snapshots.py",
+                                             "tools/source_addresses.py", "tools/source_coverage.py", "tools/ram_copies.py", "tools/header_snapshots.py", "tools/pilot_parallel_process.py",
                                              "config/ram-map-us-eu.json")}
     report['helper_sha256'].update({str(header.relative_to(ROOT)): hashlib.sha256(header.read_bytes()).hexdigest()
                                     for header in (ROOT / 'include').rglob('*.h')})
@@ -250,76 +253,16 @@ def main():
     for name in lock['native_tool_sha256']:
         path = ROOT / name
         report.setdefault("tool_sha256", {})[name] = hashlib.sha256(path.read_bytes()).hexdigest()
-    for function in manifest["functions"] + manifest.get('assembly', []):
-        name = function["name"]
-        source = ROOT / function["source"]
-        folder = run_folder / name
-        folder.mkdir(parents=True, exist_ok=True)
-        snapshot = folder / "source.c"
-        snapshot.write_bytes(source.read_bytes())
-        is_c = function.get('kind', 'compiled_c') == 'compiled_c'
-        data, compile_commands = (compile_function(function, snapshot, folder, manifest["compiler_flags"])
-                                  if is_c else assemble_glue(function, snapshot, folder))
-        expected = rom[function["rom_offset"]:function["rom_offset"] + function["size"]]
-        (folder / 'expected.bin').write_bytes(expected)
-        (folder / 'candidate.bin').write_bytes(data)
-        result = compare_bytes(expected, data)
-        result['compiled_c_bytes'], result['assembly_glue_bytes'] = byte_counts(function)
-        address = execution_address(function, copies) if is_c else 0x08000000 + function['rom_offset']
-        result.update({**function, "address": f"{address:#010x}",
-                       'rom_address': f"{0x08000000 + function['rom_offset']:#010x}",
-                       "source_sha256": hashlib.sha256(snapshot.read_bytes()).hexdigest(),
-                       "commands": compile_commands, "expected_sha256": hashlib.sha256(expected).hexdigest()})
-        if is_c:
-            selection = compiler_selection(function, manifest['compiler_flags'])
-            result.update({'compiler_id': selection['compiler_id'], 'compiler_flags': selection['flags']})
-            result['assembler_id'] = assembler_selection(function)['assembler_id']
-        if args.matrix and is_c:
-            result["optimization_trials"] = []
-            for flag in ("-O0", "-O1", "-O2", "-O3", "-Os"):
-                trial_flags = optimization_flags(selection['flags'], flag)
-                trial_function = {**function, 'compiler_flags': trial_flags}
-                trial_data, trial_commands = compile_function(
-                    trial_function, snapshot, folder / flag[1:], trial_flags)
-                trial = compare_bytes(expected, trial_data)
-                trial.update({"flags": trial_flags, "commands": trial_commands})
-                result["optimization_trials"].append(trial)
-        if args.negative_control and 'negative_control' in function:
-            control_folder = folder / 'negative-control'
-            control_folder.mkdir()
-            changed = control_folder / ('changed.c' if is_c else 'changed.s')
-            changed.write_text(mutate(snapshot.read_text(), function['negative_control']))
-            control_data, control_commands = (compile_function(function, changed, control_folder, manifest['compiler_flags'])
-                                             if is_c else assemble_glue(function, changed, control_folder))
-            (control_folder / 'candidate.bin').write_bytes(control_data)
-            control = compare_bytes(expected, control_data)
-            control.update({'rejected': not control['identical'], 'commands': control_commands,
-                            'source_edit': function['negative_control'],
-                            'source_sha256': hashlib.sha256(changed.read_bytes()).hexdigest()})
-            result['negative_control'] = control
-        if args.negative_control and function.get('inline_glue'):
-            spec = function['inline_glue']
-            control_folder = folder / 'inline-glue-control'
-            control_folder.mkdir()
-            header_name = Path(spec['source']).relative_to('include').as_posix()
-            original_header = (folder / 'include' / header_name).read_text()
-            changed_header = mutate(original_header, spec['negative_control'])
-            control_data, control_commands = compile_function(
-                function, snapshot, control_folder, manifest['compiler_flags'],
-                header_overrides={header_name: changed_header})
-            (control_folder / 'candidate.bin').write_bytes(control_data)
-            control = compare_bytes(expected, control_data)
-            control.update({'rejected': not control['identical'], 'commands': control_commands,
-                            'source_edit': spec['negative_control'],
-                            'header': spec['source'],
-                            'source_sha256': hashlib.sha256(changed_header.encode()).hexdigest()})
-            result['inline_glue_control'] = control
-        verified = verified_comparison(result, controls_compiled=args.negative_control)
-        result['source_reconstruction_verified'] = verified and is_c
-        result['assembly_glue_verified'] = verified and not is_c
-        result['inline_glue_verified'] = verified and bool(inline_glue(function))
-        report["functions"].append(result)
-        print(f"{name}: {'MATCH' if result['identical'] else 'MISMATCH'} ({len(data)} / {len(expected)} bytes)")
+    report["functions"] = compile_candidates(
+        manifest["functions"] + manifest.get('assembly', []), run_folder,
+        manifest["compiler_flags"], rom, copies, negative_control=args.negative_control,
+        matrix=args.matrix, jobs=args.jobs, compile_c=compile_function,
+        assemble_low_level=assemble_glue,
+        extra_inputs=[ROOT / name for name in report['helper_sha256']] +
+                     [ROOT / name for name in report['tool_sha256']])
+    for result in report["functions"]:
+        print(f"{result['name']}: {'MATCH' if result['identical'] else 'MISMATCH'} "
+              f"({result['candidate_size']} / {result['reference_size']} bytes)")
     report["matched_functions"] = sum(r["source_reconstruction_verified"] for r in report["functions"])
     report["matched_bytes_including_pools_and_padding"] = sum(r['compiled_c_bytes'] for r in report["functions"] if r["source_reconstruction_verified"])
     report['assembly_glue_bytes'] = sum(r['assembly_glue_bytes'] for r in report['functions']
