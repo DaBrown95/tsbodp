@@ -1,17 +1,17 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "15 Oct 2026, 02:18 BST",
-  "compiled_c_functions": 1595,
-  "compiled_c_bytes": 219640,
+  "verified_at": "15 Oct 2026, 02:54 BST",
+  "compiled_c_functions": 1598,
+  "compiled_c_bytes": 219816,
   "assembly_glue_bytes": 500,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16557076,
+  "unconverted_rom_bytes": 16556900,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2526,
-  "bounded_control_flow_bodies": 875,
+  "bounded_control_flow_bodies": 872,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 17,
   "unresolved_callback_call_sites": 101,
@@ -166,11 +166,11 @@
       "status": "candidate"
     },
     {
-      "name": "sub_08000B78",
+      "name": "frame_reset_primary_display_indices",
       "group": "ROM 0800xxxx",
       "rom_offset": 2936,
       "size": 112,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_set_animation_variant",
@@ -285,11 +285,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_080012DC",
+      "name": "scene_clear_shared_display",
       "group": "ROM 0800xxxx",
       "rom_offset": 4828,
       "size": 24,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_configure_deferred_display",
@@ -1419,11 +1419,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08009E18",
+      "name": "scene_resume_actor_speed_cue",
       "group": "ROM 0800xxxx",
       "rom_offset": 40472,
       "size": 40,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_actor_state_31_32_33",
@@ -17956,10 +17956,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_08000B78",
+      "name": "frame_reset_primary_display_indices",
       "rom_offset": 2936,
       "size": 112,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_set_animation_variant",
@@ -18058,10 +18058,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_080012DC",
+      "name": "scene_clear_shared_display",
       "rom_offset": 4828,
       "size": 24,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_configure_deferred_display",
@@ -19150,10 +19150,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08009E18",
+      "name": "scene_resume_actor_speed_cue",
       "rom_offset": 40472,
       "size": 40,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_actor_state_31_32_33",
@@ -35219,8 +35219,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "8b1b52d01bbb44ed35a7f13903072a93a7349a163f3e733423945507845a6aba",
-    "assets/rom-inventory.json": "f3cb8617f77a9813c4c2553d60bb8fc2ff7434678b62a1b42204545339cf88d7",
+    "config/build-us-eu.json": "0ea3ed1a62322aefd5c6da19fb344814dfff1c119be224774d665290e32d72c1",
+    "assets/rom-inventory.json": "452c8d3fbbf426a242205710ef61c5354b140ef71b33a9a65c6c7d4711e86aa2",
     "tools/render_progress.py": "419354ceff7a7eb3a9e9f520cce14b39dbdc60ea247901091ba834d85e0d32e6",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "bc77da39abf1f092066c258dd6dadb1606a772d563deac4a37b86d0b0bffd10d",

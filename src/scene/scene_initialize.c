@@ -50,12 +50,12 @@ void scene_initialize(void) {
  } else if(g_scene_request.mode==2) {
   display_reset_tile_allocation();
   if(!(g_game_flags&0x40000)) frame_restore_primary_objects();
-  else scene_stage_080012dc();
+  else scene_clear_shared_display();
   frame_enable_primary_object_flags(128);
-  scene_stage_08000b78();
+  frame_reset_primary_display_indices();
   scene_copy_palette_alternate(g_scene_context.palette,0,256);
   background_animation_load(g_background_animation.transfer_enabled);
-  scene_stage_08009e18();
+  scene_resume_actor_speed_cue();
  }
  if(!(g_audio_control.flags&8))
   audio_select_sequence(scene_audio_for_period(g_scene_context.period));

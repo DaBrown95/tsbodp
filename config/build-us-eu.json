@@ -2231,11 +2231,8 @@
         "scene_stage_08037444": "0x08037445",
         "background_animation_load": "0x0800a6c1",
         "frame_restore_primary_objects": "0x0800125d",
-        "scene_stage_080012dc": "0x080012dd",
         "frame_enable_primary_object_flags": "0x08001299",
-        "scene_stage_08000b78": "0x08000b79",
         "scene_copy_palette_alternate": "0x08011719",
-        "scene_stage_08009e18": "0x08009e19",
         "scene_audio_for_period": "0x08026a9d",
         "scene_initialize_objects": "0x08020235",
         "scene_initialize_transient_slots": "0x08026bc9",
@@ -2256,7 +2253,10 @@
         "frame_load_scene_map_resources": "0x080263d9",
         "frame_initialize_scene_actors": "0x08026521",
         "frame_reset_object_palette_slots": "0x080301c5",
-        "frame_reset_scene_actor_schedule": "0x0802cd91"
+        "frame_reset_scene_actor_schedule": "0x0802cd91",
+        "frame_reset_primary_display_indices": "0x08000b79",
+        "scene_resume_actor_speed_cue": "0x08009e19",
+        "scene_clear_shared_display": "0x080012dd"
       },
       "thumb_symbols": [
         "scene_vblank_callback",
@@ -2279,11 +2279,11 @@
         "background_animation_load",
         "display_reset_tile_allocation",
         "frame_restore_primary_objects",
-        "scene_stage_080012dc",
+        "scene_clear_shared_display",
         "frame_enable_primary_object_flags",
-        "scene_stage_08000b78",
+        "frame_reset_primary_display_indices",
         "scene_copy_palette_alternate",
-        "scene_stage_08009e18",
+        "scene_resume_actor_speed_cue",
         "scene_audio_for_period",
         "audio_select_sequence",
         "scene_initialize_objects",
@@ -38245,6 +38245,55 @@
       "negative_control": {
         "before": "g_scene_context.flags|=1",
         "after": "g_scene_context.flags|=2"
+      }
+    },
+    {
+      "name": "frame_reset_primary_display_indices",
+      "source": "src/frame/frame_reset_primary_display_indices.c",
+      "rom_offset": 2936,
+      "size": 112,
+      "symbols": {
+        "g_frame_primary_list": "0x030024f0"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "object->display_index=0xffff;",
+        "after": "object->display_index=0xfffe;"
+      }
+    },
+    {
+      "name": "scene_resume_actor_speed_cue",
+      "source": "src/scene/scene_resume_actor_speed_cue.c",
+      "rom_offset": 40472,
+      "size": 40,
+      "symbols": {
+        "g_frame_scene_player_mode": "0x03003950",
+        "g_frame_actor_speed_cue_mode": "0x03002eb0",
+        "frame_actor_set_speed_cue": "0x08009d9d"
+      },
+      "thumb_symbols": [
+        "frame_actor_set_speed_cue"
+      ],
+      "negative_control": {
+        "before": "mode==1",
+        "after": "mode==2"
+      }
+    },
+    {
+      "name": "scene_clear_shared_display",
+      "source": "src/scene/scene_clear_shared_display.c",
+      "rom_offset": 4828,
+      "size": 24,
+      "symbols": {
+        "g_frame_shared_display": "0x030017c8",
+        "display_fill_bytes": "0x0804e8b9"
+      },
+      "thumb_symbols": [
+        "display_fill_bytes"
+      ],
+      "negative_control": {
+        "before": ",0,572",
+        "after": ",0,568"
       }
     }
   ],
