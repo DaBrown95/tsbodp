@@ -45,8 +45,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,540 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,914 |
-| Unclassified remainder of estimated envelopes | 17,056 |
+| Unclassified inside source/glue-owned extents | 2,934 |
+| Unclassified remainder of estimated envelopes | 17,036 |
 | Other unresolved ROM | 16,433,816 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -59,6 +59,13 @@ extent bytes. Nine corroborated veneer starts were added (six register veneers a
 stubs), and four prior weak starts were folded as interior blocks, for a net five
 entries and 24 mapped extent bytes.
 The verified C function and byte gains from this inventory are both zero.
+
+The subsequent [record-selection reconstruction](RECORD_SELECTION_RECONSTRUCTION.md)
+adds six matching C functions and 1,136 C extent bytes, bringing source coverage to
+1,684 functions and 237,828 bytes. Twenty previously unclassified bytes move from
+estimated envelopes into compiler-owned extents; they remain unclassified in this
+census. Static instruction totals, mapped extent totals and denominator limits
+are unchanged. This source gain is separate from the inventory's zero C credit.
 
 Two misleading classifications were investigated explicitly. A presumed return
 from the startup call to main leads a Thumb walk into independently established

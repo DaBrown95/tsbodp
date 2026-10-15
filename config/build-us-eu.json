@@ -40399,6 +40399,175 @@
         "before": " case 2:\n  if(--g_scene_request.unknown_14==~0U) {",
         "after": " case 2:\n  if(--g_scene_request.unknown_14==0) {"
       }
+    },
+    {
+      "name": "scene_record_selection_confirm",
+      "rom_offset": 152316,
+      "size": 180,
+      "source": "src/scene/scene_record_selection_confirm.c",
+      "symbols": {
+        "save_stream_suspend_audio": "0x80412b1",
+        "save_stream_read_slot": "0x8037e9d",
+        "save_stream_resume_audio": "0x80412bd",
+        "save_stream_validate_slot": "0x8037e6d",
+        "resource_submit_scene": "0x8027dd1",
+        "audio_play_animation_cue": "0x8040ffd",
+        "g_scene_request": "0x03004350",
+        "g_frame_actor_palette_scene_resource": "0x03001db4",
+        "g_save_stream_state": "0x03005d90",
+        "scene_record_selection_set_slot_phase_original": "0x080254a5"
+      },
+      "thumb_symbols": [
+        "save_stream_suspend_audio",
+        "save_stream_read_slot",
+        "save_stream_resume_audio",
+        "save_stream_validate_slot",
+        "resource_submit_scene",
+        "audio_play_animation_cue",
+        "scene_record_selection_set_slot_phase_original"
+      ],
+      "negative_control": {
+        "before": "resource_submit_scene(1,5,0);",
+        "after": "resource_submit_scene(1,4,0);"
+      }
+    },
+    {
+      "name": "scene_record_selection_cancel",
+      "rom_offset": 153616,
+      "size": 24,
+      "source": "src/scene/scene_record_selection_cancel.c",
+      "symbols": {
+        "scene_submit_default_request": "0x8027dc1",
+        "audio_play_animation_cue": "0x8040ffd",
+        "g_scene_link_menu_selector_word": "0x03004340"
+      },
+      "thumb_symbols": [
+        "scene_submit_default_request",
+        "audio_play_animation_cue"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(2);",
+        "after": "audio_play_animation_cue(3);"
+      }
+    },
+    {
+      "name": "scene_record_selection_change_slot",
+      "rom_offset": 153548,
+      "size": 68,
+      "source": "src/scene/scene_record_selection_change_slot.c",
+      "symbols": {
+        "input_step_horizontal_pressed": "0x801f461",
+        "g_scene_request": "0x03004350",
+        "g_frame_actor_need_input": "0x030040e0",
+        "g_input_local_pressed": "0x03004250",
+        "scene_record_selection_set_slot_phase_original": "0x080254a5"
+      },
+      "thumb_symbols": [
+        "input_step_horizontal_pressed",
+        "scene_record_selection_set_slot_phase_original"
+      ],
+      "negative_control": {
+        "before": "pressed_bytes[player*2] & 16",
+        "after": "pressed_bytes[player*2] & 32"
+      }
+    },
+    {
+      "name": "scene_record_selection_step",
+      "rom_offset": 151608,
+      "size": 708,
+      "source": "src/scene/scene_record_selection_step.c",
+      "symbols": {
+        "display_fill_background": "0x800d6b9",
+        "display_load_palette_ranges": "0x8011635",
+        "display_reset_palette_jobs": "0x80117bd",
+        "display_text_draw_line": "0x801a959",
+        "display_text_set_background_control": "0x801ae2d",
+        "display_text_select_font": "0x801ae75",
+        "input_step_local_vertical_pressed": "0x801f5c9",
+        "scene_record_selection_confirm": "0x80252fd",
+        "scene_record_selection_set_phase_original": "0x80253b1",
+        "scene_record_selection_draw_panel_original": "0x8025571",
+        "frame_create_palette_scene_actor": "0x80256a5",
+        "scene_record_selection_change_slot": "0x80257cd",
+        "scene_record_selection_cancel": "0x8025811",
+        "scene_record_selection_draw_choice": "0x8025875",
+        "scene_submit_default_request": "0x8027dc1",
+        "display_scene_retire_object_slot": "0x8028339",
+        "save_stream_commit_slot": "0x8037da9",
+        "save_stream_commit_header": "0x8037ed5",
+        "audio_play_animation_cue": "0x8040ffd",
+        "display_scene_lookup_text": "0x8045009",
+        "g_scene_request": "0x3004350",
+        "g_condition_panel_objects": "0x30043b0",
+        "g_input_local_pressed": "0x3004250",
+        "g_frame_actor_need_input": "0x30040e0",
+        "g_frame_actor_palette_scene_resource": "0x3001db4",
+        "g_scene_record_selection_control0": "0x8056304",
+        "g_scene_default_menu_palette_ranges": "0x8052e30"
+      },
+      "thumb_symbols": [
+        "display_fill_background",
+        "display_load_palette_ranges",
+        "display_reset_palette_jobs",
+        "display_text_draw_line",
+        "display_text_set_background_control",
+        "display_text_select_font",
+        "input_step_local_vertical_pressed",
+        "scene_record_selection_confirm",
+        "scene_record_selection_set_phase_original",
+        "scene_record_selection_draw_panel_original",
+        "frame_create_palette_scene_actor",
+        "scene_record_selection_change_slot",
+        "scene_record_selection_cancel",
+        "scene_record_selection_draw_choice",
+        "scene_submit_default_request",
+        "display_scene_retire_object_slot",
+        "save_stream_commit_slot",
+        "save_stream_commit_header",
+        "audio_play_animation_cue",
+        "display_scene_lookup_text"
+      ],
+      "negative_control": {
+        "before": "scene_submit_default_request(11);",
+        "after": "scene_submit_default_request(12);"
+      }
+    },
+    {
+      "name": "scene_record_selection_create_objects",
+      "rom_offset": 153640,
+      "size": 76,
+      "source": "src/scene/scene_record_selection_create_objects.c",
+      "symbols": {
+        "frame_create_scene_object": "0x8027ee5",
+        "g_condition_panel_objects": "0x030043b0"
+      },
+      "thumb_symbols": [
+        "frame_create_scene_object"
+      ],
+      "negative_control": {
+        "before": "frame_create_scene_object(113,234,7,0)",
+        "after": "frame_create_scene_object(117,234,7,0)"
+      }
+    },
+    {
+      "name": "scene_record_selection_draw_choice",
+      "rom_offset": 153716,
+      "size": 80,
+      "source": "src/scene/scene_record_selection_draw_choice.c",
+      "symbols": {
+        "display_text_select_font": "0x801ae75",
+        "display_text_draw_line": "0x801a959",
+        "display_scene_lookup_text": "0x8045009"
+      },
+      "thumb_symbols": [
+        "display_text_select_font",
+        "display_text_draw_line",
+        "display_scene_lookup_text"
+      ],
+      "negative_control": {
+        "before": "if (index == selected) fill = 3;",
+        "after": "if (index == selected) fill = 2;"
+      }
     }
   ],
   "assembly": [
