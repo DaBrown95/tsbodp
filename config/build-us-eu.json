@@ -38451,6 +38451,99 @@
         "after": "timer=181"
       },
       "source": "src/frame/frame_step_condition_wait_job.c"
+    },
+    {
+      "name": "frame_need_effect_direct_49_check",
+      "source": "src/frame/frame_need_effect_direct_49_check.c",
+      "rom_offset": 138740,
+      "size": 40,
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "negative_control": {
+        "before": "unknown_60[0] == 1",
+        "after": "unknown_60[0] == 2"
+      }
+    },
+    {
+      "name": "frame_need_effect_direct_49_choices",
+      "source": "src/frame/frame_need_effect_direct_49_choices.c",
+      "rom_offset": 138780,
+      "size": 8,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "choices[0]=49",
+        "after": "choices[0]=48"
+      }
+    },
+    {
+      "name": "frame_need_effect_direct_49_begin",
+      "source": "src/frame/frame_need_effect_direct_49_begin.c",
+      "rom_offset": 138796,
+      "size": 72,
+      "symbols": {
+        "frame_allocate_actor_attachment_record": "0x0802e3c5",
+        "frame_attachment_position": "0x0800176d",
+        "frame_begin_actor_route": "0x080370d1",
+        "frame_request_animation": "0x08001b5d"
+      },
+      "thumb_symbols": [
+        "frame_allocate_actor_attachment_record",
+        "frame_attachment_position",
+        "frame_begin_actor_route",
+        "frame_request_animation"
+      ],
+      "negative_control": {
+        "before": "job->kind=kind",
+        "after": "job->kind=kind+1"
+      }
+    },
+    {
+      "name": "frame_need_effect_direct_49_dispatch",
+      "source": "src/frame/frame_need_effect_direct_49_dispatch.c",
+      "rom_offset": 138868,
+      "size": 32,
+      "symbols": {
+        "frame_find_actor_attachment_record": "0x0802ed61",
+        "frame_need_effect_direct_49_step": "0x08021d4d"
+      },
+      "thumb_symbols": [
+        "frame_find_actor_attachment_record",
+        "frame_need_effect_direct_49_step"
+      ],
+      "negative_control": {
+        "before": "job->kind==49",
+        "after": "job->kind==48"
+      }
+    },
+    {
+      "name": "frame_need_effect_direct_49_step",
+      "source": "src/frame/frame_need_effect_direct_49_step.c",
+      "rom_offset": 138572,
+      "size": 164,
+      "symbols": {
+        "g_frame_need_effect_definitions": "0x08062e7c",
+        "frame_request_animation": "0x08001b5d",
+        "frame_clear_animation_pending": "0x08001bd5",
+        "audio_play_animation_cue": "0x08040ffd",
+        "frame_adjust_actor_needs": "0x0802b825",
+        "frame_step_attachment_need_timer": "0x0802eddd"
+      },
+      "thumb_symbols": [
+        "frame_request_animation",
+        "frame_clear_animation_pending",
+        "audio_play_animation_cue",
+        "frame_adjust_actor_needs",
+        "frame_step_attachment_need_timer"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(65)",
+        "after": "audio_play_animation_cue(64)"
+      }
     }
   ],
   "assembly": [
