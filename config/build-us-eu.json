@@ -2225,7 +2225,7 @@
         "display_set_mode": "0x0800d601",
         "display_enable_layers": "0x0800d68d",
         "display_show_background": "0x0800d579",
-        "scene_stage_08026b24": "0x08026b25",
+        "scene_prepare_load": "0x08026b25",
         "display_time_period": "0x080107e5",
         "scene_palette_source": "0x08026795",
         "scene_stage_08037444": "0x08037445",
@@ -2238,7 +2238,7 @@
         "scene_stage_08009e18": "0x08009e19",
         "scene_audio_for_period": "0x08026a9d",
         "scene_initialize_objects": "0x08020235",
-        "scene_stage_08026bc8": "0x08026bc9",
+        "scene_initialize_transient_slots": "0x08026bc9",
         "scene_initialize_view": "0x0801e5f5",
         "scene_update_view": "0x0801e799",
         "scene_show_view": "0x08039b11",
@@ -2267,7 +2267,7 @@
         "display_enable_layers",
         "display_configure_tile_allocation",
         "display_show_background",
-        "scene_stage_08026b24",
+        "scene_prepare_load",
         "frame_reset_object_palette_slots",
         "display_time_period",
         "scene_palette_source",
@@ -2287,7 +2287,7 @@
         "scene_audio_for_period",
         "audio_select_sequence",
         "scene_initialize_objects",
-        "scene_stage_08026bc8",
+        "scene_initialize_transient_slots",
         "display_load_palette_ranges",
         "scene_initialize_view",
         "scene_update_view",
@@ -38166,6 +38166,86 @@
         "after": "index < 2"
       },
       "source": "src/frame/frame_need_effect_nth_attachment.c"
+    },
+    {
+      "name": "scene_audio_for_period",
+      "source": "src/scene/scene_audio_for_period.c",
+      "rom_offset": 158364,
+      "size": 136,
+      "symbols": {
+        "g_scene_period_audio": "0x08057224",
+        "g_scene_id": "0x03004334"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "sequences[3]",
+        "after": "sequences[2]"
+      }
+    },
+    {
+      "name": "scene_prepare_load",
+      "source": "src/scene/scene_prepare_load.c",
+      "rom_offset": 158500,
+      "size": 128,
+      "symbols": {
+        "g_resource_selected": "0x03002edc",
+        "g_scene_request": "0x03004350",
+        "g_scene_startup_load_options": "0x03005d90",
+        "save_world_initialize": "0x0801b631",
+        "save_stream_load_buffer": "0x08037c8d",
+        "g_scene_startup_players": "0x03004130",
+        "g_scene_context": "0x03004320",
+        "scene_check_initial_time_flags": "0x08026c49",
+        "g_input_config": "0x030040e0"
+      },
+      "thumb_symbols": [
+        "save_world_initialize",
+        "save_stream_load_buffer",
+        "scene_check_initial_time_flags"
+      ],
+      "negative_control": {
+        "before": "g_resource_selected=0",
+        "after": "g_resource_selected=1"
+      }
+    },
+    {
+      "name": "scene_initialize_transient_slots",
+      "source": "src/scene/scene_initialize_transient_slots.c",
+      "rom_offset": 158664,
+      "size": 76,
+      "symbols": {
+        "g_scene_id": "0x03004334",
+        "frame_initialize_transient_definition": "0x080303d9",
+        "g_scene_startup_transient2": "0x08069510",
+        "g_scene_startup_transient3": "0x08069520",
+        "g_scene_startup_transient6": "0x08069550",
+        "g_scene_startup_transient7": "0x08069560"
+      },
+      "thumb_symbols": [
+        "frame_initialize_transient_definition"
+      ],
+      "negative_control": {
+        "before": "g_scene_id<=14",
+        "after": "g_scene_id<=13"
+      }
+    },
+    {
+      "name": "scene_check_initial_time_flags",
+      "source": "src/scene/scene_check_initial_time_flags.c",
+      "rom_offset": 158792,
+      "size": 68,
+      "symbols": {
+        "g_scene_world_state": "0x03003958",
+        "g_scene_context": "0x03004320",
+        "display_time_compare": "0x080106c1"
+      },
+      "thumb_symbols": [
+        "display_time_compare"
+      ],
+      "negative_control": {
+        "before": "g_scene_context.flags|=1",
+        "after": "g_scene_context.flags|=2"
+      }
     }
   ],
   "assembly": [

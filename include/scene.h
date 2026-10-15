@@ -18,7 +18,7 @@ extern const unsigned int g_scene_background_control0, g_scene_background_contro
 extern struct ScenePaletteRangeConfig g_scene_palette_range_configs[];
 #include "audio_vblank.h"
 extern void scene_vblank_callback(void), set_vblank_callback(void (*)(void));
-extern void scene_stage_0803e3a8(void), scene_stage_08026b24(void);
+extern void scene_stage_0803e3a8(void), scene_prepare_load(void);
 extern void *scene_palette_source(void);
 extern void display_load_palette(const void *, unsigned int, unsigned int);
 extern void frame_load_scene_map_resources(unsigned int), frame_reset_scene_actor_schedule(void), frame_initialize_scene_actors(unsigned int), scene_stage_08037444(void);
@@ -26,7 +26,7 @@ extern void display_configure_tile_allocation(unsigned char), display_reset_tile
 extern void scene_stage_080012dc(void), scene_stage_08000b78(void);
 extern void scene_copy_palette_alternate(const void *, unsigned int, unsigned int), scene_stage_08009e18(void);
 extern unsigned char scene_audio_for_period(unsigned int);
-extern void audio_select_sequence(unsigned char), scene_initialize_objects(void *, unsigned int), scene_stage_08026bc8(void), display_load_palette_ranges(const struct PaletteRangeConfig *);
+extern void audio_select_sequence(unsigned char), scene_initialize_objects(void *, unsigned int), scene_initialize_transient_slots(void), display_load_palette_ranges(const struct PaletteRangeConfig *);
 extern void scene_initialize_view(unsigned int, unsigned int), scene_update_view(unsigned int), scene_show_view(unsigned char), scene_stage_0800e3a8(unsigned char);
 extern void display_set_mode(unsigned short), display_show_background(unsigned int, unsigned int), display_enable_layers(unsigned short);
 extern void display_cpu_copy(const void *, void *, unsigned int);

@@ -1,4 +1,5 @@
 #include "scene.h"
+#include "frame.h"
 #include "view_motion_step.h"
 #include "transition_object.h"
 #include "background_animation.h"
@@ -32,7 +33,7 @@ void scene_initialize(void) {
    int mode=(g_scene_request.mode==4 && g_scene_id==6) ? 6 : 0;
    { unsigned char *end=g_scene_mode_bytes,*p; p=end+3; do { *p--=mode; } while((int)p>=(int)end); }
   }
-  scene_stage_08026b24();
+  scene_prepare_load();
   frame_reset_object_palette_slots();
   g_scene_request.mode=0;
  }
@@ -59,7 +60,7 @@ void scene_initialize(void) {
  if(!(g_audio_control.flags&8))
   audio_select_sequence(scene_audio_for_period(g_scene_context.period));
  scene_initialize_objects(g_scene_entry_data,g_scene_id);
- scene_stage_08026bc8();
+ scene_initialize_transient_slots();
  if(g_scene_palette_range_configs[g_scene_id].resource)
   display_load_palette_ranges(g_scene_palette_range_configs[g_scene_id].resource);
  g_game_flags &= ~0x100000;
