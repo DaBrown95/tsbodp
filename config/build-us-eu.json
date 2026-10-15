@@ -40266,6 +40266,98 @@
         "before": "object->display_palette=6;",
         "after": "object->display_palette=5;"
       }
+    },
+    {
+      "name": "scene_choice_panel_initialize",
+      "source": "src/scene/scene_choice_panel_initialize.c",
+      "rom_offset": 214624,
+      "size": 396,
+      "symbols": {
+        "frame_set_position": "0x80014a5",
+        "display_scene_lookup_text": "0x8045009",
+        "display_text_measure_width": "0x801af29",
+        "display_text_select_font": "0x801ae75",
+        "frame_enable_primary_object_flags": "0x8001299",
+        "display_bios_remainder": "0x804c8cd",
+        "g_actor_scene_request": "0x3005a00",
+        "g_need_effect_choice_text": "0x30059f0",
+        "g_scene_request": "0x3004350",
+        "g_scene_choice_panel_size": "0x3001f0c"
+      },
+      "thumb_symbols": [
+        "frame_set_position",
+        "display_scene_lookup_text",
+        "display_text_measure_width",
+        "display_text_select_font",
+        "frame_enable_primary_object_flags",
+        "display_bios_remainder"
+      ],
+      "negative_control": {
+        "before": "  if(g_actor_scene_request.object) {\n   unsigned int old_width;\n   width+=32;\n   old_width=g_scene_choice_panel_size.width;\n   metric=(width+3)>>3;\n   if(metric<old_width) metric=old_width;\n   g_scene_choice_panel_size.width=metric;\n   g_scene_choice_panel_size.width=g_scene_choice_panel_size.width>25 ? 25 : g_scene_choice_panel_size.width;\n   width-=32;\n  } else {\n   unsigned int old_width;\n   old_width=g_scene_choice_panel_size.width;\n   metric=(width+3)>>3;\n   if(metric<old_width) metric=old_width;\n   g_scene_choice_panel_size.width=metric;\n   g_scene_choice_panel_size.width=g_scene_choice_panel_size.width>25 ? 25 : g_scene_choice_panel_size.width;\n  }\n  while(width>width_limit) {width-=width_limit;++lines;}\n  ++index;\n }\n g_scene_choice_panel_size.width+=2;\n pixels=lines*12+16;\n g_scene_choice_panel_size.height=pixels>>3;\n if(display_bios_remainder(pixels,8)) ++g_scene_choice_panel_size.height;\n if(lines==1 && g_actor_scene_request.object) g_scene_choice_panel_size.height=5;",
+        "after": "  if(g_scene_request.scene) {\n   unsigned int old_width;\n   width+=32;\n   old_width=g_scene_choice_panel_size.width;\n   metric=(width+3)>>3;\n   if(metric<old_width) metric=old_width;\n   g_scene_choice_panel_size.width=metric;\n   g_scene_choice_panel_size.width=g_scene_choice_panel_size.width>25 ? 25 : g_scene_choice_panel_size.width;\n   width-=32;\n  } else {\n   unsigned int old_width;\n   old_width=g_scene_choice_panel_size.width;\n   metric=(width+3)>>3;\n   if(metric<old_width) metric=old_width;\n   g_scene_choice_panel_size.width=metric;\n   g_scene_choice_panel_size.width=g_scene_choice_panel_size.width>25 ? 25 : g_scene_choice_panel_size.width;\n  }\n  while(width>width_limit) {width-=width_limit;++lines;}\n  ++index;\n }\n g_scene_choice_panel_size.width+=2;\n pixels=lines*12+16;\n g_scene_choice_panel_size.height=pixels>>3;\n if(display_bios_remainder(pixels,8)) ++g_scene_choice_panel_size.height;\n if(lines==1 && g_scene_request.scene) g_scene_choice_panel_size.height=5;"
+      }
+    },
+    {
+      "name": "scene_choice_panel_shutdown",
+      "source": "src/scene/scene_choice_panel_shutdown.c",
+      "rom_offset": 215824,
+      "size": 124,
+      "symbols": {
+        "irq_default_vblank_callback": "0x801f9e5",
+        "set_vblank_callback": "0x801f8ed",
+        "transition_run_second": "0x8039435",
+        "display_reset": "0x800dda5",
+        "heap_clear": "0x8027a49",
+        "frame_configure_deferred_display": "0x80012f5",
+        "frame_clear_render_effects": "0x8031099",
+        "frame_clear_transient_effects": "0x803105d",
+        "scene_queued_request_kind": "0x8027db1",
+        "scene_retain_display": "0x8026929",
+        "frame_disable_primary_object_flags": "0x80012b9",
+        "display_reset_palette_jobs": "0x80117bd",
+        "scene_choice_panel_original_disable_windows": "0x80489dd",
+        "g_actor_scene_request": "0x3005a00",
+        "g_need_effect_choice_text": "0x30059f0"
+      },
+      "thumb_symbols": [
+        "irq_default_vblank_callback",
+        "set_vblank_callback",
+        "transition_run_second",
+        "display_reset",
+        "heap_clear",
+        "frame_configure_deferred_display",
+        "frame_clear_render_effects",
+        "frame_clear_transient_effects",
+        "scene_queued_request_kind",
+        "scene_retain_display",
+        "frame_disable_primary_object_flags",
+        "display_reset_palette_jobs",
+        "scene_choice_panel_original_disable_windows"
+      ],
+      "negative_control": {
+        "before": "heap_clear(g_need_effect_choice_text,0,10);",
+        "after": "heap_clear(g_need_effect_choice_text,0,8);"
+      }
+    },
+    {
+      "name": "scene_choice_panel_begin_close",
+      "source": "src/scene/scene_choice_panel_begin_close.c",
+      "rom_offset": 215992,
+      "size": 60,
+      "symbols": {
+        "audio_play_animation_cue": "0x8040ffd",
+        "scene_choice_panel_original_window_end": "0x80487bd",
+        "g_actor_scene_request": "0x3005a00",
+        "g_scene_request": "0x3004350"
+      },
+      "thumb_symbols": [
+        "audio_play_animation_cue",
+        "scene_choice_panel_original_window_end"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(80);",
+        "after": "audio_play_animation_cue(81);"
+      }
     }
   ],
   "assembly": [
