@@ -42,7 +42,7 @@
         4340
       ],
       "word_copy_control": 67108935,
-      "classification": "copied ARM frame drawing code and literals; exact instruction ownership remains provisional",
+      "classification": "Copied ARM object-table ordering/sort: static 272 instruction bytes and 12 literal bytes; historical key retained, ordinary matching C unresolved.",
       "exports": "frame_draw_iwram.bin"
     },
     {
@@ -304,7 +304,7 @@
         50334668,
         50334672
       ],
-      "effect": "update ARM instruction shift fields from argument bits"
+      "effect": "Clear instruction bits 0xF80, then OR the incoming argument shifted left by seven; shift-field-only interpretation depends on incoming range, not locally masked."
     }
   ],
   "limitations": [
@@ -313,5 +313,205 @@
     "Self-modifying instruction state differs after execution; keep original and runtime state distinct.",
     "No executable entry found in initial EWRAM copy; later code installation remains possible.",
     "Audio function names are reconstructed, some intentionally address-based."
-  ]
+  ],
+  "shared_kernel_family": {
+    "copy_name": "audio_iwram",
+    "entries": [
+      {
+        "direct_return_sites": [
+          50333312
+        ],
+        "mode": "ARM",
+        "provisional_source_name": "mixLeft",
+        "ram_entry": 50333188,
+        "reachable_ranges": [
+          [
+            50333188,
+            50333316
+          ]
+        ],
+        "rom_entry": 16624252,
+        "table_slots": [
+          1
+        ]
+      },
+      {
+        "direct_return_sites": [
+          50333312
+        ],
+        "mode": "ARM",
+        "provisional_source_name": "mixRight",
+        "ram_entry": 50333316,
+        "reachable_ranges": [
+          [
+            50333212,
+            50333348
+          ]
+        ],
+        "rom_entry": 16624380,
+        "table_slots": [
+          3
+        ]
+      },
+      {
+        "direct_return_sites": [
+          50333476
+        ],
+        "mode": "ARM",
+        "provisional_source_name": "mixCenter",
+        "ram_entry": 50333348,
+        "reachable_ranges": [
+          [
+            50333348,
+            50333480
+          ]
+        ],
+        "rom_entry": 16624412,
+        "table_slots": [
+          4
+        ]
+      },
+      {
+        "direct_return_sites": [
+          50333628
+        ],
+        "mode": "ARM",
+        "provisional_source_name": "mixStereo",
+        "ram_entry": 50333480,
+        "reachable_ranges": [
+          [
+            50333480,
+            50333632
+          ]
+        ],
+        "rom_entry": 16624544,
+        "table_slots": [
+          0,
+          2
+        ]
+      },
+      {
+        "direct_return_sites": [
+          50333856
+        ],
+        "mode": "ARM",
+        "provisional_source_name": "mixLeftHQ",
+        "ram_entry": 50333632,
+        "reachable_ranges": [
+          [
+            50333632,
+            50333860
+          ]
+        ],
+        "rom_entry": 16624696,
+        "table_slots": [
+          9
+        ]
+      },
+      {
+        "direct_return_sites": [
+          50333856
+        ],
+        "mode": "ARM",
+        "provisional_source_name": "mixRightHQ",
+        "ram_entry": 50333860,
+        "reachable_ranges": [
+          [
+            50333660,
+            50333896
+          ]
+        ],
+        "rom_entry": 16624924,
+        "table_slots": [
+          11
+        ]
+      },
+      {
+        "direct_return_sites": [
+          50334124
+        ],
+        "mode": "ARM",
+        "provisional_source_name": "mixCenterHQ",
+        "ram_entry": 50333896,
+        "reachable_ranges": [
+          [
+            50333896,
+            50334128
+          ]
+        ],
+        "rom_entry": 16624960,
+        "table_slots": [
+          12
+        ]
+      },
+      {
+        "direct_return_sites": [
+          50334384
+        ],
+        "mode": "ARM",
+        "provisional_source_name": "mixStereoHQ",
+        "ram_entry": 50334128,
+        "reachable_ranges": [
+          [
+            50334128,
+            50334388
+          ]
+        ],
+        "rom_entry": 16625192,
+        "table_slots": [
+          8,
+          10
+        ]
+      }
+    ],
+    "physical_instruction_bytes_once": 1200,
+    "physical_rom_range": [
+      16624252,
+      16625452
+    ],
+    "shared_tails": [
+      {
+        "byte_ranges": [
+          [
+            50333212,
+            50333316
+          ]
+        ],
+        "entries": [
+          50333188,
+          50333316
+        ],
+        "instruction_count": 26
+      },
+      {
+        "byte_ranges": [
+          [
+            50333660,
+            50333860
+          ]
+        ],
+        "entries": [
+          50333632,
+          50333860
+        ],
+        "instruction_count": 50
+      }
+    ],
+    "function_extent_policy": "Do not synthesize contiguous extents by next table entry; preserve shared ranges.",
+    "boundary_confidence": "high for these original-image reachable instruction sets and terminal returns; provisional for names, standalone ownership and complete writer/entry coverage",
+    "remaining": [
+      "all possible write targets/self-modified states not closed",
+      "table runtime index/null slots not universally bounded",
+      "no ARM emulator execution observations",
+      "surrounding audio image pools/data/zero fill require their separate evidence"
+    ],
+    "source_evidence": {
+      "repository": "sebknzl/krawall",
+      "revision": "8d338581bf0ed0afad15b66bf5979ad4c4d15ed0",
+      "path": "lib/mixer_func.S",
+      "blob": "6d4975102527644490e195357d841976f588e412",
+      "licence": "LGPL-2.1-or-later",
+      "comparison": "300 normalized instruction-semantic correspondences and eight label correspondences; no assembler run or C credit."
+    }
+  }
 }

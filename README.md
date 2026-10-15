@@ -15,6 +15,9 @@ Green tiles are matching C. Function boundaries in the
 Amber tiles are verified low-level ARM/Thumb glue, counted separately from C.
 The build matches the original ROM, but most regions are still copied from
 the original dump.
+The ROM map separately records rooted static instructions, estimated extents,
+data and unresolved regions. It does not yet establish a complete game-code
+denominator. The historical 319,640 mapped extent bytes remain a fixed comparison.
 
 ## Building
 

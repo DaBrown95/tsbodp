@@ -1,7 +1,7 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "15 Oct 2026, 15:09 BST",
+  "verified_at": "15 Oct 2026, 16:39 BST",
   "compiled_c_functions": 1678,
   "compiled_c_bytes": 236692,
   "assembly_glue_bytes": 500,
@@ -10,13 +10,32 @@
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
-  "discovered_entries": 2523,
-  "bounded_control_flow_bodies": 792,
+  "discovered_entries": 2528,
+  "bounded_control_flow_bodies": 793,
   "bounded_switch_tables": 100,
-  "unresolved_dispatch_sites": 17,
-  "unresolved_callback_call_sites": 101,
-  "mapped_extent_bytes": 323768,
-  "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointer and Thumb prologue sweeps; estimated extents",
+  "unresolved_dispatch_sites": 22,
+  "unresolved_callback_call_sites": 98,
+  "mapped_extent_bytes": 323792,
+  "historical_mapped_extent_baseline": 319640,
+  "code_census_summary": {
+    "raw_instruction_union_bytes": 270080,
+    "qualified_observed_instruction_union_bytes": 270054,
+    "nonconflicting_qualified_instruction_bytes": 270054,
+    "raw_referenced_data_union_bytes": 34544,
+    "qualified_referenced_data_union_bytes": 34544,
+    "source_glue_owned_extent_bytes": 237192,
+    "estimated_envelope_union_bytes": 323784,
+    "classification_bytes": {
+      "estimated_envelope_unclassified": 17056,
+      "instruction_and_referenced_data_dual_use": 4,
+      "known_data": 18836,
+      "owned_extent_unclassified": 2914,
+      "strong_rooted_instruction": 270050,
+      "strong_rooted_referenced_data": 34540,
+      "unresolved": 16433816
+    }
+  },
+  "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents",
   "rows": [
     {
       "name": "ROM entry",
@@ -905,63 +924,49 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 20556,
       "size": 132,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080050D0",
       "group": "ROM 0800xxxx",
       "rom_offset": 20688,
       "size": 292,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080051F4",
       "group": "ROM 0800xxxx",
       "rom_offset": 20980,
       "size": 248,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080052EC",
       "group": "ROM 0800xxxx",
       "rom_offset": 21228,
       "size": 252,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080053E8",
       "group": "ROM 0800xxxx",
       "rom_offset": 21480,
-      "size": 46,
-      "status": "candidate"
-    },
-    {
-      "name": "sub_08005416",
-      "group": "ROM 0800xxxx",
-      "rom_offset": 21526,
-      "size": 186,
-      "status": "candidate"
+      "size": 232,
+      "status": "mapped_code"
     },
     {
       "name": "sub_080054D0",
       "group": "ROM 0800xxxx",
       "rom_offset": 21712,
-      "size": 46,
-      "status": "candidate"
-    },
-    {
-      "name": "sub_080054FE",
-      "group": "ROM 0800xxxx",
-      "rom_offset": 21758,
-      "size": 134,
-      "status": "candidate"
+      "size": 180,
+      "status": "mapped_code"
     },
     {
       "name": "sub_08005584",
       "group": "ROM 0800xxxx",
       "rom_offset": 21892,
       "size": 196,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08005648",
@@ -1787,14 +1792,14 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 47712,
       "size": 594,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800BCB4",
       "group": "ROM 0800xxxx",
       "rom_offset": 48308,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800BCB8",
@@ -1808,35 +1813,35 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 48352,
       "size": 12,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800BCEC",
       "group": "ROM 0800xxxx",
       "rom_offset": 48364,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800BCF4",
       "group": "ROM 0800xxxx",
       "rom_offset": 48372,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800BD3C",
       "group": "ROM 0800xxxx",
       "rom_offset": 48444,
       "size": 36,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800BD60",
       "group": "ROM 0800xxxx",
       "rom_offset": 48480,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_create_collision_variant_resource",
@@ -1997,7 +2002,7 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 52472,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_dispatch_secondary_header_attachment_job",
@@ -2011,14 +2016,14 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 52524,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800CD30",
       "group": "ROM 0800xxxx",
       "rom_offset": 52528,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "display_load_background_resource",
@@ -2746,7 +2751,7 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 63148,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_interaction_can_begin_31",
@@ -2760,14 +2765,14 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 63192,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800F6E0",
       "group": "ROM 0800xxxx",
       "rom_offset": 63200,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_interaction_begin_31",
@@ -2788,7 +2793,7 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 63312,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "scene_step_character_animation",
@@ -2865,14 +2870,14 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 63576,
       "size": 278,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800F970",
       "group": "ROM 0800xxxx",
       "rom_offset": 63856,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800F974",
@@ -2886,35 +2891,35 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 63900,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800F9A4",
       "group": "ROM 0800xxxx",
       "rom_offset": 63908,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800F9AC",
       "group": "ROM 0800xxxx",
       "rom_offset": 63916,
       "size": 90,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800FA08",
       "group": "ROM 0800xxxx",
       "rom_offset": 64008,
       "size": 62,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800FA48",
       "group": "ROM 0800xxxx",
       "rom_offset": 64072,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "scene_contact_activity_one_step",
@@ -3845,14 +3850,14 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 76752,
       "size": 420,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012D74",
       "group": "ROM 0801xxxx",
       "rom_offset": 77172,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012D78",
@@ -3866,42 +3871,42 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 77216,
       "size": 36,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012DC4",
       "group": "ROM 0801xxxx",
       "rom_offset": 77252,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012DCC",
       "group": "ROM 0801xxxx",
       "rom_offset": 77260,
       "size": 78,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012E1C",
       "group": "ROM 0801xxxx",
       "rom_offset": 77340,
       "size": 80,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012E6C",
       "group": "ROM 0801xxxx",
       "rom_offset": 77420,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012E74",
       "group": "ROM 0801xxxx",
       "rom_offset": 77428,
       "size": 190,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_step_header_attachment_job_49",
@@ -3922,7 +3927,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 78292,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_need_effect_check_actor_header_variant",
@@ -3943,7 +3948,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 78448,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_header_attachment_job",
@@ -3964,7 +3969,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 78640,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08013334",
@@ -3978,35 +3983,35 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 78684,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08013360",
       "group": "ROM 0801xxxx",
       "rom_offset": 78688,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08013368",
       "group": "ROM 0801xxxx",
       "rom_offset": 78696,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08013384",
       "group": "ROM 0801xxxx",
       "rom_offset": 78724,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08013388",
       "group": "ROM 0801xxxx",
       "rom_offset": 78728,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08013390",
@@ -4377,14 +4382,14 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 90572,
       "size": 260,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080162D0",
       "group": "ROM 0801xxxx",
       "rom_offset": 90832,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080162D4",
@@ -4398,35 +4403,35 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 90876,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016304",
       "group": "ROM 0801xxxx",
       "rom_offset": 90884,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801630C",
       "group": "ROM 0801xxxx",
       "rom_offset": 90892,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016354",
       "group": "ROM 0801xxxx",
       "rom_offset": 90964,
       "size": 62,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016394",
       "group": "ROM 0801xxxx",
       "rom_offset": 91028,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_step_condition_need_job",
@@ -4447,7 +4452,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 91380,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_need_effect_check_condition_jobs",
@@ -4468,7 +4473,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 91496,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_need_effect_begin_condition_job",
@@ -4489,7 +4494,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 91640,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_step_condition_wait_job",
@@ -4503,49 +4508,49 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 91776,
       "size": 226,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016764",
       "group": "ROM 0801xxxx",
       "rom_offset": 92004,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016768",
       "group": "ROM 0801xxxx",
       "rom_offset": 92008,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016770",
       "group": "ROM 0801xxxx",
       "rom_offset": 92016,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016778",
       "group": "ROM 0801xxxx",
       "rom_offset": 92024,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016794",
       "group": "ROM 0801xxxx",
       "rom_offset": 92052,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080167B4",
       "group": "ROM 0801xxxx",
       "rom_offset": 92084,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_step_attachment_job_7",
@@ -4559,7 +4564,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 92380,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080168E0",
@@ -4573,14 +4578,14 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 92424,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016910",
       "group": "ROM 0801xxxx",
       "rom_offset": 92432,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_target_attachment_job",
@@ -4601,7 +4606,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 92528,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "resource_decode_bytes",
@@ -4678,7 +4683,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 93568,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016D84",
@@ -4692,14 +4697,14 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 93612,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016DB4",
       "group": "ROM 0801xxxx",
       "rom_offset": 93620,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_attachment_route_4",
@@ -4720,7 +4725,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 93732,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016E34",
@@ -4755,35 +4760,35 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 93988,
       "size": 112,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016F94",
       "group": "ROM 0801xxxx",
       "rom_offset": 94100,
       "size": 398,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017124",
       "group": "ROM 0801xxxx",
       "rom_offset": 94500,
       "size": 162,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080171C8",
       "group": "ROM 0801xxxx",
       "rom_offset": 94664,
       "size": 306,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080172FC",
       "group": "ROM 0801xxxx",
       "rom_offset": 94972,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017318",
@@ -4797,42 +4802,42 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 95040,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017348",
       "group": "ROM 0801xxxx",
       "rom_offset": 95048,
       "size": 82,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801739C",
       "group": "ROM 0801xxxx",
       "rom_offset": 95132,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080173A0",
       "group": "ROM 0801xxxx",
       "rom_offset": 95136,
       "size": 136,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017428",
       "group": "ROM 0801xxxx",
       "rom_offset": 95272,
       "size": 126,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080174A8",
       "group": "ROM 0801xxxx",
       "rom_offset": 95400,
       "size": 84,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_create_map_animation",
@@ -4853,91 +4858,91 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 96284,
       "size": 142,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080178AC",
       "group": "ROM 0801xxxx",
       "rom_offset": 96428,
       "size": 142,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801793C",
       "group": "ROM 0801xxxx",
       "rom_offset": 96572,
       "size": 142,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080179CC",
       "group": "ROM 0801xxxx",
       "rom_offset": 96716,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080179D0",
       "group": "ROM 0801xxxx",
       "rom_offset": 96720,
       "size": 38,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080179F8",
       "group": "ROM 0801xxxx",
       "rom_offset": 96760,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017A00",
       "group": "ROM 0801xxxx",
       "rom_offset": 96768,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017A1C",
       "group": "ROM 0801xxxx",
       "rom_offset": 96796,
       "size": 68,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017A60",
       "group": "ROM 0801xxxx",
       "rom_offset": 96864,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017A68",
       "group": "ROM 0801xxxx",
       "rom_offset": 96872,
       "size": 92,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017AC4",
       "group": "ROM 0801xxxx",
       "rom_offset": 96964,
       "size": 122,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017B40",
       "group": "ROM 0801xxxx",
       "rom_offset": 97088,
       "size": 884,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017EB4",
       "group": "ROM 0801xxxx",
       "rom_offset": 97972,
       "size": 248,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017FAC",
@@ -4951,42 +4956,42 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 98260,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017FDC",
       "group": "ROM 0801xxxx",
       "rom_offset": 98268,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018024",
       "group": "ROM 0801xxxx",
       "rom_offset": 98340,
       "size": 50,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018058",
       "group": "ROM 0801xxxx",
       "rom_offset": 98392,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801805C",
       "group": "ROM 0801xxxx",
       "rom_offset": 98396,
       "size": 22,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018074",
       "group": "ROM 0801xxxx",
       "rom_offset": 98420,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018078",
@@ -5000,35 +5005,35 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 98464,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080180A8",
       "group": "ROM 0801xxxx",
       "rom_offset": 98472,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080180AC",
       "group": "ROM 0801xxxx",
       "rom_offset": 98476,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080180C8",
       "group": "ROM 0801xxxx",
       "rom_offset": 98504,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080180CC",
       "group": "ROM 0801xxxx",
       "rom_offset": 98508,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080180D4",
@@ -5084,7 +5089,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 99332,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018408",
@@ -5105,7 +5110,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 99408,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_optional_attachment_job",
@@ -5126,21 +5131,14 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 99532,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080184D4",
       "group": "ROM 0801xxxx",
       "rom_offset": 99540,
-      "size": 378,
-      "status": "candidate"
-    },
-    {
-      "name": "sub_0801864E",
-      "group": "ROM 0801xxxx",
-      "rom_offset": 99918,
-      "size": 78,
-      "status": "candidate"
+      "size": 456,
+      "status": "mapped_code"
     },
     {
       "name": "transition_object_tick_alpha",
@@ -5203,14 +5201,14 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 100948,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018A58",
       "group": "ROM 0801xxxx",
       "rom_offset": 100952,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_optional_three_effect_begin",
@@ -5224,14 +5222,14 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 101024,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018AA4",
       "group": "ROM 0801xxxx",
       "rom_offset": 101028,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_optional_three_effect_tick",
@@ -5441,14 +5439,14 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 107204,
       "size": 154,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A360",
       "group": "ROM 0801xxxx",
       "rom_offset": 107360,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A364",
@@ -5469,49 +5467,49 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 107444,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A3BC",
       "group": "ROM 0801xxxx",
       "rom_offset": 107452,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A3E8",
       "group": "ROM 0801xxxx",
       "rom_offset": 107496,
       "size": 96,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A448",
       "group": "ROM 0801xxxx",
       "rom_offset": 107592,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A450",
       "group": "ROM 0801xxxx",
       "rom_offset": 107600,
       "size": 136,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A4D8",
       "group": "ROM 0801xxxx",
       "rom_offset": 107736,
       "size": 130,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A55C",
       "group": "ROM 0801xxxx",
       "rom_offset": 107868,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A560",
@@ -5525,42 +5523,42 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 107912,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A590",
       "group": "ROM 0801xxxx",
       "rom_offset": 107920,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A598",
       "group": "ROM 0801xxxx",
       "rom_offset": 107928,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A5B4",
       "group": "ROM 0801xxxx",
       "rom_offset": 107956,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A5D4",
       "group": "ROM 0801xxxx",
       "rom_offset": 107988,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A5DC",
       "group": "ROM 0801xxxx",
       "rom_offset": 107996,
       "size": 130,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_create_attachment_parameter_indicator",
@@ -5861,7 +5859,7 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 113216,
       "size": 188,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801BAFC",
@@ -6232,21 +6230,21 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 121644,
       "size": 176,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DBDC",
       "group": "ROM 0801xxxx",
       "rom_offset": 121820,
       "size": 416,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DD7C",
       "group": "ROM 0801xxxx",
       "rom_offset": 122236,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DD80",
@@ -6260,35 +6258,35 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 122280,
       "size": 28,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DDC4",
       "group": "ROM 0801xxxx",
       "rom_offset": 122308,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DDCC",
       "group": "ROM 0801xxxx",
       "rom_offset": 122316,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DDE8",
       "group": "ROM 0801xxxx",
       "rom_offset": 122344,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DE14",
       "group": "ROM 0801xxxx",
       "rom_offset": 122388,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_scene_player_actor",
@@ -6330,28 +6328,28 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 123504,
       "size": 130,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E2F4",
       "group": "ROM 0801xxxx",
       "rom_offset": 123636,
       "size": 154,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E390",
       "group": "ROM 0801xxxx",
       "rom_offset": 123792,
       "size": 338,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E4E4",
       "group": "ROM 0801xxxx",
       "rom_offset": 124132,
       "size": 64,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E524",
@@ -6365,35 +6363,35 @@
       "group": "ROM 0801xxxx",
       "rom_offset": 124236,
       "size": 12,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E558",
       "group": "ROM 0801xxxx",
       "rom_offset": 124248,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E560",
       "group": "ROM 0801xxxx",
       "rom_offset": 124256,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E58C",
       "group": "ROM 0801xxxx",
       "rom_offset": 124300,
       "size": 76,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E5D8",
       "group": "ROM 0801xxxx",
       "rom_offset": 124376,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "scene_initialize_view",
@@ -7100,7 +7098,7 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 138736,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_need_effect_direct_49_check",
@@ -7121,7 +7119,7 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 138788,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_need_effect_direct_49_begin",
@@ -7142,21 +7140,21 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 138900,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08021E98",
       "group": "ROM 0802xxxx",
       "rom_offset": 138904,
       "size": 506,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022094",
       "group": "ROM 0802xxxx",
       "rom_offset": 139412,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022098",
@@ -7170,42 +7168,42 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 139456,
       "size": 98,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022124",
       "group": "ROM 0802xxxx",
       "rom_offset": 139556,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802212C",
       "group": "ROM 0802xxxx",
       "rom_offset": 139564,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022148",
       "group": "ROM 0802xxxx",
       "rom_offset": 139592,
       "size": 36,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802216C",
       "group": "ROM 0802xxxx",
       "rom_offset": 139628,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022170",
       "group": "ROM 0802xxxx",
       "rom_offset": 139632,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022174",
@@ -7219,56 +7217,56 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 139676,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080221A4",
       "group": "ROM 0802xxxx",
       "rom_offset": 139684,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080221AC",
       "group": "ROM 0802xxxx",
       "rom_offset": 139692,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080221C8",
       "group": "ROM 0802xxxx",
       "rom_offset": 139720,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080221E8",
       "group": "ROM 0802xxxx",
       "rom_offset": 139752,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080221EC",
       "group": "ROM 0802xxxx",
       "rom_offset": 139756,
       "size": 96,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802224C",
       "group": "ROM 0802xxxx",
       "rom_offset": 139852,
       "size": 200,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022314",
       "group": "ROM 0802xxxx",
       "rom_offset": 140052,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022318",
@@ -7282,35 +7280,35 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 140096,
       "size": 36,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022364",
       "group": "ROM 0802xxxx",
       "rom_offset": 140132,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802236C",
       "group": "ROM 0802xxxx",
       "rom_offset": 140140,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022388",
       "group": "ROM 0802xxxx",
       "rom_offset": 140168,
       "size": 52,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080223BC",
       "group": "ROM 0802xxxx",
       "rom_offset": 140220,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_create_program_trigger",
@@ -7443,7 +7441,7 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 143928,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802323C",
@@ -7457,63 +7455,63 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 143972,
       "size": 96,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080232C4",
       "group": "ROM 0802xxxx",
       "rom_offset": 144068,
       "size": 66,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023308",
       "group": "ROM 0802xxxx",
       "rom_offset": 144136,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023324",
       "group": "ROM 0802xxxx",
       "rom_offset": 144164,
       "size": 64,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023364",
       "group": "ROM 0802xxxx",
       "rom_offset": 144228,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023368",
       "group": "ROM 0802xxxx",
       "rom_offset": 144232,
       "size": 128,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080233E8",
       "group": "ROM 0802xxxx",
       "rom_offset": 144360,
       "size": 134,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023470",
       "group": "ROM 0802xxxx",
       "rom_offset": 144496,
       "size": 20,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023484",
       "group": "ROM 0802xxxx",
       "rom_offset": 144516,
       "size": 18,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023498",
@@ -7583,14 +7581,14 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 146080,
       "size": 260,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023BA4",
       "group": "ROM 0802xxxx",
       "rom_offset": 146340,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023BD0",
@@ -7604,56 +7602,56 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 146424,
       "size": 40,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023C20",
       "group": "ROM 0802xxxx",
       "rom_offset": 146464,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023C28",
       "group": "ROM 0802xxxx",
       "rom_offset": 146472,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023C44",
       "group": "ROM 0802xxxx",
       "rom_offset": 146500,
       "size": 100,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023CA8",
       "group": "ROM 0802xxxx",
       "rom_offset": 146600,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023CAC",
       "group": "ROM 0802xxxx",
       "rom_offset": 146604,
       "size": 82,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023D00",
       "group": "ROM 0802xxxx",
       "rom_offset": 146688,
       "size": 152,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023D98",
       "group": "ROM 0802xxxx",
       "rom_offset": 146840,
       "size": 56,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023DD0",
@@ -7667,42 +7665,42 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 146936,
       "size": 46,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023E28",
       "group": "ROM 0802xxxx",
       "rom_offset": 146984,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023E30",
       "group": "ROM 0802xxxx",
       "rom_offset": 146992,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023E5C",
       "group": "ROM 0802xxxx",
       "rom_offset": 147036,
       "size": 96,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023EBC",
       "group": "ROM 0802xxxx",
       "rom_offset": 147132,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023EC4",
       "group": "ROM 0802xxxx",
       "rom_offset": 147140,
       "size": 110,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "scene_text_bank_initialize",
@@ -7772,21 +7770,21 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 148060,
       "size": 452,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08024420",
       "group": "ROM 0802xxxx",
       "rom_offset": 148512,
       "size": 320,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08024560",
       "group": "ROM 0802xxxx",
       "rom_offset": 148832,
       "size": 300,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802468C",
@@ -7849,14 +7847,14 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 150220,
       "size": 66,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08024B10",
       "group": "ROM 0802xxxx",
       "rom_offset": 150288,
       "size": 76,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08024B7C",
@@ -8073,14 +8071,14 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 154132,
       "size": 260,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025B18",
       "group": "ROM 0802xxxx",
       "rom_offset": 154392,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025B1C",
@@ -8094,35 +8092,35 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 154436,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025B4C",
       "group": "ROM 0802xxxx",
       "rom_offset": 154444,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025B54",
       "group": "ROM 0802xxxx",
       "rom_offset": 154452,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025B9C",
       "group": "ROM 0802xxxx",
       "rom_offset": 154524,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025BBC",
       "group": "ROM 0802xxxx",
       "rom_offset": 154556,
       "size": 80,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Entry routine",
@@ -8500,14 +8498,14 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 161124,
       "size": 296,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802768C",
       "group": "ROM 0802xxxx",
       "rom_offset": 161420,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08027690",
@@ -8521,35 +8519,35 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 161464,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080276C0",
       "group": "ROM 0802xxxx",
       "rom_offset": 161472,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080276C8",
       "group": "ROM 0802xxxx",
       "rom_offset": 161480,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08027710",
       "group": "ROM 0802xxxx",
       "rom_offset": 161552,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08027730",
       "group": "ROM 0802xxxx",
       "rom_offset": 161584,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08027738",
@@ -8808,21 +8806,21 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 164728,
       "size": 172,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08028424",
       "group": "ROM 0802xxxx",
       "rom_offset": 164900,
       "size": 786,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08028738",
       "group": "ROM 0802xxxx",
       "rom_offset": 165688,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802873C",
@@ -8842,43 +8840,36 @@
       "name": "sub_080287D8",
       "group": "ROM 0802xxxx",
       "rom_offset": 165848,
-      "size": 104,
-      "status": "candidate"
-    },
-    {
-      "name": "sub_08028840",
-      "group": "ROM 0802xxxx",
-      "rom_offset": 165952,
-      "size": 62,
-      "status": "candidate"
+      "size": 166,
+      "status": "mapped_code"
     },
     {
       "name": "sub_08028880",
       "group": "ROM 0802xxxx",
       "rom_offset": 166016,
       "size": 50,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080288B4",
       "group": "ROM 0802xxxx",
       "rom_offset": 166068,
       "size": 206,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08028984",
       "group": "ROM 0802xxxx",
       "rom_offset": 166276,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08028988",
       "group": "ROM 0802xxxx",
       "rom_offset": 166280,
       "size": 136,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "scene_contact_initialize",
@@ -9053,14 +9044,14 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 170552,
       "size": 424,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029BE0",
       "group": "ROM 0802xxxx",
       "rom_offset": 170976,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029BE4",
@@ -9074,35 +9065,35 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 171020,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029C14",
       "group": "ROM 0802xxxx",
       "rom_offset": 171028,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029C1C",
       "group": "ROM 0802xxxx",
       "rom_offset": 171036,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029C64",
       "group": "ROM 0802xxxx",
       "rom_offset": 171108,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029C84",
       "group": "ROM 0802xxxx",
       "rom_offset": 171140,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029C8C",
@@ -9263,7 +9254,7 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 174452,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802A978",
@@ -9277,42 +9268,42 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 174508,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802A9B4",
       "group": "ROM 0802xxxx",
       "rom_offset": 174516,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802A9BC",
       "group": "ROM 0802xxxx",
       "rom_offset": 174524,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802A9D8",
       "group": "ROM 0802xxxx",
       "rom_offset": 174552,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802A9F8",
       "group": "ROM 0802xxxx",
       "rom_offset": 174584,
       "size": 56,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802AA30",
       "group": "ROM 0802xxxx",
       "rom_offset": 174640,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_probe_movement_cells",
@@ -9585,7 +9576,7 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 179216,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BC14",
@@ -9599,35 +9590,35 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 179260,
       "size": 12,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BC48",
       "group": "ROM 0802xxxx",
       "rom_offset": 179272,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BC50",
       "group": "ROM 0802xxxx",
       "rom_offset": 179280,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BC98",
       "group": "ROM 0802xxxx",
       "rom_offset": 179352,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BCC4",
       "group": "ROM 0802xxxx",
       "rom_offset": 179396,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BCCA",
@@ -9641,14 +9632,14 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 179404,
       "size": 106,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BD38",
       "group": "ROM 0802xxxx",
       "rom_offset": 179512,
       "size": 116,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_create_actor",
@@ -9795,7 +9786,7 @@
       "group": "ROM 0802xxxx",
       "rom_offset": 182900,
       "size": 146,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_refresh_scene_actor_schedule",
@@ -11202,14 +11193,14 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 210736,
       "size": 354,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08033894",
       "group": "ROM 0803xxxx",
       "rom_offset": 211092,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08033898",
@@ -11223,35 +11214,35 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 211136,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080338C8",
       "group": "ROM 0803xxxx",
       "rom_offset": 211144,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080338D0",
       "group": "ROM 0803xxxx",
       "rom_offset": 211152,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08033918",
       "group": "ROM 0803xxxx",
       "rom_offset": 211224,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08033938",
       "group": "ROM 0803xxxx",
       "rom_offset": 211256,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "scene_contact_activity_four_initialize",
@@ -11426,14 +11417,14 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 216052,
       "size": 218,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034CD0",
       "group": "ROM 0803xxxx",
       "rom_offset": 216272,
       "size": 22,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034CE8",
@@ -11447,56 +11438,56 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 216336,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034D18",
       "group": "ROM 0803xxxx",
       "rom_offset": 216344,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034D20",
       "group": "ROM 0803xxxx",
       "rom_offset": 216352,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034D3C",
       "group": "ROM 0803xxxx",
       "rom_offset": 216380,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034D5C",
       "group": "ROM 0803xxxx",
       "rom_offset": 216412,
       "size": 86,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034DB4",
       "group": "ROM 0803xxxx",
       "rom_offset": 216500,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034DB8",
       "group": "ROM 0803xxxx",
       "rom_offset": 216504,
       "size": 452,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034F7C",
       "group": "ROM 0803xxxx",
       "rom_offset": 216956,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034F80",
@@ -11510,42 +11501,42 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 217000,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034FB0",
       "group": "ROM 0803xxxx",
       "rom_offset": 217008,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034FB8",
       "group": "ROM 0803xxxx",
       "rom_offset": 217016,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035000",
       "group": "ROM 0803xxxx",
       "rom_offset": 217088,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035020",
       "group": "ROM 0803xxxx",
       "rom_offset": 217120,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035028",
       "group": "ROM 0803xxxx",
       "rom_offset": 217128,
       "size": 10,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035034",
@@ -11559,42 +11550,42 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 217180,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035060",
       "group": "ROM 0803xxxx",
       "rom_offset": 217184,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035068",
       "group": "ROM 0803xxxx",
       "rom_offset": 217192,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035084",
       "group": "ROM 0803xxxx",
       "rom_offset": 217220,
       "size": 24,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803509C",
       "group": "ROM 0803xxxx",
       "rom_offset": 217244,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080350A0",
       "group": "ROM 0803xxxx",
       "rom_offset": 217248,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080350A4",
@@ -11755,7 +11746,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 219132,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035800",
@@ -11776,7 +11767,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 219184,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_position_cycle_begin",
@@ -11797,35 +11788,35 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 219308,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080358B0",
       "group": "ROM 0803xxxx",
       "rom_offset": 219312,
       "size": 156,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803594C",
       "group": "ROM 0803xxxx",
       "rom_offset": 219468,
       "size": 184,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035A04",
       "group": "ROM 0803xxxx",
       "rom_offset": 219652,
       "size": 524,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035C10",
       "group": "ROM 0803xxxx",
       "rom_offset": 220176,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035C14",
@@ -11846,28 +11837,28 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 220312,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035CA0",
       "group": "ROM 0803xxxx",
       "rom_offset": 220320,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035CE8",
       "group": "ROM 0803xxxx",
       "rom_offset": 220392,
       "size": 68,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035D2C",
       "group": "ROM 0803xxxx",
       "rom_offset": 220460,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "save_stream_read_relation_values",
@@ -12056,7 +12047,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 223444,
       "size": 184,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803698C",
@@ -12070,14 +12061,14 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 224136,
       "size": 166,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08036C30",
       "group": "ROM 0803xxxx",
       "rom_offset": 224304,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08036C34",
@@ -12091,35 +12082,35 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 224348,
       "size": 30,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08036C7C",
       "group": "ROM 0803xxxx",
       "rom_offset": 224380,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08036C84",
       "group": "ROM 0803xxxx",
       "rom_offset": 224388,
       "size": 78,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08036CD4",
       "group": "ROM 0803xxxx",
       "rom_offset": 224468,
       "size": 78,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08036D24",
       "group": "ROM 0803xxxx",
       "rom_offset": 224548,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08036D2C",
@@ -12245,21 +12236,21 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 226692,
       "size": 158,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08037624",
       "group": "ROM 0803xxxx",
       "rom_offset": 226852,
       "size": 418,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080377C8",
       "group": "ROM 0803xxxx",
       "rom_offset": 227272,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080377CC",
@@ -12273,42 +12264,42 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 227316,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08037814",
       "group": "ROM 0803xxxx",
       "rom_offset": 227348,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803781C",
       "group": "ROM 0803xxxx",
       "rom_offset": 227356,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08037848",
       "group": "ROM 0803xxxx",
       "rom_offset": 227400,
       "size": 76,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08037894",
       "group": "ROM 0803xxxx",
       "rom_offset": 227476,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08037898",
       "group": "ROM 0803xxxx",
       "rom_offset": 227480,
       "size": 22,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "save_stream_read_nibbles",
@@ -13106,7 +13097,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 239976,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803A96C",
@@ -13127,7 +13118,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 240076,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_optional_effect_activity_begin",
@@ -13148,7 +13139,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 240228,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_shared_optional_indicator_step",
@@ -13169,7 +13160,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 240636,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803AC00",
@@ -13190,7 +13181,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 240712,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_shared_optional_begin",
@@ -13211,7 +13202,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 240836,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_create_scene_trigger",
@@ -13603,7 +13594,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 249612,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803CF10",
@@ -13617,14 +13608,14 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 249656,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803CF80",
       "group": "ROM 0803xxxx",
       "rom_offset": 249728,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_variant_attachment_job",
@@ -13645,7 +13636,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 249892,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_update_attachment_parameter",
@@ -13722,7 +13713,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 250776,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803D39C",
@@ -13736,14 +13727,14 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 250820,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803D3CC",
       "group": "ROM 0803xxxx",
       "rom_offset": 250828,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_attachment_job_73",
@@ -13764,7 +13755,7 @@
       "group": "ROM 0803xxxx",
       "rom_offset": 250964,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "link_initialize_endpoint",
@@ -14331,28 +14322,28 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 267792,
       "size": 386,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041794",
       "group": "ROM 0804xxxx",
       "rom_offset": 268180,
       "size": 172,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041840",
       "group": "ROM 0804xxxx",
       "rom_offset": 268352,
       "size": 260,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041944",
       "group": "ROM 0804xxxx",
       "rom_offset": 268612,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041960",
@@ -14366,49 +14357,49 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 268680,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080419D0",
       "group": "ROM 0804xxxx",
       "rom_offset": 268752,
       "size": 254,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041AD0",
       "group": "ROM 0804xxxx",
       "rom_offset": 269008,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041B18",
       "group": "ROM 0804xxxx",
       "rom_offset": 269080,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041B1C",
       "group": "ROM 0804xxxx",
       "rom_offset": 269084,
       "size": 132,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041BA0",
       "group": "ROM 0804xxxx",
       "rom_offset": 269216,
       "size": 120,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041C18",
       "group": "ROM 0804xxxx",
       "rom_offset": 269336,
       "size": 52,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "scene_catalog_initialize",
@@ -14576,7 +14567,7 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 275148,
       "size": 124,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_step_optional_attachment_kind_12",
@@ -14604,7 +14595,7 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 276400,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080437B4",
@@ -14618,14 +14609,14 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 276444,
       "size": 166,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08043884",
       "group": "ROM 0804xxxx",
       "rom_offset": 276612,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_dispatch_optional_activity_attachment_job",
@@ -14639,7 +14630,7 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 276900,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_step_optional_attachment_kind_22",
@@ -14653,7 +14644,7 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 277036,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08043A30",
@@ -14667,35 +14658,35 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 277080,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08043A60",
       "group": "ROM 0804xxxx",
       "rom_offset": 277088,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08043A64",
       "group": "ROM 0804xxxx",
       "rom_offset": 277092,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08043A80",
       "group": "ROM 0804xxxx",
       "rom_offset": 277120,
       "size": 12,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08043A8C",
       "group": "ROM 0804xxxx",
       "rom_offset": 277132,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_step_optional_choice_kind_45",
@@ -14800,7 +14791,7 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 279340,
       "size": 28,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_optional_choice_attachment_job",
@@ -14905,7 +14896,7 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 281008,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_optional_playback_attachment_job",
@@ -15276,28 +15267,28 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 286644,
       "size": 156,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046050",
       "group": "ROM 0804xxxx",
       "rom_offset": 286800,
       "size": 156,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080460EC",
       "group": "ROM 0804xxxx",
       "rom_offset": 286956,
       "size": 216,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080461C4",
       "group": "ROM 0804xxxx",
       "rom_offset": 287172,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080461C8",
@@ -15318,28 +15309,28 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 287288,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046240",
       "group": "ROM 0804xxxx",
       "rom_offset": 287296,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046288",
       "group": "ROM 0804xxxx",
       "rom_offset": 287368,
       "size": 62,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080462C8",
       "group": "ROM 0804xxxx",
       "rom_offset": 287432,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_step_optional_attachment_kind_7",
@@ -15360,7 +15351,7 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 287900,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080464A0",
@@ -15402,119 +15393,119 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 288136,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046590",
       "group": "ROM 0804xxxx",
       "rom_offset": 288144,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046598",
       "group": "ROM 0804xxxx",
       "rom_offset": 288152,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465A0",
       "group": "ROM 0804xxxx",
       "rom_offset": 288160,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465A4",
       "group": "ROM 0804xxxx",
       "rom_offset": 288164,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465A8",
       "group": "ROM 0804xxxx",
       "rom_offset": 288168,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465AC",
       "group": "ROM 0804xxxx",
       "rom_offset": 288172,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465B0",
       "group": "ROM 0804xxxx",
       "rom_offset": 288176,
       "size": 36,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465D4",
       "group": "ROM 0804xxxx",
       "rom_offset": 288212,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465D8",
       "group": "ROM 0804xxxx",
       "rom_offset": 288216,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465E0",
       "group": "ROM 0804xxxx",
       "rom_offset": 288224,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465E8",
       "group": "ROM 0804xxxx",
       "rom_offset": 288232,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046604",
       "group": "ROM 0804xxxx",
       "rom_offset": 288260,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046624",
       "group": "ROM 0804xxxx",
       "rom_offset": 288292,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0804662C",
       "group": "ROM 0804xxxx",
       "rom_offset": 288300,
       "size": 136,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080466B4",
       "group": "ROM 0804xxxx",
       "rom_offset": 288436,
       "size": 492,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080468A0",
       "group": "ROM 0804xxxx",
       "rom_offset": 288928,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080468A4",
@@ -15528,35 +15519,35 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 288972,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080468D4",
       "group": "ROM 0804xxxx",
       "rom_offset": 288980,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080468DC",
       "group": "ROM 0804xxxx",
       "rom_offset": 288988,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046924",
       "group": "ROM 0804xxxx",
       "rom_offset": 289060,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046944",
       "group": "ROM 0804xxxx",
       "rom_offset": 289092,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0804694C",
@@ -15675,21 +15666,21 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 291008,
       "size": 518,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080472C8",
       "group": "ROM 0804xxxx",
       "rom_offset": 291528,
       "size": 514,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080474CC",
       "group": "ROM 0804xxxx",
       "rom_offset": 292044,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080474D0",
@@ -15703,35 +15694,35 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 292088,
       "size": 12,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08047504",
       "group": "ROM 0804xxxx",
       "rom_offset": 292100,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0804750C",
       "group": "ROM 0804xxxx",
       "rom_offset": 292108,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08047554",
       "group": "ROM 0804xxxx",
       "rom_offset": 292180,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08047580",
       "group": "ROM 0804xxxx",
       "rom_offset": 292224,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_create_group_selector",
@@ -15955,7 +15946,7 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 296512,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_attachment_job_25",
@@ -16935,14 +16926,14 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 313468,
       "size": 10,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0804C886",
       "group": "ROM 0804xxxx",
       "rom_offset": 313478,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0804C888",
@@ -16955,6 +16946,27 @@
       "name": "sub_0804C88C",
       "group": "ROM 0804xxxx",
       "rom_offset": 313484,
+      "size": 4,
+      "status": "mapped_code"
+    },
+    {
+      "name": "sub_0804C890",
+      "group": "ROM 0804xxxx",
+      "rom_offset": 313488,
+      "size": 4,
+      "status": "mapped_code"
+    },
+    {
+      "name": "sub_0804C894",
+      "group": "ROM 0804xxxx",
+      "rom_offset": 313492,
+      "size": 4,
+      "status": "mapped_code"
+    },
+    {
+      "name": "sub_0804C898",
+      "group": "ROM 0804xxxx",
+      "rom_offset": 313496,
       "size": 36,
       "status": "mapped_code"
     },
@@ -17106,7 +17118,7 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0804CCF0",
+      "name": "Register veneer r0",
       "group": "ROM 0804xxxx",
       "rom_offset": 314608,
       "size": 2,
@@ -17120,7 +17132,7 @@
       "status": "exact_glue"
     },
     {
-      "name": "sub_0804CCF8",
+      "name": "Register veneer r2",
       "group": "ROM 0804xxxx",
       "rom_offset": 314616,
       "size": 2,
@@ -17134,37 +17146,79 @@
       "status": "exact_glue"
     },
     {
-      "name": "sub_0804CD00",
+      "name": "Register veneer r4",
       "group": "ROM 0804xxxx",
       "rom_offset": 314624,
       "size": 2,
       "status": "mapped_code"
     },
     {
-      "name": "sub_0804CD08",
+      "name": "Register veneer r5",
+      "group": "ROM 0804xxxx",
+      "rom_offset": 314628,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Register veneer r6",
       "group": "ROM 0804xxxx",
       "rom_offset": 314632,
       "size": 2,
       "status": "mapped_code"
     },
     {
-      "name": "sub_0804CD0C",
+      "name": "Register veneer r7",
       "group": "ROM 0804xxxx",
       "rom_offset": 314636,
       "size": 2,
       "status": "mapped_code"
     },
     {
-      "name": "sub_0804CD14",
+      "name": "Register veneer r8",
+      "group": "ROM 0804xxxx",
+      "rom_offset": 314640,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Register veneer r9",
       "group": "ROM 0804xxxx",
       "rom_offset": 314644,
       "size": 2,
       "status": "mapped_code"
     },
     {
-      "name": "sub_0804CD18",
+      "name": "Register veneer r10",
       "group": "ROM 0804xxxx",
       "rom_offset": 314648,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Register veneer r11",
+      "group": "ROM 0804xxxx",
+      "rom_offset": 314652,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Register veneer r12",
+      "group": "ROM 0804xxxx",
+      "rom_offset": 314656,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Register veneer r13",
+      "group": "ROM 0804xxxx",
+      "rom_offset": 314660,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Register veneer r14",
+      "group": "ROM 0804xxxx",
+      "rom_offset": 314664,
       "size": 2,
       "status": "mapped_code"
     },
@@ -18670,55 +18724,43 @@
       "name": "sub_0800504C",
       "rom_offset": 20556,
       "size": 132,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080050D0",
       "rom_offset": 20688,
       "size": 292,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080051F4",
       "rom_offset": 20980,
       "size": 248,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080052EC",
       "rom_offset": 21228,
       "size": 252,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080053E8",
       "rom_offset": 21480,
-      "size": 46,
-      "status": "candidate"
-    },
-    {
-      "name": "sub_08005416",
-      "rom_offset": 21526,
-      "size": 186,
-      "status": "candidate"
+      "size": 232,
+      "status": "mapped_code"
     },
     {
       "name": "sub_080054D0",
       "rom_offset": 21712,
-      "size": 46,
-      "status": "candidate"
-    },
-    {
-      "name": "sub_080054FE",
-      "rom_offset": 21758,
-      "size": 134,
-      "status": "candidate"
+      "size": 180,
+      "status": "mapped_code"
     },
     {
       "name": "sub_08005584",
       "rom_offset": 21892,
       "size": 196,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08005648",
@@ -19474,7 +19516,7 @@
       "name": "sub_0800BA60",
       "rom_offset": 47712,
       "size": 594,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_00BCB2",
@@ -19486,7 +19528,7 @@
       "name": "sub_0800BCB4",
       "rom_offset": 48308,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800BCB8",
@@ -19504,31 +19546,31 @@
       "name": "sub_0800BCE0",
       "rom_offset": 48352,
       "size": 12,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800BCEC",
       "rom_offset": 48364,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800BCF4",
       "rom_offset": 48372,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800BD3C",
       "rom_offset": 48444,
       "size": 36,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800BD60",
       "rom_offset": 48480,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_00BD62",
@@ -19672,7 +19714,7 @@
       "name": "sub_0800CCF8",
       "rom_offset": 52472,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_dispatch_secondary_header_attachment_job",
@@ -19684,7 +19726,7 @@
       "name": "sub_0800CD2C",
       "rom_offset": 52524,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_00CD2E",
@@ -19696,7 +19738,7 @@
       "name": "sub_0800CD30",
       "rom_offset": 52528,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_00CD4A",
@@ -20362,7 +20404,7 @@
       "name": "sub_0800F6AC",
       "rom_offset": 63148,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_interaction_can_begin_31",
@@ -20374,13 +20416,13 @@
       "name": "sub_0800F6D8",
       "rom_offset": 63192,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800F6E0",
       "rom_offset": 63200,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_interaction_begin_31",
@@ -20398,7 +20440,7 @@
       "name": "sub_0800F750",
       "rom_offset": 63312,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_00F752",
@@ -20488,7 +20530,7 @@
       "name": "sub_0800F858",
       "rom_offset": 63576,
       "size": 278,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_00F96E",
@@ -20500,7 +20542,7 @@
       "name": "sub_0800F970",
       "rom_offset": 63856,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800F974",
@@ -20518,19 +20560,19 @@
       "name": "sub_0800F99C",
       "rom_offset": 63900,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800F9A4",
       "rom_offset": 63908,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0800F9AC",
       "rom_offset": 63916,
       "size": 90,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_00FA06",
@@ -20542,7 +20584,7 @@
       "name": "sub_0800FA08",
       "rom_offset": 64008,
       "size": 62,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_00FA46",
@@ -20554,7 +20596,7 @@
       "name": "sub_0800FA48",
       "rom_offset": 64072,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_00FA4A",
@@ -21394,13 +21436,13 @@
       "name": "sub_08012BD0",
       "rom_offset": 76752,
       "size": 420,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012D74",
       "rom_offset": 77172,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012D78",
@@ -21418,19 +21460,19 @@
       "name": "sub_08012DA0",
       "rom_offset": 77216,
       "size": 36,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012DC4",
       "rom_offset": 77252,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012DCC",
       "rom_offset": 77260,
       "size": 78,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_012E1A",
@@ -21442,13 +21484,13 @@
       "name": "sub_08012E1C",
       "rom_offset": 77340,
       "size": 80,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08012E6C",
       "rom_offset": 77420,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_012E6E",
@@ -21460,7 +21502,7 @@
       "name": "sub_08012E74",
       "rom_offset": 77428,
       "size": 190,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_012F32",
@@ -21484,7 +21526,7 @@
       "name": "sub_080131D4",
       "rom_offset": 78292,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_need_effect_check_actor_header_variant",
@@ -21502,7 +21544,7 @@
       "name": "sub_08013270",
       "rom_offset": 78448,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_header_attachment_job",
@@ -21520,7 +21562,7 @@
       "name": "sub_08013330",
       "rom_offset": 78640,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08013334",
@@ -21538,19 +21580,19 @@
       "name": "sub_0801335C",
       "rom_offset": 78684,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08013360",
       "rom_offset": 78688,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08013368",
       "rom_offset": 78696,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_013382",
@@ -21562,13 +21604,13 @@
       "name": "sub_08013384",
       "rom_offset": 78724,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08013388",
       "rom_offset": 78728,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01338A",
@@ -21892,13 +21934,13 @@
       "name": "sub_080161CC",
       "rom_offset": 90572,
       "size": 260,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080162D0",
       "rom_offset": 90832,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080162D4",
@@ -21916,25 +21958,25 @@
       "name": "sub_080162FC",
       "rom_offset": 90876,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016304",
       "rom_offset": 90884,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801630C",
       "rom_offset": 90892,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016354",
       "rom_offset": 90964,
       "size": 62,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_016392",
@@ -21946,7 +21988,7 @@
       "name": "sub_08016394",
       "rom_offset": 91028,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_016396",
@@ -21970,7 +22012,7 @@
       "name": "sub_080164F4",
       "rom_offset": 91380,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_need_effect_check_condition_jobs",
@@ -21988,7 +22030,7 @@
       "name": "sub_08016568",
       "rom_offset": 91496,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_need_effect_begin_condition_job",
@@ -22006,7 +22048,7 @@
       "name": "sub_080165F8",
       "rom_offset": 91640,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0165FA",
@@ -22024,7 +22066,7 @@
       "name": "sub_08016680",
       "rom_offset": 91776,
       "size": 226,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_016762",
@@ -22036,25 +22078,25 @@
       "name": "sub_08016764",
       "rom_offset": 92004,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016768",
       "rom_offset": 92008,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016770",
       "rom_offset": 92016,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016778",
       "rom_offset": 92024,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_016792",
@@ -22066,13 +22108,13 @@
       "name": "sub_08016794",
       "rom_offset": 92052,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080167B4",
       "rom_offset": 92084,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0167B6",
@@ -22090,7 +22132,7 @@
       "name": "sub_080168DC",
       "rom_offset": 92380,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080168E0",
@@ -22108,13 +22150,13 @@
       "name": "sub_08016908",
       "rom_offset": 92424,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016910",
       "rom_offset": 92432,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_target_attachment_job",
@@ -22132,7 +22174,7 @@
       "name": "sub_08016970",
       "rom_offset": 92528,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_016972",
@@ -22204,7 +22246,7 @@
       "name": "sub_08016D80",
       "rom_offset": 93568,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016D84",
@@ -22222,13 +22264,13 @@
       "name": "sub_08016DAC",
       "rom_offset": 93612,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016DB4",
       "rom_offset": 93620,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_attachment_route_4",
@@ -22246,7 +22288,7 @@
       "name": "sub_08016E24",
       "rom_offset": 93732,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_016E26",
@@ -22288,13 +22330,13 @@
       "name": "sub_08016F24",
       "rom_offset": 93988,
       "size": 112,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08016F94",
       "rom_offset": 94100,
       "size": 398,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_017122",
@@ -22306,7 +22348,7 @@
       "name": "sub_08017124",
       "rom_offset": 94500,
       "size": 162,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0171C6",
@@ -22318,7 +22360,7 @@
       "name": "sub_080171C8",
       "rom_offset": 94664,
       "size": 306,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0172FA",
@@ -22330,7 +22372,7 @@
       "name": "sub_080172FC",
       "rom_offset": 94972,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_017316",
@@ -22354,13 +22396,13 @@
       "name": "sub_08017340",
       "rom_offset": 95040,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017348",
       "rom_offset": 95048,
       "size": 82,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01739A",
@@ -22372,7 +22414,7 @@
       "name": "sub_0801739C",
       "rom_offset": 95132,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01739E",
@@ -22384,13 +22426,13 @@
       "name": "sub_080173A0",
       "rom_offset": 95136,
       "size": 136,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017428",
       "rom_offset": 95272,
       "size": 126,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0174A6",
@@ -22402,7 +22444,7 @@
       "name": "sub_080174A8",
       "rom_offset": 95400,
       "size": 84,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_create_map_animation",
@@ -22420,7 +22462,7 @@
       "name": "sub_0801781C",
       "rom_offset": 96284,
       "size": 142,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0178AA",
@@ -22432,7 +22474,7 @@
       "name": "sub_080178AC",
       "rom_offset": 96428,
       "size": 142,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01793A",
@@ -22444,7 +22486,7 @@
       "name": "sub_0801793C",
       "rom_offset": 96572,
       "size": 142,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0179CA",
@@ -22456,13 +22498,13 @@
       "name": "sub_080179CC",
       "rom_offset": 96716,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080179D0",
       "rom_offset": 96720,
       "size": 38,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0179F6",
@@ -22474,13 +22516,13 @@
       "name": "sub_080179F8",
       "rom_offset": 96760,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017A00",
       "rom_offset": 96768,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_017A1A",
@@ -22492,13 +22534,13 @@
       "name": "sub_08017A1C",
       "rom_offset": 96796,
       "size": 68,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017A60",
       "rom_offset": 96864,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_017A62",
@@ -22510,13 +22552,13 @@
       "name": "sub_08017A68",
       "rom_offset": 96872,
       "size": 92,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017AC4",
       "rom_offset": 96964,
       "size": 122,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_017B3E",
@@ -22528,13 +22570,13 @@
       "name": "sub_08017B40",
       "rom_offset": 97088,
       "size": 884,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017EB4",
       "rom_offset": 97972,
       "size": 248,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017FAC",
@@ -22552,19 +22594,19 @@
       "name": "sub_08017FD4",
       "rom_offset": 98260,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08017FDC",
       "rom_offset": 98268,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018024",
       "rom_offset": 98340,
       "size": 50,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_018056",
@@ -22576,7 +22618,7 @@
       "name": "sub_08018058",
       "rom_offset": 98392,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01805A",
@@ -22588,7 +22630,7 @@
       "name": "sub_0801805C",
       "rom_offset": 98396,
       "size": 22,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_018072",
@@ -22600,7 +22642,7 @@
       "name": "sub_08018074",
       "rom_offset": 98420,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018078",
@@ -22618,19 +22660,19 @@
       "name": "sub_080180A0",
       "rom_offset": 98464,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080180A8",
       "rom_offset": 98472,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080180AC",
       "rom_offset": 98476,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0180C6",
@@ -22642,13 +22684,13 @@
       "name": "sub_080180C8",
       "rom_offset": 98504,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080180CC",
       "rom_offset": 98508,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0180CE",
@@ -22702,7 +22744,7 @@
       "name": "sub_08018404",
       "rom_offset": 99332,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018408",
@@ -22726,7 +22768,7 @@
       "name": "sub_08018450",
       "rom_offset": 99408,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_optional_attachment_job",
@@ -22744,7 +22786,7 @@
       "name": "sub_080184CC",
       "rom_offset": 99532,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0184CE",
@@ -22755,14 +22797,8 @@
     {
       "name": "sub_080184D4",
       "rom_offset": 99540,
-      "size": 378,
-      "status": "candidate"
-    },
-    {
-      "name": "sub_0801864E",
-      "rom_offset": 99918,
-      "size": 78,
-      "status": "candidate"
+      "size": 456,
+      "status": "mapped_code"
     },
     {
       "name": "transition_object_tick_alpha",
@@ -22822,13 +22858,13 @@
       "name": "sub_08018A54",
       "rom_offset": 100948,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018A58",
       "rom_offset": 100952,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_optional_three_effect_begin",
@@ -22840,13 +22876,13 @@
       "name": "sub_08018AA0",
       "rom_offset": 101024,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08018AA4",
       "rom_offset": 101028,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_018AA6",
@@ -23038,7 +23074,7 @@
       "name": "sub_0801A2C4",
       "rom_offset": 107204,
       "size": 154,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01A35E",
@@ -23050,7 +23086,7 @@
       "name": "sub_0801A360",
       "rom_offset": 107360,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A364",
@@ -23074,25 +23110,25 @@
       "name": "sub_0801A3B4",
       "rom_offset": 107444,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A3BC",
       "rom_offset": 107452,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A3E8",
       "rom_offset": 107496,
       "size": 96,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A448",
       "rom_offset": 107592,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01A44A",
@@ -23104,13 +23140,13 @@
       "name": "sub_0801A450",
       "rom_offset": 107600,
       "size": 136,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A4D8",
       "rom_offset": 107736,
       "size": 130,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01A55A",
@@ -23122,7 +23158,7 @@
       "name": "sub_0801A55C",
       "rom_offset": 107868,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A560",
@@ -23140,19 +23176,19 @@
       "name": "sub_0801A588",
       "rom_offset": 107912,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A590",
       "rom_offset": 107920,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A598",
       "rom_offset": 107928,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01A5B2",
@@ -23164,13 +23200,13 @@
       "name": "sub_0801A5B4",
       "rom_offset": 107956,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801A5D4",
       "rom_offset": 107988,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01A5D6",
@@ -23182,7 +23218,7 @@
       "name": "sub_0801A5DC",
       "rom_offset": 107996,
       "size": 130,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01A65E",
@@ -23452,7 +23488,7 @@
       "name": "sub_0801BA40",
       "rom_offset": 113216,
       "size": 188,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801BAFC",
@@ -23800,19 +23836,19 @@
       "name": "sub_0801DB2C",
       "rom_offset": 121644,
       "size": 176,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DBDC",
       "rom_offset": 121820,
       "size": 416,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DD7C",
       "rom_offset": 122236,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DD80",
@@ -23830,19 +23866,19 @@
       "name": "sub_0801DDA8",
       "rom_offset": 122280,
       "size": 28,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DDC4",
       "rom_offset": 122308,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DDCC",
       "rom_offset": 122316,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01DDE6",
@@ -23854,13 +23890,13 @@
       "name": "sub_0801DDE8",
       "rom_offset": 122344,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801DE14",
       "rom_offset": 122388,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01DE16",
@@ -23908,7 +23944,7 @@
       "name": "sub_0801E270",
       "rom_offset": 123504,
       "size": 130,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01E2F2",
@@ -23920,7 +23956,7 @@
       "name": "sub_0801E2F4",
       "rom_offset": 123636,
       "size": 154,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01E38E",
@@ -23932,7 +23968,7 @@
       "name": "sub_0801E390",
       "rom_offset": 123792,
       "size": 338,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01E4E2",
@@ -23944,7 +23980,7 @@
       "name": "sub_0801E4E4",
       "rom_offset": 124132,
       "size": 64,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E524",
@@ -23962,31 +23998,31 @@
       "name": "sub_0801E54C",
       "rom_offset": 124236,
       "size": 12,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E558",
       "rom_offset": 124248,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E560",
       "rom_offset": 124256,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E58C",
       "rom_offset": 124300,
       "size": 76,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0801E5D8",
       "rom_offset": 124376,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_01E5F2",
@@ -24610,7 +24646,7 @@
       "name": "sub_08021DF0",
       "rom_offset": 138736,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_need_effect_direct_49_check",
@@ -24628,7 +24664,7 @@
       "name": "sub_08021E24",
       "rom_offset": 138788,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_need_effect_direct_49_begin",
@@ -24646,7 +24682,7 @@
       "name": "sub_08021E94",
       "rom_offset": 138900,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_021E96",
@@ -24658,7 +24694,7 @@
       "name": "sub_08021E98",
       "rom_offset": 138904,
       "size": 506,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_022092",
@@ -24670,7 +24706,7 @@
       "name": "sub_08022094",
       "rom_offset": 139412,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022098",
@@ -24688,7 +24724,7 @@
       "name": "sub_080220C0",
       "rom_offset": 139456,
       "size": 98,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_022122",
@@ -24700,13 +24736,13 @@
       "name": "sub_08022124",
       "rom_offset": 139556,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802212C",
       "rom_offset": 139564,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_022146",
@@ -24718,13 +24754,13 @@
       "name": "sub_08022148",
       "rom_offset": 139592,
       "size": 36,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802216C",
       "rom_offset": 139628,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_02216E",
@@ -24736,7 +24772,7 @@
       "name": "sub_08022170",
       "rom_offset": 139632,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022174",
@@ -24754,19 +24790,19 @@
       "name": "sub_0802219C",
       "rom_offset": 139676,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080221A4",
       "rom_offset": 139684,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080221AC",
       "rom_offset": 139692,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0221C6",
@@ -24778,13 +24814,13 @@
       "name": "sub_080221C8",
       "rom_offset": 139720,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080221E8",
       "rom_offset": 139752,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0221EA",
@@ -24796,19 +24832,19 @@
       "name": "sub_080221EC",
       "rom_offset": 139756,
       "size": 96,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802224C",
       "rom_offset": 139852,
       "size": 200,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022314",
       "rom_offset": 140052,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022318",
@@ -24826,19 +24862,19 @@
       "name": "sub_08022340",
       "rom_offset": 140096,
       "size": 36,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08022364",
       "rom_offset": 140132,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802236C",
       "rom_offset": 140140,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_022386",
@@ -24850,13 +24886,13 @@
       "name": "sub_08022388",
       "rom_offset": 140168,
       "size": 52,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080223BC",
       "rom_offset": 140220,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0223BE",
@@ -24976,7 +25012,7 @@
       "name": "sub_08023238",
       "rom_offset": 143928,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802323C",
@@ -24994,13 +25030,13 @@
       "name": "sub_08023264",
       "rom_offset": 143972,
       "size": 96,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080232C4",
       "rom_offset": 144068,
       "size": 66,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_023306",
@@ -25012,7 +25048,7 @@
       "name": "sub_08023308",
       "rom_offset": 144136,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_023322",
@@ -25024,13 +25060,13 @@
       "name": "sub_08023324",
       "rom_offset": 144164,
       "size": 64,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023364",
       "rom_offset": 144228,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_023366",
@@ -25042,13 +25078,13 @@
       "name": "sub_08023368",
       "rom_offset": 144232,
       "size": 128,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080233E8",
       "rom_offset": 144360,
       "size": 134,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_02346E",
@@ -25060,13 +25096,13 @@
       "name": "sub_08023470",
       "rom_offset": 144496,
       "size": 20,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023484",
       "rom_offset": 144516,
       "size": 18,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_023496",
@@ -25138,13 +25174,13 @@
       "name": "sub_08023AA0",
       "rom_offset": 146080,
       "size": 260,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023BA4",
       "rom_offset": 146340,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023BD0",
@@ -25162,19 +25198,19 @@
       "name": "sub_08023BF8",
       "rom_offset": 146424,
       "size": 40,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023C20",
       "rom_offset": 146464,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023C28",
       "rom_offset": 146472,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_023C42",
@@ -25186,13 +25222,13 @@
       "name": "sub_08023C44",
       "rom_offset": 146500,
       "size": 100,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023CA8",
       "rom_offset": 146600,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_023CAA",
@@ -25204,7 +25240,7 @@
       "name": "sub_08023CAC",
       "rom_offset": 146604,
       "size": 82,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_023CFE",
@@ -25216,13 +25252,13 @@
       "name": "sub_08023D00",
       "rom_offset": 146688,
       "size": 152,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023D98",
       "rom_offset": 146840,
       "size": 56,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023DD0",
@@ -25240,7 +25276,7 @@
       "name": "sub_08023DF8",
       "rom_offset": 146936,
       "size": 46,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_023E26",
@@ -25252,25 +25288,25 @@
       "name": "sub_08023E28",
       "rom_offset": 146984,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023E30",
       "rom_offset": 146992,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023E5C",
       "rom_offset": 147036,
       "size": 96,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08023EBC",
       "rom_offset": 147132,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_023EBE",
@@ -25282,7 +25318,7 @@
       "name": "sub_08023EC4",
       "rom_offset": 147140,
       "size": 110,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_023F32",
@@ -25348,19 +25384,19 @@
       "name": "sub_0802425C",
       "rom_offset": 148060,
       "size": 452,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08024420",
       "rom_offset": 148512,
       "size": 320,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08024560",
       "rom_offset": 148832,
       "size": 300,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802468C",
@@ -25414,7 +25450,7 @@
       "name": "sub_08024ACC",
       "rom_offset": 150220,
       "size": 66,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_024B0E",
@@ -25426,7 +25462,7 @@
       "name": "sub_08024B10",
       "rom_offset": 150288,
       "size": 76,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_024B5C",
@@ -25660,13 +25696,13 @@
       "name": "sub_08025A14",
       "rom_offset": 154132,
       "size": 260,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025B18",
       "rom_offset": 154392,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025B1C",
@@ -25684,31 +25720,31 @@
       "name": "sub_08025B44",
       "rom_offset": 154436,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025B4C",
       "rom_offset": 154444,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025B54",
       "rom_offset": 154452,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025B9C",
       "rom_offset": 154524,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08025BBC",
       "rom_offset": 154556,
       "size": 80,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Entry routine",
@@ -26056,13 +26092,13 @@
       "name": "sub_08027564",
       "rom_offset": 161124,
       "size": 296,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802768C",
       "rom_offset": 161420,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08027690",
@@ -26080,31 +26116,31 @@
       "name": "sub_080276B8",
       "rom_offset": 161464,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080276C0",
       "rom_offset": 161472,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080276C8",
       "rom_offset": 161480,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08027710",
       "rom_offset": 161552,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08027730",
       "rom_offset": 161584,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_027732",
@@ -26344,13 +26380,13 @@
       "name": "sub_08028378",
       "rom_offset": 164728,
       "size": 172,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08028424",
       "rom_offset": 164900,
       "size": 786,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_028736",
@@ -26362,7 +26398,7 @@
       "name": "sub_08028738",
       "rom_offset": 165688,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802873C",
@@ -26385,14 +26421,8 @@
     {
       "name": "sub_080287D8",
       "rom_offset": 165848,
-      "size": 104,
-      "status": "candidate"
-    },
-    {
-      "name": "sub_08028840",
-      "rom_offset": 165952,
-      "size": 62,
-      "status": "candidate"
+      "size": 166,
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_02887E",
@@ -26404,7 +26434,7 @@
       "name": "sub_08028880",
       "rom_offset": 166016,
       "size": 50,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0288B2",
@@ -26416,7 +26446,7 @@
       "name": "sub_080288B4",
       "rom_offset": 166068,
       "size": 206,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_028982",
@@ -26428,7 +26458,7 @@
       "name": "sub_08028984",
       "rom_offset": 166276,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_028986",
@@ -26440,7 +26470,7 @@
       "name": "sub_08028988",
       "rom_offset": 166280,
       "size": 136,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "scene_contact_initialize",
@@ -26590,13 +26620,13 @@
       "name": "sub_08029A38",
       "rom_offset": 170552,
       "size": 424,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029BE0",
       "rom_offset": 170976,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029BE4",
@@ -26614,31 +26644,31 @@
       "name": "sub_08029C0C",
       "rom_offset": 171020,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029C14",
       "rom_offset": 171028,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029C1C",
       "rom_offset": 171036,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029C64",
       "rom_offset": 171108,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08029C84",
       "rom_offset": 171140,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_029C86",
@@ -26794,7 +26824,7 @@
       "name": "sub_0802A974",
       "rom_offset": 174452,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802A978",
@@ -26812,19 +26842,19 @@
       "name": "sub_0802A9AC",
       "rom_offset": 174508,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802A9B4",
       "rom_offset": 174516,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802A9BC",
       "rom_offset": 174524,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_02A9D6",
@@ -26836,19 +26866,19 @@
       "name": "sub_0802A9D8",
       "rom_offset": 174552,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802A9F8",
       "rom_offset": 174584,
       "size": 56,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802AA30",
       "rom_offset": 174640,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_probe_movement_cells",
@@ -27106,7 +27136,7 @@
       "name": "sub_0802BC10",
       "rom_offset": 179216,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BC14",
@@ -27124,31 +27154,31 @@
       "name": "sub_0802BC3C",
       "rom_offset": 179260,
       "size": 12,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BC48",
       "rom_offset": 179272,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BC50",
       "rom_offset": 179280,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BC98",
       "rom_offset": 179352,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0802BCC4",
       "rom_offset": 179396,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_02BCC6",
@@ -27166,7 +27196,7 @@
       "name": "sub_0802BCCC",
       "rom_offset": 179404,
       "size": 106,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_02BD36",
@@ -27178,7 +27208,7 @@
       "name": "sub_0802BD38",
       "rom_offset": 179512,
       "size": 116,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_create_actor",
@@ -27304,7 +27334,7 @@
       "name": "sub_0802CA74",
       "rom_offset": 182900,
       "size": 146,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_02CB06",
@@ -28552,7 +28582,7 @@
       "name": "sub_08033730",
       "rom_offset": 210736,
       "size": 354,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_033892",
@@ -28564,7 +28594,7 @@
       "name": "sub_08033894",
       "rom_offset": 211092,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08033898",
@@ -28582,31 +28612,31 @@
       "name": "sub_080338C0",
       "rom_offset": 211136,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080338C8",
       "rom_offset": 211144,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080338D0",
       "rom_offset": 211152,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08033918",
       "rom_offset": 211224,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08033938",
       "rom_offset": 211256,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_03393A",
@@ -28762,7 +28792,7 @@
       "name": "sub_08034BF4",
       "rom_offset": 216052,
       "size": 218,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_034CCE",
@@ -28774,7 +28804,7 @@
       "name": "sub_08034CD0",
       "rom_offset": 216272,
       "size": 22,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_034CE6",
@@ -28798,19 +28828,19 @@
       "name": "sub_08034D10",
       "rom_offset": 216336,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034D18",
       "rom_offset": 216344,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034D20",
       "rom_offset": 216352,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_034D3A",
@@ -28822,13 +28852,13 @@
       "name": "sub_08034D3C",
       "rom_offset": 216380,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034D5C",
       "rom_offset": 216412,
       "size": 86,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_034DB2",
@@ -28840,19 +28870,19 @@
       "name": "sub_08034DB4",
       "rom_offset": 216500,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034DB8",
       "rom_offset": 216504,
       "size": 452,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034F7C",
       "rom_offset": 216956,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034F80",
@@ -28870,31 +28900,31 @@
       "name": "sub_08034FA8",
       "rom_offset": 217000,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034FB0",
       "rom_offset": 217008,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08034FB8",
       "rom_offset": 217016,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035000",
       "rom_offset": 217088,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035020",
       "rom_offset": 217120,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_035022",
@@ -28906,7 +28936,7 @@
       "name": "sub_08035028",
       "rom_offset": 217128,
       "size": 10,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_035032",
@@ -28930,19 +28960,19 @@
       "name": "sub_0803505C",
       "rom_offset": 217180,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035060",
       "rom_offset": 217184,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035068",
       "rom_offset": 217192,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_035082",
@@ -28954,13 +28984,13 @@
       "name": "sub_08035084",
       "rom_offset": 217220,
       "size": 24,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803509C",
       "rom_offset": 217244,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_03509E",
@@ -28972,7 +29002,7 @@
       "name": "sub_080350A0",
       "rom_offset": 217248,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080350A4",
@@ -29122,7 +29152,7 @@
       "name": "sub_080357FC",
       "rom_offset": 219132,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035800",
@@ -29146,7 +29176,7 @@
       "name": "sub_08035830",
       "rom_offset": 219184,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_position_cycle_begin",
@@ -29164,7 +29194,7 @@
       "name": "sub_080358AC",
       "rom_offset": 219308,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0358AE",
@@ -29176,25 +29206,25 @@
       "name": "sub_080358B0",
       "rom_offset": 219312,
       "size": 156,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803594C",
       "rom_offset": 219468,
       "size": 184,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035A04",
       "rom_offset": 219652,
       "size": 524,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035C10",
       "rom_offset": 220176,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035C14",
@@ -29218,25 +29248,25 @@
       "name": "sub_08035C98",
       "rom_offset": 220312,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035CA0",
       "rom_offset": 220320,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035CE8",
       "rom_offset": 220392,
       "size": 68,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08035D2C",
       "rom_offset": 220460,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_035D2E",
@@ -29404,7 +29434,7 @@
       "name": "sub_080368D4",
       "rom_offset": 223444,
       "size": 184,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803698C",
@@ -29416,7 +29446,7 @@
       "name": "sub_08036B88",
       "rom_offset": 224136,
       "size": 166,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_036C2E",
@@ -29428,7 +29458,7 @@
       "name": "sub_08036C30",
       "rom_offset": 224304,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08036C34",
@@ -29446,7 +29476,7 @@
       "name": "sub_08036C5C",
       "rom_offset": 224348,
       "size": 30,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_036C7A",
@@ -29458,13 +29488,13 @@
       "name": "sub_08036C7C",
       "rom_offset": 224380,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08036C84",
       "rom_offset": 224388,
       "size": 78,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_036CD2",
@@ -29476,7 +29506,7 @@
       "name": "sub_08036CD4",
       "rom_offset": 224468,
       "size": 78,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_036D22",
@@ -29488,7 +29518,7 @@
       "name": "sub_08036D24",
       "rom_offset": 224548,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_036D26",
@@ -29602,7 +29632,7 @@
       "name": "sub_08037584",
       "rom_offset": 226692,
       "size": 158,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_037622",
@@ -29614,7 +29644,7 @@
       "name": "sub_08037624",
       "rom_offset": 226852,
       "size": 418,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0377C6",
@@ -29626,7 +29656,7 @@
       "name": "sub_080377C8",
       "rom_offset": 227272,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080377CC",
@@ -29644,31 +29674,31 @@
       "name": "sub_080377F4",
       "rom_offset": 227316,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08037814",
       "rom_offset": 227348,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803781C",
       "rom_offset": 227356,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08037848",
       "rom_offset": 227400,
       "size": 76,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08037894",
       "rom_offset": 227476,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_037896",
@@ -29680,7 +29710,7 @@
       "name": "sub_08037898",
       "rom_offset": 227480,
       "size": 22,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0378AE",
@@ -30376,7 +30406,7 @@
       "name": "sub_0803A968",
       "rom_offset": 239976,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803A96C",
@@ -30400,7 +30430,7 @@
       "name": "sub_0803A9CC",
       "rom_offset": 240076,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_optional_effect_activity_begin",
@@ -30418,7 +30448,7 @@
       "name": "sub_0803AA64",
       "rom_offset": 240228,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_03AA66",
@@ -30442,7 +30472,7 @@
       "name": "sub_0803ABFC",
       "rom_offset": 240636,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803AC00",
@@ -30466,7 +30496,7 @@
       "name": "sub_0803AC48",
       "rom_offset": 240712,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_shared_optional_begin",
@@ -30484,7 +30514,7 @@
       "name": "sub_0803ACC4",
       "rom_offset": 240836,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_03ACC6",
@@ -30844,7 +30874,7 @@
       "name": "sub_0803CF0C",
       "rom_offset": 249612,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803CF10",
@@ -30862,13 +30892,13 @@
       "name": "sub_0803CF38",
       "rom_offset": 249656,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803CF80",
       "rom_offset": 249728,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_variant_attachment_job",
@@ -30886,7 +30916,7 @@
       "name": "sub_0803D024",
       "rom_offset": 249892,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_03D026",
@@ -30976,7 +31006,7 @@
       "name": "sub_0803D398",
       "rom_offset": 250776,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803D39C",
@@ -30994,13 +31024,13 @@
       "name": "sub_0803D3C4",
       "rom_offset": 250820,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0803D3CC",
       "rom_offset": 250828,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_attachment_job_73",
@@ -31018,7 +31048,7 @@
       "name": "sub_0803D454",
       "rom_offset": 250964,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_03D456",
@@ -31558,7 +31588,7 @@
       "name": "sub_08041610",
       "rom_offset": 267792,
       "size": 386,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_041792",
@@ -31570,19 +31600,19 @@
       "name": "sub_08041794",
       "rom_offset": 268180,
       "size": 172,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041840",
       "rom_offset": 268352,
       "size": 260,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041944",
       "rom_offset": 268612,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_04195E",
@@ -31606,13 +31636,13 @@
       "name": "sub_08041988",
       "rom_offset": 268680,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080419D0",
       "rom_offset": 268752,
       "size": 254,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_041ACE",
@@ -31624,13 +31654,13 @@
       "name": "sub_08041AD0",
       "rom_offset": 269008,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041B18",
       "rom_offset": 269080,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_041B1A",
@@ -31642,19 +31672,19 @@
       "name": "sub_08041B1C",
       "rom_offset": 269084,
       "size": 132,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041BA0",
       "rom_offset": 269216,
       "size": 120,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08041C18",
       "rom_offset": 269336,
       "size": 52,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "scene_catalog_initialize",
@@ -31804,7 +31834,7 @@
       "name": "sub_080432CC",
       "rom_offset": 275148,
       "size": 124,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_step_optional_attachment_kind_12",
@@ -31828,7 +31858,7 @@
       "name": "sub_080437B0",
       "rom_offset": 276400,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080437B4",
@@ -31846,7 +31876,7 @@
       "name": "sub_080437DC",
       "rom_offset": 276444,
       "size": 166,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_043882",
@@ -31858,7 +31888,7 @@
       "name": "sub_08043884",
       "rom_offset": 276612,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_dispatch_optional_activity_attachment_job",
@@ -31870,7 +31900,7 @@
       "name": "sub_080439A4",
       "rom_offset": 276900,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0439A6",
@@ -31888,7 +31918,7 @@
       "name": "sub_08043A2C",
       "rom_offset": 277036,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08043A30",
@@ -31906,19 +31936,19 @@
       "name": "sub_08043A58",
       "rom_offset": 277080,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08043A60",
       "rom_offset": 277088,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08043A64",
       "rom_offset": 277092,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_043A7E",
@@ -31930,13 +31960,13 @@
       "name": "sub_08043A80",
       "rom_offset": 277120,
       "size": 12,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08043A8C",
       "rom_offset": 277132,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_043A8E",
@@ -32032,7 +32062,7 @@
       "name": "sub_0804432C",
       "rom_offset": 279340,
       "size": 28,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_optional_choice_attachment_job",
@@ -32122,7 +32152,7 @@
       "name": "sub_080449B0",
       "rom_offset": 281008,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_optional_playback_attachment_job",
@@ -32482,25 +32512,25 @@
       "name": "sub_08045FB4",
       "rom_offset": 286644,
       "size": 156,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046050",
       "rom_offset": 286800,
       "size": 156,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080460EC",
       "rom_offset": 286956,
       "size": 216,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080461C4",
       "rom_offset": 287172,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080461C8",
@@ -32524,19 +32554,19 @@
       "name": "sub_08046238",
       "rom_offset": 287288,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046240",
       "rom_offset": 287296,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046288",
       "rom_offset": 287368,
       "size": 62,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0462C6",
@@ -32548,7 +32578,7 @@
       "name": "sub_080462C8",
       "rom_offset": 287432,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0462CA",
@@ -32572,7 +32602,7 @@
       "name": "sub_0804649C",
       "rom_offset": 287900,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080464A0",
@@ -32614,7 +32644,7 @@
       "name": "sub_08046588",
       "rom_offset": 288136,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_04658A",
@@ -32626,7 +32656,7 @@
       "name": "sub_08046590",
       "rom_offset": 288144,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_046594",
@@ -32638,31 +32668,31 @@
       "name": "sub_08046598",
       "rom_offset": 288152,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465A0",
       "rom_offset": 288160,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465A4",
       "rom_offset": 288164,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465A8",
       "rom_offset": 288168,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465AC",
       "rom_offset": 288172,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0465AE",
@@ -32674,31 +32704,31 @@
       "name": "sub_080465B0",
       "rom_offset": 288176,
       "size": 36,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465D4",
       "rom_offset": 288212,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465D8",
       "rom_offset": 288216,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465E0",
       "rom_offset": 288224,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080465E8",
       "rom_offset": 288232,
       "size": 26,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_046602",
@@ -32710,13 +32740,13 @@
       "name": "sub_08046604",
       "rom_offset": 288260,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046624",
       "rom_offset": 288292,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_046626",
@@ -32728,19 +32758,19 @@
       "name": "sub_0804662C",
       "rom_offset": 288300,
       "size": 136,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080466B4",
       "rom_offset": 288436,
       "size": 492,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080468A0",
       "rom_offset": 288928,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080468A4",
@@ -32758,31 +32788,31 @@
       "name": "sub_080468CC",
       "rom_offset": 288972,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080468D4",
       "rom_offset": 288980,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080468DC",
       "rom_offset": 288988,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046924",
       "rom_offset": 289060,
       "size": 32,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08046944",
       "rom_offset": 289092,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_046946",
@@ -32902,7 +32932,7 @@
       "name": "sub_080470C0",
       "rom_offset": 291008,
       "size": 518,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0472C6",
@@ -32914,7 +32944,7 @@
       "name": "sub_080472C8",
       "rom_offset": 291528,
       "size": 514,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_0474CA",
@@ -32926,7 +32956,7 @@
       "name": "sub_080474CC",
       "rom_offset": 292044,
       "size": 4,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_080474D0",
@@ -32944,31 +32974,31 @@
       "name": "sub_080474F8",
       "rom_offset": 292088,
       "size": 12,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08047504",
       "rom_offset": 292100,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0804750C",
       "rom_offset": 292108,
       "size": 72,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08047554",
       "rom_offset": 292180,
       "size": 44,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_08047580",
       "rom_offset": 292224,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "Unresolved_047582",
@@ -33172,7 +33202,7 @@
       "name": "sub_08048640",
       "rom_offset": 296512,
       "size": 8,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "frame_begin_attachment_job_25",
@@ -34066,13 +34096,13 @@
       "name": "sub_0804C87C",
       "rom_offset": 313468,
       "size": 10,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0804C886",
       "rom_offset": 313478,
       "size": 2,
-      "status": "candidate"
+      "status": "mapped_code"
     },
     {
       "name": "sub_0804C888",
@@ -34083,14 +34113,26 @@
     {
       "name": "sub_0804C88C",
       "rom_offset": 313484,
-      "size": 36,
+      "size": 4,
       "status": "mapped_code"
     },
     {
-      "name": "Unresolved_04C8B0",
-      "rom_offset": 313520,
-      "size": 12,
-      "status": "unresolved"
+      "name": "sub_0804C890",
+      "rom_offset": 313488,
+      "size": 4,
+      "status": "mapped_code"
+    },
+    {
+      "name": "sub_0804C894",
+      "rom_offset": 313492,
+      "size": 4,
+      "status": "mapped_code"
+    },
+    {
+      "name": "sub_0804C898",
+      "rom_offset": 313496,
+      "size": 36,
+      "status": "mapped_code"
     },
     {
       "name": "view_bios_arctan2",
@@ -34225,7 +34267,7 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0804CCF0",
+      "name": "Register veneer r0",
       "rom_offset": 314608,
       "size": 2,
       "status": "mapped_code"
@@ -34243,7 +34285,7 @@
       "status": "exact_glue"
     },
     {
-      "name": "sub_0804CCF8",
+      "name": "Register veneer r2",
       "rom_offset": 314616,
       "size": 2,
       "status": "mapped_code"
@@ -34261,7 +34303,7 @@
       "status": "exact_glue"
     },
     {
-      "name": "sub_0804CD00",
+      "name": "Register veneer r4",
       "rom_offset": 314624,
       "size": 2,
       "status": "mapped_code"
@@ -34269,11 +34311,23 @@
     {
       "name": "Unresolved_04CD02",
       "rom_offset": 314626,
-      "size": 6,
+      "size": 2,
       "status": "unresolved"
     },
     {
-      "name": "sub_0804CD08",
+      "name": "Register veneer r5",
+      "rom_offset": 314628,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Unresolved_04CD06",
+      "rom_offset": 314630,
+      "size": 2,
+      "status": "unresolved"
+    },
+    {
+      "name": "Register veneer r6",
       "rom_offset": 314632,
       "size": 2,
       "status": "mapped_code"
@@ -34285,7 +34339,7 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_0804CD0C",
+      "name": "Register veneer r7",
       "rom_offset": 314636,
       "size": 2,
       "status": "mapped_code"
@@ -34293,11 +34347,23 @@
     {
       "name": "Unresolved_04CD0E",
       "rom_offset": 314638,
-      "size": 6,
+      "size": 2,
       "status": "unresolved"
     },
     {
-      "name": "sub_0804CD14",
+      "name": "Register veneer r8",
+      "rom_offset": 314640,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Unresolved_04CD12",
+      "rom_offset": 314642,
+      "size": 2,
+      "status": "unresolved"
+    },
+    {
+      "name": "Register veneer r9",
       "rom_offset": 314644,
       "size": 2,
       "status": "mapped_code"
@@ -34309,7 +34375,7 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_0804CD18",
+      "name": "Register veneer r10",
       "rom_offset": 314648,
       "size": 2,
       "status": "mapped_code"
@@ -34317,7 +34383,55 @@
     {
       "name": "Unresolved_04CD1A",
       "rom_offset": 314650,
-      "size": 18,
+      "size": 2,
+      "status": "unresolved"
+    },
+    {
+      "name": "Register veneer r11",
+      "rom_offset": 314652,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Unresolved_04CD1E",
+      "rom_offset": 314654,
+      "size": 2,
+      "status": "unresolved"
+    },
+    {
+      "name": "Register veneer r12",
+      "rom_offset": 314656,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Unresolved_04CD22",
+      "rom_offset": 314658,
+      "size": 2,
+      "status": "unresolved"
+    },
+    {
+      "name": "Register veneer r13",
+      "rom_offset": 314660,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Unresolved_04CD26",
+      "rom_offset": 314662,
+      "size": 2,
+      "status": "unresolved"
+    },
+    {
+      "name": "Register veneer r14",
+      "rom_offset": 314664,
+      "size": 2,
+      "status": "mapped_code"
+    },
+    {
+      "name": "Unresolved_04CD2A",
+      "rom_offset": 314666,
+      "size": 2,
       "status": "unresolved"
     },
     {
@@ -34803,7 +34917,55 @@
     {
       "name": "Unresolved_04EAE0",
       "rom_offset": 322272,
-      "size": 19064,
+      "size": 1944,
+      "status": "unresolved"
+    },
+    {
+      "name": "resource_factories",
+      "rom_offset": 324216,
+      "size": 96,
+      "status": "mapped_data"
+    },
+    {
+      "name": "Unresolved_04F2D8",
+      "rom_offset": 324312,
+      "size": 10304,
+      "status": "unresolved"
+    },
+    {
+      "name": "resource_program_handlers",
+      "rom_offset": 334616,
+      "size": 192,
+      "status": "mapped_data"
+    },
+    {
+      "name": "Unresolved_051BD8",
+      "rom_offset": 334808,
+      "size": 832,
+      "status": "unresolved"
+    },
+    {
+      "name": "option_definitions",
+      "rom_offset": 335640,
+      "size": 64,
+      "status": "mapped_data"
+    },
+    {
+      "name": "Unresolved_051F58",
+      "rom_offset": 335704,
+      "size": 2928,
+      "status": "unresolved"
+    },
+    {
+      "name": "resource_transition_steps",
+      "rom_offset": 338632,
+      "size": 12,
+      "status": "mapped_data"
+    },
+    {
+      "name": "Unresolved_052AD4",
+      "rom_offset": 338644,
+      "size": 2692,
       "status": "unresolved"
     },
     {
@@ -34827,7 +34989,31 @@
     {
       "name": "Unresolved_057ACC",
       "rom_offset": 359116,
-      "size": 75540,
+      "size": 6800,
+      "status": "unresolved"
+    },
+    {
+      "name": "scene_contact_definitions",
+      "rom_offset": 365916,
+      "size": 224,
+      "status": "mapped_data"
+    },
+    {
+      "name": "Unresolved_05963C",
+      "rom_offset": 366140,
+      "size": 38976,
+      "status": "unresolved"
+    },
+    {
+      "name": "need_effect_definitions",
+      "rom_offset": 405116,
+      "size": 5364,
+      "status": "mapped_data"
+    },
+    {
+      "name": "Unresolved_064370",
+      "rom_offset": 410480,
+      "size": 24176,
       "status": "unresolved"
     },
     {
@@ -34845,7 +35031,19 @@
     {
       "name": "Unresolved_06A250",
       "rom_offset": 434768,
-      "size": 13652564,
+      "size": 88116,
+      "status": "unresolved"
+    },
+    {
+      "name": "audio_game_callbacks",
+      "rom_offset": 522884,
+      "size": 8,
+      "status": "mapped_data"
+    },
+    {
+      "name": "Unresolved_07FA8C",
+      "rom_offset": 522892,
+      "size": 13564440,
       "status": "unresolved"
     },
     {
@@ -34857,7 +35055,49 @@
     {
       "name": "Unresolved_D6F4E4",
       "rom_offset": 14087396,
-      "size": 2535320,
+      "size": 52,
+      "status": "unresolved"
+    },
+    {
+      "name": "audio_track_effects",
+      "rom_offset": 14087448,
+      "size": 612,
+      "status": "mapped_data"
+    },
+    {
+      "name": "audio_volume_effects",
+      "rom_offset": 14088060,
+      "size": 80,
+      "status": "mapped_data"
+    },
+    {
+      "name": "Unresolved_D6F7CC",
+      "rom_offset": 14088140,
+      "size": 4296,
+      "status": "unresolved"
+    },
+    {
+      "name": "world_effect_functions",
+      "rom_offset": 14092436,
+      "size": 28,
+      "status": "mapped_data"
+    },
+    {
+      "name": "Unresolved_D708B0",
+      "rom_offset": 14092464,
+      "size": 5940,
+      "status": "unresolved"
+    },
+    {
+      "name": "route_modes",
+      "rom_offset": 14098404,
+      "size": 64,
+      "status": "mapped_data"
+    },
+    {
+      "name": "Unresolved_D72024",
+      "rom_offset": 14098468,
+      "size": 2524248,
       "status": "unresolved"
     },
     {
@@ -35067,10 +35307,10 @@
   ],
   "input_sha256": {
     "config/build-us-eu.json": "dec0b817a253eb0af921aae3d8ce972b584c43a2a95e898a967cb9dd74c0c66b",
-    "assets/rom-inventory.json": "92afdf9c685ff6d3997e6c65f69c9e2ed0127eeca5b65b5006f2a2b783552352",
-    "tools/render_progress.py": "419354ceff7a7eb3a9e9f520cce14b39dbdc60ea247901091ba834d85e0d32e6",
+    "assets/rom-inventory.json": "e8b66fb0b231f49d22744e6aa5f823a8bc43acc54e2e2034b2efcd0a164da931",
+    "tools/render_progress.py": "fad1862e5fab3e426f73aff235be2cf71954c4b4722fd0eb9158fc853bcf7b05",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
-    "tools/inventory_partition.py": "bc77da39abf1f092066c258dd6dadb1606a772d563deac4a37b86d0b0bffd10d",
+    "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",
     "config/progress-requirements.txt": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"
   }
 }

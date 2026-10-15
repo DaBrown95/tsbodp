@@ -107,6 +107,8 @@ def inventory():
             'unresolved_dispatch_sites': len(discovered['unresolved_transfer_sites']),
             'unresolved_callback_call_sites': len(discovered['unresolved_indirect_call_sites']),
             'mapped_extent_bytes': sum(r['size'] for r in rows),
+            'historical_mapped_extent_baseline': discovered.get('historical_mapped_extent_baseline', 319640),
+            'code_census_summary': discovered['code_census']['counts'] if 'code_census' in discovered else None,
             'scope': discovered['method'],
             'rows': [{k: r[k] for k in ('name', 'group', 'rom_offset', 'size', 'status')} for r in rows],
             'partition': partition([{k: r[k] for k in ('name', 'rom_offset', 'size', 'status')} for r in rows] + discovered['data_regions'], target['size']),
@@ -209,7 +211,10 @@ def render(data, output):
     draw.text((24, 725), 'Entire 16 MiB ROM — every byte accounted for', fill=MUTED, font=small)
     draw.text((24, 785), 'Complete ROM: identical to reference  ·  Source reconstruction: incomplete', fill=FOREGROUND, font=heading)
     draw.text((24, 816), f"{data['compiled_c_bytes']:,} C bytes + {data['assembly_glue_bytes']:,} ARM/Thumb glue bytes  /  {data['rom_bytes']:,} total ROM bytes  ·  {data['unconverted_rom_bytes']:,} remain unconverted", fill=MUTED, font=body)
-    draw.text((24, 851), 'Tile area follows estimated extents; main code and startup/audio use separate scales.', fill=MUTED, font=small)
+    census = data.get('code_census_summary')
+    note = (f"{census['nonconflicting_qualified_instruction_bytes']:,} rooted static instruction bytes  ·  Game-code denominator unresolved  ·  Historical mapped extents: 319,640 B"
+            if census else 'Tile area follows estimated extents; main code and startup/audio use separate scales.')
+    draw.text((24, 851), note, fill=MUTED, font=small)
     draw.text((24, 877), 'Verified build: ' + data['verified_at'], fill=MUTED, font=small)
     output.parent.mkdir(parents=True, exist_ok=True)
     image.save(output, format='PNG', compress_level=6)

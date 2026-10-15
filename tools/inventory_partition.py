@@ -50,6 +50,11 @@ def verify_discovery(data, size, reference_sha256):
         raise ValueError('Discovery inventory cannot claim matching source')
     if any(row['status'] != 'mapped_data' for row in data.get('data_regions', [])):
         raise ValueError('Data regions cannot claim matching source')
+    if data.get('inventory_schema_version') == 2:
+        from inventory_census import verify_census
+        if data.get('historical_mapped_extent_baseline') != 319640:
+            raise ValueError('Historical comparison baseline changed')
+        verify_census(data['code_census'], size)
     if (partition(data['rows']+data.get('data_regions', []), size) != data['partition']
             or data.get('extent_count', len(data['rows'])) != len(data['rows'])
             or data['entry_count'] != len({r.get('entry_rom_offset', r['rom_offset']) for r in data['rows']})

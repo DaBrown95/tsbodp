@@ -31,7 +31,14 @@
         0,
         0,
         134519792
-      ]
+      ],
+      "target_pointer_load_runtime_address": 50334984,
+      "index_byte_load_runtime_addresses": [
+        50334948,
+        50334952
+      ],
+      "index_sum_runtime_address": 50334968,
+      "historical_index_load_name": "index_load_runtime_address is retained as a historical key for the target-pointer LDR, not an index-byte load."
     },
     {
       "name": "default_irq_handlers",
@@ -130,7 +137,7 @@
         163530
       ],
       "targets_complete": false,
-      "limitation": "Flattened 28 rows with begin, step and end pointers. Each consumer selects its phase column; mapped target lists conservatively include all columns. The next row is nonpointer data and observed queued-kind calls reach 27, but arbitrary runtime kind bounds and callback arguments remain unproven.",
+      "limitation": "Observed 28 rows of begin, step and end pointers. Each consumer selects its own phase column. Runtime kind domain and callback argument contracts remain open.",
       "entries": [
         134381281,
         134381281,
@@ -216,7 +223,12 @@
         134442805,
         134442953,
         134443017
-      ]
+      ],
+      "consumer_fields": {
+        "163430": 0,
+        "163476": 4,
+        "163530": 8
+      }
     }
   ]
 }

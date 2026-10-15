@@ -1,5 +1,9 @@
 # Bounded inventory follow-up, 15 October 2026
 
+This is the earlier bounded checkpoint. The subsequent requested
+[whole-ROM survey](WHOLE_ROM_INVENTORY.md) supersedes its open audio-kernel and
+conservative phase-column annotations; the historical findings below are retained.
+
 This internal pass reviewed 23 scoped sites or boundary facts across three
 connected clusters. Existing maps, matching caller receipts and local failed
 attempts were inspected first. Original-image control flow and literal loads

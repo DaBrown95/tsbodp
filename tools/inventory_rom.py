@@ -15,6 +15,9 @@ from project import ROOT, audit
 from inventory_partition import partition, overlay
 from control_flow import thumb_switch, constant_result, stack_return
 from ram_copies import validate_copy
+from indirect_evidence import record_tables, phase_targets, validate_fixed_target, annotate_records, literal_veneers
+from fixed_target_proof import prove_fixed_target
+from inventory_census import census, verify_census
 
 BASE = 0x08000000
 
@@ -245,6 +248,37 @@ def main():
     for entry in ram['entries']:
         scanner.seed(entry['ram_address'], entry['mode'], 'audited RAM entry', entry['name'])
     dispatch_config = json.loads((ROOT/'config/indirect-transfers-us-eu.json').read_text())
+    evidence_config = json.loads((ROOT/'config/code-evidence-us-eu.json').read_text())
+    if evidence_config['reference_sha256'] != identity['sha256']:
+        raise ValueError('Static evidence targets another ROM')
+    evidence_inputs = set()
+    observed_records = record_tables(data, evidence_config['observed_record_tables'], scanner.physical)
+    for table in observed_records:
+        for item in table['evidence']:
+            if 'source' in item:
+                owner = next((f for f in manifest['functions'] if f['name'] == item['function']), None)
+                if (owner is None or owner['source'] != item['source']
+                        or hashlib.sha256((ROOT/item['source']).read_bytes()).hexdigest() != item['source_sha256']):
+                    raise ValueError('Stale matching-source table evidence')
+                evidence_inputs.add(item['source'])
+        for value in table['targets']:
+            scanner.seed(value & ~1, 'Thumb' if value & 1 else 'ARM', 'audited dispatch entry')
+    for row in evidence_config['fixed_targets']:
+        validate_fixed_target(row, data, manifest['functions'],
+                              lambda f: hashlib.sha256((ROOT/f['source']).read_bytes()).hexdigest(), scanner.physical)
+        evidence_inputs.add(next(f['source'] for f in manifest['functions'] if f['name'] == row['owner']))
+    for address in literal_veneers(scanner, evidence_config['audio_literal_veneers']):
+        scanner.seed(address, 'Thumb', 'audited dispatch entry')
+    veneers = evidence_config['register_veneer_sequence']
+    from capstone import arm
+    for index, register in enumerate(veneers['registers']):
+        address = BASE + veneers['rom_offset'] + index * veneers['stride']
+        ins = scanner.decode(address, 'Thumb')
+        if (ins is None or ins.id != ARM_INS_BX
+                or ins.operands[0].reg != getattr(arm, 'ARM_REG_R'+str(register))
+                or struct.unpack_from('<H', data, address-BASE+2)[0] != 0x46c0):
+            raise ValueError('Register veneer sequence differs from audited template')
+        scanner.seed(address, 'Thumb', 'audited dispatch entry', 'Register veneer r'+str(register))
     for table in dispatch_config['observed_dispatch_tables']:
         values = list(struct.unpack_from('<'+'I'*table['count'], data, table['rom_offset']))
         if values != table['entries']:
@@ -255,19 +289,51 @@ def main():
             if value:
                 scanner.seed(value & ~1, 'Thumb' if value & 1 else 'ARM', 'audited dispatch entry')
     scanner.drain()
+    # Snapshot strong evidence before any pointer/prologue-only candidate seeds.
+    # The separate census never promotes those candidates or awards source credit.
+    for key in list(scanner.results):
+        scanner.results[key] = scanner.walk(*key)
+    scanner.drain()
+    strong_results = dict(scanner.results)
+    strong_entries = {key: {**value, 'evidence': set(value['evidence'])}
+                      for key, value in scanner.entries.items()}
+    for row in evidence_config['fixed_targets']:
+        owner = next(f for f in manifest['functions'] if f['name'] == row['owner'])
+        prove_fixed_target(scanner, owner, row['rom_offset'], row['target'])
     graph_count = len(scanner.entries)
     # Inspect ALL aligned ROM words for pointers. They remain candidate evidence:
     # integer data can resemble addresses, and callbacks are not proven reachable.
     pointers = defaultdict(int)
+    arm_pointers = defaultdict(int)
+    arm_signatures = defaultdict(list)
+    raw_arm_bx = 0
     prologues = set()
     for off in range(0, len(data)-3, 4):
         value = struct.unpack_from('<I', data, off)[0]
         if value & 1 and scanner.physical(value & ~1) is not None:
             pointers[value & ~1] += 1
+        elif not value & 3 and scanner.physical(value) is not None:
+            arm_pointers[value] += 1
+        if value & 0x0ffffff0 == 0x012fff10:
+            raw_arm_bx += 1
+        if value & 0x0fff0000 == 0x092d0000 and value & 0x4000:
+            condition = value >> 28
+            name = ('STMDB_SP_LR_AL' if condition == 14 else
+                    'STMDB_SP_LR_conditional' if condition < 14 else
+                    'STMDB_pattern_unsupported_condition_15')
+            arm_signatures[name].append(BASE+off)
+        if value == 0xe52de004:
+            arm_signatures['STR_LR_SP_predecrement_AL'].append(BASE+off)
+        if (value == 0xe1a0c00d and off+8 <= len(data)
+                and struct.unpack_from('<I', data, off+4)[0] & 0x0fff4000 == 0x092d4000):
+            arm_signatures['APCS_MOV_IP_SP_then_STMDB'].append(BASE+off)
     # Scan every Thumb halfword for the common push {...,lr} entry pattern.
-    for off in range(0xc0, len(data)-1, 2):
+    raw_thumb_bx = 0
+    for off in range(0, len(data)-1, 2):
         value = struct.unpack_from('<H', data, off)[0]
-        if value & 0xff00 == 0xb500:
+        if value & 0xff87 == 0x4700:
+            raw_thumb_bx += 1
+        if off >= 0xc0 and value & 0xff00 == 0xb500:
             prologues.add(BASE+off)
     known_instr = {pc for result in scanner.results.values() for pc in result['instructions']}
     main_end = max(pc for pc in known_instr if BASE <= pc < BASE+0x100000)
@@ -319,13 +385,14 @@ def main():
             scanner.results[key] = scanner.walk(*key)
         scanner.drain()
     for table in dispatch_config['observed_dispatch_tables']:
-        targets = sorted({value & ~1 for value in table['entries'] if value})
         for result in scanner.results.values():
             for record in result['transfer_records']:
                 if scanner.physical(record['site']) in table['consumer_sites']:
-                    record.update(kind='observed_table_call', targets=targets, targets_complete=False,
+                    record.update(kind='observed_table_call', targets=phase_targets(table, scanner.physical(record['site'])), targets_complete=False,
                                   table_name=table['name'], table_rom_offset=table['rom_offset'],
                                   table_bytes=4*table['count'], limitation=table['limitation'])
+    annotate_records(scanner.results, scanner.physical,
+                     evidence_config['indirect_producers'], evidence_config['fixed_targets'])
     # Merge RAM/ROM aliases at physical entry. They receive a single ROM tile.
     merged = {}
     for key, result in scanner.results.items():
@@ -403,10 +470,13 @@ def main():
     for table in dispatch_config['observed_dispatch_tables']:
         data_regions.append({'name': table['name'], 'rom_offset': table['rom_offset'],
                              'size': table['count']*4, 'status': 'mapped_data'})
+    for table in observed_records:
+        data_regions.append({'name': table['name'], 'rom_offset': table['rom_offset'],
+                             'size': table['observed_rows']*table['record_stride'], 'status': 'mapped_data'})
     result = {'target': 'us-eu', 'reference_sha256': identity['sha256'], 'rom_bytes': len(data),
               'complete_rom_partition': True, 'complete_code_inventory': False,
               'decoder': {'name': 'Capstone', 'version': capstone_version},
-              'method': 'ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointer and Thumb prologue sweeps; estimated extents',
+              'method': 'ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents',
               'limitations': ['Control-flow bounded means decoded paths terminate or loop; it does not prove compiler ownership, stack balance or runtime reachability.',
                               'Static discovery is not proof of function boundaries or reachability.',
                               'Indirect jumps and jump tables can hide code; unresolved bytes may include code, pools, data and padding.',
@@ -418,11 +488,27 @@ def main():
               'initial_connected_entries': graph_count, 'connected_main_last_instruction': main_end,
               'unresolved_transfer_sites': sorted({p for r in rows for p in r['unresolved_transfer_offsets']}), 'whole_rom_prologue_hits': len(prologues),
               'sweep_seed_count': len(sweep_candidates),
+              'weak_whole_ROM_survey': {'aligned_words_examined': len(data)//4,
+                  'Thumb_halfwords_examined': len(data)//2,
+                  'raw_BX_patterns': {'ARM': raw_arm_bx, 'Thumb': raw_thumb_bx},
+                  'ARM_signature_counts': {name: len(values) for name, values in arm_signatures.items()},
+                  'ARM_signature_pointer_coincidences': sorted({address for values in arm_signatures.values() for address in values if arm_pointers[address]}),
+                  'ARM_signatures_seeded_as_code': False,
+                  'limitation': 'Signatures, raw BX words and pointer coincidences do not prove code, function entries or absence of other code.'},
               'entry_count': len({r['entry_rom_offset'] for r in rows}), 'extent_count': len(rows),
               'mapped_extent_bytes': sum(r['size'] for r in rows), 'rows': rows,
               'data_regions': data_regions, 'partition': partition(rows+data_regions, len(data)),
               'input_sha256': {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in
-                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt')}}
+                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'tools/indirect_evidence.py', 'tools/fixed_target_proof.py', 'tools/inventory_census.py', 'config/code-evidence-us-eu.json', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt', *sorted(evidence_inputs))}}
+    result['inventory_schema_version'] = 2
+    result['historical_mapped_extent_baseline'] = 319640
+    result['code_census'] = census(scanner, strong_entries, strong_results,
+        rows=rows, data_regions=data_regions,
+        source_code=[{**f, 'source_kind': f.get('kind', 'compiled_c'),
+                      'mode': f.get('mode', 'Thumb')}
+                     for f in manifest['functions']+manifest.get('assembly', [])],
+        quality_annotations=evidence_config['quality_annotations'])
+    verify_census(result['code_census'], len(data))
     out = ROOT/'assets/rom-inventory.json'
     out.write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps({k: result[k] for k in ('entry_count', 'initial_connected_entries', 'whole_rom_prologue_hits', 'sweep_seed_count', 'mapped_extent_bytes')}, indent=2))

@@ -1,0 +1,2189 @@
+{
+  "target": "us-eu",
+  "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
+  "scope": "Static producer and observed-prefix evidence; no recovered C or target completeness.",
+  "historical_mapped_extent_baseline": 319640,
+  "observed_record_tables": [
+    {
+      "name": "resource_factories",
+      "rom_offset": 324216,
+      "observed_rows": 24,
+      "record_stride": 4,
+      "callback_fields": [
+        0
+      ],
+      "region_sha256": "3be2a73a5178188a56e1fefbc98a2af15669fe8a5a4ce7b67c9ffc96196ad9f9",
+      "targets_complete": false,
+      "consumer_sites": [
+        43428
+      ],
+      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "evidence": [
+        {
+          "function": "resource_spawn_group",
+          "source": "src/display/spawn_resource_group.c",
+          "source_sha256": "7bea41cd3a5c652d9d0c6c24662a2243dd9fbb4b87af0a3750947862bc236f29"
+        }
+      ],
+      "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
+      "limitation": "Observed24-word prefix includes null0; no selector<24 proof at consumer."
+    },
+    {
+      "name": "resource_program_handlers",
+      "rom_offset": 334616,
+      "observed_rows": 48,
+      "record_stride": 4,
+      "callback_fields": [
+        0
+      ],
+      "region_sha256": "6c3ad8b8290521408d573e7d746c388b989476ce50991096f1537846ed954e24",
+      "targets_complete": false,
+      "consumer_sites": [
+        44556
+      ],
+      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "evidence": [
+        {
+          "function": "resource_execute_group",
+          "source": "src/resource/resource_execute_group.c",
+          "source_sha256": "0da8d1069c641f6fc6a628187d9dd103f619bc2a83ac88156200cc9b01006530"
+        }
+      ],
+      "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
+      "limitation": "Observed48-word prefix; command is32-bit serialized word, no local upper guard."
+    },
+    {
+      "name": "option_definitions",
+      "rom_offset": 335640,
+      "observed_rows": 4,
+      "record_stride": 16,
+      "callback_fields": [
+        0,
+        4,
+        8
+      ],
+      "region_sha256": "0462d8ae01c78087f408fe37a98f7853c52a02f64f5113e9e06a6a5894885dec",
+      "targets_complete": false,
+      "consumer_sites": [
+        79036
+      ],
+      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "evidence": [
+        {
+          "function": "frame_create_option_object",
+          "source": "src/frame/frame_create_option_object.c",
+          "source_sha256": "d842ff6b76b3793fa0952523406a53e02e9325df825ad4be7607954d62e809c1"
+        },
+        {
+          "function": "frame_option_initialize",
+          "source": "src/frame/frame_option_initialize.c",
+          "source_sha256": "a98b26d1f3448eb1d08200ca4ff3139d50d3f4a97d4c229623327e034820d7fd"
+        },
+        {
+          "function": "frame_option_configure",
+          "source": "src/frame/frame_option_configure.c",
+          "source_sha256": "30fa36dd2594ffae5e8afdb0b455c5a1c901743b176969ad238c5165995ab172"
+        }
+      ],
+      "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
+      "limitation": "Observed4 rows; subtype halfword width is not a four-row bound."
+    },
+    {
+      "name": "scene_contact_definitions",
+      "rom_offset": 365916,
+      "observed_rows": 8,
+      "record_stride": 28,
+      "callback_fields": [
+        0,
+        4
+      ],
+      "region_sha256": "4c48dbfc00bd8191692e11f3654c78a15fa40e4b260df004764273713ae942d0",
+      "targets_complete": false,
+      "consumer_sites": [
+        169980,
+        170334,
+        170462,
+        170518
+      ],
+      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "evidence": [
+        {
+          "function": "scene_contact_initialize_primary_activity",
+          "source": "src/scene/scene_contact_initialize_primary_activity.c",
+          "source_sha256": "46a4bb24ea8f3a6e3feccf5a21327267f660b7b809f0635d39e569b7e337d0bd"
+        },
+        {
+          "function": "scene_contact_step_primary_activity",
+          "source": "src/scene/scene_contact_step_primary_activity.c",
+          "source_sha256": "e0fa1cac98e257046f3361630c1d5a792d0f9297d2cd1329d4a84d7a64cbe4d6"
+        },
+        {
+          "function": "scene_contact_initialize_secondary_activity",
+          "source": "src/scene/scene_contact_initialize_secondary_activity.c",
+          "source_sha256": "5da308be4407586aaa6e4f3b32841d59ec7c39648bdeff2acb56e9517357dc20"
+        },
+        {
+          "function": "scene_contact_step_secondary_activity",
+          "source": "src/scene/scene_contact_step_secondary_activity.c",
+          "source_sha256": "e001f19029ca955b562a1c34fad36fe31bb69879e4c244854833f6220a528df5"
+        }
+      ],
+      "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
+      "limitation": "8 observed rows; byte scene is not proven<8 for all callers."
+    },
+    {
+      "name": "need_effect_definitions",
+      "rom_offset": 405116,
+      "observed_rows": 149,
+      "record_stride": 36,
+      "callback_fields": [
+        0,
+        4,
+        8,
+        12,
+        16,
+        20,
+        24,
+        28
+      ],
+      "region_sha256": "a948b6349f87f7b30f135d017d51e74f598d389aab9afaf58c7214b79c207dce",
+      "targets_complete": false,
+      "consumer_sites": [
+        28572,
+        28602,
+        32254,
+        32284,
+        34142,
+        34164,
+        40932,
+        186204,
+        187652,
+        188160,
+        188536,
+        188622,
+        189576,
+        189734,
+        191180,
+        192342
+      ],
+      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "evidence": [
+        {
+          "function": "frame_allocate_need_effect_state",
+          "source": "src/display/allocate_need_effect_state.c",
+          "source_sha256": "f7d3202d877705e32bda2b507decfb389c3a469a298c92eaea7a7e56aa06a267"
+        },
+        {
+          "function": "frame_spawn_need_effect",
+          "source": "src/frame/frame_spawn_need_effect.c",
+          "source_sha256": "6876be2666d3c93f2f0ce3c115739b58e725cc40e84510e9655229a689629d74"
+        },
+        {
+          "function": "frame_need_effect_average",
+          "source": "src/frame/frame_need_effect_average.c",
+          "source_sha256": "fef2a2f2a0a23d88d8ea2bde7af5df8ec8be1f93f9311cad0c96de0299e1a52a"
+        }
+      ],
+      "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
+      "limitation": "No universal runtime bound established. Additive record148 follows same layout;149 observed rows still do not prove global capacity."
+    },
+    {
+      "name": "route_modes",
+      "rom_offset": 14098404,
+      "observed_rows": 8,
+      "record_stride": 8,
+      "callback_fields": [
+        0
+      ],
+      "region_sha256": "19f94ed130b40eaf7c871927a121b2f7b47801d8032144ac845eafad9388e580",
+      "targets_complete": false,
+      "consumer_sites": [
+        225398
+      ],
+      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "evidence": [
+        {
+          "function": "frame_update_actor_routes",
+          "source": "src/frame/frame_update_actor_routes.c",
+          "source_sha256": "ca8152b5bfed2aa25122cdb147e45a18ecd31d49ea54599c99f2db294c0d5f34"
+        }
+      ],
+      "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
+      "limitation": "Eight observed descriptors: modes0..6 have callbacks, mode7 null and source default writes status3. Runtime mode remains fullword; no universal mode<8 proof."
+    },
+    {
+      "name": "audio_track_effects",
+      "rom_offset": 14087448,
+      "observed_rows": 51,
+      "record_stride": 12,
+      "callback_fields": [
+        0,
+        4
+      ],
+      "region_sha256": "c652b34d7d1581e051073ccf0b4e1a39e56949f68938b66339098954742c7cde",
+      "targets_complete": false,
+      "consumer_sites": [
+        303520,
+        304156,
+        304178
+      ],
+      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "evidence": [
+        {
+          "function": "audio_player_process_row",
+          "source": "src/audio/player_process_row.c",
+          "source_sha256": "94c8988e4cf0f10dde90c029e7439967c528b10ec1e1dd9df1515d0a7c1a5e9c"
+        },
+        {
+          "function": "audio_player_process_between_row",
+          "source": "src/audio/player_process_between_row.c",
+          "source_sha256": "f541ed81a46529f10a6179c656949d712e59fce9f94e4e9295a5dbfa8d09eefc"
+        }
+      ],
+      "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
+      "limitation": "51 observed records; effect byte range0..255 does not establish<51."
+    },
+    {
+      "name": "audio_volume_effects",
+      "rom_offset": 14088060,
+      "observed_rows": 10,
+      "record_stride": 8,
+      "callback_fields": [
+        0
+      ],
+      "region_sha256": "cfe3d1cf62348779e975e3637fce6339016a3d2f83d48a691c41fcb92dadfb5a",
+      "targets_complete": false,
+      "consumer_sites": [
+        304002,
+        304120
+      ],
+      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "evidence": [
+        {
+          "function": "audio_player_process_row",
+          "source": "src/audio/player_process_row.c",
+          "source_sha256": "94c8988e4cf0f10dde90c029e7439967c528b10ec1e1dd9df1515d0a7c1a5e9c"
+        },
+        {
+          "function": "audio_player_process_between_row",
+          "source": "src/audio/player_process_between_row.c",
+          "source_sha256": "f541ed81a46529f10a6179c656949d712e59fce9f94e4e9295a5dbfa8d09eefc"
+        }
+      ],
+      "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
+      "limitation": "Nibble gives0..15 but only10 immediate callback records are corroborated. Values10..15 overlap numeric wave data; valid-song/index invariant remains unproven."
+    },
+    {
+      "name": "audio_game_callbacks",
+      "rom_offset": 522884,
+      "observed_rows": 2,
+      "record_stride": 4,
+      "callback_fields": [
+        0
+      ],
+      "region_sha256": "3500e2246d223513dc6664b94a70648446f7c4a82345559eede2e73228e2907e",
+      "targets_complete": false,
+      "consumer_sites": [
+        302802,
+        302858,
+        302898,
+        305118,
+        306046,
+        310986
+      ],
+      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "evidence": [
+        {
+          "function": "audio_game_select_activity_callback",
+          "source": "src/audio/audio_game_select_activity_callback.c",
+          "source_sha256": "f1b271db1ce338b8e0e9fb72e53366263d86726953bb6ad6b4f1615d52ccb5b6"
+        }
+      ],
+      "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
+      "limitation": "Source loads a callback then installs it into a writable slot; caller index and global writer population are not proven exhaustive."
+    },
+    {
+      "name": "world_effect_functions",
+      "rom_offset": 14092436,
+      "observed_rows": 7,
+      "record_stride": 4,
+      "callback_fields": [
+        0
+      ],
+      "region_sha256": "1f5fd3bdad9050ae229c8dff90d6fad83072206723d64ca63f8c102f05a9f02b",
+      "targets_complete": false,
+      "consumer_sites": [
+        19854
+      ],
+      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "evidence": [
+        {
+          "original_entry_rom_offset": 19688,
+          "base_literal_load_site": 19736,
+          "target_word_load_site": 19852,
+          "indirect_call_site": 19854
+        }
+      ],
+      "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
+      "limitation": "Seven observed entries; selected descriptor byte and kind range not globally bounded."
+    },
+    {
+      "name": "resource_transition_steps",
+      "rom_offset": 338632,
+      "observed_rows": 3,
+      "record_stride": 4,
+      "callback_fields": [
+        0
+      ],
+      "region_sha256": "3ea65eb04321630e9835075f8ccf05055560dc30878cde0ebfd12926183857d8",
+      "targets_complete": false,
+      "consumer_sites": [
+        7498
+      ],
+      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "evidence": [
+        {
+          "function": "resource_create_transition",
+          "source": "src/resource/resource_create_transition.c",
+          "source_sha256": "b3dff1142f3a572b6cb73a26a063d134584103b8d7531a41fb8703267fa4a283"
+        }
+      ],
+      "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
+      "limitation": "Source loads a callback then installs it into a writable slot; caller index and global writer population are not proven exhaustive."
+    }
+  ],
+  "indirect_producers": [
+    {
+      "rom_offset": 604,
+      "target_origin": "writable_table_from_ROM_defaults",
+      "producer": "Copied ARM dispatcher uses0x03004290 +offset scanned from IRQ mask; default source ROM0x53558.",
+      "observed_table": "default_irq_handlers",
+      "field": 0,
+      "writer_roles": [
+        "g_irq_table"
+      ],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 1726,
+      "target_origin": "fixed_literal",
+      "producer": "R9 captured from literal0x03002A20; accepted frame_schedule local dispatch_primary.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "frame_schedule"
+      ],
+      "remaining_uncertainty": "Does not prove runtime input-object validity or universal copied-memory immutability.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 1822,
+      "target_origin": "fixed_literal",
+      "producer": "R10 captured from literal0x03002900; accepted frame_schedule local dispatch_sort.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "frame_schedule"
+      ],
+      "remaining_uncertainty": "Sort body remains original; source target identity is separate from ownership/runtime.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 2368,
+      "target_origin": "writable_field",
+      "producer": "FrameObject.on_remove at+0x8C",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "on_remove"
+      ],
+      "source_owners": [
+        "frame_remove_object"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 7470,
+      "target_origin": "writable_field",
+      "producer": "FrameObject.before_step at+0x98",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "before_step"
+      ],
+      "source_owners": [
+        "frame_step_object"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 7498,
+      "target_origin": "writable_field",
+      "producer": "FrameObject.on_step at+0x88",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "on_step"
+      ],
+      "source_owners": [
+        "frame_step_object"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 19854,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x080D70894 +4*byte from descriptor0x080695DC +8*runtime_kind+1",
+      "observed_table": "world_effect_functions",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 28572,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xE4 copied from definition[kind]+28; state owner and actor are separate arguments.",
+      "observed_table": "need_effect_definitions",
+      "field": 28,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 28602,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xE8 copied from definition[kind]+4; state and output-byte-buffer.",
+      "observed_table": "need_effect_definitions",
+      "field": 4,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 32254,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xE4 copied from definition[kind]+28; state owner and actor are separate arguments.",
+      "observed_table": "need_effect_definitions",
+      "field": 28,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [
+        "frame_find_action_target"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 32284,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xE8 copied from definition[kind]+4; state and output-byte-buffer.",
+      "observed_table": "need_effect_definitions",
+      "field": 4,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [
+        "frame_find_action_target"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 34142,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xE4 copied from definition[kind]+28; state owner and actor are separate arguments.",
+      "observed_table": "need_effect_definitions",
+      "field": 28,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [
+        "frame_actor_state_39"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 34164,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xF0 copied from definition[kind]+12; actual site passes state,actor,word.",
+      "observed_table": "need_effect_definitions",
+      "field": 12,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [
+        "frame_actor_state_39"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 40932,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xE8 copied from definition[kind]+4; state and output-byte-buffer.",
+      "observed_table": "need_effect_definitions",
+      "field": 4,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 43428,
+      "target_origin": "fixed_ROM_table",
+      "producer": "g_resource_object_factories[entry->factory], 16-bit factory selector; two byte arguments.",
+      "observed_table": "resource_factories",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "resource_spawn_group"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 44556,
+      "target_origin": "fixed_ROM_table",
+      "producer": "g_resource_program_handlers[record->command]; command0 skips call.",
+      "observed_table": "resource_program_handlers",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "resource_execute_group"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 45744,
+      "target_origin": "writable_field",
+      "producer": "CollisionObject.on_collision[bound] at+0xC8/+0xCC; reciprocal (a,b)/(b,a).",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "on_primary",
+        "on_secondary",
+        "on_contact",
+        "on_interact",
+        "collision"
+      ],
+      "source_owners": [
+        "frame_dispatch_collisions"
+      ],
+      "remaining_uncertainty": "Different accepted source views have differing C tags/signatures; this is a physical slot graph, not a new uniform type claim.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 45784,
+      "target_origin": "writable_field",
+      "producer": "CollisionObject.on_collision[bound] at+0xC8/+0xCC; reciprocal (a,b)/(b,a).",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "on_primary",
+        "on_secondary",
+        "on_contact",
+        "on_interact",
+        "collision"
+      ],
+      "source_owners": [
+        "frame_dispatch_collisions"
+      ],
+      "remaining_uncertainty": "Different accepted source views have differing C tags/signatures; this is a physical slot graph, not a new uniform type claim.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 57784,
+      "target_origin": "writable_global",
+      "producer": "g_display_background_decompress word at0x030036C0",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_display_background_decompress"
+      ],
+      "source_owners": [
+        "display_decode_background"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 79036,
+      "target_origin": "fixed_ROM_table",
+      "producer": "g_frame_option_definitions[subtype].configure: ROM0x08051F18 +16*subtype +0.",
+      "observed_table": "option_definitions",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "frame_create_option_object"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 92682,
+      "target_origin": "writable_global",
+      "producer": "g_display_tile_decompress word at0x03003360",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_display_tile_decompress"
+      ],
+      "source_owners": [
+        "resource_decode_bytes"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 92702,
+      "target_origin": "writable_global",
+      "producer": "g_display_background_decompress word at0x030036C0",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_display_background_decompress"
+      ],
+      "source_owners": [
+        "resource_decode_bytes"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 92986,
+      "target_origin": "writable_global",
+      "producer": "g_display_tile_decompress word at0x03003360",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_display_tile_decompress"
+      ],
+      "source_owners": [
+        "resource_decode_alternate"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 93006,
+      "target_origin": "writable_global",
+      "producer": "g_display_background_decompress word at0x030036C0",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_display_background_decompress"
+      ],
+      "source_owners": [
+        "resource_decode_alternate"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 99664,
+      "target_origin": "fixed_ROM_table",
+      "producer": "First transition table0x0806A1E0, byte selectors object+0x6E/+0x6F; R0=63.",
+      "observed_table": "display_transition_first",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 99754,
+      "target_origin": "fixed_ROM_table",
+      "producer": "Second transition table0x0806A218, byte selectors object+0x6E/+0x6F; R0=63.",
+      "observed_table": "display_transition_second",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 99844,
+      "target_origin": "fixed_ROM_table",
+      "producer": "Second transition table0x0806A218, byte selectors object+0x6E/+0x6F; R0=63.",
+      "observed_table": "display_transition_second",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 99958,
+      "target_origin": "fixed_ROM_table",
+      "producer": "First transition table0x0806A1E0, byte selectors object+0x6E/+0x6F; R0=63.",
+      "observed_table": "display_transition_first",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 116090,
+      "target_origin": "writable_field",
+      "producer": "g_scene_contact_input_setup.handler at root+44; word command, ushort output-size pointer, buffer.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "handler"
+      ],
+      "source_owners": [
+        "scene_contact_receive_serial_word"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 116170,
+      "target_origin": "writable_field",
+      "producer": "g_scene_contact_input_setup.handler at root+44; word command, ushort output-size pointer, buffer.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "handler"
+      ],
+      "source_owners": [
+        "scene_contact_receive_serial_word"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 116268,
+      "target_origin": "writable_field",
+      "producer": "g_scene_contact_input_setup.handler at root+44; word command, ushort output-size pointer, buffer.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "handler"
+      ],
+      "source_owners": [
+        "scene_contact_receive_serial_word"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 128924,
+      "target_origin": "writable_field",
+      "producer": "(*g_irq_context_at03004280).vblank+0",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_irq_context->vblank"
+      ],
+      "source_owners": [
+        "irq_vblank"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 129532,
+      "target_origin": "writable_field",
+      "producer": "(*g_irq_context_at03004280).hblank+4",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_irq_context->hblank"
+      ],
+      "source_owners": [
+        "irq_hblank"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 129588,
+      "target_origin": "writable_field",
+      "producer": "(*g_irq_context_at03004280).vcount+8",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_irq_context->vcount"
+      ],
+      "source_owners": [
+        "irq_vcount"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 163430,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x0805797C +12*fullword kind +0; nullable callback.",
+      "observed_table": "scene_phase_callbacks",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "scene_run_begin_callback"
+      ],
+      "remaining_uncertainty": "Current exporter flattens all84 cells for each site; exact per-column evidence is pinned separately.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 163476,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x0805797C +12*fullword kind +4; nullable callback.",
+      "observed_table": "scene_phase_callbacks",
+      "field": 4,
+      "writer_roles": [],
+      "source_owners": [
+        "scene_run_step_callback"
+      ],
+      "remaining_uncertainty": "Current exporter flattens all84 cells for each site; exact per-column evidence is pinned separately.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 163530,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x0805797C +12*fullword kind +8; nullable callback.",
+      "observed_table": "scene_phase_callbacks",
+      "field": 8,
+      "writer_roles": [],
+      "source_owners": [
+        "scene_run_end_callback"
+      ],
+      "remaining_uncertainty": "Current exporter flattens all84 cells for each site; exact per-column evidence is pinned separately.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 169980,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x0805955C +28*scene byte +0",
+      "observed_table": "scene_contact_definitions",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "scene_contact_initialize_primary_activity"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 170334,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x0805955C +28*scene byte +4; primary null-check, secondary unconditional.",
+      "observed_table": "scene_contact_definitions",
+      "field": 4,
+      "writer_roles": [],
+      "source_owners": [
+        "scene_contact_step_primary_activity"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 170462,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x0805955C +28*scene byte +0",
+      "observed_table": "scene_contact_definitions",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "scene_contact_initialize_secondary_activity"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 170518,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x0805955C +28*scene byte +4; primary null-check, secondary unconditional.",
+      "observed_table": "scene_contact_definitions",
+      "field": 4,
+      "writer_roles": [],
+      "source_owners": [
+        "scene_contact_step_secondary_activity"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 186204,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x08062E7C +36*kind +0; null tested; state argument.",
+      "observed_table": "need_effect_definitions",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "frame_spawn_need_effect"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 187652,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xE8 copied from definition[kind]+4; state and output-byte-buffer.",
+      "observed_table": "need_effect_definitions",
+      "field": 4,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [
+        "frame_need_effect_build_choices"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 188160,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xF0 copied from definition[kind]+12; actual site passes state,actor,word.",
+      "observed_table": "need_effect_definitions",
+      "field": 12,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [
+        "frame_need_effect_choose_action"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 188536,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xE4 copied from definition[kind]+28; state owner and actor are separate arguments.",
+      "observed_table": "need_effect_definitions",
+      "field": 28,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [
+        "frame_need_effect_begin_choices"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 188622,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xE4 copied from definition[kind]+28; state owner and actor are separate arguments.",
+      "observed_table": "need_effect_definitions",
+      "field": 28,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [
+        "frame_actor_use_target"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 189576,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xF4 copied from definition[kind]+16; actual consumer passes state and actor.",
+      "observed_table": "need_effect_definitions",
+      "field": 16,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [
+        "frame_actor_attachment_status"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 189734,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x08062E94 +36*kind = definition[kind]+24; optional branches bypass query.",
+      "observed_table": "need_effect_definitions",
+      "field": 24,
+      "writer_roles": [],
+      "source_owners": [
+        "frame_need_effect_average"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 191180,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xF8 copied from definition[kind]+20; null tested; receiver only.",
+      "observed_table": "need_effect_definitions",
+      "field": 20,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [
+        "frame_step_need_effect_attachments"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 192342,
+      "target_origin": "writable_field_from_ROM_table",
+      "producer": "State+0xF0 copied from definition[kind]+12; actual site passes state,actor,word.",
+      "observed_table": "need_effect_definitions",
+      "field": 12,
+      "writer_roles": [
+        "frame_allocate_need_effect_state"
+      ],
+      "source_owners": [
+        "frame_need_effect_begin_optional_three"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 225398,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x08D71FE4 +8*job->mode +0; nullable callback.",
+      "observed_table": "route_modes",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "frame_update_actor_routes"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 234518,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x0806A1E0 +4*fullword kind; ushort targets.",
+      "observed_table": "display_transition_first",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "transition_run_first"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 234574,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x0806A218 +4*fullword kind; ushort targets.",
+      "observed_table": "display_transition_second",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "transition_run_second"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 236514,
+      "target_origin": "writable_global",
+      "producer": "g_frame_map_draw_routine at0x03001FC8; byte view argument.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_frame_map_draw_routine"
+      ],
+      "source_owners": [
+        "frame_update_map_view"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 236644,
+      "target_origin": "writable_global",
+      "producer": "g_frame_map_scroll_routine at0x03001FCC; byte local-player argument.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_frame_map_scroll_routine"
+      ],
+      "source_owners": [
+        "frame_publish_map_scroll"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 237048,
+      "target_origin": "writable_global",
+      "producer": "g_display_tile_decompress word at0x03003360",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_display_tile_decompress"
+      ],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 237070,
+      "target_origin": "writable_global",
+      "producer": "g_display_background_decompress word at0x030036C0",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_display_background_decompress"
+      ],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 251392,
+      "target_origin": "writable_field",
+      "producer": "g_link_setup_state at0x03002CB0 +8; null-test.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_link_setup_state.callback"
+      ],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 253090,
+      "target_origin": "writable_field",
+      "producer": "g_link_setup_state at0x03002CB0 +8; null-test.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_link_setup_state.callback"
+      ],
+      "source_owners": [],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 290414,
+      "target_origin": "writable_indexed_field",
+      "producer": "Word callback at0x03002250 +16*(*0x03007388)+16; args addresses root+8/+12+same stride.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "No callback type/record owner can be inferred from the overlapping accepted DisplayPendingBlock byte arrays; writers remain unclosed.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 292556,
+      "target_origin": "writable_global",
+      "producer": "g_display_tile_decompress word at0x03003360",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_display_tile_decompress"
+      ],
+      "source_owners": [
+        "display_copy_tile_resource"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 292824,
+      "target_origin": "fixed_literal",
+      "producer": "Local allocator fixed0x03007390; args allocated-bitmap,count,0.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "display_allocate_tile_bytes"
+      ],
+      "remaining_uncertainty": "No whole-copy/runtime behavior claim.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 293006,
+      "target_origin": "writable_global",
+      "producer": "g_display_tile_decompress word at0x03003360",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_display_tile_decompress"
+      ],
+      "source_owners": [
+        "display_update_tile_resource"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 293106,
+      "target_origin": "writable_global",
+      "producer": "g_display_tile_decompress word at0x03003360",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_display_tile_decompress"
+      ],
+      "source_owners": [
+        "display_update_tile_sequence"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 302802,
+      "target_origin": "writable_global",
+      "producer": "g_audio_player_callback at0x020025B4; event code,word value.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_audio_player_callback"
+      ],
+      "source_owners": [
+        "audio_player_advance_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 302858,
+      "target_origin": "writable_global",
+      "producer": "g_audio_player_callback at0x020025B4; event code,word value.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_audio_player_callback"
+      ],
+      "source_owners": [
+        "audio_player_advance_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 302898,
+      "target_origin": "writable_global",
+      "producer": "g_audio_player_callback at0x020025B4; event code,word value.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_audio_player_callback"
+      ],
+      "source_owners": [
+        "audio_player_advance_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 303460,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x24 calc_period",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_period"
+      ],
+      "source_owners": [
+        "audio_player_process_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 303520,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x08D6F518 +12*effect byte +0",
+      "observed_table": "audio_track_effects",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "audio_player_process_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 303550,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_player_process_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 303682,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_player_process_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 303900,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x24 calc_period",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_period"
+      ],
+      "source_owners": [
+        "audio_player_process_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 304002,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x08D6F77C +8*(volume_effect byte>>4) +0",
+      "observed_table": "audio_volume_effects",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "audio_player_process_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 304120,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x08D6F77C +8*(volume_effect byte>>4) +0",
+      "observed_table": "audio_volume_effects",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "audio_player_process_between_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 304156,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x08D6F518 +12*effect byte +0",
+      "observed_table": "audio_track_effects",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "audio_player_process_between_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 304178,
+      "target_origin": "fixed_ROM_table",
+      "producer": "ROM0x08D6F518 +12*effect byte +4; nullable.",
+      "observed_table": "audio_track_effects",
+      "field": 4,
+      "writer_roles": [],
+      "source_owners": [
+        "audio_player_process_between_row"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 304590,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_player_process_instruments"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 305118,
+      "target_origin": "writable_global",
+      "producer": "g_audio_player_callback at0x020025B4; event code,word value.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_audio_player_callback"
+      ],
+      "source_owners": [
+        "audio_player_tick"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 306046,
+      "target_origin": "writable_global",
+      "producer": "g_audio_player_callback at0x020025B4; event code,word value.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_audio_player_callback"
+      ],
+      "source_owners": [
+        "audio_player_finish_jingle"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 307902,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_up_s3m"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 308018,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_up_s3m"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 308122,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_down_s3m"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 308214,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_down_s3m"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 308404,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_note"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 308432,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_note"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 308730,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_fine_vibrato"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 309714,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_arpeggio"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 309980,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_volume_effect_vibrato"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 310986,
+      "target_origin": "writable_global",
+      "producer": "g_audio_player_callback at0x020025B4; event code,word value.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_audio_player_callback"
+      ],
+      "source_owners": [
+        "audio_effect_mark"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 311368,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_up_xm"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 311430,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_up_fine"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 311500,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_up_extra_fine"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 311592,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_down_xm"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 311678,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_down_fine"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 311776,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_portamento_down_extra_fine"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 311970,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_vibrato"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 312686,
+      "target_origin": "writable_field",
+      "producer": "g_audio_player at0x02001644 +0x28 calc_final_frequency",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "calc_final_frequency"
+      ],
+      "source_owners": [
+        "audio_effect_note_delay"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 314608,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Single BX Rn; call-site producers determine actual target/mode. Includes high registersR9/R10.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Do not count these terminal forwarding sites as extra independent dynamic callback origins.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 314612,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Single BX Rn; call-site producers determine actual target/mode. Includes high registersR9/R10.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Do not count these terminal forwarding sites as extra independent dynamic callback origins.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 314616,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Single BX Rn; call-site producers determine actual target/mode. Includes high registersR9/R10.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Do not count these terminal forwarding sites as extra independent dynamic callback origins.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 314620,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Single BX Rn; call-site producers determine actual target/mode. Includes high registersR9/R10.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Do not count these terminal forwarding sites as extra independent dynamic callback origins.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 314624,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Single BX Rn; call-site producers determine actual target/mode. Includes high registersR9/R10.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Do not count these terminal forwarding sites as extra independent dynamic callback origins.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 314632,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Single BX Rn; call-site producers determine actual target/mode. Includes high registersR9/R10.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Do not count these terminal forwarding sites as extra independent dynamic callback origins.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 314636,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Single BX Rn; call-site producers determine actual target/mode. Includes high registersR9/R10.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Do not count these terminal forwarding sites as extra independent dynamic callback origins.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 314644,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Single BX Rn; call-site producers determine actual target/mode. Includes high registersR9/R10.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Do not count these terminal forwarding sites as extra independent dynamic callback origins.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 314648,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Single BX Rn; call-site producers determine actual target/mode. Includes high registersR9/R10.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "Do not count these terminal forwarding sites as extra independent dynamic callback origins.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 16626260,
+      "target_origin": "fixed_ROM_table",
+      "producer": "g_audio_mix_functions at0x08D6F4A4 indexed by derived channel bytes, target capturedR6.",
+      "observed_table": "audio_mix_kernels",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "audio_mix_channels"
+      ],
+      "remaining_uncertainty": "Three individual calls do not all define the same liveR2 semantics; signature is accepted source view and not inferred from stale argumentregisters.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 16626380,
+      "target_origin": "fixed_ROM_table",
+      "producer": "g_audio_mix_functions at0x08D6F4A4 indexed by derived channel bytes, target capturedR6.",
+      "observed_table": "audio_mix_kernels",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "audio_mix_channels"
+      ],
+      "remaining_uncertainty": "Three individual calls do not all define the same liveR2 semantics; signature is accepted source view and not inferred from stale argumentregisters.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 16626452,
+      "target_origin": "fixed_ROM_table",
+      "producer": "g_audio_mix_functions at0x08D6F4A4 indexed by derived channel bytes, target capturedR6.",
+      "observed_table": "audio_mix_kernels",
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [
+        "audio_mix_channels"
+      ],
+      "remaining_uncertainty": "Three individual calls do not all define the same liveR2 semantics; signature is accepted source view and not inferred from stale argumentregisters.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 16627112,
+      "target_origin": "writable_global",
+      "producer": "g_audio_tick_callback loaded after audio_mix_channels; ARM MOVLR,PC/BXIP.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [
+        "g_audio_tick_callback"
+      ],
+      "source_owners": [
+        "audio_mix_frame"
+      ],
+      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "confidence": "static native/source producer; populations and ABI remain provisional"
+    },
+    {
+      "rom_offset": 314628,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Member of adjacent r0..lr BX veneer template; incoming register supplied by caller.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "No current caller observed for this slot; dynamic incoming targets remain open.",
+      "confidence": "high template and original instruction agreement; not runtime reachability"
+    },
+    {
+      "rom_offset": 314640,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Member of adjacent r0..lr BX veneer template; incoming register supplied by caller.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "No current caller observed for this slot; dynamic incoming targets remain open.",
+      "confidence": "high template and original instruction agreement; not runtime reachability"
+    },
+    {
+      "rom_offset": 314652,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Member of adjacent r0..lr BX veneer template; incoming register supplied by caller.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "No current caller observed for this slot; dynamic incoming targets remain open.",
+      "confidence": "high template and original instruction agreement; not runtime reachability"
+    },
+    {
+      "rom_offset": 314656,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Member of adjacent r0..lr BX veneer template; incoming register supplied by caller.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "No current caller observed for this slot; dynamic incoming targets remain open.",
+      "confidence": "high template and original instruction agreement; not runtime reachability"
+    },
+    {
+      "rom_offset": 314660,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Member of adjacent r0..lr BX veneer template; incoming register supplied by caller.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "No current caller observed for this slot; dynamic incoming targets remain open.",
+      "confidence": "high template and original instruction agreement; not runtime reachability"
+    },
+    {
+      "rom_offset": 314664,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Member of adjacent r0..lr BX veneer template; incoming register supplied by caller.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "No current caller observed for this slot; dynamic incoming targets remain open.",
+      "confidence": "high template and original instruction agreement; not runtime reachability"
+    },
+    {
+      "rom_offset": 313478,
+      "target_origin": "forwarder_register_argument",
+      "producer": "Private BX R5 helper called by the adjacent preserving audio wrapper. Caller fixes its own register target; arbitrary other entries remain open.",
+      "observed_table": null,
+      "field": 0,
+      "writer_roles": [],
+      "source_owners": [],
+      "remaining_uncertainty": "No complete incoming caller population or runtime reachability claim.",
+      "confidence": "high local wrapper/helper role; incoming target population provisional"
+    }
+  ],
+  "fixed_targets": [
+    {
+      "rom_offset": 1726,
+      "target": 50342432,
+      "literal_rom_offset": 1644,
+      "owner": "frame_schedule",
+      "source_sha256": "176728f6f0c33ccf5df222a395edaa625d418628db3017718dd9084aaa45dec1",
+      "evidence": "Matching ordinary C fixes the local function pointer; original owned pool contains this ARM address. Static producer only."
+    },
+    {
+      "rom_offset": 1822,
+      "target": 50342144,
+      "literal_rom_offset": 1648,
+      "owner": "frame_schedule",
+      "source_sha256": "176728f6f0c33ccf5df222a395edaa625d418628db3017718dd9084aaa45dec1",
+      "evidence": "Matching ordinary C fixes the local function pointer; original owned pool contains this ARM address. Static producer only."
+    },
+    {
+      "rom_offset": 292824,
+      "target": 50361232,
+      "literal_rom_offset": 292812,
+      "owner": "display_allocate_tile_bytes",
+      "source_sha256": "0d7d9543ebfa67bbbaebdb510d5fcb8d6dff4610767fb7caa5bf0f85edb152af",
+      "evidence": "Matching ordinary C fixes the local function pointer; original owned pool contains this ARM address. Static producer only."
+    }
+  ],
+  "register_veneer_sequence": {
+    "rom_offset": 314608,
+    "registers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "stride": 4,
+    "instruction_bytes": 2,
+    "alignment_bytes": 2,
+    "evidence": "GNU GCC lib1funcs.asm call-via-register template: fifteen ordered register slots; actual original BX and following NOP checked independently.",
+    "confidence": "high original-image instruction role; caller coverage remains open"
+  },
+  "survey_counts": {
+    "current_transfer_records": 301,
+    "classified_open_sites": 111,
+    "callback_sites": 101,
+    "terminal_sites": 17,
+    "overlap": 7,
+    "closed_bounded_switches": 100,
+    "closed_literal_transfers": 11,
+    "closed_veneer_calls": 79,
+    "source_writer_functions": 84,
+    "source_assignment_statements": 135,
+    "native_literal_writer_candidates_initial": 124,
+    "native_local_literal_observations_additive": 127,
+    "additional_local_writers": 4,
+    "native_writer_union": 128,
+    "aligned_pointer_words_examined": 4194304,
+    "pointer_run_candidates": 200,
+    "literal_or_global_window_roots": 84,
+    "raw_Thumb_BX": 3849,
+    "raw_ARM_BX": 61,
+    "indexed_BX": 2461,
+    "indexed_BX_unannotated": 0,
+    "unindexed_corroborated_veneer_slots": 6,
+    "route_descriptors_observed": 8,
+    "need_effect_descriptors_observed": 149,
+    "semantic_negative_guards": 8,
+    "pointer_run_triage": {
+      "REFERENCED_LITERAL_POOL_SEQUENCE_NOT_TABLE": 30,
+      "UNRESOLVED_VALUE_RUN": 1,
+      "INSIDE_CORROBORATED_OBSERVED_TABLE_PREFIX": 168,
+      "TWO_ADJACENT_OBSERVED_TRANSITION_TABLES": 1
+    }
+  },
+  "limitations": [
+    "An observed table prefix does not prove arbitrary runtime indices are bounded.",
+    "Candidate callback writers and observed accepted-source assignments are not a complete write population.",
+    "Raw pointer, prologue and BX coincidences outside corroborated CFGs remain unresolved.",
+    "No new runtime observations or source coverage credit."
+  ],
+  "quality_annotations": [
+    {
+      "kind": "exclude_observation",
+      "entry": 134217964,
+      "mode": "Thumb",
+      "instruction_ranges": [
+        [
+          192,
+          196
+        ],
+        [
+          2054,
+          2194
+        ]
+      ],
+      "reason": "Presumed return from main reaches a Thumb branch into independently established ARM startup, then scheduler literals. Exclude only descendants in this startup context; independently rooted scheduler instructions remain.",
+      "evidence": [
+        "ARM startup at 0x080000C0 is established by reset control flow and mode exchange.",
+        "Thumb startup at 0x080000EC calls main via MOV LR,PC / BX R1; following branch does not exchange mode.",
+        "The main CFG has no normal return, but fallback branch and raw alternative reach remain recorded; no universal nonlocal-control claim."
+      ]
+    },
+    {
+      "kind": "dual_use",
+      "ranges": [
+        [
+          16622832,
+          16622836
+        ]
+      ],
+      "reason": "Original ARM return word is also read as data for the known one-time IRQ patch. Count physical bytes once and preserve both roles.",
+      "evidence": [
+        "Original IRQ CFG reaches this ARM return.",
+        "PC-relative load at execution 0x0300006C reads execution 0x03000078; store at 0x03000074 uses it at 0x0300004C.",
+        "No patched runtime instruction state was observed."
+      ]
+    }
+  ],
+  "audio_literal_veneers": {
+    "rom_offset": 313460,
+    "size": 72,
+    "region_sha256": "4d02504c50bab62160d97ff72ff5207074b82a78d5f149dc9523477887702961",
+    "entries": [
+      {
+        "entry_rom_offset": 313460,
+        "load_rom_offset": 313460,
+        "BX_rom_offset": 313462,
+        "literal_rom_offset": 313500,
+        "target": 50335872,
+        "target_mode": "ARM",
+        "confidence": "high original PC load/BX and validated copy destination; caller/runtime reachability unproved"
+      },
+      {
+        "entry_rom_offset": 313464,
+        "load_rom_offset": 313464,
+        "BX_rom_offset": 313466,
+        "literal_rom_offset": 313504,
+        "target": 50332396,
+        "target_mode": "ARM",
+        "confidence": "high original PC load/BX and validated copy destination; caller/runtime reachability unproved"
+      },
+      {
+        "entry_rom_offset": 313468,
+        "load_rom_offset": 313470,
+        "BX_rom_offset": 313478,
+        "literal_rom_offset": 313508,
+        "target": 50331796,
+        "target_mode": "ARM",
+        "confidence": "high original PC load/BX and validated copy destination; caller/runtime reachability unproved"
+      },
+      {
+        "entry_rom_offset": 313480,
+        "load_rom_offset": 313480,
+        "BX_rom_offset": 313482,
+        "literal_rom_offset": 313512,
+        "target": 50332448,
+        "target_mode": "ARM",
+        "confidence": "high original PC load/BX and validated copy destination; caller/runtime reachability unproved"
+      },
+      {
+        "entry_rom_offset": 313484,
+        "load_rom_offset": 313484,
+        "BX_rom_offset": 313486,
+        "literal_rom_offset": 313516,
+        "target": 50332648,
+        "target_mode": "ARM",
+        "confidence": "high original PC load/BX and validated copy destination; caller/runtime reachability unproved"
+      },
+      {
+        "entry_rom_offset": 313488,
+        "load_rom_offset": 313488,
+        "BX_rom_offset": 313490,
+        "literal_rom_offset": 313520,
+        "target": 50332724,
+        "target_mode": "ARM",
+        "confidence": "high original PC load/BX and validated copy destination; caller/runtime reachability unproved"
+      },
+      {
+        "entry_rom_offset": 313492,
+        "load_rom_offset": 313492,
+        "BX_rom_offset": 313494,
+        "literal_rom_offset": 313524,
+        "target": 50332852,
+        "target_mode": "ARM",
+        "confidence": "high original PC load/BX and validated copy destination; caller/runtime reachability unproved"
+      },
+      {
+        "entry_rom_offset": 313496,
+        "load_rom_offset": 313496,
+        "BX_rom_offset": 313498,
+        "literal_rom_offset": 313528,
+        "target": 50333048,
+        "target_mode": "ARM",
+        "confidence": "high original PC load/BX and validated copy destination; caller/runtime reachability unproved"
+      }
+    ],
+    "evidence": "Eight adjacent original Thumb veneers reach accepted ARM audio entries through their PC-relative literals; seven simple thunks and one preserving wrapper with private BX helper.",
+    "producer_scope": "Fixed local producer only; runtime/caller coverage unproved.",
+    "runtime_targets_complete": false
+  },
+  "pointer_run_followup": {
+    "rom_offset": 313500,
+    "size": 32,
+    "classification": "Eight PC-relative audio veneer literals; not indexed dispatch data.",
+    "original_unresolved_runs": 1,
+    "remaining_unresolved_runs_after_followup": 0,
+    "additional_stub_entry_offsets": [
+      313488,
+      313492,
+      313496
+    ],
+    "wrapper_entry": 313468,
+    "private_register_veneer": 313478,
+    "evidence": "Bounded 40-byte original code window plus existing copy, RAM-entry and accepted target evidence."
+  }
+}
