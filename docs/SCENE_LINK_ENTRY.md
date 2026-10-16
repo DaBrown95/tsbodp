@@ -63,7 +63,7 @@ has not been established.
 `scene_link_entry_initialize` at `0x08003750` reconstructs the 876-byte begin
 callback. It sets up offers, object slots, backgrounds, palettes, text and
 selection previews, then coordinates the original scene helpers, countdown and
-transition. It now calls twenty-two accepted C providers and four explicit original
+transition. It now calls twenty-three accepted C providers and three explicit original
 services. Those service declarations describe this caller's boundary with no
 supplied arguments and no consumed result; they do not recover the helpers' original C signatures,
 complete footprints or implementations.
@@ -235,3 +235,42 @@ control changes one compiled byte. A static two-participant witness with remote
 quantity eight changes map cell `(14,13)` from `0x3011` to `0x3010`; subsequent
 partial and cleared rows do not overwrite it. Normal/strict compilation, the
 caller controls and whole-ROM equality remain separate from runtime evidence.
+
+## Panel and continuation text
+
+`scene_link_entry_draw_panel` at `0x08004060` reconstructs 356 extent bytes. It
+captures the canonical save-state byte at offset `0x28` before selecting the font.
+Scene 82 selects one of twelve text identifiers; an out-of-range byte leaves the
+existing staging field zero unchanged. Other scenes use the catalog text field.
+It expands text 448 into a 128-byte local buffer, draws the panel and chooses the
+continuation text using the link flag and the freshly read received identifier.
+Its six already reconstructed C providers cover 332 bytes separately. The begin
+callback now uses the canonical name at the same address with identical bytes.
+
+The complete span contains 238 instruction bytes, 108 referenced data bytes and
+ten zero alignment bytes. The data includes a 48-byte, twelve-case switch table.
+The sole function symbol covers 354 bytes through the return; two trailing zeros
+precede the independently called entry at `0x080041C4`. Three weak interior map
+starts are absorbed into this verified envelope. This boundary repair adds no
+separate C credit. The existing pinned GNU 2.10.1 assembler reproduces the zero
+tail; the modern assembler produced a Thumb no-op there. Assembly and output are
+not rewritten, and a compatible tool profile does not identify the historical
+build environment.
+
+The byte is an actual unsigned-character element of the existing `unknown10`
+array: offset sixteen plus index twenty-four is forty. No new overlay, field name
+or complete save-state interpretation is introduced. The other-scene catalog
+index must be backed, selected text must fit the 64-byte staging field, and
+expanded text including its terminator must fit 128 bytes. Expansion requires
+well-formed substitution indices and backed, terminated substitution rows. The
+existing font, map, text and link-provider conditions remain necessary. Names and
+types are provisional static interpretations, with no new runtime observation.
+
+Six target fixtures check nine physical layout facts, the byte's unsigned type,
+all six provider declarations and the caller declaration. Wrong offset,
+signedness, font formal width, field capacity and return type are rejected.
+Changing the font selection from one to two changes one compiled byte and has a
+defined selector-state witness when both banks are backed. Strict compilation,
+changed-source controls and the full-ROM comparison remain separate evidence.
+The other object builder, offer refresh, step callback and renderer/finalizer
+remain explicit unconverted regions.

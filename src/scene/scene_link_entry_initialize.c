@@ -118,7 +118,7 @@ void scene_link_entry_initialize(void)
         scene_link_entry_draw_quantities();
     else
         scene_link_entry_draw_linked_quantities();
-    scene_link_entry_draw_panel_original();
+    scene_link_entry_draw_panel();
     if (!(g_game_flags & 0x20))
         transition_run_first(63, 0);
     else

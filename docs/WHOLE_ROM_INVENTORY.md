@@ -47,8 +47,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,986 |
-| Unclassified remainder of estimated envelopes | 16,248 |
+| Unclassified inside source/glue-owned extents | 2,996 |
+| Unclassified remainder of estimated envelopes | 16,238 |
 | Other unresolved ROM | 16,433,810 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -56,7 +56,7 @@ Thus 270,608 bytes have qualified static instruction evidence, under the stated
 decoder, mode, original-image and ordinary-call assumptions. This confirms their
 static instruction role; it does not establish that every instruction executes.
 The raw alternative reach is 270,634 bytes. There are 2,324 rooted execution
-entries, while the ordinary map has 2,526 entries/candidates and 323,980 mapped
+entries, while the ordinary map has 2,523 entries/candidates and 323,998 mapped
 extent bytes. In the initial survey, nine corroborated veneer starts were added (six register veneers and three audio
 stubs), and four prior weak starts were folded as interior blocks, for a net five
 entries and 24 mapped extent bytes.
@@ -407,3 +407,26 @@ The other offer refresh, object builder, step callback and renderer/finalizer
 remain unconverted. The eight copied-audio-kernel extent uncertainties and the
 other survey limits remain open. No new runtime observation or complete code
 denominator is claimed; the fixed historical comparison remains 319,640 bytes.
+
+### Connected entry panel
+
+The helper at `0x08004060` adds one matching C function and 356 extent bytes,
+bringing coverage to 1,711 functions and 244,908 C bytes, with 500 glue bytes
+separate. The complete span ends at the separately called entry `0x080041C4` and
+contains 238 instruction bytes, 108 referenced data bytes and ten alignment zeros.
+The referenced data includes the existing twelve-case switch table. The begin
+caller's canonical provider name retains identical positive and source-control
+bytes. Inventory discoveries themselves add no C credit.
+
+The verified envelope replaces four old map rows: the root and weak starts at
+`0x0800408A`, `0x080040E2` and `0x080041C2`. It also covers an eighteen-byte gap
+between prior estimates. The ordinary map therefore has 2,523 entries and 323,998
+mapped extent bytes; the treemap has 324,006 extent bytes. Its inherited eight-byte
+difference remains separate. Ten already observed alignment zeros move from
+estimated gaps into owned unclassified bytes. Qualified static instruction and
+referenced-data unions remain 270,608 and 34,732 bytes. This is stronger function
+ownership evidence, not newly observed execution.
+
+The eight copied-audio-kernel extent uncertainties, unresolved indirect targets,
+other estimated boundaries and remaining survey limits still prevent a complete
+game-code denominator. The historical comparison stays fixed at 319,640 bytes.

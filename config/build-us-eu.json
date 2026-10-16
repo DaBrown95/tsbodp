@@ -41192,7 +41192,7 @@
       "symbols": {
         "scene_link_entry_build_objects_original": "0x8003d75",
         "scene_link_entry_build_linked_objects": "0x8003f09",
-        "scene_link_entry_draw_panel_original": "0x8004061",
+        "scene_link_entry_draw_panel": "0x8004061",
         "scene_link_entry_refresh_offers_original": "0x80045d1",
         "scene_link_entry_refresh_linked_offers": "0x8004825",
         "scene_link_entry_draw_quantities": "0x8004945",
@@ -41240,7 +41240,7 @@
       "thumb_symbols": [
         "scene_link_entry_build_objects_original",
         "scene_link_entry_build_linked_objects",
-        "scene_link_entry_draw_panel_original",
+        "scene_link_entry_draw_panel",
         "scene_link_entry_refresh_offers_original",
         "scene_link_entry_refresh_linked_offers",
         "scene_link_entry_draw_quantities",
@@ -41374,6 +41374,38 @@
         "display_text_set_object_string",
         "frame_set_centered_integer_position"
       ]
+    },
+    {
+      "name": "scene_link_entry_draw_panel",
+      "rom_offset": 16480,
+      "size": 356,
+      "source": "src/scene/scene_link_entry_draw_panel.c",
+      "symbols": {
+        "g_save_world_view": "0x03003950",
+        "g_scene_request": "0x03004350",
+        "g_display_scene_catalog": "0x080616cc",
+        "g_game_flags": "0x03004310",
+        "g_link_received_join": "0x03002d60",
+        "display_text_select_font": "0x0801ae75",
+        "display_text_copy_expanded": "0x0801aec9",
+        "display_text_draw_all_lines": "0x0801b04d",
+        "display_text_copy_field_zero": "0x0801b151",
+        "event_get_link_slot": "0x0803e439",
+        "display_scene_lookup_text": "0x08045009"
+      },
+      "thumb_symbols": [
+        "display_text_select_font",
+        "display_text_copy_expanded",
+        "display_text_draw_all_lines",
+        "display_text_copy_field_zero",
+        "event_get_link_slot",
+        "display_scene_lookup_text"
+      ],
+      "negative_control": {
+        "before": "display_text_select_font(1, 3, 0);",
+        "after": "display_text_select_font(2, 3, 0);"
+      },
+      "assembler_id": "binutils2101"
     }
   ],
   "assembly": [
