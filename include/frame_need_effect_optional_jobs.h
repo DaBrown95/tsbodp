@@ -26,4 +26,8 @@ unsigned int frame_dispatch_optional_attachment_job(struct FrameNeedEffectState 
 unsigned int frame_check_optional_attachment_capacity(struct FrameNeedEffectState *,
                                                        struct FrameObject *);
 
+
+/* EC action switch; formal roles remain inferred until its consumer is identified. */
+unsigned int frame_prepare_optional_attachment_kinds_92_97(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+
 #endif

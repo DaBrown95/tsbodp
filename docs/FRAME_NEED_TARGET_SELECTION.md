@@ -702,7 +702,9 @@ The common header reuses existing object, record and audio declarations;
 no qualifier or layout change supplies the match. The FC slot is null. The
 separate, unrooted predicate at `0x08017318` now owns 40 matching C bytes with
 a rejected control; no pointer or current direct caller establishes its use.
-The installed LR-saving callback at `0x08017340` remains original. Matching these nine bodies therefore does not close the
+The installed LR-saving callback at `0x08017340` now has matching C ownership
+under the late-collapse explanation below. Twelve source bodies continuously
+cover `0x08016F24..0x080174FC` (1,496 bytes), including the separate predicate. Matching these nine bodies therefore does not close the
 entire row, its runtime population, callback writers, allocation or object
 lifetime domains. Row 104 execution has not been observed.
 
@@ -741,3 +743,50 @@ Their extents comprise 1,086 instruction bytes, 488 literal/switch bytes and
 checks; incompatible callback assignments reject. These are finite static and
 compiler results. Writable targets, runtime row/index populations, object
 lifetimes, allocation and gameplay domains remain open.
+
+
+## Constant-result EC switches and the retained LR save
+
+Seven eight-byte EC entries now have matching C definitions, using each
+recovered action writer's complete evidenced set:
+
+| Definition row | EC entry | Action cases |
+| --- | --- | --- |
+| 9 | `0x08047504` | 88, 89 |
+| 87 | `0x08022124` | 92 through 97 |
+| 97 | `0x08017FD4` | 64, 65, 66 |
+| 98 | `0x08048640` | 25 |
+| 99 | `0x0801DDC4` | 42, 94 |
+| 100 | `0x08034FB0` | 71 |
+| 104 | `0x08017340` | 45, 56, 57, 98, 99, 100, 101 |
+
+Each source switch returns word one for its cases and default. The original
+256-byte EC switch in rows 42/43 independently corroborates this family idiom;
+its native third-word guard and all-one table remain in the final code. The
+seven smaller functions retain their actual comparisons through global
+allocation/reload. Argument-pointer elimination classifies the not-yet-shortened
+conditional branches as possible far jumps and caches that fact. The later
+`jump2` cross-jumping pass merges identical return blocks and removes every
+comparison. The cached flag still makes the backend save LR, leaving exactly
+`PUSH LR; MOV R0,1; POP R1; BX R1`.
+
+One counterfactual compiles the unchanged row-9 source with only the existing
+prologue-bugfix flag added: eight bytes become four. All captured headers and
+preprocessed input remain identical. This supports the within-function cache
+explanation; it is a diagnostic, not an accepted alternate recipe. The earlier
+plain-constant and cross-function inline-cache explanations remain disproved.
+
+All seven complete-set recipes match on their first attempt, without instruction
+assembly, register constraints, added qualifiers or invented calls. Real controls
+make one evidenced case return zero: six compile to 16 bytes and reject by 14
+bytes; row 104 compiles to 24 and rejects by 22. The stable verifier includes
+extra bytes in rejection. Canonical API, full-ROM/control and progress gates pass.
+These add 56 C instruction bytes and no assembly, pools or alignment.
+
+Removed case structure and unused first-two formal roles are inferred from the
+family and its recovered writers, not uniquely identified historical source.
+The source still returns one for every word input. Generic EC delivery, writable
+callback targets, valid selection indices and retained-tail domains remain open.
+After these seven, 41 distinct same-body entries in the observed 149-row prefix
+still need their own justified source recipes; 29 depend on unconverted E8
+writers. Byte equality alone does not authorize an arbitrary case list.

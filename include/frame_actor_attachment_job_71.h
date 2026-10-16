@@ -15,4 +15,8 @@ void frame_finish_attachment_job_71(struct FrameNeedEffectState *);
 unsigned int frame_check_attachment_job_71(struct FrameNeedEffectState *, struct FrameObject *);
 unsigned int frame_attachment_job_71_default_value(void);
 
+
+/* EC action switch; formal roles remain inferred until its consumer is identified. */
+unsigned int frame_prepare_attachment_job_71(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+
 #endif

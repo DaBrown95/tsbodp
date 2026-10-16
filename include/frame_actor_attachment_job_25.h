@@ -14,4 +14,8 @@ unsigned int frame_select_attachment_job_25(struct FrameNeedEffectState *,unsign
 void frame_finish_attachment_job_25(struct FrameNeedEffectState *);
 #define JOB25_WORK(o) ((struct FrameAttachmentJob25Work *)(o))
 #define JOB25_CLOCK(o) ((struct FrameAttachmentJob25Clock *)(o))
+
+/* EC action switch; formal roles remain inferred until its consumer is identified. */
+unsigned int frame_prepare_attachment_job_25(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+
 #endif

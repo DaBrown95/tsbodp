@@ -34,7 +34,7 @@ bodies, ROM payload or extracted assets are published as inventory metadata.
 ## Results
 
 The table below is a historical survey snapshot. Current source ownership is
-1,885 verified C functions and 263,008 C extent bytes, plus 4,060 separately
+1,892 verified C functions and 263,064 C extent bytes, plus 4,060 separately
 counted assembly extent bytes. The latter includes the 1,604-byte mixer family,
 140-byte timer IRQ, 140-byte startup exceptions, eight-byte BIOS wait wrapper,
 60-byte compiler register-call family, 672-byte division/remainder family and

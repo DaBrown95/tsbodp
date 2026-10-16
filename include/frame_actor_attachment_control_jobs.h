@@ -18,4 +18,8 @@ unsigned int frame_step_attachment_controls_98_99_101(struct FrameNeedEffectStat
 /* Separate neighbouring predicate; no installed callback slot is identified. */
 unsigned int frame_check_attachment_control_jobs(struct FrameNeedEffectState *, struct FrameObject *);
 
+
+/* EC action switch; formal roles remain inferred until its consumer is identified. */
+unsigned int frame_prepare_attachment_control_jobs(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+
 #endif

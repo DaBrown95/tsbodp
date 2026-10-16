@@ -14,4 +14,8 @@ unsigned int frame_begin_attachment_jobs_88_89(struct FrameNeedEffectState *,
 unsigned int frame_dispatch_attachment_jobs_88_89(struct FrameNeedEffectState *,
                                                   struct FrameObject *);
 
+
+/* EC action switch; formal roles remain inferred until its consumer is identified. */
+unsigned int frame_prepare_attachment_jobs_88_89(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+
 #endif
