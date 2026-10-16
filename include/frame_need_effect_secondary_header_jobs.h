@@ -21,4 +21,8 @@ unsigned int frame_step_secondary_header_attachment_job_50(struct FrameNeedEffec
 unsigned int frame_initialize_secondary_header_jobs(struct FrameNeedEffectState *);
 unsigned int frame_select_secondary_header_attachment_jobs(struct FrameNeedEffectState *,unsigned char *);
 unsigned int frame_dispatch_secondary_header_attachment_job(struct FrameNeedEffectState *,struct FrameObject *);
+
+/* EC action switches; unused formal roles remain inferred. */
+unsigned int frame_prepare_secondary_header_attachment_jobs(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+
 #endif

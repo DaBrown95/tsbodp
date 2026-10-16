@@ -87,5 +87,5 @@ alignment.
 Neither entry has an observed ROM pointer or a definition-row callback slot.
 Their incoming domains and wider reachability remain unresolved. The neutral
 constant-leaf API does not recover unused historical formals or a generic
-percentage/FC consumer. The EC callback at `0x34FB0` remains original, and these
+percentage/FC consumer. The EC callback at `0x34FB0` now has matching C source; these
 matches add no runtime/gameplay or whole-inventory completeness evidence.

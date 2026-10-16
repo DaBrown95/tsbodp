@@ -6,4 +6,8 @@ unsigned int frame_shared_optional_begin(struct FrameNeedEffectState *,struct Fr
 unsigned int frame_shared_optional_dispatch(struct FrameNeedEffectState *,struct FrameObject *);
 unsigned int frame_shared_optional_indicator_step(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
 unsigned int frame_shared_optional_timed_step(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
+
+/* EC action switches; unused formal roles remain inferred. */
+unsigned int frame_prepare_shared_optional_jobs(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+
 #endif

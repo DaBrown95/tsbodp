@@ -48,4 +48,8 @@ unsigned char frame_begin_actor_route(struct FrameObject *, struct FramePoint *,
                                       unsigned int *, unsigned int, unsigned char);
 void frame_commit_need_effect(struct FrameObject *, unsigned int);
 
+
+/* EC action switches; unused formal roles remain inferred. */
+unsigned int frame_prepare_optional_playback_attachment_kind(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+
 #endif

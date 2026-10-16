@@ -1277,9 +1277,9 @@ assembly supplies either body. Their totals include 508 instruction bytes,
 changed-source controls reject, and actual definitions pass canonical API and
 target-layout checks.
 
-The original direct call connects these two disjoint extents. Intervening ROM
-`0x08036B88..0x08036D2C`, player-index/callback writers and allocation/lifetime
-domains remain open. The callback assignment is static evidence; execution
+The original direct call connects these two bodies. The intervening attachment
+module now has source ownership as described below; player-index/callback writers
+and allocation/lifetime domains remain open. The callback assignment is static evidence; execution
 of this special path has not been observed.
 
 
@@ -1303,3 +1303,30 @@ canonical API/target-layout checks pass. The extents contain 538 instruction
 bytes, 124 literal/switch bytes and ten zero-alignment bytes. Their static
 request/table/callback chain is established; actual execution, input indices,
 signed arithmetic, allocation and wider callback domains remain unproven.
+
+
+## Special-need attachment module
+
+Ten further C functions own 604 bytes: the full attachment gap
+`0x08036B88..0x08036D2C` (420) and its job-45 provider at `0x080368D4` (184).
+Together with the special callback, companion and request-27 continuation, source
+ownership is continuous across `0x080368D4..0x08037028` (1,876 bytes).
+Definition row 141 installs the initializer, action writer, EC, begin, status
+and finish; its FC word is null and shared E4 capacity check is already owned.
+The adjacent actor-check (40) and constant-100 body (four) are separate unrooted
+entries, with no asserted FC or runtime role.
+
+The selector writes 7 or 45 after the optional predicate's low-byte test.
+Begin and job 7 use actor `+0x58` as a signed word countdown, initialized to
+30 or 90 and tested against minus one after decrement. This differs from the
+related halfword need timer. The first status source put the zero-result
+initialization after record lookup; moving that existing initialization before
+the call restored native order and all 80 bytes. Every accepted body has a
+rejecting source control and actual-definition API/layout checks. The new
+604 bytes contain 578 instructions, 12 pool bytes and 14 genuine zero-alignment
+bytes, with no new assembly, bindings or qualifiers.
+
+These static and compiler matches do not close EC delivery, writable targets,
+owner/actor populations, arithmetic, point-provider success or initialized
+sample-handle domains. Native unchecked results and early-completion cleanup
+order remain intact; no compensating guards or initialization are introduced.

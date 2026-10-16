@@ -664,7 +664,7 @@ The separate unrooted predicate at `08034F80` and word-returning constant-100
 entry at `08035024` now own another 44 C bytes with rejected controls, reusing
 the existing sibling predicate recipe. Neither has an established installed
 table-callback role; the latter is separate from the empty body's alignment.
-The EC callback at `08034FB0` remains original. See the
+The EC callback at `08034FB0` now has the matching source described below. See the
 [kind-71 boundary notes](FRAME_ATTACHMENT_JOB_71.md). No runtime selection or
 complete callback-domain claim follows from this finite table/source evidence.
 
@@ -747,8 +747,8 @@ lifetimes, allocation and gameplay domains remain open.
 
 ## Constant-result EC switches and the retained LR save
 
-Seven eight-byte EC entries now have matching C definitions, using each
-recovered action writer's complete evidenced set:
+Twenty-one eight-byte EC entries now have matching C definitions, using each
+recovered action writer's complete evidenced action set:
 
 | Definition row | EC entry | Action cases |
 | --- | --- | --- |
@@ -759,11 +759,25 @@ recovered action writer's complete evidenced set:
 | 99 | `0x0801DDC4` | 42, 94 |
 | 100 | `0x08034FB0` | 71 |
 | 104 | `0x08017340` | 45, 56, 57, 98, 99, 100, 101 |
+| 1 | `0x08018450` | 29, 45 |
+| 11, 12 | `0x0801A3B4` | 12, 23, 60 |
+| 44, 45, 49 | `0x080449B0` | 1, 6, 45, 56, 57, 62 |
+| 51, 52, 53, 54, 55, 84 | `0x0800CCF8` | 27, 50 |
+| 59, 60, 61, 62, 80, 81, 82 | `0x08035830` | 49 |
+| 69, 71, 73, 91, 111 | `0x0803AC48` | 45, 61 |
+| 79, 86 | `0x08021E24` | 49 |
+| 90, 109, 110 | `0x0803A9CC` | 12, 45, 53 |
+| 92, 114, 115 | `0x08046238` | 12, 45, 59 |
+| 132 | `0x08016568` | 7, 44, 45 |
+| 3, 4 | `0x08035C98` | 12, 31, 33, 45 |
+| 63, 64, 65, 66, 67, 75 | `0x08013270` | 49, 50 |
+| 0 | `0x0800BCEC` | 13, 14 |
+| 141 | `0x08036C7C` | 7, 45 |
 
 Each source switch returns word one for its cases and default. The original
 256-byte EC switch in rows 42/43 independently corroborates this family idiom;
 its native third-word guard and all-one table remain in the final code. The
-seven smaller functions retain their actual comparisons through global
+smaller functions retain their actual comparisons through global
 allocation/reload. Argument-pointer elimination classifies the not-yet-shortened
 conditional branches as possible far jumps and caches that fact. The later
 `jump2` cross-jumping pass merges identical return blocks and removes every
@@ -776,17 +790,44 @@ preprocessed input remain identical. This supports the within-function cache
 explanation; it is a diagnostic, not an accepted alternate recipe. The earlier
 plain-constant and cross-function inline-cache explanations remain disproved.
 
-All seven complete-set recipes match on their first attempt, without instruction
-assembly, register constraints, added qualifiers or invented calls. Real controls
-make one evidenced case return zero: six compile to 16 bytes and reject by 14
-bytes; row 104 compiles to 24 and rejects by 22. The stable verifier includes
-extra bytes in rejection. Canonical API, full-ROM/control and progress gates pass.
-These add 56 C instruction bytes and no assembly, pools or alignment.
+All twenty-one complete-set recipes match on their first attempt, without
+instruction assembly, register constraints, added qualifiers or invented calls.
+Real controls make one evidenced case return zero: fifteen compile to 16 bytes
+and reject by 14 bytes; six compile to 24 and reject by 22. The stable verifier
+includes extra bytes in rejection. Canonical API, full-ROM/control and progress
+gates pass. Together these leaves own 168 C instruction bytes and no assembly,
+pools or alignment.
+
+For rows 3/4 and the shared header writer, zero is an evidenced buffer sentinel,
+so the action cases are respectively 12/31/33/45 and 49/50. Zero remains in the
+complete write-value evidence and takes the source's constant-one default.
+Unwritten tails and forwarded selection indices remain separate open domains.
 
 Removed case structure and unused first-two formal roles are inferred from the
 family and its recovered writers, not uniquely identified historical source.
 The source still returns one for every word input. Generic EC delivery, writable
 callback targets, valid selection indices and retained-tail domains remain open.
-After these seven, 41 distinct same-body entries in the observed 149-row prefix
-still need their own justified source recipes; 29 depend on unconverted E8
-writers. Byte equality alone does not authorize an arbitrary case list.
+After these twenty-one, 27 distinct same-body entries in the observed 149-row
+prefix still need their own justified source recipes and depend on unconverted
+E8 writers. Byte equality alone does not authorize an arbitrary case list.
+
+
+## Definition row zero: attachment actions 13/14
+
+Nine ordinary C bodies own the complete interval `0x0800BA60..0x0800BD68`
+(776 bytes: 524 instructions, 244 literal/switch bytes and eight zero-alignment
+bytes). Installed callbacks own 136 bytes and their connected worker 596.
+The separate 40-byte actor-check and four-byte constant-100 leaf have no
+established incoming edge; neither is an installed row-zero callback. Its FC
+word is null. The copied sorter at `0xB840` remains outside this module.
+
+The writer stores actions 13 and 14 without a terminator or tail initialization;
+status accepts those actions. The worker preserves cancellation only when
+`running == 1`, captured needs, the complete 55-entry unsigned timer switch,
+halfword countdown wrap, route/animation/audio order and definition byte 35.
+All seven direct providers already have matching source. Every body has a
+rejecting changed-source control, including finish's real kind-zero to kind-one
+edit; an earlier write-zero diagnostic is excluded as inconclusive. Actual
+definitions and 17 target-layout facts pass API checks, while a wrong callback
+assignment rejects. Runtime use, index bounds and callback populations remain
+open.

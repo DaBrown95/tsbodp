@@ -10,4 +10,8 @@ unsigned int frame_need_effect_dispatch_condition_job(struct FrameNeedEffectStat
 unsigned int frame_step_condition_need_job(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
 unsigned int frame_step_condition_parameter_job(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
 unsigned int frame_step_condition_wait_job(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
+
+/* EC action switches; unused formal roles remain inferred. */
+unsigned int frame_prepare_condition_attachment_jobs(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+
 #endif

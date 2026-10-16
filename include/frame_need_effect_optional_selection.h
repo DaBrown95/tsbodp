@@ -18,4 +18,11 @@ unsigned int frame_select_optional_attachment_kinds_3a994(struct FrameNeedEffect
 unsigned int frame_select_optional_attachment_kinds_46200(struct FrameNeedEffectState *,
                                                          unsigned char *);
 
+
+/* EC action switches; unused formal roles remain inferred. */
+unsigned int frame_prepare_optional_attachment_kinds_12_23_60(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+unsigned int frame_prepare_optional_attachment_kinds_12_45_53(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+unsigned int frame_prepare_optional_attachment_kinds_12_45_59(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+unsigned int frame_prepare_optional_attachment_kinds_12_31_33_45(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+
 #endif

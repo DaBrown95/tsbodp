@@ -34,7 +34,7 @@ bodies, ROM payload or extracted assets are published as inventory metadata.
 ## Results
 
 The table below is a historical survey snapshot. Current source ownership is
-1,892 verified C functions and 263,064 C extent bytes, plus 4,060 separately
+1,923 verified C functions and 264,540 C extent bytes, plus 4,060 separately
 counted assembly extent bytes. The latter includes the 1,604-byte mixer family,
 140-byte timer IRQ, 140-byte startup exceptions, eight-byte BIOS wait wrapper,
 60-byte compiler register-call family, 672-byte division/remainder family and
@@ -44,13 +44,13 @@ See [audio](AUDIO_RECONSTRUCTION.md),
 [startup](STARTUP_RECONSTRUCTION.md), [compiler assembly](RUNTIME_REGISTER_CALLS.md) and the concise
 [remaining-work list](COMPLETION_BLOCKERS.md).
 
-The current qualified static union is 276,896 physical instruction bytes.
+The current qualified static union is 276,980 physical instruction bytes.
 Source extents include their literal pools and alignment; instruction-byte
 counts describe separately qualified code. Compiler matches do not
 establish runtime execution. The separate
 [bounded boot experiment](RUNTIME_OBSERVATIONS.md) records selected entry and
 write observations without closing target domains. The static census's
-325,054 estimated envelope bytes, the treemap's 325,062 mapped extent bytes
+325,080 estimated envelope bytes, the treemap's 325,088 mapped extent bytes
 and fixed 319,640 historical comparison remain distinct, with no complete
 game-code denominator established.
 

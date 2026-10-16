@@ -1,6 +1,6 @@
 # Connected header check and choice callback
 
-This private proposal reconstructs three connected bodies from an observed six-row definition prefix: the word-return header check at 0x080131D8 (52 bytes), the word-return choice writer at 0x0801320C (100 bytes), and its one-based occupied-record lookup at 0x0802ED20 (64 bytes). All 216 bytes match, including the writer's two original zero alignment bytes after its 98 instruction bytes. The adjacent 0x080131D4 and 0x08013270 entries remain original and receive no C credit here.
+This private proposal reconstructs three connected bodies from an observed six-row definition prefix: the word-return header check at 0x080131D8 (52 bytes), the word-return choice writer at 0x0801320C (100 bytes), and its one-based occupied-record lookup at 0x0802ED20 (64 bytes). All 216 bytes match, including the writer's two original zero alignment bytes after its 98 instruction bytes. The adjacent `0x080131D4` remains original. EC `0x08013270` now has matching C source.
 
 The accepted allocator copies definition offset +28 to state E4, and +4 to E8. In the observed 148-row/36-byte prefix, rows 63, 64, 65, 66, 67 and 75 pair this check and writer. This does not establish a complete definition-table capacity or types for the other original targets. The separate definition +8 maps EC.
 

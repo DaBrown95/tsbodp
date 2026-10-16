@@ -5,7 +5,7 @@ This connected source batch reconstructs the complete C8A4/148 begin,
 C938/140 kind-27 worker, C9C4/660 kind-50 worker, CC58/52 concrete initializer,
 CCC0/56 choice producer and CD00/44 dispatcher: six functions and 1,100 bytes.
 The earlier 712-byte worker and 64-byte choices guesses remain excluded.
-CC8C/52 is an already published check; CCF8/8, CD2C/4 and CD30/4 remain original
+CC8C/52 is an already published check; CD2C/4 and CD30/4 remain original
 and receive no source credit.
 
 The initial private qualification used published milestone 111. The canonical
@@ -68,3 +68,5 @@ descriptors and representable signed arithmetic are explicit fixture domains.
 Arbitrary counts, table indices and capacities remain unchecked. Complete
 matching source extents and bounded finite evidence do not establish scheduler,
 whole-module, hardware or gameplay behavior.
+
+The EC entry now has matching C ownership; see the [constant-result compiler explanation](FRAME_NEED_TARGET_SELECTION.md#constant-result-ec-switches-and-the-retained-lr-save). This does not close its incoming target domain.

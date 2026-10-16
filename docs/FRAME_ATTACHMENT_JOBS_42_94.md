@@ -18,7 +18,7 @@ The 36-byte definition row 99 begins at `0x08063C68`. Its field 16 supplies the
 shared dispatcher, which looks up an attachment record, selects full-word kind
 42 or 94 and otherwise returns zero. Definition-row index 99 and record kinds
 42/94 are distinct. The row's choices and begin callbacks feed this path; its
-init, EC and tick stubs remain original. The unconditional lookup-result
+init and tick stubs remain original. EC now has matching C source. The unconditional lookup-result
 dereference is retained, without a new null guard.
 
 Both workers capture the actor's need-state pointer before their phase switch.

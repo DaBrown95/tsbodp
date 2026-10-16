@@ -2,7 +2,7 @@
 
 The seven observed definition rows 59, 60, 61, 62, 80, 81 and 82 share four
 recovered functions (628 bytes). The 148-row ROM prefix has 36-byte rows. Its
-initializer357FC/4, EC35830/8, removal358AC/4 and neighboring check35800/40 remain
+initializer357FC/4, removal358AC/4 and neighboring check35800/40 remain
 original and receive no C credit. The neighboring check is not installed by
 these rows. Actual E8/F0/F4 pointer slots, word return values and byte choice
 output use the already qualified caller contracts, without a universal ABI claim.
@@ -41,3 +41,5 @@ three phase43 route results), included in the initialized total. All 216 actual
 changed-source divergences and eight input/interpreter faults are retained.
 
 The publication mirror changes only the source-local role header include and guard names. Fresh normal/strict compiler inputs are byte-identical after preprocessing; all new native bodies and actual source controls are rechecked. Existing provider metadata, source, types and finite models are reused explicitly. Public promotion and source credit remain gated separately.
+
+The EC entry now has matching C ownership; see the [constant-result compiler explanation](FRAME_NEED_TARGET_SELECTION.md#constant-result-ec-switches-and-the-retained-lr-save). This does not close its incoming target domain.
