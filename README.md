@@ -100,6 +100,8 @@ notices and [GPL licence](licenses/GCC-GPL-2.0.txt), including the exceptions
 printed in those source files.
 The adapted Newlib string providers retain their [upstream notices](licenses/Newlib-COPYING.txt).
 They include software developed by the University of California, Berkeley.
+The independently reconstructed background decoder has documented
+[assembly-origin evidence and version limits](docs/RESOURCE_BACKGROUND_DECODER.md).
 
 | Dependency | Use | Licence |
 | --- | --- | --- |

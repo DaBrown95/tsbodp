@@ -137,10 +137,12 @@ The 512-byte installation beginning at ROM `0x160` is larger than the IRQ
 routine. The existing [dispatcher source](../src/irq/irq_dispatcher.s) owns
 296 instruction bytes through `0x288`; the separate pool owns eight bytes at
 `0x2A0..0x2A8`. The intervening 24-byte startup copy helper is already owned
-above. These total 328 source extent bytes. The remaining 184 copied bytes
-contain two zero words, a provisional 60-byte ARM debugger wrapper at `0x2B0`,
-and the first 116 bytes of the background decoder. Their copy does not make
-them dispatcher instructions or establish a call target. The wrapper's
+above. These total 328 source extent bytes. The first 116 bytes of the
+[source-owned background decoder](RESOURCE_BACKGROUND_DECODER.md) also lie in
+this copy, bringing source ownership to 444 of its 512 bytes. The remaining
+68 bytes contain two zero words and a provisional 60-byte ARM debugger wrapper
+at `0x2B0`. Copying these separate bodies does not make them dispatcher
+instructions or establish a call target. The wrapper's
 `MOV R12,R12`, branch and embedded `PRF %r0%` record agree with the
 [official no$gba debugger-message protocol](https://problemkaputt.de/gbahlp.htm).
 Its 16-byte alignment also agrees with the documented macro's `.align 4`

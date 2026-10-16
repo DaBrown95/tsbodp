@@ -86,6 +86,7 @@ The four new definitions have eight provider-symbol imports. Five existing
 consumer definitions have ten metadata bindings to integer-to-double and
 double-to-unsigned conversion; their accepted extents total 2,372 bytes. Those
 counts describe this bounded binding audit, not a complete runtime caller
-inventory. Other comparison wrappers, single-precision arithmetic and remaining
-runtime entries stay original. Matching bytes, bounded source-model execution,
+inventory. The [remaining double comparisons](RUNTIME_FLOATING_POINT.md#double-comparison-wrapper-closure)
+and [single-precision family](RUNTIME_SINGLE_PRECISION.md) now have separate
+source ownership. Matching bytes, bounded source-model execution,
 whole-ROM equality and gameplay correctness remain separate claims.

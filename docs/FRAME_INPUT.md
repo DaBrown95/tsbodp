@@ -841,12 +841,12 @@ Static disassembly places the first decoder's return at `0xB560`, followed by
 another ARM prologue at `0xB564`: a provisional 504-byte body within a 528-byte
 copy that includes 24 following bytes. The second decoder's terminal return is
 at `0x614`, followed by the accepted Thumb frame scheduler at `0x618`: its
-provisional 812-byte code/helper span is copied with 36 bytes from that next
-function. The second span contains internal register-based helper calls and
-carry-sensitive bit-reader operations, so its entry boundaries and internal
-interfaces require separate reconstruction. Neither code span is represented
-by an embedded instruction body or credited as matching C. Raw copy words,
-ARM disassembly, inferred entry signatures and boundary distinctions are retained
+812-byte code/helper span is copied with 36 bytes from that next function.
+The second body now has [complete assembly-origin source ownership](RESOURCE_BACKGROUND_DECODER.md),
+including its carry-sensitive private readers. Its independently reconstructed
+assembly matches at both ROM and RAM addresses, with no C credit or embedded
+instruction data. The first decoder remains unconverted. Raw copy words, ARM
+disassembly, inferred entry signatures and boundary distinctions are retained
 in the ignored `decoder-copy-evidence.json` and accompanying raw files.
 
 Each of the four follow-up source changes rejects by one byte: halving the

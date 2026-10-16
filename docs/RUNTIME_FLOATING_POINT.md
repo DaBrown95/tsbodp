@@ -43,9 +43,9 @@ the proportional scene counter, actor state 27 and menu scrolling text. Their
 eight current bindings to add/subtract/multiply all agree with these entries;
 the five accepted consumer extents total 2,372 bytes. This finite binding audit
 is not a complete runtime caller inventory. The remaining double-comparison
-wrappers are covered below; single-precision
-arithmetic and other remaining runtime entries stay original. The connected
-conversion subset is documented in [RUNTIME_CONVERSIONS.md](RUNTIME_CONVERSIONS.md).
+wrappers are covered below. The [single-precision family and cross-precision
+conversions](RUNTIME_SINGLE_PRECISION.md) now have separate source ownership.
+The connected conversion subset is documented in [RUNTIME_CONVERSIONS.md](RUNTIME_CONVERSIONS.md).
 
 ## Types and ABI
 
@@ -64,6 +64,11 @@ RAM access view at `0x030024C0`, established by the actual core literals. No
 initializer, complete allocation ownership or new data credit is assigned to
 that storage. Pack and unpack never consume that helper, so its unused static
 allocation is absent from those translation units.
+
+The matching startup memory initializer clears the full DF and SF NaN records
+to zero before later initialization, through the documented immediate fixed-source
+DMA clear `0x030015B0..0x03007D00`. This supplies their static startup byte
+producer; it does not exclude later aliases or assign allocation/data credit.
 
 The negation adaptation performs both word subtractions as unsigned arithmetic,
 avoiding signed word-negation overflow in the upstream expression. The target's

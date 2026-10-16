@@ -34,23 +34,23 @@ bodies, ROM payload or extracted assets are published as inventory metadata.
 ## Results
 
 The table below is a historical survey snapshot. Current source ownership is
-1,819 verified C functions and 255,552 C extent bytes, plus 3,116 separately
+1,842 verified C functions and 258,080 C extent bytes, plus 3,928 separately
 counted assembly extent bytes. The latter includes the 1,604-byte mixer family,
 140-byte timer IRQ, 140-byte startup exceptions, eight-byte BIOS wait wrapper,
-60-byte compiler register-call family and 672-byte division/remainder family,
-with their genuine data and alignment; it is not a C gain. Exact source and
-full-ROM/control gates verify
-these replacements. See [audio](AUDIO_RECONSTRUCTION.md),
+60-byte compiler register-call family, 672-byte division/remainder family and
+812-byte background decoder, with their genuine data and alignment; it is not
+a C gain. Exact source and full-ROM/control gates verify these replacements.
+See [audio](AUDIO_RECONSTRUCTION.md),
 [startup](STARTUP_RECONSTRUCTION.md), [compiler assembly](RUNTIME_REGISTER_CALLS.md) and the concise
 [remaining-work list](COMPLETION_BLOCKERS.md).
 
-The current qualified static union is 273,366 physical instruction bytes.
+The current qualified static union is 275,808 physical instruction bytes.
 Source extents include their literal pools and alignment; instruction-byte
 counts describe separately qualified code. Compiler matches do not
 establish runtime execution. The separate
 [bounded boot experiment](RUNTIME_OBSERVATIONS.md) records selected entry and
 write observations without closing target domains. The static census's
-324,396 estimated envelope bytes, the treemap's 324,404 mapped extent bytes
+324,954 estimated envelope bytes, the treemap's 324,962 mapped extent bytes
 and fixed 319,640 historical comparison remain distinct, with no complete
 game-code denominator established.
 
@@ -242,6 +242,14 @@ usually prefixes of following routines. Physical ROM ownership is counted once;
 execution addresses remain aliases. Copy length does not establish function size.
 The initial EWRAM image has no established executable entry; later executable
 writes remain possible.
+
+The custom background decoder now has 812 separately counted assembly-origin
+source bytes, verified at ROM `0x2EC` and RAM `0x03003370`. Its whole-function
+Pucrunch ARM lineage is documented in [the origin review](RESOURCE_BACKGROUND_DECODER.md);
+the native version is independently reconstructed and is not identified as the
+exact earlier release. The 848-byte installation consists of that body and
+36 bytes of the following C frame scheduler. Source ownership of this copy
+does not close writable entry assignments or later code modifications.
 
 | Provisional audio name | ARM entry | Reachable instruction bytes |
 | --- | --- | ---: |
@@ -743,3 +751,17 @@ are typed-table/static and finite-model observations, with
 no gameplay invocation, code-exclusion or new C credit. Their private receipts
 are under `analysis/outside-thumb-67e758/` and
 `analysis/outside-thumb-428660/typed-context.json` and `source-context.json`.
+
+Three other selected words now have compressed-text roles through the accepted
+six-bank text selector and string loader: source `0xA7B4DC` is in bank 4,
+string 3239 (`0xA7B4D2..0xA7B4E4`); target `0x9ADDC4` is in bank 0,
+string 4095 (`0x9ADDA8..0x9ADDC9`); source `0xA3705C` is in bank 3,
+string 254 (`0xA37057..0xA37063`). The apparent pointer source `0x176614`
+independently lies in the accepted activity-five background's codec-3 payload
+`0x175120..0x1770DC`, consumed by the original-instruction decoder model.
+Small transcriptions of the matching text-loader C consume each selected text
+word and reject truncation before it. Those are source-semantic observations,
+not original-instruction or gameplay traces. Observed offset-table prefixes
+are not declared capacities. The paired endpoints retain independent evidence;
+none of these data roles excludes execution or closes a ROM bank. Receipts are
+under the corresponding ignored `analysis/outside-thumb-*/` directories.

@@ -34,8 +34,9 @@ the byte-writing LZ77/Huffman/run-length services for selectors 1/2/3. Its
 alternate at `0x16ABC` uses CpuFastSet and the halfword-writing LZ77/run-length
 entries. That alternate has no selector-2 operation. These source observations
 remain distinct from supported-input or gameplay claims. The copied ARM
-callbacks at RAM `0x030036D0` and `0x03003370` are custom bodies, remain
-unconverted, and receive no C coverage from these service wrappers.
+callbacks at RAM `0x030036D0` and `0x03003370` are custom bodies and receive no
+C coverage from these service wrappers. The former remains unconverted; the
+latter now has separate [assembly-origin source ownership](RESOURCE_BACKGROUND_DECODER.md).
 
 Installation at `0x16A48` uses CpuSet with controls `0x04000084` and
 `0x040000D4`, copying 528 and 848 bytes. Map installation at `0x39E78` uses
