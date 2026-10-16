@@ -2,6 +2,7 @@
 
 void transition_record_event(unsigned int kind, struct EventPayload payload) {
  struct EventRecord record;
+ unsigned int payload_word;
  g_event_sequence++;
  memory_fill(&record, 0, 12);
  record.kind = kind;
@@ -12,7 +13,8 @@ void transition_record_event(unsigned int kind, struct EventPayload payload) {
   record.payload.halfwords[0] = ~*(volatile unsigned short *)0x04000130;
   break;
  case 2:
-  record.payload.halfwords[0] = *(unsigned int *)payload.bytes;
+  __builtin_memcpy(&payload_word, &payload, sizeof payload_word);
+  record.payload.halfwords[0] = payload_word;
   break;
  case 5:
   record.payload.bytes[1] = payload.bytes[0];
@@ -21,7 +23,8 @@ void transition_record_event(unsigned int kind, struct EventPayload payload) {
   record.payload.bytes[0] = event_get_link_slot();
   break;
  case 7:
-  record.payload.word = *(unsigned int *)payload.bytes;
+  __builtin_memcpy(&payload_word, &payload, sizeof payload_word);
+  record.payload.word = payload_word;
   break;
  case 8:
   *(struct EventPayload *)&record.payload = g_event_vector_a;

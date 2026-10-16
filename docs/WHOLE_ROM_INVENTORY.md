@@ -280,3 +280,10 @@ The inventory checkpoint ends with these limits explicit. Connected matching C
 work resumes at the phase-7 initializer and copied object ordering path, followed
 by the held renderer/finalizer work. Inventory closure is not a prerequisite for
 further reconstruction.
+
+The later [event payload copy repair](EVENT_HANDOFF.md) refreshes the complete
+matching build, inventory and treemap without changing any static classification
+or coverage count. Its existing 244-byte recorder gains no additional C credit.
+The total remains 1,705 matching C functions and 242,112 C extent bytes; the fixed
+319,640-byte historical comparison and unresolved game-code denominator remain
+unchanged.
