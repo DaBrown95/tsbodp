@@ -48,4 +48,6 @@ void frame_save_actor_needs(struct FrameActorNeedState *);
 /* Explicit unconverted input serializers; their full contracts remain unknown. */
 void save_world_write_region_1fecc(void *);
 void save_world_write_module_29d18(void);
+void save_stream_read_actor_tail(void *);
+void save_stream_write_actor_tail(const void *);
 #endif

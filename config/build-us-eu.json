@@ -49679,6 +49679,40 @@
         "after": "{\n    *(unsigned char *)pointer = 1;\n}"
       },
       "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
+    },
+    {
+      "name": "save_stream_read_actor_tail",
+      "rom_offset": 60208,
+      "size": 12,
+      "source": "src/save/read_actor_tail.c",
+      "symbols": {
+        "frame_load_save_value": "0x08037d19"
+      },
+      "thumb_symbols": [
+        "frame_load_save_value"
+      ],
+      "negative_control": {
+        "before": "destination, 28",
+        "after": "destination, 27"
+      },
+      "expected_sha256": "d0e3b794eed9bdaa44c143adcfc2c28686fedeba94519aa4849ae851804f2901"
+    },
+    {
+      "name": "save_stream_write_actor_tail",
+      "rom_offset": 60220,
+      "size": 12,
+      "source": "src/save/write_actor_tail.c",
+      "symbols": {
+        "frame_write_save_value": "0x08037e21"
+      },
+      "thumb_symbols": [
+        "frame_write_save_value"
+      ],
+      "negative_control": {
+        "before": "source, 28",
+        "after": "source, 27"
+      },
+      "expected_sha256": "3005dd9bb253e6cba8c20bfb118c799175c77e909c90ede3a6871709430d9b43"
     }
   ],
   "assembly": [

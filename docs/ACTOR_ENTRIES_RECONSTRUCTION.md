@@ -1,6 +1,6 @@
 # Actor entry list lifecycle and condition handoff
 
-Twenty connected replacements add 2,328 bytes of matching C. Their complete
+The 23 connected source extents listed here cover 2,356 bytes of matching C. Their complete
 linked extents, pools and alignment match at the original addresses. Every
 replacement has an actual compiled changed-source control that rejects. The
 list setup, reset, insertion and selection paths connect to the previously
@@ -29,6 +29,9 @@ static and compiler results; no gameplay behavior is claimed.
 | `actor_entry_remove_collection_record` | `08020574` | 160 |
 | `actor_entry_refresh_list` | `08020368` | 328 |
 | `actor_entry_reserve_collection_record` | `080204B0` | 196 |
+| `actor_entry_empty_hook` | `0800EB2C` | 4 |
+| `save_stream_read_actor_tail` | `0800EB30` | 12 |
+| `save_stream_write_actor_tail` | `0800EB3C` | 12 |
 
 ## Shared storage evidence
 
@@ -53,10 +56,35 @@ copies that pointer to context `31C`. It retains the original absence of an
 allocation-failure check. Reset marks every capacity slot's kind `FF`, zeroes
 the fifteen counts, calls the connected refresh path for the first thirteen
 headers, regenerates five bytes at context `0D` from the two-byte parameters at
-`08053634`, and clears the separate allocation. The observed `0800EB2C` hook
-remains an original no-op body. Reset finally inserts ID `8E` into the list
+`08053634`, and clears the separate allocation. Its `0800EB2C` hook already has
+an empty matching C body and a rejecting byte-store control; the table now
+includes those four previously owned bytes without adding credit again.
+Reset finally inserts ID `8E` into the list
 pointed to by game-state `F0`. Neither the complete context allocation nor its
 gameplay identity is established.
+
+The adjacent tail reader and writer now close the source-owned interval
+`0800EB2C..0800EB48`: 28 bytes including the existing hook. Each new wrapper
+owns 12 instruction bytes, with no literal pool or alignment. They pass a fixed
+signed count of 28 to the existing byte-stream providers. The writer accepts a
+read-only source pointer; no seven-word actor owner is inferred from that count.
+
+Native grouped-reader and writer callers pass their original complete byte
+base plus `0x320`. The known enclosing world paths therefore transfer bytes
+`0x3FC..0x417` relative to the world root. This tail lies beyond the canonical
+`0x320` context prefix and requires the actual enclosing backing. Stream cursor,
+copy overlap and partial-bit-position preconditions remain those of the byte
+providers. Observed direct callers do not establish all incoming targets or
+valid stream populations. The larger grouped bodies remain unconverted.
+
+The old writer recipe already matched but lacked controls and canonical API
+qualification. Fresh normal and strict builds verify both current wrappers;
+all four controls changing 28 to 27 reject by one byte. Actual provider and
+caller-definition checks pass ten target layout facts, and six incompatible
+contracts reject. The held canonical reader is used only for API checking.
+Its corrected group count/start offsets now agree, but a separate late-cursor
+optimization and register/frame allocation still prevent a full match. It
+receives no C credit.
 
 ## Insertion and selection
 

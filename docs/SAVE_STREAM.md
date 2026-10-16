@@ -8,6 +8,15 @@ at its original ROM address and compared with the fixed reference. Each also
 has a compiled changed-source control. These are static and compiler results;
 no runtime save/load or EEPROM compatibility claim is made.
 
+The connected actor-tail reader and writer at `0x0800EB30` and `0x0800EB3C`
+separately add two matching C functions and 24 bytes. Each transfers 28 bytes
+through the existing byte provider and has normal/strict comparisons with
+rejecting count controls. The adjacent reset hook was already owned; the
+larger grouped actor reader and writer remain unconverted. See the
+[actor-entry evidence](ACTOR_ENTRIES_RECONSTRUCTION.md) for their backing and
+interface limits. These additions do not expand the historical 59-function
+snapshot above into a claim that every save path is reconstructed.
+
 ## Shared storage and format limits
 
 Literal loads identify the shared state at `0x03005D90`. The observed header
