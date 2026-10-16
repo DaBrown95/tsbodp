@@ -115,6 +115,37 @@ complete storage ownership. Fresh full matching/control and progress gates
 cover the getter together with land placement; no assembly instruction body or
 new compiler profile is used.
 
+## Byte snapshot and shutdown helpers
+
+The current-byte getter at `0x0803A510` (12 bytes), saved-byte getter at
+`0x0803A51C` (12) and snapshot at `0x0803A528` (20) now have matching C.
+Together with the existing reset they own the complete 64-byte local interval.
+The snapshot copies the cached random byte to the saved byte. The generator
+updates that cache on its non-refill path; this is not necessarily the low byte
+of every most recently returned random word. Record preparation calls the current
+getter and snapshot; the unconverted next-stage IRQ calls the saved getter.
+The retained source and positive/control proofs were revalidated before adoption.
+The three real mutations reject by four, four and eight bytes, respectively.
+
+The independent cleanup body at `0x0803E314` owns 84 C bytes, comprising 56
+instruction and 28 literal bytes. Its first recipe reproduces the existing
+cleanup suffix of the accepted wait routine: conditional clearing of
+interrupt-enable bit `0x40`, clearing bit `0x80`, the serial-data store and
+active/slot reset.
+Changing the slot reset from 255 to 254 rejects by one byte. Canonical layout,
+MMIO access and actual-definition API checks pass. No incoming transfer is
+identified; `void(void)` describes the recovered side effects and does not prove
+the historical prototype or callback population.
+
+The main identifier poll and status reader remain held. Static startup,
+interrupt-enable and writer evidence supports asynchronous identifier/slot
+accesses under compatible guards. Making only the actual identifier poll read
+volatile reproduces the prior 408-byte / 101-difference candidate exactly;
+that read already stays inside the loop. Slot volatility also does not explain
+the native unsigned snapshot and retained all-ones OR: the pinned compiler folds
+that OR even when it retains a volatile read. No qualifier is added merely to
+force those instructions, and no runtime or complete protocol claim is made.
+
 
 ## Surrounding serial-scene source
 

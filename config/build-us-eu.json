@@ -49343,6 +49343,63 @@
         "after": "transition_fade_black_out_record(62)"
       },
       "source": "src/scene/scene_link_status_shutdown.c"
+    },
+    {
+      "name": "link_current_random_byte",
+      "rom_offset": 238864,
+      "size": 12,
+      "symbols": {
+        "g_frame_random_last_byte": "0x03005a0c"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return g_frame_random_last_byte;",
+        "after": "return g_frame_random_last_byte+1;"
+      },
+      "source": "src/link/link_current_random_byte.c"
+    },
+    {
+      "name": "link_saved_random_byte",
+      "rom_offset": 238876,
+      "size": 12,
+      "symbols": {
+        "g_link_byte_030072fc": "0x030072fc"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return g_link_byte_030072fc;",
+        "after": "return g_link_byte_030072fc+1;"
+      },
+      "source": "src/link/link_saved_random_byte.c"
+    },
+    {
+      "name": "link_snapshot_random_byte",
+      "rom_offset": 238888,
+      "size": 20,
+      "symbols": {
+        "g_link_byte_030072fc": "0x030072fc",
+        "g_frame_random_last_byte": "0x03005a0c"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "g_link_byte_030072fc=g_frame_random_last_byte;",
+        "after": "g_link_byte_030072fc=g_frame_random_last_byte+1;"
+      },
+      "source": "src/link/link_snapshot_random_byte.c"
+    },
+    {
+      "name": "link_stop_status_poll",
+      "rom_offset": 254740,
+      "size": 84,
+      "symbols": {
+        "g_link_setup_state": "0x03002cb0"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "g_link_setup_state.slot = 0xff;",
+        "after": "g_link_setup_state.slot = 0xfe;"
+      },
+      "source": "src/link/link_stop_status_poll.c"
     }
   ],
   "assembly": [

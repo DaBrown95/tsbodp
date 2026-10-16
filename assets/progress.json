@@ -1,37 +1,37 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "16 Oct 2026, 20:31 BST",
-  "compiled_c_functions": 2152,
-  "compiled_c_bytes": 276092,
+  "verified_at": "16 Oct 2026, 21:00 BST",
+  "compiled_c_functions": 2156,
+  "compiled_c_bytes": 276220,
   "assembly_glue_bytes": 4060,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16497064,
+  "unconverted_rom_bytes": 16496936,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2536,
-  "bounded_control_flow_bodies": 331,
+  "bounded_control_flow_bodies": 327,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 98,
   "mapped_extent_bytes": 325334,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
-    "raw_instruction_union_bytes": 279616,
-    "qualified_observed_instruction_union_bytes": 279590,
-    "nonconflicting_qualified_instruction_bytes": 279590,
-    "raw_referenced_data_union_bytes": 35588,
-    "qualified_referenced_data_union_bytes": 35588,
-    "source_glue_owned_extent_bytes": 280152,
+    "raw_instruction_union_bytes": 279672,
+    "qualified_observed_instruction_union_bytes": 279646,
+    "nonconflicting_qualified_instruction_bytes": 279646,
+    "raw_referenced_data_union_bytes": 35616,
+    "qualified_referenced_data_union_bytes": 35616,
+    "source_glue_owned_extent_bytes": 280280,
     "estimated_envelope_union_bytes": 325326,
     "classification_bytes": {
-      "estimated_envelope_unclassified": 6550,
+      "estimated_envelope_unclassified": 6460,
       "instruction_and_referenced_data_dual_use": 4,
       "known_data": 18852,
-      "owned_extent_unclassified": 3626,
-      "strong_rooted_instruction": 279586,
-      "strong_rooted_referenced_data": 35584,
+      "owned_extent_unclassified": 3632,
+      "strong_rooted_instruction": 279642,
+      "strong_rooted_referenced_data": 35612,
       "unresolved": 16433014
     }
   },
@@ -13044,25 +13044,25 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803A510",
+      "name": "link_current_random_byte",
       "group": "ROM 0803xxxx",
       "rom_offset": 238864,
       "size": 12,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0803A51C",
+      "name": "link_saved_random_byte",
       "group": "ROM 0803xxxx",
       "rom_offset": 238876,
       "size": 12,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0803A528",
+      "name": "link_snapshot_random_byte",
       "group": "ROM 0803xxxx",
       "rom_offset": 238888,
       "size": 20,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "link_reset_random_bytes",
@@ -13849,11 +13849,11 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0803E314",
+      "name": "link_stop_status_poll",
       "group": "ROM 0803xxxx",
       "rom_offset": 254740,
       "size": 84,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "link_wait_for_status_confirmation",
@@ -29687,22 +29687,22 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803A510",
+      "name": "link_current_random_byte",
       "rom_offset": 238864,
       "size": 12,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0803A51C",
+      "name": "link_saved_random_byte",
       "rom_offset": 238876,
       "size": 12,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_0803A528",
+      "name": "link_snapshot_random_byte",
       "rom_offset": 238888,
       "size": 20,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "link_reset_random_bytes",
@@ -30449,10 +30449,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0803E314",
+      "name": "link_stop_status_poll",
       "rom_offset": 254740,
       "size": 84,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
       "name": "link_wait_for_status_confirmation",
@@ -34320,8 +34320,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "c7ea87e9983782b3101367a583eb05ed2eea5bddcc7602f8c0402a3f16de15db",
-    "assets/rom-inventory.json": "a0a487f7aba5c88810fdeb37df0e96bd7b9daf8a26be38f632ea833e25df1d6f",
+    "config/build-us-eu.json": "60e43b59e96c658160cb1096d18afa676f7857030b7c6cdea391c48b8ab53389",
+    "assets/rom-inventory.json": "9299fd7ed4b9277861c236dc87c5070745edb9445fd527bf05e855ad215c12ba",
     "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",
