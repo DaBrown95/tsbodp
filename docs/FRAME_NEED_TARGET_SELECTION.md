@@ -700,7 +700,44 @@ two-argument worker to the three-argument mode API rejects.
 
 The common header reuses existing object, record and audio declarations;
 no qualifier or layout change supplies the match. The FC slot is null. The
-separate, unrooted predicate at `0x08017318` and installed LR-saving callback at `0x08017340`
-remain original. Matching these nine bodies therefore does not close the
+separate, unrooted predicate at `0x08017318` now owns 40 matching C bytes with
+a rejected control; no pointer or current direct caller establishes its use.
+The installed LR-saving callback at `0x08017340` remains original. Matching these nine bodies therefore does not close the
 entire row, its runtime population, callback writers, allocation or object
 lifetime domains. Row 104 execution has not been observed.
+
+
+## Shared rows 42 and 43
+
+Twelve readable C bodies cover the contiguous 1,596 bytes at
+`0x08041610..0x08041C4C`. Eleven own the two observed definitions' six non-null
+callbacks and the status dispatcher's five direct providers (1,556 bytes).
+The separate 40-byte predicate at `0x08041960` has no identified incoming
+pointer or direct call. It receives source ownership without an installed-slot
+or runtime claim. The existing capacity predicate gains no additional credit;
+the FC slots are null.
+
+The dispatcher at `0x08041610` (388 bytes) selects the job-45 worker at
+`0x08041794` (172), job 18 at `0x08041840` (260), modes for jobs 56/57 at
+`0x08041B1C` (132), modes for jobs 2/5 at `0x08041BA0` (120), and audio refresh
+at `0x08041C18` (52). These preserve the actual direction reversal, distinct
+need/animation paths and parameter-controlled sequence choices. Shared callback
+entries are initializer `0x08041944` (28), action writer `0x08041988` (72), EC
+check `0x080419D0` (256), begin `0x08041AD0` (72) and empty F8 tick
+`0x08041B18` (4).
+
+The EC check reads the third word and guards a 56-entry jump table; every
+entry and the default reach a constant-one return. An ordinary switch over
+the action writer's six evidenced kinds (2, 5, 18, 45, 56 and 57) reproduces
+this complete compiler-generated table. Returning zero for case two is a real
+control and rejects. No table bytes or instruction bodies are embedded in C.
+This gives a positive source producer for this constant-result function; it
+does not explain the separate eight-byte LR-saving leaf family. Its generic
+consumer and unused first-two argument roles remain unidentified.
+
+All twelve first source recipes match, and every meaningful control rejects.
+Their extents comprise 1,086 instruction bytes, 488 literal/switch bytes and
+22 zero-alignment bytes. Actual definitions pass canonical API and target-layout
+checks; incompatible callback assignments reject. These are finite static and
+compiler results. Writable targets, runtime row/index populations, object
+lifetimes, allocation and gameplay domains remain open.

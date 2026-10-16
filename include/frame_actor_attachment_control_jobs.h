@@ -14,4 +14,8 @@ unsigned int frame_step_attachment_job_100_171c8(struct FrameNeedEffectState *, 
 unsigned int frame_step_attachment_controls_56_57(struct FrameNeedEffectState *, struct FrameActorAttachmentRecord *, unsigned int);
 unsigned int frame_step_attachment_controls_98_99_101(struct FrameNeedEffectState *, struct FrameActorAttachmentRecord *, unsigned int);
 
+
+/* Separate neighbouring predicate; no installed callback slot is identified. */
+unsigned int frame_check_attachment_control_jobs(struct FrameNeedEffectState *, struct FrameObject *);
+
 #endif

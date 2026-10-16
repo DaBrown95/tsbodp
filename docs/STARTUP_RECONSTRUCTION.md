@@ -139,19 +139,33 @@ routine. The existing [dispatcher source](../src/irq/irq_dispatcher.s) owns
 `0x2A0..0x2A8`. The intervening 24-byte startup copy helper is already owned
 above. These total 328 source extent bytes. The first 116 bytes of the
 [source-owned background decoder](RESOURCE_BACKGROUND_DECODER.md) also lie in
-this copy, bringing source ownership to 444 of its 512 bytes. The remaining
-68 bytes contain two zero words and a provisional 60-byte ARM debugger wrapper
-at `0x2B0`. Copying these separate bodies does not make them dispatcher
-instructions or establish a call target. The wrapper's
-`MOV R12,R12`, branch and embedded `PRF %r0%` record agree with the
+this copy. The register-transparent debugger adapter at `0x080002B0` now
+owns another 60 assembly bytes, bringing source ownership to 504 of the 512
+copied bytes. The two zero words at `0x2A8..0x2B0` remain outside these source
+extents. Copying any of these separate bodies does not establish a call target.
+
+The [debugger adapter](../src/startup/debug_display_word.s) saves R0, reads the
+word at `0x030015B0` into it, presents that register through a no$gba message
+packet, restores R0 and returns. Its `MOV R12,R12`, branch, identifier/flags,
+`PRF %r0%` text and 16-byte continuation alignment agree with the
 [official no$gba debugger-message protocol](https://problemkaputt.de/gbahlp.htm).
-Its 16-byte alignment also agrees with the documented macro's `.align 4`
-spelling under GNU assembler semantics. The outer register-preservation
-sequence still lacks a matching ordinary-C producer or established source
-origin; no whole-wrapper assembly exception has been accepted. The read word
-at `0x030015B0` is the first word after the installed audio image and is cleared
-by the existing unused-IWRAM initializer. Later value producers and actual
-wrapper entries remain unresolved.
+The complete adapter is a justified debugger-ABI glue exception: it transports
+state transparently around the explicit protocol and contains no game algorithm.
+This positive purpose/ABI evidence supersedes the earlier held exception
+assessment; a failed C diagnostic supplies no part of the justification.
+No exact historical source-file identity is claimed. A mixed C/custom-ABI
+implementation remains logically possible and is not asserted as recovered C.
+
+All 60 bytes rebuild at the original ROM address. Two independent real source
+controls change the loaded word and packet text; each keeps the same size and
+rejects one byte. Relinking the same object at copied address `0x03001CF0`
+also gives identical bytes, proving placement geometry rather than an actual
+incoming entry. The extent has 28 instruction bytes, 28 skipped packet/alignment
+bytes and one four-byte pointer literal. No instruction payload is embedded.
+The displayed word is initially cleared by accepted startup code; its later
+writers, meaning and actual adapter entries remain unresolved. Private proofs
+and the bounded origin/ABI review are retained under ignored
+`analysis/startup-debug-glue/`.
 
 The dispatcher's banked-stack/SPSR entry, unrolled IRQ priorities, Game Pak
 stop and switch to a System-mode callback agree with the assembly family in

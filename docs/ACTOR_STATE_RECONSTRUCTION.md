@@ -1281,3 +1281,25 @@ The original direct call connects these two disjoint extents. Intervening ROM
 `0x08036B88..0x08036D2C`, player-index/callback writers and allocation/lifetime
 domains remain open. The callback assignment is static evidence; execution
 of this special path has not been observed.
+
+
+## Request-27 continuation
+
+The special effect's scene request now connects to all three callbacks in
+observed scene-table row 27 and the object they create. Five ordinary C bodies
+cover the contiguous 672 bytes at `0x08036D88..0x08037028`: constructor (144),
+object step (284), scene begin (148), scene step (64) and scene end (32).
+The constructor installs the object callback and existing resource pre-step,
+initializes the signed countdown to twelve, upward velocity and animation,
+and starts cue 69. The object step preserves predecrement/-1 timing, acceleration
+and velocity thresholds, appearance-selected cues and the eventual scene flag.
+Scene begin configures two backgrounds, palette and transition 63; step submits
+request 13 after input or the scene flag; end releases the object list and resets
+display/palette state.
+
+All five first C recipes match without register constraints, added qualifiers
+or assembly. Each same-size changed-source control rejects one byte, and current
+canonical API/target-layout checks pass. The extents contain 538 instruction
+bytes, 124 literal/switch bytes and ten zero-alignment bytes. Their static
+request/table/callback chain is established; actual execution, input indices,
+signed arithmetic, allocation and wider callback domains remain unproven.
