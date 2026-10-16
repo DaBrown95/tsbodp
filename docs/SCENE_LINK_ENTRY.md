@@ -63,7 +63,7 @@ has not been established.
 `scene_link_entry_initialize` at `0x08003750` reconstructs the 876-byte begin
 callback. It sets up offers, object slots, backgrounds, palettes, text and
 selection previews, then coordinates the original scene helpers, countdown and
-transition. It now calls twenty accepted C providers and six explicit original
+transition. It now calls twenty-one accepted C providers and five explicit original
 services. Those service declarations describe this caller's boundary with no
 supplied arguments and no consumed result; they do not recover the helpers' original C signatures,
 complete footprints or implementations.
@@ -111,7 +111,7 @@ invented. Changed-source controls, strict declarations, actual field/API checks
 and deliberately wrong contracts accompany the byte comparisons. These remain
 static and compiler findings, with no new runtime or gameplay observation.
 
-The connected 596-byte offer-refresh helper remains unconverted. Its latest
+The connected 596-byte offer-refresh helper remains unconverted. An indexed
 ordinary candidate is 592 bytes; compiler evidence identifies an extra generated
 cost-address variable and the resulting allocation pressure. Its wider proposed
 record fields and separate status access have not been adopted.
@@ -153,3 +153,46 @@ two exact types and deliberately wrong alignment, width, copy offset and return
 type. Source controls change ninety-five to ninety-four and preserve the begin
 callback's existing control. These are compiler and static findings; no new
 runtime or gameplay observation is claimed.
+
+
+## Quantity bars and text
+
+`scene_link_entry_draw_quantities` at `0x08004944` reconstructs 376 bytes. For each
+active offer it draws two whole-bar columns, two fractional tiles and the cleared
+row above them, formats the scaled value, updates its text object and centers it.
+The seven existing C providers cover 264 bytes separately. The begin callback now
+uses this provider's canonical name at the same address and retains its bytes.
+
+The compiler owns the complete 376-byte span: 342 instruction bytes, two zero
+alignment bytes before the pool and 32 referenced literal bytes. The return and
+all eight referenced words bound the span through `0x08004ABC`; the adjacent
+linked-player helper remains explicit original code.
+
+The source captures the record's byte count before drawing, then reads multiplier
+and cost afresh after the five fills. Unsigned word product and sum preserve
+modulo arithmetic before the logical shift by sixteen. One real remainder value
+is captured in the first fractional-tile argument and reused. The byte coordinate
+changes from tile to pixel units after the last tile use; its final signed-short
+conversion stays at the positioning call. The array base and derived slot are
+distinct typed pointers. The object is captured before text lookup, while the
+slot is reread after the string setter. These scopes and expression phases are
+compiler constraints, not unique historical source spellings or type proofs.
+
+The existing 24-byte offer record and 104-byte state stay unchanged. The readonly
+caption declaration matches the accepted linked builder's complete type; its
+four observed rows are an access prefix, not a complete table-capacity claim.
+At each controlling read the participant count must be zero through four; a
+captured quantity from zero through ninety-five provides a sufficient bar-map
+and coordinate domain. Initialized map/font/text storage, live slots, successful
+lookup and the existing centered-position provider's alias and nonnegative
+signed-shift conditions remain required. No all-writer or gameplay proof is
+introduced.
+
+Target checks cover twelve layout facts, four field types, two conversion-type
+probes and deliberately wrong offset, width, signedness, formal and return
+contracts. The tile-seventeen-to-sixteen source control changes one compiled
+byte. A static quantity-eight witness changes one backed map cell; quantity zero
+has zero height and cannot establish that effect. Normal and strict compiler
+comparisons, the caller's source control and full-build checks remain separate
+from runtime evidence. The linked 556-byte counterpart, 596-byte refresh helper,
+adjacent builder, step callback and renderer/finalizer remain unconverted.

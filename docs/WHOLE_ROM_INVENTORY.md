@@ -47,8 +47,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,982 |
-| Unclassified remainder of estimated envelopes | 16,252 |
+| Unclassified inside source/glue-owned extents | 2,984 |
+| Unclassified remainder of estimated envelopes | 16,250 |
 | Other unresolved ROM | 16,433,810 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -360,3 +360,27 @@ comparison stays 319,640 bytes. Catalog alignment and representation checks do
 not establish its complete table capacity, historical types, runtime execution or
 a complete game-code denominator. The other refresh helper, adjacent builder,
 step callback and renderer/finalizer remain explicit original regions.
+
+
+### Quantity display and its connected caller
+
+The quantity-display helper at `0x08004944` adds one matching C function and 376
+extent bytes: totals are 1,709 functions and 243,996 C bytes, with 500 glue bytes
+separate. Its 342 instruction bytes, two alignment zeros and 32 referenced pool
+bytes match through `0x08004ABC`. The begin caller replaces the original-service
+name at the same address, with identical positive and changed-source-control
+bytes. No inventory discovery receives C credit.
+
+Only this ordinary inventory row changes; its existing 376-byte estimate gains
+the matching source/compiler ownership evidence. There remain 2,526 entries,
+323,980 inventory extent bytes and 323,988 treemap extent bytes. Qualified static
+unions stay 270,608 instruction bytes and 34,732 referenced-data bytes. Two zero
+bytes move from estimated gaps to unclassified owned bytes; the Results table
+records that classification separately. The historical comparison remains
+319,640 bytes, with no complete game-code denominator or new execution claim.
+
+The connected linked-player quantity helper, other offer refresh, object builder,
+step callback and renderer/finalizer remain unconverted. The callback domains,
+eight copied-audio-kernel extent uncertainties and other survey limits above
+remain open. The field, API and source-control checks do not close those gaps or
+establish complete table capacities and historical types.

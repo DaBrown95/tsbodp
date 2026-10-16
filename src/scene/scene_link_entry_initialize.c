@@ -115,7 +115,7 @@ void scene_link_entry_initialize(void)
     scene_link_entry_prepare_original();
     display_time_step_countdown();
     if (!(g_game_flags & 0x20))
-        scene_link_entry_draw_quantities_original();
+        scene_link_entry_draw_quantities();
     else
         scene_link_entry_draw_linked_quantities_original();
     scene_link_entry_draw_panel_original();

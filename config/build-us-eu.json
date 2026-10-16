@@ -41195,7 +41195,7 @@
         "scene_link_entry_draw_panel_original": "0x8004061",
         "scene_link_entry_refresh_offers_original": "0x80045d1",
         "scene_link_entry_refresh_linked_offers": "0x8004825",
-        "scene_link_entry_draw_quantities_original": "0x8004945",
+        "scene_link_entry_draw_quantities": "0x8004945",
         "scene_link_entry_draw_linked_quantities_original": "0x8004abd",
         "scene_link_entry_prepare_original": "0x8005685",
         "display_time_step_countdown": "0x8005725",
@@ -41243,7 +41243,7 @@
         "scene_link_entry_draw_panel_original",
         "scene_link_entry_refresh_offers_original",
         "scene_link_entry_refresh_linked_offers",
-        "scene_link_entry_draw_quantities_original",
+        "scene_link_entry_draw_quantities",
         "scene_link_entry_draw_linked_quantities_original",
         "scene_link_entry_prepare_original",
         "display_time_step_countdown",
@@ -41304,6 +41304,39 @@
         "display_time_copy",
         "display_fill_background_constant_rectangle",
         "display_bios_div"
+      ]
+    },
+    {
+      "name": "scene_link_entry_draw_quantities",
+      "negative_control": {
+        "after": "(unsigned short)((unsigned int)((i + 3) << 12) | 16)",
+        "before": "(unsigned short)((unsigned int)((i + 3) << 12) | 17)"
+      },
+      "rom_offset": 18756,
+      "size": 376,
+      "source": "src/scene/scene_link_entry_draw_quantities.c",
+      "symbols": {
+        "display_fill_background_constant_rectangle": "0x800d7fd",
+        "display_scene_lookup_text": "0x8045009",
+        "display_text_number_field_zero": "0x801b1cd",
+        "display_text_select_font": "0x801ae75",
+        "display_text_set_background_control": "0x801ae2d",
+        "display_text_set_object_string": "0x8045329",
+        "frame_set_centered_integer_position": "0x804533d",
+        "g_display_scene_frame_objects": "0x030043b0",
+        "g_link_entry_offers": "0x03002e00",
+        "g_link_received_join": "0x03002d60",
+        "g_scene_link_entry_captions": "0x0804ed48",
+        "g_scene_link_entry_text_control": "0x0804ed90"
+      },
+      "thumb_symbols": [
+        "display_fill_background_constant_rectangle",
+        "display_text_set_background_control",
+        "display_text_select_font",
+        "display_text_number_field_zero",
+        "display_scene_lookup_text",
+        "display_text_set_object_string",
+        "frame_set_centered_integer_position"
       ]
     }
   ],
