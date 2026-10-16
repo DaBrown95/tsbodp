@@ -308,11 +308,12 @@
     }
   ],
   "limitations": [
-    "Static original-image map; no runtime trace or complete code/data partition.",
+    "Static original-image installation map, supplemented by the separate bounded 300-frame mGBA boot in config/runtime-observations-us-eu.json; neither establishes a complete code/data partition.",
     "Not every byte within a copy or between entries is executable.",
     "Self-modifying instruction state differs after execution; keep original and runtime state distinct.",
     "No executable entry found in initial EWRAM copy; later code installation remains possible.",
-    "Audio function names are reconstructed, some intentionally address-based."
+    "Audio function names are reconstructed, some intentionally address-based.",
+    "The bounded HLE boot observes selected copied-code arrivals, callback publications and audio writes, including patch arguments five and four; all incoming targets, writer domains and reachable modified states remain unresolved."
   ],
   "shared_kernel_family": {
     "copy_name": "audio_iwram",
@@ -502,7 +503,7 @@
     "remaining": [
       "all possible write targets/self-modified states not closed",
       "table runtime index/null slots not universally bounded",
-      "no ARM emulator execution observations",
+      "Selected copied-code arrivals and audio writes observed in one bounded mGBA HLE boot; six selected entry probes have zero hits and complete runtime domains remain open.",
       "surrounding audio image pools/data/zero fill require their separate evidence"
     ],
     "source_evidence": {

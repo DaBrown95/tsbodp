@@ -34,19 +34,23 @@ bodies, ROM payload or extracted assets are published as inventory metadata.
 ## Results
 
 The table below is a historical survey snapshot. Current source ownership is
-1,743 verified C functions and 250,244 C extent bytes, plus 2,384 separately
+1,752 verified C functions and 250,924 C extent bytes, plus 2,392 separately
 counted assembly extent bytes. The latter includes the 1,604-byte mixer family,
-140-byte timer IRQ and 140-byte startup exceptions, with their genuine data and
+140-byte timer IRQ, 140-byte startup exceptions and eight-byte BIOS wait wrapper,
+with their genuine data and
 alignment; it is not a C gain. Exact source and full-ROM/control gates verify
 these replacements. See [audio](AUDIO_RECONSTRUCTION.md),
 [startup](STARTUP_RECONSTRUCTION.md) and the concise
 [remaining-work list](COMPLETION_BLOCKERS.md).
 
-The new source roots for the audio shutdown wrapper and separate actor
-attachment predicate promote 10 and 38 existing instruction bytes respectively.
-The current qualified static instruction union is 270,656 bytes. These two
-compiler-proven entries do not establish runtime execution. The census's
-324,034 estimated envelope bytes, the treemap's 324,042 mapped extent bytes
+The current qualified static union is 270,936 physical instruction bytes.
+The source additions include six audio queries, the 108-byte runtime installer,
+the 228-byte cue-handle dispatcher and the 224-byte game entry; source extent
+and instruction-byte counts remain separate. Compiler matches do not
+establish runtime execution. The separate
+[bounded boot experiment](RUNTIME_OBSERVATIONS.md) records selected entry and
+write observations without closing target domains. The static census's
+324,158 estimated envelope bytes, the treemap's 324,166 mapped extent bytes
 and fixed 319,640 historical comparison remain distinct, with no complete
 game-code denominator established.
 

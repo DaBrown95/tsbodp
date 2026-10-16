@@ -1199,3 +1199,151 @@ commands, objects, raw comparisons and receipts are retained under
 `reports/audio-reconstruction-20261016/timer-irq/final-canonical/`,
 `ram-address-proof/` and `patch-target-control/`. No device, audible-output or
 gameplay execution is claimed.
+
+## Unrooted backend query closure
+
+Six library entries add **120 matching C bytes** while closing gaps that were
+absent from the rooted inventory rows. The getter bodies and their literal
+pools are now rebuilt from readable C; no incoming execution or call is thereby
+observed. Their names follow the matching fields and pinned Krawall interfaces.
+
+| Entry | ROM address | Complete C extent | Observed read |
+| --- | --- | ---: | --- |
+| Sample-mixer volume | `0804995C` | 12 | Byte one at `03000090` |
+| Channel frequency | `08049A40` | 24 | Signed step at channel `+14`, arithmetic shift by two |
+| Channel volume | `08049A58` | 20 | Unsigned byte at channel `+00` |
+| Channel pan | `08049A6C` | 24 | Signed byte at channel `+01` |
+| Channel position | `08049A84` | 28 | Cursor `+08` minus start `+04` |
+| Player volume target | `0804BC7C` | 12 | Word at `020025AC` |
+
+All channel offsets in this table are hexadecimal. The four queries narrow the
+handle to an unsigned byte before multiplying by the existing 44-byte stride.
+They do not validate the complete handle, active state or array index. The
+explicit byte conversion produces the original left/right shift pair; an
+integer `& 255` candidate instead emitted an AND and different register
+lifetimes. Keeping the position's two direct array-field expressions reproduces
+the observed separate offset additions; collapsing them into a local channel
+pointer does not. These are bounded, falsifiable type/dataflow refinements,
+without register constraints or instruction assembly.
+
+The frequency result retains an arithmetic shift of the signed step and then
+converts to the unsigned return type. It does not take an absolute value. The
+inspected later upstream's unsigned temporary likewise makes its `ret < 0`
+branch ineffective. The position is a byte-pointer difference, rather than the
+fractional step accumulator. The sample-volume query reads table byte one,
+shared with its accepted setter; it does not read byte zero used for the
+separate global volume. The player query reads the requested target word,
+shared with the accepted fade setter, rather than the current-volume word at
+`02001640`. A pending fade can therefore report its target before the current
+volume reaches it. The query alone does not establish audible output.
+
+The new files retain the pinned Krawall revision and LGPL-2.1-or-later notices.
+Their isolated header closes over the existing channel layout without editing
+accepted shared headers. All six complete extents match with the existing
+GCC 3.0.2 and GNU 2.10.1 profiles. Their actual changed-source controls preserve
+size and reject by one or two bytes: frequency scale, channel-index width,
+position field, mixer table byte, and cached-word read width. Exact source and
+header snapshots, commands, positive bytes, changed inputs and raw comparisons
+are retained in `reports/audio-query-closure-20261016/publication-canonical/`.
+
+## Master-volume compiler producer and remaining NOP
+
+A minimal three-body compiler reproducer now explains the bad final literal.
+With constant external-array indexing, `store_field` receives bit position
+`-8192`; `store_bit_field` receives the same bits as an unsigned compiler
+integer, then divides by eight, producing `0x1FFFFC00`. Live tracing of the
+unchanged pinned 32-bit-integer GCC build corroborates this exact producer.
+Pointer-parameter and variable-index forms avoid that constant field-offset
+path. All 24 RTL stages nevertheless retain the final memory store, and both
+pinned assemblers emit the ordinary byte-store opcode. Invalid negative-offset
+assembly is rejected rather than silently replaced by a NOP.
+
+The original NOP at `080499B0` is reachable fallthrough immediately after the
+address addition and before register restoration. It is not an internal branch
+target. Its address and section-relative offset are already word aligned, so
+ordinary Thumb word alignment would emit no padding there. The actual pool
+alignment occurs at `080499D2`, where the reference and old assembler both have
+two zero bytes. The compiler candidate has no alignment directive between its
+address addition and byte store. A historical post-assembly change is possible
+but unproven; this failure is not evidence of assembly origin and authorizes no
+store omission, instruction insertion or output patch.
+
+As a separate diagnostic, the locally pinned USA revision 1 entry at
+`08049A4C` matches all 116 bytes when the final constant `[-1024]` becomes the
+later upstream variable `[-i]` expression. Its gain-mask control compiles to the
+same size and rejects by one byte. That secondary-ROM comparison corroborates
+the compiler and variable-index workaround; it does not change this project's
+reference or contribute USA/Europe revision 0 source coverage. The required
+ordinary C explanation for revision 0's NOP remains unresolved. The original
+initializer's loops write 2,047 distinct clip-table bytes; index `-1024` is left
+unchanged, and the startup copy initially sets it to zero. Neither that fact
+nor the known four/five patch shifts closes all runtime writers and indices.
+Causal inputs, RTL, debugger commands/log, secondary-ROM diagnostic and concise
+findings are retained under `reports/audio-master-causal-20261016/`.
+
+## Complete original-image accounting of the startup audio copy
+
+The fixed startup `audio_iwram` copy contains **5,552 bytes**. Its current source
+owners cover `03000004–03000090`, `03000094–03000600` and
+`03000604–0300115C`: 4,432 extent bytes, comprising 2,632 credited C bytes and
+1,800 separately counted assembly bytes, including inline BIOS glue. This
+accounting uses the existing matches and adds no recovered source bytes.
+
+The remaining 1,120 bytes have supported storage roles:
+
+| RAM span, end exclusive | Bytes | Original-image role |
+| --- | ---: | --- |
+| `03000000–03000001` | 1 | Hardware-enabled byte, initially zero |
+| `03000001–03000004` | 3 | Zero alignment/reserved storage, with no field meaning assigned |
+| `03000090–03000094` | 4 | Two volume bytes initially 128, mixing mode zero and fade option zero |
+| `03000600–03000604` | 4 | Sample generation counter, initially zero |
+| `0300115C–030015AC` | 1,104 | Stereo intermediate buffer: 552 signed halfwords, initially zero |
+| `030015AC–030015B0` | 4 | Instrument generation counter, initially zero |
+
+Pinned upstream declarations corroborate these object types and sizes; accepted
+producer/consumer bodies and 18 fixed original-literal references establish the
+game addresses. The game's initial fade-option zero is retained explicitly;
+the later upstream declaration initializes its corresponding byte to one.
+Zeros alone are not the classification evidence. Source ranges are disjoint,
+and all 23 known/source entry addresses fall in instruction ranges.
+
+The complete physical partition is **4,288 instruction bytes, 136 literal
+bytes, 1,125 mutable-data bytes and three alignment/reserved bytes**. The eight
+volume-accumulator data bytes inside the assembly source block belong to the
+mutable-data total. The IRQ's return instruction, also read as its replacement
+word, is counted once as an instruction. Compiler pool directives and exact
+source/control proofs distinguish instruction words from pools within the
+source extents; no broad between-entry envelope is treated as code.
+
+The sanitized separate initial-image partition is recorded in
+[`audio_initial_image_partition`](../config/code-evidence-us-eu.json), with all
+33 physical ranges, 12 source owners, fixed storage references and upstream pin.
+It does not change the inventory algorithm or census counts. The ignored
+reproducible read-only audit is `reports/audio-copy-partition-20261016/audit.py`;
+its `partition.json` retains source-proof pins and initial-data hashes. This
+closes the original-image extent gap for this particular copy. Runtime
+writer/input domains remain separate: the known IRQ write changes
+`0300004C`, and the shift patcher changes eight converter words without a local
+argument mask. Potential later installations, writable callbacks, unbounded
+inputs and transfer veneers outside this copy still require their own evidence.
+
+## Cue playback with an existing handle
+
+The ordinary C entry at `080410D8` extends the already matched cue dispatcher:
+with sample volume enabled, it keeps an active previous handle; otherwise it
+plays a fixed sample or an eligible random variant and sets its pitch. Disabled
+volume or an ineligible variant returns zero. Its accepted status query returns
+a byte, matching the original status narrowing. No incoming execution has been
+observed for this entry; its descriptor/handle input domain remains provisional.
+
+Putting playback in the first arm of `if (!audio_game_sample_active(previous))`
+places the previous-handle assignment at the shared return. This ordinary branch
+layout also lets agbcc merge both cases' identical pitch/synchronization tail;
+the opposite source-arm order duplicated that tail and produced 240 bytes. The
+matching 228-byte extent includes 226 bytes of code and pools plus two original
+zero alignment bytes before the next word-aligned entry at `080411BC`. The
+explicit zero-filled alignment follows the existing game-wrapper convention;
+it inserts no instruction. The random bound and kept-handle increment controls
+each preserve all 228 bytes of size and reject by one byte. Source/header
+closure, commands and comparisons are retained in
+`reports/audio-cue-handle-20261016/publication-canonical/`.

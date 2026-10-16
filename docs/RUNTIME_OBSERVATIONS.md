@@ -1,0 +1,139 @@
+# Bounded boot observations
+
+These emulator observations supplement static reconstruction evidence. They do
+not establish all executable regions, all indirect targets, hardware behavior,
+or complete source ownership. The separate static inventory census retains
+`runtime_observations: 0`: that field describes the census's inputs, not the
+absence of this independent experiment.
+
+The target remains USA/Europe revision 0, SHA-256
+`92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e`.
+The ROM, native emulator library and raw trace payloads remain local and ignored.
+Only the harness, reproducibility instructions and bounded summary are public.
+
+## Emulator recipe
+
+Use a clean [mGBA 0.10.5 checkout](https://github.com/mgba-emu/mgba/tree/26b7884bc25a5933960f3cdcd98bac1ae14d42e2)
+at `toolchains/mgba-source`, pinned to commit
+`26b7884bc25a5933960f3cdcd98bac1ae14d42e2`. Preserve its source and licences.
+With CMake, Ninja and a native C compiler already available, build the static
+GBA core without frontends or optional dependencies:
+
+```sh
+git -C toolchains/mgba-source rev-parse HEAD
+git -C toolchains/mgba-source status --short
+cmake -S toolchains/mgba-source -B toolchains/mgba-build -G Ninja \
+  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+  -DLIBMGBA_ONLY=ON -DM_CORE_GBA=ON -DM_CORE_GB=OFF \
+  -DUSE_DEBUGGERS=ON -DUSE_EDITLINE=OFF -DUSE_GDB_STUB=OFF \
+  -DENABLE_SCRIPTING=OFF -DBUILD_QT=OFF -DBUILD_SDL=OFF \
+  -DBUILD_LTO=OFF -DCMAKE_BUILD_TYPE=MinSizeRel \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+cmake --build toolchains/mgba-build --target mgba --parallel 4
+```
+
+The recorded build used CMake 4.4.4 and AppleClang 21 on macOS arm64. Its
+`libmgba.a` is 1,235,544 bytes, SHA-256
+`2bf6624179d69b7541ac3d07f046009663d5d85182de4139f357f4c7e1bd8604`.
+That native archive hash identifies this local build; it is not a portable
+expected hash for other hosts. The unchanged upstream source built with no
+errors. Warnings concerned 108 four-character game-ID initializers, one
+`futimens` availability check and one unused CLI parameter.
+
+The harness must include generated `mgba/flags.h` before the core declarations;
+`USE_DEBUGGERS` changes the `mCore` layout. Include both
+`toolchains/mgba-source/include` and `toolchains/mgba-build/include`. The recorded
+macOS link uses `libmgba.a`, `-framework Foundation` and `-lm`. `MinSizeRel` uses
+`-Os` while avoiding upstream's automatic Apple Release LTO. No global install,
+package install, GUI or dependency fetch is needed for this core build.
+
+Build and run the [public harness](../tools/observe_boot.c) against the local ROM:
+
+```sh
+mkdir -p analysis/runtime-boot
+cc -std=c11 -Os -DBUILD_STATIC \
+  -Itoolchains/mgba-source/include -Itoolchains/mgba-build/include \
+  tools/observe_boot.c toolchains/mgba-build/libmgba.a \
+  -framework Foundation -lm -o analysis/runtime-boot/observe_boot
+rom_path="baseroms/Sims, The - Bustin' Out (USA, Europe) (En,Fr,De,Es,It,Nl).gba"
+analysis/runtime-boot/observe_boot "$rom_path" 300 50000000 0 \
+  > analysis/runtime-boot/boot.jsonl
+analysis/runtime-boot/observe_boot "$rom_path" 300 50000000 0 \
+  > analysis/runtime-boot/replay.jsonl
+analysis/runtime-boot/observe_boot "$rom_path" 300 50000000 0x10000000 \
+  > analysis/runtime-boot/wrong-watch.jsonl
+cmp analysis/runtime-boot/boot.jsonl analysis/runtime-boot/replay.jsonl
+python3 -m unittest discover -s tests -p test_boot_observer.py -v
+```
+
+This is the recorded macOS link command; other hosts need their platform's
+native link dependencies. Validate the local ROM against the fixed target hash
+before running. The harness accepts bounded runs up to 3,600 frames and
+100,000,000 steps. It accepts only the normal watch locations or the aligned
+`0x10000000` displacement. The five authored-fixture tests cover STM readback,
+the wrong-watch control, pre-entry register timing, missing ROM rejection and
+invalid bounds. They use synthetic instructions, with no original game payload.
+
+## Recorded result
+
+The [machine-readable summary](../config/runtime-observations-us-eu.json)
+records all 23 entry probes and 16 write probes, including zero-hit probes.
+The 300-frame run reached 17 entry probes in 5,835,926 steps and 84,028,913
+emulator ticks. Its replay was byte-identical: both 38,341-byte trace files have
+SHA-256 `8803874f05d0e9809c1783695fd5fef96243201f0e8032b19310df2560f7cce0`.
+The wrong-watch trace has SHA-256
+`a67b01a3ada412cc128c1bb3427ac2c9f960824034a25f5b5e7964f45c3ba8e0`.
+It reports zero watched writes and the same entry counts, final registers,
+frames, steps and ticks. All three runs report zero fatal, error, warning,
+stub and game-error log messages.
+
+Renderer and finalizer entry counters each reached 810, the copied sorter 135,
+background decoder one and copied tile allocator six. These arrivals connect
+the remaining reconstruction work to this boot path. The six zero-hit entry
+probes include both selected mixer entries, collision and tile decoding, and
+both map kernels; no unreachability conclusion follows.
+
+The two master-volume calls received `128` and `0x40080`, followed by converter
+patch arguments five and four. Readbacks from all four watched instruction
+pairs retained `0xE7DCA2CA` / `0xE7DCB2CB` after shift five, then changed to
+`0xE7DCA24A` / `0xE7DCB24B` after shift four. The IRQ word at `0x0300004C`
+changed from `0xE59F0034` to `0xE12FFF1E` (`BX LR`). Its first entry sample
+contains the old instruction; seven later samples contain the replacement.
+There were 67 total tail arrivals: the first and 66 later arrivals. Only the
+first eight have individual instruction/register samples.
+
+Both arrivals at `0x080499B0` show the Thumb NOP halfword `0x46C0`; the trace's
+32-bit snapshot also includes the following halfword. No store at that NOP
+site was executed. The clipping endpoint word finishes at `0x80808000`, whose
+low byte is zero; the exact-byte probe does not cover other byte writes within
+that word. Selected resource/map callback publications and IRQ-vector writes
+are recorded, without a claim that these are all writers or possible targets.
+
+## Meaning of an observation
+
+Hardware breakpoint checks run after one emulator step and compare the next
+instruction address with the probe: raw PC minus four in ARM mode or minus two
+in Thumb mode. They record arrival before that instruction executes. A separate
+initial check handles a probe already at the initial PC. An interrupt can
+intervene before the next instruction; arrival does not itself prove that
+instruction retired.
+
+Write watchpoints run before the underlying hooked store. Single stores expose
+their proposed value, but mGBA 0.10.5's multiple-store shim supplies zero for
+every word. A recorded shim value therefore cannot establish an STM payload.
+End-of-step readback records the word after that step; repeated writes during
+one step can share the same final readback.
+
+DMA word and halfword stores pass through these hooks. The CPU PC in a DMA
+callback is context, not the address of a CPU store. Direct host memory changes,
+including some HLE reset `memset` operations, bypass the hooks. Watchpoint
+comparisons also group bytes within an access width, so shifting a word probe
+by one to three bytes is not an independent negative control. Unmapped reads
+have no stored word and must not be interpreted as successful writes.
+
+The run uses mGBA's replacement BIOS with startup skipped, fixed RTC and no
+held keys. HLE services and timing do not reproduce every retail BIOS detail.
+Probe hits and a finite no-input boot cannot identify complete callback domains,
+jump-table targets, later gameplay paths, or every modified code location.
+Per-probe output limits preserve bounded examples; total hit counters remain
+separate from the retained event samples. No trace result adds matching C credit.

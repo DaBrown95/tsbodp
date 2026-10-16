@@ -32,4 +32,5 @@ extern unsigned int game_random_inclusive(unsigned short);
 extern unsigned int audio_play_sample(const void *, int, int);
 extern void audio_set_sample_pitch(unsigned int, int);
 unsigned int audio_play_animation_cue(unsigned int);
+unsigned int audio_play_animation_cue_or_keep(unsigned int, unsigned int);
 #endif

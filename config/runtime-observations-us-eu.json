@@ -1,0 +1,441 @@
+{
+  "schema_version": 1,
+  "target": "us-eu",
+  "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
+  "scope": "Bounded no-input boot observations, separate from the static inventory census; no C credit, hardware equivalence, complete executable inventory or complete target domains.",
+  "static_census_runtime_observations_unchanged": 0,
+  "emulator": {
+    "project": "mGBA",
+    "repository": "https://github.com/mgba-emu/mgba",
+    "version": "0.10.5",
+    "revision": "26b7884bc25a5933960f3cdcd98bac1ae14d42e2",
+    "source_unchanged": true,
+    "licence": "MPL-2.0 with upstream third-party notices retained",
+    "build_type": "MinSizeRel",
+    "cmake_options": [
+      "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
+      "-DLIBMGBA_ONLY=ON",
+      "-DM_CORE_GBA=ON",
+      "-DM_CORE_GB=OFF",
+      "-DUSE_DEBUGGERS=ON",
+      "-DUSE_EDITLINE=OFF",
+      "-DUSE_GDB_STUB=OFF",
+      "-DENABLE_SCRIPTING=OFF",
+      "-DBUILD_QT=OFF",
+      "-DBUILD_SDL=OFF",
+      "-DBUILD_LTO=OFF",
+      "-DCMAKE_BUILD_TYPE=MinSizeRel",
+      "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+    ],
+    "recorded_host": {
+      "system": "macOS",
+      "architecture": "arm64",
+      "compiler": "AppleClang 21",
+      "cmake": "4.4.4"
+    },
+    "native_archive": {
+      "path": "toolchains/mgba-build/libmgba.a",
+      "sha256": "2bf6624179d69b7541ac3d07f046009663d5d85182de4139f357f4c7e1bd8604",
+      "size": 1235544
+    },
+    "native_hash_portable": false
+  },
+  "harness": {
+    "path": "tools/observe_boot.c",
+    "sha256": "cefd57cee492f734440fee4ba8233256e717de16abccafcf41effad3a46270f2",
+    "size": 8518
+  },
+  "bounds": {
+    "frames": 300,
+    "max_steps": 50000000,
+    "keys_held": 0,
+    "rtc_fixed": 0,
+    "bios": "mGBA replacement BIOS with startup skipped",
+    "log_limit_per_probe": 8
+  },
+  "local_trace_artifacts": [
+    {
+      "path": "analysis/runtime-boot/boot.jsonl",
+      "sha256": "8803874f05d0e9809c1783695fd5fef96243201f0e8032b19310df2560f7cce0",
+      "size": 38341
+    },
+    {
+      "path": "analysis/runtime-boot/replay.jsonl",
+      "sha256": "8803874f05d0e9809c1783695fd5fef96243201f0e8032b19310df2560f7cce0",
+      "size": 38341
+    },
+    {
+      "path": "analysis/runtime-boot/wrong-watch.jsonl",
+      "sha256": "a67b01a3ada412cc128c1bb3427ac2c9f960824034a25f5b5e7964f45c3ba8e0",
+      "size": 20633
+    }
+  ],
+  "controls": {
+    "identical_replay_bytes": true,
+    "wrong_watch_shift": 268435456,
+    "wrong_watch_hits": 0,
+    "wrong_watch_equal_entry_counts_registers_ticks_steps": true,
+    "synthetic_stm_fixture_readback": true,
+    "synthetic_missing_ROM_rejected": true,
+    "invalid_unbounded_or_misaligned_arguments_rejected": true
+  },
+  "result": {
+    "termination": "frame_limit",
+    "frames": 300,
+    "steps": 5835926,
+    "ticks": 84028913,
+    "emitted_entry_samples": 60,
+    "emitted_pre_write_samples": 37,
+    "emitted_after_step_readbacks": 37,
+    "entry_probes": [
+      {
+        "name": "reset",
+        "address": "0x080000c0",
+        "hits": 1
+      },
+      {
+        "name": "game_entry",
+        "address": "0x08025c0c",
+        "hits": 1
+      },
+      {
+        "name": "frame_install_runtime",
+        "address": "0x0800109c",
+        "hits": 1
+      },
+      {
+        "name": "resource_install",
+        "address": "0x08016a48",
+        "hits": 1
+      },
+      {
+        "name": "frame_render_object",
+        "address": "0x080023e8",
+        "hits": 810
+      },
+      {
+        "name": "frame_finalize_object",
+        "address": "0x08003248",
+        "hits": 810
+      },
+      {
+        "name": "map_install",
+        "address": "0x08039e78",
+        "hits": 1
+      },
+      {
+        "name": "tile_allocator_install",
+        "address": "0x08047724",
+        "hits": 1
+      },
+      {
+        "name": "audio_game_initialize",
+        "address": "0x08041258",
+        "hits": 1
+      },
+      {
+        "name": "audio_master_volume",
+        "address": "0x08049968",
+        "hits": 2
+      },
+      {
+        "name": "audio_master_volume_nop",
+        "address": "0x080499b0",
+        "hits": 2
+      },
+      {
+        "name": "audio_timer_irq",
+        "address": "0x03000004",
+        "hits": 67
+      },
+      {
+        "name": "audio_shift_patcher",
+        "address": "0x03000bf0",
+        "hits": 2
+      },
+      {
+        "name": "audio_irq_reprogram_or_return",
+        "address": "0x0300004c",
+        "hits": 67
+      },
+      {
+        "name": "audio_mix_left",
+        "address": "0x03000604",
+        "hits": 0
+      },
+      {
+        "name": "audio_mix_convert",
+        "address": "0x03000ab4",
+        "hits": 0
+      },
+      {
+        "name": "frame_sort",
+        "address": "0x03002900",
+        "hits": 135
+      },
+      {
+        "name": "frame_collisions",
+        "address": "0x03002a20",
+        "hits": 0
+      },
+      {
+        "name": "tile_decoder",
+        "address": "0x030036d0",
+        "hits": 0
+      },
+      {
+        "name": "background_decoder",
+        "address": "0x03003370",
+        "hits": 1
+      },
+      {
+        "name": "map_draw",
+        "address": "0x03007160",
+        "hits": 0
+      },
+      {
+        "name": "map_transfer",
+        "address": "0x03005e60",
+        "hits": 0
+      },
+      {
+        "name": "tile_allocator",
+        "address": "0x03007390",
+        "hits": 6
+      }
+    ],
+    "write_probes": [
+      {
+        "name": "irq_reprogram_word",
+        "address": "0x0300004c",
+        "hits": 2,
+        "final_word": "0xe12fff1e"
+      },
+      {
+        "name": "convert_pair0_a",
+        "address": "0x03000b70",
+        "hits": 3,
+        "final_word": "0xe7dca24a"
+      },
+      {
+        "name": "convert_pair0_b",
+        "address": "0x03000b74",
+        "hits": 3,
+        "final_word": "0xe7dcb24b"
+      },
+      {
+        "name": "convert_pair1_a",
+        "address": "0x03000b8c",
+        "hits": 3,
+        "final_word": "0xe7dca24a"
+      },
+      {
+        "name": "convert_pair1_b",
+        "address": "0x03000b90",
+        "hits": 3,
+        "final_word": "0xe7dcb24b"
+      },
+      {
+        "name": "convert_pair2_a",
+        "address": "0x03000bb0",
+        "hits": 3,
+        "final_word": "0xe7dca24a"
+      },
+      {
+        "name": "convert_pair2_b",
+        "address": "0x03000bb4",
+        "hits": 3,
+        "final_word": "0xe7dcb24b"
+      },
+      {
+        "name": "convert_pair3_a",
+        "address": "0x03000bcc",
+        "hits": 3,
+        "final_word": "0xe7dca24a"
+      },
+      {
+        "name": "convert_pair3_b",
+        "address": "0x03000bd0",
+        "hits": 3,
+        "final_word": "0xe7dcb24b"
+      },
+      {
+        "name": "tile_decoder_callback",
+        "address": "0x03003360",
+        "hits": 2,
+        "final_word": "0x030036d0"
+      },
+      {
+        "name": "background_decoder_callback",
+        "address": "0x030036c0",
+        "hits": 2,
+        "final_word": "0x03003370"
+      },
+      {
+        "name": "map_draw_callback",
+        "address": "0x03001fc8",
+        "hits": 2,
+        "final_word": "0x03007160"
+      },
+      {
+        "name": "map_transfer_callback",
+        "address": "0x03001fcc",
+        "hits": 2,
+        "final_word": "0x03005e60"
+      },
+      {
+        "name": "bios_irq_vector",
+        "address": "0x03007ffc",
+        "hits": 2,
+        "final_word": "0x03001ba0"
+      },
+      {
+        "name": "clip_negative_endpoint",
+        "address": "0x02000e38",
+        "hits": 1,
+        "final_word": "0x80808000"
+      },
+      {
+        "name": "bad_literal_destination",
+        "address": "0x22000e38",
+        "hits": 0
+      }
+    ],
+    "emulator_log_counts": {
+      "fatal": 0,
+      "error": 0,
+      "warn": 0,
+      "info": 2615,
+      "debug": 260,
+      "stub": 0,
+      "game_error": 0
+    }
+  },
+  "observed_audio": {
+    "master_volume_arguments_r0": [
+      "0x00000080",
+      "0x00040080"
+    ],
+    "master_volume_nop_site": {
+      "address": "0x080499b0",
+      "hits": 2,
+      "instruction_halfword": "0x46c0",
+      "width_bits": 16,
+      "interpretation": "The observed Thumb halfword is the original NOP; no store at this site was executed. The 32-bit trace snapshot also contains the following halfword."
+    },
+    "converter_shift_arguments_r0": [
+      5,
+      4
+    ],
+    "converter_shift_states": [
+      {
+        "argument_r0": 5,
+        "entry_event_index": 28,
+        "word_pairs_before": [
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ],
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ],
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ],
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ]
+        ],
+        "readback_pairs_after_stores": [
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ],
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ],
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ],
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ]
+        ]
+      },
+      {
+        "argument_r0": 4,
+        "entry_event_index": 39,
+        "word_pairs_before": [
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ],
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ],
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ],
+          [
+            "0xe7dca2ca",
+            "0xe7dcb2cb"
+          ]
+        ],
+        "readback_pairs_after_stores": [
+          [
+            "0xe7dca24a",
+            "0xe7dcb24b"
+          ],
+          [
+            "0xe7dca24a",
+            "0xe7dcb24b"
+          ],
+          [
+            "0xe7dca24a",
+            "0xe7dcb24b"
+          ],
+          [
+            "0xe7dca24a",
+            "0xe7dcb24b"
+          ]
+        ]
+      }
+    ],
+    "irq_patch": {
+      "address": "0x0300004c",
+      "old_word": "0xe59f0034",
+      "after_step_word": "0xe12fff1e",
+      "entry_hits_total": 67,
+      "entry_samples_emitted": 8,
+      "first_entry_word": "0xe59f0034",
+      "later_entry_hits": 66,
+      "later_entry_samples_with_bx_lr": 7,
+      "interpretation": "One original-instruction arrival, a store/readback of BX LR, and seven later sampled BX LR arrivals; the total tail entry counter is 67. The trace samples do not record all 66 later instructions individually."
+    },
+    "clip_negative_endpoint": {
+      "address": "0x02000e38",
+      "final_word": "0x80808000",
+      "final_low_byte": "0x00",
+      "interpretation": "The watched aligned word has one hooked startup-copy write. Later byte writes to other offsets in this word need not hit the exact byte probe. No master-volume NOP-site store was observed; complete clipping-table write coverage is not established."
+    }
+  },
+  "limitations": [
+    "Hardware entry callbacks record next-instruction arrival before execution; raw PC minus four in ARM or two in Thumb is the breakpoint address. Pending interrupts may intervene.",
+    "Only named probes and one 300-frame no-input HLE boot are observed; zero hits do not establish unreachable or non-executable code.",
+    "Each probe emits at most eight event samples while final counters retain all hits; later arrivals without event records do not individually record their instruction words.",
+    "The ARM multiple-store shim newValue is a zero placeholder. Its proposed value is explicitly untrusted; readbacks record end-of-step words and can combine repeated writes.",
+    "DMA writes use hooked memory stores, but CPU PC during DMA is context rather than a CPU writer. Direct host memory changes, including some HLE/reset memset operations, bypass hooks.",
+    "Write watchpoints group addresses by access width and do not normalize all mirrored aliases; all possible modifications and writer addresses remain open.",
+    "The replacement BIOS, skipped startup, dummy video and fixed RTC do not prove physical hardware, retail BIOS or timing equivalence, or later gameplay behavior.",
+    "Observed shift arguments five and four and selected written words do not close all patcher inputs, reachable modified states, incoming transfers or callback domains.",
+    "The wrong-watch control shifts only probes, not emulated memory or ROM. The native library and raw traces remain ignored; their hashes are receipts, not included game payloads."
+  ]
+}

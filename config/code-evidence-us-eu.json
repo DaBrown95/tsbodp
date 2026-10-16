@@ -2185,5 +2185,864 @@
     "wrapper_entry": 313468,
     "private_register_veneer": 313478,
     "evidence": "Bounded 40-byte original code window plus existing copy, RAM-entry and accepted target evidence."
+  },
+  "audio_initial_image_partition": {
+    "scope": "Separate initial-image partition of the fixed startup audio_iwram copy; no additional source coverage or runtime-domain closure.",
+    "complete_runtime_domain": false,
+    "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
+    "copy": {
+      "name": "audio_iwram",
+      "phase": "startup",
+      "rom_offset": 16622712,
+      "ram_address": 50331648,
+      "size": 5552,
+      "startup_literal_offset": 276
+    },
+    "copy_sha256": "fe99bec16a292278cb94be1fa58749c7e81c9d6ca3d48e58392a15df420a838b",
+    "counts": {
+      "source_owner_count": 12,
+      "source_owned_bytes": 4432,
+      "compiled_c_credit_bytes": 2632,
+      "assembly_owned_credit_bytes": 1800,
+      "outside_source_storage_bytes": 1120
+    },
+    "physical_byte_counts": {
+      "instruction": 4288,
+      "literal": 136,
+      "mutable-data": 1125,
+      "alignment": 3
+    },
+    "ranges": [
+      {
+        "kind": "mutable-data",
+        "owner": "hardware enabled",
+        "ram_start": "0x3000000",
+        "ram_end": "0x3000001"
+      },
+      {
+        "kind": "alignment",
+        "owner": "zero alignment/reserved bytes",
+        "ram_start": "0x3000001",
+        "ram_end": "0x3000004"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_timer_irq",
+        "ram_start": "0x3000004",
+        "ram_end": "0x300007c"
+      },
+      {
+        "kind": "literal",
+        "owner": "audio_timer_irq",
+        "ram_start": "0x300007c",
+        "ram_end": "0x3000090"
+      },
+      {
+        "kind": "mutable-data",
+        "owner": "global/sample volume bytes",
+        "ram_start": "0x3000090",
+        "ram_end": "0x3000092"
+      },
+      {
+        "kind": "mutable-data",
+        "owner": "mixing mode",
+        "ram_start": "0x3000092",
+        "ram_end": "0x3000093"
+      },
+      {
+        "kind": "mutable-data",
+        "owner": "fade option",
+        "ram_start": "0x3000093",
+        "ram_end": "0x3000094"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_start_sample_extended",
+        "ram_start": "0x3000094",
+        "ram_end": "0x30002d4"
+      },
+      {
+        "kind": "literal",
+        "owner": "audio_start_sample_extended",
+        "ram_start": "0x30002d4",
+        "ram_end": "0x30002ec"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_start_sample",
+        "ram_start": "0x30002ec",
+        "ram_end": "0x3000320"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_sample_release",
+        "ram_start": "0x3000320",
+        "ram_end": "0x30003e0"
+      },
+      {
+        "kind": "literal",
+        "owner": "audio_sample_release",
+        "ram_start": "0x30003e0",
+        "ram_end": "0x30003e8"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_set_sample_step",
+        "ram_start": "0x30003e8",
+        "ram_end": "0x3000430"
+      },
+      {
+        "kind": "literal",
+        "owner": "audio_set_sample_step",
+        "ram_start": "0x3000430",
+        "ram_end": "0x3000434"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_set_channel_volume",
+        "ram_start": "0x3000434",
+        "ram_end": "0x30004ac"
+      },
+      {
+        "kind": "literal",
+        "owner": "audio_set_channel_volume",
+        "ram_start": "0x30004ac",
+        "ram_end": "0x30004b4"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_set_channel_pan",
+        "ram_start": "0x30004b4",
+        "ram_end": "0x300056c"
+      },
+      {
+        "kind": "literal",
+        "owner": "audio_set_channel_pan",
+        "ram_start": "0x300056c",
+        "ram_end": "0x3000578"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_set_channel_position",
+        "ram_start": "0x3000578",
+        "ram_end": "0x30005c4"
+      },
+      {
+        "kind": "literal",
+        "owner": "audio_set_channel_position",
+        "ram_start": "0x30005c4",
+        "ram_end": "0x30005c8"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_sample_active_ram",
+        "ram_start": "0x30005c8",
+        "ram_end": "0x30005fc"
+      },
+      {
+        "kind": "literal",
+        "owner": "audio_sample_active_ram",
+        "ram_start": "0x30005fc",
+        "ram_end": "0x3000600"
+      },
+      {
+        "kind": "mutable-data",
+        "owner": "sample generation counter",
+        "ram_start": "0x3000600",
+        "ram_end": "0x3000604"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_mixer_primitives",
+        "ram_start": "0x3000604",
+        "ram_end": "0x3000b30"
+      },
+      {
+        "kind": "mutable-data",
+        "owner": "audio_mixer_primitives",
+        "ram_start": "0x3000b30",
+        "ram_end": "0x3000b38"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_mixer_primitives",
+        "ram_start": "0x3000b38",
+        "ram_end": "0x3000c44"
+      },
+      {
+        "kind": "literal",
+        "owner": "audio_mixer_primitives",
+        "ram_start": "0x3000c44",
+        "ram_end": "0x3000c48"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_mix_channels",
+        "ram_start": "0x3000c48",
+        "ram_end": "0x3001060"
+      },
+      {
+        "kind": "literal",
+        "owner": "audio_mix_channels",
+        "ram_start": "0x3001060",
+        "ram_end": "0x3001080"
+      },
+      {
+        "kind": "instruction",
+        "owner": "audio_mix_frame",
+        "ram_start": "0x3001080",
+        "ram_end": "0x300114c"
+      },
+      {
+        "kind": "literal",
+        "owner": "audio_mix_frame",
+        "ram_start": "0x300114c",
+        "ram_end": "0x300115c"
+      },
+      {
+        "kind": "mutable-data",
+        "owner": "stereo intermediate sample buffer",
+        "ram_start": "0x300115c",
+        "ram_end": "0x30015ac"
+      },
+      {
+        "kind": "mutable-data",
+        "owner": "instrument generation counter",
+        "ram_start": "0x30015ac",
+        "ram_end": "0x30015b0"
+      }
+    ],
+    "source_owners": [
+      {
+        "name": "audio_timer_irq",
+        "source": "src/audio/timer_irq.s",
+        "rom_start": "0xfda47c",
+        "rom_end": "0xfda508",
+        "ram_start": "0x3000004",
+        "ram_end": "0x3000090",
+        "size": 140,
+        "compiled_c_bytes": 0,
+        "assembly_owned_bytes": 140,
+        "source_sha256": "2ee58236c9ded56ad38da60d358989a01a6e9df45d8c6924f5a2266a849e0d5b"
+      },
+      {
+        "name": "audio_start_sample_extended",
+        "source": "src/audio/start_sample_extended.c",
+        "rom_start": "0xfda50c",
+        "rom_end": "0xfda764",
+        "ram_start": "0x3000094",
+        "ram_end": "0x30002ec",
+        "size": 600,
+        "compiled_c_bytes": 600,
+        "assembly_owned_bytes": 0,
+        "source_sha256": "92140ea10b503e44a76d71064e8d5a6764806e36ff0cd8118a3d353893ff5d3f"
+      },
+      {
+        "name": "audio_start_sample",
+        "source": "src/audio/start_sample.c",
+        "rom_start": "0xfda764",
+        "rom_end": "0xfda798",
+        "ram_start": "0x30002ec",
+        "ram_end": "0x3000320",
+        "size": 52,
+        "compiled_c_bytes": 52,
+        "assembly_owned_bytes": 0,
+        "source_sha256": "aa82a5263d6083e8c5b3f85516f808e935b45ee14d4e78d66ee459cd9ede52e6"
+      },
+      {
+        "name": "audio_sample_release",
+        "source": "src/audio/sample_release.c",
+        "rom_start": "0xfda798",
+        "rom_end": "0xfda860",
+        "ram_start": "0x3000320",
+        "ram_end": "0x30003e8",
+        "size": 200,
+        "compiled_c_bytes": 200,
+        "assembly_owned_bytes": 0,
+        "source_sha256": "4eaff1e1977854d2d2f763db43143f151744062d5b0d4f8efe49814b9b54ed71"
+      },
+      {
+        "name": "audio_set_sample_step",
+        "source": "src/audio/set_sample_step.c",
+        "rom_start": "0xfda860",
+        "rom_end": "0xfda8ac",
+        "ram_start": "0x30003e8",
+        "ram_end": "0x3000434",
+        "size": 76,
+        "compiled_c_bytes": 76,
+        "assembly_owned_bytes": 0,
+        "source_sha256": "d99f5669f7206d68ab964489835a9d5796c1548b13f0c26977badaf27ee31fe9"
+      },
+      {
+        "name": "audio_set_channel_volume",
+        "source": "src/audio/set_channel_volume.c",
+        "rom_start": "0xfda8ac",
+        "rom_end": "0xfda92c",
+        "ram_start": "0x3000434",
+        "ram_end": "0x30004b4",
+        "size": 128,
+        "compiled_c_bytes": 128,
+        "assembly_owned_bytes": 0,
+        "source_sha256": "c4fda9b806e2dca93604ba0239ebab2bdfc84060906f97586cfddf1d602206d4"
+      },
+      {
+        "name": "audio_set_channel_pan",
+        "source": "src/audio/set_channel_pan.c",
+        "rom_start": "0xfda92c",
+        "rom_end": "0xfda9f0",
+        "ram_start": "0x30004b4",
+        "ram_end": "0x3000578",
+        "size": 196,
+        "compiled_c_bytes": 196,
+        "assembly_owned_bytes": 0,
+        "source_sha256": "3fa827f467afce185dce8fbf0a748367f3225cd4427b2998dc60bc0016b52212"
+      },
+      {
+        "name": "audio_set_channel_position",
+        "source": "src/audio/set_channel_position.c",
+        "rom_start": "0xfda9f0",
+        "rom_end": "0xfdaa40",
+        "ram_start": "0x3000578",
+        "ram_end": "0x30005c8",
+        "size": 80,
+        "compiled_c_bytes": 80,
+        "assembly_owned_bytes": 0,
+        "source_sha256": "0a390212da4641a26a41cdbd2c16a1bb26af923424a74bf991f993c167d84eb4"
+      },
+      {
+        "name": "audio_sample_active_ram",
+        "source": "src/audio/sample_active_ram.c",
+        "rom_start": "0xfdaa40",
+        "rom_end": "0xfdaa78",
+        "ram_start": "0x30005c8",
+        "ram_end": "0x3000600",
+        "size": 56,
+        "compiled_c_bytes": 56,
+        "assembly_owned_bytes": 0,
+        "source_sha256": "cec1ea7c0bf2277e6bf6f101710c40d3086819da91917d2dadc5280fb3f5f671"
+      },
+      {
+        "name": "audio_mixer_primitives",
+        "source": "src/audio/mixer_primitives.s",
+        "rom_start": "0xfdaa7c",
+        "rom_end": "0xfdb0c0",
+        "ram_start": "0x3000604",
+        "ram_end": "0x3000c48",
+        "size": 1604,
+        "compiled_c_bytes": 0,
+        "assembly_owned_bytes": 1604,
+        "source_sha256": "1daf05e8297b9c534103220986df472ac56d161b16b22a7cac3c1ce930425201"
+      },
+      {
+        "name": "audio_mix_channels",
+        "source": "src/audio/mix_channels.c",
+        "rom_start": "0xfdb0c0",
+        "rom_end": "0xfdb4f8",
+        "ram_start": "0x3000c48",
+        "ram_end": "0x3001080",
+        "size": 1080,
+        "compiled_c_bytes": 1024,
+        "assembly_owned_bytes": 56,
+        "source_sha256": "833c5355d0464cbf251ce8f7161b32d0ce3be891f17439b40edd1bd1dc39c852"
+      },
+      {
+        "name": "audio_mix_frame",
+        "source": "src/audio/mix_frame.c",
+        "rom_start": "0xfdb4f8",
+        "rom_end": "0xfdb5d4",
+        "ram_start": "0x3001080",
+        "ram_end": "0x300115c",
+        "size": 220,
+        "compiled_c_bytes": 220,
+        "assembly_owned_bytes": 0,
+        "source_sha256": "7d2d4460d99726d938be1724c20b79cbed6dba22eae5af55e229f18ad1229ef2"
+      }
+    ],
+    "storage_roles": [
+      {
+        "name": "hardware enabled",
+        "ram_start": "0x3000000",
+        "ram_end": "0x3000001",
+        "rom_start": "0xfda478",
+        "size": 1,
+        "all_initial_zero": true,
+        "role_evidence": "u8 dsStereo IWRAM;",
+        "upstream_path": "lib/directsound.c",
+        "known_writers": [
+          "audio_initialize_hardware"
+        ],
+        "known_consumers": [
+          "audio_set_channel_pan",
+          "audio_start_sample_extended"
+        ]
+      },
+      {
+        "name": "zero alignment/reserved bytes",
+        "ram_start": "0x3000001",
+        "ram_end": "0x3000004",
+        "rom_start": "0xfda479",
+        "size": 3,
+        "all_initial_zero": true,
+        "role_evidence": "u8 storage preceding word-aligned hardware IRQ entry; no separately interpreted field",
+        "upstream_path": "lib/directsound.c",
+        "known_writers": [],
+        "known_consumers": []
+      },
+      {
+        "name": "global/sample volume bytes",
+        "ram_start": "0x3000090",
+        "ram_end": "0x3000092",
+        "rom_start": "0xfda508",
+        "size": 2,
+        "all_initial_zero": false,
+        "role_evidence": "u8 volMaster[]={128,128};",
+        "upstream_path": "lib/mixer.arm.c",
+        "known_writers": [
+          "audio_set_global_volume",
+          "audio_mixer_set_sample_volume"
+        ],
+        "known_consumers": [
+          "audio_update_channel_volumes",
+          "audio_set_channel_volume",
+          "audio_set_channel_pan",
+          "audio_start_sample_extended",
+          "audio_mixer_get_sample_volume"
+        ]
+      },
+      {
+        "name": "mixing mode",
+        "ram_start": "0x3000092",
+        "ram_end": "0x3000093",
+        "rom_start": "0xfda50a",
+        "size": 1,
+        "all_initial_zero": true,
+        "role_evidence": "u8 hqMode IWRAM=0;",
+        "upstream_path": "lib/mixer.arm.c",
+        "known_writers": [
+          "audio_configure_mix_mode"
+        ],
+        "known_consumers": [
+          "audio_start_sample_extended"
+        ]
+      },
+      {
+        "name": "fade option",
+        "ram_start": "0x3000093",
+        "ram_end": "0x3000094",
+        "rom_start": "0xfda50b",
+        "size": 1,
+        "all_initial_zero": true,
+        "role_evidence": "u8 hqRamp IWRAM=1; storage role corroborates game; original game initial value is 0",
+        "upstream_path": "lib/mixer.arm.c",
+        "known_writers": [
+          "audio_configure_mix_mode"
+        ],
+        "known_consumers": [
+          "audio_sample_release",
+          "audio_start_sample_extended"
+        ]
+      },
+      {
+        "name": "sample generation counter",
+        "ram_start": "0x3000600",
+        "ram_end": "0x3000604",
+        "rom_start": "0xfdaa78",
+        "size": 4,
+        "all_initial_zero": true,
+        "role_evidence": "static u32 cidCounter IWRAM;",
+        "upstream_path": "lib/mixer.arm.c",
+        "known_writers": [
+          "audio_start_sample_extended"
+        ],
+        "known_consumers": [
+          "audio_start_sample_extended"
+        ]
+      },
+      {
+        "name": "stereo intermediate sample buffer",
+        "ram_start": "0x300115c",
+        "ram_end": "0x30015ac",
+        "rom_start": "0xfdb5d4",
+        "size": 1104,
+        "all_initial_zero": true,
+        "role_evidence": "static s16 mixBuffer[SAMPLESPERFRAME*2] IWRAM aligned(4); game SAMPLESPERFRAME 276 gives 552 shorts / 1104 bytes",
+        "upstream_path": "lib/mixer_private.arm.c",
+        "known_writers": [
+          "audio_mix_channels:clear/kernel/bias dispatch"
+        ],
+        "known_consumers": [
+          "audio_mix_channels:kernel/downsample dispatch"
+        ]
+      },
+      {
+        "name": "instrument generation counter",
+        "ram_start": "0x30015ac",
+        "ram_end": "0x30015b0",
+        "rom_start": "0xfdba24",
+        "size": 4,
+        "all_initial_zero": true,
+        "role_evidence": "static u32 iidCounter IWRAM;",
+        "upstream_path": "lib/player.c",
+        "known_writers": [
+          "audio_instrument_start"
+        ],
+        "known_consumers": [
+          "audio_instrument_start"
+        ]
+      }
+    ],
+    "fixed_data_references": [
+      {
+        "owner": "audio_set_global_volume",
+        "source": "src/audio/set_global_volume.c",
+        "source_sha256": "609f08a91a5b59c4b581d8a8e0818aefceb28ac9900a64fb18b2273db40a096b",
+        "symbol": "g_audio_global_volume",
+        "address": "0x3000090",
+        "original_literal_rom_offsets": [
+          "0x49ab0"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_configure_mix_mode",
+        "source": "src/audio/configure_mix_mode.c",
+        "source_sha256": "29ee13078a426a97675fa5879b79381f86de7e8c2023170910c54bbcc8638e0a",
+        "symbol": "g_audio_sample_fade_enabled",
+        "address": "0x3000093",
+        "original_literal_rom_offsets": [
+          "0x4993c"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_configure_mix_mode",
+        "source": "src/audio/configure_mix_mode.c",
+        "source_sha256": "29ee13078a426a97675fa5879b79381f86de7e8c2023170910c54bbcc8638e0a",
+        "symbol": "g_audio_sample_mix_mode",
+        "address": "0x3000092",
+        "original_literal_rom_offsets": [
+          "0x49940"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_update_channel_volumes",
+        "source": "src/audio/update_channel_volumes.c",
+        "source_sha256": "c9278af986b4c2c46ee968e486316f4c8c3ad36141715ac12f323b8dfc342cc9",
+        "symbol": "g_audio_sample_volume_table",
+        "address": "0x3000090",
+        "original_literal_rom_offsets": [
+          "0x49bec"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_sample_release",
+        "source": "src/audio/sample_release.c",
+        "source_sha256": "4eaff1e1977854d2d2f763db43143f151744062d5b0d4f8efe49814b9b54ed71",
+        "symbol": "g_audio_sample_fade_enabled",
+        "address": "0x3000093",
+        "original_literal_rom_offsets": [
+          "0xfda85c"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_initialize_hardware",
+        "source": "src/audio/initialize_hardware.c",
+        "source_sha256": "e65afb99d3108c3ed7961ac35080976b3a26b944f8bd34e4178df73bd66ecab6",
+        "symbol": "g_audio_hardware_enabled",
+        "address": "0x3000000",
+        "original_literal_rom_offsets": [
+          "0x49760"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_mixer_set_sample_volume",
+        "source": "src/audio/mixer_set_sample_volume.c",
+        "source_sha256": "381887ca51d7e9e673db2e2b648169eecaec61a87de94c793693b8379a27e615",
+        "symbol": "g_audio_sample_volume_table",
+        "address": "0x3000090",
+        "original_literal_rom_offsets": [
+          "0x49958"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_mix_channels",
+        "source": "src/audio/mix_channels.c",
+        "source_sha256": "833c5355d0464cbf251ce8f7161b32d0ce3be891f17439b40edd1bd1dc39c852",
+        "symbol": "g_audio_mix_buffer",
+        "address": "0x300115c",
+        "original_literal_rom_offsets": [
+          "0xfdb4dc"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_set_channel_volume",
+        "source": "src/audio/set_channel_volume.c",
+        "source_sha256": "c4fda9b806e2dca93604ba0239ebab2bdfc84060906f97586cfddf1d602206d4",
+        "symbol": "g_audio_sample_volume_table",
+        "address": "0x3000090",
+        "original_literal_rom_offsets": [
+          "0xfda928"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_set_channel_pan",
+        "source": "src/audio/set_channel_pan.c",
+        "source_sha256": "3fa827f467afce185dce8fbf0a748367f3225cd4427b2998dc60bc0016b52212",
+        "symbol": "g_audio_hardware_enabled",
+        "address": "0x3000000",
+        "original_literal_rom_offsets": [
+          "0xfda9e8"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_set_channel_pan",
+        "source": "src/audio/set_channel_pan.c",
+        "source_sha256": "3fa827f467afce185dce8fbf0a748367f3225cd4427b2998dc60bc0016b52212",
+        "symbol": "g_audio_sample_volume_table",
+        "address": "0x3000090",
+        "original_literal_rom_offsets": [
+          "0xfda9ec"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_start_sample_extended",
+        "source": "src/audio/start_sample_extended.c",
+        "source_sha256": "92140ea10b503e44a76d71064e8d5a6764806e36ff0cd8118a3d353893ff5d3f",
+        "symbol": "g_audio_sample_fade_enabled",
+        "address": "0x3000093",
+        "original_literal_rom_offsets": [
+          "0xfda74c"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_start_sample_extended",
+        "source": "src/audio/start_sample_extended.c",
+        "source_sha256": "92140ea10b503e44a76d71064e8d5a6764806e36ff0cd8118a3d353893ff5d3f",
+        "symbol": "g_audio_channel_counter",
+        "address": "0x3000600",
+        "original_literal_rom_offsets": [
+          "0xfda754"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_start_sample_extended",
+        "source": "src/audio/start_sample_extended.c",
+        "source_sha256": "92140ea10b503e44a76d71064e8d5a6764806e36ff0cd8118a3d353893ff5d3f",
+        "symbol": "g_audio_sample_mix_mode",
+        "address": "0x3000092",
+        "original_literal_rom_offsets": [
+          "0xfda758"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_start_sample_extended",
+        "source": "src/audio/start_sample_extended.c",
+        "source_sha256": "92140ea10b503e44a76d71064e8d5a6764806e36ff0cd8118a3d353893ff5d3f",
+        "symbol": "g_audio_hardware_enabled",
+        "address": "0x3000000",
+        "original_literal_rom_offsets": [
+          "0xfda75c"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_start_sample_extended",
+        "source": "src/audio/start_sample_extended.c",
+        "source_sha256": "92140ea10b503e44a76d71064e8d5a6764806e36ff0cd8118a3d353893ff5d3f",
+        "symbol": "g_audio_sample_volume_table",
+        "address": "0x3000090",
+        "original_literal_rom_offsets": [
+          "0xfda760"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_instrument_start",
+        "source": "src/audio/instrument_start.c",
+        "source_sha256": "e240528ba1cbdb96aecdd7c109193db850c1b97acc0260064c633147c8676801",
+        "symbol": "g_audio_instrument_generation",
+        "address": "0x30015ac",
+        "original_literal_rom_offsets": [
+          "0x4acf4"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      },
+      {
+        "owner": "audio_mixer_get_sample_volume",
+        "source": "src/audio/mixer_get_sample_volume.c",
+        "source_sha256": "b021b8150edb6aed1a6c2810d699f4bed3e35bc9ce5b3f8777d09bca1a81b4fd",
+        "symbol": "g_audio_sample_volume_table",
+        "address": "0x3000090",
+        "original_literal_rom_offsets": [
+          "0x49964"
+        ],
+        "compiler_assembly_has_symbol_word": true
+      }
+    ],
+    "known_entry_points": [
+      {
+        "address": "0x3000004",
+        "owner": "audio_timer_irq",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000094",
+        "owner": "audio_start_sample_extended",
+        "role": "instruction"
+      },
+      {
+        "address": "0x30002ec",
+        "owner": "audio_start_sample",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000320",
+        "owner": "audio_sample_release",
+        "role": "instruction"
+      },
+      {
+        "address": "0x30003e8",
+        "owner": "audio_set_sample_step",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000434",
+        "owner": "audio_set_channel_volume",
+        "role": "instruction"
+      },
+      {
+        "address": "0x30004b4",
+        "owner": "audio_set_channel_pan",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000578",
+        "owner": "audio_set_channel_position",
+        "role": "instruction"
+      },
+      {
+        "address": "0x30005c8",
+        "owner": "audio_sample_active_ram",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000604",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000684",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x30006a4",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000728",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x30007c0",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x30008a4",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x30008c8",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x30009b0",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000ab4",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000afc",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000b38",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000bf0",
+        "owner": "audio_mixer_primitives",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3000c48",
+        "owner": "audio_mix_channels",
+        "role": "instruction"
+      },
+      {
+        "address": "0x3001080",
+        "owner": "audio_mix_frame",
+        "role": "instruction"
+      }
+    ],
+    "known_code_writes": [
+      {
+        "writer": "audio_timer_irq",
+        "target": "0x0300004c",
+        "bytes": 4,
+        "value_source": "0x03000078 existing BX LR instruction; dual-use instruction read counted once as code"
+      },
+      {
+        "writer": "audio_mixer_primitives shift patcher at 0x03000BF0",
+        "targets": [
+          "0x3000b70",
+          "0x3000b74",
+          "0x3000b8c",
+          "0x3000b90",
+          "0x3000bb0",
+          "0x3000bb4",
+          "0x3000bcc",
+          "0x3000bd0"
+        ],
+        "bytes_each": 4,
+        "operation": "Clear 0xF80, OR incoming argument << 7; no local argument mask"
+      }
+    ],
+    "upstream": {
+      "project": "Krawall",
+      "url": "https://github.com/sebknzl/krawall",
+      "revision": "8d338581bf0ed0afad15b66bf5979ad4c4d15ed0",
+      "role": "Storage declarations corroborate roles, not historical game source identity; game fade-option initial value is zero, while this upstream declaration uses one."
+    },
+    "evidence": "Disjoint exact source/control proofs, compiler pool directives, original startup initialization and fixed original-literal references; zero bytes alone are not role evidence.",
+    "limitations": [
+      "Pinned upstream source supplies corroborating storage roles, not historical game source identity. Game fade-option initialization differs from upstream and is recorded from fixed ROM.",
+      "Three leading zero bytes are alignment/reserved storage; no field meaning is assigned.",
+      "Known buffer operations require their documented valid pointer/count/channel domains. This audit does not prove all writers, absence of later installation/execution in data, or all dispatch-table indices.",
+      "Original-image source ownership does not close self-modified states, writable callbacks or arbitrary incoming transfers. Audio Thumb/ARM veneers outside this copy remain separate."
+    ]
   }
 }

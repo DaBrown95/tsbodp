@@ -63,11 +63,26 @@ RAM calls explicit and preserve the original interworking thunks. The copied
 collision dispatcher now has a verified 640-byte semantic ARM C replacement;
 the 284-byte sort body remains unconverted and receives no C credit.
 
-The initializer at `0x109C` provides static source and size evidence for both
-RAM copies: ROM `0xB840` to RAM `0x03002900`, 71 words / 284 bytes; ROM `0xB0E8`
-to RAM `0x03002A20`, 160 words / 640 bytes. Each call passes the corresponding
-word count plus CpuFastSet control bit `0x04000000`. This establishes copy
-mapping, not runtime execution or a decompiled dispatcher.
+`frame_install_runtime` at `0x109C` now matches its complete 108-byte C extent:
+72 instruction bytes and 36 literal bytes. It allocates 40,960 zeroed bytes for
+128 object slots at a 320-byte stride, then allocates 572 zeroed shared-display
+bytes. The canonical `FrameObject` is a 312-byte partial C view, not a claim
+that these slots allocate only 312 bytes. The shared allocation size does not
+establish complete runtime record or index bounds. Neither allocation has an
+original null check before the subsequent pool initialization.
+
+The installer copies ROM `0xB840` to RAM `0x03002900`, 71 words / 284 bytes, and
+ROM `0xB0E8` to RAM `0x03002A20`, 160 words / 640 bytes. Both calls use SWI `0B`
+(`CpuSet`), with bit `0x04000000` selecting 32-bit copy units and the low bits
+holding the word count. It then clears the shared rounding word at
+`0x030017D0`. These addresses and transfer sizes retain the existing RAM map.
+
+The changed-source control reduces the first transfer from 71 to 70 words;
+it still compiles to 108 bytes and rejects by one byte. Source/header snapshots,
+linked bytes and comparisons are retained under ignored
+`analysis/frame-install-runtime/`. This reconstructs the installer and its
+allocation/copy operations. It does not establish observed execution, complete
+callback domains, or matching C ownership of the copied sorter.
 
 `frame_step_object` at `0x1CCC` is a matched 256-byte object update coordinator.
 It branches between removal, visibility, callbacks, animation, affine updates,

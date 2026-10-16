@@ -2700,6 +2700,36 @@
       }
     },
     {
+      "name": "audio_play_animation_cue_or_keep",
+      "rom_offset": 266456,
+      "size": 228,
+      "source": "src/audio/play_animation_cue_or_keep.c",
+      "symbols": {
+        "g_audio_cue_descriptors": "0x08d73b9c",
+        "g_audio_sample_parameters": "0x08d73708",
+        "g_audio_sample_variants": "0x08d73a7c",
+        "g_audio_samples": "0x08d54690",
+        "audio_play_sample": "0x0804c879",
+        "audio_set_sample_pitch": "0x0804c88d",
+        "g_audio_control": "0x03007360",
+        "g_audio_game_options": "0x03005d90",
+        "audio_sync_game_state": "0x08041535",
+        "game_random_inclusive": "0x08035451",
+        "audio_game_sample_active": "0x0804146d"
+      },
+      "thumb_symbols": [
+        "audio_sync_game_state",
+        "game_random_inclusive",
+        "audio_play_sample",
+        "audio_set_sample_pitch",
+        "audio_game_sample_active"
+      ],
+      "negative_control": {
+        "before": "game_random_inclusive(7)",
+        "after": "game_random_inclusive(6)"
+      }
+    },
+    {
       "name": "audio_sync_game_state",
       "rom_offset": 267572,
       "size": 40,
@@ -42158,6 +42188,246 @@
         "after": "choices[1] = 88;"
       },
       "source": "src/frame/frame_select_attachment_jobs_88_89.c"
+    },
+    {
+      "name": "frame_install_runtime",
+      "rom_offset": 4252,
+      "size": 108,
+      "source": "src/frame/frame_install_runtime.c",
+      "symbols": {
+        "g_frame_queue": "0x030015b8",
+        "g_frame_shared_display": "0x030017c8",
+        "g_frame_round_bias": "0x030017d0",
+        "heap_allocate_zeroed": "0x080278e5",
+        "frame_pool_initialize": "0x08024d19",
+        "resource_bios_swi_0b": "0x0804c8c5",
+        "g_frame_sort_rom": "0x0800b840",
+        "g_frame_sort_ram": "0x03002900",
+        "g_frame_collision_rom": "0x0800b0e8",
+        "g_frame_collision_ram": "0x03002a20"
+      },
+      "thumb_symbols": [
+        "heap_allocate_zeroed",
+        "frame_pool_initialize",
+        "resource_bios_swi_0b"
+      ],
+      "negative_control": {
+        "before": "0x04000047",
+        "after": "0x04000046"
+      }
+    },
+    {
+      "name": "audio_get_channel_frequency",
+      "rom_offset": 301632,
+      "size": 24,
+      "source": "src/audio/get_channel_frequency.c",
+      "symbols": {
+        "g_audio_sample_channels": "0x020008b4"
+      },
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "step >> 2",
+        "after": "step >> 3"
+      }
+    },
+    {
+      "name": "audio_get_channel_volume",
+      "rom_offset": 301656,
+      "size": 20,
+      "source": "src/audio/get_channel_volume.c",
+      "symbols": {
+        "g_audio_sample_channels": "0x020008b4"
+      },
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "(unsigned char)handle",
+        "after": "(unsigned short)handle"
+      }
+    },
+    {
+      "name": "audio_get_channel_pan",
+      "rom_offset": 301676,
+      "size": 24,
+      "source": "src/audio/get_channel_pan.c",
+      "symbols": {
+        "g_audio_sample_channels": "0x020008b4"
+      },
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "(unsigned char)handle",
+        "after": "(unsigned short)handle"
+      }
+    },
+    {
+      "name": "audio_get_channel_position",
+      "rom_offset": 301700,
+      "size": 28,
+      "source": "src/audio/get_channel_position.c",
+      "symbols": {
+        "g_audio_sample_channels": "0x020008b4"
+      },
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "handle].cursor -",
+        "after": "handle].end -"
+      }
+    },
+    {
+      "name": "audio_mixer_get_sample_volume",
+      "rom_offset": 301404,
+      "size": 12,
+      "source": "src/audio/mixer_get_sample_volume.c",
+      "symbols": {
+        "g_audio_sample_volume_table": "0x03000090"
+      },
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "g_audio_sample_volume_table[1]",
+        "after": "g_audio_sample_volume_table[0]"
+      }
+    },
+    {
+      "name": "audio_player_get_volume_target",
+      "rom_offset": 310396,
+      "size": 12,
+      "source": "src/audio/player_get_volume_target.c",
+      "symbols": {
+        "g_audio_player_volume_target": "0x020025ac"
+      },
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "return g_audio_player_volume_target;",
+        "after": "return *(unsigned char *)&g_audio_player_volume_target;"
+      }
+    },
+    {
+      "name": "startup_game_entry",
+      "rom_offset": 154636,
+      "size": 224,
+      "source": "src/startup/game_entry.c",
+      "symbols": {
+        "configure_blending": "0x080393d5",
+        "startup_initialize_080350a4": "0x080350a5",
+        "irq_init": "0x0801f855",
+        "heap_initialize": "0x08027831",
+        "display_text_initialize": "0x0801adf9",
+        "display_text_initialize_buffer": "0x08044fa1",
+        "save_stream_initialize": "0x08037c0d",
+        "scene_initialize_request_queue": "0x08027d55",
+        "display_install_tile_allocator": "0x08047725",
+        "frame_install_runtime": "0x0800109d",
+        "startup_initialize_0800d564": "0x0800d565",
+        "display_initialize_palettes": "0x080116b5",
+        "resource_install_decoders": "0x08016a49",
+        "startup_initialize_0801bafc": "0x0801bafd",
+        "frame_initialize_oam": "0x0802ce7d",
+        "startup_initialize_08030338": "0x08030339",
+        "startup_initialize_08039184": "0x08039185",
+        "frame_install_map_routines": "0x08039e79",
+        "startup_initialize_0802b11c": "0x0802b11d",
+        "frame_initialize_random_buffer": "0x0803530d",
+        "input_init": "0x0801f305",
+        "startup_initialize_080458b8": "0x080458b9",
+        "resource_allocate_arena": "0x0800ad05",
+        "set_word_0300217c": "0x0803e449",
+        "set_word_03002180_bit0": "0x0803e461",
+        "audio_game_initialize_default": "0x08041245",
+        "irq_enable_defaults": "0x0801f8a9",
+        "set_vblank_callback": "0x0801f8ed",
+        "startup_initialize_08046eb0": "0x08046eb1",
+        "scene_step_request_handoff": "0x08027cad",
+        "startup_bios_wait_vblank": "0x0804c8ed",
+        "g_game_flags": "0x03004310",
+        "g_transition_frame_period": "0x0300430c",
+        "g_irq_context": "0x03004280",
+        "irq_default_vblank_callback": "0x0801f9e5"
+      },
+      "thumb_symbols": [
+        "configure_blending",
+        "startup_initialize_080350a4",
+        "irq_init",
+        "heap_initialize",
+        "display_text_initialize",
+        "display_text_initialize_buffer",
+        "save_stream_initialize",
+        "scene_initialize_request_queue",
+        "display_install_tile_allocator",
+        "frame_install_runtime",
+        "startup_initialize_0800d564",
+        "display_initialize_palettes",
+        "resource_install_decoders",
+        "startup_initialize_0801bafc",
+        "frame_initialize_oam",
+        "startup_initialize_08030338",
+        "startup_initialize_08039184",
+        "frame_install_map_routines",
+        "startup_initialize_0802b11c",
+        "frame_initialize_random_buffer",
+        "input_init",
+        "startup_initialize_080458b8",
+        "resource_allocate_arena",
+        "set_word_0300217c",
+        "set_word_03002180_bit0",
+        "audio_game_initialize_default",
+        "irq_enable_defaults",
+        "set_vblank_callback",
+        "startup_initialize_08046eb0",
+        "scene_step_request_handoff",
+        "startup_bios_wait_vblank",
+        "irq_default_vblank_callback"
+      ],
+      "negative_control": {
+        "before": "g_transition_frame_period = 2;",
+        "after": "g_transition_frame_period = 3;"
+      }
     }
   ],
   "assembly": [
@@ -42462,6 +42732,18 @@
       "negative_control": {
         "before": "add r1, r1, #1",
         "after": "add r1, r1, #2"
+      }
+    },
+    {
+      "name": "startup_bios_wait_vblank",
+      "rom_offset": 313580,
+      "size": 8,
+      "source": "src/startup/bios_wait_vblank.s",
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "negative_control": {
+        "before": "BIOS_VBLANK_INTR_WAIT, 0x05",
+        "after": "BIOS_VBLANK_INTR_WAIT, 0x04"
       }
     }
   ]
