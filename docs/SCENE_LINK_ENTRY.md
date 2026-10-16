@@ -336,3 +336,46 @@ game-state representations must satisfy their existing consumers. Signed
 fixed-point arithmetic is qualified to representable inputs. No new range,
 capacity, string-size or gameplay guarantee follows from the byte match; the
 offset-sixteen string access does not establish a complete game-state layout.
+
+
+## World-effect offer callbacks
+
+Five ordinary-C callbacks from the seven-word observed world-effect table at
+`08D70894` now own 1,100 complete bytes: table indices 0 (`0800504C`, 132),
+1 (`080050D0`, 292), 2 (`080051F4`, 248), 4 (`080053E8`, 232) and
+6 (`08005584`, 196). Their disjoint roles are 1,022 instruction bytes,
+60 literal bytes and eighteen zero alignment bytes. Every first ordinary-C
+recipe matches; each cue-15-to-14 source control keeps the extent and rejects
+by one byte. Target API/layout checks include the actual provider definitions
+and three deliberately incompatible contracts. Defined C fixtures distinguish
+the control's cue argument; these are authored fixtures, not game observations.
+
+The callbacks use the existing 24-byte offer geometry: limit word at +4,
+countdown at +16, phase at +18 and count byte at +20, followed by multiplier
+at state +96 and signed selected index at +100. The new view does not change
+the existing offer-state allocation or claim all its writers. A genuine
+`previous = countdown--` value preserves the native old-halfword zero test.
+The used second argument is retained as a byte and explicitly interpreted
+signed at its comparison. Unused formals and the common declaration do not
+uniquely identify the historical API; the original dispatcher sign-extends
+its second byte and still requires an end-to-end source contract.
+
+Observed table entries 3 (`080052EC`, 252 bytes) and 5 (`080054D0`, 180) remain
+unconverted. Current first CSE removes a second ordinary count read that the
+native code retains. Both reads use the same preserved native record base;
+there is no separate count literal or intervening call/store. A postincrement
+counterfactual did not change the mismatch. The compiler's widened-load reuse
+in first CSE explains the removed QI read.
+A diagnostic disabling expensive optimizations preserves that read in both
+sources, but introduces allocated read-only data and still mismatches the native
+code. The stable verifier rejects both objects. This identifies a compiler
+mechanism, not an accepted source or historical profile. No new qualifier, alias
+or register constraint supplies a match.
+
+The step at `08003ABC` is the scene table's row-23 step callback, bounded by
+its native return, pools and the next entry at `08003D74`. Fourteen of its
+sixteen direct providers already have source. Its original two providers at
+`08004CE8` and `08004E90`, together with the step's retained phase/input
+producer mismatch, remain held. This callback batch does not close those
+bodies, descriptor-index/table capacity, incoming targets, arithmetic or
+backing-storage domains. `resource_get_object` at `0800AEE4` was already owned.

@@ -25,4 +25,11 @@ unsigned int audio_play_animation_cue(unsigned int);
 unsigned char frame_actor_need_value(struct FrameActorNeedState *,unsigned int);
 unsigned char frame_actor_need_average(struct FrameActorNeedState *);
 unsigned char frame_attachment_need_is_low(struct FrameActorNeedState *,unsigned int);
+/* Remaining observed row57 callbacks; action49 uses the legacy _31 family. */
+unsigned int frame_interaction_initialize_31(struct FrameNeedEffectState *);
+unsigned int frame_interaction_select_31(struct FrameNeedEffectState *, unsigned char *);
+/* EC formal roles remain inferred until its generic caller is identified. */
+unsigned int frame_interaction_prepare_31(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+void frame_interaction_finish_31(struct FrameNeedEffectState *);
+
 #endif

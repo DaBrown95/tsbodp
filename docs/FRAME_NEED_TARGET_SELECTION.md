@@ -745,8 +745,9 @@ lifetimes, allocation and gameplay domains remain open.
 
 ## Constant-result EC switches and the retained LR save
 
-Thirty-one eight-byte EC entries now have matching C definitions, using each
-recovered writer and status dispatcher's complete evidenced action set:
+Thirty-four observed-prefix eight-byte EC entries now have matching C
+definitions, using each recovered writer and status dispatcher's complete
+evidenced action set:
 
 | Definition row | EC entry | Action cases |
 | --- | --- | --- |
@@ -781,6 +782,9 @@ recovered writer and status dispatcher's complete evidenced action set:
 | 35, 36 | `0x0803D3CC` | 73 |
 | 39 | `0x080276C0` | 46 |
 | 40 | `0x080338C8` | 43 |
+| 50 | `0x0802A9B4` | 87 |
+| 56, 58 | `0x08016DB4` | 49 |
+| 57 | `0x0800F6E0` | 49 |
 
 Each source switch returns word one for its cases and default. The original
 256-byte EC switch in rows 42/43 independently corroborates this family idiom;
@@ -798,13 +802,17 @@ preprocessed input remain identical. This supports the within-function cache
 explanation; it is a diagnostic, not an accepted alternate recipe. The earlier
 plain-constant and cross-function inline-cache explanations remain disproved.
 
-All thirty-one complete-set recipes match on their first attempt, without
+One additional same-body EC at `0x08016E34` belongs to the unrooted action-75
+module outside this observed prefix. Its writer and status independently ground
+case 75; it adds no entry to the 48-prefix count.
+
+All thirty-five complete-set recipes match on their first attempt, without
 instruction assembly, register constraints, added qualifiers or invented calls.
-Real controls make one evidenced case return zero: twenty-five compile to 16 bytes
+Real controls make one evidenced case return zero: twenty-nine compile to 16 bytes
 and reject by 14 bytes; six compile to 24 and reject by 22. The stable verifier
 includes extra bytes in rejection. Canonical API, full-ROM/control and progress
-gates pass. Together these leaves own 248 C instruction bytes and no assembly,
-pools or alignment.
+gates pass. Together these leaves own 280 C instruction bytes (272 in the
+observed prefix) and no assembly, pools or alignment.
 
 For rows 3/4 and the shared header writer, zero is an evidenced buffer sentinel,
 so the action cases are respectively 12/31/33/45 and 49/50. Zero remains in the
@@ -815,9 +823,11 @@ Removed case structure and unused first-two formal roles are inferred from the
 family and its recovered writers, not uniquely identified historical source.
 The source still returns one for every word input. Generic EC delivery, writable
 callback targets, valid selection indices and retained-tail domains remain open.
-After these thirty-one, 17 distinct same-body entries in the observed 149-row
-prefix still need their own justified source recipes and depend on unconverted
-E8 writers. Byte equality alone does not authorize an arbitrary case list.
+After these thirty-four, 14 distinct same-body entries in the observed 149-row
+prefix still need justified source recipes: 13 depend on unconverted E8 writers;
+`0x08013360` has an owned writer that writes no actions. No grounded case set is
+available for that EC, and no speculative source trial was made. Byte equality
+alone does not authorize an arbitrary case list.
 
 
 ## Definition row zero: attachment actions 13/14
@@ -960,3 +970,43 @@ actual-definition API/layout checks pass, and the full matching/control and
 progress gates pass. No assembly instruction, register constraint or added
 qualifier supplies a match. Complete incoming/writable domains, valid state
 backing and gameplay remain open.
+
+
+## Spawn, shared action-49 and no-choice attachments
+
+| Observed rows | Local interval | New C functions / extent bytes |
+| --- | --- | ---: |
+| 50 | `0x0802A974..0x0802AA78` | 8 / 260 |
+| 56, 58 | `0x08016C68..0x08016E28` | 5 / 64; 384 already owned |
+| 57 | `0x0800F4DC..0x0800F754` | 4 / 24; 608 already owned |
+| 68, 70, 72 | `0x08013330..0x08013390` | 7 / 88; eight EC bytes remain original |
+| No installed row identified | `0x08016E28..0x08016F24` | 7 / 180; 72 already owned |
+
+These attachment additions own 31 definitions / 616 extent bytes: 592
+instruction bytes, four pool bytes and twenty zero-alignment bytes. Actual
+definitions and target layouts pass API checks; every changed-source control
+rejects. Full matching/control and progress gates pass. Existing bodies were
+reverified where their contracts connect the modules and receive no new credit.
+
+Row 50 writes action 87. Its worker obtains the owner's attachment-zero point,
+creates actor 4 with the owner's direction, plays cue 49, and sets the owner
+parameter and phase. Its tick stores the genuine narrowed search result after
+the commit call. That result lifetime is real here and does not resolve the
+separate kind-66 worker. The neighbouring predicate requires two early checks;
+combining them reversed the native final branch.
+
+Rows 56/58 and legacy interaction row 57 both write action 49, retaining their
+separate worker and ABI families. Row 57's source names retain the existing
+`_31` convention. The next entry at `0x0800F754` is the owned animation step;
+`0x08016E28` starts the distinct action-75 module. Neither is a constant-100
+neighbor of the preceding module. The unrooted action-75 worker follows phases
+0, 83 and 1; its already-owned route keeps its unsigned-byte return. No installed
+callback or incoming role is inferred from this source grouping.
+
+Rows 68/70/72 use an E8 selector that returns one without writing the choices
+buffer, a conventional record allocator/begin and a constant-two status. Its EC
+remains original: no action cases are evidenced. The neighbouring count
+predicate and constant-100 body likewise have no identified incoming edges.
+This module starts at `0x08013330`; the header-job rows' actual F8 pointer is
+`0x08012E75`. Complete callback populations, generic EC/FC delivery, live point
+and record backing, arithmetic domains and gameplay remain open.
