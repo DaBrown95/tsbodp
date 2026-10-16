@@ -12,12 +12,7 @@ struct FrameNeedEffectSpatialWork {
  struct FrameNeedEffectCell candidates[12],targets[10];
  struct FramePoint far_bounds,near_bounds;
 };
-/* The copied state point is stored at object +0xA4; its geometric role remains
- * provisional, as does its relationship with the handoff's equal points. */
-struct FrameNeedObjectBounds {
- unsigned char unknown00[0xa4];
- struct FramePoint bounds;
-};
+/* Object +0xA4 is the canonical spatial.bounds.upper point. */
 unsigned char frame_grid_cell_extents(void *, const int *,
                                      struct FramePoint *, struct FramePoint *);
 

@@ -4,17 +4,17 @@
 void frame_need_effect_handoff_bounds(struct FrameObject *base,
  struct FrameNeedEffectState *state, unsigned char before)
 {
- struct FrameActorFinishBounds *object = (struct FrameActorFinishBounds *)base;
+ struct FrameObject *object = base;
  object->before_step = 0;
  if (before) {
-  object->lower.x = object->upper.x =
-   ((struct FrameActorFinishBounds *)((struct DisplayNeedEffectStateView *)state)->object)->upper.x - 1;
-  object->lower.y = object->upper.y =
-   ((struct FrameActorFinishBounds *)((struct DisplayNeedEffectStateView *)state)->object)->upper.y + 1;
+  object->spatial.bounds.lower.x = object->spatial.bounds.upper.x =
+   ((struct DisplayNeedEffectStateView *)state)->object->spatial.bounds.upper.x - 1;
+  object->spatial.bounds.lower.y = object->spatial.bounds.upper.y =
+   ((struct DisplayNeedEffectStateView *)state)->object->spatial.bounds.upper.y + 1;
  } else {
-  object->lower.x = object->upper.x =
-   ((struct FrameActorFinishBounds *)((struct DisplayNeedEffectStateView *)state)->object)->upper.x + 1;
-  object->lower.y = object->upper.y =
-   ((struct FrameActorFinishBounds *)((struct DisplayNeedEffectStateView *)state)->object)->upper.y - 1;
+  object->spatial.bounds.lower.x = object->spatial.bounds.upper.x =
+   ((struct DisplayNeedEffectStateView *)state)->object->spatial.bounds.upper.x + 1;
+  object->spatial.bounds.lower.y = object->spatial.bounds.upper.y =
+   ((struct DisplayNeedEffectStateView *)state)->object->spatial.bounds.upper.y - 1;
  }
 }

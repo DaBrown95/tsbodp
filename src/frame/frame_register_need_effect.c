@@ -52,7 +52,7 @@ unsigned char frame_register_need_effect(void *context,struct FrameObject *base,
       struct FrameObject *neighbor_object;
       frame_need_effect_increment_counter(neighbor,state);
       neighbor_object=((struct DisplayNeedEffectStateView *)neighbor)->object;
-      ((struct FrameNeedObjectBounds *)neighbor_object)->bounds=
+      neighbor_object->spatial.bounds.upper=
        ((struct FrameNeedEffectSpatialWork *)((struct FrameNeedEffectObject *)neighbor_object)->effect_state)->far_bounds;
       frame_need_effect_handoff_bounds(((struct DisplayNeedEffectStateView *)state)->object,neighbor,1);
      }
@@ -68,7 +68,7 @@ unsigned char frame_register_need_effect(void *context,struct FrameObject *base,
       struct FrameObject *neighbor_object;
       frame_need_effect_increment_counter(state,neighbor);
       neighbor_object=((struct DisplayNeedEffectStateView *)neighbor)->object;
-      ((struct FrameNeedObjectBounds *)neighbor_object)->bounds=
+      neighbor_object->spatial.bounds.upper=
        ((struct FrameNeedEffectSpatialWork *)((struct FrameNeedEffectObject *)neighbor_object)->effect_state)->far_bounds;
       frame_need_effect_handoff_bounds(((struct DisplayNeedEffectStateView *)neighbor)->object,neighbor,1);
      } else frame_grid_add_occupancy(context,cell_pointer,4);

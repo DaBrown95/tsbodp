@@ -12,8 +12,8 @@ struct FrameObject *frame_create_actor_effect(struct FrameObject *owner,unsigned
   frame_set_position((struct FrameObject *)object,position.x,position.y);
  else frame_set_position((struct FrameObject *)object,owner->position.x,owner->position.y);
  object->before_step=0;
- object->lower_x=object->upper_x=((struct FrameActorEffectObject *)owner)->upper_x-1;
- object->lower_y=object->upper_y=((struct FrameActorEffectObject *)owner)->upper_y+1;
+ ((struct FrameObject *)object)->spatial.bounds.lower.x=((struct FrameObject *)object)->spatial.bounds.upper.x=owner->spatial.bounds.upper.x-1;
+ ((struct FrameObject *)object)->spatial.bounds.lower.y=((struct FrameObject *)object)->spatial.bounds.upper.y=owner->spatial.bounds.upper.y+1;
  object->flags=0x40011;
  object->subtype=kind;object->kind=kind;object->owner=owner;object->completion_mode=completion_mode;
  transition_object_set_state((struct FrameObject *)object,0);

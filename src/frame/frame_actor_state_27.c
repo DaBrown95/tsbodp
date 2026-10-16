@@ -65,7 +65,9 @@ void frame_actor_state_27(struct FrameObject *object)
    ((struct FrameActorSpeedGame *)&g_resource_game_state)->saved_position=object->position;
    audio_game_stop_sample(g_frame_actor_speed_cue_handle);
    frame_update_actor_state(actor);
-   *(struct FrameActorSpeedBounds *)((char *)actor+0x98)=*(struct FrameActorSpeedBounds *)((char *)object+0x98);
+   __builtin_memcpy((unsigned char *)actor+0x98,
+    (const unsigned char *)object+0x98,
+    sizeof object->before_step+sizeof object->spatial.bounds.lower+sizeof object->spatial.bounds.upper);
   } else {
    /* Keep this input argument live in its ABI register. */
    register unsigned char argument asm("r0")=player;

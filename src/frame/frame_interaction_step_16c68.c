@@ -50,6 +50,6 @@ finish:
     job->actor->position.y = point.y << 16;
     frame_request_animation((struct FrameCommandObject *)job->actor, 1);
     frame_commit_need_effect(owner->object, 0);
-    ((struct FrameActorFinishBounds *)job->actor)->before_step = resource_object_before_step;
+    job->actor->before_step = resource_object_before_step;
     return 2;
 }

@@ -1,7 +1,7 @@
 #ifndef FRAME_ACTOR_EFFECT_H
 #define FRAME_ACTOR_EFFECT_H
 /* FrameObject, FrameOam and variant-resource types come from the actor view.
- * The four word bounds are a bounded partial view; units remain provisional. */
+ * Ordering coordinates use the canonical FrameObject spatial member. */
 struct FrameActorEffectObject {
  unsigned char unknown00[8]; unsigned short id,subtype; unsigned int flags;
  unsigned char unknown10[60]; unsigned char kind,state,unknown4e[22];
@@ -9,7 +9,7 @@ struct FrameActorEffectObject {
  unsigned char completion_mode,unknown6d[27];
  void (*on_step)(struct FrameObject *); unsigned char unknown8c[12];
  void (*before_step)(struct FrameObject *);
- int lower_x,lower_y,upper_x,upper_y;
+ unsigned char unknown9c[16];
  unsigned char unknownac[36]; struct FrameOam oam;
  unsigned char unknownd8[41]; unsigned char sharing_flags;
 };

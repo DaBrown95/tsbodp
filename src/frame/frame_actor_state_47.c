@@ -12,11 +12,11 @@ void frame_actor_state_47(struct FrameObject *object)
    frame_set_variant_state(object,6);
    frame_clear_animation_pending(object);
    actor=frame_create_actor(1,4,object->position.x+(15<<16),object->position.y-(25<<16));
-   ((struct FrameActorFinishBounds *)actor)->upper=((struct FrameActorFinishBounds *)object)->upper;
-   ((struct FrameActorFinishBounds *)actor)->upper.y-=10;
-   ((struct FrameActorFinishBounds *)actor)->lower=((struct FrameActorFinishBounds *)object)->lower;
-   ((struct FrameActorFinishBounds *)actor)->lower.y-=10;
-   ((struct FrameActorFinishBounds *)actor)->before_step=0;
+   actor->spatial.bounds.upper=object->spatial.bounds.upper;
+   actor->spatial.bounds.upper.y-=10;
+   actor->spatial.bounds.lower=object->spatial.bounds.lower;
+   actor->spatial.bounds.lower.y-=10;
+   actor->before_step=0;
    frame_request_animation((struct FrameCommandObject *)actor,89);
    transition_object_set_state(actor,25);
    frame_set_variant_state(actor,0);

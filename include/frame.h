@@ -12,6 +12,16 @@ struct FrameDisplayPart {
 struct FramePoint {
     int x, y;
 };
+/* Ordering coordinates observed at object +0x9C through +0xAB.
+ * The remaining 16 bytes have no new typed interpretation here. */
+struct FrameOrderingBounds {
+    struct FramePoint lower, upper;
+    FrameU8 unknown_ac[16];
+};
+union FrameSpatialStorage {
+    FrameU8 unknown_9c[32];
+    struct FrameOrderingBounds bounds;
+};
 union FrameMotionStorage {
     FrameU8 bytes[60];
     struct {
@@ -36,7 +46,7 @@ struct FrameObject {
     FrameU32 unknown_90;
     struct FrameObject *animation_source;
     void (*before_step)(struct FrameObject *);
-    FrameU8 unknown_9c[32];
+    union FrameSpatialStorage spatial;
     signed char bound_x0, bound_x1, bound_y0, bound_y1;
     FrameU8 unknown_c0[4];
     FrameU8 registered_bounds[13];

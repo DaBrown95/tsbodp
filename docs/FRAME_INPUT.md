@@ -1519,7 +1519,8 @@ The handoff clears `before_step` at object `+0x98`. It reads the object pointer
 from the supplied effect state at `+0x54`, adjusts that object's point at
 `+0xA4`, and writes the same point at destination `+0x9C` and `+0xA4`. Nonzero
 mode applies x minus one and y plus one; zero mode reverses those offsets. It
-reuses the existing `FrameActorFinishBounds` view. The lower/upper names and
+originally used a separate `FrameActorFinishBounds` view; the shared-owner
+repair below replaces it with canonical `FrameObject` members. The lower/upper names and
 coordinate units remain provisional, and the two equal output points alone do
 not establish a complete bounding-box model.
 
@@ -2204,3 +2205,40 @@ Every current matching importer of the affected headers is freshly compared
 with its actual changed-source control. Existing bodies and their C credit do
 not change. The renderer remains unconverted; correcting these real type
 relationships does not turn a near-match into a verified function.
+
+
+### Shared owner for frame ordering points
+
+The object words at `+0x9C`, `+0xA0`, `+0xA4` and `+0xA8` now belong to
+`FrameObject.spatial.bounds.lower` and `.upper`, using the existing signed
+`FramePoint` type. The union retains the original 32-byte byte view; its last
+16 bytes remain unknown. The object still measures 312 bytes with four-byte
+alignment. This is a bounded interpretation of four observed coordinate words,
+not a declaration of a complete collision or rendering model.
+
+The 104-byte resource callback supplies direct producer evidence: it passes the
+lower point to the projection routine at `0x08048BF8`, then copies lower to upper.
+Its other branch writes zero X and the signed integer part of the object's Y
+position to both points. The projector can return without writing output; no
+new initialization or success guard has been introduced. Its ignored return
+value and the coordinate names remain provisional. Need-effect registration,
+center calculation and handoff consume the same two points. Actor creation,
+state changes and interaction update these members through the same owner.
+State twenty-seven copies the established 20-byte callback-and-points span
+through character pointers and the compiler's representation-copy builtin,
+replacing a foreign structure lvalue at `+0x98`.
+
+Nine previously accepted functions, covering 3,240 C extent bytes, retain
+identical full spans under ordinary and strict compiler checks. Each has a
+compiled changed-source control. Target-compiler fixtures preserve every
+previously named object member and bitfield, and the remaining members of the
+partial actor-effect view. Wrong callback types, capacity, offset and signedness
+are rejected, including same-size header mutations. This repair adds zero new
+functions and zero C bytes. Other partial access views and their ownership
+assumptions remain explicitly unresolved.
+
+The ordinary finalizer was retried against these actual members and emits
+340 bytes for the original 348-byte span. It remains unconverted and earns no
+C credit. Earlier register-bound near-matches do not establish ordinary source
+reconstruction. The renderer is also unconverted. These are static and compiler
+results; runtime and gameplay behavior have not been established.
