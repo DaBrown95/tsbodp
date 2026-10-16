@@ -47,8 +47,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,984 |
-| Unclassified remainder of estimated envelopes | 16,250 |
+| Unclassified inside source/glue-owned extents | 2,986 |
+| Unclassified remainder of estimated envelopes | 16,248 |
 | Other unresolved ROM | 16,433,810 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -379,8 +379,31 @@ bytes move from estimated gaps to unclassified owned bytes; the Results table
 records that classification separately. The historical comparison remains
 319,640 bytes, with no complete game-code denominator or new execution claim.
 
-The connected linked-player quantity helper, other offer refresh, object builder,
-step callback and renderer/finalizer remain unconverted. The callback domains,
+At that milestone the linked-player quantity helper, other offer refresh, object
+builder, step callback and renderer/finalizer remained unconverted. The callback domains,
 eight copied-audio-kernel extent uncertainties and other survey limits above
 remain open. The field, API and source-control checks do not close those gaps or
 establish complete table capacities and historical types.
+
+### Linked participant quantity display
+
+The connected helper at `0x08004ABC` adds one matching C function and 556 extent
+bytes: totals are 1,710 functions and 244,552 C bytes, with 500 glue bytes counted
+separately. The complete span includes 502 instruction bytes, 52 referenced
+literal bytes and two zero alignment bytes, ending at `0x08004CE8`. Its begin
+caller replaces only the provider name at the same address and retains identical
+positive and changed-source-control bytes. Inventory discoveries add no C credit.
+
+Only this ordinary inventory row changes. Its existing estimate gains compiler
+ownership evidence; there remain 2,526 entries, 323,980 inventory extent bytes
+and 323,988 treemap extent bytes. Qualified static unions remain 270,608
+instruction bytes and 34,732 referenced-data bytes. Two zero bytes move from
+estimated gaps into unclassified owned bytes, as recorded in the Results table.
+There are 762 bounded estimated bodies, 100 switch tables, 22 unresolved dispatch
+sites and 98 unresolved callback call sites. Observed reach does not close every
+possible target.
+
+The other offer refresh, object builder, step callback and renderer/finalizer
+remain unconverted. The eight copied-audio-kernel extent uncertainties and the
+other survey limits remain open. No new runtime observation or complete code
+denominator is claimed; the fixed historical comparison remains 319,640 bytes.

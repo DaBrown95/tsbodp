@@ -33,11 +33,11 @@ void transition_fade_black_in_record(unsigned short);
 void scene_link_entry_build_linked_objects(void);
 void scene_link_entry_refresh_linked_offers(void);
 void scene_link_entry_draw_quantities(void);
+void scene_link_entry_draw_linked_quantities(void);
 /* Explicit original service boundaries. No reconstructed C is claimed. */
 void scene_link_entry_build_objects_original(void);
 void scene_link_entry_refresh_offers_original(void);
 void scene_link_entry_prepare_original(void);
-void scene_link_entry_draw_linked_quantities_original(void);
 void scene_link_entry_draw_panel_original(void);
 void scene_link_entry_initialize(void);
 #endif

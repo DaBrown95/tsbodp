@@ -63,7 +63,7 @@ has not been established.
 `scene_link_entry_initialize` at `0x08003750` reconstructs the 876-byte begin
 callback. It sets up offers, object slots, backgrounds, palettes, text and
 selection previews, then coordinates the original scene helpers, countdown and
-transition. It now calls twenty-one accepted C providers and five explicit original
+transition. It now calls twenty-two accepted C providers and four explicit original
 services. Those service declarations describe this caller's boundary with no
 supplied arguments and no consumed result; they do not recover the helpers' original C signatures,
 complete footprints or implementations.
@@ -165,8 +165,8 @@ uses this provider's canonical name at the same address and retains its bytes.
 
 The compiler owns the complete 376-byte span: 342 instruction bytes, two zero
 alignment bytes before the pool and 32 referenced literal bytes. The return and
-all eight referenced words bound the span through `0x08004ABC`; the adjacent
-linked-player helper remains explicit original code.
+all eight referenced words bound the span through `0x08004ABC`. The linked-player
+counterpart is described below.
 
 The source captures the record's byte count before drawing, then reads multiplier
 and cost afresh after the five fills. Unsigned word product and sum preserve
@@ -194,5 +194,44 @@ contracts. The tile-seventeen-to-sixteen source control changes one compiled
 byte. A static quantity-eight witness changes one backed map cell; quantity zero
 has zero height and cannot establish that effect. Normal and strict compiler
 comparisons, the caller's source control and full-build checks remain separate
-from runtime evidence. The linked 556-byte counterpart, 596-byte refresh helper,
-adjacent builder, step callback and renderer/finalizer remain unconverted.
+from runtime evidence. The 596-byte refresh helper, adjacent builder, step
+callback and renderer/finalizer remain unconverted.
+
+## Linked participant quantity display
+
+`scene_link_entry_draw_linked_quantities` at `0x08004ABC` reconstructs 556 bytes:
+502 instruction bytes, 52 referenced literal bytes and two zero alignment bytes.
+Its return and both referenced pools bound the complete span through
+`0x08004CE8`. The begin callback calls the canonical provider at the same address;
+its positive and changed-source-control bytes remain identical. Eight existing
+C providers cover 276 bytes separately.
+
+For other participants, the row comes from the participant's caption while the
+column and palette use a compact index that advances only after positioning.
+The path draws five rectangles, including a three-tile cleared row. It captures
+the record count before drawing and reads multiplier and cost afresh afterward.
+The local participant draws no bars: it updates its caption and, after the
+centering call, reloads pointer slot ten for the second positioning call.
+
+One captured count and one byte coordinate serve the two mutually exclusive
+branches. The coordinate changes from tile to pixel units after the string
+setter; its local pixel value feeds both positioning calls. Object capture
+before lookup and slot reload after the string setter remain distinct phases.
+The participant and compact counters retain their observed initialization order.
+These ordinary scopes reproduce the native allocation and conversions; neither
+the source spelling nor historical local types are uniquely established.
+
+At each controlling read the participant count must be zero through four.
+Captured quantities zero through ninety-five, backed caption rows, live object
+slots, successful text lookup and initialized map/font/text resources provide a
+sufficient defined domain. The existing centering provider's alias and
+nonnegative signed-shift conditions still apply. No complete table capacity,
+all-writer invariant or gameplay execution is proved.
+
+Six target fixtures check twelve layout facts, four field types, two conversion
+types and the actual caller declaration, with deliberately incorrect offset,
+width, signedness, formal and return contracts. The seventeen-to-sixteen tile
+control changes one compiled byte. A static two-participant witness with remote
+quantity eight changes map cell `(14,13)` from `0x3011` to `0x3010`; subsequent
+partial and cleared rows do not overwrite it. Normal/strict compilation, the
+caller controls and whole-ROM equality remain separate from runtime evidence.
