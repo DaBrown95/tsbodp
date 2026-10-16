@@ -573,12 +573,13 @@ extraction before the zero test. That result closes this local-width hypothesis;
 the fixed 248-byte worker remains original. Current renderer and finalizer
 candidates also remain outside matching-C totals.
 
-## Row-97 initialization and finish
+## Row-97 initialization, finish and percentage
 
-Three further ordinary-C bodies add 136 complete extent bytes: the factory
+Four further ordinary-C bodies own 160 complete extent bytes: the factory
 initializer at `08017A68` (92), the separate attachment predicate at `08017FAC`
-(40), and the finish callback at `08018058` (4). They reuse the existing state,
-attachment and need-effect object declarations. All three complete extents
+(40), the finish callback at `08018058` (4), and percentage at `0801805C` (24).
+They reuse the existing state, attachment and need-effect object declarations.
+All four complete extents
 match and reject meaningful changed-source controls; the existing begin,
 primary worker and dispatcher remain exact with their own rejected controls.
 
@@ -606,8 +607,25 @@ to two, and the empty finish body to store optional value one. Defined witnesses
 use parameter `0x5000`, a nonzero attachment count with state byte one, and a live
 owner respectively. The first two controls retain their extents; the finish
 control grows from four to eight bytes and is rejected in full. The three
-positive spans contain 120 instruction bytes, twelve referenced literal bytes
+positive initialization/predicate/finish spans contain 120 instruction bytes,
+twelve referenced literal bytes
 and four zero alignment bytes. Alignment directives contain no instructions.
+
+The percentage callback returns byte value 100, or 50 when the signed 16-bit
+parameter at state `+70` is zero. The allocator copies definition row 97's
+offset-24 pointer to state `+FC`. The already-owned optional-percentage callback
+at `0802F30C` supplied the same concrete type/dataflow recipe. A live state with
+parameter one witnesses the compiling 100-to-99 control; it rejects by one byte.
+The full 24-byte extent contains 22 instruction bytes and two zero alignment
+bytes. No generic FC consumer or unique historical typedef is established.
+
+The LR-only leaf prologue follows the pinned compiler's cached far-jump
+predicate, rather than an invented call. Its complete RTL has no call and uses
+only R0-R2. A diagnostic changing only `-fprologue-bugfix` removes the LR save
+and changes 24 bytes to 20; the accepted standard profile remains unchanged.
+This explains this conditional leaf's frame without justifying assembly for
+the separate constant-return callback. Ordinary inline deferral does not leak
+this cache: it exits before reload, and emitted functions reset the flag.
 
 The kind-66 worker remains an unconverted 248-byte body. All five direct
 providers already have matching source. A separate bounded test changed only
@@ -616,7 +634,32 @@ compiler output used a byte-valued call result, but the combine pass still
 removed the right shift before the zero test. The final 244-byte candidate
 was byte-identical to the existing word-return candidate and retained the same
 115 differences. This disproves that return-ABI explanation; no public API was
-changed. The eight-byte intermediate callback at `08017FD4` and the 24-byte
-callback at `0801805C` also remain original. Their leaf prologues still lack a
-supported source explanation. Row 97's enabled byte remains zero, and finite
+changed. The eight-byte intermediate callback at `08017FD4` remains original:
+its constant body has no supported source operation to produce the cached
+far-jump state. Row 97's enabled byte remains zero, and finite
 table ownership does not close writable callbacks or runtime reachability.
+
+## Row-100 installed callbacks
+
+Three further ordinary-C callbacks complete 16 extent bytes around the already
+owned kind-71 worker, begin and dispatcher: initialization at `08034F7C` (4),
+selection at `08034FA8` (8), and the empty callback at `08035020` (4). Definition
+row 100 at `0x63C8C` supplies their pointers at offsets zero, four and twenty.
+The allocator copies the latter two into state `+E8` and `+F8`.
+
+Initialization returns one; the factory ignores that result. Selection writes
+kind 71 to the first output byte and returns one, without clearing the tail.
+Its typed consumer calls E8 before its later enabled check, so the disabled
+definition byte does not by itself exclude that route. The descriptive finish
+name follows the existing family; the actual F8 consumer invokes it as a
+nullable void tick callback. Historical unused argument counts are not uniquely
+established by these constant or empty bodies.
+
+All three full extents match with the existing profile. Returning zero,
+selecting 70, or adding an optional-byte store each compiles and rejects; the
+last control grows from four to eight bytes. The positives contain 14
+instruction bytes and two zero alignment bytes. An actual-definition API unit
+checks the existing E8/F8 signatures, and an incompatible callback type rejects.
+The separate unrooted predicate at `08034F80`, EC callback at `08034FB0` and
+constant-100 entry at `08035024` remain original. No runtime selection or
+complete callback-domain claim follows from this finite table/source evidence.

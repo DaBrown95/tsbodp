@@ -34,7 +34,7 @@ bodies, ROM payload or extracted assets are published as inventory metadata.
 ## Results
 
 The table below is a historical survey snapshot. Current source ownership is
-1,842 verified C functions and 258,080 C extent bytes, plus 3,928 separately
+1,846 verified C functions and 258,120 C extent bytes, plus 3,928 separately
 counted assembly extent bytes. The latter includes the 1,604-byte mixer family,
 140-byte timer IRQ, 140-byte startup exceptions, eight-byte BIOS wait wrapper,
 60-byte compiler register-call family, 672-byte division/remainder family and
@@ -50,7 +50,7 @@ counts describe separately qualified code. Compiler matches do not
 establish runtime execution. The separate
 [bounded boot experiment](RUNTIME_OBSERVATIONS.md) records selected entry and
 write observations without closing target domains. The static census's
-324,954 estimated envelope bytes, the treemap's 324,962 mapped extent bytes
+324,958 estimated envelope bytes, the treemap's 324,966 mapped extent bytes
 and fixed 319,640 historical comparison remain distinct, with no complete
 game-code denominator established.
 
@@ -709,59 +709,31 @@ function-count percentage or inferred ABI, provide the physical census totals.
 
 ## Outside-main Thumb coincidences
 
-The apparent Thumb target `0x08D05342` lies 8,092 bytes into the referenced
-13,111-byte sample span `0x08D033A6..0x08D066DD`. Sample-pointer table
-`0x08D54690`, observed index 395, points to the 18-byte header at `0x08D03394`.
-The matching sample-start and mixer consumers give those bytes a data-read
-role; the declared end, 69 bytes of `0x80` padding and two alignment bytes lead
-exactly to the next header at `0x08D06724`, agreeing with the pinned Krawall
-format. This adds no C or execution credit and does not change the static
-census classifications.
+All twelve selected endpoints of six weak pointer/prologue coincidences now
+have positive data roles. The source-backed routes below preserve both endpoints
+independently. No classifier changes or C credit follow from these findings.
 
-The apparent pointer word at ROM offset `0x46B664` still lacks a consumer or
-container explanation. Actual selection/playback of sample 395, exhaustive
-execution exclusion and other five weak candidates remain open. Local format,
-source/hash and pointer checks are retained under ignored
-`analysis/outside-thumb-sample395/`. A positive data-read role does not exclude
-dual use as instructions or close an entire bank.
+| Apparent pointer source | Selected data role | Apparent Thumb target | Selected data role |
+| --- | --- | --- | --- |
+| `0x46B664` | Kind-29 need-effect sprite, variant 3, frame 1: compressed pixels `0x46B3F8..0x46B6A0`. | `0xD05342` | Sample-table index 395: offset 8,092 in the declared 13,111-byte sample `0xD033A6..0xD066DD`. |
+| `0xFD6368` | Scene-map codec-3 input `0xFD5A5C..0xFD7320`. | `0x15EB5C` | Completion-screen row 6's next background: codec-3 input `0x15CC80..0x161154`. |
+| `0x888668` | Group-zero/clothes-zero animation 13, variant 3, frame 10: compressed pixels `0x88863C..0x888688`. | `0x428660` | Actor 30, animation 1, variant 4, frame 6: compressed pixels `0x428620..0x4288C8`. |
+| `0xA7B4DC` | Text bank 4, string 3239: compressed bytes `0xA7B4D2..0xA7B4E4`. | `0x67E758` | Actor 41, animation 46, variant 3, frame 18: packed sprite part `0x67E758..0x67E75C`. |
+| `0x176614` | Activity-five background: codec-3 input `0x175120..0x1770DC`. | `0x9ADDC4` | Text bank 0, string 4095: compressed bytes `0x9ADDA8..0x9ADDC9`. |
+| `0xA3705C` | Text bank 3, string 254: compressed bytes `0xA37057..0xA37063`. | `0xF61400` | Menu code-nine secondary result, row 14, variant 4: codec-3 input `0xF6086C..0xF61560`. |
 
-A second apparent pointer, the word at ROM `0xFD6368` naming target
-`0x0815EB5C`, lies inside the source-backed scene-map background codec-3
-payload `0xFD5A5C..0xFD7320`. A bounded model executing the original decoder
-reads that word as compressed input, finishes at the declared payload end,
-and rejects input truncated before the selected word. This is modeled
-consumption, not an observed scene invocation. The target still lacks a bounded
-container or qualified incoming transfer; neither this input use nor the
-absence of an identified entry excludes executable dual use. The private
-receipt is under ignored `analysis/outside-thumb-15eb5c/`.
+The unchanged original-instruction decoder models consume every selected
+compressed-background or pixel word and reject truncation before it. The
+`0x46B664` sprite produces 1,376 output bytes; its 48-by-88 geometry does not
+imply a dense rectangular pixel payload. Small transcriptions of the matching
+text-loader C consume each selected text word and reject truncation; those are
+source-semantic models, not original-instruction traces. Matching sprite-part
+and mixer consumers establish the packed-part and sample data roles. The sample's
+declared end plus 69 silence bytes and two alignment bytes reaches the next header.
 
-The accepted actor loader also gives two apparent Thumb targets concrete data
-roles. Actor 41, animation 46, variant 3 leads through the source-backed pointer
-tables to sequence `0x67E5AC`; its frame 18 stores one packed sprite part at
-`0x67E758..0x67E75C`, read by matching `frame_draw_sequence`. The declared
-20-frame sequence ends exactly at the next animation's pixel root. Actor 30,
-animation 1, variant 4 identifies `0x428660` inside the compressed frame payload
-`0x428620..0x4288C8`. The original tile-decoder model reads those selected bytes,
-returns 1,024 packed output bytes, and rejects truncation before them. Its apparent
-pointer source, `0x888668`, independently lies in frame 10's 76-byte compressed
-payload `0x88863C..0x888688`, reached through the group-zero/clothes-zero table,
-animation 13 and variant 3. The original decoder consumes all four selected
-bytes, returns 128 output bytes, and rejects truncation before the word. These
-are typed-table/static and finite-model observations, with
-no gameplay invocation, code-exclusion or new C credit. Their private receipts
-are under `analysis/outside-thumb-67e758/` and
-`analysis/outside-thumb-428660/typed-context.json` and `source-context.json`.
-
-Three other selected words now have compressed-text roles through the accepted
-six-bank text selector and string loader: source `0xA7B4DC` is in bank 4,
-string 3239 (`0xA7B4D2..0xA7B4E4`); target `0x9ADDC4` is in bank 0,
-string 4095 (`0x9ADDA8..0x9ADDC9`); source `0xA3705C` is in bank 3,
-string 254 (`0xA37057..0xA37063`). The apparent pointer source `0x176614`
-independently lies in the accepted activity-five background's codec-3 payload
-`0x175120..0x1770DC`, consumed by the original-instruction decoder model.
-Small transcriptions of the matching text-loader C consume each selected text
-word and reject truncation before it. Those are source-semantic observations,
-not original-instruction or gameplay traces. Observed offset-table prefixes
-are not declared capacities. The paired endpoints retain independent evidence;
-none of these data roles excludes execution or closes a ROM bank. Receipts are
-under the corresponding ignored `analysis/outside-thumb-*/` directories.
+These are typed static routes and finite model observations, without gameplay
+selection. Observed table prefixes are not capacities. Positive data roles do
+not exclude executable dual use, identify every incoming transfer or close a
+ROM bank. The six weak coincidences therefore remain unresolved in the static
+inventory. Source/hash checks, truncation controls and bounded receipts remain
+under ignored `analysis/outside-thumb-*/` and `analysis/source-word-46b664/`.

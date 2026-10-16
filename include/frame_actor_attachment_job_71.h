@@ -7,4 +7,8 @@ int frame_actor_need_fixed_word(struct FrameActorNeedState *, unsigned int);
 unsigned int frame_begin_attachment_job_71(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 unsigned int frame_step_attachment_job_71(struct FrameNeedEffectState *, struct FrameActorAttachmentRecord *);
 unsigned int frame_dispatch_attachment_job_71(struct FrameNeedEffectState *, struct FrameObject *);
+unsigned int frame_initialize_attachment_job_71(struct FrameNeedEffectState *);
+unsigned int frame_select_attachment_job_71(struct FrameNeedEffectState *, unsigned char *);
+void frame_finish_attachment_job_71(struct FrameNeedEffectState *);
+
 #endif

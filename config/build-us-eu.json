@@ -44144,6 +44144,54 @@
         "before": "sf_flip_sign (&a);",
         "after": "a.sign = a.sign;"
       }
+    },
+    {
+      "name": "frame_attachment_jobs_64_66_percentage",
+      "source": "src/frame/frame_attachment_jobs_64_66_percentage.c",
+      "rom_offset": 98396,
+      "size": 24,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "result = 100",
+        "after": "result = 99"
+      }
+    },
+    {
+      "name": "frame_initialize_attachment_job_71",
+      "source": "src/frame/frame_initialize_attachment_job_71.c",
+      "rom_offset": 216956,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      }
+    },
+    {
+      "name": "frame_select_attachment_job_71",
+      "source": "src/frame/frame_select_attachment_job_71.c",
+      "rom_offset": 217000,
+      "size": 8,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "out[0] = 71;",
+        "after": "out[0] = 70;"
+      }
+    },
+    {
+      "name": "frame_finish_attachment_job_71",
+      "source": "src/frame/frame_finish_attachment_job_71.c",
+      "rom_offset": 217120,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    owner->optional = 1;\n}"
+      }
     }
   ],
   "assembly": [

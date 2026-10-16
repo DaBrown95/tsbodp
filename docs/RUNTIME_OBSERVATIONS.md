@@ -89,9 +89,40 @@ stub and game-error log messages.
 
 Renderer and finalizer entry counters each reached 810, the copied sorter 135,
 background decoder one and copied tile allocator six. These arrivals connect
-the remaining reconstruction work to this boot path. The six zero-hit entry
-probes include the selected left-mixer and bias-fill entries, collision and tile decoding, and
-both map kernels; no unreachability conclusion follows.
+the remaining reconstruction work to this boot path. A separate calibrated
+RAM-field follow-up records strip mode for all 810 renderer arrivals, across
+six objects, with zero shared-part arrivals. Extending no-input boot to 3,600
+frames records 10,710 arrivals of the same strip-only form. A bounded Start/A
+path reaches non-strip direct-sequence objects but still no shared-part path.
+The original 300-frame trace is byte-identical after the extra field observations
+are removed. The six zero-hit entry probes include the selected left-mixer and
+bias-fill entries, collision and tile decoding, and both map kernels; no
+unreachability conclusion follows.
+
+A separate source-directed key route accepts the language selection, enters a
+nonempty name, and opens the appearance preview. It reaches shared rendering at
+frame 1,180 without changing game code or memory. Dynamic watches then follow
+four part-flag bytes and four variant-pointer words on object `0x0200D0A0`
+through 128 renderer calls. Every window closes after the native return at
+`0x08002940` retires to the saved caller with restored stack and CPU mode.
+No watched writes or nested IRQ-dispatcher/audio-IRQ entries occur in these
+windows. Replay is byte-identical (252,102 bytes, SHA-256
+`04f4174c41701798224682737ab345d548474f9de84d150e360ec6700b438a3a`);
+displaced watches preserve final CPU, timing, entry counts and field snapshots.
+Authored fixtures independently catch byte and word writes inside and outside
+the window, using typed after-step readbacks.
+
+One source-supported Right press in the same preview supplies an actual-game
+positive control. At frame 1,243 the accepted setter at `0x08001464` updates the
+same object's part-zero pointer from `0x08D70CE0` to `0x08D70CE4`, and part one
+from `0x08D70CF0` to `0x08D70D18`. Both writes occur outside rendering. That run
+also completes 128 validated calls without selected-field writes or observed
+nested IRQ entries inside them. These finite observations establish reachable
+shared rendering and live watches, but do not justify `volatile`, explain the
+third pointer reload, or close other writers, interrupt schedules or gameplay
+paths. Unique private harnesses, calibration and route/control receipts remain
+under ignored `analysis/renderer-shared-navigation/`; the public no-input
+harness and its recorded 300-frame result are unchanged.
 
 The two master-volume calls received `128` and `0x40080`, followed by converter
 patch arguments five and four. Readbacks from all four watched instruction

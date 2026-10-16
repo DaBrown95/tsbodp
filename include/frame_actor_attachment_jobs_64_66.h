@@ -20,4 +20,7 @@ unsigned int frame_check_attachment_jobs_64_66(struct FrameNeedEffectState *,
                                               struct FrameObject *);
 void frame_finish_attachment_jobs_64_66(struct FrameNeedEffectState *);
 
+/* Row-97 FC access view; generic callback consumer remains unidentified. */
+unsigned char frame_attachment_jobs_64_66_percentage(struct FrameNeedEffectState *);
+
 #endif
