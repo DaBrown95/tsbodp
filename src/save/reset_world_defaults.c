@@ -11,5 +11,5 @@ void save_world_reset_defaults(void)
     heap_clear(player, 0, 52);
     player[48] = 1;
     frame_set_game_value(0);
-    save_world_original_copy_padded_bytes(world + 16, g_save_world_default_name, 16);
+    runtime_copy_padded_string(world + 16, g_save_world_default_name, 16);
 }

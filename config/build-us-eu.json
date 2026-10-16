@@ -34622,17 +34622,17 @@
         "actor_entry_prepare": "0x0802086d",
         "save_world_original_reset_hook": "0x0802a70d",
         "frame_set_game_value": "0x0801bc11",
-        "save_world_original_copy_padded_bytes": "0x0804ea71",
         "g_resource_game_state": "0x03003950",
         "g_scene_contact_serial_player_input": "0x030040e0",
-        "g_save_world_default_name": "0x08052f48"
+        "g_save_world_default_name": "0x08052f48",
+        "runtime_copy_padded_string": "0x0804ea71"
       },
       "thumb_symbols": [
         "heap_clear",
         "actor_entry_prepare",
         "save_world_original_reset_hook",
         "frame_set_game_value",
-        "save_world_original_copy_padded_bytes"
+        "runtime_copy_padded_string"
       ],
       "negative_control": {
         "before": "heap_clear(world, 0, 1876)",
@@ -43494,6 +43494,172 @@
         "after": "*out++ = 1;"
       },
       "compiler_id": "agbcc_old"
+    },
+    {
+      "name": "display_text_find_character",
+      "source": "src/display/text_find_character.c",
+      "rom_offset": 321876,
+      "size": 140,
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2",
+        "-fno-builtin"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return (char *)s;",
+        "after": "return (char *)(s + 1);"
+      }
+    },
+    {
+      "name": "runtime_copy_padded_string",
+      "source": "src/runtime/copy_padded_string.c",
+      "rom_offset": 322160,
+      "size": 112,
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2",
+        "-fno-builtin"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "*dst++ = 0;",
+        "after": "*dst++ = 1;"
+      }
+    },
+    {
+      "name": "__cmpdf2",
+      "source": "src/runtime/double_compare.c",
+      "rom_offset": 318004,
+      "size": 44,
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__unpack_d": "0x0804d159",
+        "__fpcmp_parts_d": "0x0804d935"
+      },
+      "thumb_symbols": [
+        "__unpack_d",
+        "__fpcmp_parts_d"
+      ],
+      "negative_control": {
+        "before": "return __fpcmp_parts_d (&a, &b);",
+        "after": "return __fpcmp_parts_d (&a, &b) + 1;"
+      }
+    },
+    {
+      "name": "__eqdf2",
+      "source": "src/runtime/double_compare_eq.c",
+      "rom_offset": 318048,
+      "size": 76,
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__unpack_d": "0x0804d159",
+        "__fpcmp_parts_d": "0x0804d935"
+      },
+      "thumb_symbols": [
+        "__unpack_d",
+        "__fpcmp_parts_d"
+      ],
+      "negative_control": {
+        "before": "return __fpcmp_parts_d (&a, &b) ;",
+        "after": "return __fpcmp_parts_d (&a, &b)  + 1;"
+      }
+    },
+    {
+      "name": "__nedf2",
+      "source": "src/runtime/double_compare_ne.c",
+      "rom_offset": 318124,
+      "size": 76,
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__unpack_d": "0x0804d159",
+        "__fpcmp_parts_d": "0x0804d935"
+      },
+      "thumb_symbols": [
+        "__unpack_d",
+        "__fpcmp_parts_d"
+      ],
+      "negative_control": {
+        "before": "return  __fpcmp_parts_d (&a, &b) ;",
+        "after": "return  __fpcmp_parts_d (&a, &b)  + 1;"
+      }
+    },
+    {
+      "name": "__gtdf2",
+      "source": "src/runtime/double_compare_gt.c",
+      "rom_offset": 318200,
+      "size": 76,
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__unpack_d": "0x0804d159",
+        "__fpcmp_parts_d": "0x0804d935"
+      },
+      "thumb_symbols": [
+        "__unpack_d",
+        "__fpcmp_parts_d"
+      ],
+      "negative_control": {
+        "before": "return __fpcmp_parts_d (&a, &b);",
+        "after": "return __fpcmp_parts_d (&a, &b) + 1;"
+      }
+    },
+    {
+      "name": "__ltdf2",
+      "source": "src/runtime/double_compare_lt.c",
+      "rom_offset": 318352,
+      "size": 76,
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__unpack_d": "0x0804d159",
+        "__fpcmp_parts_d": "0x0804d935"
+      },
+      "thumb_symbols": [
+        "__unpack_d",
+        "__fpcmp_parts_d"
+      ],
+      "negative_control": {
+        "before": "return __fpcmp_parts_d (&a, &b);",
+        "after": "return __fpcmp_parts_d (&a, &b) + 1;"
+      }
+    },
+    {
+      "name": "__ledf2",
+      "source": "src/runtime/double_compare_le.c",
+      "rom_offset": 318428,
+      "size": 76,
+      "compiler_id": "agbcc_old",
+      "compiler_flags": [
+        "-O2"
+      ],
+      "symbols": {
+        "__unpack_d": "0x0804d159",
+        "__fpcmp_parts_d": "0x0804d935"
+      },
+      "thumb_symbols": [
+        "__unpack_d",
+        "__fpcmp_parts_d"
+      ],
+      "negative_control": {
+        "before": "return __fpcmp_parts_d (&a, &b) ;",
+        "after": "return __fpcmp_parts_d (&a, &b)  + 1;"
+      }
     }
   ],
   "assembly": [

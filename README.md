@@ -98,6 +98,8 @@ and source notices.
 The selected floating-point, integer and register-call runtime sources retain their GNU GCC
 notices and [GPL licence](licenses/GCC-GPL-2.0.txt), including the exceptions
 printed in those source files.
+The adapted Newlib string providers retain their [upstream notices](licenses/Newlib-COPYING.txt).
+They include software developed by the University of California, Berkeley.
 
 | Dependency | Use | Licence |
 | --- | --- | --- |

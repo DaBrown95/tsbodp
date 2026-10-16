@@ -14,5 +14,6 @@ void actor_entry_prepare(struct ActorEntryContext *);
 void save_world_reset_defaults(void);
 /* Explicit original providers; these declarations confer no C credit. */
 void save_world_original_reset_hook(void);
-unsigned char *save_world_original_copy_padded_bytes(unsigned char *,const unsigned char *,unsigned int);
+/* Counted string copy with zero padding; returns the original destination. */
+unsigned char *runtime_copy_padded_string(unsigned char *,const unsigned char *,unsigned int);
 #endif

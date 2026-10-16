@@ -42,9 +42,10 @@ The five existing direct consumers are actor state 42, actor input velocity,
 the proportional scene counter, actor state 27 and menu scrolling text. Their
 eight current bindings to add/subtract/multiply all agree with these entries;
 the five accepted consumer extents total 2,372 bytes. This finite binding audit
-is not a complete runtime caller inventory. Other comparison wrappers,
-single-precision arithmetic and remaining runtime entries stay original. The
-connected conversion subset is documented in [RUNTIME_CONVERSIONS.md](RUNTIME_CONVERSIONS.md).
+is not a complete runtime caller inventory. The remaining double-comparison
+wrappers are covered below; single-precision
+arithmetic and other remaining runtime entries stay original. The connected
+conversion subset is documented in [RUNTIME_CONVERSIONS.md](RUNTIME_CONVERSIONS.md).
 
 ## Types and ABI
 
@@ -104,3 +105,58 @@ inputs and rejection of a parallel bootstrap recipe. An actual fresh serial
 bootstrap reproduces all eleven extents. These finite checks do not establish
 all caller preconditions, every unknown stack representation, hardware
 floating-point behavior, universal IEEE conformance or gameplay correctness.
+
+## Double-comparison wrapper closure
+
+Six further ordinary-C wrappers add 424 complete extent bytes around the
+existing unpacker and parts comparator. The same pinned `fp-bit-base.c` supplies
+all six bodies, and the established `agbcc_old -O2` recipe matches each on its
+first source-backed reconstruction. Existing providers and the already-owned
+`__gedf2` add no new coverage.
+
+| Entry | ROM offset | Complete extent |
+| --- | --- | ---: |
+| `__cmpdf2` | `0x4DA34` | 44 |
+| `__eqdf2` | `0x4DA60` | 76 |
+| `__nedf2` | `0x4DAAC` | 76 |
+| `__gtdf2` | `0x4DAF8` | 76 |
+| Existing `__gedf2` | `0x4DB44` | 76 |
+| `__ltdf2` | `0x4DB90` | 76 |
+| `__ledf2` | `0x4DBDC` | 76 |
+
+The seven wrappers account for the connected `0x4DA34..0x4DC28` interval, with
+500 C extent bytes in total. Each unpacks both DF inputs into the existing
+20-byte records and calls `__fpcmp_parts_d`. These functions return signed
+comparison words, not Boolean values. The EQ, NE, LT and LE wrappers return
+positive one when either input is NaN; GT and existing GE return negative one.
+The generic comparator delegates its NaN result to the parts comparator. The
+caller applies the comparison appropriate to its operation.
+
+Names follow the pinned upstream order and compatible native result protocols.
+Wrappers sharing a result protocol cannot be distinguished by their operations
+alone, so this does not uniquely recover historical symbol names or identify
+the precise original toolchain release. The current accepted-C import audit
+finds `__fixunsdfsi` calling the already-owned GE wrapper; it finds no direct
+import of the six newly owned wrappers. Their reconstruction closes a coherent
+runtime family without implying gameplay use or a complete caller inventory.
+
+Only the selected upstream symbol wrappers are expanded. The complete original
+copyright, authorship, GPL and linking-exception notices remain; trailing
+whitespace is trimmed. All six use the existing mixed-word DF ABI, target
+representation and unpacked-record declarations. Their six new prototypes in
+`runtime_fp.h` leave every existing type and provider signature unchanged.
+A strict old-target compilation includes all seven actual definitions together
+with the conversion header, checks the signed 32-bit result, 64-bit DF and
+20-byte record, and checks compatible function pointers. The existing GE body
+also remains exact with its own rejected source control.
+
+Every new full extent matches and rejects a real source mutation that adds one
+to the existing comparator return. Equal finite inputs such as one and one
+initialize both parts records and produce zero, while the mutation returns one.
+Five controls retain their extents; GT's grows from 76 to 80 bytes and rejects
+in full. The six positive spans contain 414 instruction bytes and ten trailing
+zero alignment bytes, with no literal pools or assembly instructions in the C.
+The alignment directives follow the upstream Makefile. No new runtime model or
+gameplay test was run, and the earlier bounded model counts are unchanged.
+Existing target-representation and provider-domain limits still apply; matching
+and the strict API check do not prove universal IEEE behavior or runtime reachability.

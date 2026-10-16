@@ -34,7 +34,7 @@ bodies, ROM payload or extracted assets are published as inventory metadata.
 ## Results
 
 The table below is a historical survey snapshot. Current source ownership is
-1,811 verified C functions and 254,876 C extent bytes, plus 3,116 separately
+1,819 verified C functions and 255,552 C extent bytes, plus 3,116 separately
 counted assembly extent bytes. The latter includes the 1,604-byte mixer family,
 140-byte timer IRQ, 140-byte startup exceptions, eight-byte BIOS wait wrapper,
 60-byte compiler register-call family and 672-byte division/remainder family,
@@ -44,13 +44,13 @@ these replacements. See [audio](AUDIO_RECONSTRUCTION.md),
 [startup](STARTUP_RECONSTRUCTION.md), [compiler assembly](RUNTIME_REGISTER_CALLS.md) and the concise
 [remaining-work list](COMPLETION_BLOCKERS.md).
 
-The current qualified static union is 272,952 physical instruction bytes.
+The current qualified static union is 273,366 physical instruction bytes.
 Source extents include their literal pools and alignment; instruction-byte
 counts describe separately qualified code. Compiler matches do not
 establish runtime execution. The separate
 [bounded boot experiment](RUNTIME_OBSERVATIONS.md) records selected entry and
 write observations without closing target domains. The static census's
-324,384 estimated envelope bytes, the treemap's 324,392 mapped extent bytes
+324,396 estimated envelope bytes, the treemap's 324,404 mapped extent bytes
 and fixed 319,640 historical comparison remain distinct, with no complete
 game-code denominator established.
 
@@ -726,3 +726,20 @@ consumption, not an observed scene invocation. The target still lacks a bounded
 container or qualified incoming transfer; neither this input use nor the
 absence of an identified entry excludes executable dual use. The private
 receipt is under ignored `analysis/outside-thumb-15eb5c/`.
+
+The accepted actor loader also gives two apparent Thumb targets concrete data
+roles. Actor 41, animation 46, variant 3 leads through the source-backed pointer
+tables to sequence `0x67E5AC`; its frame 18 stores one packed sprite part at
+`0x67E758..0x67E75C`, read by matching `frame_draw_sequence`. The declared
+20-frame sequence ends exactly at the next animation's pixel root. Actor 30,
+animation 1, variant 4 identifies `0x428660` inside the compressed frame payload
+`0x428620..0x4288C8`. The original tile-decoder model reads those selected bytes,
+returns 1,024 packed output bytes, and rejects truncation before them. Its apparent
+pointer source, `0x888668`, independently lies in frame 10's 76-byte compressed
+payload `0x88863C..0x888688`, reached through the group-zero/clothes-zero table,
+animation 13 and variant 3. The original decoder consumes all four selected
+bytes, returns 128 output bytes, and rejects truncation before the word. These
+are typed-table/static and finite-model observations, with
+no gameplay invocation, code-exclusion or new C credit. Their private receipts
+are under `analysis/outside-thumb-67e758/` and
+`analysis/outside-thumb-428660/typed-context.json` and `source-context.json`.

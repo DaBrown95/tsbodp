@@ -96,4 +96,11 @@ FLO_type __adddf3(FLO_type, FLO_type), __subdf3(FLO_type, FLO_type);
 FLO_type __muldf3(FLO_type, FLO_type), __divdf3(FLO_type, FLO_type);
 int __fpcmp_parts_d(fp_number_type *, fp_number_type *);
 
+/* Signed comparison words; these wrappers do not return Boolean values.
+ * Conventional names for identical wrapper bodies follow upstream order. */
+SItype __cmpdf2(FLO_type, FLO_type);
+SItype __eqdf2(FLO_type, FLO_type), __nedf2(FLO_type, FLO_type);
+SItype __gtdf2(FLO_type, FLO_type);
+SItype __ltdf2(FLO_type, FLO_type), __ledf2(FLO_type, FLO_type);
+
 #endif
