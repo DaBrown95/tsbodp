@@ -745,7 +745,7 @@ lifetimes, allocation and gameplay domains remain open.
 
 ## Constant-result EC switches and the retained LR save
 
-Thirty-eight observed-prefix eight-byte EC entries now have matching C
+Forty-one observed-prefix eight-byte EC entries now have matching C
 definitions, using each recovered writer and status dispatcher's complete
 evidenced action set:
 
@@ -789,6 +789,9 @@ evidenced action set:
 | 88 | `0x080221A4` | 26 |
 | 135 | `0x08034D18` | 12 |
 | 74 | `0x080179F8` | 8, 9, 10, 11 |
+| 131 | `0x08023C20` | 3, 4, 18 |
+| 96 | `0x08016770` | 18 |
+| 133 | `0x0802BC48` | 16, 17 |
 
 Each source switch returns word one for its cases and default. The original
 256-byte EC switch in rows 42/43 independently corroborates this family idiom;
@@ -810,12 +813,13 @@ One additional same-body EC at `0x08016E34` belongs to the unrooted action-75
 module outside this observed prefix. Its writer and status independently ground
 case 75; it adds no entry to the 48-prefix count.
 
-All thirty-nine complete-set recipes match on their first attempt, without
+All forty-two complete-set recipes match on their first attempt, without
 instruction assembly, register constraints, added qualifiers or invented calls.
-Real controls make one evidenced case return zero: thirty-three compile to 16 bytes
-and reject by 14 bytes; six compile to 24 and reject by 22. The stable verifier
+Real controls make one evidenced case return zero: thirty-four compile to 16
+bytes and reject by 14; the kind-90 control compiles to 20 and rejects by 18;
+seven compile to 24 and reject by 22. The stable verifier
 includes extra bytes in rejection. Canonical API, full-ROM/control and progress
-gates pass. Together these leaves own 312 C instruction bytes (304 in the
+gates pass. Together these leaves own 336 C instruction bytes (328 in the
 observed prefix) and no assembly, pools or alignment.
 
 For rows 3/4 and the shared header writer, zero is an evidenced buffer sentinel,
@@ -827,12 +831,12 @@ Removed case structure and unused first-two formal roles are inferred from the
 family and its recovered writers, not uniquely identified historical source.
 The source still returns one for every word input. Generic EC delivery, writable
 callback targets, valid selection indices and retained-tail domains remain open.
-After these thirty-eight, ten same-body entries in the observed 149-row prefix
-still need justified source recipes. Eight have unconverted output-writing E8
-paths (including a zero-only writer whose delivery is unresolved). The original
-no-write selector at `0x0803505C` and owned no-write selector at `0x0801335C`
-supply no grounded cases for their EC entries. No speculative recipes were
-tried. Byte equality alone does not authorize an arbitrary case list.
+After these forty-one, seven same-body entries in the observed 149-row prefix
+still need justified source recipes. Five have unconverted output-writing E8
+paths (including a zero-only writer whose delivery is unresolved). Both
+no-write selectors at `0x0803505C` and `0x0801335C` now have source but supply
+no grounded cases for their EC entries. No speculative recipes were tried.
+Byte equality alone does not authorize an arbitrary case list.
 
 
 ## Definition row zero: attachment actions 13/14
@@ -1059,3 +1063,49 @@ status guards before compilation. Choice tails, generic EC delivery, found/live
 records, signed countdown domains, all writers and gameplay remain open. The
 separate [header-family tick and initializer](FRAME_NEED_EFFECT_HEADER_JOBS.md)
 now close that family's 1,212-byte local interval.
+
+
+## Sequence, need and default-choice attachments
+
+| Observed family | Local interval | New C functions / extent bytes |
+| --- | --- | ---: |
+| Row 131 | `0x08023AA0..0x08023D00` | 9 / 608 |
+| Row 96 | `0x08016680..0x080167B8` | 7 / 312 |
+| Row 133 | `0x0802BC10..0x0802BDAC` | 10 / 412 |
+| Shared fallback rows | `0x08035028..0x080350A4` | 7 / 116; eight EC bytes remain original |
+
+These additions own 33 C definitions / 1,448 bytes: 1,352 instructions,
+60 literal bytes and 36 native zero-alignment bytes. Actual definitions,
+provider declarations and target layouts pass API checks. All genuine source
+controls reject, including size changes. Full matching/control and progress
+gates pass. No instruction assembly, numeric register constraint or compiler
+profile change supplies these matches.
+
+Row 131 always writes action 18, adds 3 when its full mode word differs from
+one, and adds 4 when nonzero; it returns success one. Its dispatcher preserves
+the actual volatile audio-byte operations when selecting sequences 3/4. The
+selector's initial 40-byte recipe differed by six bytes: it initialized the
+cursor before the first output store. Assigning that real cursor after storing
+18 reproduces native source order. Row 96's independent action-18 family uses
+the real attachment count to select need 2 or 3, then tests the timer provider's
+low byte. That ordinary normalization does not explain kind 66's missing shift.
+
+Row 133 writes 16/17 and independently dispatches both. Its second worker uses
+the canonical game-state root and actual word/byte pending-selection views.
+Acquiring that real root before the transition call caused ten differences in
+116 bytes; assigning it after the call restores all bytes without a new alias,
+type, qualifier or operation. Both useful initial failures remain retained.
+The action-3/4/18 and 16/17 selectors write no zero terminator; choice-tail and
+consumer domains remain separate.
+
+The fallback selector writes nothing. Its status recognizes record kind 40,
+but the generic chooser intercepts common choices 40/34 before F0; those writes
+do not supply a grounded EC case set. EC `0x08035060` stays original and
+uncompiled. Its constant-100 neighbour at `0x080350A0` is installed as FC by
+rows 10/103: the actual byte-result/state-argument declaration replaces an
+initial private word/void guess before publication. The separate predicate
+remains unrooted. This differs from the 13 published four-byte default-100
+neighbours with no aligned ROM pointer in a bounded full-ROM scan.
+
+Generic EC delivery, full table/writable populations, found/live record backing,
+serialized indices, signed arithmetic and scheduling/gameplay remain open.

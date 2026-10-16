@@ -625,7 +625,7 @@
     {
       "rom_offset": 45744,
       "target_origin": "writable_field",
-      "producer": "CollisionObject.on_collision[bound] at+0xC8/+0xCC; reciprocal (a,b)/(b,a).",
+      "producer": "CollisionObject.on_collision[bound] at+0xC8+4*byte_index, with index tested against object byte+0xAF; reciprocal (a,b)/(b,a).",
       "observed_table": null,
       "field": 0,
       "writer_roles": [
@@ -638,13 +638,13 @@
       "source_owners": [
         "frame_dispatch_collisions"
       ],
-      "remaining_uncertainty": "Different accepted source views have differing C tags/signatures; this is a physical slot graph, not a new uniform type claim.",
+      "remaining_uncertainty": "Serialized/derived bound-count, index, object-base alias and callback-writer domains remain open. +C8/+CC identify the first observed slots, not a locally exhaustive range. Differing source tags/signatures remain provisional.",
       "confidence": "static native/source producer; populations and ABI remain provisional"
     },
     {
       "rom_offset": 45784,
       "target_origin": "writable_field",
-      "producer": "CollisionObject.on_collision[bound] at+0xC8/+0xCC; reciprocal (a,b)/(b,a).",
+      "producer": "CollisionObject.on_collision[bound] at+0xC8+4*byte_index, with index tested against object byte+0xAF; reciprocal (a,b)/(b,a).",
       "observed_table": null,
       "field": 0,
       "writer_roles": [
@@ -657,7 +657,7 @@
       "source_owners": [
         "frame_dispatch_collisions"
       ],
-      "remaining_uncertainty": "Different accepted source views have differing C tags/signatures; this is a physical slot graph, not a new uniform type claim.",
+      "remaining_uncertainty": "Serialized/derived bound-count, index, object-base alias and callback-writer domains remain open. +C8/+CC identify the first observed slots, not a locally exhaustive range. Differing source tags/signatures remain provisional.",
       "confidence": "static native/source producer; populations and ABI remain provisional"
     },
     {
