@@ -74,7 +74,8 @@ size without inventing a fixed command size. The original byte-length table
 contains records of 4, 8, 12 and 16 bytes. Halfword arguments are loaded from
 observed aligned argument positions. No bounds checks absent from the original
 have been added. Group object counts come from a relative halfword table at
-`03002ED8`; the object pointer lookup at `0800AEE4` remains unconverted.
+`03002ED8`; the object pointer lookup at `0800AEE4` now has 80 matching C
+extent bytes. This does not close table or runtime handle domains.
 
 The commands connect the resource group walker to frame-object flags, state,
 animation requests, positions, countdowns and follow targets. The object state

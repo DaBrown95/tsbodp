@@ -745,7 +745,7 @@ lifetimes, allocation and gameplay domains remain open.
 
 ## Constant-result EC switches and the retained LR save
 
-Twenty-eight eight-byte EC entries now have matching C definitions, using each
+Thirty-one eight-byte EC entries now have matching C definitions, using each
 recovered writer and status dispatcher's complete evidenced action set:
 
 | Definition row | EC entry | Action cases |
@@ -778,6 +778,9 @@ recovered writer and status dispatcher's complete evidenced action set:
 | 13 | `0x08016304` | 24 |
 | 14, 15, 19 | `0x0801E558` | 60, 63 |
 | 16, 17 | `0x08029C14` | 72 |
+| 35, 36 | `0x0803D3CC` | 73 |
+| 39 | `0x080276C0` | 46 |
+| 40 | `0x080338C8` | 43 |
 
 Each source switch returns word one for its cases and default. The original
 256-byte EC switch in rows 42/43 independently corroborates this family idiom;
@@ -795,12 +798,12 @@ preprocessed input remain identical. This supports the within-function cache
 explanation; it is a diagnostic, not an accepted alternate recipe. The earlier
 plain-constant and cross-function inline-cache explanations remain disproved.
 
-All twenty-eight complete-set recipes match on their first attempt, without
+All thirty-one complete-set recipes match on their first attempt, without
 instruction assembly, register constraints, added qualifiers or invented calls.
-Real controls make one evidenced case return zero: twenty-two compile to 16 bytes
+Real controls make one evidenced case return zero: twenty-five compile to 16 bytes
 and reject by 14 bytes; six compile to 24 and reject by 22. The stable verifier
 includes extra bytes in rejection. Canonical API, full-ROM/control and progress
-gates pass. Together these leaves own 224 C instruction bytes and no assembly,
+gates pass. Together these leaves own 248 C instruction bytes and no assembly,
 pools or alignment.
 
 For rows 3/4 and the shared header writer, zero is an evidenced buffer sentinel,
@@ -812,7 +815,7 @@ Removed case structure and unused first-two formal roles are inferred from the
 family and its recovered writers, not uniquely identified historical source.
 The source still returns one for every word input. Generic EC delivery, writable
 callback targets, valid selection indices and retained-tail domains remain open.
-After these twenty-eight, 20 distinct same-body entries in the observed 149-row
+After these thirty-one, 17 distinct same-body entries in the observed 149-row
 prefix still need their own justified source recipes and depend on unconverted
 E8 writers. Byte equality alone does not authorize an arbitrary case list.
 
@@ -922,3 +925,38 @@ instructions, numeric register constraints, added qualifiers or fabricated
 operations supply these matches. Source ownership does not close generic EC/FC
 consumers, table capacity, valid actor/record/sample backing, point-output
 success, arithmetic domains or runtime selection/gameplay.
+
+
+## Attachment actions 43, 46 and 73; saved-effect predicate
+
+| Observed rows | Complete local C interval | Functions / extent bytes |
+| --- | --- | ---: |
+| 35, 36 | `0x0803D214..0x0803D45C` | 9 / 584, including 516 already owned |
+| 39 | `0x08027564..0x08027738` | 9 / 468 |
+| 40 | `0x08033730..0x08033940` | 9 / 528 |
+
+The corresponding selectors write only 73, 46 or 43, and the status paths
+independently dispatch those values. All EC sets were fixed before their
+single recipes. The kind-73 worker/begin/status reverify under six appended
+declarations without duplicate credit. Job 46 preserves unsigned duration and
+elapsed arithmetic, including the signed-byte-times-50 producer converted to
+its unsigned storage. Its status initially used a one-case switch that reversed
+the native fallthrough blocks; the existing if/join result form restored all
+32 bytes. No enum or profile axis was needed for these modules.
+
+Each local count predicate and constant-100 neighbor remains explicitly
+unrooted, with null FC words in the inspected rows. The separate predicate at
+`0x080336B4` now also has 28 matching C bytes: it compares the saved-effect owner
+with the first player slot's object, reusing the same canonical views and byte
+result as the accepted inlined predicate in `frame_scene_effect_remove`.
+Changing equality to inequality rejects one byte. Its incoming edge remains
+unidentified. This fills the source gap between the existing 64-byte spawn and
+96-byte remove bodies; combined with row 40, source ownership is continuous
+from `0x08033674` through `0x08033940` (716 bytes).
+
+These additions own 25 definitions / 1,092 C extent bytes: 1,034 instructions,
+36 pool bytes and 22 genuine zero-alignment bytes. All real controls reject,
+actual-definition API/layout checks pass, and the full matching/control and
+progress gates pass. No assembly instruction, register constraint or added
+qualifier supplies a match. Complete incoming/writable domains, valid state
+backing and gameplay remain open.

@@ -12,9 +12,9 @@ The definition root is `0x08062E7C`, with a 36-byte stride. Row 98 at
 `0x08063C44` supplies initialization `0x0804860D`, selection `0x08048639`,
 acceptance `0x08048641`, beginning `0x08048649`, dispatch `0x08048691` and
 finishing `0x080486B1`. The separate accepted capacity callback is
-`0x0802F349`. The acceptance function at `0x08048640` remains original: ordinary
-constant-return C omits its original LR-saving prologue. It receives no C
-credit. The unreferenced predicate at `0x08048610` (40 bytes) and constant-100
+`0x0802F349`. The acceptance function at `0x08048640` now has eight matching
+C bytes from the [selector-backed constant-result switch](FRAME_NEED_TARGET_SELECTION.md#constant-result-ec-switches-and-the-retained-lr-save).
+The earlier plain-return source omits its LR-saving prologue and is not accepted. The unreferenced predicate at `0x08048610` (40 bytes) and constant-100
 leaf at `0x080486B4` (four bytes) also remain original. The latter is a real
 leaf, not alignment belonging to the empty finishing callback. Only the actual
 two zero bytes at `0x080486B2` belong to that callback's four-byte extent.

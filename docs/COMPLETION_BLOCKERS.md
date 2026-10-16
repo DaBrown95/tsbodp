@@ -1,8 +1,8 @@
 # Remaining reconstruction and closure work
 
-The current gate verifies **1,981 C functions / 267,952 C extent bytes**, plus
+The current gate verifies **2,006 C functions / 269,044 C extent bytes**, plus
 **4,060 separate assembly extent bytes**. The starting published baseline was
-1,735 / 250,064 C bytes and 500 glue bytes. The build still obtains 16,505,204
+1,735 / 250,064 C bytes and 500 glue bytes. The build still obtains 16,504,112
 bytes of assets and unconverted code from original slices. Whole-ROM equality
 is proven; complete source ownership is not. The fixed 319,640 mapped extent
 bytes are a historical comparison only.
@@ -14,7 +14,7 @@ untracked candidates and old match-distance receipts receive no credit.
 | Order | Remaining work | Required closure evidence |
 | --- | --- | --- |
 | 1 | Renderer `0x080023E8` (1,400 bytes) and finalizer `0x08003248` (348). | Readable C matching both complete slots with source controls. The renderer lacks a source explanation combining its native frame/register allocation with the preserved variants reads; real inline stores and the live working-word hypothesis failed. A previously tested indexed-record view already preserves all three reads through one field cursor, but remains 1,396 bytes / 682 differences with an 84-byte frame. In the cached-read candidate, spilling cannot restore removed field loads because its rows pseudo has no memory equivalence. Finalizer flags/category/previous lifetimes remain unresolved; real point snapshots failed. Its terminal transfer is a saved return. Inspect retained compiler evidence before another trial. |
-| 2 | Connected actor producers, attachment workers and writable callbacks. | Close kind 66's 248-byte worker, land placement `0x08024ACC` (68 bytes / six differences), movement `0x08024720` (472 / 14), and the remaining attachment modules. Their prior ABI and later-result-use failures stay explicit. Twenty-eight constant-one EC leaves now have source-backed compiler explanations; 20 observed-prefix entries still depend on unconverted E8/EC paths. Exhaust object and attachment callback writers/targets, including the unidentified generic EC consumer. Finite source-owned modules do not close writable, incoming or gameplay domains. See [actor state](ACTOR_STATE_RECONSTRUCTION.md) and [attachment paths](FRAME_NEED_TARGET_SELECTION.md). |
+| 2 | Connected actor producers, attachment workers and writable callbacks. | Close kind 66's 248-byte worker, land placement `0x08024ACC` (68 bytes / six differences), movement `0x08024720` (472 / 14), and the remaining attachment modules. Their prior ABI and later-result-use failures stay explicit. Thirty-one constant-one EC leaves now have source-backed compiler explanations; 17 observed-prefix entries still depend on unconverted E8/EC paths. Exhaust object and attachment callback writers/targets, including the unidentified generic EC consumer. Finite source-owned modules do not close writable, incoming or gameplay domains. See [actor state](ACTOR_STATE_RECONSTRUCTION.md) and [attachment paths](FRAME_NEED_TARGET_SELECTION.md). |
 | 3 | Copied-RAM ordering, tile decoding and map drawing. | Reconstruct ROM `0xB840` (284-byte sorter), `0xB36C` (provisional 504-byte tile decoder) and `0xB564` (provisional 320-byte map body). The sorter's two-byte difference is register allocation; retain its causal failures. Verify RAM addresses and ROM load offsets independently. Copy lengths include following prefixes. The 812-byte background decoder's justified assembly ownership does not close these C-origin bodies. See [RAM map](../config/ram-map-us-eu.json) and [decoder notes](RESOURCE_BACKGROUND_DECODER.md). |
 | 4 | Audio C initializer, extended-play entry and writable-code domains. | Resolve the unexplained NOP versus store at `0x08049968` in ordinary C without suppressing a store. The initial 72-byte interworking interval now has source ownership under the assembly/hardware-glue exceptions. The saved-R5 adapter's unusual caller/stack protocol remains open. Exhaust patcher inputs, incoming transfers and later executable writes; compare every reachable modified state. Observed shifts five/four and replacement-word arrivals are finite evidence. See [audio](AUDIO_RECONSTRUCTION.md). |
 | 5 | Remaining startup, runtime and other mapped C bodies. | Replace every executable slice. The 60-byte debugger adapter now has justified ABI-glue ownership; the preceding eight zero bytes remain outside owned startup extents, and its incoming/writer domain remains open. Other established startup/runtime intervals do not close their transitive graph. Offer confirmation now owns 224 C bytes; its surrounding scene controller and quantity-input paths remain original. Use connected callers and the current map to choose bodies; inspect previous attempts first. |
@@ -29,10 +29,10 @@ explain the reload or close interrupt/writer/gameplay domains. The separate
 300-frame boot and byte-identical replay likewise prove selected observations,
 not complete target sets. The static census retains `runtime_observations: 0`.
 
-The census qualifies 277,258 physical instruction bytes, including four also
+The census qualifies 277,406 physical instruction bytes, including four also
 read as data. This is not a complete code denominator or C extent total.
-Unclassified bytes remain: 3,430 inside source-owned extents, 9,290 inside
-estimated envelopes and 16,433,202 elsewhere. The initial EWRAM image has no
+Unclassified bytes remain: 3,452 inside source-owned extents, 9,144 inside
+estimated envelopes and 16,433,174 elsewhere. The initial EWRAM image has no
 established executable entry; later executable writes remain possible.
 
 Retain one current paired full-build proof and its controls, unique source

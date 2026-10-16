@@ -61,4 +61,7 @@ struct FrameSceneSavedEffect {
 struct FrameSceneSavedEffect *frame_create_scene_saved_effect(unsigned char,int,int);
 struct FrameSceneSavedEffect *frame_spawn_saved_scene_effect(int,int);
 
+/* Separate matching body; incoming edge remains unidentified. */
+unsigned char frame_scene_effect_is_player(struct FrameSceneSavedEffect *);
+
 #endif
