@@ -41197,7 +41197,7 @@
         "scene_link_entry_refresh_linked_offers": "0x8004825",
         "scene_link_entry_draw_quantities": "0x8004945",
         "scene_link_entry_draw_linked_quantities": "0x8004abd",
-        "scene_link_entry_prepare_original": "0x8005685",
+        "scene_link_entry_draw_header_value": "0x8005685",
         "display_time_step_countdown": "0x8005725",
         "display_load_background_resource": "0x800cd4d",
         "display_show_background": "0x800d579",
@@ -41245,7 +41245,7 @@
         "scene_link_entry_refresh_linked_offers",
         "scene_link_entry_draw_quantities",
         "scene_link_entry_draw_linked_quantities",
-        "scene_link_entry_prepare_original",
+        "scene_link_entry_draw_header_value",
         "display_time_step_countdown",
         "display_load_background_resource",
         "display_show_background",
@@ -41406,6 +41406,32 @@
         "after": "display_text_select_font(2, 3, 0);"
       },
       "assembler_id": "binutils2101"
+    },
+    {
+      "name": "scene_link_entry_draw_header_value",
+      "rom_offset": 22148,
+      "size": 160,
+      "source": "src/scene/scene_link_entry_draw_header_value.c",
+      "symbols": {
+        "g_game_flags": "0x03004310",
+        "g_save_world_view": "0x03003950",
+        "display_fill_background_constant_rectangle": "0x800d7fd",
+        "display_text_draw_line": "0x801a959",
+        "display_text_select_font": "0x801ae75",
+        "display_text_number_field_zero": "0x801b1cd",
+        "display_scene_lookup_text": "0x8045009"
+      },
+      "thumb_symbols": [
+        "display_fill_background_constant_rectangle",
+        "display_text_draw_line",
+        "display_text_select_font",
+        "display_text_number_field_zero",
+        "display_scene_lookup_text"
+      ],
+      "negative_control": {
+        "before": "if (!(g_game_flags & 0x20)) {\n        display_text_select_font(3, 0, 0);",
+        "after": "if (!(g_game_flags & 0x20)) {\n        display_text_select_font(2, 0, 0);"
+      }
     }
   ],
   "assembly": [

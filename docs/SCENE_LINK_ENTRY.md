@@ -63,7 +63,7 @@ has not been established.
 `scene_link_entry_initialize` at `0x08003750` reconstructs the 876-byte begin
 callback. It sets up offers, object slots, backgrounds, palettes, text and
 selection previews, then coordinates the original scene helpers, countdown and
-transition. It now calls twenty-three accepted C providers and three explicit original
+transition. It now calls twenty-four accepted C providers and two explicit original
 services. Those service declarations describe this caller's boundary with no
 supplied arguments and no consumed result; they do not recover the helpers' original C signatures,
 complete footprints or implementations.
@@ -274,3 +274,38 @@ defined selector-state witness when both banks are backed. Strict compilation,
 changed-source controls and the full-ROM comparison remain separate evidence.
 The other object builder, offer refresh, step callback and renderer/finalizer
 remain explicit unconverted regions.
+
+## Header value and link-dependent placement
+
+`scene_link_entry_draw_header_value` at `0x08005684` reconstructs 160 extent
+bytes: 138 instruction bytes, twenty referenced literal bytes and two internal
+zero alignment bytes. Its referenced trailing pool ends at the separate countdown
+entry `0x08005724`. The begin callback now calls this canonical provider at the
+same address. Its five existing C providers cover 456 bytes separately; the panel
+is the only other existing consumer of the shared setup header and keeps its
+compiled bytes.
+
+The helper captures the link flag before any calls. Each branch selects font
+group three, reads the existing save-state word at offset four after that call,
+and formats it into staging field zero. It clears a seven-by-two map rectangle
+at `(2,1)` or `(2,6)`, then draws text 6220 centered at `(48,14)` or `(48,52)`.
+The field remains named `unknown04`; its existing signed-int view agrees with the
+number provider's formal type. Neither a currency interpretation, the original
+signedness nor complete save-state ownership is established.
+
+Initialized word storage, backed font bank three, a successful terminated text
+lookup and the existing map, tile, glyph, substitution and work-buffer conditions
+are required. The number formatter writes at most fifteen bytes including its
+terminator into the 64-byte staging row. That bound does not assert mathematical
+decimal correctness for the minimum signed integer. No staging-to-active
+substitution transfer, new input validation or gameplay behavior is inferred.
+
+Six target fixtures check the word's offset, width and signed type, the five
+provider declarations and the caller declaration. Wrong offset, signedness, font
+formal width, rectangle tile-argument width and return type are rejected. The
+changed-source control selects font two in the first branch. With both banks
+backed and drawing buffers separate from font state, this changes the retained
+font and alternate-font pointers. A replay of the original rasterizer and row
+reader supports that static write-footprint claim; those two bodies remain
+unconverted and gain no C credit. Normal/strict compilation, the caller and panel
+controls, full-ROM equality and runtime evidence remain separate claims.

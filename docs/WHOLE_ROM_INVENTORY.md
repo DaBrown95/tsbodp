@@ -47,8 +47,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,996 |
-| Unclassified remainder of estimated envelopes | 16,238 |
+| Unclassified inside source/glue-owned extents | 2,998 |
+| Unclassified remainder of estimated envelopes | 16,236 |
 | Other unresolved ROM | 16,433,810 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -430,3 +430,22 @@ ownership evidence, not newly observed execution.
 The eight copied-audio-kernel extent uncertainties, unresolved indirect targets,
 other estimated boundaries and remaining survey limits still prevent a complete
 game-code denominator. The historical comparison stays fixed at 319,640 bytes.
+
+### Linked entry header value
+
+The helper at `0x08005684` adds one matching C function and 160 extent bytes,
+bringing coverage to 1,712 functions and 245,068 C bytes, with 500 glue bytes
+separate. Its existing 160-byte estimate gains compiler ownership evidence for
+138 instruction bytes, twenty literal bytes and two internal alignment zeros.
+The referenced pool ends at the separately called countdown entry `0x08005724`.
+The canonical begin caller and unchanged panel header consumer retain their
+positive and changed-source-control bytes.
+
+Only this ordinary map row changes. Entry count remains 2,523, inventory extent
+bytes remain 323,998 and treemap extent bytes remain 324,006. Two observed zeros
+move from estimated gaps into owned unclassified bytes. Qualified instruction and
+referenced-data unions remain 270,608 and 34,732 bytes. The original rasterizer
+and row reader were replayed for the font-control write-footprint witness; this
+adds neither C coverage nor runtime observations. The copied-audio extent gaps,
+unresolved targets and complete-denominator limitations remain open. The fixed
+historical comparison is still 319,640 bytes.
