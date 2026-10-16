@@ -1,5 +1,5 @@
-"""Remove superseded successful build artifacts, retaining source/control receipts."""
-import argparse, gzip, hashlib, json, os, re, shutil, time, zipfile
+"""Retire duplicate successful build outputs; hold unique source attempts."""
+import argparse, hashlib, json, os, re, shutil, time
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASE = Path('reports/us-eu/retention')
@@ -19,9 +19,9 @@ def ordinary_tree(p):
                 raise ValueError('Linked artifact')
 
 def retained_input_file(q):
-    return (q.suffix == '.c' or q.name in ('header-snapshot.json', 'preprocessor.d', 'changed.s')
+    return (q.suffix in ('.c', '.h') or q.name == 'changed.s'
             or (q.name == 'source.s' and not (q.parent / 'source.c').exists() and not (q.parent / 'changed.c').exists())
-            or (q.suffix == '.h' and any(part in q.parts for part in ('inline-glue-control', 'source-inputs'))))
+            )
 
 
 def retained_inputs(p):
@@ -49,10 +49,32 @@ def accepted(p):
 def current():
     return {kind: json.loads((ROOT / f'reports/us-eu/{kind}.json').read_text())['run_id'] for kind in ('pilot', 'build')}
 
+def current_inputs(now):
+    if now['pilot'] != now['build']:
+        raise ValueError('Current pilot/build proof is not paired; finish the full build before retirement')
+    pins = {}
+    for kind, parent in [('pilot', 'build/pilot/runs'), ('build', 'build/us-eu/runs')]:
+        if not RUN.fullmatch(now[kind]):
+            raise ValueError('Invalid current run')
+        p = ROOT / parent / now[kind]
+        ordinary_tree(p)
+        accepted(p)
+        pins[kind] = {'report_sha256': sha(p / 'report.json'), 'inputs': retained_inputs(p)}
+    return pins
+
+def input_identities(pins):
+    return {(Path(name).suffix, digest) for proof in pins.values()
+            for name, digest in proof['inputs'].items()}
+
+def unique_inputs(pins, known):
+    return [name for name, digest in pins.items() if (Path(name).suffix, digest) not in known]
+
 def make_plan():
     now = current()
+    proof_inputs = current_inputs(now)
+    known = input_identities(proof_inputs)
     latest = {}
-    operations = []
+    operations, held = [], []
     for kind, parent in [('pilot', ROOT / 'build/pilot/runs'), ('build', ROOT / 'build/us-eu/runs')]:
         valid = []
         for p in parent.iterdir():
@@ -63,20 +85,30 @@ def make_plan():
             except ValueError:
                 continue
             valid.append(p)
-        protected = {now[kind]} | {p.name for p in sorted(valid, key=lambda x: x.name)[-2:]}
+        protected = {now[kind]}
         latest[kind] = sorted(protected)
         for p in valid:
             if p.name in protected:
                 continue
             ordinary_tree(p)
-            operations.append({'kind': kind, 'folder': p.relative_to(ROOT).as_posix(), 'report_sha256': sha(p / 'report.json'), 'retained_input_pins': retained_inputs(p)})
-    return {'version': 1, 'helper_sha256': sha(__file__), 'current': now, 'protected_runs': latest, 'operations': operations, 'available_before': os.statvfs(ROOT).f_bavail * os.statvfs(ROOT).f_frsize}
+            inputs = retained_inputs(p)
+            unique = unique_inputs(inputs, known)
+            item = {'kind': kind, 'folder': p.relative_to(ROOT).as_posix(), 'report_sha256': sha(p / 'report.json'), 'retained_input_pins': inputs}
+            if unique:
+                held.append({**item, 'unique_inputs': unique, 'reason': 'Unique source/control/header input; deliberate review required'})
+            else:
+                operations.append(item)
+    return {'version': 2, 'helper_sha256': sha(__file__), 'current': now, 'current_proof_pins': proof_inputs, 'protected_runs': latest, 'operations': operations, 'held_runs': held, 'available_before': os.statvfs(ROOT).f_bavail * os.statvfs(ROOT).f_frsize}
 
 def apply(plan):
-    if plan.get('version') != 1 or plan['helper_sha256'] != sha(__file__) or plan['current'] != current():
+    if plan.get('version') != 2 or plan['helper_sha256'] != sha(__file__) or plan['current'] != current():
         raise ValueError('Changed helper/current proof')
-    if plan['protected_runs'] != make_plan()['protected_runs']:
+    fresh = make_plan()
+    if plan['protected_runs'] != fresh['protected_runs']:
         raise ValueError('Changed protection list')
+    if plan['current_proof_pins'] != fresh['current_proof_pins']:
+        raise ValueError('Changed current proof inputs')
+    known = input_identities(plan['current_proof_pins'])
     (ROOT / BASE).mkdir(parents=True, exist_ok=True)
     journal = ROOT / BASE / ('prune-' + str(time.time_ns()) + '.jsonl')
     if journal.exists():
@@ -87,52 +119,28 @@ def apply(plan):
         if p.parent != expected_parent or not RUN.fullmatch(p.name) or p.name in plan['protected_runs'][item['kind']]:
             raise ValueError('Invalid run selection')
         ordinary_tree(p)
-        accepted(p)
+        report = accepted(p)
         if sha(p / 'report.json') != item['report_sha256'] or retained_inputs(p) != item['retained_input_pins']:
             raise ValueError('Run report or source/control inputs changed')
-        dest = ROOT / 'reports/pruned-build-runs' / item['kind'] / p.name
-        if dest.exists():
-            raise ValueError('Receipt destination exists')
-        dest.mkdir(parents=True)
-        report_data = (p / 'report.json').read_bytes()
-        compressed = gzip.compress(report_data, mtime=0)
-        assert gzip.decompress(compressed) == report_data
-        (dest / 'report.json.gz').write_bytes(compressed)
-        selected = []
+        if unique_inputs(item['retained_input_pins'], known):
+            raise ValueError('Unique source/control/header input cannot be removed')
         allocated = files = 0
         for directory, dirs, names in os.walk(p):
             for name in names:
                 q = Path(directory, name)
                 allocated += q.stat().st_blocks * 512
                 files += 1
-                if retained_input_file(q):
-                    selected.append(q)
-        archive = dest / 'sources-and-controls.zip'
-        pins = {}
-        with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as z:
-            for q in selected:
-                name = q.relative_to(p).as_posix()
-                data = q.read_bytes()
-                pins[name] = hashlib.sha256(data).hexdigest()
-                z.writestr(name, data)
-            z.writestr('_source_hashes.json', json.dumps(pins, sort_keys=True))
-        with zipfile.ZipFile(archive) as z:
-            assert set(z.namelist()) == set(pins) | {'_source_hashes.json'}
-            for name, digest in pins.items():
-                assert hashlib.sha256(z.read(name)).hexdigest() == digest
-        assert hashlib.sha256(gzip.decompress((dest / 'report.json.gz').read_bytes())).hexdigest() == item['report_sha256']
-        receipt = {**item, 'event': 'prepared', 'removed_files': files, 'removed_allocated_bytes': allocated, 'retained_sources_and_header_receipts': len(pins), 'archive_sha256': sha(archive), 'artifacts_pruned': True, 'report_file': 'report.json.gz', 'report_compressed_sha256': sha(dest / 'report.json.gz')}
-        (dest / 'artifacts-pruned.json').write_text(json.dumps(receipt, indent=2) + '\n')
-        for q in [archive, dest / 'report.json.gz', dest / 'artifacts-pruned.json']:
-            with q.open('rb') as f:
-                os.fsync(f.fileno())
+        receipt = {**item, 'event': 'prepared', 'removed_files': files, 'removed_allocated_bytes': allocated,
+                   'artifacts_pruned': True, 'inputs_duplicated_in_current_proof': True,
+                   'compiled_c_functions': report.get('compiled_c_functions'),
+                   'compiled_c_bytes_including_pools_and_alignment': report.get('compiled_c_bytes_including_pools_and_alignment')}
         with journal.open('a') as f:
             f.write(json.dumps(receipt) + '\n')
             f.flush()
             os.fsync(f.fileno())
-        sync_directories(dest)
         sync_directories(journal.parent)
-        if plan['current'] != current() or sha(p / 'report.json') != item['report_sha256'] or retained_inputs(p) != item['retained_input_pins']:
+        if (plan['current'] != current() or current_inputs(plan['current']) != plan['current_proof_pins']
+                or sha(p / 'report.json') != item['report_sha256'] or retained_inputs(p) != item['retained_input_pins']):
             raise ValueError('Concurrent gate/input change detected')
         shutil.rmtree(p)
         with journal.open('a') as f:
@@ -140,7 +148,7 @@ def apply(plan):
             f.flush()
             os.fsync(f.fileno())
         print('Pruned', i + 1, 'of', len(plan['operations']), item['folder'], flush=True)
-    result = {'runs_removed': len(plan['operations']), 'protected_runs': plan['protected_runs'], 'retained': 'original run report and compressed C/control sources plus header hash receipts; current and previous full proofs retained intact', 'available_before': plan['available_before'], 'available_after': os.statvfs(ROOT).f_bavail * os.statvfs(ROOT).f_frsize}
+    result = {'runs_removed': len(plan['operations']), 'held_runs': len(plan['held_runs']), 'protected_runs': plan['protected_runs'], 'retained': 'current proof intact; unique source/control/header attempts and failed runs held; duplicate generated runs retired without archives', 'available_before': plan['available_before'], 'available_after': os.statvfs(ROOT).f_bavail * os.statvfs(ROOT).f_frsize}
     result['available_gain_bytes'] = result['available_after'] - result['available_before']
     (ROOT / BASE / 'latest-audit.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result), flush=True)
@@ -155,4 +163,4 @@ if __name__ == '__main__':
         plan = make_plan()
         args.plan.parent.mkdir(parents=True, exist_ok=True)
         args.plan.write_text(json.dumps(plan, indent=2) + '\n')
-        print(json.dumps({'operations': len(plan['operations']), 'protected_runs': plan['protected_runs']}))
+        print(json.dumps({'operations': len(plan['operations']), 'held_runs': len(plan['held_runs']), 'protected_runs': plan['protected_runs']}))

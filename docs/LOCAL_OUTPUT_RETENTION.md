@@ -3,17 +3,25 @@
 After a verified milestone is published, run
 `python3 tools/retain_build_runs.py` to inspect its plan, then
 `python3 tools/retain_build_runs.py --apply` to remove superseded successful
-build outputs. The plan pins the current pilot/build receipts and each selected
-run's report. A changed current proof, linked directory, altered receipt or
-unexpected path aborts removal.
+build outputs. The plan pins the current pilot/build reports, actual inputs and
+each selected run's report. A changed current proof or input, linked directory,
+altered receipt or unexpected path aborts removal.
+If a newer pilot has not yet completed the full build, retirement stops until
+the paired pilot/full proof is current; it cannot retire the pilot referenced
+by the retained full-ROM proof.
 
-Keep the current successful paired pilot/full-ROM proof and one preceding
-success intact, including source/header snapshots, changed-source controls and
-raw outputs. Older successful runs retain their original compressed report,
-compressed C and control inputs, and header hash receipts under ignored
-`reports/pruned-build-runs/`; their large reproducible output directories are
-removed. The retained report explicitly records that its working artifacts
-were pruned. Failed or incomplete gates are held for deliberate review.
+Keep one current successful paired pilot/full-ROM proof intact, including
+source/header snapshots, changed-source controls and raw outputs. The helper
+directly retires a superseded success only when every actual C, assembly,
+header and control input is byte-identical to an input in that current proof.
+It records the retirement under ignored `reports/us-eu/retention/`; it creates
+no historical proof archive. Run-specific dependency files and old hash
+receipts alone do not require retaining duplicate payloads.
+
+Any unique source, header or control input holds the old run for deliberate
+review. Preserve the unique attempt and its useful comparison before manually
+retiring its other generated outputs. Failed and incomplete gates also require
+review; retain only the bounded useful failures for active reconstruction.
 
 For private compiler trials, retain one current best candidate per target and
 useful failures that distinguish a source/compiler hypothesis. Preserve source,

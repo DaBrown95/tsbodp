@@ -1,4 +1,4 @@
-import gzip, importlib.util, json, tempfile, unittest, zipfile, hashlib
+import importlib.util, json, tempfile, unittest
 from pathlib import Path
 spec = importlib.util.spec_from_file_location('prune', str(Path(__file__).resolve().parents[1] / 'tools/retain_build_runs.py'))
 m = importlib.util.module_from_spec(spec)
@@ -23,6 +23,9 @@ class PruneTests(unittest.TestCase):
                 (p / 'source.o').write_bytes(b'obsolete')
                 (p / 'header-snapshot.json').write_text('{}')
                 (p / 'preprocessor.d').write_text('source.i: retained-source.c')
+                project = p / 'include'
+                project.mkdir()
+                (project / 'public.h').write_text('#define PUBLIC 1\n')
                 control = p / 'inline-glue-control/include'
                 control.mkdir(parents=True)
                 (control / 'control.h').write_text('#define CONTROL 2\n')
@@ -35,21 +38,41 @@ class PruneTests(unittest.TestCase):
     def tearDown(self):
         self.t.cleanup()
 
-    def test_roundtrip_retains_sources_receipts_and_current_proofs(self):
+    def test_duplicate_runs_retired_without_archives_and_current_proof_intact(self):
         plan = m.make_plan()
-        self.assertEqual(len(plan['operations']), 4)
+        self.assertEqual(len(plan['operations']), 6)
+        self.assertEqual(plan['held_runs'], [])
         m.apply(plan)
         for op in plan['operations']:
             self.assertFalse((self.root / op['folder']).exists())
-            d = self.root / 'reports/pruned-build-runs' / op['kind'] / Path(op['folder']).name
-            self.assertEqual(hashlib.sha256(gzip.decompress((d / 'report.json.gz').read_bytes())).hexdigest(), op['report_sha256'])
-            with zipfile.ZipFile(d / 'sources-and-controls.zip') as z:
-                self.assertEqual(z.read('changed.c'), b'int example(void){return 2;}')
-                self.assertEqual(z.read('inline-glue-control/include/control.h'), b'#define CONTROL 2\n')
-                self.assertEqual(z.read('preprocessor.d'), b'source.i: retained-source.c')
-                self.assertEqual(z.read('changed.s'), b'nop\n')
-                self.assertEqual(z.read('source-inputs/private.h'), b'#define PRIVATE 7\n')
-        self.assertTrue((self.root / 'build/pilot/runs' / self.runs[-1] / 'source.o').is_file())
+        self.assertFalse((self.root / 'reports/pruned-build-runs').exists())
+        for kind, parent in [('pilot', 'build/pilot/runs'), ('build', 'build/us-eu/runs')]:
+            self.assertTrue((self.root / parent / self.runs[-1] / 'source.o').is_file())
+            self.assertTrue((self.root / parent / self.runs[-1] / 'changed.c').is_file())
+            self.assertEqual(plan['protected_runs'][kind], [self.runs[-1]])
+        journal = next((self.root / m.BASE).glob('prune-*.jsonl'))
+        records = [json.loads(line) for line in journal.read_text().splitlines()]
+        self.assertEqual(sum(record['event'] == 'completed' for record in records), 6)
+
+    def test_unique_source_control_and_project_header_are_held(self):
+        for filename in ('source.c', 'changed.c', 'include/public.h'):
+            with self.subTest(filename=filename):
+                run = self.root / 'build/pilot/runs' / self.runs[0]
+                p = run / filename
+                original = p.read_bytes()
+                p.write_bytes(b'unique attempt')
+                plan = m.make_plan()
+                held = [item for item in plan['held_runs'] if item['folder'] == run.relative_to(self.root).as_posix()]
+                self.assertEqual(len(held), 1)
+                self.assertIn(filename, held[0]['unique_inputs'])
+                self.assertNotIn(held[0]['folder'], [item['folder'] for item in plan['operations']])
+                p.write_bytes(original)
+
+    def test_generated_metadata_does_not_require_archiving_duplicate_inputs(self):
+        p = self.root / 'build/pilot/runs' / self.runs[0]
+        (p / 'header-snapshot.json').write_text('{"historical_receipt": true}')
+        (p / 'preprocessor.d').write_text('old/run/path/source.i: old/run/path/source.c')
+        self.assertIn(p.relative_to(self.root).as_posix(), [op['folder'] for op in m.make_plan()['operations']])
 
     def test_failed_run_excluded(self):
         p = self.root / 'build/pilot/runs' / self.runs[0] / 'report.json'
@@ -70,6 +93,34 @@ class PruneTests(unittest.TestCase):
         (self.root / 'reports/us-eu/pilot.json').write_text(json.dumps({'run_id': 'new'}))
         self.assertRaises(ValueError, m.apply, plan)
         self.assertTrue((self.root / plan['operations'][0]['folder']).exists())
+
+    def test_current_proof_input_change_rejected_before_removal(self):
+        plan = m.make_plan()
+        p = self.root / 'build/pilot/runs' / self.runs[-1] / 'source.c'
+        p.write_text('changed current input')
+        self.assertRaises(ValueError, m.apply, plan)
+        self.assertTrue((self.root / plan['operations'][0]['folder']).exists())
+
+    def test_current_proof_must_be_accepted(self):
+        p = self.root / 'build/pilot/runs' / self.runs[-1] / 'report.json'
+        r = json.loads(p.read_text())
+        r['accepted'] = False
+        p.write_text(json.dumps(r))
+        self.assertRaises(ValueError, m.make_plan)
+
+    def test_new_pilot_cannot_retire_the_pilot_of_the_current_full_proof(self):
+        (self.root / 'reports/us-eu/pilot.json').write_text(json.dumps({'run_id': self.runs[-2]}))
+        self.assertRaises(ValueError, m.make_plan)
+        self.assertTrue((self.root / 'build/pilot/runs' / self.runs[-1] / 'source.o').is_file())
+
+    def test_forged_plan_cannot_remove_unique_attempt(self):
+        plan = m.make_plan()
+        op = plan['operations'][0]
+        p = self.root / op['folder'] / 'source.c'
+        p.write_text('unique source')
+        op['retained_input_pins'] = m.retained_inputs(p.parent)
+        self.assertRaises(ValueError, m.apply, plan)
+        self.assertTrue(p.is_file())
 
     def test_changed_receipt_rejected(self):
         plan = m.make_plan()
