@@ -41457,6 +41457,39 @@
         "before": "frame_actor_need_value(actor_need_state(actor), i) <= 30",
         "after": "frame_actor_need_value(actor_need_state(actor), i) <= 29"
       }
+    },
+    {
+      "name": "frame_select_optional_attachment_kinds_432cc",
+      "rom_offset": 275148,
+      "size": 124,
+      "source": "src/frame/frame_select_optional_attachment_kinds_432cc.c",
+      "symbols": {
+        "display_time_period": "0x080107e5",
+        "g_display_world_clock": "0x03003958"
+      },
+      "thumb_symbols": [
+        "display_time_period"
+      ],
+      "negative_control": {
+        "before": "(short)state->parameter > 10240",
+        "after": "(short)state->parameter >= 10240"
+      }
+    },
+    {
+      "name": "frame_select_optional_attachment_kinds_16f24",
+      "rom_offset": 93988,
+      "size": 112,
+      "source": "src/frame/frame_select_optional_attachment_kinds_16f24.c",
+      "symbols": {
+        "frame_need_effect_optional_one_ready": "0x0802f179"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_optional_one_ready"
+      ],
+      "negative_control": {
+        "before": "out[0] = 57;",
+        "after": "out[0] = 58;"
+      }
     }
   ],
   "assembly": [

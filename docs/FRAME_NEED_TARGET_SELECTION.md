@@ -33,8 +33,8 @@ list and state view. The copied pointer must have a valid target representation.
 The current observed definition prefix contains 149 rows of 36 bytes. Its
 allocator copies definition `+28` to state `+0xE4` and definition `+4` to
 `+0xE8`. All six observed predicate targets have matching word-return C
-contracts. The observed action producers include 17 matching C targets and
-42 original targets; their wider capacity and side effects remain uncertain.
+contracts. The observed action producers include 19 matching C targets and
+40 original targets; their wider capacity and side effects remain uncertain.
 Null action callbacks in observed rows 125, 126 and 139 are excluded by their
 zero enabled byte. This finite table finding does not exhaust writable callback
 assignments or establish a complete runtime population.
@@ -69,3 +69,55 @@ increment. These source producers account for the retained compiler results;
 they do not identify the original source spelling or historical toolchain.
 Whole-ROM matching, finite static mapping and runtime behavior remain separate
 claims. No inventory discovery or existing provider adds recovered-C credit.
+
+
+## Connected action writers
+
+Two ordinary C callbacks add 236 verified extent bytes through the existing
+need-effect definition and consumer paths. This includes pools and alignment;
+it adds no credit for existing callers, providers or inventory findings.
+
+| Entry | Callback | Bytes | Observed definition rows | Output writes |
+| --- | --- | ---: | --- | --- |
+| `0x080432CC` | `frame_select_optional_attachment_kinds_432cc` | 124 | 5, 6, 7 | Bytes 0 and optionally 1 |
+| `0x08016F24` | `frame_select_optional_attachment_kinds_16f24` | 112 | 104 | Bytes 0 through 3 at most |
+
+The time-based writer selects 45 or 22 for optional modes 1 or 3. Other modes
+map the current time period to 28, 32, 30 or 31. Mode 2 appends 12 only when
+the signed interpretation of the parameter exceeds 10,240. Its second mode
+read remains fresh after the first output write and the time-provider call.
+The control changes `>` to `>=`: mode 2, parameter 10,240 and hour six produce
+`[28, 0]` from a cleared buffer, versus `[28, 12]` in the control.
+
+Row 104's writer checks the low byte of the optional-ready word result.
+Readiness selects 45; otherwise a zero signed parameter selects 57. Other
+parameters first write 56 and 100, then reread the parameter before appending
+the pairs for `0xA00`, `0xB00` and `0xC00`. Output bytes may alias state storage,
+so caching that read would change the source meaning. The first two cases
+share an ordinary C append destination for their common final 101. The 57-to-58
+control uses optional mode zero and parameter zero with the actual predicate
+returning zero.
+
+Rows 5, 6, 7 and 104 have enabled byte one. Their table assignments and the
+existing consumers provide conditional static routes, without proving every
+such state reaches a consumer or establishing gameplay use. Both callbacks
+return the existing word value one. They append no terminator and leave unused
+output bytes unchanged. Calls require live seven-byte output backing; the
+target selectors clear their local buffers, while the embedded choice-buffer
+path retains its own initialization and lifetime requirements. Existing partial
+state/list/allocator owner relationships remain provisional. The signed-short
+accesses and conversions use the pinned target's 16-bit representation; current
+layout/API checks do not identify historical source types.
+
+The two bodies contain 230 instruction bytes, four referenced literal bytes
+and two internal zero alignment bytes. The full 236-byte extents are included
+in matching. Whole-ROM equality, static routes and runtime behavior remain
+separate claims. The 319,640 mapped extent bytes remain the historical
+comparison baseline.
+
+The connected row-97 writer at `0x08017AC4` remains unconverted. Its closest
+124-byte candidate differs in four bytes, so it receives no C coverage and its
+proposed two trailing alignment bytes are not newly owned. Row 97 has enabled
+byte zero and is skipped by both guarded target selectors. The existing
+choice-builder invokes the action callback before later enabled checks, a
+conditional source route whose runtime population remains unproven.

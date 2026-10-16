@@ -47,8 +47,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 3,002 |
-| Unclassified remainder of estimated envelopes | 16,234 |
+| Unclassified inside source/glue-owned extents | 3,004 |
+| Unclassified remainder of estimated envelopes | 16,232 |
 | Other unresolved ROM | 16,433,808 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -56,7 +56,7 @@ Thus 270,608 bytes have qualified static instruction evidence, under the stated
 decoder, mode, original-image and ordinary-call assumptions. This confirms their
 static instruction role; it does not establish that every instruction executes.
 The raw alternative reach is 270,634 bytes. There are 2,324 rooted execution
-entries, while the ordinary map has 2,523 entries/candidates and 323,998 mapped
+entries, while the ordinary map has 2,523 entries/candidates and 324,000 mapped
 extent bytes. In the initial survey, nine corroborated veneer starts were added (six register veneers and three audio
 stubs), and four prior weak starts were folded as interior blocks, for a net five
 entries and 24 mapped extent bytes.
@@ -472,3 +472,24 @@ No inventory discovery, existing provider or callback gains C credit here.
 The copied-audio-kernel extent uncertainties, unresolved targets and other survey
 limits still prevent a complete code denominator. The historical comparison
 remains fixed at 319,640 mapped extent bytes.
+
+### Connected need-action writers
+
+Two callbacks at `0x080432CC` and `0x08016F24` add two matching C functions
+and 236 extent bytes, bringing coverage to 1,715 functions and 245,576 C bytes;
+500 glue bytes remain separate. The complete spans contain 230 instruction
+bytes, four literal bytes and two internal alignment zeros. Existing callers,
+providers and inventory findings add no C credit.
+
+These two existing map rows gain compiler ownership. Entry count remains 2,523,
+inventory extent bytes remain 324,000 and treemap extent bytes remain 324,008.
+Two internal zeros move from estimated gaps into source-owned unclassified bytes;
+qualified instruction and referenced-data unions remain 270,608 and 34,732.
+The observed callback prefix and provisional owner/type limits are detailed in
+[FRAME_NEED_TARGET_SELECTION.md](FRAME_NEED_TARGET_SELECTION.md).
+
+The row-97 writer remains unconverted: its closest 124-byte candidate differs
+in four bytes, and its proposed trailing alignment gains no ownership here.
+Copied-audio extent gaps, unresolved transfers and other survey limits still
+prevent a complete code denominator. The historical comparison remains fixed
+at 319,640 mapped extent bytes. No new runtime observations are claimed.
