@@ -1,9 +1,9 @@
 # Remaining reconstruction and closure work
 
-The current gate verifies **2,111 C functions / 273,800 C extent bytes**, plus
+The current gate verifies **2,146 C functions / 275,344 C extent bytes**, plus
 **4,060 separate assembly extent bytes**. The starting baseline was
 1,735 / 250,064 C bytes and 500 glue bytes. Original slices still supply
-16,499,356 bytes of assets and unconverted code. Whole-ROM equality is proven;
+16,497,812 bytes of assets and unconverted code. Whole-ROM equality is proven;
 complete source ownership is not. The fixed 319,640 mapped extent bytes are
 solely a historical comparison.
 
@@ -13,8 +13,8 @@ Untracked candidates and old match-distance receipts receive no credit.
 
 | Order | Remaining work | Closure required / present blocker |
 | --- | --- | --- |
-| 1 | Renderer `0x080023E8` (1,400 bytes), finalizer `0x08003248` (348). | Readable C matching both complete slots, with controls. Renderer needs native frame/register allocation together with three variant reads; the retained indexed-record producer preserves those reads but is 1,396 bytes / 682 differences. Real stores/live-word trials failed. Finalizer flag/category/previous lifetimes remain unexplained; point snapshots failed, and its native stack accesses supply no address-taking producer. Inspect retained compiler evidence before another trial. |
-| 2 | Connected actor and attachment lifecycles. | Finish kind 66 (248), land `0x08024ACC` (68 / six differences), movement `0x08024720` (472 / 14), and remaining modules. The header family now owns its complete 1,212-byte local interval. Of 48 observed-prefix EC8 leaves, 41 have source; five have unconverted output-writing E8 paths, and two owned no-write selectors supply no grounded cases. Row 117's unpublished path depends on settlement `0x0801BA40` (188), whose three source attempts remain mismatched. Exhaust writable callbacks and the unidentified generic EC consumer. See [actor state](ACTOR_STATE_RECONSTRUCTION.md) and [attachments](FRAME_NEED_TARGET_SELECTION.md). |
+| 1 | Renderer `0x080023E8` (1,400 bytes), finalizer `0x08003248` (348). | Readable C matching both complete slots, with controls. Renderer needs native frame/register allocation together with three variant reads; the retained indexed-record producer preserves those reads but is 1,396 bytes / 682 differences. Real stores/live-word trials failed. Finalizer native stack placement remains unexplained: candidate flags/category snapshots already survive swaps, and its previous-index producer already crosses the backedge. Point snapshots failed; native accesses supply no address-taking producer. Inspect retained compiler evidence before another trial. |
+| 2 | Connected actor and attachment lifecycles. | Finish kind 66 (248), land `0x08024ACC` (68 / six differences), movement `0x08024720` (472 / 14), and remaining modules. The header family now owns its complete 1,212-byte local interval. Of 48 observed-prefix EC8 leaves, 44 have source; one path remains private, while an owned zero-only writer and two no-write selectors supply no grounded cases. Private rows 117 and 85 depend on settlement `0x0801BA40` (188); its candidate already has the native counter-address producer but still mismatches. Row 85 also needs its selector/EC and selection remover `0x080454DC` (192). Exhaust writable callbacks and the unidentified generic EC consumer. See [actor state](ACTOR_STATE_RECONSTRUCTION.md) and [attachments](FRAME_NEED_TARGET_SELECTION.md). |
 | 3 | Copied-RAM sorter, tile decoder and map drawer. | Match ROM `0xB840` (284), `0xB36C` (provisional 504) and `0xB564` (provisional 320). The constrained sort diagnostic remains two bytes different; its source/register cause is unresolved. Verify RAM/load addresses separately: copy lengths include following prefixes. The owned 812-byte assembly decoder does not close these C-origin bodies. See [RAM map](../config/ram-map-us-eu.json) and [decoder](RESOURCE_BACKGROUND_DECODER.md). |
 | 4 | Audio initializer, unusual entry protocols and executable writes. | Explain the NOP versus store at `0x08049968` in ordinary C. The saved-R5 adapter's caller/stack protocol remains open despite ownership of the initial 72-byte glue interval. Exhaust patcher inputs, incoming transfers and later writes; compare every reachable modified state. Observed converter shifts five/four remain conditional evidence. See [audio](AUDIO_RECONSTRUCTION.md). |
 | 5 | Other startup, runtime and scene bodies. | Replace every executable slice. Debugger glue ownership leaves eight preceding zero bytes and incoming/writer domains unresolved. World-effect callbacks `0x080052EC` (252) and `0x080054D0` (180), their controller and quantity-input paths remain original. First-CSE widened-load reuse explains missing rereads; disabling it still mismatches and introduces rejected data. See [scene paths](SCENE_LINK_ENTRY.md). |
@@ -27,9 +27,9 @@ outside rendering. They neither justify `volatile` nor close writer/gameplay
 populations. Boot/replay evidence is also bounded; the static census retains
 `runtime_observations: 0`.
 
-The census qualifies 278,016 physical instruction bytes, including four also
+The census qualifies 278,146 physical instruction bytes, including four also
 read as data; this is no complete denominator. Unclassified bytes remain:
-3,578 inside owned extents, 8,516 inside estimated envelopes and 16,433,062
+3,614 inside owned extents, 8,396 inside estimated envelopes and 16,433,016
 elsewhere. The initial EWRAM image has no established executable entry;
 later executable writes remain possible.
 

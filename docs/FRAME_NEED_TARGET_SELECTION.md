@@ -745,7 +745,7 @@ lifetimes, allocation and gameplay domains remain open.
 
 ## Constant-result EC switches and the retained LR save
 
-Forty-one observed-prefix eight-byte EC entries now have matching C
+Forty-four observed-prefix eight-byte EC entries now have matching C
 definitions, using each recovered writer and status dispatcher's complete
 evidenced action set:
 
@@ -792,6 +792,9 @@ evidenced action set:
 | 131 | `0x08023C20` | 3, 4, 18 |
 | 96 | `0x08016770` | 18 |
 | 133 | `0x0802BC48` | 16, 17 |
+| 95 | `0x0800F9A4` | 70 |
+| 106, 107, 108 | `0x08023E28` | 45, 56, 57 |
+| 146, 147 | `0x080465E0` | 12 |
 
 Each source switch returns word one for its cases and default. The original
 256-byte EC switch in rows 42/43 independently corroborates this family idiom;
@@ -813,13 +816,13 @@ One additional same-body EC at `0x08016E34` belongs to the unrooted action-75
 module outside this observed prefix. Its writer and status independently ground
 case 75; it adds no entry to the 48-prefix count.
 
-All forty-two complete-set recipes match on their first attempt, without
+All forty-five complete-set recipes match on their first attempt, without
 instruction assembly, register constraints, added qualifiers or invented calls.
-Real controls make one evidenced case return zero: thirty-four compile to 16
+Real controls make one evidenced case return zero: thirty-seven compile to 16
 bytes and reject by 14; the kind-90 control compiles to 20 and rejects by 18;
 seven compile to 24 and reject by 22. The stable verifier
 includes extra bytes in rejection. Canonical API, full-ROM/control and progress
-gates pass. Together these leaves own 336 C instruction bytes (328 in the
+gates pass. Together these leaves own 360 C instruction bytes (352 in the
 observed prefix) and no assembly, pools or alignment.
 
 For rows 3/4 and the shared header writer, zero is an evidenced buffer sentinel,
@@ -831,9 +834,10 @@ Removed case structure and unused first-two formal roles are inferred from the
 family and its recovered writers, not uniquely identified historical source.
 The source still returns one for every word input. Generic EC delivery, writable
 callback targets, valid selection indices and retained-tail domains remain open.
-After these forty-one, seven same-body entries in the observed 149-row prefix
-still need justified source recipes. Five have unconverted output-writing E8
-paths (including a zero-only writer whose delivery is unresolved). Both
+After these forty-four, four same-body entries in the observed 149-row prefix
+still need justified source recipes. Row 117 has a private, matched writer but
+an unconverted settlement provider. The owned zero-only writer in row 128
+does not establish delivery of its independent status kind 12. Both
 no-write selectors at `0x0803505C` and `0x0801335C` now have source but supply
 no grounded cases for their EC entries. No speculative recipes were tried.
 Byte equality alone does not authorize an arbitrary case list.
@@ -1109,3 +1113,42 @@ neighbours with no aligned ROM pointer in a bounded full-ROM scan.
 
 Generic EC delivery, full table/writable populations, found/live record backing,
 serialized indices, signed arithmetic and scheduling/gameplay remain open.
+
+
+## Parameter, counter and timed attachment paths
+
+| Observed row | Local interval | New C functions / extent bytes |
+| --- | --- | ---: |
+| 95 | `0x0800F858..0x0800FA50` | 9 / 504 |
+| 128 | `0x0801A55C..0x0801A660` | 8 / 252; eight EC bytes remain original |
+| 106, 107, 108 | `0x08023D00..0x08023F34` | 10 / 564 |
+| 146, 147 | `0x080465D4..0x080466B4` | 8 / 224 |
+
+These paths add 35 C definitions / 1,544 bytes: 1,476 instructions, 32 literal
+bytes and 36 native zero-alignment bytes. All external providers have source.
+Actual definitions and target layouts pass API checks; every genuine source
+control rejects. Full matching/control and progress gates pass. The separate
+predicates and constant-return neighbours remain unrooted unless explicitly
+installed by the observed definition rows.
+
+Row 95 writes action 70. Its worker updates the real parameter indicator,
+compares the parameter against its previous value and advances phases 0/81/1.
+The initial direct-return dispatcher differed by 14 bytes; assigning the actual
+worker/default result before the common return restores native control flow.
+Row 128 writes only zero and returns success one. Known chooser paths stop or
+suppress zero. Its independent status dispatch recognizes 12, but neither fact
+grounds an EC case set; EC `0x0801A590` remains original and uncompiled.
+
+Rows 106–108 select optional action 45 or animation modes 56/57. The latter
+worker preserves modes 512/256 and its actual cue, animation and commit order.
+Writing case 57 before 56 restores the native dispatch fallthrough; testing the
+completion equality before the default return restores the worker's branch.
+Both initial failures remain retained. Rows 146/147 separately select action
+12, stop motion and use direction 2, animation 27 and timer 120 before the
+actual need adjustment and completion transition.
+
+The three new EC switches use action sets established before compilation.
+Generic delivery, choice tails, writable targets, found/live records, counter
+and serialized-index domains, scheduling and gameplay remain open. The private
+row-117 and row-85 paths receive no credit here: their shared settlement provider
+still mismatches, and row 85 also requires its original selection remover.
