@@ -167,13 +167,12 @@ The initializer constructs the four indicator objects and endpoint state;
 the notice drawer preserves its table delay and staged-string word; shutdown
 retains the real fade, object-list release and display resets.
 
-The 1,224-byte controller at `0x0801BE78` stays original. Matching its surrounding
-calls does not validate its unwritten kind-11 event argument. The existing
-recording fade provider also retains its prefix-store/suffix qualifications;
-these new callers add no event payload or invented initialization. Resource
-prefixes, object/list backing, allocation success, incoming indices, writable
-fields, scheduling and gameplay remain separate open domains. These entries
-add source ownership without claiming completion of the serial path.
+When these surrounding bodies were adopted, the 1,224-byte controller at
+`0x0801BE78` remained original. Its later matching reconstruction is described
+below. The existing recording fade provider retains its prefix-store/suffix
+qualifications. Resource prefixes, object/list backing, allocation success,
+incoming indices, writable fields, scheduling and gameplay remain separate
+open domains; source ownership does not close the whole serial path.
 
 ## Peer response predicate
 
@@ -197,13 +196,54 @@ No authored prior attempt was found for this 64-byte predicate; its first
 canonical short-circuit recipe matches. The 408-byte failures and the separate
 124-byte status-reader hold remain unchanged.
 
-The held 1,224-byte status controller now uses the actual provider names and
-the same empty-member payload representation as the catalog. Its low-byte peer
-result test has an explicit narrowing conversion at the caller. All 39 native
-calls retain their 21 targets, and twenty actual provider definitions pass the
-canonical API checks. Output remains 1,224 bytes with eleven differences; the
-controller gains no ownership. The remaining entry-zero and indicator-loop
-register differences survive these interface repairs. Genuine-value register
-constraints made the local instructions agree but changed compiler-wide
-allocation; retained intermediate output explains the extra pre-GCSE copy. No
-dead initialization, dummy instruction or assembly replacement is admitted.
+The canonical API repair first preserved the controller's 1,224-byte /
+eleven-difference candidate: all 39 native calls retained their 21 targets.
+The later matching recipe below resolves the entry and indicator-loop
+producers. Retained failed constraints explain why adding an entry-zero local
+changed compiler-wide allocation. No dead initialization, dummy instruction
+or assembly replacement is admitted.
+
+## Linked-status controller
+
+`scene_link_status_step` at `0x0801BE78` reconstructs the observed phase-9 step
+callback in 1,224 complete C extent bytes. The disjoint static partition is
+980 instruction bytes, 228 referenced data bytes (including the seven-entry
+switch table), and 16 zero bytes at eight pool-alignment gaps. The ELF function
+and section both own the complete extent; the next owned entry is `0x0801C340`.
+The changed-source control changes the actual start-result exclusion from seven
+to six and is rejected with 56 differing bytes at the same size.
+
+Two actual producers explain the final match. The initialized flag value two
+uses a genuine local `R3` constraint entirely inside a loop with no calls;
+the ordinary cursor remains available for commoning its pointer read. The first
+input-byte write uses a real character pointer to the complete `InputConfig`
+object. Naming that consumed base preserves the original object-root address
+and offset calculation while avoiding the compiler's temporary field-clearing
+zero, which first CSE otherwise reuses for a later store. A direct character
+expression instead folded the member address into a different literal pool and
+failed; the retained failures distinguish these causes.
+
+The kind-11 path initializes the GNU empty member of the existing payload union.
+Its by-value ABI copies eight bytes of unspecified representation; this does
+not initialize an eight-byte array or promise zero padding. Current canonical
+header checks include the actual controller, recorder and all 20 owned direct
+providers; the 124-byte status reader at `0x0803E298` remains an original
+word-returning boundary. The peer predicate has its own word API and an explicit
+low-byte conversion at this consumer, distinct from the 408-byte serial poll.
+
+This ordinary-C recipe requires the complete input object through its 50 member
+bytes, valid initialized indicator objects/flags, count values in zero through
+four at the indicator loops, valid four-slot input indices, and signed flicker
+increments within the C integer range. Native additions alone do not prove those
+runtime conditions or portable overflow behavior. Opaque provider preconditions,
+all incoming/writer populations and whole-protocol/gameplay closure remain open.
+
+The initializer (352), controller (1,224), notice helper (164), indicator helper
+(120) and shutdown (32) now own the complete local interval
+`0x0801BD18..0x0801C47C`: five C bodies and 1,892 extent bytes. The observed scene
+table row and its accepted phase consumers support the begin/step/end linkage;
+they do not establish every runtime scene index. The 408-byte poll, 124-byte
+status reader and 1,616-byte next-stage IRQ remain separate reconstruction
+blockers. A current actual-owner IRQ recipe lowers two-byte representation
+copies inline but materializes two stack stores and four frame bytes absent
+from the native body; it earns no C credit.
