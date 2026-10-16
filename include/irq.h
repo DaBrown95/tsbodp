@@ -1,3 +1,6 @@
+#ifndef TSBODP_IRQ_H
+#define TSBODP_IRQ_H
+
 /* Names are reconstructed. Layout is supported by the original accesses. */
 typedef void (*IrqCallback)(void);
 struct IrqContext {
@@ -17,3 +20,5 @@ extern void irq_noop(void);
 extern void frame_update(void);
 #define REG16(a) (*(volatile unsigned short *)(a))
 #define REG32(a) (*(volatile unsigned int *)(a))
+
+#endif /* TSBODP_IRQ_H */

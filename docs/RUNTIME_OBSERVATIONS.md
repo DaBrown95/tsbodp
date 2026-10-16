@@ -77,12 +77,12 @@ invalid bounds. They use synthetic instructions, with no original game payload.
 ## Recorded result
 
 The [machine-readable summary](../config/runtime-observations-us-eu.json)
-records all 27 entry/site probes and 18 write probes, including zero-hit probes.
-The 300-frame run reached 21 probes in 5,835,926 steps and 84,028,913
-emulator ticks. Its replay was byte-identical: both 50,139-byte trace files have
-SHA-256 `4aa9fa7150ee359dce9d386845fd135bfc2b465d95018836e43d926f7d9dc824`.
+records all 36 entry/site probes and 18 write probes, including zero-hit probes.
+The 300-frame run reached 30 probes in 5,835,926 steps and 84,028,913
+emulator ticks. Its replay was byte-identical: both 72,816-byte trace files have
+SHA-256 `5422e126c328ce26917aa7553cc51c86e9fc42863527a7416879a11564907630`.
 The wrong-watch trace has SHA-256
-`708e01b6327ec13ce45364ad761081ca2492cb3001a1fc12528332e6a43b025b`.
+`c0a2b1b44c94921ec8cf7fb12a5d98ab8fb836b9b7f0ecd9a8f0a986478121e5`.
 It reports zero watched writes and the same entry counts, final registers,
 frames, steps and ticks. All three runs report zero fatal, error, warning,
 stub and game-error log messages.
@@ -90,7 +90,7 @@ stub and game-error log messages.
 Renderer and finalizer entry counters each reached 810, the copied sorter 135,
 background decoder one and copied tile allocator six. These arrivals connect
 the remaining reconstruction work to this boot path. The six zero-hit entry
-probes include both selected mixer entries, collision and tile decoding, and
+probes include the selected left-mixer and bias-fill entries, collision and tile decoding, and
 both map kernels; no unreachability conclusion follows.
 
 The two master-volume calls received `128` and `0x40080`, followed by converter
@@ -101,6 +101,16 @@ changed from `0xE59F0034` to `0xE12FFF1E` (`BX LR`). Its first entry sample
 contains the old instruction; seven later samples contain the replacement.
 There were 67 total tail arrivals: the first and 66 later arrivals. Only the
 first eight have individual instruction/register samples.
+
+The corrected converter entry at `0x03000B38` has 268 arrivals. Each of its
+eight known writable instruction-word sites has 18,492 arrivals. All eight
+retained samples at each site contain the shift-four words
+`0xE7DCA24A` / `0xE7DCB24B`; converter-entry snapshots also retain all four
+word pairs in that state. These are arrivals before instructions execute.
+The old `0x03000AB4` probe was mislabeled as conversion: the source entry is
+`mixBias`. Its zero-hit counter is preserved with the corrected label. The
+new probes preserve every prior address's hit count, all watched final words
+and final machine state; no complete input/state domain is claimed.
 
 Both arrivals at `0x080499B0` show the Thumb NOP halfword `0x46C0`; the trace's
 32-bit snapshot also includes the following halfword. No store at that NOP

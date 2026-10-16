@@ -19,26 +19,37 @@ follow the hardware register destinations, not a recovered original type.
 word at `0x03007388`. The connected VCount path below establishes the staged
 row callback role; the full backing layout remains uncertain.
 
-The [pending-row sources](../include/display_pending_block.h) own six C
-definitions and 304 bytes: initialization at `0x08046EB0`, queue/reset,
-VCount arming, the callback at `0x08046E50`, and the four-byte default no-op.
-Sixteen-byte rows contain a scanline halfword, two mutable state words and a
-callback at offset 12. The callback receives the two state-word addresses,
-then the VCount handler advances to the next row or wraps at a null callback.
-The default ROM row at `0x0807FC1C` names `0x08047081`.
+The pending-display module at `0x08046DD0..0x080470C0` now has complete
+source-extent ownership: thirteen C bodies, 752 bytes, with no gaps or
+overlaps. The [row view](../include/display_pending_block.h),
+[mutation APIs](../include/display_pending_mutation.h) and
+[scroll/IRQ providers](../include/display_pending_scroll.h) keep pools and
+alignment within their independently compared extents.
 
-The queue copies caller-supplied rows and has no local count guard. The staged
-copy covers eleven rows; reset writes twelve queued rows. Static insertion
-at `0x08046DD0` also publishes a caller-supplied callback, and removal at
-`0x08046F24` shifts rows after an unbounded equality search. The final reset
-record overlaps the first twelve bytes of the tile-allocation bitmap at
-`0x030023B8`. This establishes accesses, not safe caller counts, backing
-capacity or complete writer/target sets. Those unconverted writers and their
-incoming domains remain completion blockers. The [bounded boot](RUNTIME_OBSERVATIONS.md)
-records 270 handler and default-callback arrivals, with eight sampled argument
-and target sets; it does not close those domains. All six accepted source
-extents retain changed-source controls, including the default no-op's genuine
-state mutation and its extra output bytes.
+Sixteen-byte rows contain a scanline halfword, two mutable state words and a
+callback at offset 12. The VCount handler passes the two state-word addresses,
+then advances or wraps at a null next callback. The default ROM row at
+`0x0807FC1C` names the four-byte no-op at `0x08047080`. The default-reset
+wrapper queues this row and calls the existing flag-polling VBlank wait.
+The separate disable routine clears IE bit 2, acknowledges IF bit 2 and clears
+DISPSTAT bit 5. Adjacent BG2/BG3 horizontal-scroll callbacks capture the prior
+high state halfword, add the delta, wait for HBlank and write that prior value.
+Their compatible ABI does not establish membership in the queued target domain.
+
+The queue copies caller-supplied rows without a local count guard. Insertion
+accepts an arbitrary callback, shifts rows and leaves the inserted state words
+as carried storage; removal shifts after an unbounded line-equality search.
+Both use the independently reconstructed [directional copy helper](HEAP_RECONSTRUCTION.md#directional-copy-used-by-pending-display-rows),
+including its original backward-offset edge. The staged copy covers eleven
+rows; reset writes twelve queued rows. The final reset record overlaps the
+first twelve bytes of the tile-allocation bitmap at `0x030023B8`. These are
+actual accesses, not safe caller counts, backing-capacity or exhaustive writer
+proofs. Incoming aliases, counts, indices and callback targets remain open.
+
+The [bounded boot](RUNTIME_OBSERVATIONS.md) records 270 handler/default-callback
+arrivals and eight sampled argument/target sets. Every source extent has a
+changed-source control, including the no-op's extra output bytes. Those byte
+comparisons and observations do not close the remaining runtime domains.
 
 Palette jobs have two observed layouts. The twelve range records are 8 bytes
 at `0x030032f0`; the twelve block records are 20 bytes at `0x03003170`. Bit 1

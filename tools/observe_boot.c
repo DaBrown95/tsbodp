@@ -26,7 +26,12 @@ static struct Probe entries[] = {
  {0x080499b0,"audio_master_volume_nop"},
  {0x03000004,"audio_timer_irq"}, {0x03000bf0,"audio_shift_patcher"},
  {0x0300004c,"audio_irq_reprogram_or_return"},
- {0x03000604,"audio_mix_left"}, {0x03000ab4,"audio_mix_convert"},
+ {0x03000604,"audio_mix_left"}, {0x03000ab4,"audio_mix_bias"},
+ {0x03000b38,"audio_mix_convert"},
+ {0x03000b70,"audio_convert_pair0_a"}, {0x03000b74,"audio_convert_pair0_b"},
+ {0x03000b8c,"audio_convert_pair1_a"}, {0x03000b90,"audio_convert_pair1_b"},
+ {0x03000bb0,"audio_convert_pair2_a"}, {0x03000bb4,"audio_convert_pair2_b"},
+ {0x03000bcc,"audio_convert_pair3_a"}, {0x03000bd0,"audio_convert_pair3_b"},
  {0x03002900,"frame_sort"}, {0x03002a20,"frame_collisions"},
  {0x030036d0,"tile_decoder"}, {0x03003370,"background_decoder"},
  {0x03007160,"map_draw"}, {0x03005e60,"map_transfer"},
@@ -112,7 +117,8 @@ static void entered(struct mDebugger *debugger, enum mDebuggerEntryReason reason
   }
   if(reason==DEBUGGER_ENTER_BREAKPOINT)
    printf(",\"instruction_word\":%u",debugger->core->busRead32(debugger->core,probe->address));
-  if(reason==DEBUGGER_ENTER_BREAKPOINT && probe->address==0x03000bf0) {
+  if(reason==DEBUGGER_ENTER_BREAKPOINT &&
+     (probe->address==0x03000bf0 || probe->address==0x03000b38)) {
    printf(",\"patch_words_before\":[");
    for(size_t i=1;i<9;++i) printf("%s%u",i>1?",":"",debugger->core->busRead32(debugger->core,writes[i].address));
    printf("]");

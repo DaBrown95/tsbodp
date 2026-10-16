@@ -1,7 +1,6 @@
 # Connected heap allocation and release
 
-Sixteen connected functions supply 1,144 bytes of matching C. The latest four
-add 472 bytes. All complete linked
+Seventeen connected functions supply 1,392 bytes of matching C. All complete linked
 extents match at their original ROM addresses, including literal pools and
 alignment. Actual changed-source controls reject for every function. This
 closes the allocation, zeroing, resize and release core used by text rendering
@@ -9,6 +8,7 @@ and map resource loading. Copy and arena bootstrap are also reconstructed.
 
 | Function | ROM address | Bytes |
 | --- | --- | ---: |
+| `heap_move` | `0x08027738` | 248 |
 | `heap_initialize` | `0x08027830` | 52 |
 | `heap_allocate` | `0x08027864` | 128 |
 | `heap_allocate_zeroed` | `0x080278E4` | 164 |
@@ -127,3 +127,25 @@ and their compiled controls reject by one, one, 57 and one bytes respectively.
 Those fresh receipts are indexed by the local `heap-rename-proof.json` beside
 the core receipt. Full-ROM equality, static heap layout and runtime behavior
 remain separate claims.
+
+## Directional copy used by pending display rows
+
+[`heap_move`](../src/heap/heap_move.c) adds the complete 248-byte body before
+heap initialization. Its two established direct callers insert/remove pending
+scanline rows through overlapping shifts. It selects forward or backward
+copying from unsigned 32-bit address comparisons, handles unaligned input with
+byte loops and otherwise separates word and trailing-byte loops. A real return
+at the end of the forward arm and separate byte/word loop indices preserve the
+original dataflow without register constraints. The adjacency-comparison
+control retains size and rejects by one byte.
+
+The aligned backward arm preserves an unusual native edge: the final unsigned
+post-decrement leaves `trailing == UINT_MAX`. The source uses that unsigned
+byte offset when forming word pointers; native 32-bit address adds wrap to
+source/destination minus one. Those word accesses can therefore be misaligned
+even when incoming addresses are aligned. This is the original compiled
+behavior, not a portable `memmove` contract or a corrected algorithm. Caller
+validity, target-specific pointer/alignment behavior and execution of this
+path remain separate questions. Source snapshots, failed lifetime hypotheses,
+RTL, complete comparisons and the control are retained under ignored
+`analysis/display-pending-inventory/`.

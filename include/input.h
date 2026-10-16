@@ -1,3 +1,6 @@
+#ifndef TSBODP_INPUT_H
+#define TSBODP_INPUT_H
+
 /* Reconstructed state for local and linked input. Original names are unknown. */
 typedef unsigned char InputU8;
 typedef unsigned short InputU16;
@@ -17,3 +20,5 @@ extern InputU8 g_input_direction_table[16];
 void input_clear(void);
 void input_poll(void);
 void input_enable(void);
+
+#endif /* TSBODP_INPUT_H */

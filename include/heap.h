@@ -26,6 +26,7 @@ extern void heap_free(void *);
 extern void heap_initialize_arena(unsigned int, void *, void *);
 extern void *heap_clear(void *, int, unsigned int);
 extern void *heap_copy(void *, const void *, unsigned int);
+extern void *heap_move(void *, const void *, unsigned int);
 extern void *heap_resize_in_place(void *, unsigned int);
 extern void heap_initialize(void);
 #endif

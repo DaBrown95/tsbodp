@@ -23,7 +23,7 @@ and unsigned counter at twelve. Other bits and bytes remain uninterpreted.
 Mode one counts down while unpaused and reports completion at zero; mode two
 increments while unpaused. The native scene callers at `0x08024C04` and
 `0x08024CC0` start slots zero/one with values 60/90 and consume byte completion
-results. Those callers are separate source-ownership work.
+results. Those callers now have separate [matching C ownership](SCENE_TIMED_NOTICE.md).
 
 Two compiler explanations close this path. A one-bit paused field reproduces
 the original negative preservation mask; a plain byte field narrowed it to 254.

@@ -1,3 +1,6 @@
+#ifndef TSBODP_DISPLAY_H
+#define TSBODP_DISPLAY_H
+
 /* Inferred layouts are supported by original field widths and offsets. */
 struct DisplayCommitContext {
     unsigned char unknown_00[0x38];
@@ -189,3 +192,5 @@ extern void display_write_constant_map_rectangle(void *, int, int, int, int, uns
 extern void display_write_map_palette_rectangle(void *, int, int, int, int, unsigned short);
 extern const unsigned short *display_load_background_resource_dma(unsigned int,
     const struct BackgroundResource *, unsigned short);
+
+#endif /* TSBODP_DISPLAY_H */

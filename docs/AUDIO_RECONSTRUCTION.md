@@ -1381,3 +1381,19 @@ was found targeting any of the three entries. The inventory previously omitted
 the two leaf mask routines. Matching C establishes their static source roots;
 it adds no observed execution and does not close arbitrary indirect incoming
 transfers or later writable targets.
+
+## Bounded converter execution and remaining input domains
+
+The [corrected boot probes](RUNTIME_OBSERVATIONS.md) distinguish bias fill
+at `0x03000AB4` from conversion at `0x03000B38`. The converter has 268
+arrivals; all eight known writable instruction sites have 18,492 arrivals
+each. The eight retained samples per site contain the shift-four instruction
+words. This links the known modified words to this boot path; arrivals do
+not establish instruction retirement, every later state or a complete domain.
+
+The two named master-volume callers select shifts five/four. Other incoming
+transfers and arbitrary writer aliases remain unclosed. Mix-buffer bounds also
+depend on valid sample geometry, frequency/fit arithmetic, channel and volume
+state, and timing invariants; the SDK's documented ranges are not a proof that
+every game producer enforces them. Source ownership and one finite no-input
+boot do not establish that executable storage can never receive other writes.

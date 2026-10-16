@@ -42,8 +42,8 @@
   },
   "harness": {
     "path": "tools/observe_boot.c",
-    "sha256": "e2e1f1e1c925ab1cb2bed712439b318eaeedfbb5a0d024130814623f91a3e973",
-    "size": 8793
+    "sha256": "3fa0992bf6bfd5c49dad869dfc1c2cce7053df2d52a5d579c414ce04d9116efc",
+    "size": 9170
   },
   "bounds": {
     "frames": 300,
@@ -56,18 +56,18 @@
   "local_trace_artifacts": [
     {
       "path": "analysis/runtime-boot/boot.jsonl",
-      "sha256": "4aa9fa7150ee359dce9d386845fd135bfc2b465d95018836e43d926f7d9dc824",
-      "size": 50139
+      "sha256": "5422e126c328ce26917aa7553cc51c86e9fc42863527a7416879a11564907630",
+      "size": 72816
     },
     {
       "path": "analysis/runtime-boot/replay.jsonl",
-      "sha256": "4aa9fa7150ee359dce9d386845fd135bfc2b465d95018836e43d926f7d9dc824",
-      "size": 50139
+      "sha256": "5422e126c328ce26917aa7553cc51c86e9fc42863527a7416879a11564907630",
+      "size": 72816
     },
     {
       "path": "analysis/runtime-boot/wrong-watch.jsonl",
-      "sha256": "708e01b6327ec13ce45364ad761081ca2492cb3001a1fc12528332e6a43b025b",
-      "size": 29024
+      "sha256": "c0a2b1b44c94921ec8cf7fb12a5d98ab8fb836b9b7f0ecd9a8f0a986478121e5",
+      "size": 51686
     }
   ],
   "controls": {
@@ -84,7 +84,7 @@
     "frames": 300,
     "steps": 5835926,
     "ticks": 84028913,
-    "emitted_entry_samples": 85,
+    "emitted_entry_samples": 157,
     "emitted_pre_write_samples": 44,
     "emitted_after_step_readbacks": 44,
     "entry_probes": [
@@ -164,9 +164,54 @@
         "hits": 0
       },
       {
-        "name": "audio_mix_convert",
+        "name": "audio_mix_bias",
         "address": "0x03000ab4",
         "hits": 0
+      },
+      {
+        "name": "audio_mix_convert",
+        "address": "0x03000b38",
+        "hits": 268
+      },
+      {
+        "name": "audio_convert_pair0_a",
+        "address": "0x03000b70",
+        "hits": 18492
+      },
+      {
+        "name": "audio_convert_pair0_b",
+        "address": "0x03000b74",
+        "hits": 18492
+      },
+      {
+        "name": "audio_convert_pair1_a",
+        "address": "0x03000b8c",
+        "hits": 18492
+      },
+      {
+        "name": "audio_convert_pair1_b",
+        "address": "0x03000b90",
+        "hits": 18492
+      },
+      {
+        "name": "audio_convert_pair2_a",
+        "address": "0x03000bb0",
+        "hits": 18492
+      },
+      {
+        "name": "audio_convert_pair2_b",
+        "address": "0x03000bb4",
+        "hits": 18492
+      },
+      {
+        "name": "audio_convert_pair3_a",
+        "address": "0x03000bcc",
+        "hits": 18492
+      },
+      {
+        "name": "audio_convert_pair3_b",
+        "address": "0x03000bd0",
+        "hits": 18492
       },
       {
         "name": "frame_sort",
@@ -457,6 +502,26 @@
       "final_word": "0x80808000",
       "final_low_byte": "0x00",
       "interpretation": "The watched aligned word has one hooked startup-copy write. Later byte writes to other offsets in this word need not hit the exact byte probe. No master-volume NOP-site store was observed; complete clipping-table write coverage is not established."
+    },
+    "converter_execution": {
+      "entry_address": "0x03000b38",
+      "entry_hits": 268,
+      "retained_entry_samples": 8,
+      "patched_word_site_hits": {
+        "audio_convert_pair0_a": 18492,
+        "audio_convert_pair0_b": 18492,
+        "audio_convert_pair1_a": 18492,
+        "audio_convert_pair1_b": 18492,
+        "audio_convert_pair2_a": 18492,
+        "audio_convert_pair2_b": 18492,
+        "audio_convert_pair3_a": 18492,
+        "audio_convert_pair3_b": 18492
+      },
+      "retained_word_site_samples": 64,
+      "sampled_a_word": "0xe7dca24a",
+      "sampled_b_word": "0xe7dcb24b",
+      "correction": "The earlier03000AB4probe was mislabeled as conversion; its actual role is mixBias. Its zero hit counter is preserved under corrected name audio_mix_bias.",
+      "interpretation": "Actual converter entry and all eight known mutable instruction-word sites are reached in this bounded boot. The first eight samples of each word site contain shift-four words. These are pre-instruction arrivals, not instruction-retirement or complete modified-state/domain proof."
     }
   },
   "limitations": [

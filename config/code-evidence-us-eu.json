@@ -385,6 +385,16 @@
           "function": "display_reset_queued_rows",
           "source": "src/display/reset_queued_rows.c",
           "source_sha256": "4087944ef2b9e8b881062a5c2a1b038066fc10371bca75f9de9b71eac26b8f27"
+        },
+        {
+          "function": "display_insert_pending_row",
+          "source": "src/display/insert_pending_row.c",
+          "source_sha256": "a6cd080e6964866eb0759e7aa46c6cf55b5419b96e18948b5743cbd72d775c32"
+        },
+        {
+          "function": "display_remove_pending_row",
+          "source": "src/display/remove_pending_row.c",
+          "source_sha256": "6aaed1ed0d0ee77f183a44c43566cae20f0c547edd21a71259372dc294babc7a"
         }
       ],
       "confidence": "Matching initializer, queue and consumer establish the single default row and writable callback role; no universal row/count bounds.",
@@ -1226,16 +1236,18 @@
         "display_reset_queued_rows",
         "display_flush_pending_block",
         "display_initialize_pending_block",
-        "unconverted_insert_08046dd0",
-        "unconverted_remove_08046f24"
+        "display_insert_pending_row",
+        "display_remove_pending_row"
       ],
       "source_owners": [
         "display_initialize_pending_block",
         "display_queue_pending_rows",
         "display_pending_vcount_callback",
-        "display_reset_queued_rows"
+        "display_reset_queued_rows",
+        "display_insert_pending_row",
+        "display_remove_pending_row"
       ],
-      "remaining_uncertainty": "Default row and first eight boot calls identify08047081; inserter accepts arbitrary callback R2, remover has unbounded equality search, last reset record overlaps tile bitmap. No exhaustive incoming row, index, count, writer or target domain is proven.",
+      "remaining_uncertainty": "Default row and eight retained boot calls identify08047081. Source-owned inserter accepts arbitrary callbackR2, remover searches without a local bound, and final reset record overlaps tile bitmap. Global writer aliases, incoming counts/indices, backing capacity and callback target domain remain unresolved.",
       "confidence": "Pinned matching source and bounded separate boot corroboration; complete target set remains open."
     },
     {
