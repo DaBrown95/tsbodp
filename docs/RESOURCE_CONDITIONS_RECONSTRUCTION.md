@@ -1,8 +1,8 @@
 # Resource condition reconstruction evidence
 
-This connected continuation of resource commands 36 and 37 now contains 21
-verified C functions covering 2,980 bytes. The latest entry-group refresh and
-actor-entry lookup/removal add three functions and 260 bytes. Complete extents match at their original ROM
+This connected continuation of resource commands 36 and 37 now contains 23
+verified C functions covering 3,284 bytes, including the selected-group initializer
+and the notification predicate. Complete extents match at their original ROM
 addresses, including literal pools and zero tail alignment. Every replacement
 has a compiled, linked changed-source control that is rejected. These are static
 and compiler results; condition behaviour has not been tested during gameplay.
@@ -30,6 +30,8 @@ and compiler results; condition behaviour has not been tested during gameplay.
 | `0802A688` | `condition_refresh` | 132 |
 | `08020A98` | `condition_query_actor` | 48 |
 | `080209CC` | `condition_update_actor` | 80 |
+| `0802A580` | `condition_initialize_selected_group` | 264 |
+| `08040E08` | `condition_notification_active` | 40 |
 
 The serialized cells share the game-state base at `03003950` with the accepted
 resource command predicates. Rows have stride 144 and columns stride 24.
@@ -71,6 +73,18 @@ earlier row counts, selects an eight-byte record at `0805FAB4`, indexes the
 word ID table at `0805F860`, and subtracts 18. Its result feeds the notification
 predicate at `08040E08`. These call roles motivate the names but do not recover
 the original terminology or prove display behaviour.
+
+That predicate now owns its complete 40-byte slot: 30 instruction bytes, two
+literal words and two zero alignment bytes. It returns one only when the
+existing scene request's word zero equals 15 and the existing menu definition
+word at offset four equals the full supplied kind. The second read occurs only
+after the first comparison succeeds. An ordinary failure guard preserves the
+original compiler's false-block placement; a positive-condition recipe had the
+same observations but four different bytes. Normal and strict builds match,
+and changing request kind 15 to 14 rejects by one byte. Target checks include
+the actual completion caller, kind lookup and three request/menu producers.
+This closes that direct completion-call dependency, not all state writers,
+valid caller domains or notification gameplay.
 
 The display-bit clearer writes 15 bytes at `03001E00`. The setter selects byte
 `kind >> 3` and bit `kind & 7`; it retains the original absence of a bounds

@@ -49621,6 +49621,38 @@
         "before": ">> 8",
         "after": ">> 7"
       }
+    },
+    {
+      "name": "condition_notification_active",
+      "rom_offset": 265736,
+      "size": 40,
+      "source": "src/resource/conditions/condition_notification_active.c",
+      "symbols": {
+        "g_scene_request": "0x03004350",
+        "g_display_menu_state": "0x03002198"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "unknown_00 != 15",
+        "after": "unknown_00 != 14"
+      }
+    },
+    {
+      "name": "save_world_original_reset_hook",
+      "rom_offset": 173836,
+      "size": 4,
+      "source": "src/save/world_reset_hook.c",
+      "symbols": {
+        "frame_set_game_value": "0x0801bc11"
+      },
+      "thumb_symbols": [
+        "frame_set_game_value"
+      ],
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    frame_set_game_value(0);\n}"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
     }
   ],
   "assembly": [

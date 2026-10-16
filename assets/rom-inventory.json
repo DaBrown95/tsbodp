@@ -5841,7 +5841,7 @@
   },
   "entry_count": 2536,
   "extent_count": 2537,
-  "mapped_extent_bytes": 325334,
+  "mapped_extent_bytes": 325338,
   "rows": [
     {
       "name": "rom_entry",
@@ -50111,13 +50111,14 @@
       "referenced_literal_bytes": 12
     },
     {
-      "name": "sub_0802A70C",
+      "name": "save_world_original_reset_hook",
       "rom_offset": 173836,
       "mode": "Thumb",
       "runtime_addresses": [
         134391564
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -50127,12 +50128,12 @@
       "return_offsets": [
         173836
       ],
-      "size": 2,
-      "extent_basis": "CFG envelope estimate",
+      "size": 4,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 173836,
       "body_rom_start": 173836,
       "body_rom_end": 173838,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0802xxxx",
       "decoded_instruction_bytes": 2,
@@ -73827,13 +73828,14 @@
       "referenced_literal_bytes": 12
     },
     {
-      "name": "sub_08040E08",
+      "name": "condition_notification_active",
       "rom_offset": 265736,
       "mode": "Thumb",
       "runtime_addresses": [
         134483464
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -73843,12 +73845,12 @@
       "return_offsets": [
         265772
       ],
-      "size": 38,
-      "extent_basis": "CFG envelope estimate",
+      "size": 40,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 265736,
       "body_rom_start": 265736,
       "body_rom_end": 265774,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0804xxxx",
       "decoded_instruction_bytes": 30,
@@ -101557,16 +101559,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0802A70C",
+      "name": "save_world_original_reset_hook",
       "rom_offset": 173836,
-      "size": 2,
+      "size": 4,
       "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_02A70E",
-      "rom_offset": 173838,
-      "size": 2,
-      "status": "unresolved"
     },
     {
       "name": "save_world_initialize_conditions",
@@ -105961,16 +105957,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08040E08",
+      "name": "condition_notification_active",
       "rom_offset": 265736,
-      "size": 38,
+      "size": 40,
       "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_040E2E",
-      "rom_offset": 265774,
-      "size": 2,
-      "status": "unresolved"
     },
     {
       "name": "display_menu_primary_row_parameter",
@@ -109525,7 +109515,7 @@
     "config/ram-map-us-eu.json": "67362238b648e40fbf3b51d8e466bfd12e709a38211c16e157d384243896410b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "bdd2740d84d6ce54f8dc7431555ac7a405ee08847f4fdea5224fab2b860b6540",
-    "config/build-us-eu.json": "6295bb01bd3ebd933275144c9d20a198fa3d227a228d732373380c00b35f1130",
+    "config/build-us-eu.json": "6c53abf33b0cf04d96d49aff85e102c3ab3fa07ea6e212a3c946c71197267dc0",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/audio/audio_game_select_activity_callback.c": "f1b271db1ce338b8e0e9fb72e53366263d86726953bb6ad6b4f1615d52ccb5b6",
     "src/audio/player_process_between_row.c": "f541ed81a46529f10a6179c656949d712e59fce9f94e4e9295a5dbfa8d09eefc",
@@ -109624,16 +109614,16 @@
       "nonconflicting_qualified_instruction_bytes": 279646,
       "raw_referenced_data_union_bytes": 35616,
       "qualified_referenced_data_union_bytes": 35616,
-      "source_glue_owned_extent_bytes": 282112,
-      "estimated_envelope_union_bytes": 325334,
+      "source_glue_owned_extent_bytes": 282156,
+      "estimated_envelope_union_bytes": 325338,
       "classification_bytes": {
         "estimated_envelope_unclassified": 6434,
         "instruction_and_referenced_data_dual_use": 4,
         "known_data": 18852,
-        "owned_extent_unclassified": 3666,
+        "owned_extent_unclassified": 3670,
         "strong_rooted_instruction": 279642,
         "strong_rooted_referenced_data": 35612,
-        "unresolved": 16433006
+        "unresolved": 16433002
       }
     },
     "physical_unions": {
@@ -149990,10 +149980,6 @@
         ],
         [
           171428,
-          173836
-        ],
-        [
-          173840,
           173908
         ],
         [
@@ -150173,7 +150159,7 @@
           264884
         ],
         [
-          265776,
+          265736,
           266052
         ],
         [
@@ -150644,10 +150630,6 @@
         ],
         [
           166280,
-          173838
-        ],
-        [
-          173840,
           173908
         ],
         [
@@ -150756,10 +150738,6 @@
         ],
         [
           261472,
-          265774
-        ],
-        [
-          265776,
           273394
         ],
         [
@@ -219775,7 +219753,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -219783,10 +219762,13 @@
       {
         "rom_offset": 173838,
         "size": 2,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "estimated_envelope",
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 173840,
@@ -252933,7 +252915,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -252944,7 +252927,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -252957,7 +252941,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -252965,10 +252950,13 @@
       {
         "rom_offset": 265774,
         "size": 2,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "estimated_envelope",
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 265776,
@@ -273085,10 +273073,10 @@
         "size": 65536,
         "classification_bytes": {
           "estimated_envelope_unclassified": 1974,
-          "owned_extent_unclassified": 840,
+          "owned_extent_unclassified": 842,
           "strong_rooted_instruction": 54262,
           "strong_rooted_referenced_data": 8256,
-          "unresolved": 204
+          "unresolved": 202
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -273122,10 +273110,10 @@
         "classification_bytes": {
           "estimated_envelope_unclassified": 736,
           "known_data": 96,
-          "owned_extent_unclassified": 702,
+          "owned_extent_unclassified": 704,
           "strong_rooted_instruction": 52120,
           "strong_rooted_referenced_data": 6480,
-          "unresolved": 5402
+          "unresolved": 5400
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -332349,8 +332337,9 @@
         "execution_address": 134391564,
         "entry_rom_offset": 173836,
         "mode": "Thumb",
-        "name": null,
+        "name": "save_world_original_reset_hook",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -364243,8 +364232,9 @@
         "execution_address": 134483464,
         "entry_rom_offset": 265736,
         "mode": "Thumb",
-        "name": null,
+        "name": "condition_notification_active",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -407373,6 +407363,26 @@
         "mode": "Thumb",
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 18,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "condition_notification_active",
+        "rom_offset": 265736,
+        "size": 40,
+        "source": "src/resource/conditions/condition_notification_active.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 30,
+        "referenced_data_bytes_in_extent": 8
+      },
+      {
+        "name": "save_world_original_reset_hook",
+        "rom_offset": 173836,
+        "size": 4,
+        "source": "src/save/world_reset_hook.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 2,
         "referenced_data_bytes_in_extent": 0
       },
       {

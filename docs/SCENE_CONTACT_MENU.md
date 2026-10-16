@@ -1160,11 +1160,16 @@ background layer.
 The serial initializer and step change only their two same-address
 provider identifiers. All eleven current importers of the two session
 headers and five additional heap, actor-entry, map-fill and game-value
-providers are recompiled with actual changed-source controls. The original
-return hook at `0x0802A70C` (four bytes) and padded string-copy body at
-`0x0804EA70` (112 bytes) remain explicit originals and receive no new C or
-glue credit. A four-byte mismatch in a separate string-copy candidate is
-preserved and excluded.
+providers are recompiled with actual changed-source controls. The return hook
+at `0x0802A70C` now has a separately verified empty C definition covering its
+four-byte slot, including two zero alignment bytes. Normal and strict caller
+replays remain exact, and an actual state-changing call added to the hook is
+rejected. The 112-byte padded string-copy provider at `0x0804EA70` already has
+matching C and a padding-value control, documented in the
+[string-provider evidence](LIBC_STRING_PROVIDERS.md). That later ownership
+supersedes this path's earlier four-byte failed candidate; it adds no new credit
+here. The reset caller's direct providers now all have source. Their valid input
+and memory domains remain separately qualified.
 
 Finite checks cover 32 initialized numeric-memory cases, with 32 actual
 source-control divergences and four deliberate interpreter/input failures.

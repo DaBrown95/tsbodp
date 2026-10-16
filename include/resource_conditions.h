@@ -33,4 +33,5 @@ void condition_refresh_thresholds(void *);
 void condition_update_actor_context(void *);
 void condition_publish_row_displays(unsigned int);
 void condition_clear_display_bits(void);
+unsigned char condition_notification_active(unsigned int);
 #endif

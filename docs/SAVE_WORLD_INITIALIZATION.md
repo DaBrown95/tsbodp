@@ -76,3 +76,14 @@ two alignment bytes, so its verified extent is 36. The larger game-state loader
 at `0x1B704`, grouped actor-entry reader at `0x1FCF8`, paired condition modules and
 row transition updater remain unconverted. Failed trials and raw comparisons are
 retained locally; this connected reset/display path adds no runtime claim.
+
+The separate default-reset path at `0x0801BB14` now also owns its original
+no-op hook at `0x0802A70C`. An empty `void(void)` C definition rebuilds its two
+instruction bytes and two zero alignment bytes, ending exactly at the condition
+initializer. Normal and strict builds match both the hook and its existing
+84-byte caller. A changed hook that calls the existing game-value setter with
+zero produces 12 bytes and rejects; incompatible signatures and a missing
+caller declaration also reject. The only direct Thumb-BL encoding found in the
+ROM is the caller at `0x0801BB2A`; no exact even or Thumb pointer word was found.
+These bounded static findings do not exclude dynamically formed references or
+uniquely determine the original no-op's unused formal parameters.
