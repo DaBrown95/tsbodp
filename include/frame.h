@@ -1,3 +1,6 @@
+#ifndef TSBODP_FRAME_H
+#define TSBODP_FRAME_H
+
 #include "irq.h"
 #include "frame_grid_cells.h"
 
@@ -133,3 +136,5 @@ int frame_sine(int);
 int frame_cosine(int);
 
 void frame_locate_bounds(void *, struct FramePoint *, void *);
+
+#endif /* TSBODP_FRAME_H */

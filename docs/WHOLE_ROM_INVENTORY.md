@@ -47,16 +47,16 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 3,030 |
-| Unclassified remainder of estimated envelopes | 16,214 |
-| Other unresolved ROM | 16,433,800 |
+| Unclassified inside source/glue-owned extents | 3,068 |
+| Unclassified remainder of estimated envelopes | 16,182 |
+| Other unresolved ROM | 16,433,794 |
 | **Physical ROM total** | **16,777,216** |
 
 Thus 270,608 bytes have qualified static instruction evidence, under the stated
 decoder, mode, original-image and ordinary-call assumptions. This confirms their
 static instruction role; it does not establish that every instruction executes.
 The raw alternative reach is 270,634 bytes. There are 2,324 rooted execution
-entries, while the ordinary map has 2,523 entries/candidates and 324,008 mapped
+entries, while the ordinary map has 2,523 entries/candidates and 324,014 mapped
 extent bytes. In the initial survey, nine corroborated veneer starts were added (six register veneers and three audio
 stubs), and four prior weak starts were folded as interior blocks, for a net five
 entries and 24 mapped extent bytes.
@@ -646,3 +646,34 @@ importers require matching-source controls; neither the type refinement nor
 inventory findings add C credit. The historical comparison remains 319,640 mapped
 extent bytes, and the complete game-code denominator remains open. No runtime
 observation is added.
+
+
+### Parameter and activity attachment paths
+
+Seven bodies in the [parameter/activity attachment paths](FRAME_NEED_TARGET_SELECTION.md#parameter-jobs-64-and-65-and-activity-jobs-88-and-89)
+add 2,160 matching C extent bytes, bringing source coverage to 1,735 functions
+and 250,064 C bytes. The same 500 separately counted glue bytes give 250,564
+source/glue-owned bytes. Raw C section extents total 250,156, including the
+already accounted 92 inline glue bytes; those do not add C credit.
+
+Kinds 64 and 65 now have the primary worker and begin/dispatcher pair in C.
+The dispatcher retains an explicit original call for kind 66. The kind-88/89
+pair has both substantial workers and its begin/dispatcher in C. The original
+choice writer, intermediate callbacks and neighboring predicates are not
+silently counted. The renderer and other held candidates remain original.
+
+The two activity workers had CFG extent estimates of 518 and 514 bytes. Their
+complete linked slots are 520 and 516, including the two observed zero tail
+bytes in each. Actual function symbols remain 518 and 514; boundary confidence,
+section extent and symbol size are not interchangeable. Each span has 372
+instruction bytes, 136 or 132 referenced literal/switch bytes, and twelve zero
+alignment bytes. The ordinary source switch creates the table; the source does
+not contain an original instruction or table payload.
+
+The generated inventory and treemap retain their separate rooted instruction,
+referenced-data and unclassified accounting after these rows gain compiler
+ownership. Inventory discovery, the include guard and reused provider/type
+facts add zero C credit. The fixed historical comparison remains 319,640 mapped
+extent bytes. The complete game-code denominator remains open, and no gameplay
+or runtime observation is added. The current generated assets, rather than a
+function-count percentage or inferred ABI, provide the physical census totals.

@@ -398,8 +398,9 @@ switch-table bytes and eight internal zero alignment bytes. All four function
 symbols cover their full spans. The ordinary source switch produces the bounded
 27-entry table; no instruction body or table payload is embedded in the source.
 The explicit initialization phase explains the retained six-byte entry-order
-failure without identifying historical source spelling. Row 97's larger
-workers and the renderer remain original; their held candidates gain no credit.
+failure without identifying historical source spelling. At that four-body milestone, row 97's larger workers and the renderer remained
+original. The later kind-64/65 path below covers its primary worker; kind 66 and
+the renderer remain original.
 Matching builds, static routes and runtime behavior remain separate claims.
 
 
@@ -436,3 +437,98 @@ witness. Row 3's enabled definition and existing actor-state callback use give
 a conditional allocation-to-step route; no gameplay observation or exhaustive
 callback-population claim follows. The entire function is 72 instruction bytes,
 with no referenced pool or alignment bytes.
+
+
+## Parameter jobs 64 and 65, and activity jobs 88 and 89
+
+Seven connected bodies add 2,160 C extent bytes. The kind-64/65 primary worker,
+its begin callback and dispatcher contribute 1,008 bytes. The two kind-88/89
+workers and their begin/dispatcher pair contribute 1,152 bytes. Existing action
+writers, capacity checks, routing services and shared providers add no further
+credit. The renderer and kind-66 worker remain explicit original code.
+
+| Body | ROM start | Complete matching extent |
+| --- | --- | ---: |
+| Begin kinds 64–66 | `08017FDC` | 72 |
+| Step kinds 64/65 | `08017B40` | 884 |
+| Dispatch kinds 64–66 | `08018024` | 52 |
+| Step kind 88 | `080470C0` | 520 |
+| Step kind 89 | `080472C8` | 516 |
+| Begin kinds 88/89 | `0804750C` | 72 |
+| Dispatch kinds 88/89 | `08047554` | 44 |
+
+The parameter worker uses fixed index two in the existing six-word world
+parameter view. The signed parameter provider reads the high byte of a word
+and returns an `int` in the range -128 through 127; it is not a signed-halfword
+reader. Converting that result to unsigned for the `<= 9` check deliberately
+excludes negative values. A fresh read after the update is compared with the
+captured prior value plus one. The already-ten branch instead waits for the
+actor's unsigned-halfword countdown to wrap to `FFFF`. Kind 64 commits mode one
+and stores `2800` in the owner's parameter; kind 65 commits mode three and stores
+`5000`. Current percentage and signed-parameter APIs remain unchanged.
+
+The actor's countdown is the real canonical member at `+0x5E`; the needs pointer
+is copied from the canonical motion character storage at `+0x60`. Indicator
+pointers at state `+0x58` use bounded four-byte representation copies. One shared
+percentage local and one shared post-update value retain the real value phases
+across mutually exclusive states; direct assignments retain the actual timer
+write position. There are no fixed-register constraints or instruction bodies.
+Captured needs, indicators, actors, records, direction indices and provider
+backing must remain valid and live across the corresponding calls.
+
+The parameter dispatcher calls this worker for kinds 64 and 65. Its kind-66
+branch still calls the original `08017EB4` service, whose provisional word
+contract and fresh signed-halfword owner-parameter tests are not changed here.
+Neither a failed candidate nor a function declaration earns C credit. Definition
+row 97 has enabled byte zero: the guarded need/action selectors skip that
+unchanged factory row. Its recorded callbacks establish a conditional source
+connection, not gameplay use or universal writable-callback reachability.
+
+Enabled definition row nine emits choices 88 and 89 in its original two-byte
+writer and records the new begin and dispatcher addresses. The worker families
+share the existing amount-ten gate and optional-state providers. On success
+phase zero requests animation 58 and cue 170; failure requests animation five,
+selects cue 86 or 85 from the live attachment mode, and waits in phase eight.
+Phase six waits for the actor flag, commits mode one, plays cue 171 and stores
+countdown 30. After wrap, kind 88 requests animation 21, records sample cue 21
+and enters phase 27; kind 89 uses animation 23, sample cue 20 and phase 26.
+Their adjustment kinds are 40 and eight respectively, with the definition's
+fresh multiplier byte. The sample is stopped at the observed completion stages;
+the cleanup phase commits mode zero, requests animation one and returns two.
+
+Each activity worker captures the needs pointer before initializing its result.
+Its sample at `+0xE0` is copied through bytes three through six of `unknown_dd`
+in the existing 256-byte access view. This is within that view's extent; it does
+not extend the smaller partial state type or prove universal effective-type
+compatibility of legacy views. Both worker spans contain 372 instruction bytes;
+they contain 136 and 132 referenced bytes and twelve zero alignment bytes each.
+The function symbols cover 518 and 514 bytes, while their linked sections cover
+520 and 516. The EOF directive requests zero section alignment, with no padding
+object, original table payload or instruction body embedded in source.
+
+Both begin callbacks allocate a real three-record slot, store the supplied word
+kind, read attachment point zero and request animation six. Their route modes
+are zero for kinds 64–66 and three for kinds 88/89, both with style one. Point
+and route returns remain ignored: both coordinates must be defined whenever a
+route copies them, and actor/record/status storage must survive the retained
+status pointer through completion or cancellation. A route allocation failure
+still leaves the callback returning one. Dispatcher finder results must be live
+records. Existing allocator, command, tick, state and world-view compatibility
+remains conditional rather than a universal aliasing proof.
+
+The seven controls change each worker's completion result or countdown, each
+begin's stored kind, and each dispatcher's selected kind. Defined witnesses use
+live cleanup records, or a phase-six actor with its completion flag, or a free
+record and valid point/route backing. A full owner cannot witness the changed
+begin store. These distinguish return/status or stored state without claiming a
+runtime observation. The independent four-byte callback at `080474CC`, separate
+predicate at `080474D0`, two-choice writer at `080474F8`, intermediate callback at
+`08047504` and kind-66 body remain original. Existing capacity checks and the
+remaining renderer/finalizer work gain no credit.
+
+The only changed existing shared header is a conventional include guard around
+`frame.h`. Its original body, fields and APIs are byte-for-byte unchanged. It
+prevents duplicate type definitions when the real resource-entry and attachment
+include paths meet. It neither hides a type view nor adds an ABI or C-coverage
+claim. Matching, layout/API checks, static callback routes and observed runtime
+behavior remain separate forms of evidence.
