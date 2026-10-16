@@ -32,7 +32,7 @@ unsigned short save_transfer_write_wait(unsigned short, const void *);
 unsigned short save_transfer_compare(unsigned int, const void *);
 unsigned short save_transfer_write_retry(unsigned int, const void *);
 unsigned short save_transfer_write_4ccb0(unsigned int, const void *);
-/* The short mode gate at 0x0804CC78 remains explicit and unconverted. */
+/* Non-waiting mode gate at 0x0804CC78; 512-byte mode returns 0x8080. */
 unsigned short save_transfer_write_nowait(unsigned int, const void *);
 
 #endif

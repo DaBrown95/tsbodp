@@ -747,8 +747,8 @@ lifetimes, allocation and gameplay domains remain open.
 
 ## Constant-result EC switches and the retained LR save
 
-Twenty-one eight-byte EC entries now have matching C definitions, using each
-recovered action writer's complete evidenced action set:
+Twenty-five eight-byte EC entries now have matching C definitions, using each
+recovered writer and status dispatcher's complete evidenced action set:
 
 | Definition row | EC entry | Action cases |
 | --- | --- | --- |
@@ -773,6 +773,10 @@ recovered action writer's complete evidenced action set:
 | 63, 64, 65, 66, 67, 75 | `0x08013270` | 49, 50 |
 | 0 | `0x0800BCEC` | 13, 14 |
 | 141 | `0x08036C7C` | 7, 45 |
+| 31 | `0x08037814` | 7, 91 |
+| 37, 38 | `0x08012DC4` | 79, 80 |
+| 89 | `0x08022364` | 45, 90 |
+| 18, 20 through 30, 32 through 34, 83, 101, 136, 137 | `0x08016910` | 7 |
 
 Each source switch returns word one for its cases and default. The original
 256-byte EC switch in rows 42/43 independently corroborates this family idiom;
@@ -790,12 +794,12 @@ preprocessed input remain identical. This supports the within-function cache
 explanation; it is a diagnostic, not an accepted alternate recipe. The earlier
 plain-constant and cross-function inline-cache explanations remain disproved.
 
-All twenty-one complete-set recipes match on their first attempt, without
+All twenty-five complete-set recipes match on their first attempt, without
 instruction assembly, register constraints, added qualifiers or invented calls.
-Real controls make one evidenced case return zero: fifteen compile to 16 bytes
+Real controls make one evidenced case return zero: nineteen compile to 16 bytes
 and reject by 14 bytes; six compile to 24 and reject by 22. The stable verifier
 includes extra bytes in rejection. Canonical API, full-ROM/control and progress
-gates pass. Together these leaves own 168 C instruction bytes and no assembly,
+gates pass. Together these leaves own 200 C instruction bytes and no assembly,
 pools or alignment.
 
 For rows 3/4 and the shared header writer, zero is an evidenced buffer sentinel,
@@ -807,7 +811,7 @@ Removed case structure and unused first-two formal roles are inferred from the
 family and its recovered writers, not uniquely identified historical source.
 The source still returns one for every word input. Generic EC delivery, writable
 callback targets, valid selection indices and retained-tail domains remain open.
-After these twenty-one, 27 distinct same-body entries in the observed 149-row
+After these twenty-five, 23 distinct same-body entries in the observed 149-row
 prefix still need their own justified source recipes and depend on unconverted
 E8 writers. Byte equality alone does not authorize an arbitrary case list.
 
@@ -831,3 +835,51 @@ edit; an earlier write-zero diagnostic is excluded as inconclusive. Actual
 definitions and 17 target-layout facts pass API checks, while a wrong callback
 assignment rejects. Runtime use, index bounds and callback populations remain
 open.
+
+
+## Further connected attachment modules
+
+| Observed rows | Complete local C interval | Functions / extent bytes |
+| --- | --- | ---: |
+| 31 | `0x08037584..0x080378B0` | 10 / 812 |
+| 37, 38 | `0x08012BD0..0x08012E74` | 9 / 676 |
+| 89 | `0x0802224C..0x080223C0` | 8 / 372 |
+| Shared job 7, 19 rows listed above | `0x080167B8..0x08016978` | 9 / 448, including 380 already owned |
+
+Each interval includes a separate adjacent actor-check whose incoming edge is
+unestablished. The rows 37/38 and shared-job-7 constant-100 neighbors are also
+separate unrooted entries. Row 31 instead installs its 24-byte FC callback,
+returning 50 for a zero signed parameter and 100 otherwise. These roles come
+from the actual table pointers; adjacency does not establish a callback role.
+
+Row 31's selector writes 7 for signed owner parameter `0x6400`, otherwise 91.
+Its two workers preserve halfword timer `+0x5E` and unsigned comparisons on the
+signed parameter reader's result. Rows 37/38 write 79 and conditionally 80.
+Their worker's first source kept the indicator pointer live across a nested
+percentage call. Reading the actual percentage first and loading the indicator
+afterward restored native order and reduced 440 bytes to the exact 420. A shared
+status result also preserves two native worker call sites that the initial
+direct-return form merged in `jump2`; no extra operations were added.
+
+Row 89 writes sentinel zero or action 90 after the condition-3 test. Its status
+also explicitly sends action 45 to the same worker, independently grounding the
+EC cases 45/90 before the trial. The worker treats the signed-byte provider's
+result as unsigned for the native greater-than-two completion test. Begin's
+single result join restores native block order. Status has a separate confirmed
+type cause: this compiler applies ASCII case costs to an integer switch over
+0/45/90, choosing pivot 90. An enum expression disables those costs and selects
+native pivot 45. A local unsigned 32-bit enum view reproduces all 52 bytes;
+the shared record remains a word. Target checks verify width, unsignedness and
+round trips for 256, `0x80000000` and `0xFFFFFFFF`, preserving the default for
+all unnamed words. Case-order changes were disproved before this type trial.
+The enum spelling is supported matching source, not uniquely historical naming.
+
+The shared job-7 writer stores only seven and retains the tail. Six new bodies
+own 68 bytes; its existing worker, begin and status were reverified with controls
+under the appended declarations and receive no duplicate credit. Across these
+modules all actual definitions and target layouts pass API checks, all real
+source controls reject, and full-ROM/control and progress gates pass. No added
+assembly instructions, register constraints, qualifiers or invented calls supply
+the matches. Unique failed sources and useful compiler evidence remain local.
+Live backing, provider success, selection indices, complete EC delivery,
+writable callback populations and gameplay remain separate open domains.

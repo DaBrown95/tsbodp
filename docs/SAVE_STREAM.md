@@ -415,11 +415,16 @@ accepted read provider and returns `0x8000` on the first difference from the
 source. It ignores the read provider's returned status, matching the original
 call. Each retry path permits three attempts, compares only after a zero
 write status, and returns immediately on a successful comparison. The wait
-path calls the matched wait wrapper. The game path calls the still-unconverted
-56-byte mode gate at `0x0804CC78`. That gate's static body rejects byte-size
-512 with `0x8200` and otherwise calls the core with a zero wait argument;
-its constant construction and literal pool have not yet matched and receive
-no C coverage. The game writer's full-word formal is explicitly narrowed in
+path calls the matched wait wrapper. The game path calls the now source-owned
+56-byte mode gate at `0x0804CC78`. Its native error value is `0x8080`, correcting
+the earlier `0x8200` assumption: the load at `0x0804CCA4` addresses pool word
+`0x0804CCAC`. The actual parameter row selected by value four has byte size 512.
+One corrected ordinary-C recipe under the existing `-O1` profile matches all
+56 bytes; changing `0x8080` to `0x8081` rejects one byte. The gate narrows its
+block argument, returns that error for byte size 512, otherwise calls the owned
+core with wait zero. No caller binding or API change is required. This closes
+the contiguous 644-byte write family `0x0804CA6C..0x0804CCF0`; prior wrong-value
+sources remain failed evidence. The game writer's full-word formal is explicitly narrowed in
 its body; its accepted game caller retains the original halfword call-side
 narrowing through an explicit cast.
 
