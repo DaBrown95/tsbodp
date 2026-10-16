@@ -2242,3 +2242,24 @@ The ordinary finalizer was retried against these actual members and emits
 C credit. Earlier register-bound near-matches do not establish ordinary source
 reconstruction. The renderer is also unconverted. These are static and compiler
 results; runtime and gameplay behavior have not been established.
+
+
+### Complete display-part record ownership
+
+The four display-part records now have one canonical layout at object offsets
+`0x104`, `0x110`, `0x11C` and `0x128`, with a 12-byte stride. Each record owns
+flags, palette and order bytes, its existing byte-count/index halfwords at
+`+4/+6`, and the variant pointer at `+8`. The old partial view began at
+`0x108`, inside the first record, and crossed later record boundaries. Group
+and variant selectors occupy `0x134/0x135`; the object remains 312 bytes with
+four-byte alignment. No unsupported volatile qualification remains on these
+ordinary fields.
+
+Target-compiler layout fixtures preserve all unrelated member offsets and
+bitfield masks. Nine connected functions covering 2,980 C extent bytes retain
+full equality and reject their compiled changed-source controls; the full
+matching gate also revalidates every accepted function. This repair adds no
+C credit. The truthful renderer baseline still fails at 1,404 bytes for its
+1,400-byte slot; the existing valid 1,400-byte, 25-difference frontier remains
+private. The finalizer remains unmatched. Neither this layout evidence nor
+whole-ROM equality establishes runtime or gameplay behavior.

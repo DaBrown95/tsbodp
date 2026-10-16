@@ -532,3 +532,43 @@ prevents duplicate type definitions when the real resource-entry and attachment
 include paths meet. It neither hides a type view nor adds an ABI or C-coverage
 claim. Matching, layout/API checks, static callback routes and observed runtime
 behavior remain separate forms of evidence.
+
+## Row-nine callback closure
+
+Four further C bodies account for 60 complete extent bytes: the constant-return
+callback at `080474CC` (4), the separate attachment predicate at `080474D0` (40),
+the choice writer at `080474F8` (12), and the empty finish callback at `08047580`
+(4). All four match their fixed extents and reject function-specific changed
+source controls. The predicate and finish source request only zero section
+alignment; neither contains executable assembly.
+
+Definition row nine stores the first callback, choice writer and finish callback
+at offsets zero, four and twenty. Its enabled byte remains one. The allocator
+copies the choice and finish addresses into the existing state callback slots
+at `E8` and `F8`. The first callback returns one, although the visible factory
+caller ignores that return. The finish callback performs no operation. The
+choice writer stores exactly two bytes, 88 and 89, and returns one.
+
+The separate predicate returns zero when the actor has attachments and state
+byte `+60` is one; otherwise it returns one. Its existing attachment-count API
+returns a byte. No aligned ROM pointer to this predicate was found in the
+bounded whole-ROM word scan, so its compiler match does not establish a live
+callback route. Actor attachment storage, state backing and a choice buffer of
+at least two bytes remain caller requirements. These are static and compiler
+findings, with no new runtime observation.
+
+The four controls change the first callback's return to zero, the predicate's
+state comparison to two, the second selected kind to 88, and the empty finish
+callback to store optional value one. Live state, an actor with one attachment,
+and a two-byte output buffer provide defined witnesses for those respective
+changes. The intermediate callback at `08047504` remains original: its eight
+bytes save and restore LR around a return of one, and no source explanation for
+that prologue has yet been established. No artificial call or instruction body
+was added to reproduce it.
+
+The prepared kind-66 byte-local result experiment has now been executed against
+current headers. It produces the same 244 bytes and 115 differences as the
+word-local candidate. Both omit the original right shift after low-byte
+extraction before the zero test. That result closes this local-width hypothesis;
+the fixed 248-byte worker remains original. Current renderer and finalizer
+candidates also remain outside matching-C totals.

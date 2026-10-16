@@ -12,7 +12,8 @@ Almost all code, analysis and tooling are AI-generated.
 
 Green tiles are matching C. Function boundaries in the
 [ROM map](assets/rom-inventory.json) are provisional.
-Amber tiles are verified low-level ARM/Thumb glue, counted separately from C.
+Amber tiles are verified hardware glue and routines with evidence of assembly
+origin, counted separately from C.
 The build matches the original ROM, but most regions are still copied from
 the original dump.
 The ROM map separately records rooted static instructions, estimated extents,
@@ -60,7 +61,7 @@ Output: `build/us-eu/bustin-out.gba`. The build fails if any byte differs.
 ├── assets/         Progress image and ROM map
 ├── config/         ROM hashes, tool versions and mapped regions
 ├── include/        C headers
-├── src/            Decompiled C
+├── src/            Matching C and justified assembly
 ├── tools/          Build and analysis scripts
 ├── tests/          Tests
 └── docs/           Internal AI scratch notes
@@ -91,8 +92,9 @@ publisher or Nintendo.
 Dependencies are installed separately under their own licences. The table lists
 their main licences; bundled components retain their upstream notices.
 Pinned versions are recorded in [config/](config/).
-The adapted audio routines and BIOS division wrapper retain their [Krawall licence](licenses/Krawall-LGPL-2.1.txt)
-and source notice.
+The adapted audio routines, assembly-origin mixer primitives, hardware timer IRQ
+and BIOS division wrapper retain their [Krawall licence](licenses/Krawall-LGPL-2.1.txt)
+and source notices.
 The selected floating-point and integer runtime sources retain their GNU GCC
 notices and [GPL licence](licenses/GCC-GPL-2.0.txt), including the exceptions
 printed in those source files.

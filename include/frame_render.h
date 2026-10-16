@@ -48,10 +48,10 @@ struct FrameSpriteVariant {
     FrameU32 unknown_08[2];
 };
 struct FrameRenderPart {
-    volatile FrameU8 flags;
+    FrameU8 flags;
     FrameU8 palette, order, unknown_03;
     FrameU16 bytes, index;
-    struct FrameSpriteVariant ** volatile variants;
+    struct FrameSpriteVariant **variants;
 };
 struct FrameRenderObject {
     FrameU8 unknown_00[12];

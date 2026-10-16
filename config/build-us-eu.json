@@ -42028,6 +42028,136 @@
         "before": "case 88:",
         "after": "case 87:"
       }
+    },
+    {
+      "name": "audio_game_initialize",
+      "rom_offset": 266840,
+      "size": 76,
+      "source": "src/audio/game_initialize.c",
+      "symbols": {
+        "audio_initialize": "0x080496f9",
+        "audio_set_master_volume": "0x08049969",
+        "audio_configure_mix_mode": "0x080498e1",
+        "audio_game_set_pacing": "0x080412e1",
+        "audio_game_set_sample_volume": "0x080412ed",
+        "audio_game_set_sequence_volume": "0x08041309",
+        "audio_game_select_activity_callback": "0x080412c9",
+        "g_audio_control": "0x03007360",
+        "g_audio_game_options": "0x03005d90"
+      },
+      "thumb_symbols": [
+        "audio_initialize",
+        "audio_set_master_volume",
+        "audio_configure_mix_mode",
+        "audio_game_set_pacing",
+        "audio_game_set_sample_volume",
+        "audio_game_set_sequence_volume",
+        "audio_game_select_activity_callback"
+      ],
+      "negative_control": {
+        "before": "0x40080",
+        "after": "0x4007f"
+      }
+    },
+    {
+      "name": "audio_game_initialize_default",
+      "rom_offset": 266820,
+      "size": 20,
+      "source": "src/audio/game_initialize_default.c",
+      "symbols": {
+        "audio_game_initialize": "0x08041259",
+        "g_audio_control": "0x03007360"
+      },
+      "thumb_symbols": [
+        "audio_game_initialize"
+      ],
+      "negative_control": {
+        "before": "pacing = 8",
+        "after": "pacing = 7"
+      }
+    },
+    {
+      "name": "audio_game_shutdown_hardware",
+      "rom_offset": 266916,
+      "size": 12,
+      "source": "src/audio/game_shutdown_hardware.c",
+      "symbols": {
+        "audio_deactivate_hardware": "0x080498a1",
+        "audio_activate_hardware": "0x08049871"
+      },
+      "thumb_symbols": [
+        "audio_deactivate_hardware",
+        "audio_activate_hardware"
+      ],
+      "negative_control": {
+        "before": "audio_deactivate_hardware();",
+        "after": "audio_activate_hardware();"
+      }
+    },
+    {
+      "name": "audio_game_set_pacing",
+      "rom_offset": 266976,
+      "size": 12,
+      "source": "src/audio/game_set_pacing.c",
+      "symbols": {
+        "g_audio_control": "0x03007360"
+      },
+      "negative_control": {
+        "before": "g_audio_control.pacing = value",
+        "after": "g_audio_control.sequence_id = value"
+      }
+    },
+    {
+      "name": "frame_attachment_jobs_88_89_ready",
+      "rom_offset": 292044,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      },
+      "source": "src/frame/frame_attachment_jobs_88_89_ready.c"
+    },
+    {
+      "name": "frame_check_attachment_jobs_88_89",
+      "rom_offset": 292048,
+      "size": 40,
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "negative_control": {
+        "before": "owner->unknown_60[0] == 1",
+        "after": "owner->unknown_60[0] == 2"
+      },
+      "source": "src/frame/frame_check_attachment_jobs_88_89.c"
+    },
+    {
+      "name": "frame_finish_attachment_jobs_88_89",
+      "source": "src/frame/frame_finish_attachment_jobs_88_89.c",
+      "rom_offset": 292224,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    owner->optional = 1;\n}"
+      }
+    },
+    {
+      "name": "frame_select_attachment_jobs_88_89",
+      "rom_offset": 292088,
+      "size": 12,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "choices[1] = 89;",
+        "after": "choices[1] = 88;"
+      },
+      "source": "src/frame/frame_select_attachment_jobs_88_89.c"
     }
   ],
   "assembly": [
@@ -42242,6 +42372,96 @@
       "negative_control": {
         "before": "svc #0x0a",
         "after": "svc #0x0b"
+      }
+    },
+    {
+      "name": "audio_mixer_primitives",
+      "rom_offset": 16624252,
+      "size": 1604,
+      "source": "src/audio/mixer_primitives.s",
+      "kind": "assembly_glue",
+      "mode": "ARM",
+      "defines_symbol": false,
+      "symbols": {
+        "g_audio_clip_table": "0x02001238"
+      },
+      "negative_control": {
+        "before": ".LmixLeft:\n stmdb sp!, {r4-r11}",
+        "after": ".LmixLeft:\n stmdb sp!, {r3-r11}"
+      },
+      "ram_address": 50333188,
+      "ram_copy": "audio_iwram"
+    },
+    {
+      "name": "rom_entry",
+      "rom_offset": 0,
+      "size": 4,
+      "source": "src/startup/rom_entry.s",
+      "kind": "assembly_glue",
+      "mode": "ARM",
+      "symbols": {
+        "startup_reset": "0x080000c0"
+      },
+      "negative_control": {
+        "before": "b startup_reset",
+        "after": "b startup_reset + 4"
+      }
+    },
+    {
+      "name": "startup_reset",
+      "rom_offset": 192,
+      "size": 112,
+      "source": "src/startup/reset.s",
+      "kind": "assembly_glue",
+      "mode": "ARM",
+      "symbols": {
+        "irq_dispatcher": "0x08000160",
+        "startup_copy_words": "0x08000289",
+        "startup_system_stack": "0x03007e00",
+        "startup_irq_stack": "0x03007fa0",
+        "startup_bios_irq_vector": "0x03007ffc",
+        "startup_audio_load": "0x08fda478",
+        "startup_audio_start": "0x03000000",
+        "startup_audio_end": "0x030015b0",
+        "startup_ewram_load": "0x08fdba28",
+        "startup_ewram_start": "0x02000000",
+        "startup_ewram_end": "0x020027f8",
+        "startup_game_entry": "0x08025c0d"
+      },
+      "negative_control": {
+        "before": "mov r0, #0x12",
+        "after": "mov r0, #0x13"
+      }
+    },
+    {
+      "name": "startup_copy_words",
+      "rom_offset": 648,
+      "size": 24,
+      "source": "src/startup/copy_words.s",
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "subs r3, #4",
+        "after": "subs r3, #8"
+      }
+    },
+    {
+      "name": "audio_timer_irq",
+      "rom_offset": 16622716,
+      "size": 140,
+      "source": "src/audio/timer_irq.s",
+      "kind": "assembly_glue",
+      "mode": "ARM",
+      "defines_symbol": false,
+      "ram_address": 50331652,
+      "ram_copy": "audio_iwram",
+      "symbols": {
+        "g_audio_stamp": "0x020008b0"
+      },
+      "negative_control": {
+        "before": "add r1, r1, #1",
+        "after": "add r1, r1, #2"
       }
     }
   ]

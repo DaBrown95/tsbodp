@@ -161,7 +161,7 @@ def render(data, output):
     draw.text((24, 18), "The Sims: Bustin' Out — Matching Progress", fill=FOREGROUND, font=title)
     draw.text((24, 58), 'USA / Europe  ·  ROM-wide static inventory  ·  Function boundaries provisional', fill=MUTED, font=body)
     x = 24
-    for label, color in (('Exact C', COLORS['exact_c']), ('ARM/Thumb glue', COLORS['exact_glue']), ('Code entries', COLORS['mapped_code']), ('Candidates', COLORS['candidate']), ('Mapped data', COLORS['mapped_data']), ('Unresolved', COLORS['unresolved'])):
+    for label, color in (('Exact C', COLORS['exact_c']), ('Assembly', COLORS['exact_glue']), ('Code entries', COLORS['mapped_code']), ('Candidates', COLORS['candidate']), ('Mapped data', COLORS['mapped_data']), ('Unresolved', COLORS['unresolved'])):
         draw.rectangle((x, 92, x + 12, 104), fill=color)
         draw.text((x + 21, 88), label, fill=FOREGROUND, font=body)
         x += 21 + draw.textlength(label, font=body) + 34
@@ -208,9 +208,9 @@ def render(data, output):
         left = 24 + 1552*r['rom_offset']/data['rom_bytes']
         right = 24 + 1552*(r['rom_offset']+r['size'])/data['rom_bytes']
         draw.rectangle((left, 744, right, 768), fill=COLORS[r['status']])
-    draw.text((24, 725), 'Entire 16 MiB ROM — every byte accounted for', fill=MUTED, font=small)
+    draw.text((24, 725), 'Entire 16 MiB ROM — including unresolved regions', fill=MUTED, font=small)
     draw.text((24, 785), 'Complete ROM: identical to reference  ·  Source reconstruction: incomplete', fill=FOREGROUND, font=heading)
-    draw.text((24, 816), f"{data['compiled_c_bytes']:,} C bytes + {data['assembly_glue_bytes']:,} ARM/Thumb glue bytes  /  {data['rom_bytes']:,} total ROM bytes  ·  {data['unconverted_rom_bytes']:,} remain unconverted", fill=MUTED, font=body)
+    draw.text((24, 816), f"{data['compiled_c_bytes']:,} C bytes + {data['assembly_glue_bytes']:,} assembly bytes  /  {data['rom_bytes']:,} total ROM bytes  ·  {data['unconverted_rom_bytes']:,} remain unconverted", fill=MUTED, font=body)
     census = data.get('code_census_summary')
     note = (f"{census['nonconflicting_qualified_instruction_bytes']:,} rooted static instruction bytes  ·  Game-code denominator unresolved  ·  Historical mapped extents: 319,640 B"
             if census else 'Tile area follows estimated extents; main code and startup/audio use separate scales.')

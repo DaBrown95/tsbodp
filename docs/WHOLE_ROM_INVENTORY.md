@@ -33,6 +33,23 @@ bodies, ROM payload or extracted assets are published as inventory metadata.
 
 ## Results
 
+The table below is a historical survey snapshot. Current source ownership is
+1,743 verified C functions and 250,244 C extent bytes, plus 2,384 separately
+counted assembly extent bytes. The latter includes the 1,604-byte mixer family,
+140-byte timer IRQ and 140-byte startup exceptions, with their genuine data and
+alignment; it is not a C gain. Exact source and full-ROM/control gates verify
+these replacements. See [audio](AUDIO_RECONSTRUCTION.md),
+[startup](STARTUP_RECONSTRUCTION.md) and the concise
+[remaining-work list](COMPLETION_BLOCKERS.md).
+
+The new source roots for the audio shutdown wrapper and separate actor
+attachment predicate promote 10 and 38 existing instruction bytes respectively.
+The current qualified static instruction union is 270,656 bytes. These two
+compiler-proven entries do not establish runtime execution. The census's
+324,034 estimated envelope bytes, the treemap's 324,042 mapped extent bytes
+and fixed 319,640 historical comparison remain distinct, with no complete
+game-code denominator established.
+
 The authoritative current counts and interval evidence are in
 [`assets/rom-inventory.json`](../assets/rom-inventory.json), under `code_census`.
 They distinguish qualified static instruction bytes, deliberately dual-use bytes,

@@ -8,9 +8,12 @@
 typedef unsigned char FrameU8;
 typedef unsigned short FrameU16;
 typedef unsigned int FrameU32;
+struct FrameSpriteVariant;
+/* Four records at object +0x104, with a 12-byte stride. */
 struct FrameDisplayPart {
+    FrameU8 flags, palette, order, unknown_03;
     FrameU16 bytes, index;
-    FrameU8 unknown_04[8];
+    struct FrameSpriteVariant **variants;
 };
 struct FramePoint {
     int x, y;
@@ -72,8 +75,10 @@ struct FrameObject {
     FrameU8 forced_visible;
     FrameU8 sharing_flags;
     FrameU8 shared_group;
-    FrameU8 unknown_103[5];
+    FrameU8 unknown_103;
     struct FrameDisplayPart parts[4];
+    FrameU8 variant_group, variant;
+    FrameU8 unknown_136[2];
 };
 struct FrameSharedDisplay {
     FrameU8 unknown_00[8];

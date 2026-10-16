@@ -1,69 +1,55 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "16 Oct 2026, 09:55 BST",
-  "compiled_c_functions": 1735,
-  "compiled_c_bytes": 250064,
-  "assembly_glue_bytes": 500,
+  "verified_at": "16 Oct 2026, 12:22 BST",
+  "compiled_c_functions": 1743,
+  "compiled_c_bytes": 250244,
+  "assembly_glue_bytes": 2384,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16526652,
+  "unconverted_rom_bytes": 16524588,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
-  "discovered_entries": 2523,
-  "bounded_control_flow_bodies": 737,
+  "discovered_entries": 2511,
+  "bounded_control_flow_bodies": 718,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 22,
   "unresolved_callback_call_sites": 98,
-  "mapped_extent_bytes": 324022,
+  "mapped_extent_bytes": 324042,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
-    "raw_instruction_union_bytes": 270634,
-    "qualified_observed_instruction_union_bytes": 270608,
-    "nonconflicting_qualified_instruction_bytes": 270608,
+    "raw_instruction_union_bytes": 270682,
+    "qualified_observed_instruction_union_bytes": 270656,
+    "nonconflicting_qualified_instruction_bytes": 270656,
     "raw_referenced_data_union_bytes": 34732,
     "qualified_referenced_data_union_bytes": 34732,
-    "source_glue_owned_extent_bytes": 250564,
-    "estimated_envelope_union_bytes": 324014,
+    "source_glue_owned_extent_bytes": 252628,
+    "estimated_envelope_union_bytes": 324034,
     "classification_bytes": {
-      "estimated_envelope_unclassified": 16182,
+      "estimated_envelope_unclassified": 16130,
       "instruction_and_referenced_data_dual_use": 4,
       "known_data": 18836,
-      "owned_extent_unclassified": 3068,
-      "strong_rooted_instruction": 270604,
+      "owned_extent_unclassified": 3080,
+      "strong_rooted_instruction": 270652,
       "strong_rooted_referenced_data": 34728,
-      "unresolved": 16433794
+      "unresolved": 16433786
     }
   },
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents",
   "rows": [
     {
-      "name": "ROM entry",
+      "name": "rom_entry",
       "group": "Startup / ARM",
       "rom_offset": 0,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_glue"
     },
     {
-      "name": "ARM startup",
+      "name": "startup_reset",
       "group": "Startup / ARM",
       "rom_offset": 192,
-      "size": 44,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Thumb startup",
-      "group": "Startup / ARM",
-      "rom_offset": 236,
-      "size": 28,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Thumb startup_extent_000108",
-      "group": "Startup / ARM",
-      "rom_offset": 264,
-      "size": 40,
-      "status": "mapped_code"
+      "size": 112,
+      "status": "exact_glue"
     },
     {
       "name": "irq_cpu_enable",
@@ -87,11 +73,11 @@
       "status": "exact_glue"
     },
     {
-      "name": "Startup copy helper",
+      "name": "startup_copy_words",
       "group": "Startup / ARM",
       "rom_offset": 648,
-      "size": 22,
-      "status": "mapped_code"
+      "size": 24,
+      "status": "exact_glue"
     },
     {
       "name": "irq_dispatcher_literals",
@@ -14115,25 +14101,25 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08041244",
+      "name": "audio_game_initialize_default",
       "group": "ROM 0804xxxx",
       "rom_offset": 266820,
       "size": 20,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08041258",
+      "name": "audio_game_initialize",
       "group": "ROM 0804xxxx",
       "rom_offset": 266840,
       "size": 76,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080412A4",
+      "name": "audio_game_shutdown_hardware",
       "group": "ROM 0804xxxx",
       "rom_offset": 266916,
-      "size": 10,
-      "status": "candidate"
+      "size": 12,
+      "status": "exact_c"
     },
     {
       "name": "save_stream_suspend_audio",
@@ -14157,11 +14143,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_080412E0",
+      "name": "audio_game_set_pacing",
       "group": "ROM 0804xxxx",
       "rom_offset": 266976,
       "size": 12,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "audio_game_set_sample_volume",
@@ -15641,25 +15627,25 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_080474CC",
+      "name": "frame_attachment_jobs_88_89_ready",
       "group": "ROM 0804xxxx",
       "rom_offset": 292044,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080474D0",
+      "name": "frame_check_attachment_jobs_88_89",
       "group": "ROM 0804xxxx",
       "rom_offset": 292048,
-      "size": 38,
-      "status": "candidate"
+      "size": 40,
+      "status": "exact_c"
     },
     {
-      "name": "sub_080474F8",
+      "name": "frame_select_attachment_jobs_88_89",
       "group": "ROM 0804xxxx",
       "rom_offset": 292088,
       "size": 12,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08047504",
@@ -15683,11 +15669,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08047580",
+      "name": "frame_finish_attachment_jobs_88_89",
       "group": "ROM 0804xxxx",
       "rom_offset": 292224,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_c"
     },
     {
       "name": "frame_create_group_selector",
@@ -17605,7 +17591,7 @@
       "group": "Copied audio / ARM",
       "rom_offset": 16622716,
       "size": 140,
-      "status": "mapped_code"
+      "status": "exact_glue"
     },
     {
       "name": "audio_start_sample_extended",
@@ -17664,88 +17650,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_03000604",
+      "name": "audio_mixer_primitives",
       "group": "Copied audio / ARM",
       "rom_offset": 16624252,
-      "size": 128,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_03000684",
-      "group": "Copied audio / ARM",
-      "rom_offset": 16624380,
-      "size": 32,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_030006A4",
-      "group": "Copied audio / ARM",
-      "rom_offset": 16624412,
-      "size": 132,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_03000728",
-      "group": "Copied audio / ARM",
-      "rom_offset": 16624544,
-      "size": 152,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_030007C0",
-      "group": "Copied audio / ARM",
-      "rom_offset": 16624696,
-      "size": 228,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_030008A4",
-      "group": "Copied audio / ARM",
-      "rom_offset": 16624924,
-      "size": 36,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_030008C8",
-      "group": "Copied audio / ARM",
-      "rom_offset": 16624960,
-      "size": 232,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_030009B0",
-      "group": "Copied audio / ARM",
-      "rom_offset": 16625192,
-      "size": 260,
-      "status": "mapped_code"
-    },
-    {
-      "name": "audio_mix_ab4",
-      "group": "Copied audio / ARM",
-      "rom_offset": 16625452,
-      "size": 72,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_03000AFC",
-      "group": "Copied audio / ARM",
-      "rom_offset": 16625524,
-      "size": 52,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_03000B38",
-      "group": "Copied audio / ARM",
-      "rom_offset": 16625584,
-      "size": 184,
-      "status": "mapped_code"
-    },
-    {
-      "name": "audio_set_shift",
-      "group": "Copied audio / ARM",
-      "rom_offset": 16625768,
-      "size": 84,
-      "status": "mapped_code"
+      "size": 1604,
+      "status": "exact_glue"
     },
     {
       "name": "audio_mix_channels_c_1",
@@ -17792,10 +17701,10 @@
   ],
   "partition": [
     {
-      "name": "ROM entry",
+      "name": "rom_entry",
       "rom_offset": 0,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_glue"
     },
     {
       "name": "Cartridge header",
@@ -17804,22 +17713,10 @@
       "status": "mapped_data"
     },
     {
-      "name": "ARM startup",
+      "name": "startup_reset",
       "rom_offset": 192,
-      "size": 44,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Thumb startup",
-      "rom_offset": 236,
-      "size": 28,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Thumb startup_extent_000108",
-      "rom_offset": 264,
-      "size": 40,
-      "status": "mapped_code"
+      "size": 112,
+      "status": "exact_glue"
     },
     {
       "name": "irq_cpu_enable",
@@ -17840,16 +17737,10 @@
       "status": "exact_glue"
     },
     {
-      "name": "Startup copy helper",
+      "name": "startup_copy_words",
       "rom_offset": 648,
-      "size": 22,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_00029E",
-      "rom_offset": 670,
-      "size": 2,
-      "status": "unresolved"
+      "size": 24,
+      "status": "exact_glue"
     },
     {
       "name": "irq_dispatcher_literals",
@@ -31286,28 +31177,22 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08041244",
+      "name": "audio_game_initialize_default",
       "rom_offset": 266820,
       "size": 20,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08041258",
+      "name": "audio_game_initialize",
       "rom_offset": 266840,
       "size": 76,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080412A4",
+      "name": "audio_game_shutdown_hardware",
       "rom_offset": 266916,
-      "size": 10,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_0412AE",
-      "rom_offset": 266926,
-      "size": 2,
-      "status": "unresolved"
+      "size": 12,
+      "status": "exact_c"
     },
     {
       "name": "save_stream_suspend_audio",
@@ -31328,10 +31213,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_080412E0",
+      "name": "audio_game_set_pacing",
       "rom_offset": 266976,
       "size": 12,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "audio_game_set_sample_volume",
@@ -32804,28 +32689,22 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_080474CC",
+      "name": "frame_attachment_jobs_88_89_ready",
       "rom_offset": 292044,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080474D0",
+      "name": "frame_check_attachment_jobs_88_89",
       "rom_offset": 292048,
-      "size": 38,
-      "status": "candidate"
+      "size": 40,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_0474F6",
-      "rom_offset": 292086,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_080474F8",
+      "name": "frame_select_attachment_jobs_88_89",
       "rom_offset": 292088,
       "size": 12,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08047504",
@@ -32846,15 +32725,15 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08047580",
+      "name": "frame_finish_attachment_jobs_88_89",
       "rom_offset": 292224,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_047582",
-      "rom_offset": 292226,
-      "size": 6,
+      "name": "Unresolved_047584",
+      "rom_offset": 292228,
+      "size": 4,
       "status": "unresolved"
     },
     {
@@ -34955,7 +34834,7 @@
       "name": "audio_timer_irq",
       "rom_offset": 16622716,
       "size": 140,
-      "status": "mapped_code"
+      "status": "exact_glue"
     },
     {
       "name": "Unresolved_FDA508",
@@ -35018,88 +34897,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_03000604",
+      "name": "audio_mixer_primitives",
       "rom_offset": 16624252,
-      "size": 128,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_03000684",
-      "rom_offset": 16624380,
-      "size": 32,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_030006A4",
-      "rom_offset": 16624412,
-      "size": 132,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_03000728",
-      "rom_offset": 16624544,
-      "size": 152,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_030007C0",
-      "rom_offset": 16624696,
-      "size": 228,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_030008A4",
-      "rom_offset": 16624924,
-      "size": 36,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_030008C8",
-      "rom_offset": 16624960,
-      "size": 232,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_030009B0",
-      "rom_offset": 16625192,
-      "size": 260,
-      "status": "mapped_code"
-    },
-    {
-      "name": "audio_mix_ab4",
-      "rom_offset": 16625452,
-      "size": 72,
-      "status": "mapped_code"
-    },
-    {
-      "name": "sub_03000AFC",
-      "rom_offset": 16625524,
-      "size": 52,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_FDAFA8",
-      "rom_offset": 16625576,
-      "size": 8,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_03000B38",
-      "rom_offset": 16625584,
-      "size": 184,
-      "status": "mapped_code"
-    },
-    {
-      "name": "audio_set_shift",
-      "rom_offset": 16625768,
-      "size": 84,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_FDB0BC",
-      "rom_offset": 16625852,
-      "size": 4,
-      "status": "unresolved"
+      "size": 1604,
+      "status": "exact_glue"
     },
     {
       "name": "audio_mix_channels_c_1",
@@ -35157,9 +34958,9 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "89417cc4edd087d27775f9b00df1a7dbdac8fa461dd0f1dbfb43962ced29dcdc",
-    "assets/rom-inventory.json": "18cbf0539e1d49e6114a72da8775889abc299d33e314e669bcd556324691d50d",
-    "tools/render_progress.py": "fad1862e5fab3e426f73aff235be2cf71954c4b4722fd0eb9158fc853bcf7b05",
+    "config/build-us-eu.json": "f3e2f8b30ea581ac1f49814ea278a6decffe2b22ca99d8ec5b7bce9e2764e92d",
+    "assets/rom-inventory.json": "16e23e3c24d31cbd8a2bf2ea5f2a286e58fa6fa7588452ee84029e5613655ce7",
+    "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",
     "config/progress-requirements.txt": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"

@@ -1045,3 +1045,157 @@ static and compiler evidence does not establish audible playback or gameplay.
 The fade mixer's adapted LGPL source, full extent and changed-source control
 are retained in `fade-mixer-canonical/`; the independent original-expression
 trials are in `fade-mixer/`. No assembly or value constraints are used there.
+
+
+## Assembly-origin mixer primitives and converter
+
+The pinned public Krawall `lib/mixer_func.S` source now rebuilds the complete
+1,604-byte block stored at ROM `0x08FDAA7C` and copied to RAM `0x03000604`.
+This is an assembly-origin exception, not a difficult C match replaced with
+assembly. The upstream file at revision
+`8d338581bf0ed0afad15b66bf5979ad4c4d15ed0`, blob
+`6d4975102527644490e195357d841976f588e412`, already expresses every one of the
+398 ARM instructions in assembly, including register assignments, paired-sample
+arithmetic, shared left/right tails, converter load sites and their modifying
+routine. The earlier 300-instruction kernel correspondence in the RAM map is
+now corroborated by assembling the entire original upstream algorithm with the
+game's separately identified clip-table address. No raw instruction body from
+the ROM is incorporated into the source.
+
+`src/audio/mixer_primitives.s` preserves the LGPL-2.1-or-later notice and licence
+reference. Changes expand register macros, express channel offsets and shift
+constants as assembler `.equ` names, replace the writable-IWRAM section with
+`.text`, make labels private, and leave clip-table storage in the explicit
+original data. The instruction sequence is unchanged. The external
+`g_audio_clip_table` address is `0x02001238`, supplied by the original converter
+literal, rather than the later upstream storage choice.
+
+The 12 entry points are listed below. The physical byte column counts each
+instruction once; it is not an invented standalone function extent. In
+particular the two right-channel entries branch into their left counterparts.
+
+| Upstream label | ROM address | RAM address | Physical instruction bytes |
+| --- | --- | --- | ---: |
+| `mixLeft` | `08FDAA7C` | `03000604` | 128 |
+| `mixRight` | `08FDAAFC` | `03000684` | 32 |
+| `mixCenter` | `08FDAB1C` | `030006A4` | 132 |
+| `mixStereo` | `08FDABA0` | `03000728` | 152 |
+| `mixLeftHQ` | `08FDAC38` | `030007C0` | 228 |
+| `mixRightHQ` | `08FDAD1C` | `030008A4` | 36 |
+| `mixCenterHQ` | `08FDAD40` | `030008C8` | 232 |
+| `mixStereoHQ` | `08FDAE28` | `030009B0` | 260 |
+| `mixBias` | `08FDAF2C` | `03000AB4` | 72 |
+| `mixClear` | `08FDAF74` | `03000AFC` | 52 |
+| `mix16to8` | `08FDAFB0` | `03000B38` | 184 |
+| `mix16to8_patch` | `08FDB068` | `03000BF0` | 84 |
+
+The block has **1,592 instruction bytes** and **12 non-executable bytes**:
+the two initialized volume-counter words at RAM `0x03000B30/0x03000B34` and
+clip-table pointer pool at `0x03000C44`. These assembly-owned bytes receive no
+C credit. Bias, clear and conversion close the accepted channel mixer's three
+lower-level handoffs; the eight kernel entries are the known original-image
+entries reached by its shared dispatch table. The table's complete runtime
+index domain and writable channel state remain separate inventory questions.
+
+All local branches, counter accesses and converter-patch addresses are relative
+to the same block, so the same object bytes are valid at both its ROM storage
+and RAM execution address. The clip-table literal is the only external absolute
+address. Private labels and `defines_symbol: false` retain existing fixed RAM
+aliases for C callers, without teaching stable build tooling a second assembly
+execution-address mechanism. An independent RAM-address link of the upstream
+source and the ordinary ROM-address source comparison both reproduce all 1,604
+reference bytes.
+
+The stable isolated candidate gate records `identical: true` and
+`assembly_glue_verified: true` in
+`reports/audio-reconstruction-20261016/named-constants-canonical-report.json`.
+Its actual changed-source control alters the first saved-register set, compiles
+to the same size, and differs by one byte. Twelve additional individual entry
+controls each change that entry's first instruction, compile to the same
+1,604-byte extent, and differ by one byte; their receipts are retained in
+`entry-controls.json` and the corresponding subdirectories. These are original
+image and source-sensitivity proofs, not audio or gameplay execution evidence.
+
+The converter patcher remains self-modifying code. It clears instruction bits
+`0xF80`, then ORs the incoming argument shifted left by seven into eight
+converter instructions. It does not locally mask that argument. Therefore a
+shift-field-only interpretation still requires proof of the incoming domain;
+this exact initial-image rebuild does not close every possible modified
+instruction state or justify a full audio-completeness claim. The C-origin
+master-volume/clip-table initializer at `0x08049968` also remains unresolved,
+with its previously recorded two-byte final-store discrepancy unchanged.
+
+## Game initialization and identified converter-shift inputs
+
+Four connected game-level entries add **120 matching C bytes**: the default
+initializer at `0x08041244` (20), initializer at `0x08041258` (76), hardware
+shutdown at `0x080412A4` (12), and pacing setter at `0x080412E0` (12).
+All four ordinary C candidates match complete extents with the existing agbcc
+profile. Their actual changed-source controls each compile to the same extent
+and reject by one byte. Receipts, source/header snapshots and comparisons are
+under `reports/audio-reconstruction-20261016/game-initialize/canonical/`.
+The existing source alignment directive preserves the observed alignment; no
+instruction bodies, output patches or register bindings are introduced.
+
+The default entry stores pacing eight before calling the initializer. The main
+entry initializes the accepted backend with mode one, sets master volume to
+`0x40080`, selects mixing mode two, reapplies the shared pacing byte and saved
+sample/sequence volume options, sets sequence ID 255, clears the volatile flags
+byte and installs callback-table entry zero. Its volatile eight-bit flag view
+preserves the original read before the zero store. The pacing setter writes the
+low input byte; hardware shutdown calls the already accepted deactivation body.
+Names describe these observed operations and do not establish audible behavior.
+
+The current rooted inventory identifies two direct master-volume callers:
+accepted `audio_initialize` passes 128, and the now reconstructed game
+initializer passes `0x40080`. The original master-volume body sends five to the
+converter patcher when the upper halfword is zero, otherwise sends the upper
+halfword. Therefore these two identified paths choose converter shifts five
+and four respectively. A whole-ROM byte search finds no word containing
+`0x08049968` or `0x08049969`; the sole exact patcher pointer word is at ROM
+`0x499D4`. This corroborates the known paths but does not prove absence of
+computed or currently unresolved callers. The patcher's lack of a local mask
+and the broader inventory limits remain explicit.
+
+## Copied hardware timer/DMA IRQ
+
+The 140-byte extent stored at ROM `0x08FDA47C` and installed at ARM RAM
+`0x03000004` now rebuilds exactly from `src/audio/timer_irq.s`. It contributes
+120 hardware-IRQ instruction bytes and 20 literal-pool bytes, counted separately
+from C. The four bytes immediately before it contain the hardware-enabled byte; those
+bytes and the four volume/mode bytes immediately after it remain explicit
+non-executable original data.
+
+The source adapts the assembly IRQ in the same pinned Krawall revision's
+`lib/directsound_asm.S`, blob `c2f82e5d2971b5405c9b88009063984ade358b29`.
+Its LGPL-2.1-or-later notice and licence reference are retained. The original
+MMIO register sequence follows that assembly source: reset DMA1, reset DMA2
+when its start bit is set, stop/reload/restart timer 1, then return through LR.
+The earlier game increments the shared full-word stamp rather than toggling
+the later upstream byte. It reloads timer 1 with `65536 - 1104`, using the full
+observed four-phase buffer size, rather than the later half-buffer expression.
+These observed earlier operations, private labels, named constants and the
+external stamp address are documented adaptations, not raw ROM instructions.
+
+The original first-IRQ behavior also differs from later upstream. Both DMA
+paths reach the timer tail at `0x0300004C`. After programming the timer, the
+source loads its existing unconditional `BX LR` instruction word at
+`0x03000078` and stores that word over the timer tail's first load. Later IRQs
+therefore increment the stamp, reset the active DMAs and return at that same
+tail address. The source introduces neither the later upstream front-branch
+patch nor its backup/undo routine. Both initial and modified return behavior
+are explicit; unrelated writers and complete interrupt scheduling remain
+outside this local proof.
+
+The five original pool words are at RAM `0x0300007C` through `0x0300008C`:
+stamp `0x020008B0`, DMA1 control `0x040000C6`, DMA2 control `0x040000D2`,
+timer 1 `0x04000104`, and reload `0xFBB0`. All internal references stay relative
+to this copied block. The stable isolated source/control gate and a separately
+retained RAM-address link match the entire extent. Increasing the stamp step
+from one to two compiles to the same size and rejects by one byte. A second
+control redirects the self-modifying store to the existing final return;
+it compiles to the same size and rejects by two bytes. Source snapshots,
+commands, objects, raw comparisons and receipts are retained under
+`reports/audio-reconstruction-20261016/timer-irq/final-canonical/`,
+`ram-address-proof/` and `patch-target-control/`. No device, audible-output or
+gameplay execution is claimed.
