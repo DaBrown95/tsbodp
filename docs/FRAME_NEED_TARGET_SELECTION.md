@@ -170,3 +170,77 @@ inventory extent changing from 324,000 to 324,004 and the treemap extent from
 324,008 to 324,012; the remaining two alignment bytes are internal. Existing
 estimated boundaries are not reclassified as complete game-code coverage.
 The 319,640 mapped extent bytes remain the fixed historical comparison baseline.
+
+
+## Row-87 attachment lifecycle
+
+The allocation, dispatch and worker path connected to row 87 adds three matching
+C functions and 572 extent bytes. Existing action writers, callers and thirteen
+worker providers gain no additional C credit. Names and phase roles are inferred.
+
+| Entry | Function | Complete bytes | Role |
+| --- | --- | ---: | --- |
+| `0x08021E98` | `frame_step_attachment_job_87` | 508 | Parameter progress, indicator, animation and cleanup |
+| `0x0802212C` | `frame_begin_attachment_job_87` | 28 | Allocate an actor record and store its full-word kind |
+| `0x08022148` | `frame_dispatch_attachment_job_87` | 36 | Dispatch record kinds 92 through 97 to the worker |
+
+The existing factory installs row 87's begin and dispatch callbacks in state
+fields `+0xF0` and `+0xF4`. Allocation returns zero when all three record slots
+are occupied; otherwise it stores the requested kind and returns one. Dispatch
+uses the existing record finder and classifies the six actual action kinds with
+a grouped switch. Other kinds return zero. As in the original, dispatch
+dereferences the finder result without a null guard; a matching live record is
+a caller requirement. Other small callbacks in the row remain explicit original
+regions.
+
+A record whose running byte is exactly one enters phase one. Phase zero either
+starts a low-need animation and waits in phase eight, or initializes parameter
+progress and waits in phase 72. The parameter branch creates and updates an
+indicator when the current signed value differs from ten. It adjusts the actor's
+needs using the definition row's amount byte and advances when the value reaches
+the next step or ten. The completed-value branch instead decrements the actor
+timer until minus one. Phase eight observes the animation-completion flag and
+clears the need countdown. Phase one requests the idle animation, transitions
+and clears any indicator, and returns two; other paths return one.
+
+The source copies the actor's need pointer and integer timer from the existing
+canonical object's character storage at `+0x60` and `+0x58`. It copies the
+indicator pointer through four bytes of the state's existing seven-byte field
+at `+0x58`. These accesses stay within their declared character arrays and
+require initialized, valid target representations. They introduce no foreign
+actor or state word overlay. The bounded shared-world declaration represents
+the observed mode byte at offset `0x20` and six parameter words at `0x98`,
+with target extent `0xB0`; it supplies no original data initializer. Its wider
+owner and effective-type relationship with other global views remains
+provisional. Existing record-owner casts and provider views retain their
+previous compatibility requirements.
+
+Every parameter-table access requires the current optional byte to be four
+through nine, including after opaque provider calls. The factory initializes
+that byte to zero, so factory allocation alone does not establish this domain.
+The existing spawn interface can install the required modes, and the row-87
+writer emits the corresponding kinds 92 through 97. These are conditional
+source routes: their action-row halfword eight still cannot match the current
+need selector's ordinal zero through seven. They establish neither gameplay
+use nor all runtime assignments. Calls also require valid actor/need/indicator
+objects, a backed definition row, direction-table indices zero through seven,
+and a timer decrement that does not overflow. The captured need storage must
+remain live across provider calls, even if the job's actor field changes. Fresh
+optional, kind and provider reads remain after calls; no unsupported caching is
+introduced.
+
+The three meaningful controls change cleanup return two to three, the allocated
+kind to kind plus one, and dispatch case 92 to case 91. Respectively, a valid
+cleanup phase with no indicator changes the return value; a free record stores
+a different kind; and a kind-92 cleanup record changes from worker return two
+to default zero. All retain the surrounding provider and lifetime requirements.
+
+The complete spans contain 536 instruction bytes, 28 referenced literal bytes
+and eight zero alignment bytes. Four alignment bytes are internal to the worker;
+two follow its 506-byte function symbol and two follow the begin callback's
+26-byte symbol. Independently rooted next entries bound those trailing bytes.
+The dispatch symbol itself is 36 bytes. Alignment directives contain no
+instruction body, and all spans, pools and alignment are included in matching.
+The source-level switch and direct representation copy account for the retained
+compiler differences without identifying historical source spelling. Matching,
+static mapping and runtime behavior remain separate claims.

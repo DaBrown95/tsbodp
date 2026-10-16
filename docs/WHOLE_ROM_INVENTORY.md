@@ -47,16 +47,16 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 3,010 |
-| Unclassified remainder of estimated envelopes | 16,230 |
-| Other unresolved ROM | 16,433,804 |
+| Unclassified inside source/glue-owned extents | 3,018 |
+| Unclassified remainder of estimated envelopes | 16,226 |
+| Other unresolved ROM | 16,433,800 |
 | **Physical ROM total** | **16,777,216** |
 
 Thus 270,608 bytes have qualified static instruction evidence, under the stated
 decoder, mode, original-image and ordinary-call assumptions. This confirms their
 static instruction role; it does not establish that every instruction executes.
 The raw alternative reach is 270,634 bytes. There are 2,324 rooted execution
-entries, while the ordinary map has 2,523 entries/candidates and 324,004 mapped
+entries, while the ordinary map has 2,523 entries/candidates and 324,008 mapped
 extent bytes. In the initial survey, nine corroborated veneer starts were added (six register veneers and three audio
 stubs), and four prior weak starts were folded as interior blocks, for a net five
 entries and 24 mapped extent bytes.
@@ -531,3 +531,34 @@ assignments. Copied-audio extent gaps, unresolved transfers and the other
 survey limits still prevent a complete game-code denominator. The historical
 comparison remains fixed at 319,640 mapped extent bytes; no runtime observation
 is added.
+
+
+### Row-87 attachment lifecycle
+
+The connected worker at `0x08021E98`, begin callback at `0x0802212C` and
+dispatch callback at `0x08022148` add three matching C functions and 572 extent
+bytes. Coverage reaches 1,720 functions and 246,372 C bytes, with the same 500
+separate glue bytes. The complete spans contain 536 instruction bytes, 28
+referenced literal bytes and eight alignment zeros. Existing providers, callers
+and inventory discoveries add no C credit. The other row-87 callbacks remain
+explicit original regions.
+
+These three existing map rows gain compiler ownership. The worker's former
+506-byte estimate extends through two trailing zero bytes to the independently
+rooted next entry; the begin callback's 26-byte estimate similarly extends to
+28. Dispatch's existing 36-byte extent is unchanged. Entry count remains 2,523,
+inventory mapped extents become 324,008 and treemap extents 324,016. Four
+internal zeros move from estimated envelopes into source-owned unclassified
+bytes, and four trailing zeros move there from other unresolved ROM. Those
+categories become 3,018, 16,226 and 16,433,800 bytes respectively. Qualified
+static instruction and referenced-data unions remain 270,608 and 34,732 bytes.
+
+The [connected source evidence](FRAME_NEED_TARGET_SELECTION.md#row-87-attachment-lifecycle)
+records exact action-kind dispatch, indicator and parameter phases, the
+per-access optional-mode requirement, bounded canonical representation copies,
+provisional shared-world and legacy owner relationships, and meaningful source
+controls. The existing thirteen worker providers are reused without new credit.
+Finite callback assignments and a matching build do not establish runtime use
+or exhaust indirect targets. Copied-audio-kernel extent gaps and other survey
+limits still prevent a complete code denominator. The historical comparison
+remains fixed at 319,640 mapped extent bytes; no runtime observation is added.
