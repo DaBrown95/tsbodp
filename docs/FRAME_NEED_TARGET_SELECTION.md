@@ -336,9 +336,10 @@ Observed definition row 3 has enabled byte one and installs the dispatcher at
 state `+0xF4`. Its accepted action writer can emit 31, 33, 45 and an optional
 12. Dispatch looks up the actor's existing record and selects the corresponding
 worker; other kinds return zero. The finder result is dereferenced without a
-null guard, so a matching live record remains a caller requirement. The row's
+null guard, so a matching live record remains a caller requirement. The four-body milestone left the row's
 eight-byte intermediate callback, 72-byte begin callback and intervening
-44-byte region remain original. These finite assignments provide a conditional
+44-byte region original. The begin callback is covered by the follow-up below;
+the eight-byte callback and 44-byte region remain original. These finite assignments provide a conditional
 source route, not proof of gameplay use or all writable callback populations.
 
 The kinds-31/33 worker captures the actor's need pointer before initializing
@@ -400,3 +401,38 @@ The explicit initialization phase explains the retained six-byte entry-order
 failure without identifying historical source spelling. Row 97's larger
 workers and the renderer remain original; their held candidates gain no credit.
 Matching builds, static routes and runtime behavior remain separate claims.
+
+
+## Row-3 allocation and route handoff
+
+`frame_begin_attachment_jobs_12_31_33_45` adds the complete 72-byte callback
+at `0x08035CA0`. This connects row 3's existing begin slot to the four published
+dispatch/step bodies. It adds no credit for those 932 bytes or for its four
+already matching providers. The row's eight-byte intermediate callback and
+44-byte neighboring region remain explicit original code.
+
+The callback allocates one of the owner's three actor records. Failure returns
+zero. Success stores the supplied full-word kind, reads attachment point zero
+from the owner's object, starts route mode zero with style one through the
+record's status word, requests animation six, and returns one. The route mode
+is zero here; the related kind-72 callback uses three. No kind filter or new
+validation branch is added. The source uses the same canonical owner/record
+interfaces and existing provider declarations.
+
+The attachment provider's return is ignored. Whenever a free route slot reads
+the destination, that provider must have initialized both signed point
+coordinates within its resource and arithmetic domain. The route copies the
+local point during the call and retains the record's status pointer. Record,
+status and actor storage must therefore remain live until the route completes
+or is cancelled. Route-allocation failure is also ignored; the callback still
+requests animation six and returns one. These are preserved caller contracts,
+not successful-route guarantees. Legacy allocator, command and tick-object
+view compatibility remains provisional.
+
+The control adds one to the stored kind. With a free record, kind 31 and valid
+point/provider/route backing, the sources store 31 and 32 respectively while
+both return one. A full owner would not reach the changed store and is not the
+witness. Row 3's enabled definition and existing actor-state callback use give
+a conditional allocation-to-step route; no gameplay observation or exhaustive
+callback-population claim follows. The entire function is 72 instruction bytes,
+with no referenced pool or alignment bytes.

@@ -617,3 +617,32 @@ remain unconverted. Copied-audio extent gaps and other unresolved survey limits
 still prevent a complete game-code denominator. The historical comparison
 remains fixed at 319,640 mapped extent bytes; no runtime observation or
 inventory-discovery C credit is added.
+
+
+### Row-3 allocation and canonical secondary-list access
+
+The begin callback at `0x08035CA0` adds one matching C function and 72 extent
+bytes, bringing source coverage to 1,728 functions and 247,904 C bytes. The same
+500 glue bytes remain separate. All 72 new bytes are instructions, with no pool
+or alignment bytes. Existing row-3 dispatch/step bodies and providers gain no
+additional credit; the intermediate eight-byte callback remains original.
+
+The existing map row gains compiler ownership without changing its 72-byte
+extent. Entry count stays 2,523, inventory extents stay 324,008 and treemap
+extents stay 324,016. Qualified static instruction and referenced-data unions
+remain 270,608 and 34,732 bytes. No unclassified bytes move: source-owned,
+estimated-envelope and other unresolved categories remain 3,030, 16,214 and
+16,433,800. The bounded estimated-body count becomes 744 because this existing
+body now has matching-source ownership.
+
+A separate canonical-field/source-quality repair names the producer-backed
+secondary-list pointer at world `+0xF0` and removes reset's fixed-register
+constraint without changing its 116-byte match or source coverage. Target
+checks show that old and refined record/union sizes and alignments are already
+the same; no ABI-size change is claimed. The [row-3 allocation contract](FRAME_NEED_TARGET_SELECTION.md#row-3-allocation-and-route-handoff)
+and [secondary-list evidence](ACTOR_ENTRIES_RECONSTRUCTION.md#producer-backed-secondary-list-member)
+retain provider, lifetime, layout and legacy-owner limitations. All affected
+importers require matching-source controls; neither the type refinement nor
+inventory findings add C credit. The historical comparison remains 319,640 mapped
+extent bytes, and the complete game-code denominator remains open. No runtime
+observation is added.

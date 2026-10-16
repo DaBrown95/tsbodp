@@ -41807,6 +41807,28 @@
         "before": "case 31:",
         "after": "case 30:"
       }
+    },
+    {
+      "name": "frame_begin_attachment_jobs_12_31_33_45",
+      "rom_offset": 220320,
+      "size": 72,
+      "source": "src/frame/frame_begin_attachment_jobs_12_31_33_45.c",
+      "symbols": {
+        "frame_allocate_actor_attachment_record": "0x802e3c5",
+        "frame_attachment_position": "0x800176d",
+        "frame_begin_actor_route": "0x80370d1",
+        "frame_request_animation": "0x8001b5d"
+      },
+      "thumb_symbols": [
+        "frame_allocate_actor_attachment_record",
+        "frame_attachment_position",
+        "frame_begin_actor_route",
+        "frame_request_animation"
+      ],
+      "negative_control": {
+        "before": "job->kind = kind;",
+        "after": "job->kind = kind + 1;"
+      }
     }
   ],
   "assembly": [

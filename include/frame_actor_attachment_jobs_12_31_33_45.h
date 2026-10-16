@@ -14,4 +14,7 @@ unsigned int frame_step_attachment_job_45_3594c(struct FrameNeedEffectState *,
 unsigned int frame_dispatch_attachment_jobs_12_31_33_45(struct FrameNeedEffectState *,
                                                        struct FrameObject *);
 
+unsigned int frame_begin_attachment_jobs_12_31_33_45(struct FrameNeedEffectState *,
+                                                        struct FrameObject *, unsigned int);
+
 #endif

@@ -175,10 +175,11 @@ The real retained-count comparison mutation rejects one byte. Its proof index is
 
 ## Matching and remaining path
 
-Ordinary C reproduces seventeen functions. The refresh and collection removal constraints are
-recorded above. Reset uses one semantic `r0` binding
-for the game-state base so the compiler retains the original base literal plus
-`F0` address calculation. It contains no instruction-body assembly. Zero-filled
+Ordinary C reproduces eighteen functions. The refresh and collection removal
+constraints are recorded above. Reset now reads the producer-backed canonical
+`secondary_entries` member without a fixed-register constraint. The source
+quality repair preserves its complete 116-byte match and adds zero C credit.
+It contains no instruction-body assembly. Zero-filled
 Thumb tail alignment is explicit where present. Changed limits, sentinels,
 field selection, initialization values and notification IDs each reject by one
 byte, except the altered random spread in reset-values, which rejects by 32
@@ -193,3 +194,35 @@ is `reports/audio-root/actor-entry-collection-canonical/1791849007996878000/read
 Secondary-flag reconciliation at `0802005C` remains a connected target. Useful
 failed bodies and raw comparisons remain in ignored local reports. Whole-ROM
 equality, partial storage mapping and runtime behavior remain separate claims.
+
+
+## Producer-backed secondary-list member
+
+The existing canonical `ResourceActorState` now names the four-byte
+`secondary_entries` pointer at `+0xF0`, with its character prefix ending at
+`F0` and suffix beginning at `F4`. The selected-actor byte remains at `+0x748`.
+The producer is the existing world reset calling `actor_entry_prepare` with
+world base plus `0xDC`: that initializer's context-secondary field at `+0x14`
+writes the pointer at world `+0xF0`. In the defined initialized state it points
+to embedded list fourteen; its backing and capacity come from the existing
+context setup. The separate `0x84C` heap collection is a different pointer and
+is not the new member's pointee.
+
+Actual selected-target layout checks establish that both the old character-only
+record and the refined record have size `0x74C` and alignment four. The old
+record was already rounded by the Thumb target's 32-bit structure boundary;
+there is no old `0x749`/alignment-one ABI change. The containing union also
+remains `0x74C`/alignment four, and all old field offsets are preserved. This
+field refinement does not establish the full global allocation, a universally
+initialized pointer, or compatibility of every legacy world alias and save/load
+writer. The observed broader clear is not a complete storage-owner proof.
+
+Reset's final insertion now reads `g_resource_game_state.actor.secondary_entries`
+at its original position after the reset-value, clear and hook calls. It keeps
+the live pointer read rather than taking an earlier snapshot. The fixed `r0`
+source constraint and integer-address pointer dereference are removed; the
+remaining reset loops, provider calls, full-word ID 142 and changed-source
+control are unchanged. This is a source-quality repair, not an additional
+function or byte gain. The wider header importer closure must retain its
+matching bytes and controls under the refined declaration. Matching and target
+layout evidence remain separate from gameplay and universal aliasing claims.

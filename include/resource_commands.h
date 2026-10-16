@@ -80,8 +80,11 @@ struct ResourceConditionalState {
     unsigned char unknown00[0x444];
     struct ResourceViewCell cells[1][6];
 };
+struct ConditionActorEntries;
 struct ResourceActorState {
-    unsigned char unknown00[0x748];
+    unsigned char unknown00[0xF0];
+    struct ConditionActorEntries *secondary_entries;
+    unsigned char unknownf4[0x748 - 0xF4];
     unsigned char selected_actor;
 };
 union ResourceGameState {

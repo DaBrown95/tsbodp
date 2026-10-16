@@ -62669,14 +62669,15 @@
       "referenced_literal_bytes": 0
     },
     {
-      "name": "sub_08035CA0",
+      "name": "frame_begin_attachment_jobs_12_31_33_45",
       "rom_offset": 220320,
       "mode": "Thumb",
       "runtime_addresses": [
         134438048
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -62691,11 +62692,11 @@
         220390
       ],
       "size": 72,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 220320,
       "body_rom_start": 220320,
       "body_rom_end": 220392,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0803xxxx",
       "decoded_instruction_bytes": 72,
@@ -103984,7 +103985,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08035CA0",
+      "name": "frame_begin_attachment_jobs_12_31_33_45",
       "rom_offset": 220320,
       "size": 72,
       "status": "mapped_code"
@@ -109984,7 +109985,7 @@
     "config/ram-map-us-eu.json": "00dd934b59250ccb1059aa4bc84e65efd755c9a82bc1c8f0fdeeb3140342524e",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "fd5ff50e29e7bd3e2605573d07458b7ea43e0e058f9922667d7d8e0987969067",
-    "config/build-us-eu.json": "3aa6a02be1dab9a37f36f2f85c35664af16f90e28faa5a9dff0565b9e75e1450",
+    "config/build-us-eu.json": "3e386755a472fcb58d2ce7b4064b2826b496cb248c50f68d3c764cdd465a182a",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/audio/audio_game_select_activity_callback.c": "f1b271db1ce338b8e0e9fb72e53366263d86726953bb6ad6b4f1615d52ccb5b6",
     "src/audio/player_process_between_row.c": "f541ed81a46529f10a6179c656949d712e59fce9f94e4e9295a5dbfa8d09eefc",
@@ -110077,7 +110078,7 @@
       "nonconflicting_qualified_instruction_bytes": 270608,
       "raw_referenced_data_union_bytes": 34732,
       "qualified_referenced_data_union_bytes": 34732,
-      "source_glue_owned_extent_bytes": 248332,
+      "source_glue_owned_extent_bytes": 248404,
       "estimated_envelope_union_bytes": 324008,
       "classification_bytes": {
         "estimated_envelope_unclassified": 16214,
@@ -149398,7 +149399,7 @@
           220312
         ],
         [
-          220392,
+          220320,
           220460
         ],
         [
@@ -236743,7 +236744,7 @@
       },
       {
         "rom_offset": 220312,
-        "size": 80,
+        "size": 8,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -236755,8 +236756,8 @@
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
       },
       {
-        "rom_offset": 220392,
-        "size": 68,
+        "rom_offset": 220320,
+        "size": 140,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -344103,9 +344104,10 @@
         "execution_address": 134438048,
         "entry_rom_offset": 220320,
         "mode": "Thumb",
-        "name": null,
+        "name": "frame_begin_attachment_jobs_12_31_33_45",
         "evidence": [
-          "audited dispatch entry"
+          "audited dispatch entry",
+          "bounded audit"
         ],
         "raw_instruction_intervals": [
           [
@@ -394209,6 +394211,16 @@
         "mode": "Thumb",
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 68,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "frame_begin_attachment_jobs_12_31_33_45",
+        "rom_offset": 220320,
+        "size": 72,
+        "source": "src/frame/frame_begin_attachment_jobs_12_31_33_45.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 72,
         "referenced_data_bytes_in_extent": 0
       },
       {

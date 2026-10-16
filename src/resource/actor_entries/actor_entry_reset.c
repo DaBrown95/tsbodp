@@ -5,5 +5,5 @@ void actor_entry_reset(struct ActorEntryContext *context) {
  actor_entry_reset_values(context);
  heap_clear(*(void **)((unsigned char*)context+0x31c),0,0x84c);
  actor_entry_empty_hook((unsigned char*)context+0x320);
- {register unsigned int base asm("r0")=(unsigned int)&g_resource_game_state; actor_entry_add(*(struct ConditionActorEntries **)(base+0xf0),142,0,0);}
+ actor_entry_add(g_resource_game_state.actor.secondary_entries,142,0,0);
 }
