@@ -341,37 +341,48 @@ offset-sixteen string access does not establish a complete game-state layout.
 
 ## World-effect offer callbacks
 
-Five ordinary-C callbacks from the seven-word observed world-effect table at
-`08D70894` now own 1,100 complete bytes: table indices 0 (`0800504C`, 132),
-1 (`080050D0`, 292), 2 (`080051F4`, 248), 4 (`080053E8`, 232) and
-6 (`08005584`, 196). Their disjoint roles are 1,022 instruction bytes,
-60 literal bytes and eighteen zero alignment bytes. Every first ordinary-C
-recipe matches; each cue-15-to-14 source control keeps the extent and rejects
-by one byte. Target API/layout checks include the actual provider definitions
-and three deliberately incompatible contracts. Defined C fixtures distinguish
-the control's cue argument; these are authored fixtures, not game observations.
+The seven observed callback bodies from the world-effect table at `08D70894`
+now own the complete 1,532-byte interval `0800504C..08005648`: indices
+0 (`0800504C`, 132), 1 (`080050D0`, 292), 2 (`080051F4`, 248),
+3 (`080052EC`, 252), 4 (`080053E8`, 232), 5 (`080054D0`, 180) and
+6 (`08005584`, 196). Every body has an exact complete-extent comparison and
+a cue-15-to-14 source control that retains its size and rejects by one byte.
+Target API/layout checks include the actual random/cue provider definitions
+and deliberately incompatible contracts. Earlier defined C fixtures distinguish
+the five ordinary callbacks' cue arguments; these are authored fixtures, not
+game observations.
 
 The callbacks use the existing 24-byte offer geometry: limit word at +4,
 countdown at +16, phase at +18 and count byte at +20, followed by multiplier
-at state +96 and signed selected index at +100. The new view does not change
-the existing offer-state allocation or claim all its writers. A genuine
-`previous = countdown--` value preserves the native old-halfword zero test.
-The used second argument is retained as a byte and explicitly interpreted
-signed at its comparison. Unused formals and the common declaration do not
-uniquely identify the historical API; the original dispatcher sign-extends
-its second byte and still requires an end-to-end source contract.
+at state +96 and signed selected index at +100. The access view does not change
+the existing allocation or establish all writers. Slots must name the four
+backed records, members must be initialized and evaluated signed products must
+fit 32-bit `int`. A genuine `previous = countdown--` preserves the native
+old-halfword zero test. The used second argument is retained as a byte and
+explicitly interpreted signed at its comparison; conversion above 127 follows
+the pinned target. Unused formals and the common declaration do not uniquely
+identify the historical API. The original dispatcher sign-extends its second
+byte and still requires an end-to-end source contract.
 
-Observed table entries 3 (`080052EC`, 252 bytes) and 5 (`080054D0`, 180) remain
-unconverted. Current first CSE removes a second ordinary count read that the
-native code retains. Both reads use the same preserved native record base;
-there is no separate count literal or intervening call/store. A postincrement
-counterfactual did not change the mismatch. The compiler's widened-load reuse
-in first CSE explains the removed QI read.
-A diagnostic disabling expensive optimizations preserves that read in both
-sources, but introduces allocated read-only data and still mismatches the native
-code. The stable verifier rejects both objects. This identifies a compiler
-mechanism, not an accepted source or historical profile. No new qualifier, alias
-or register constraint supplies a match.
+Effects 3 and 5 resolve the previously missing count rereads with a genuine
+record pointer held in native R4. Under `SMALL_REGISTER_CLASSES`, the pinned
+compiler's `cse.c` does not record expressions depending on nonfixed hard
+registers, and `canon_reg` never replaces a hard register. Ordinary pseudo-based
+pointer expressions had let first CSE reuse the widened count load. This is a
+source/register explanation under the existing profile, without a new qualifier,
+alias promise, barrier or embedded instruction. The earlier diagnostic disabling
+expensive optimizations remains a rejected failure: it introduced allocated
+data and still mismatched.
+
+Actual shared observations remain explicit. Effect 3 captures one count for
+both bound products and one limit for both comparisons, while its increment
+reads the field again. Both effects capture the retreat count shared by the
+product and decrement. The genuine entry byte offsets use R0 and R1,
+respectively; effect 3's real limit uses R2 only between its load and final
+comparison, with no intervening call. The record pointer is callee-preserved;
+the other constrained values die before calls. Fresh normal and strict pairs
+reproduce both complete bodies and their changed-source rejections. No register
+search, new memory access or compiler-profile change is part of this result.
 
 The step at `08003ABC` is the scene table's row-23 step callback, bounded by
 its native return, pools and the next entry at `08003D74`. Fourteen of its

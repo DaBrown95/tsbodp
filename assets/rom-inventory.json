@@ -9800,14 +9800,15 @@
       "referenced_literal_bytes": 20
     },
     {
-      "name": "sub_080052EC",
+      "name": "scene_link_offer_effect_3",
       "rom_offset": 21228,
       "mode": "Thumb",
       "runtime_addresses": [
         134238956
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -9820,11 +9821,11 @@
         21472
       ],
       "size": 252,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 21228,
       "body_rom_start": 21228,
       "body_rom_end": 21474,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0800xxxx",
       "decoded_instruction_bytes": 228,
@@ -9863,14 +9864,15 @@
       "referenced_literal_bytes": 8
     },
     {
-      "name": "sub_080054D0",
+      "name": "scene_link_offer_effect_5",
       "rom_offset": 21712,
       "mode": "Thumb",
       "runtime_addresses": [
         134239440
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -9883,11 +9885,11 @@
         21890
       ],
       "size": 180,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 21712,
       "body_rom_start": 21712,
       "body_rom_end": 21892,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0800xxxx",
       "decoded_instruction_bytes": 168,
@@ -93981,7 +93983,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_080052EC",
+      "name": "scene_link_offer_effect_3",
       "rom_offset": 21228,
       "size": 252,
       "status": "mapped_code"
@@ -93993,7 +93995,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_080054D0",
+      "name": "scene_link_offer_effect_5",
       "rom_offset": 21712,
       "size": 180,
       "status": "mapped_code"
@@ -109533,7 +109535,7 @@
     "config/ram-map-us-eu.json": "67362238b648e40fbf3b51d8e466bfd12e709a38211c16e157d384243896410b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "bdd2740d84d6ce54f8dc7431555ac7a405ee08847f4fdea5224fab2b860b6540",
-    "config/build-us-eu.json": "8e54b822ef893cc2080ae0115931eb7d8dbac5f678dba26fc958f954f86e72fb",
+    "config/build-us-eu.json": "e63c36666119b7a37b8eea1ce3fea0e02326a8140362d8ec845e4bca0ceed900",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/audio/audio_game_select_activity_callback.c": "f1b271db1ce338b8e0e9fb72e53366263d86726953bb6ad6b4f1615d52ccb5b6",
     "src/audio/player_process_between_row.c": "f541ed81a46529f10a6179c656949d712e59fce9f94e4e9295a5dbfa8d09eefc",
@@ -109632,13 +109634,13 @@
       "nonconflicting_qualified_instruction_bytes": 279646,
       "raw_referenced_data_union_bytes": 35616,
       "qualified_referenced_data_union_bytes": 35616,
-      "source_glue_owned_extent_bytes": 281640,
+      "source_glue_owned_extent_bytes": 282072,
       "estimated_envelope_union_bytes": 325330,
       "classification_bytes": {
-        "estimated_envelope_unclassified": 6442,
+        "estimated_envelope_unclassified": 6434,
         "instruction_and_referenced_data_dual_use": 4,
         "known_data": 18852,
-        "owned_extent_unclassified": 3654,
+        "owned_extent_unclassified": 3662,
         "strong_rooted_instruction": 279642,
         "strong_rooted_referenced_data": 35612,
         "unresolved": 16433010
@@ -149642,14 +149644,6 @@
         ],
         [
           20556,
-          21228
-        ],
-        [
-          21480,
-          21712
-        ],
-        [
-          21892,
           26592
         ],
         [
@@ -170971,7 +170965,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -170982,7 +170977,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -170995,7 +170991,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -171006,7 +171003,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -171019,7 +171017,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -171027,12 +171026,13 @@
       {
         "rom_offset": 21398,
         "size": 2,
-        "classification": "estimated_envelope_unclassified",
+        "classification": "owned_extent_unclassified",
         "roles": [
-          "estimated_envelope"
+          "estimated_envelope",
+          "source_owned"
         ],
-        "confidence": "low_estimated_boundary",
-        "evidence_basis": "Provisional discovery envelope only; neither byte role nor function boundary is established."
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 21400,
@@ -171040,7 +171040,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -171053,7 +171054,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -171064,7 +171066,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -171077,7 +171080,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -171085,12 +171089,13 @@
       {
         "rom_offset": 21474,
         "size": 2,
-        "classification": "estimated_envelope_unclassified",
+        "classification": "owned_extent_unclassified",
         "roles": [
-          "estimated_envelope"
+          "estimated_envelope",
+          "source_owned"
         ],
-        "confidence": "low_estimated_boundary",
-        "evidence_basis": "Provisional discovery envelope only; neither byte role nor function boundary is established."
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 21476,
@@ -171098,7 +171103,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -171179,7 +171185,7 @@
       },
       {
         "rom_offset": 21692,
-        "size": 20,
+        "size": 54,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -171192,27 +171198,15 @@
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
       },
       {
-        "rom_offset": 21712,
-        "size": 34,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
         "rom_offset": 21746,
         "size": 2,
-        "classification": "estimated_envelope_unclassified",
+        "classification": "owned_extent_unclassified",
         "roles": [
-          "estimated_envelope"
+          "estimated_envelope",
+          "source_owned"
         ],
-        "confidence": "low_estimated_boundary",
-        "evidence_basis": "Provisional discovery envelope only; neither byte role nor function boundary is established."
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 21748,
@@ -171220,7 +171214,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -171233,7 +171228,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -171241,12 +171237,13 @@
       {
         "rom_offset": 21866,
         "size": 2,
-        "classification": "estimated_envelope_unclassified",
+        "classification": "owned_extent_unclassified",
         "roles": [
-          "estimated_envelope"
+          "estimated_envelope",
+          "source_owned"
         ],
-        "confidence": "low_estimated_boundary",
-        "evidence_basis": "Provisional discovery envelope only; neither byte role nor function boundary is established."
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 21868,
@@ -171254,27 +171251,15 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
       },
       {
         "rom_offset": 21872,
-        "size": 20,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
-        "rom_offset": 21892,
-        "size": 38,
+        "size": 58,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -273075,9 +273060,9 @@
         "rom_offset": 0,
         "size": 65536,
         "classification_bytes": {
-          "estimated_envelope_unclassified": 1206,
+          "estimated_envelope_unclassified": 1198,
           "known_data": 188,
-          "owned_extent_unclassified": 596,
+          "owned_extent_unclassified": 604,
           "strong_rooted_instruction": 56198,
           "strong_rooted_referenced_data": 6716,
           "unresolved": 632
@@ -282373,9 +282358,10 @@
         "execution_address": 134238956,
         "entry_rom_offset": 21228,
         "mode": "Thumb",
-        "name": null,
+        "name": "scene_link_offer_effect_3",
         "evidence": [
-          "audited dispatch entry"
+          "audited dispatch entry",
+          "bounded audit"
         ],
         "raw_instruction_intervals": [
           [
@@ -282518,9 +282504,10 @@
         "execution_address": 134239440,
         "entry_rom_offset": 21712,
         "mode": "Thumb",
-        "name": null,
+        "name": "scene_link_offer_effect_5",
         "evidence": [
-          "audited dispatch entry"
+          "audited dispatch entry",
+          "bounded audit"
         ],
         "raw_instruction_intervals": [
           [
@@ -407359,6 +407346,26 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 2,
         "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "scene_link_offer_effect_3",
+        "rom_offset": 21228,
+        "size": 252,
+        "source": "src/scene/scene_link_offer_effect_3.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 228,
+        "referenced_data_bytes_in_extent": 20
+      },
+      {
+        "name": "scene_link_offer_effect_5",
+        "rom_offset": 21712,
+        "size": 180,
+        "source": "src/scene/scene_link_offer_effect_5.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 168,
+        "referenced_data_bytes_in_extent": 8
       },
       {
         "name": "irq_cpu_enable",

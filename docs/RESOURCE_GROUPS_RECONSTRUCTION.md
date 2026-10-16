@@ -73,10 +73,15 @@ and word-group copy `0800B018` remain explicit unconverted regions. The latter
 is the next connected builder dependency. A fresh current-header replay of its
 original authored candidate is 64 bytes / 61 differences against the native
 68-byte extent. Its eight-byte assignment lowers as a DI copy rather than the
-native block transfer; offset-table and final arithmetic producers also differ.
-Older source attempts remain preserved, but their retired raw outputs do not
-establish a current near-match. The refreshed comparison and useful compiler
-passes are retained; no source credit or new trial grid follows.
+native block transfer. A fixed eight-byte representation copy from the existing
+four-aligned typed records instead selects the native block transfer without
+a helper or stack frame. Retaining the actual offset-table base at source +2,
+as in the neighboring owned builders, then gives 68 bytes / seven differences.
+Four differing instructions are confined to commuted loop ADD operands and the
+final size/return allocation; both causes remain open. Earlier genuine size
+locals have already been tried. Unique source attempts and selected compiler
+passes remain; retired old raw outputs do not establish another current match.
+This candidate has no source credit or assembly exception.
 The resource selection/cleanup operations, object lookup and view effect
 updates remain next connected targets. The group object-count reader at
 `0800AE50` is now accepted with the command continuation.
