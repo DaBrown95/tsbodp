@@ -52,9 +52,10 @@ The adjacent 404-byte builder remains unconverted: ordinary candidates have
 seventeen and twenty-four differing bytes. Reusing its counters did not resolve
 the allocation difference; retained compiler diagnostics explain that failed
 hypothesis. The step callback, remaining setup/update helpers, renderer and
-finalizer remain explicit original regions. The step callback's ignored,
-uninitialized payload words still require source-domain work. No reconstructed-C
-credit is awarded for those candidates or for inventory discoveries. The
+finalizer remain explicit original regions. The retained step candidate now
+initializes the truthful empty active payload member for ignored marker kinds
+12/13, without assigning transport bytes. Its phase/input mismatch still prevents
+source credit. Inventory discoveries likewise add no reconstructed-C credit. The
 319,640-byte historical comparison remains fixed; a complete code denominator
 has not been established.
 
@@ -401,10 +402,31 @@ rejected with one differing byte. Strict target checks cover the callback and
 six actual provider definitions, word/list/table geometry and callable types;
 wrong end-column and transition-target-width fixtures are rejected.
 
-This body does not resolve the held `0x08003ABC` step or its kind-12/13 payload
-problem. The existing fade provider initializes only the first word of its
+This body does not resolve the held `0x08003ABC` step. Its newer candidate uses
+the established empty active payload member for kinds 12/13, but still fails the
+full byte comparison. The existing fade provider initializes only the first word of its
 payload before recording kind one, whose recorder ignores the payload. Its
 partially initialized suffix and transitive source-domain limits stay qualified;
 this callback adds no initialization, signature relaxation or whole-domain
 claim for that provider. These are compiler and static findings, with no new
 runtime or gameplay validation.
+
+
+## Retained step compiler findings
+
+The current 696-byte step candidate still differs by 64 bytes, so receives no
+C credit. Capturing the genuine signed reference score before comparing the
+current offer recovers the complete 184-byte offer window `0x3BD0..0x3C88`: the
+reference is calculated first, then the native current-versus-reference signed
+comparison is retained. This separates evaluation order from comparison
+orientation without changing arithmetic types, association or source reads.
+
+The remaining differences concern selective request-address retention and
+phase-zero input selection. A conditional array index expands the input base
+before the flag test; selecting an input pointer instead moves that base after
+the index join. Neither gives the native branch-scoped base loads. A real
+request pointer used only by the initial read and phase-zero write recovers its
+R5 role but still changes the extent and pool placement. The native phase word
+reaches the sixth fill argument as zero; its independent tile meaning supplies
+no source evidence for reusing a phase value as a tile. No new qualifier,
+artificial live use or register grid is adopted.

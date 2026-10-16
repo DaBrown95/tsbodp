@@ -60,3 +60,24 @@ and the bounded HLE boot observes one entry. Source ownership, these finite
 observations and whole-ROM equality do not close all input bounds, malformed
 streams, writable entry assignments, copied-memory modifications or gameplay.
 The other custom tile decoder remains for matching C reconstruction.
+
+
+## Startup callback writer
+
+For the unresolved background call at ROM `0x0800E1B8`, the callback word at
+`0x030036C0` has an additional established startup writer. The matching memory
+initializer requests a fixed-zero DMA3 fill of `0x030015B0..0x03007D00`, which
+includes that word. This establishes its pre-install zero state under the
+platform DMA contract. The matching decoder installer then copies 848 bytes to
+`0x03003370`, ending immediately before the callback word, and explicitly stores
+the even ARM entry `0x03003370` into it. The target's 812-byte source ownership
+does not itself exhaust callback writers.
+
+The matching game entry orders memory initialization before decoder installation.
+The current qualified direct-call graph for its eleven initialization roots
+before installation covers 74 entries, has no missing entry or unresolved
+transfer, and does not reach `display_decode_background`. This supports the
+absence of a synchronous call to this site in that normal startup prefix under
+the existing decoder, ordinary-call and BIOS assumptions. IRQ entry, nonordinary
+re-entry, later aliases and writers remain open. Pre-install zero is a storage
+state, not an additional executable target; the transfer remains unresolved.

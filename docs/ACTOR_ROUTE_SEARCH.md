@@ -1601,3 +1601,33 @@ coverage. Publication metadata is `frame-optional-playback-batch-manifest.json`;
 raw disassembly, bounded table scans, useful source failures and complete
 positive/negative comparisons remain private. Whole-ROM equality, these source
 matches and the static callback map remain separate from runtime evidence.
+
+
+## Variant lifecycle leaves and remaining selector
+
+Three installed leaves add 12 complete C extent bytes: initializer `0x3CF0C`
+and prepare `0x3CF80` return word one; finish `0x3D024` returns without changing
+state. The last extent includes two zero alignment bytes. Definition rows 10,
+46, 47, 48, 94 and 103 install these beside the already owned begin, step and
+dispatch bodies. The E0 initializer dispatch and F8 tick consumer support their
+concrete owner roles. EC's unused three formal roles remain conventional; its
+generic consumer and incoming ABI are still unresolved.
+
+All three full comparisons pass. Real controls change each return to zero or
+make the empty finish write owner state; they reject by one, one and eight
+bytes. Scoped target checks cover the actual definitions, row/owner geometry
+and E8/F8 consumer types, with wrong width and result contracts rejected. These
+are compiler and static findings, without new runtime or gameplay evidence.
+
+The intervening selector at `0x3CF38` remains unconverted. Its current ordinary
+loop is 64 bytes / 45 differences; the retained prechecked loop is 64 / 65.
+The latter loses the native repeated owner-kind read in loop optimization,
+while the former shares the entry comparison. A single genuine owner-R4
+constraint prevents that hoist but still gives 64 / 52: after allocation makes
+both comparison operands identical, the final jump pass merges their entry
+code. Native uses distinct initial and loop operand roles. These are failures;
+no register grid follows. The six installed definition kinds match the six
+searched row kinds. An unmatched
+kind nevertheless advances to the adjacent parameter-rate storage and reads
+a word there; this is not evidence for a seventh variant row. No validation,
+whole incoming-kind domain or complete lifecycle claim is added.

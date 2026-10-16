@@ -1,21 +1,21 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "16 Oct 2026, 22:05 BST",
-  "compiled_c_functions": 2159,
-  "compiled_c_bytes": 277568,
+  "verified_at": "16 Oct 2026, 22:44 BST",
+  "compiled_c_functions": 2162,
+  "compiled_c_bytes": 277580,
   "assembly_glue_bytes": 4060,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16495588,
+  "unconverted_rom_bytes": 16495576,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2536,
-  "bounded_control_flow_bodies": 324,
+  "bounded_control_flow_bodies": 321,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 98,
-  "mapped_extent_bytes": 325336,
+  "mapped_extent_bytes": 325338,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
     "raw_instruction_union_bytes": 279672,
@@ -23,16 +23,16 @@
     "nonconflicting_qualified_instruction_bytes": 279646,
     "raw_referenced_data_union_bytes": 35616,
     "qualified_referenced_data_union_bytes": 35616,
-    "source_glue_owned_extent_bytes": 281628,
-    "estimated_envelope_union_bytes": 325328,
+    "source_glue_owned_extent_bytes": 281640,
+    "estimated_envelope_union_bytes": 325330,
     "classification_bytes": {
       "estimated_envelope_unclassified": 6442,
       "instruction_and_referenced_data_dual_use": 4,
       "known_data": 18852,
-      "owned_extent_unclassified": 3652,
+      "owned_extent_unclassified": 3654,
       "strong_rooted_instruction": 279642,
       "strong_rooted_referenced_data": 35612,
-      "unresolved": 16433012
+      "unresolved": 16433010
     }
   },
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents",
@@ -13618,11 +13618,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803CF0C",
+      "name": "frame_initialize_variant_attachment_job",
       "group": "ROM 0803xxxx",
       "rom_offset": 249612,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_0803CF10",
@@ -13639,11 +13639,11 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0803CF80",
+      "name": "frame_prepare_variant_attachment_job",
       "group": "ROM 0803xxxx",
       "rom_offset": 249728,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_begin_variant_attachment_job",
@@ -13660,11 +13660,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803D024",
+      "name": "frame_finish_variant_attachment_job",
       "group": "ROM 0803xxxx",
       "rom_offset": 249892,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_c"
     },
     {
       "name": "frame_update_attachment_parameter",
@@ -30221,10 +30221,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803CF0C",
+      "name": "frame_initialize_variant_attachment_job",
       "rom_offset": 249612,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_0803CF10",
@@ -30245,10 +30245,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0803CF80",
+      "name": "frame_prepare_variant_attachment_job",
       "rom_offset": 249728,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_begin_variant_attachment_job",
@@ -30263,15 +30263,15 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803D024",
+      "name": "frame_finish_variant_attachment_job",
       "rom_offset": 249892,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_03D026",
-      "rom_offset": 249894,
-      "size": 6,
+      "name": "Unresolved_03D028",
+      "rom_offset": 249896,
+      "size": 4,
       "status": "unresolved"
     },
     {
@@ -34314,8 +34314,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "27a69fe0978c88aa8c5aa4ed458d410cfeb2146d571a677c131ec549adf6f7b3",
-    "assets/rom-inventory.json": "14a18c46533da0e8cdd385afe2c4a06ce3a30327c4ece7b8f0f8d0d38b6f4574",
+    "config/build-us-eu.json": "8e54b822ef893cc2080ae0115931eb7d8dbac5f678dba26fc958f954f86e72fb",
+    "assets/rom-inventory.json": "3aa1d5720b1c10fa35239e928c7d894c0a193fbff8f7a8e5442491520b62876b",
     "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",

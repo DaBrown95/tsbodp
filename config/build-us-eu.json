@@ -49515,6 +49515,42 @@
         "before": "start_result!=7 && start_result!=5",
         "after": "start_result!=6 && start_result!=5"
       }
+    },
+    {
+      "name": "frame_initialize_variant_attachment_job",
+      "rom_offset": 249612,
+      "size": 4,
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      },
+      "symbols": {},
+      "thumb_symbols": [],
+      "source": "src/frame/frame_initialize_variant_attachment_job.c"
+    },
+    {
+      "name": "frame_prepare_variant_attachment_job",
+      "rom_offset": 249728,
+      "size": 4,
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      },
+      "symbols": {},
+      "thumb_symbols": [],
+      "source": "src/frame/frame_prepare_variant_attachment_job.c"
+    },
+    {
+      "name": "frame_finish_variant_attachment_job",
+      "rom_offset": 249892,
+      "size": 4,
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    owner->optional = 1;\n}"
+      },
+      "symbols": {},
+      "thumb_symbols": [],
+      "source": "src/frame/frame_finish_variant_attachment_job.c"
     }
   ],
   "assembly": [

@@ -70,8 +70,13 @@ projection context and the flag remains provisional.
 Useful mismatches, compiler inputs, linked outputs and raw comparisons remain
 in the ignored local agent reports. In particular, the controller `0800AD1C`
 and word-group copy `0800B018` remain explicit unconverted regions. The latter
-is the next connected builder dependency; its current candidate differs only
-in the final arithmetic register allocation and is not counted as source.
+is the next connected builder dependency. A fresh current-header replay of its
+original authored candidate is 64 bytes / 61 differences against the native
+68-byte extent. Its eight-byte assignment lowers as a DI copy rather than the
+native block transfer; offset-table and final arithmetic producers also differ.
+Older source attempts remain preserved, but their retired raw outputs do not
+establish a current near-match. The refreshed comparison and useful compiler
+passes are retained; no source credit or new trial grid follows.
 The resource selection/cleanup operations, object lookup and view effect
 updates remain next connected targets. The group object-count reader at
 `0800AE50` is now accepted with the command continuation.
