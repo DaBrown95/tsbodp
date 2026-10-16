@@ -12,9 +12,11 @@
 /* Four observed 24-byte offer records precede the multiplier at +0x60 and
  * signed selection at +0x64. The selected index is not range-checked here. */
 struct LinkEntryOfferRecord {
-    unsigned char unknown00[12];
+    unsigned int kind;
+    unsigned char unknown04[8];
     int cost;
-    unsigned char unknown10[4], count, unknown15[3];
+    unsigned short unknown10;
+    unsigned char unknown12[2], count, unknown15[3];
 };
 struct LinkEntryOfferState {
     struct LinkEntryOfferRecord records[4];

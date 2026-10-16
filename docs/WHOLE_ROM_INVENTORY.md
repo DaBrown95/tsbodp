@@ -47,16 +47,16 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,970 |
-| Unclassified remainder of estimated envelopes | 16,262 |
-| Other unresolved ROM | 16,433,812 |
+| Unclassified inside source/glue-owned extents | 2,980 |
+| Unclassified remainder of estimated envelopes | 16,254 |
+| Other unresolved ROM | 16,433,810 |
 | **Physical ROM total** | **16,777,216** |
 
 Thus 270,608 bytes have qualified static instruction evidence, under the stated
 decoder, mode, original-image and ordinary-call assumptions. This confirms their
 static instruction role; it does not establish that every instruction executes.
 The raw alternative reach is 270,634 bytes. There are 2,324 rooted execution
-entries, while the ordinary map has 2,528 entries/candidates and 323,788 estimated
+entries, while the ordinary map has 2,527 entries/candidates and 323,800 mapped
 extent bytes. In the initial survey, nine corroborated veneer starts were added (six register veneers and three audio
 stubs), and four prior weak starts were folded as interior blocks, for a net five
 entries and 24 mapped extent bytes.
@@ -309,4 +309,30 @@ ownership, dual roles and split remnants. The global unions remain 270,608
 qualified instruction bytes and 34,732 referenced data bytes. No additional
 execution, recovered C or complete-boundary claim is inferred from this counter
 repair. Callback domains, copied-code and unresolved-region limits above remain
-open. The adjacent builder and begin/step callbacks remain unconverted.
+open. At that checkpoint the adjacent builder and begin/step callbacks remained
+unconverted.
+
+### Linked entry begin callback
+
+The begin callback at `0x08003750` adds one matching C function and 876 extent
+bytes: totals are 1,707 functions and 243,332 C bytes, with 500 instruction-glue
+bytes separate. It contains 738 instruction bytes, 132 referenced pool bytes,
+four internal zero alignment bytes and two trailing zero alignment bytes. The
+sole function symbol spans 874 bytes; the accepted full extent includes the
+final alignment before the step entry at `0x08003ABC`.
+
+Only this inventory row changes. Its previous 874-byte control-flow envelope
+becomes the bounded 876-byte matching extent; there are still 2,527 entries.
+Inventory mapped extents are now 323,800 bytes; the treemap's inherited accounting
+reports 323,808 bytes. Qualified instruction and referenced-data unions remain
+270,608 and 34,732 bytes. Disjoint classification reports 270,604 instruction
+bytes, 34,728 referenced-data bytes, four dual-use bytes, 18,836 known-data bytes,
+2,980 unclassified owned bytes, 16,254 unclassified estimated-envelope bytes and
+16,433,810 unresolved bytes. These classifications do not establish a complete
+game-code denominator. The fixed historical comparison remains 319,640 bytes.
+
+Shared field and character-interface repairs preserve all existing matching
+function bytes and add no separate C credit. The refresh helper, adjacent
+builder, step callback and renderer/finalizer remain unconverted. No new runtime
+execution or completeness claim is inferred from this update; the inventory
+limits above remain open.

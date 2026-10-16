@@ -62,7 +62,7 @@ void display_menu_initialize(void) {
  struct DisplayMenuState *menu=(struct DisplayMenuState *)&g_display_menu_state;
  menu->unknown_0c[1]=(unsigned int)map;
  scene_view_load_selected_resource(1,1,15,426,15,
-  (const struct SceneViewResourceSelection *)((const unsigned char *)&g_display_catalog_state+0x20));
+  (const SceneViewResourceSelectionByte *)((const unsigned char *)&g_display_catalog_state+0x20));
  display_text_set_background_control(g_display_menu_control1);
  display_text_select_font(3,0,-1);
  display_text_set_line_height(12);

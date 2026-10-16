@@ -71,7 +71,7 @@ void condition_panel_initialize(void)
     display_set_background_velocity(3, 32768, 32768);
     display_load_background(2, &g_condition_panel_background2, 4, 1, 0, 0);
     scene_view_load_selected_resource(1, 3, 1, 1, 6,
-        (const struct SceneViewResourceSelection *)((unsigned char *)&g_condition_panel_world + 0x20));
+        (const SceneViewResourceSelectionByte *)((unsigned char *)&g_condition_panel_world + 0x20));
     display_load_resource_palette(&g_condition_panel_palette0, 0);
     display_load_resource_palette(&g_condition_panel_palette7, 7);
     display_load_palette_ranges(&g_condition_panel_ranges);
