@@ -47,8 +47,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 3,018 |
-| Unclassified remainder of estimated envelopes | 16,226 |
+| Unclassified inside source/glue-owned extents | 3,022 |
+| Unclassified remainder of estimated envelopes | 16,222 |
 | Other unresolved ROM | 16,433,800 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -562,3 +562,29 @@ Finite callback assignments and a matching build do not establish runtime use
 or exhaust indirect targets. Copied-audio-kernel extent gaps and other survey
 limits still prevent a complete code denominator. The historical comparison
 remains fixed at 319,640 mapped extent bytes; no runtime observation is added.
+
+
+### Fixed-parameter kind-72 lifecycle
+
+The connected worker at `0x08029A38`, begin callback at `0x08029C1C` and
+dispatch callback at `0x08029C64` add three matching C functions and 528 extent
+bytes, bringing coverage to 1,723 functions and 246,900 C bytes. Separate glue
+remains 500 bytes. The complete spans contain 504 instruction bytes, twenty
+referenced literal bytes and four internal alignment zeros. The sixty-byte
+intervening original region and all existing providers gain no C credit.
+
+These three existing map rows gain compiler ownership without extent growth.
+Entry count remains 2,523, inventory mapped extents remain 324,008 and treemap
+extents remain 324,016. Four internal zeros move from estimated envelopes into
+source-owned unclassified bytes, making those categories 3,022 and 16,222 bytes.
+Other unresolved ROM stays 16,433,800 bytes. Qualified static instruction and
+referenced-data unions remain 270,608 and 34,732 bytes.
+
+The [connected source evidence](FRAME_NEED_TARGET_SELECTION.md#fixed-parameter-kind-72-lifecycle)
+records fixed parameter index five, the shared bounded world, route/status and
+record contracts, exact phase distinctions and source controls. Observed rows
+16 and 17 remain disabled in the guarded selectors; conditional callback routes
+do not establish gameplay use or exhaust writable populations. Copied-audio
+extent gaps and other unresolved survey limits still prevent a complete game-code
+denominator. The historical comparison remains fixed at 319,640 mapped extent
+bytes; no runtime observation or inventory C credit is added.

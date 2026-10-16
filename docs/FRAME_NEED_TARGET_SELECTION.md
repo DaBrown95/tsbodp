@@ -244,3 +244,76 @@ instruction body, and all spans, pools and alignment are included in matching.
 The source-level switch and direct representation copy account for the retained
 compiler differences without identifying historical source spelling. Matching,
 static mapping and runtime behavior remain separate claims.
+
+
+## Fixed-parameter kind-72 lifecycle
+
+The related path installed by observed definition rows 16 and 17 adds three
+matching C functions and 528 extent bytes. It shares the existing mode and
+parameter world with row 87, but reads parameter index five directly. Its names
+and phase roles remain provisional.
+
+| Entry | Function | Complete bytes |
+| --- | --- | ---: |
+| `0x08029A38` | `frame_step_attachment_job_72` | 424 |
+| `0x08029C1C` | `frame_begin_attachment_job_72` | 72 |
+| `0x08029C64` | `frame_dispatch_attachment_job_72` | 32 |
+
+The begin callback allocates a record, stores the requested full-word kind,
+obtains attachment point zero from the owner's object, starts route mode three
+with style one through the record's status word, and requests animation six.
+It returns zero on record-allocation failure and one otherwise. The attachment
+provider must succeed and initialize both point coordinates; its byte return is
+ignored. The route copies the local point during the call but retains the record's
+status pointer for an active route, so the record and status must remain live.
+The route-creation failure return is also ignored, as in the original; the source
+adds no guard or fabricated point initialization. Dispatch requires an existing
+matching record and calls the worker only for
+kind 72; other kinds return zero. The source preserves the unchecked finder
+dereference. The same legacy record-owner and provider compatibility limits
+continue to apply.
+
+Running byte one forces cleanup phase one. Phase zero either begins the
+low-need animation and enters phase eight, or prepares an indicator and animation
+seven before entering phase three. Both phase-zero branches initialize the
+actor timer to 150. In phase three, a parameter value other than ten updates
+the indicator and parameter and completes only when a fresh signed read equals
+the captured value plus one. When the captured value is ten, it instead applies
+need-adjustment row 47 using the definition's amount byte, then decrements the
+actor timer and completes at zero. Phase eight waits on the completion flag
+and clears the countdown; cleanup requests animation one, transitions and clears
+the indicator, and returns two. Other paths return one.
+
+The sources reuse the published bounded shared-world type and canonical
+character-representation copies for the needs pointer, actor timer and state
+indicator. They introduce no duplicate world alias or actor/state overlay.
+Valid representations, backed actor/need/indicator objects, direction indices
+zero through seven, a backed definition row and compatible provider lifetimes
+remain required. Captured need storage must stay live across calls. Timer
+decrement must not receive the minimum signed integer. The fixed index-five
+access requires the six-word parameter backing, but this worker has no
+optional-four-through-nine indexing requirement. Wider world ownership and
+effective-type compatibility remain provisional.
+
+Both observed rows have enabled byte zero, so the guarded target selectors
+skip their factory-installed callbacks. The original eight-byte action writer
+emits kind 72, and the choice-builder supplies a conditional callback route;
+these facts do not prove gameplay use or all writable assignments. The sixty
+bytes between the worker and begin entry remain explicit original regions:
+three small callbacks, plus an independent attachment predicate and its two
+alignment bytes. None is a direct callee of the three new bodies, and none
+gains C credit. All seventeen reused providers already have matching sources.
+
+The controls change cleanup return two to three, the allocated kind to kind
+plus one, and dispatch case 72 to case 73. A valid cleanup record with no
+indicator distinguishes the first return; a free record with a successful point
+provider and valid route/status lifetime distinguishes the stored kind; and a
+kind-72 cleanup record distinguishes worker return two
+from default zero. These are source-domain witnesses, not runtime observations.
+
+The complete spans contain 504 instruction bytes, twenty referenced literal
+bytes and four internal zero alignment bytes. There are no trailing alignment
+bytes or added assembly directives. The existing extents gain compiler ownership
+without increasing mapped extents. Matching, static routes and runtime behavior
+remain separate claims; the fixed historical comparison is 319,640 mapped
+extent bytes.
