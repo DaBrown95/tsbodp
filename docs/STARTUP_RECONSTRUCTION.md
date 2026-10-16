@@ -55,15 +55,13 @@ header snapshots, linked bytes, compiler mapping symbols, comparisons and a
 compact call-dependency table are retained under ignored
 `analysis/startup-game-entry/`.
 
-Twenty-five direct callees and the installed VBlank callback have
-separate matching C definitions. Five ordinary initialization roots remain
-unconverted and keep address-based names in the
-[prototype header](../include/startup_game_entry.h): `0x0801BAFC`,
-`0x08039184`, `0x0802B11C`, `0x080458B8` and
-`0x08046EB0`. The separate SWI 05 provider at `0x0804C8EC` has the explicit
-hardware-glue replacement below.
-Ownership of this coordinator does not claim those bodies, copied routines
-installed by its callees, complete callback domains, or counter-wrap behavior.
+All 31 direct callees now have separate source ownership: 30 readable C
+definitions and the SWI 05 hardware wrapper below. The installed VBlank
+callback also has a matching C definition. The last five initialization roots
+now own actor/need resources, the buffer at `0x03005E5C`, map-cell buffers,
+counter slots and pending VCount rows. The buffer's wider role remains unknown.
+Ownership of these startup bodies does not close their transitive callees,
+copied routines, complete callback domains, or counter-wrap behavior.
 The entry was reached once in the separate 300-frame HLE boot.
 
 ## Memory and display initialization
@@ -83,7 +81,38 @@ fresh exact comparisons and meaningful changed-source controls; the renamed
 game entry also retains its exact 224-byte comparison and control. Local
 source/header snapshots and comparisons are under ignored
 `analysis/startup-initializers/canonical/`. These source matches do not
-establish physical DMA timing or complete ownership of the remaining roots.
+establish physical DMA timing or complete ownership of their transitive paths.
+
+## Connected startup providers
+
+The [actor resource initializer](../src/startup/initialize_actor_resources.c)
+and four connected allocation/reset routines cover 164 C bytes. They preserve
+the ten actor-need records, the 128-node need-effect pool with 256-byte stride,
+the selected-object reset and free-list rebuilding without inventing allocation
+or lifetime rules. See [actor-state evidence](ACTOR_STATE_RECONSTRUCTION.md).
+
+The [map-cell initializer](../src/frame/frame_initialize_map_cell_buffers.c)
+owns 68 bytes, including its three allocation sizes and the extra-types pointer
+alias. The separate [buffer allocator](../src/startup/allocate_buffer_03005e5c.c)
+owns 24 bytes and stores an 8,192-byte allocation in the byte-pointer slot at
+`0x03005E5C`. Typed pointer storage explains the original address lifetime across
+the allocator call in several of these functions.
+
+The contiguous [counter module](COUNTER_RECONSTRUCTION.md) owns eight C
+functions and 320 bytes at `0x08045854..0x08045994`. Its one-bit paused member
+and word-sized local result with byte return reproduce the original masks and
+stepper exit without fixed registers. The [pending VCount path](DISPLAY_RECONSTRUCTION.md)
+owns six C definitions and 304 bytes: initializer, queue/reset, arming, callback
+and default no-op. Its indirect callback takes addresses of two row-state words.
+Eleven staged rows and twelve reset writes do not establish a universal queue
+count or backing-capacity bound. The default ROM row identifies one callback;
+other writers and target populations remain open.
+
+Every accepted provider has an entire-extent comparison and a changed-source
+control. The meaningful no-op and pause controls grow their outputs and are
+rejected by the unchanged verifier, which compares extra bytes as well as the
+original extent. The renamed game entry also retains its own period-change
+control. Source/control equality does not establish execution of every provider.
 
 ## BIOS wait handoff
 

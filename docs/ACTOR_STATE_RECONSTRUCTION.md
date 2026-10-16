@@ -1139,3 +1139,24 @@ existing interaction callback remains exact with its own rejected control.
 `ACTOR_ROUTE_SEARCH.md` records offset-table bounds, null-result behavior,
 unused/conversion preconditions and the unresolved 356-byte target selector.
 This adds source coverage without a runtime/gameplay claim.
+
+## Startup allocation of actor and need-effect resources
+
+The startup coordinator at `0x0801BAFC` and three providers have readable C
+for 116 complete original-address bytes: actor-need allocation at `0x0802C6B0`,
+need-effect pool initialization at `0x0802EAD8`, and selected-effect reset at
+`0x0803C58C`. The fourth coordinator call already has accepted source in
+`frame_search_initialize_buffers`. Existing next entries establish every
+boundary, and compiler pools/zero alignment remain included.
+
+Actor needs use the existing 44-byte state view and a non-clearing 440-byte
+allocation. The effect initializer retains a 32,768-byte zeroed backing block,
+initializes 128 nodes at the established 256-byte stride, stores its free-list
+head, and clears the existing active-list head/tail. Selection reset clears
+the existing selected-object pointer. No allocation-failure behavior or caller
+index bound is invented. A typed backing pointer preserves the destination
+address across allocation; the initial `void *` declaration produced the
+wrong lifetime. This supports the matching type/dataflow, not a unique original
+typedef. All four full extents and same-size changed-source controls pass;
+current source/header proofs are retained under ignored
+`analysis/startup-initializers/root-1bafc/canonical/`.

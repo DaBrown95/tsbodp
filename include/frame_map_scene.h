@@ -30,6 +30,7 @@ void *frame_create_map_registration(unsigned short, unsigned short, unsigned cha
 void frame_configure_deferred_display(unsigned char);
 void frame_load_scene_map_resources(unsigned int);
 void frame_load_selected_map_tiles(const struct FrameMapTileResource *, const void *, const struct FrameMapBackgroundControl *);
+void frame_initialize_map_cell_buffers(void);
 void frame_decode_map_cell_types(const void *, const void *);
 void frame_decode_extra_map_cell_types(const void *, const void *);
 extern unsigned char *g_frame_map_cell_data, *g_frame_map_cell_types;

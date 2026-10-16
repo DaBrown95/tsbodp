@@ -16,7 +16,29 @@ follow the hardware register destinations, not a recovered original type.
 
 `display_flush_pending_block` copies `0xb0` bytes from offset `0xb4` to offset
 `4` within the record at `0x03002250`, then clears its pending halfword and the
-word at `0x03007388`. The block's higher-level role remains uncertain.
+word at `0x03007388`. The connected VCount path below establishes the staged
+row callback role; the full backing layout remains uncertain.
+
+The [pending-row sources](../include/display_pending_block.h) own six C
+definitions and 304 bytes: initialization at `0x08046EB0`, queue/reset,
+VCount arming, the callback at `0x08046E50`, and the four-byte default no-op.
+Sixteen-byte rows contain a scanline halfword, two mutable state words and a
+callback at offset 12. The callback receives the two state-word addresses,
+then the VCount handler advances to the next row or wraps at a null callback.
+The default ROM row at `0x0807FC1C` names `0x08047081`.
+
+The queue copies caller-supplied rows and has no local count guard. The staged
+copy covers eleven rows; reset writes twelve queued rows. Static insertion
+at `0x08046DD0` also publishes a caller-supplied callback, and removal at
+`0x08046F24` shifts rows after an unbounded equality search. The final reset
+record overlaps the first twelve bytes of the tile-allocation bitmap at
+`0x030023B8`. This establishes accesses, not safe caller counts, backing
+capacity or complete writer/target sets. Those unconverted writers and their
+incoming domains remain completion blockers. The [bounded boot](RUNTIME_OBSERVATIONS.md)
+records 270 handler and default-callback arrivals, with eight sampled argument
+and target sets; it does not close those domains. All six accepted source
+extents retain changed-source controls, including the default no-op's genuine
+state mutation and its extra output bytes.
 
 Palette jobs have two observed layouts. The twelve range records are 8 bytes
 at `0x030032f0`; the twelve block records are 20 bytes at `0x03003170`. Bit 1

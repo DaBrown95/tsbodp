@@ -77,12 +77,12 @@ invalid bounds. They use synthetic instructions, with no original game payload.
 ## Recorded result
 
 The [machine-readable summary](../config/runtime-observations-us-eu.json)
-records all 23 entry probes and 16 write probes, including zero-hit probes.
-The 300-frame run reached 17 entry probes in 5,835,926 steps and 84,028,913
-emulator ticks. Its replay was byte-identical: both 38,341-byte trace files have
-SHA-256 `8803874f05d0e9809c1783695fd5fef96243201f0e8032b19310df2560f7cce0`.
+records all 27 entry/site probes and 18 write probes, including zero-hit probes.
+The 300-frame run reached 21 probes in 5,835,926 steps and 84,028,913
+emulator ticks. Its replay was byte-identical: both 50,139-byte trace files have
+SHA-256 `4aa9fa7150ee359dce9d386845fd135bfc2b465d95018836e43d926f7d9dc824`.
 The wrong-watch trace has SHA-256
-`a67b01a3ada412cc128c1bb3427ac2c9f960824034a25f5b5e7964f45c3ba8e0`.
+`708e01b6327ec13ce45364ad761081ca2492cb3001a1fc12528332e6a43b025b`.
 It reports zero watched writes and the same entry counts, final registers,
 frames, steps and ticks. All three runs report zero fatal, error, warning,
 stub and game-error log messages.
@@ -108,6 +108,18 @@ site was executed. The clipping endpoint word finishes at `0x80808000`, whose
 low byte is zero; the exact-byte probe does not cover other byte writes within
 that word. Selected resource/map callback publications and IRQ-vector writes
 are recorded, without a claim that these are all writers or possible targets.
+
+The pending-display initializer is reached once. The VCount callback, its
+indirect-call site at `0x08046E6E` and default no-op at `0x08047080` each have
+270 arrivals. The first eight retained call-site samples carry Thumb target
+`0x08047081` in `r2` and argument addresses `0x03002258` / `0x0300225C` in
+`r0` / `r1`; the no-op entry samples retain those arguments. The first staged
+and queued callback words have three and four hooked writes, respectively,
+and both finish at that default target. Only those first callback words were
+watched. Other rows, publications, count bounds and target populations remain
+unresolved. Adding these probes preserved the previous counters and complete
+final machine state; obsolete trace payloads were retired after replay/control
+verification, while the unique older harness draft was retained locally.
 
 ## Meaning of an observation
 

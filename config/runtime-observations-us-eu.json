@@ -42,8 +42,8 @@
   },
   "harness": {
     "path": "tools/observe_boot.c",
-    "sha256": "cefd57cee492f734440fee4ba8233256e717de16abccafcf41effad3a46270f2",
-    "size": 8518
+    "sha256": "e2e1f1e1c925ab1cb2bed712439b318eaeedfbb5a0d024130814623f91a3e973",
+    "size": 8793
   },
   "bounds": {
     "frames": 300,
@@ -56,18 +56,18 @@
   "local_trace_artifacts": [
     {
       "path": "analysis/runtime-boot/boot.jsonl",
-      "sha256": "8803874f05d0e9809c1783695fd5fef96243201f0e8032b19310df2560f7cce0",
-      "size": 38341
+      "sha256": "4aa9fa7150ee359dce9d386845fd135bfc2b465d95018836e43d926f7d9dc824",
+      "size": 50139
     },
     {
       "path": "analysis/runtime-boot/replay.jsonl",
-      "sha256": "8803874f05d0e9809c1783695fd5fef96243201f0e8032b19310df2560f7cce0",
-      "size": 38341
+      "sha256": "4aa9fa7150ee359dce9d386845fd135bfc2b465d95018836e43d926f7d9dc824",
+      "size": 50139
     },
     {
       "path": "analysis/runtime-boot/wrong-watch.jsonl",
-      "sha256": "a67b01a3ada412cc128c1bb3427ac2c9f960824034a25f5b5e7964f45c3ba8e0",
-      "size": 20633
+      "sha256": "708e01b6327ec13ce45364ad761081ca2492cb3001a1fc12528332e6a43b025b",
+      "size": 29024
     }
   ],
   "controls": {
@@ -84,9 +84,9 @@
     "frames": 300,
     "steps": 5835926,
     "ticks": 84028913,
-    "emitted_entry_samples": 60,
-    "emitted_pre_write_samples": 37,
-    "emitted_after_step_readbacks": 37,
+    "emitted_entry_samples": 85,
+    "emitted_pre_write_samples": 44,
+    "emitted_after_step_readbacks": 44,
     "entry_probes": [
       {
         "name": "reset",
@@ -202,6 +202,26 @@
         "name": "tile_allocator",
         "address": "0x03007390",
         "hits": 6
+      },
+      {
+        "name": "display_pending_initialize",
+        "address": "0x08046eb0",
+        "hits": 1
+      },
+      {
+        "name": "display_pending_vcount",
+        "address": "0x08046e50",
+        "hits": 270
+      },
+      {
+        "name": "display_pending_indirect_call",
+        "address": "0x08046e6e",
+        "hits": 270
+      },
+      {
+        "name": "display_pending_default_callback",
+        "address": "0x08047080",
+        "hits": 270
       }
     ],
     "write_probes": [
@@ -299,6 +319,18 @@
         "name": "bad_literal_destination",
         "address": "0x22000e38",
         "hits": 0
+      },
+      {
+        "name": "display_staged_first_callback",
+        "address": "0x03002260",
+        "hits": 3,
+        "final_word": "0x08047081"
+      },
+      {
+        "name": "display_queued_first_callback",
+        "address": "0x03002310",
+        "hits": 4,
+        "final_word": "0x08047081"
       }
     ],
     "emulator_log_counts": {
@@ -330,7 +362,7 @@
     "converter_shift_states": [
       {
         "argument_r0": 5,
-        "entry_event_index": 28,
+        "entry_event_index": 30,
         "word_pairs_before": [
           [
             "0xe7dca2ca",
@@ -370,7 +402,7 @@
       },
       {
         "argument_r0": 4,
-        "entry_event_index": 39,
+        "entry_event_index": 41,
         "word_pairs_before": [
           [
             "0xe7dca2ca",
@@ -437,5 +469,23 @@
     "The replacement BIOS, skipped startup, dummy video and fixed RTC do not prove physical hardware, retail BIOS or timing equivalence, or later gameplay behavior.",
     "Observed shift arguments five and four and selected written words do not close all patcher inputs, reachable modified states, incoming transfers or callback domains.",
     "The wrong-watch control shifts only probes, not emulated memory or ROM. The native library and raw traces remain ignored; their hashes are receipts, not included game payloads."
-  ]
+  ],
+  "observed_display_pending": {
+    "entry_hits": {
+      "display_pending_initialize": 1,
+      "display_pending_vcount": 270,
+      "display_pending_indirect_call": 270,
+      "display_pending_default_callback": 270
+    },
+    "retained_call_samples": 8,
+    "sampled_target_r2": "0x08047081",
+    "sampled_argument_addresses_r0_r1": [
+      "0x03002258",
+      "0x0300225c"
+    ],
+    "default_callback_extent": "0x08047080..0x08047084",
+    "first_staged_callback_word": "0x03002260",
+    "first_queued_callback_word": "0x03002310",
+    "interpretation": "The first eight sampled indirect calls carry the default Thumb callback and addresses of two row-state words; entry counters count270 arrivals each. Only first callback words are watched. These samples and finite no-input boot do not close other rows, writers, queue bounds or target domains."
+  }
 }

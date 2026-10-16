@@ -130,3 +130,14 @@ index bounds. The flagged projection branch of `resource_object_before_step`
 still calls the explicit unconverted helper at `0x08048BF8`; it is not newly
 reconstructed here. Whole-ROM integration is checked by the publication gates,
 separately from these static connections and from runtime behavior.
+
+## Map-cell startup storage
+
+The connected startup allocator
+[`frame_initialize_map_cell_buffers`](../src/frame/frame_initialize_map_cell_buffers.c)
+at `0802B11C` matches its full 68-byte extent: 52 instruction bytes and four
+literal words. It allocates `0x2000` scratch, `0x2800` type-map and `0x4000`
+cell-data bytes, then points the extra type map four bytes into the type-map
+buffer. Existing base/extra decoders corroborate the pointer roles. The
+allocation-size control preserves 68 bytes and rejects by one byte. This is
+source/static evidence; allocation success and gameplay are not established.

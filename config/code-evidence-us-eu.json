@@ -350,6 +350,45 @@
       ],
       "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
       "limitation": "Source loads a callback then installs it into a writable slot; caller index and global writer population are not proven exhaustive."
+    },
+    {
+      "name": "display_pending_default_row",
+      "rom_offset": 523292,
+      "observed_rows": 1,
+      "record_stride": 16,
+      "callback_fields": [
+        12
+      ],
+      "region_sha256": "462d4b145044fd7c1a5347036743419c2115644906d76c342fa2b0cfaa893a99",
+      "targets_complete": false,
+      "consumer_sites": [
+        290414
+      ],
+      "consumer_semantics": "Queue copies caller-supplied sixteen-byte rows to writable storage; VCount dispatch loads row+12 and passes addresses of row+4 and row+8.",
+      "evidence": [
+        {
+          "function": "display_initialize_pending_block",
+          "source": "src/display/initialize_pending_block.c",
+          "source_sha256": "45424425b9e72f7df3eca028f34fec4621477dce361f4a5975e73462849e3af8"
+        },
+        {
+          "function": "display_queue_pending_rows",
+          "source": "src/display/queue_pending_rows.c",
+          "source_sha256": "aa2b765ebce1a926cb74cc8fbcf1c61971112ddcacfe4f365cedcb000ba1d05c"
+        },
+        {
+          "function": "display_pending_vcount_callback",
+          "source": "src/display/pending_vcount_callback.c",
+          "source_sha256": "b36f595479f531953678da3f7fd2ab6a0a22b64c9c0bc8886064121bec530696"
+        },
+        {
+          "function": "display_reset_queued_rows",
+          "source": "src/display/reset_queued_rows.c",
+          "source_sha256": "4087944ef2b9e8b881062a5c2a1b038066fc10371bca75f9de9b71eac26b8f27"
+        }
+      ],
+      "confidence": "Matching initializer, queue and consumer establish the single default row and writable callback role; no universal row/count bounds.",
+      "limitation": "One default ROM row is observed. Reset writes twelve queued records, staged copy covers eleven, and queue has no local upper count guard; backing extent, callers and other writers remain open."
     }
   ],
   "indirect_producers": [
@@ -1178,14 +1217,26 @@
     },
     {
       "rom_offset": 290414,
-      "target_origin": "writable_indexed_field",
-      "producer": "Word callback at0x03002250 +16*(*0x03007388)+16; args addresses root+8/+12+same stride.",
-      "observed_table": null,
-      "field": 0,
-      "writer_roles": [],
-      "source_owners": [],
-      "remaining_uncertainty": "No callback type/record owner can be inferred from the overlapping accepted DisplayPendingBlock byte arrays; writers remain unclosed.",
-      "confidence": "static native/source producer; populations and ABI remain provisional"
+      "target_origin": "writable_staged_row_from_queued_rows",
+      "producer": "R2 loaded from0x03002260 +16*g_display_pending_block_flag; R0/R1 are addresses of row words+4/+8; queued copy begins0x03002304.",
+      "observed_table": "display_pending_default_row",
+      "field": 12,
+      "writer_roles": [
+        "display_queue_pending_rows",
+        "display_reset_queued_rows",
+        "display_flush_pending_block",
+        "display_initialize_pending_block",
+        "unconverted_insert_08046dd0",
+        "unconverted_remove_08046f24"
+      ],
+      "source_owners": [
+        "display_initialize_pending_block",
+        "display_queue_pending_rows",
+        "display_pending_vcount_callback",
+        "display_reset_queued_rows"
+      ],
+      "remaining_uncertainty": "Default row and first eight boot calls identify08047081; inserter accepts arbitrary callback R2, remover has unbounded equality search, last reset record overlaps tile bitmap. No exhaustive incoming row, index, count, writer or target domain is proven.",
+      "confidence": "Pinned matching source and bounded separate boot corroboration; complete target set remains open."
     },
     {
       "rom_offset": 292556,

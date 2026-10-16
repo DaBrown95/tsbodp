@@ -17,15 +17,15 @@ void startup_game_entry(void)
     display_initialize();
     display_initialize_palettes();
     resource_install_decoders();
-    startup_initialize_0801bafc();
+    startup_initialize_actor_resources();
     frame_initialize_oam();
     frame_initialize_effect_pools();
-    startup_initialize_08039184();
+    startup_allocate_buffer_03005e5c();
     frame_install_map_routines();
-    startup_initialize_0802b11c();
+    frame_initialize_map_cell_buffers();
     frame_initialize_random_buffer();
     input_init();
-    startup_initialize_080458b8();
+    game_initialize_counter_slots();
     resource_allocate_arena();
     g_game_flags = 0;
     set_word_0300217c(5);
@@ -33,7 +33,7 @@ void startup_game_entry(void)
     audio_game_initialize_default();
     irq_enable_defaults();
     set_vblank_callback(irq_default_vblank_callback);
-    startup_initialize_08046eb0();
+    display_initialize_pending_block();
     g_transition_frame_period = 2;
     for (;;) {
         struct IrqContext *context;

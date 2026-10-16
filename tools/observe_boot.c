@@ -30,7 +30,11 @@ static struct Probe entries[] = {
  {0x03002900,"frame_sort"}, {0x03002a20,"frame_collisions"},
  {0x030036d0,"tile_decoder"}, {0x03003370,"background_decoder"},
  {0x03007160,"map_draw"}, {0x03005e60,"map_transfer"},
- {0x03007390,"tile_allocator"}
+ {0x03007390,"tile_allocator"},
+ {0x08046eb0,"display_pending_initialize"},
+ {0x08046e50,"display_pending_vcount"},
+ {0x08046e6e,"display_pending_indirect_call"},
+ {0x08047080,"display_pending_default_callback"}
 };
 static struct Probe writes[] = {
  {0x0300004c,"irq_reprogram_word"},
@@ -41,7 +45,9 @@ static struct Probe writes[] = {
  {0x03003360,"tile_decoder_callback"}, {0x030036c0,"background_decoder_callback"},
  {0x03001fc8,"map_draw_callback"}, {0x03001fcc,"map_transfer_callback"},
  {0x03007ffc,"bios_irq_vector"}
- ,{0x02000e38,"clip_negative_endpoint"}, {0x22000e38,"bad_literal_destination"}
+ ,{0x02000e38,"clip_negative_endpoint"}, {0x22000e38,"bad_literal_destination"},
+ {0x03002260,"display_staged_first_callback"},
+ {0x03002310,"display_queued_first_callback"}
 };
 static uint64_t steps;
 static uint64_t event_count;

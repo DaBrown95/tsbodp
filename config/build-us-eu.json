@@ -42367,21 +42367,21 @@
         "display_initialize": "0x0800d565",
         "display_initialize_palettes": "0x080116b5",
         "resource_install_decoders": "0x08016a49",
-        "startup_initialize_0801bafc": "0x0801bafd",
+        "startup_initialize_actor_resources": "0x0801bafd",
         "frame_initialize_oam": "0x0802ce7d",
-        "startup_initialize_08039184": "0x08039185",
+        "startup_allocate_buffer_03005e5c": "0x08039185",
         "frame_install_map_routines": "0x08039e79",
-        "startup_initialize_0802b11c": "0x0802b11d",
+        "frame_initialize_map_cell_buffers": "0x0802b11d",
         "frame_initialize_random_buffer": "0x0803530d",
         "input_init": "0x0801f305",
-        "startup_initialize_080458b8": "0x080458b9",
+        "game_initialize_counter_slots": "0x080458b9",
         "resource_allocate_arena": "0x0800ad05",
         "set_word_0300217c": "0x0803e449",
         "set_word_03002180_bit0": "0x0803e461",
         "audio_game_initialize_default": "0x08041245",
         "irq_enable_defaults": "0x0801f8a9",
         "set_vblank_callback": "0x0801f8ed",
-        "startup_initialize_08046eb0": "0x08046eb1",
+        "display_initialize_pending_block": "0x08046eb1",
         "scene_step_request_handoff": "0x08027cad",
         "startup_bios_wait_vblank": "0x0804c8ed",
         "g_game_flags": "0x03004310",
@@ -42404,22 +42404,22 @@
         "display_initialize",
         "display_initialize_palettes",
         "resource_install_decoders",
-        "startup_initialize_0801bafc",
+        "startup_initialize_actor_resources",
         "frame_initialize_oam",
         "frame_initialize_effect_pools",
-        "startup_initialize_08039184",
+        "startup_allocate_buffer_03005e5c",
         "frame_install_map_routines",
-        "startup_initialize_0802b11c",
+        "frame_initialize_map_cell_buffers",
         "frame_initialize_random_buffer",
         "input_init",
-        "startup_initialize_080458b8",
+        "game_initialize_counter_slots",
         "resource_allocate_arena",
         "set_word_0300217c",
         "set_word_03002180_bit0",
         "audio_game_initialize_default",
         "irq_enable_defaults",
         "set_vblank_callback",
-        "startup_initialize_08046eb0",
+        "display_initialize_pending_block",
         "scene_step_request_handoff",
         "startup_bios_wait_vblank",
         "irq_default_vblank_callback"
@@ -42600,6 +42600,352 @@
       "negative_control": {
         "before": "|= 0x10",
         "after": "|= 0x20"
+      }
+    },
+    {
+      "name": "startup_initialize_actor_resources",
+      "source": "src/startup/initialize_actor_resources.c",
+      "rom_offset": 113404,
+      "size": 24,
+      "symbols": {
+        "frame_initialize_actor_need_states": "0x0802c6b1",
+        "frame_initialize_need_effect_pool": "0x0802ead9",
+        "frame_reset_need_effect_selection": "0x0803c58d",
+        "frame_search_initialize_buffers": "0x0803bfc5"
+      },
+      "negative_control": {
+        "before": "frame_reset_need_effect_selection();",
+        "after": "frame_search_initialize_buffers();"
+      },
+      "thumb_symbols": [
+        "frame_initialize_actor_need_states",
+        "frame_initialize_need_effect_pool",
+        "frame_reset_need_effect_selection",
+        "frame_search_initialize_buffers"
+      ]
+    },
+    {
+      "name": "frame_initialize_actor_need_states",
+      "source": "src/frame/frame_initialize_actor_need_states.c",
+      "rom_offset": 181936,
+      "size": 24,
+      "symbols": {
+        "g_frame_actor_need_states": "0x03001df8",
+        "heap_allocate": "0x08027865"
+      },
+      "negative_control": {
+        "before": "10 * sizeof(*g_frame_actor_need_states)",
+        "after": "9 * sizeof(*g_frame_actor_need_states)"
+      },
+      "thumb_symbols": [
+        "heap_allocate"
+      ]
+    },
+    {
+      "name": "frame_initialize_need_effect_pool",
+      "source": "src/frame/frame_initialize_need_effect_pool.c",
+      "rom_offset": 191192,
+      "size": 56,
+      "symbols": {
+        "g_frame_need_effect_storage": "0x03001e30",
+        "g_frame_need_effect_free_pool": "0x03001e34",
+        "g_frame_need_effect_active_list": "0x03005868",
+        "heap_allocate_zeroed": "0x080278e5",
+        "frame_pool_initialize": "0x08024d19"
+      },
+      "negative_control": {
+        "before": "g_frame_need_effect_storage, 128, 256",
+        "after": "g_frame_need_effect_storage, 127, 256"
+      },
+      "thumb_symbols": [
+        "heap_allocate_zeroed",
+        "frame_pool_initialize"
+      ]
+    },
+    {
+      "name": "frame_reset_need_effect_selection",
+      "source": "src/frame/frame_reset_need_effect_selection.c",
+      "rom_offset": 247180,
+      "size": 12,
+      "symbols": {
+        "g_grid_selected_need_effect_object": "0x03002170"
+      },
+      "negative_control": {
+        "before": "g_grid_selected_need_effect_object = 0;",
+        "after": "g_grid_selected_need_effect_object = (struct FrameObject *)4;"
+      }
+    },
+    {
+      "name": "frame_reset_need_effect_pool",
+      "rom_offset": 191248,
+      "size": 48,
+      "source": "src/frame/frame_reset_need_effect_pool.c",
+      "symbols": {
+        "g_frame_need_effect_free_pool": "0x03001e34",
+        "g_frame_need_effect_storage": "0x03001e30",
+        "g_frame_need_effect_active_list": "0x03005868",
+        "frame_pool_initialize": "0x08024d19"
+      },
+      "thumb_symbols": [
+        "frame_pool_initialize"
+      ],
+      "negative_control": {
+        "before": "g_frame_need_effect_storage, 128, 256",
+        "after": "g_frame_need_effect_storage, 127, 256"
+      }
+    },
+    {
+      "name": "frame_initialize_map_cell_buffers",
+      "source": "src/frame/frame_initialize_map_cell_buffers.c",
+      "rom_offset": 176412,
+      "size": 68,
+      "symbols": {
+        "g_frame_map_extra_decode": "0x030043fc",
+        "g_frame_map_cell_types": "0x03001dd8",
+        "g_frame_map_cell_data": "0x03001ddc",
+        "g_frame_map_extra_cell_types": "0x03001de0",
+        "heap_allocate": "0x08027865"
+      },
+      "thumb_symbols": [
+        "heap_allocate"
+      ],
+      "negative_control": {
+        "before": "heap_allocate(0x2800)",
+        "after": "heap_allocate(0x2400)"
+      }
+    },
+    {
+      "name": "startup_allocate_buffer_03005e5c",
+      "rom_offset": 233860,
+      "size": 24,
+      "source": "src/startup/allocate_buffer_03005e5c.c",
+      "symbols": {
+        "heap_allocate": "0x08027865",
+        "g_startup_buffer_03005e5c": "0x03005e5c"
+      },
+      "thumb_symbols": [
+        "heap_allocate"
+      ],
+      "negative_control": {
+        "before": "heap_allocate(8192)",
+        "after": "heap_allocate(4096)"
+      }
+    },
+    {
+      "name": "game_step_counter_slot",
+      "source": "src/counter/step.c",
+      "rom_offset": 284756,
+      "size": 100,
+      "symbols": {
+        "g_game_counter_slots": "0x03002200"
+      },
+      "negative_control": {
+        "before": ".counter++;",
+        "after": ".counter += 2;"
+      }
+    },
+    {
+      "name": "game_initialize_counter_slots",
+      "source": "src/counter/initialize.c",
+      "rom_offset": 284856,
+      "size": 24,
+      "symbols": {
+        "game_reset_counter_slot": "0x080458d1"
+      },
+      "thumb_symbols": [
+        "game_reset_counter_slot"
+      ],
+      "negative_control": {
+        "before": "index < 4",
+        "after": "index < 3"
+      }
+    },
+    {
+      "name": "game_reset_counter_slot",
+      "source": "src/counter/reset.c",
+      "rom_offset": 284880,
+      "size": 44,
+      "symbols": {
+        "g_game_counter_slots": "0x03002200"
+      },
+      "negative_control": {
+        "before": ".paused = 0;",
+        "after": ".paused = 1;"
+      }
+    },
+    {
+      "name": "game_start_countdown_slot",
+      "source": "src/counter/start_countdown.c",
+      "rom_offset": 284924,
+      "size": 44,
+      "symbols": {
+        "g_game_counter_slots": "0x03002200"
+      },
+      "negative_control": {
+        "before": ".mode = 1;",
+        "after": ".mode = 3;"
+      }
+    },
+    {
+      "name": "game_start_incrementing_slot",
+      "source": "src/counter/start_counter.c",
+      "rom_offset": 284968,
+      "size": 48,
+      "symbols": {
+        "g_game_counter_slots": "0x03002200"
+      },
+      "negative_control": {
+        "before": ".mode = 2;",
+        "after": ".mode = 3;"
+      }
+    },
+    {
+      "name": "game_pause_counter_slot",
+      "source": "src/counter/pause.c",
+      "rom_offset": 285016,
+      "size": 20,
+      "symbols": {
+        "g_game_counter_slots": "0x03002200"
+      },
+      "negative_control": {
+        "before": ".paused = 1;",
+        "after": ".paused = 0;"
+      }
+    },
+    {
+      "name": "game_resume_counter_slot",
+      "source": "src/counter/resume.c",
+      "rom_offset": 285036,
+      "size": 24,
+      "symbols": {
+        "g_game_counter_slots": "0x03002200"
+      },
+      "negative_control": {
+        "before": ".paused = 0;",
+        "after": ".counter &= ~1u;"
+      }
+    },
+    {
+      "name": "game_get_counter_slot",
+      "source": "src/counter/get.c",
+      "rom_offset": 285060,
+      "size": 16,
+      "symbols": {
+        "g_game_counter_slots": "0x03002200"
+      },
+      "negative_control": {
+        "before": ".counter;",
+        "after": ".mode;"
+      }
+    },
+    {
+      "name": "display_initialize_pending_block",
+      "rom_offset": 290480,
+      "size": 64,
+      "source": "src/display/initialize_pending_block.c",
+      "symbols": {
+        "g_display_pending_block_flag": "0x03007388",
+        "g_display_default_pending_rows": "0x0807fc1c",
+        "g_display_pending_block": "0x03002250",
+        "display_reset_queued_rows": "0x08047085",
+        "display_queue_pending_rows": "0x08046ef1",
+        "heap_copy": "0x08027ab5",
+        "set_vcount_callback": "0x0801f945",
+        "display_pending_vcount_callback": "0x08046e51",
+        "display_arm_pending_vcount": "0x08046fb1"
+      },
+      "thumb_symbols": [
+        "display_reset_queued_rows",
+        "display_queue_pending_rows",
+        "heap_copy",
+        "set_vcount_callback",
+        "display_pending_vcount_callback",
+        "display_arm_pending_vcount"
+      ],
+      "negative_control": {
+        "before": "g_display_default_pending_rows, 1",
+        "after": "g_display_default_pending_rows, 2"
+      }
+    },
+    {
+      "name": "display_arm_pending_vcount",
+      "rom_offset": 290736,
+      "size": 28,
+      "source": "src/display/arm_pending_vcount.c",
+      "symbols": {
+        "g_display_pending_block_flag": "0x03007388",
+        "g_display_pending_block": "0x03002250",
+        "irq_set_vcount": "0x0801f999"
+      },
+      "thumb_symbols": [
+        "irq_set_vcount"
+      ],
+      "negative_control": {
+        "before": "g_display_pending_block_flag = 0",
+        "after": "g_display_pending_block_flag = 1"
+      }
+    },
+    {
+      "name": "display_queue_pending_rows",
+      "rom_offset": 290544,
+      "size": 52,
+      "source": "src/display/queue_pending_rows.c",
+      "symbols": {
+        "g_display_pending_block": "0x03002250",
+        "display_reset_queued_rows": "0x08047085",
+        "heap_copy": "0x08027ab5"
+      },
+      "thumb_symbols": [
+        "display_reset_queued_rows",
+        "heap_copy"
+      ],
+      "negative_control": {
+        "before": "DISPLAY_PENDING_ROWS.pending = 1",
+        "after": "DISPLAY_PENDING_ROWS.pending = 0"
+      }
+    },
+    {
+      "name": "display_reset_queued_rows",
+      "rom_offset": 290948,
+      "size": 60,
+      "source": "src/display/reset_queued_rows.c",
+      "symbols": {
+        "g_display_pending_block": "0x03002250"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "index <= 11",
+        "after": "index <= 10"
+      }
+    },
+    {
+      "name": "display_pending_vcount_callback",
+      "rom_offset": 290384,
+      "size": 96,
+      "source": "src/display/pending_vcount_callback.c",
+      "symbols": {
+        "g_display_pending_block": "0x03002250",
+        "g_display_pending_block_flag": "0x03007388",
+        "_call_via_r2": "0x0804ccf9"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "negative_control": {
+        "before": ".line << 8",
+        "after": ".line << 7"
+      }
+    },
+    {
+      "name": "display_pending_noop",
+      "rom_offset": 290944,
+      "size": 4,
+      "source": "src/display/pending_noop.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    ++*value;\n}"
       }
     }
   ],

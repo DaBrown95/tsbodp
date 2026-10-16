@@ -12,6 +12,11 @@
 #include "resource_builders.h"
 #include "audio_game_initialize.h"
 #include "input.h"
+#include "frame_actor_initialization.h"
+#include "frame_map_scene.h"
+#include "startup_buffer.h"
+#include "game_counter.h"
+#include "display_pending_block.h"
 
 /* Shared storage and APIs already used by the scene/transition paths. */
 extern unsigned int g_game_flags, g_transition_frame_period;
@@ -27,10 +32,6 @@ void set_word_03002180_bit0(unsigned char);
 
 void startup_initialize_memory(void), display_initialize(void);
 
-/* Unconverted no-argument startup providers; roles remain address-based. */
-void startup_initialize_0801bafc(void);
-void startup_initialize_08039184(void), startup_initialize_0802b11c(void);
-void startup_initialize_080458b8(void), startup_initialize_08046eb0(void);
 /* The original provider uses SWI 05, unlike irq_wait_vblank's flag polling. */
 void startup_bios_wait_vblank(void);
 
