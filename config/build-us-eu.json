@@ -43437,6 +43437,63 @@
         "before": "collected_count == 100",
         "after": "collected_count == 99"
       }
+    },
+    {
+      "name": "frame_initialize_attachment_jobs_64_66",
+      "source": "src/frame/frame_initialize_attachment_jobs_64_66.c",
+      "rom_offset": 96872,
+      "size": 92,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "requested_animation = 3",
+        "after": "requested_animation = 2"
+      }
+    },
+    {
+      "name": "frame_check_attachment_jobs_64_66",
+      "source": "src/frame/frame_check_attachment_jobs_64_66.c",
+      "rom_offset": 98220,
+      "size": 40,
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "negative_control": {
+        "before": "unknown_60[0] == 1",
+        "after": "unknown_60[0] == 2"
+      }
+    },
+    {
+      "name": "frame_finish_attachment_jobs_64_66",
+      "source": "src/frame/frame_finish_attachment_jobs_64_66.c",
+      "rom_offset": 98392,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    owner->optional = 1;\n}"
+      }
+    },
+    {
+      "name": "audio_zero_bytes",
+      "rom_offset": 321460,
+      "size": 28,
+      "source": "src/runtime/zero_bytes.c",
+      "compiler_flags": [
+        "-O2",
+        "-fno-builtin"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "*out++ = 0;",
+        "after": "*out++ = 1;"
+      },
+      "compiler_id": "agbcc_old"
     }
   ],
   "assembly": [
@@ -43753,6 +43810,248 @@
       "negative_control": {
         "before": "BIOS_VBLANK_INTR_WAIT, 0x05",
         "after": "BIOS_VBLANK_INTR_WAIT, 0x04"
+      }
+    },
+    {
+      "name": "_call_via_r0",
+      "source": "src/frame/call_via_r0.s",
+      "rom_offset": 314608,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx r0",
+        "after": "bx r1"
+      }
+    },
+    {
+      "name": "_call_via_r2",
+      "source": "src/frame/call_via_r2.s",
+      "rom_offset": 314616,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx r2",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "_call_via_r4",
+      "source": "src/frame/call_via_r4.s",
+      "rom_offset": 314624,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx r4",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "_call_via_r5",
+      "source": "src/frame/call_via_r5.s",
+      "rom_offset": 314628,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx r5",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "_call_via_r6",
+      "source": "src/frame/call_via_r6.s",
+      "rom_offset": 314632,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx r6",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "_call_via_r7",
+      "source": "src/frame/call_via_r7.s",
+      "rom_offset": 314636,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx r7",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "_call_via_r8",
+      "source": "src/frame/call_via_r8.s",
+      "rom_offset": 314640,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx r8",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "_call_via_r9",
+      "source": "src/frame/call_via_r9.s",
+      "rom_offset": 314644,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx r9",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "_call_via_sl",
+      "source": "src/frame/call_via_sl.s",
+      "rom_offset": 314648,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx sl",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "_call_via_fp",
+      "source": "src/frame/call_via_fp.s",
+      "rom_offset": 314652,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx fp",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "_call_via_ip",
+      "source": "src/frame/call_via_ip.s",
+      "rom_offset": 314656,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx ip",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "_call_via_sp",
+      "source": "src/frame/call_via_sp.s",
+      "rom_offset": 314660,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx sp",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "_call_via_lr",
+      "source": "src/frame/call_via_lr.s",
+      "rom_offset": 314664,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "bx lr",
+        "after": "bx r0"
+      }
+    },
+    {
+      "name": "__divsi3",
+      "source": "src/runtime/divsi3.s",
+      "rom_offset": 314668,
+      "size": 148,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {
+        "__div0": "0x0804cdc1"
+      },
+      "negative_control": {
+        "before": "mov\tcurbit, #1",
+        "after": "mov\tcurbit, #2"
+      }
+    },
+    {
+      "name": "__div0",
+      "source": "src/runtime/div0.s",
+      "rom_offset": 314816,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {},
+      "negative_control": {
+        "before": "mov pc, lr",
+        "after": "bx lr"
+      }
+    },
+    {
+      "name": "__modsi3",
+      "source": "src/runtime/modsi3.s",
+      "rom_offset": 314888,
+      "size": 208,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {
+        "__div0": "0x0804cdc1"
+      },
+      "negative_control": {
+        "before": "mov\tcurbit, #1",
+        "after": "mov\tcurbit, #2"
+      }
+    },
+    {
+      "name": "__udivsi3",
+      "source": "src/runtime/udivsi3.s",
+      "rom_offset": 315096,
+      "size": 120,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {
+        "__div0": "0x0804cdc1"
+      },
+      "negative_control": {
+        "before": "mov\tcurbit, #1",
+        "after": "mov\tcurbit, #2"
+      }
+    },
+    {
+      "name": "__umodsi3",
+      "source": "src/runtime/umodsi3.s",
+      "rom_offset": 315216,
+      "size": 192,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "symbols": {
+        "__div0": "0x0804cdc1"
+      },
+      "negative_control": {
+        "before": "mov\tcurbit, #1",
+        "after": "mov\tcurbit, #2"
       }
     }
   ]

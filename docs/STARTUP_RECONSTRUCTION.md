@@ -130,3 +130,37 @@ C prototype and Thumb alias remain unchanged. Source, boundary evidence, linked
 bytes and the control are retained under ignored
 `analysis/startup-game-entry/swi05/`. BIOS behavior outside this wrapper and
 physical hardware equivalence remain separate questions.
+
+## IRQ dispatcher copy boundaries
+
+The 512-byte installation beginning at ROM `0x160` is larger than the IRQ
+routine. The existing [dispatcher source](../src/irq/irq_dispatcher.s) owns
+296 instruction bytes through `0x288`; the separate pool owns eight bytes at
+`0x2A0..0x2A8`. The intervening 24-byte startup copy helper is already owned
+above. These total 328 source extent bytes. The remaining 184 copied bytes
+contain two zero words, a provisional 60-byte ARM debugger wrapper at `0x2B0`,
+and the first 116 bytes of the background decoder. Their copy does not make
+them dispatcher instructions or establish a call target. The wrapper's
+`MOV R12,R12`, branch and embedded `PRF %r0%` record agree with the
+[official no$gba debugger-message protocol](https://problemkaputt.de/gbahlp.htm).
+Its 16-byte alignment also agrees with the documented macro's `.align 4`
+spelling under GNU assembler semantics. The outer register-preservation
+sequence still lacks a matching ordinary-C producer or established source
+origin; no whole-wrapper assembly exception has been accepted. The read word
+at `0x030015B0` is the first word after the installed audio image and is cleared
+by the existing unused-IWRAM initializer. Later value producers and actual
+wrapper entries remain unresolved.
+
+The dispatcher's banked-stack/SPSR entry, unrolled IRQ priorities, Game Pak
+stop and switch to a System-mode callback agree with the assembly family in
+[pinned Krawall startup source](https://github.com/sebknzl/krawall/blob/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0/examples/crt0/crt0.s#L581-L697).
+That later source corroborates the hardware ABI and assembly origin; it is not
+proof of the exact game-era revision. The existing source/control proof still
+owns the full dispatcher, so this boundary review adds no source credit.
+
+The dispatcher permits enabled Timer 1/VCount IRQs to preempt a System-mode
+handler, while excluding nested VBlank through its `0x20F4` mask. The accepted
+main loop also schedules scene work outside the default VBlank callback.
+Retained renderer/finalizer samples have IRQs enabled in System mode. These
+facts do not establish that any specific renderer input was concurrently
+modified, and do not justify inventing volatile fields to force a reload.

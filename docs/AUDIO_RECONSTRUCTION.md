@@ -1397,3 +1397,24 @@ depend on valid sample geometry, frequency/fit arithmetic, channel and volume
 state, and timing invariants; the SDK's documented ranges are not a proof that
 every game producer enforces them. Source ownership and one finite no-input
 boot do not establish that executable storage can never receive other writes.
+
+## Track-buffer byte-clear provider
+
+The ordinary C provider `audio_zero_bytes` at ROM `0x0804E7B4` now rebuilds
+28 bytes: 26 instruction bytes and the original two zero alignment bytes before
+`display_text_copy_bytes` at `0x0804E7D0`. Player start calls it at
+`0x0804A964` with its track buffer and 1,920 bytes. Its existing declaration in
+`audio_sequence_player.h` remains unchanged; no instruction assembly or glue
+bytes are added.
+
+The pinned AGBCC libc `string/bzero.c` corroborates the byte-clear operation;
+its Makefile selects the old Thumb compiler with `-O2 -fno-builtin`. Both files
+match revision `da598c1d918402c42c0c0d7128ba14567f3175e9`. This provider is an
+independent C reconstruction, with no upstream source copied. The explicit
+`previous = bytes--` lifetime matters: a direct `while (bytes--)` becomes a
+comparison against minus one in initial compiler RTL, whereas the explicit
+previous value retains the original count/test flow. Changing counter signedness
+did not explain that difference. The public input compiles identically with the
+pinned old profile; changing the stored zero to one produces a same-size control
+with a one-byte mismatch. This proves source ownership, not arbitrary destination
+bounds or the complete caller/input domain.

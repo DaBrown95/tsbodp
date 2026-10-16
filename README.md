@@ -95,7 +95,7 @@ Pinned versions are recorded in [config/](config/).
 The adapted audio routines, assembly-origin mixer primitives, hardware timer IRQ
 and BIOS division wrapper retain their [Krawall licence](licenses/Krawall-LGPL-2.1.txt)
 and source notices.
-The selected floating-point and integer runtime sources retain their GNU GCC
+The selected floating-point, integer and register-call runtime sources retain their GNU GCC
 notices and [GPL licence](licenses/GCC-GPL-2.0.txt), including the exceptions
 printed in those source files.
 

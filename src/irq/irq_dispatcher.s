@@ -32,7 +32,7 @@ irq_dispatcher:
     next_irq 4                   /* VCount */
     next_irq 0x10                /* Timer 1 */
     next_irq 2                   /* HBlank */
-    next_irq 8                   /* Timer 0 / audio */
+    next_irq 8                   /* Timer 0 */
     next_irq 0x20                /* Timer 2 */
     next_irq 0x100
     next_irq 0x200

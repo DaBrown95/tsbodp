@@ -572,3 +572,51 @@ word-local candidate. Both omit the original right shift after low-byte
 extraction before the zero test. That result closes this local-width hypothesis;
 the fixed 248-byte worker remains original. Current renderer and finalizer
 candidates also remain outside matching-C totals.
+
+## Row-97 initialization and finish
+
+Three further ordinary-C bodies add 136 complete extent bytes: the factory
+initializer at `08017A68` (92), the separate attachment predicate at `08017FAC`
+(40), and the finish callback at `08018058` (4). They reuse the existing state,
+attachment and need-effect object declarations. All three complete extents
+match and reject meaningful changed-source controls; the existing begin,
+primary worker and dispatcher remain exact with their own rejected controls.
+
+The initializer reads the signed interpretation of the owner's parameter.
+`0x5000` selects requested animation mode three and `0x2800` selects one. Other
+values select zero and clear the parameter and optional byte. It writes the
+existing `FrameNeedEffectObject.requested_animation` member at object `+103`,
+which the published need-effect updater subsequently supplies to
+`frame_commit_need_effect`. The initializer returns one. Definition row 97
+stores this callback at offset zero; the spawning path supplies the object's
+state and optional saved parameter before invoking it. This is a conditional
+static route, without a gameplay observation or complete callback-domain claim.
+
+The finish callback is row 97's offset-twenty entry, copied by the allocator
+to state `+F8`, and performs no operation. Its four-byte extent contains the
+two-byte return and two zero alignment bytes. The independent predicate returns
+zero only when the byte attachment count is nonzero and state byte `+60` equals
+one. No aligned full-ROM word pointer to this predicate was found; that bounded
+scan does not establish unreachability. Its source preserves the state read
+after the provider call and requires compatible live owner, actor and attachment
+backing. The existing partial-view compatibility limits remain unchanged.
+
+The controls change initializer mode three to two, predicate comparison one
+to two, and the empty finish body to store optional value one. Defined witnesses
+use parameter `0x5000`, a nonzero attachment count with state byte one, and a live
+owner respectively. The first two controls retain their extents; the finish
+control grows from four to eight bytes and is rejected in full. The three
+positive spans contain 120 instruction bytes, twelve referenced literal bytes
+and four zero alignment bytes. Alignment directives contain no instructions.
+
+The kind-66 worker remains an unconverted 248-byte body. All five direct
+providers already have matching source. A separate bounded test changed only
+the private `actor_entry_add` call declaration to a byte return. Its initial
+compiler output used a byte-valued call result, but the combine pass still
+removed the right shift before the zero test. The final 244-byte candidate
+was byte-identical to the existing word-return candidate and retained the same
+115 differences. This disproves that return-ABI explanation; no public API was
+changed. The eight-byte intermediate callback at `08017FD4` and the 24-byte
+callback at `0801805C` also remain original. Their leaf prologues still lack a
+supported source explanation. Row 97's enabled byte remains zero, and finite
+table ownership does not close writable callbacks or runtime reachability.

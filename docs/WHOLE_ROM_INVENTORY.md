@@ -34,22 +34,23 @@ bodies, ROM payload or extracted assets are published as inventory metadata.
 ## Results
 
 The table below is a historical survey snapshot. Current source ownership is
-1,800 verified C functions and 253,876 C extent bytes, plus 2,392 separately
+1,811 verified C functions and 254,876 C extent bytes, plus 3,116 separately
 counted assembly extent bytes. The latter includes the 1,604-byte mixer family,
-140-byte timer IRQ, 140-byte startup exceptions and eight-byte BIOS wait wrapper,
+140-byte timer IRQ, 140-byte startup exceptions, eight-byte BIOS wait wrapper,
+60-byte compiler register-call family and 672-byte division/remainder family,
 with their genuine data and alignment; it is not a C gain. Exact source and
 full-ROM/control gates verify
 these replacements. See [audio](AUDIO_RECONSTRUCTION.md),
-[startup](STARTUP_RECONSTRUCTION.md) and the concise
+[startup](STARTUP_RECONSTRUCTION.md), [compiler assembly](RUNTIME_REGISTER_CALLS.md) and the concise
 [remaining-work list](COMPLETION_BLOCKERS.md).
 
-The current qualified static union is 272,488 physical instruction bytes.
+The current qualified static union is 272,952 physical instruction bytes.
 Source extents include their literal pools and alignment; instruction-byte
 counts describe separately qualified code. Compiler matches do not
 establish runtime execution. The separate
 [bounded boot experiment](RUNTIME_OBSERVATIONS.md) records selected entry and
 write observations without closing target domains. The static census's
-324,346 estimated envelope bytes, the treemap's 324,354 mapped extent bytes
+324,384 estimated envelope bytes, the treemap's 324,392 mapped extent bytes
 and fixed 319,640 historical comparison remain distinct, with no complete
 game-code denominator established.
 
@@ -698,7 +699,7 @@ extent bytes. The complete game-code denominator remains open, and no gameplay
 or runtime observation is added. The current generated assets, rather than a
 function-count percentage or inferred ABI, provide the physical census totals.
 
-## One outside-main Thumb coincidence with a sample-data role
+## Outside-main Thumb coincidences
 
 The apparent Thumb target `0x08D05342` lies 8,092 bytes into the referenced
 13,111-byte sample span `0x08D033A6..0x08D066DD`. Sample-pointer table
@@ -715,3 +716,13 @@ execution exclusion and other five weak candidates remain open. Local format,
 source/hash and pointer checks are retained under ignored
 `analysis/outside-thumb-sample395/`. A positive data-read role does not exclude
 dual use as instructions or close an entire bank.
+
+A second apparent pointer, the word at ROM `0xFD6368` naming target
+`0x0815EB5C`, lies inside the source-backed scene-map background codec-3
+payload `0xFD5A5C..0xFD7320`. A bounded model executing the original decoder
+reads that word as compressed input, finishes at the declared payload end,
+and rejects input truncated before the selected word. This is modeled
+consumption, not an observed scene invocation. The target still lacks a bounded
+container or qualified incoming transfer; neither this input use nor the
+absence of an identified entry excludes executable dual use. The private
+receipt is under ignored `analysis/outside-thumb-15eb5c/`.

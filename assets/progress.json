@@ -1,38 +1,38 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "16 Oct 2026, 14:41 BST",
-  "compiled_c_functions": 1807,
-  "compiled_c_bytes": 254712,
-  "assembly_glue_bytes": 2392,
+  "verified_at": "16 Oct 2026, 15:06 BST",
+  "compiled_c_functions": 1811,
+  "compiled_c_bytes": 254876,
+  "assembly_glue_bytes": 3116,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16520112,
+  "unconverted_rom_bytes": 16519224,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2523,
-  "bounded_control_flow_bodies": 666,
+  "bounded_control_flow_bodies": 656,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 22,
   "unresolved_callback_call_sites": 98,
-  "mapped_extent_bytes": 324354,
+  "mapped_extent_bytes": 324392,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
-    "raw_instruction_union_bytes": 272940,
-    "qualified_observed_instruction_union_bytes": 272914,
-    "nonconflicting_qualified_instruction_bytes": 272914,
+    "raw_instruction_union_bytes": 272978,
+    "qualified_observed_instruction_union_bytes": 272952,
+    "nonconflicting_qualified_instruction_bytes": 272952,
     "raw_referenced_data_union_bytes": 34968,
     "qualified_referenced_data_union_bytes": 34968,
-    "source_glue_owned_extent_bytes": 257104,
-    "estimated_envelope_union_bytes": 324346,
+    "source_glue_owned_extent_bytes": 257992,
+    "estimated_envelope_union_bytes": 324384,
     "classification_bytes": {
-      "estimated_envelope_unclassified": 13874,
+      "estimated_envelope_unclassified": 13836,
       "instruction_and_referenced_data_dual_use": 4,
       "known_data": 18852,
-      "owned_extent_unclassified": 3154,
-      "strong_rooted_instruction": 272910,
+      "owned_extent_unclassified": 3192,
+      "strong_rooted_instruction": 272948,
       "strong_rooted_referenced_data": 34964,
-      "unresolved": 16433458
+      "unresolved": 16433420
     }
   },
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents",
@@ -4868,11 +4868,11 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08017A68",
+      "name": "frame_initialize_attachment_jobs_64_66",
       "group": "ROM 0801xxxx",
       "rom_offset": 96872,
       "size": 92,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_select_need_actions_17ac4",
@@ -4896,11 +4896,11 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08017FAC",
+      "name": "frame_check_attachment_jobs_64_66",
       "group": "ROM 0801xxxx",
       "rom_offset": 98220,
-      "size": 38,
-      "status": "candidate"
+      "size": 40,
+      "status": "exact_c"
     },
     {
       "name": "sub_08017FD4",
@@ -4924,11 +4924,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08018058",
+      "name": "frame_finish_attachment_jobs_64_66",
       "group": "ROM 0801xxxx",
       "rom_offset": 98392,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_c"
     },
     {
       "name": "sub_0801805C",
@@ -17146,11 +17146,11 @@
       "status": "exact_c"
     },
     {
-      "name": "Register veneer r0",
+      "name": "_call_via_r0",
       "group": "ROM 0804xxxx",
       "rom_offset": 314608,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
       "name": "_call_via_r1",
@@ -17160,11 +17160,11 @@
       "status": "exact_glue"
     },
     {
-      "name": "Register veneer r2",
+      "name": "_call_via_r2",
       "group": "ROM 0804xxxx",
       "rom_offset": 314616,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
       "name": "_call_via_r3",
@@ -17174,95 +17174,95 @@
       "status": "exact_glue"
     },
     {
-      "name": "Register veneer r4",
+      "name": "_call_via_r4",
       "group": "ROM 0804xxxx",
       "rom_offset": 314624,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Register veneer r5",
+      "name": "_call_via_r5",
       "group": "ROM 0804xxxx",
       "rom_offset": 314628,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Register veneer r6",
+      "name": "_call_via_r6",
       "group": "ROM 0804xxxx",
       "rom_offset": 314632,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Register veneer r7",
+      "name": "_call_via_r7",
       "group": "ROM 0804xxxx",
       "rom_offset": 314636,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Register veneer r8",
+      "name": "_call_via_r8",
       "group": "ROM 0804xxxx",
       "rom_offset": 314640,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Register veneer r9",
+      "name": "_call_via_r9",
       "group": "ROM 0804xxxx",
       "rom_offset": 314644,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Register veneer r10",
+      "name": "_call_via_sl",
       "group": "ROM 0804xxxx",
       "rom_offset": 314648,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Register veneer r11",
+      "name": "_call_via_fp",
       "group": "ROM 0804xxxx",
       "rom_offset": 314652,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Register veneer r12",
+      "name": "_call_via_ip",
       "group": "ROM 0804xxxx",
       "rom_offset": 314656,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Register veneer r13",
+      "name": "_call_via_sp",
       "group": "ROM 0804xxxx",
       "rom_offset": 314660,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Register veneer r14",
+      "name": "_call_via_lr",
       "group": "ROM 0804xxxx",
       "rom_offset": 314664,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "sub_0804CD2C",
+      "name": "__divsi3",
       "group": "ROM 0804xxxx",
       "rom_offset": 314668,
-      "size": 146,
-      "status": "mapped_code"
+      "size": 148,
+      "status": "exact_glue"
     },
     {
-      "name": "sub_0804CDC0",
+      "name": "__div0",
       "group": "ROM 0804xxxx",
       "rom_offset": 314816,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
       "name": "__fixunsdfsi",
@@ -17272,25 +17272,25 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0804CE08",
+      "name": "__modsi3",
       "group": "ROM 0804xxxx",
       "rom_offset": 314888,
-      "size": 206,
-      "status": "mapped_code"
+      "size": 208,
+      "status": "exact_glue"
     },
     {
-      "name": "sub_0804CED8",
+      "name": "__udivsi3",
       "group": "ROM 0804xxxx",
       "rom_offset": 315096,
       "size": 120,
-      "status": "mapped_code"
+      "status": "exact_glue"
     },
     {
-      "name": "sub_0804CF50",
+      "name": "__umodsi3",
       "group": "ROM 0804xxxx",
       "rom_offset": 315216,
       "size": 192,
-      "status": "mapped_code"
+      "status": "exact_glue"
     },
     {
       "name": "__pack_d",
@@ -17601,11 +17601,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0804E7B4",
+      "name": "audio_zero_bytes",
       "group": "ROM 0804xxxx",
       "rom_offset": 321460,
-      "size": 26,
-      "status": "mapped_code"
+      "size": 28,
+      "status": "exact_c"
     },
     {
       "name": "display_text_copy_bytes",
@@ -22422,10 +22422,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_08017A68",
+      "name": "frame_initialize_attachment_jobs_64_66",
       "rom_offset": 96872,
       "size": 92,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_select_need_actions_17ac4",
@@ -22446,16 +22446,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08017FAC",
+      "name": "frame_check_attachment_jobs_64_66",
       "rom_offset": 98220,
-      "size": 38,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_017FD2",
-      "rom_offset": 98258,
-      "size": 2,
-      "status": "unresolved"
+      "size": 40,
+      "status": "exact_c"
     },
     {
       "name": "sub_08017FD4",
@@ -22476,16 +22470,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08018058",
+      "name": "frame_finish_attachment_jobs_64_66",
       "rom_offset": 98392,
-      "size": 2,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_01805A",
-      "rom_offset": 98394,
-      "size": 2,
-      "status": "unresolved"
+      "size": 4,
+      "status": "exact_c"
     },
     {
       "name": "sub_0801805C",
@@ -34044,16 +34032,10 @@
       "status": "exact_c"
     },
     {
-      "name": "Register veneer r0",
+      "name": "_call_via_r0",
       "rom_offset": 314608,
-      "size": 2,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_04CCF2",
-      "rom_offset": 314610,
-      "size": 2,
-      "status": "unresolved"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
       "name": "_call_via_r1",
@@ -34062,16 +34044,10 @@
       "status": "exact_glue"
     },
     {
-      "name": "Register veneer r2",
+      "name": "_call_via_r2",
       "rom_offset": 314616,
-      "size": 2,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_04CCFA",
-      "rom_offset": 314618,
-      "size": 2,
-      "status": "unresolved"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
       "name": "_call_via_r3",
@@ -34080,160 +34056,82 @@
       "status": "exact_glue"
     },
     {
-      "name": "Register veneer r4",
+      "name": "_call_via_r4",
       "rom_offset": 314624,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CD02",
-      "rom_offset": 314626,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "Register veneer r5",
+      "name": "_call_via_r5",
       "rom_offset": 314628,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CD06",
-      "rom_offset": 314630,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "Register veneer r6",
+      "name": "_call_via_r6",
       "rom_offset": 314632,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CD0A",
-      "rom_offset": 314634,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "Register veneer r7",
+      "name": "_call_via_r7",
       "rom_offset": 314636,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CD0E",
-      "rom_offset": 314638,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "Register veneer r8",
+      "name": "_call_via_r8",
       "rom_offset": 314640,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CD12",
-      "rom_offset": 314642,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "Register veneer r9",
+      "name": "_call_via_r9",
       "rom_offset": 314644,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CD16",
-      "rom_offset": 314646,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "Register veneer r10",
+      "name": "_call_via_sl",
       "rom_offset": 314648,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CD1A",
-      "rom_offset": 314650,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "Register veneer r11",
+      "name": "_call_via_fp",
       "rom_offset": 314652,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CD1E",
-      "rom_offset": 314654,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "Register veneer r12",
+      "name": "_call_via_ip",
       "rom_offset": 314656,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CD22",
-      "rom_offset": 314658,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "Register veneer r13",
+      "name": "_call_via_sp",
       "rom_offset": 314660,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CD26",
-      "rom_offset": 314662,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "Register veneer r14",
+      "name": "_call_via_lr",
       "rom_offset": 314664,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CD2A",
-      "rom_offset": 314666,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_0804CD2C",
+      "name": "__divsi3",
       "rom_offset": 314668,
-      "size": 146,
-      "status": "mapped_code"
+      "size": 148,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CDBE",
-      "rom_offset": 314814,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_0804CDC0",
+      "name": "__div0",
       "rom_offset": 314816,
-      "size": 2,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_04CDC2",
-      "rom_offset": 314818,
-      "size": 2,
-      "status": "unresolved"
+      "size": 4,
+      "status": "exact_glue"
     },
     {
       "name": "__fixunsdfsi",
@@ -34242,28 +34140,22 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0804CE08",
+      "name": "__modsi3",
       "rom_offset": 314888,
-      "size": 206,
-      "status": "mapped_code"
+      "size": 208,
+      "status": "exact_glue"
     },
     {
-      "name": "Unresolved_04CED6",
-      "rom_offset": 315094,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_0804CED8",
+      "name": "__udivsi3",
       "rom_offset": 315096,
       "size": 120,
-      "status": "mapped_code"
+      "status": "exact_glue"
     },
     {
-      "name": "sub_0804CF50",
+      "name": "__umodsi3",
       "rom_offset": 315216,
       "size": 192,
-      "status": "mapped_code"
+      "status": "exact_glue"
     },
     {
       "name": "__pack_d",
@@ -34626,16 +34518,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0804E7B4",
+      "name": "audio_zero_bytes",
       "rom_offset": 321460,
-      "size": 26,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_04E7CE",
-      "rom_offset": 321486,
-      "size": 2,
-      "status": "unresolved"
+      "size": 28,
+      "status": "exact_c"
     },
     {
       "name": "display_text_copy_bytes",
@@ -35017,8 +34903,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "a8e9842b1558b6e0d4e3f71c8e7417a5eefde02628f6c2f2b196a3b269d51fbf",
-    "assets/rom-inventory.json": "ad3e0cfff2b64353bcee0c0a637a7b5f804188ea45983fec53ce2be65087f288",
+    "config/build-us-eu.json": "d3414cf332f71e477e7b6669f811d5eb7dde6148550ff5d0581c91568d08edb6",
+    "assets/rom-inventory.json": "03e27b111b2883e66add0687972846ec034bd6eb33506f8e0018ccb390942c71",
     "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",
