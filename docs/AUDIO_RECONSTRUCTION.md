@@ -1418,3 +1418,30 @@ did not explain that difference. The public input compiles identically with the
 pinned old profile; changing the stored zero to one produces a same-size control
 with a one-byte mismatch. This proves source ownership, not arbitrary destination
 bounds or the complete caller/input domain.
+
+## Source-owned Thumb interworking entries
+
+Seven four-byte entries at ROM `0x4C874`, `0x4C878`, `0x4C888`, `0x4C88C`,
+`0x4C890`, `0x4C894` and `0x4C898` now rebuild from the pinned Krawall
+[`lib/stub.S`](https://github.com/sebknzl/krawall/blob/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0/lib/stub.S)
+(LGPL-2.1-or-later). Each loads a separately placed ARM provider address into
+scratch `r3` and tail-branches through it. The providers already have RAM source
+ownership. The stubs preserve their at-most-three register arguments, SP and LR;
+play forwards the sample handle returned by its provider.
+
+The ten disjoint extents contain 28 instruction and 28 literal bytes, with no
+padding and no C credit. Three data-only pool blocks retain their original
+locations, including the gap for the excluded extended-play target word. Named
+fixed entry/pool addresses express ordinary PC-relative LDR operands because the
+assembler cannot relocate an external Thumb pool operand. Separate joint ELFs
+contain exactly the selected sections and no sections for unowned gaps. Every
+extent passes the existing verifier and rejects its changed-source control.
+
+As an independent origin check, assembling the upstream file verbatim with the
+eight native provider aliases reproduces all 56 selected bytes exactly. Its
+12 differing bytes are confined to the excluded extended-play trampoline.
+That body and its four-byte target pool remain original; the full 72-byte
+diagnostic is not an accepted replacement. Current accepted game/VBlank callers
+corroborate the first four routes; no current accepted binding was found for the
+three volume, pan and position stubs. Assembly ownership does not close incoming
+transfers, gameplay arguments or the providers' later writable-code states.

@@ -71,3 +71,21 @@ no complete game-code denominator and add no inventory-derived C credit.
 Further connected targets include definition row 99's dispatcher and substantial
 state workers. The renderer and finalizer remain unmatched; their retained
 ordinary-source attempts receive no C credit.
+
+## Separate neighbouring entries
+
+Two separate neighbouring bodies also reproduce 44 bytes: the predicate at
+`0x34F80` owns 38 instruction bytes and two zero alignment bytes, and the
+constant-return leaf at `0x35024` owns four instruction bytes. Both match on the
+first ordinary-C attempt and both real changed-source controls reject by one
+byte. The predicate reuses the owned `0x17FAC` control/dataflow recipe and the
+canonical unsigned-byte attachment counter. It rejects only a nonzero actor
+attachment count combined with owner byte `0x60` equal to one. The independent
+leaf returns the full word 100; it is not part of the preceding empty finish's
+alignment.
+
+Neither entry has an observed ROM pointer or a definition-row callback slot.
+Their incoming domains and wider reachability remain unresolved. The neutral
+constant-leaf API does not recover unused historical formals or a generic
+percentage/FC consumer. The EC callback at `0x34FB0` remains original, and these
+matches add no runtime/gameplay or whole-inventory completeness evidence.

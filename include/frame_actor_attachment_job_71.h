@@ -11,4 +11,8 @@ unsigned int frame_initialize_attachment_job_71(struct FrameNeedEffectState *);
 unsigned int frame_select_attachment_job_71(struct FrameNeedEffectState *, unsigned char *);
 void frame_finish_attachment_job_71(struct FrameNeedEffectState *);
 
+/* Separate entries; no installed table-callback role is established. */
+unsigned int frame_check_attachment_job_71(struct FrameNeedEffectState *, struct FrameObject *);
+unsigned int frame_attachment_job_71_default_value(void);
+
 #endif

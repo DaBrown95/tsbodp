@@ -309,3 +309,30 @@ font and alternate-font pointers. A replay of the original rasterizer and row
 reader supports that static write-footprint claim; those two bodies remain
 unconverted and gain no C credit. Normal/strict compilation, the caller and panel
 controls, full-ROM equality and runtime evidence remain separate claims.
+
+## Standalone offer confirmation
+
+`scene_link_entry_confirm_offer` at `0x080041C4` owns 224 C extent bytes:
+204 instruction bytes and twenty referenced literal bytes. It selects the
+font, hides entry objects and changes sequence before reading the signed offer
+selection. Kind 42 inserts the requested entry using the two packed parameter
+bytes, rereads the selected offer after that call, debits its signed fixed-point
+cost, and stages the existing game-state bytes at offset sixteen. Other kinds
+stage their selected text. Both branches draw the two confirmation labels.
+All called providers already have matching source; the surrounding step and
+quantity-input paths remain separate original dependencies.
+
+The original argument producer masks bits 8-15 before shifting. This actual
+packed-word operation explains the scratch-mask lifetime and the complete
+register allocation: replacing a narrowed shifted word with `(parameter &
+0xff00) >> 8` takes the first 224-byte candidate from 71 differences to exact
+identity, without register bindings or extra memory traffic. Changing the kind
+comparison from 42 to 41 compiles to the same size and rejects by one byte.
+A strict actual-definition check accepts the existing entry/text provider APIs
+and rejects a deliberately incompatible function pointer.
+
+The selected index must name backed offer storage, and the entry list, text and
+game-state representations must satisfy their existing consumers. Signed
+fixed-point arithmetic is qualified to representable inputs. No new range,
+capacity, string-size or gameplay guarantee follows from the byte match; the
+offset-sixteen string access does not establish a complete game-state layout.

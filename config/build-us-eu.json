@@ -44192,6 +44192,72 @@
         "before": "{\n}",
         "after": "{\n    owner->optional = 1;\n}"
       }
+    },
+    {
+      "name": "scene_link_entry_confirm_offer",
+      "rom_offset": 16836,
+      "size": 224,
+      "source": "src/scene/scene_link_entry_confirm_offer.c",
+      "symbols": {
+        "display_text_select_font": "0x0801ae75",
+        "display_scene_hide_entry_objects": "0x080057a1",
+        "audio_game_stop_sequence": "0x080413fd",
+        "audio_select_sequence": "0x080411bd",
+        "g_link_entry_offers": "0x03002e00",
+        "g_link_entry_game_state": "0x03003950",
+        "g_scene_request": "0x03004350",
+        "actor_entry_add": "0x080200c9",
+        "display_text_copy_field_zero": "0x0801b151",
+        "audio_play_sequence_notification": "0x08041425",
+        "display_scene_lookup_text": "0x08045009",
+        "display_text_draw_all_lines": "0x0801b04d"
+      },
+      "thumb_symbols": [
+        "display_text_select_font",
+        "display_scene_hide_entry_objects",
+        "audio_game_stop_sequence",
+        "audio_select_sequence",
+        "actor_entry_add",
+        "display_text_copy_field_zero",
+        "audio_play_sequence_notification",
+        "display_scene_lookup_text",
+        "display_text_draw_all_lines"
+      ],
+      "negative_control": {
+        "before": "kind == 42",
+        "after": "kind == 41"
+      },
+      "expected_sha256": "0330e036c736995ce3c39834e0117370f4a6d875c15fadebc200c2d0c90cbd74"
+    },
+    {
+      "name": "frame_check_attachment_job_71",
+      "source": "src/frame/frame_check_attachment_job_71.c",
+      "rom_offset": 216960,
+      "size": 40,
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "negative_control": {
+        "before": "unknown_60[0] == 1",
+        "after": "unknown_60[0] == 2"
+      },
+      "expected_sha256": "efd40441fcb9023852d5798a9a20dc79c655d17476eb8cd9aa109b675fe2b7c1"
+    },
+    {
+      "name": "frame_attachment_job_71_default_value",
+      "source": "src/frame/frame_attachment_job_71_default_value.c",
+      "rom_offset": 217124,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 100;",
+        "after": "return 99;"
+      },
+      "expected_sha256": "a2271e164827e90980393ec57efbeee0efeba93f9e67d5eff60d0043fc8970f8"
     }
   ],
   "assembly": [
@@ -44766,6 +44832,152 @@
       },
       "ram_address": 50344816,
       "ram_copy": "resource_background_decoder_iwram"
+    },
+    {
+      "name": "vblank_audio_step",
+      "source": "src/audio/vblank_interwork.s",
+      "rom_offset": 313460,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "negative_control": {
+        "before": "bx r3",
+        "after": "bx r2"
+      },
+      "expected_sha256": "48753f80713ad67f3e25d1d26e7e5b230526b21d358083640f103a0bfbb76583"
+    },
+    {
+      "name": "audio_play_sample",
+      "source": "src/audio/play_sample_interwork.s",
+      "rom_offset": 313464,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "negative_control": {
+        "before": "bx r3",
+        "after": "bx r2"
+      },
+      "expected_sha256": "48753f80713ad67f3e25d1d26e7e5b230526b21d358083640f103a0bfbb76583"
+    },
+    {
+      "name": "audio_stop_sample",
+      "source": "src/audio/stop_sample_interwork.s",
+      "rom_offset": 313480,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "negative_control": {
+        "before": "bx r3",
+        "after": "bx r2"
+      },
+      "expected_sha256": "3e236d94c7045ef41747713f1ec38c021f589a12705438878a6b3ff57af2b0f0"
+    },
+    {
+      "name": "audio_set_sample_pitch",
+      "source": "src/audio/set_sample_pitch_interwork.s",
+      "rom_offset": 313484,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "negative_control": {
+        "before": "bx r3",
+        "after": "bx r2"
+      },
+      "expected_sha256": "3e236d94c7045ef41747713f1ec38c021f589a12705438878a6b3ff57af2b0f0"
+    },
+    {
+      "name": "audio_stub_worker_play_pool",
+      "source": "src/audio/interwork_worker_play_pool.s",
+      "rom_offset": 313500,
+      "size": 8,
+      "kind": "assembly_glue",
+      "mode": "data",
+      "defines_symbol": false,
+      "symbols": {
+        "audio_mix_frame": "0x3001080",
+        "audio_start_sample": "0x30002ec"
+      },
+      "negative_control": {
+        "before": ".word audio_mix_frame",
+        "after": ".word audio_mix_frame + 4"
+      },
+      "expected_sha256": "41aeca75b8e71aaec7c0c14c74ee9f272637ede17b128b12bc15d4ade329cc6b"
+    },
+    {
+      "name": "audio_stub_stop_frequency_pool",
+      "source": "src/audio/interwork_stop_pitch_pool.s",
+      "rom_offset": 313512,
+      "size": 8,
+      "kind": "assembly_glue",
+      "mode": "data",
+      "defines_symbol": false,
+      "symbols": {
+        "audio_sample_release": "0x3000320",
+        "audio_set_sample_step": "0x30003e8"
+      },
+      "negative_control": {
+        "before": ".word audio_sample_release",
+        "after": ".word audio_sample_release + 4"
+      },
+      "expected_sha256": "9b68014bba3edc06a13c31831ffe9d62eac03ba84b883efec58d2f6ba18ac721"
+    },
+    {
+      "name": "audio_set_sample_volume",
+      "source": "src/audio/set_sample_volume_interwork.s",
+      "rom_offset": 313488,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "negative_control": {
+        "before": "bx r3",
+        "after": "bx r2"
+      },
+      "expected_sha256": "3e236d94c7045ef41747713f1ec38c021f589a12705438878a6b3ff57af2b0f0"
+    },
+    {
+      "name": "audio_set_sample_pan",
+      "source": "src/audio/set_sample_pan_interwork.s",
+      "rom_offset": 313492,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "negative_control": {
+        "before": "bx r3",
+        "after": "bx r2"
+      },
+      "expected_sha256": "3e236d94c7045ef41747713f1ec38c021f589a12705438878a6b3ff57af2b0f0"
+    },
+    {
+      "name": "audio_set_sample_position",
+      "source": "src/audio/set_sample_position_interwork.s",
+      "rom_offset": 313496,
+      "size": 4,
+      "kind": "assembly_glue",
+      "mode": "Thumb",
+      "negative_control": {
+        "before": "bx r3",
+        "after": "bx r2"
+      },
+      "expected_sha256": "3e236d94c7045ef41747713f1ec38c021f589a12705438878a6b3ff57af2b0f0"
+    },
+    {
+      "name": "audio_stub_sample_setters_pool",
+      "source": "src/audio/interwork_sample_setters_pool.s",
+      "rom_offset": 313520,
+      "size": 12,
+      "kind": "assembly_glue",
+      "mode": "data",
+      "defines_symbol": false,
+      "symbols": {
+        "audio_set_channel_volume": "0x3000434",
+        "audio_set_channel_pan": "0x30004b4",
+        "audio_set_channel_position": "0x3000578"
+      },
+      "negative_control": {
+        "before": ".word audio_set_channel_volume",
+        "after": ".word audio_set_channel_volume + 4"
+      },
+      "expected_sha256": "f2e6170b43d47aaa94f91acc9cba14f68cc77bd1f75ee6ef5ac0e43ca38163d0"
     }
   ]
 }

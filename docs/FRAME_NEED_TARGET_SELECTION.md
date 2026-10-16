@@ -660,6 +660,10 @@ selecting 70, or adding an optional-byte store each compiles and rejects; the
 last control grows from four to eight bytes. The positives contain 14
 instruction bytes and two zero alignment bytes. An actual-definition API unit
 checks the existing E8/F8 signatures, and an incompatible callback type rejects.
-The separate unrooted predicate at `08034F80`, EC callback at `08034FB0` and
-constant-100 entry at `08035024` remain original. No runtime selection or
+The separate unrooted predicate at `08034F80` and word-returning constant-100
+entry at `08035024` now own another 44 C bytes with rejected controls, reusing
+the existing sibling predicate recipe. Neither has an established installed
+table-callback role; the latter is separate from the empty body's alignment.
+The EC callback at `08034FB0` remains original. See the
+[kind-71 boundary notes](FRAME_ATTACHMENT_JOB_71.md). No runtime selection or
 complete callback-domain claim follows from this finite table/source evidence.
