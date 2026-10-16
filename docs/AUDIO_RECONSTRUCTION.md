@@ -1033,8 +1033,9 @@ their controls. That audit is in `instrument-track-context-audit/`. Sources adap
 files retain their notices and licence reference. The common track refinement
 also preserves existing player/effect source controls.
 
-The 124-byte master-volume/clip-table routine at `0x08049968`, its copied shift
-patcher and the bias mixer remain unconverted.
+The 124-byte master-volume/clip-table routine at `0x08049968` remains
+unconverted. Its copied shift patcher and bias mixer now have the assembly
+source ownership described below; their writable domains remain open.
 Private master-volume trials are retained in `master-init-lifecycle/`. The later
 upstream variable-index final write does not reproduce the original. A literal
 minus-1024 index with HWI32 reproduces the original address calculation but
@@ -1465,3 +1466,37 @@ source-only ELF reproduces all 72 bytes across the eight entries and their
 pools (40 instruction / 32 literal bytes), with no gaps, padding or ROM-body
 fallback. This closes that initial source interval, not the audio module's
 remaining C or writable-state domains.
+
+
+## Conditional converter states during identified initialization
+
+The original master-volume body selects exactly one converter-patcher call:
+`08049974` forwards the nonzero high halfword; `080499CC` forwards five when
+that halfword is zero. Both reach the same clip-table work afterward. The
+accepted backend initializer passes 128, and its enclosing game initializer
+subsequently passes `0x40080`, so this identified initialization sequence
+selects five, then four. The two local indirect targets are established; this
+does not exhaust incoming arguments or constructed/writable targets.
+
+Starting with the fixed installed image, a serialized execution of those two
+calls with no other writer has exactly nine distinct joint converter-word
+states. The default-five call leaves the image unchanged. The shift-four call
+updates `03000B70/B74`, `03000B8C/B90`, `03000BB0/BB4`, then
+`03000BCC/BD0`, each pair's first word before its second. After each store,
+a prefix of zero through eight words has shift four and the remainder shift
+five. These are conditional storage states; no atomic eight-word update or
+execution of every intermediate image is claimed.
+
+The patcher reads only the first pair, clears `0xF80` and ORs its unmasked
+argument shifted left seven. Non-shift corruption in that first pair persists
+and propagates; a later valid call can instead overwrite corruption confined
+to a later pair. No bad input is established reachable. The generic native
+master path permits high halves 1 through 65535, while exhaustive incoming
+producers, writer/reinstallation aliases and nested patching remain open. The
+known Timer-1 self-store is disjoint, and the writable IRQ dispatcher at
+`03001C9C` still has an incomplete target population. IME (`04000208`) on entry
+to the two master calls is also unproved: the explicit startup enable follows
+audio initialization, but earlier entry/transitive producers are not exhausted. The ordinary master-
+volume C producer and converter read/fit domains remain separate blockers. The private reproducible
+receipt is `analysis/audio-converter-shift-cohort/receipt.json`; it adds no
+source ownership and repeats no runtime trace.

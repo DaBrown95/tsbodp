@@ -521,10 +521,9 @@ begin's stored kind, and each dispatcher's selected kind. Defined witnesses use
 live cleanup records, or a phase-six actor with its completion flag, or a free
 record and valid point/route backing. A full owner cannot witness the changed
 begin store. These distinguish return/status or stored state without claiming a
-runtime observation. The independent four-byte callback at `080474CC`, separate
-predicate at `080474D0`, two-choice writer at `080474F8`, intermediate callback at
-`08047504` and kind-66 body remain original. Existing capacity checks and the
-remaining renderer/finalizer work gain no credit.
+runtime observation. The independent row-nine callbacks are now source-owned
+as described below; the kind-66 worker remains original. Existing capacity
+checks and the remaining renderer/finalizer work gain no credit.
 
 The only changed existing shared header is a conventional include guard around
 `frame.h`. Its original body, fields and APIs are byte-for-byte unchanged. It
@@ -561,10 +560,9 @@ The four controls change the first callback's return to zero, the predicate's
 state comparison to two, the second selected kind to 88, and the empty finish
 callback to store optional value one. Live state, an actor with one attachment,
 and a two-byte output buffer provide defined witnesses for those respective
-changes. The intermediate callback at `08047504` remains original: its eight
-bytes save and restore LR around a return of one, and no source explanation for
-that prologue has yet been established. No artificial call or instruction body
-was added to reproduce it.
+changes. The intermediate callback at `08047504` now has the matching constant-
+result switch source explained below. The earlier plain-return and artificial-
+call hypotheses are not accepted recipes.
 
 The prepared kind-66 byte-local result experiment has now been executed against
 current headers. It produces the same 244 bytes and 115 differences as the
@@ -634,10 +632,10 @@ compiler output used a byte-valued call result, but the combine pass still
 removed the right shift before the zero test. The final 244-byte candidate
 was byte-identical to the existing word-return candidate and retained the same
 115 differences. This disproves that return-ABI explanation; no public API was
-changed. The eight-byte intermediate callback at `08017FD4` remains original:
-its constant body has no supported source operation to produce the cached
-far-jump state. Row 97's enabled byte remains zero, and finite
-table ownership does not close writable callbacks or runtime reachability.
+changed. The eight-byte intermediate callback at `08017FD4` now has the
+selector-backed constant-result switch source explained below. Row 97's
+enabled byte remains zero, and finite table ownership does not close writable
+callbacks or runtime reachability.
 
 ## Row-100 installed callbacks
 
@@ -747,7 +745,7 @@ lifetimes, allocation and gameplay domains remain open.
 
 ## Constant-result EC switches and the retained LR save
 
-Twenty-five eight-byte EC entries now have matching C definitions, using each
+Twenty-eight eight-byte EC entries now have matching C definitions, using each
 recovered writer and status dispatcher's complete evidenced action set:
 
 | Definition row | EC entry | Action cases |
@@ -777,6 +775,9 @@ recovered writer and status dispatcher's complete evidenced action set:
 | 37, 38 | `0x08012DC4` | 79, 80 |
 | 89 | `0x08022364` | 45, 90 |
 | 18, 20 through 30, 32 through 34, 83, 101, 136, 137 | `0x08016910` | 7 |
+| 13 | `0x08016304` | 24 |
+| 14, 15, 19 | `0x0801E558` | 60, 63 |
+| 16, 17 | `0x08029C14` | 72 |
 
 Each source switch returns word one for its cases and default. The original
 256-byte EC switch in rows 42/43 independently corroborates this family idiom;
@@ -794,12 +795,12 @@ preprocessed input remain identical. This supports the within-function cache
 explanation; it is a diagnostic, not an accepted alternate recipe. The earlier
 plain-constant and cross-function inline-cache explanations remain disproved.
 
-All twenty-five complete-set recipes match on their first attempt, without
+All twenty-eight complete-set recipes match on their first attempt, without
 instruction assembly, register constraints, added qualifiers or invented calls.
-Real controls make one evidenced case return zero: nineteen compile to 16 bytes
+Real controls make one evidenced case return zero: twenty-two compile to 16 bytes
 and reject by 14 bytes; six compile to 24 and reject by 22. The stable verifier
 includes extra bytes in rejection. Canonical API, full-ROM/control and progress
-gates pass. Together these leaves own 200 C instruction bytes and no assembly,
+gates pass. Together these leaves own 224 C instruction bytes and no assembly,
 pools or alignment.
 
 For rows 3/4 and the shared header writer, zero is an evidenced buffer sentinel,
@@ -811,7 +812,7 @@ Removed case structure and unused first-two formal roles are inferred from the
 family and its recovered writers, not uniquely identified historical source.
 The source still returns one for every word input. Generic EC delivery, writable
 callback targets, valid selection indices and retained-tail domains remain open.
-After these twenty-five, 23 distinct same-body entries in the observed 149-row
+After these twenty-eight, 20 distinct same-body entries in the observed 149-row
 prefix still need their own justified source recipes and depend on unconverted
 E8 writers. Byte equality alone does not authorize an arbitrary case list.
 
@@ -883,3 +884,41 @@ assembly instructions, register constraints, qualifiers or invented calls supply
 the matches. Unique failed sources and useful compiler evidence remain local.
 Live backing, provider success, selection indices, complete EC delivery,
 writable callback populations and gameplay remain separate open domains.
+
+
+## Attachment actions 24, 60/63 and 72
+
+| Observed rows | Complete local C interval | Functions / extent bytes |
+| --- | --- | ---: |
+| 13 | `0x080161CC..0x08016398` | 8 / 460 |
+| 14, 15, 19 | `0x0801E270..0x0801E5F4` | 10 / 900 |
+| 16, 17 | `0x08029A38..0x08029C8C` | 9 / 596, including 528 already owned |
+
+These modules add 24 definitions / 1,428 C extent bytes: 1,370 instructions,
+32 pool bytes and 26 genuine zero-alignment bytes. All source controls reject,
+actual definitions and target layouts pass API checks, and full-ROM/control and
+progress gates pass. The existing kind-72 worker/begin/status also reverify under
+the appended declarations and receive no duplicate credit. The count predicates
+and kind-72 constant-100 neighbor remain explicitly unrooted; installed callback
+roles come from table words, not adjacency.
+
+Row 13 writes only action 24. Its worker preserves captured needs, the full-word
+running-equals-one cancellation, clock 150, cue 41 and commit modes 3/2. The next
+already-owned condition worker at `0x08016398` is excluded from the new extent.
+Rows 16/17 write only 72; their lifecycle behavior above is unchanged.
+
+Rows 14/15/19 write 60 then 63 and dispatch them to distinct workers. Their F8
+callback is a real 132-byte tick, and FC is a 28-byte word result. Signed owner
+parameter reads, unsigned halfword countdown wrap/reset, the signed random
+threshold, byte-to-signed-byte reverse conversion and the different cancellation
+rules are preserved. The FC source initially initialized its result before the
+parameter read, reserving the native index register. An explicit read snapshot
+alone was disproved. Defining the real result only in the two condition arms
+restored native evaluation/register reuse and all 28 bytes without a type or
+profile change. Both useful failed sources remain local.
+
+Complete EC action sets were fixed before each single recipe. No assembly
+instructions, numeric register constraints, added qualifiers or fabricated
+operations supply these matches. Source ownership does not close generic EC/FC
+consumers, table capacity, valid actor/record/sample backing, point-output
+success, arithmetic domains or runtime selection/gameplay.
