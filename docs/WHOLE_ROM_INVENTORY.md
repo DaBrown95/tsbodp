@@ -47,8 +47,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 3,022 |
-| Unclassified remainder of estimated envelopes | 16,222 |
+| Unclassified inside source/glue-owned extents | 3,030 |
+| Unclassified remainder of estimated envelopes | 16,214 |
 | Other unresolved ROM | 16,433,800 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -588,3 +588,32 @@ do not establish gameplay use or exhaust writable populations. Copied-audio
 extent gaps and other unresolved survey limits still prevent a complete game-code
 denominator. The historical comparison remains fixed at 319,640 mapped extent
 bytes; no runtime observation or inventory C credit is added.
+
+
+### Row-3 attachment dispatch and steps
+
+The three workers at `0x080358B0`, `0x0803594C` and `0x08035A04`, together
+with the dispatcher at `0x08035CE8`, add four matching C functions and 932
+extent bytes. Coverage reaches 1,727 functions and 247,832 C bytes; the same
+500 glue bytes remain separate. The complete spans contain 780 instruction
+bytes, 144 referenced literal/switch bytes and eight internal alignment zeros.
+Existing providers, action writers, callers and intervening original callbacks
+gain no C credit.
+
+All four existing map rows gain compiler ownership without extent growth.
+Entry count remains 2,523, inventory mapped extents remain 324,008 and treemap
+extents remain 324,016. Eight internal zeros move from estimated envelopes
+into source-owned unclassified bytes, making those categories 3,030 and 16,214.
+Other unresolved ROM remains 16,433,800 bytes. Qualified static instruction and
+referenced-data unions remain 270,608 and 34,732 bytes. Regenerated assets remain
+the authoritative current census.
+
+The [connected source evidence](FRAME_NEED_TARGET_SELECTION.md#row-3-attachment-jobs-12-31-33-and-45)
+records the enabled row-3 route, exact running-byte and phase distinctions,
+the two bounded sample representations, real unsigned-halfword countdown,
+provider lifetimes and meaningful controls. The inherited allocator/state
+compatibility limits remain explicit. Larger row-97 workers and the renderer
+remain unconverted. Copied-audio extent gaps and other unresolved survey limits
+still prevent a complete game-code denominator. The historical comparison
+remains fixed at 319,640 mapped extent bytes; no runtime observation or
+inventory-discovery C credit is added.

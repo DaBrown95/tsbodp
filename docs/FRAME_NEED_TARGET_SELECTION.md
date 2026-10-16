@@ -317,3 +317,86 @@ bytes or added assembly directives. The existing extents gain compiler ownership
 without increasing mapped extents. Matching, static routes and runtime behavior
 remain separate claims; the fixed historical comparison is 319,640 mapped
 extent bytes.
+
+
+## Row-3 attachment jobs 12, 31, 33 and 45
+
+The four connected bodies add 932 matching C extent bytes through the existing
+row-3 dispatcher. Existing callers, action writers and seventeen accepted
+providers gain no additional C credit. Names and phase roles remain inferred.
+
+| Entry | Function | Complete bytes |
+| --- | --- | ---: |
+| `0x08035A04` | `frame_step_attachment_jobs_31_33` | 524 |
+| `0x080358B0` | `frame_step_attachment_job_12_358b0` | 156 |
+| `0x0803594C` | `frame_step_attachment_job_45_3594c` | 184 |
+| `0x08035CE8` | `frame_dispatch_attachment_jobs_12_31_33_45` | 68 |
+
+Observed definition row 3 has enabled byte one and installs the dispatcher at
+state `+0xF4`. Its accepted action writer can emit 31, 33, 45 and an optional
+12. Dispatch looks up the actor's existing record and selects the corresponding
+worker; other kinds return zero. The finder result is dereferenced without a
+null guard, so a matching live record remains a caller requirement. The row's
+eight-byte intermediate callback, 72-byte begin callback and intervening
+44-byte region remain original. These finite assignments provide a conditional
+source route, not proof of gameplay use or all writable callback populations.
+
+The kinds-31/33 worker captures the actor's need pointer before initializing
+its default word result. Phase zero reverses direction, checks the existing
+condition and chooses optional-effect work or a waiting animation. Phase six
+commits the first need-effect stage and sets the object's byte flag. Phase 24
+waits on the completion flag, commits stage three, starts animation 23 and
+stores two sample handles before initializing the actor's countdown to 60.
+Phase 26 adjusts need row eight, then tests the fresh running byte. Exactly one
+short-circuits the decrement; otherwise the unsigned 16-bit countdown wraps
+from zero to `0xFFFF`, which advances to phase nine. That phase commits stage
+two, stops both stored samples, plays the completion cue and changes direction.
+Phase one requests animation one, updates the existing resource triple and
+returns two; other phases return one. There is no global running-byte clamp.
+
+The kind-12 worker forces phase one only when running is exactly one. Its
+start phase uses animation 14 and one stored sample; phase four adjusts need
+row 52 and tests only the low byte of the optional-two consumer's word result.
+The kind-45 worker instead forces cleanup for any nonzero running byte. It
+reverses direction before the actor-effect test and uses animation 46 when an
+indicator is needed. A successful optional consumer stores phase one before
+the opaque resource update. The subsequent phase read remains fresh, so a
+provider change is not hidden by a cached phase. Cleanup stops the stored
+sample, requests animation one, transitions and clears a nonnull indicator,
+and returns two. Other paths return one.
+
+The first sample's four-byte representation at `+0xE0` is accessed through
+`DisplayNeedEffectStateView.unknown_dd[3..6]`, within the existing allocator's
+256-byte access view. The shorter `FrameNeedEffectState` declaration
+does not reach that field and is not used as its storage extent. The second
+sample at `+0x64` uses four bytes inside the partial state's thirteen-byte
+`unknown_63` member. The indicator at `+0x58` similarly uses four bytes of its
+existing seven-byte character member. Copies require initialized valid target
+representations and the backing extent appropriate to the existing allocation.
+Reuse of the allocator/state views does not prove universal effective-type
+compatibility among legacy views.
+
+The actor's needs pointer is copied through the canonical motion character
+array at `+0x60`, and the countdown uses the existing unsigned-halfword member
+at `+0x5E`. The byte flag at `+0x4F` is within the same canonical motion storage.
+No actor/state word overlay or shared-header layout change is introduced.
+Captured need storage must remain live across calls. Actor, state, record,
+indicator, sample, definition, condition, resource and input backing must meet
+the existing provider contracts; direction-table indices must be zero through
+seven. Fresh state, kind and provider reads remain where they follow opaque
+calls. This path establishes no universal optional-mode or global-index domain.
+
+The three worker controls change completion return two to three. A valid
+cleanup record and initialized sample/provider backing distinguish each return;
+the kind-45 witness uses a null indicator. The dispatcher control changes case
+31 to 30: a live kind-31 cleanup record returns two in the positive and zero
+in the control. These are defined source-domain witnesses, not runtime tests.
+
+The complete spans contain 780 instruction bytes, 144 referenced literal or
+switch-table bytes and eight internal zero alignment bytes. All four function
+symbols cover their full spans. The ordinary source switch produces the bounded
+27-entry table; no instruction body or table payload is embedded in the source.
+The explicit initialization phase explains the retained six-byte entry-order
+failure without identifying historical source spelling. Row 97's larger
+workers and the renderer remain original; their held candidates gain no credit.
+Matching builds, static routes and runtime behavior remain separate claims.
