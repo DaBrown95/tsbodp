@@ -667,3 +667,40 @@ table-callback role; the latter is separate from the empty body's alignment.
 The EC callback at `08034FB0` remains original. See the
 [kind-71 boundary notes](FRAME_ATTACHMENT_JOB_71.md). No runtime selection or
 complete callback-domain claim follows from this finite table/source evidence.
+
+
+## Row 104 control and status path
+
+Nine connected C definitions now own 1,336 extent bytes. The initializer at
+`0x080172FC` (28 bytes) conditionally refreshes audio. The begin callback at
+`0x08017348` (84) allocates an attachment record, stores its kind, obtains the
+attachment point and starts the actor route. The F8 callback at `0x0801739C`
+(4) is empty. Refresh at `0x080174A8` (84) independently reads the parameter
+around sequence calls: `0xA00`, `0xB00` and `0xC00` select sequences 21, 7 and
+22, then the existing audio flag field receives bit eight.
+
+The 400-byte dispatcher at `0x08016F94` is definition row 104's `+16` pointer,
+copied to state `+0xF4` and called by the accepted status consumer. Its guarded
+57-slot local switch selects four C workers: job 45 at `0x08017124` (164), job
+100 at `0x080171C8` (308), modes for jobs 56/57 at `0x080173A0` (136), and
+modes for jobs 98/99/101 at `0x08017428` (128). All their direct providers now
+have source ownership. Job 45 preserves cancellation for any nonzero running
+word. Job 100 retains its need-state pointer while rereading actor/work fields
+across provider calls; its timer and sample cadence use the native 150 and
+32-tick conditions. The mode workers update the parameter before animation
+completion, with the original distinct refresh/commit behavior.
+
+The nine extents comprise 1,062 instruction bytes, 252 referenced literal or
+switch bytes and 22 zero-alignment bytes. Source controls reject for every
+body. The dispatcher's control changes mode one to zero, which changes the
+connected parameter write. An earlier one-to-two mutation is semantically
+equivalent in this worker and supplies no control evidence. All actual new
+definitions pass the canonical API and target-layout checks; assigning the
+two-argument worker to the three-argument mode API rejects.
+
+The common header reuses existing object, record and audio declarations;
+no qualifier or layout change supplies the match. The FC slot is null. The
+separate, unrooted predicate at `0x08017318` and installed LR-saving callback at `0x08017340`
+remain original. Matching these nine bodies therefore does not close the
+entire row, its runtime population, callback writers, allocation or object
+lifetime domains. Row 104 execution has not been observed.

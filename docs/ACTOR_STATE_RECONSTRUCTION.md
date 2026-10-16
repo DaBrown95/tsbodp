@@ -1250,3 +1250,34 @@ void interfaces agree with the accepted reset caller or constructor callback
 assignment. Each real control adds a byte store through a live argument and
 compiles to eight bytes, rejected in full. These three definitions add twelve
 C extent bytes and no runtime or incoming-target completeness claim.
+
+
+## Special need-effect callback and companion
+
+Two connected ordinary C bodies own 600 extent bytes: the special callback at
+`0x0803698C` (508) and its companion constructor at `0x08036D2C` (92). The
+accepted spawn function installs the callback for world option (4, 5) and
+subtype 141. While state four is active, variants 0, 2, 3, 4, 5, 7 and 11
+coordinate actor animations, a 16-bit countdown, view offset, attachment-based
+companion position and vertical velocity, then a scene request. Countdown
+predecrement tests `0xFFFF`, retaining the native underflow transition. The
+constructor initializes kind 24, flags `0x19`, existing OAM fields, palette
+seven and the first animation record. Its resource aliases describe original
+data without claiming new asset ownership.
+
+The first callback source compiled 512 bytes with 418 differences. Compiler
+intermediates showed two live object roots and one address-taken point shared
+between unrelated cases. Using one typed object root and separate case-local
+points leaves the view offset in the native register pair and gives only the
+attachment point a stack address. This bounded source change matches all 508
+bytes; it does not establish unique historical declarations. The constructor
+matches all 92 bytes. No register binding, added qualifier or instruction
+assembly supplies either body. Their totals include 508 instruction bytes,
+84 literal/table bytes and eight zero-alignment bytes. Both meaningful
+changed-source controls reject, and actual definitions pass canonical API and
+target-layout checks.
+
+The original direct call connects these two disjoint extents. Intervening ROM
+`0x08036B88..0x08036D2C`, player-index/callback writers and allocation/lifetime
+domains remain open. The callback assignment is static evidence; execution
+of this special path has not been observed.
