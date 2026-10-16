@@ -45,7 +45,6 @@ extern struct DisplayTimeRecord g_display_countdown;
 
 void frame_create_actor_item(unsigned int, unsigned char *);
 void frame_place_actor_item_in_water(struct FrameObject *, unsigned char *);
-/* The land-placement body remains unconverted. */
 void frame_place_actor_item_on_land(struct FrameObject *);
 void frame_step_actor_item_visibility(struct FrameObject *);
 void frame_emit_actor_item_contact(struct FrameObject *, unsigned char);

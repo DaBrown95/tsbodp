@@ -25,6 +25,57 @@
       "group": "Startup and runtime",
       "rom_offset": 154636,
       "size": 196
+    },
+    {
+      "name": "link_serial_interrupt",
+      "group": "Link and serial",
+      "rom_offset": 253000,
+      "size": 1616,
+      "mode": "Thumb",
+      "installation_evidence": {
+        "matching_owner": "link_serial_handshake",
+        "source": {
+          "path": "src/link/link_serial_handshake.c",
+          "sha256": "8ab043c0470dab4a94282890be6099b35c47c997a0269d9d59f1780d4f26b779"
+        },
+        "writable_destination": "g_irq_table[0] at 0x03004290",
+        "stores": [
+          {
+            "rom_offset": 252720,
+            "target_load_rom_offset": 252718,
+            "target_literal_rom_offset": 252792,
+            "destination_literal_rom_offset": 252788,
+            "target": 134470729
+          },
+          {
+            "rom_offset": 252850,
+            "target_load_rom_offset": 252848,
+            "target_literal_rom_offset": 252920,
+            "destination_literal_rom_offset": 252916,
+            "target": 134470729
+          }
+        ],
+        "dispatcher": {
+          "path": "src/irq/irq_dispatcher.s",
+          "sha256": "f1d977871990fba2c49858ac8b551c207ef636e8ae7348ad85d4f6188b577ab4"
+        },
+        "scope": "Known statically installed Thumb callback, not observed execution or complete writable IRQ target population."
+      },
+      "bounded_partition_evidence": {
+        "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
+        "extent_sha256": "6ec9e5a1ec58b5d7b777a40b1f51ab71f35d6ae165f1b1899813c0f325596c2e",
+        "instruction_bytes": 1242,
+        "referenced_literal_bytes": 356,
+        "zero_alignment_bytes": 18,
+        "last_return_rom_offset": 254600,
+        "final_literal_rom_offsets": [
+          254604,
+          254608,
+          254612
+        ],
+        "next_independent_entry_rom_offset": 254616
+      },
+      "source_ownership": "Original unconverted ordinary C candidate; zero recovered-C or assembly credit."
     }
   ]
 }

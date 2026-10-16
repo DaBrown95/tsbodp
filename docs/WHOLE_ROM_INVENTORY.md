@@ -34,8 +34,9 @@ bodies, ROM payload or extracted assets are published as inventory metadata.
 ## Results
 
 The table below is a historical survey snapshot. Current source ownership is
-2,006 verified C functions and 269,044 C extent bytes, plus 4,060 separately
-counted assembly extent bytes. The latter includes the 1,604-byte mixer family,
+recorded in the generated [progress data](../assets/progress.json) and the
+[remaining-work list](COMPLETION_BLOCKERS.md). The separately counted 4,060
+assembly extent bytes include the 1,604-byte mixer family,
 140-byte timer IRQ, 140-byte startup exceptions, eight-byte BIOS wait wrapper,
 60-byte compiler register-call family, 672-byte division/remainder family and
 812-byte background decoder and 72-byte audio interworking entries/pools and 60-byte debugger adapter, with
@@ -44,15 +45,15 @@ See [audio](AUDIO_RECONSTRUCTION.md),
 [startup](STARTUP_RECONSTRUCTION.md), [compiler assembly](RUNTIME_REGISTER_CALLS.md) and the concise
 [remaining-work list](COMPLETION_BLOCKERS.md).
 
-The current qualified static union is 277,406 physical instruction bytes.
+The generated inventory records the current qualified static instruction union.
 Source extents include their literal pools and alignment; instruction-byte
-counts describe separately qualified code. Compiler matches do not
-establish runtime execution. The separate
+counts describe separately qualified code. Compiler matches do not establish
+runtime execution. The separate
 [bounded boot experiment](RUNTIME_OBSERVATIONS.md) records selected entry and
 write observations without closing target domains. The static census's
-325,166 estimated envelope bytes, the treemap's 325,174 mapped extent bytes
-and fixed 319,640 historical comparison remain distinct, with no complete
-game-code denominator established.
+estimated envelope bytes, the treemap's mapped extent bytes and fixed 319,640
+historical comparison remain distinct, with no complete game-code denominator
+established.
 
 The authoritative current counts and interval evidence are in
 [`assets/rom-inventory.json`](../assets/rom-inventory.json), under `code_census`.
@@ -775,3 +776,24 @@ field-load caveat, not a generic need-effect EC consumer or action-delivery
 route. Count/header and base-alias closure remain required. All selected
 consumers, count producers and callers already have source. No new compiler or
 runtime observation, source credit or complete target set follows.
+
+
+## Installed serial IRQ target
+
+The accepted handshake installs Thumb target `0x0803DC49` in writable IRQ slot
+zero at `0x0803DB30` and `0x0803DBB2`. Its original literals at `0x0803DB78`
+and `0x0803DBF8` agree. The owned ARM dispatcher calls that slot for mask `0xC0`.
+The existing bounded-entry map now records the handler after checking these
+installation sites. The literal remains within its owned handshake extent;
+it is not a separate data region or a ROM dispatch-table capacity. Installation
+and partition pins are review evidence, not extra schema validations.
+This promotes the previously weak `0x0803DC48` entry to a statically grounded
+callable target; it supplies no runtime observation or recovered-C credit.
+
+Within `0x0803DC48..0x0803E298`, the bounded native CFG partitions all 1,616 bytes:
+1,242 instruction bytes, 356 referenced literal bytes and 18 zero-alignment bytes.
+There are no overlapping roles or interior entry roots in the current census;
+the final referenced words end at the independent next prologue. The retained
+C frontier still mismatches. Its transport-record ownership and initialization,
+other IRQ-table writers, enable conditions and complete incoming/writable target
+domains remain open. This discovery does not establish inventory completeness.

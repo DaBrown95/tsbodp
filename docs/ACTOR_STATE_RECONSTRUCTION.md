@@ -1184,14 +1184,28 @@ and rejects a meaningful source mutation, including the reward, collection
 threshold, animation-sharing group and random upper bound. These are static and
 compiler findings; no runtime or gameplay coverage is claimed.
 
-Two connected bodies remain unconverted: land placement at `0x08024ACC`
-(68 bytes) and movement update at `0x08024720` (472 bytes). The ordinary land
-candidate differs in six bytes; the old exact attempt requires explicit
-register bindings and is not accepted. A bounded test of two scalar terrain
-arguments produced the same lifetime and call-setup differences, disproving
-that ABI explanation. The ordinary movement candidate still differs in
-14 bytes; no unsupported switch arm has been added to influence its compiler
-pivot. Neither blocker receives source coverage.
+Land placement at `0x08024ACC` now owns 68 C bytes: 66 instruction bytes and two
+native zero-alignment bytes. The retained exact recipe uses two explicit C
+register constraints for genuine values, consistent with the accepted terrain
+provider and other published C. X occupies a callee-saved register across the
+real Y/terrain calls. Both point fields are assigned after the random calls;
+the two-word point occupies only the immediate by-value terrain call's argument
+registers and is never read after that call. No instruction body, dummy operation
+or memory traffic supplies the match. Unsigned final scaling preserves modulo
+word arithmetic; map/terrain backing and termination remain native preconditions.
+
+The earlier unconstrained-only exclusion was a method restriction absent from
+the user/project rules. Its old `source_reconstruction_verified: false` came
+from a raw comparison without a compiled source control. Fresh canonical
+positive/control builds now match all 68 bytes and reject an upper-Y margin
+change by one byte. Actual provider/caller API and layout checks pass; the wrong
+scalar terrain contract rejects. The ordinary 68-byte/six-difference predecessor
+and ABI failures remain retained. This establishes matching C with compiler
+constraints, not unique historical source or toolchain provenance.
+
+Movement update at `0x08024720` remains unconverted at 472 bytes / 14 differences.
+No unsupported switch arm has been added to alter its compiler pivot; land
+ownership does not establish completion of the surrounding actor path.
 
 ## Interaction choices and two-object callbacks
 

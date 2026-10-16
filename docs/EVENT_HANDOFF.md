@@ -41,9 +41,11 @@ certify those caller stores or the entire end-to-end path.
 The original 100-byte connection starter is also still unconverted. Its
 typed-word-copy candidate produced 96 bytes. The random-result narrowing
 omitted the original register move, with the shorter instruction sequence also
-changing pool alignment. That candidate adds no C credit. The full-width active
-count getter remains an original provider, while the slot and random-bound
-providers have accepted source. See [the preceding handshake milestone](SERIAL_HANDSHAKE.md)
+changing pool alignment. That candidate adds no C credit. The actual active-byte
+getter now has matching C with a full-word result; see the later
+[getter continuation](SERIAL_HANDSHAKE.md#active-byte-getter-continuation).
+The slot and random-bound providers also have accepted source. See
+[the preceding handshake milestone](SERIAL_HANDSHAKE.md)
 for the connected IRQ and timeout evidence.
 
 Kinds 8–10 retain their existing foreign aggregate output views. The receiver's

@@ -94,3 +94,52 @@ game-code denominator remains open.
 The treemap's bounded-body count changes from 768 to 766 because these two
 entries move from a control-flow boundary label to a compiler-audited boundary
 label. Their instruction/literal geometry is retained; no decoded body is lost.
+
+
+## Active-byte getter continuation
+
+The connected getter at `0x0803E42C` now owns 12 C bytes: six instruction bytes,
+four literal bytes and two native zero-alignment bytes. It returns the canonical
+unsigned active byte at endpoint offset four as a full word, compatible with
+the existing controller import. The inferred field role does not establish a
+complete peer-count or protocol domain. Its first recipe matches, and changing
+the source to read the slot byte rejects by one byte. Actual-definition API and
+layout checks pass; wrong offset and byte-return contracts reject. All 256
+initialized byte values agree in a finite source witness, which supplies no
+peripheral or runtime execution evidence.
+
+The larger controller, next-stage IRQ, connection starter and status reader
+remain explicit original-code boundaries. In particular, matching this getter
+does not initialize another caller's unwritten event payload or establish its
+complete storage ownership. Fresh full matching/control and progress gates
+cover the getter together with land placement; no assembly instruction body or
+new compiler profile is used.
+
+
+## Surrounding serial-scene source
+
+Four retained exact recipes now have fresh source controls and actual API checks:
+
+| Function | ROM offset | C extent bytes |
+| --- | --- | ---: |
+| `scene_link_status_initialize` | `0x1BD18` | 352 |
+| `scene_link_status_draw_notice` | `0x1C340` | 164 |
+| `scene_link_status_create_indicator` | `0x1C3E4` | 120 |
+| `scene_link_status_shutdown` | `0x1C45C` | 32 |
+
+Their 668 bytes comprise 564 instruction bytes, 96 literal bytes and eight native
+zero-alignment bytes. The authored bodies are unchanged from the retained
+attempts; each same-size meaningful control rejects by one byte. Twenty-six
+provider declarations agree with actual owned definitions, and target layout
+and wrong-contract checks pass. Full matching/control and progress gates pass.
+The initializer constructs the four indicator objects and endpoint state;
+the notice drawer preserves its table delay and staged-string word; shutdown
+retains the real fade, object-list release and display resets.
+
+The 1,224-byte controller at `0x0801BE78` stays original. Matching its surrounding
+calls does not validate its unwritten kind-11 event argument. The existing
+recording fade provider also retains its prefix-store/suffix qualifications;
+these new callers add no event payload or invented initialization. Resource
+prefixes, object/list backing, allocation success, incoming indices, writable
+fields, scheduling and gameplay remain separate open domains. These entries
+add source ownership without claiming completion of the serial path.
