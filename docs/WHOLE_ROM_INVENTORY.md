@@ -47,16 +47,16 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 3,004 |
-| Unclassified remainder of estimated envelopes | 16,232 |
-| Other unresolved ROM | 16,433,808 |
+| Unclassified inside source/glue-owned extents | 3,010 |
+| Unclassified remainder of estimated envelopes | 16,230 |
+| Other unresolved ROM | 16,433,804 |
 | **Physical ROM total** | **16,777,216** |
 
 Thus 270,608 bytes have qualified static instruction evidence, under the stated
 decoder, mode, original-image and ordinary-call assumptions. This confirms their
 static instruction role; it does not establish that every instruction executes.
 The raw alternative reach is 270,634 bytes. There are 2,324 rooted execution
-entries, while the ordinary map has 2,523 entries/candidates and 324,000 mapped
+entries, while the ordinary map has 2,523 entries/candidates and 324,004 mapped
 extent bytes. In the initial survey, nine corroborated veneer starts were added (six register veneers and three audio
 stubs), and four prior weak starts were folded as interior blocks, for a net five
 entries and 24 mapped extent bytes.
@@ -488,8 +488,46 @@ qualified instruction and referenced-data unions remain 270,608 and 34,732.
 The observed callback prefix and provisional owner/type limits are detailed in
 [FRAME_NEED_TARGET_SELECTION.md](FRAME_NEED_TARGET_SELECTION.md).
 
-The row-97 writer remains unconverted: its closest 124-byte candidate differs
-in four bytes, and its proposed trailing alignment gains no ownership here.
+At that milestone, the row-97 writer remained unconverted: its closest
+124-byte candidate differed in four bytes, and its proposed trailing alignment
+gained no ownership there.
 Copied-audio extent gaps, unresolved transfers and other survey limits still
 prevent a complete code denominator. The historical comparison remains fixed
 at 319,640 mapped extent bytes. No new runtime observations are claimed.
+
+
+### Zero-index action writers
+
+The row-97 writer at `0x08017AC4` and row-87 writer at `0x080220C0` add two
+matching C functions and 224 extent bytes, bringing coverage to 1,717 functions
+and 245,800 C bytes. The same 500 glue bytes remain separate. The complete
+spans contain 186 instruction bytes, 32 referenced data bytes and six alignment
+zeros. The data includes the bounded six-case switch table and its pointer.
+Existing callers, providers and inventory findings add no C credit.
+
+The former row-97 hold now matches all 124 bytes. These two ordinary map rows
+gain compiler ownership through two trailing zero bytes each; entry count stays
+2,523, inventory extent bytes become 324,004 and treemap extent bytes 324,012.
+Four trailing zeros move from unresolved ROM into source-owned unclassified
+bytes; two internal zeros move there from estimated gaps. The source-owned
+unclassified total therefore becomes 3,010, estimated-envelope remainder
+16,230 and other unresolved ROM 16,433,804. Qualified instruction and
+referenced-data unions remain 270,608 and 34,732 bytes.
+
+The source preserves eight address operations in ordinary target-specific C.
+Their local indices are proven zero and unescaped; pointer/integer width and
+conversion requirements are explicit, without inferring historical spelling,
+nonzero-index behavior or address packing. The high-level condition/switch and
+provider logic remains present. No instruction body or output patch is added.
+The existing alignment directive requests only alignment. The exact source,
+callback/field/API domains, meaningful controls and static route limits are
+detailed in [FRAME_NEED_TARGET_SELECTION.md](FRAME_NEED_TARGET_SELECTION.md).
+
+Row 97 remains disabled in both guarded selectors. The choice-builder route
+is conditional; row 87 is enabled, but all codes emitted by these writers have
+action halfword eight and cannot match the need selector's zero-through-seven
+ordinal. These findings establish neither gameplay use nor all callback
+assignments. Copied-audio extent gaps, unresolved transfers and the other
+survey limits still prevent a complete game-code denominator. The historical
+comparison remains fixed at 319,640 mapped extent bytes; no runtime observation
+is added.

@@ -41490,6 +41490,39 @@
         "before": "out[0] = 57;",
         "after": "out[0] = 58;"
       }
+    },
+    {
+      "name": "frame_select_need_actions_17ac4",
+      "rom_offset": 96964,
+      "size": 124,
+      "source": "src/frame/frame_select_need_actions_17ac4.c",
+      "symbols": {
+        "g_frame_actor_social_probe": "0x030039e8",
+        "frame_read_signed_parameter": "0x0803d1f5",
+        "condition_is_active": "0x0802a799",
+        "condition_is_complete": "0x0802a7c5"
+      },
+      "thumb_symbols": [
+        "frame_read_signed_parameter",
+        "condition_is_active",
+        "condition_is_complete"
+      ],
+      "negative_control": {
+        "before": "*out = 66;",
+        "after": "*out = 67;"
+      }
+    },
+    {
+      "name": "frame_select_optional_attachment_kinds_220c0",
+      "rom_offset": 139456,
+      "size": 100,
+      "source": "src/frame/frame_select_optional_attachment_kinds_220c0.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "*out = 92;",
+        "after": "*out = 93;"
+      }
     }
   ],
   "assembly": [

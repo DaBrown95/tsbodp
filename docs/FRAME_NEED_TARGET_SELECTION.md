@@ -33,8 +33,8 @@ list and state view. The copied pointer must have a valid target representation.
 The current observed definition prefix contains 149 rows of 36 bytes. Its
 allocator copies definition `+28` to state `+0xE4` and definition `+4` to
 `+0xE8`. All six observed predicate targets have matching word-return C
-contracts. The observed action producers include 19 matching C targets and
-40 original targets; their wider capacity and side effects remain uncertain.
+contracts. The observed action producers include 21 matching C targets and
+38 original targets; their wider capacity and side effects remain uncertain.
 Null action callbacks in observed rows 125, 126 and 139 are excluded by their
 zero enabled byte. This finite table finding does not exhaust writable callback
 assignments or establish a complete runtime population.
@@ -115,9 +115,58 @@ in matching. Whole-ROM equality, static routes and runtime behavior remain
 separate claims. The 319,640 mapped extent bytes remain the historical
 comparison baseline.
 
-The connected row-97 writer at `0x08017AC4` remains unconverted. Its closest
-124-byte candidate differs in four bytes, so it receives no C coverage and its
-proposed two trailing alignment bytes are not newly owned. Row 97 has enabled
-byte zero and is skipped by both guarded target selectors. The existing
-choice-builder invokes the action callback before later enabled checks, a
-conditional source route whose runtime population remains unproven.
+## Further action writers
+
+Two further callbacks add 224 matching extent bytes. The former row-97 hold
+at `0x08017AC4` now matches its complete 124-byte span; the row-87 writer at
+`0x080220C0` matches 100 bytes. Existing consumers and inventory findings add
+no recovered-C credit.
+
+| Entry | Callback | Observed row | Behavior |
+| --- | --- | ---: | --- |
+| `0x08017AC4` | `frame_select_need_actions_17ac4` | 97 | Writes one code: 66, 65 or 64 |
+| `0x080220C0` | `frame_select_optional_attachment_kinds_220c0` | 87 | Modes 4 through 9 write 92 through 97; other modes write nothing |
+
+Row 97's writer selects 66 when the signed parameter is positive. Otherwise,
+the existing signed-parameter return is converted to unsigned for its `> 3`
+and `> 6` tests. Exact low-byte condition checks select 65 or 64. Repeated
+condition and parameter calls stay fresh and short-circuit in the original
+order. Its 66-to-67 control uses parameter one and calls no providers. The
+row-87 writer reads its byte mode once and calls no providers; its 92-to-93
+control uses mode four. Both controls change the emitted byte while retaining
+the word return value one and leaving unused output bytes unchanged.
+
+The two sources retain eight explicit address operations: the output pointer
+is converted to the target's 32-bit unsigned integer, combined with the local
+index by bitwise OR, then converted back. Each index is initialized to zero,
+never changed and never exposed to another function. Thus the operation keeps
+the same pointer bits within this pinned target's pointer/integer conversion
+contract. This is implementation-specific C, with no claim that the historical
+source used this spelling, that addresses contain tags, or that the operation
+works for a nonzero index. The surrounding conditional, switch and provider
+logic remains ordinary C. The only assembly directive requests alignment and
+contains no instruction body.
+
+Both callbacks write at most output byte zero, retain no output pointer, and
+append no terminator. The consumers' live seven-byte backing and initialization
+requirements still apply. The signed parameter uses the corresponding signed
+16-bit view of the existing field. The existing partial state/list/allocator
+relationships remain provisional; matching and target-width checks do not
+prove universal effective-type compatibility or runtime state populations.
+
+Row 87 has enabled byte one. Row 97 has enabled byte zero, so both guarded
+target selectors skip its factory-installed callback. The choice-builder calls
+the action callback before later enabled checks, supplying a conditional
+source route. All codes emitted by these two callbacks have first action-row
+halfword eight, while the current need selector compares an ordinal from zero
+through seven. That selector cannot accept these codes under its current
+comparison. These table and consumer facts do not establish gameplay use or
+exhaust all possible callback assignments.
+
+The complete spans contain 186 instruction bytes, 32 referenced data bytes and
+six alignment bytes. The data includes the bounded six-case switch table and
+its referenced pointer. Four newly owned trailing zero bytes account for the
+inventory extent changing from 324,000 to 324,004 and the treemap extent from
+324,008 to 324,012; the remaining two alignment bytes are internal. Existing
+estimated boundaries are not reclassified as complete game-code coverage.
+The 319,640 mapped extent bytes remain the fixed historical comparison baseline.
