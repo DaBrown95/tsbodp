@@ -77,11 +77,16 @@ native block transfer. A fixed eight-byte representation copy from the existing
 four-aligned typed records instead selects the native block transfer without
 a helper or stack frame. Retaining the actual offset-table base at source +2,
 as in the neighboring owned builders, then gives 68 bytes / seven differences.
-Four differing instructions are confined to commuted loop ADD operands and the
-final size/return allocation; both causes remain open. Earlier genuine size
-locals have already been tried. Unique source attempts and selected compiler
-passes remain; retired old raw outputs do not establish another current match.
-This candidate has no source credit or assembly exception.
+Materializing the actual per-record byte offset and typed element pointers
+avoids the compiler's deferred-multiplication address ordering and repairs the
+two loop ADD instructions, giving 68 bytes / three differences. Only the two
+return-size instructions differ. A previously authored late byte-count model
+repairs the native shift but still misses the full-size result. Replaying its
+existing two-value form also fails: combine removes the explicit result copy
+before local allocation. A compound form has no established protection from an
+earlier legal combine, so it does not justify another trial. Unique attempts
+and selected compiler passes remain; retired old raw outputs do not establish
+another current match. This candidate has no source credit or assembly exception.
 The resource selection/cleanup operations, object lookup and view effect
 updates remain next connected targets. The group object-count reader at
 `0800AE50` is now accepted with the command continuation.

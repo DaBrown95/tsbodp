@@ -49589,6 +49589,38 @@
         "before": "audio_play_animation_cue(15)",
         "after": "audio_play_animation_cue(14)"
       }
+    },
+    {
+      "name": "display_matrix_sine",
+      "rom_offset": 160424,
+      "size": 20,
+      "source": "src/display/matrix_sine.c",
+      "symbols": {
+        "frame_sine": "0x8027219"
+      },
+      "thumb_symbols": [
+        "frame_sine"
+      ],
+      "negative_control": {
+        "before": ">> 8",
+        "after": ">> 7"
+      }
+    },
+    {
+      "name": "display_matrix_cosine",
+      "rom_offset": 160444,
+      "size": 20,
+      "source": "src/display/matrix_cosine.c",
+      "symbols": {
+        "frame_cosine": "0x802725d"
+      },
+      "thumb_symbols": [
+        "frame_cosine"
+      ],
+      "negative_control": {
+        "before": ">> 8",
+        "after": ">> 7"
+      }
     }
   ],
   "assembly": [

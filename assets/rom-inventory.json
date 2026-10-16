@@ -5841,7 +5841,7 @@
   },
   "entry_count": 2536,
   "extent_count": 2537,
-  "mapped_extent_bytes": 325330,
+  "mapped_extent_bytes": 325334,
   "rows": [
     {
       "name": "rom_entry",
@@ -45836,13 +45836,14 @@
       "referenced_literal_bytes": 8
     },
     {
-      "name": "sub_080272A8",
+      "name": "display_matrix_sine",
       "rom_offset": 160424,
       "mode": "Thumb",
       "runtime_addresses": [
         134378152
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -45854,25 +45855,26 @@
       "return_offsets": [
         160440
       ],
-      "size": 18,
-      "extent_basis": "CFG envelope estimate",
+      "size": 20,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 160424,
       "body_rom_start": 160424,
       "body_rom_end": 160442,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0802xxxx",
       "decoded_instruction_bytes": 18,
       "referenced_literal_bytes": 0
     },
     {
-      "name": "sub_080272BC",
+      "name": "display_matrix_cosine",
       "rom_offset": 160444,
       "mode": "Thumb",
       "runtime_addresses": [
         134378172
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -45884,12 +45886,12 @@
       "return_offsets": [
         160460
       ],
-      "size": 18,
-      "extent_basis": "CFG envelope estimate",
+      "size": 20,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 160444,
       "body_rom_start": 160444,
       "body_rom_end": 160462,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0802xxxx",
       "decoded_instruction_bytes": 18,
@@ -100769,28 +100771,16 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_080272A8",
+      "name": "display_matrix_sine",
       "rom_offset": 160424,
-      "size": 18,
+      "size": 20,
       "status": "mapped_code"
     },
     {
-      "name": "Unresolved_0272BA",
-      "rom_offset": 160442,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_080272BC",
+      "name": "display_matrix_cosine",
       "rom_offset": 160444,
-      "size": 18,
+      "size": 20,
       "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_0272CE",
-      "rom_offset": 160462,
-      "size": 2,
-      "status": "unresolved"
     },
     {
       "name": "display_fixed_multiply",
@@ -109535,7 +109525,7 @@
     "config/ram-map-us-eu.json": "67362238b648e40fbf3b51d8e466bfd12e709a38211c16e157d384243896410b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "bdd2740d84d6ce54f8dc7431555ac7a405ee08847f4fdea5224fab2b860b6540",
-    "config/build-us-eu.json": "e63c36666119b7a37b8eea1ce3fea0e02326a8140362d8ec845e4bca0ceed900",
+    "config/build-us-eu.json": "6295bb01bd3ebd933275144c9d20a198fa3d227a228d732373380c00b35f1130",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/audio/audio_game_select_activity_callback.c": "f1b271db1ce338b8e0e9fb72e53366263d86726953bb6ad6b4f1615d52ccb5b6",
     "src/audio/player_process_between_row.c": "f541ed81a46529f10a6179c656949d712e59fce9f94e4e9295a5dbfa8d09eefc",
@@ -109634,16 +109624,16 @@
       "nonconflicting_qualified_instruction_bytes": 279646,
       "raw_referenced_data_union_bytes": 35616,
       "qualified_referenced_data_union_bytes": 35616,
-      "source_glue_owned_extent_bytes": 282072,
-      "estimated_envelope_union_bytes": 325330,
+      "source_glue_owned_extent_bytes": 282112,
+      "estimated_envelope_union_bytes": 325334,
       "classification_bytes": {
         "estimated_envelope_unclassified": 6434,
         "instruction_and_referenced_data_dual_use": 4,
         "known_data": 18852,
-        "owned_extent_unclassified": 3662,
+        "owned_extent_unclassified": 3666,
         "strong_rooted_instruction": 279642,
         "strong_rooted_referenced_data": 35612,
-        "unresolved": 16433010
+        "unresolved": 16433006
       }
     },
     "physical_unions": {
@@ -149952,10 +149942,6 @@
         ],
         [
           154636,
-          160424
-        ],
-        [
-          160464,
           160516
         ],
         [
@@ -150618,14 +150604,6 @@
         ],
         [
           154436,
-          160442
-        ],
-        [
-          160444,
-          160462
-        ],
-        [
-          160464,
           160602
         ],
         [
@@ -215355,7 +215333,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -215363,10 +215342,13 @@
       {
         "rom_offset": 160442,
         "size": 2,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "estimated_envelope",
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 160444,
@@ -215376,7 +215358,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -215384,10 +215367,13 @@
       {
         "rom_offset": 160462,
         "size": 2,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "estimated_envelope",
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 160464,
@@ -273099,10 +273085,10 @@
         "size": 65536,
         "classification_bytes": {
           "estimated_envelope_unclassified": 1974,
-          "owned_extent_unclassified": 836,
+          "owned_extent_unclassified": 840,
           "strong_rooted_instruction": 54262,
           "strong_rooted_referenced_data": 8256,
-          "unresolved": 208
+          "unresolved": 204
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -327526,8 +327512,9 @@
         "execution_address": 134378152,
         "entry_rom_offset": 160424,
         "mode": "Thumb",
-        "name": null,
+        "name": "display_matrix_sine",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -327559,8 +327546,9 @@
         "execution_address": 134378172,
         "entry_rom_offset": 160444,
         "mode": "Thumb",
-        "name": null,
+        "name": "display_matrix_cosine",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -407366,6 +407354,26 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 168,
         "referenced_data_bytes_in_extent": 8
+      },
+      {
+        "name": "display_matrix_sine",
+        "rom_offset": 160424,
+        "size": 20,
+        "source": "src/display/matrix_sine.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 18,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "display_matrix_cosine",
+        "rom_offset": 160444,
+        "size": 20,
+        "source": "src/display/matrix_cosine.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 18,
+        "referenced_data_bytes_in_extent": 0
       },
       {
         "name": "irq_cpu_enable",

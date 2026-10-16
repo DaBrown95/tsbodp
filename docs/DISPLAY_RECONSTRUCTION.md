@@ -166,8 +166,19 @@ triggers sine/cosine fixed-point multiplication and reference centering around
 120 by 80. It then clears matrix-dirty and sets affine-commit. Expanded state
 fields at offsets `0x24` through `0x6a` follow these operations and their widths.
 The countdown is explicitly re-read for both divisions, preserving observed
-RAM loads; it is not assumed constant across calls. The vector/trigonometric
-callees remain original where no separate matching entry exists.
+RAM loads; it is not assumed constant across calls.
+
+The matrix wave adapters now own both complete 20-byte slots at `0x080272a8`
+and `0x080272bc`, including two zero alignment bytes each. They convert the
+phase to an unsigned byte, call the existing matching `frame_sine` or
+`frame_cosine`, then arithmetic-shift by eight and narrow to signed 16 bits.
+The source preserves the selected target's negative-shift and narrowing behavior;
+for example, -1608 shifted by eight yields -7 before narrowing. Fresh normal and
+strict pairs match; changing the shift to seven rejects each by one byte.
+Target API checks compile the actual wrapper/provider `int(int)` definitions
+alongside the background updater. All six direct providers of that updater now
+have source, including the separately counted signed-division library assembly.
+This does not close the renderer/finalizer or establish gameplay coverage.
 
 The background map initializer at `0x0800d6c8` calls the character fill routine,
 then fills the staged screen map with a tile/palette halfword through CpuSet.
