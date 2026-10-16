@@ -47,9 +47,9 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,998 |
-| Unclassified remainder of estimated envelopes | 16,236 |
-| Other unresolved ROM | 16,433,810 |
+| Unclassified inside source/glue-owned extents | 3,002 |
+| Unclassified remainder of estimated envelopes | 16,234 |
+| Other unresolved ROM | 16,433,808 |
 | **Physical ROM total** | **16,777,216** |
 
 Thus 270,608 bytes have qualified static instruction evidence, under the stated
@@ -449,3 +449,26 @@ and row reader were replayed for the font-control write-footprint witness; this
 adds neither C coverage nor runtime observations. The copied-audio extent gaps,
 unresolved targets and complete-denominator limitations remain open. The fixed
 historical comparison is still 319,640 bytes.
+
+### Actor need-target selector
+
+The connected actor-state selector at `0x08006F20` adds one matching C
+function and 272 extent bytes, bringing coverage to 1,713 functions and 245,340
+C bytes, with 500 glue bytes separate. Its earlier 270-byte control-flow
+estimate now has compiler ownership through the two trailing alignment zeros
+before the independently called state-34 entry at `0x08007030`. The full span
+contains 256 instruction bytes, twelve literal bytes and four alignment zeros.
+
+Only this ordinary map row changes. Entry count stays 2,523; inventory extent
+bytes become 324,000 and treemap extent bytes 324,008. Two internal zeros move
+from estimated gaps into source-owned unclassified bytes, and two trailing zeros
+move from unresolved ROM into that owned category. Qualified instruction and
+referenced-data unions remain 270,608 and 34,732 bytes. The two callback sites
+retain open writable-population evidence; finite table assignments and the
+seven-byte writer contract are detailed in
+[FRAME_NEED_TARGET_SELECTION.md](FRAME_NEED_TARGET_SELECTION.md).
+
+No inventory discovery, existing provider or callback gains C credit here.
+The copied-audio-kernel extent uncertainties, unresolved targets and other survey
+limits still prevent a complete code denominator. The historical comparison
+remains fixed at 319,640 mapped extent bytes.

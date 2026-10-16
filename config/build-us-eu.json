@@ -41432,6 +41432,31 @@
         "before": "if (!(g_game_flags & 0x20)) {\n        display_text_select_font(3, 0, 0);",
         "after": "if (!(g_game_flags & 0x20)) {\n        display_text_select_font(2, 0, 0);"
       }
+    },
+    {
+      "name": "frame_find_need_target",
+      "rom_offset": 28448,
+      "size": 272,
+      "source": "src/frame/frame_find_need_target.c",
+      "symbols": {
+        "frame_actor_need_value": "0x0802b9a1",
+        "frame_random_range": "0x080353d9",
+        "g_frame_pending_action_head": "0x03005868",
+        "g_frame_action_search_descriptors": "0x08062e7c",
+        "_call_via_r2": "0x0804ccf9",
+        "heap_clear": "0x08027a49",
+        "g_need_effect_action_text": "0x080645c4"
+      },
+      "thumb_symbols": [
+        "frame_actor_need_value",
+        "frame_random_range",
+        "_call_via_r2",
+        "heap_clear"
+      ],
+      "negative_control": {
+        "before": "frame_actor_need_value(actor_need_state(actor), i) <= 30",
+        "after": "frame_actor_need_value(actor_need_state(actor), i) <= 29"
+      }
     }
   ],
   "assembly": [

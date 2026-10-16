@@ -1070,8 +1070,10 @@ Direct inspection identifies `0x0804D49C` as double addition and `0x0804D4CC` as
 double subtraction. Both unpack two operands, call the same addition core at
 `0x0804D230`, then pack the result at `0x0804D010`; only the second entry flips
 the unpacked second operand's sign at `+4`. This agrees with the inspected local
-compiler's `fp-bit.c` add/sub structure. These helper bodies remain unconverted
-and receive no C coverage from the alias audit.
+compiler's `fp-bit.c` add/sub structure. This historical alias audit added no C
+coverage; the helper bodies were unconverted at that stage. Their later matching
+C replacements and verification limits are documented in
+[RUNTIME_FLOATING_POINT.md](RUNTIME_FLOATING_POINT.md).
 
 The entry at `0x0804CDC4` is an unsigned double-to-word conversion wrapper. It
 compares its input with `2^31`; below that threshold it calls the signed core
