@@ -315,7 +315,7 @@
       "consumer_sites": [
         19854
       ],
-      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "consumer_semantics": "Direct indexed call through the fixed ROM table; runtime kind/descriptor-index domains and table capacity remain unproved.",
       "evidence": [
         {
           "original_entry_rom_offset": 19688,
@@ -489,12 +489,12 @@
     {
       "rom_offset": 19854,
       "target_origin": "fixed_ROM_table",
-      "producer": "ROM0x080D70894 +4*byte from descriptor0x080695DC +8*runtime_kind+1",
+      "producer": "ROM0x08D70894 +4*byte from descriptor0x080695DC +8*runtime_kind+1",
       "observed_table": "world_effect_functions",
       "field": 0,
       "writer_roles": [],
       "source_owners": [],
-      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
+      "remaining_uncertainty": "Kind is loaded as a full word without a local bound; the descriptor byte selects a table word. All kind writers, descriptor-index values and table capacity are not exhausted.",
       "confidence": "static native/source producer; populations and ABI remain provisional"
     },
     {

@@ -9,4 +9,15 @@ extern const unsigned int g_attachment_job_48_direction_words[];
 unsigned int frame_begin_attachment_job_48(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 unsigned int frame_step_attachment_job_48(struct FrameNeedEffectState *, struct FrameActorAttachmentRecord *);
 unsigned int frame_dispatch_attachment_job_48(struct FrameNeedEffectState *, struct FrameObject *);
+/* Actual observed row102 definition callbacks for kind48. */
+unsigned int frame_initialize_attachment_job_48(struct FrameNeedEffectState *);
+unsigned int frame_select_attachment_job_48(struct FrameNeedEffectState *, unsigned char *);
+/* EC formal roles remain inferred until its generic caller is identified. */
+unsigned int frame_prepare_attachment_job_48(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+void frame_finish_attachment_job_48(struct FrameNeedEffectState *);
+
+/* Separate neighbouring entries; no installed callback role is established. */
+unsigned int frame_check_attachment_job_48(struct FrameNeedEffectState *, struct FrameObject *);
+unsigned int frame_attachment_job_48_default_value(void);
+
 #endif

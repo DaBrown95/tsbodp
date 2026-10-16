@@ -1,43 +1,40 @@
 # Remaining reconstruction and closure work
 
-The current gate verifies **2,042 C functions / 270,760 C extent bytes**, plus
-**4,060 separate assembly extent bytes**. The starting published baseline was
-1,735 / 250,064 C bytes and 500 glue bytes. The build still obtains 16,502,396
-bytes of assets and unconverted code from original slices. Whole-ROM equality
-is proven; complete source ownership is not. The fixed 319,640 mapped extent
-bytes are a historical comparison only.
+The current gate verifies **2,078 C functions / 272,352 C extent bytes**, plus
+**4,060 separate assembly extent bytes**. The starting baseline was
+1,735 / 250,064 C bytes and 500 glue bytes. Original slices still supply
+16,500,804 bytes of assets and unconverted code. Whole-ROM equality is proven;
+complete source ownership is not. The fixed 319,640 mapped extent bytes are
+solely a historical comparison.
 
 Follow this dependency order. Accepted ownership comes from the
-[manifest](../config/build-us-eu.json) and [inventory](../assets/rom-inventory.json);
-untracked candidates and old match-distance receipts receive no credit.
+[manifest](../config/build-us-eu.json) and [inventory](../assets/rom-inventory.json).
+Untracked candidates and old match-distance receipts receive no credit.
 
-| Order | Remaining work | Required closure evidence |
+| Order | Remaining work | Closure required / present blocker |
 | --- | --- | --- |
-| 1 | Renderer `0x080023E8` (1,400 bytes) and finalizer `0x08003248` (348). | Readable C matching both complete slots with source controls. The renderer lacks a source explanation combining its native frame/register allocation with the preserved variants reads; real inline stores and the live working-word hypothesis failed. A previously tested indexed-record view already preserves all three reads through one field cursor, but remains 1,396 bytes / 682 differences with an 84-byte frame. In the cached-read candidate, spilling cannot restore removed field loads because its rows pseudo has no memory equivalence. Finalizer flags/category/previous lifetimes remain unresolved; real point snapshots failed. Its terminal transfer is a saved return. Inspect retained compiler evidence before another trial. |
-| 2 | Connected actor producers, attachment workers and writable callbacks. | Close kind 66's 248-byte worker, land placement `0x08024ACC` (68 bytes / six differences), movement `0x08024720` (472 / 14), and the remaining attachment modules. Their prior ABI and later-result-use failures stay explicit. Thirty-four observed-prefix constant-one EC leaves have source-backed compiler explanations. Fourteen remain: 13 depend on unconverted E8 writers, while the owned no-write selector at `0x0801335C` supplies no grounded cases for EC `0x08013360`. The header jobs' actual F8 at `0x08012E74` (192 bytes) remains original; `0x08013330` is a distinct initializer. Exhaust object and attachment callback writers/targets, including the unidentified generic EC consumer. Finite source-owned modules do not close writable, incoming or gameplay domains. See [actor state](ACTOR_STATE_RECONSTRUCTION.md) and [attachment paths](FRAME_NEED_TARGET_SELECTION.md). |
-| 3 | Copied-RAM ordering, tile decoding and map drawing. | Reconstruct ROM `0xB840` (284-byte sorter), `0xB36C` (provisional 504-byte tile decoder) and `0xB564` (provisional 320-byte map body). The sorter's two-byte difference is register allocation; retain its causal failures. Verify RAM addresses and ROM load offsets independently. Copy lengths include following prefixes. The 812-byte background decoder's justified assembly ownership does not close these C-origin bodies. See [RAM map](../config/ram-map-us-eu.json) and [decoder notes](RESOURCE_BACKGROUND_DECODER.md). |
-| 4 | Audio C initializer, extended-play entry and writable-code domains. | Resolve the unexplained NOP versus store at `0x08049968` in ordinary C without suppressing a store. The initial 72-byte interworking interval now has source ownership under the assembly/hardware-glue exceptions. The saved-R5 adapter's unusual caller/stack protocol remains open. Exhaust patcher inputs, incoming transfers and later executable writes; compare every reachable modified state. Observed shifts five/four and replacement-word arrivals are finite evidence. See [audio](AUDIO_RECONSTRUCTION.md). |
-| 5 | Remaining startup, runtime and other mapped C bodies. | Replace every executable slice. The 60-byte debugger adapter now has justified ABI-glue ownership; the preceding eight zero bytes remain outside owned startup extents, and its incoming/writer domain remains open. Other established startup/runtime intervals do not close their transitive graph. Offer confirmation owns 224 C bytes and five world-effect callbacks own 1,100; callbacks `0x080052EC` (252) and `0x080054D0` (180), the scene controller and quantity-input paths remain original. First-CSE widened-load reuse explains the callbacks' missing rereads, but the optimization diagnostic still mismatches and is rejected for extra allocated data. Use connected callers and the current map to choose bodies; inspect previous attempts first. |
-| 6 | Inventory gaps, indirect domains and later copied/modified code, alongside rows 1-5. | Close 98 unresolved call-site and 21 transfer observations at 112 physical sites. Resolve serialized indices, writable callbacks, IRQ targets, jump tables and decompression destinations across all ten installations (19,188 distinct ROM source bytes). Pending-display count/capacity/alias and arbitrary-callback domains remain open. All twelve selected endpoints of six outside-main Thumb coincidences have data roles; this does not prove execution exclusion. See [inventory](WHOLE_ROM_INVENTORY.md). |
-| 7 | Completion and publication proof. | No executable instruction body may come from an original-ROM slice. Resolve material inventory uncertainty, justify every assembly exception and reproduce a clean build with pinned tools/local inputs. Pass matching/control, applicable tool-test, inventory and progress gates; audit content/history and publish to `main` with concise reader instructions and contribution features disabled. |
+| 1 | Renderer `0x080023E8` (1,400 bytes), finalizer `0x08003248` (348). | Readable C matching both complete slots, with controls. Renderer needs native frame/register allocation together with three variant reads; the retained indexed-record producer preserves those reads but is 1,396 bytes / 682 differences. Real stores/live-word trials failed. Finalizer flag/category/previous lifetimes remain unexplained; point snapshots failed, and its native stack accesses supply no address-taking producer. Inspect retained compiler evidence before another trial. |
+| 2 | Connected actor and attachment lifecycles. | Finish kind 66 (248), land `0x08024ACC` (68 / six differences), movement `0x08024720` (472 / 14), and remaining modules. The header family now owns its complete 1,212-byte local interval. Of 48 observed-prefix EC8 leaves, 38 have source; eight have unconverted output-writing E8 paths, and two no-write selectors supply no grounded cases. Exhaust writable callbacks and the unidentified generic EC consumer. See [actor state](ACTOR_STATE_RECONSTRUCTION.md) and [attachments](FRAME_NEED_TARGET_SELECTION.md). |
+| 3 | Copied-RAM sorter, tile decoder and map drawer. | Match ROM `0xB840` (284), `0xB36C` (provisional 504) and `0xB564` (provisional 320). The constrained sort diagnostic remains two bytes different; its source/register cause is unresolved. Verify RAM/load addresses separately: copy lengths include following prefixes. The owned 812-byte assembly decoder does not close these C-origin bodies. See [RAM map](../config/ram-map-us-eu.json) and [decoder](RESOURCE_BACKGROUND_DECODER.md). |
+| 4 | Audio initializer, unusual entry protocols and executable writes. | Explain the NOP versus store at `0x08049968` in ordinary C. The saved-R5 adapter's caller/stack protocol remains open despite ownership of the initial 72-byte glue interval. Exhaust patcher inputs, incoming transfers and later writes; compare every reachable modified state. Observed converter shifts five/four remain conditional evidence. See [audio](AUDIO_RECONSTRUCTION.md). |
+| 5 | Other startup, runtime and scene bodies. | Replace every executable slice. Debugger glue ownership leaves eight preceding zero bytes and incoming/writer domains unresolved. World-effect callbacks `0x080052EC` (252) and `0x080054D0` (180), their controller and quantity-input paths remain original. First-CSE widened-load reuse explains missing rereads; disabling it still mismatches and introduces rejected data. See [scene paths](SCENE_LINK_ENTRY.md). |
+| 6 | Inventory closure alongside rows 1-5. | Close 98 unresolved call-site and 21 transfer observations at 112 physical sites. Exhaust serialized indices, writable/IRQ callbacks, jump tables, decompression destinations and all ten code installations (19,188 distinct ROM source bytes). Pending-display and computed collision count/header/alias domains remain open. Selected outside-main endpoints have data roles, which does not establish execution exclusion. See [inventory](WHOLE_ROM_INVENTORY.md). |
+| 7 | Final reproducibility and publication. | Obtain no executable instruction body from original-ROM slices; resolve material inventory uncertainty and justify every assembly exception. Reproduce a clean build with pinned tools/local inputs. Pass matching/control, applicable tool-test, inventory and progress gates, audit content/history and publish to `main`. Keep reader instructions concise and contribution features disabled. |
 
-The [bounded runtime observations](RUNTIME_OBSERVATIONS.md) now reach shared
-rendering through normal keys. Across 128 validated calls, selected fields had
-no writes or observed nested IRQ entries. A Right press confirmed two real
-same-object variant writes outside rendering. This does not justify `volatile`,
-explain the reload or close interrupt/writer/gameplay domains. The separate
-300-frame boot and byte-identical replay likewise prove selected observations,
-not complete target sets. The static census retains `runtime_observations: 0`.
+[Runtime observations](RUNTIME_OBSERVATIONS.md) cover 128 renderer calls without
+selected-field writes or nested IRQ entries, plus two actual variant writes
+outside rendering. They neither justify `volatile` nor close writer/gameplay
+populations. Boot/replay evidence is also bounded; the static census retains
+`runtime_observations: 0`.
 
-The census qualifies 277,708 physical instruction bytes, including four also
-read as data. This is not a complete code denominator or C extent total.
-Unclassified bytes remain: 3,490 inside source-owned extents, 8,840 inside
-estimated envelopes and 16,433,134 elsewhere. The initial EWRAM image has no
-established executable entry; later executable writes remain possible.
+The census qualifies 277,898 physical instruction bytes, including four also
+read as data; this is no complete denominator. Unclassified bytes remain:
+3,542 inside owned extents, 8,640 inside estimated envelopes and 16,433,092
+elsewhere. The initial EWRAM image has no established executable entry;
+later executable writes remain possible.
 
-Retain one current paired full-build proof and its controls, unique source
-attempts and bounded useful failures. Retire obsolete generated payloads and
-record their removal under the existing [retention policy](LOCAL_OUTPUT_RETENTION.md).
-The last measured allocation was about 4.00 GB, below 5 GB. Historical hash
-receipts do not imply payload retention; do not create another archive or touch
-backups/unrelated files.
+Retain one current paired full proof and controls, unique source attempts and
+bounded useful failures. Retire obsolete generated payloads with a record under
+the existing [retention policy](LOCAL_OUTPUT_RETENTION.md). Latest measured
+allocation: about 4.10 GB, below 5 GB. Historical hashes do not require permanent
+payload retention. Leave backups and unrelated files alone.

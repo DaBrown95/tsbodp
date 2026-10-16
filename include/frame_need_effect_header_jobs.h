@@ -8,4 +8,5 @@ unsigned int frame_step_header_attachment_job_50(struct FrameNeedEffectState *,s
 unsigned char frame_actor_header_mode(struct FrameObject *);
 /* Word ROM entries are narrowed by the actual byte direction store. */
 extern const unsigned int g_header_attachment_reverse_directions[];
+unsigned int frame_initialize_header_attachment_jobs(struct FrameNeedEffectState *);
 #endif

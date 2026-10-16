@@ -737,3 +737,41 @@ not exclude executable dual use, identify every incoming transfer or close a
 ROM bank. The six weak coincidences therefore remain unresolved in the static
 inventory. Source/hash checks, truncation controls and bounded receipts remain
 under ignored `analysis/outside-thumb-*/` and `analysis/source-word-46b664/`.
+
+
+### Standalone reflected-byte checksum
+
+The separate entry at `0x08013390` now owns 68 matching C instruction bytes as
+[`crc8_reflected`](../src/runtime/crc8_reflected.c). It starts checksum zero and
+updates each byte through eight reflected polynomial-`0x8C` steps. A first
+fetch-postincrement recipe was 68 bytes / 60 differences. Moving pointer
+advancement to the outer iteration clause gives exact identity: GCSE PRE forms
+independent next-pointer and next-count values before the bit loop and restores
+the argument homes at its backedge. The retained pass output corrects the
+initial prediction that this would first occur in the later loop pass.
+
+Changing the real polynomial to `0x8D` rejects one byte at the same size. Strict
+ARM API checks and a wrong-length-type rejection pass; defined host C witnesses
+distinguish the actual control and include zero length. These are not game
+observations. Valid byte-array/pointer-advance domains are required. No direct
+caller or odd ROM pointer has been identified; name, unused formals and the
+chosen compatible API remain provisional. Source ownership adds no complete
+incoming domain. The full matching/control and progress gates pass.
+
+
+### Computed collision callback index
+
+The copied collision dispatcher at ROM `0xB0E8` loads callbacks through
+`object + 0xC8 + 4*index` at calls `0xB2B0` and `0xB2D8`. The byte loop indices
+are tested against object byte `+0xAF`, with no local two-entry bound. Index
+nine selects offset `0xEC` if the count reaches ten. Accepted animation and
+part-collider updaters obtain that count from serialized sequence byte `+0x0B`
+and selected-part updates; their full input/header domain remains open. The
+existing `+C8/+CC` shorthand does not establish an exhaustive local slot range.
+
+The actual scratch-array producer collects scene-object pointers, while
+need-effect states use a separate allocation pool. This identifies a computed
+field-load caveat, not a generic need-effect EC consumer or action-delivery
+route. Count/header and base-alias closure remain required. All selected
+consumers, count producers and callers already have source. No new compiler or
+runtime observation, source credit or complete target set follows.
