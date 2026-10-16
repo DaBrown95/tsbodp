@@ -1192,3 +1192,61 @@ arguments produced the same lifetime and call-setup differences, disproving
 that ABI explanation. The ordinary movement candidate still differs in
 14 bytes; no unsupported switch arm has been added to influence its compiler
 pivot. Neither blocker receives source coverage.
+
+## Interaction choices and two-object callbacks
+
+The actor constructor's interaction-choice refresher at `0x08009FAC` now owns
+132 matching C bytes: 124 instruction bytes and eight referenced literal bytes.
+It saves each pending node's next pointer, checks the definition's enabled byte,
+clears seven local choice bytes and invokes the existing E8 action callback.
+It scans that initialized buffer for codes 12, 27, 45 or 22, stores the first
+recognized code at node byte `0x5C`, and continues through the saved list. The
+result records whether any node supplied a recognized code. Its 12-to-13 source
+control rejects by one byte.
+
+The existing `unknown58[0x8C]` character array supplies the byte at element four;
+the access remains inside that 140-byte array. A real pointer to this byte lives
+from before the scan, matching the native address lifetime. The explicit shared
+scan guard avoids the pinned compiler's duplication of a structured loop exit
+test. Earlier compound and structured-loop sources remain bounded failures;
+no compiler flags, register bindings or invented reads were used.
+
+This adds a source-owned consumer of the known action writers. It does not close
+writable callback targets, list populations, descriptor bounds, pointer backing
+or runtime reachability. The kind-66 worker still has no later non-Boolean use
+of its narrowed add-entry result: both successors overwrite it before use, and
+the final result is independently set to two. That read-only audit supports no
+new ABI or inline-return source attempt.
+
+The actor constructor's three installed interaction callbacks now reproduce
+232 C bytes: default `0x08011274` (104), special `0x080112DC` (76), and the
+world-31 override `0x080114A4` (52). They contain 208 instruction bytes, 20
+referenced literal bytes and four zero alignment bytes. Each first C-body
+recipe matches, and each genuine scene-kind or variant control rejects by one
+byte.
+
+All three consume self and other object pointers. The existing collision
+dispatcher supplies that two-object protocol at the secondary callback slot
+`+0xCC`; the constructor selects the corresponding pointers by subtype/world.
+The actor callback field and three declarations now use two formals. The
+scene-saved constructor's obsolete one-formal cast is removed; it and the
+unchanged actor constructor still match with their existing source controls.
+This changes no object offsets or pointer widths.
+
+Default interaction checks the game-state byte, the other object's id, pressed
+input and state, then submits scene 15, plays cue 79, stores self at the other's
+`+0x90` pointer and clears input. Special interaction handles subtypes 6 through
+17 with scene 21. The world-31 callback requests variant four and clears input
+after its id/input checks. Live object backing, input slots zero through three,
+stored-pointer lifetimes and the partial object views remain conditional
+contracts. These source-owned bodies do not close all writable callback targets
+or establish runtime/gameplay coverage.
+
+Three separate no-op hooks also have ordinary C ownership: `actor_entry_empty_hook`
+at `0x0800EB2C`, `frame_scene_primary_tick` at `0x0802FB80`, and
+`frame_scene_trigger_noop` at `0x0803AD60`. Each owns a two-byte return and two
+zero alignment bytes, ending at a separate following entry. Their existing
+void interfaces agree with the accepted reset caller or constructor callback
+assignment. Each real control adds a byte store through a live argument and
+compiles to eight bytes, rejected in full. These three definitions add twelve
+C extent bytes and no runtime or incoming-target completeness claim.

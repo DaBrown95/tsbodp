@@ -28,7 +28,7 @@ struct FrameSceneSavedEffect *frame_create_scene_saved_effect(unsigned char kind
  effect->owner=0;
  object->on_step=frame_scene_effect_tick;
  object->on_remove=frame_scene_effect_remove;
- object->on_interact=(void (*)(struct FrameObject *))frame_scene_effect_interact;
+ object->on_interact=frame_scene_effect_interact;
  object->oam.gfx_mode=0;
  object->oam.double_tile_size=0;
  object->speed=g_frame_scene_effect_speeds[object->actor_id];

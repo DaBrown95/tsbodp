@@ -1440,8 +1440,28 @@ extent passes the existing verifier and rejects its changed-source control.
 As an independent origin check, assembling the upstream file verbatim with the
 eight native provider aliases reproduces all 56 selected bytes exactly. Its
 12 differing bytes are confined to the excluded extended-play trampoline.
-That body and its four-byte target pool remain original; the full 72-byte
-diagnostic is not an accepted replacement. Current accepted game/VBlank callers
-corroborate the first four routes; no current accepted binding was found for the
-three volume, pan and position stubs. Assembly ownership does not close incoming
-transfers, gameplay arguments or the providers' later writable-code states.
+That diagnostic does not by itself justify replacing the differing body.
+Current accepted game/VBlank callers corroborate the first four routes; no
+current accepted binding was found for the three volume, pan and position
+stubs. Assembly ownership does not close incoming transfers, gameplay arguments
+or the providers' later writable-code states.
+
+The remaining PlayExt body at `0x4C87C` and pool word at `0x4C8A4` now rebuild
+under the justified hardware-glue exception: twelve instruction bytes and four
+literal bytes, without C credit. The Thumb BL/private BX-R5 path has an
+independently established CPU-mode-adapter purpose, the same named handwritten
+SDK stub/pool role and seven exactly reproduced neighbours. The source adapts
+that interworking glue; its exact historical variant remains unidentified.
+No ordinary C game algorithm has been replaced by assembly.
+
+Its unusual native protocol remains explicit. With incoming SP `S`, provider
+entry uses `S-8`; its first two stack-argument slots contain saved caller R5
+and LR. R0-R3 pass unchanged, and ordinary Thumb return restores SP/R5. The
+source does not advertise a normal six-argument forwarding API. No accepted
+incoming alias, raw main-code Thumb call or raw ROM word pointer was found in
+the bounded scans; computed targets and writable callbacks remain possible.
+Controls changing the saved register and ARM destination both reject. A joint
+source-only ELF reproduces all 72 bytes across the eight entries and their
+pools (40 instruction / 32 literal bytes), with no gaps, padding or ROM-body
+fallback. This closes that initial source interval, not the audio module's
+remaining C or writable-state domains.
