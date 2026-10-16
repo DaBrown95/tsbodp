@@ -61,3 +61,28 @@ along with 298 tests and fourteen full-proof failure cases. Inventory discoverie
 earn additional recovered-C credit. The fixed historical mapped-extent
 comparison remains 319,640 bytes; the complete game-code denominator remains
 open.
+
+## Empty payload variant
+
+The shared payload now wraps a named union containing its existing eight-byte
+character view and a GNU empty record. The payload remains eight bytes with
+four-byte alignment; the event record remains twelve bytes with its payload at
+offset four. Six owned bodies receive fourteen mechanical member-path edits.
+The recorder's `EventData` destinations and the receiver's byte views remain
+unchanged. The original representation-copy repair and its source-domain
+qualifications still apply.
+
+The catalog's kind-11 cancel edge explicitly assigns the empty member before
+passing the whole payload to the recorder, which ignores payload fields for
+that kind. This initializes a genuine empty variant; it does not initialize
+eight character-array elements or prescribe stable transport bytes outside the
+active member. The selected compiler emits no value store or memory clobber for
+that assignment and retains the native by-value register loads. This is a GNU
+target source model, not proof of the historical record declaration.
+
+The complete recorder and catalog spans still match at 244 and 1,400 bytes, and
+their meaningful changed-source controls reject. Current public-header checks
+cover their actual definitions and providers. The other callers still have
+partially written arguments and existing integer-pointer representation casts;
+this change neither certifies those domains nor supplies invented values for
+their unwritten suffixes. It adds no function or byte ownership.

@@ -14,7 +14,7 @@ void transition_fade_black_in_record(unsigned short targets) {
  for (level=16; level>=0; level--) {
   REG_BLDY = level;
   transition_link_update();
-  *(unsigned int *)payload.bytes = 0;
+  *(unsigned int *)payload.storage.bytes = 0;
   transition_record_event(1, payload);
   transition_frame_update_08001168();
   transition_stage_0802d054();

@@ -1,7 +1,14 @@
+#ifndef TSBODP_EVENT_RECORD_H
+#define TSBODP_EVENT_RECORD_H
 /* Eight-byte payload ABI and twelve-byte record inferred from callers/callee.
  * Kind selects the fields read; the byte view keeps the parameter representation. */
-struct EventPayload {
+struct EventNoPayload {};
+union EventPayloadStorage {
+ struct EventNoPayload no_payload;
  unsigned char bytes[8];
+};
+struct EventPayload {
+ union EventPayloadStorage storage;
 } __attribute__((aligned(4)));
 union EventData {
  unsigned int word;
@@ -23,3 +30,5 @@ extern void *memory_fill(void *, int, unsigned int);
 extern void *memory_copy(void *, const void *, unsigned int);
 /* The slot is interpreted as a signed byte and returned as a full word. */
 extern int event_get_link_slot(void);
+
+#endif

@@ -379,3 +379,32 @@ sixteen direct providers already have source. Its original two providers at
 producer mismatch, remain held. This callback batch does not close those
 bodies, descriptor-index/table capacity, incoming targets, arithmetic or
 backing-storage domains. `resource_get_object` at `0800AEE4` was already owned.
+
+## End callback
+
+`scene_link_entry_shutdown` at `0x08005648` reconstructs the observed row-23
+end callback in 60 complete C extent bytes: 52 instruction bytes and eight
+referenced literal bytes, with no alignment gap. The next owned entry remains
+`0x08005684`. The accepted end consumer invokes the table's end column as
+`void(void)`; the observed row does not establish every runtime scene index.
+
+With game flag `0x20` clear, it invokes second-transition kind zero with target
+mask 63; with the flag set, it invokes the existing recorded fade-out with the
+same target mask. It then releases the primary object list, resets the display,
+resets palette jobs and clears the scene object slots. All six direct providers
+already have source ownership. The callback has no payload local or aggregate
+argument. Its names remain inferred from the static lifecycle role.
+
+The full match and changed-source control use canonical APIs. Changing the
+first transition's target mask from 63 to 62 keeps the 60-byte extent and is
+rejected with one differing byte. Strict target checks cover the callback and
+six actual provider definitions, word/list/table geometry and callable types;
+wrong end-column and transition-target-width fixtures are rejected.
+
+This body does not resolve the held `0x08003ABC` step or its kind-12/13 payload
+problem. The existing fade provider initializes only the first word of its
+payload before recording kind one, whose recorder ignores the payload. Its
+partially initialized suffix and transitive source-domain limits stay qualified;
+this callback adds no initialization, signature relaxation or whole-domain
+claim for that provider. These are compiler and static findings, with no new
+runtime or gameplay validation.

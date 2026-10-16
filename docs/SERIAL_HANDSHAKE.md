@@ -174,3 +174,36 @@ these new callers add no event payload or invented initialization. Resource
 prefixes, object/list backing, allocation success, incoming indices, writable
 fields, scheduling and gameplay remain separate open domains. These entries
 add source ownership without claiming completion of the serial path.
+
+## Peer response predicate
+
+The response predicate at `0x0803E48C` has matching C ownership for its complete
+64-byte extent: 52 instruction bytes, eight literal bytes and four original
+zero alignment bytes. It reads the canonical response count at `0x0300218C`
+and byte mask at `0x03007338`, succeeding for exactly `(2,3)`, `(3,7)` or
+`(4,15)`. The accepted handshake resets and populates these fields. This is the
+response count; the starter's expected-count word at `0x03002190` is separate.
+Changing the final mask from 15 to 14 keeps the extent and rejects one byte.
+
+The held row-nine step calls the predicate at `0x0801C01C` and tests its low
+byte. The reconstructed word-return API preserves the actual zero/one result;
+the original narrow-versus-word return spelling remains unknown. Complete
+incoming, writer, interrupt and protocol domains remain open.
+
+Earlier private notes conflated this entry with the heavily tried 408-byte
+`link_transfer_finished` at `0x0803D850`: an old private row-nine alias reused
+that name for `0x0803E48C`. Exact-address and definition review separates them.
+No authored prior attempt was found for this 64-byte predicate; its first
+canonical short-circuit recipe matches. The 408-byte failures and the separate
+124-byte status-reader hold remain unchanged.
+
+The held 1,224-byte status controller now uses the actual provider names and
+the same empty-member payload representation as the catalog. Its low-byte peer
+result test has an explicit narrowing conversion at the caller. All 39 native
+calls retain their 21 targets, and twenty actual provider definitions pass the
+canonical API checks. Output remains 1,224 bytes with eleven differences; the
+controller gains no ownership. The remaining entry-zero and indicator-loop
+register differences survive these interface repairs. Genuine-value register
+constraints made the local instructions agree but changed compiler-wide
+allocation; retained intermediate output explains the extra pre-GCSE copy. No
+dead initialization, dummy instruction or assembly replacement is admitted.

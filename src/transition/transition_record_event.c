@@ -17,9 +17,9 @@ void transition_record_event(unsigned int kind, struct EventPayload payload) {
   record.payload.halfwords[0] = payload_word;
   break;
  case 5:
-  record.payload.bytes[1] = payload.bytes[0];
-  record.payload.bytes[2] = payload.bytes[1];
-  record.payload.bytes[3] = payload.bytes[2];
+  record.payload.bytes[1] = payload.storage.bytes[0];
+  record.payload.bytes[2] = payload.storage.bytes[1];
+  record.payload.bytes[3] = payload.storage.bytes[2];
   record.payload.bytes[0] = event_get_link_slot();
   break;
  case 7:

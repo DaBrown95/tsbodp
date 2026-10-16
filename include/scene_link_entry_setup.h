@@ -41,4 +41,9 @@ void scene_link_entry_confirm_offer(void);
 void scene_link_entry_build_objects_original(void);
 void scene_link_entry_refresh_offers_original(void);
 void scene_link_entry_initialize(void);
+
+/* End callback and existing transition provider boundaries. */
+void transition_run_second(unsigned short, unsigned int);
+void transition_fade_black_out_record(unsigned short);
+void scene_link_entry_shutdown(void);
 #endif

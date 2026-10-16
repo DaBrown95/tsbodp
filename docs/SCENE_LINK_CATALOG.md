@@ -67,3 +67,29 @@ are preserved, without fabricated initialization; any seeded-stack transport
 observations are separate native diagnostics. Full-ROM byte equality, bounded
 initialized behavior checks, static connections and gameplay evidence are
 separate claims. No hardware or gameplay execution is established here.
+
+## Explicit no-payload cancel event
+
+The catalog controller's existing kind-11 cancel edge now selects an initialized
+GNU empty-record member of the shared payload union immediately before its
+recorder call. This expresses a no-payload variant for a recorder kind that
+ignores payload data. It does not initialize the eight transport bytes or permit
+reading the inactive byte member. Seven existing payload byte paths gain only
+the shared `storage.` member path; all other source operations are unchanged.
+
+The complete existing 1,400-byte span still matches. Actual initial compiler
+output contains no memory clobber or value store at the empty-member assignment;
+its unused address computation is removed. The emitted kind-11 call retains
+`R1 <- [SP+8]` and `R2 <- [SP+12]`, matching the native setup at `0x080215FE`.
+The existing link-flag source control remains 1,400 bytes and is rejected with
+two differing bytes. The normal optimization/interworking profile is unchanged;
+`-da` captures diagnostic output only, and the publication gate uses the literal
+normal flags.
+
+Strict checks retain the eight-byte/four-aligned payload, twelve-byte event
+record, actual mode/input field geometry and by-value recorder API. All seventeen
+import declarations and fifteen actual owned provider definitions pass; wrong
+recorder-formal and input-offset fixtures are rejected. The two original accept
+services remain explicit without recovered definitions. Other partial payloads,
+existing representation casts, selection/input domains and runtime/gameplay
+limits remain qualified. This repair adds no new function or C-byte ownership.

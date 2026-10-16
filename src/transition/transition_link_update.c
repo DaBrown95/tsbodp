@@ -19,7 +19,7 @@ int transition_link_update(void) {
    g_link_endpoint.slot = 0xFF;
    return 1;
   } else {
-   *(unsigned int *)payload.bytes = 0;
+   *(unsigned int *)payload.storage.bytes = 0;
    if (g_link_recording & 1)
     transition_record_event(1, payload);
    else

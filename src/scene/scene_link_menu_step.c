@@ -14,7 +14,7 @@ void scene_link_menu_step(void)
                 g_scene_request.unknown_10 = 0;
             scene_link_menu_draw_status();
         } else {
-            *(unsigned int *)payload.bytes = 0;
+            *(unsigned int *)payload.storage.bytes = 0;
             transition_record_event(1, payload);
             if ((g_link_flags & 0x2000) && (g_link_flags & 0x4000)) {
                 resource_submit_scene(1, 2, g_frame_world_id);

@@ -11,16 +11,16 @@ void scene_link_catalog_step(void)
  }
  switch(g_scene_request.unknown_10) {
  case 4:
-  *(unsigned int *)payload.bytes=g_scene_link_catalog_world.value;
+  *(unsigned int *)payload.storage.bytes=g_scene_link_catalog_world.value;
   transition_record_event(7,payload);g_scene_request.unknown_10=5;break;
  case 5:
-  *(unsigned int *)payload.bytes=0;
+  *(unsigned int *)payload.storage.bytes=0;
   transition_record_event(8,payload);g_scene_request.unknown_10=6;break;
  case 6:
-  *(unsigned int *)payload.bytes=0;
+  *(unsigned int *)payload.storage.bytes=0;
   transition_record_event(9,payload);g_scene_request.unknown_10=7;break;
  case 7:
-  *(unsigned int *)payload.bytes=0;
+  *(unsigned int *)payload.storage.bytes=0;
   transition_record_event(10,payload);g_scene_request.unknown_10=8;break;
  case 8:resource_submit_scene(23,0,g_link_received_join.metadata[1]);break;
  default:
@@ -129,13 +129,14 @@ void scene_link_catalog_step(void)
      display_text_draw_line(226,120,96,display_scene_lookup_text(450),1);
      audio_play_animation_cue(3);
     } else {
-     payload.bytes[0]=context->entries[selection-5].unknown_00[0];
-     payload.bytes[1]=context->entries[selection-5].unknown_00[1];
-     payload.bytes[2]=context->entries[selection-5].type;
+     payload.storage.bytes[0]=context->entries[selection-5].unknown_00[0];
+     payload.storage.bytes[1]=context->entries[selection-5].unknown_00[1];
+     payload.storage.bytes[2]=context->entries[selection-5].type;
      transition_record_event(5,payload);
      g_link_received_join.entry_index=g_scene_request.scene-5;
     }
    } else if(g_input_pressed[g_scene_link_catalog_input.local_player]&2) {
+    payload.storage.no_payload=(struct EventNoPayload){};
     transition_record_event(11,payload);audio_play_animation_cue(2);
    }
   }
