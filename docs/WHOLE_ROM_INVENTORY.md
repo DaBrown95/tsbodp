@@ -287,3 +287,26 @@ or coverage count. Its existing 244-byte recorder gains no additional C credit.
 The total remains 1,705 matching C functions and 242,112 C extent bytes; the fixed
 319,640-byte historical comparison and unresolved game-code denominator remain
 unchanged.
+
+### Linked entry setup and final-row observation counts
+
+The linked-scene object builder at `0x08003F08` adds one matching C function and
+344 extent bytes: totals are now 1,706 functions and 242,456 C bytes, with 500
+instruction-glue bytes separate. Its full comparison includes 292 instruction
+bytes, 48 referenced pool bytes and four zero alignment bytes. The former
+326-byte estimate stopped at the return; the full extent ends at `0x08004060`.
+It absorbs the weak eight-byte pointer candidate at `0x0800404E`, leaving 2,527
+inventory entries and 323,798 mapped extent bytes. The treemap's inherited
+accounting reports 323,806 mapped extent bytes. Neither is a complete code
+denominator; the fixed historical comparison remains 319,640 bytes.
+
+Publication checks exposed stale per-row counts after known extents and split
+remnants replaced scanner estimates. Counts are now recomputed from retained
+observations within each final row, before raw offset sets are discarded. Seven
+row summaries change; every final instruction and literal count is bounded by
+its row size. Four regression tests cover trailing pools, observations outside
+ownership, dual roles and split remnants. The global unions remain 270,608
+qualified instruction bytes and 34,732 referenced data bytes. No additional
+execution, recovered C or complete-boundary claim is inferred from this counter
+repair. Callback domains, copied-code and unresolved-region limits above remain
+open. The adjacent builder and begin/step callbacks remain unconverted.

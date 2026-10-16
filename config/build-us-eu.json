@@ -41147,6 +41147,42 @@
         "after": ">301"
       },
       "source": "src/link/link_serial_timeout.c"
+    },
+    {
+      "name": "scene_link_entry_build_linked_objects",
+      "rom_offset": 16136,
+      "size": 344,
+      "source": "src/scene/scene_link_entry_build_linked_objects.c",
+      "symbols": {
+        "g_display_scene_catalog": "0x080616cc",
+        "g_scene_request": "0x03004350",
+        "g_display_scene_frame_objects": "0x030043b0",
+        "g_link_received_join": "0x03002d60",
+        "g_scene_link_entry_captions": "0x0804ed48",
+        "g_scene_link_entry_text_control": "0x0804ed90",
+        "frame_create_scene_object": "0x8027ee5",
+        "frame_set_position": "0x80014a5",
+        "display_text_number_field_zero": "0x801b1cd",
+        "display_text_select_font": "0x801ae75",
+        "display_scene_lookup_text": "0x8045009",
+        "display_allocate_text_object": "0x80450a1",
+        "display_text_set_background_control": "0x801ae2d",
+        "frame_set_variant_state": "0x8001be1"
+      },
+      "thumb_symbols": [
+        "frame_create_scene_object",
+        "frame_set_variant_state",
+        "frame_set_position",
+        "display_text_number_field_zero",
+        "display_text_select_font",
+        "display_scene_lookup_text",
+        "display_allocate_text_object",
+        "display_text_set_background_control"
+      ],
+      "negative_control": {
+        "before": "frame_set_variant_state(g_display_scene_frame_objects[0], 11);",
+        "after": "frame_set_variant_state(g_display_scene_frame_objects[0], 10);"
+      }
     }
   ],
   "assembly": [

@@ -5,7 +5,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 from inventory_partition import partition, overlay, verify_discovery
 try:
-    from inventory_rom import Scanner, BASE, unresolved_callback_sites
+    from inventory_rom import (Scanner, BASE, unresolved_callback_sites,
+                               observed_extent_counts, finalize_extent_observations)
 except ModuleNotFoundError:
     Scanner = None
 
@@ -49,6 +50,46 @@ class AccountingTests(unittest.TestCase):
 
 @unittest.skipIf(Scanner is None, 'Capstone is needed for scanner controls')
 class ScannerTests(unittest.TestCase):
+    def test_verified_extent_recovers_pool_beyond_prior_entry_clip(self):
+        observed = {'instruction_offsets': set(range(100, 106)),
+                    'literal_offsets': set(range(108, 112)) | set(range(116, 120))}
+        before = {key: set(value) for key, value in observed.items()}
+        self.assertEqual(observed_extent_counts(observed, 100, 12),
+                         {'decoded_instruction_bytes': 6, 'referenced_literal_bytes': 4})
+        self.assertEqual(observed_extent_counts(observed, 100, 20),
+                         {'decoded_instruction_bytes': 6, 'referenced_literal_bytes': 8})
+        self.assertEqual(observed, before)
+
+    def test_replacement_counts_exclude_observations_outside_ownership(self):
+        observed = {'instruction_offsets': set(range(96, 102)) | set(range(108, 114)),
+                    'literal_offsets': set(range(92, 96)) | set(range(104, 108))}
+        self.assertEqual(observed_extent_counts(observed, 100, 12),
+                         {'decoded_instruction_bytes': 6, 'referenced_literal_bytes': 4})
+        self.assertEqual(observed_extent_counts({}, 100, 12), {})
+
+    def test_replacement_does_not_erase_observed_dual_byte_roles(self):
+        observed = {'instruction_offsets': set(range(100, 104)),
+                    'literal_offsets': set(range(100, 104))}
+        self.assertEqual(observed_extent_counts(observed, 100, 4),
+                         {'decoded_instruction_bytes': 4, 'referenced_literal_bytes': 4})
+
+    def test_final_overlay_recounts_both_surviving_estimate_remnants(self):
+        estimate = {'name': 'estimate', 'rom_offset': 100, 'size': 20,
+                    'status': 'mapped_code', 'decoded_instruction_bytes': 14,
+                    'referenced_literal_bytes': 4,
+                    'instruction_offsets': set(range(100, 114)),
+                    'literal_offsets': set(range(116, 120))}
+        source = {'name': 'source', 'rom_offset': 108, 'size': 4,
+                  'status': 'exact_c', 'instruction_offsets': set(range(108, 112)),
+                  'literal_offsets': set()}
+        rows = overlay([estimate], [source])
+        finalize_extent_observations(rows)
+        self.assertEqual([(r['rom_offset'], r['size'], r['decoded_instruction_bytes'],
+                           r['referenced_literal_bytes']) for r in rows],
+                         [(100, 8, 8, 0), (108, 4, 4, 0), (112, 8, 2, 4)])
+        self.assertTrue(all('instruction_offsets' not in r and 'literal_offsets' not in r
+                            for r in rows))
+
     def test_observed_targets_do_not_remove_unproven_callback_bounds(self):
         records = [
             {'rom_offset': 4, 'kind': 'register_veneer_call',

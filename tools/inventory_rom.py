@@ -22,6 +22,22 @@ from inventory_census import census, verify_census
 BASE = 0x08000000
 
 
+def observed_extent_counts(observed, start, size):
+    """Count observed byte roles inside an estimate or replacement extent."""
+    return {count: sum(start <= offset < start + size for offset in observed[field])
+            for field, count in (('instruction_offsets', 'decoded_instruction_bytes'),
+                                 ('literal_offsets', 'referenced_literal_bytes'))
+            if field in observed}
+
+
+def finalize_extent_observations(rows):
+    """Recount final ownership, including remnants split by an overlay."""
+    for row in rows:
+        row.update(observed_extent_counts(row, row['rom_offset'], row['size']))
+        row.pop('instruction_offsets', None)
+        row.pop('literal_offsets', None)
+
+
 def unresolved_callback_sites(rows):
     """Observed table entries do not prove the runtime index is bounded."""
     calls = ('register_veneer_call', 'dynamic_call', 'observed_table_call')
@@ -434,8 +450,7 @@ def main():
         row['body_rom_start'] = min(row['instruction_offsets'])
         row['body_rom_end'] = max(row['instruction_offsets'])+1
         row['boundary_confidence'] = 'control_flow_bounded' if not row['issues'] and row['return_offsets'] and all(off <= p < end for p in row['instruction_offsets']) else 'provisional'
-        row['decoded_instruction_bytes'] = sum(off <= p < end for p in row.pop('instruction_offsets'))
-        row['referenced_literal_bytes'] = sum(off <= p < end for p in row.pop('literal_offsets'))
+        # Preserve full observations until the final ownership overlay.
         row['status'] = 'candidate' if any('candidate' in e for e in row['evidence']) and not any(e in row['evidence'] for e in ('direct call', 'bounded audit', 'audited RAM entry', 'audited dispatch entry', 'resolved literal transfer')) else 'mapped_code'
         row['group'] = 'Copied audio / ARM' if 0xfda478 <= off < 0xfdba28 else ('Startup / ARM' if off < 0x2a0 else f'ROM {0x0800+off//0x10000:04X}xxxx')
         for field in ('evidence', 'issues', 'call_targets', 'runtime_addresses', 'unresolved_transfer_offsets', 'return_offsets'):
@@ -455,7 +470,7 @@ def main():
     for row in rows:
         for field in ('evidence', 'issues', 'call_targets', 'runtime_addresses', 'unresolved_transfer_offsets', 'return_offsets'):
             row[field] = sorted(set(row.get(field, ())))
-        row.pop('instruction_offsets', None); row.pop('literal_offsets', None)
+    finalize_extent_observations(rows)
     audio = next(c for c in ram['copies'] if c['name'] == 'audio_iwram')
     ewram = next(c for c in ram['copies'] if c['name'] == 'initial_ewram')
     zero_start = audio['rom_offset']+0x115c
