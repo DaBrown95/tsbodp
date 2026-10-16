@@ -55,16 +55,35 @@ header snapshots, linked bytes, compiler mapping symbols, comparisons and a
 compact call-dependency table are retained under ignored
 `analysis/startup-game-entry/`.
 
-Twenty-two direct callees and the installed VBlank callback already have
-separate matching C definitions. Eight ordinary initialization roots remain
+Twenty-five direct callees and the installed VBlank callback have
+separate matching C definitions. Five ordinary initialization roots remain
 unconverted and keep address-based names in the
-[prototype header](../include/startup_game_entry.h): `0x080350A4`, `0x0800D564`,
-`0x0801BAFC`, `0x08030338`, `0x08039184`, `0x0802B11C`, `0x080458B8` and
+[prototype header](../include/startup_game_entry.h): `0x0801BAFC`,
+`0x08039184`, `0x0802B11C`, `0x080458B8` and
 `0x08046EB0`. The separate SWI 05 provider at `0x0804C8EC` has the explicit
 hardware-glue replacement below.
 Ownership of this coordinator does not claim those bodies, copied routines
 installed by its callees, complete callback domains, or counter-wrap behavior.
 The entry was reached once in the separate 300-frame HLE boot.
+
+## Memory and display initialization
+
+[`startup_initialize_memory`](../src/startup/initialize_memory.c) at
+`0x080350A4` and its five helpers own the contiguous 268-byte path through
+`0x080351B0`. They preserve the initialized IWRAM/EWRAM spans, clear unused
+RAM, then clear VRAM, OAM and palette memory through volatile DMA3 accesses
+and the original control readbacks. Word and halfword fill types preserve
+the transfer widths; compiler literal pools and zero alignment remain owned
+by their full source extents.
+
+[`display_initialize`](../src/display/initialize.c) owns the complete 20-byte
+entry at `0x0800D564`: it clears the hardware display-control halfword and
+calls the existing typed mode setter with zero. All seven functions have
+fresh exact comparisons and meaningful changed-source controls; the renamed
+game entry also retains its exact 224-byte comparison and control. Local
+source/header snapshots and comparisons are under ignored
+`analysis/startup-initializers/canonical/`. These source matches do not
+establish physical DMA timing or complete ownership of the remaining roots.
 
 ## BIOS wait handoff
 

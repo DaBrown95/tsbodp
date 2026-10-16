@@ -1,3 +1,6 @@
+#ifndef FRAME_RENDER_H
+#define FRAME_RENDER_H
+
 #include "frame.h"
 /* Independent record view for the frame/render path; offsets are provisional. */
 struct FrameOam {
@@ -107,3 +110,5 @@ const void *frame_part_pixels(struct FrameObject *, FrameU8);
 FrameU32 frame_allocate_display(const void *, FrameU32, FrameU32);
 void frame_upload_display(struct FrameObject *, const void *);
 void frame_upload_sequence(struct FrameSpriteSequence *, const void *, FrameU16, FrameU16, FrameU16);
+
+#endif

@@ -5814,7 +5814,7 @@
     16626452,
     16627112
   ],
-  "initial_connected_entries": 2333,
+  "initial_connected_entries": 2336,
   "connected_main_last_instruction": 134539998,
   "unresolved_transfer_sites": [
     604,
@@ -5841,7 +5841,7 @@
     16627112
   ],
   "whole_rom_prologue_hits": 15021,
-  "sweep_seed_count": 188,
+  "sweep_seed_count": 187,
   "weak_whole_ROM_survey": {
     "aligned_words_examined": 4194304,
     "Thumb_halfwords_examined": 8388608,
@@ -5869,9 +5869,9 @@
     "ARM_signatures_seeded_as_code": false,
     "limitation": "Signatures, raw BX words and pointer coincidences do not prove code, function entries or absence of other code."
   },
-  "entry_count": 2517,
-  "extent_count": 2517,
-  "mapped_extent_bytes": 324158,
+  "entry_count": 2519,
+  "extent_count": 2519,
+  "mapped_extent_bytes": 324232,
   "rows": [
     {
       "name": "rom_entry",
@@ -15962,13 +15962,14 @@
       "referenced_literal_bytes": 4
     },
     {
-      "name": "sub_0800D564",
+      "name": "display_initialize",
       "rom_offset": 54628,
       "mode": "Thumb",
       "runtime_addresses": [
         134272356
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -15981,11 +15982,11 @@
         54646
       ],
       "size": 20,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 54628,
       "body_rom_start": 54628,
       "body_rom_end": 54648,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0800xxxx",
       "decoded_instruction_bytes": 20,
@@ -56768,13 +56769,14 @@
       "referenced_literal_bytes": 4
     },
     {
-      "name": "sub_08030338",
+      "name": "frame_initialize_effect_pools",
       "rom_offset": 197432,
       "mode": "Thumb",
       "runtime_addresses": [
         134415160
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -56788,11 +56790,11 @@
         197542
       ],
       "size": 160,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 197432,
       "body_rom_start": 197432,
       "body_rom_end": 197544,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0803xxxx",
       "decoded_instruction_bytes": 112,
@@ -61352,13 +61354,14 @@
       "referenced_literal_bytes": 0
     },
     {
-      "name": "sub_080350A4",
+      "name": "startup_initialize_memory",
       "rom_offset": 217252,
       "mode": "Thumb",
       "runtime_addresses": [
         134434980
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -61371,25 +61374,26 @@
       "return_offsets": [
         217264
       ],
-      "size": 14,
-      "extent_basis": "CFG envelope estimate",
+      "size": 16,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 217252,
       "body_rom_start": 217252,
       "body_rom_end": 217266,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0803xxxx",
       "decoded_instruction_bytes": 14,
       "referenced_literal_bytes": 0
     },
     {
-      "name": "sub_080350B4",
+      "name": "startup_clear_unused_ram",
       "rom_offset": 217268,
       "mode": "Thumb",
       "runtime_addresses": [
         134434996
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -61400,24 +61404,25 @@
         217362
       ],
       "size": 116,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 217268,
       "body_rom_start": 217268,
       "body_rom_end": 217364,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0803xxxx",
       "decoded_instruction_bytes": 96,
       "referenced_literal_bytes": 20
     },
     {
-      "name": "sub_08035128",
+      "name": "startup_clear_display_memory",
       "rom_offset": 217384,
       "mode": "Thumb",
       "runtime_addresses": [
         134435112
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -61431,25 +61436,26 @@
       "return_offsets": [
         217400
       ],
-      "size": 18,
-      "extent_basis": "CFG envelope estimate",
+      "size": 20,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 217384,
       "body_rom_start": 217384,
       "body_rom_end": 217402,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0803xxxx",
       "decoded_instruction_bytes": 18,
       "referenced_literal_bytes": 0
     },
     {
-      "name": "sub_0803513C",
+      "name": "startup_clear_vram",
       "rom_offset": 217404,
       "mode": "Thumb",
       "runtime_addresses": [
         134435132
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -61460,24 +61466,25 @@
         217432
       ],
       "size": 40,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 217404,
       "body_rom_start": 217404,
       "body_rom_end": 217434,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0803xxxx",
       "decoded_instruction_bytes": 30,
       "referenced_literal_bytes": 8
     },
     {
-      "name": "sub_08035164",
+      "name": "startup_clear_oam",
       "rom_offset": 217444,
       "mode": "Thumb",
       "runtime_addresses": [
         134435172
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -61488,24 +61495,25 @@
         217470
       ],
       "size": 36,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 217444,
       "body_rom_start": 217444,
       "body_rom_end": 217472,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0803xxxx",
       "decoded_instruction_bytes": 28,
       "referenced_literal_bytes": 8
     },
     {
-      "name": "sub_08035188",
+      "name": "startup_clear_palette_memory",
       "rom_offset": 217480,
       "mode": "Thumb",
       "runtime_addresses": [
         134435208
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -61516,11 +61524,11 @@
         217508
       ],
       "size": 40,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 217480,
       "body_rom_start": 217480,
       "body_rom_end": 217510,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0803xxxx",
       "decoded_instruction_bytes": 30,
@@ -74032,14 +74040,14 @@
       "referenced_literal_bytes": 4
     },
     {
-      "name": "sub_0804138C",
+      "name": "audio_game_pause_forwarder",
       "rom_offset": 267148,
       "mode": "Thumb",
       "runtime_addresses": [
         134484876
       ],
       "evidence": [
-        "prologue candidate"
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -74050,13 +74058,13 @@
       "return_offsets": [
         267156
       ],
-      "size": 10,
-      "extent_basis": "CFG envelope estimate",
+      "size": 12,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 267148,
       "body_rom_start": 267148,
       "body_rom_end": 267158,
-      "boundary_confidence": "control_flow_bounded",
-      "status": "candidate",
+      "boundary_confidence": "bounded audit",
+      "status": "mapped_code",
       "group": "ROM 0804xxxx",
       "decoded_instruction_bytes": 10,
       "referenced_literal_bytes": 0
@@ -74070,7 +74078,6 @@
       ],
       "evidence": [
         "bounded audit",
-        "candidate call",
         "direct call"
       ],
       "issues": [],
@@ -74218,6 +74225,62 @@
       "group": "ROM 0804xxxx",
       "decoded_instruction_bytes": 14,
       "referenced_literal_bytes": 0
+    },
+    {
+      "name": "audio_game_disable_timer1_irq",
+      "rom_offset": 267388,
+      "mode": "Thumb",
+      "runtime_addresses": [
+        134485116
+      ],
+      "evidence": [
+        "bounded audit"
+      ],
+      "issues": [],
+      "call_targets": [],
+      "unresolved_transfer_offsets": [],
+      "transfer_records": [],
+      "return_offsets": [
+        267408
+      ],
+      "size": 36,
+      "extent_basis": "bounded audit",
+      "entry_rom_offset": 267388,
+      "body_rom_start": 267388,
+      "body_rom_end": 267410,
+      "boundary_confidence": "bounded audit",
+      "status": "mapped_code",
+      "group": "ROM 0804xxxx",
+      "decoded_instruction_bytes": 22,
+      "referenced_literal_bytes": 12
+    },
+    {
+      "name": "audio_game_enable_timer1_irq",
+      "rom_offset": 267424,
+      "mode": "Thumb",
+      "runtime_addresses": [
+        134485152
+      ],
+      "evidence": [
+        "bounded audit"
+      ],
+      "issues": [],
+      "call_targets": [],
+      "unresolved_transfer_offsets": [],
+      "transfer_records": [],
+      "return_offsets": [
+        267444
+      ],
+      "size": 32,
+      "extent_basis": "bounded audit",
+      "entry_rom_offset": 267424,
+      "body_rom_start": 267424,
+      "body_rom_end": 267446,
+      "boundary_confidence": "bounded audit",
+      "status": "mapped_code",
+      "group": "ROM 0804xxxx",
+      "decoded_instruction_bytes": 22,
+      "referenced_literal_bytes": 8
     },
     {
       "name": "audio_game_default_activity_notice",
@@ -94244,7 +94307,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0800D564",
+      "name": "display_initialize",
       "rom_offset": 54628,
       "size": 20,
       "status": "mapped_code"
@@ -102488,7 +102551,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08030338",
+      "name": "frame_initialize_effect_pools",
       "rom_offset": 197432,
       "size": 160,
       "status": "mapped_code"
@@ -103424,49 +103487,37 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_080350A4",
+      "name": "startup_initialize_memory",
       "rom_offset": 217252,
-      "size": 14,
+      "size": 16,
       "status": "mapped_code"
     },
     {
-      "name": "Unresolved_0350B2",
-      "rom_offset": 217266,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_080350B4",
+      "name": "startup_clear_unused_ram",
       "rom_offset": 217268,
       "size": 116,
       "status": "mapped_code"
     },
     {
-      "name": "sub_08035128",
+      "name": "startup_clear_display_memory",
       "rom_offset": 217384,
-      "size": 18,
+      "size": 20,
       "status": "mapped_code"
     },
     {
-      "name": "Unresolved_03513A",
-      "rom_offset": 217402,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_0803513C",
+      "name": "startup_clear_vram",
       "rom_offset": 217404,
       "size": 40,
       "status": "mapped_code"
     },
     {
-      "name": "sub_08035164",
+      "name": "startup_clear_oam",
       "rom_offset": 217444,
       "size": 36,
       "status": "mapped_code"
     },
     {
-      "name": "sub_08035188",
+      "name": "startup_clear_palette_memory",
       "rom_offset": 217480,
       "size": 40,
       "status": "mapped_code"
@@ -105914,16 +105965,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0804138C",
+      "name": "audio_game_pause_forwarder",
       "rom_offset": 267148,
-      "size": 10,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_041396",
-      "rom_offset": 267158,
-      "size": 2,
-      "status": "unresolved"
+      "size": 12,
+      "status": "mapped_code"
     },
     {
       "name": "audio_game_pause",
@@ -105956,10 +106001,16 @@
       "status": "mapped_code"
     },
     {
-      "name": "Unresolved_04147C",
+      "name": "audio_game_disable_timer1_irq",
       "rom_offset": 267388,
-      "size": 68,
-      "status": "unresolved"
+      "size": 36,
+      "status": "mapped_code"
+    },
+    {
+      "name": "audio_game_enable_timer1_irq",
+      "rom_offset": 267424,
+      "size": 32,
+      "status": "mapped_code"
     },
     {
       "name": "audio_game_default_activity_notice",
@@ -109574,7 +109625,7 @@
     "config/ram-map-us-eu.json": "dcf382e97c0bcc7f016b763eb8816db3ce89d2303838995112115c8805fab562",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "fd5ff50e29e7bd3e2605573d07458b7ea43e0e058f9922667d7d8e0987969067",
-    "config/build-us-eu.json": "d4cbb3dcdc7a641758288e8ac467e402f7e0cf4ea5bc3a2332a92b987ba5b496",
+    "config/build-us-eu.json": "7a52079f99f589c77ed7b407fff21d937ecea8a0eceac6631c347320fe6c49bc",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/audio/audio_game_select_activity_callback.c": "f1b271db1ce338b8e0e9fb72e53366263d86726953bb6ad6b4f1615d52ccb5b6",
     "src/audio/player_process_between_row.c": "f541ed81a46529f10a6179c656949d712e59fce9f94e4e9295a5dbfa8d09eefc",
@@ -109659,24 +109710,24 @@
       "Owned extents include pools/alignment. Weak seeds, linked-only tags and copies cannot establish code.",
       "Unresolved bytes may contain code; no whole-code denominator is inferred."
     ],
-    "strong_execution_entries": 2333,
-    "unique_physical_entries": 2332,
+    "strong_execution_entries": 2336,
+    "unique_physical_entries": 2335,
     "counts": {
-      "raw_instruction_union_bytes": 270962,
-      "qualified_observed_instruction_union_bytes": 270936,
-      "nonconflicting_qualified_instruction_bytes": 270936,
-      "raw_referenced_data_union_bytes": 34788,
-      "qualified_referenced_data_union_bytes": 34788,
-      "source_glue_owned_extent_bytes": 253316,
-      "estimated_envelope_union_bytes": 324158,
+      "raw_instruction_union_bytes": 271016,
+      "qualified_observed_instruction_union_bytes": 270990,
+      "nonconflicting_qualified_instruction_bytes": 270990,
+      "raw_referenced_data_union_bytes": 34808,
+      "qualified_referenced_data_union_bytes": 34808,
+      "source_glue_owned_extent_bytes": 253844,
+      "estimated_envelope_union_bytes": 324232,
       "classification_bytes": {
-        "estimated_envelope_unclassified": 15904,
+        "estimated_envelope_unclassified": 15890,
         "instruction_and_referenced_data_dual_use": 4,
         "known_data": 18836,
-        "owned_extent_unclassified": 3094,
-        "strong_rooted_instruction": 270932,
-        "strong_rooted_referenced_data": 34784,
-        "unresolved": 16433662
+        "owned_extent_unclassified": 3108,
+        "strong_rooted_instruction": 270986,
+        "strong_rooted_referenced_data": 34804,
+        "unresolved": 16433588
       }
     },
     "physical_unions": {
@@ -121066,6 +121117,10 @@
           267142
         ],
         [
+          267148,
+          267158
+        ],
+        [
           267160,
           267200
         ],
@@ -121084,6 +121139,14 @@
         [
           267372,
           267386
+        ],
+        [
+          267388,
+          267410
+        ],
+        [
+          267424,
+          267446
         ],
         [
           267456,
@@ -134858,6 +134921,10 @@
           267142
         ],
         [
+          267148,
+          267158
+        ],
+        [
           267160,
           267200
         ],
@@ -134876,6 +134943,14 @@
         [
           267372,
           267386
+        ],
+        [
+          267388,
+          267410
+        ],
+        [
+          267424,
+          267446
         ],
         [
           267456,
@@ -146480,6 +146555,14 @@
           267372
         ],
         [
+          267412,
+          267424
+        ],
+        [
+          267448,
+          267456
+        ],
+        [
           267484,
           267488
         ],
@@ -148609,10 +148692,6 @@
         ],
         [
           53628,
-          54628
-        ],
-        [
-          54648,
           54824
         ],
         [
@@ -149045,10 +149124,6 @@
         ],
         [
           195460,
-          197432
-        ],
-        [
-          197592,
           200560
         ],
         [
@@ -149092,7 +149167,7 @@
           217120
         ],
         [
-          217520,
+          217252,
           219132
         ],
         [
@@ -149273,14 +149348,6 @@
         ],
         [
           266132,
-          267148
-        ],
-        [
-          267160,
-          267388
-        ],
-        [
-          267456,
           267792
         ],
         [
@@ -150263,14 +150330,6 @@
         ],
         [
           217248,
-          217266
-        ],
-        [
-          217268,
-          217402
-        ],
-        [
-          217404,
           219174
         ],
         [
@@ -150403,14 +150462,6 @@
         ],
         [
           265776,
-          267158
-        ],
-        [
-          267160,
-          267388
-        ],
-        [
-          267456,
           268178
         ],
         [
@@ -162108,6 +162159,10 @@
           267142
         ],
         [
+          267148,
+          267158
+        ],
+        [
           267160,
           267200
         ],
@@ -162126,6 +162181,14 @@
         [
           267372,
           267386
+        ],
+        [
+          267388,
+          267410
+        ],
+        [
+          267424,
+          267446
         ],
         [
           267456,
@@ -178372,20 +178435,7 @@
       },
       {
         "rom_offset": 54628,
-        "size": 20,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
-        "rom_offset": 54648,
-        "size": 26,
+        "size": 46,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -229061,7 +229111,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -229072,7 +229123,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -235253,7 +235305,7 @@
       },
       {
         "rom_offset": 217248,
-        "size": 18,
+        "size": 4,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -235265,12 +235317,29 @@
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
       },
       {
+        "rom_offset": 217252,
+        "size": 14,
+        "classification": "strong_rooted_instruction",
+        "roles": [
+          "Thumb",
+          "estimated_envelope",
+          "instruction",
+          "raw_instruction",
+          "source_owned"
+        ],
+        "confidence": "high_static_instruction_provenance",
+        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
+      },
+      {
         "rom_offset": 217266,
         "size": 2,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "estimated_envelope",
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 217268,
@@ -235280,7 +235349,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -235291,7 +235361,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -235304,7 +235375,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -235312,10 +235384,13 @@
       {
         "rom_offset": 217402,
         "size": 2,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "estimated_envelope",
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 217404,
@@ -235325,7 +235400,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -235333,12 +235409,13 @@
       {
         "rom_offset": 217434,
         "size": 2,
-        "classification": "estimated_envelope_unclassified",
+        "classification": "owned_extent_unclassified",
         "roles": [
-          "estimated_envelope"
+          "estimated_envelope",
+          "source_owned"
         ],
-        "confidence": "low_estimated_boundary",
-        "evidence_basis": "Provisional discovery envelope only; neither byte role nor function boundary is established."
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 217436,
@@ -235346,7 +235423,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -235359,7 +235437,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -235370,7 +235449,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -235383,7 +235463,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -235391,12 +235472,13 @@
       {
         "rom_offset": 217510,
         "size": 2,
-        "classification": "estimated_envelope_unclassified",
+        "classification": "owned_extent_unclassified",
         "roles": [
-          "estimated_envelope"
+          "estimated_envelope",
+          "source_owned"
         ],
-        "confidence": "low_estimated_boundary",
-        "evidence_basis": "Provisional discovery envelope only; neither byte role nor function boundary is established."
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 217512,
@@ -235404,7 +235486,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -251655,20 +251738,27 @@
       {
         "rom_offset": 267148,
         "size": 10,
-        "classification": "estimated_envelope_unclassified",
+        "classification": "strong_rooted_instruction",
         "roles": [
-          "estimated_envelope"
+          "Thumb",
+          "estimated_envelope",
+          "instruction",
+          "raw_instruction",
+          "source_owned"
         ],
-        "confidence": "low_estimated_boundary",
-        "evidence_basis": "Provisional discovery envelope only; neither byte role nor function boundary is established."
+        "confidence": "high_static_instruction_provenance",
+        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
       },
       {
         "rom_offset": 267158,
         "size": 2,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "estimated_envelope",
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 267160,
@@ -251834,11 +251924,77 @@
       },
       {
         "rom_offset": 267388,
-        "size": 68,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "size": 22,
+        "classification": "strong_rooted_instruction",
+        "roles": [
+          "Thumb",
+          "estimated_envelope",
+          "instruction",
+          "raw_instruction",
+          "source_owned"
+        ],
+        "confidence": "high_static_instruction_provenance",
+        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
+      },
+      {
+        "rom_offset": 267410,
+        "size": 2,
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "estimated_envelope",
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+      },
+      {
+        "rom_offset": 267412,
+        "size": 12,
+        "classification": "strong_rooted_referenced_data",
+        "roles": [
+          "estimated_envelope",
+          "referenced_data",
+          "source_owned"
+        ],
+        "confidence": "high_referenced_data_role_execution_exclusion_provisional",
+        "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
+      },
+      {
+        "rom_offset": 267424,
+        "size": 22,
+        "classification": "strong_rooted_instruction",
+        "roles": [
+          "Thumb",
+          "estimated_envelope",
+          "instruction",
+          "raw_instruction",
+          "source_owned"
+        ],
+        "confidence": "high_static_instruction_provenance",
+        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
+      },
+      {
+        "rom_offset": 267446,
+        "size": 2,
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "estimated_envelope",
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+      },
+      {
+        "rom_offset": 267448,
+        "size": 8,
+        "classification": "strong_rooted_referenced_data",
+        "roles": [
+          "estimated_envelope",
+          "referenced_data",
+          "source_owned"
+        ],
+        "confidence": "high_referenced_data_role_execution_exclusion_provisional",
+        "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
       },
       {
         "rom_offset": 267456,
@@ -270028,11 +270184,11 @@
         "rom_offset": 196608,
         "size": 65536,
         "classification_bytes": {
-          "estimated_envelope_unclassified": 3808,
-          "owned_extent_unclassified": 622,
+          "estimated_envelope_unclassified": 3804,
+          "owned_extent_unclassified": 630,
           "strong_rooted_instruction": 53968,
           "strong_rooted_referenced_data": 6952,
-          "unresolved": 186
+          "unresolved": 182
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -270046,12 +270202,12 @@
         "rom_offset": 262144,
         "size": 65536,
         "classification_bytes": {
-          "estimated_envelope_unclassified": 4272,
+          "estimated_envelope_unclassified": 4262,
           "known_data": 96,
-          "owned_extent_unclassified": 560,
-          "strong_rooted_instruction": 48596,
-          "strong_rooted_referenced_data": 6336,
-          "unresolved": 5676
+          "owned_extent_unclassified": 566,
+          "strong_rooted_instruction": 48650,
+          "strong_rooted_referenced_data": 6356,
+          "unresolved": 5606
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -286445,8 +286601,9 @@
         "execution_address": 134272356,
         "entry_rom_offset": 54628,
         "mode": "Thumb",
-        "name": null,
+        "name": "display_initialize",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -336788,8 +336945,9 @@
         "execution_address": 134415160,
         "entry_rom_offset": 197432,
         "mode": "Thumb",
-        "name": null,
+        "name": "frame_initialize_effect_pools",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -342822,8 +342980,9 @@
         "execution_address": 134434980,
         "entry_rom_offset": 217252,
         "mode": "Thumb",
-        "name": null,
+        "name": "startup_initialize_memory",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -342855,8 +343014,9 @@
         "execution_address": 134434996,
         "entry_rom_offset": 217268,
         "mode": "Thumb",
-        "name": null,
+        "name": "startup_clear_unused_ram",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -342893,8 +343053,9 @@
         "execution_address": 134435112,
         "entry_rom_offset": 217384,
         "mode": "Thumb",
-        "name": null,
+        "name": "startup_clear_display_memory",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -342926,8 +343087,9 @@
         "execution_address": 134435132,
         "entry_rom_offset": 217404,
         "mode": "Thumb",
-        "name": null,
+        "name": "startup_clear_vram",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -342964,8 +343126,9 @@
         "execution_address": 134435172,
         "entry_rom_offset": 217444,
         "mode": "Thumb",
-        "name": null,
+        "name": "startup_clear_oam",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -343002,8 +343165,9 @@
         "execution_address": 134435208,
         "entry_rom_offset": 217480,
         "mode": "Thumb",
-        "name": null,
+        "name": "startup_clear_palette_memory",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -358802,6 +358966,39 @@
         "runtime_reachability_established": false
       },
       {
+        "execution_address": 134484876,
+        "entry_rom_offset": 267148,
+        "mode": "Thumb",
+        "name": "audio_game_pause_forwarder",
+        "evidence": [
+          "bounded audit"
+        ],
+        "raw_instruction_intervals": [
+          [
+            267148,
+            267158
+          ]
+        ],
+        "qualified_instruction_intervals": [
+          [
+            267148,
+            267158
+          ]
+        ],
+        "referenced_data_intervals": [],
+        "excluded_instruction_intervals": [],
+        "excluded_literal_intervals": [],
+        "return_sites": [
+          134484884
+        ],
+        "issues": [],
+        "unresolved_transfer_sites": [],
+        "terminal_observed": true,
+        "boundary_basis": "entry reach, not function ownership",
+        "compiler_ownership_established": false,
+        "runtime_reachability_established": false
+      },
+      {
         "execution_address": 134484888,
         "entry_rom_offset": 267160,
         "mode": "Thumb",
@@ -358983,6 +359180,82 @@
         "excluded_literal_intervals": [],
         "return_sites": [
           134485112
+        ],
+        "issues": [],
+        "unresolved_transfer_sites": [],
+        "terminal_observed": true,
+        "boundary_basis": "entry reach, not function ownership",
+        "compiler_ownership_established": false,
+        "runtime_reachability_established": false
+      },
+      {
+        "execution_address": 134485116,
+        "entry_rom_offset": 267388,
+        "mode": "Thumb",
+        "name": "audio_game_disable_timer1_irq",
+        "evidence": [
+          "bounded audit"
+        ],
+        "raw_instruction_intervals": [
+          [
+            267388,
+            267410
+          ]
+        ],
+        "qualified_instruction_intervals": [
+          [
+            267388,
+            267410
+          ]
+        ],
+        "referenced_data_intervals": [
+          [
+            267412,
+            267424
+          ]
+        ],
+        "excluded_instruction_intervals": [],
+        "excluded_literal_intervals": [],
+        "return_sites": [
+          134485136
+        ],
+        "issues": [],
+        "unresolved_transfer_sites": [],
+        "terminal_observed": true,
+        "boundary_basis": "entry reach, not function ownership",
+        "compiler_ownership_established": false,
+        "runtime_reachability_established": false
+      },
+      {
+        "execution_address": 134485152,
+        "entry_rom_offset": 267424,
+        "mode": "Thumb",
+        "name": "audio_game_enable_timer1_irq",
+        "evidence": [
+          "bounded audit"
+        ],
+        "raw_instruction_intervals": [
+          [
+            267424,
+            267446
+          ]
+        ],
+        "qualified_instruction_intervals": [
+          [
+            267424,
+            267446
+          ]
+        ],
+        "referenced_data_intervals": [
+          [
+            267448,
+            267456
+          ]
+        ],
+        "excluded_instruction_intervals": [],
+        "excluded_literal_intervals": [],
+        "return_sites": [
+          134485172
         ],
         "issues": [],
         "unresolved_transfer_sites": [],
@@ -394974,6 +395247,116 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 196,
         "referenced_data_bytes_in_extent": 28
+      },
+      {
+        "name": "startup_initialize_memory",
+        "rom_offset": 217252,
+        "size": 16,
+        "source": "src/startup/initialize_memory.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 14,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "startup_clear_unused_ram",
+        "rom_offset": 217268,
+        "size": 116,
+        "source": "src/startup/clear_unused_ram.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 96,
+        "referenced_data_bytes_in_extent": 20
+      },
+      {
+        "name": "startup_clear_display_memory",
+        "rom_offset": 217384,
+        "size": 20,
+        "source": "src/startup/clear_display_memory.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 18,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "startup_clear_vram",
+        "rom_offset": 217404,
+        "size": 40,
+        "source": "src/startup/clear_vram.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 30,
+        "referenced_data_bytes_in_extent": 8
+      },
+      {
+        "name": "startup_clear_oam",
+        "rom_offset": 217444,
+        "size": 36,
+        "source": "src/startup/clear_oam.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 28,
+        "referenced_data_bytes_in_extent": 8
+      },
+      {
+        "name": "startup_clear_palette_memory",
+        "rom_offset": 217480,
+        "size": 40,
+        "source": "src/startup/clear_palette_memory.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 30,
+        "referenced_data_bytes_in_extent": 8
+      },
+      {
+        "name": "display_initialize",
+        "rom_offset": 54628,
+        "size": 20,
+        "source": "src/display/initialize.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 20,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "frame_initialize_effect_pools",
+        "rom_offset": 197432,
+        "size": 160,
+        "source": "src/frame/frame_initialize_effect_pools.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 112,
+        "referenced_data_bytes_in_extent": 48
+      },
+      {
+        "name": "audio_game_pause_forwarder",
+        "rom_offset": 267148,
+        "size": 12,
+        "source": "src/audio/game_pause_forwarder.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 10,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "audio_game_disable_timer1_irq",
+        "rom_offset": 267388,
+        "size": 36,
+        "source": "src/audio/game_disable_timer1_irq.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 22,
+        "referenced_data_bytes_in_extent": 12
+      },
+      {
+        "name": "audio_game_enable_timer1_irq",
+        "rom_offset": 267424,
+        "size": 32,
+        "source": "src/audio/game_enable_timer1_irq.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 22,
+        "referenced_data_bytes_in_extent": 8
       },
       {
         "name": "irq_cpu_enable",

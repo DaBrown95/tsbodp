@@ -5,7 +5,7 @@ void startup_game_entry(void)
     REG16(0x04000204) &= 0xffe3;
     REG16(0x04000204) |= 0x4014;
     configure_blending(63, 16);
-    startup_initialize_080350a4();
+    startup_initialize_memory();
     irq_init();
     heap_initialize();
     display_text_initialize();
@@ -14,12 +14,12 @@ void startup_game_entry(void)
     scene_initialize_request_queue();
     display_install_tile_allocator();
     frame_install_runtime();
-    startup_initialize_0800d564();
+    display_initialize();
     display_initialize_palettes();
     resource_install_decoders();
     startup_initialize_0801bafc();
     frame_initialize_oam();
-    startup_initialize_08030338();
+    frame_initialize_effect_pools();
     startup_initialize_08039184();
     frame_install_map_routines();
     startup_initialize_0802b11c();

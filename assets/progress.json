@@ -1,38 +1,38 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "16 Oct 2026, 13:07 BST",
-  "compiled_c_functions": 1752,
-  "compiled_c_bytes": 250924,
+  "verified_at": "16 Oct 2026, 13:21 BST",
+  "compiled_c_functions": 1763,
+  "compiled_c_bytes": 251452,
   "assembly_glue_bytes": 2392,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16523900,
+  "unconverted_rom_bytes": 16523372,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
-  "discovered_entries": 2517,
-  "bounded_control_flow_bodies": 715,
+  "discovered_entries": 2519,
+  "bounded_control_flow_bodies": 706,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 22,
   "unresolved_callback_call_sites": 98,
-  "mapped_extent_bytes": 324166,
+  "mapped_extent_bytes": 324240,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
-    "raw_instruction_union_bytes": 270962,
-    "qualified_observed_instruction_union_bytes": 270936,
-    "nonconflicting_qualified_instruction_bytes": 270936,
-    "raw_referenced_data_union_bytes": 34788,
-    "qualified_referenced_data_union_bytes": 34788,
-    "source_glue_owned_extent_bytes": 253316,
-    "estimated_envelope_union_bytes": 324158,
+    "raw_instruction_union_bytes": 271016,
+    "qualified_observed_instruction_union_bytes": 270990,
+    "nonconflicting_qualified_instruction_bytes": 270990,
+    "raw_referenced_data_union_bytes": 34808,
+    "qualified_referenced_data_union_bytes": 34808,
+    "source_glue_owned_extent_bytes": 253844,
+    "estimated_envelope_union_bytes": 324232,
     "classification_bytes": {
-      "estimated_envelope_unclassified": 15904,
+      "estimated_envelope_unclassified": 15890,
       "instruction_and_referenced_data_dual_use": 4,
       "known_data": 18836,
-      "owned_extent_unclassified": 3094,
-      "strong_rooted_instruction": 270932,
-      "strong_rooted_referenced_data": 34784,
-      "unresolved": 16433662
+      "owned_extent_unclassified": 3108,
+      "strong_rooted_instruction": 270986,
+      "strong_rooted_referenced_data": 34804,
+      "unresolved": 16433588
     }
   },
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents",
@@ -2019,11 +2019,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0800D564",
+      "name": "display_initialize",
       "group": "ROM 0800xxxx",
       "rom_offset": 54628,
       "size": 20,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "display_show_background",
@@ -10566,11 +10566,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08030338",
+      "name": "frame_initialize_effect_pools",
       "group": "ROM 0803xxxx",
       "rom_offset": 197432,
       "size": 160,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_initialize_transient_definition",
@@ -11532,46 +11532,46 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_080350A4",
+      "name": "startup_initialize_memory",
       "group": "ROM 0803xxxx",
       "rom_offset": 217252,
-      "size": 14,
-      "status": "mapped_code"
+      "size": 16,
+      "status": "exact_c"
     },
     {
-      "name": "sub_080350B4",
+      "name": "startup_clear_unused_ram",
       "group": "ROM 0803xxxx",
       "rom_offset": 217268,
       "size": 116,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08035128",
+      "name": "startup_clear_display_memory",
       "group": "ROM 0803xxxx",
       "rom_offset": 217384,
-      "size": 18,
-      "status": "mapped_code"
+      "size": 20,
+      "status": "exact_c"
     },
     {
-      "name": "sub_0803513C",
+      "name": "startup_clear_vram",
       "group": "ROM 0803xxxx",
       "rom_offset": 217404,
       "size": 40,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08035164",
+      "name": "startup_clear_oam",
       "group": "ROM 0803xxxx",
       "rom_offset": 217444,
       "size": 36,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08035188",
+      "name": "startup_clear_palette_memory",
       "group": "ROM 0803xxxx",
       "rom_offset": 217480,
       "size": 40,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_random_refill",
@@ -14192,11 +14192,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0804138C",
+      "name": "audio_game_pause_forwarder",
       "group": "ROM 0804xxxx",
       "rom_offset": 267148,
-      "size": 10,
-      "status": "candidate"
+      "size": 12,
+      "status": "exact_c"
     },
     {
       "name": "audio_game_pause",
@@ -14231,6 +14231,20 @@
       "group": "ROM 0804xxxx",
       "rom_offset": 267372,
       "size": 16,
+      "status": "exact_c"
+    },
+    {
+      "name": "audio_game_disable_timer1_irq",
+      "group": "ROM 0804xxxx",
+      "rom_offset": 267388,
+      "size": 36,
+      "status": "exact_c"
+    },
+    {
+      "name": "audio_game_enable_timer1_irq",
+      "group": "ROM 0804xxxx",
+      "rom_offset": 267424,
+      "size": 32,
       "status": "exact_c"
     },
     {
@@ -19614,10 +19628,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0800D564",
+      "name": "display_initialize",
       "rom_offset": 54628,
       "size": 20,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "display_show_background",
@@ -27858,10 +27872,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08030338",
+      "name": "frame_initialize_effect_pools",
       "rom_offset": 197432,
       "size": 160,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_initialize_transient_definition",
@@ -28794,52 +28808,40 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_080350A4",
+      "name": "startup_initialize_memory",
       "rom_offset": 217252,
-      "size": 14,
-      "status": "mapped_code"
+      "size": 16,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_0350B2",
-      "rom_offset": 217266,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_080350B4",
+      "name": "startup_clear_unused_ram",
       "rom_offset": 217268,
       "size": 116,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08035128",
+      "name": "startup_clear_display_memory",
       "rom_offset": 217384,
-      "size": 18,
-      "status": "mapped_code"
+      "size": 20,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_03513A",
-      "rom_offset": 217402,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_0803513C",
+      "name": "startup_clear_vram",
       "rom_offset": 217404,
       "size": 40,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08035164",
+      "name": "startup_clear_oam",
       "rom_offset": 217444,
       "size": 36,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08035188",
+      "name": "startup_clear_palette_memory",
       "rom_offset": 217480,
       "size": 40,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_random_refill",
@@ -31284,16 +31286,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0804138C",
+      "name": "audio_game_pause_forwarder",
       "rom_offset": 267148,
-      "size": 10,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_041396",
-      "rom_offset": 267158,
-      "size": 2,
-      "status": "unresolved"
+      "size": 12,
+      "status": "exact_c"
     },
     {
       "name": "audio_game_pause",
@@ -31326,10 +31322,16 @@
       "status": "exact_c"
     },
     {
-      "name": "Unresolved_04147C",
+      "name": "audio_game_disable_timer1_irq",
       "rom_offset": 267388,
-      "size": 68,
-      "status": "unresolved"
+      "size": 36,
+      "status": "exact_c"
+    },
+    {
+      "name": "audio_game_enable_timer1_irq",
+      "rom_offset": 267424,
+      "size": 32,
+      "status": "exact_c"
     },
     {
       "name": "audio_game_default_activity_notice",
@@ -34993,8 +34995,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "d4cbb3dcdc7a641758288e8ac467e402f7e0cf4ea5bc3a2332a92b987ba5b496",
-    "assets/rom-inventory.json": "2ce44be4cb6e890fa0c5844afbb7ff732d3fad0b2a7bf518219a1e461c1e6ec4",
+    "config/build-us-eu.json": "7a52079f99f589c77ed7b407fff21d937ecea8a0eceac6631c347320fe6c49bc",
+    "assets/rom-inventory.json": "2cbd72e56d1aafb655e6a10bb34afccbd41eb3c6cc84d7bf06cb423b3939b9a9",
     "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",

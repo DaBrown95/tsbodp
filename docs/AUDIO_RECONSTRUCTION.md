@@ -1347,3 +1347,37 @@ it inserts no instruction. The random bound and kept-handle increment controls
 each preserve all 228 bytes of size and reject by one byte. Source/header
 closure, commands and comparisons are retained in
 `reports/audio-cue-handle-20261016/publication-canonical/`.
+
+## Remaining game-audio interface entries
+
+Three ordinary C entries close the source-ownership gaps in the local
+`08040FFC–0804155C` interval, end exclusive:
+
+| Entry | Address | Complete extent | Source behavior |
+| --- | --- | ---: | --- |
+| `audio_game_pause_forwarder` | `0804138C` | 12 bytes | Calls the accepted pause routine |
+| `audio_game_disable_timer1_irq` | `0804147C` | 36 bytes | Clears interrupt-enable bit 4 |
+| `audio_game_enable_timer1_irq` | `080414A0` | 32 bytes | Sets interrupt-enable bit 4 |
+
+The mask routines use volatile halfword accesses in the original order: write
+zero to IME, modify IE, then write one to IME. They unconditionally enable IME
+on exit. The disable mask narrows to `0xFFEF`; the matching literal follows from
+the halfword store. Both first semantic C candidates match, without register
+bindings or assembly. The pause forwarder includes the two original zero
+alignment bytes before the next word-aligned entry, following the existing
+source convention. It contains no assembly instruction.
+
+Each actual-source/header proof includes a same-size changed-source control:
+Timer1 bit 4 becomes bit 5, or pause becomes resume. Each control rejects by
+one byte. API/header closure compiles. The current proofs and metadata are
+retained in `reports/audio-timer1-mask-20261016/publication-canonical/` and
+`publication-metadata.json`. The read-only `audit_local_interfaces.py` verifies
+all 28 source owners against their raw byte/control proofs: their extents cover
+exactly 1,376 bytes, with no gap or overlap. This is local extent accounting,
+not an expanded claim about the whole ROM.
+
+No original-ROM raw Thumb BL encoding or aligned/unaligned Thumb pointer word
+was found targeting any of the three entries. The inventory previously omitted
+the two leaf mask routines. Matching C establishes their static source roots;
+it adds no observed execution and does not close arbitrary indirect incoming
+transfers or later writable targets.

@@ -2,6 +2,7 @@
 #define STARTUP_GAME_ENTRY_H
 
 #include "frame_map.h"
+#include "frame_effect_pools.h"
 #include "frame_oam.h"
 #include "frame_random.h"
 #include "display_text_raster.h"
@@ -24,9 +25,10 @@ void input_init(void);
 void set_word_0300217c(unsigned int);
 void set_word_03002180_bit0(unsigned char);
 
+void startup_initialize_memory(void), display_initialize(void);
+
 /* Unconverted no-argument startup providers; roles remain address-based. */
-void startup_initialize_080350a4(void), startup_initialize_0800d564(void);
-void startup_initialize_0801bafc(void), startup_initialize_08030338(void);
+void startup_initialize_0801bafc(void);
 void startup_initialize_08039184(void), startup_initialize_0802b11c(void);
 void startup_initialize_080458b8(void), startup_initialize_08046eb0(void);
 /* The original provider uses SWI 05, unlike irq_wait_vblank's flag polling. */

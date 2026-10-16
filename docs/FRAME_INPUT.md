@@ -84,6 +84,18 @@ linked bytes and comparisons are retained under ignored
 allocation/copy operations. It does not establish observed execution, complete
 callback domains, or matching C ownership of the copied sorter.
 
+`frame_initialize_effect_pools` at `0x30338` matches its complete 160-byte
+extent: 112 Thumb instruction bytes and 48 literal bytes. It allocates and
+initializes 64 render-effect slots at an 84-byte stride and 15 transient-effect
+slots at a 72-byte stride, then allocates four 256-byte layer-pointer lists.
+It clears both active heads, their halfword counts/maxima and the pending byte.
+Typed free-head words at `0x03001ED8` / `0x03001EDC` share storage with the
+existing pool-address views; those consumer declarations stay intact.
+The source uses the existing record layouts and pool API. Reducing the layer
+loop from four iterations to three retains the 160-byte extent and rejects by
+one byte. The initializer supplies the existing effect consumers; allocation
+success and complete later index/callback domains remain separate preconditions.
+
 `frame_step_object` at `0x1CCC` is a matched 256-byte object update coordinator.
 It branches between removal, visibility, callbacks, animation, affine updates,
 velocity, bounds and render ordering. `frame_remove_object` at `0x928` is a
