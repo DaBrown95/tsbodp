@@ -47,8 +47,8 @@ through matching source receipts and changed-source negative controls.
 | Qualified instructions also read as data | 4 |
 | Referenced literal/switch data | 34,728 |
 | Other established data | 18,836 |
-| Unclassified inside source/glue-owned extents | 2,980 |
-| Unclassified remainder of estimated envelopes | 16,254 |
+| Unclassified inside source/glue-owned extents | 2,982 |
+| Unclassified remainder of estimated envelopes | 16,252 |
 | Other unresolved ROM | 16,433,810 |
 | **Physical ROM total** | **16,777,216** |
 
@@ -56,7 +56,7 @@ Thus 270,608 bytes have qualified static instruction evidence, under the stated
 decoder, mode, original-image and ordinary-call assumptions. This confirms their
 static instruction role; it does not establish that every instruction executes.
 The raw alternative reach is 270,634 bytes. There are 2,324 rooted execution
-entries, while the ordinary map has 2,527 entries/candidates and 323,800 mapped
+entries, while the ordinary map has 2,526 entries/candidates and 323,980 mapped
 extent bytes. In the initial survey, nine corroborated veneer starts were added (six register veneers and three audio
 stubs), and four prior weak starts were folded as interior blocks, for a net five
 entries and 24 mapped extent bytes.
@@ -336,3 +336,27 @@ function bytes and add no separate C credit. The refresh helper, adjacent
 builder, step callback and renderer/finalizer remain unconverted. No new runtime
 execution or completeness claim is inferred from this update; the inventory
 limits above remain open.
+
+### Linked offer refresh and its connected caller
+
+The linked offer-refresh helper at `0x08004824` adds one matching C function and
+288 extent bytes: totals are 1,708 functions and 243,620 C bytes, with 500 glue
+bytes separate. The 234 instruction bytes, 52 referenced pool bytes and two zero
+alignment bytes all match. Its begin caller uses the accepted provider's name at
+the same address and retains identical positive and changed-source-control bytes.
+
+The earlier 94-byte row stopped at the weak `0x08004882` candidate. Existing
+instruction reach and literal references already supported the full span through
+`0x08004944`; the compiler/linker comparison now establishes its matching extent.
+The weak start is absorbed as alignment/pool context. This leaves 2,526 entries,
+323,980 inventory extent bytes and 323,988 treemap extent bytes. Those extra 180
+mapped bytes are a boundary repair, not additional C credit beyond the accepted
+288-byte function.
+
+The global qualified unions remain 270,608 instruction bytes and 34,732 referenced
+data bytes. Two zero bytes move from estimated gaps to unclassified owned bytes;
+the current disjoint counts appear in the Results table. The fixed historical
+comparison stays 319,640 bytes. Catalog alignment and representation checks do
+not establish its complete table capacity, historical types, runtime execution or
+a complete game-code denominator. The other refresh helper, adjacent builder,
+step callback and renderer/finalizer remain explicit original regions.

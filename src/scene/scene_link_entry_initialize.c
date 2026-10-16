@@ -109,7 +109,7 @@ void scene_link_entry_initialize(void)
         display_text_select_font(3, 0, 0);
         display_text_draw_line(35, 22, 128, display_scene_lookup_text(445), 0);
         display_text_draw_line(53, 22, 148, display_scene_lookup_text(446), 0);
-        scene_link_entry_refresh_linked_offers_original();
+        scene_link_entry_refresh_linked_offers();
         scene_link_entry_build_linked_objects();
     }
     scene_link_entry_prepare_original();

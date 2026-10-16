@@ -63,7 +63,7 @@ has not been established.
 `scene_link_entry_initialize` at `0x08003750` reconstructs the 876-byte begin
 callback. It sets up offers, object slots, backgrounds, palettes, text and
 selection previews, then coordinates the original scene helpers, countdown and
-transition. It calls nineteen accepted C providers and seven explicit original
+transition. It now calls twenty accepted C providers and six explicit original
 services. Those service declarations describe this caller's boundary with no
 supplied arguments and no consumed result; they do not recover the helpers' original C signatures,
 complete footprints or implementations.
@@ -115,3 +115,41 @@ The connected 596-byte offer-refresh helper remains unconverted. Its latest
 ordinary candidate is 592 bytes; compiler evidence identifies an extra generated
 cost-address variable and the resulting allocation pressure. Its wider proposed
 record fields and separate status access have not been adopted.
+
+## Linked offer refresh
+
+`scene_link_entry_refresh_linked_offers` at `0x08004824` reconstructs 288 bytes.
+It refreshes the scene object when present, assigns received or locally scaled
+offer values, clears costs, copies the countdown, clears two background areas and
+updates the multiplier and selection. Its six C callees already cover 232 bytes;
+the four-byte BIOS division wrapper remains separately counted assembly glue.
+The begin callback now calls this accepted provider through its canonical name.
+Its symbol binding changes name at the same address, with identical caller bytes.
+
+The complete span contains 234 instruction bytes, 52 referenced pool bytes and
+two zero alignment bytes. References reach `0x08004944`; the boundary is not
+inferred from the next entry alone. The weak start at `0x08004882` falls in that
+alignment/pool context and is absorbed, rather than claimed as another function.
+
+The existing offer record stays 24 bytes. Four representation bytes at offset
+four receive a defined unsigned result shifted by sixteen; the remaining unknown
+bytes retain their earlier meaning. A four-byte copy from a real unsigned-word
+object avoids introducing a foreign word lvalue over that unknown byte region.
+
+The catalog cache holds an address, not a scene index or field value. It starts
+from the character representation of the whole catalog array, advances twenty
+bytes to its number column and uses each fresh scene index with the actual
+24-byte stride. A separate character typedef has size one and alignment four;
+ordinary unsigned characters keep alignment one. The catalog record's alignment,
+stride, field offset and word width justify the aligned copy into a real unsigned
+word. This preserves the observed preheader cache without a word-array walk
+across distinct members. The final multiplier reads the global catalog afresh.
+
+The source assumes a valid initialized catalog element and backed record/resource
+storage, with count zero through four at every controlling read. Provider
+arithmetic, allocation and backing conditions still apply; signed conversions
+retain the pinned target's interpretation. Target checks cover ten layout facts,
+two exact types and deliberately wrong alignment, width, copy offset and return
+type. Source controls change ninety-five to ninety-four and preserve the begin
+callback's existing control. These are compiler and static findings; no new
+runtime or gameplay observation is claimed.

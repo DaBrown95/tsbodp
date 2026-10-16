@@ -41194,7 +41194,7 @@
         "scene_link_entry_build_linked_objects": "0x8003f09",
         "scene_link_entry_draw_panel_original": "0x8004061",
         "scene_link_entry_refresh_offers_original": "0x80045d1",
-        "scene_link_entry_refresh_linked_offers_original": "0x8004825",
+        "scene_link_entry_refresh_linked_offers": "0x8004825",
         "scene_link_entry_draw_quantities_original": "0x8004945",
         "scene_link_entry_draw_linked_quantities_original": "0x8004abd",
         "scene_link_entry_prepare_original": "0x8005685",
@@ -41242,7 +41242,7 @@
         "scene_link_entry_build_linked_objects",
         "scene_link_entry_draw_panel_original",
         "scene_link_entry_refresh_offers_original",
-        "scene_link_entry_refresh_linked_offers_original",
+        "scene_link_entry_refresh_linked_offers",
         "scene_link_entry_draw_quantities_original",
         "scene_link_entry_draw_linked_quantities_original",
         "scene_link_entry_prepare_original",
@@ -41269,6 +41269,42 @@
         "before": "condition_complete_if_active(1, 2, 1);",
         "after": "condition_complete_if_active(1, 2, 0);"
       }
+    },
+    {
+      "name": "scene_link_entry_refresh_linked_offers",
+      "negative_control": {
+        "after": "record->count = 94;",
+        "before": "record->count = 95;"
+      },
+      "rom_offset": 18468,
+      "size": 288,
+      "source": "src/scene/scene_link_entry_refresh_linked_offers.c",
+      "symbols": {
+        "display_bios_div": "0x0804c8c9",
+        "display_fill_background_constant_rectangle": "0x0800d7fd",
+        "display_text_select_font": "0x0801ae75",
+        "display_text_set_background_control": "0x0801ae2d",
+        "display_time_copy": "0x08010741",
+        "frame_set_variant_state": "0x08001be1",
+        "g_display_countdown": "0x03003150",
+        "g_display_scene_catalog": "0x080616cc",
+        "g_display_scene_frame_objects": "0x030043b0",
+        "g_link_entry_offers": "0x03002e00",
+        "g_link_received_join": "0x03002d60",
+        "g_scene_link_entry_text_control": "0x0804ed90",
+        "g_scene_link_offer_countdown": "0x0804ed38",
+        "g_scene_request": "0x03004350",
+        "save_world_scale_percent": "0x08027525"
+      },
+      "thumb_symbols": [
+        "frame_set_variant_state",
+        "display_text_select_font",
+        "display_text_set_background_control",
+        "save_world_scale_percent",
+        "display_time_copy",
+        "display_fill_background_constant_rectangle",
+        "display_bios_div"
+      ]
     }
   ],
   "assembly": [
