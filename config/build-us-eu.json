@@ -49653,6 +49653,32 @@
         "after": "{\n    frame_set_game_value(0);\n}"
       },
       "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
+    },
+    {
+      "name": "save_world_empty_hook_32000",
+      "rom_offset": 204800,
+      "size": 4,
+      "source": "src/save/world_empty_hook_32000.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    *(unsigned char *)pointer = 1;\n}"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
+    },
+    {
+      "name": "save_world_empty_hook_3d170",
+      "rom_offset": 250224,
+      "size": 4,
+      "source": "src/save/world_empty_hook_3d170.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    *(unsigned char *)pointer = 1;\n}"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
     }
   ],
   "assembly": [

@@ -1,6 +1,6 @@
 # World defaults and selected-row display lifecycle
 
-Nine connected C functions cover 628 bytes. The default-state initializer closes
+Eleven connected C functions cover 636 bytes. The default-state initializer closes
 its record, condition and selected-row reset calls, while the same selected-row
 view connects window transition setup to the primary scene exit's object cleanup.
 All complete extents, pools and alignment match independently; actual source
@@ -17,6 +17,8 @@ mutations reject. This is compiler/static evidence, not a runtime or gameplay te
 | `save_world_transition_ready` | `0x1EE84` | 36 |
 | `save_world_clear_row_objects` | `0x1EEA8` | 64 |
 | `save_world_release_row_object` | `0x1EFEC` | 24 |
+| `save_world_empty_hook_32000` | `0x32000` | 4 |
+| `save_world_empty_hook_3d170` | `0x3D170` | 4 |
 
 The initializer uses the established world root at `0x03003950`. It copies the
 complete eight-byte clock from an original ROM resource, initializes the child at
@@ -32,8 +34,21 @@ provider copies a 44-byte need state and resets the selected field, establishing
 child storage through `+0xCB`. The separately serialized needs child retains its
 eight-word/32-byte boundary. The initializer uses an opaque record argument and
 an explicit offset into the known `+0x10` world span, preserving that distinction
-without changing the serializer's partial record declaration. Original no-op
-hooks at `0x32000` and `0x3D170` remain explicit unconverted calls.
+without changing the serializer's partial record declaration. Its two no-op
+hooks at `0x32000` and `0x3D170` now each rebuild from an empty C definition
+using the existing `void(void *)` caller contract. Each owns two instruction
+bytes and two original zero alignment bytes. The two entries receive child
+pointers at `+0x18` and `+0x88` only when the existing save-view word equals zero;
+neither hook dereferences its argument. Their unused original formal types
+remain nonunique. This closes all four direct providers of the record reset.
+
+Normal and strict builds match both hooks and the 52-byte caller. Controls that
+write one byte through the genuine supplied pointers produce eight bytes each
+and reject; the caller's actual branch control also rejects. Static scans find
+one direct Thumb-BL encoding for each hook, at `0x08031ED8` and `0x08031EE0`,
+with no exact even or Thumb pointer word. Dynamically formed references remain
+outside that finding. The separate return at `0x08031FFC` is not part of either
+slot and receives no credit.
 
 The default initializer clears two eight-byte regions at `+0x724` and `+0x72C`,
 sets the observed byte defaults, and writes `-2` at `+0x74C`. This last word shares
@@ -62,7 +77,7 @@ indices zero through seven after a null check.
 
 The cleanup C has one scoped register binding for the meaningful objects-array
 address. It ends before the release call, preserving the observed base-plus-offset
-calculation while preventing a different compiler reassociation. The other eight
+calculation while preventing a different compiler reassociation. The other ten
 functions use ordinary C. No output edits, hidden section removal, instruction
 body transcription or comparison masks are used. Every positive and control
 object and linked extent has `.text` as its sole nonempty allocated section.

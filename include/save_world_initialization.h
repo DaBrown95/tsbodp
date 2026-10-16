@@ -58,7 +58,7 @@ void actor_entry_reset(struct ActorEntryContext *);
 void frame_reset_actor_needs(struct FrameActorNeedState *);
 void resource_set_display_kind(unsigned int);
 unsigned int audio_play_animation_cue(unsigned int);
-/* Original no-op hooks remain explicit unconverted calls. */
+/* No-op reset hooks retain the observed caller argument contract. */
 void save_world_empty_hook_32000(void *);
 void save_world_empty_hook_3d170(void *);
 #endif
