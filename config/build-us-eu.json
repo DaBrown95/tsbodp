@@ -43257,6 +43257,186 @@
         "before": "frame_set_variant_state(other, 8)",
         "after": "frame_set_variant_state(other, 7)"
       }
+    },
+    {
+      "name": "frame_place_actor_item_in_water",
+      "source": "src/frame/frame_place_actor_item_in_water.c",
+      "rom_offset": 150288,
+      "size": 76,
+      "symbols": {
+        "frame_set_position": "0x80014a5",
+        "frame_random_range": "0x80353d9",
+        "frame_map_terrain_at": "0x802abb1",
+        "g_frame_actor_item_water_points": "0x8d71470"
+      },
+      "thumb_symbols": [
+        "frame_set_position",
+        "frame_random_range",
+        "frame_map_terrain_at"
+      ],
+      "negative_control": {
+        "before": "frame_random_range(0, 42)",
+        "after": "frame_random_range(0, 41)"
+      }
+    },
+    {
+      "name": "frame_step_actor_item_visibility",
+      "source": "src/frame/frame_step_actor_item_visibility.c",
+      "rom_offset": 149972,
+      "size": 52,
+      "symbols": {
+        "frame_check_visibility": "0x80009b5",
+        "frame_enable_object_flags": "0x8001c69",
+        "frame_disable_object_flags": "0x8001c71"
+      },
+      "thumb_symbols": [
+        "frame_check_visibility",
+        "frame_enable_object_flags",
+        "frame_disable_object_flags"
+      ],
+      "negative_control": {
+        "before": "pending_updates = 0",
+        "after": "pending_updates = 1"
+      }
+    },
+    {
+      "name": "frame_emit_actor_item_contact",
+      "source": "src/frame/frame_emit_actor_item_contact.c",
+      "rom_offset": 149752,
+      "size": 112,
+      "symbols": {
+        "frame_create_transient_effect": "0x803054d",
+        "g_frame_transient_extended_directions": "0x8052860"
+      },
+      "thumb_symbols": [
+        "frame_create_transient_effect"
+      ],
+      "negative_control": {
+        "before": "effect->countdown = 8",
+        "after": "effect->countdown = 9"
+      }
+    },
+    {
+      "name": "frame_actor_item_contact_penalty",
+      "source": "src/frame/frame_actor_item_contact_penalty.c",
+      "rom_offset": 150072,
+      "size": 84,
+      "symbols": {
+        "audio_play_animation_cue": "0x8040ffd",
+        "frame_enable_object_flags": "0x8001c69",
+        "frame_disable_object_flags": "0x8001c71",
+        "scene_contact_add_activity_score": "0x802934d",
+        "frame_emit_actor_item_contact": "0x80248f9",
+        "g_scene_contact_state": "0x30043f4",
+        "g_frame_actor_item_options": "0x805628c"
+      },
+      "thumb_symbols": [
+        "audio_play_animation_cue",
+        "frame_enable_object_flags",
+        "frame_disable_object_flags",
+        "scene_contact_add_activity_score",
+        "frame_emit_actor_item_contact"
+      ],
+      "negative_control": {
+        "before": "-5 * g_frame_actor_item_options",
+        "after": "-4 * g_frame_actor_item_options"
+      }
+    },
+    {
+      "name": "frame_actor_item_contact_relation",
+      "source": "src/frame/frame_actor_item_contact_relation.c",
+      "rom_offset": 150156,
+      "size": 64,
+      "symbols": {
+        "audio_play_animation_cue": "0x8040ffd",
+        "frame_enable_object_flags": "0x8001c69",
+        "frame_disable_object_flags": "0x8001c71",
+        "display_menu_adjust_relation": "0x8035d99",
+        "frame_emit_actor_item_contact": "0x80248f9",
+        "g_display_menu_relation_state": "0x3003960"
+      },
+      "thumb_symbols": [
+        "audio_play_animation_cue",
+        "frame_enable_object_flags",
+        "frame_disable_object_flags",
+        "display_menu_adjust_relation",
+        "frame_emit_actor_item_contact"
+      ],
+      "negative_control": {
+        "before": "g_display_menu_relation_state, 12, -4",
+        "after": "g_display_menu_relation_state, 12, -3"
+      }
+    },
+    {
+      "name": "frame_create_actor_item",
+      "source": "src/frame/frame_create_actor_item.c",
+      "rom_offset": 148832,
+      "size": 300,
+      "symbols": {
+        "resource_object_before_step": "0x8001ae1",
+        "frame_set_animation_record": "0x800132d",
+        "frame_acquire_palette_slot": "0x8030221",
+        "frame_enable_object_flags": "0x8001c69",
+        "frame_allocate_scene_object": "0x8001129",
+        "frame_actor_item_contact_collect": "0x802468d",
+        "frame_step_actor_item_visibility": "0x80249d5",
+        "frame_actor_contact_24a08": "0x8024a09",
+        "frame_actor_item_contact_penalty": "0x8024a39",
+        "frame_place_actor_item_on_land": "0x8024acd",
+        "frame_place_actor_item_in_water": "0x8024b11",
+        "g_scene_contact_state": "0x30043f4",
+        "g_actor_24420_palette_by_id": "0x805627c",
+        "g_frame_actor_item_resource2": "0x8055ae8",
+        "g_frame_actor_item_resource3": "0x8055af8",
+        "g_frame_actor_item_resource4": "0x8055b08",
+        "g_frame_flags": "0x3004310"
+      },
+      "thumb_symbols": [
+        "resource_object_before_step",
+        "frame_set_animation_record",
+        "frame_acquire_palette_slot",
+        "frame_enable_object_flags",
+        "frame_allocate_scene_object",
+        "frame_actor_item_contact_collect",
+        "frame_step_actor_item_visibility",
+        "frame_actor_contact_24a08",
+        "frame_actor_item_contact_penalty",
+        "frame_place_actor_item_on_land",
+        "frame_place_actor_item_in_water"
+      ],
+      "negative_control": {
+        "before": "object->shared_group = 4",
+        "after": "object->shared_group = 7"
+      }
+    },
+    {
+      "name": "frame_actor_item_contact_collect",
+      "source": "src/frame/frame_actor_item_contact_collect.c",
+      "rom_offset": 149132,
+      "size": 148,
+      "symbols": {
+        "audio_play_animation_cue": "0x8040ffd",
+        "frame_enable_object_flags": "0x8001c69",
+        "frame_disable_object_flags": "0x8001c71",
+        "scene_contact_add_activity_score": "0x802934d",
+        "frame_create_actor_item": "0x8024561",
+        "frame_emit_actor_item_contact": "0x80248f9",
+        "g_scene_contact_state": "0x30043f4",
+        "g_frame_actor_item_options": "0x805628c",
+        "g_display_countdown": "0x3003150"
+      },
+      "thumb_symbols": [
+        "audio_play_animation_cue",
+        "frame_enable_object_flags",
+        "frame_disable_object_flags",
+        "scene_contact_add_activity_score",
+        "frame_create_actor_item",
+        "frame_emit_actor_item_contact"
+      ],
+      "negative_control": {
+        "before": "collected_count == 100",
+        "after": "collected_count == 99"
+      }
     }
   ],
   "assembly": [

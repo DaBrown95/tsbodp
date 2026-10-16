@@ -1160,3 +1160,35 @@ wrong lifetime. This supports the matching type/dataflow, not a unique original
 typedef. All four full extents and same-size changed-source controls pass;
 current source/header proofs are retained under ignored
 `analysis/startup-initializers/root-1bafc/canonical/`.
+
+## Connected activity-row-zero items
+
+Seven ordinary-C bodies cover 836 complete bytes in the actor path around
+`0x08024560`: the item factory, water placement, visibility callback, contact
+feedback and three collection/penalty/relation callbacks. The factory reuses
+the existing `frame_actor_contact_24a08` callback for kind 3. Its kind-2 branch
+and the collection callback form a cycle: creation installs the callback, and
+a collection can create a replacement while the signed created count is below
+100. The shared partial state retains the signed created count, unsigned
+collected count, option byte and flag byte at their observed offsets. Existing
+scene-state, palette-by-id, effect-direction and relation-state aliases are
+used consistently.
+
+Water placement samples indices 0 through 42 until the terrain classifier
+returns 1, then marks the selected byte and publishes a 16.16 position. This
+requires a writable 43-byte `used` region; it does not establish every caller's
+buffer domain or the point table's complete provenance. The factory publishes
+callbacks only in the observed kind-2/3/4 branches. Its default branch and wider
+dynamic kind/callback domains remain unresolved. Every complete extent matches
+and rejects a meaningful source mutation, including the reward, collection
+threshold, animation-sharing group and random upper bound. These are static and
+compiler findings; no runtime or gameplay coverage is claimed.
+
+Two connected bodies remain unconverted: land placement at `0x08024ACC`
+(68 bytes) and movement update at `0x08024720` (472 bytes). The ordinary land
+candidate differs in six bytes; the old exact attempt requires explicit
+register bindings and is not accepted. A bounded test of two scalar terrain
+arguments produced the same lifetime and call-setup differences, disproving
+that ABI explanation. The ordinary movement candidate still differs in
+14 bytes; no unsupported switch arm has been added to influence its compiler
+pivot. Neither blocker receives source coverage.
