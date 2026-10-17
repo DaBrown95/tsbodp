@@ -50637,6 +50637,124 @@
         "after": ") << 3);"
       },
       "expected_sha256": "b140cd928d0034cb40bec853f2cb059cd94a5973b34660907ce6321304c90148"
+    },
+    {
+      "name": "frame_check_optional_three_effect_count",
+      "source": "src/frame/frame_check_optional_three_effect_count.c",
+      "rom_offset": 100908,
+      "size": 40,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "negative_control": {
+        "before": "unknown_60[0] == 1",
+        "after": "unknown_60[0] == 2"
+      },
+      "expected_sha256": "f3e334bc8d3521617fa710d0ee1e58aad633c109b7f8e4b83bd56a27da1b2e3a"
+    },
+    {
+      "name": "frame_optional_three_effect_select",
+      "rom_offset": 100948,
+      "size": 4,
+      "source": "src/frame/frame_optional_three_effect_select.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 2;"
+      },
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb"
+    },
+    {
+      "name": "frame_optional_three_effect_prepare",
+      "rom_offset": 100952,
+      "size": 4,
+      "source": "src/frame/frame_optional_three_effect_prepare.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 2;"
+      },
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb"
+    },
+    {
+      "name": "frame_optional_three_effect_attachment_status",
+      "rom_offset": 101024,
+      "size": 4,
+      "source": "src/frame/frame_optional_three_effect_attachment_status.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 2;"
+      },
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb"
+    },
+    {
+      "name": "frame_optional_three_effect_state_tick",
+      "rom_offset": 101028,
+      "size": 4,
+      "source": "src/frame/frame_optional_three_effect_state_tick.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "\n{\n}",
+        "after": "\n{\n    owner->optional = 1;\n}"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
+    },
+    {
+      "name": "frame_optional_three_effect_default_value",
+      "rom_offset": 101032,
+      "size": 4,
+      "source": "src/frame/frame_optional_three_effect_default_value.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "return 100;",
+        "after": "return 99;"
+      },
+      "expected_sha256": "a2271e164827e90980393ec57efbeee0efeba93f9e67d5eff60d0043fc8970f8"
     }
   ],
   "assembly": [

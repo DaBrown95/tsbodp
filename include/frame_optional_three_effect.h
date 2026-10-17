@@ -20,4 +20,13 @@ unsigned int frame_optional_three_effect_initialize(struct FrameNeedEffectState 
 /* The concrete mode-three producer passes two zero words; this body ignores them. */
 unsigned int frame_optional_three_effect_begin(struct FrameNeedEffectState *,struct FrameObject *,unsigned int);
 void frame_optional_three_effect_tick(struct FrameObject *);
+unsigned int frame_optional_three_effect_select(struct FrameNeedEffectState *, unsigned char *);
+/* EC unused formal roles remain inferred until its generic consumer is identified. */
+unsigned int frame_optional_three_effect_prepare(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+unsigned int frame_optional_three_effect_attachment_status(struct FrameNeedEffectState *, struct FrameObject *);
+void frame_optional_three_effect_state_tick(struct FrameNeedEffectState *);
+/* Adjacent unrooted leaf; row41's field +24 is null. No query role is established. */
+unsigned int frame_optional_three_effect_default_value(void);
+/* Separate adjacent predicate; no installed callback or incoming role is established. */
+unsigned int frame_check_optional_three_effect_count(struct FrameNeedEffectState *, struct FrameObject *);
 #endif
