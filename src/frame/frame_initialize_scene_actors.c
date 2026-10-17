@@ -12,7 +12,7 @@ void frame_initialize_scene_actors(unsigned int scene) {
   struct FrameObject *object=frame_scene_player_actor(index);
   transition_reset_view(index);
   transition_set_view_mode(0,index);
-  transition_configure_view((struct TransitionViewObject *)object,*(const struct FramePoint *)g_transition_view_configuration,index);
+  transition_configure_view((struct TransitionViewObject *)object,g_transition_view_configuration.point,index);
  }
  resource_spawn_group(0);
  resource_execute_group(0);

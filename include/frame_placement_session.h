@@ -19,7 +19,7 @@ extern signed char g_frame_placement_steps[][2];
 extern struct FrameSpriteResource *g_frame_placement_resources[];
 extern unsigned char g_frame_placement_commands[];
 /* Two-word configuration access view already used by scene actor setup. */
-extern unsigned int g_transition_view_configuration[2];
+#include "transition_view_configuration.h"
 void transition_set_view_origin(struct FramePoint,unsigned char);
 void frame_disable_primary_object_flags(unsigned int);
 unsigned char frame_grid_cell_corner(void *,const int *,struct FramePoint *);

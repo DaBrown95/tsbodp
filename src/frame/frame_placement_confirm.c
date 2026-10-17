@@ -3,7 +3,7 @@ unsigned char frame_placement_confirm(void)
 {
  unsigned char result=frame_placement_validate();
  if(result==1) {
-  transition_configure_view((struct TransitionViewObject *)g_frame_placement_session.actor,*(const struct FramePoint *)g_transition_view_configuration,0);
+  transition_configure_view((struct TransitionViewObject *)g_frame_placement_session.actor,g_transition_view_configuration.point,0);
   transition_set_view_origin(g_frame_placement_session.preview->position,0);
   if(((struct FramePlacementActor *)g_frame_placement_session.actor)->mode==0)frame_unregister_need_effect(g_frame_placement_session.grid,g_frame_placement_session.effect);
   g_frame_placement_session.effect->position=g_frame_placement_session.preview->position;

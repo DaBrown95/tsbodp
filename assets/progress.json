@@ -1,21 +1,21 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "17 Oct 2026, 15:10 BST",
-  "compiled_c_functions": 2199,
-  "compiled_c_bytes": 280048,
+  "verified_at": "17 Oct 2026, 16:14 BST",
+  "compiled_c_functions": 2201,
+  "compiled_c_bytes": 280612,
   "assembly_glue_bytes": 4060,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16493108,
+  "unconverted_rom_bytes": 16492544,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2538,
-  "bounded_control_flow_bodies": 286,
+  "bounded_control_flow_bodies": 284,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 98,
-  "mapped_extent_bytes": 325378,
+  "mapped_extent_bytes": 325380,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
     "raw_instruction_union_bytes": 280452,
@@ -23,16 +23,16 @@
     "nonconflicting_qualified_instruction_bytes": 280426,
     "raw_referenced_data_union_bytes": 35628,
     "qualified_referenced_data_union_bytes": 35628,
-    "source_glue_owned_extent_bytes": 284108,
-    "estimated_envelope_union_bytes": 325370,
+    "source_glue_owned_extent_bytes": 284672,
+    "estimated_envelope_union_bytes": 325372,
     "classification_bytes": {
-      "estimated_envelope_unclassified": 5642,
+      "estimated_envelope_unclassified": 5634,
       "instruction_and_referenced_data_dual_use": 4,
       "known_data": 18852,
-      "owned_extent_unclassified": 3702,
+      "owned_extent_unclassified": 3712,
       "strong_rooted_instruction": 280422,
       "strong_rooted_referenced_data": 35624,
-      "unresolved": 16432970
+      "unresolved": 16432968
     }
   },
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents",
@@ -2474,11 +2474,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0800E8B4",
+      "name": "transition_set_view_mode",
       "group": "ROM 0800xxxx",
       "rom_offset": 59572,
-      "size": 106,
-      "status": "mapped_code"
+      "size": 108,
+      "status": "exact_c"
     },
     {
       "name": "transition_get_view_mode",
@@ -5134,11 +5134,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_080184D4",
+      "name": "transition_object_tick_windows",
       "group": "ROM 0801xxxx",
       "rom_offset": 99540,
       "size": 456,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "transition_object_tick_alpha",
@@ -20155,16 +20155,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0800E8B4",
+      "name": "transition_set_view_mode",
       "rom_offset": 59572,
-      "size": 106,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_00E91E",
-      "rom_offset": 59678,
-      "size": 2,
-      "status": "unresolved"
+      "size": 108,
+      "status": "exact_c"
     },
     {
       "name": "transition_get_view_mode",
@@ -22519,10 +22513,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_080184D4",
+      "name": "transition_object_tick_windows",
       "rom_offset": 99540,
       "size": 456,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "transition_object_tick_alpha",
@@ -34256,8 +34250,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "998baf7d124f9461a2f81d177b145d8604a09ed9b4a67fb47f9130ecbc694b14",
-    "assets/rom-inventory.json": "3bc59678251826c755472732ee66ac11825406f6d90e333f144a876c3a498fb5",
+    "config/build-us-eu.json": "53b81ac4d0996131cd1ada2f94b57bb0ba6cb25719f3ef5102078fcb23afd722",
+    "assets/rom-inventory.json": "ae1f7b90be96608f11eeb98b61b6296ab5c0a17fbb0c5d6c635045334f307025",
     "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",

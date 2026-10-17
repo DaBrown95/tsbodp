@@ -33,7 +33,7 @@ struct TransitionViewContext {
  unsigned char count, current_view;
 };
 extern struct TransitionViewContext g_transition_view_context;
-extern unsigned int g_transition_view_configuration[2];
+#include "transition_view_configuration.h"
 typedef void (*TransitionHandler)(unsigned short);
 extern TransitionHandler g_transition_first_handlers[], g_transition_second_handlers[];
 extern void transition_set_view_mode(unsigned int, unsigned char);

@@ -19,7 +19,7 @@ void scene_contact_initialize_primary_activity(void)
     transition_set_view_mode(0, 0);
     transition_configure_view(
         ((struct SceneContactActivityStatePrefix *)g_scene_contact_state)->view,
-        *(const struct FramePoint *)g_transition_view_configuration, 0);
+        g_transition_view_configuration.point, 0);
     frame_update_map_view(0);
     transition_step_view(0);
 }

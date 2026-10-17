@@ -3,7 +3,7 @@ void frame_placement_cancel(void)
 {
  if(((struct FramePlacementActor *)g_frame_placement_session.actor)->mode==1)frame_remove_object(g_frame_placement_session.effect);
  else frame_enable_object_flags(g_frame_placement_session.effect,1);
- transition_configure_view((struct TransitionViewObject *)g_frame_placement_session.actor,*(const struct FramePoint *)g_transition_view_configuration,0);
+ transition_configure_view((struct TransitionViewObject *)g_frame_placement_session.actor,g_transition_view_configuration.point,0);
  transition_set_view_origin(g_frame_placement_session.preview->position,0);
  frame_remove_object(g_frame_placement_session.preview);
  g_frame_placement_session.effect=0;

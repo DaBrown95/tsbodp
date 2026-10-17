@@ -9,7 +9,7 @@ struct TransitionViewObject;
 void transition_reset_view(unsigned char);
 void transition_set_view_mode(unsigned int,unsigned char);
 void transition_configure_view(struct TransitionViewObject *,struct FramePoint,unsigned char);
-extern unsigned int g_transition_view_configuration[2];
+#include "transition_view_configuration.h"
 void resource_spawn_group(unsigned char),resource_execute_group(unsigned char);
 extern unsigned short g_resource_group_flags;
 void resource_prepare(const unsigned char *);

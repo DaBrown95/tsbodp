@@ -21,6 +21,7 @@ unsigned char transition_approach_view(struct FramePoint,int,unsigned char);
 void transition_configure_view_move(struct FramePoint,int,unsigned short,unsigned char);
 
 unsigned int transition_get_view_mode(unsigned char);
+void transition_set_view_mode(unsigned int, unsigned char);
 void transition_set_view_origin(struct FramePoint, unsigned char);
 void transition_get_view_position(struct FramePoint *, unsigned char);
 #endif
