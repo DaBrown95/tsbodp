@@ -40,7 +40,7 @@ struct FrameObject *frame_allocate_object(int);
 void frame_set_position(struct FrameObject *, int, int);
 void frame_enable_parts(struct FrameObject *);
 void frame_bind_actor_group(struct FrameObject *, const void *);
-void frame_set_animation_variant(struct FrameObject *, signed char, signed char);
+void frame_set_animation_variant(struct FrameObject *, int, int);
 void frame_set_part_order(struct FrameObject *, FrameU8, FrameU8);
 void frame_load_actor_group_palette(const void *, unsigned int);
 void resource_object_before_step(struct FrameObject *);

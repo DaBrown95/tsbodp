@@ -50342,6 +50342,146 @@
         "before": "REG16(0x0400004A) = 0x1F;",
         "after": "REG16(0x0400004A) = 0x1E;"
       }
+    },
+    {
+      "name": "frame_initialize_node_pool_1dac4",
+      "source": "src/frame/frame_initialize_node_pool_1dac4.c",
+      "rom_offset": 121540,
+      "size": 44,
+      "symbols": {
+        "heap_clear": "0x08027a49",
+        "heap_allocate": "0x08027865",
+        "frame_pool_initialize": "0x08024d19",
+        "g_frame_node_pool_1dac4": "0x03001b88"
+      },
+      "thumb_symbols": [
+        "heap_clear",
+        "heap_allocate",
+        "frame_pool_initialize"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "memory, 128, 36",
+        "after": "memory, 127, 36"
+      }
+    },
+    {
+      "name": "frame_shutdown_node_pool_1daf0",
+      "source": "src/frame/frame_shutdown_node_pool_1daf0.c",
+      "rom_offset": 121584,
+      "size": 28,
+      "symbols": {
+        "heap_free": "0x08027989",
+        "g_frame_node_pool_1dac4": "0x03001b88"
+      },
+      "thumb_symbols": [
+        "heap_free"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "heap_free(g_frame_node_pool_1dac4.memory);",
+        "after": "heap_free(g_frame_node_pool_1dac4.lists.heads.free_head);"
+      }
+    },
+    {
+      "name": "frame_allocate_node_pool_1db0c",
+      "source": "src/frame/frame_allocate_node_pool_1db0c.c",
+      "rom_offset": 121612,
+      "size": 20,
+      "symbols": {
+        "frame_pool_allocate_08024d50": "0x08024d51",
+        "g_frame_node_pool_1dac4": "0x03001b88"
+      },
+      "thumb_symbols": [
+        "frame_pool_allocate_08024d50"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "lists.active, 36",
+        "after": "lists.active, 32"
+      }
+    },
+    {
+      "name": "frame_unrooted_attachment_check_1dd80",
+      "rom_offset": 122240,
+      "size": 40,
+      "source": "src/frame/frame_unrooted_attachment_check_1dd80.c",
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "unknown_60[0] == 1",
+        "after": "unknown_60[0] == 0"
+      }
+    },
+    {
+      "name": "frame_unrooted_attachment_value_1de18",
+      "rom_offset": 122392,
+      "size": 4,
+      "source": "src/frame/frame_unrooted_attachment_value_1de18.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "return 100;",
+        "after": "return 99;"
+      }
+    },
+    {
+      "name": "frame_scene_player_step_1dfe4",
+      "rom_offset": 122852,
+      "size": 276,
+      "source": "src/frame/frame_scene_player_step_1dfe4.c",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {
+        "frame_update_actor_needs": "0x0802b4d9",
+        "frame_actor_choose_need_action": "0x0802b5a5",
+        "frame_run_actor_state": "0x08005805",
+        "g_display_menu_result_local_needs": "0x03003a00",
+        "g_frame_scene_double_direction_variants": "0x0804f1b8",
+        "g_frame_actor_direction_variants_signed": "0x0804f1b0",
+        "g_frame_actor_palette_pair_definition": "0x03003970",
+        "frame_bind_actor_group": "0x0803ad65",
+        "frame_set_animation_variant": "0x08000be9",
+        "g_frame_actor_commands_kind1": "0x08d729d8",
+        "g_frame_scene_player_commands_kind2": "0x08d734cc",
+        "frame_set_animation_commands": "0x080015bd",
+        "g_frame_scene_actor_selection": "0x03003950"
+      },
+      "thumb_symbols": [
+        "frame_update_actor_needs",
+        "frame_actor_choose_need_action",
+        "frame_run_actor_state",
+        "frame_bind_actor_group",
+        "frame_set_animation_variant",
+        "frame_set_animation_commands"
+      ],
+      "negative_control": {
+        "before": "actor->pending_updates = 0;",
+        "after": "actor->pending_updates = 1;"
+      }
     }
   ],
   "assembly": [

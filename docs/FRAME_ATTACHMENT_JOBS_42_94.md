@@ -1,18 +1,24 @@
 # Attachment jobs 42 and 94
 
-The initial five-function batch reproduces 692 bytes at its original addresses.
-Normal and strict positives match the complete spans, including literal pools
-and alignment. Changed-source controls reject under both profiles. No new
-low-level instruction glue is introduced.
+Ten C bodies cover the contiguous range `0x0801DB2C..0x0801DE1C`, reproducing
+752 complete extent bytes. Two remain unrooted: matching their source does not
+identify incoming callers or callback roles. Normal and strict positives match
+the complete spans, including literal pools and alignment; changed-source
+controls reject under both profiles. No new executable assembly is introduced.
 
 | Body | ROM offset | Instructions | Literals | Zero alignment | Full span |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Kind 42 update | `0x1DB2C` | 170 | 4 | 2 | 176 |
 | Kind 94 update | `0x1DBDC` | 386 | 28 | 2 | 416 |
+| Initialization callback | `0x1DD7C` | 4 | 0 | 0 | 4 |
+| Unrooted predicate | `0x1DD80` | 38 | 0 | 2 | 40 |
 | Choices callback | `0x1DDA8` | 24 | 4 | 0 | 28 |
+| EC action switch | `0x1DDC4` | 8 | 0 | 0 | 8 |
 | Begin callback | `0x1DDCC` | 26 | 0 | 2 | 28 |
 | Shared dispatch | `0x1DDE8` | 44 | 0 | 0 | 44 |
-| **Total** | | **650** | **36** | **6** | **692** |
+| Empty tick callback | `0x1DE14` | 2 | 0 | 2 | 4 |
+| Unrooted constant result | `0x1DE18` | 4 | 0 | 0 | 4 |
+| **Total** | | **706** | **36** | **10** | **752** |
 
 The 36-byte definition row 99 begins at `0x08063C68`. Its field 16 supplies the
 shared dispatcher, which looks up an attachment record, selects full-word kind
@@ -100,7 +106,8 @@ Both observed selector callback owners agree on a word result and state/output
 pointer arguments. Both begin callback owners agree on a word result and
 state/actor/full-word-kind arguments. The observed callers consume the begin
 result through its low byte. The init, EC and tick callbacks are now owned by C.
-The nearby unrooted predicate remains unowned and adds no recovered-C credit.
+The adjacent predicate and constant-result body also have matching C, without
+identified incoming callers or installed callback roles.
 
 The follow-up checks cover 16 shared physical layout facts, the three actual
 callback pointer types and the complete accepted scene initializer with a named
@@ -130,11 +137,42 @@ Normal and strict positives match the complete four-byte slots. Changing the
 initializer result to zero and making the empty tick store optional value one
 both reject in full under both profiles; controls that grow are not truncated.
 
-Together these two stubs and the original five-function batch own seven
-functions / 700 extent bytes: 656 instruction bytes, 36 literal bytes and eight
-zero alignment bytes. The separately owned eight-byte EC action switch and
-76-byte capacity predicate receive no additional credit. All observed nonnull
-callback pointers in physical row 99 now point to matching C bodies. This closes ownership
-of that row's stored callbacks, while selector domains, later pointer writes,
-owner lifetimes and gameplay reachability remain open. The preceding unrooted
-predicate and following return-100 body remain unowned.
+The workers and row-local callbacks, including the eight-byte EC action
+switch, account for eight bodies / 708 extent bytes in this range. The separately
+owned 76-byte capacity predicate lies outside it and receives no additional
+credit. All observed nonnull callback pointers in physical row 99 point to
+matching C bodies. This closes ownership of that row's stored callback bodies;
+selector domains, later pointer writes, owner lifetimes and gameplay
+reachability remain open.
+
+## Adjacent unrooted bodies
+
+The predicate at `0x0801DD80` calls the existing unsigned-byte attachment
+counter on its actor argument. Only a nonzero result reads the owner's byte at
+`+0x60`; it returns zero when that byte equals one and returns one otherwise.
+The source uses the existing 256-byte `FrameNeedEffectState` owner and proper
+`FrameObject *` counter interface. Valid reached owner/actor backing remains a
+precondition. The body contains 38 instruction bytes and two following zeros,
+reproduced by an instruction-free alignment directive.
+
+The four-byte body at `0x0801DE18` returns unsigned 100. Its chosen `(void)`
+interface states the project's callable view; original unused formals and
+historical result signedness are not established by the return instruction.
+Together these bodies add 44 bytes, giving the ten-body / 752-byte contiguous
+source range above. They add no observed callback or entry root.
+
+Both complete spans match under normal and strict profiles. Changing the
+predicate's comparison from one to zero changes one byte at offset 22 in each
+40-byte control. Changing 100 to 99 changes the first byte in each four-byte
+control. Actual definitions, the owner byte's offset 96 and size 256, and the
+counter's unsigned-byte result receive type/layout checks. Deliberately wrong
+offset, result, arity and pointer units reject; the chosen unrooted arity check
+establishes declaration/definition consistency, not historical ABI.
+
+No checked direct branch, canonical or mirrored entry pointer, indexed call
+or observed definition-table callback identifies an incoming caller for these
+two bodies. This finite static absence does not establish dead code or close
+computed, writable or serialized target domains. The unrooted
+[node-pool lifecycle](FRAME_NODE_POOL_1DAC4.md) immediately before this range
+remains a separate state/call protocol; physical adjacency supplies no gameplay
+connection. The twelve bytes at `0x1DB20..0x1DB2C` remain unresolved.

@@ -1,9 +1,11 @@
-#include "frame_tick.h"
+#include "frame_actor_runtime.h"
 struct FramePartRecord { const FrameU8 *data; struct FrameSpriteSequence *sequence; const FrameU8 *palette; FrameU8 frame_delay, unknown_0d[3]; };
 void frame_set_animation_resource(struct FrameObject *, struct FrameSpriteResource *);
 void display_load_palette_alternate(const void *, FrameU32, FrameU32);
 void display_queue_palette(const void *, FrameU32, FrameU32);
-void frame_set_animation_variant(struct FrameObject *base, signed char group, signed char variant)
+void frame_set_animation_variant(base, group, variant)
+struct FrameObject *base;
+signed char group, variant;
 {
  struct FrameTickObject *object=(struct FrameTickObject *)base;
  struct FramePartRecord *resource=(struct FramePartRecord *)&object->parts[0].variants[(signed char)group][(signed char)variant];
