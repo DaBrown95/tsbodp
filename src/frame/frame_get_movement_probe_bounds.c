@@ -1,7 +1,7 @@
 #include "frame_movement.h"
 unsigned int frame_get_movement_probe_bounds(struct FrameObject *object,int *bounds)
 {
- struct FramePoint position=object->next_position;
+ struct FramePoint position=object->next_position.word;
  unsigned int heading=((struct FrameMovementDirection *)object)->direction;
  const int *offsets;
  unsigned int mask,direction;

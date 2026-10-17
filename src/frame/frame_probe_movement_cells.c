@@ -15,7 +15,7 @@ void frame_probe_movement_cells(struct FrameObject *object, void *registration)
     if (direction < 0)
         direction = ((struct FrameMovementDirection *)object)->direction + 7;
     i = 0;
-    next = &object->next_position;
+    next = &object->next_position.word;
     for (; i <= 2; i++) {
         if (direction == ((struct FrameMovementDirection *)object)->direction)
             frame_make_velocity(&velocity, flags, direction, 0x80000);

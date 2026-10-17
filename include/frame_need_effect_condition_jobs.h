@@ -14,4 +14,8 @@ unsigned int frame_step_condition_wait_job(struct FrameNeedEffectState *,struct 
 /* EC action switches; unused formal roles remain inferred. */
 unsigned int frame_prepare_condition_attachment_jobs(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 
+/* Observed row-132 definition entry and per-frame state callback. */
+unsigned int frame_initialize_condition_attachment_jobs(struct FrameNeedEffectState *);
+void frame_tick_condition_attachment_jobs(struct FrameNeedEffectState *);
+
 #endif

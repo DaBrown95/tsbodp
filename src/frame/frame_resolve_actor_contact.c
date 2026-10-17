@@ -10,7 +10,7 @@ void frame_resolve_actor_contact(struct FrameObject *object,
                                   struct FrameObject *other)
 {
  int first_top,first_left,first_bottom,first_right;
- struct FramePoint position=object->next_position;
+ struct FramePoint position=object->next_position.word;
  int top,bottom,left,right;
  struct FramePoint first,second,offset;
  int intersecting,second_inside;
@@ -24,7 +24,7 @@ void frame_resolve_actor_contact(struct FrameObject *object,
   first_left=(position.x>>16)+object->bound_x0;
   first_right=(position.x>>16)+object->bound_x1;
  }
- position=other->next_position;
+ position=other->next_position.word;
  top=(position.y>>16)+other->bound_y0;
  bottom=(position.y>>16)+other->bound_y1;
  if(other->render_special<0) {
@@ -53,21 +53,21 @@ void frame_resolve_actor_contact(struct FrameObject *object,
     second.y>=first_top && second.y<=first_bottom)second_inside=1;
  if(intersecting || second_inside) {
   if(direction&1) {
-   if(intersecting)other->next_position.y=other->position.y;
-   if(second_inside)other->next_position.x=other->position.x;
+   if(intersecting)other->next_position.word.y=other->position.y;
+   if(second_inside)other->next_position.word.x=other->position.x;
   }else{
    offset.x=0;offset.y=0;
    if(intersecting) {
     if(direction==0 || direction==4)offset.x=((struct FrameCollisionMotion*)other)->speed>>3;
     else offset.y=((struct FrameCollisionMotion*)other)->speed>>3;
-    frame_add_points(&other->position,&offset,&other->next_position);
+    frame_add_points(&other->position,&offset,&other->next_position.word);
    }
    if(second_inside) {
     if(direction==0 || direction==4)offset.x=(-((struct FrameCollisionMotion*)other)->speed)>>3;
     else offset.y=(-((struct FrameCollisionMotion*)other)->speed)>>3;
-    frame_add_points(&other->position,&offset,&other->next_position);
+    frame_add_points(&other->position,&offset,&other->next_position.word);
    }
-   if(intersecting && second_inside)other->next_position=other->position;
+   if(intersecting && second_inside)other->next_position.word=other->position;
   }
  }else{
   intersecting=1;
@@ -76,7 +76,7 @@ void frame_resolve_actor_contact(struct FrameObject *object,
   else if(first_top>bottom)intersecting=0;
   else if(first_bottom<top)intersecting=0;
   if(intersecting==1) {
-   other->next_position=other->position;
+   other->next_position.word=other->position;
    other->velocity.y=0;other->velocity.x=0;
    ((struct FrameCollisionContactState*)other)->contact|=1;
   }

@@ -4787,8 +4787,8 @@
       "thumb_symbols": [],
       "source": "src/frame/frame_set_position.c",
       "negative_control": {
-        "before": "object->next_position.x = x",
-        "after": "object->next_position.x = y"
+        "before": "object->next_position.word.x = x",
+        "after": "object->next_position.word.x = y"
       }
     },
     {
@@ -50107,6 +50107,72 @@
       "negative_control": {
         "before": "{\n}",
         "after": "{\n    owner->enabled = 1;\n}"
+      }
+    },
+    {
+      "name": "frame_initialize_need_effect_direct_49",
+      "source": "src/frame/frame_initialize_need_effect_direct_49.c",
+      "rom_offset": 138736,
+      "size": 4,
+      "symbols": {},
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      }
+    },
+    {
+      "name": "frame_tick_need_effect_direct_49",
+      "source": "src/frame/frame_tick_need_effect_direct_49.c",
+      "rom_offset": 138900,
+      "size": 4,
+      "symbols": {},
+      "negative_control": {
+        "before": "return;",
+        "after": "owner->enabled = 1;\n    return;"
+      }
+    },
+    {
+      "name": "frame_initialize_optional_attachment_jobs",
+      "source": "src/frame/frame_initialize_optional_attachment_jobs.c",
+      "rom_offset": 99332,
+      "size": 4,
+      "symbols": {},
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      }
+    },
+    {
+      "name": "frame_tick_optional_attachment_jobs",
+      "source": "src/frame/frame_tick_optional_attachment_jobs.c",
+      "rom_offset": 99532,
+      "size": 4,
+      "symbols": {},
+      "negative_control": {
+        "before": "return;",
+        "after": "owner->enabled = 1;\n    return;"
+      }
+    },
+    {
+      "name": "frame_initialize_condition_attachment_jobs",
+      "source": "src/frame/frame_initialize_condition_attachment_jobs.c",
+      "rom_offset": 91380,
+      "size": 4,
+      "symbols": {},
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      }
+    },
+    {
+      "name": "frame_tick_condition_attachment_jobs",
+      "source": "src/frame/frame_tick_condition_attachment_jobs.c",
+      "rom_offset": 91640,
+      "size": 4,
+      "symbols": {},
+      "negative_control": {
+        "before": "return;",
+        "after": "owner->enabled = 1;\n    return;"
       }
     }
   ],

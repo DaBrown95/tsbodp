@@ -34,4 +34,8 @@ unsigned int frame_prepare_optional_attachment_kinds_92_97(struct FrameNeedEffec
 /* EC action switches; unused formal roles remain inferred. */
 unsigned int frame_prepare_optional_attachment_kind(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 
+/* Observed row-one definition entry and per-frame state callback. */
+unsigned int frame_initialize_optional_attachment_jobs(struct FrameNeedEffectState *);
+void frame_tick_optional_attachment_jobs(struct FrameNeedEffectState *);
+
 #endif

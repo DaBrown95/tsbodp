@@ -2,17 +2,17 @@
 unsigned char frame_movement_offset_blocked(struct FrameObject *object,struct FramePoint displacement)
 {
  unsigned char allowed=1;
- struct FramePoint saved=object->next_position;
+ struct FramePoint saved=object->next_position.word;
  struct FrameActorPackedCell cell;
  struct FramePoint position;
  int bounds[4];
  unsigned int contact;
- object->next_position.x+=displacement.x;
- object->next_position.y+=displacement.y;
+ object->next_position.word.x+=displacement.x;
+ object->next_position.word.y+=displacement.y;
  contact=frame_get_movement_probe_bounds(object,bounds);
  if(g_frame_registration) {
-  position.x=((short *)&object->next_position)[1];
-  position.y=((short *)&object->next_position)[3];
+  position.x=object->next_position.halves.x_pixel;
+  position.y=object->next_position.halves.y_pixel;
   if(!frame_grid_point_to_cell(g_frame_registration,&position,&cell))allowed=0;
   else if(((struct FrameActorPackedCellView *)object)->cell.index!=cell.index) {
    unsigned int occupancy=frame_grid_occupancy(g_frame_registration,(const int *)&cell);
@@ -22,7 +22,7 @@ unsigned char frame_movement_offset_blocked(struct FrameObject *object,struct Fr
   }
  }
  if(frame_movement_is_contact(contact) || !allowed) {
-  object->next_position=saved;
+  object->next_position.word=saved;
   return 1;
  }
  ((struct FrameActorContactWork *)object)->contact|=2;

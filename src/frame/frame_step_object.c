@@ -30,7 +30,7 @@ void frame_step_object(struct FrameObject *object, FrameU8 update_display)
         if (g_frame_flags & 8) {
             if (update_display != 1)
                 return;
-            object->position = object->next_position;
+            object->position = object->next_position.word;
             frame_advance_position(object);
         }
     }

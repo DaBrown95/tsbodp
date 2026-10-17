@@ -36,13 +36,24 @@ union FrameMotionStorage {
         FrameU8 unknown_14[40];
     } motion;
 };
+/* Two views of the same initialized next-position coordinates on the target. */
+union FramePointStorage {
+    struct FramePoint word;
+    struct {
+        unsigned short x_fraction;
+        short x_pixel;
+        unsigned short y_fraction;
+        short y_pixel;
+    } halves;
+};
 struct FrameObject {
     struct FrameObject *next, *previous;
     FrameU16 id, unknown_0a;
     FrameU32 flags;
     FrameU8 owner_id, owner_slot;
     FrameU8 unknown_12[6];
-    struct FramePoint position, next_position;
+    struct FramePoint position;
+    union FramePointStorage next_position;
     struct FramePoint velocity, acceleration, destination;
     FrameU16 phase_x, phase_y;
     short rate_x, rate_y, amplitude_x, amplitude_y;

@@ -7,7 +7,7 @@
 struct FrameRenderEffect {
     struct FrameRenderEffect *next, *previous;
     unsigned int unknown08;
-    struct FrameSpriteResource *resource;
+    const struct FrameSpriteResource *resource;
     struct FramePoint origin;
     union {
         struct FramePoint fixed;

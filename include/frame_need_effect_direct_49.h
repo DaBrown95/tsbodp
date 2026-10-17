@@ -10,4 +10,8 @@ unsigned int frame_need_effect_direct_49_step(struct FrameNeedEffectState *,stru
 /* EC action switches; unused formal roles remain inferred. */
 unsigned int frame_prepare_need_effect_direct_49(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 
+/* Definition entry and per-frame state callback for observed rows79/86. */
+unsigned int frame_initialize_need_effect_direct_49(struct FrameNeedEffectState *);
+void frame_tick_need_effect_direct_49(struct FrameNeedEffectState *);
+
 #endif

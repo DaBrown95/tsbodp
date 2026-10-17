@@ -8,9 +8,9 @@ void scene_contact_activity_four_step_event(struct FrameObject *object)
     struct FrameObject *control;
     struct FramePoint lower, upper;
 
-    object->next_position.x = (int)((unsigned int)object->position.x +
+    object->next_position.word.x = (int)((unsigned int)object->position.x +
         (unsigned int)object->velocity.x);
-    object->next_position.y = (int)((unsigned int)object->position.y +
+    object->next_position.word.y = (int)((unsigned int)object->position.y +
         (unsigned int)object->velocity.y);
     state = STATE;
     control = state->control;
@@ -19,8 +19,8 @@ void scene_contact_activity_four_step_event(struct FrameObject *object)
     upper.x = (int)((unsigned int)control->position.x + 0xc0000);
     upper.y = (int)((unsigned int)control->position.y + 0xa0000);
     if (control->unknown_0a == 0 &&
-        object->next_position.x > lower.x && object->next_position.x < upper.x &&
-        object->next_position.y > lower.y && object->next_position.y < upper.y) {
+        object->next_position.word.x > lower.x && object->next_position.word.x < upper.x &&
+        object->next_position.word.y > lower.y && object->next_position.word.y < upper.y) {
         object->flags |= 2;
         if (!state->second[state->current]) {
             struct FramePoint point;
@@ -51,12 +51,12 @@ void scene_contact_activity_four_step_event(struct FrameObject *object)
         }
     } else {
         if ((object->unknown_12[0] == 2 &&
-             object->next_position.x > 0xb7ffff) ||
-            (object->unknown_12[0] == 6 && object->next_position.x <= 0))
+             object->next_position.word.x > 0xb7ffff) ||
+            (object->unknown_12[0] == 6 && object->next_position.word.x <= 0))
             object->flags |= 2;
         else {
-            object->position.x = object->next_position.x;
-            object->position.y = object->next_position.y;
+            object->position.x = object->next_position.word.x;
+            object->position.y = object->next_position.word.y;
         }
     }
 }

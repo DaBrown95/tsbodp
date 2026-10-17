@@ -31,7 +31,7 @@ int frame_schedule(struct FrameObjectList *list, FrameU8 update_display)
         for (object = list->first; object; object = object->next) {
             if (object->animation_source)
                 frame_prepare_animation(object);
-            object->position = object->next_position;
+            object->position = object->next_position.word;
             frame_advance_position(object);
         }
     }
@@ -53,7 +53,7 @@ int frame_schedule(struct FrameObjectList *list, FrameU8 update_display)
                 for (; layer < object->display_layer; layer++)
                     frame_finish_layer(layer);
             if (object->sharing_flags & 0x10) {
-                object->render_special = 1;
+                object->render_special = -1;
                 frame_render_object(object);
                 object->render_special = 0;
             }

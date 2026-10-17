@@ -19,8 +19,8 @@ void frame_actor_state_17(struct FrameObject *object)
   frame_request_animation((struct FrameCommandObject *)object,1);
   transition_object_set_state(object,((struct FrameActorObject *)object)->default_state);
   frame_set_variant_state(object,2);
-  frame_point_to_integer(&object->next_position,&point);
+  frame_point_to_integer(&object->next_position.word,&point);
   frame_grid_snap_point_to_center(g_frame_registration,&point,&point);
-  frame_point_to_fixed(&point,&object->next_position);
+  frame_point_to_fixed(&point,&object->next_position.word);
  }
 }

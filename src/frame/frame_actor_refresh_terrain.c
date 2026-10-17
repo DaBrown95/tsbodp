@@ -3,7 +3,7 @@
 #include "frame_actor_social.h"
 void frame_actor_refresh_terrain(struct FrameObject *object)
 {
- struct FramePoint point={((short*)&object->next_position)[1],((short*)&object->next_position)[3]};
+ struct FramePoint point={object->next_position.halves.x_pixel,object->next_position.halves.y_pixel};
  ((struct FrameActorTerrainState*)object)->terrain=frame_map_terrain_at(point);
  if(((struct FrameActorTerrainState*)object)->terrain==1) {
   if(!(object->flags&0x4000)) {

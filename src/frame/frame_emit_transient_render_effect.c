@@ -24,15 +24,15 @@ void frame_emit_transient_render_effect(struct FrameTransientEffect *emitter)
             return;
         }
         if(emitter->owner->unknown_12[0]>direction_limit) {
-            origin.x=emitter->owner->next_position.x-origin.x*65536;
-            second.x=emitter->owner->next_position.x-second.x*65536;
+            origin.x=emitter->owner->next_position.word.x-origin.x*65536;
+            second.x=emitter->owner->next_position.word.x-second.x*65536;
         }
         else {
-            origin.x=emitter->owner->next_position.x+origin.x*65536;
-            second.x=emitter->owner->next_position.x+second.x*65536;
+            origin.x=emitter->owner->next_position.word.x+origin.x*65536;
+            second.x=emitter->owner->next_position.word.x+second.x*65536;
         }
-        origin.y=emitter->owner->next_position.y+origin.y*65536;
-        second.y=emitter->owner->next_position.y+second.y*65536;
+        origin.y=emitter->owner->next_position.word.y+origin.y*65536;
+        second.y=emitter->owner->next_position.word.y+second.y*65536;
         dx=second.x-origin.x;
         dy=second.y-origin.y;
         weight=frame_random_secondary_range(0,65535);
@@ -60,8 +60,8 @@ void frame_emit_transient_render_effect(struct FrameTransientEffect *emitter)
         origin.y=((struct FrameTransientIntegerPoint *)&emitter->position)->y;
     }
     else {
-        origin.x=((struct FrameTransientIntegerPoint *)&emitter->owner->next_position)->x;
-        origin.y=((struct FrameTransientIntegerPoint *)&emitter->owner->next_position)->y;
+        origin.x=emitter->owner->next_position.halves.x_pixel;
+        origin.y=emitter->owner->next_position.halves.y_pixel;
     }
     effect->origin.x=frame_random_secondary_range(origin.x-radius,origin.x+radius)*65536;
     effect->origin.y=frame_random_secondary_range(origin.y-radius,origin.y+radius)*65536;

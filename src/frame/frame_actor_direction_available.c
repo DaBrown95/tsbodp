@@ -8,8 +8,8 @@ unsigned char frame_actor_direction_available(struct FrameObject *object, unsign
  int current, i;
  unsigned int mask=0xffff;
  frame_make_velocity(&velocity,object->flags,direction,((struct FrameActorObject *)object)->speed);
- destination.x=object->next_position.x+velocity.x;
- destination.y=object->next_position.y+velocity.y;
+ destination.x=object->next_position.word.x+velocity.x;
+ destination.y=object->next_position.word.y+velocity.y;
  current=direction-1;
  if (current<0) current=direction+7;
  for (i=0; i<3; i++) {

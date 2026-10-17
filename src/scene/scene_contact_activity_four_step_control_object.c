@@ -18,13 +18,13 @@ void scene_contact_activity_four_step_control_object(struct FrameObject *object)
         }
         break;
     case 3:
-        object->next_position.y = (int)((unsigned int)object->next_position.y +
+        object->next_position.word.y = (int)((unsigned int)object->next_position.word.y +
             (unsigned int)object->velocity.y);
         object->velocity.y = (int)((unsigned int)object->velocity.y +
             (unsigned int)object->acceleration.y);
         if (object->velocity.y > 0)
             object->unknown_0a = 1;
-        if (object->next_position.y > 0x8bffff) {
+        if (object->next_position.word.y > 0x8bffff) {
             int lower, upper;
 
             object->velocity.y = 0;
@@ -54,7 +54,7 @@ void scene_contact_activity_four_step_control_object(struct FrameObject *object)
                 frame_set_animation_frame((struct FrameTickObject *)object, 0);
             }
         } else {
-            object->position.y = object->next_position.y;
+            object->position.y = object->next_position.word.y;
         }
         break;
     case 7:
