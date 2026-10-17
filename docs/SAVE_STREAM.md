@@ -2,20 +2,21 @@
 
 The reconstructed path connects the published menu-choice and actor-need
 save/load callers to a shared byte/bit cursor, record views, slot transfers,
-header initialization and audio/display-status handoff. It has 59 matching C
-functions covering 4,588 bytes. Each full extent, pool and alignment was linked
-at its original ROM address and compared with the fixed reference. Each also
+header initialization and audio/display-status handoff. Its historical snapshot
+contained 59 matching C functions covering 4,588 bytes. Each full extent, pool
+and alignment was linked at its original ROM address and compared with the fixed reference. Each also
 has a compiled changed-source control. These are static and compiler results;
 no runtime save/load or EEPROM compatibility claim is made.
 
 The connected actor-tail reader and writer at `0x0800EB30` and `0x0800EB3C`
 separately add two matching C functions and 24 bytes. Each transfers 28 bytes
 through the existing byte provider and has normal/strict comparisons with
-rejecting count controls. The adjacent reset hook was already owned; the
-larger grouped actor reader and writer remain unconverted. See the
-[actor-entry evidence](ACTOR_ENTRIES_RECONSTRUCTION.md) for their backing and
-interface limits. These additions do not expand the historical 59-function
-snapshot above into a claim that every save path is reconstructed.
+rejecting count controls. The adjacent reset hook was already owned. The
+newly qualified grouped reader and writer add two further C extents and
+868 bytes (468 plus 400); the actor-entry family now contains 25 extents and
+3,224 bytes. Their full-project matching and progress gates pass. See the [actor-entry evidence](ACTOR_ENTRIES_RECONSTRUCTION.md) for
+backing and interface limits. These additions remain separate from the
+historical 59-function snapshot and do not establish complete save paths.
 
 ## Shared storage and format limits
 
@@ -102,9 +103,9 @@ These remain bounded static claims, not a complete code inventory.
 Useful failed approaches, original/actual bytes, assembly, source snapshots and
 real negative controls remain in ignored local reports. The 108-byte buffer
 builder is still unconverted; its candidates are excluded from coverage.
-The short library write-mode gate, several game-state subserializers and the
-unconverted header-refresh branch also remain explicit. Next connected targets
-are those producers and the higher game-state load/save consumers.
+The higher game-state loader, retained condition module and unconverted
+header-refresh branch remain explicit dependencies. The reconstructed
+write-mode gate and grouped actor transfer are described below.
 
 ## Game-state producer and header representation
 
@@ -157,8 +158,8 @@ The 28-byte child at
 one byte. The 52-byte module at `0x08010AE0` writes four words at
 `0x03004064`; nearby bit-mask readers support the flag-word name. These four
 functions are direct producer dependencies, with their own full-extent matches
-and real negative controls. The remaining child/module serializers stay
-unconverted.
+and real negative controls. The retained condition module at `0x08029D18`
+remains unconverted; the grouped actor serializer is described below.
 
 The first decoded record's two pair bytes and six nibble bytes also form an
 eight-byte selector view at `0x03005DC4`, with subsequent records forty bytes
@@ -229,10 +230,9 @@ not establish separate allocations or a complete world-state size.
 All eight inverse sources use ordinary C, match their full original extents
 including pools and alignment, and have real compiled changed-source controls.
 All 75 previously accepted save-header consumers were also rebuilt with their
-controls against the final union/header closure. The buffer builder,
-grouped subrecord loader/serializer and retained condition module
-remain explicit unconverted interfaces. Static transfer order and compiler
-equality do not establish save compatibility or gameplay behaviour.
+controls against the final union/header closure. The buffer builder, higher
+game-state loader and retained condition module remain explicit unconverted
+interfaces. Static transfer order and compiler equality do not establish save compatibility or gameplay behaviour.
 
 ## Condition display-bit transfer and completion
 
@@ -256,8 +256,9 @@ provisional; the code supplies no kind-range check or independent table bound.
 All three ordinary C sources match their original addresses, complete extents,
 literal pools and alignment. Their real changed-source controls reject. The
 five accepted byte-transfer and condition providers were also rebuilt with
-controls against current headers. The larger row/cell modules, complete game
-loader and grouped record loader remain excluded from matching coverage.
+controls against current headers. The larger row/cell modules and complete game
+loader remain excluded from matching coverage; the grouped record pair now has
+its own full qualification below.
 
 ## Buffer-load wrapper and saved text-resource selection
 
@@ -322,8 +323,9 @@ There are no embedded original instructions, output modifications or artificial
 volatile accesses. A real mask change from fifteen to fourteen changes the
 compiled bytes. All current accepted save-header consumers are recompiled with
 their own source controls after removing the old unconverted-writer comment.
-The main game-state loader, grouped region readers/writers, condition modules,
-buffer builder and short write-mode gate remain explicit unconverted paths.
+The main game-state loader, condition modules and buffer builder remain
+explicit unconverted paths. The grouped actor pair and write-mode gate are
+qualified separately below.
 
 ## Parameter selection, DMA handoff and serial read
 
@@ -446,3 +448,50 @@ recompiled with their own controls after the interface refinement. Earlier
 loop, polling-workspace, register-binding and mode-gate failures remain local
 and excluded. Static polling order and byte equality do not prove successful
 physical-media writes, concurrent safety or save-format compatibility.
+
+## Paired grouped actor transfer
+
+The reader at `0x0801FCF8` (468 bytes) and writer at `0x0801FECC`
+(400 bytes) now pass complete source qualification: two C functions and
+868 bytes. The reader includes 456 instruction bytes and twelve literal bytes;
+the writer includes 390 instruction bytes, eight literal bytes and two alignment
+bytes. The full-project matching and progress gates pass with both installed.
+
+The canonical collection has 160 twelve-byte records and fifty four-byte group
+descriptors with start at byte zero, count at byte one and flags at byte two.
+Older foreign headers inverted start/count and do not qualify those attempts.
+The fifteen small-list loops instead transfer count at byte zero and traverse
+capacity at byte one. Both grouped functions require mutable complete backing
+of at least `0x348` bytes through input `+0x347`; the canonical context is only
+a `0x320` prefix. Their 28-byte tail begins at `+0x320` and the complete
+menu-choice record at `+0x33C`.
+
+The reader clears the full `0x84C` collection and initializes the word receiving
+one stream byte per group to zero. Each group consumes that byte and decrements
+the word to zero before the next read. Two separate collection-count observations remain: the
+first supplies the descriptor start, the second the total update and record
+address. The latter's actual `r6` lifetime ends before the first record-reader
+call. The writer's `r6` start snapshot instead survives the count-byte writer
+call before supplying its record address. Valid capacities, collection indices,
+complete backing and stream/provider state are preconditions, not new checks.
+
+The reader keeps one genuine complete byte base and leaves its register
+unconstrained. Its actual next-group `r8` value survives small-list calls; the
+short count snapshot excludes the conflicting field-slot allocation naturally.
+An explicit unsigned-byte truncation before shifting restores the large-record
+low-nibble producer. Both sources preserve the actual late `r4` copy-then-add
+cursor and a separate `r5` counter across the final five byte calls. Retained
+old constructor and register-role attempts are disclosed; no embedded original
+instructions, fabricated traffic or compiler-output changes are used.
+
+Fresh normal/strict builds without diagnostic flags match all bytes, and both
+first-list-limit controls changing fifteen to fourteen reject by one byte.
+The actual-definition reader API unit passes 35 target facts and rejects nine
+incompatible contracts; the writer unit passes 31 facts and rejects seven. The
+reader unit uses its six actual providers plus the copy dependency; native incoming evidence
+from the still-unconverted `0x0801B704` loader is recorded separately, with no
+fabricated caller definition. The `0x08029D18` condition serializer, connected
+weekly/secondary-flag routine at `0x0802005C` and their target domains remain
+open. The actor-entry family's 25 extents and 3,224 bytes do not establish the
+complete save format, executable inventory, valid save population or runtime
+save compatibility.

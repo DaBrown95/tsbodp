@@ -1,11 +1,14 @@
 # Actor entry list lifecycle and condition handoff
 
-The 23 connected source extents listed here cover 2,356 bytes of matching C. Their complete
-linked extents, pools and alignment match at the original addresses. Every
-replacement has an actual compiled changed-source control that rejects. The
-list setup, reset, insertion and selection paths connect to the previously
-accepted condition lookup/removal and condition completion code. These are
-static and compiler results; no gameplay behavior is claimed.
+The 25 connected source extents listed here cover 3,224 bytes of matching C,
+including the newly qualified grouped reader and writer: two functions and
+868 bytes beyond the previous 23-extent, 2,356-byte snapshot. Complete linked
+extents, pools and alignment match at the original addresses. Every replacement
+has a compiled changed-source control that rejects. The full-project matching
+and progress gates also pass with the paired transfer installed.
+The list setup, reset, insertion and selection paths connect to the accepted
+condition lookup/removal and completion code. These are static and compiler
+results; no gameplay behavior or complete executable inventory is claimed.
 
 | Provisional name | ROM address | Bytes |
 | --- | --- | ---: |
@@ -32,6 +35,8 @@ static and compiler results; no gameplay behavior is claimed.
 | `actor_entry_empty_hook` | `0800EB2C` | 4 |
 | `save_stream_read_actor_tail` | `0800EB30` | 12 |
 | `save_stream_write_actor_tail` | `0800EB3C` | 12 |
+| `save_stream_read_actor_entries` | `0801FCF8` | 468 |
+| `save_world_write_region_1fecc` | `0801FECC` | 400 |
 
 ## Shared storage evidence
 
@@ -75,16 +80,59 @@ base plus `0x320`. The known enclosing world paths therefore transfer bytes
 `0x320` context prefix and requires the actual enclosing backing. Stream cursor,
 copy overlap and partial-bit-position preconditions remain those of the byte
 providers. Observed direct callers do not establish all incoming targets or
-valid stream populations. The larger grouped bodies remain unconverted.
+valid stream populations.
 
-The old writer recipe already matched but lacked controls and canonical API
-qualification. Fresh normal and strict builds verify both current wrappers;
-all four controls changing 28 to 27 reject by one byte. Actual provider and
-caller-definition checks pass ten target layout facts, and six incompatible
-contracts reject. The held canonical reader is used only for API checking.
-Its corrected group count/start offsets now agree, but a separate late-cursor
-optimization and register/frame allocation still prevent a full match. It
-receives no C credit.
+The older tail-writer recipe lacked controls and canonical API qualification.
+Fresh normal/strict builds subsequently verified both 12-byte wrappers; all
+four count controls changing 28 to 27 reject by one byte. Their actual provider
+and caller-definition checks pass ten target layout facts, and six incompatible
+contracts reject. The grouped callers now have their own qualification below.
+
+## Paired grouped transfer
+
+The reader at `0801FCF8` owns 468 bytes: 456 instruction bytes and twelve literal
+bytes. The writer at `0801FECC` owns 400 bytes: 390 instruction bytes, eight
+literal bytes and two alignment bytes. Both use the canonical collection group
+layout: start at byte zero, count at byte one and flags at byte two. Retained
+older private headers reversed start/count; those failed sources remain evidence,
+not matching coverage. The separate small-list layout still has count at zero,
+capacity at one and four-byte entries selected by capacity.
+
+Both functions require complete mutable backing of at least `0x348` bytes
+through input `+0x347`, beyond the canonical `0x320` context prefix. Besides the
+28-byte tail at `+0x320`, they access the twelve-byte menu-choice record at
+`+0x33C`. Valid capacity-backed lists, the separate aligned `0x84C` collection,
+record indices within its 160 slots and valid stream/provider state remain
+source-domain preconditions. No bounds, allocation or stream checks are added.
+
+The reader clears the full `0x84C` collection and initializes the receiving
+word to zero before reading one count byte per group. Decrementing each count
+to zero preserves the word's defined upper bytes for the next group. It keeps
+two distinct halfword count observations: the first supplies the descriptor
+start byte; the second supplies the total-count update and `12 * start + 4`
+record address. That second snapshot is the genuine `r6` value and dies before
+the first record-reader call. The writer instead captures the descriptor start
+in `r6` before the count-byte writer call and uses it for the record address
+afterward. Those lifetimes are different.
+
+One actual complete byte base removes the reader's redundant typed root.
+Truncating the large-record packed value to an unsigned byte before shifting
+produces the native low-nibble shift pair. The real small-list next-group value
+in `r8` survives its reader calls; the input base remains unconstrained. The
+late `r4` cursor is copied from the complete base and then advanced by four,
+preserving its native scope rather than hoisting it into the entry. Both
+functions use a separate real `r5` counter across the final five byte calls.
+These are initialized algorithm values with disjoint required lifetimes, not
+instruction-body assembly or artificial memory traffic.
+
+Fresh normal and strict builds without diagnostic flags match both entire
+extents. Controls changing the first list limit from fifteen to fourteen reject
+one byte in each build and omit real serialized input/output. The reader's API
+unit includes its actual definition, six providers and the copy dependency;
+35 target layout facts pass and nine incompatible contracts reject. The
+writer's actual-definition unit passes 31 facts and rejects seven contracts.
+Complete backing, valid save populations, incoming targets and runtime save
+compatibility remain separate from these source and compiler results.
 
 ## Insertion and selection
 
@@ -130,8 +178,9 @@ Its observed layout contains a halfword count at zero, an unknown halfword at
 two, 160 twelve-byte records beginning at four, and 50 four-byte group headers
 beginning at `784`. Each record begins with the existing four-byte actor entry;
 its two following words remain unknown. A group header supplies byte-sized
-start and count fields, followed by flags and an unknown byte. The scene marker
-sets flag bit zero at group `+2` without changing its four-byte layout. The capacity test in insertion,
+start, count and flags at offsets zero, one and two, followed by an unknown byte.
+The scene marker sets flag bit zero at group `+2` without changing its four-byte
+layout. The capacity test in insertion,
 the `49` bounds in deletion/clearing, and the reset's `84C` clear agree on these
 extents. This is evidence for this allocation, not the complete context size.
 
@@ -203,9 +252,10 @@ The real retained-count comparison mutation rejects one byte. Its proof index is
 
 ## Matching and remaining path
 
-Ordinary C reproduces eighteen functions. The refresh and collection removal
-constraints are recorded above. Reset now reads the producer-backed canonical
-`secondary_entries` member without a fixed-register constraint. The source
+The historical lifecycle snapshot reported eighteen functions without fixed
+register constraints. The refresh and collection-removal constraints are
+recorded above; the newly qualified grouped pair is described separately. Reset
+now reads the producer-backed canonical `secondary_entries` member without a fixed-register constraint. The source
 quality repair preserves its complete 116-byte match and adds zero C credit.
 It contains no instruction-body assembly. Zero-filled
 Thumb tail alignment is explicit where present. Changed limits, sentinels,
@@ -219,9 +269,12 @@ The two collection controls change the later-group bound and the catalog
 category filter, rejecting by two and one bytes respectively. Their proof index
 is `reports/audio-root/actor-entry-collection-canonical/1791849007996878000/ready.json`.
 
-Secondary-flag reconciliation at `0802005C` remains a connected target. Useful
-failed bodies and raw comparisons remain in ignored local reports. Whole-ROM
-equality, partial storage mapping and runtime behavior remain separate claims.
+The connected weekly/secondary-flag routine at `0802005C`, the higher game-state
+loader at `0801B704` and condition serializer at `08029D18` remain unconverted.
+Useful failed bodies and raw comparisons remain in ignored local reports. The
+paired transfer does not close their target domains, valid save populations or
+whole-game execution. Whole-ROM equality, storage mapping and runtime behavior
+remain separate claims.
 
 
 ## Producer-backed secondary-list member

@@ -45,7 +45,7 @@ void save_stream_write_relation_values(struct DisplayMenuRelationValues *);
 void save_stream_write_six_value_words(const int *);
 struct FrameActorNeedState;
 void frame_save_actor_needs(struct FrameActorNeedState *);
-/* Explicit unconverted input serializers; their full contracts remain unknown. */
+/* Grouped writer uses complete backing; module_29d18 remains unconverted. */
 void save_world_write_region_1fecc(void *);
 void save_world_write_module_29d18(void);
 void save_stream_read_actor_tail(void *);

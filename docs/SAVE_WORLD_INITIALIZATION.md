@@ -88,9 +88,10 @@ cleanup-loop end, respectively.
 Boundary corrections remain explicit: `0x2A710` owns 68 bytes and stops before
 the separate no-op at `0x2A754`; the ready predicate's 34-byte CFG envelope omits
 two alignment bytes, so its verified extent is 36. The larger game-state loader
-at `0x1B704`, grouped actor-entry reader at `0x1FCF8`, paired condition modules and
-row transition updater remain unconverted. Failed trials and raw comparisons are
-retained locally; this connected reset/display path adds no runtime claim.
+at `0x1B704`, paired condition modules and row transition updater remain
+unconverted. The grouped actor-entry reader/writer pair at `0x1FCF8`/`0x1FECC`
+is now owned by matching C; see [actor entries](ACTOR_ENTRIES_RECONSTRUCTION.md).
+Failed trials and raw comparisons are retained locally; this connected reset/display path adds no runtime claim.
 
 The separate default-reset path at `0x0801BB14` now also owns its original
 no-op hook at `0x0802A70C`. An empty `void(void)` C definition rebuilds its two

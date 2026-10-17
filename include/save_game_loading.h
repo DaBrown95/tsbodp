@@ -14,4 +14,5 @@ void save_stream_read_nibble_state(void);
 void save_stream_read_flag_words(void);
 struct FrameActorNeedState;
 void frame_load_actor_needs(struct FrameActorNeedState *);
+void save_stream_read_actor_entries(void *);
 #endif

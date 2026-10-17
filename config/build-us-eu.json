@@ -49713,6 +49713,58 @@
         "after": "source, 27"
       },
       "expected_sha256": "3005dd9bb253e6cba8c20bfb118c799175c77e909c90ede3a6871709430d9b43"
+    },
+    {
+      "name": "save_world_write_region_1fecc",
+      "rom_offset": 130764,
+      "size": 400,
+      "source": "src/save/write_actor_entries.c",
+      "symbols": {
+        "frame_write_save_value": "0x8037e21",
+        "save_stream_write_bits": "0x8037b39",
+        "save_stream_write_nibbles": "0x8037a0d",
+        "save_stream_write_actor_tail": "0x800eb3d",
+        "display_menu_save_choice": "0x80181c1"
+      },
+      "thumb_symbols": [
+        "frame_write_save_value",
+        "save_stream_write_bits",
+        "save_stream_write_nibbles",
+        "save_stream_write_actor_tail",
+        "display_menu_save_choice"
+      ],
+      "negative_control": {
+        "before": "group < 15",
+        "after": "group < 14"
+      },
+      "expected_sha256": "f121aeffb4d1392bae84ea1e444a7ed585ae509318dad505792d2bcf8fca357d"
+    },
+    {
+      "name": "save_stream_read_actor_entries",
+      "rom_offset": 130296,
+      "size": 468,
+      "source": "src/save/read_actor_entries.c",
+      "symbols": {
+        "frame_load_save_value": "0x08037d19",
+        "heap_clear": "0x08027a49",
+        "save_stream_read_bits": "0x08037d59",
+        "save_stream_read_nibbles": "0x080378b1",
+        "save_stream_read_actor_tail": "0x0800eb31",
+        "display_menu_load_choice": "0x080181f1"
+      },
+      "thumb_symbols": [
+        "frame_load_save_value",
+        "heap_clear",
+        "save_stream_read_bits",
+        "save_stream_read_nibbles",
+        "save_stream_read_actor_tail",
+        "display_menu_load_choice"
+      ],
+      "negative_control": {
+        "before": "group < 15",
+        "after": "group < 14"
+      },
+      "expected_sha256": "eb3cbcebbb7806c8d855b99dc7b281f5ff4955282396ed8c5a2f692f8a530722"
     }
   ],
   "assembly": [
