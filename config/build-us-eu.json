@@ -50516,6 +50516,65 @@
         "before": "g_input_pressed[player] & 512",
         "after": "g_input_pressed[player] & 256"
       }
+    },
+    {
+      "name": "scene_two_page_initialize",
+      "rom_offset": 129716,
+      "size": 236,
+      "source": "src/scene/scene_two_page_initialize.c",
+      "symbols": {
+        "display_set_mode": "0x800d601",
+        "display_configure_tile_allocation": "0x8047741",
+        "display_show_background": "0x800d579",
+        "display_fill_background": "0x800d6b9",
+        "display_load_background": "0x800da21",
+        "display_load_resource_palette": "0x800da95",
+        "display_text_set_background_control": "0x801ae2d",
+        "display_text_select_font": "0x801ae75",
+        "display_scene_lookup_text": "0x8045009",
+        "display_text_draw_all_lines": "0x801b04d",
+        "transition_set_black_brightness": "0x80393ad",
+        "g_scene_request": "0x03004350",
+        "g_scene_two_page_default_control": "0x0804f7ec",
+        "g_scene_two_page_rows": "0x0805358c",
+        "g_scene_text_bank_control": "0x0804f7e8",
+        "g_display_scrolling_palette": "0x08ede3b8"
+      },
+      "thumb_symbols": [
+        "display_set_mode",
+        "display_configure_tile_allocation",
+        "display_show_background",
+        "display_fill_background",
+        "display_load_background",
+        "display_load_resource_palette",
+        "display_text_set_background_control",
+        "display_text_select_font",
+        "display_scene_lookup_text",
+        "display_text_draw_all_lines",
+        "transition_set_black_brightness"
+      ],
+      "negative_control": {
+        "before": "transition_set_black_brightness(2, 16)",
+        "after": "transition_set_black_brightness(2, 15)"
+      }
+    },
+    {
+      "name": "scene_two_page_shutdown",
+      "rom_offset": 130276,
+      "size": 20,
+      "source": "src/scene/scene_two_page_shutdown.c",
+      "symbols": {
+        "transition_set_black_brightness": "0x80393ad",
+        "display_reset_palette_jobs": "0x80117bd"
+      },
+      "thumb_symbols": [
+        "transition_set_black_brightness",
+        "display_reset_palette_jobs"
+      ],
+      "negative_control": {
+        "before": "transition_set_black_brightness(63, 16)",
+        "after": "transition_set_black_brightness(62, 16)"
+      }
     }
   ],
   "assembly": [

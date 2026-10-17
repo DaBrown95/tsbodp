@@ -121,6 +121,37 @@ that descriptor-base/cursor lifetime changes compiler instruction scheduling;
 the accepted source has both as ordinary typed pointers, with no instruction
 body, output fixup or byte mask.
 
+## Scene-table row 4 endpoints
+
+The begin and end callbacks for row 4 of the phase table at `0x0805797C`
+match as C: `scene_two_page_initialize` at `0x0801FAB4` owns 236 bytes, and
+`scene_two_page_shutdown` at `0x0801FCE4` owns 20. The row stores the Thumb
+entries `0x0801FAB5`, `0x0801FBA1` and `0x0801FCE5`; the middle, 324-byte
+step remains unconverted. The endpoint names follow two observed display
+records and remain provisional.
+
+The initializer resets the request selector, configures the display and tile
+allocator, loads the selected background and palette, draws its text, then
+sets brightness and the initial transition state. The current `SceneRequest`
+and display/text owners supply its accesses and provider interfaces. Each
+12-byte row has a resource pointer, text ID, font byte and vertical halfword;
+its byte at `+9` remains unknown. Two physical records are observed, without
+proof that every selector reloaded after a call stays within them or that all
+pointed resources and text inputs are valid.
+
+The shutdown sets black brightness for target mask 63 at level 16, then
+resets palette jobs. Its C body is 18 bytes; the final two bytes are original
+zero alignment represented by a standard alignment directive. The initializer
+includes 202 instruction bytes, 32 literal bytes and two internal zero
+alignment bytes. Every byte is compared at its original address.
+
+Both endpoints pass ordinary and strict positive builds. Real controls change
+brightness 16 to 15 in the initializer and mask 63 to 62 in the shutdown; each
+changes one instruction byte. Actual provider definitions, callback signatures
+and row layouts pass the ARM-target type checks, while five wrong contracts
+reject. These 256 bytes establish endpoint source ownership only. They do not
+complete the row's step, runtime scene-index domain or resource lifecycle.
+
 ## Local evidence
 
 The ignored `reports/agents/vblank-wrapper/scene-batch-manifest.json` records

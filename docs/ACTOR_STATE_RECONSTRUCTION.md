@@ -661,9 +661,10 @@ enters substate 13 with timer 20. Two C argument variables constrained to `r1`
 preserve the original ordering of register moves at those calls; these are
 compiler constraints, with no instruction statements or byte bodies. The table
 and the larger terrain query remain explicit original data/code. Camera predicate
-`0x67E0` has an inspected 148-byte extent and a retained near-match, so it receives
-no source credit. Full comparisons and changed distance, saved-speed, terrain-mask
-and timer controls pass for all four accepted extents.
+`0x67E0` has an inspected 148-byte extent. Its current-header candidates still
+fail full-byte comparison, so it remains unconverted and receives no source
+credit. Full comparisons and changed distance, saved-speed, terrain-mask and
+timer controls pass for all four accepted extents.
 
 ## Transient effects and shared intrusive allocation
 
