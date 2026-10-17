@@ -50614,6 +50614,29 @@
         "before": "scene_submit_default_request(5);",
         "after": "scene_submit_default_request(6);"
       }
+    },
+    {
+      "name": "frame_bios_fixed_divide",
+      "rom_offset": 160604,
+      "size": 16,
+      "mode": "Thumb",
+      "compiler_id": "agbcc",
+      "source": "src/math/frame_bios_fixed_divide.c",
+      "symbols": {
+        "display_bios_div": "0x0804c8c9"
+      },
+      "thumb_symbols": [
+        "display_bios_div"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": ") << 4);",
+        "after": ") << 3);"
+      },
+      "expected_sha256": "b140cd928d0034cb40bec853f2cb059cd94a5973b34660907ce6321304c90148"
     }
   ],
   "assembly": [

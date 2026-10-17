@@ -43,10 +43,20 @@ indices, writable callbacks, transitive dependencies or runtime populations.
 The copied sorter's legal direct halfword loads still leave two mismatching
 bytes; it receives no C credit. See the [remaining work](COMPLETION_BLOCKERS.md).
 
-The copied map drawer at ROM `0x0800B564` also remains unconverted. Its ordinary
-unaddressed two-word value removes helper calls and the eight-byte local pair,
-but generates 352 bytes against the native 320, with 302 differing or extra
-bytes. Partial writes conservatively keep the combined value live; allocation
-uses R4/R5 and adds moves, while a four-byte frame holds the outer index. This
-measured failure receives no C credit and does not change the shared point
-storage contract above.
+The copied map drawer at ROM `0x0800B564` also remains unconverted. Genuine
+per-copy aggregate initializers kill the prior incoming partial-pair live range.
+Evaluating the representation reads inside those initializers removes three
+copies and retains the primary, combined-resource and row-width reads. The
+result is still 348 bytes against 320, with 313 differing or extra bytes. Scalar
+preincrement loads prevent native load grouping; an eight-byte frame holds the
+outer index and row stride. No pair has a stack home. This explained failure
+receives no C credit.
+
+The connected BIOS arithmetic helper at `0x0802735C` owns its full 16 instruction
+bytes. Its unsigned 32-bit left shifts preserve wrapping; the denominator uses
+the target's signed arithmetic right shift before BIOS division. Ordinary and
+strict builds match, and both actual changed-source controls reject. ARM-target
+checks use the four real arithmetic definitions and reject wrong return, arity
+and BIOS formal contracts. The incoming scalar versus two-word grouped argument
+interpretation remains provisional, and no denominator guard or runtime-domain
+closure is inferred. The fresh full gate supplies publication evidence.

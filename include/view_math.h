@@ -9,6 +9,7 @@ int frame_sine(int);
 int frame_cosine(int);
 int frame_fixed_multiply(int,int);
 int frame_fixed_divide(int,int);
+int frame_bios_fixed_divide(int,int);
 int frame_fixed_reciprocal(int);
 void view_subtract_point(const struct FramePoint *,const struct FramePoint *,struct FramePoint *);
 void view_copy_point(const struct FramePoint *,struct FramePoint *);
