@@ -6,19 +6,19 @@ void link_apply_received_events(void)
     g_link_flags &= ~0x80u;
     for (i = 0; i < g_link_peer_count; i++) {
         struct EventRecord *record = &g_link_received_events[i];
-        const unsigned short *input = (const void *)record;
+        const __typeof__(record->storage) *input = &record->storage;
         event_get_link_slot();
-        if (record->sequence != g_link_received_sequence[i] && record->kind) {
-            g_link_received_sequence[i] = record->sequence;
+        if (record->storage.fields.sequence != g_link_received_sequence[i] && record->storage.fields.kind) {
+            g_link_received_sequence[i] = record->storage.fields.sequence;
             g_link_received_input[i] = 0;
-            switch (record->kind) {
+            switch (record->storage.fields.kind) {
             case 3:
-                g_link_received_input[i] = input[2];
+                g_link_received_input[i] = input->halfwords[2];
                 if (event_get_link_slot() == i)
                     g_link_flags |= 0x80;
                 break;
             case 2:
-                frame_set_random_seed(record->payload.halfwords[0]);
+                frame_set_random_seed(record->storage.fields.payload.halfwords[0]);
                 break;
             case 4:
                 if (i == 0) g_link_flags |= 0x100000;
@@ -42,22 +42,22 @@ void link_apply_received_events(void)
                         g_link_received_join.identifier = i;
                     }
                     g_link_received_join.metadata[0] = g_link_peer_count;
-                    g_link_received_join.metadata[1] = record->payload.bytes[1];
-                    g_link_received_join.metadata[2] = record->payload.bytes[2];
-                    g_link_received_join.metadata[3] = record->payload.bytes[3];
+                    g_link_received_join.metadata[1] = record->storage.fields.payload.bytes[1];
+                    g_link_received_join.metadata[2] = record->storage.fields.payload.bytes[2];
+                    g_link_received_join.metadata[3] = record->storage.fields.payload.bytes[3];
                     g_scene_request.unknown_10 = 4;
                 }
                 break;
             case 7:
-                g_link_received_join.values[i] = record->payload.word;
+                g_link_received_join.values[i] = record->storage.fields.payload.word;
                 break;
             case 8:
                 display_text_copy_bytes(&g_link_received_pairs[i].first,
-                                        &record->payload, 8);
+                                        &record->storage.fields.payload, 8);
                 break;
             case 9:
                 display_text_copy_bytes(&g_link_received_pairs[i].second,
-                                        &record->payload, 8);
+                                        &record->storage.fields.payload, 8);
                 break;
             case 11:
                 g_link_flags |= 0x80000;
@@ -69,7 +69,7 @@ void link_apply_received_events(void)
                 unsigned int address = i * sizeof(struct EventPayload);
                 address += (unsigned int)g_link_received_vectors;
                 *(struct EventPayload *)address =
-                    *(struct EventPayload *)&record->payload;
+                    record->storage.fields.payload.argument;
                 break;
             }
             case 12: link_apply_received_actor_entry(); break;

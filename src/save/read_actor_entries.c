@@ -4,7 +4,7 @@
 
 void save_stream_read_actor_entries(void *input)
 {
-    /* Input has complete mutable backing through +347; the typed view is a prefix. */
+    /* Input has complete mutable backing through +0x347; the typed view is a prefix. */
     unsigned char *region = input;
     unsigned int group, index, remaining, collection_group;
     unsigned int *remaining_input;

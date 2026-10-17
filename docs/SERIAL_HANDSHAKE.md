@@ -54,8 +54,8 @@ There are no register bindings, copied instructions or new volatile qualifiers.
 
 The original 100-byte start provider, 1,616-byte next-stage IRQ and downstream
 200-byte record helper remain explicit boundaries with zero new C credit. Their
-call/address ABI views do not qualify their implementations or the proposed
-six-halfword whole-record representation. The start provider's unwritten payload
+call/address ABI views do not qualify their implementations. The canonical
+whole-record representation is qualified separately below. The start provider's unwritten payload
 suffix is not promoted to initialized C. The separate 124-byte status reader
 also remains on hold. No runtime fixture, peripheral timing or gameplay claim
 is made for these functions.
@@ -244,6 +244,49 @@ The initializer (352), controller (1,224), notice helper (164), indicator helper
 table row and its accepted phase consumers support the begin/step/end linkage;
 they do not establish every runtime scene index. The 408-byte poll, 124-byte
 status reader and 1,616-byte next-stage IRQ remain separate reconstruction
-blockers. A current actual-owner IRQ recipe lowers two-byte representation
-copies inline but materializes two stack stores and four frame bytes absent
-from the native body; it earns no C credit.
+blockers. An earlier actual-owner IRQ recipe lowered two-byte representation
+copies inline but materialized two stack stores and four frame bytes absent
+from the native body; that rejected attempt earns no C credit.
+
+## Canonical record owner
+
+`EventRecord` now contains a named union of its existing fields and six
+halfwords. It remains twelve bytes, aligned to four, with kind, sequence,
+reserved and payload at offsets 0, 1, 2 and 4. The eight-byte by-value payload
+ABI is unchanged. The recorder uses the fields view; the receive consumer reads
+its case-three halfword directly through the union. That consumer preserves the
+actual input address captured before `event_get_link_slot`, matching the native
+R7 lifetime across the call. Removing that address snapshot produced a different
+632-byte body and was rejected.
+
+The payload union also contains a genuine `EventPayload` member. Three recorder
+copies and the consumer's case-ten read use that member directly, replacing
+casts between incompatible object types. These remain the same eight-byte
+copies at the original addresses, with no additional storage or accesses.
+
+Normal and strict builds reproduce the recorder (244 bytes), receive consumer
+(632) and unchanged endpoint initializer (356). Their three real source controls
+reject by one byte in each profile. A unit containing ten actual definitions
+checks the interfaces, including the still-unconverted provider and IRQ for
+syntax only; six wrong contracts reject. The pinned compiler verifies 48 target
+layout facts and the twelve-byte representation mask. This requalifies 1,232
+already-owned bytes and adds no C functions or bytes. The full matching and
+progress gates also rebuild all 51 transitive header importers.
+
+This owner makes direct union halfword transfers possible without addressable
+local copies. The private IRQ diagnostic removes both unwanted stack stores and
+their extra frame allocation, but remains 1,612 bytes against the original 1,616.
+Its original-home transfers pass the representation checks; the full byte
+comparison fails. The early and late slot reads use different native address
+registers, whereas the candidate reuses one base and cross-jumps their tails.
+This does not justify a new volatile qualifier. The 200-byte provider also
+remains unmatched; its separate setup-address producers already appear in
+initial compiler output.
+
+The pinned compiler's union-punning exception requires direct union access.
+Taking an escaped halfword pointer, including through an integer address, does
+not inherit that exception after fields-view writes. Known pointer banks and
+record extents do not establish initialized bytes, all incoming indices,
+asynchronous writers, callback populations or complete protocol behavior. The
+IRQ, provider and status-reader boundaries remain original code, with zero
+additional source credit from this owner change.

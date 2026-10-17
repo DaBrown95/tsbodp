@@ -15,11 +15,17 @@ union EventData {
  unsigned int words[2];
  unsigned short halfwords[4];
  unsigned char bytes[8];
+ struct EventPayload argument;
 };
 struct EventRecord {
- unsigned char kind, sequence;
- unsigned short reserved;
- union EventData payload;
+ union {
+  struct {
+   unsigned char kind, sequence;
+   unsigned short reserved;
+   union EventData payload;
+  } fields;
+  unsigned short halfwords[6];
+ } storage;
 };
 extern unsigned char g_event_sequence;
 extern struct EventRecord g_event_record;
