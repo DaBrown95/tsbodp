@@ -2300,3 +2300,31 @@ C credit. The truthful renderer baseline still fails at 1,404 bytes for its
 1,400-byte slot; the existing valid 1,400-byte, 25-difference frontier remains
 private. The finalizer remains unmatched. Neither this layout evidence nor
 whole-ROM equality establishes runtime or gameplay behavior.
+
+
+### Motion parameters and fixed-point helpers
+
+The 16-byte routine at `0x08003568` copies three words into the canonical
+object's 12-byte phase, rate and amplitude span at `+0x40`. Its builtin
+representation copy uses the complete object's character view. It requires a
+live 312-byte destination, readable initialized source backing, word alignment
+and no overlap; the array parameter does not enforce capacity. Fourteen
+instruction bytes and two zero alignment bytes match at the original address.
+
+Three adjacent math helpers add 56 C extent bytes. At `0x08027304`, the signed
+short denominator divides 65536 and the result narrows to a signed short before
+promotion to `int`. At `0x0802733C`, the unsigned word representation of the
+numerator shifts left sixteen bits before signed division. At `0x08027348`,
+the quotient of 65536 shifts left sixteen bits as an unsigned word. The latter
+20-byte extent includes two zero alignment bytes. Target-defined narrowing
+and unsigned-to-signed conversions preserve the observed word representations;
+unsigned shifts avoid overflowing or negative signed left shifts.
+
+All three call the already owned software `__divsi3` at `0x0804CD2C` through
+the existing `display_divide` declaration. Its zero-divisor path is preserved;
+no new guard or assembly exception is introduced. The separately owned BIOS
+division glue is at `0x0804C8C8`. Normal and strict compiler checks compare all
+four full spans and reject actual changed-source controls. Target layout and
+actual-definition API checks also reject wrong contracts. Syntactic Thumb-call
+and exact entry-word searches found no incoming sites for these four routines;
+computed targets, historical APIs and runtime execution remain unproved.

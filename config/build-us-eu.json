@@ -49789,6 +49789,70 @@
         "before": "render_reverse_y < 0",
         "after": "render_reverse_y >= 0"
       }
+    },
+    {
+      "name": "frame_set_motion_parameters",
+      "source": "src/frame/frame_set_motion_parameters.c",
+      "rom_offset": 13672,
+      "size": 16,
+      "symbols": {},
+      "thumb_symbols": [],
+      "expected_sha256": "9c0415b9ead4d32390f372a853c8e3d68fcad5273105ed4d5664f70506759960",
+      "negative_control": {
+        "before": "parameters, 12);",
+        "after": "parameters, 8);"
+      }
+    },
+    {
+      "name": "display_fixed_reciprocal",
+      "source": "src/display/fixed_reciprocal.c",
+      "rom_offset": 160516,
+      "size": 24,
+      "symbols": {
+        "display_divide": "0x0804cd2d"
+      },
+      "thumb_symbols": [
+        "display_divide"
+      ],
+      "negative_control": {
+        "before": "display_divide(0x10000, denominator)",
+        "after": "display_divide(0x8000, denominator)"
+      },
+      "expected_sha256": "931820f959fc921f489c576dd1afd4c127311d0185f380cb5d5af3b326a1baa7"
+    },
+    {
+      "name": "frame_fixed_divide",
+      "source": "src/math/frame_fixed_divide.c",
+      "rom_offset": 160572,
+      "size": 12,
+      "symbols": {
+        "display_divide": "0x0804cd2d"
+      },
+      "thumb_symbols": [
+        "display_divide"
+      ],
+      "negative_control": {
+        "before": "numerator << 16",
+        "after": "numerator << 15"
+      },
+      "expected_sha256": "56565e21c78590eca1b6e666f6adb744403d586cf695043ec468c070862da46d"
+    },
+    {
+      "name": "frame_fixed_reciprocal",
+      "source": "src/math/frame_fixed_reciprocal.c",
+      "rom_offset": 160584,
+      "size": 20,
+      "symbols": {
+        "display_divide": "0x0804cd2d"
+      },
+      "thumb_symbols": [
+        "display_divide"
+      ],
+      "negative_control": {
+        "before": "denominator) << 16",
+        "after": "denominator) << 15"
+      },
+      "expected_sha256": "5dba88be966b6ab0223b51689c8bf9e7f193a82bbed75d36263afae0e5d8695c"
     }
   ],
   "assembly": [

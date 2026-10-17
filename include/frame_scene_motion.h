@@ -15,5 +15,6 @@ void frame_set_centered_integer_position(struct FrameObject *,short,int);
 void frame_set_velocity(struct FrameObject *,int,int);
 void frame_set_oriented_velocity_x(struct FrameObject *,int);
 void frame_set_oriented_velocity_y(struct FrameObject *,int);
+void frame_set_motion_parameters(struct FrameObject *,const unsigned int [3]);
 int display_bios_div(int,int);
 #endif

@@ -10,5 +10,6 @@ extern unsigned char g_palette_curve_values[];
    The helpers retain the observed eight fractional bits and low-half result. */
 int display_fixed_multiply(short, short);
 int display_fixed_divide(short, short);
+int display_fixed_reciprocal(short);
 
 #endif
