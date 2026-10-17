@@ -52,6 +52,31 @@ controls reject. No original instruction bodies, output patches or masks supply 
 match. The historical compiler flags and source syntax are not uniquely established, and
 valid view-index domains remain open.
 
+## Finite resource storage
+
+The 50 structurally backed scene roots contain 105 physical pack records. All
+105 base/selected copy layouts decode within the fixed ROM and 8,192-byte arena
+bounds. This finite population contains no command-21 records. Six distinct
+factory-14 payloads produce ten copy occurrences, all with first/second kinds
+12/12. These select the already matched
+[lightening](../src/transition/transition_mosaic_lightening_refresh.c) and
+[darkening](../src/transition/transition_mosaic_darkening_refresh.c) mosaic handlers.
+Four nonempty word groups contain 19 eight-byte records. Stored groups may be
+dormant; copying their records does not establish execution or factory invocation.
+
+Evaluating all 256 unsigned-byte inputs per root gives 6,101 numerically backed
+directory-index outcomes and 6,699 unbacked outcomes, which remain unfollowed.
+Seventeen lookup read windows cross the following root. These calculations do
+not validate selectors: later bytes can belong to directories, payloads or
+neighboring storage. The physical census does not close unchecked scene indices,
+saved inputs, later writes, aliases, writable callbacks or complete target sets.
+
+A separately qualified 36-byte routine at `0x0802A8FC` writes selector 1, calls
+`resource_submit_scene(1, 0, 9)`, then stores 4 in `scene_mode[0]`. Its
+`void(void)` interface is inferred and incoming callers remain unidentified;
+the full matching and progress gates pass. The saved-byte loader can overwrite the
+earlier selector reset, so that path's input domain remains open.
+
 ## Remaining selector domains
 
 Transition selector domains remain open. The direct-call census finds 32
@@ -59,6 +84,6 @@ first-wrapper and 30 second-wrapper calls; 52 have current C owners, while ten
 original callers supply immediate zero. Command 21's window kinds and factory
 14's optional-view kinds copy serialized bytes without a 14-entry guard. A
 first-table index 14 would read the following table's first entry; this is a
-conditional static finding, not observed input or execution. Serialized asset
+conditional static finding, not observed input or execution. Other serialized asset
 populations, aliases, later writers and indirect incoming transfers still need
 closure. Matching this controller does not resolve those inventory blockers.

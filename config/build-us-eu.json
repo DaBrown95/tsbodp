@@ -50232,6 +50232,31 @@
         "after": "g_resource_view_effects[view].mode = 1;"
       },
       "expected_sha256": "f861bfb908cb24ecd2d62d5a1a19801efc25bb4bc84141f3f07fe66d06195c51"
+    },
+    {
+      "name": "resource_select_scene_nine",
+      "rom_offset": 174332,
+      "size": 36,
+      "mode": "Thumb",
+      "source": "src/resource/resource_select_scene_nine.c",
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {
+        "g_resource_selected": "0x03002edc",
+        "g_scene_mode_bytes": "0x03004114",
+        "resource_submit_scene": "0x08027dd1"
+      },
+      "thumb_symbols": [
+        "resource_submit_scene"
+      ],
+      "expected_sha256": "b3cbf8942440c8547c3fadcf5627137efb9690f5a9c1f3676fa170bf6cd65b9b",
+      "negative_control": {
+        "before": "    g_resource_selected = 1;",
+        "after": "    g_resource_selected = 0;"
+      }
     }
   ],
   "assembly": [
