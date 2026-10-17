@@ -2328,3 +2328,41 @@ four full spans and reject actual changed-source controls. Target layout and
 actual-definition API checks also reject wrong contracts. Syntactic Thumb-call
 and exact entry-word searches found no incoming sites for these four routines;
 computed targets, historical APIs and runtime execution remain unproved.
+
+
+### Two unrooted input helpers
+
+The provisional entry at `0x0801F574` takes a writable byte and replaces it
+with its logical negation. The full 20-byte extent has no literal pool. The
+chosen `void(InputU8 *)` interface describes the observed operation and return
+sequence; incoming callers, additional unused parameters and original names
+remain unidentified.
+
+The separate entry at `0x0801F588` reads bit `0x200` of
+`g_input_pressed[player]` at `0x03004228`. When the bit is set, it increments a
+word below the supplied maximum. At or above the maximum, a nonzero wrap byte
+replaces the word with the supplied minimum; otherwise it leaves the word
+unchanged. It always returns the word. There is no decrement branch, minimum
+comparison, ordering check between the bounds or added index guard. Its full
+64-byte extent includes the original literal word and two zero alignment bytes.
+
+The chosen interface uses `InputU32 *`, two word bounds and two byte parameters.
+The fifth parameter's low-byte handling is preserved. The canonical pressed
+array has four halfwords: the C view requires `player < 4` and a live, aligned
+word object, but no incoming caller establishes that complete domain. The byte
+helper likewise requires valid writable byte backing. Adjacency supplies no
+shared lifecycle or runtime-root evidence.
+
+Both complete spans match under the normal and strict compiler profiles. The
+changed-source toggle controls contain twelve bytes against twenty and reject
+at all twenty positions, including the eight missing bytes. The counter
+controls retain 64 bytes and differ only at offset 24. All four actual type
+cases pass their intended outcomes and twelve layout/type facts hold. The
+fresh full gate checks the final header, all owned source/control pairs and
+whole-ROM equality, including rejection of the changed-source whole ROM.
+
+The actual source controls change logical negation to truth normalization and
+select pressed bit `0x100` instead of `0x200`. Actual-definition type checks
+cover the chosen interfaces and reject a word-pointer toggle, a byte counter
+result and a word fifth parameter. These checks establish neither historical
+unused arity nor all caller, callback, index, lifetime or gameplay domains.

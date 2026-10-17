@@ -50482,6 +50482,40 @@
         "before": "actor->pending_updates = 0;",
         "after": "actor->pending_updates = 1;"
       }
+    },
+    {
+      "name": "input_toggle_byte_unrooted_1f574",
+      "source": "src/frame/input_toggle_byte_unrooted_1f574.c",
+      "rom_offset": 128372,
+      "size": 20,
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "*value = !*value;",
+        "after": "*value = !!*value;"
+      }
+    },
+    {
+      "name": "input_increment_pressed_unrooted_1f588",
+      "source": "src/frame/input_increment_pressed_unrooted_1f588.c",
+      "rom_offset": 128392,
+      "size": 64,
+      "symbols": {
+        "g_input_pressed": "0x03004228"
+      },
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "g_input_pressed[player] & 512",
+        "after": "g_input_pressed[player] & 256"
+      }
     }
   ],
   "assembly": [

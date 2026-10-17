@@ -21,4 +21,9 @@ void input_clear(void);
 void input_poll(void);
 void input_enable(void);
 
+/* Provisional unrooted entry views; incoming callers and unused formals unknown. */
+void input_toggle_byte_unrooted_1f574(InputU8 *);
+InputU32 input_increment_pressed_unrooted_1f588(InputU32 *, InputU32, InputU32,
+                                               InputU8, InputU8);
+
 #endif /* TSBODP_INPUT_H */
