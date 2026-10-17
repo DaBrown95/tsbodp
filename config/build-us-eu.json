@@ -50257,6 +50257,91 @@
         "before": "    g_resource_selected = 1;",
         "after": "    g_resource_selected = 0;"
       }
+    },
+    {
+      "name": "frame_initialize_attachment_jobs_42_94",
+      "rom_offset": 122236,
+      "size": 4,
+      "source": "src/frame/frame_initialize_attachment_jobs_42_94.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      }
+    },
+    {
+      "name": "frame_finish_attachment_jobs_42_94",
+      "rom_offset": 122388,
+      "size": 4,
+      "source": "src/frame/frame_finish_attachment_jobs_42_94.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "{\n}\n",
+        "after": "{\n    owner->optional = 1;\n}\n"
+      },
+      "assembler_id": "binutils2101"
+    },
+    {
+      "name": "frame_scene_initialize_player_state",
+      "rom_offset": 123324,
+      "size": 140,
+      "source": "src/frame/frame_scene_initialize_player_state.c",
+      "symbols": {
+        "frame_scene_player_step_1dfe4": "0x0801dfe5",
+        "g_transition_view_context": "0x030040e0",
+        "g_frame_scene_actor_selection": "0x03003950",
+        "frame_request_animation": "0x08001b5d",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_variant_state": "0x08001be1"
+      },
+      "thumb_symbols": [
+        "frame_scene_player_step_1dfe4",
+        "frame_request_animation",
+        "transition_object_set_state",
+        "frame_set_variant_state"
+      ],
+      "negative_control": {
+        "before": "actor->unknown_13 = player;",
+        "after": "actor->unknown_13 = player + 1;"
+      }
+    },
+    {
+      "name": "transition_fade_black_in_windows",
+      "rom_offset": 235356,
+      "size": 132,
+      "source": "src/transition/transition_fade_black_in_windows.c",
+      "symbols": {
+        "frame_request_refresh": "0x08001169",
+        "display_step_backgrounds": "0x0800d17d",
+        "display_step_palette_jobs": "0x080117d5",
+        "frame_prepare_oam_transfer": "0x0802d055",
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "frame_request_refresh",
+        "display_step_backgrounds",
+        "display_step_palette_jobs",
+        "frame_prepare_oam_transfer",
+        "irq_wait_vblank"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "REG16(0x0400004A) = 0x1F;",
+        "after": "REG16(0x0400004A) = 0x1E;"
+      }
     }
   ],
   "assembly": [

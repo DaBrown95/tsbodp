@@ -1,6 +1,6 @@
 # Attachment jobs 42 and 94
 
-Five connected C functions reproduce 692 bytes at their original addresses.
+The initial five-function batch reproduces 692 bytes at its original addresses.
 Normal and strict positives match the complete spans, including literal pools
 and alignment. Changed-source controls reject under both profiles. No new
 low-level instruction glue is introduced.
@@ -18,8 +18,9 @@ The 36-byte definition row 99 begins at `0x08063C68`. Its field 16 supplies the
 shared dispatcher, which looks up an attachment record, selects full-word kind
 42 or 94 and otherwise returns zero. Definition-row index 99 and record kinds
 42/94 are distinct. The row's choices and begin callbacks feed this path; its
-init and tick stubs remain original. EC now has matching C source. The unconditional lookup-result
-dereference is retained, without a new null guard.
+init and tick callbacks also have matching C source, as described below. EC has
+matching C source. The unconditional lookup-result dereference is retained,
+without a new null guard.
 
 Both workers capture the actor's need-state pointer before their phase switch.
 Running byte exactly one selects cleanup. Phase zero initializes animation 35,
@@ -98,8 +99,8 @@ still requires the existing conditional owner and actor storage contracts.
 Both observed selector callback owners agree on a word result and state/output
 pointer arguments. Both begin callback owners agree on a word result and
 state/actor/full-word-kind arguments. The observed callers consume the begin
-result through its low byte. The init, EC and tick stubs and the nearby unrooted
-predicate remain original and add no recovered-C credit.
+result through its low byte. The init, EC and tick callbacks are now owned by C.
+The nearby unrooted predicate remains unowned and adds no recovered-C credit.
 
 The follow-up checks cover 16 shared physical layout facts, the three actual
 callback pointer types and the complete accepted scene initializer with a named
@@ -109,15 +110,31 @@ allocator type unit is reused through exact source, prefix, preprocessor,
 assembly and dependency identity; it was not recompiled for this follow-up.
 These checks establish no additional provider execution or gameplay behavior.
 
-The fresh full-ROM matching build and refreshed progress gates pass with 1,701
-verified C functions covering 241,140 bytes. The callback follow-up adds two
-functions and 56 bytes to the earlier three-function, 636-byte worker batch.
-The fixed 16 MiB ROM is byte-identical, including pools and alignment; the
-changed-source whole-ROM control rejects. Separate glue remains 500 bytes, and
-16,535,576 ROM bytes remain explicit unconverted regions.
+## Initialization and tick closure
 
-The five extents own six observed zero alignment bytes without counting them as
-instructions. The begin callback's two tail bytes extend its earlier estimated
-map by two bytes. Qualified instruction evidence remains 270,054 bytes and
-inventory mapped extents are 323,786 bytes. The historical comparison stays
-319,640 bytes; a complete game-code denominator remains open.
+Two additional dedicated callbacks reproduce eight full extent bytes:
+`frame_initialize_attachment_jobs_42_94` at `0x0801DD7C` returns unsigned one,
+and `frame_finish_attachment_jobs_42_94` at `0x0801DE14` has a void result and
+performs no operation. Both receive the existing `FrameNeedEffectState *`.
+Row 99 stores these pointers at offsets zero and twenty. The allocator copies
+the latter to state `+0xF8`, where the actual attachment-step consumer calls it
+as a nullable void callback. The historical finish name does not establish
+that it is only called during teardown.
+
+The empty tick has a two-byte return and two zero alignment bytes. The pinned
+GNU 2.10.1 assembler emits a two-byte input section from unchanged compiler
+assembly, and the linker supplies the natural two-byte zero tail. The modern
+assembler's different alignment bytes are a retained failure. No executable
+assembly, output patch, mask or copied instruction body supplies either C match.
+Normal and strict positives match the complete four-byte slots. Changing the
+initializer result to zero and making the empty tick store optional value one
+both reject in full under both profiles; controls that grow are not truncated.
+
+Together these two stubs and the original five-function batch own seven
+functions / 700 extent bytes: 656 instruction bytes, 36 literal bytes and eight
+zero alignment bytes. The separately owned eight-byte EC action switch and
+76-byte capacity predicate receive no additional credit. All observed nonnull
+callback pointers in physical row 99 now point to matching C bodies. This closes ownership
+of that row's stored callbacks, while selector domains, later pointer writes,
+owner lifetimes and gameplay reachability remain open. The preceding unrooted
+predicate and following return-100 body remain unowned.

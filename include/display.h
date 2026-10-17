@@ -172,6 +172,7 @@ extern unsigned int g_palette_block_count;
 extern void *display_set_bytes(void *, int, unsigned int);
 extern unsigned int display_find_palette_block(void);
 extern void display_step_palette_block(struct PaletteBlockJob *);
+extern void display_step_palette_blocks(void);
 extern void display_reset_palette_block(struct PaletteBlockJob *);
 extern unsigned int display_create_palette_block(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, const unsigned short *);
 

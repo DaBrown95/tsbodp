@@ -1,21 +1,21 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "17 Oct 2026, 16:48 BST",
-  "compiled_c_functions": 2202,
-  "compiled_c_bytes": 280648,
+  "verified_at": "17 Oct 2026, 17:58 BST",
+  "compiled_c_functions": 2206,
+  "compiled_c_bytes": 280928,
   "assembly_glue_bytes": 4060,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16492508,
+  "unconverted_rom_bytes": 16492228,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2538,
-  "bounded_control_flow_bodies": 283,
+  "bounded_control_flow_bodies": 279,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 98,
-  "mapped_extent_bytes": 325380,
+  "mapped_extent_bytes": 325384,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
     "raw_instruction_union_bytes": 280480,
@@ -23,16 +23,16 @@
     "nonconflicting_qualified_instruction_bytes": 280454,
     "raw_referenced_data_union_bytes": 35636,
     "qualified_referenced_data_union_bytes": 35636,
-    "source_glue_owned_extent_bytes": 284708,
-    "estimated_envelope_union_bytes": 325372,
+    "source_glue_owned_extent_bytes": 284988,
+    "estimated_envelope_union_bytes": 325376,
     "classification_bytes": {
-      "estimated_envelope_unclassified": 5598,
+      "estimated_envelope_unclassified": 5596,
       "instruction_and_referenced_data_dual_use": 4,
       "known_data": 18852,
-      "owned_extent_unclassified": 3712,
+      "owned_extent_unclassified": 3718,
       "strong_rooted_instruction": 280450,
       "strong_rooted_referenced_data": 35632,
-      "unresolved": 16432968
+      "unresolved": 16432964
     }
   },
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents",
@@ -6247,11 +6247,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0801DD7C",
+      "name": "frame_initialize_attachment_jobs_42_94",
       "group": "ROM 0801xxxx",
       "rom_offset": 122236,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_0801DD80",
@@ -6289,11 +6289,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0801DE14",
+      "name": "frame_finish_attachment_jobs_42_94",
       "group": "ROM 0801xxxx",
       "rom_offset": 122388,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_c"
     },
     {
       "name": "frame_scene_player_actor",
@@ -6317,11 +6317,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0801E1BC",
+      "name": "frame_scene_initialize_player_state",
       "group": "ROM 0801xxxx",
       "rom_offset": 123324,
-      "size": 138,
-      "status": "mapped_code"
+      "size": 140,
+      "status": "exact_c"
     },
     {
       "name": "resource_prepare_object",
@@ -12862,11 +12862,11 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0803975C",
+      "name": "transition_fade_black_in_windows",
       "group": "ROM 0803xxxx",
       "rom_offset": 235356,
       "size": 132,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "transition_fade_black_out_fast",
@@ -23539,10 +23539,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0801DD7C",
+      "name": "frame_initialize_attachment_jobs_42_94",
       "rom_offset": 122236,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_0801DD80",
@@ -23581,15 +23581,15 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0801DE14",
+      "name": "frame_finish_attachment_jobs_42_94",
       "rom_offset": 122388,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_01DE16",
-      "rom_offset": 122390,
-      "size": 6,
+      "name": "Unresolved_01DE18",
+      "rom_offset": 122392,
+      "size": 4,
       "status": "unresolved"
     },
     {
@@ -23611,16 +23611,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0801E1BC",
+      "name": "frame_scene_initialize_player_state",
       "rom_offset": 123324,
-      "size": 138,
-      "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_01E246",
-      "rom_offset": 123462,
-      "size": 2,
-      "status": "unresolved"
+      "size": 140,
+      "status": "exact_c"
     },
     {
       "name": "resource_prepare_object",
@@ -29467,10 +29461,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0803975C",
+      "name": "transition_fade_black_in_windows",
       "rom_offset": 235356,
       "size": 132,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "transition_fade_black_out_fast",
@@ -34250,8 +34244,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "fbbee75a54520fa1e1e2db4ba95df30b24cef4e96c416bd34330c72545865ee7",
-    "assets/rom-inventory.json": "a8732a2c444bdc30693dfc74dafcd66cd284f284dd084cf641df638972857049",
+    "config/build-us-eu.json": "f4f13d087c69fe5643f8419271292cde2367523965875493ca5b20733ab80548",
+    "assets/rom-inventory.json": "262597d22fb6bd6f117fe6e9c323293babffb790fb703b0c9e70834677903b6f",
     "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",

@@ -162,6 +162,45 @@ unresolved. Adding these probes preserved the previous counters and complete
 final machine state; obsolete trace payloads were retired after replay/control
 verification, while the unique older harness draft was retained locally.
 
+## Pending-display storage follow-up
+
+A separate private observer watched all 23 syntactic callback-shaped words:
+eleven staged words and twelve queued words, using 92 byte-address watches.
+Authored STM, word, byte-at-+3 and halfword-at-+2 stores passed typed-readback
+controls; nearby storage was excluded, and displaced watches reported zero
+hooks with identical fixture state. The log-overflow control also passed.
+No game callback was injected and no game code or register was patched.
+
+The real appearance-preview run stopped at its explicit output limit at frame
+1,257, after 35,740,009 observer steps and 39 of the intended 128 selected
+renderer returns. Its 194,089-byte trace has complete JSON lines and mandatory
+counters, but one detailed changed-write sample was explicitly dropped.
+There were 974 hooked writes and 974 readbacks: 330 detailed-sample attempts,
+329 emitted samples, one dropped sample and 644 counted unchanged omissions.
+Queued word 11 at `0x030023C0` aliases the tile bitmap and accounts for 907
+writes and 305 changes: 304 changed-value records were emitted, and the last
+changed sample was explicitly dropped. The 305 emitted samples for this word
+also include its first, unchanged write. Its arbitrary values are not execution
+targets without an actual dispatch. CPU contexts lie within the owned tile allocation
+and release routines; the DMA context is not a CPU store address.
+
+All 1,227 call-site arrivals were counted. Eight retained tuples and 1,219 counted
+duplicates carried index zero, default target `0x08047081` and the expected two
+argument addresses. One actual startup BL reached the register-call veneer,
+then its BX reached the default target with the expected arguments, return
+address, stack and Thumb state. That is a point transfer witness before the
+target instruction retires. It closes no callback domain or target population.
+
+The cap failure prevented the full-route endpoint, real replay and displaced
+real-run controls; none were claimed or retried. Informational/debug log counts
+were also nonzero in the retained earlier full route. They are separate from
+warnings/errors, which remained zero. The new reporter's all-log-levels-zero
+expectation was overstrict and is preserved as an additional reporting issue;
+it was not reached after the earlier native cap failure. Unique harness,
+fixtures, failed build/checker attempts and useful raw prefix remain local.
+This follow-up adds no C credit, runtime census input or completed-route
+absence claim. Writable aliases, unchecked indices and other paths remain open.
+
 ## Meaning of an observation
 
 Hardware breakpoint checks run after one emulator step and compare the next

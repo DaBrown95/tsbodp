@@ -77,6 +77,23 @@ A separately qualified 36-byte routine at `0x0802A8FC` writes selector 1, calls
 the full matching and progress gates pass. The saved-byte loader can overwrite the
 earlier selector reset, so that path's input domain remains open.
 
+## Windowed fade-in handler
+
+The 132-byte handler at `0x0803975C` also has matching C. It sets the native
+window coordinates and layer masks, enables the two window bits, selects the
+requested blend targets, then steps brightness from 16 through zero. Each
+iteration requests refresh, steps backgrounds and palette jobs, prepares OAM
+and waits for two VBlanks. The source retains the actual signed loop and all
+six literal words. Normal and strict full-extent matches and changed layer-mask
+controls cover the complete output.
+
+The first handler table's observed fourteen-word prefix stores its address in
+slot 13. The finite 105-pack census contains only factory kinds 12/12, so it
+does not establish execution of this handler. The downstream palette-block
+worker remains unconverted. The shared display header now declares the existing
+plural `display_step_palette_blocks(void)` API, matching its actual definition;
+all 511 existing matching header importers pass the fresh full build gate.
+
 ## Remaining selector domains
 
 Transition selector domains remain open. The direct-call census finds 32

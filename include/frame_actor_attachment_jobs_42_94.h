@@ -8,4 +8,6 @@ extern const unsigned char g_attachment_job_94_sequence_rows[][4];
 unsigned int frame_step_attachment_job_42(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
 unsigned int frame_step_attachment_job_94(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
 unsigned int frame_dispatch_attachment_jobs_42_94(struct FrameNeedEffectState *,struct FrameObject *);
+unsigned int frame_initialize_attachment_jobs_42_94(struct FrameNeedEffectState *);
+void frame_finish_attachment_jobs_42_94(struct FrameNeedEffectState *);
 #endif
