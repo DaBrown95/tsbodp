@@ -173,6 +173,55 @@ Resource backing, selector bounds, later request writers and the wider runtime
 population remain open. Owning these callbacks does not establish complete
 scene or resource lifecycle execution.
 
+## Scene-table row 26 callbacks
+
+The three callbacks for row 26 of the phase table at `0x0805797C` match as C:
+`scene_previous_parameter_return_initialize` at `0x0802BAE0` owns 200 bytes,
+`scene_previous_parameter_return_step` at `0x0802BBA8` owns 52, and
+`scene_previous_parameter_return_shutdown` at `0x0802BBDC` owns 52. The row
+at `0x08057AB4` stores Thumb entries `0x0802BAE1`, `0x0802BBA9` and
+`0x0802BBDD`. Names and gameplay meaning remain provisional. These 304 extent
+bytes contain 254 instruction bytes, 44 literal bytes and six zero alignment
+bytes, all compared at their original addresses.
+
+The initializer resets the display and tile allocator, enables the object
+layer, loads background 3 and its palette, prepares text background 0, and
+selects font 3. It draws text ID 308 from y = 5 in twelve-pixel steps while the
+text cursor remains nonempty, then starts transition 63 and audio cue 54.
+The step tests input mask 1 for the configured local player and, when set,
+submits `(1, 0, g_scene_previous_request.parameter)`. This is the full word at
+previous-request offset `+12`, not its scene word at `+8`. The shutdown runs
+the second transition, releases the primary object list, resets the display
+and palette jobs, and stores byte 7 at game-state offset `0x746` through the
+existing character-array owner.
+
+The previous parameter at `0x0300437C` is copied from outgoing active parameter
+`0x0300435C` after the outgoing end callback runs. The row 11 and row 14 end
+callbacks can store `0xFFFFFFFF` before that snapshot. The same previous word
+also has a signed choice-index alias with an owned direct writer of 1. These
+are actual storage and writer facts, without evidence that those particular
+values reach row 26. One concrete producer is `condition_select_row`: outside
+its kind-8 branch it stores a row-table scene byte into the active parameter,
+then calls `resource_scene_event(26)`, an alias of the default request wrapper.
+The inspected tail preserves that parameter. Intervening callers, the outgoing
+end callback and later previous-word aliases can still overwrite it. The full
+producer population, row-table extent and valid resource/scene index domain
+remain open.
+
+All three bodies pass ordinary and strict positive builds and real
+changed-source controls. The controls change cue 54 to 55, input mask 1 to 2,
+and the shutdown byte from 7 to 6; each changes one byte in the full extent.
+Three ARM-target positive contract units contain the three new definitions
+and all eighteen actual called providers, and reject three contradictory
+return, extra-parameter and provider contracts. The host tool version was
+queried separately after qualification, not by the qualification driver.
+The initializer's standard alignment directive retains its two-byte zero tail;
+no executable instruction body is embedded or patched.
+
+This establishes the three callback bodies, not complete scene execution.
+Local-player bounds, valid text progress and coordinate arithmetic, resource
+backing, request producers and later aliases still require their own evidence.
+
 ## Local evidence
 
 The ignored `reports/agents/vblank-wrapper/scene-batch-manifest.json` records

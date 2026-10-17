@@ -50755,6 +50755,114 @@
         "after": "return 99;"
       },
       "expected_sha256": "a2271e164827e90980393ec57efbeee0efeba93f9e67d5eff60d0043fc8970f8"
+    },
+    {
+      "name": "scene_previous_parameter_return_initialize",
+      "source": "src/scene/scene_previous_parameter_return_initialize.c",
+      "rom_offset": 178912,
+      "size": 200,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {
+        "display_show_background": "0x800d579",
+        "display_set_mode": "0x800d601",
+        "display_enable_layers": "0x800d68d",
+        "display_fill_background": "0x800d6b9",
+        "display_load_background": "0x800da21",
+        "display_load_resource_palette": "0x800da95",
+        "display_text_draw": "0x801a7c9",
+        "display_text_set_background_control": "0x801ae2d",
+        "display_text_select_font": "0x801ae75",
+        "transition_run_first": "0x80393fd",
+        "audio_play_sequence_notification": "0x8041425",
+        "display_scene_lookup_text": "0x8045009",
+        "display_configure_tile_allocation": "0x8047741",
+        "g_scene_previous_parameter_return_control0": "0x0805a528",
+        "g_scene_previous_parameter_return_control3": "0x0805a52c",
+        "g_scene_previous_parameter_return_background3": "0x08ef0db0",
+        "g_scene_previous_parameter_return_palette": "0x08ede3b8"
+      },
+      "thumb_symbols": [
+        "display_show_background",
+        "display_set_mode",
+        "display_enable_layers",
+        "display_fill_background",
+        "display_load_background",
+        "display_load_resource_palette",
+        "display_text_draw",
+        "display_text_set_background_control",
+        "display_text_select_font",
+        "transition_run_first",
+        "audio_play_sequence_notification",
+        "display_scene_lookup_text",
+        "display_configure_tile_allocation"
+      ],
+      "negative_control": {
+        "before": "audio_play_sequence_notification(54);",
+        "after": "audio_play_sequence_notification(55);"
+      },
+      "expected_sha256": "099e471df1ce3281271c84163bc9a031438ab7b7480b67e977c64d9f02fd424f"
+    },
+    {
+      "name": "scene_previous_parameter_return_step",
+      "source": "src/scene/scene_previous_parameter_return_step.c",
+      "rom_offset": 179112,
+      "size": 52,
+      "mode": "Thumb",
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {
+        "g_input_pressed": "0x03004228",
+        "g_input_config": "0x030040e0",
+        "g_scene_previous_request": "0x03004370",
+        "resource_submit_scene": "0x08027dd1"
+      },
+      "thumb_symbols": [
+        "resource_submit_scene"
+      ],
+      "negative_control": {
+        "before": "& 1",
+        "after": "& 2"
+      },
+      "expected_sha256": "1ae119d7506d2db2891b0234634e9f3334fd29fbe301086149b2a5890f36c36c"
+    },
+    {
+      "name": "scene_previous_parameter_return_shutdown",
+      "source": "src/scene/scene_previous_parameter_return_shutdown.c",
+      "rom_offset": 179164,
+      "size": 52,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {
+        "display_release_object_list": "0x8001189",
+        "display_reset": "0x800dda5",
+        "display_reset_palette_jobs": "0x80117bd",
+        "transition_run_second": "0x8039435",
+        "g_frame_primary_list": "0x030024f0",
+        "g_resource_game_state": "0x03003950"
+      },
+      "thumb_symbols": [
+        "display_release_object_list",
+        "display_reset",
+        "display_reset_palette_jobs",
+        "transition_run_second"
+      ],
+      "negative_control": {
+        "before": "unknownf4[0x746 - 0xf4] = 7;",
+        "after": "unknownf4[0x746 - 0xf4] = 6;"
+      },
+      "expected_sha256": "523d450a1175e905464d4a53a05662436d56ec7576080ae2c6103c37903697ac"
     }
   ],
   "assembly": [
