@@ -38216,14 +38216,15 @@
       "referenced_literal_bytes": 32
     },
     {
-      "name": "sub_0801FBA0",
+      "name": "scene_two_page_step",
       "rom_offset": 129952,
       "mode": "Thumb",
       "runtime_addresses": [
         134347680
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -38244,11 +38245,11 @@
         130274
       ],
       "size": 324,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 129952,
       "body_rom_start": 129952,
       "body_rom_end": 130276,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0801xxxx",
       "decoded_instruction_bytes": 300,
@@ -99355,7 +99356,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0801FBA0",
+      "name": "scene_two_page_step",
       "rom_offset": 129952,
       "size": 324,
       "status": "mapped_code"
@@ -109537,7 +109538,7 @@
     "config/ram-map-us-eu.json": "67362238b648e40fbf3b51d8e466bfd12e709a38211c16e157d384243896410b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "bdd2740d84d6ce54f8dc7431555ac7a405ee08847f4fdea5224fab2b860b6540",
-    "config/build-us-eu.json": "d523da843404a7462ee3d423ebb43cbe2003d8ca64855f5c4bb68184e0cc3490",
+    "config/build-us-eu.json": "e9f4ca5b10509ca55b780a5b1078eed335aefa93b8f44721c13b759d340ed7a6",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/audio/audio_game_select_activity_callback.c": "f1b271db1ce338b8e0e9fb72e53366263d86726953bb6ad6b4f1615d52ccb5b6",
     "src/audio/player_process_between_row.c": "f541ed81a46529f10a6179c656949d712e59fce9f94e4e9295a5dbfa8d09eefc",
@@ -109636,7 +109637,7 @@
       "nonconflicting_qualified_instruction_bytes": 280890,
       "raw_referenced_data_union_bytes": 35688,
       "qualified_referenced_data_union_bytes": 35688,
-      "source_glue_owned_extent_bytes": 285740,
+      "source_glue_owned_extent_bytes": 286064,
       "estimated_envelope_union_bytes": 325384,
       "classification_bytes": {
         "estimated_envelope_unclassified": 5104,
@@ -150054,10 +150055,6 @@
         ],
         [
           121644,
-          129952
-        ],
-        [
-          130276,
           131164
         ],
         [
@@ -205722,7 +205719,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -205733,7 +205731,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -205746,7 +205745,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -205757,7 +205757,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -205770,7 +205771,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -205781,27 +205783,15 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
       },
       {
         "rom_offset": 130256,
-        "size": 20,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
-        "rom_offset": 130276,
-        "size": 18,
+        "size": 38,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -318954,9 +318944,10 @@
         "execution_address": 134347680,
         "entry_rom_offset": 129952,
         "mode": "Thumb",
-        "name": null,
+        "name": "scene_two_page_step",
         "evidence": [
-          "audited dispatch entry"
+          "audited dispatch entry",
+          "bounded audit"
         ],
         "raw_instruction_intervals": [
           [
@@ -409348,6 +409339,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 18,
         "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "scene_two_page_step",
+        "rom_offset": 129952,
+        "size": 324,
+        "source": "src/scene/scene_two_page_step.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 300,
+        "referenced_data_bytes_in_extent": 24
       },
       {
         "name": "irq_cpu_enable",

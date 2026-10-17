@@ -50575,6 +50575,45 @@
         "before": "transition_set_black_brightness(63, 16)",
         "after": "transition_set_black_brightness(62, 16)"
       }
+    },
+    {
+      "name": "scene_two_page_step",
+      "rom_offset": 129952,
+      "size": 324,
+      "source": "src/scene/scene_two_page_step.c",
+      "symbols": {
+        "transition_set_black_brightness": "0x80393ad",
+        "display_show_background": "0x800d579",
+        "display_text_set_background_control": "0x801ae2d",
+        "display_fill_background": "0x800d6b9",
+        "display_load_background": "0x800da21",
+        "display_load_resource_palette": "0x800da95",
+        "display_text_select_font": "0x801ae75",
+        "display_scene_lookup_text": "0x8045009",
+        "display_text_draw_all_lines": "0x801b04d",
+        "scene_submit_default_request": "0x8027dc1",
+        "g_scene_request": "0x03004350",
+        "g_scene_two_page_default_control": "0x0804f7ec",
+        "g_scene_two_page_rows": "0x0805358c",
+        "g_scene_text_bank_control": "0x0804f7e8",
+        "g_display_scrolling_palette": "0x08ede3b8"
+      },
+      "thumb_symbols": [
+        "transition_set_black_brightness",
+        "display_show_background",
+        "display_text_set_background_control",
+        "display_fill_background",
+        "display_load_background",
+        "display_load_resource_palette",
+        "display_text_select_font",
+        "display_scene_lookup_text",
+        "display_text_draw_all_lines",
+        "scene_submit_default_request"
+      ],
+      "negative_control": {
+        "before": "scene_submit_default_request(5);",
+        "after": "scene_submit_default_request(6);"
+      }
     }
   ],
   "assembly": [

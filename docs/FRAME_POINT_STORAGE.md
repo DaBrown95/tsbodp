@@ -42,3 +42,11 @@ These are source and compiler findings. They do not close arbitrary definition
 indices, writable callbacks, transitive dependencies or runtime populations.
 The copied sorter's legal direct halfword loads still leave two mismatching
 bytes; it receives no C credit. See the [remaining work](COMPLETION_BLOCKERS.md).
+
+The copied map drawer at ROM `0x0800B564` also remains unconverted. Its ordinary
+unaddressed two-word value removes helper calls and the eight-byte local pair,
+but generates 352 bytes against the native 320, with 302 differing or extra
+bytes. Partial writes conservatively keep the combined value live; allocation
+uses R4/R5 and adds moves, while a four-byte frame holds the outer index. This
+measured failure receives no C credit and does not change the shared point
+storage contract above.

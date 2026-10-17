@@ -121,14 +121,14 @@ that descriptor-base/cursor lifetime changes compiler instruction scheduling;
 the accepted source has both as ordinary typed pointers, with no instruction
 body, output fixup or byte mask.
 
-## Scene-table row 4 endpoints
+## Scene-table row 4 callbacks
 
-The begin and end callbacks for row 4 of the phase table at `0x0805797C`
-match as C: `scene_two_page_initialize` at `0x0801FAB4` owns 236 bytes, and
+All three callback bodies for row 4 of the phase table at `0x0805797C`
+match as C: `scene_two_page_initialize` at `0x0801FAB4` owns 236 bytes,
+`scene_two_page_step` at `0x0801FBA0` owns 324, and
 `scene_two_page_shutdown` at `0x0801FCE4` owns 20. The row stores the Thumb
-entries `0x0801FAB5`, `0x0801FBA1` and `0x0801FCE5`; the middle, 324-byte
-step remains unconverted. The endpoint names follow two observed display
-records and remain provisional.
+entries `0x0801FAB5`, `0x0801FBA1` and `0x0801FCE5`. These 580 extent bytes
+establish ownership of the three bodies; their names remain provisional.
 
 The initializer resets the request selector, configures the display and tile
 allocator, loads the selected background and palette, draws its text, then
@@ -139,18 +139,39 @@ its byte at `+9` remains unknown. Two physical records are observed, without
 proof that every selector reloaded after a call stays within them or that all
 pointed resources and text inputs are valid.
 
+The step stores the decremented word timer before testing its old value.
+State 0 fades using the new timer, state 1 waits, and state 2 fades using
+16 minus the new timer before advancing the selector. It rebuilds the next
+observed row or enters state 3, which submits scene request 5. Brightness
+arguments retain the actual unsigned-halfword interface, and row selectors
+are reloaded at the original consumers around opaque calls.
+
+The successful source gives each of states 0, 1 and 2 its own ordinary
+old-timer result in a lexical block. A shared local across all three cases
+initially produced the real old-value copies and tied decrements, but first
+CSE preferred the shared pseudo's longer span, reversed the load/copy pairs
+and untied the decrements. FLOW then deleted the redundant reversed copies;
+REGMOVE was not the cause. Separate real results avoid that demonstrated CSE
+preference. This explains the matching source's compiler behavior, without
+claiming the original source used these scopes.
+
 The shutdown sets black brightness for target mask 63 at level 16, then
 resets palette jobs. Its C body is 18 bytes; the final two bytes are original
 zero alignment represented by a standard alignment directive. The initializer
 includes 202 instruction bytes, 32 literal bytes and two internal zero
-alignment bytes. Every byte is compared at its original address.
+alignment bytes; the step includes 300 instruction bytes and 24 literal bytes.
+Every byte is compared at its original address.
 
-Both endpoints pass ordinary and strict positive builds. Real controls change
-brightness 16 to 15 in the initializer and mask 63 to 62 in the shutdown; each
-changes one instruction byte. Actual provider definitions, callback signatures
-and row layouts pass the ARM-target type checks, while five wrong contracts
-reject. These 256 bytes establish endpoint source ownership only. They do not
-complete the row's step, runtime scene-index domain or resource lifecycle.
+All three bodies pass ordinary and strict positive builds with real source
+controls. The step's control changes its actual scene request from 5 to 6,
+changing one byte; the endpoint controls change brightness 16 to 15 and mask
+63 to 62. The canonical step qualification checks 45 ARM-target facts against
+17 actual definitions and rejects five wrong contracts. A full progress gate
+rebuilds the changed header's existing initializer and the new step.
+
+Resource backing, selector bounds, later request writers and the wider runtime
+population remain open. Owning these callbacks does not establish complete
+scene or resource lifecycle execution.
 
 ## Local evidence
 

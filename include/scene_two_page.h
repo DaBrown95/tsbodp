@@ -16,6 +16,7 @@ extern const struct SceneTwoPageRow g_scene_two_page_rows[];
 extern const unsigned int g_scene_two_page_default_control;
 
 void scene_two_page_initialize(void);
+void scene_two_page_step(void);
 void scene_two_page_shutdown(void);
 
 #endif
