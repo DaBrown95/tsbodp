@@ -2,15 +2,19 @@
 #define FRAME_NEED_EFFECT_H
 
 #include "frame_actor_runtime.h"
+#include "frame_actor_attachment.h"
 struct FrameNeedEffectState {
  FrameU8 unknown_00[8];
  FrameU32 kind;
- FrameU8 unknown_0c[72];
+ struct FrameActorAttachmentRecord records[3];
  struct FrameObject *object;
  FrameU8 unknown_58[7], mode;
  FrameU8 unknown_60[2], enabled, unknown_63[13];
  FrameU16 parameter;
- FrameU8 optional;
+ FrameU8 optional, unknown_73;
+ FrameU8 unknown_74[0x80];
+ unsigned int (*step)(struct FrameNeedEffectState *,struct FrameObject *);
+ FrameU8 unknown_f8[8];
 };
 struct FrameNeedEffectObject {
  struct FrameObject *next,*previous;

@@ -368,9 +368,9 @@ and returns two. Other paths return one.
 
 The first sample's four-byte representation at `+0xE0` is accessed through
 `DisplayNeedEffectStateView.unknown_dd[3..6]`, within the existing allocator's
-256-byte access view. The shorter `FrameNeedEffectState` declaration
-does not reach that field and is not used as its storage extent. The second
-sample at `+0x64` uses four bytes inside the partial state's thirteen-byte
+256-byte access view. The canonical `FrameNeedEffectState` now also represents
+the complete backing; this worker retains the existing character access. The second
+sample at `+0x64` uses four bytes inside the canonical state's thirteen-byte
 `unknown_63` member. The indicator at `+0x58` similarly uses four bytes of its
 existing seven-byte character member. Copies require initialized valid target
 representations and the backing extent appropriate to the existing allocation.
@@ -499,8 +499,8 @@ the cleanup phase commits mode zero, requests animation one and returns two.
 Each activity worker captures the needs pointer before initializing its result.
 Its sample at `+0xE0` is copied through bytes three through six of `unknown_dd`
 in the existing 256-byte access view. This is within that view's extent; it does
-not extend the smaller partial state type or prove universal effective-type
-compatibility of legacy views. Both worker spans contain 372 instruction bytes;
+not establish universal effective-type compatibility among the legacy views
+and the complete canonical state owner. Both worker spans contain 372 instruction bytes;
 they contain 136 and 132 referenced bytes and twelve zero alignment bytes each.
 The function symbols cover 518 and 514 bytes, while their linked sections cover
 520 and 516. The EOF directive requests zero section alignment, with no padding
@@ -1152,3 +1152,51 @@ Generic delivery, choice tails, writable targets, found/live records, counter
 and serialized-index domains, scheduling and gameplay remain open. The private
 row-117 and row-85 paths receive no credit here: their shared settlement provider
 still mismatches, and row 85 also requires its original selection remover.
+
+## Complete need-state record backing and route constructors
+
+The need-state allocator and pool use 256-byte slots. The shared
+`FrameNeedEffectState` now represents that complete backing, with three 24-byte
+attachment records at +0x0C and the existing two-argument, word-result callback
+at +0xF4. All eleven matching record-array users now use this owner. The
+allocator/finder/releaser, nth-record and mark-running APIs propagate that same
+owner through their actual definitions and callers. The separate +0xF8 tick
+callback retains its own contract. This does not close callback target
+populations, generic object views or the provenance of every grid slot.
+
+Five remaining direct route-constructor callers add 368 C extent bytes at
+`0x08012B54`, `0x080259A0`, `0x08025B54`, `0x08043884` and `0x08046240`.
+The 80-byte caller stores the record kind before initializing the genuine
+selector; moving that initialization after the store restores native compiler
+order. The other first recipes match, and the existing row-117 constructor is
+requalified using the public header. Other row-117 bodies still depend on the
+unmatched settlement provider and remain original.
+
+All 53 syntactic Thumb calls to the route constructor now have matching C
+owners. Their immediate mode arguments are 0/3/4/5. Together with the eight
+observed descriptor transitions, these select four already-owned physical
+callbacks. This is a conditional target set: the 30 passed to the path-copy
+routine is unused, while the shared byte count controls the actual copy.
+Without a proved count bound, a 35th point in job zero or one can reach the
+next job's mode word. That is a static address-range fact, not an observed
+overflow or complete writable-target identification. Wider incoming, alias and
+path-count domains remain open.
+
+The connected kind-21/45 family at `0x08012968..0x08012BCC` now has all nine
+bodies in C, totaling 612 bytes; its constructor is included in the five above.
+The other eight add 540 bytes. The 156-byte indicator worker reuses an existing
+matching graph with the same calls. The 252-byte worker preserves phases
+0/1/75/76/77 and the genuine unsigned-halfword countdown wrap to `0xFFFF`.
+The dispatcher's initial nested conditionals differed by 21 bytes in 44;
+a switch places both comparisons before the default and child blocks, restoring
+the native branch layout. Both versions load the record kind once in final code.
+No installed callback or incoming role outside this family is established.
+The following four-byte constant-100 entry remains original and unrooted.
+
+The owner repair rechecks 115 existing definitions without new C credit.
+The thirteen new definitions add 908 C extent bytes: 884 instructions, twelve
+literal bytes and twelve zero-alignment bytes. Normal and strict qualification,
+actual source controls, 54 target layout facts and nine deliberately wrong
+contracts pass. The full matching/control and progress gates verify the
+integrated inputs. F4 target population, F8 tick delivery, all slot backing,
+aliases and gameplay remain separate obligations.

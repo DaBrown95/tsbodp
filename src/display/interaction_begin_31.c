@@ -4,7 +4,7 @@ unsigned int frame_interaction_begin_31(struct FrameNeedEffectState *owner,
                                          struct FrameObject *object, unsigned int kind)
 {
     struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(
-        (struct FrameActorAttachmentOwner *)owner, object);
+        owner, object);
     struct FramePoint point;
     unsigned char result;
     if (!job) result = 0;

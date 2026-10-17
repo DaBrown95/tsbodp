@@ -5,7 +5,7 @@
 
 unsigned int frame_need_effect_dispatch_condition_job(struct FrameNeedEffectState *owner,struct FrameObject *actor)
 {
- struct FrameActorAttachmentRecord *job=frame_find_actor_attachment_record((struct FrameActorAttachmentOwner *)owner,actor);
+ struct FrameActorAttachmentRecord *job=frame_find_actor_attachment_record(owner,actor);
  switch (job->kind) {
  case 7:return frame_step_condition_need_job(owner,job);
  case 44:return frame_step_condition_wait_job(owner,job);

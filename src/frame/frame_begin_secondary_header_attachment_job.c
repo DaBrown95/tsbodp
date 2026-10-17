@@ -2,14 +2,14 @@
 unsigned int frame_begin_secondary_header_attachment_job(struct FrameNeedEffectState *owner,struct FrameObject *actor,unsigned int kind)
 {
  struct FramePoint point;
- struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record((struct FrameActorAttachmentOwner *)owner,actor);
+ struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record(owner,actor);
  if(job){
   unsigned char attachment;
   job->kind=kind;
   if(kind==50){
    ((struct FrameSecondaryHeaderOwnerWork *)owner)->active=1;
    if(owner->kind==53||owner->kind==51){
-    struct FrameActorAttachmentRecord *first=frame_need_effect_nth_attachment((struct FrameActorAttachmentOwner *)owner,1);
+    struct FrameActorAttachmentRecord *first=frame_need_effect_nth_attachment(owner,1);
     unsigned char mode=frame_actor_header_mode(actor);
     attachment=100;
     if(first)attachment=((unsigned char *)&first->unknown14)[0];

@@ -6,9 +6,9 @@ void frame_tick_header_attachment_jobs(struct FrameNeedEffectState *owner)
         struct FrameActorAttachmentRecord *second;
         unsigned int header;
         first = frame_need_effect_nth_attachment(
-            (struct FrameActorAttachmentOwner *)owner, 1);
+            owner, 1);
         second = frame_need_effect_nth_attachment(
-            (struct FrameActorAttachmentOwner *)owner, 2);
+            owner, 2);
         if (first->actor->id == 7) header = ((unsigned char *)first->actor)[0x0a];
         else header = ((unsigned char *)second->actor)[0x0a];
         if ((display_menu_relation_flags(g_need_effect_game_state + 0x30, header - 18) & 8) &&
@@ -26,7 +26,7 @@ void frame_tick_header_attachment_jobs(struct FrameNeedEffectState *owner)
         }
     } else if (frame_need_effect_attachment_count(owner) == 1) {
         first = frame_need_effect_nth_attachment(
-            (struct FrameActorAttachmentOwner *)owner, 1);
+            owner, 1);
         if (first->timer == 43)
             frame_request_animation((struct FrameCommandObject *)first->actor, 50);
     }

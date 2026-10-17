@@ -17,7 +17,7 @@ unsigned int frame_release_need_effect_state(struct FrameNeedEffectState *base)
         state->auxiliary_object=0;
     }
     i=0;
-    records=(struct FrameActorAttachmentRecord *)state->records;
+    records=base->records;
     for(;i<3;i++) {
         if(load_actor(records,i))
             frame_detach_actor(load_actor(records,i),(struct FrameObject *)state);

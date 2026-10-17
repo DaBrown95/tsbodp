@@ -297,7 +297,7 @@ callers still match after this prototype refinement. The limit setter also
 narrows its input to a byte. Both setters stop after their first matching actor.
 Cancel checks all slots; release clears the route flag, reapplies the saved flag
 mask, resets the status word, clears all 280 job bytes and decrements the count.
-The eight-entry mode table at `0x08D71FE4` resolves the indirect transfer in
+The eight-entry mode table at `0x08D71FE4` describes the observed dispatch domain in
 `frame_update_actor_routes`: modes 0/5 call path search, 2/3/4 steering, 6 path
 following and 1 final positioning; mode 7 has no callback. Each descriptor also
 provides a next-mode word. The update loop processes occupied slots, releases
@@ -325,7 +325,12 @@ sets the actor to the original destination and stops motion. Reset clears the
 active count and all three jobs. The flag helpers are semantic OR/AND updates
 called by beginning, searching and releasing routes. The core grid search and
 reverse-order path extraction at `0x3C08C` now match; their queue and output
-capacity contracts remain uncertain.
+capacity contracts remain uncertain. The literal 30 passed to the copier is
+unused; its shared byte count controls the actual writes. A source-backed
+conditional 17-by-17 corridor model yields 35 copied points within the search's
+queue and cost limits. Its 35th point reaches the next job's mode word for job
+zero or one. Actual serialized-map and actor-input reachability is unproved;
+this is no observed overflow or complete callback-target identification.
 
 State 37 reads the global timer at game state `+0x74C`. Values above -2 submit
 scene request 37 with mode byte 0. Otherwise, stage word `+0x440` selects request

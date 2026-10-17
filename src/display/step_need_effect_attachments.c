@@ -5,7 +5,7 @@ void frame_step_need_effect_attachments(struct FrameNeedEffectState *state)
  struct FrameObject *object=state->object;
  unsigned int visible=object->flags&1;
  struct FrameObject **effect=(struct FrameObject **)((unsigned char *)object+0x90);
- struct FrameActorAttachmentOwner *owner=(struct FrameActorAttachmentOwner *)state;
+ struct FrameNeedEffectState *owner=state;
  unsigned int count=0,i;
 
  for(i=0;i<3;i++)if(owner->records[i].actor)count++;

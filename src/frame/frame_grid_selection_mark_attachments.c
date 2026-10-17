@@ -5,7 +5,7 @@ void frame_grid_selection_mark_attachments(struct FrameObject *base)
   unsigned char i;
   for(i=0;i<2;i++) {
    struct FrameObject *owner=((struct FrameActorAttachmentView *)base)->slots[i];
-   if(owner)frame_need_effect_mark_attachment_running((struct FrameActorAttachmentOwner *)owner,base);
+   if(owner)frame_need_effect_mark_attachment_running((struct FrameNeedEffectState *)owner,base);
   }
  }
 }

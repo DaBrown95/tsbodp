@@ -4,8 +4,8 @@
 unsigned int frame_begin_header_attachment_job(struct FrameNeedEffectState *owner,struct FrameObject *actor,unsigned int kind)
 {
  struct FramePoint point;
- struct FrameActorAttachmentRecord *first=frame_need_effect_nth_attachment((struct FrameActorAttachmentOwner *)owner,1);
- struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record((struct FrameActorAttachmentOwner *)owner,actor);
+ struct FrameActorAttachmentRecord *first=frame_need_effect_nth_attachment(owner,1);
+ struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record(owner,actor);
  if(job){
   unsigned char mode,attachment;
   job->kind=kind;

@@ -4,7 +4,7 @@ unsigned int frame_dispatch_optional_attachment_job(struct FrameNeedEffectState 
                                                      struct FrameObject *actor)
 {
     struct FrameActorAttachmentRecord *job =
-        frame_find_actor_attachment_record((struct FrameActorAttachmentOwner *)owner,
+        frame_find_actor_attachment_record(owner,
                                            actor);
     switch (job->kind) {
     case 29:

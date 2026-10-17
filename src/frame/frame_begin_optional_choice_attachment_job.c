@@ -5,7 +5,7 @@ unsigned int frame_begin_optional_choice_attachment_job(struct FrameNeedEffectSt
                                                          unsigned int kind)
 {
     struct FrameActorAttachmentRecord *job =
-        frame_allocate_actor_attachment_record((struct FrameActorAttachmentOwner *)owner, object);
+        frame_allocate_actor_attachment_record(owner, object);
     unsigned int result;
     if (!job)
         result = 0;

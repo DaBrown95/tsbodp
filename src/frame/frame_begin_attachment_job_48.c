@@ -1,7 +1,7 @@
 #include "frame_actor_attachment_job_48.h"
 unsigned int frame_begin_attachment_job_48(struct FrameNeedEffectState *owner, struct FrameObject *actor, unsigned int kind)
 {
- struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record((struct FrameActorAttachmentOwner *)owner,actor);
+ struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record(owner,actor);
  struct FramePoint point;
  unsigned int result;
  if(!job)result=0;

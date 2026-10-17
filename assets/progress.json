@@ -1,38 +1,38 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "17 Oct 2026, 11:40 BST",
-  "compiled_c_functions": 2180,
-  "compiled_c_bytes": 279116,
+  "verified_at": "17 Oct 2026, 13:12 BST",
+  "compiled_c_functions": 2193,
+  "compiled_c_bytes": 280024,
   "assembly_glue_bytes": 4060,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16494040,
+  "unconverted_rom_bytes": 16493132,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
-  "discovered_entries": 2536,
-  "bounded_control_flow_bodies": 303,
+  "discovered_entries": 2538,
+  "bounded_control_flow_bodies": 292,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 98,
-  "mapped_extent_bytes": 325358,
+  "mapped_extent_bytes": 325372,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
-    "raw_instruction_union_bytes": 279784,
-    "qualified_observed_instruction_union_bytes": 279758,
-    "nonconflicting_qualified_instruction_bytes": 279758,
-    "raw_referenced_data_union_bytes": 35616,
-    "qualified_referenced_data_union_bytes": 35616,
-    "source_glue_owned_extent_bytes": 283176,
-    "estimated_envelope_union_bytes": 325350,
+    "raw_instruction_union_bytes": 280452,
+    "qualified_observed_instruction_union_bytes": 280426,
+    "nonconflicting_qualified_instruction_bytes": 280426,
+    "raw_referenced_data_union_bytes": 35628,
+    "qualified_referenced_data_union_bytes": 35628,
+    "source_glue_owned_extent_bytes": 284084,
+    "estimated_envelope_union_bytes": 325364,
     "classification_bytes": {
-      "estimated_envelope_unclassified": 6320,
+      "estimated_envelope_unclassified": 5642,
       "instruction_and_referenced_data_dual_use": 4,
       "known_data": 18852,
-      "owned_extent_unclassified": 3684,
-      "strong_rooted_instruction": 279754,
-      "strong_rooted_referenced_data": 35612,
-      "unresolved": 16432990
+      "owned_extent_unclassified": 3696,
+      "strong_rooted_instruction": 280422,
+      "strong_rooted_referenced_data": 35624,
+      "unresolved": 16432976
     }
   },
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents",
@@ -3727,53 +3727,67 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08012968",
+      "name": "frame_step_route_attachment_45_12968",
       "group": "ROM 0801xxxx",
       "rom_offset": 76136,
       "size": 156,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08012A04",
+      "name": "frame_step_route_attachment_21_12a04",
       "group": "ROM 0801xxxx",
       "rom_offset": 76292,
       "size": 252,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08012B04",
+      "name": "frame_initialize_route_attachment_12b00",
+      "group": "ROM 0801xxxx",
+      "rom_offset": 76544,
+      "size": 4,
+      "status": "exact_c"
+    },
+    {
+      "name": "frame_check_route_attachment_12b04",
       "group": "ROM 0801xxxx",
       "rom_offset": 76548,
-      "size": 38,
-      "status": "candidate"
+      "size": 40,
+      "status": "exact_c"
     },
     {
-      "name": "sub_08012B2C",
+      "name": "frame_select_route_attachment_12b2c",
       "group": "ROM 0801xxxx",
       "rom_offset": 76588,
-      "size": 30,
-      "status": "candidate"
+      "size": 32,
+      "status": "exact_c"
     },
     {
-      "name": "sub_08012B4C",
+      "name": "frame_prepare_route_attachment_12b4c",
       "group": "ROM 0801xxxx",
       "rom_offset": 76620,
       "size": 8,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08012B54",
+      "name": "frame_begin_route_attachment_12b54",
       "group": "ROM 0801xxxx",
       "rom_offset": 76628,
       "size": 72,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08012B9C",
+      "name": "frame_dispatch_route_attachment_12b9c",
       "group": "ROM 0801xxxx",
       "rom_offset": 76700,
       "size": 44,
-      "status": "candidate"
+      "status": "exact_c"
+    },
+    {
+      "name": "frame_finish_route_attachment_12bc8",
+      "group": "ROM 0801xxxx",
+      "rom_offset": 76744,
+      "size": 4,
+      "status": "exact_c"
     },
     {
       "name": "frame_step_attachment_jobs_79_80",
@@ -8053,11 +8067,11 @@
       "status": "candidate"
     },
     {
-      "name": "sub_080259A0",
+      "name": "frame_begin_route_attachment_259a0",
       "group": "ROM 0802xxxx",
       "rom_offset": 154016,
-      "size": 78,
-      "status": "candidate"
+      "size": 80,
+      "status": "exact_c"
     },
     {
       "name": "sub_080259F0",
@@ -8102,11 +8116,11 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08025B54",
+      "name": "frame_begin_attachment_job_68",
       "group": "ROM 0802xxxx",
       "rom_offset": 154452,
       "size": 72,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08025B9C",
@@ -14661,11 +14675,11 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08043884",
+      "name": "frame_begin_route_attachment_43884",
       "group": "ROM 0804xxxx",
       "rom_offset": 276612,
       "size": 72,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_dispatch_optional_activity_attachment_job",
@@ -15382,11 +15396,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08046240",
+      "name": "frame_begin_route_attachment_46240",
       "group": "ROM 0804xxxx",
       "rom_offset": 287296,
       "size": 72,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08046288",
@@ -21257,69 +21271,63 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08012968",
+      "name": "frame_step_route_attachment_45_12968",
       "rom_offset": 76136,
       "size": 156,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08012A04",
+      "name": "frame_step_route_attachment_21_12a04",
       "rom_offset": 76292,
       "size": 252,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_012B00",
+      "name": "frame_initialize_route_attachment_12b00",
       "rom_offset": 76544,
       "size": 4,
-      "status": "unresolved"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08012B04",
+      "name": "frame_check_route_attachment_12b04",
       "rom_offset": 76548,
-      "size": 38,
-      "status": "candidate"
+      "size": 40,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_012B2A",
-      "rom_offset": 76586,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_08012B2C",
+      "name": "frame_select_route_attachment_12b2c",
       "rom_offset": 76588,
-      "size": 30,
-      "status": "candidate"
+      "size": 32,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_012B4A",
-      "rom_offset": 76618,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_08012B4C",
+      "name": "frame_prepare_route_attachment_12b4c",
       "rom_offset": 76620,
       "size": 8,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08012B54",
+      "name": "frame_begin_route_attachment_12b54",
       "rom_offset": 76628,
       "size": 72,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08012B9C",
+      "name": "frame_dispatch_route_attachment_12b9c",
       "rom_offset": 76700,
       "size": 44,
-      "status": "candidate"
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_012BC8",
+      "name": "frame_finish_route_attachment_12bc8",
       "rom_offset": 76744,
-      "size": 8,
+      "size": 4,
+      "status": "exact_c"
+    },
+    {
+      "name": "Unresolved_012BCC",
+      "rom_offset": 76748,
+      "size": 4,
       "status": "unresolved"
     },
     {
@@ -25217,16 +25225,10 @@
       "status": "candidate"
     },
     {
-      "name": "sub_080259A0",
+      "name": "frame_begin_route_attachment_259a0",
       "rom_offset": 154016,
-      "size": 78,
-      "status": "candidate"
-    },
-    {
-      "name": "Unresolved_0259EE",
-      "rom_offset": 154094,
-      "size": 2,
-      "status": "unresolved"
+      "size": 80,
+      "status": "exact_c"
     },
     {
       "name": "sub_080259F0",
@@ -25277,10 +25279,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08025B54",
+      "name": "frame_begin_attachment_job_68",
       "rom_offset": 154452,
       "size": 72,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08025B9C",
@@ -31121,10 +31123,10 @@
       "status": "unresolved"
     },
     {
-      "name": "sub_08043884",
+      "name": "frame_begin_route_attachment_43884",
       "rom_offset": 276612,
       "size": 72,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_dispatch_optional_activity_attachment_job",
@@ -31793,10 +31795,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08046240",
+      "name": "frame_begin_route_attachment_46240",
       "rom_offset": 287296,
       "size": 72,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_08046288",
@@ -34260,8 +34262,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "2375b8ffc69bbdc64a1ecdf5cf1a4369e6d4d910932da0c3ef85428c96fb35f2",
-    "assets/rom-inventory.json": "68a8d4e726ff8fa9db613a33defa48bd1fcec72a6977aa98d6020f61b1cc65d8",
+    "config/build-us-eu.json": "c79ef58a1836441b202e0e97a6599ad2ab7f8472dd634ef1adc6fb2e260b56e6",
+    "assets/rom-inventory.json": "a067f6098a6368a99ad925523ff2d796701fa7a7ed6700864a71dcc20c0ce99f",
     "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",

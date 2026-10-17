@@ -6,7 +6,7 @@
 unsigned int frame_need_effect_begin_condition_job(struct FrameNeedEffectState *owner,struct FrameObject *actor,unsigned int kind)
 {
  struct FramePoint point;
- struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record((struct FrameActorAttachmentOwner *)owner,actor);
+ struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record(owner,actor);
  if (job) {
   job->kind=kind;
   frame_attachment_position(owner->object,0,&point);

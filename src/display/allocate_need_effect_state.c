@@ -54,7 +54,7 @@ struct FrameNeedEffectState *frame_allocate_need_effect_state(unsigned int origi
         last_base=definitions+24;
         offset+=(unsigned int)last_base;
         *out=*(void **)offset;
-        heap_clear(state->records,0,72);
+        heap_clear(((struct FrameNeedEffectState *)state)->records,0,72);
     }
     return (struct FrameNeedEffectState *)state;
 }

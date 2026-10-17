@@ -3,7 +3,7 @@ unsigned int frame_need_effect_attachment_count(struct FrameNeedEffectState *sta
 {
  struct FrameActorAttachmentRecord *record;
  unsigned int count=0,index=0;
- record=((struct DisplayNeedEffectStateView *)state)->records;
+ record=state->records;
  do {
   if(record->actor)count++;
   record++;

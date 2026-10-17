@@ -1,7 +1,7 @@
 #include "frame_need_effect_direct_49.h"
 #include "display_actor_interaction.h"
 unsigned int frame_need_effect_direct_49_begin(struct FrameNeedEffectState *owner,struct FrameObject *actor,unsigned int kind){
- struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record((struct FrameActorAttachmentOwner *)owner,actor);
+ struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record(owner,actor);
  struct FramePoint point;unsigned char result;
  if(job){
   job->kind=kind;

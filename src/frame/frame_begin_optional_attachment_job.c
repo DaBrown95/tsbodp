@@ -6,7 +6,7 @@ unsigned int frame_begin_optional_attachment_job(struct FrameNeedEffectState *ow
 {
     struct FramePoint point;
     struct FrameActorAttachmentRecord *job =
-        frame_allocate_actor_attachment_record((struct FrameActorAttachmentOwner *)owner,
+        frame_allocate_actor_attachment_record(owner,
                                                actor);
     if (job) {
         job->kind = kind;

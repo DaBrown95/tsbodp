@@ -12,9 +12,9 @@ unsigned char frame_attachment_position(struct FrameObject *,unsigned char,struc
 void frame_request_animation(struct FrameCommandObject *,unsigned char);
 void frame_commit_need_effect(struct FrameObject *,unsigned int);
 void frame_adjust_actor_needs(struct FrameActorNeedState *,unsigned int,unsigned char);
-struct FrameActorAttachmentRecord *frame_allocate_actor_attachment_record(struct FrameActorAttachmentOwner *,struct FrameObject *);
-struct FrameActorAttachmentRecord *frame_find_actor_attachment_record(struct FrameActorAttachmentOwner *,struct FrameObject *);
-unsigned char frame_release_actor_attachment_record(struct FrameActorAttachmentOwner *,struct FrameObject *);
+struct FrameActorAttachmentRecord *frame_allocate_actor_attachment_record(struct FrameNeedEffectState *,struct FrameObject *);
+struct FrameActorAttachmentRecord *frame_find_actor_attachment_record(struct FrameNeedEffectState *,struct FrameObject *);
+unsigned char frame_release_actor_attachment_record(struct FrameNeedEffectState *,struct FrameObject *);
 /* The step caller observes only the low byte of the timer result. */
 unsigned int frame_step_attachment_need_timer(struct FrameActorAttachmentRecord *,struct FrameActorNeedState *,unsigned int,int *);
 unsigned int frame_interaction_step_31(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
@@ -31,5 +31,17 @@ unsigned int frame_interaction_select_31(struct FrameNeedEffectState *, unsigned
 /* EC formal roles remain inferred until its generic caller is identified. */
 unsigned int frame_interaction_prepare_31(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 void frame_interaction_finish_31(struct FrameNeedEffectState *);
+
+/* Native route-begin adapter names remain provisional. */
+unsigned int frame_begin_route_attachment_12b54(struct FrameNeedEffectState *,
+    struct FrameObject *, unsigned int);
+unsigned int frame_begin_route_attachment_259a0(struct FrameNeedEffectState *,
+    struct FrameObject *, unsigned int);
+unsigned int frame_begin_route_attachment_43884(struct FrameNeedEffectState *,
+    struct FrameObject *, unsigned int);
+unsigned int frame_begin_route_attachment_46240(struct FrameNeedEffectState *,
+    struct FrameObject *, unsigned int);
+unsigned int frame_begin_attachment_job_68(struct FrameNeedEffectState *,
+    struct FrameObject *, unsigned int);
 
 #endif

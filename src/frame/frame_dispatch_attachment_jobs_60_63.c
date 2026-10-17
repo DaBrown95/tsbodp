@@ -3,7 +3,7 @@ unsigned int frame_dispatch_attachment_jobs_60_63(struct FrameNeedEffectState *o
                                                   struct FrameObject *actor)
 {
     struct FrameActorAttachmentRecord *job = frame_find_actor_attachment_record(
-        (struct FrameActorAttachmentOwner *)owner, actor);
+        owner, actor);
     if (job->timer == 0) {
         struct FrameObject *target = job->actor;
         frame_set_actor_direction(target, frame_direction_to_need_effect_center(target, owner));

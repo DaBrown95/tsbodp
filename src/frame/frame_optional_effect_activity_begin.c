@@ -2,7 +2,7 @@
 unsigned int frame_optional_effect_activity_begin(struct FrameNeedEffectState *owner,struct FrameObject *actor,unsigned int kind)
 {
  struct FramePoint point;
- struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record((struct FrameActorAttachmentOwner *)owner,actor);
+ struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record(owner,actor);
  if(job) {
   job->kind=kind;
   ((struct FrameOptionalEffectActivityWork *)owner)->saved_position=actor->position;

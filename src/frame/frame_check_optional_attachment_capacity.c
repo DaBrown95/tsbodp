@@ -4,7 +4,7 @@ unsigned int frame_check_optional_attachment_capacity(struct FrameNeedEffectStat
                                                         struct FrameObject *actor)
 {
     unsigned int count = 0, i;
-    struct FrameActorAttachmentOwner *view = (struct FrameActorAttachmentOwner *)owner;
+    struct FrameNeedEffectState *view = owner;
     for (i = 0; i < 3; i++)
         if (view->records[i].actor)
             count++;

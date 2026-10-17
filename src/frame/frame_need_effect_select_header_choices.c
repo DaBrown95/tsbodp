@@ -4,7 +4,7 @@ unsigned int frame_need_effect_select_header_choices(struct FrameNeedEffectState
 {
     unsigned char index = 0;
     if (frame_need_effect_attachment_count(owner) == 1 &&
-        frame_need_effect_nth_attachment((struct FrameActorAttachmentOwner *)owner,1)->kind == 50)
+        frame_need_effect_nth_attachment(owner,1)->kind == 50)
         choices[index++] = 0;
     else if (frame_need_effect_attachment_count(owner) == 1 || owner->kind == 75)
         choices[index++] = 49;

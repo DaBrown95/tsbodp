@@ -23,7 +23,7 @@ extern struct FrameObject *g_grid_selected_need_effect_object;
 extern const struct DisplayTimeRecord g_grid_selection_time_steps[];
 unsigned char frame_need_effect_begin_choices(struct FrameObject *, struct FrameObject *);
 unsigned char frame_need_effect_cycle_mode(struct FrameObject *);
-void frame_need_effect_mark_attachment_running(struct FrameActorAttachmentOwner *, struct FrameObject *);
+void frame_need_effect_mark_attachment_running(struct FrameNeedEffectState *, struct FrameObject *);
 void frame_grid_selection_interact(struct FrameObject *);
 void frame_grid_selection_mark_attachments(struct FrameObject *);
 void frame_step_local_need_effect_selection(void);

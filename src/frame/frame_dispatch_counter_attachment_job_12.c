@@ -5,7 +5,7 @@ unsigned int frame_dispatch_counter_attachment_job_12(struct FrameNeedEffectStat
                                               struct FrameObject *actor)
 {
     struct FrameActorAttachmentRecord *job = frame_find_actor_attachment_record(
-        (struct FrameActorAttachmentOwner *)owner, actor);
+        owner, actor);
     unsigned int result;
     if (job->kind == 12) result = frame_step_counter_attachment_job_12(owner, job);
     else result = 0;

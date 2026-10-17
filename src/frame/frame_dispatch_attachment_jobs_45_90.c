@@ -10,7 +10,7 @@ unsigned int frame_dispatch_attachment_jobs_45_90(struct FrameNeedEffectState *o
 {
     unsigned int result = 1;
     struct FrameActorAttachmentRecord *job = frame_find_actor_attachment_record(
-        (struct FrameActorAttachmentOwner *)owner, actor);
+        owner, actor);
     switch ((enum FrameAttachmentJobKind45_90)job->kind) {
     case 0:
         break;

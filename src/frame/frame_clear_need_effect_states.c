@@ -21,7 +21,7 @@ void frame_clear_need_effect_states(void)
             state->auxiliary_object = 0;
         }
         i = 0;
-        records = state->records;
+        records = ((struct FrameNeedEffectState *)state)->records;
         do {
             struct FrameObject *actor = attachment_actor(records, i);
             if (actor)

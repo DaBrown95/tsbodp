@@ -1,7 +1,7 @@
 #include "frame_optional_playback.h"
 unsigned int frame_begin_optional_playback_attachment_job(struct FrameNeedEffectState *owner,struct FrameObject *object,unsigned int kind)
 {
- struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record((struct FrameActorAttachmentOwner *)owner,object);
+ struct FrameActorAttachmentRecord *job=frame_allocate_actor_attachment_record(owner,object);
  unsigned int result;
  if(job){
   job->kind=kind;

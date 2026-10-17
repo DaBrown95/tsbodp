@@ -5,7 +5,7 @@ unsigned int frame_dispatch_special_need_jobs(struct FrameNeedEffectState *owner
 {
     unsigned int result = 0;
     struct FrameActorAttachmentRecord *job = frame_find_actor_attachment_record(
-        (struct FrameActorAttachmentOwner *)owner, actor);
+        owner, actor);
     if (job->timer == 0)
         frame_set_actor_direction(job->actor,
             frame_direction_to_need_effect_center(job->actor, owner));

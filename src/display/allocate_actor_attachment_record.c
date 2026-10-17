@@ -1,7 +1,7 @@
 #include "display_actor_interaction.h"
 
 struct FrameActorAttachmentRecord *frame_allocate_actor_attachment_record(
-    struct FrameActorAttachmentOwner *owner, struct FrameObject *actor)
+    struct FrameNeedEffectState *owner, struct FrameObject *actor)
 {
     unsigned char i;
     for (i = 0; i < 3; i++) {
