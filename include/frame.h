@@ -63,7 +63,8 @@ struct FrameObject {
     FrameU8 unknown_d2;
     unsigned char render_unknown_d3_0 : 4;
     signed char render_special : 1;
-    unsigned char render_unknown_d3_5 : 3;
+    signed char render_reverse_y : 1;
+    unsigned char render_unknown_d3_6 : 2;
     unsigned short display_tile : 10;
     unsigned short display_layer : 2;
     unsigned short display_palette : 4;

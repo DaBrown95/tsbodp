@@ -49765,6 +49765,30 @@
         "after": "group < 14"
       },
       "expected_sha256": "eb3cbcebbb7806c8d855b99dc7b281f5ff4955282396ed8c5a2f692f8a530722"
+    },
+    {
+      "name": "frame_set_oriented_velocity_x",
+      "rom_offset": 5304,
+      "size": 24,
+      "source": "src/frame/frame_set_oriented_velocity_x.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "render_special < 0",
+        "after": "render_special >= 0"
+      }
+    },
+    {
+      "name": "frame_set_oriented_velocity_y",
+      "rom_offset": 5328,
+      "size": 24,
+      "source": "src/frame/frame_set_oriented_velocity_y.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "render_reverse_y < 0",
+        "after": "render_reverse_y >= 0"
+      }
     }
   ],
   "assembly": [

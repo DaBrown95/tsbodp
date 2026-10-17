@@ -547,6 +547,16 @@ extended component table. These call and field relationships are static evidence
 not a runtime motion test. Raw constructor comparisons and failed alternatives
 remain under `actor-construction/`.
 
+Two adjacent velocity setters now match in C at `0x14B8` and
+`0x14D0` (24 bytes each, including alignment). They test object byte `+0xD3`
+bits four and five as signed one-bit fields, then store the selected X or Y
+velocity. Unsigned negation preserves the target word wrapping. Bit five now
+has a named field in the existing `FrameObject`; its broader rendering role
+remains provisional. The source controls invert the predicates and reject by
+one byte each; target layout and bit-mask objects verify the shared owner.
+These previously isolated prologue candidates add source ownership, without
+establishing runtime execution or closing incoming/writer domains.
+
 The 640-byte selector at `0x2B5A4` now matches as
 `frame_actor_choose_need_action`, bringing the local subtotal to 79 functions and
 13,424 bytes. All 79 controls reject after the shared actor-header refinement.

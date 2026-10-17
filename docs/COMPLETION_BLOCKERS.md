@@ -1,9 +1,9 @@
 # Remaining reconstruction and closure work
 
-The current gate verifies **2,174 C functions / 278,996 C extent bytes**, plus
+The current gate verifies **2,176 C functions / 279,044 C extent bytes**, plus
 **4,060 separate assembly extent bytes**. The starting baseline was
 1,735 / 250,064 C bytes and 500 glue bytes. Original slices still supply
-16,494,160 bytes of assets and unconverted code. Whole-ROM equality is proven;
+16,494,112 bytes of assets and unconverted code. Whole-ROM equality is proven;
 complete source ownership is not. The fixed 319,640 mapped extent bytes are
 solely a historical comparison.
 
@@ -27,9 +27,9 @@ outside rendering. They neither justify `volatile` nor close writer/gameplay
 populations. Boot/replay evidence is also bounded; the static census retains
 `runtime_observations: 0`.
 
-The census qualifies 279,646 physical instruction bytes, including four also
+The census qualifies 279,690 physical instruction bytes, including four also
 read as data; this is no complete denominator. Unclassified bytes remain:
-3,676 inside owned extents, 6,432 inside estimated envelopes and 16,432,998
+3,680 inside owned extents, 6,388 inside estimated envelopes and 16,432,994
 elsewhere. The initial EWRAM image has no established executable entry;
 later executable writes remain possible.
 
