@@ -235,3 +235,31 @@ Selection removal `0x080454DC` remains a 192-byte original dependency. Their
 declaration checks add no provider execution or source ownership. Choice-index
 capacity, overlapping scene/menu views, later writers, resource validity,
 object lifetimes and gameplay reachability remain open.
+
+## Definition rows 76, 77 and 78
+
+Fourteen matching C bodies own 192 extent bytes: row 76's seven-body range at
+`0x08018074..0x080180D0`, and seven shared bodies for rows 77/78 at
+`0x08043A2C..0x08043A90`. Each family includes six installed callbacks and a
+separate 40-byte attachment predicate. Six source-emitted two-byte zero tails
+are included in these full extents. The neighbouring constant-result bodies at
+`0x080180D0` and `0x08043A90` remain excluded; adjacency supplies no entry root.
+
+Both selectors clear the first choice byte. Begin uses the real record allocator
+and stores the supplied full-word kind. Row 76's status returns two; the shared
+77/78 status calls the real record finder and returns zero. The empty F8 body
+uses the actual void tick interface; its finish name does not establish a
+teardown-only role. The three observed rows retain the already owned common capacity callback
+at `0x0802F348` and a null query slot. Neither separate predicate is installed
+by these rows or has an identified incoming caller.
+
+The [row 76](../include/frame_actor_attachment_definition_76.h) and
+[shared 77/78 declarations](../include/frame_attachment_definitions_77_78.h)
+use the existing owner, byte-output, actor and full-word interfaces. Normal and
+strict full-byte comparisons and real changed-source controls pass for every
+body; actual complete provider/caller definitions qualify the observed
+E8/F0/F4/F8 types. The initializer and `prepare(void)` declarations establish consistency with
+the chosen C definitions; unused original formals and the generic EC caller
+remain unproved. Owner/actor backing, record lifetimes,
+selector bounds, later pointer writers and complete target populations remain
+open; these are static and compiler findings, not runtime observations.

@@ -51819,6 +51819,237 @@
         "-mthumb-interwork"
       ],
       "expected_sha256": "8fa10d79091a247f34076687e1ad7baccab738e4c526c6491b6a997383abdbed"
+    },
+    {
+      "name": "frame_initialize_attachment_definition_76",
+      "rom_offset": 98420,
+      "size": 4,
+      "source": "src/frame/frame_initialize_attachment_definition_76.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      }
+    },
+    {
+      "name": "frame_check_attachment_definition_76",
+      "rom_offset": 98424,
+      "size": 40,
+      "source": "src/frame/frame_check_attachment_definition_76.c",
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "negative_control": {
+        "before": "owner->unknown_60[0] == 1",
+        "after": "owner->unknown_60[0] == 2"
+      }
+    },
+    {
+      "name": "frame_select_attachment_definition_76",
+      "rom_offset": 98464,
+      "size": 8,
+      "source": "src/frame/frame_select_attachment_definition_76.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "choices[0] = 0;",
+        "after": "choices[0] = 1;"
+      }
+    },
+    {
+      "name": "frame_prepare_attachment_definition_76",
+      "rom_offset": 98472,
+      "size": 4,
+      "source": "src/frame/frame_prepare_attachment_definition_76.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      }
+    },
+    {
+      "name": "frame_begin_attachment_definition_76",
+      "rom_offset": 98476,
+      "size": 28,
+      "source": "src/frame/frame_begin_attachment_definition_76.c",
+      "symbols": {
+        "frame_allocate_actor_attachment_record": "0x0802e3c5"
+      },
+      "thumb_symbols": [
+        "frame_allocate_actor_attachment_record"
+      ],
+      "negative_control": {
+        "before": "job->kind = kind;",
+        "after": "job->kind = kind + 1;"
+      }
+    },
+    {
+      "name": "frame_complete_attachment_definition_76",
+      "rom_offset": 98504,
+      "size": 4,
+      "source": "src/frame/frame_complete_attachment_definition_76.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 2;",
+        "after": "return 1;"
+      }
+    },
+    {
+      "name": "frame_finish_attachment_definition_76",
+      "rom_offset": 98508,
+      "size": 4,
+      "source": "src/frame/frame_finish_attachment_definition_76.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    owner->enabled = 1;\n}"
+      }
+    },
+    {
+      "name": "scene_link_entry_build_objects_original",
+      "rom_offset": 15732,
+      "size": 404,
+      "source": "src/scene/scene_link_entry_build_objects_original.c",
+      "symbols": {
+        "g_display_scene_catalog": "0x080616cc",
+        "g_scene_request": "0x03004350",
+        "g_display_scene_frame_objects": "0x030043b0",
+        "g_game_flags": "0x03004310",
+        "g_link_received_join": "0x03002d60",
+        "g_scene_link_entry_captions": "0x0804ed48",
+        "g_scene_link_entry_text_control": "0x0804ed90",
+        "frame_create_scene_object": "0x8027ee5",
+        "frame_set_position": "0x80014a5",
+        "display_text_number_field_zero": "0x801b1cd",
+        "display_text_select_font": "0x801ae75",
+        "display_scene_lookup_text": "0x8045009",
+        "display_allocate_text_object": "0x80450a1",
+        "display_text_set_background_control": "0x801ae2d",
+        "g_link_entry_effect_state": "0x03002e00"
+      },
+      "thumb_symbols": [
+        "frame_create_scene_object",
+        "frame_set_position",
+        "display_text_number_field_zero",
+        "display_text_select_font",
+        "display_scene_lookup_text",
+        "display_allocate_text_object",
+        "display_text_set_background_control"
+      ],
+      "negative_control": {
+        "before": "frame_create_scene_object(106,",
+        "after": "frame_create_scene_object(107,"
+      },
+      "expected_sha256": "2de2e7b862e2fae288eb999157abd905eacd6bb7cc4fb81bf4ca746caa3ed192",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb"
+    },
+    {
+      "name": "frame_initialize_attachment_definitions_77_78",
+      "rom_offset": 277036,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      },
+      "source": "src/frame/frame_initialize_attachment_definitions_77_78.c"
+    },
+    {
+      "name": "frame_check_attachment_definitions_77_78",
+      "rom_offset": 277040,
+      "size": 40,
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments"
+      ],
+      "negative_control": {
+        "before": "owner->unknown_60[0] == 1",
+        "after": "owner->unknown_60[0] == 2"
+      },
+      "source": "src/frame/frame_check_attachment_definitions_77_78.c"
+    },
+    {
+      "name": "frame_select_attachment_definitions_77_78",
+      "rom_offset": 277080,
+      "size": 8,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "choices[0] = 0;",
+        "after": "choices[0] = 1;"
+      },
+      "source": "src/frame/frame_select_attachment_definitions_77_78.c"
+    },
+    {
+      "name": "frame_prepare_attachment_definitions_77_78",
+      "rom_offset": 277088,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      },
+      "source": "src/frame/frame_prepare_attachment_definitions_77_78.c"
+    },
+    {
+      "name": "frame_begin_attachment_definitions_77_78",
+      "rom_offset": 277092,
+      "size": 28,
+      "symbols": {
+        "frame_allocate_actor_attachment_record": "0x0802e3c5"
+      },
+      "thumb_symbols": [
+        "frame_allocate_actor_attachment_record"
+      ],
+      "negative_control": {
+        "before": "job->kind = kind;",
+        "after": "job->kind = kind + 1;"
+      },
+      "source": "src/frame/frame_begin_attachment_definitions_77_78.c"
+    },
+    {
+      "name": "frame_status_attachment_definitions_77_78",
+      "rom_offset": 277120,
+      "size": 12,
+      "symbols": {
+        "frame_find_actor_attachment_record": "0x0802ed61"
+      },
+      "thumb_symbols": [
+        "frame_find_actor_attachment_record"
+      ],
+      "negative_control": {
+        "before": "return 0;",
+        "after": "return 1;"
+      },
+      "source": "src/frame/frame_status_attachment_definitions_77_78.c"
+    },
+    {
+      "name": "frame_finish_attachment_definitions_77_78",
+      "rom_offset": 277132,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    owner->enabled = 1;\n}"
+      },
+      "source": "src/frame/frame_finish_attachment_definitions_77_78.c"
     }
   ],
   "assembly": [

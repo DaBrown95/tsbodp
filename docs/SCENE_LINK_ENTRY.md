@@ -48,10 +48,25 @@ This report correction adds no source credit or newly observed execution.
 These are compiler and static findings. Runtime execution
 and gameplay have not been validated.
 
-The adjacent 404-byte builder remains unconverted: ordinary candidates have
-seventeen and twenty-four differing bytes. Reusing its counters did not resolve
-the allocation difference; retained compiler diagnostics explain that failed
-hypothesis. The remaining setup/update helpers, renderer and finalizer remain explicit
+The adjacent [builder](../src/scene/scene_link_entry_build_objects_original.c)
+at `0x08003D74` now owns all 404 C extent bytes: 342 instruction bytes, 60
+referenced literal bytes and two internal zero alignment bytes. It retains the
+canonical offer owner, existing provider interfaces and four-byte caption view.
+A genuine caption cursor is confined to R4 in the linked branch; the shared
+index remains ordinary C. The guarded loop and that real lifetime conflict
+recover the native allocation in both branches. No instruction text or extra
+memory observation supplies the match.
+
+Normal and strict builds match the complete span, and changing the first
+created kind from 106 to 107 rejects in both profiles. Type/layout checks use
+the complete builder and seven real provider definitions, with nineteen layout
+facts and two deliberately incompatible callable types. Every controlling
+participant count must remain within zero through four, each used index and
+resource must be backed, and allocations must succeed before dereference.
+Original reads remain fresh around opaque calls. These checks do not close
+incoming indices, later writers, complete callback targets or gameplay.
+
+The remaining setup/update helpers, renderer and finalizer remain explicit
 original regions. The step callback is now reconstructed below. It initializes
 the existing empty active payload member for ignored marker kinds 12/13,
 without assigning transport bytes. Inventory discoveries likewise add no reconstructed-C credit. The
