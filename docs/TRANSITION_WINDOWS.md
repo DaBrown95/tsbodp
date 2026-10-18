@@ -173,3 +173,35 @@ bodies selected by slots 8 and 9 in the two observed table prefixes are now
 source-owned. The fourteen-word prefixes do not close
 selector, table, writer or backing populations; runtime and gameplay claims
 remain open.
+
+## Rectangle window handlers
+
+Three readable rectangle handlers cover **632 native bytes** with the existing
+`void(unsigned short)` callback interface: **516 instruction bytes, 112 literal
+bytes and four internal alignment bytes**. The alignment is inside the C extents
+and adds no separate code credit. The [shared header](../include/transition_rectangle_windows.h)
+declares only these three interfaces; names and original source spelling remain
+provisional.
+
+| Provisional role | Observed prefix slot | ROM entry | Instructions | Literals | Alignment | Whole extent |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| [Expand outside](../src/transition/transition_expand_rectangle_outside_window.c) | Second 10 | `0x08038C74` | 174 | 40 | 2 | 216 |
+| [Contract](../src/transition/transition_contract_rectangle_window.c) | First 11 | `0x08038D4C` | 172 | 36 | 0 | 208 |
+| [Contract inside](../src/transition/transition_contract_rectangle_inside_window.c) | Second 11 | `0x08038E1C` | 170 | 36 | 2 | 208 |
+
+The sources retain genuine word-sized initial packs and ordinary short coordinate
+updates. The expanding handler gives its actual two-store hardware cursor an R2
+storage annotation; that cursor dies before the first IRQ call. Its native R1
+values and R2 address explain the earlier six differing bytes. This records a
+compiler explanation without instruction assembly or a claim to original syntax.
+
+After these three adoptions, **21 of the 28 bodies in the two observed prefixes**
+are source-owned. Seven remain unowned: first-slot-10 `0x08038B90` (228 bytes),
+`0x0803965C` (128), `0x080396DC` (128), `0x08039860` (124), `0x080398DC`
+(136), `0x08039964` (124) and `0x080399E0` (140), totaling **1,008 bytes**.
+The best first-slot-10 candidate remains full 228 / 8; the last R6 trial emitted
+216 / 188 and was rejected. Further first-slot-10 trials are stopped pending a
+distinct supported cause. The six other retained targets total 780 bytes. The four existing source seeds
+are unqualified and are not the best prior attempts.
+Owning this finite prefix population would still leave complete table extents,
+arbitrary selectors, later writers, backing and runtime populations open.

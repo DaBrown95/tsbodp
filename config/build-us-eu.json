@@ -52445,6 +52445,75 @@
         "-O2",
         "-mthumb-interwork"
       ]
+    },
+    {
+      "name": "transition_expand_rectangle_outside_window",
+      "rom_offset": 232564,
+      "size": 216,
+      "source": "src/transition/transition_expand_rectangle_outside_window.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "expected_sha256": "e18a6ce5e1eae431d2d7fa1a590af758073b6366d3dea065da32c24fd08eb3a2",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "*window_register = 0x3F;",
+        "after": "*window_register = 0x3E;"
+      }
+    },
+    {
+      "name": "transition_contract_rectangle_window",
+      "rom_offset": 232780,
+      "size": 208,
+      "source": "src/transition/transition_contract_rectangle_window.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "aef95945cdb5ede4edad1eae54e5b572aba2be616978ac48210e7005f750331e",
+      "negative_control": {
+        "before": "REG16(0x0400004A) = 0x3F;",
+        "after": "REG16(0x0400004A) = 0x3E;"
+      }
+    },
+    {
+      "name": "transition_contract_rectangle_inside_window",
+      "rom_offset": 232988,
+      "size": 208,
+      "source": "src/transition/transition_contract_rectangle_inside_window.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "3dea0e4468ec2c5f25824143a8902a97db2dc82e2b7fd47a1e6127b001c45bc3",
+      "negative_control": {
+        "before": "REG16(0x04000048) = 0x3F;",
+        "after": "REG16(0x04000048) = 0x3E;"
+      }
     }
   ],
   "assembly": [

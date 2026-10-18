@@ -1,21 +1,21 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,295 C functions / 289,944 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 294,004 bytes; original slices
-still supply 16,483,212 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,298 C functions / 290,576 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 294,636 bytes; original slices
+still supply 16,482,580 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The starting baseline was
 1,735 C functions / 250,064 C bytes and 500 glue bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **194 unowned rows / 31,448
+[inventory](../assets/rom-inventory.json) contain **191 unowned rows / 30,816
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
 | Order | Remaining code | Blocker and next evidence |
 | --- | --- | --- |
 | 1 | Renderer `0x080023E8` (1,400), finalizer `0x08003248` (348). | Renderer: 25 differing bytes, unresolved frame homes, no distinct supported producer; plain `register` does not change the relevant pseudos at `-O2`. Finalizer: proper-owner 340 / 285 attempt retains an upper-X spill and wrong category/flags/previous-index homes. Native upper X/Y use SP8/SP12; category/flags/previous use SP16/SP20/SP24. R7 binding overwrites a live category through the frame-pointer exception and is invalid. Require a new hypothesis using [bounded failures](BOUNDED_INVENTORY.md) and [runtime limits](RUNTIME_OBSERVATIONS.md). |
-| 2 | Connected actor, attachment, save and transition workers. | Prioritize movement `0x08024720` (472 / 14), kind 66 (248), weekly `0x0802005C` (108), loader `0x0801B704` (548), settlement `0x0801BA40` (188 / 22), remover `0x080454DC` (192), variant selector (72), generic EC consumer and palette worker (400). Resolve twelve bytes at `0x1DB20..0x1DB2C` and unrooted entries. Backing, selector, serialized-index, writable-target and later-writer domains remain open; generic EC delivery and unused formals are provisional. The horizontal/vertical handler bodies at observed slots 6–9 are owned; selector, table, writer and backing populations remain open. See [actor state](ACTOR_STATE_RECONSTRUCTION.md), [entries](ACTOR_ENTRIES_RECONSTRUCTION.md), [attachments](FRAME_ATTACHMENT_JOBS_42_94.md), [save](SAVE_STREAM.md) and [transitions](TRANSITION_WINDOWS.md). |
+| 2 | Connected actor, attachment, save and transition workers. | Prioritize movement `0x08024720` (472 / 14), kind 66 (248), weekly `0x0802005C` (108), loader `0x0801B704` (548), settlement `0x0801BA40` (188 / 22), remover `0x080454DC` (192), variant selector (72), generic EC consumer and palette worker (400). Resolve twelve bytes at `0x1DB20..0x1DB2C` and unrooted entries. Backing, selector, serialized-index, writable-target and later-writer domains remain open; generic EC delivery and unused formals are provisional. The horizontal/vertical bodies at observed slots 6–9 and three rectangle bodies are owned. The observed prefixes retain seven unowned handlers / 1,008 bytes, including first-slot-10 `0x08038B90` at 228 / 8 on hold; further trials are stopped. Selector, table, writer and backing populations remain open. See [actor state](ACTOR_STATE_RECONSTRUCTION.md), [entries](ACTOR_ENTRIES_RECONSTRUCTION.md), [attachments](FRAME_ATTACHMENT_JOBS_42_94.md), [save](SAVE_STREAM.md) and [transitions](TRANSITION_WINDOWS.md). |
 | 3 | Copied-RAM resources: ROM `0xB840` (284), `0xB36C` (provisional 504), `0xB564` (320), word-group copier (68). | Sorter remains 284 / 2 after R3-sum, Y-first and scheduler tests. Aggregate/by-reference drawer attempts remain 348 / 313 and 356 / 321: optimization recreates pointer equivalence and spills. Preserve API contracts; prove RAM execution addresses and copy prefixes separately. Serialized selection, alignment and arena/backing remain open; the 812-byte assembly decoder leaves C workers open. See [RAM map](../config/ram-map-us-eu.json) and [decoder](RESOURCE_BACKGROUND_DECODER.md). |
 | 4 | Audio `0x08049968` (124), saved-register adapters and executable patches. | Explain native NOP versus ordinary C store; close caller/stack protocols, incoming transfers, patcher inputs, IRQ targets and later writes. Rebuild every reachable modified code state. Glue and observed shifts do not close those domains. See [audio](AUDIO_RECONSTRUCTION.md). |
 | 5 | Serial IRQ `0x0803DC48` (1,616), poll (408), status (124), record provider (200), refresh `0x080045D0` (596). | IRQ remains 1,612 after its record-union repair. Refresh differs in nine of 596 bytes: late LOOP cost-offset processing reverses pointer initialization/increment pairs. Capturing the cost destination regresses to 588 / 377. Participant/index, resource, allocation, descriptor and writer domains remain open. See [scene](SCENE_LINK_ENTRY.md) and [serial](SERIAL_HANDSHAKE.md). |
