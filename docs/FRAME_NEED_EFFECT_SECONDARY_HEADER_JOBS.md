@@ -1,12 +1,18 @@
-Six connected secondary header jobs
-==================================
+Secondary header jobs
+=====================
 
-This connected source batch reconstructs the complete C8A4/148 begin,
-C938/140 kind-27 worker, C9C4/660 kind-50 worker, CC58/52 concrete initializer,
-CCC0/56 choice producer and CD00/44 dispatcher: six functions and 1,100 bytes.
-The earlier 712-byte worker and 64-byte choices guesses remain excluded.
-CC8C/52 is an already published check; CD2C/4 and CD30/4 remain original
-and receive no source credit.
+The current source set owns ten C bodies and 1,192 extent bytes: the
+C8A4/148 begin, C938/140 kind-27 worker, C9C4/660 kind-50 worker, CC58/52
+initializer, CC8C/52 header check, CCC0/56 choice producer, CCF8/8 EC
+preparer, CD00/44 dispatcher, CD2C/4 tick and CD30/28 query. The earlier
+712-byte worker and 64-byte choice guesses remain excluded.
+
+The former CD30/4 description was a boundary error. CD30 contains 26
+instruction bytes and two zero alignment bytes before the next entry at
+CD4C. CD2C contains a two-byte return and two zero alignment bytes. These
+two new source extents total 32 bytes: 28 instructions and four zero bytes,
+with no literal pool. Both sources use only the existing standard alignment
+directive for those zero tails.
 
 The initial private qualification used published milestone 111. The canonical
 sources and isolated role header were subsequently qualified against published
@@ -70,3 +76,35 @@ matching source extents and bounded finite evidence do not establish scheduler,
 whole-module, hardware or gameplay behavior.
 
 The EC entry now has matching C ownership; see the [constant-result compiler explanation](FRAME_NEED_TARGET_SELECTION.md#constant-result-ec-switches-and-the-retained-lr-save). This does not close its incoming target domain.
+
+The two callback endpoints
+--------------------------
+
+The CD2C tick returns without changing the state. CD30 returns 25 when the
+signed halfword at state `+0x70` equals 2560, and 100 otherwise. Its source
+returns an unsigned byte through the existing callback contract. These values
+do not uniquely establish the original typedef or source spelling.
+
+The existing allocator copies definition `+20` into state `+0xF8`. The owned
+attachment-step body calls that field as `void (FrameNeedEffectState *)` when
+non-NULL. The owned averaging body reads a separate definition-table view at
+`+24` and calls it as `unsigned char (FrameNeedEffectState *)`. In the observed
+36-byte definition prefix, rows 51–55 and 84 contain the CD2C tick; rows 51–55
+contain the CD30 query, while row 84 has a NULL query and takes the existing
+100 fallback. These are conditional static deliveries through actual source
+and table words. They do not identify a universal state `+0xFC` consumer,
+complete table capacity, later target writes or runtime arrivals.
+
+Both endpoints pass ordinary and strict full-extent positives and real source
+controls. The tick control writes the existing `enabled` field and grows to
+eight bytes; all eight are retained and rejected, without truncation. The query
+control changes 100 to 99 and is rejected in both profiles. The actual contract
+unit contains both new definitions and the complete attachment-step and
+averaging definitions. Six layout facts and four function/field pointer checks
+pass; three units reject a contradictory query return, an extra tick argument
+and a different tick owner type. No substitute provider body is used.
+
+Owning these ten bodies does not close callback target populations, valid
+state/record backing, definition indices, writable callbacks, scheduler or
+gameplay domains. The earlier finite-model cases are not extended by these
+compiler and type checks.

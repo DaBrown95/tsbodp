@@ -25,4 +25,8 @@ unsigned int frame_dispatch_secondary_header_attachment_job(struct FrameNeedEffe
 /* EC action switches; unused formal roles remain inferred. */
 unsigned int frame_prepare_secondary_header_attachment_jobs(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 
+/* Observed F8 and definition+24 callbacks; incoming target domains remain open. */
+void frame_tick_secondary_header_attachment_jobs(struct FrameNeedEffectState *);
+unsigned char frame_secondary_header_attachment_percentage(struct FrameNeedEffectState *);
+
 #endif

@@ -50863,6 +50863,111 @@
         "after": "unknownf4[0x746 - 0xf4] = 6;"
       },
       "expected_sha256": "523d450a1175e905464d4a53a05662436d56ec7576080ae2c6103c37903697ac"
+    },
+    {
+      "name": "frame_tick_secondary_header_attachment_jobs",
+      "source": "src/frame/frame_tick_secondary_header_attachment_jobs.c",
+      "rom_offset": 52524,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return;",
+        "after": "owner->enabled = 1;\n    return;"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ]
+    },
+    {
+      "name": "frame_secondary_header_attachment_percentage",
+      "source": "src/frame/frame_secondary_header_attachment_percentage.c",
+      "rom_offset": 52528,
+      "size": 28,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "result = 100",
+        "after": "result = 99"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ]
+    },
+    {
+      "name": "frame_check_local_visibility_ae0",
+      "source": "src/frame/frame_check_local_visibility_ae0.c",
+      "rom_offset": 2784,
+      "size": 152,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {
+        "frame_get_view_origin": "0x08039fdd",
+        "frame_point_to_integer": "0x080273dd",
+        "g_input_config": "0x030040e0"
+      },
+      "thumb_symbols": [
+        "frame_get_view_origin",
+        "frame_point_to_integer"
+      ],
+      "negative_control": {
+        "before": "origin.x + 240",
+        "after": "origin.x + 239"
+      },
+      "expected_sha256": "0e2e3aa3ad02e549669464ed408add85c8984ef8e2e4b4f8ad2b74160d9a216c"
+    },
+    {
+      "name": "scene_row24_selection_move",
+      "source": "src/scene/scene_row24_selection_move.c",
+      "rom_offset": 145584,
+      "size": 88,
+      "symbols": {
+        "g_scene_request": "0x03004350"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "selection - 1",
+        "after": "selection - 2"
+      }
+    },
+    {
+      "name": "scene_row24_selection_step",
+      "source": "src/scene/scene_row24_selection_step.c",
+      "rom_offset": 144760,
+      "size": 212,
+      "symbols": {
+        "g_scene_request": "0x03004350",
+        "g_input_config": "0x030040e0",
+        "g_input_pressed": "0x03004228",
+        "g_input_local_pressed": "0x03004250",
+        "scene_row24_selection_move": "0x080238b1",
+        "scene_row24_selection_refresh_original": "0x08023909",
+        "audio_play_animation_cue": "0x08040ffd",
+        "scene_submit_default_request": "0x08027dc1"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "scene_submit_default_request(11);",
+        "after": "scene_submit_default_request(12);"
+      },
+      "thumb_symbols": [
+        "scene_row24_selection_move",
+        "scene_row24_selection_refresh_original",
+        "audio_play_animation_cue",
+        "scene_submit_default_request"
+      ]
     }
   ],
   "assembly": [

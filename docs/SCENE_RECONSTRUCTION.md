@@ -222,6 +222,32 @@ This establishes the three callback bodies, not complete scene execution.
 Local-player bounds, valid text progress and coordinate arithmetic, resource
 backing, request producers and later aliases still require their own evidence.
 
+## Scene-table row 24 selection path
+
+Row 24 at `0x08057A9C` supplies the step at `0x08023578`; its direction helper
+is at `0x080238B0`. Their 212- and 88-byte C extents contain 252 instruction
+bytes, 40 literal bytes and eight zero alignment bytes. Names are provisional.
+The step has the actual `ScenePhaseCallback` interface, `void(void)`; the
+helper accepts an unsigned word and returns a byte. The same 466-byte header
+supplies their declarations and the existing queue, input and audio owners.
+
+The helper narrows the request's unsigned scene word at `+8` to a byte and
+handles directions 0 through 3, with unchanged output for other directions.
+Its explicit byte conversions retain wrap behavior beyond scene values 0..7.
+The step preserves input reads across helper calls and compares the saved
+previous byte against the current full scene word. A changed selection plays
+cue 0 and calls the original display refresh. A later test of pressed mask 2
+submits request 11 and plays cue 2. No input snapshot is added across those
+calls. The source controls change the decrement from 1 to 2 and request 11
+to 12; complete extents and pools remain part of matching verification.
+
+The initializer at `0x08023498`, refresh at `0x08023908` and end callback at
+`0x080239B4` remain original. The refresh's `void(void)` declaration is a
+provisional view, without a replacement body. Input arrays have four halfword
+entries, so each local-player index must stay below four; all writers and
+runtime index populations remain open. Owning these two bodies does not prove
+complete row execution, scene-value bounds or resource/display ownership.
+
 ## Local evidence
 
 The ignored `reports/agents/vblank-wrapper/scene-batch-manifest.json` records
