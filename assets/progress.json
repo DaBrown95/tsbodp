@@ -1,17 +1,17 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "18 Oct 2026, 20:01 BST",
-  "compiled_c_functions": 2298,
-  "compiled_c_bytes": 290576,
+  "verified_at": "18 Oct 2026, 21:05 BST",
+  "compiled_c_functions": 2304,
+  "compiled_c_bytes": 291356,
   "assembly_glue_bytes": 4060,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16482580,
+  "unconverted_rom_bytes": 16481800,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2539,
-  "bounded_control_flow_bodies": 189,
+  "bounded_control_flow_bodies": 183,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 98,
@@ -23,12 +23,12 @@
     "nonconflicting_qualified_instruction_bytes": 281308,
     "raw_referenced_data_union_bytes": 35692,
     "qualified_referenced_data_union_bytes": 35692,
-    "source_glue_owned_extent_bytes": 294636,
+    "source_glue_owned_extent_bytes": 295416,
     "estimated_envelope_union_bytes": 325444,
     "classification_bytes": {
-      "estimated_envelope_unclassified": 4608,
+      "estimated_envelope_unclassified": 4604,
       "instruction_and_referenced_data_dual_use": 4,
-      "known_data": 22682,
+      "known_data": 22686,
       "owned_extent_unclassified": 34,
       "strong_rooted_instruction": 281304,
       "strong_rooted_referenced_data": 35688,
@@ -12862,18 +12862,18 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803965C",
+      "name": "transition_shrink_vertical_window",
       "group": "ROM 0803xxxx",
       "rom_offset": 235100,
       "size": 128,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080396DC",
+      "name": "transition_shrink_horizontal_window",
       "group": "ROM 0803xxxx",
       "rom_offset": 235228,
       "size": 128,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "transition_fade_black_in_windows",
@@ -12897,32 +12897,32 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08039860",
+      "name": "transition_grow_vertical_window",
       "group": "ROM 0803xxxx",
       "rom_offset": 235616,
       "size": 124,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080398DC",
+      "name": "transition_grow_vertical_window_from_bottom",
       "group": "ROM 0803xxxx",
       "rom_offset": 235740,
       "size": 136,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08039964",
+      "name": "transition_grow_horizontal_window",
       "group": "ROM 0803xxxx",
       "rom_offset": 235876,
       "size": 124,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080399E0",
+      "name": "transition_grow_horizontal_window_from_right",
       "group": "ROM 0803xxxx",
       "rom_offset": 236000,
       "size": 140,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "transition_fade_black_out_windows",
@@ -29330,16 +29330,16 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803965C",
+      "name": "transition_shrink_vertical_window",
       "rom_offset": 235100,
       "size": 128,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080396DC",
+      "name": "transition_shrink_horizontal_window",
       "rom_offset": 235228,
       "size": 128,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "transition_fade_black_in_windows",
@@ -29360,28 +29360,28 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08039860",
+      "name": "transition_grow_vertical_window",
       "rom_offset": 235616,
       "size": 124,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080398DC",
+      "name": "transition_grow_vertical_window_from_bottom",
       "rom_offset": 235740,
       "size": 136,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_08039964",
+      "name": "transition_grow_horizontal_window",
       "rom_offset": 235876,
       "size": 124,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
-      "name": "sub_080399E0",
+      "name": "transition_grow_horizontal_window_from_right",
       "rom_offset": 236000,
       "size": 140,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "transition_fade_black_out_windows",
@@ -34095,8 +34095,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "54161514a3a4e85222dad290c028ea12aaf18b118db724dde0432649b085d57c",
-    "assets/rom-inventory.json": "38fd77566291d0299524ea89a3ba1407a1599513bb8cf2d07a167b32edd9af05",
+    "config/build-us-eu.json": "27199a7548d80eee78dbaf4370ff80a9f068a610260ccf77edfa9f816b0a52d4",
+    "assets/rom-inventory.json": "a5b3d397b60b8fb5e21bb7962476250cd229bd46aa0c2c053ee3e14e6d1e365f",
     "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",

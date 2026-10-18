@@ -195,13 +195,48 @@ storage annotation; that cursor dies before the first IRQ call. Its native R1
 values and R2 address explain the earlier six differing bytes. This records a
 compiler explanation without instruction assembly or a claim to original syntax.
 
-After these three adoptions, **21 of the 28 bodies in the two observed prefixes**
-are source-owned. Seven remain unowned: first-slot-10 `0x08038B90` (228 bytes),
-`0x0803965C` (128), `0x080396DC` (128), `0x08039860` (124), `0x080398DC`
-(136), `0x08039964` (124) and `0x080399E0` (140), totaling **1,008 bytes**.
-The best first-slot-10 candidate remains full 228 / 8; the last R6 trial emitted
-216 / 188 and was rejected. Further first-slot-10 trials are stopped pending a
-distinct supported cause. The six other retained targets total 780 bytes. The four existing source seeds
-are unqualified and are not the best prior attempts.
-Owning this finite prefix population would still leave complete table extents,
-arbitrary selectors, later writers, backing and runtime populations open.
+Together with the six single-window handlers below, **27 of the 28 bodies in
+the two observed prefixes** are source-owned. Only first-slot-10 `0x08038B90`
+(228 bytes) remains. Its best candidate remains full 228 / 8; a named halfword
+R6 trial emitted 216 / 188 and a subsequent word-sized R6 coordinate emitted
+220 / 184. Both failed. The word-sized coordinate preserved the initial pack
+but diverged from the promoted-short read/update graph in the first RTL expansion;
+COMBINE never formed its scaled step. Further
+trials are stopped pending a distinct supported cause. Owning this finite
+prefix population would still leave complete table extents, arbitrary selectors,
+later writers, backing and runtime populations open.
+
+## Single-window handlers
+
+Six readable C handlers cover **780 native bytes**: **620 instruction bytes,
+156 literal bytes and four internal alignment bytes**. Normal and strict
+full-extent matches, all twelve actual changed-source controls, actual
+definition/provider/dispatcher API checks and full matching/progress gates pass.
+The [header](../include/transition_single_windows.h) declares their existing
+`void(unsigned short)` interfaces. Names and source spelling remain inferred.
+
+| Provisional role | ROM entry | Instructions | Literals | Alignment | Whole extent |
+| --- | --- | ---: | ---: | ---: | ---: |
+| [Grow vertical](../src/transition/transition_grow_vertical_window.c) | `0x08039860` | 100 | 24 | 0 | 124 |
+| [Grow horizontal](../src/transition/transition_grow_horizontal_window.c) | `0x08039964` | 100 | 24 | 0 | 124 |
+| [Grow from bottom](../src/transition/transition_grow_vertical_window_from_bottom.c) | `0x080398DC` | 110 | 24 | 2 | 136 |
+| [Grow from right](../src/transition/transition_grow_horizontal_window_from_right.c) | `0x080399E0` | 110 | 28 | 2 | 140 |
+| [Shrink vertical](../src/transition/transition_shrink_vertical_window.c) | `0x0803965C` | 100 | 28 | 0 | 128 |
+| [Shrink horizontal](../src/transition/transition_shrink_horizontal_window.c) | `0x080396DC` | 100 | 28 | 0 | 128 |
+
+All six give their genuine persistent window pointer a GNU C R4 location
+annotation. The two grows from the far edge also retain the short-lived R2
+hardware cursor; it dies before the first IRQ call. Their ordinary signed-short
+updates first become scaled subtraction in the compiler's late combine pass.
+The other four sources retain the matching explicit scaled short calculation.
+The shrink pair assigns the shared zero in the first required window-mask store;
+compiler common-subexpression elimination reuses it for the initial brightness
+store and allocates it in R5. This explains the observed evaluation and register
+allocation without instruction assembly or extra hardware accesses.
+
+The grow pair makes 81 waits and updates from zero to 162/243. The far-edge
+pair also makes 81 waits, ending at top -2 or left -3 while keeping the opposite
+edge fixed. Each shrink makes one initial wait and 81 further waits/updates,
+ending at -2/-3. These are finite source and native arithmetic facts, not runtime
+or gameplay observations. Both dispatchers keep their unsigned-word kind and
+unsized tables; matching these bodies does not close selector or writer domains.

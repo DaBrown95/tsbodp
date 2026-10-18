@@ -52514,6 +52514,144 @@
         "before": "REG16(0x04000048) = 0x3F;",
         "after": "REG16(0x04000048) = 0x3E;"
       }
+    },
+    {
+      "name": "transition_grow_vertical_window",
+      "rom_offset": 235616,
+      "size": 124,
+      "source": "src/transition/transition_grow_vertical_window.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "a064d49f0e5ab52f51d309c668bd62c2a162cbae52ac3280a82d4044cdbcf486",
+      "negative_control": {
+        "before": "REG16(0x0400004A) = 0x3F;",
+        "after": "REG16(0x0400004A) = 0x3E;"
+      }
+    },
+    {
+      "name": "transition_grow_horizontal_window",
+      "rom_offset": 235876,
+      "size": 124,
+      "source": "src/transition/transition_grow_horizontal_window.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "b50105ab523447997e2330e051b1bcabd30284b85769be828f3e3dda1727ffa6",
+      "negative_control": {
+        "before": "REG16(0x0400004A) = 0x3F;",
+        "after": "REG16(0x0400004A) = 0x3E;"
+      }
+    },
+    {
+      "name": "transition_grow_vertical_window_from_bottom",
+      "rom_offset": 235740,
+      "size": 136,
+      "source": "src/transition/transition_grow_vertical_window_from_bottom.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "af9592b0ad88972283d5d28118fe877d0c04a781be1905a0ddb2283d544712e8",
+      "negative_control": {
+        "before": "*window_register = 0x3F;",
+        "after": "*window_register = 0x3E;"
+      }
+    },
+    {
+      "name": "transition_grow_horizontal_window_from_right",
+      "rom_offset": 236000,
+      "size": 140,
+      "source": "src/transition/transition_grow_horizontal_window_from_right.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "1127c7bd7c77efcc2b6df51b48098eaaad1fd23c61fe5de5813e20bd6953835d",
+      "negative_control": {
+        "before": "*window_register = 0x3F;",
+        "after": "*window_register = 0x3E;"
+      }
+    },
+    {
+      "name": "transition_shrink_vertical_window",
+      "rom_offset": 235100,
+      "size": 128,
+      "source": "src/transition/transition_shrink_vertical_window.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "3d1c92e1ec487dceaada90a2617a5296988bbea96f876c38f7194e02a120f0da",
+      "negative_control": {
+        "before": "REG16(0x0400004A) = 0x3F;",
+        "after": "REG16(0x0400004A) = 0x3E;"
+      }
+    },
+    {
+      "name": "transition_shrink_horizontal_window",
+      "rom_offset": 235228,
+      "size": 128,
+      "source": "src/transition/transition_shrink_horizontal_window.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "1826c0bfa5d7dfea3943a2e47fa09d982c25d7a1db2268da5ed1fa6334c5fccf",
+      "negative_control": {
+        "before": "REG16(0x0400004A) = 0x3F;",
+        "after": "REG16(0x0400004A) = 0x3E;"
+      }
     }
   ],
   "assembly": [
