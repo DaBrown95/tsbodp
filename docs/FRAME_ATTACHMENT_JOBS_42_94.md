@@ -176,3 +176,59 @@ computed, writable or serialized target domains. The unrooted
 [node-pool lifecycle](FRAME_NODE_POOL_1DAC4.md) immediately before this range
 remains a separate state/call protocol; physical adjacency supplies no gameplay
 connection. The twelve bytes at `0x1DB20..0x1DB2C` remain unresolved.
+
+## Row 85 counter choices
+
+Eleven C bodies account for the contiguous 608-byte interval
+`0x08023238..0x08023498`: 522 instruction bytes, 64 referenced literal bytes
+and 22 zero alignment bytes. This establishes source ownership of those bodies;
+it does not close their incoming calls, data domains or gameplay path.
+
+| Body | ROM offset | Full span |
+| --- | ---: | ---: |
+| Initialization callback | `0x23238` | 4 |
+| Separate attachment predicate | `0x2323C` | 40 |
+| Choice selector | `0x23264` | 96 |
+| EC acceptance callback | `0x232C4` | 68 |
+| Begin callback | `0x23308` | 28 |
+| Kind dispatcher | `0x23324` | 64 |
+| Empty finish callback | `0x23364` | 4 |
+| Kind 19 worker | `0x23368` | 128 |
+| Kinds 68/69 worker | `0x233E8` | 136 |
+| Present choice helper | `0x23470` | 20 |
+| Remove selection helper | `0x23484` | 20 |
+| **Total** | | **608** |
+
+Begin and dispatch use the actual allocator and finder interfaces, both taking
+`FrameNeedEffectState *`. The workers use the existing `FrameActorSceneState`
+through `ResourceGameState.scene`: counter `+0x744` is an unsigned halfword,
+variant `+0x749` an unsigned byte and timer `+0x74C` a signed word. EC reads the
+existing signed value at `+4` through `ResourceGameState.actor_values`, whose
+member type is the existing eight-byte `FrameActorValueWorld`. Both members view the existing shared state storage. The partial union has
+`0x754` bytes under the ARM32 layout checks.
+
+EC keeps one late zero return and one late one return. For variant one, its
+kind-equality branches reach the common acceptance label and both mismatches
+share rejection. This reproduces the native branch directions that the prior
+68-byte candidate missed. It is a compiler match for this source and context,
+not proof of the original source spelling.
+
+The definition-row index 85, record kinds 19/20/68/69 and callback offsets are
+distinct. The observed row prefix identifies callbacks but does not prove a
+complete table capacity or all incoming roles. The separate predicate has no
+established incoming caller. Unused callback arguments and the generic EC
+consumer remain provisional. The dispatcher retains the native unconditional
+finder-result dereference, requiring a matching record and valid backing.
+
+The selector uses the same proper state views and the owned number formatter.
+Its short cached state pointer and counter-address values use genuine native
+register constraints; neither crosses a formatter call. Full positive and
+changed-source control checks cover all 96 bytes, including its literal pools
+and two-byte alignment. These constraints describe the matched values and
+lifetimes, without establishing the original source spelling.
+
+Settlement `0x0801BA40` remains a 188-byte original dependency (held candidate: 39 differing
+bytes), and selection removal `0x080454DC` remains a 192-byte original
+dependency. Their declaration checks add no provider execution or source
+ownership. Choice-index capacity, overlapping scene/menu views, later writers,
+resource validity, object lifetimes and gameplay reachability remain open.

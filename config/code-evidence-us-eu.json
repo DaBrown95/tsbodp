@@ -22462,6 +22462,2402 @@
       "evidence": [
         "Matching C emits .align 2,0 at retained normal source.s LF241; source.o $d starts relative434 and the actual two zero bytes agree with linked/native full444. Alignment/data role only, not alternate-entry exclusion."
       ]
+    },
+    {
+      "name": "frame_scene_effect_facing_available_alignment_000f72",
+      "owner": "frame_scene_effect_facing_available",
+      "rom_offset": 3954,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "035fb912b86f811820f13ef100b97833e4bc050038085bcdfa2475b94977e2c6",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative182; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_restore_primary_objects_alignment_00128a",
+      "owner": "frame_restore_primary_objects",
+      "rom_offset": 4746,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "8942f52bb2743d9f5145a6ca1a081f9785e4962f56a55d834353619688885346",
+      "evidence": [
+        "Old GAS2.10.1 listing of unchanged compiler output associates .align 2,0 at source LF32 with relative46..48 after BX and before the literal pool. Whole source.o text/relocations/function metadata remain identical; no data mapping symbol is invented.",
+        "Current matching owner source, compiler assembly and whole object reproduce this witness; complete linked/native extent and changed-source control remain verified. Alignment data role only; no alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_disable_primary_object_flags_alignment_0012d6",
+      "owner": "frame_disable_primary_object_flags",
+      "rom_offset": 4822,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "38acbe58a8614e84d6f00bc3c50e5f795a31f2d58e30db71148a41127dbe8a1e",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line28 with relative30..32. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_link_entry_draw_panel_alignment_00408a",
+      "owner": "scene_link_entry_draw_panel",
+      "rom_offset": 16522,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2be4857fa7cfc03cb42d97b967626d9691eaaf6e55f39224fdabb12b65c7d34a",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line31 with relative42..44. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_link_entry_draw_panel_alignment_0040e2",
+      "owner": "scene_link_entry_draw_panel",
+      "rom_offset": 16610,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2be4857fa7cfc03cb42d97b967626d9691eaaf6e55f39224fdabb12b65c7d34a",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line73 with relative130..132. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_link_entry_draw_panel_alignment_004102",
+      "owner": "scene_link_entry_draw_panel",
+      "rom_offset": 16642,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2be4857fa7cfc03cb42d97b967626d9691eaaf6e55f39224fdabb12b65c7d34a",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line98 with relative162..164. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_link_entry_draw_panel_alignment_00412a",
+      "owner": "scene_link_entry_draw_panel",
+      "rom_offset": 16682,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2be4857fa7cfc03cb42d97b967626d9691eaaf6e55f39224fdabb12b65c7d34a",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line126 with relative202..204. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_link_entry_draw_panel_alignment_0041c2",
+      "owner": "scene_link_entry_draw_panel",
+      "rom_offset": 16834,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2be4857fa7cfc03cb42d97b967626d9691eaaf6e55f39224fdabb12b65c7d34a",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative354; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_actor_entry_alignment_004356",
+      "owner": "link_apply_received_actor_entry",
+      "rom_offset": 17238,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "10fda98a085d734c2ee24c2a88d759a14a1d184ae5af060f432a1891b78e7bcf",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line90 with relative178..180. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "New proper common-owner normal-positive qualification supplies this source context. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_show_received_entry_notice_alignment_004552",
+      "owner": "link_show_received_entry_notice",
+      "rom_offset": 17746,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "77e74cf48d99e23315235da41407328c669e20f13630f3e2054fd8797a7e023f",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line40 with relative70..72. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "New proper common-owner normal-positive qualification supplies this source context. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_show_received_entry_notice_alignment_0045ce",
+      "owner": "link_show_received_entry_notice",
+      "rom_offset": 17870,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "77e74cf48d99e23315235da41407328c669e20f13630f3e2054fd8797a7e023f",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align 2,0 at LF line101 with relative194..196. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "New proper common-owner normal-positive qualification supplies this source context. The actual frozen C explicitly supplies post-function alignment. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_scene_effect_state_8e14_alignment_009016",
+      "owner": "frame_scene_effect_state_8e14",
+      "rom_offset": 36886,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "9b983b94ffebe5879aec7d147e67e4f1941ca8a7f3fa6673785f757302afe6a5",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line216 with relative514..516. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_scene_effect_state_91f4_alignment_0092f2",
+      "owner": "frame_scene_effect_state_91f4",
+      "rom_offset": 37618,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "726d5007ca8fbaede0aaf267b5e2cade48e00fb9109a0596593bcbde99a60f8b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line149 with relative254..256. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_scene_effect_state_91f4_alignment_00933a",
+      "owner": "frame_scene_effect_state_91f4",
+      "rom_offset": 37690,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "726d5007ca8fbaede0aaf267b5e2cade48e00fb9109a0596593bcbde99a60f8b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line181 with relative326..328. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_scene_effect_state_91f4_alignment_0094b2",
+      "owner": "frame_scene_effect_state_91f4",
+      "rom_offset": 38066,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "726d5007ca8fbaede0aaf267b5e2cade48e00fb9109a0596593bcbde99a60f8b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line348 with relative702..704. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_scene_effect_state_91f4_alignment_009502",
+      "owner": "frame_scene_effect_state_91f4",
+      "rom_offset": 38146,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "726d5007ca8fbaede0aaf267b5e2cade48e00fb9109a0596593bcbde99a60f8b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line386 with relative782..784. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_scene_effect_update_950c_alignment_009536",
+      "owner": "frame_scene_effect_update_950c",
+      "rom_offset": 38198,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "5d895960682f78db75cb63cf4bde6edf64b84bc6dd1c602debfac2307f111ea3",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line34 with relative42..44. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_scene_effect_update_950c_alignment_009692",
+      "owner": "frame_scene_effect_update_950c",
+      "rom_offset": 38546,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "5d895960682f78db75cb63cf4bde6edf64b84bc6dd1c602debfac2307f111ea3",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line160 with relative390..392. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_scene_effect_update_950c_alignment_0096b2",
+      "owner": "frame_scene_effect_update_950c",
+      "rom_offset": 38578,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "5d895960682f78db75cb63cf4bde6edf64b84bc6dd1c602debfac2307f111ea3",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line177 with relative422..424. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_scene_effect_update_950c_alignment_00970e",
+      "owner": "frame_scene_effect_update_950c",
+      "rom_offset": 38670,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "5d895960682f78db75cb63cf4bde6edf64b84bc6dd1c602debfac2307f111ea3",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative514; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_scene_effect_walk_972c_alignment_009756",
+      "owner": "frame_scene_effect_walk_972c",
+      "rom_offset": 38742,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "4d3e8f0a2bf03f2d2383c0f4a7a75a711e95df9a460155c2e93d85af9d028ebc",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative42; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_stop_actor_speed_cue_alignment_009e0a",
+      "owner": "scene_stop_actor_speed_cue",
+      "rom_offset": 40458,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "ca1ad3f3fb5cf106e83ffbd7ee04b046eca7dc80b77a83ec11f9ae876fe6fee9",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line24 with relative26..28. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "background_animation_reset_alignment_00a842",
+      "owner": "background_animation_reset",
+      "rom_offset": 43074,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "692ee4b4836bbf9264b095caafcdd26ea009a04265c633648d52f30c4b042073",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative14; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "transition_step_view_alignment_00e3de",
+      "owner": "transition_step_view",
+      "rom_offset": 58334,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "6afb416cdc24b60aa42f0f498285203ceb8fe66cdf17ff4ebe2916118f9bc527",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line39 with relative54..56. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "transition_step_view_alignment_00e56a",
+      "owner": "transition_step_view",
+      "rom_offset": 58730,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "6afb416cdc24b60aa42f0f498285203ceb8fe66cdf17ff4ebe2916118f9bc527",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line248 with relative450..452. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "transition_step_view_alignment_00e62e",
+      "owner": "transition_step_view",
+      "rom_offset": 58926,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "6afb416cdc24b60aa42f0f498285203ceb8fe66cdf17ff4ebe2916118f9bc527",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line351 with relative646..648. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "transition_step_view_alignment_00e6be",
+      "owner": "transition_step_view",
+      "rom_offset": 59070,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "6afb416cdc24b60aa42f0f498285203ceb8fe66cdf17ff4ebe2916118f9bc527",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line426 with relative790..792. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "transition_set_view_mode_alignment_00e8e6",
+      "owner": "transition_set_view_mode",
+      "rom_offset": 59622,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2cc1519e4ff2ecad0f96785aa33c5d554c27ee0cb91923df192713e04374a906",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line36 with relative50..52. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "transition_set_view_mode_alignment_00e91e",
+      "owner": "transition_set_view_mode",
+      "rom_offset": 59678,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2cc1519e4ff2ecad0f96785aa33c5d554c27ee0cb91923df192713e04374a906",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative106; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_create_palette_menu_actors_alignment_01422e",
+      "owner": "frame_create_palette_menu_actors",
+      "rom_offset": 82478,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "d14b72eeab7ade0c40667fbdd435c95a82302d4b79a21de76e25750d7cb9f59a",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line163 with relative354..356. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_update_palette_menu_actor_alignment_01431e",
+      "owner": "frame_update_palette_menu_actor",
+      "rom_offset": 82718,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "53a8f1d2dbd2430684418085d9495f58fb871e96fce249ddf91e8db3e23f9aa9",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line103 with relative198..200. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_draw_palette_menu_row_alignment_014472",
+      "owner": "frame_draw_palette_menu_row",
+      "rom_offset": 83058,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "b5acaa1bb89bb2a982d254dd66edc76e7ea7f7727230bb74aa5f0491f94b7b7b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line77 with relative138..140. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_palette_menu_alignment_014566",
+      "owner": "frame_step_palette_menu",
+      "rom_offset": 83302,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "30752dc7d2de462d8aa567cf0af74380e2d62c3b18d25666364ddf72b0b3fa8c",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line87 with relative154..156. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_palette_menu_alignment_014582",
+      "owner": "frame_step_palette_menu",
+      "rom_offset": 83330,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "30752dc7d2de462d8aa567cf0af74380e2d62c3b18d25666364ddf72b0b3fa8c",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align 2, 0 at LF line103 with relative182..184. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. The actual frozen C explicitly supplies post-function alignment. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_palette_menu_transition_alignment_015e9a",
+      "owner": "frame_step_palette_menu_transition",
+      "rom_offset": 89754,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c76851b323dab9fbe75e287044a1b864d1a93f377291e60a6698b26943856d11",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line228 with relative482..484. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_palette_menu_transition_alignment_015f52",
+      "owner": "frame_step_palette_menu_transition",
+      "rom_offset": 89938,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c76851b323dab9fbe75e287044a1b864d1a93f377291e60a6698b26943856d11",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line316 with relative666..668. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_load_actor_palette_pair_alignment_0161c6",
+      "owner": "frame_load_actor_palette_pair",
+      "rom_offset": 90566,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "19682f02c0ef9a3eb251f8e0c94999ae30493faf083eae776f9a225f5bf3e3c2",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line22 with relative26..28. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_finish_attachment_jobs_42_94_alignment_01de16",
+      "owner": "frame_finish_attachment_jobs_42_94",
+      "rom_offset": 122390,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "f728d21977aa991716d7cfd586aad0dca814c52005d4640b64120e21f2a2e890",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative2; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "save_world_scale_gauge_alignment_01ef76",
+      "owner": "save_world_scale_gauge",
+      "rom_offset": 126838,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "f2448e1718880d57e55006b1c1911d4c457d1ce7aa51ba336098ce4a9826828f",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative54; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "condition_select_actor_alignment_020b92",
+      "owner": "condition_select_actor",
+      "rom_offset": 134034,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "35026da35d318dfd0d41c44a3b08f1c00f66e55684f8c6cf236c628a468a55d5",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line20 with relative18..20. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "condition_select_actor_alignment_020bf6",
+      "owner": "condition_select_actor",
+      "rom_offset": 134134,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "35026da35d318dfd0d41c44a3b08f1c00f66e55684f8c6cf236c628a468a55d5",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative118; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "actor_entry_save_collection_record_alignment_020c6e",
+      "owner": "actor_entry_save_collection_record",
+      "rom_offset": 134254,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "b1d1818f23031af41e60cf27811fedcc4c60ce478a008f24357575301de7132f",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative26; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_primary_step_alignment_02605e",
+      "owner": "scene_primary_step",
+      "rom_offset": 155742,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "a5c569d80a2d3d386fe4363f25d085b600c0ae3f039d2dac74cd6ee4c603bc40",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line47 with relative74..76. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_primary_step_alignment_026192",
+      "owner": "scene_primary_step",
+      "rom_offset": 156050,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "a5c569d80a2d3d386fe4363f25d085b600c0ae3f039d2dac74cd6ee4c603bc40",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line196 with relative382..384. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_primary_exit_alignment_0261b2",
+      "owner": "scene_primary_exit",
+      "rom_offset": 156082,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c6feac4609f0b5e6764d394fc1b9200184eb96915f1a49b0c2526b079d239761",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line21 with relative22..24. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_primary_exit_alignment_026272",
+      "owner": "scene_primary_exit",
+      "rom_offset": 156274,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c6feac4609f0b5e6764d394fc1b9200184eb96915f1a49b0c2526b079d239761",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line108 with relative214..216. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_primary_exit_alignment_0262ae",
+      "owner": "scene_primary_exit",
+      "rom_offset": 156334,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c6feac4609f0b5e6764d394fc1b9200184eb96915f1a49b0c2526b079d239761",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line130 with relative274..276. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_refresh_environment_alignment_02671a",
+      "owner": "scene_refresh_environment",
+      "rom_offset": 157466,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "d3be1fdb84649c04296d494a8681bc442fa3812e11d94f11c427a1e4b4e0a4a2",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line63 with relative106..108. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_palette_source_alignment_0267ae",
+      "owner": "scene_palette_source",
+      "rom_offset": 157614,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "49c24364b8ce1c2111a17578822ea60ac5ed4809a0d6961696d345b50dd6629d",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line25 with relative26..28. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_palette_source_alignment_0267ce",
+      "owner": "scene_palette_source",
+      "rom_offset": 157646,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "49c24364b8ce1c2111a17578822ea60ac5ed4809a0d6961696d345b50dd6629d",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line42 with relative58..60. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_palette_source_alignment_0267e6",
+      "owner": "scene_palette_source",
+      "rom_offset": 157670,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "49c24364b8ce1c2111a17578822ea60ac5ed4809a0d6961696d345b50dd6629d",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line55 with relative82..84. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_refresh_period_audio_alignment_026886",
+      "owner": "scene_refresh_period_audio",
+      "rom_offset": 157830,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c117a363f1da6f7a731ee0e874593d8483051a5561d5be8ce00e0187c1727874",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line35 with relative50..52. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_refresh_period_audio_alignment_0268a6",
+      "owner": "scene_refresh_period_audio",
+      "rom_offset": 157862,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c117a363f1da6f7a731ee0e874593d8483051a5561d5be8ce00e0187c1727874",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line51 with relative82..84. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_refresh_period_audio_alignment_0268c2",
+      "owner": "scene_refresh_period_audio",
+      "rom_offset": 157890,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c117a363f1da6f7a731ee0e874593d8483051a5561d5be8ce00e0187c1727874",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line66 with relative110..112. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_refresh_period_audio_alignment_0268de",
+      "owner": "scene_refresh_period_audio",
+      "rom_offset": 157918,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c117a363f1da6f7a731ee0e874593d8483051a5561d5be8ce00e0187c1727874",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line81 with relative138..140. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_retain_display_alignment_02696a",
+      "owner": "scene_retain_display",
+      "rom_offset": 158058,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "f066ae4a53f7efc7b464cfcb0f40e9c0f97755a3d0a63fd06bb0271c14a1d53a",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line40 with relative66..68. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_release_display_alignment_02698a",
+      "owner": "scene_release_display",
+      "rom_offset": 158090,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "a909d65ef2fa0d9d7fbdd03524d12248d0a1b672f6261457f6c57ae24c154e3c",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative14; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_clear_retained_display_alignment_0269de",
+      "owner": "scene_clear_retained_display",
+      "rom_offset": 158174,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "9c2b73c9182a74bff26890abd7c186f391fdf688f5a418d3df01a7d68d64303b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line45 with relative82..84. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_release_scene_transient_tiles_alignment_026c42",
+      "owner": "frame_release_scene_transient_tiles",
+      "rom_offset": 158786,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "3f42942c1e9782ecfa497679435620ae407f6d44908fbdc60094b61aaa78d391",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line31 with relative46..48. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "save_world_scale_percent_alignment_027536",
+      "owner": "save_world_scale_percent",
+      "rom_offset": 161078,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "11796394f119c12bccd72d52a2ba23318762b038283a8d2200b39709303cb3a8",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative18; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "save_world_ratio_percent_alignment_027546",
+      "owner": "save_world_ratio_percent",
+      "rom_offset": 161094,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "32131537d927a3c251979727dfd564f3f2e6e0e34e4daabb4631c099555bf91e",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative14; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_step_request_handoff_alignment_027d36",
+      "owner": "scene_step_request_handoff",
+      "rom_offset": 163126,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "9597e60c373290aa76cafbff76d8b16236873d3569a8c70aec5064c87dbb55b8",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line70 with relative138..140. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_initialize_request_queue_alignment_027d86",
+      "owner": "scene_initialize_request_queue",
+      "rom_offset": 163206,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "14de5ab3c23b2fcfc6fd20745c01e96bb30f6b12914a09c8945448e5e0f03d3c",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line34 with relative50..52. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_current_request_kind_alignment_027daa",
+      "owner": "scene_current_request_kind",
+      "rom_offset": 163242,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "050de4e87291cc49f5432733965a5777c27b362dd013e0488f04a93a8400c430",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line14 with relative6..8. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_submit_default_request_alignment_027dce",
+      "owner": "scene_submit_default_request",
+      "rom_offset": 163278,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e774079f4f7fad69a97fd43b1a84b0b6914a9f7dc8cf5c7d3ec5b75187e49963",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative14; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_request_changed_alignment_027e32",
+      "owner": "scene_request_changed",
+      "rom_offset": 163378,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "a53faa366a77b266e2e37f5b103a01ee0363dc203055f3e8f9ca97c621862d9d",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line20 with relative18..20. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_request_changed_alignment_027e42",
+      "owner": "scene_request_changed",
+      "rom_offset": 163394,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "a53faa366a77b266e2e37f5b103a01ee0363dc203055f3e8f9ca97c621862d9d",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative34; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_run_begin_callback_alignment_027e6e",
+      "owner": "scene_run_begin_callback",
+      "rom_offset": 163438,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "7084a2fcc066e4d46990f4796fb0f89762ce749feb98342ba59ffa09703b2044",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line33 with relative42..44. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_run_end_callback_alignment_027ed2",
+      "owner": "scene_run_end_callback",
+      "rom_offset": 163538,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "8de913dcb03c6986c89f5ef2991a46db4ecd5bbfe562bfe8a987b57eb3aca538",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line34 with relative46..48. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_redirect_movement_alignment_02aee2",
+      "owner": "frame_redirect_movement",
+      "rom_offset": 175842,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "610207a84e817efc6b1ce8989e3bf0b1f522206307ebd235313c71b9273c0398",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line126 with relative234..236. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_redirect_movement_alignment_02af12",
+      "owner": "frame_redirect_movement",
+      "rom_offset": 175890,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "610207a84e817efc6b1ce8989e3bf0b1f522206307ebd235313c71b9273c0398",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative282; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_need_effect_find_neighbor_alignment_02e61e",
+      "owner": "frame_need_effect_find_neighbor",
+      "rom_offset": 189982,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "9f1512f09e99f5b1d48de0a7b483540c8e56582547388e8520ac000f7117f41b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line36 with relative50..52. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_need_effect_find_neighbor_alignment_02e642",
+      "owner": "frame_need_effect_find_neighbor",
+      "rom_offset": 190018,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "9f1512f09e99f5b1d48de0a7b483540c8e56582547388e8520ac000f7117f41b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line58 with relative86..88. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_need_effect_find_neighbor_alignment_02e686",
+      "owner": "frame_need_effect_find_neighbor",
+      "rom_offset": 190086,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "9f1512f09e99f5b1d48de0a7b483540c8e56582547388e8520ac000f7117f41b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align 2,0 at LF line103 with relative154..156. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. The actual frozen C explicitly supplies post-function alignment. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_need_effect_increment_counter_alignment_02ec92",
+      "owner": "frame_need_effect_increment_counter",
+      "rom_offset": 191634,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "3ecc3339c1b6e4989d5fe052099336b8c9e91ff83bab7e4b9782f3afa99354b0",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative10; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_need_effect_decrement_counter_alignment_02ec9e",
+      "owner": "frame_need_effect_decrement_counter",
+      "rom_offset": 191646,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c86bae3181c040da12918d29db1c1bc6c64af09203e84d74befcbfd1d87d36e8",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative10; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_need_effect_pattern_dimensions_alignment_02f4ea",
+      "owner": "frame_need_effect_pattern_dimensions",
+      "rom_offset": 193770,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "359d2867451f57f57bb4264f29ec08c0493d52cba93dbdd3a78e8b3eeb489429",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative186; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_render_effect_animation_alignment_030e86",
+      "owner": "frame_step_render_effect_animation",
+      "rom_offset": 200326,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "3266d23715bd57958854d36ad7ea9a2436d2217fdd18c1c7f513cddd0f410b23",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative98; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_render_effect_linear_alignment_030efa",
+      "owner": "frame_step_render_effect_linear",
+      "rom_offset": 200442,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "dba4aa15b60cc796bb8b120a22885e581ace3c0046a3f40d1b25074b530b49a6",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative114; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_render_effect_linear_alternate_alignment_030f6e",
+      "owner": "frame_step_render_effect_linear_alternate",
+      "rom_offset": 200558,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "5f5677e0405f5487daa92b4ae9816bb9e109bfa99e5cf17f07d8bd86406d5a9b",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative114; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_release_transient_definition_tiles_alignment_031032",
+      "owner": "frame_release_transient_definition_tiles",
+      "rom_offset": 200754,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "10a8644768c071c9c864c15317e1c055e86735e59294d5df0c39a9b03353f235",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line75 with relative126..128. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_draw_render_effect_alignment_03128e",
+      "owner": "frame_draw_render_effect",
+      "rom_offset": 201358,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "d7475d467956edb9efd06d9ffc59361801c049cb3893b1222bb78b10c8e29f0b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line65 with relative110..112. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_draw_render_effect_alignment_0313ae",
+      "owner": "frame_draw_render_effect",
+      "rom_offset": 201646,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "d7475d467956edb9efd06d9ffc59361801c049cb3893b1222bb78b10c8e29f0b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line216 with relative398..400. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_render_effect_terrain_alignment_03140a",
+      "owner": "frame_render_effect_terrain",
+      "rom_offset": 201738,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "51532e3e1209d90800d7766089f5f512bb3b61e859fe6ff2ffc94cc6d830699b",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative62; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_owner_transient_effects_alignment_03144a",
+      "owner": "frame_step_owner_transient_effects",
+      "rom_offset": 201802,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "aeaf48e2eb273af1a1289d3b25c26d52468e07281b6fdc5638eac7a12d061c7f",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line45 with relative62..64. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_events_alignment_03a27a",
+      "owner": "link_apply_received_events",
+      "rom_offset": 238202,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2978320c50e99bc1f770c060996ea4e6acb12162005c9cebc76a59f6522be696",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line115 with relative214..216. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_events_alignment_03a28e",
+      "owner": "link_apply_received_events",
+      "rom_offset": 238222,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2978320c50e99bc1f770c060996ea4e6acb12162005c9cebc76a59f6522be696",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line127 with relative234..236. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_events_alignment_03a2a2",
+      "owner": "link_apply_received_events",
+      "rom_offset": 238242,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2978320c50e99bc1f770c060996ea4e6acb12162005c9cebc76a59f6522be696",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line139 with relative254..256. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_events_alignment_03a2de",
+      "owner": "link_apply_received_events",
+      "rom_offset": 238302,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2978320c50e99bc1f770c060996ea4e6acb12162005c9cebc76a59f6522be696",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line177 with relative314..316. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_events_alignment_03a2f6",
+      "owner": "link_apply_received_events",
+      "rom_offset": 238326,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2978320c50e99bc1f770c060996ea4e6acb12162005c9cebc76a59f6522be696",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line190 with relative338..340. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_events_alignment_03a30a",
+      "owner": "link_apply_received_events",
+      "rom_offset": 238346,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2978320c50e99bc1f770c060996ea4e6acb12162005c9cebc76a59f6522be696",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line202 with relative358..360. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_events_alignment_03a34a",
+      "owner": "link_apply_received_events",
+      "rom_offset": 238410,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2978320c50e99bc1f770c060996ea4e6acb12162005c9cebc76a59f6522be696",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line238 with relative422..424. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_events_alignment_03a366",
+      "owner": "link_apply_received_events",
+      "rom_offset": 238438,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2978320c50e99bc1f770c060996ea4e6acb12162005c9cebc76a59f6522be696",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line252 with relative450..452. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_events_alignment_03a372",
+      "owner": "link_apply_received_events",
+      "rom_offset": 238450,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2978320c50e99bc1f770c060996ea4e6acb12162005c9cebc76a59f6522be696",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line260 with relative462..464. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_events_alignment_03a3d6",
+      "owner": "link_apply_received_events",
+      "rom_offset": 238550,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2978320c50e99bc1f770c060996ea4e6acb12162005c9cebc76a59f6522be696",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line315 with relative562..564. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "link_apply_received_events_alignment_03a40e",
+      "owner": "link_apply_received_events",
+      "rom_offset": 238606,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2978320c50e99bc1f770c060996ea4e6acb12162005c9cebc76a59f6522be696",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line346 with relative618..620. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_bind_actor_group_alignment_03ae06",
+      "owner": "frame_bind_actor_group",
+      "rom_offset": 241158,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "883e6aa70d63ac3dd25904004f4af42cbcb51840fcb23b4220e62f90ef6d14fa",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align 2, 0 at LF line88 with relative162..164. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. The actual frozen C explicitly supplies post-function alignment. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_compose_actor_group_palette_alignment_03ae76",
+      "owner": "frame_compose_actor_group_palette",
+      "rom_offset": 241270,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "a300b858a9815c92e62e01c91ce211853833ba7410184645d64e849fcb1ca6ba",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line61 with relative110..112. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_compose_actor_group_alternate_palette_alignment_03aec2",
+      "owner": "frame_compose_actor_group_alternate_palette",
+      "rom_offset": 241346,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "38cc028cba0843917a8c79762e8abb29e6646a6e0eb4f8686fe8e28da24fda88",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line43 with relative70..72. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_load_actor_group_palette_alignment_03af52",
+      "owner": "frame_load_actor_group_palette",
+      "rom_offset": 241490,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "f5cbac266cb5bda22e45258d867bae82010e4f8973e5a3cd7b58e8592114ecfe",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line74 with relative138..140. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_load_actor_group_alternate_palette_alignment_03afb2",
+      "owner": "frame_load_actor_group_alternate_palette",
+      "rom_offset": 241586,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "4a8bc133058ec03b497c8a87948135cc1467be0499f6cdcd4c54957662a4f17b",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line52 with relative90..92. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_register_need_effect_alignment_03b202",
+      "owner": "frame_register_need_effect",
+      "rom_offset": 242178,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e14837a61c40eea2e513bc2f890464c4b66f7695d41b2a9bcd88072bb7e7c5e5",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line120 with relative214..216. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_register_need_effect_alignment_03b466",
+      "owner": "frame_register_need_effect",
+      "rom_offset": 242790,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e14837a61c40eea2e513bc2f890464c4b66f7695d41b2a9bcd88072bb7e7c5e5",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line425 with relative826..828. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_register_need_effect_alignment_03b4ee",
+      "owner": "frame_register_need_effect",
+      "rom_offset": 242926,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e14837a61c40eea2e513bc2f890464c4b66f7695d41b2a9bcd88072bb7e7c5e5",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative962; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_grid_need_effect_cell_available_alignment_03bc0e",
+      "owner": "frame_grid_need_effect_cell_available",
+      "rom_offset": 244750,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "6ed56fc58e9f5c461b97bfac4a3f25d7e424e39a49749fc9288f9e76a520b595",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line69 with relative106..108. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_grid_need_effect_cell_available_alignment_03bc6e",
+      "owner": "frame_grid_need_effect_cell_available",
+      "rom_offset": 244846,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "6ed56fc58e9f5c461b97bfac4a3f25d7e424e39a49749fc9288f9e76a520b595",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative202; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_need_effect_pattern_cell_alignment_03bcf2",
+      "owner": "frame_need_effect_pattern_cell",
+      "rom_offset": 244978,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "bebb1a33e0f5bc1553a2ec7a71e0be63c92d6489eb6399aea464eaf2947e5afb",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative130; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "event_get_link_slot_alignment_03e442",
+      "owner": "event_get_link_slot",
+      "rom_offset": 255042,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c3832d078759048495e95bb0830c4956e41c12de5f2dcf6df57ad66085aaa5d8",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line16 with relative10..12. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_select_sequence_alignment_04123e",
+      "owner": "audio_select_sequence",
+      "rom_offset": 266814,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "12d414118fe110244ff5a96bb2168b38cf93b3e70e74c81bf1f6a4f3b5be739c",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line76 with relative130..132. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "display_text_set_object_string_alignment_04533a",
+      "owner": "display_text_set_object_string",
+      "rom_offset": 283450,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "8c59156b71d16a72b0ea833849bb4367a86e21795fd7fbc0b30beeb6ece2fecb",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align 2, 0 at LF line20 with relative18..20. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. The actual frozen C explicitly supplies post-function alignment. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "resource_selection_kind_available_0804565c_alignment_04566e",
+      "owner": "resource_selection_kind_available_0804565c",
+      "rom_offset": 284270,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "54d75c1c7329234c5670bc1ded0cdc3927d0e7282ed78ca50ae3f564fdb36900",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line20 with relative18..20. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "resource_selection_kind_available_0804565c_alignment_0456f2",
+      "owner": "resource_selection_kind_available_0804565c",
+      "rom_offset": 284402,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "54d75c1c7329234c5670bc1ded0cdc3927d0e7282ed78ca50ae3f564fdb36900",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative150; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "resource_selection_group_count_080456f4_alignment_04570e",
+      "owner": "resource_selection_group_count_080456f4",
+      "rom_offset": 284430,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "fc3f3d5eb78df406c434e74d3710eff6709e7fa3b5b6b8c20d983e53c6d3ec30",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line24 with relative26..28. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "resource_selection_group_count_080456f4_alignment_04573a",
+      "owner": "resource_selection_group_count_080456f4",
+      "rom_offset": 284474,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "fc3f3d5eb78df406c434e74d3710eff6709e7fa3b5b6b8c20d983e53c6d3ec30",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative70; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_initialize_hardware_alignment_049752",
+      "owner": "audio_initialize_hardware",
+      "rom_offset": 300882,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e65afb99d3108c3ed7961ac35080976b3a26b944f8bd34e4178df73bd66ecab6",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line41 with relative58..60. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_initialize_hardware_alignment_0497b2",
+      "owner": "audio_initialize_hardware",
+      "rom_offset": 300978,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e65afb99d3108c3ed7961ac35080976b3a26b944f8bd34e4178df73bd66ecab6",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line83 with relative154..156. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_initialize_hardware_alignment_0497ee",
+      "owner": "audio_initialize_hardware",
+      "rom_offset": 301038,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e65afb99d3108c3ed7961ac35080976b3a26b944f8bd34e4178df73bd66ecab6",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line108 with relative214..216. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_acquire_frame_buffers_alignment_049852",
+      "owner": "audio_acquire_frame_buffers",
+      "rom_offset": 301138,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "5d91680833af8f4c993fdcdb83c52637571a21ce6bd626c838f42ef61851e4a8",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line59 with relative90..92. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_activate_hardware_alignment_04989e",
+      "owner": "audio_activate_hardware",
+      "rom_offset": 301214,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "820636a7914250176eb48f8f021f0580873919616956bbd4833bf417f9489337",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative46; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_count_active_channels_alignment_0498da",
+      "owner": "audio_count_active_channels",
+      "rom_offset": 301274,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "5e39caa348eb55d10e4cb046bbfc1bc8c4239be34807e45b8ee87b93bd4dfad3",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line29 with relative30..32. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_configure_mix_mode_alignment_04993a",
+      "owner": "audio_configure_mix_mode",
+      "rom_offset": 301370,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "29ee13078a426a97675fa5879b79381f86de7e8c2023170910c54bbcc8638e0a",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line64 with relative90..92. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_mixer_get_sample_volume_alignment_049962",
+      "owner": "audio_mixer_get_sample_volume",
+      "rom_offset": 301410,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "b021b8150edb6aed1a6c2810d699f4bed3e35bc9ce5b3f8777d09bca1a81b4fd",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line14 with relative6..8. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_get_channel_frequency_alignment_049a52",
+      "owner": "audio_get_channel_frequency",
+      "rom_offset": 301650,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e6be1e217d6c05a30ce856e65e3ea4f182ebbb90d7a72784bb20f35b06c1d8d8",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line20 with relative18..20. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_get_channel_pan_alignment_049a7e",
+      "owner": "audio_get_channel_pan",
+      "rom_offset": 301694,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "fe68dea9c1126f7ca699b5c8e131e1fecb8657e12faa8324033c6968425247d8",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line20 with relative18..20. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_mark_channels_alignment_049b56",
+      "owner": "audio_mark_channels",
+      "rom_offset": 301910,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "758d95f383aceac91422ca90bc0e3c6b18a25caf2ff138219e86bbf3e5d47357",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line41 with relative50..52. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_update_channel_volumes_alignment_049be6",
+      "owner": "audio_update_channel_volumes",
+      "rom_offset": 302054,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c9278af986b4c2c46ee968e486316f4c8c3ad36141715ac12f323b8dfc342cc9",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line46 with relative66..68. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_player_load_row_alignment_049e26",
+      "owner": "audio_player_load_row",
+      "rom_offset": 302630,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "43b12b7380a97a9873dddeb02cb60dae32607a338d743b0cae7443954e5cf74e",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line81 with relative126..128. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_player_advance_row_alignment_049f5a",
+      "owner": "audio_player_advance_row",
+      "rom_offset": 302938,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "04abad640cfdcaae91a71dcbeab446ff25dd5932725c120db73aae92cfad395d",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line170 with relative302..304. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_player_process_row_alignment_04a11a",
+      "owner": "audio_player_process_row",
+      "rom_offset": 303386,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "94c8988e4cf0f10dde90c029e7439967c528b10ec1e1dd9df1515d0a7c1a5e9c",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line250 with relative438..440. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_instrument_start_alignment_04ac36",
+      "owner": "audio_instrument_start",
+      "rom_offset": 306230,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e240528ba1cbdb96aecdd7c109193db850c1b97acc0260064c633147c8676801",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line74 with relative114..116. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_instrument_start_alignment_04acea",
+      "owner": "audio_instrument_start",
+      "rom_offset": 306410,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e240528ba1cbdb96aecdd7c109193db850c1b97acc0260064c633147c8676801",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line168 with relative294..296. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_instrument_start_alignment_04adba",
+      "owner": "audio_instrument_start",
+      "rom_offset": 306618,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e240528ba1cbdb96aecdd7c109193db850c1b97acc0260064c633147c8676801",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line277 with relative502..504. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_portamento_up_s3m_alignment_04b352",
+      "owner": "audio_effect_portamento_up_s3m",
+      "rom_offset": 308050,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "7df53986ac91bf53086098c08e4a69208b9a741ba57dc4f005fc31156bd51394",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line123 with relative214..216. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_portamento_down_s3m_alignment_04b406",
+      "owner": "audio_effect_portamento_down_s3m",
+      "rom_offset": 308230,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "b00cb1b4ebfb15edca35f7a8992aaf39be608dbc9471ac753fa2f7e6d7390b7e",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line98 with relative166..168. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_portamento_note_alignment_04b54e",
+      "owner": "audio_effect_portamento_note",
+      "rom_offset": 308558,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "9b4ebca0f4c89bf9d69872ba3b619a918f66e98fd362a111576c125b89d0c02e",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line179 with relative318..320. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_retrigger_alignment_04b98a",
+      "owner": "audio_effect_retrigger",
+      "rom_offset": 309642,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "1688cbcdf23abd54dbc53c644b8f054ad14d461a6dae5c3f6dd4e9976bf96374",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line209 with relative366..368. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_volume_effect_vibrato_alignment_04bb02",
+      "owner": "audio_volume_effect_vibrato",
+      "rom_offset": 310018,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "8d29882804f700a0f6620f7c8989d385348a8a848afd16d7e22825a5b930e71a",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line67 with relative110..112. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_player_stop_jingle_alignment_04bb6e",
+      "owner": "audio_player_stop_jingle",
+      "rom_offset": 310126,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e20581b787205bb4cef6427d9b1c1cf0c732d26cef1b6800ae27bfe59d0179ee",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line22 with relative22..24. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_player_set_callback_alignment_04bb7a",
+      "owner": "audio_player_set_callback",
+      "rom_offset": 310138,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "43d1ae22807dfdce090cc54f048fedddf4f4e0cb95b9b447992d1c05948371b7",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line14 with relative6..8. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_player_pause_alignment_04bbae",
+      "owner": "audio_player_pause",
+      "rom_offset": 310190,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "92b7b58df8426886ae21d037bea0e67d85679fa3267ad63f67e58f90f1c35523",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line36 with relative46..48. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_player_resume_alignment_04bbe2",
+      "owner": "audio_player_resume",
+      "rom_offset": 310242,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c97e4d1e5bde479c69667cf88839e5f84290cc3789301e1ccba5d6d1af55b22d",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line36 with relative46..48. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_player_get_volume_target_alignment_04bc82",
+      "owner": "audio_player_get_volume_target",
+      "rom_offset": 310402,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "604d0e3df0a6caa91f3f897a94ca1393a9cd90b4c55f4189d7a8971f279bafa0",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line14 with relative6..8. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_instrument_release_alignment_04bcee",
+      "owner": "audio_instrument_release",
+      "rom_offset": 310510,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2401e334472626525e1defc8ecf53cdd02636f565a99dcf7d09e03a7f5c53ac5",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line68 with relative102..104. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_instrument_stop_alignment_04bd26",
+      "owner": "audio_instrument_stop",
+      "rom_offset": 310566,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "1f381d03690ac77a188eda7e7c3ceb92c1cae8c433dea7f57dab96a7070f0350",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line35 with relative46..48. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_instrument_process_alignment_04bd3e",
+      "owner": "audio_instrument_process",
+      "rom_offset": 310590,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "8224143474477a2cc313de2ea21c534cdd4170fb9e2687e46ef4c5b474bed606",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line17 with relative14..16. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_instrument_handle_valid_alignment_04bd66",
+      "owner": "audio_instrument_handle_valid",
+      "rom_offset": 310630,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e2fff91f39c7f5b39cc60001e58709281a558a2653d9b35ee6bd1ba606044f79",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line29 with relative34..36. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_instrument_initialize_alignment_04bdc6",
+      "owner": "audio_instrument_initialize",
+      "rom_offset": 310726,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "8e157337e24188e4f2806e0d6a58cf04e5ee5ee5e802583cc6818e190367a884",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line25 with relative26..28. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_frequency_amiga_alignment_04be16",
+      "owner": "audio_frequency_amiga",
+      "rom_offset": 310806,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c892a1f93289e1131233486f00c85840926bb8af54ef5b773d61e06bb825bedf",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line33 with relative34..36. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_frequency_linear_alignment_04be52",
+      "owner": "audio_frequency_linear",
+      "rom_offset": 310866,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "8b5346e42346aa249be4ee7b0ef51a55cffe016a64a77008490daf45bf138763",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line26 with relative30..32. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_speed_alignment_04be6e",
+      "owner": "audio_effect_speed",
+      "rom_offset": 310894,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "59f528d95c0bc0d2a29f18dff7f85523cda4904d70f39e5ea2aeb4172e07bfed",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line21 with relative18..20. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_mark_alignment_04bed2",
+      "owner": "audio_effect_mark",
+      "rom_offset": 310994,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "cf04694bc0ffed529035b1ce5a88cac31c4ca8ad6fe8580d38df31f1e63f6ff0",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line22 with relative22..24. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_volume_slide_down_fine_alignment_04bf2a",
+      "owner": "audio_effect_volume_slide_down_fine",
+      "rom_offset": 311082,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "68d89cf160e217d86a9204041d4ac0635cdde959c478aef08cc61c5909d7f36d",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line55 with relative82..84. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_portamento_up_extra_fine_alignment_04c0e6",
+      "owner": "audio_effect_portamento_up_extra_fine",
+      "rom_offset": 311526,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c0361dd669bd564e3db525b91beae8bf15258c6f3a0695999043243ea39cf87a",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line42 with relative62..64. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_portamento_down_fine_alignment_04c1aa",
+      "owner": "audio_effect_portamento_down_fine",
+      "rom_offset": 311722,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "f099c6dd193947688be1a644577a93081f95f330abf61d70ee49b2742b275197",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line55 with relative86..88. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_vibrato_alignment_04c2ca",
+      "owner": "audio_effect_vibrato",
+      "rom_offset": 312010,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "67332517b961d1e5d3c92fca810be16bc446020588dccef6e96e38fc465a1749",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line104 with relative178..180. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_glissando_alignment_04c316",
+      "owner": "audio_effect_glissando",
+      "rom_offset": 312086,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "520853e082a3f06ddf7c02504bf479788cb896104f11f0fb87bd1b4c4eb22543",
+      "evidence": [
+        "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative22; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
+        "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_pan_alignment_04c48a",
+      "owner": "audio_effect_pan",
+      "rom_offset": 312458,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "df430aa47ad872d6daf0d16ec68569c79bb1492843ae968914e35e544f3a0350",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line49 with relative70..72. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_effect_note_cut_alignment_04c52e",
+      "owner": "audio_effect_note_cut",
+      "rom_offset": 312622,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "79d8acef243bd5d6022796adc73335bb8dd38a9df94647abba023e746125fafe",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line38 with relative50..52. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_volume_effect_slide_down_alignment_04c62e",
+      "owner": "audio_volume_effect_slide_down",
+      "rom_offset": 312878,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "d07c3a79c8a2162b58ea6fab4ab6723f781f61b0b43f62c4d873ca5bc960f7ba",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line51 with relative74..76. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_volume_effect_slide_up_alignment_04c682",
+      "owner": "audio_volume_effect_slide_up",
+      "rom_offset": 312962,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "40ffe10687e00545111bb19972b4f400c9493f9ae6e345575e9bf8e30b75319f",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line52 with relative78..80. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "audio_volume_effect_slide_down_fine_alignment_04c6ce",
+      "owner": "audio_volume_effect_slide_down_fine",
+      "rom_offset": 313038,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "9248ccbcb0b38f630fd019c5e5321ae2919e84df1b9aa9fc5391fc2db14128a8",
+      "evidence": [
+        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2 at LF line47 with relative70..72. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
+        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
+        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_check_counter_attachment_choices_alignment_023262",
+      "owner": "frame_check_counter_attachment_choices",
+      "rom_offset": 143970,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c2901f09ce299498d35794d1b73d057424c3ddd36a675183e4874d6e59842a8d",
+      "evidence": [
+        "Matching compiler output .align 2,0 at LF line32 emits padding covering relative38..40; source.o $d covers this exact span. C source explicitly supplies post-function alignment.",
+        "Full retained 40-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_select_counter_attachment_choices_alignment_023286",
+      "owner": "frame_select_counter_attachment_choices",
+      "rom_offset": 144006,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "5b0b046212289570d9d6e0a680d714f5f307fc563a700275fd7bf333be810f56",
+      "evidence": [
+        "Matching C emits .align 2,0 at retained normal source.s LF28; source.o $d begins relative34 and covers two zero alignment bytes before the pool at relative36. The native branch at 0x08023284 targets 0x080232BC and skips this span.",
+        "All96B linked normal/strict positives equal fixednativebec515; real20\u219221 controls differonebyte. This is a source-emitted data role only, not alternate-entry or runtime proof."
+      ]
+    },
+    {
+      "name": "frame_prepare_counter_attachment_choices_alignment_0232e2",
+      "owner": "frame_prepare_counter_attachment_choices",
+      "rom_offset": 144098,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2f658f6bdd557ea5de90d667dacf28726228dcf4d9d067f8d3708a3399802cfb",
+      "evidence": [
+        "Matching compiler output .align\t2, 0 at LF line26 emits padding covering relative30..32; source.o $d covers this exact span. Compiler pool alignment within function.",
+        "Full retained 68-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_prepare_counter_attachment_choices_alignment_023306",
+      "owner": "frame_prepare_counter_attachment_choices",
+      "rom_offset": 144134,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2f658f6bdd557ea5de90d667dacf28726228dcf4d9d067f8d3708a3399802cfb",
+      "evidence": [
+        "Matching compiler output .align 2,0 at LF line50 emits padding covering relative66..68; source.o $d covers this exact span. C source explicitly supplies post-function alignment.",
+        "Full retained 68-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_begin_counter_attachment_choices_alignment_023322",
+      "owner": "frame_begin_counter_attachment_choices",
+      "rom_offset": 144162,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "438afdfff56c8f54050f5b5b05dec247152ef83e5148d1d5929e952ea0cf20f4",
+      "evidence": [
+        "Matching compiler output .align 2,0 at LF line26 emits padding covering relative26..28; source.o $d covers this exact span. C source explicitly supplies post-function alignment.",
+        "Full retained 28-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_finish_counter_attachment_choices_alignment_023366",
+      "owner": "frame_finish_counter_attachment_choices",
+      "rom_offset": 144230,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "9b237ef379542dfffe3cef8fb59c4aedd3947b2849d43efb5ed6880d513aca31",
+      "evidence": [
+        "Matching compiler output .align 2,0 at LF line13 emits padding covering relative2..4; source.o $d covers this exact span. C source explicitly supplies post-function alignment.",
+        "Full retained 4-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_counter_attachment_job_19_alignment_02339a",
+      "owner": "frame_step_counter_attachment_job_19",
+      "rom_offset": 144282,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "fb41aae82ca58b76af1052abe7787e8d9ebe4c1b909c0e9d3b5b06bfead212e4",
+      "evidence": [
+        "Matching compiler output .align\t2, 0 at LF line36 emits padding covering relative50..52; source.o $d covers this exact span. Compiler pool alignment within function.",
+        "Full retained 128-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_counter_attachment_job_19_alignment_0233d6",
+      "owner": "frame_step_counter_attachment_job_19",
+      "rom_offset": 144342,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "fb41aae82ca58b76af1052abe7787e8d9ebe4c1b909c0e9d3b5b06bfead212e4",
+      "evidence": [
+        "Matching compiler output .align\t2, 0 at LF line67 emits padding covering relative110..112; source.o $d covers this exact span. Compiler pool alignment within function.",
+        "Full retained 128-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_counter_attachment_jobs_68_69_alignment_02344e",
+      "owner": "frame_step_counter_attachment_jobs_68_69",
+      "rom_offset": 144462,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "83e6b92f48d5bef6c86ba1cc6a085816e665e680ba293a7c4b503e25862a0896",
+      "evidence": [
+        "Matching compiler output .align\t2, 0 at LF line63 emits padding covering relative102..104; source.o $d covers this exact span. Compiler pool alignment within function.",
+        "Full retained 136-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_step_counter_attachment_jobs_68_69_alignment_02346e",
+      "owner": "frame_step_counter_attachment_jobs_68_69",
+      "rom_offset": 144494,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "83e6b92f48d5bef6c86ba1cc6a085816e665e680ba293a7c4b503e25862a0896",
+      "evidence": [
+        "Matching compiler output .align 2,0 at LF line80 emits padding covering relative134..136; source.o $d covers this exact span. C source explicitly supplies post-function alignment.",
+        "Full retained 136-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "frame_remove_counter_attachment_selection_alignment_023496",
+      "owner": "frame_remove_counter_attachment_selection",
+      "rom_offset": 144534,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "43558d4095bf5066a19d34850e1071008ddd9c3ea8497e5384ca5ec2b03497d5",
+      "evidence": [
+        "Matching compiler output .align 2,0 at LF line20 emits padding covering relative18..20; source.o $d covers this exact span. C source explicitly supplies post-function alignment.",
+        "Full retained 20-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
+      ]
     }
   ],
   "indirect_producers": [

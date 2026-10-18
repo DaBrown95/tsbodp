@@ -5,6 +5,8 @@
 #include "audio_game.h"
 #include "transition_object.h"
 #include "frame_scene_actor_schedule.h"
+#include "frame_actor_scene.h"
+#include "frame_actor_actions.h"
 
 /* Offsets are relative to the serialized selector word, not a native pointer. */
 #define COMMAND_BYTE(n) (command->parameters[(n)-4])
@@ -90,6 +92,8 @@ struct ResourceActorState {
 union ResourceGameState {
     struct ResourceConditionalState conditions;
     struct ResourceActorState actor;
+    struct FrameActorSceneState scene;
+    struct FrameActorValueWorld actor_values;
 };
 extern union ResourceGameState g_resource_game_state;
 

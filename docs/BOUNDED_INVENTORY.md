@@ -38,3 +38,11 @@ separate claims.
 The pass ends here. Connected reconstruction resumes with the copied object
 ordering routine and the phase-7 callback path, alongside the held ordinary-C
 renderer/finalizer work. Exhaustive inventory is not a prerequisite.
+
+## Object visibility helper at `0x080011B8`
+
+The 100-byte helper returns one when `forced_visible` is exactly one. Otherwise it obtains the selected view origin, converts the object's position through the existing point provider, and tests inclusive bounds: X from origin minus 100 through origin plus 340, and Y from origin minus 100 through origin plus 260. The proposed interface is `int(FrameObject *, FrameU8)`; the actual provider definitions and ARM32 point/object layouts pass separate type and offset checks.
+
+The complete native span matches under ordinary and strict compilation. The matching C keeps the real margin value in R6 and the cached origin X in R4 after the provider calls, with each upper-bound subtotal carried in R0. Those GNU register variables describe actual values and overlapping lifetimes; they contain no instruction bodies. The final two commutative operand orders also matter to the emitted Thumb ADD encodings. A changed margin is rejected in both profiles. These results establish one matching source spelling, not the original source or uniquely determined compiler choices.
+
+The non-forced path still requires a valid view-origin entry and representable signed coordinate arithmetic. Type/layout checks do not establish every provider access's effective-type legality, incoming-call coverage or runtime behavior. The full matching and progress gates cover this source. The renderer, finalizer and view-index domains remain open.
