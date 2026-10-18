@@ -568,3 +568,34 @@ original extents including literal pools/alignment, and reject actual
 changed-source controls. The save startup and header updater now call the
 canonical interfaces at the same addresses. This is static connected
 evidence, not a runtime language-selection or save-compatibility claim.
+
+## Template record walker
+
+`display_text_draw_template` at `0x08044F00` owns its complete 160-byte extent:
+150 instruction bytes, eight literal bytes and two source-emitted alignment
+zeros at relative offset 154 (`0x08044F9A`). The alignment role adds no extra
+C credit and does not exclude an alternate entry.
+
+The existing eight-byte record contract supplies signed halfword x/y, byte
+width/style and a halfword text ID. The walker loads each text into the working
+buffer with limit 1,024, uses multiline drawing for nonzero width and single-line
+drawing otherwise, and passes null after a failed load. Word arguments are
+initially narrowed to sixteen bits; the final tile is returned as a word. The
+accepted palette-menu preparation and bank-refresh callers pass `(1,37)` and
+select the established roots at `0x08052444` and `0x0805256C`. These accesses do
+not establish complete template populations, incoming-count validity, allocation
+success or buffer capacity for arbitrary strings.
+
+The tested word-sized local count removes a later initial narrowing sink that
+COMBINE used in the narrow-count predecessor. That predecessor lost its early
+shift pair and placed entry-cursor setup first. The word count instead consumes
+the split left/right-shift conversion directly around cursor setup, preserving
+the native order through COMBINE and allocation. The backedge explicitly casts
+`count - 1` to `unsigned short`, retaining the native sixteen-bit decrement.
+These two edits were tested together; their independent effects and the original
+source spelling remain unproven.
+
+Final normal and strict public-header positives match all 160 bytes. Changing
+the real backedge decrement from one to two rejects in both profiles by one
+byte. This is compiler/link evidence; gameplay and complete incoming/backing
+populations remain open.

@@ -150,7 +150,7 @@ comparisons remain private.
 
 Preparation clears backgrounds zero, one and two, selects font one with fill
 minus one, loads the two original backgrounds and the established entry palette,
-and invokes the original template walker with tile one and word argument 37.
+and invokes the C-owned template walker with tile one and word argument 37.
 It sets all three background scroll targets with word duration one before calling
 the entry-object builder reconstructed below. The template declaration returns a word and
 accepts word arguments plus a pointer to eight-byte records containing signed
@@ -163,9 +163,12 @@ layout evidence from caller-byte equality. The ignored word result and
 proper record-pointer type retain the original 168-byte helper. The former
 private void/untyped declaration is excluded from canonical interface evidence.
 
-The template walker at `0x08044F00..0x08044FA0` remains an explicit original
-dependency with zero new C credit. The typed template header does not represent
-recovered source for that provider. The 336-byte object builder is reconstructed
+The 160-byte template walker at `0x08044F00..0x08044FA0` is now C-owned,
+including its pools and alignment. Its existing typed header connects both
+palette-menu callers to the recovered provider. Incoming counts, complete
+template populations and buffer backing/capacity remain open; see the
+[template reconstruction](DISPLAY_TEXT_RECONSTRUCTION.md#template-record-walker).
+The 336-byte object builder is reconstructed
 as part of the following character-entry path. Its accepted text decoder/drawing/font/buffer context,
 the actual background, window, variant and audio providers, the lifecycle caller
 and incoming background-enable wrapper are verified separately.
@@ -237,7 +240,7 @@ it does not establish portable arbitrary-coordinate arithmetic.
 The bank helper clears background zero, selects its text control and font, and
 reads the bank flag after that font call. It chooses the original eight-byte
 entry records at `0x08052444` or `0x0805256C` and passes word arguments `(1,37)`
-to the original template walker. The latter root follows thirty-seven eight-byte
+to the C-owned template walker. The latter root follows thirty-seven eight-byte
 records; neither root is asserted to own a complete table. Slot twelve's ID
 toggles between 134 and 130, with all other IDs selecting 134. Its fresh pointer
 is then passed to variant state 58.
@@ -271,7 +274,8 @@ current canonical positive and actual changed-source negative proofs. Controls
 change the add guard, the cursor's real flag predicate, the template argument
 and the movement duration. Current accepted callers, input producers and text,
 object, movement, background and audio providers are freshly checked; the
-template walker remains original. Separate strict declaration builds reject
+template walker's 160-byte body is now C-owned. Its template-table and buffer
+population limits remain open. Separate strict declaration builds reject
 implicit interfaces without changing acceptance compiler flags. Useful failed
 pointer-lifetime and discarded-control forms remain local.
 

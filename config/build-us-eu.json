@@ -52279,6 +52279,34 @@
         "-O2",
         "-mthumb-interwork"
       ]
+    },
+    {
+      "name": "display_text_draw_template",
+      "rom_offset": 282368,
+      "size": 160,
+      "source": "src/display/text_draw_template.c",
+      "symbols": {
+        "g_display_text_buffer": "0x030021f4",
+        "display_text_load_string": "0x0801f029",
+        "display_text_draw_all_lines": "0x0801b04d",
+        "display_text_draw_line": "0x0801a959"
+      },
+      "thumb_symbols": [
+        "display_text_load_string",
+        "display_text_draw_all_lines",
+        "display_text_draw_line"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "e590576fba9d758965e9504453f8a3b930ebb4b2cc7a5cb65342532678c39edc",
+      "negative_control": {
+        "before": "count = (unsigned short)(count - 1);",
+        "after": "count = (unsigned short)(count - 2);"
+      }
     }
   ],
   "assembly": [
