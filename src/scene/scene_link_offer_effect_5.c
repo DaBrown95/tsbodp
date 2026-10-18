@@ -1,6 +1,6 @@
 #include "scene_link_offer_effects.h"
 
-void scene_link_offer_effect_5(unsigned char slot, unsigned char difference)
+void scene_link_offer_effect_5(unsigned char slot, int difference)
 {
     /* Keep the one-use byte offset separate from the preserved record pointer. */
     register unsigned int record_offset asm("r1") =

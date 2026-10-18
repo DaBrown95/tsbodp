@@ -1,6 +1,7 @@
 #include "scene_link_offer_effects.h"
-void scene_link_offer_effect_4(unsigned char slot, unsigned char difference)
+void scene_link_offer_effect_4(unsigned char slot, int difference_word)
 {
+    unsigned char difference = (unsigned char)difference_word;
     int change = 0;
     struct SceneLinkEffectOffer *offer = &g_link_entry_effect_state.records[slot];
     switch (offer->phase) {

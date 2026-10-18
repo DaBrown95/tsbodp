@@ -1,5 +1,5 @@
 #include "scene_link_offer_effects.h"
-void scene_link_offer_effect_2(unsigned char slot, unsigned char difference)
+void scene_link_offer_effect_2(unsigned char slot, int difference)
 {
     int change = 0;
     struct SceneLinkEffectOffer *offer = &g_link_entry_effect_state.records[slot];

@@ -51259,6 +51259,33 @@
         "before": "0x8000",
         "after": "0x4000"
       }
+    },
+    {
+      "name": "scene_link_entry_step_offers",
+      "rom_offset": 19688,
+      "size": 424,
+      "expected_sha256": "2e4a44de94bd667e0740a97f1357dd219482ebaba92c96e84e90d23c3a3d362b",
+      "source": "src/scene/scene_link_entry_step_offers.c",
+      "symbols": {
+        "g_link_entry_effect_state": "0x03002e00",
+        "g_link_offer_adjustment_timer": "0x03002e68",
+        "g_link_offer_difference_limits": "0x0804ed7c",
+        "g_frame_actor_greetings": "0x080612a4",
+        "g_display_menu_relation_traits": "0x080695dc",
+        "g_link_offer_adjustments": "0x08d70894",
+        "g_input_current": "0x03004220",
+        "g_input_config": "0x030040e0",
+        "audio_play_animation_cue": "0x08040ffd",
+        "_call_via_r2": "0x0804ccf9"
+      },
+      "thumb_symbols": [
+        "audio_play_animation_cue",
+        "_call_via_r2"
+      ],
+      "negative_control": {
+        "before": "g_link_offer_adjustment_timer = 2;",
+        "after": "g_link_offer_adjustment_timer = 3;"
+      }
     }
   ],
   "assembly": [

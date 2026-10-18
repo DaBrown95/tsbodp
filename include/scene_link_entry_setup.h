@@ -19,6 +19,9 @@ extern const unsigned int g_scene_link_entry_control_unlinked;
 extern const unsigned int g_scene_link_entry_control_linked;
 extern const unsigned int g_scene_link_entry_control1;
 extern const unsigned int g_scene_link_entry_text_control;
+extern short g_link_offer_adjustment_timer;
+/* Two-byte serialized rows observed by the native controller. */
+extern const unsigned char g_link_offer_difference_limits[][2];
 /* Existing canonical readonly declarations, not new mutable owners. */
 extern const struct DisplayTimeRecord g_resource_selector_clock;
 extern const unsigned short g_display_menu_palette_data[];
@@ -38,10 +41,10 @@ void scene_link_entry_draw_linked_quantities(void);
 void scene_link_entry_draw_panel(void);
 void scene_link_entry_draw_header_value(void);
 void scene_link_entry_confirm_offer(void);
+void scene_link_entry_step_offers(void);
 /* Explicit original service boundaries. No reconstructed C is claimed. */
 void scene_link_entry_build_objects_original(void);
 void scene_link_entry_refresh_offers_original(void);
-void scene_link_entry_step_offers(void);
 void scene_link_entry_step_linked_offers(void);
 
 void scene_link_entry_initialize(void);

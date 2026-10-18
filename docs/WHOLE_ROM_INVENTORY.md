@@ -813,3 +813,21 @@ resource/text backing and later writers remain open. Current inventory and
 mapped counts come from the fresh generated assets; the fixed 319,640-byte
 historical comparison remains a separate baseline, without a complete code
 denominator.
+
+### Source-owned alignment and data roles
+
+The existing code-evidence configuration now records optional
+`source_owned_data_regions`. Eleven exact spans account for 48 bytes: the
+debugger's 28-byte inline packet and twenty alignment bytes across the row-23
+step, row-24 text helpers and reconstructed offer controller. Each record pins
+the owning source, complete owner extent and original bytes. Compiler data
+mapping symbols and emitted alignment, together with native branches or returns,
+supply the role evidence. These classifications add no C bytes or new ownership.
+
+The census validates those pins and feeds the spans through its existing known
+data handling. A conflicting strong instruction remains an explicit ambiguous
+instruction/data result; the field cannot suppress execution evidence. The
+ordinary map and display partition remain separate from these overlapping
+source-owned roles. Tests reject stale pins, malformed or overlapping records
+and preserve that execution conflict. Complete code inventory and executable
+write domains remain unresolved.

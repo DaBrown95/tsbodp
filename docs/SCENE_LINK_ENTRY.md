@@ -272,7 +272,7 @@ signedness, font formal width, field capacity and return type are rejected.
 Changing the font selection from one to two changes one compiled byte and has a
 defined selector-state witness when both banks are backed. Strict compilation,
 changed-source controls and the full-ROM comparison remain separate evidence.
-The other object builder, offer refresh, step callback and renderer/finalizer
+The other object builder, offer refresh and renderer/finalizer
 remain explicit unconverted regions.
 
 ## Header value and link-dependent placement
@@ -360,8 +360,13 @@ fit 32-bit `int`. A genuine `previous = countdown--` preserves the native
 old-halfword zero test. The used second argument is retained as a byte and
 explicitly interpreted signed at its comparison; conversion above 127 follows
 the pinned target. Unused formals and the common declaration do not uniquely
-identify the historical API. The original dispatcher sign-extends its second
-byte and still requires an end-to-end source contract.
+identify the historical API. The reconstructed dispatcher sign-extends the low
+byte of its running minimum and passes it as a full word. The common callback
+type is therefore `void(unsigned char, int)`; the three consuming callbacks
+explicitly retain the low byte before their signed comparisons. All seven
+complete bodies still match after this interface repair, including normal and
+strict source controls. This establishes the observed producer/consumer contract,
+not a unique historical declaration or a complete table population.
 
 Effects 3 and 5 resolve the previously missing count rereads with a genuine
 record pointer held in native R4. Under `SMALL_REGISTER_CLASSES`, the pinned
@@ -384,10 +389,10 @@ reproduce both complete bodies and their changed-source rejections. No register
 search, new memory access or compiler-profile change is part of this result.
 
 The step at `0x08003ABC` is reconstructed below through `0x08003D74`.
-Fourteen of its sixteen direct providers have source. The original offer
-controllers at `0x08004CE8` and `0x08004E90` remain unconverted. This callback
-batch does not close those bodies, descriptor-index/table capacity, incoming
-targets, arithmetic or backing-storage domains. `resource_get_object` at `0800AEE4` was already owned.
+Fifteen of its sixteen direct providers have source. The offer controller at
+`0x08004CE8` is reconstructed below; `0x08004E90` remains unconverted.
+Descriptor-index/table capacity, incoming targets, arithmetic and backing-storage
+domains remain open. `resource_get_object` at `0800AEE4` was already owned.
 
 ## End callback
 
@@ -423,10 +428,10 @@ runtime or gameplay validation.
 `scene_link_entry_step` reconstructs the complete 696-byte callback at
 `0x08003ABC..0x08003D74`, including all literal pools and alignment. Together
 with the 876-byte begin and 60-byte end callbacks, the observed row-23 lifecycle
-now has 1,632 C extent bytes. Fourteen direct callees are already C-owned;
-the two offer controllers remain explicit original services. Their provisional
-`void(void)` declarations describe only this caller's supplied arguments and
-unconsumed results.
+now has 1,632 C extent bytes. Fifteen direct callees are C-owned; the linked
+offer controller remains an explicit original service. Its provisional
+`void(void)` declaration describes only this caller's supplied arguments and
+unconsumed result.
 
 The callback handles the link-abort flag and phases zero, one and two. It
 coordinates offer updates, the countdown, participant selection, text, audio,
@@ -471,3 +476,47 @@ snapshot is selected before any phase-specific opaque calls, and the tile use
 occurs on the call-free zero-phase input path. This establishes no all-writer,
 callback-index, controller or gameplay population closure. These are static
 and compiler findings, with no new runtime observation.
+
+## Offer controller
+
+`scene_link_entry_step_offers` owns all 424 bytes at
+`0x08004CE8..0x08004E90`, including 56 literal bytes and four alignment bytes.
+It periodically compares participant counts, invokes an observed world-effect
+callback or decrements a count, handles the local participant's directional
+input and countdown, then selects the least-valued offer. The running minimum
+is initialized once before the participant loop, preserving the native
+cross-iteration dataflow. Both countdowns retain their old-value zero tests.
+
+The controller uses the same owner as the seven callbacks:
+`SceneLinkEffectState.records[4]`. Treating this storage as a separate offer
+structure gave incompatible access views. Starting the selected-cost address
+from the complete owner's character representation, then converting only the
+address of its actual aligned `int` member, also recovers the compiler's shared
+base expression. First common-subexpression elimination and loop optimization
+then produce the native record cursor and cost access. This does not treat
+separate members as an array of integers.
+
+The remaining two differing instruction bytes came from a commutative button
+test. Its genuine `buttons & 0x80` result is constrained to the observed R0.
+Initial intermediate output still contains a temporary and capture; combination
+removes that copy, and register-move optimization preserves the hard destination.
+The value dies at its comparison, before the cue call. The compiler generates
+the complete body; the declaration emits no instruction text and adds no read,
+consumer, alignment directive or assembly exception. This is a bounded register
+explanation, not a search across registers.
+
+Normal and strict builds match the full extent. Changing the actual adjustment
+timer reset from two to three retains 424 bytes and differs by five bytes in
+both profiles. API/layout checks use the complete controller and cue provider,
+the common callback type and actual owner layouts; the old byte-only second
+argument and a wrong cost offset both fail. The full gate also verifies all
+seven repaired callback definitions and their changed-source controls.
+
+Every selected or participant slot must name one of the four initialized
+records. Descriptor, greeting, difference-limit, input and callback indices must
+name backed storage; observing seven callback words does not establish complete
+table capacity. Signed products, sums and the running difference must remain
+representable. Those domains, later writers and runtime populations remain
+open. The linked controller at `0x08004E90` remains original: migrating it to
+the same proper owner reproduces its existing 432-byte / 311-difference failure
+and supplies a valid baseline, without matching its 444-byte native extent.

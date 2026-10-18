@@ -401,6 +401,140 @@
       "limitation": "One default ROM row is observed. Reset writes twelve queued records, staged copy covers eleven, and queue has no local upper count guard; backing extent, callers and other writers remain open."
     }
   ],
+  "source_owned_data_regions": [
+    {
+      "name": "startup_debug_display_word_debug_packet_0002c4",
+      "owner": "startup_debug_display_word",
+      "rom_offset": 708,
+      "size": 28,
+      "role": "debug_packet",
+      "region_sha256": "045ed4bc6df37bf93c8d8fa820bb6e9f84f242e3ca06004e142a75ed855229c4",
+      "source_sha256": "950417003db51325d2db691ebdb98bf0b4175df519c8e2963146a583b1fcc9c9",
+      "evidence": [
+        "Matching assembly explicitly emits debugger halfwords, NUL text and16-byte zero alignment after branch0x080002C0 to0x080002E0. Object $d begins atrelative20. Packet/data role does not exclude every alternate entry."
+      ]
+    },
+    {
+      "name": "scene_link_entry_step_alignment_003b56",
+      "owner": "scene_link_entry_step",
+      "rom_offset": 15190,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "ce881c33676e9a84b01f3fb9b5d0d5cf13870a51fe293f5deaf30ec5a91e12d5",
+      "evidence": [
+        "Matching compiler .align2,0 at LF line84; source object $d at relative154; preceding native b #0x8003c66; following word pool startsROM0x3B58. Role is alignment/data, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_link_entry_step_alignment_003c6e",
+      "owner": "scene_link_entry_step",
+      "rom_offset": 15470,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "ce881c33676e9a84b01f3fb9b5d0d5cf13870a51fe293f5deaf30ec5a91e12d5",
+      "evidence": [
+        "Matching compiler .align2,0 at LF line219; source object $d at relative434; preceding native b #0x8003d5c; following word pool startsROM0x3C70. Role is alignment/data, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_link_entry_step_alignment_003ca2",
+      "owner": "scene_link_entry_step",
+      "rom_offset": 15522,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "ce881c33676e9a84b01f3fb9b5d0d5cf13870a51fe293f5deaf30ec5a91e12d5",
+      "evidence": [
+        "Matching compiler .align2,0 at LF line248; source object $d at relative486; preceding native b #0x8003cb6; following word pool startsROM0x3CA4. Role is alignment/data, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_link_entry_step_alignment_003ce2",
+      "owner": "scene_link_entry_step",
+      "rom_offset": 15586,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "ce881c33676e9a84b01f3fb9b5d0d5cf13870a51fe293f5deaf30ec5a91e12d5",
+      "evidence": [
+        "Matching compiler .align2,0 at LF line279; source object $d at relative550; preceding native b #0x8003d5c; following word pool startsROM0x3CE4. Role is alignment/data, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_link_entry_step_alignment_003d1e",
+      "owner": "scene_link_entry_step",
+      "rom_offset": 15646,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "ce881c33676e9a84b01f3fb9b5d0d5cf13870a51fe293f5deaf30ec5a91e12d5",
+      "evidence": [
+        "Matching compiler .align2,0 at LF line309; source object $d at relative610; preceding native b #0x8003d4a; following word pool startsROM0x3D20. Role is alignment/data, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_row24_selection_draw_content_original_alignment_0237ae",
+      "owner": "scene_row24_selection_draw_content_original",
+      "rom_offset": 145326,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "8e03e1b5380b01cc13832d6fc5228091cfbb9e607752968fe55f482aa4d1e64d",
+      "evidence": [
+        "Matching compiler .align2,0 at LF line80; source object $d at relative150; preceding native b #0x802388a; following word pool startsROM0x237B0. Role is alignment/data, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_row24_selection_draw_content_original_alignment_02389a",
+      "owner": "scene_row24_selection_draw_content_original",
+      "rom_offset": 145562,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "8e03e1b5380b01cc13832d6fc5228091cfbb9e607752968fe55f482aa4d1e64d",
+      "evidence": [
+        "Matching compiler .align2,0 at LF line185; source object $d at relative386; preceding native bx r0; following word pool startsROM0x2389C. Role is alignment/data, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_row24_selection_create_labels_alignment_023a3a",
+      "owner": "scene_row24_selection_create_labels",
+      "rom_offset": 145978,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2427245c80bc04615192fbc9ca458b31899be09223b25093617f8e7d887fc7b3",
+      "evidence": [
+        "Matching compiler .align2,0 at LF line54; source object $d at relative98; preceding native bx r0; following word pool startsROM0x23A3C. Role is alignment/data, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_link_entry_step_offers_alignment_004d5e",
+      "owner": "scene_link_entry_step_offers",
+      "rom_offset": 19806,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "326bb4935312d3a7d011ede5d424ec7d78bf5b699bbfc1a8602fc94e1ca12c55",
+      "evidence": [
+        "Matching compiler .align2,0 at LF line73; source object $d at relative118; preceding native b #0x08004D92 skips alignment and pool; following word pool startsROM0x4D60. Role is alignment/data, not alternate-entry exclusion."
+      ]
+    },
+    {
+      "name": "scene_link_entry_step_offers_alignment_004e8a",
+      "owner": "scene_link_entry_step_offers",
+      "rom_offset": 20106,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "326bb4935312d3a7d011ede5d424ec7d78bf5b699bbfc1a8602fc94e1ca12c55",
+      "evidence": [
+        "Matching compiler .align2,0 at LF line225; source object $d at relative418; preceding native bx r0 at0x08004E88; following word pool startsROM0x4E8C. Role is alignment/data, not alternate-entry exclusion."
+      ]
+    }
+  ],
   "indirect_producers": [
     {
       "rom_offset": 604,

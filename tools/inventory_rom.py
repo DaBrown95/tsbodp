@@ -47,6 +47,38 @@ def unresolved_callback_sites(rows):
                    and not record.get('targets_complete', False)})
 
 
+def source_owned_data_regions(data, regions, owners, source_hash):
+    """Validate supplied source-emitted roles; never remove execution evidence."""
+    if not isinstance(regions, list):
+        raise ValueError('Source data regions must be a list')
+    owners = {owner['name']: owner for owner in owners}
+    result, names, spans = [], set(), []
+    for row in regions:
+        if not isinstance(row, dict):
+            raise ValueError('Source data region must be an object')
+        name, start, size = row.get('name'), row.get('rom_offset'), row.get('size')
+        owner_name = row.get('owner')
+        owner = owners.get(owner_name) if isinstance(owner_name, str) else None
+        if (not isinstance(name, str) or not name or name in names
+                or type(start) is not int or type(size) is not int
+                or size <= 0 or start < 0 or start + size > len(data)
+                or owner is None or not owner['rom_offset'] <= start
+                or start + size > owner['rom_offset'] + owner['size']
+                or row.get('role') not in ('alignment', 'debug_packet')
+                or not isinstance(row.get('evidence'), list) or not row['evidence']
+                or any(not isinstance(item, str) or not item.strip() for item in row['evidence'])):
+            raise ValueError('Invalid source-owned data region')
+        if (source_hash(owner) != row.get('source_sha256')
+                or hashlib.sha256(data[start:start + size]).hexdigest() != row.get('region_sha256')):
+            raise ValueError('Source-owned data evidence differs')
+        if any(start < end and begin < start + size for begin, end in spans):
+            raise ValueError('Source-owned data regions overlap')
+        names.add(name)
+        spans.append((start, start + size))
+        result.append({**row, 'status': 'mapped_data'})
+    return result
+
+
 class Scanner:
     def __init__(self, data, copies):
         self.data, self.copies = data, copies
@@ -268,6 +300,12 @@ def main():
     if evidence_config['reference_sha256'] != identity['sha256']:
         raise ValueError('Static evidence targets another ROM')
     evidence_inputs = set()
+    source_data = source_owned_data_regions(
+        data, evidence_config.get('source_owned_data_regions', []),
+        manifest['functions'] + manifest.get('assembly', []),
+        lambda owner: hashlib.sha256((ROOT/owner['source']).read_bytes()).hexdigest())
+    evidence_inputs.update(next(owner['source'] for owner in manifest['functions'] + manifest.get('assembly', [])
+                                if owner['name'] == row['owner']) for row in source_data)
     observed_records = record_tables(data, evidence_config['observed_record_tables'], scanner.physical)
     for table in observed_records:
         for item in table['evidence']:
@@ -512,13 +550,14 @@ def main():
                   'limitation': 'Signatures, raw BX words and pointer coincidences do not prove code, function entries or absence of other code.'},
               'entry_count': len({r['entry_rom_offset'] for r in rows}), 'extent_count': len(rows),
               'mapped_extent_bytes': sum(r['size'] for r in rows), 'rows': rows,
+              'source_owned_data_regions': source_data,
               'data_regions': data_regions, 'partition': partition(rows+data_regions, len(data)),
               'input_sha256': {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in
                               ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'tools/indirect_evidence.py', 'tools/fixed_target_proof.py', 'tools/inventory_census.py', 'config/code-evidence-us-eu.json', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt', *sorted(evidence_inputs))}}
     result['inventory_schema_version'] = 2
     result['historical_mapped_extent_baseline'] = 319640
     result['code_census'] = census(scanner, strong_entries, strong_results,
-        rows=rows, data_regions=data_regions,
+        rows=rows, data_regions=data_regions+source_data,
         source_code=[{**f, 'source_kind': f.get('kind', 'compiled_c'),
                       'mode': f.get('mode', 'Thumb')}
                      for f in manifest['functions']+manifest.get('assembly', [])],

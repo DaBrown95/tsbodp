@@ -1,7 +1,8 @@
 #include "scene_link_offer_effects.h"
 
-void scene_link_offer_effect_3(unsigned char slot, unsigned char difference)
+void scene_link_offer_effect_3(unsigned char slot, int difference_word)
 {
+    unsigned char difference = (unsigned char)difference_word;
     /* Keep the one-use byte offset separate from the preserved record pointer. */
     register unsigned int record_offset asm("r0") =
         (unsigned int)slot * sizeof(struct SceneLinkEffectOffer);
