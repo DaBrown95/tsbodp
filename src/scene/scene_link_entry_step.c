@@ -46,13 +46,13 @@ void scene_link_entry_step(void)
             for (i = 0; i < g_link_received_join.metadata[0]; ++i) {
                 if (i != g_link_received_join.identifier) {
                     int reference_total =
-                        g_link_entry_offers.records[g_link_received_join.identifier].count *
-                            g_link_entry_offers.multiplier +
-                            g_link_entry_offers.records[g_link_received_join.identifier].cost;
-                    if (g_link_entry_offers.records[i].count * g_link_entry_offers.multiplier +
-                            g_link_entry_offers.records[i].cost >= reference_total) {
-                    g_link_entry_offers.selected = i;
-                    if (event_get_link_slot() == g_link_entry_offers.selected) {
+                        g_link_entry_effect_state.records[g_link_received_join.identifier].count *
+                            g_link_entry_effect_state.multiplier +
+                            g_link_entry_effect_state.records[g_link_received_join.identifier].cost;
+                    if (g_link_entry_effect_state.records[i].count * g_link_entry_effect_state.multiplier +
+                            g_link_entry_effect_state.records[i].cost >= reference_total) {
+                    g_link_entry_effect_state.selected = i;
+                    if (event_get_link_slot() == g_link_entry_effect_state.selected) {
                         payload.storage.no_payload = (struct EventNoPayload){};
                         if (!(unsigned char)actor_entry_is_full(g_link_entry_game_state.entries))
                             transition_record_event(12, payload);

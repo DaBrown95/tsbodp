@@ -8,23 +8,23 @@ void scene_link_entry_initialize(void)
     condition_complete_if_active(1, 2, 1);
     if (!(g_game_flags & 0x20)) {
         g_link_received_join.metadata[0] = 4;
-        g_link_entry_offers.records[0].kind = 42;
+        g_link_entry_effect_state.records[0].kind = 42;
         do {
-            g_link_entry_offers.records[1].kind = frame_random_bounded(23);
-        } while (g_link_entry_offers.records[1].kind == 31);
+            g_link_entry_effect_state.records[1].kind = frame_random_bounded(23);
+        } while (g_link_entry_effect_state.records[1].kind == 31);
         do {
-            g_link_entry_offers.records[2].kind = frame_random_bounded(23);
-        } while (g_link_entry_offers.records[1].kind == 31 ||
-            g_link_entry_offers.records[1].kind ==
-                g_link_entry_offers.records[2].kind);
+            g_link_entry_effect_state.records[2].kind = frame_random_bounded(23);
+        } while (g_link_entry_effect_state.records[1].kind == 31 ||
+            g_link_entry_effect_state.records[1].kind ==
+                g_link_entry_effect_state.records[2].kind);
         for (;;) {
-            g_link_entry_offers.records[3].kind = frame_random_bounded(23);
-            if (g_link_entry_offers.records[1].kind == 31 ||
-                g_link_entry_offers.records[3].kind ==
-                    g_link_entry_offers.records[1].kind)
+            g_link_entry_effect_state.records[3].kind = frame_random_bounded(23);
+            if (g_link_entry_effect_state.records[1].kind == 31 ||
+                g_link_entry_effect_state.records[3].kind ==
+                    g_link_entry_effect_state.records[1].kind)
                 continue;
-            if (g_link_entry_offers.records[3].kind !=
-                g_link_entry_offers.records[2].kind)
+            if (g_link_entry_effect_state.records[3].kind !=
+                g_link_entry_effect_state.records[2].kind)
                 break;
         }
     } else {
@@ -33,14 +33,14 @@ void scene_link_entry_initialize(void)
             const int identifier = g_link_received_join.identifier;
             do {
                 if (i != identifier)
-                    g_link_entry_offers.records[i].kind = 42;
+                    g_link_entry_effect_state.records[i].kind = 42;
                 ++i;
             } while (i < g_link_received_join.metadata[0]);
         }
     }
     /* The original clears exactly these two representation bytes with STRH. */
-    g_link_entry_offers.records[0].unknown10 = 0;
-    g_link_entry_offers.selected = 0;
+    g_link_entry_effect_state.records[0].countdown = 0;
+    g_link_entry_effect_state.selected = 0;
     g_scene_request.unknown_10 = 0;
     g_display_scene_frame_objects[0] = 0;
     g_display_scene_frame_objects[10] = 0;

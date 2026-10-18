@@ -24608,7 +24608,7 @@
       "rom_offset": 17060,
       "size": 616,
       "symbols": {
-        "g_link_entry_offers": "0x03002e00",
+        "g_link_entry_effect_state": "0x03002e00",
         "g_link_entry_game_state": "0x03003950",
         "g_link_received_join": "0x03002d60",
         "g_link_received_pairs": "0x03002d74",
@@ -24654,7 +24654,7 @@
       "rom_offset": 17676,
       "size": 196,
       "symbols": {
-        "g_link_entry_offers": "0x03002e00",
+        "g_link_entry_effect_state": "0x03002e00",
         "g_link_received_join": "0x03002d60",
         "event_get_link_slot": "0x0803e439",
         "display_scene_hide_entry_objects": "0x080057a1",
@@ -41248,7 +41248,7 @@
         "display_scene_lookup_text": "0x8045009",
         "g_game_flags": "0x3004310",
         "g_link_received_join": "0x3002d60",
-        "g_link_entry_offers": "0x3002e00",
+        "g_link_entry_effect_state": "0x3002e00",
         "g_scene_request": "0x3004350",
         "g_display_scene_frame_objects": "0x30043b0",
         "g_save_world_view": "0x3003950",
@@ -41319,7 +41319,7 @@
         "g_display_countdown": "0x03003150",
         "g_display_scene_catalog": "0x080616cc",
         "g_display_scene_frame_objects": "0x030043b0",
-        "g_link_entry_offers": "0x03002e00",
+        "g_link_entry_effect_state": "0x03002e00",
         "g_link_received_join": "0x03002d60",
         "g_scene_link_entry_text_control": "0x0804ed90",
         "g_scene_link_offer_countdown": "0x0804ed38",
@@ -41354,7 +41354,7 @@
         "display_text_set_object_string": "0x8045329",
         "frame_set_centered_integer_position": "0x804533d",
         "g_display_scene_frame_objects": "0x030043b0",
-        "g_link_entry_offers": "0x03002e00",
+        "g_link_entry_effect_state": "0x03002e00",
         "g_link_received_join": "0x03002d60",
         "g_scene_link_entry_captions": "0x0804ed48",
         "g_scene_link_entry_text_control": "0x0804ed90"
@@ -41388,7 +41388,7 @@
         "frame_set_centered_integer_position": "0x804533d",
         "frame_set_position": "0x80014a5",
         "g_display_scene_frame_objects": "0x030043b0",
-        "g_link_entry_offers": "0x03002e00",
+        "g_link_entry_effect_state": "0x03002e00",
         "g_link_received_join": "0x03002d60",
         "g_scene_link_entry_captions": "0x0804ed48",
         "g_scene_link_entry_linked_captions": "0x0804ed58",
@@ -44203,7 +44203,7 @@
         "display_scene_hide_entry_objects": "0x080057a1",
         "audio_game_stop_sequence": "0x080413fd",
         "audio_select_sequence": "0x080411bd",
-        "g_link_entry_offers": "0x03002e00",
+        "g_link_entry_effect_state": "0x03002e00",
         "g_link_entry_game_state": "0x03003950",
         "g_scene_request": "0x03004350",
         "actor_entry_add": "0x080200c9",
@@ -51226,7 +51226,7 @@
         "event_get_link_slot": "0x0803e439",
         "g_link_received_join": "0x03002d60",
         "audio_select_sequence": "0x080411bd",
-        "g_link_entry_offers": "0x03002e00",
+        "g_link_entry_effect_state": "0x03002e00",
         "g_link_entry_game_state": "0x03003950",
         "actor_entry_is_full": "0x08020a71",
         "transition_record_event": "0x803a41d",
@@ -51286,6 +51286,30 @@
         "before": "g_link_offer_adjustment_timer = 2;",
         "after": "g_link_offer_adjustment_timer = 3;"
       }
+    },
+    {
+      "name": "scene_link_entry_step_linked_offers",
+      "rom_offset": 20112,
+      "size": 444,
+      "source": "src/scene/scene_link_entry_step_linked_offers.c",
+      "symbols": {
+        "g_input_current": "0x03004220",
+        "g_link_received_join": "0x03002d60",
+        "audio_play_animation_cue": "0x08040ffd",
+        "g_link_entry_effect_state": "0x03002e00"
+      },
+      "thumb_symbols": [
+        "audio_play_animation_cue"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(15);",
+        "after": "audio_play_animation_cue(14);"
+      },
+      "expected_sha256": "cb4fbaf147c00da28f256700dc8bd6712c2d6854236529287e71dbf1e02948c8",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ]
     }
   ],
   "assembly": [

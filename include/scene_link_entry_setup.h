@@ -42,10 +42,10 @@ void scene_link_entry_draw_panel(void);
 void scene_link_entry_draw_header_value(void);
 void scene_link_entry_confirm_offer(void);
 void scene_link_entry_step_offers(void);
+void scene_link_entry_step_linked_offers(void);
 /* Explicit original service boundaries. No reconstructed C is claimed. */
 void scene_link_entry_build_objects_original(void);
 void scene_link_entry_refresh_offers_original(void);
-void scene_link_entry_step_linked_offers(void);
 
 void scene_link_entry_initialize(void);
 void scene_link_entry_step(void);

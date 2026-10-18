@@ -18,7 +18,7 @@ void scene_link_entry_draw_quantities(void)
         struct FrameObject *object;
         const char *text;
 
-        count = g_link_entry_offers.records[i].count;
+        count = g_link_entry_effect_state.records[i].count;
         y = g_scene_link_entry_captions[i].y - (count >> 3);
         x = g_scene_link_entry_captions[i].x;
         next_y = y + 1;
@@ -34,8 +34,8 @@ void scene_link_entry_draw_quantities(void)
             (unsigned short)((unsigned int)((i + 3) << 12) | (remainder * 2 + 2)));
         display_fill_background_constant_rectangle(1, x, y - 1, 2, 1, 0);
         display_text_number_field_zero((int)(
-            ((unsigned int)g_link_entry_offers.multiplier * count +
-             (unsigned int)g_link_entry_offers.records[i].cost) >> 16));
+            ((unsigned int)g_link_entry_effect_state.multiplier * count +
+             (unsigned int)g_link_entry_effect_state.records[i].cost) >> 16));
         objects = g_display_scene_frame_objects;
         slot_index = i + 6;
         slot = &objects[slot_index];

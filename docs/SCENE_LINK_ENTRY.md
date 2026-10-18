@@ -75,7 +75,7 @@ The former 874-byte observation stopped before that alignment. The separate
 step entry remains at `0x08003ABC`; its reconstruction is described below.
 
 The existing 24-byte offer record now names its first word `kind` and exposes
-the halfword at offset sixteen as `unknown10`. The begin callback's word stores and
+the halfword at offset sixteen as `countdown`. The begin callback's word stores and
 the connected builders' word reads support the first field; the begin callback's
 zero store and original refresh helper's halfword store of two support the
 second. The unsigned word is a provisional value view of zero-extended random
@@ -132,9 +132,9 @@ inferred from the next entry alone. The weak start at `0x08004882` falls in that
 alignment/pool context and is absorbed, rather than claimed as another function.
 
 The existing offer record stays 24 bytes. Four representation bytes at offset
-four receive a defined unsigned result shifted by sixteen; the remaining unknown
-bytes retain their earlier meaning. A four-byte copy from a real unsigned-word
-object avoids introducing a foreign word lvalue over that unknown byte region.
+four hold the limit word. A four-byte representation copy from a real
+unsigned-word object supplies the defined unsigned result shifted by sixteen;
+the remaining unknown bytes retain their earlier meaning.
 
 The catalog cache holds an address, not a scene index or field value. It starts
 from the character representation of the whole catalog array, advances twenty
@@ -319,8 +319,8 @@ selection. Kind 42 inserts the requested entry using the two packed parameter
 bytes, rereads the selected offer after that call, debits its signed fixed-point
 cost, and stages the existing game-state bytes at offset sixteen. Other kinds
 stage their selected text. Both branches draw the two confirmation labels.
-All called providers already have matching source; the surrounding step and
-quantity-input paths remain separate original dependencies.
+All called providers already have matching source. The surrounding step and
+quantity-input paths are reconstructed below.
 
 The original argument producer masks bits 8-15 before shifting. This actual
 packed-word operation explains the scratch-mask lifetime and the complete
@@ -389,8 +389,8 @@ reproduce both complete bodies and their changed-source rejections. No register
 search, new memory access or compiler-profile change is part of this result.
 
 The step at `0x08003ABC` is reconstructed below through `0x08003D74`.
-Fifteen of its sixteen direct providers have source. The offer controller at
-`0x08004CE8` is reconstructed below; `0x08004E90` remains unconverted.
+All sixteen direct providers have source. The offer controllers at
+`0x08004CE8` and `0x08004E90` are reconstructed below.
 Descriptor-index/table capacity, incoming targets, arithmetic and backing-storage
 domains remain open. `resource_get_object` at `0800AEE4` was already owned.
 
@@ -428,10 +428,9 @@ runtime or gameplay validation.
 `scene_link_entry_step` reconstructs the complete 696-byte callback at
 `0x08003ABC..0x08003D74`, including all literal pools and alignment. Together
 with the 876-byte begin and 60-byte end callbacks, the observed row-23 lifecycle
-now has 1,632 C extent bytes. Fifteen direct callees are C-owned; the linked
-offer controller remains an explicit original service. Its provisional
-`void(void)` declaration describes only this caller's supplied arguments and
-unconsumed result.
+now has 1,632 C extent bytes. All sixteen direct callees are C-owned, including
+both offer controllers. Their matching definitions share the `void(void)`
+declarations used by this caller.
 
 The callback handles the link-abort flag and phases zero, one and two. It
 coordinates offer updates, the countdown, participant selection, text, audio,
@@ -517,6 +516,47 @@ records. Descriptor, greeting, difference-limit, input and callback indices must
 name backed storage; observing seven callback words does not establish complete
 table capacity. Signed products, sums and the running difference must remain
 representable. Those domains, later writers and runtime populations remain
-open. The linked controller at `0x08004E90` remains original: migrating it to
-the same proper owner reproduces its existing 432-byte / 311-difference failure
-and supplies a valid baseline, without matching its 444-byte native extent.
+open.
+
+## Linked offer controller and common state
+
+`scene_link_entry_step_linked_offers` owns the complete 444-byte interval
+`0x08004E90..0x0800504C`: 396 instruction bytes, 44 referenced literal bytes and
+four zero alignment bytes. It applies local and remote quantity input, checks
+the scaled quantity against the offer limit, updates counts and residual costs,
+and calls the existing cue provider when a count changes.
+
+The matching dataflow follows the actual producers. Direct record-member count
+reads let first common-subexpression elimination retain the base before the
+variable offset; loop optimization then selects the native record cursor.
+The genuine required product is evaluated before loading the limit. Cost stores
+calculate the real record byte offset before the biased cost-column address.
+Separate local and remote input captures preserve distinct compiler values and
+resolve the final four bytes. Two genuine decrement-test results use the native
+R0 constraint and die at their conditions, before calls. No instruction text,
+extra memory access or artificial consumer supplies the match.
+
+All connected offer users now declare one `SceneLinkEffectState` object through
+`scene_link_offer_state.h`. The former `g_link_entry_offers` declaration exposed
+the same address as another global symbol and a different record type. Different
+symbol identities can be treated as nonaliasing by the pinned compiler; equal
+linker addresses alone do not repair that source contract. Eight existing
+bodies now use the same global and record definition as both controllers and
+the seven callbacks. Their complete bytes and control behavior are unchanged.
+The record remains 24 bytes and the state 104 bytes; the richer existing view
+names the limit, countdown and phase without establishing all writers.
+
+Normal and strict builds match both controllers and every affected header
+importer. Changing the linked controller's unique local cue from fifteen to
+fourteen preserves 444 bytes and rejects by one byte in both profiles. Contract
+checks compile seventeen complete related definitions separately, then check
+the common owner layout and actual function types in their own unit. Obsolete
+aliases, a wrong cost offset and the former byte-only callback formal are
+rejected. Full matching and progress gates remain separate from these bounded
+source checks.
+
+Each used index must name one of four initialized records and backed input
+storage; every controlling participant count must lie between zero and four.
+Evaluated signed products and differences must be representable. Opaque calls
+retain the original fresh reads. These are compiler and static findings, with
+no complete incoming-index, later-writer, callback-table or gameplay claim.

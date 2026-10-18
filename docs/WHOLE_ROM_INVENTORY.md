@@ -817,12 +817,29 @@ denominator.
 ### Source-owned alignment and data roles
 
 The existing code-evidence configuration now records optional
-`source_owned_data_regions`. Eleven exact spans account for 48 bytes: the
-debugger's 28-byte inline packet and twenty alignment bytes across the row-23
-step, row-24 text helpers and reconstructed offer controller. Each record pins
-the owning source, complete owner extent and original bytes. Compiler data
-mapping symbols and emitted alignment, together with native branches or returns,
-supply the role evidence. These classifications add no C bytes or new ownership.
+`source_owned_data_regions`. There are 1,698 exact spans accounting for 3,422
+bytes: the debugger's 28-byte inline packet and 3,394 alignment bytes. Each
+record pins the owning source, complete owner extent and original bytes.
+Compiler data mapping symbols and emitted alignment, together with native
+branches or returns, supply the role evidence. These classifications add no
+C bytes or new ownership.
+
+A bounded pass over 1,863 previously unclassified two-byte gaps qualified 1,685
+spans: 1,168 compiler-emitted alignments, 511 explicit C post-function zero
+alignments and six authored assembly alignments. The retained complete linked
+texts match the fixed native extents. A source-layout interpretation, actual
+object bytes and data mapping symbols identify each padding directive; unknown
+forms stay unresolved. Independent review checked the method and ledgers,
+all 511 explicit terminal source directives and three physical witnesses.
+Six records in four renamed offer-state users were rebound only after fresh
+matching output confirmed their roles; the earlier source pins remain historical.
+The new linked offer controller contributes two more two-byte alignment records.
+
+The remaining 178 gaps / 356 bytes stay explicit: 161 need old-assembler listing
+or linker-padding evidence, fifteen are authored NOP instructions after returns,
+and two audio tails contain NOPs with unresolved source-layout attribution.
+They have not been relabelled as padding. The known data total is 22,274 bytes;
+4,866 bytes inside estimated envelopes and 16,432,938 elsewhere remain unresolved.
 
 The census validates those pins and feeds the spans through its existing known
 data handling. A conflicting strong instruction remains an explicit ambiguous

@@ -16,7 +16,7 @@ void scene_link_entry_refresh_linked_offers(void)
         const SceneLinkCatalogColumnByte *number_values =
             (const SceneLinkCatalogColumnByte *)(
                 (const unsigned char *)&g_display_scene_catalog + 20);
-        struct LinkEntryOfferRecord *record = &g_link_entry_offers.records[0];
+        struct SceneLinkEffectOffer *record = &g_link_entry_effect_state.records[0];
         for (; i < g_link_received_join.metadata[0]; ++i) {
             unsigned int value;
 
@@ -42,11 +42,11 @@ void scene_link_entry_refresh_linked_offers(void)
     display_time_copy(&g_display_countdown, &g_scene_link_offer_countdown);
     display_fill_background_constant_rectangle(1, 9, 0, 21, 14, 0);
     display_fill_background_constant_rectangle(0, 9, 0, 21, 14, 0);
-    g_link_entry_offers.multiplier = (int)((unsigned int)
+    g_link_entry_effect_state.multiplier = (int)((unsigned int)
         save_world_scale_percent(
             (int)g_display_scene_catalog[g_scene_request.scene].number_value,
             200) << 16);
-    g_link_entry_offers.multiplier =
-        display_bios_div(g_link_entry_offers.multiplier, 96);
-    g_link_entry_offers.selected = 0;
+    g_link_entry_effect_state.multiplier =
+        display_bios_div(g_link_entry_effect_state.multiplier, 96);
+    g_link_entry_effect_state.selected = 0;
 }

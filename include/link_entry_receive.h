@@ -9,20 +9,8 @@
 #include "resource_condition_entries.h"
 #include "display_scene_entry_cleanup.h"
 
-/* Four observed 24-byte offer records precede the multiplier at +0x60 and
- * signed selection at +0x64. The selected index is not range-checked here. */
-struct LinkEntryOfferRecord {
-    unsigned int kind;
-    unsigned char unknown04[8];
-    int cost;
-    unsigned short unknown10;
-    unsigned char unknown12[2], count, unknown15[3];
-};
-struct LinkEntryOfferState {
-    struct LinkEntryOfferRecord records[4];
-    int multiplier;
-    signed char selected;
-};
+#include "scene_link_offer_state.h"
+
 /* Alternate access view of the existing game state, not a complete allocation. */
 struct LinkEntryGameState {
     unsigned int unknown00;
@@ -30,7 +18,6 @@ struct LinkEntryGameState {
     unsigned char unknown08[0xe8];
     struct ConditionActorEntries *entries;
 };
-extern struct LinkEntryOfferState g_link_entry_offers;
 extern struct LinkEntryGameState g_link_entry_game_state;
 unsigned int actor_entry_add(struct ConditionActorEntries *, unsigned int,
                             unsigned char, unsigned char);
