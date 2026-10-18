@@ -797,3 +797,19 @@ the final referenced words end at the independent next prologue. The retained
 C frontier still mismatches. Its transport-record ownership and initialization,
 other IRQ-table writers, enable conditions and complete incoming/writable target
 domains remain open. This discovery does not establish inventory completeness.
+
+
+### Scene-table row 24 source ownership
+
+Seven connected [row-24 bodies](SCENE_RECONSTRUCTION.md#scene-table-row-24-selection-path)
+add 1,244 matching C extent bytes, joining the existing selection step and
+direction helper. The nine observed bodies total 1,544 bytes and include all
+three table callbacks. Existing mapped entries supply the seven boundaries;
+no manual entry or new runtime observation is added. Source controls and the
+full matching/progress gate cover the complete extents, pools and alignment.
+
+This closes these source bodies, while input and scene/index populations,
+resource/text backing and later writers remain open. Current inventory and
+mapped counts come from the fresh generated assets; the fixed 319,640-byte
+historical comparison remains a separate baseline, without a complete code
+denominator.

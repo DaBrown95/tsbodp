@@ -224,29 +224,35 @@ backing, request producers and later aliases still require their own evidence.
 
 ## Scene-table row 24 selection path
 
-Row 24 at `0x08057A9C` supplies the step at `0x08023578`; its direction helper
-is at `0x080238B0`. Their 212- and 88-byte C extents contain 252 instruction
-bytes, 40 literal bytes and eight zero alignment bytes. Names are provisional.
-The step has the actual `ScenePhaseCallback` interface, `void(void)`; the
-helper accepts an unsigned word and returns a byte. The same 466-byte header
-supplies their declarations and the existing queue, input and audio owners.
+Row 24 at `0x08057A9C` now owns its three callback bodies and six connected
+helpers: nine C functions / 1,544 extent bytes. The existing 212-byte step at
+`0x08023578` and 88-byte direction helper at `0x080238B0` are joined by the
+initializer (224), shutdown (36), refresh (172), label creation (128), line
+drawing (72), display preparation (204) and content drawing (408). Names and
+the global-consuming helper interfaces remain provisional.
 
-The helper narrows the request's unsigned scene word at `+8` to a byte and
-handles directions 0 through 3, with unchanged output for other directions.
-Its explicit byte conversions retain wrap behavior beyond scene values 0..7.
-The step preserves input reads across helper calls and compares the saved
-previous byte against the current full scene word. A changed selection plays
-cue 0 and calls the original display refresh. A later test of pressed mask 2
-submits request 11 and plays cue 2. No input snapshot is added across those
-calls. The source controls change the decrement from 1 to 2 and request 11
-to 12; complete extents and pools remain part of matching verification.
+The direction helper preserves byte wrapping and directions 0..3. The step
+preserves input reads across calls, refreshes changed selections and submits
+request 11 on pressed mask 2. The initializer prepares display resources and
+objects; shutdown runs the second transition, releases the object list and
+resets display state. Preparation and refresh construct the observed labels
+and content. Line drawing advances the actual tile/y homes while scanning
+text. Content drawing retains fresh scene/permutation observations between
+calls, captures each resource parameter before its formatter, and preserves
+the two early returns and final font restore on the long path.
 
-The initializer at `0x08023498`, refresh at `0x08023908` and end callback at
-`0x080239B4` remain original. The refresh's `void(void)` declaration is a
-provisional view, without a replacement body. Input arrays have four halfword
-entries, so each local-player index must stay below four; all writers and
-runtime index populations remain open. Owning these two bodies does not prove
-complete row execution, scene-value bounds or resource/display ownership.
+The matching content source uses separate locals for the two real parameter
+values. Each has one definition and one death in the same block, allowing local
+allocation before the longer-lived carriers. Its real y and tile assignments
+also retain the observed initialization order. These measured compiler causes
+do not establish the original source spelling.
+
+The shared header supplies the same canonical object, condition, resource,
+text, queue, input and audio interfaces used by qualification. All complete
+extents, literal pools and alignment participate in matching and source
+controls. Input arrays still require local-player indices below four. Scene,
+permutation, level, text/resource backing, later writers and gameplay/runtime
+populations remain open; owning the nine bodies does not close those domains.
 
 ## Local evidence
 
