@@ -104,3 +104,35 @@ first-table index 14 would read the following table's first entry; this is a
 conditional static finding, not observed input or execution. Other serialized asset
 populations, aliases, later writers and indirect incoming transfers still need
 closure. Matching this controller does not resolve those inventory blockers.
+
+## Horizontal window handlers
+
+Three readable C functions implement horizontal window expansion, contraction
+and joining with the existing `void(unsigned short)` callback interface. Normal
+and strict builds reproduce all **464 native bytes** at their original addresses:
+**368 instruction bytes, 92 literal bytes and four alignment bytes**. All six
+changed-source controls reject; the actual provider and dispatcher API checks
+and full matching/progress gates pass. The alignment bytes lie within these C
+extents and add no separate byte credit.
+
+| Provisional role | ROM entry | Instructions | Literals | Alignment | Whole extent |
+| --- | --- | ---: | ---: | ---: | ---: |
+| [Expand](../src/transition/transition_expand_horizontal_window.c) | `0x08038740` | 118 | 28 | 2 | 148 |
+| [Contract](../src/transition/transition_contract_horizontal_window.c) | `0x080387D4` | 116 | 28 | 0 | 144 |
+| [Join](../src/transition/transition_join_horizontal.c) | `0x08038864` | 134 | 36 | 2 | 172 |
+
+Expansion expresses its initial packed bounds through the actual word-sized
+calculation, avoiding the earlier redundant halfword copy. Contraction and
+joining retain ordinary short `+3`/`-3` updates until the compiler's late combine
+pass forms the scaled steps, after both common-subexpression passes. Expansion
+and joining give their existing persistent window pointers a GNU C R4 location
+annotation; contraction naturally caches its ordinary window address in R4.
+These are explanations of observed compiler output, with no instruction bodies
+embedded in C and no claim to the original source spelling.
+
+The [new header](../include/transition_horizontal_windows.h) declares the three
+actual callback interfaces without defining another callback typedef or table
+bound. All four handler bodies selected by slots 6 and 7 in the two observed
+table prefixes are now source-owned. The fourteen-word prefixes do not establish
+complete table, selector, writer or backing populations. Names remain inferred,
+and these source and byte comparisons provide no runtime or gameplay evidence.

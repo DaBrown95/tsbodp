@@ -52307,6 +52307,75 @@
         "before": "count = (unsigned short)(count - 1);",
         "after": "count = (unsigned short)(count - 2);"
       }
+    },
+    {
+      "name": "transition_expand_horizontal",
+      "rom_offset": 231232,
+      "size": 148,
+      "source": "src/transition/transition_expand_horizontal_window.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "expected_sha256": "031934a2225bfb40cf605363df20e861df29feec2f2b68c56f5b909cdc51ed91",
+      "negative_control": {
+        "before": "*window_register = 0x3F;",
+        "after": "*window_register = 0x3E;"
+      },
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ]
+    },
+    {
+      "name": "transition_contract_horizontal",
+      "rom_offset": 231380,
+      "size": 144,
+      "source": "src/transition/transition_contract_horizontal_window.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "expected_sha256": "b412bc0498b2d43090f556530eb87a9d9211baf69bcef1d311ebf29a818bd24b",
+      "negative_control": {
+        "before": "REG16(0x0400004A) = 0x3F;",
+        "after": "REG16(0x0400004A) = 0x3E;"
+      },
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ]
+    },
+    {
+      "name": "transition_join_horizontal",
+      "rom_offset": 231524,
+      "size": 172,
+      "source": "src/transition/transition_join_horizontal.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "expected_sha256": "3158dc4fb1e363e58be5ed02b48e55007fa46b21e1821553e6ead1b40cb62583",
+      "negative_control": {
+        "before": "REG16(0x0400004A) = 0x3F;",
+        "after": "REG16(0x0400004A) = 0x3E;"
+      },
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ]
     }
   ],
   "assembly": [
