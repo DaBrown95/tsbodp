@@ -209,7 +209,7 @@ contracts. The tile-seventeen-to-sixteen source control changes one compiled
 byte. A static quantity-eight witness changes one backed map cell; quantity zero
 has zero height and cannot establish that effect. Normal and strict compiler
 comparisons, the caller's source control and full-build checks remain separate
-from runtime evidence. The 596-byte refresh helper, adjacent builder and renderer/finalizer remain
+from runtime evidence. The 596-byte refresh helper and renderer/finalizer remain
 unconverted. The step callback is described below.
 
 ## Linked participant quantity display
@@ -287,8 +287,7 @@ signedness, font formal width, field capacity and return type are rejected.
 Changing the font selection from one to two changes one compiled byte and has a
 defined selector-state witness when both banks are backed. Strict compilation,
 changed-source controls and the full-ROM comparison remain separate evidence.
-The other object builder, offer refresh and renderer/finalizer
-remain explicit unconverted regions.
+The offer refresh and renderer/finalizer remain explicit unconverted regions.
 
 ## Header value and link-dependent placement
 

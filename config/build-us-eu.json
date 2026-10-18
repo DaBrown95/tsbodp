@@ -52050,6 +52050,169 @@
         "after": "{\n    owner->enabled = 1;\n}"
       },
       "source": "src/frame/frame_finish_attachment_definitions_77_78.c"
+    },
+    {
+      "name": "frame_initialize_position_cycle_jobs",
+      "rom_offset": 219132,
+      "size": 4,
+      "source": "src/frame/frame_initialize_position_cycle_jobs.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      }
+    },
+    {
+      "name": "frame_tick_position_cycle_jobs",
+      "rom_offset": 219308,
+      "size": 4,
+      "source": "src/frame/frame_tick_position_cycle_jobs.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    owner->enabled = 1;\n}"
+      }
+    },
+    {
+      "name": "frame_step_optional_attachment_kind_12_45fb4",
+      "rom_offset": 286644,
+      "size": 156,
+      "symbols": {
+        "g_actor_reverse_directions": "0x08052858",
+        "frame_set_actor_direction": "0x08001c29",
+        "frame_request_animation": "0x08001b5d",
+        "audio_play_animation_cue": "0x08040ffd",
+        "g_frame_need_effect_definitions": "0x08062e7c",
+        "frame_adjust_actor_needs": "0x0802b825",
+        "frame_need_effect_consume_optional_two": "0x0802f241",
+        "audio_game_stop_sample": "0x08041341"
+      },
+      "thumb_symbols": [
+        "frame_set_actor_direction",
+        "frame_request_animation",
+        "audio_play_animation_cue",
+        "frame_adjust_actor_needs",
+        "frame_need_effect_consume_optional_two",
+        "audio_game_stop_sample"
+      ],
+      "negative_control": {
+        "before": "job->actor, 14)",
+        "after": "job->actor, 15)"
+      },
+      "source": "src/frame/frame_step_optional_attachment_kind_12_45fb4.c",
+      "expected_sha256": "960f1c68a1105292013de3afdc07ef9e178ddda767e0b9af6e0af1443f62e41e"
+    },
+    {
+      "name": "frame_step_optional_attachment_kind_45_46050",
+      "rom_offset": 286800,
+      "size": 156,
+      "source": "src/frame/frame_step_optional_attachment_kind_45_46050.c",
+      "symbols": {
+        "frame_create_attachment_parameter_indicator": "0x801a661",
+        "frame_set_actor_direction": "0x8001c29",
+        "frame_request_animation": "0x8001b5d",
+        "audio_play_animation_cue": "0x8040ffd",
+        "frame_need_effect_consume_optional": "0x802e7d1",
+        "audio_game_stop_sample": "0x8041341",
+        "transition_object_set_state": "0x8001c05",
+        "g_actor_reverse_directions": "0x08052858",
+        "g_frame_need_effect_definitions": "0x08062e7c"
+      },
+      "thumb_symbols": [
+        "frame_create_attachment_parameter_indicator",
+        "frame_set_actor_direction",
+        "frame_request_animation",
+        "audio_play_animation_cue",
+        "frame_need_effect_consume_optional",
+        "audio_game_stop_sample",
+        "transition_object_set_state"
+      ],
+      "negative_control": {
+        "before": "actor, 46)",
+        "after": "actor, 47)"
+      },
+      "expected_sha256": "023e230fc46b4c8c0446fd7fd285a554cfb3e6f75f1c2378577a16b012e6af5e"
+    },
+    {
+      "name": "frame_step_optional_attachment_kind_59",
+      "rom_offset": 286956,
+      "size": 216,
+      "symbols": {
+        "frame_request_animation": "0x08001B5D",
+        "frame_clear_animation_pending": "0x08001BD5",
+        "frame_adjust_actor_needs": "0x0802B825",
+        "frame_need_effect_try_optional": "0x0802E689",
+        "frame_need_effect_accumulate_optional": "0x0802E6F1",
+        "frame_step_attachment_need_timer": "0x0802EDDD",
+        "audio_play_animation_cue": "0x08040FFD",
+        "g_frame_need_effect_definitions": "0x08062E7C"
+      },
+      "thumb_symbols": [
+        "frame_request_animation",
+        "frame_clear_animation_pending",
+        "frame_adjust_actor_needs",
+        "frame_need_effect_try_optional",
+        "frame_need_effect_accumulate_optional",
+        "frame_step_attachment_need_timer",
+        "audio_play_animation_cue"
+      ],
+      "negative_control": {
+        "before": "result = 2;",
+        "after": "result = 3;"
+      },
+      "source": "src/frame/frame_step_optional_attachment_kind_59.c",
+      "expected_sha256": "c20dda8bc62dc754640c8c52fa587a25e9ae07b3fecdb529f5cd6307c043097a"
+    },
+    {
+      "name": "frame_dispatch_optional_attachment_kinds_12_45_59",
+      "rom_offset": 287368,
+      "size": 64,
+      "symbols": {
+        "frame_find_actor_attachment_record": "0x0802ED61",
+        "frame_step_optional_attachment_kind_59": "0x080460ED",
+        "frame_step_optional_attachment_kind_12_45fb4": "0x08045FB5",
+        "frame_step_optional_attachment_kind_45_46050": "0x08046051"
+      },
+      "thumb_symbols": [
+        "frame_find_actor_attachment_record",
+        "frame_step_optional_attachment_kind_59",
+        "frame_step_optional_attachment_kind_12_45fb4",
+        "frame_step_optional_attachment_kind_45_46050"
+      ],
+      "negative_control": {
+        "before": "case FRAME_OPTIONAL_ATTACHMENT_KIND_59:",
+        "after": "case 60:"
+      },
+      "source": "src/frame/frame_dispatch_optional_attachment_kinds_12_45_59.c",
+      "expected_sha256": "e477a8ed290530c6c63c88df5315a7b2bd8d2066314a6e4f6a626bcf4394af7c"
+    },
+    {
+      "name": "frame_initialize_optional_attachment_kinds_12_45_59",
+      "rom_offset": 287172,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      },
+      "source": "src/frame/frame_initialize_optional_attachment_kinds_12_45_59.c",
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb"
+    },
+    {
+      "name": "frame_finish_optional_attachment_kinds_12_45_59",
+      "rom_offset": 287432,
+      "size": 4,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "\n{\n}\n",
+        "after": "\n{\n    owner->optional = 1;\n}\n"
+      },
+      "source": "src/frame/frame_finish_optional_attachment_kinds_12_45_59.c",
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
     }
   ],
   "assembly": [

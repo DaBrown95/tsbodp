@@ -263,3 +263,45 @@ the chosen C definitions; unused original formals and the generic EC caller
 remain unproved. Owner/actor backing, record lifetimes,
 selector bounds, later pointer writers and complete target populations remain
 open; these are static and compiler findings, not runtime observations.
+
+## Shared position-cycle ends and row 92
+
+The shared initializer at `0x080357FC` and tick at `0x080358AC` own eight C
+extent bytes. The observed rows 59–62 and 80–82 install these entries. The
+initializer returns one; the tick is an empty void callback with two source
+zero-alignment bytes. The initializer's unused formal and historical result
+type remain provisional. The uninstalled predicate at `0x08035800` receives no
+credit from these rows.
+
+Row 92's remaining six rooted bodies own 600 C extent bytes:
+
+| Body | ROM address | Full extent |
+| --- | --- | ---: |
+| Kind 12 worker | `0x08045FB4` | 156 |
+| Kind 45 worker | `0x08046050` | 156 |
+| Kind 59 worker | `0x080460EC` | 216 |
+| Initializer | `0x080461C4` | 4 |
+| Kind dispatcher | `0x08046288` | 64 |
+| Empty tick | `0x080462C8` | 4 |
+
+The first two workers reuse already matched operation graphs at their separate
+original addresses. Kind 45 enters cleanup for any nonzero running byte; kinds
+12 and 59 require equality to one. Kind 59 preserves the needs-pointer capture,
+separate direction-byte read, animation choice and phases 0/46/47/1. The
+dispatcher's action enum and source case order 59/12/45 reproduce the compiler's
+comparison tree; they do not identify the historical typedef. Finder results
+are dereferenced without adding an unobserved guard.
+
+The row's capacity, choice selector, EC entry and begin body already have C
+owners. All observed nonnull stored callback bodies in row 92 therefore have
+source. The separate predicate at `0x080461C8` remains uninstalled and excluded.
+This is source ownership of a finite observed row, not complete callback,
+selector, writable-target, backing, scheduling or gameplay closure.
+
+The eight new bodies contribute 608 full C extent bytes, including ten
+source-emitted zero-alignment bytes. Normal and strict complete-byte positives
+and all real changed-source controls pass; growing controls retain their whole
+output. Actual provider/caller definitions and deliberately wrong callback
+contracts qualify the chosen interfaces. Full matching/control and progress
+gates verify the integrated sources. No executable assembly or original
+instruction payload supplies these replacements.
