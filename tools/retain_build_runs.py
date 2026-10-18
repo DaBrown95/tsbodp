@@ -130,10 +130,13 @@ def apply(plan):
                 q = Path(directory, name)
                 allocated += q.stat().st_blocks * 512
                 files += 1
-        receipt = {**item, 'event': 'prepared', 'removed_files': files, 'removed_allocated_bytes': allocated,
+        receipt = {key: value for key, value in item.items() if key != 'retained_input_pins'}
+        receipt.update({'event': 'prepared', 'removed_files': files, 'removed_allocated_bytes': allocated,
+                   'retained_input_count': len(item['retained_input_pins']),
+                   'retained_input_pins_sha256': hashlib.sha256(json.dumps(item['retained_input_pins'], sort_keys=True, separators=(',', ':')).encode()).hexdigest(),
                    'artifacts_pruned': True, 'inputs_duplicated_in_current_proof': True,
                    'compiled_c_functions': report.get('compiled_c_functions'),
-                   'compiled_c_bytes_including_pools_and_alignment': report.get('compiled_c_bytes_including_pools_and_alignment')}
+                   'compiled_c_bytes_including_pools_and_alignment': report.get('compiled_c_bytes_including_pools_and_alignment')})
         with journal.open('a') as f:
             f.write(json.dumps(receipt) + '\n')
             f.flush()

@@ -68,6 +68,27 @@ class PruneTests(unittest.TestCase):
                 self.assertNotIn(held[0]['folder'], [item['folder'] for item in plan['operations']])
                 p.write_bytes(original)
 
+    def test_completed_journal_does_not_repeat_expanded_input_maps(self):
+        for parent in ('build/pilot/runs', 'build/us-eu/runs'):
+            for run in self.runs:
+                for index in range(256):
+                    (self.root / parent / run / 'include' / ('duplicate_%03d.h' % index)).write_text('#define SAME 1\n')
+        plan = m.make_plan()
+        self.assertGreater(len(json.dumps(plan)), 100000)
+        m.apply(plan)
+        journal = next((self.root / m.BASE).glob('prune-*.jsonl'))
+        self.assertLess(journal.stat().st_size, 16384)
+        prepared = [json.loads(line) for line in journal.read_text().splitlines()
+                    if json.loads(line)['event'] == 'prepared']
+        self.assertEqual(len(prepared), len(plan['operations']))
+        for record, operation in zip(prepared, plan['operations']):
+            self.assertNotIn('retained_input_pins', record)
+            self.assertEqual(record['retained_input_count'], len(operation['retained_input_pins']))
+            self.assertEqual(len(record['retained_input_pins_sha256']), 64)
+            self.assertEqual(record['report_sha256'], operation['report_sha256'])
+            self.assertFalse((self.root / operation['folder']).exists())
+        self.assertTrue((self.root / 'build/pilot/runs' / self.runs[-1] / 'include/duplicate_255.h').is_file())
+
     def test_generated_metadata_does_not_require_archiving_duplicate_inputs(self):
         p = self.root / 'build/pilot/runs' / self.runs[0]
         (p / 'header-snapshot.json').write_text('{"historical_receipt": true}')

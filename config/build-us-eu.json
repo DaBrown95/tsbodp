@@ -51783,6 +51783,42 @@
         "before": "display_menu_show_change(5);",
         "after": "display_menu_show_change(6);"
       }
+    },
+    {
+      "name": "resource_prepare",
+      "rom_offset": 44316,
+      "size": 124,
+      "source": "src/resource/resource_prepare.c",
+      "symbols": {
+        "g_resource_arena": "0x03002ee8",
+        "g_resource_word_data": "0x03002ee0",
+        "g_resource_selected": "0x03002edc",
+        "resource_copy_arena_header": "0x0800afa9",
+        "resource_build_object_groups": "0x0800a9f1",
+        "resource_build_word_groups": "0x0800ab51",
+        "resource_build_program_groups": "0x0800ac29",
+        "g_resource_object_data": "0x03002ed8",
+        "g_resource_program_data": "0x03002ee4",
+        "heap_clear": "0x08027a49"
+      },
+      "thumb_symbols": [
+        "heap_clear",
+        "resource_copy_arena_header",
+        "resource_build_object_groups",
+        "resource_build_word_groups",
+        "resource_build_program_groups"
+      ],
+      "negative_control": {
+        "before": "8192",
+        "after": "4096"
+      },
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "8fa10d79091a247f34076687e1ad7baccab738e4c526c6491b6a997383abdbed"
     }
   ],
   "assembly": [

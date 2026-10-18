@@ -15,7 +15,9 @@ source/header snapshots, changed-source controls and raw outputs. The helper
 directly retires a superseded success only when every actual C, assembly,
 header and control input is byte-identical to an input in that current proof.
 It records the retirement under ignored `reports/us-eu/retention/`; it creates
-no historical proof archive. Run-specific dependency files and old hash
+no historical proof archive. The completed journal records each input-map count
+and digest; the full map remains in the plan for the checks before deletion.
+Retire a fulfilled plan after retaining its compact journal. Run-specific dependency files and old hash
 receipts alone do not require retaining duplicate payloads.
 
 Any unique source, header or control input holds the old run for deliberate

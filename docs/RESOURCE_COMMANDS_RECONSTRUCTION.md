@@ -135,6 +135,8 @@ control referencing an undeclared alternate alias failed to link; it was not
 accepted. The retained final controls make two calls to the same declared
 helper and produce real linked differences. All formatted public sources and
 controls were reverified, as were the affected published resource builders and
-scene initializer. Remaining connected targets include the resource controller
-at `0800AD1C`, word-group copier at `0800B018`, object lookup at `0800AEE4`, view
-effect updates and the called scene/configuration operations.
+scene initializer. The resource controller at `0800AD1C` is now C-owned; see
+[resource groups](RESOURCE_GROUPS_RECONSTRUCTION.md) for its producer and backing
+limits. The object lookup at `0800AEE4` was already C-owned. Remaining connected
+targets include the word-group copier at `0800B018`, view effect updates and the
+called scene/configuration operations.

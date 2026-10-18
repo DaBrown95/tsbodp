@@ -1,6 +1,6 @@
 # Resource group reconstruction evidence
 
-This connected batch adds 14 verified C replacements covering 1,352 bytes.
+The original connected batch added 14 verified C replacements covering 1,352 bytes.
 All full extents match at their original ROM addresses, including literal pools
 and zero tail alignment. Every replacement has a changed-source negative control.
 This is static/compiler evidence; no runtime or gameplay claim follows from it.
@@ -33,10 +33,13 @@ are now reconstructed in the connected continuation documented in
 [RESOURCE_COMMANDS_RECONSTRUCTION.md](RESOURCE_COMMANDS_RECONSTRUCTION.md).
 
 The arena allocator reserves 8,192 bytes and stores the pointer at `03002EE8`.
-The selected resource controller at `0800AD1C` clears this arena and chains the
-header copy, object builder, word builder and program builder. Its reconstruction
-is still unconverted. The builders place halfword counts and relative halfword
-offsets into runtime tables. Resource flag bit zero includes a default object
+The selected resource controller at `0800AD1C`, `resource_prepare`, is now a
+complete 124-byte C replacement: 104 instruction bytes and 20 literal bytes,
+with no alignment tail. It clears the arena and chains the header copy, object
+builder, word builder and program builder. The byte selector at `03002EDC`
+indexes the serialized directory; the selected record and each builder's
+returned cursor feed the following call. The builders place halfword counts and
+relative halfword offsets into runtime tables. Resource flag bit zero includes a default object
 and program group from the base resource and prepends the base word groups.
 The source word-group counts are initially read as bytes but loop limits are
 read as halfwords; this access distinction is preserved.
@@ -68,10 +71,9 @@ claiming the entire unknown object area has been decoded. The exact role of the
 projection context and the flag remains provisional.
 
 Useful mismatches, compiler inputs, linked outputs and raw comparisons remain
-in the ignored local agent reports. In particular, the controller `0800AD1C`
-and word-group copy `0800B018` remain explicit unconverted regions. The latter
-is the next connected builder dependency. A fresh current-header replay of its
-original authored candidate is 64 bytes / 61 differences against the native
+in the ignored local agent reports. The word-group copy at `0800B018` remains
+an explicit unconverted region and the next connected builder dependency. A
+fresh current-header replay of its original authored candidate is 64 bytes / 61 differences against the native
 68-byte extent. Its eight-byte assignment lowers as a DI copy rather than the
 native block transfer. A fixed eight-byte representation copy from the existing
 four-aligned typed records instead selects the native block transfer without
@@ -104,10 +106,10 @@ are access-view sizes, while the existing allocator still reserves 8,192 bytes.
 The compiler's header size changes from twelve to four; all field offsets,
 the eight-byte record stride and the arena allocation remain unchanged.
 
-All ten current header importers and the allocation/clear providers have fresh
-positive and changed-source controls; the copier also has a strict declaration
-pair. Pinned layout and API checks reject the old one-element bound, incorrect
-field widths, record stride, packing and return type. The old declaration can
+All ten header importers in the declaration-correction batch, and its
+allocation/clear providers, received fresh positive and changed-source controls;
+the copier also has a strict declaration pair. Pinned layout and API checks
+reject the old one-element bound, incorrect field widths, record stride, packing and return type. The old declaration can
 still compile to the same complete 72 bytes, which demonstrates why byte
 equality alone does not validate a declared array bound. Actual wrong count and
 size-word declarations change native bytes; packing the record introduces an
@@ -116,6 +118,32 @@ alias. Original source and diagnostic evidence are retained privately.
 
 The zero-length member describes the observed variable-count access rather
 than a valid-capacity guarantee. Serialized counts, pointers, source alignment,
-byte-size values and the arena's remaining capacity stay unchecked. The original
-controller and 68-byte word-group copier remain unconverted; no runtime,
-hardware or gameplay result follows from this declaration correction.
+byte-size values and the arena's remaining capacity stay unchecked.
+The 68-byte word-group copier remains unconverted; no runtime, hardware or gameplay
+result follows from this declaration correction or the controller match.
+
+## Selected resource controller
+
+The controller uses only the existing resource-builder and heap headers. Its
+proper `void(const unsigned char *)` contract is checked against the existing
+scene-actor declaration, together with complete definitions of all five called
+providers. ARM32 checks retain the four-byte arena prefix, records at offset
+four, eight-byte record stride and the byte selector. Normal and strict
+positives match the complete fixed extent; changing the clear size from 8,192
+to 4,096 produces the same one-byte rejection in both profiles.
+
+The source reuses a real cursor for the directory address, the selected-byte
+address, the selected resource and provider results. Taking the selected-byte
+address before its read preserves the separate directory snapshot through
+first CSE and later register moves. The existing R4 input and R6 base constraints
+operate on real values: the halfword base offset is consumed before R6 becomes
+the base pointer. Its offset value is dead at that addition; the base then
+crosses the builder calls. Combine emits the native halfword load into R6 and
+addition of the input, without a stale offset use, instruction assembly or
+extra memory observation. This explains the matched producer, not a unique
+original source form.
+
+Serialized directory and selected-record extents, source alignment, clear/input
+aliasing and the arena's available capacity remain caller obligations. The
+zero-length arena tail does not establish a valid selector or blob population.
+No runtime or complete resource-system claim follows from the controller.
