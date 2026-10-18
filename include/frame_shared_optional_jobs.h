@@ -10,4 +10,9 @@ unsigned int frame_shared_optional_timed_step(struct FrameNeedEffectState *,stru
 /* EC action switches; unused formal roles remain inferred. */
 unsigned int frame_prepare_shared_optional_jobs(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 
+
+unsigned int frame_initialize_shared_optional_jobs(struct FrameNeedEffectState *);
+unsigned int frame_unrooted_shared_optional_check_3ac00(struct FrameNeedEffectState *, struct FrameObject *);
+void frame_tick_shared_optional_jobs(struct FrameNeedEffectState *);
+
 #endif

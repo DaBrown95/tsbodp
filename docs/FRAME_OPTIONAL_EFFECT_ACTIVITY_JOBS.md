@@ -10,11 +10,23 @@ it does not establish original compiler or original source provenance.
 
 The 148-row observed definition prefix has these begin/dispatch pointers in
 rows 90, 109, and 110. Its existing E8 selector writes kind 53 or 45 first, may
-write kind 12 second, and returns one. Its original initializer `0x0803A968`
-(4 bytes), EC callback `0x0803A9CC` (8 bytes), and removal `0x0803AA64`
-(4 bytes) remain original with zero new C credit. The neighboring 40-byte
-check at `0x0803A96C` is not installed by those rows and remains original.
-Observed prefix coverage is not a complete table-capacity claim.
+write kind 12 second, and returns one. The EC callback `0x0803A9CC` (8 bytes)
+already has matching C ownership as `frame_prepare_optional_attachment_kinds_12_45_53`.
+The stored initializer `0x0803A968/4`, neighboring check `0x0803A96C/40`, and
+F8 callback `0x0803AA64/4` now have source ownership. Their complete 48-byte
+extents contain 44 instruction bytes and four source alignment bytes: the check
+has a 38-byte function symbol and two trailing zero bytes; F8 has a two-byte
+function symbol and two trailing zero bytes.
+
+The initializer returns word one; its unused owner formal and result use remain
+inferred compatible contracts. F8 is an empty void owner callback, so the
+historical removal label does not prove destructor semantics. The check calls
+the existing unsigned-byte attachment counter before testing owner byte96 for
+exactly one. Its explicitly unrooted name records that these rows do not install
+it. The existing family header declares all three forms. Real source controls
+change the initializer result, owner-byte comparison, or an actual owner-byte
+store in F8. Matching source and typed interfaces do not close incoming targets,
+runtime populations or the observed table's capacity.
 
 The dispatcher consumes the stored full-word kind. A genuine operation-kind
 enum avoids this compiler's ASCII-weighted integer-switch cost heuristic;

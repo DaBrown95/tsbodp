@@ -15,4 +15,9 @@ unsigned int frame_optional_indicator_activity_step(struct FrameNeedEffectState 
 unsigned int frame_optional_effect_activity_step(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
 unsigned int frame_optional_effect_activity_begin(struct FrameNeedEffectState *,struct FrameObject *,unsigned int);
 unsigned int frame_optional_effect_activity_dispatch(struct FrameNeedEffectState *,struct FrameObject *);
+
+unsigned int frame_initialize_optional_effect_activity_jobs(struct FrameNeedEffectState *);
+unsigned int frame_unrooted_optional_effect_activity_check_3a96c(struct FrameNeedEffectState *, struct FrameObject *);
+void frame_tick_optional_effect_activity_jobs(struct FrameNeedEffectState *);
+
 #endif
