@@ -151,7 +151,7 @@ through 63 remain unproved; no new guards are invented. The unsigned source
 shift describes the bank operation within that domain, while the complete
 pinned-compiler comparison preserves the original machine bytes. The flag
 setters, factory and interaction callback are reconstructed below; the weekly
-reconciliation retains its unconverted one-byte compiler mismatch.
+reconciliation remains unconverted.
 
 ## Daily flag factory and interaction closure
 
@@ -222,5 +222,4 @@ literal pools and original zero tail alignment match; controls changing factory
 flags, bank boundaries and the accepted owner state all reject. The seven-function
 flag-object path totals 800 C extent bytes and joins the daily flag reset and
 save-word accessors. Whole-ROM equality and gameplay behavior remain separate
-claims. The weekly entry reconciliation remains unconverted with its retained
-one-byte mismatch.
+claims. The weekly entry reconciliation remains unconverted.
