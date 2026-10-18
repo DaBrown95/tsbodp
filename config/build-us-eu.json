@@ -52376,6 +52376,75 @@
         "-O2",
         "-mthumb-interwork"
       ]
+    },
+    {
+      "name": "transition_expand_vertical",
+      "rom_offset": 231872,
+      "size": 148,
+      "source": "src/transition/transition_expand_vertical_window.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "expected_sha256": "81af6e9babcadb63b5d7fda7fbabfbce60aa24751da57fdcac04b1a44fd93ae2",
+      "negative_control": {
+        "before": "*window_register = 0x3F;",
+        "after": "*window_register = 0x3E;"
+      },
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ]
+    },
+    {
+      "name": "transition_contract_vertical",
+      "rom_offset": 232020,
+      "size": 144,
+      "source": "src/transition/transition_contract_vertical_window.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "negative_control": {
+        "before": "REG16(0x0400004A) = 0x3F;",
+        "after": "REG16(0x0400004A) = 0x3E;"
+      },
+      "expected_sha256": "b9068546a33eaab315301ab4736af38e1d760f8f2fd2205ec2bb3e53a8abe799",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ]
+    },
+    {
+      "name": "transition_join_vertical",
+      "rom_offset": 232164,
+      "size": 172,
+      "source": "src/transition/transition_join_vertical.c",
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "negative_control": {
+        "before": "REG16(0x0400004A) = 0x3F;",
+        "after": "REG16(0x0400004A) = 0x3E;"
+      },
+      "expected_sha256": "a805fd585c5b7a2763d53e5df006e0b4acf01d791247ad1921c0a53751291daf",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ]
     }
   ],
   "assembly": [

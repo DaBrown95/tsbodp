@@ -136,3 +136,40 @@ bound. All four handler bodies selected by slots 6 and 7 in the two observed
 table prefixes are now source-owned. The fourteen-word prefixes do not establish
 complete table, selector, writer or backing populations. Names remain inferred,
 and these source and byte comparisons provide no runtime or gameplay evidence.
+
+## Vertical window handlers
+
+Three readable vertical handlers use the same `void(unsigned short)` callback
+interface. Normal and strict builds reproduce all **464 native bytes**:
+**368 instruction bytes, 92 literal bytes and four alignment bytes**. All six
+actual changed-source controls reject, and the actual provider/dispatcher API
+checks pass. Full matching/progress gates pass. The four alignment
+bytes lie within these C extents and add no separate byte credit.
+
+| Provisional role | ROM entry | Instructions | Literals | Alignment | Whole extent |
+| --- | --- | ---: | ---: | ---: | ---: |
+| [Expand](../src/transition/transition_expand_vertical_window.c) | `0x080389C0` | 118 | 28 | 2 | 148 |
+| [Contract](../src/transition/transition_contract_vertical_window.c) | `0x08038A54` | 116 | 28 | 0 | 144 |
+| [Join](../src/transition/transition_join_vertical.c) | `0x08038AE4` | 134 | 36 | 2 | 172 |
+
+The horizontal source explanations transfer to these observed vertical bodies.
+Contraction and joining keep ordinary short `+2`/`-2` arithmetic through both
+common-subexpression passes; the late combine pass first forms the scaled
+steps. Contraction naturally caches its ordinary window address in R4. Expansion
+and joining retain genuine persistent window pointers at GNU C R4 locations;
+expansion also retains its short-lived R2 hardware cursor and word-sized initial
+packed bounds. Joining preserves the actual initial cursor order
+`0x04000040 -> 0x04000044 -> 0x04000042`, before using the persistent
+`0x04000046` window pointer. These explain captured compiler output without
+instruction assembly or a claim to the original source spelling.
+
+Contraction makes 40 updates plus one initial wait, ending at 80/80; joining
+makes 41 updates, ending at 82/78. These are finite source/native arithmetic
+facts, not gameplay observations. The [header](../include/transition_vertical_windows.h)
+declares only the actual interfaces. Both dispatchers retain an unsigned-word
+kind and unsized tables. Together with the existing
+[split-vertical body](../src/transition/transition_split_vertical.c), all four
+bodies selected by slots 8 and 9 in the two observed table prefixes are now
+source-owned. The fourteen-word prefixes do not close
+selector, table, writer or backing populations; runtime and gameplay claims
+remain open.
