@@ -164,42 +164,50 @@ verification, while the unique older harness draft was retained locally.
 
 ## Pending-display storage follow-up
 
-A separate private observer watched all 23 syntactic callback-shaped words:
-eleven staged words and twelve queued words, using 92 byte-address watches.
-Authored STM, word, byte-at-+3 and halfword-at-+2 stores passed typed-readback
-controls; nearby storage was excluded, and displaced watches reported zero
-hooks with identical fixture state. The log-overflow control also passed.
-No game callback was injected and no game code or register was patched.
+The latest canonical private observer watches all 23 syntactic callback-shaped
+words: eleven staged words and twelve queued words, using 92 byte-address
+watches. It completes all 128 selected renderer returns at frame 1,433, after
+43,437,271 observer steps and 402,438,870 ticks. No callback was injected and no
+game code or register was patched.
 
-The real appearance-preview run stopped at its explicit output limit at frame
-1,257, after 35,740,009 observer steps and 39 of the intended 128 selected
-renderer returns. Its 194,089-byte trace has complete JSON lines and mandatory
-counters, but one detailed changed-write sample was explicitly dropped.
-There were 974 hooked writes and 974 readbacks: 330 detailed-sample attempts,
-329 emitted samples, one dropped sample and 644 counted unchanged omissions.
-Queued word 11 at `0x030023C0` aliases the tile bitmap and accounts for 907
-writes and 305 changes: 304 changed-value records were emitted, and the last
-changed sample was explicitly dropped. The 305 emitted samples for this word
-also include its first, unchanged write. Its arbitrary values are not execution
-targets without an actual dispatch. CPU contexts lie within the owned tile allocation
-and release routines; the DMA context is not a CPU store address.
+All 1,454 hooked writes have typed after-step readbacks. Across the watched
+words, 30 write-detail records were emitted, 735 alias details were coalesced
+and 689 unchanged writes were counted without repeated detail. No output was
+dropped. The final queued callback-shaped word at `0x030023C0` aliases the tile
+bitmap: it has 1,387 hits/readbacks, 740 changes and eight CPU/DMA writer-context
+groups. Its arbitrary bitmap values are not execution targets. The canonical
+contexts distinguish queued reset, fixed bitmap fill, commit's word AND and
+mark-allocated byte OR; the DMA PC is context, not a CPU store address. The
+statically supported immediate-release context at raw PC `0x08047A34` was not
+observed on this route.
 
-All 1,227 call-site arrivals were counted. Eight retained tuples and 1,219 counted
-duplicates carried index zero, default target `0x08047081` and the expected two
-argument addresses. One actual startup BL reached the register-call veneer,
-then its BX reached the default target with the expected arguments, return
-address, stack and Thumb state. That is a point transfer witness before the
-target instruction retires. It closes no callback domain or target population.
+All 1,403 call-site arrivals were counted. Eight retained tuples and 1,395
+counted duplicates carry index zero, default target `0x08047081` and argument
+addresses `0x03002258` / `0x0300225C`. One startup BL reached the register-call
+veneer, then its BX reached the default target with the expected arguments,
+return address, stack and Thumb state. These are point-arrival witnesses; the
+target instruction had not retired at the target witness. They do not establish
+that every later call retired or close the incoming target population.
 
-The cap failure prevented the full-route endpoint, real replay and displaced
-real-run controls; none were claimed or retried. Informational/debug log counts
-were also nonzero in the retained earlier full route. They are separate from
-warnings/errors, which remained zero. The new reporter's all-log-levels-zero
-expectation was overstrict and is preserved as an additional reporting issue;
-it was not reached after the earlier native cap failure. Unique harness,
-fixtures, failed build/checker attempts and useful raw prefix remain local.
-This follow-up adds no C credit, runtime census input or completed-route
-absence claim. Writable aliases, unchecked indices and other paths remain open.
+The actual 128 writer-guard checks passed. Thirteen further commands passed:
+log-overflow, authored 516-store fixture and displaced-fixture controls, a
+missing-ROM failure, seven invalid-bound failures, a cold real replay and a
+displaced-watch real route. The fixture retains the corrected frame-one endpoint,
+515 alias changes, typed STM/word/byte/halfword values and unchanged nearby
+storage. The cold replay is byte-identical to the 75,721-byte normal trace.
+Displaced watches report zero hooks/readbacks while preserving the complete
+execution endpoint, final CPU state, route counters, filtered transfer protocol
+and all 23 logical final words. Seven reporter mutations were rejected after
+both real comparisons passed. Warning/error counters remain zero;
+informational/debug counts are retained separately.
+
+The earlier trace's output-cap failure at frame 1,257 and 39/128 returns remains
+historical evidence: it explicitly dropped one changed-write detail. Its strict
+all-log-levels-zero reporting issue and later unknown-writer stops are also
+preserved locally. The successful successor coalesces detail without losing
+write/readback accounting. These observations add no C credit or static-census
+input and close no arbitrary writer, alias, queue-count, callback-index or target
+domain. Other paths and gameplay remain open.
 
 ## Meaning of an observation
 

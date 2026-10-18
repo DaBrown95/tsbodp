@@ -1,4 +1,5 @@
 #include "display_menu_results.h"
+#include "display_text_fields.h"
 
 void display_menu_draw_choice_result(void)
 {

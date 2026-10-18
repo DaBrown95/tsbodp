@@ -1,17 +1,17 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "18 Oct 2026, 08:16 BST",
-  "compiled_c_functions": 2258,
-  "compiled_c_bytes": 286400,
+  "verified_at": "18 Oct 2026, 11:58 BST",
+  "compiled_c_functions": 2261,
+  "compiled_c_bytes": 287372,
   "assembly_glue_bytes": 4060,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16486756,
+  "unconverted_rom_bytes": 16485784,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
-  "discovered_entries": 2540,
-  "bounded_control_flow_bodies": 229,
+  "discovered_entries": 2539,
+  "bounded_control_flow_bodies": 226,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 98,
@@ -23,12 +23,12 @@
     "nonconflicting_qualified_instruction_bytes": 281232,
     "raw_referenced_data_union_bytes": 35692,
     "qualified_referenced_data_union_bytes": 35692,
-    "source_glue_owned_extent_bytes": 290460,
+    "source_glue_owned_extent_bytes": 291432,
     "estimated_envelope_union_bytes": 325422,
     "classification_bytes": {
-      "estimated_envelope_unclassified": 4718,
+      "estimated_envelope_unclassified": 4706,
       "instruction_and_referenced_data_dual_use": 4,
-      "known_data": 22626,
+      "known_data": 22638,
       "owned_extent_unclassified": 34,
       "strong_rooted_instruction": 281228,
       "strong_rooted_referenced_data": 35688,
@@ -13968,25 +13968,18 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803E800",
+      "name": "display_menu_step",
       "group": "ROM 0803xxxx",
       "rom_offset": 256000,
-      "size": 174,
-      "status": "mapped_code"
+      "size": 736,
+      "status": "exact_c"
     },
     {
-      "name": "sub_0803E8AE",
-      "group": "ROM 0803xxxx",
-      "rom_offset": 256174,
-      "size": 562,
-      "status": "candidate"
-    },
-    {
-      "name": "sub_0803EAE0",
+      "name": "display_menu_shutdown",
       "group": "ROM 0803xxxx",
       "rom_offset": 256736,
       "size": 156,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "display_menu_execute_row",
@@ -14178,11 +14171,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08040F44",
+      "name": "display_menu_step_result_effects",
       "group": "ROM 0804xxxx",
       "rom_offset": 266052,
       "size": 80,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "display_menu_stage_result_text",
@@ -30369,22 +30362,16 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0803E800",
+      "name": "display_menu_step",
       "rom_offset": 256000,
-      "size": 174,
-      "status": "mapped_code"
+      "size": 736,
+      "status": "exact_c"
     },
     {
-      "name": "sub_0803E8AE",
-      "rom_offset": 256174,
-      "size": 562,
-      "status": "candidate"
-    },
-    {
-      "name": "sub_0803EAE0",
+      "name": "display_menu_shutdown",
       "rom_offset": 256736,
       "size": 156,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "display_menu_execute_row",
@@ -30555,10 +30542,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08040F44",
+      "name": "display_menu_step_result_effects",
       "rom_offset": 266052,
       "size": 80,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "display_menu_stage_result_text",
@@ -34150,8 +34137,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "a8ce4407159ccd569725eb7fd43b5b5d5e84514f6b00b78a96f603b631815aa6",
-    "assets/rom-inventory.json": "8fde39ee3565b17c6f114761bff56b8f6c13bb0d5703f9c8da1f2c7dc8638f3c",
+    "config/build-us-eu.json": "44e69ac426356c564300f98edc0157e7fffff5cd5c4147d0e11c45e354b8f420",
+    "assets/rom-inventory.json": "741f1b30c3c69d09cfa2c59339eba843906704553f8177fec13db30b851c8408",
     "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",

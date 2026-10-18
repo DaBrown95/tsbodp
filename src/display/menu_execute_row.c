@@ -1,4 +1,5 @@
 #include "display_menu_results.h"
+#include "display_window.h"
 
 static inline unsigned int selected_result_text(void)
 {
@@ -17,7 +18,7 @@ void display_menu_execute_row(void)
     display_enable_window(1);
     {
         struct DisplayMenuState *menu = &g_display_menu_state;
-        unsigned char *active = (unsigned char *)menu + 0x2c;
+        unsigned char *active = &menu->repeat_delay;
         unsigned int zero = 0;
         *active = zero;
         display_set_background_scroll_target(zero, 0, 0, 1);

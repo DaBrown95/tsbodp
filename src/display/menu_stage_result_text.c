@@ -1,4 +1,5 @@
 #include "display_menu_results.h"
+#include "display_window.h"
 
 void display_menu_stage_result_text(const char *text)
 {

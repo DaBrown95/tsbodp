@@ -51659,6 +51659,130 @@
         "after": "{\n    g_game_flags ^= 1;\n}\n"
       },
       "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
+    },
+    {
+      "name": "display_menu_step",
+      "rom_offset": 256000,
+      "size": 736,
+      "source": "src/display/menu_step.c",
+      "symbols": {
+        "g_scene_request": "0x03004350",
+        "g_input_pressed": "0x03004228",
+        "g_input_current": "0x03004220",
+        "g_input_config": "0x030040e0",
+        "g_display_menu_state": "0x03002198",
+        "g_display_scene_frame_objects": "0x030043b0",
+        "g_scene_id": "0x03004334",
+        "g_frame_actor_greetings": "0x080612a4",
+        "frame_step_transient_effects": "0x080310c5",
+        "input_step_vertical_pressed": "0x0801f3a9",
+        "input_step_vertical_held": "0x0801f405",
+        "display_set_background_scroll_target": "0x0800dd81",
+        "display_menu_draw_lines": "0x0803efb9",
+        "display_menu_execute_row": "0x0803eb7d",
+        "display_menu_prepare_primary": "0x0803eefd",
+        "display_menu_step_result_effects": "0x08040f45",
+        "resource_submit_scene": "0x08027dd1",
+        "audio_play_animation_cue": "0x08040ffd",
+        "__floatsidf": "0x0804dc29",
+        "__adddf3": "0x0804d49d",
+        "__muldf3": "0x0804d505",
+        "__fixdfsi": "0x0804dca5"
+      },
+      "thumb_symbols": [
+        "frame_step_transient_effects",
+        "input_step_vertical_pressed",
+        "input_step_vertical_held",
+        "display_set_background_scroll_target",
+        "display_menu_draw_lines",
+        "display_menu_execute_row",
+        "display_menu_prepare_primary",
+        "display_menu_step_result_effects",
+        "resource_submit_scene",
+        "audio_play_animation_cue",
+        "__floatsidf",
+        "__adddf3",
+        "__muldf3",
+        "__fixdfsi"
+      ],
+      "expected_sha256": "0f07a48a57de4a580fc2313a227addba0cb1a97281322d7bdc764d4d86b23806",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "g_display_menu_state.repeat_delay = 4;",
+        "after": "g_display_menu_state.repeat_delay = 5;"
+      }
+    },
+    {
+      "name": "display_menu_shutdown",
+      "rom_offset": 256736,
+      "size": 156,
+      "source": "src/display/menu_shutdown.c",
+      "symbols": {
+        "g_need_effect_player": "0x030040e0",
+        "g_display_menu_relation_state": "0x03003960",
+        "g_display_menu_state": "0x03002198",
+        "g_frame_primary_list": "0x030024f0",
+        "g_scene_request": "0x03004350",
+        "display_menu_read_relation": "0x08035fcd",
+        "transition_run_second": "0x08039435",
+        "display_release_object_list": "0x08001189",
+        "display_reset_palette_jobs": "0x080117bd",
+        "frame_clear_transient_effects": "0x0803105d",
+        "frame_clear_render_effects": "0x08031099",
+        "frame_release_transient_definition_tiles": "0x08030fb5",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_variant_state": "0x08001be1",
+        "scene_clear_retained_display": "0x0802698d"
+      },
+      "thumb_symbols": [
+        "display_menu_read_relation",
+        "transition_run_second",
+        "display_release_object_list",
+        "display_reset_palette_jobs",
+        "frame_clear_transient_effects",
+        "frame_clear_render_effects",
+        "frame_release_transient_definition_tiles",
+        "transition_object_set_state",
+        "frame_set_variant_state",
+        "scene_clear_retained_display"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "5078619ded41d4385f618fd95a2b5817fe321ffebf64519be847d0614595e95e",
+      "negative_control": {
+        "before": "transition_run_second(63, 0);",
+        "after": "transition_run_second(62, 0);"
+      }
+    },
+    {
+      "name": "display_menu_step_result_effects",
+      "rom_offset": 266052,
+      "size": 80,
+      "source": "src/display/menu_step_result_effects.c",
+      "symbols": {
+        "g_display_menu_state": "0x03002198",
+        "g_scene_request": "0x03004350",
+        "display_menu_show_change": "0x080408a9",
+        "__umodsi3": "0x0804cf51"
+      },
+      "thumb_symbols": [
+        "display_menu_show_change",
+        "__umodsi3"
+      ],
+      "expected_sha256": "c7618355b777f88aa029a7642213644157c2c4b23f397a84741c3cbad1ee04f4",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "display_menu_show_change(5);",
+        "after": "display_menu_show_change(6);"
+      }
     }
   ],
   "assembly": [

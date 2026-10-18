@@ -46,10 +46,15 @@ first twelve bytes of the tile-allocation bitmap at `0x030023B8`. These are
 actual accesses, not safe caller counts, backing-capacity or exhaustive writer
 proofs. Incoming aliases, counts, indices and callback targets remain open.
 
-The [bounded boot](RUNTIME_OBSERVATIONS.md) records 270 handler/default-callback
-arrivals and eight sampled argument/target sets. Every source extent has a
-changed-source control, including the no-op's extra output bytes. Those byte
-comparisons and observations do not close the remaining runtime domains.
+The latest [bounded route](RUNTIME_OBSERVATIONS.md#pending-display-storage-follow-up)
+completes 128 selected renderer returns and counts 1,403 pending calls; eight
+sampled tuples and 1,395 counted duplicates use index zero/default target
+`0x08047081`. One BL/veneer/BX arrival pair confirms that transfer before the
+target instruction retires. Actual guard checks, thirteen controls, seven
+reporter negatives, byte-identical cold replay and displaced-watch state
+agreement support this finite observation. Every source extent retains its
+changed-source control. Bitmap aliases are data, and arbitrary writer, index,
+count and target domains remain open; no C credit follows from the route.
 
 Palette jobs have two observed layouts. The twelve range records are 8 bytes
 at `0x030032f0`; the twelve block records are 20 bytes at `0x03003170`. Bit 1
@@ -349,3 +354,23 @@ and changed-source raw comparisons, are retained locally. Existing collider
 writer names and the higher-level meaning of the kind byte still require
 connected evidence. This is static mapping and compiler evidence; no new
 runtime or gameplay claim is made.
+
+## Phase-15 menu display state
+
+The phase-15 menu uses the partial state at `0x03002198`. Its existing code,
+parameter and position arrays retain offsets 20, 25 and 30; the observed repeat
+delay is an unsigned byte at offset 44. The C view has size 48 and alignment
+four, ending at the next named catalog state. This does not establish an
+original allocation boundary or the complete storage behind either owner.
+
+The executor uses that real byte member and the existing window APIs. Three
+text callers include their proper line-height, field-copy and window headers.
+The new callbacks and affected layout importers retain complete matching
+normal/strict outputs and meaningful changed-source controls; prototype-only
+import reach is checked again by the fresh full gate. No instruction body or
+output patch supplies the match.
+
+The 736-byte step contains five two-byte compiler-emitted alignment spans.
+An odd word at ROM `0xE40A40` still carries `0x0803E8AF`; its incoming origin
+remains weak and unclassified. The padding at `0x03E8AE` has a source role,
+but that role does not exclude an alternate execution entry.

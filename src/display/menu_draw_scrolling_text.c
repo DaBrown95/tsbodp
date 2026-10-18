@@ -1,4 +1,5 @@
 #include "display_menu_pages.h"
+#include "display_catalog_presentation.h"
 
 void display_menu_draw_scrolling_text(const char *text)
 {

@@ -44,6 +44,7 @@ void display_menu_draw_primary_result(int, unsigned char);
 void display_menu_draw_secondary_result(int), display_menu_draw_choice_result(void);
 void display_menu_stage_result_text(const char *), display_menu_reset_result_text(void);
 void display_menu_execute_row(void);
+void display_menu_step_result_effects(void);
 /* Accepted needs updater; the local storage is a partial role view. */
 void frame_adjust_actor_needs(struct FrameActorNeedState *, unsigned int, unsigned char);
 void display_text_set_line_height(int);

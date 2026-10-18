@@ -20,6 +20,10 @@ extern InputU8 g_input_direction_table[16];
 void input_clear(void);
 void input_poll(void);
 void input_enable(void);
+InputU32 input_step_vertical_pressed(InputU32 *, InputU32, InputU32,
+                                     InputU8, InputU8);
+InputU32 input_step_vertical_held(InputU32 *, InputU32, InputU32,
+                                  InputU8, InputU8);
 
 /* Provisional unrooted entry views; incoming callers and unused formals unknown. */
 void input_toggle_byte_unrooted_1f574(InputU8 *);

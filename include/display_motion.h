@@ -11,6 +11,8 @@ struct DisplayBackgroundWave {
     short phase_step_x, phase_step_y, amplitude_x, amplitude_y;
 };
 extern void display_set_background_position(unsigned int index, int x, int y);
+extern void display_set_background_scroll_target(unsigned int index, int x, int y,
+    unsigned int duration);
 extern void display_set_background_position_x(unsigned int index, int x);
 extern void display_set_background_position_y(unsigned int index, int y);
 extern void display_offset_background_position(unsigned int index, int x, int y);

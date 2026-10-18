@@ -263,3 +263,36 @@ compiler output, linked ELF, reference/candidate bytes and complete comparison
 reports. `shared-header-irq_vblank/` and `shared-header-background_animation_tick/`
 revalidate the existing matches after shared declaration changes. Rejected
 scene-loop, character-control and animation-loader attempts remain local.
+
+## Phase-table row 15 menu callbacks
+
+Row 15 at ROM `0x08057A30` names the 744-byte initializer at `0x0803E518`,
+736-byte step at `0x0803E800` and 156-byte shutdown at `0x0803EAE0`. Their
+Thumb entries are odd. These three callback bodies cover 1,636 extent bytes;
+the initializer was already owned. The separate 80-byte result-effect helper
+at `0x08040F44` completes the step's direct local path. The new three C bodies
+add 972 extent bytes: 820 instructions, 140 literal bytes and 12 alignment
+bytes. These are source/compiler extents, separate from runtime closure.
+
+The step captures the request phase after transient-effect updates. Its first
+phase handles pressed navigation and activation, the second handles held
+navigation with a four-tick repeat byte, and the third advances selected
+result effects and their countdown. Codes three, four and five select the
+helper's five-tick effect cadence. Cancel submits the existing scene request
+and greeting cue. The byte position is promoted to signed `int` before
+conversion to `double`; addition of negative 116 produces the native signed
+conversion/add/multiply sequence. The actual compiler's constant words and
+full linked bytes establish that result, not a host floating-point layout.
+
+Shutdown captures the object and old relation byte, narrows the getter's
+result to a byte, performs cleanup, then subtracts the two signed-byte values.
+The narrowed difference is stored at object byte `+0x64`, inside the existing
+`motion_storage` owner. The relation byte at `+0x20` lies inside its 136-byte
+owner. Matching preserves this order; it does not prove that the captured
+object survives every cleanup input.
+
+The chosen `void(void)` callback interfaces agree with the current phase
+table contract. Player selectors, code scans, object slots, greeting/resource
+indices, incoming request kinds and later writers remain open domains. A
+finite table prefix or successful byte match supplies no broader bounds or
+gameplay claim. See [display state](DISPLAY_RECONSTRUCTION.md#phase-15-menu-display-state).

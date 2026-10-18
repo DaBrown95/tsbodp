@@ -7,6 +7,8 @@ struct DisplayMenuState {
     unsigned char codes[5], parameters[5], positions[6];
     unsigned char resource_shown, choice, unknown_26, unknown_27;
     unsigned char unknown_28, unknown_29, unknown_2a, unknown_2b;
+    /* Held-direction countdown at +2C; the name is provisional. */
+    unsigned char repeat_delay;
 };
 struct DisplayMenuTextRecord {
     unsigned short text, unknown_02;
@@ -16,5 +18,6 @@ extern struct DisplayMenuState g_display_menu_state;
 extern const struct DisplayMenuTextRecord *g_display_menu_text_records[];
 void display_menu_draw_lines(void);
 void display_menu_initialize(void);
+void display_menu_step(void), display_menu_shutdown(void);
 
 #endif
