@@ -20,6 +20,7 @@ extern const unsigned int g_scene_link_entry_control_linked;
 extern const unsigned int g_scene_link_entry_control1;
 extern const unsigned int g_scene_link_entry_text_control;
 /* Existing canonical readonly declarations, not new mutable owners. */
+extern const struct DisplayTimeRecord g_resource_selector_clock;
 extern const unsigned short g_display_menu_palette_data[];
 extern const struct BackgroundResource g_display_menu_palette_resource;
 extern const struct BackgroundResource g_scene_link_entry_background_unlinked;
@@ -40,7 +41,11 @@ void scene_link_entry_confirm_offer(void);
 /* Explicit original service boundaries. No reconstructed C is claimed. */
 void scene_link_entry_build_objects_original(void);
 void scene_link_entry_refresh_offers_original(void);
+void scene_link_entry_step_offers(void);
+void scene_link_entry_step_linked_offers(void);
+
 void scene_link_entry_initialize(void);
+void scene_link_entry_step(void);
 
 /* End callback and existing transition provider boundaries. */
 void transition_run_second(unsigned short, unsigned int);

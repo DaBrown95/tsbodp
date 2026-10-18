@@ -51,11 +51,10 @@ and gameplay have not been validated.
 The adjacent 404-byte builder remains unconverted: ordinary candidates have
 seventeen and twenty-four differing bytes. Reusing its counters did not resolve
 the allocation difference; retained compiler diagnostics explain that failed
-hypothesis. The step callback, remaining setup/update helpers, renderer and
-finalizer remain explicit original regions. The retained step candidate now
-initializes the truthful empty active payload member for ignored marker kinds
-12/13, without assigning transport bytes. Its phase/input mismatch still prevents
-source credit. Inventory discoveries likewise add no reconstructed-C credit. The
+hypothesis. The remaining setup/update helpers, renderer and finalizer remain explicit
+original regions. The step callback is now reconstructed below. It initializes
+the existing empty active payload member for ignored marker kinds 12/13,
+without assigning transport bytes. Inventory discoveries likewise add no reconstructed-C credit. The
 319,640-byte historical comparison remains fixed; a complete code denominator
 has not been established.
 
@@ -73,7 +72,7 @@ The full extent contains 738 instruction bytes, 132 referenced pool bytes, four
 internal zero alignment bytes and two trailing zero alignment bytes. Its sole
 function symbol covers 874 bytes; the full comparison includes the trailing two.
 The former 874-byte observation stopped before that alignment. The separate
-step entry remains at `0x08003ABC` and receives no C credit here.
+step entry remains at `0x08003ABC`; its reconstruction is described below.
 
 The existing 24-byte offer record now names its first word `kind` and exposes
 the halfword at offset sixteen as `unknown10`. The begin callback's word stores and
@@ -195,8 +194,8 @@ contracts. The tile-seventeen-to-sixteen source control changes one compiled
 byte. A static quantity-eight witness changes one backed map cell; quantity zero
 has zero height and cannot establish that effect. Normal and strict compiler
 comparisons, the caller's source control and full-build checks remain separate
-from runtime evidence. The 596-byte refresh helper, adjacent builder, step
-callback and renderer/finalizer remain unconverted.
+from runtime evidence. The 596-byte refresh helper, adjacent builder and renderer/finalizer remain
+unconverted. The step callback is described below.
 
 ## Linked participant quantity display
 
@@ -384,13 +383,11 @@ the other constrained values die before calls. Fresh normal and strict pairs
 reproduce both complete bodies and their changed-source rejections. No register
 search, new memory access or compiler-profile change is part of this result.
 
-The step at `08003ABC` is the scene table's row-23 step callback, bounded by
-its native return, pools and the next entry at `08003D74`. Fourteen of its
-sixteen direct providers already have source. Its original two providers at
-`08004CE8` and `08004E90`, together with the step's retained phase/input
-producer mismatch, remain held. This callback batch does not close those
-bodies, descriptor-index/table capacity, incoming targets, arithmetic or
-backing-storage domains. `resource_get_object` at `0800AEE4` was already owned.
+The step at `0x08003ABC` is reconstructed below through `0x08003D74`.
+Fourteen of its sixteen direct providers have source. The original offer
+controllers at `0x08004CE8` and `0x08004E90` remain unconverted. This callback
+batch does not close those bodies, descriptor-index/table capacity, incoming
+targets, arithmetic or backing-storage domains. `resource_get_object` at `0800AEE4` was already owned.
 
 ## End callback
 
@@ -413,31 +410,64 @@ rejected with one differing byte. Strict target checks cover the callback and
 six actual provider definitions, word/list/table geometry and callable types;
 wrong end-column and transition-target-width fixtures are rejected.
 
-This body does not resolve the held `0x08003ABC` step. Its newer candidate uses
-the established empty active payload member for kinds 12/13, but still fails the
-full byte comparison. The existing fade provider initializes only the first word of its
-payload before recording kind one, whose recorder ignores the payload. Its
+The existing fade provider initializes only the first word of its payload
+before recording kind one, whose recorder ignores the payload. Its
 partially initialized suffix and transitive source-domain limits stay qualified;
 this callback adds no initialization, signature relaxation or whole-domain
 claim for that provider. These are compiler and static findings, with no new
 runtime or gameplay validation.
 
 
-## Retained step compiler findings
+## Step callback
 
-The current 696-byte step candidate still differs by 64 bytes, so receives no
-C credit. Capturing the genuine signed reference score before comparing the
-current offer recovers the complete 184-byte offer window `0x3BD0..0x3C88`: the
-reference is calculated first, then the native current-versus-reference signed
-comparison is retained. This separates evaluation order from comparison
-orientation without changing arithmetic types, association or source reads.
+`scene_link_entry_step` reconstructs the complete 696-byte callback at
+`0x08003ABC..0x08003D74`, including all literal pools and alignment. Together
+with the 876-byte begin and 60-byte end callbacks, the observed row-23 lifecycle
+now has 1,632 C extent bytes. Fourteen direct callees are already C-owned;
+the two offer controllers remain explicit original services. Their provisional
+`void(void)` declarations describe only this caller's supplied arguments and
+unconsumed results.
 
-The remaining differences concern selective request-address retention and
-phase-zero input selection. A conditional array index expands the input base
-before the flag test; selecting an input pointer instead moves that base after
-the index join. Neither gives the native branch-scoped base loads. A real
-request pointer used only by the initial read and phase-zero write recovers its
-R5 role but still changes the extent and pool placement. The native phase word
-reaches the sixth fill argument as zero; its independent tile meaning supplies
-no source evidence for reusing a phase value as a tile. No new qualifier,
-artificial live use or register grid is adopted.
+The callback handles the link-abort flag and phases zero, one and two. It
+coordinates offer updates, the countdown, participant selection, text, audio,
+event records and subsequent scene requests. Names remain static interpretations.
+The existing empty payload member selects kinds 12/13, whose recorder ignores
+the transport representation; no invented payload-byte stores are introduced.
+
+Three connected dataflow explanations resolve the retained mismatch. First,
+capturing the genuine signed reference score before comparing the current offer
+recovers the complete 184-byte offer window `0x3BD0..0x3C88`. The reference is
+calculated first, preserving the native current-versus-reference signed test
+and the original arithmetic association. Second, each phase-zero flag arm
+captures the actual input base before its differently sized index load, then
+joins for the common halfword read. Third, a request address is retained only
+for the initial phase load and the phase-zero post-fill store. Extending that
+pointer to every state access had produced a different allocation.
+
+The native phase word loaded at `0x3AFE` survives the zero test at `0x3C88` and
+is stored as the existing sixth fill argument at `0x3CCA`. Capturing that actual
+word once and consuming it at the same argument under `phase == 0` preserves
+this observed dataflow. It adds no read or consumer. Compiler intermediate
+output retains the value through all fourteen captured passes into R2; the
+selective request pointer becomes R5. The earlier rejection of phase reuse
+was too broad: the native operand route supplies affirmative evidence for this
+specific source hypothesis. The match does not establish the unique original
+C spelling or general compiler reuse of a known-zero constant.
+
+The source uses existing owner layouts and proper provider headers. Normal
+and strict builds reproduce all 696 bytes. A real source control changing the
+abort mask from `0x8000` to `0x4000` preserves the extent and differs by two
+bytes in both profiles. Target API/layout checks consume actual provider
+definitions and reject deliberately incompatible contracts. Full progress
+verification also covers the five existing direct importers of the extended
+setup header and their source controls.
+
+Each loop test requires a participant count from zero through four; every
+actually used participant or input index must name backed initialized storage.
+The received identifier must name a backed offer whenever used. The signed
+count-times-multiplier and cost sums must fit 32-bit `int`. Provider allocation,
+resource/text, arithmetic and backing conditions remain in force. The phase
+snapshot is selected before any phase-specific opaque calls, and the tile use
+occurs on the call-free zero-phase input path. This establishes no all-writer,
+callback-index, controller or gameplay population closure. These are static
+and compiler findings, with no new runtime observation.
