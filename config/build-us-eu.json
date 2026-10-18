@@ -51583,6 +51583,82 @@
         "after": "choices[count] = 21;"
       },
       "expected_sha256": "bec5154b80ef3ff8497efd16117191da5eba92b88c12aff72c0ed94ad9d39acf"
+    },
+    {
+      "name": "scene_phase_0_empty",
+      "rom_offset": 163552,
+      "size": 4,
+      "source": "src/scene/scene_phase_0_empty.c",
+      "symbols": {
+        "g_game_flags": "0x03004310"
+      },
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "{\n}\n",
+        "after": "{\n    g_game_flags ^= 1;\n}\n"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
+    },
+    {
+      "name": "scene_phase_8_begin",
+      "rom_offset": 63564,
+      "size": 4,
+      "source": "src/scene/scene_phase_8_begin.c",
+      "symbols": {
+        "g_game_flags": "0x03004310"
+      },
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "{\n}\n",
+        "after": "{\n    g_game_flags ^= 1;\n}\n"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
+    },
+    {
+      "name": "scene_phase_8_step",
+      "rom_offset": 63568,
+      "size": 4,
+      "source": "src/scene/scene_phase_8_step.c",
+      "symbols": {
+        "g_game_flags": "0x03004310"
+      },
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "{\n}\n",
+        "after": "{\n    g_game_flags ^= 1;\n}\n"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
+    },
+    {
+      "name": "scene_phase_8_end",
+      "rom_offset": 63572,
+      "size": 4,
+      "source": "src/scene/scene_phase_8_end.c",
+      "symbols": {
+        "g_game_flags": "0x03004310"
+      },
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "{\n}\n",
+        "after": "{\n    g_game_flags ^= 1;\n}\n"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
     }
   ],
   "assembly": [

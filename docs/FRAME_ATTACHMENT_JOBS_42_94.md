@@ -227,8 +227,11 @@ changed-source control checks cover all 96 bytes, including its literal pools
 and two-byte alignment. These constraints describe the matched values and
 lifetimes, without establishing the original source spelling.
 
-Settlement `0x0801BA40` remains a 188-byte original dependency (held candidate: 39 differing
-bytes), and selection removal `0x080454DC` remains a 192-byte original
-dependency. Their declaration checks add no provider execution or source
-ownership. Choice-index capacity, overlapping scene/menu views, later writers,
-resource validity, object lifetimes and gameplay reachability remain open.
+Settlement `0x0801BA40` remains a 188-byte original dependency. Its latest private
+counter-record candidate is 188 bytes with 22 differing bytes: native
+zero-before-STRH and read-cursor producers are recovered, while register homes
+still differ. That record/header adaptation remains unqualified and unadopted.
+Selection removal `0x080454DC` remains a 192-byte original dependency. Their
+declaration checks add no provider execution or source ownership. Choice-index
+capacity, overlapping scene/menu views, later writers, resource validity,
+object lifetimes and gameplay reachability remain open.
