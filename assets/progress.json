@@ -1,21 +1,21 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "18 Oct 2026, 16:14 BST",
-  "compiled_c_functions": 2285,
-  "compiled_c_bytes": 288700,
+  "verified_at": "18 Oct 2026, 16:50 BST",
+  "compiled_c_functions": 2288,
+  "compiled_c_bytes": 288856,
   "assembly_glue_bytes": 4060,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16484456,
+  "unconverted_rom_bytes": 16484300,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2539,
-  "bounded_control_flow_bodies": 202,
+  "bounded_control_flow_bodies": 199,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 98,
-  "mapped_extent_bytes": 325448,
+  "mapped_extent_bytes": 325452,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
     "raw_instruction_union_bytes": 281334,
@@ -23,16 +23,16 @@
     "nonconflicting_qualified_instruction_bytes": 281308,
     "raw_referenced_data_union_bytes": 35692,
     "qualified_referenced_data_union_bytes": 35692,
-    "source_glue_owned_extent_bytes": 292760,
-    "estimated_envelope_union_bytes": 325440,
+    "source_glue_owned_extent_bytes": 292916,
+    "estimated_envelope_union_bytes": 325444,
     "classification_bytes": {
-      "estimated_envelope_unclassified": 4624,
+      "estimated_envelope_unclassified": 4622,
       "instruction_and_referenced_data_dual_use": 4,
-      "known_data": 22662,
+      "known_data": 22668,
       "owned_extent_unclassified": 34,
       "strong_rooted_instruction": 281304,
       "strong_rooted_referenced_data": 35688,
-      "unresolved": 16432900
+      "unresolved": 16432896
     }
   },
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents",
@@ -9817,11 +9817,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0802CA74",
+      "name": "frame_restore_need_effect_object",
       "group": "ROM 0802xxxx",
       "rom_offset": 182900,
-      "size": 146,
-      "status": "mapped_code"
+      "size": 148,
+      "status": "exact_c"
     },
     {
       "name": "frame_refresh_scene_actor_schedule",
@@ -15438,11 +15438,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0804649C",
+      "name": "frame_initialize_optional_parameter_attachment_job",
       "group": "ROM 0804xxxx",
       "rom_offset": 287900,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_080464A0",
@@ -15480,11 +15480,11 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08046588",
+      "name": "frame_tick_optional_parameter_attachment_job",
       "group": "ROM 0804xxxx",
       "rom_offset": 288136,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_c"
     },
     {
       "name": "sub_08046590",
@@ -26678,15 +26678,15 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0802CA74",
+      "name": "frame_restore_need_effect_object",
       "rom_offset": 182900,
-      "size": 146,
-      "status": "mapped_code"
+      "size": 148,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_02CB06",
-      "rom_offset": 183046,
-      "size": 6,
+      "name": "Unresolved_02CB08",
+      "rom_offset": 183048,
+      "size": 4,
       "status": "unresolved"
     },
     {
@@ -31670,10 +31670,10 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_0804649C",
+      "name": "frame_initialize_optional_parameter_attachment_job",
       "rom_offset": 287900,
       "size": 4,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "sub_080464A0",
@@ -31712,15 +31712,15 @@
       "status": "exact_c"
     },
     {
-      "name": "sub_08046588",
+      "name": "frame_tick_optional_parameter_attachment_job",
       "rom_offset": 288136,
-      "size": 2,
-      "status": "mapped_code"
+      "size": 4,
+      "status": "exact_c"
     },
     {
-      "name": "Unresolved_04658A",
-      "rom_offset": 288138,
-      "size": 6,
+      "name": "Unresolved_04658C",
+      "rom_offset": 288140,
+      "size": 4,
       "status": "unresolved"
     },
     {
@@ -34095,8 +34095,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "0a5a4486ddf2db3e109a58c02babb31c11bcb9293414d84be5dc611614db5008",
-    "assets/rom-inventory.json": "fe0abae05b7da59ca1af9a820b6ea3fefea4103129661ada308a21bf42dba03a",
+    "config/build-us-eu.json": "a712df5817c300f0fcc48f436d714c6d04fc5725ff56b1ca5e361fc0c8d127d6",
+    "assets/rom-inventory.json": "3e467a0b29561f50b3b4e366547a63b20bf69b57732d5a82d43960b73d683ed6",
     "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",

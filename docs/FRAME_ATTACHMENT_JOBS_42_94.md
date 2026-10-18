@@ -305,3 +305,43 @@ output. Actual provider/caller definitions and deliberately wrong callback
 contracts qualify the chosen interfaces. Full matching/control and progress
 gates verify the integrated sources. No executable assembly or original
 instruction payload supplies these replacements.
+
+## Restoration rows 125/126/139 and row 138
+
+Three matching C bodies contribute 156 extent bytes: restoration at
+`0x0802CA74` (148), row 138 initialization at `0x0804649C` (4) and its empty
+tick at `0x08046588` (4). These contain 146 instruction bytes, four referenced
+literal bytes and six source-emitted zero-alignment bytes. Normal and strict
+complete-byte positives and real changed-source controls pass; the tick control
+retains all eight emitted bytes.
+
+Restoration keeps the flag gate and the distinct coordinate views: kinds
+125/126 create option objects from signed pixel halves, while kind 139 passes
+full fixed-point words to the saved-effect provider. Kind 125 conditionally
+clears the actual shared-state byte at `+0xE5`, then reloads the owner object.
+The final state setter reloads it again after any opaque creation call.
+
+The revised source combines a short-lived R2 base-address pointer with a
+separate ordinary case-125 object pointer. Its output retains the native base
+literal and `+0xE5` addition, and the fresh R0 object load with the old R4 home
+available as coordinate scratch. These are two output observations from one
+combined source change. Neither edit was independently ablated, so this does
+not isolate their causal contributions or establish the original source spelling.
+
+The [restoration declarations](../include/frame_need_effect_object_restore.h)
+and [row 138 declarations](../include/frame_optional_parameter_lifecycle.h)
+retain the canonical owner, signed-short option coordinates and pointer-returning
+providers. API checks compile six complete actual source definitions with their
+original leading includes, plus proper global-union and F8-consumer witnesses.
+The eight positive translation units and two intended prototype/layout negatives
+pass. The initializer's unused formal and historical result spelling remain
+nonunique; its factory ignores the result.
+
+Rows 125/126/139 share restoration and the already owned capacity callback.
+Row 138's selector, check, begin, status, capacity and two connected workers
+already have C owners. All observed nonnull stored callback bodies in these four
+rows therefore have source after integration and full gates. This is finite
+stored-target ownership. Runtime installation/populations, generic EC delivery,
+selector bounds, later writers, owner/object/world backing, allocation success
+and incoming signed-coordinate domains remain open. The following entries at
+`0x0802CB08`, `0x080464A0` and `0x0804658C` remain excluded.

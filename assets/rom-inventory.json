@@ -5836,7 +5836,7 @@
   },
   "entry_count": 2539,
   "extent_count": 2540,
-  "mapped_extent_bytes": 325440,
+  "mapped_extent_bytes": 325444,
   "rows": [
     {
       "name": "rom_entry",
@@ -53104,14 +53104,15 @@
       "referenced_literal_bytes": 12
     },
     {
-      "name": "sub_0802CA74",
+      "name": "frame_restore_need_effect_object",
       "rom_offset": 182900,
       "mode": "Thumb",
       "runtime_addresses": [
         134400628
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -53124,12 +53125,12 @@
       "return_offsets": [
         183044
       ],
-      "size": 146,
-      "extent_basis": "CFG envelope estimate",
+      "size": 148,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 182900,
       "body_rom_start": 182900,
       "body_rom_end": 183046,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0802xxxx",
       "decoded_instruction_bytes": 140,
@@ -80245,14 +80246,15 @@
       "referenced_literal_bytes": 16
     },
     {
-      "name": "sub_0804649C",
+      "name": "frame_initialize_optional_parameter_attachment_job",
       "rom_offset": 287900,
       "mode": "Thumb",
       "runtime_addresses": [
         134505628
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [],
@@ -80262,11 +80264,11 @@
         287902
       ],
       "size": 4,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 287900,
       "body_rom_start": 287900,
       "body_rom_end": 287904,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0804xxxx",
       "decoded_instruction_bytes": 4,
@@ -80432,14 +80434,15 @@
       "referenced_literal_bytes": 0
     },
     {
-      "name": "sub_08046588",
+      "name": "frame_tick_optional_parameter_attachment_job",
       "rom_offset": 288136,
       "mode": "Thumb",
       "runtime_addresses": [
         134505864
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [],
@@ -80448,12 +80451,12 @@
       "return_offsets": [
         288136
       ],
-      "size": 2,
-      "extent_basis": "CFG envelope estimate",
+      "size": 4,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 288136,
       "body_rom_start": 288136,
       "body_rom_end": 288138,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0804xxxx",
       "decoded_instruction_bytes": 2,
@@ -119840,6 +119843,48 @@
         "Source-emitted data role only; does not exclude alternate instruction entries or close incoming target populations."
       ],
       "status": "mapped_data"
+    },
+    {
+      "name": "frame_restore_need_effect_object_alignment_02cace",
+      "owner": "frame_restore_need_effect_object",
+      "rom_offset": 182990,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "1266423c12a7293848a0b7998be8ff5ad90762f53ad1cb77f6838713f8bd5f80",
+      "evidence": [
+        "Matching compiler literal-pool alignment emits two zero bytes at relative offset 90; actual source.o and linked data mappings cover them in both normal and strict positive profiles. Complete native extents and whole changed-source controls were checked.",
+        "Source-emitted data role only; does not exclude alternate instruction entries or close incoming target populations."
+      ],
+      "status": "mapped_data"
+    },
+    {
+      "name": "frame_restore_need_effect_object_alignment_02cb06",
+      "owner": "frame_restore_need_effect_object",
+      "rom_offset": 183046,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "1266423c12a7293848a0b7998be8ff5ad90762f53ad1cb77f6838713f8bd5f80",
+      "evidence": [
+        "Matching source EOF alignment emits two zero bytes at relative offset 146; actual source.o and linked data mappings cover them in both normal and strict positive profiles. Complete native extents and whole changed-source controls were checked.",
+        "Source-emitted data role only; does not exclude alternate instruction entries or close incoming target populations."
+      ],
+      "status": "mapped_data"
+    },
+    {
+      "name": "frame_tick_optional_parameter_attachment_job_alignment_04658a",
+      "owner": "frame_tick_optional_parameter_attachment_job",
+      "rom_offset": 288138,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "8eadf8629dbeacdc45a7bb77733729549e404743b4c58ccfb31ac4bf112cb6e1",
+      "evidence": [
+        "Matching source EOF alignment emits two zero bytes at relative offset 2; actual source.o and linked data mappings cover them in both normal and strict positive profiles. Complete native extents and whole changed-source controls were checked.",
+        "Source-emitted data role only; does not exclude alternate instruction entries or close incoming target populations."
+      ],
+      "status": "mapped_data"
     }
   ],
   "data_regions": [
@@ -128720,15 +128765,15 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0802CA74",
+      "name": "frame_restore_need_effect_object",
       "rom_offset": 182900,
-      "size": 146,
+      "size": 148,
       "status": "mapped_code"
     },
     {
-      "name": "Unresolved_02CB06",
-      "rom_offset": 183046,
-      "size": 6,
+      "name": "Unresolved_02CB08",
+      "rom_offset": 183048,
+      "size": 4,
       "status": "unresolved"
     },
     {
@@ -133712,7 +133757,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0804649C",
+      "name": "frame_initialize_optional_parameter_attachment_job",
       "rom_offset": 287900,
       "size": 4,
       "status": "mapped_code"
@@ -133754,15 +133799,15 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08046588",
+      "name": "frame_tick_optional_parameter_attachment_job",
       "rom_offset": 288136,
-      "size": 2,
+      "size": 4,
       "status": "mapped_code"
     },
     {
-      "name": "Unresolved_04658A",
-      "rom_offset": 288138,
-      "size": 6,
+      "name": "Unresolved_04658C",
+      "rom_offset": 288140,
+      "size": 4,
       "status": "unresolved"
     },
     {
@@ -136066,11 +136111,11 @@
     "tools/indirect_evidence.py": "5df8e0fa17096b86737b158d57fd2122b6b16d20aeda2994fecb087a1bf5f53d",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "f9cdb87bee5fbc3fb2527955eac07a2ac6da1c053d571812f132878e6057762f",
-    "config/code-evidence-us-eu.json": "56a485445f8da5dd0211850ad4d8859cc88fc610f1f29fe70ed2c9cb90fab51b",
+    "config/code-evidence-us-eu.json": "b28fd4b42785ec611b304be27f4b01ae7a1d78d8497b59bc52f76d7957cc42cf",
     "config/ram-map-us-eu.json": "67362238b648e40fbf3b51d8e466bfd12e709a38211c16e157d384243896410b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "f909e3593af669a8134538dd3821dbddc0df607529059bedcef945cca672e3d8",
-    "config/build-us-eu.json": "0a5a4486ddf2db3e109a58c02babb31c11bcb9293414d84be5dc611614db5008",
+    "config/build-us-eu.json": "a712df5817c300f0fcc48f436d714c6d04fc5725ff56b1ca5e361fc0c8d127d6",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -136726,6 +136771,7 @@
     "src/frame/frame_reset_primary_display_indices.c": "e306182824341c89c004faac638846420ea49dcc1fdc570058c3a1c6348eae70",
     "src/frame/frame_reset_scene_actor_schedule.c": "6435713a9f27f72788909917e4a2d7b27975bdca76c0d273c87f2f420e01dbba",
     "src/frame/frame_restore_map_vram.c": "cda05e4ff41dd94dc0782c34ee77484b85d2649136765bde4117fd1c563e4aee",
+    "src/frame/frame_restore_need_effect_object.c": "1266423c12a7293848a0b7998be8ff5ad90762f53ad1cb77f6838713f8bd5f80",
     "src/frame/frame_restore_primary_objects.c": "8942f52bb2743d9f5145a6ca1a081f9785e4962f56a55d834353619688885346",
     "src/frame/frame_route_enable_destination.c": "2db3c2c33a453ed08a708a270bd61d6e06ce845677afa7155d4d8a78385dee71",
     "src/frame/frame_run_actor_state.c": "4b96b326e7f3101960f321a1bdf9d0ea66637d02262bddfd09842daf53364f0d",
@@ -136890,6 +136936,7 @@
     "src/frame/frame_tick_header_attachment_jobs.c": "d37f366b079fbc3667d8e5a9a58168585ebe505a982a05fe453188ae01e5f13e",
     "src/frame/frame_tick_need_effect_direct_49.c": "e07467db449ec8d67759e596f2a95f764f327e821c5bee8da59ad679e4638e79",
     "src/frame/frame_tick_optional_attachment_jobs.c": "e3119433d12085763027acc7f977f9170e83ffd1003acd651068a4dd17555578",
+    "src/frame/frame_tick_optional_parameter_attachment_job.c": "8eadf8629dbeacdc45a7bb77733729549e404743b4c58ccfb31ac4bf112cb6e1",
     "src/frame/frame_tick_position_cycle_jobs.c": "77d8c05c8b22c85cd87eac29e88325d75748fedb9b18b20628b92ebedb4072ec",
     "src/frame/frame_tick_secondary_header_attachment_jobs.c": "e8bd777aba088d562db06e4a6fe13a58c2e221b7e257b16109df0909d62ab9a1",
     "src/frame/frame_tick_timed_attachment_job_12.c": "6c09fa7aec4ef0d973991cff3d3129a7f49e6e29b580a9b52172beefdd9fac1b",
@@ -137481,16 +137528,16 @@
       "nonconflicting_qualified_instruction_bytes": 281308,
       "raw_referenced_data_union_bytes": 35692,
       "qualified_referenced_data_union_bytes": 35692,
-      "source_glue_owned_extent_bytes": 292760,
-      "estimated_envelope_union_bytes": 325440,
+      "source_glue_owned_extent_bytes": 292916,
+      "estimated_envelope_union_bytes": 325444,
       "classification_bytes": {
-        "estimated_envelope_unclassified": 4624,
+        "estimated_envelope_unclassified": 4622,
         "instruction_and_referenced_data_dual_use": 4,
-        "known_data": 22662,
+        "known_data": 22668,
         "owned_extent_unclassified": 34,
         "strong_rooted_instruction": 281304,
         "strong_rooted_referenced_data": 35688,
-        "unresolved": 16432900
+        "unresolved": 16432896
       }
     },
     "physical_unions": {
@@ -181728,6 +181775,14 @@
           182888
         ],
         [
+          182990,
+          182992
+        ],
+        [
+          183046,
+          183048
+        ],
+        [
           183210,
           183212
         ],
@@ -184436,6 +184491,10 @@
           288020
         ],
         [
+          288138,
+          288140
+        ],
+        [
           288258,
           288260
         ],
@@ -185563,7 +185622,7 @@
         ],
         [
           177080,
-          182900
+          183048
         ],
         [
           183052,
@@ -185747,11 +185806,11 @@
         ],
         [
           287232,
-          287900
+          287904
         ],
         [
           287944,
-          288136
+          288140
         ],
         [
           288212,
@@ -186061,7 +186120,7 @@
         ],
         [
           177080,
-          183046
+          183048
         ],
         [
           183052,
@@ -186181,7 +186240,7 @@
         ],
         [
           287944,
-          288138
+          288140
         ],
         [
           288144,
@@ -260437,7 +260496,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -260445,12 +260505,14 @@
       {
         "rom_offset": 182990,
         "size": 2,
-        "classification": "estimated_envelope_unclassified",
+        "classification": "known_data",
         "roles": [
-          "estimated_envelope"
+          "estimated_envelope",
+          "known_data",
+          "source_owned"
         ],
-        "confidence": "low_estimated_boundary",
-        "evidence_basis": "Provisional discovery envelope only; neither byte role nor function boundary is established."
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 182992,
@@ -260458,7 +260520,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -260471,14 +260534,27 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
       },
       {
         "rom_offset": 183046,
-        "size": 6,
+        "size": 2,
+        "classification": "known_data",
+        "roles": [
+          "estimated_envelope",
+          "known_data",
+          "source_owned"
+        ],
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
+      },
+      {
+        "rom_offset": 183048,
+        "size": 4,
         "classification": "unresolved",
         "roles": [],
         "confidence": "unknown",
@@ -299356,7 +299432,7 @@
       },
       {
         "rom_offset": 287824,
-        "size": 76,
+        "size": 80,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -299364,19 +299440,6 @@
           "instruction",
           "raw_instruction",
           "source_owned"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
-        "rom_offset": 287900,
-        "size": 4,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -299491,7 +299554,7 @@
       },
       {
         "rom_offset": 288020,
-        "size": 116,
+        "size": 118,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -299504,21 +299567,20 @@
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
       },
       {
-        "rom_offset": 288136,
+        "rom_offset": 288138,
         "size": 2,
-        "classification": "strong_rooted_instruction",
+        "classification": "known_data",
         "roles": [
-          "Thumb",
           "estimated_envelope",
-          "instruction",
-          "raw_instruction"
+          "known_data",
+          "source_owned"
         ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
-        "rom_offset": 288138,
-        "size": 6,
+        "rom_offset": 288140,
+        "size": 4,
         "classification": "unresolved",
         "roles": [],
         "confidence": "unknown",
@@ -310917,11 +310979,11 @@
         "rom_offset": 131072,
         "size": 65536,
         "classification_bytes": {
-          "estimated_envelope_unclassified": 1724,
-          "known_data": 894,
+          "estimated_envelope_unclassified": 1722,
+          "known_data": 898,
           "strong_rooted_instruction": 54476,
           "strong_rooted_referenced_data": 8264,
-          "unresolved": 178
+          "unresolved": 176
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -310954,11 +311016,11 @@
         "size": 65536,
         "classification_bytes": {
           "estimated_envelope_unclassified": 692,
-          "known_data": 782,
+          "known_data": 784,
           "owned_extent_unclassified": 34,
           "strong_rooted_instruction": 52158,
           "strong_rooted_referenced_data": 6480,
-          "unresolved": 5390
+          "unresolved": 5388
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -375287,9 +375349,10 @@
         "execution_address": 134400628,
         "entry_rom_offset": 182900,
         "mode": "Thumb",
-        "name": null,
+        "name": "frame_restore_need_effect_object",
         "evidence": [
-          "audited dispatch entry"
+          "audited dispatch entry",
+          "bounded audit"
         ],
         "raw_instruction_intervals": [
           [
@@ -411606,9 +411669,10 @@
         "execution_address": 134505628,
         "entry_rom_offset": 287900,
         "mode": "Thumb",
-        "name": null,
+        "name": "frame_initialize_optional_parameter_attachment_job",
         "evidence": [
-          "audited dispatch entry"
+          "audited dispatch entry",
+          "bounded audit"
         ],
         "raw_instruction_intervals": [
           [
@@ -411801,9 +411865,10 @@
         "execution_address": 134505864,
         "entry_rom_offset": 288136,
         "mode": "Thumb",
-        "name": null,
+        "name": "frame_tick_optional_parameter_attachment_job",
         "evidence": [
-          "audited dispatch entry"
+          "audited dispatch entry",
+          "bounded audit"
         ],
         "raw_instruction_intervals": [
           [
@@ -447696,6 +447761,36 @@
         "rom_offset": 287432,
         "size": 4,
         "source": "src/frame/frame_finish_optional_attachment_kinds_12_45_59.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 2,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "frame_restore_need_effect_object",
+        "rom_offset": 182900,
+        "size": 148,
+        "source": "src/frame/frame_restore_need_effect_object.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 140,
+        "referenced_data_bytes_in_extent": 4
+      },
+      {
+        "name": "frame_initialize_optional_parameter_attachment_job",
+        "rom_offset": 287900,
+        "size": 4,
+        "source": "src/frame/frame_initialize_optional_parameter_attachment_job.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 4,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "frame_tick_optional_parameter_attachment_job",
+        "rom_offset": 288136,
+        "size": 4,
+        "source": "src/frame/frame_tick_optional_parameter_attachment_job.c",
         "mode": "Thumb",
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 2,
