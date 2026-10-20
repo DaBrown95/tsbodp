@@ -45,7 +45,7 @@ also check the shared header against all previously accepted sources.
 
 The initializer's unused owner formal remains inferred from its caller protocol.
 Observed table rows are not a complete selector, writer, target or backing
-population. The neighboring word at `0x1A44C..0x1A450` decodes as a return-100
+population. The neighboring word at `0x1A44C..0x1A450` decodes as a return-zero
 leaf, but has no established incoming root. It remains an inventory question
 without a fabricated C owner. No new runtime execution observation is claimed;
 complete executable inventory and source ownership remain unproved.
