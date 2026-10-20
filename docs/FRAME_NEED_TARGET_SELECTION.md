@@ -417,9 +417,10 @@ switch-table bytes and eight internal zero alignment bytes. All four function
 symbols cover their full spans. The ordinary source switch produces the bounded
 27-entry table; no instruction body or table payload is embedded in the source.
 The explicit initialization phase explains the retained six-byte entry-order
-failure without identifying historical source spelling. At that four-body milestone, row 97's larger workers and the renderer remained
-original. The later kind-64/65 path below covers its primary worker; kind 66 and
-the renderer remain original.
+failure without identifying historical source spelling. At that four-body
+milestone, row 97's larger workers and the renderer remained original. The later
+kind-64/65 and kind-66 sections below cover those workers; the renderer remains
+original.
 Matching builds, static routes and runtime behavior remain separate claims.
 
 
@@ -464,7 +465,8 @@ Seven connected bodies add 2,160 C extent bytes. The kind-64/65 primary worker,
 its begin callback and dispatcher contribute 1,008 bytes. The two kind-88/89
 workers and their begin/dispatcher pair contribute 1,152 bytes. Existing action
 writers, capacity checks, routing services and shared providers add no further
-credit. The renderer and kind-66 worker remain explicit original code.
+credit. This seven-body, 2,160-byte subtotal excludes the later kind-66
+replacement below. The renderer remains explicit original code.
 
 | Body | ROM start | Complete matching extent |
 | --- | --- | ---: |
@@ -496,12 +498,11 @@ Captured needs, indicators, actors, records, direction indices and provider
 backing must remain valid and live across the corresponding calls.
 
 The parameter dispatcher calls this worker for kinds 64 and 65. Its kind-66
-branch still calls the original `08017EB4` service, whose provisional word
-contract and fresh signed-halfword owner-parameter tests are not changed here.
-Neither a failed candidate nor a function declaration earns C credit. Definition
-row 97 has enabled byte zero: the guarded need/action selectors skip that
-unchanged factory row. Its recorded callbacks establish a conditional source
-connection, not gameplay use or universal writable-callback reachability.
+branch now calls the matching `08017EB4` worker described below, retaining the
+existing word contract and fresh signed-halfword owner-parameter tests.
+Definition row 97 has enabled byte zero: the guarded need/action selectors skip
+that unchanged factory row. Its recorded callbacks establish a conditional
+source connection, not gameplay use or universal writable-callback reachability.
 
 Enabled definition row nine emits choices 88 and 89 in its original two-byte
 writer and records the new begin and dispatcher addresses. The worker families
@@ -540,9 +541,9 @@ begin's stored kind, and each dispatcher's selected kind. Defined witnesses use
 live cleanup records, or a phase-six actor with its completion flag, or a free
 record and valid point/route backing. A full owner cannot witness the changed
 begin store. These distinguish return/status or stored state without claiming a
-runtime observation. The independent row-nine callbacks are now source-owned
-as described below; the kind-66 worker remains original. Existing capacity
-checks and the remaining renderer/finalizer work gain no credit.
+runtime observation. The independent row-nine callbacks and subsequent kind-66
+replacement are described below. Existing capacity checks and the remaining
+renderer/finalizer work gain no credit.
 
 The only changed existing shared header is a conventional include guard around
 `frame.h`. Its original body, fields and APIs are byte-for-byte unchanged. It
@@ -583,12 +584,12 @@ changes. The intermediate callback at `08047504` now has the matching constant-
 result switch source explained below. The earlier plain-return and artificial-
 call hypotheses are not accepted recipes.
 
-The prepared kind-66 byte-local result experiment has now been executed against
-current headers. It produces the same 244 bytes and 115 differences as the
-word-local candidate. Both omit the original right shift after low-byte
-extraction before the zero test. That result closes this local-width hypothesis;
-the fixed 248-byte worker remains original. Current renderer and finalizer
-candidates also remain outside matching-C totals.
+The earlier kind-66 byte-local result experiment produced the same 244 bytes
+and 115 differences as its word-local predecessor. Both omitted the native
+right shift after low-byte extraction before the zero test. This historical
+failure closed the local-width hypothesis; the later matching worker below
+uses a different branch-local producer graph. Current renderer and finalizer
+candidates remain outside matching-C totals.
 
 ## Row-97 initialization, finish and percentage
 
@@ -648,17 +649,60 @@ This explains this conditional leaf's frame without justifying assembly for
 the separate constant-return callback. Ordinary inline deferral does not leak
 this cache: it exits before reload, and emitted functions reset the flag.
 
-The kind-66 worker remains an unconverted 248-byte body. All five direct
-providers already have matching source. A separate bounded test changed only
+Before the kind-66 replacement below, a separate bounded test changed only
 the private `actor_entry_add` call declaration to a byte return. Its initial
-compiler output used a byte-valued call result, but the combine pass still
-removed the right shift before the zero test. The final 244-byte candidate
-was byte-identical to the existing word-return candidate and retained the same
-115 differences. This disproves that return-ABI explanation; no public API was
-changed. The eight-byte intermediate callback at `08017FD4` now has the
-selector-backed constant-result switch source explained below. Row 97's
-enabled byte remains zero, and finite table ownership does not close writable
-callbacks or runtime reachability.
+compiler output used a byte-valued call result, but combine still removed the
+right shift before the zero test. That 244-byte candidate was byte-identical
+to the word-return candidate and retained 115 differences. This historical
+failure disproved the return-ABI explanation; no public API was changed. The
+eight-byte intermediate callback at `08017FD4` has the selector-backed
+constant-result switch source explained below. Row 97's enabled byte remains
+zero, and finite table ownership does not close writable callbacks or runtime
+reachability.
+
+## Kind-66 attachment worker
+
+The [kind-66 worker](../src/frame/frame_step_attachment_job_66.c) at
+`0x08017EB4` now owns 248 matching C extent bytes: 216 instruction bytes,
+28 referenced literal bytes and four internal zero-alignment bytes. Together
+with nine existing definitions covering 1,300 bytes, the local interval
+`0x08017A68..0x08018074` now has ten C definitions covering 1,548 bytes. This
+adds no newly mapped extent bytes and makes no runtime or gameplay claim.
+
+The worker preserves the real timer phases. A running byte equal to one first
+sets timer one. Phase zero gives the record's actor the owner's reversed
+direction, requests animation 58 and stores timer seven; phase seven waits for
+actor flag `0x400000` before storing timer one. Unrecognized phases return status one. Phase one
+tests the signed 16-bit parameter and calls the existing add-entry provider
+with kind 144 above `0x4FFF`, or 143 otherwise. A zero low-byte result sets the
+local player's UI flag `0x200000`.
+Success rereads the parameter after the call, conditionally sets triple
+`(3, 1, 1)`, then clears the optional byte before the parameter. Both outcomes
+freshly read the owner's object for commit mode zero and the record's actor
+for animation one, then return status two.
+
+Each existing 143/144 branch narrows its own call result before their common
+predicate. This real producer join prevents the early combine pass from
+removing the right shift; late tail sharing produces the single native
+normalization. The unchanged matching emitter supplied an accepted peer for
+that pass sequence. An ordinary case-local `added` value keeps the short query
+separate from the independent return status one/two. No binding, type or ABI
+change supplies the match, and `actor_entry_add` retains its word return.
+
+Normal and strict full-extent positives match, and the genuine kind-143-to-142
+control rejects. Existing proofs and controls for the five actual providers
+are reused, with the actual interfaces checked in their separate contexts;
+those providers earn no further C credit. Live owner, record, actor, resource,
+direction-table and indexed UI backing remain required, including compatible
+state views and valid storage across calls.
+
+The existing dispatcher selects this worker for full-word kind 66. Definition
+row 97 records the matching begin and dispatcher in slots `+12/+16`, copied
+to state `F0/F4`; its choice writer emits 66 for a positive signed parameter.
+The row's enabled byte is still zero. These static connections do not close
+writable callback or record populations, broader kind/input domains, stored
+EC/FC dispatch, or runtime reachability. The earlier seven-body, 2,160-byte
+subtotal remains separate from this 248-byte addition.
 
 ## Row-100 installed callbacks
 
@@ -1027,8 +1071,8 @@ reverified where their contracts connect the modules and receive no new credit.
 Row 50 writes action 87. Its worker obtains the owner's attachment-zero point,
 creates actor 4 with the owner's direction, plays cue 49, and sets the owner
 parameter and phase. Its tick stores the genuine narrowed search result after
-the commit call. That result lifetime is real here and does not resolve the
-separate kind-66 worker. The neighbouring predicate requires two early checks;
+the commit call. That distinct result lifetime did not explain the earlier kind-66
+normalization mismatch. The neighbouring predicate requires two early checks;
 combining them reversed the native final branch.
 
 Rows 56/58 and legacy interaction row 57 both write action 49, retaining their
@@ -1115,7 +1159,8 @@ selector's initial 40-byte recipe differed by six bytes: it initialized the
 cursor before the first output store. Assigning that real cursor after storing
 18 reproduces native source order. Row 96's independent action-18 family uses
 the real attachment count to select need 2 or 3, then tests the timer provider's
-low byte. That ordinary normalization does not explain kind 66's missing shift.
+low byte. This ordinary normalization did not explain the historical kind-66
+mismatch; the branch-local producer join described above resolves that worker.
 
 Row 133 writes 16/17 and independently dispatches both. Its second worker uses
 the canonical game-state root and actual word/byte pending-selection views.

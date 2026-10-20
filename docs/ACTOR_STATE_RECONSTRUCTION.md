@@ -1234,10 +1234,12 @@ no compiler flags, register bindings or invented reads were used.
 
 This adds a source-owned consumer of the known action writers. It does not close
 writable callback targets, list populations, descriptor bounds, pointer backing
-or runtime reachability. The kind-66 worker still has no later non-Boolean use
-of its narrowed add-entry result: both successors overwrite it before use, and
-the final result is independently set to two. That read-only audit supports no
-new ABI or inline-return source attempt.
+or runtime reachability. The kind-66 worker has no later non-Boolean use of its
+narrowed add-entry result: both successors overwrite it before use, and the final
+result is independently set to two. Its [matching source](FRAME_NEED_TARGET_SELECTION.md#kind-66-attachment-worker)
+now separates that query value from the return status and narrows the real call
+results before their join. No ABI change, inline-return workaround or extra
+consumer is needed.
 
 The actor constructor's three installed interaction callbacks now reproduce
 232 C bytes: default `0x08011274` (104), special `0x080112DC` (76), and the

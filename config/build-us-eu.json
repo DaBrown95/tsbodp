@@ -54458,6 +54458,34 @@
         "before": "(x >> 5)",
         "after": "(x >> 4)"
       }
+    },
+    {
+      "name": "frame_step_attachment_job_66",
+      "rom_offset": 97972,
+      "size": 248,
+      "source": "src/frame/frame_step_attachment_job_66.c",
+      "symbols": {
+        "frame_request_animation": "0x8001b5d",
+        "frame_set_actor_direction": "0x8001c29",
+        "actor_entry_add": "0x80200c9",
+        "resource_set_triple": "0x802a1e9",
+        "frame_commit_need_effect": "0x802d9ad",
+        "g_actor_reverse_directions": "0x08052858",
+        "g_resource_game_state": "0x03003950",
+        "g_attachment_parameter_ui": "0x03004130",
+        "g_input_config": "0x030040e0"
+      },
+      "thumb_symbols": [
+        "frame_request_animation",
+        "frame_set_actor_direction",
+        "actor_entry_add",
+        "resource_set_triple",
+        "frame_commit_need_effect"
+      ],
+      "negative_control": {
+        "before": "read_collection(), 143, 0, 0",
+        "after": "read_collection(), 142, 0, 0"
+      }
     }
   ],
   "assembly": [
