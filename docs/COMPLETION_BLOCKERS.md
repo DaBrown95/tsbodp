@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,314 C functions / 291,692 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 295,752 bytes; original slices
-still supply 16,481,464 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,327 C functions / 292,212 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 296,272 bytes; original slices
+still supply 16,480,944 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The starting baseline was
 1,735 C functions / 250,064 C bytes and 500 glue bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **175 unowned rows / 29,714
+[inventory](../assets/rom-inventory.json) contain **162 unowned rows / 29,220
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -21,6 +21,9 @@ Unverified candidates receive no credit.
 | 5 | Serial IRQ `0x0803DC48` (1,616), poll (408), status (124), record provider (200), refresh `0x080045D0` (596). | IRQ remains 1,612 after its record-union repair. Refresh differs in nine of 596 bytes: late LOOP cost-offset processing reverses pointer initialization/increment pairs. Capturing the cost destination regresses to 588 / 377. Participant/index, resource, allocation, descriptor and writer domains remain open. See [scene](SCENE_LINK_ENTRY.md) and [serial](SERIAL_HANDSHAKE.md). |
 | 6 | Executable inventory alongside rows 1–5. | Resolve 98 call-site plus 21 transfer observations at 112 physical sites, writable callbacks/jump tables and ten code installations (19,188 distinct ROM source bytes). Close the selector domains behind 6,699 unbacked serialized outcomes. Pending-display's 128 selected returns/controls/replays leave writer/index/target populations open, as do collision/audio writer and alias domains. Weak word `0xE40A40` naming `0x0803E8AF` remains unclassified incoming evidence. See [inventory](WHOLE_ROM_INVENTORY.md). |
 | 7 | Reproducibility and publication. | Remove executable instruction bodies from original-ROM slices, resolve material inventory uncertainty and justify assembly exceptions. Reproduce a clean build with pinned tools/local inputs. Pass matching/controls, applicable tool tests, inventory and progress gates; audit contents/history, publish to `main` and keep contribution features disabled. |
+
+The thirteen [independently bounded attachment checks](UNROOTED_ATTACHMENT_CHECKS.md)
+now own their complete extents; their incoming roots remain open.
 
 Executable inventory remains incomplete. It separates instructions, data and
 unresolved bytes; its instruction union is not complete. Unclassified owned/envelope bytes,
