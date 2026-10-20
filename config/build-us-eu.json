@@ -53653,6 +53653,67 @@
         "after": "case 68: return 0;\n"
       },
       "expected_sha256": "c1f16de3829320e098d9abfaeef9984357bdd4dcedadc91466dbb7a7be8e67f2"
+    },
+    {
+      "name": "scene_contact_activity_three_ensure_line_slot",
+      "source": "src/scene/scene_contact_activity_three_ensure_line_slot.c",
+      "rom_offset": 107020,
+      "size": 104,
+      "symbols": {
+        "g_scene_contact_activity_three_slots": "0x030038e0",
+        "g_scene_contact_activity_three_line_animation": "0x08052dd0",
+        "frame_allocate_object": "0x08001109",
+        "frame_set_animation_record": "0x0800132d",
+        "frame_set_position": "0x080014a5"
+      },
+      "thumb_symbols": [
+        "frame_allocate_object",
+        "frame_set_animation_record",
+        "frame_set_position"
+      ],
+      "negative_control": {
+        "before": "object->flags=9;",
+        "after": "object->flags=10;"
+      },
+      "expected_sha256": "762823f39ffc6f35bf9a20162164df9eeb32b9a5aed8b760a9557a3541232734"
+    },
+    {
+      "name": "scene_contact_activity_three_plot_line_pixel",
+      "source": "src/scene/scene_contact_activity_three_plot_line_pixel.c",
+      "rom_offset": 107124,
+      "size": 80,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "(1<<shift)",
+        "after": "(2<<shift)"
+      },
+      "expected_sha256": "0f326f8d424dc769b9fc97c0f78e81a336fea30d0925f3752101816b539a8f9b"
+    },
+    {
+      "name": "scene_contact_activity_three_update_line_slots",
+      "source": "src/scene/scene_contact_activity_three_update_line_slots.c",
+      "rom_offset": 106544,
+      "size": 396,
+      "symbols": {
+        "g_scene_contact_activity_three_slots": "0x030038e0",
+        "g_scene_contact_activity_three_line_animation": "0x08052dd0",
+        "frame_allocate_object": "0x08001109",
+        "frame_set_animation_record": "0x0800132d",
+        "frame_set_position": "0x080014a5",
+        "display_cpu_copy": "0x0804c8c5"
+      },
+      "thumb_symbols": [
+        "frame_allocate_object",
+        "frame_set_animation_record",
+        "frame_set_position",
+        "display_cpu_copy"
+      ],
+      "negative_control": {
+        "before": "object->flags=9;",
+        "after": "object->flags=10;"
+      },
+      "expected_sha256": "2bb7755f936ccb2e45b484f72215aebbaa3646f8ec4b77c3d38b57243aa08947"
     }
   ],
   "assembly": [

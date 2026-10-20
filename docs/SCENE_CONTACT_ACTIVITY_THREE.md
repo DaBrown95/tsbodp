@@ -1,11 +1,12 @@
 # Definition row three: selection controller, moving event and row actors
 
-This connected path has twenty-two matching C functions covering 4,232 bytes,
+This connected path has twenty-five matching C functions covering 4,812 bytes,
 including their original literal pools and alignment. It follows selection input
 through initialization, value updates, object creators and the installed event
 and row updates, coordinate and vector helpers, animation resets, palette
 requests and temporary-object removal. Row preparation at `0x08019640` (544
-bytes) and event drawing at `0x08019D80` (368) remain explicit original
+bytes), event drawing at `0x08019D80` (368) and line rasterization at
+`0x08019EF0` (320) remain explicit original
 dependencies and receive no C credit.
 An exact source match does not recover those dependencies or establish gameplay.
 
@@ -24,8 +25,30 @@ sequence restore field 14, option 19, flags 21, primary/secondary/cursor pointer
 sample handle 84 and three value bytes 88. The control root `0x03004350` has a
 24-byte prefix, with refresh count 8, selection word/byte view 12, phase 16 and
 timer 20. Temporary storage at `0x030038E0` has sixteen observed pointer slots
-and a word count at 64 in a 104-byte prefix. Complete original capacities and
+and a word count at 64 in a 104-byte prefix. Native writers establish delta,
+origin, endpoint and step points at 68, 76, 84 and 92, followed by the horizontal
+byte at 100. Typing the former opaque suffix preserves its size and alignment.
+Complete original capacities and
 ownership remain unproved; no one-element array substitutes for these prefixes.
+
+Three line-drawing services add 580 C extent bytes: ensure-slot at `0x1A20C`
+(104), plot-pixel at `0x1A274` (80), and update-slots at `0x1A030` (396).
+They contain 542 instruction, 36 literal and two alignment bytes. The pixel
+extent includes its natural zero tail after 78 instruction bytes; the former
+78-byte map estimate omitted those two data bytes, not executable code.
+Normal and strict full comparisons match, and each changed flags/pixel-value
+control rejects by one byte. Actual allocation, animation, position, clear,
+remove and event-step definitions remain exact in separate contexts; wrong
+layout and formal contracts reject.
+
+The updater reuses the canonical next-position word view, creates missing line
+objects, positions the final object at the endpoint, copies tiles through the
+existing BIOS service-0B glue and hides unused slots. The ensure-slot helper
+retains its full-word index and original allocation assumptions. The pixel
+writer clamps X only. Valid slot/count, object-zero, allocation, source-tile,
+pixel Y/buffer and later-writer domains remain preconditions; these matches do
+not establish all drawing inputs or hardware behavior. The parent draw and
+raster bodies remain original dependencies.
 
 The activity's object view is 224 bytes, four-aligned, within the separately
 verified 320-byte allocation. It names only observed positions, velocity,

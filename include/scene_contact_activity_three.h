@@ -53,7 +53,7 @@ extern unsigned char g_scene_contact_activity_three_primary_commands[],g_scene_c
 #include "display_text_draw.h"
 #include "display_text_fields.h"
 #include "display_text_raster.h"
-struct SceneContactActivityThreeSlots {struct FrameObject *objects[16];unsigned int count;unsigned char unknown44[36];};
+struct SceneContactActivityThreeSlots {struct FrameObject *objects[16];unsigned int count;struct FramePoint delta,origin,endpoint,step;unsigned char horizontal,unknown65[3];};
 extern struct SceneContactActivityThreeSlots g_scene_contact_activity_three_slots;
 extern struct FrameVariantResource g_scene_contact_activity_three_observer_animation,g_scene_contact_activity_three_cursor_animation,g_scene_contact_activity_three_event_animation;
 void scene_contact_activity_three_step_event(struct FrameObject*),scene_contact_activity_three_step_row(struct FrameObject*);
@@ -91,4 +91,8 @@ void scene_contact_activity_three_remove_slots(void);
 void display_fill_background(unsigned int,unsigned short);
 void scene_contact_activity_three_initialize(void);
 void scene_contact_add_activity_score(int);
+extern struct FrameVariantResource g_scene_contact_activity_three_line_animation;
+void scene_contact_activity_three_ensure_line_slot(unsigned int,int,int);
+void scene_contact_activity_three_plot_line_pixel(unsigned short*,int,int);
+void scene_contact_activity_three_update_line_slots(void);
 #endif

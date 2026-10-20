@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,346 C functions / 294,528 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 298,588 bytes; original slices
-still supply 16,478,628 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,349 C functions / 295,108 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 299,168 bytes; original slices
+still supply 16,478,048 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The starting baseline was
 1,735 C functions / 250,064 C bytes and 500 glue bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **142 unowned rows / 26,926
+[inventory](../assets/rom-inventory.json) contain **139 unowned rows / 26,348
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -39,6 +39,12 @@ The six remaining [kind-68 attachment bodies](FRAME_ATTACHMENT_JOBS_42_94.md#obs
 add 392 C bytes: 344 instruction and 48 literal bytes. They complete ownership
 of the observed local 504-byte span together with two existing owners. The
 settlement provider, generic EC delivery and callback populations remain open.
+
+Three [activity-three line services](SCENE_CONTACT_ACTIVITY_THREE.md) add 580
+C bytes: 542 instruction, 36 literal and two natural alignment bytes. The
+existing slot owner gains its native point fields without changing layout.
+The former pixel estimate omitted those two data bytes; no new executable code
+is claimed. Parent drawing, rasterization and input/writer domains remain open.
 
 The thirteen [independently bounded attachment checks](UNROOTED_ATTACHMENT_CHECKS.md)
 now own their complete extents; their incoming roots remain open.
