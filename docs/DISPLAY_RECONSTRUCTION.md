@@ -371,6 +371,9 @@ import reach is checked again by the fresh full gate. No instruction body or
 output patch supplies the match.
 
 The 736-byte step contains five two-byte compiler-emitted alignment spans.
-An odd word at ROM `0xE40A40` still carries `0x0803E8AF`; its incoming origin
-remains weak and unclassified. The padding at `0x03E8AE` has a source role,
-but that role does not exclude an alternate execution entry.
+The word at ROM `0xE40A40` carries `0x0803E8AF`; its bit-cleared value falls
+inside one such span.
+It now has a [source-backed compressed-map data role](WHOLE_ROM_INVENTORY.md#phase-15-pointer-shaped-map-word):
+the original decoder model consumes its four bytes from scene-resource row 23's
+`combined0` input. That data use and the source-owned padding at `0x03E8AE`
+do not exclude other aliases or an alternate execution entry.

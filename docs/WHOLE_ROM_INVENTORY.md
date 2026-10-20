@@ -739,6 +739,29 @@ ROM bank. The six weak coincidences therefore remain unresolved in the static
 inventory. Source/hash checks, truncation controls and bounded receipts remain
 under ignored `analysis/outside-thumb-*/` and `analysis/source-word-46b664/`.
 
+### Phase-15 pointer-shaped map word
+
+The separate word at ROM `0xE40A40` carries `0x0803E8AF`, whose bit-cleared
+address is inside source-owned menu-step alignment. Its source word has a
+concrete map-data route: physical row 23 of the 72-byte scene-resource table
+at `0x56414` supplies `combined0` through the pointer at `0x56A98`. That resource
+starts at `0xE3F780`; its header selects codec six without the delta filter and
+declares 13,860 decoded bytes. The matching map loader and resource dispatcher
+pass input `0xE3F784` to the installed background decoder with a size output.
+
+The retained original-instruction evaluator consumes the selected four-byte
+word and returns 13,860 bytes. Input reads end exactly at `0xE41364`, the
+independently rooted next resource in the same row. Null and nonnull size-output
+controls agree on output hashes and input-read sequences; truncating the input
+before `0xE40A40` rejects at the missing word. Output and the size word use
+separate fixture storage.
+
+This establishes a local compressed-input role, with no observed scene-23
+invocation, new source credit or exclusive non-execution classification. The
+50 complete scene records before the next named table form a physical prefix,
+not a proven runtime selector capacity. Other aliases, incoming transfers and
+alternate entry execution remain open.
+
 
 ### Standalone reflected-byte checksum
 
