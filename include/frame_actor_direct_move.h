@@ -10,4 +10,8 @@ struct FrameActorDirectMoveWork {
 void frame_actor_step_wait_phase(struct FrameObject *);
 unsigned char frame_actor_face_destination(struct FrameObject *);
 void frame_set_actor_destination(struct FrameObject *,const struct FramePoint *);
+void frame_unrooted_actor_waypoint_step_82bc(struct FrameObject *);
+void frame_actor_choose_next_waypoint(struct FrameObject *);
+unsigned char frame_unrooted_refresh_destination_velocity_2b358(struct FrameObject *);
+void frame_unrooted_start_destination_move_8cd4(struct FrameObject *,int,int,int);
 #endif

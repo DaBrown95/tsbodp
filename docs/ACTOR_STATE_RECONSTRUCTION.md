@@ -1393,3 +1393,58 @@ the pinned target behavior and does not establish portable behavior for every
 possible speed. Wider writers and incoming roots, historical extra unused
 formals, callback/selector populations and gameplay remain open. No runtime
 transfer or gameplay observation is added.
+
+## Waypoint and destination movement
+
+Four further independently bounded entries now have matching C with the existing
+actor, waypoint, point, destination, direction and random-provider owners. Two
+calls connect the waypoint step to its chooser; the destination setup calls
+the velocity helper. No external root is established for either path; names
+and historical unused formals remain provisional.
+
+| ROM offset | Source | Extent bytes |
+| --- | --- | ---: |
+| `0x82BC` | [frame_unrooted_actor_waypoint_step_82bc](../src/frame/frame_unrooted_actor_waypoint_step_82bc.c) | 168 |
+| `0x8DBC` | [frame_actor_choose_next_waypoint](../src/frame/frame_actor_choose_next_waypoint.c) | 88 |
+| `0x8CD4` | [frame_unrooted_start_destination_move_8cd4](../src/frame/frame_unrooted_start_destination_move_8cd4.c) | 40 |
+| `0x2B358` | [frame_unrooted_refresh_destination_velocity_2b358](../src/frame/frame_unrooted_refresh_destination_velocity_2b358.c) | 96 |
+
+The waypoint step preserves states zero, three and two before its default wait
+handler. State zero selects an index and sets a destination; state three selects
+a different waypoint after arrival, chooses variant seven and stores wait units
+times thirty; state two selects another waypoint, faces it and chooses variant
+three. The chooser retries against the existing byte index, stores its new index
+before reading the point, and retains fresh group/count observations around the
+random calls. The actual eight-byte point return uses the existing hidden-result
+convention; two ordinary point objects preserve the native temporary-to-local
+copy before the destination call.
+
+The destination setup stores both supplied coordinates and signed speed, calls
+the velocity helper, consumes its low-byte direction and chooses outer state
+thirteen. The helper divides the unsigned point distance by unsigned speed,
+converts the quotient to a signed word and takes its absolute value. It captures
+the destination-minus-next-position deltas, then the direction of the old
+velocity, before writing both signed delta/duration quotients. That captured
+direction is returned unchanged.
+
+All four first canonical bodies match. Normal/strict positives and genuine
+changed-source controls cover both pairs and eleven actual C providers in their
+separate contexts. Four actual declarations extend the existing direct-move
+header; its affected contexts are checked under the final shared declarations.
+No owner layout changes or new register bindings are needed. Full matching,
+control, inventory and progress gates check the integration.
+
+The complete 392 bytes contain 388 instruction bytes and four zero-alignment
+bytes. The latter are two-byte tails at `0x8362` and `0x2B3B6`, independently
+bounded by the next owned entries. Normal/strict object mappings classify these
+source-emitted tails as data; the old four rows omitted them. This adds four
+mapped data bytes and no newly discovered executable instructions. Other
+possible incoming execution is not excluded by the alignment classification.
+
+Live aligned objects, valid serialized group/point backing, an alternative
+waypoint and retry termination remain premises. Existing point shifts and
+provider arithmetic require their valid domains. The destination helper also
+requires nonzero speed, a nonzero duration, the pinned unsigned-to-signed word
+conversion, a representable signed absolute value and valid signed divisions.
+Complete writers, selectors, aliases, historical signatures and gameplay remain
+unproven. These source matches add no runtime observation.

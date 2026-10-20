@@ -54309,6 +54309,126 @@
       ],
       "compiler_id": "agbcc",
       "mode": "Thumb"
+    },
+    {
+      "name": "frame_unrooted_actor_waypoint_step_82bc",
+      "rom_offset": 33468,
+      "size": 168,
+      "source": "src/frame/frame_unrooted_actor_waypoint_step_82bc.c",
+      "symbols": {
+        "resource_group_point_count": "0x0800af61",
+        "resource_read_group_point": "0x0800af79",
+        "frame_set_actor_destination": "0x08008dad",
+        "frame_random_range": "0x080353d9",
+        "frame_set_variant_state": "0x08001be1",
+        "frame_actor_step_wait_phase": "0x08007d7d",
+        "frame_actor_face_destination": "0x08008d79",
+        "frame_actor_choose_next_waypoint": "0x08008dbd"
+      },
+      "negative_control": {
+        "before": "wait_units * 30",
+        "after": "wait_units * 31"
+      },
+      "thumb_symbols": [
+        "resource_group_point_count",
+        "resource_read_group_point",
+        "frame_set_actor_destination",
+        "frame_random_range",
+        "frame_set_variant_state",
+        "frame_actor_step_wait_phase",
+        "frame_actor_face_destination",
+        "frame_actor_choose_next_waypoint"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "ce0a7051cb6eb7087d1b94c1b63001e9a345dc7a2579cb04ac58608a738e55c2",
+      "compiler_id": "agbcc",
+      "mode": "Thumb"
+    },
+    {
+      "name": "frame_actor_choose_next_waypoint",
+      "rom_offset": 36284,
+      "size": 88,
+      "source": "src/frame/frame_actor_choose_next_waypoint.c",
+      "symbols": {
+        "resource_group_point_count": "0x0800af61",
+        "resource_read_group_point": "0x0800af79",
+        "frame_set_actor_destination": "0x08008dad",
+        "frame_random_range": "0x080353d9"
+      },
+      "negative_control": {
+        "before": " - 1);",
+        "after": " - 2);"
+      },
+      "thumb_symbols": [
+        "resource_group_point_count",
+        "resource_read_group_point",
+        "frame_set_actor_destination",
+        "frame_random_range"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "192fbfaf1a68144821f1ea92921e42fc1c750fa10c279d3643278acbcbc87fdc",
+      "compiler_id": "agbcc",
+      "mode": "Thumb"
+    },
+    {
+      "name": "frame_unrooted_refresh_destination_velocity_2b358",
+      "source": "src/frame/frame_unrooted_refresh_destination_velocity_2b358.c",
+      "rom_offset": 176984,
+      "size": 96,
+      "symbols": {
+        "view_point_distance": "0x08027495",
+        "frame_direction_from_velocity": "0x08027421",
+        "__udivsi3": "0x0804ced9",
+        "__divsi3": "0x0804cd2d"
+      },
+      "thumb_symbols": [
+        "view_point_distance",
+        "frame_direction_from_velocity",
+        "__udivsi3",
+        "__divsi3"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "object->velocity.x = delta_x / duration;",
+        "after": "object->velocity.x = delta_y / duration;"
+      },
+      "compiler_id": "agbcc",
+      "mode": "Thumb"
+    },
+    {
+      "name": "frame_unrooted_start_destination_move_8cd4",
+      "source": "src/frame/frame_unrooted_start_destination_move_8cd4.c",
+      "rom_offset": 36052,
+      "size": 40,
+      "symbols": {
+        "frame_unrooted_refresh_destination_velocity_2b358": "0x0802b359",
+        "frame_set_actor_direction": "0x08001c29",
+        "transition_object_set_state": "0x08001c05"
+      },
+      "thumb_symbols": [
+        "frame_unrooted_refresh_destination_velocity_2b358",
+        "frame_set_actor_direction",
+        "transition_object_set_state"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "transition_object_set_state(object, 13);",
+        "after": "transition_object_set_state(object, 12);"
+      },
+      "compiler_id": "agbcc",
+      "mode": "Thumb"
     }
   ],
   "assembly": [
