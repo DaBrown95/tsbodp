@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,377 C functions / 297,396 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 301,456 bytes; original slices
-still supply 16,475,760 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,379 C functions / 297,644 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 301,704 bytes; original slices
+still supply 16,475,512 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **117 unowned rows / 24,100
+[inventory](../assets/rom-inventory.json) contain **115 unowned rows / 23,852
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -129,6 +129,14 @@ two alignment bytes. This completes local source ownership from `0x46588` to
 `0x466B4` with the existing neighbours. The existing averaging routine consumes
 the definition's value callback directly. Stored EC/FC delivery, unused formals,
 complete incoming roots and input/writer/gameplay populations remain open.
+
+Two independently bounded [actor helpers](ACTOR_STATE_RECONSTRUCTION.md#independently-bounded-timed-phase-and-input-velocity)
+add 248 C extent bytes: 220 instruction and 28 literal bytes. The timed-phase
+helper preserves states 2/5/7, the low-16-bit duration and full-word timer store.
+The input-velocity helper retains both scale and animation-call paths. Existing
+actor, input, vector and animation owners/providers are reused. Incoming roots,
+historical unused formals, backing and complete writer/input/gameplay domains
+remain unresolved; these are source matches, with no new runtime discovery.
 
 Executable inventory remains incomplete. It separates instructions, data and
 unresolved bytes; its instruction union is not complete. Unclassified owned/envelope bytes,

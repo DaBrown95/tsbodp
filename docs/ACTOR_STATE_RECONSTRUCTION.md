@@ -1351,3 +1351,45 @@ These static and compiler matches do not close EC delivery, writable targets,
 owner/actor populations, arithmetic, point-provider success or initialized
 sample-handle domains. Native unchecked results and early-completion cleanup
 order remain intact; no compensating guards or initialization are introduced.
+
+## Independently bounded timed phase and input velocity
+
+Two previously mapped, independently bounded entries now have readable matching
+C using existing actor/object, timer, input, vector and animation declarations.
+Their names describe the observed behavior; no incoming direct call or exact
+ROM pointer was identified in the bounded static checks.
+
+| ROM offset | Source | Extent bytes |
+| --- | --- | ---: |
+| `0x7D14` | [frame_actor_step_timed_phase](../src/frame/frame_actor_step_timed_phase.c) | 104 |
+| `0x7EC8` | [frame_unrooted_input_velocity_7ec8](../src/frame/frame_unrooted_input_velocity_7ec8.c) | 144 |
+
+The first switches on the existing actor variant byte at `+0x4E`. State two
+decrements the signed timer at `+0x58` and selects variant seven at minus one;
+state five selects outer state one. In state seven, flag `0x400000` permits its
+own clearing, variant two and a full-word timer store of the saved unsigned
+16-bit duration. The consumed C view takes an actor and that duration and
+returns no meaningful value. Its natural extent is 100 instruction and four
+literal bytes, ending before the independent entry at `0x7D7C`.
+
+The second tests input mask `0x2` for the existing local-player index. Its two
+branches independently scale signed actor speed by double constants 1.1 or
+0.6, convert through the unsigned-word result, call the existing vector writer
+with flags and direction, and request animation 55. Both actual animation calls
+remain in the source. Its consumed view takes an actor and vector output and
+returns no meaningful value. It owns 120 instruction and 24 literal bytes,
+ending at the independent `frame_actor_has_action` entry `0x7F58`.
+
+The complete 248 bytes match without register bindings, volatile qualifiers,
+embedded instructions or added alignment. Normal/strict positives and genuine
+changed-source controls cover both definitions and their actual direct
+providers, in their separate compilation contexts; full matching/control and
+progress gates check the integration. The providers gain no new C credit.
+
+Live correctly aligned actor/output backing, valid local-player selection and
+appropriate timer/speed values remain premises. In particular the signed timer
+decrement requires a value other than `INT_MIN`; floating conversion follows
+the pinned target behavior and does not establish portable behavior for every
+possible speed. Wider writers and incoming roots, historical extra unused
+formals, callback/selector populations and gameplay remain open. No runtime
+transfer or gameplay observation is added.

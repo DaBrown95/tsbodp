@@ -54253,6 +54253,62 @@
         "before": "return 100;",
         "after": "return 99;"
       }
+    },
+    {
+      "name": "frame_actor_step_timed_phase",
+      "rom_offset": 32020,
+      "size": 104,
+      "source": "src/frame/frame_actor_step_timed_phase.c",
+      "symbols": {
+        "frame_set_variant_state": "0x08001be1",
+        "transition_object_set_state": "0x08001c05"
+      },
+      "thumb_symbols": [
+        "frame_set_variant_state",
+        "transition_object_set_state"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "frame_set_variant_state(object, 7);",
+        "after": "frame_set_variant_state(object, 6);"
+      },
+      "compiler_id": "agbcc",
+      "mode": "Thumb"
+    },
+    {
+      "name": "frame_unrooted_input_velocity_7ec8",
+      "rom_offset": 32456,
+      "size": 144,
+      "source": "src/frame/frame_unrooted_input_velocity_7ec8.c",
+      "symbols": {
+        "g_input_current": "0x03004220",
+        "g_frame_actor_need_input": "0x030040e0",
+        "frame_make_velocity": "0x08001979",
+        "frame_request_animation": "0x08001b5d",
+        "__floatsidf": "0x0804dc29",
+        "__muldf3": "0x0804d505",
+        "__fixunsdfsi": "0x0804cdc5"
+      },
+      "thumb_symbols": [
+        "frame_make_velocity",
+        "frame_request_animation",
+        "__floatsidf",
+        "__muldf3",
+        "__fixunsdfsi"
+      ],
+      "negative_control": {
+        "before": "* 1.1",
+        "after": "* 1.0"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb"
     }
   ],
   "assembly": [
