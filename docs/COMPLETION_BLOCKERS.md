@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,355 C functions / 296,884 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 300,944 bytes; original slices
-still supply 16,476,272 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,356 C functions / 296,936 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 300,996 bytes; original slices
+still supply 16,476,220 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **133 unowned rows / 24,574
+[inventory](../assets/rom-inventory.json) contain **132 unowned rows / 24,522
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -18,7 +18,7 @@ Unverified candidates receive no credit.
 | 2 | Connected actor, attachment, save and transition workers. | Prioritize kind 66 (248), weekly `0x0802005C` (108), loader `0x0801B704` (548), settlement `0x0801BA40` (188 / 22), remover `0x080454DC` (192), generic EC consumer and palette worker (400). Resolve twelve bytes at `0x1DB20..0x1DB2C` and unrooted entries. Backing, selector, serialized-index, writable-target and later-writer domains remain open; generic EC delivery and unused formals are provisional. The six single-window, horizontal/vertical slots 6–9 and three rectangle bodies are owned. Of 28 bodies in the observed prefixes, only first-slot-10 `0x08038B90` (228 bytes) remains unowned. Its best candidate remains 228 / 8. The latest emits 228 / 109: its initial constant and shared-step expression match, but coordinate/window homes and the DISPCNT reload remain wrong. Further trials await a distinct supported cause. The frame-loop [window coordinate updater](DISPLAY_WINDOW_MOTION.md) and its driver now match, as do the layer/mask services; the separate `0x48A14` setter remains 68 / 15 with its four-scalar declaration. Selector, table, writer and backing populations remain open. See [actor state](ACTOR_STATE_RECONSTRUCTION.md), [entries](ACTOR_ENTRIES_RECONSTRUCTION.md), [attachments](FRAME_ATTACHMENT_JOBS_42_94.md), [save](SAVE_STREAM.md) and [transitions](TRANSITION_WINDOWS.md). |
 | 3 | Copied-RAM resources: ROM `0xB840` (284), `0xB36C` (504-byte ARM body), `0xB564` (320), word-group copier (68). | Sorter retains a 284 / 2 best candidate. Returning its actual final pass changes register preference but leaves the two blocked operands wrong and adds a return move (288 / 33); that return experiment is closed. The tile decoder now emits 504 / 11 against the fixed 504-byte ARM body at RAM `0x030036D0`; its 528-byte copy also includes 24 bytes of the next body. Genuine return/field lifetimes, distance association, the APPEND wrapper and four separate tail calculations are resolved in the private candidate. The four copy-entry and repeat-entry order groups now match through real zero-pair guards and ordinary tail values. Only the parser CMP/distance rotation remains. Integer predicate/discriminator capture fails; no C or API credit is assigned. Aggregate/by-reference drawer attempts remain 348 / 313 and 356 / 321: optimization recreates pointer equivalence and spills. Preserve API contracts; prove RAM execution addresses and copy prefixes separately. Serialized selection, alignment and arena/backing remain open; the 812-byte assembly decoder leaves C workers open. See [RAM map](../config/ram-map-us-eu.json) and [decoder](RESOURCE_BACKGROUND_DECODER.md). |
 | 4 | Audio `0x08049968` (124), saved-register adapters and executable patches. | Explain native NOP versus ordinary C store; close caller/stack protocols, incoming transfers, patcher inputs, IRQ targets and later writes. Rebuild every reachable modified code state. Glue and observed shifts do not close those domains. See [audio](AUDIO_RECONSTRUCTION.md). |
-| 5 | Serial IRQ `0x0803DC48` (1,616), poll (408), status (124), record provider (200). | IRQ remains unowned. The latest setup-owner candidate is 1,572 bytes / 1,386 differences; the retained shared-counter candidate is 1,624 / 809. Canonical owner phases and real checksum/counter/bank lifetimes are represented, but register allocation and shared SEND tails differ. The ready value dies before SEND operands and supplies no missing dependency. Hold those source axes until a distinct producer is identified. The 596-byte offer refresh matches using its real next-record loop bound. The provider remains 200 / 159. Participant/index, resource, allocation, descriptor and writer domains remain open. See [scene](SCENE_LINK_ENTRY.md) and [serial](SERIAL_HANDSHAKE.md). |
+| 5 | Serial IRQ `0x0803DC48` (1,616), poll (408), status (124), record provider (200). | IRQ remains unowned. The actual main-flags-owner diagnostic is 1,568 bytes / 1,310 differences; the retained shared-counter candidate is 1,624 / 809. The flags owner dies before its later sentinel/checksum roles, but local allocation and shared SEND tails differ. The ready value dies before SEND operands and supplies no missing dependency. Hold those source axes until a distinct producer is identified. The 596-byte offer refresh matches using its real next-record loop bound. The provider remains 200 / 159. Participant/index, resource, allocation, descriptor and writer domains remain open. See [scene](SCENE_LINK_ENTRY.md) and [serial](SERIAL_HANDSHAKE.md). |
 | 6 | Executable inventory alongside rows 1–5. | Resolve 98 call-site plus 21 transfer observations at 112 physical sites, writable callbacks/jump tables and ten code installations (19,188 distinct ROM source bytes). Close the selector domains behind 6,699 unbacked serialized outcomes. Pending-display's 128 selected returns/controls/replays leave writer/index/target populations open, as do collision/audio writer and alias domains. Word `0xE40A40` naming `0x0803E8AF` has a source-backed compressed-map data role; other aliases and alternate incoming execution remain open. See [inventory](WHOLE_ROM_INVENTORY.md). |
 | 7 | Reproducibility and publication. | Remove executable instruction bodies from original-ROM slices, resolve material inventory uncertainty and justify assembly exceptions. Reproduce a clean build with pinned tools/local inputs. Pass matching/controls, applicable tool tests, inventory and progress gates; audit contents/history, publish to `main` and keep contribution features disabled. |
 
@@ -87,6 +87,13 @@ target addresses instead of pointer-array arithmetic across separate members.
 Its full 248 bytes remain exact; it adds no source credit or generic EC consumer.
 The route-search table's corrected 134 rows / 16,216 bytes include four already
 owned entries and add no global credit.
+
+The [independently bounded background-dimensions reader](DISPLAY_MAP_RECONSTRUCTION.md#independently-bounded-background-dimensions)
+adds 52 C extent bytes: 42 instruction, eight literal and two compiler alignment
+bytes. It uses the canonical whole background owner and preserves two actual
+control observations around the first output store. Its incoming roots and
+historical signature remain provisional; no table-data ownership, new executable
+discovery or runtime coverage is claimed.
 
 The thirteen [independently bounded attachment checks](UNROOTED_ATTACHMENT_CHECKS.md)
 now own their complete extents; their incoming roots remain open.

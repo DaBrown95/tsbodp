@@ -35,4 +35,8 @@ extern void display_set_background_wave_y(unsigned int index, unsigned int phase
 extern void display_set_background_wave_phase(unsigned int index, unsigned int x, unsigned int y);
 extern void display_set_background_wave_step(unsigned int index, short x, short y);
 extern void display_set_background_wave_amplitude(unsigned int index, short x, short y);
+/* Independently bounded unrooted reader; callers and unused arguments are unknown.
+ * Defined inputs use index 0..3 and two live aligned halfword outputs. */
+void display_read_background_dimensions_unrooted_d9d4(unsigned int,
+    unsigned short *, unsigned short *);
 #endif

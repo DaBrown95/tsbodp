@@ -53896,6 +53896,21 @@
         "after": "row_address + 2 * (x + 1)"
       },
       "expected_sha256": "a2994db49547b3d4706c44216a459133e6250d559ae727159855278d7002cd73"
+    },
+    {
+      "name": "display_read_background_dimensions_unrooted_d9d4",
+      "rom_offset": 55764,
+      "size": 52,
+      "source": "src/display/read_background_dimensions_unrooted_d9d4.c",
+      "symbols": {
+        "g_display_background_map_dimensions": "0x0804f7f8",
+        "g_display_background_system": "0x03002ef0"
+      },
+      "negative_control": {
+        "before": "].width;",
+        "after": "].width + 1;"
+      },
+      "expected_sha256": "1ac8b04425b8688879281870abdd91911912fbd8f4d198f7e2df80ef873b6bd1"
     }
   ],
   "assembly": [

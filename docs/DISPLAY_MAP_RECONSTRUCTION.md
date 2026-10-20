@@ -1,15 +1,15 @@
 # Background map rectangle operations
 
-This connected batch reconstructs seven record-based functions at `0x0800DAE0` through
-`0x0800DD80` and the connected palette-field rectangle writer at `0x0800D90C`.
-The eight complete linked extents total 764 bytes. Each has an exact compiler
-comparison and a compiled changed-source control that rejects. These are
-static and byte-matching results; runtime use of every routine has not been
-established.
+Eight record-based and palette functions at `0x0800D90C` and
+`0x0800DAE0..0x0800DD80` own 764 matching bytes. The independently bounded
+background-dimensions reader at `0x0800D9D4` adds 52 bytes. These nine complete
+linked extents total 816 bytes, with exact compiler comparisons and rejecting
+changed-source controls. Runtime use and incoming roots remain separate questions.
 
 | Source function | ROM address | Complete extent |
 | --- | --- | ---: |
 | `display_write_map_palette_rectangle` | `0x0800D90C` | 92 |
+| `display_read_background_dimensions_unrooted_d9d4` | `0x0800D9D4` | 52 |
 | `display_reload_background_map` | `0x0800DAE0` | 88 |
 | `display_copy_map_rectangle` | `0x0800DB38` | 96 |
 | `display_copy_background_map_forward` | `0x0800DB98` | 96 |
@@ -94,6 +94,40 @@ register constraints on the x-byte offset and dirty flag are compiler-facing
 source choices; they are not claims about original syntax. A compiled change
 from incrementing tiles by one to incrementing by two rejects by one byte.
 
-The 640-byte background map writer at `0x0800CEFC` and its text/affine map layout
-remain a retained unmatched candidate, excluded from the eight-function
-coverage above.
+The [640-byte background-map writer](DISPLAY_RECONSTRUCTION.md#dimension-prefixed-background-map-writer)
+at `0x0800CEFC` and the [24-byte tile reader](DISPLAY_MENU_PAGES.md#hint-resource-and-map-read)
+at `0x0800DA08` are separately source-owned. They are outside this document's
+nine-function subtotal. The copied-RAM map drawer remains unconverted.
+
+## Independently bounded background dimensions
+
+The [reader](../src/display/read_background_dimensions_unrooted_d9d4.c) owns
+42 instruction bytes, eight literal bytes and two compiler alignment bytes.
+Its balanced stack/return path, literal references and next entry at `0xDA08`
+bound the complete 52-byte body. No incoming direct call or aligned function
+pointer has been identified in the bounded searches. Its three consumed
+arguments and void result describe the chosen project interface; historical
+names, extra unused arguments and complete incoming domains remain unknown.
+
+The source uses the canonical 440-byte `DisplayBackgroundSystem`, with four
+108-byte records beginning at offset eight. A byte view of that whole owner
+forms each indexed prefix and reads byte nine, the selected record's control
+high byte. Index zero through three keeps these accesses within the owner.
+The high two bits select one of four observed width/height pairs. This local
+read view adds no ownership credit for the external 16-byte table.
+
+It writes width before reading the control byte again for height. The second
+observation matters for the native byte-memory interface: with size code three,
+a width output at the selected control's low halfword stores 512 (`0x0200`),
+so the next size observation is zero and height becomes 256. Caching size three
+would instead produce 512. This is a bounded target-access witness, without a
+universal effective-type or alias-population claim. Source inputs still require
+properly backed, aligned halfword outputs and valid owner/index storage.
+
+Ordinary table and system-base captures before the indexed address reproduce
+the native value lifetimes without register bindings. Normal/strict positives
+and real source controls cover this definition and the actual configuration
+writer separately. Actual-definition API checks, wrong-contract rejections and
+target layout facts preserve their distinct compilation contexts. The alignment
+role does not exclude alternate entry execution. No runtime or gameplay
+observation is added.
