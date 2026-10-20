@@ -154,10 +154,24 @@ audio notification 54-to-55 control changes the compiled result.
 Need adjustment `0x0802944C` / 100 bytes remains original. Its typed call
 declaration is a local, provisional description of observed operands and
 carries no new C credit. The input status service is covered by the
-IRQ-shared reset and polling section below. The original view operations at
-`0x0800EB14` and `0x0800E8B4` remain explicit. Retained failed candidates and
-raw comparisons distinguish genuine source-lifetime improvements from these
-remaining mismatches.
+IRQ-shared reset and polling section below. The view-mode setter at `0x0800E8B4`
+is already source-owned.
+
+The [interpolation setter](../src/transition/transition_set_view_interpolation.c)
+at `0x0800EB14` now owns its full 24 bytes: 20 instruction and four literal bytes.
+It writes the low byte of the incoming word to the existing 48-byte motion
+record's `interpolate` field at `+0x2E`. Its index is an unsigned byte, matching
+the native entry's narrowing; the provisional two-word declaration is replaced
+by the canonical view-effects declaration. The actual primary activity caller
+passes `(0,0)`, the reset writes one, and the view controller tests for one.
+The setter, these actual connected definitions, their normal/strict controls
+and separate target API/layout witnesses are checked. An integration diagnostic
+exposed the existing transition-object header's missing include guard; adding
+the guard changes no layout or callable type.
+
+These facts identify a stored value and its consumers. They do not establish a
+bound for the unsized motion table, all writers or every incoming index. No
+runtime or gameplay observation is added.
 
 # Connected activity dispatch and resource loading
 

@@ -1,26 +1,9 @@
 # Actor route-search support
 
-The connected route-search path reconstructs 130 C functions and 16,132 bytes:
-11 support helpers, the central 720-byte search, two 100-byte buffer setup
-and reset functions, the 76-byte reverse path extractor, and two connected
-target-route and interaction consumers plus their eight-function job lifecycle,
-and six further variant/job-73 and shared value/random functions, followed by
-the nine-function variant controller and parameter-indicator closure, and its
-three-function random refill/seed/reader dependency, its adjoining
-attachment-neighbor producer, and five allocation, seed-coordination and
-secondary-reader functions, followed by six bounded-output, signed-offset and
-threshold APIs, and the secondary threshold's optional need-effect/cue consumer
-plus its five parameter and retained-effect producers, parameter consumer and
-two attachment-job controllers and five connected selection/setup/dispatch/capacity callbacks,
-followed by six mode-two selection functions, a three-function optional activity path,
-and fourteen connected completion, parameter-job and choice functions, followed by
-five choice-list setup, filtering, clock classification and refresh helpers,
-and eight connected choice application, completion and value readers, followed by
-eight context and attachment callbacks and their connected page builder, followed by
-twelve playback callbacks and jobs and their adjoining three-function view factory.
-Every complete
-linked extent matches the fixed reference,
-including literal pools and alignment. Each real source mutation is rejected.
+The table records 134 matching C functions and 16,216 extent bytes across
+route search, attachment jobs, choices, playback and variant lifecycle entries.
+Every complete linked extent matches the fixed reference, including literal
+pools and alignment. Each real source mutation is rejected.
 Neither these matches nor the full-ROM equality gate establish runtime behaviour.
 
 | ROM offset | Function | Verified bytes |
@@ -102,6 +85,7 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x355AC` | `frame_next_random_secondary_word` | 88 |
 | `0x3CB14` | `frame_step_variant_attachment_job` | 1016 |
 | `0x3D00C` | `frame_dispatch_variant_attachment_job` | 24 |
+| `0x3D024` | `frame_finish_variant_attachment_job` | 4 |
 | `0x3D02C` | `frame_update_attachment_parameter` | 188 |
 | `0x3D200` | `frame_read_parameter_percentage` | 20 |
 | `0x2B9D8` | `frame_clear_attachment_need_countdown` | 16 |
@@ -109,6 +93,9 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x1A6FC` | `frame_complete_attachment_parameter_indicator` | 112 |
 | `0x1A76C` | `frame_set_attachment_parameter_indicator` | 64 |
 | `0x1A7AC` | `frame_attachment_parameter_indicator_tick` | 28 |
+| `0x3CF0C` | `frame_initialize_variant_attachment_job` | 4 |
+| `0x3CF38` | `frame_select_attachment_route_variant` | 72 |
+| `0x3CF80` | `frame_prepare_variant_attachment_job` | 4 |
 | `0x3CF84` | `frame_begin_variant_attachment_job` | 136 |
 | `0x3D3D4` | `frame_begin_attachment_job_73` | 64 |
 | `0x3D214` | `frame_step_attachment_job_73` | 388 |

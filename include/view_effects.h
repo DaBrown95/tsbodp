@@ -24,4 +24,5 @@ unsigned int transition_get_view_mode(unsigned char);
 void transition_set_view_mode(unsigned int, unsigned char);
 void transition_set_view_origin(struct FramePoint, unsigned char);
 void transition_get_view_position(struct FramePoint *, unsigned char);
+void transition_set_view_interpolation(unsigned int, unsigned char);
 #endif

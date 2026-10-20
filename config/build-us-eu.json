@@ -31274,7 +31274,7 @@
         "g_scene_contact_initial_background_control1": "0x08059540",
         "g_scene_contact_activity_background_control1": "0x08059544",
         "g_transition_view_configuration": "0x08053504",
-        "scene_contact_original_view_eb14": "0x0800eb15",
+        "transition_set_view_interpolation": "0x0800eb15",
         "transition_set_view_mode": "0x0800e8b5",
         "scene_contact_load_primary_resources": "0x08029859",
         "_call_via_r0": "0x0804ccf1",
@@ -31291,14 +31291,14 @@
         "frame_update_map_view",
         "transition_step_view",
         "transition_configure_view",
-        "scene_contact_original_view_eb14",
+        "transition_set_view_interpolation",
         "transition_set_view_mode",
         "scene_contact_load_primary_resources",
         "_call_via_r0"
       ],
       "negative_control": {
-        "before": "scene_contact_original_view_eb14(0, 0);",
-        "after": "scene_contact_original_view_eb14(1, 0);"
+        "before": "transition_set_view_interpolation(0, 0);",
+        "after": "transition_set_view_interpolation(1, 0);"
       }
     },
     {
@@ -53870,6 +53870,32 @@
         "-mthumb-interwork"
       ],
       "expected_sha256": "7e302ea71f99263e0c9c4944ba49279e28d6f687f086d3e63247751ca548647f"
+    },
+    {
+      "name": "transition_set_view_interpolation",
+      "rom_offset": 60180,
+      "size": 24,
+      "source": "src/transition/transition_set_view_interpolation.c",
+      "symbols": {
+        "g_resource_view_motion": "0x030017d8"
+      },
+      "negative_control": {
+        "before": ".interpolate = value;",
+        "after": ".interpolate = value + 1;"
+      },
+      "expected_sha256": "0cf6581dda8e6c4000dc6ae28eee882cb2e946b5f7c41c8fa8d1839c6ab768a6"
+    },
+    {
+      "name": "display_read_map_tile",
+      "rom_offset": 55816,
+      "size": 24,
+      "source": "src/display/read_map_tile.c",
+      "symbols": {},
+      "negative_control": {
+        "before": "row_address + 2 * x",
+        "after": "row_address + 2 * (x + 1)"
+      },
+      "expected_sha256": "a2994db49547b3d4706c44216a459133e6250d559ae727159855278d7002cd73"
     }
   ],
   "assembly": [

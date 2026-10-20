@@ -10,7 +10,7 @@
 extern const struct BackgroundResource g_display_menu_hint_resource;
 extern unsigned char g_display_menu_page_text_variants[];
 extern struct FrameObject *g_need_effect_player;
-/* Unconverted tile reader: this caller observes a 16-bit return. */
+/* Reads a halfword tile from a live row-major map; bounds are caller-owned. */
 unsigned short display_read_map_tile(const unsigned short *, int, int, int);
 void display_load_background_dma(unsigned int, const struct BackgroundResource *,
     unsigned short, unsigned short, unsigned int, unsigned int);

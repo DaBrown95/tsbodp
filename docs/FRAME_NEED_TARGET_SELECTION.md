@@ -1164,6 +1164,19 @@ owner through their actual definitions and callers. The separate +0xF8 tick
 callback retains its own contract. This does not close callback target
 populations, generic object views or the provenance of every grid slot.
 
+The already-owned 248-byte allocator now advances its callback output cursor
+through target 32-bit integer addresses. Its seven callback slots are separately
+named members, so treating the first member as a seven-element pointer array
+was an unsupported C object-boundary assumption. The corrected four-byte
+address steps preserve every native store and all 248 bytes, including the
+literal pool and alignment. No layout, callback API, access or source-credit
+count changes. Normal/strict checks cover the corrected allocator, its actual
+node and clear providers, and its spawn caller; their existing source controls
+reject, as do two controls that change the actual stride from four to eight.
+Separate definition/type checks cover the real compilation contexts. This
+repairs the known writer; it does not identify a generic EC load-to-call path
+or exhaust writable target, alias and definition-index domains.
+
 Five remaining direct route-constructor callers add 368 C extent bytes at
 `0x08012B54`, `0x080259A0`, `0x08025B54`, `0x08043884` and `0x08046240`.
 The 80-byte caller stores the record kind before initializing the genuine

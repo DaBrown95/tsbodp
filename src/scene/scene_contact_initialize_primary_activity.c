@@ -15,7 +15,7 @@ void scene_contact_initialize_primary_activity(void)
     display_text_set_background_control(control);
     g_scene_contact_definitions[g_scene_contact_state->scene].initialize();
     transition_reset_view(0);
-    scene_contact_original_view_eb14(0, 0);
+    transition_set_view_interpolation(0, 0);
     transition_set_view_mode(0, 0);
     transition_configure_view(
         ((struct SceneContactActivityStatePrefix *)g_scene_contact_state)->view,

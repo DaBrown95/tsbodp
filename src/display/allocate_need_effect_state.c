@@ -2,7 +2,7 @@
 
 static inline void **advance_output(void **out)
 {
-    return out + 1;
+    return (void **)((unsigned int)out + sizeof(*out));
 }
 static inline void *definition_callback(const unsigned char *base, unsigned int offset,
                                         unsigned int field)

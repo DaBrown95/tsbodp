@@ -1,3 +1,6 @@
+#ifndef TRANSITION_OBJECT_H
+#define TRANSITION_OBJECT_H
+
 /* Partial frame-object view inferred from connected transition callbacks. */
 struct TransitionObject {
  unsigned char unknown_00[12];
@@ -41,3 +44,5 @@ struct FramePoint;
 extern void transition_set_view_position(struct FramePoint, unsigned char);
 extern void transition_configure_view(struct TransitionViewObject *, struct FramePoint, unsigned char);
 extern void transition_clear_game_flags(unsigned int);
+
+#endif

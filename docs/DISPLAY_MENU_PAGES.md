@@ -98,11 +98,35 @@ low 16-bit tile return plus 407 is retained in menu word `+0`, and menu byte
 `+28` becomes 1.
 
 A zero argument clears the object's flag bit, fills a 17 by 10 rectangle at
-(1,3) on background 1 with tile 572, and clears menu byte `+28`. The neutral
-unconverted `display_read_map_tile` dependency at `0x0800DA08` remains explicit.
-Its private semantic candidates have not matched its complete 24-byte extent;
-they receive no source coverage. The hint caller establishes a 16-bit return
-and four arguments, without a bound or clipping claim for arbitrary maps.
+(1,3) on background 1 with tile 572, and clears menu byte `+28`.
+
+The [tile reader](../src/display/read_map_tile.c) at `0x0800DA08` now owns all
+24 instruction bytes. It retains the existing four-argument, unsigned-halfword
+result contract and reads one entry at `tiles + y * width + x`. The real row
+value occupies scratch R0 through its product, byte-offset and absolute-address
+phases; the incoming tile pointer remains live in R4 until that row address is
+formed, and R4 then holds the final entry address. Capturing only the final row
+address lost the native input-pointer lifetime. Keeping the complete row
+producer restored every operation; the final base-first addition restored the
+two operand-encoding bytes. No reads, calls or arithmetic operations were added.
+
+Normal and strict builds and genuine source controls cover the reader and its
+actual hint caller in separate compilation contexts. Target layout and callable
+types are checked independently. The target's 32-bit pointer/address conversions,
+live halfword backing and representable `2*x` remain required; neither clipping
+nor valid arbitrary map coordinates follows from a compiler match. The hint
+caller's fixed `(3,3)` and supplied width do not close every map producer or alias.
+
+For the selected hint resource at `0x08FB8CE4`, the loader returns the direct ROM
+map at `0x08FB8D06`, whose dimensions are 17 by 10. Entry 54 at `(3,3)` is the
+aligned halfword at `0x08FB8D76`, within its 170-entry payload. Its value six
+makes the caller store 413. The named synchronous loader and map writer preserve
+this source pointer; their writes target configured display and palette storage.
+A bounded interpretation of the installed default decoder uses the separate
+character destination. These facts require valid configured owners and backing,
+the unchanged default decoder, and no intervening owner or configuration writer.
+They establish this conditional call's map backing, without a gameplay or
+complete writer-population claim.
 
 ## Text layout and scroll extent
 

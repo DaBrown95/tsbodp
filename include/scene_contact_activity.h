@@ -1,6 +1,8 @@
 #ifndef SCENE_CONTACT_ACTIVITY_H
 #define SCENE_CONTACT_ACTIVITY_H
 
+#include "view_effects.h"
+
 /* Specific effect-only calls through the contact definition table. This does
  * not refine other callback interfaces or recover unconverted callee types. */
 typedef void (*SceneContactActivityCallback)(void);
@@ -29,7 +31,7 @@ void scene_contact_step_primary_activity(void);
 void scene_contact_step_secondary_activity(void);
 void scene_contact_load_primary_resources(unsigned int);
 
-/* Existing providers and one explicit original view operation. */
+/* Existing providers for the connected activity path. */
 void scene_vblank_callback(void);
 void transition_reset_view(unsigned char);
 void transition_step_view(unsigned char);
@@ -41,6 +43,5 @@ void frame_load_combined_map_resource(unsigned int, const void *, const void *);
 void frame_decode_map_cell_types(const void *, const void *);
 void frame_decode_extra_map_cell_types(const void *, const void *);
 void frame_reset_object_palette_slots(void);
-void scene_contact_original_view_eb14(unsigned int, unsigned int);
 
 #endif
