@@ -25892,6 +25892,19 @@
         "Matching normal and strict source object .text covers the complete fixed extent and its mapping symbol marks this two-byte zero span as data. Source emits alignment; no native instruction or neighboring body is included.",
         "Actual source controls reject the whole comparison. An alignment classification does not exclude all possible alternate execution entries."
       ]
+    },
+    {
+      "name": "frame_inert_need_effect_tick_alignment_0465ae",
+      "owner": "frame_inert_need_effect_tick",
+      "rom_offset": 288174,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "42611a220e69c8de77104faebbeec2b148f189a3859115d6a888b68f0214a986",
+      "evidence": [
+        "Fixed-address normal and strict source objects own the complete four-byte extent. The function is BX LR; object $d at relative2 and explicit out-of-function .align 2,0 identify the two trailing zero bytes as source-emitted alignment.",
+        "The behavior-changing owner-byte-store control rejects the full extent. Alignment does not exclude every possible alternate execution entry."
+      ]
     }
   ],
   "indirect_producers": [

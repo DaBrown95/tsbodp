@@ -1236,3 +1236,46 @@ actual source controls, 54 target layout facts and nine deliberately wrong
 contracts pass. The full matching/control and progress gates verify the
 integrated inputs. F4 target population, F8 tick delivery, all slot backing,
 aliases and gameplay remain separate obligations.
+
+## Shared inert callbacks
+
+Observed definition rows 8, 105 and 116 install the same seven callbacks below.
+They now match alongside two independently bounded, unrooted constant leaves.
+Names describe the observed effects; the original source names are unknown.
+
+| ROM offset | Definition | Extent bytes |
+| --- | --- | ---: |
+| `0x4658C` | `frame_unrooted_need_effect_hundred_4658c` | 4 |
+| `0x46590` | `frame_inert_need_effect_initialize` | 4 |
+| `0x46594` | `frame_unrooted_need_effect_one_46594` | 4 |
+| `0x46598` | `frame_inert_need_effect_select` | 8 |
+| `0x465A0` | `frame_inert_need_effect_prepare` | 4 |
+| `0x465A4` | `frame_inert_need_effect_begin` | 4 |
+| `0x465A8` | `frame_inert_need_effect_dispatch` | 4 |
+| `0x465AC` | `frame_inert_need_effect_tick` | 4 |
+| `0x465B0` | `frame_inert_need_effect_value` | 36 |
+
+The initializer and prepare return one. The selector writes zero to its first
+output byte and returns one; the known chooser stops at zero. Begin returns
+zero, dispatch returns two, and tick changes no state. The value callback reads
+definition byte `+0x23` through the canonical owner kind at `+8`, returns
+`100 + 12 * byte` narrowed to an unsigned byte, and reuses the 36-byte definition
+layout. Its arithmetic fits an ARM32 signed int before the final narrowing.
+The seven callback words and allocator mapping are direct static evidence;
+complete generic EC/FC delivery is still unresolved.
+
+All nine normal and strict positive extents match; all eighteen genuine
+source-control comparisons reject. Final integration checks cover the shared
+header. No register constraint or executable assembly is added. The two zero
+bytes after tick have an object-mapped alignment role, which does not exclude
+alternate execution. The nine functions own 72 bytes: 66 instructions, four
+literal and two alignment bytes. Seven previously mapped rows account for 62
+estimated bytes; the two unrooted leaves add eight mapped instruction bytes,
+and tick adds two mapped alignment bytes. With the existing optional-parameter
+and timed-job neighbours, `0x46588..0x466B4` is now source-owned.
+
+The chosen interfaces preserve consumed inputs and actual handoffs. Extra
+historical unused arguments remain unknown; the two unrooted leaves use a
+word-result/no-consumed-input view. Value calls require a live owner and backed
+definition index. Observed rows 8/105/116 do not bound every writer, selector or
+callback population. No runtime or gameplay evidence is added.

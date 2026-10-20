@@ -54080,6 +54080,179 @@
         "after": "return 99;"
       },
       "expected_sha256": "a2271e164827e90980393ec57efbeee0efeba93f9e67d5eff60d0043fc8970f8"
+    },
+    {
+      "name": "frame_inert_need_effect_initialize",
+      "rom_offset": 288144,
+      "size": 4,
+      "source": "src/frame/frame_inert_need_effect_initialize.c",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      }
+    },
+    {
+      "name": "frame_unrooted_need_effect_one_46594",
+      "rom_offset": 288148,
+      "size": 4,
+      "source": "src/frame/frame_unrooted_need_effect_one_46594.c",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      }
+    },
+    {
+      "name": "frame_inert_need_effect_select",
+      "rom_offset": 288152,
+      "size": 8,
+      "source": "src/frame/frame_inert_need_effect_select.c",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "expected_sha256": "785af2cc1008e95fddf09128538575d96f6e73ef213d1711a65267f1284a8fc6",
+      "negative_control": {
+        "before": "choices[0] = 0;",
+        "after": "choices[0] = 1;"
+      }
+    },
+    {
+      "name": "frame_inert_need_effect_prepare",
+      "rom_offset": 288160,
+      "size": 4,
+      "source": "src/frame/frame_inert_need_effect_prepare.c",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      }
+    },
+    {
+      "name": "frame_inert_need_effect_begin",
+      "rom_offset": 288164,
+      "size": 4,
+      "source": "src/frame/frame_inert_need_effect_begin.c",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "expected_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+      "negative_control": {
+        "before": "return 0;",
+        "after": "return 1;"
+      }
+    },
+    {
+      "name": "frame_inert_need_effect_dispatch",
+      "rom_offset": 288168,
+      "size": 4,
+      "source": "src/frame/frame_inert_need_effect_dispatch.c",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "expected_sha256": "05d3139ac6e259b40e1e6f8f351cdfa813fc1ee75d253c299ce67f07e78d4454",
+      "negative_control": {
+        "before": "return 2;",
+        "after": "return 1;"
+      }
+    },
+    {
+      "name": "frame_inert_need_effect_tick",
+      "rom_offset": 288172,
+      "size": 4,
+      "source": "src/frame/frame_inert_need_effect_tick.c",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c",
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    owner->enabled = 0;\n}"
+      }
+    },
+    {
+      "name": "frame_inert_need_effect_value",
+      "rom_offset": 288176,
+      "size": 36,
+      "source": "src/frame/frame_inert_need_effect_value.c",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {
+        "g_frame_need_effect_definitions": "0x08062e7c"
+      },
+      "thumb_symbols": [],
+      "expected_sha256": "2d5ed1a7e5cb098b5354af7e07f3bff4451579bbb335520e16bec1dee7ef09f3",
+      "negative_control": {
+        "before": "return 100 + 12 *",
+        "after": "return 99 + 12 *"
+      }
+    },
+    {
+      "name": "frame_unrooted_need_effect_hundred_4658c",
+      "rom_offset": 288140,
+      "size": 4,
+      "source": "src/frame/frame_unrooted_need_effect_hundred_4658c.c",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "expected_sha256": "a2271e164827e90980393ec57efbeee0efeba93f9e67d5eff60d0043fc8970f8",
+      "negative_control": {
+        "before": "return 100;",
+        "after": "return 99;"
+      }
     }
   ],
   "assembly": [

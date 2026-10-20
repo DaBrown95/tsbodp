@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,368 C functions / 297,324 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 301,384 bytes; original slices
-still supply 16,475,832 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,377 C functions / 297,396 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 301,456 bytes; original slices
+still supply 16,475,760 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **124 unowned rows / 24,162
+[inventory](../assets/rom-inventory.json) contain **117 unowned rows / 24,100
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -119,6 +119,15 @@ newly mapped bytes contain 16 instructions and six alignment bytes. The existing
 40-byte predicate gains no additional credit. One eight-byte LR-preserving
 constant-return body at `0x44C10` remains original. Incoming roots, historical
 unused formals, selector/backing populations and gameplay remain unresolved.
+
+The shared [inert need-effect callbacks](FRAME_NEED_TARGET_SELECTION.md#shared-inert-callbacks)
+add nine C functions / 72 extent bytes: 66 instruction, four literal and two
+alignment bytes. Seven callbacks are installed by observed rows 8/105/116;
+the two constant-return neighbours remain unrooted. Seven old rows cover 62
+estimated bytes; the other ten newly mapped bytes are eight instructions and
+two alignment bytes. This completes local source ownership from `0x46588` to
+`0x466B4` with the existing neighbours. Generic EC/FC delivery, unused formals,
+all incoming roots and input/writer/gameplay populations remain open.
 
 Executable inventory remains incomplete. It separates instructions, data and
 unresolved bytes; its instruction union is not complete. Unclassified owned/envelope bytes,
