@@ -2,6 +2,7 @@
 #define FRAME_ACTOR_ATTACHMENT_PARAMETERS_H
 
 #include "frame_actor_attachment_jobs.h"
+#include "frame_actor_social.h"
 #include "frame_actor_effect.h"
 #include "frame_transient_effect.h"
 #include "input.h"

@@ -53851,6 +53851,25 @@
         "-mthumb-interwork"
       ],
       "expected_sha256": "4414cc32f842972ddc4564d9fff74d36284f12d062effd2c876a847f590bb432"
+    },
+    {
+      "name": "frame_select_attachment_route_variant",
+      "rom_offset": 249656,
+      "size": 72,
+      "source": "src/frame/frame_select_attachment_route_variant.c",
+      "symbols": {
+        "g_frame_attachment_route_variants": "0x0807f4c0"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "++variant > 5",
+        "after": "++variant > 4"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "7e302ea71f99263e0c9c4944ba49279e28d6f687f086d3e63247751ca548647f"
     }
   ],
   "assembly": [

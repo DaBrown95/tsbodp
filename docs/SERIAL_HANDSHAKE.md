@@ -274,14 +274,22 @@ already-owned bytes and adds no C functions or bytes. The full matching and
 progress gates also rebuild all 51 transitive header importers.
 
 This owner makes direct union halfword transfers possible without addressable
-local copies. The private IRQ diagnostic removes both unwanted stack stores and
-their extra frame allocation, but remains 1,612 bytes against the original 1,616.
-Its original-home transfers pass the representation checks; the full byte
-comparison fails. The early and late slot reads use different native address
-registers, whereas the candidate reuses one base and cross-jumps their tails.
-This does not justify a new volatile qualifier. The 200-byte provider also
-remains unmatched; its separate setup-address producers already appear in
-initial compiler output.
+local copies, removing the two unwanted stack stores and their frame allocation.
+The IRQ remains unowned. The current shared-counter candidate emits 1,624 bytes
+with 809 differing bytes against the complete 1,616-byte reference. Its actual
+peer variable covers both reset-to-zero loops and naturally occupies native R7.
+Genuine checksum, word-result, setup and bank-cursor lifetimes preserve their
+measured native producers without extra accesses.
+
+A separate experiment gives three native terminal failure edges one common
+fresh slot read, using a legal operation scope and parent restart label. It
+emits 1,608 bytes with 1,040 differences. The shared producer exists, but its
+ordinary global root and address extraction still differ from the native IP
+owner; the other restart consumers remain separate. Neither experiment passes
+the full comparison or earns source credit. Further work requires the actual
+owner reaching definitions and remaining topology, not another volatile
+qualifier. The 200-byte provider also remains unmatched; its separate
+setup-address producers already appear in initial compiler output.
 
 The pinned compiler's union-punning exception requires direct union access.
 Taking an escaped halfword pointer, including through an integer address, does

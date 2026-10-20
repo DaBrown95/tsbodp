@@ -489,8 +489,8 @@ Six further matching functions add 748 bytes. Effect-definition rows 35 and 36
 store the job-73 initializer and dispatcher in slots `+0xC/+0x10`. The direct
 388-byte step is called by that dispatcher rather than appearing as a word
 pointer in the bounded ROM scan. Rows 10, 46, 47, 48, 94 and 103 store the
-variant initializer at `+0xC`; their dispatcher is now matching C, while the configuration callback at
-`0x3CF38` remains an explicit unconverted region. The raw aligned
+variant initializer at `+0xC`; their dispatcher and configuration callback at
+`0x3CF38` now have matching C. The raw aligned
 pointer references and row arithmetic are retained in
 `dependencies/attachment-job73-definition-slots.json`. These are static
 connections, without runtime reachability evidence.
@@ -565,8 +565,8 @@ an attachment record and immediately passes it to the 1,016-byte controller;
 there is no added null check. The aligned definition-row evidence already
 recorded above connects that dispatcher to kinds 10, 46, 47, 48, 94 and 103.
 The phase table embedded in the controller maps zero, six, nine, eight and one
-to active bodies; other values return the unchanged result one. The unmatched
-72-byte configuration selector at `0x3CF38` remains outside source coverage.
+to active bodies; other values return the unchanged result one. The
+72-byte configuration selector at `0x3CF38` is now separately owned below.
 
 At phase zero, kind 47 tests the world exclusion predicate or the primary-actor
 value gate with amount 20. A failed gate requests animation five, selects phase
@@ -1603,7 +1603,7 @@ positive/negative comparisons remain private. Whole-ROM equality, these source
 matches and the static callback map remain separate from runtime evidence.
 
 
-## Variant lifecycle leaves and remaining selector
+## Variant lifecycle leaves and selector
 
 Three installed leaves add 12 complete C extent bytes: initializer `0x3CF0C`
 and prepare `0x3CF80` return word one; finish `0x3D024` returns without changing
@@ -1619,15 +1619,34 @@ bytes. Scoped target checks cover the actual definitions, row/owner geometry
 and E8/F8 consumer types, with wrong width and result contracts rejected. These
 are compiler and static findings, without new runtime or gameplay evidence.
 
-The intervening selector at `0x3CF38` remains unconverted. Its current ordinary
-loop is 64 bytes / 45 differences; the retained prechecked loop is 64 / 65.
-The latter loses the native repeated owner-kind read in loop optimization,
-while the former shares the entry comparison. A single genuine owner-R4
-constraint prevents that hoist but still gives 64 / 52: after allocation makes
-both comparison operands identical, the final jump pass merges their entry
-code. Native uses distinct initial and loop operand roles. These are failures;
-no register grid follows. The six installed definition kinds match the six
-searched row kinds. An unmatched
-kind nevertheless advances to the adjacent parameter-rate storage and reads
-a word there; this is not evidence for a seventh variant row. No validation,
-whole incoming-kind domain or complete lifecycle claim is added.
+The intervening configuration selector at `0x3CF38` adds 72 C extent bytes:
+68 instruction bytes and four literal bytes, with no alignment tail. It searches
+the six 32-byte rows for the owner's full-word kind, stores the matching index
+at owner `+0x5E`, loads the selected row's initial-code word, writes its low byte
+to the output, and returns word one. The actual choice builder receives this callback
+through state `+0xE8`, installed from definition `+4`; begin and step consume the
+stored index through the existing canonical owner and row types.
+
+The entry reads use a short R0 table pointer before its persistent handoff.
+This keeps the initial comparison distinct from the loop's fresh owner-kind
+read. The owner and long-lived output pointer are captured in R4 and R6 in
+that order. The match-only byte-store address has its own short R0 lifetime;
+the final word-field base uses R1 while the row-offset accumulator becomes
+the complete address. These bindings carry actual pointers with disjoint
+scratch lifetimes and no calls or added memory accesses. They explain this
+compiler match without establishing the original source spelling.
+
+Normal and strict full comparisons pass. Reducing the maximum searched index
+from five to four changes one byte in each complete 72-byte control. Connected
+caller, installer, producer and consumer definitions retain their matches and
+reject their real source controls. The controller now includes the existing
+canonical social-provider header, exposing the actual signed-parameter reader's
+declaration in its own compilation context. This interface repair adds no
+separate source credit.
+
+The six installed definition kinds match the six searched row kinds. An
+unmatched kind still advances to adjacent parameter-rate storage and reads a
+word there; this does not define a seventh variant. The source contract requires
+a live owner with a matching kind and a live byte output. Complete incoming-kind,
+writer, backing and lifecycle domains remain open, including EC's generic
+consumer and unused formal roles. No runtime or gameplay evidence is added.
