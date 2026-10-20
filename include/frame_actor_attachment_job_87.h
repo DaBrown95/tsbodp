@@ -22,4 +22,9 @@ unsigned int frame_begin_attachment_job_87(struct FrameNeedEffectState *,
 unsigned int frame_dispatch_attachment_job_87(struct FrameNeedEffectState *,
                                               struct FrameObject *);
 
+/* Row 87's initializer and F8 tick consume no argument value.
+ * Additional historical unused formals remain unresolved. */
+unsigned int frame_initialize_attachment_job_87(struct FrameNeedEffectState *);
+void frame_tick_attachment_job_87(struct FrameNeedEffectState *);
+
 #endif

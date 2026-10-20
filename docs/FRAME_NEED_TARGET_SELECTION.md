@@ -190,8 +190,27 @@ are occupied; otherwise it stores the requested kind and returns one. Dispatch
 uses the existing record finder and classifies the six actual action kinds with
 a grouped switch. Other kinds return zero. As in the original, dispatch
 dereferences the finder result without a null guard; a matching live record is
-a caller requirement. Other small callbacks in the row remain explicit original
-regions.
+a caller requirement.
+
+The remaining initializer at `0x08022094` and F8 tick at `0x0802216C` now add
+two C functions / eight extent bytes. The initializer returns word one without
+consuming its supplied state; the canonical `void (state *)` tick changes nothing.
+The actual factory forwards the state to the initializer and installs the tick
+at `+0xF8`; its accepted consumer calls that slot with the same state pointer.
+Additional historical unused formals remain unresolved.
+
+The initializer owns four instruction bytes. The tick owns its two-byte return
+and two independently bounded zero alignment bytes before the next rooted
+initializer at `0x22170`. Its out-of-function alignment directive emits data;
+the original directive-free candidate and full four-byte NOP mismatch are
+preserved. No original instructions or padding object are embedded in source.
+This data role does not exclude alternate incoming execution.
+
+Together with the already-owned worker, predicate and optional-kind helpers,
+these fill the local interval `0x21E98..0x22170`: eight C functions / 728 bytes.
+Normal/strict source checks and genuine changed-source controls pass, including
+the actual tick consumer and a rejected wrong-result contract. Names, wider
+table/writer populations, live-state backing and gameplay remain provisional.
 
 A record whose running byte is exactly one enters phase one. Phase zero either
 starts a low-need animation and waits in phase eight, or initializes parameter

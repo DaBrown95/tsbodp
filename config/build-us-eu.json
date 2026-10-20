@@ -53922,6 +53922,28 @@
       },
       "expected_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
       "source": "src/frame/frame_unrooted_return_zero_1a44c.c"
+    },
+    {
+      "name": "frame_initialize_attachment_job_87",
+      "rom_offset": 139412,
+      "size": 4,
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      },
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+      "source": "src/frame/frame_initialize_attachment_job_87.c"
+    },
+    {
+      "name": "frame_tick_attachment_job_87",
+      "rom_offset": 139628,
+      "size": 4,
+      "negative_control": {
+        "before": "\n{\n}",
+        "after": "\n{\n    owner->enabled = 0;\n}"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c",
+      "source": "src/frame/frame_tick_attachment_job_87.c"
     }
   ],
   "assembly": [
