@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,340 C functions / 294,136 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 298,196 bytes; original slices
-still supply 16,479,020 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,346 C functions / 294,528 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 298,588 bytes; original slices
+still supply 16,478,628 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The starting baseline was
 1,735 C functions / 250,064 C bytes and 500 glue bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **148 unowned rows / 27,318
+[inventory](../assets/rom-inventory.json) contain **142 unowned rows / 26,926
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -34,6 +34,11 @@ The former weak entry at `0x0800480E`
 lies inside the matching refresh extent and receives no separate credit.
 Sixteen previously unmapped trailing pool bytes are now owned; this is not
 newly discovered executable code.
+
+The six remaining [kind-68 attachment bodies](FRAME_ATTACHMENT_JOBS_42_94.md#observed-row-117-and-kind-68)
+add 392 C bytes: 344 instruction and 48 literal bytes. They complete ownership
+of the observed local 504-byte span together with two existing owners. The
+settlement provider, generic EC delivery and callback populations remain open.
 
 The thirteen [independently bounded attachment checks](UNROOTED_ATTACHMENT_CHECKS.md)
 now own their complete extents; their incoming roots remain open.

@@ -53516,6 +53516,143 @@
         "after": "heap_clear(used, 0, 42)"
       },
       "expected_sha256": "0aa3d5d7c1606e74bd442730bca1814118906f01b5f09076f065e4a2287cf10d"
+    },
+    {
+      "name": "frame_step_attachment_job_68",
+      "rom_offset": 154132,
+      "size": 260,
+      "source": "src/frame/frame_step_attachment_job_68.c",
+      "symbols": {
+        "frame_set_animation_frame": "0x08000c6d",
+        "frame_request_animation": "0x08001b5d",
+        "frame_set_actor_direction": "0x08001c29",
+        "frame_settle_actor_scene_counter": "0x0801ba41",
+        "frame_commit_need_effect": "0x0802d9ad",
+        "frame_activate_actor_scene_request": "0x08034b8d",
+        "audio_play_animation_cue": "0x08040ffd",
+        "g_actor_reverse_directions": "0x08052858",
+        "g_resource_game_state": "0x03003950",
+        "g_actor_scene_result_id": "0x030059f0",
+        "g_need_effect_choice_state": "0x03004370"
+      },
+      "thumb_symbols": [
+        "frame_set_animation_frame",
+        "frame_request_animation",
+        "frame_set_actor_direction",
+        "frame_settle_actor_scene_counter",
+        "frame_commit_need_effect",
+        "frame_activate_actor_scene_request",
+        "audio_play_animation_cue"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(60u);",
+        "after": "audio_play_animation_cue(61u);"
+      },
+      "expected_sha256": "17b730653f66ba0f6636a2a5ab9f9ebbc7aaa63f40e1ea622eb31ca33b98b98e"
+    },
+    {
+      "name": "frame_dispatch_attachment_job_68",
+      "rom_offset": 154524,
+      "size": 32,
+      "source": "src/frame/frame_dispatch_attachment_job_68.c",
+      "symbols": {
+        "frame_step_attachment_job_68": "0x08025a15",
+        "frame_find_actor_attachment_record": "0x0802ed61"
+      },
+      "thumb_symbols": [
+        "frame_step_attachment_job_68",
+        "frame_find_actor_attachment_record"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "job->kind == 68",
+        "after": "job->kind == 69"
+      },
+      "expected_sha256": "98bb498ad3049cbe85f57c545199ce2074621143e619ba4876a3d414c9caf9e6"
+    },
+    {
+      "name": "frame_finish_attachment_job_68",
+      "rom_offset": 154556,
+      "size": 80,
+      "source": "src/frame/frame_finish_attachment_job_68.c",
+      "symbols": {
+        "frame_set_animation_frame": "0x08000c6d",
+        "save_world_scene_in_selected_row": "0x080262b5",
+        "g_frame_world_id": "0x03004334",
+        "g_attachment_job_68_refresh_clock": "0x03001db8",
+        "g_resource_game_state": "0x03003950"
+      },
+      "thumb_symbols": [
+        "frame_set_animation_frame",
+        "save_world_scene_in_selected_row"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "refresh_clock = 100;",
+        "after": "refresh_clock = 101;"
+      },
+      "expected_sha256": "a4ce1cb8d6ab2bad8676908bcdb913bab0fb4d7ee1657e15e572461bb11bf523"
+    },
+    {
+      "name": "frame_initialize_attachment_job_68",
+      "rom_offset": 154392,
+      "size": 4,
+      "source": "src/frame/frame_initialize_attachment_job_68.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      },
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb"
+    },
+    {
+      "name": "frame_select_attachment_job_68",
+      "rom_offset": 154436,
+      "size": 8,
+      "source": "src/frame/frame_select_attachment_job_68.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "choices[0] = 68;",
+        "after": "choices[0] = 69;"
+      },
+      "expected_sha256": "9c706c9aee39e7382292378eb151b051e9552c60a2abab0fabf01cd16165b143"
+    },
+    {
+      "name": "frame_prepare_attachment_job_68",
+      "rom_offset": 154444,
+      "size": 8,
+      "source": "src/frame/frame_prepare_attachment_job_68.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "case 68:\n",
+        "after": "case 68: return 0;\n"
+      },
+      "expected_sha256": "c1f16de3829320e098d9abfaeef9984357bdd4dcedadc91466dbb7a7be8e67f2"
     }
   ],
   "assembly": [

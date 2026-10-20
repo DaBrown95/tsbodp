@@ -236,6 +236,38 @@ declaration checks add no provider execution or source ownership. Choice-index
 capacity, overlapping scene/menu views, later writers, resource validity,
 object lifetimes and gameplay reachability remain open.
 
+## Observed row 117 and kind 68
+
+Six further C bodies own 392 bytes: initialization, selection, preparation,
+the 260-byte phase worker, its 32-byte dispatcher and the 80-byte refresh
+callback. They contain 344 instruction bytes and 48 referenced literal bytes.
+Together with the existing 72-byte begin adapter and separately bounded
+40-byte predicate, they cover the 504-byte local span `0x25A14..0x25C0C`.
+The predicate's incoming roots remain open.
+
+The worker uses phases 0, 78, 79 and 1. It reverses the owner's facing,
+requests animations and cues, changes need-effect status, and reads the
+canonical game-state value and scene counter. A running record selects phase
+1. Phase 78 may activate request `0x125`, advance to phase 79 when the actor
+flag is set, and call the still-unconverted settlement provider. The dispatcher
+uses the canonical record finder and accepts only kind 68. The refresh callback
+updates the owner's animation on a selected-row check, resetting its byte clock
+to 100 before decrementing it.
+
+The sources reuse the existing record, need-effect and game-state union owners.
+Current normal and strict comparisons match every byte; genuine cue, kind,
+clock and return changes reject. The preparation control changes its kind-68
+return and grows from eight to sixteen bytes; the other five controls retain
+size and differ by one byte. Actual owned definitions remain exact in separate
+source contexts; the settlement declaration is checked separately from byte
+ownership. No instruction-body assembly or new register constraint is used.
+
+The observed definition row connects these callbacks; it does not close the
+generic EC caller or establish all incoming formal roles. Record lookup success,
+actor/owner lifetime, reverse-direction index, saved selection, clock writers,
+and wider callback populations remain preconditions. The 188-byte settlement
+provider remains an original-ROM dependency and receives no C credit here.
+
 ## Definition rows 76, 77 and 78
 
 Fourteen matching C bodies own 192 extent bytes: row 76's seven-body range at
