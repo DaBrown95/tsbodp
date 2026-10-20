@@ -53811,6 +53811,46 @@
         "after": "background->flags = flags | 0x10;"
       },
       "expected_sha256": "03a2bfac5abe518c4a2c0357330eb30997be5c1520fd04fa252f276e933dc914"
+    },
+    {
+      "name": "frame_actor_update_24720",
+      "source": "src/frame/frame_actor_update_24720.c",
+      "rom_offset": 149280,
+      "size": 472,
+      "symbols": {
+        "input_rotate_direction": "0x801f365",
+        "frame_set_variant_state": "0x8001be1",
+        "frame_set_directional_acceleration": "0x80014e9",
+        "frame_enable_object_flags": "0x8001c69",
+        "frame_disable_object_flags": "0x8001c71",
+        "frame_set_actor_turn_direction": "0x8001c49",
+        "frame_random_range": "0x80353d9",
+        "g_input_current": "0x3004220",
+        "frame_make_direction_vector": "0x80019cd",
+        "frame_approximate_vector_length": "0x802736d",
+        "g_scene_contact_state": "0x30043f4",
+        "g_frame_actor_item_options": "0x805628c"
+      },
+      "thumb_symbols": [
+        "input_rotate_direction",
+        "frame_set_variant_state",
+        "frame_set_directional_acceleration",
+        "frame_enable_object_flags",
+        "frame_disable_object_flags",
+        "frame_set_actor_turn_direction",
+        "frame_random_range",
+        "frame_make_direction_vector",
+        "frame_approximate_vector_length"
+      ],
+      "negative_control": {
+        "before": "frame_random_range(17, 31)",
+        "after": "frame_random_range(17, 30)"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "4414cc32f842972ddc4564d9fff74d36284f12d062effd2c876a847f590bb432"
     }
   ],
   "assembly": [

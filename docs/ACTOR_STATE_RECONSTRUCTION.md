@@ -1209,9 +1209,10 @@ scalar terrain contract rejects. The ordinary 68-byte/six-difference predecessor
 and ABI failures remain retained. This establishes matching C with compiler
 constraints, not unique historical source or toolchain provenance.
 
-Movement update at `0x08024720` remains unconverted at 472 bytes / 14 differences.
-No unsupported switch arm has been added to alter its compiler pivot; land
-ownership does not establish completion of the surrounding actor path.
+The [movement update](SCENE_CONTACT_ACTIVITY_ZERO.md#movement-worker) at
+`0x08024720` now matches all 472 bytes. A complete early dispatch over the same
+states two, three and eight preserves the native control graph without added
+arms. Land and movement ownership do not establish complete actor gameplay.
 
 ## Interaction choices and two-object callbacks
 

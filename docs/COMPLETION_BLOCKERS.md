@@ -1,21 +1,21 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,351 C functions / 296,292 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 300,352 bytes; original slices
-still supply 16,476,864 bytes of assets and unconverted code. Whole-ROM equality
-is proven; complete source ownership is not. The starting baseline was
-1,735 C functions / 250,064 C bytes and 500 glue bytes. The fixed 319,640 mapped
+The current gates verify **2,352 C functions / 296,764 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 300,824 bytes; original slices
+still supply 16,476,392 bytes of assets and unconverted code. Whole-ROM equality
+is proven; complete source ownership is not. The 20 October goal baseline was
+2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **137 unowned rows / 25,166
+[inventory](../assets/rom-inventory.json) contain **136 unowned rows / 24,694
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
 | Order | Remaining code | Blocker and next evidence |
 | --- | --- | --- |
 | 1 | Renderer `0x080023E8` (1,400), finalizer `0x08003248` (348). | Renderer: 25 differing bytes, unresolved frame homes, no distinct supported producer; plain `register` does not change the relevant pseudos at `-O2`. Finalizer: proper-owner 340 / 285 attempt retains an upper-X spill and wrong category/flags/previous-index homes. Native upper X/Y use SP8/SP12; category/flags/previous use SP16/SP20/SP24. R7 binding overwrites a live category through the frame-pointer exception and is invalid. Require a new hypothesis using [bounded failures](BOUNDED_INVENTORY.md) and [runtime limits](RUNTIME_OBSERVATIONS.md). |
-| 2 | Connected actor, attachment, save and transition workers. | Prioritize movement `0x08024720` (472 / 14), kind 66 (248), weekly `0x0802005C` (108), loader `0x0801B704` (548), settlement `0x0801BA40` (188 / 22), remover `0x080454DC` (192), variant selector (72), generic EC consumer and palette worker (400). Resolve twelve bytes at `0x1DB20..0x1DB2C` and unrooted entries. Backing, selector, serialized-index, writable-target and later-writer domains remain open; generic EC delivery and unused formals are provisional. The six single-window, horizontal/vertical slots 6–9 and three rectangle bodies are owned. Of 28 bodies in the observed prefixes, only first-slot-10 `0x08038B90` (228 bytes) remains unowned. Its best candidate remains 228 / 8. The latest emits 228 / 109: its initial constant and shared-step expression match, but coordinate/window homes and the DISPCNT reload remain wrong. Further trials await a distinct supported cause. The frame-loop [window coordinate updater](DISPLAY_WINDOW_MOTION.md) and its driver now match, as do the layer/mask services; the separate `0x48A14` setter remains 68 / 15 with its four-scalar declaration. Selector, table, writer and backing populations remain open. See [actor state](ACTOR_STATE_RECONSTRUCTION.md), [entries](ACTOR_ENTRIES_RECONSTRUCTION.md), [attachments](FRAME_ATTACHMENT_JOBS_42_94.md), [save](SAVE_STREAM.md) and [transitions](TRANSITION_WINDOWS.md). |
+| 2 | Connected actor, attachment, save and transition workers. | Prioritize kind 66 (248), weekly `0x0802005C` (108), loader `0x0801B704` (548), settlement `0x0801BA40` (188 / 22), remover `0x080454DC` (192), variant selector (72), generic EC consumer and palette worker (400). Resolve twelve bytes at `0x1DB20..0x1DB2C` and unrooted entries. Backing, selector, serialized-index, writable-target and later-writer domains remain open; generic EC delivery and unused formals are provisional. The six single-window, horizontal/vertical slots 6–9 and three rectangle bodies are owned. Of 28 bodies in the observed prefixes, only first-slot-10 `0x08038B90` (228 bytes) remains unowned. Its best candidate remains 228 / 8. The latest emits 228 / 109: its initial constant and shared-step expression match, but coordinate/window homes and the DISPCNT reload remain wrong. Further trials await a distinct supported cause. The frame-loop [window coordinate updater](DISPLAY_WINDOW_MOTION.md) and its driver now match, as do the layer/mask services; the separate `0x48A14` setter remains 68 / 15 with its four-scalar declaration. Selector, table, writer and backing populations remain open. See [actor state](ACTOR_STATE_RECONSTRUCTION.md), [entries](ACTOR_ENTRIES_RECONSTRUCTION.md), [attachments](FRAME_ATTACHMENT_JOBS_42_94.md), [save](SAVE_STREAM.md) and [transitions](TRANSITION_WINDOWS.md). |
 | 3 | Copied-RAM resources: ROM `0xB840` (284), `0xB36C` (504-byte ARM body), `0xB564` (320), word-group copier (68). | Sorter remains 284 / 2 after R3-sum, Y-first and scheduler tests. The tile decoder now emits 504 / 11 against the fixed 504-byte ARM body at RAM `0x030036D0`; its 528-byte copy also includes 24 bytes of the next body. Genuine return/field lifetimes, distance association, the APPEND wrapper and four separate tail calculations are resolved in the private candidate. The four copy-entry and repeat-entry order groups now match through real zero-pair guards and ordinary tail values. Only the parser CMP/distance rotation remains. Integer predicate/discriminator capture fails; no C or API credit is assigned. Aggregate/by-reference drawer attempts remain 348 / 313 and 356 / 321: optimization recreates pointer equivalence and spills. Preserve API contracts; prove RAM execution addresses and copy prefixes separately. Serialized selection, alignment and arena/backing remain open; the 812-byte assembly decoder leaves C workers open. See [RAM map](../config/ram-map-us-eu.json) and [decoder](RESOURCE_BACKGROUND_DECODER.md). |
 | 4 | Audio `0x08049968` (124), saved-register adapters and executable patches. | Explain native NOP versus ordinary C store; close caller/stack protocols, incoming transfers, patcher inputs, IRQ targets and later writes. Rebuild every reachable modified code state. Glue and observed shifts do not close those domains. See [audio](AUDIO_RECONSTRUCTION.md). |
 | 5 | Serial IRQ `0x0803DC48` (1,616), poll (408), status (124), record provider (200). | IRQ remains 1,612 after its record-union repair. The 596-byte offer refresh now matches using the real next-record address at the loop bound. A direct union-index copy still leaves the record provider at 200 / 159; a late genuine R3 slot-address binding leaves IRQ at 1,612 unchanged because COMBINE folds it back into the shared base. Participant/index, resource, allocation, descriptor and writer domains remain open. See [scene](SCENE_LINK_ENTRY.md) and [serial](SERIAL_HANDSHAKE.md). |
@@ -28,7 +28,7 @@ extent bytes; their two callers remain exact. Its relation display owns another
 [offer refresh](SCENE_LINK_ENTRY.md) owns 596 bytes with its canonical 24-byte
 record owner. The [activity-zero initializer](SCENE_CONTACT_ACTIVITY_ZERO.md)
 owns 452 bytes using the existing item, player, option and collision owners;
-its movement worker remains unconverted. These six source additions cover
+its movement worker now matches separately. These six source additions cover
 1,352 bytes: 1,170 instruction, 172 literal and ten alignment bytes.
 The former weak entry at `0x0800480E`
 lies inside the matching refresh extent and receives no separate credit.
@@ -58,6 +58,13 @@ five actual callers remain exact with their canonical owners and separate
 compilation contexts. The native affine pair consumption and partial-halfword
 backing requirements are explicit; neither complete input domains nor gameplay
 are claimed. The copied-RAM map drawer remains unconverted.
+
+The [activity-zero movement worker](SCENE_CONTACT_ACTIVITY_ZERO.md#movement-worker)
+adds 472 C bytes: 430 instruction, 36 literal and six alignment bytes. Its
+existing states two, three and eight use a complete early dispatch before the
+handler bodies, preserving the native tree without added cases. Canonical actor,
+scene, option and vector interfaces remain consistent. Input/backing domains,
+signed vector arithmetic and complete gameplay remain conditional.
 
 The thirteen [independently bounded attachment checks](UNROOTED_ATTACHMENT_CHECKS.md)
 now own their complete extents; their incoming roots remain open.

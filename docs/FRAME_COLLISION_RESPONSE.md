@@ -85,6 +85,7 @@ ordered object writes, nested calls and complete object-memory result. It does
 not execute the copied ARM dispatcher, scheduler or resource engine and is not
 a gameplay test.
 
-The remaining activity-zero controller at `0x24720` is still original: the
-current private source has ten differing bytes in its switch tree. Its other
-private matching functions remain held with that connected activity path.
+The [activity-zero controller](SCENE_CONTACT_ACTIVITY_ZERO.md#movement-worker)
+at `0x24720` now has its own complete 472-byte C match and genuine source
+controls. That compiler proof does not extend the finite collision qualification
+above or establish complete activity gameplay.

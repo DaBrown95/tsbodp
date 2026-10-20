@@ -16,17 +16,15 @@ adds the connected state-eight writer, bringing these six bodies to 616 bytes.
 It disables flags 5 on the colliding object, enables flag 2 and assigns state
 eight to the other object when its ID is zero, then plays cue 181.
 
-The callback still calls the unconverted movement helper at `0x08024720`.
-Its vector providers are now source-owned, but this intake does not claim a
-complete activity path. The vector constructor writes a scaled direction
-to an output point; the approximate length receives a two-word point by value
-and returns the larger absolute component plus three eighths of the smaller.
-These APIs reproduce their complete extents and agree with the helper
-callers, without changing the unresolved dispatch tree. The movement helper
-retains a 472-byte ordinary-C candidate with 14 differing bytes. The pinned
-compiler chooses the middle state (3) for its three-case switch, while the
-native tree starts with state 2. No additional state arm is justified by the
-bounded connected-writer scan, and no idle cases have been added.
+The callback now calls the matching 472-byte
+[movement worker](SCENE_CONTACT_ACTIVITY_ZERO.md#movement-worker) at
+`0x08024720`, bringing these seven bodies to 1,088 source bytes. Its early
+dispatch uses only the existing states two, three and eight, preserving the
+native tree before the handler bodies. The vector constructor writes a scaled
+direction to an output point; approximate length receives a two-word point by
+value and returns the larger absolute component plus three eighths of the
+smaller. Their actual public interfaces agree with the movement source.
+Backing, selector/writer domains and complete activity gameplay remain open.
 
 The direct call at `0x080242E6` loads a contiguous two-word position from
 `0x08056284` into `r0/r1`, with direction in `r2`. A `FramePoint` passed by value
