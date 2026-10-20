@@ -53,6 +53,12 @@ passes the actual parameter address to the existing vertical input provider,
 with bounds 0 through 5, and redraws both the old and new selected rows before
 loading the new background preview.
 
+Those cursor bounds do not validate the saved initial selection: initialization
+loads its preview before movement, and confirmation can apply the unchanged
+parameter. [Header validation](SAVE_STREAM.md#transfer-and-checksum-boundary)
+does not restrict byte ten to zero through five, so that initial range remains
+a precondition.
+
 Rows use text IDs `row + 6`, font 3, color 3 for the selected row and color 0 for
 other rows. The unselected row's offset is the word value 65535, then the computed
 Y coordinate is explicitly narrowed to a signed halfword before the existing

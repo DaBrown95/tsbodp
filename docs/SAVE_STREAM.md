@@ -74,6 +74,14 @@ setting producer stores a returned word narrowed to that byte, sets byte
 `+0xB` to one and leaves word one in the return register. The setting's original
 meaning beyond the connected text-resource selection is not established here.
 
+Header validation does not constrain byte `+0xA` to the UI's bank range of zero
+through five. Setting that byte to six and adjusting checksum halfword `+0xE`
+can preserve both the template prefix and zero additive sum. This is a static
+countermodel to the range assumption, without an EEPROM execution claim;
+startup still forwards the byte unchecked to the selector. When each bank
+observation is zero through five, the connected
+[serial text reply](SCENE_CONTACT_MENU.md) has a 172-byte static output bound.
+
 The commit routine invokes the unconverted buffer builder, suspends audio,
 writes and reads a slot, resumes audio, validates and loads or clears its record,
 then stores the selected slot. Its two game audio wrappers call the accepted

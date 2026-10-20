@@ -1019,8 +1019,15 @@ each of eight rows, copies every terminating zero, and adds one zero byte
 when the final address is odd. Its actual output pointer begins after the
 prefix store; signed row progression reproduces the original loop. The
 pointer difference is stored as a halfword. Valid text pointers, terminating
-strings, buffer capacity and the incoming pointer contract remain unchecked;
-the observed fixed-ROM banks do not establish a general bank limit.
+strings and the incoming pointer contract remain unchecked.
+
+For bank observations zero through five, the eight per-row maximum string spans,
+including terminating zeros, sum to 170 bytes. The prefix and possible alignment
+zero give a static bound of 172 bytes, even if the getter selects a different
+supported bank for each row. This fits the installer's 514-byte buffer provided
+the allocation is live and writable. The selector condition remains open:
+[save-header validation](SAVE_STREAM.md#transfer-and-checksum-boundary) does not
+constrain byte ten to that range. This bound adds no runtime or protocol evidence.
 
 Fresh compiler checks pin all partial sizes, alignments, field offsets,
 widths and actual function definitions. Restoring the old void-input
