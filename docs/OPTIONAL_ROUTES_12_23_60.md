@@ -46,6 +46,15 @@ also check the shared header against all previously accepted sources.
 The initializer's unused owner formal remains inferred from its caller protocol.
 Observed table rows are not a complete selector, writer, target or backing
 population. The neighboring word at `0x1A44C..0x1A450` decodes as a return-zero
-leaf, but has no established incoming root. It remains an inventory question
-without a fabricated C owner. No new runtime execution observation is claimed;
-complete executable inventory and source ownership remain unproved.
+leaf and now has [matching C](../src/frame/frame_unrooted_return_zero_1a44c.c).
+The adjacent verified finish owns only its return and two alignment bytes,
+ending at `0x1A44C`; the next rooted worker begins at `0x1A450`. No identified
+literal or data owner overlaps the four-byte leaf. Normal and strict builds
+match all four instruction bytes; changing its zero return to one rejects both.
+This adds four newly mapped executable bytes outside the seven-function,
+572-byte subtotal above, without reducing the existing unfinished-row backlog.
+
+No incoming root is established. Its unsigned-word result and no-consumed-input
+signature are chosen source views; historical unused formals remain unresolved.
+No runtime execution observation is added. Complete executable inventory and
+source ownership remain unproved.

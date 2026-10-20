@@ -1,38 +1,38 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "20 Oct 2026, 20:08 BST",
-  "compiled_c_functions": 2356,
-  "compiled_c_bytes": 296936,
+  "verified_at": "20 Oct 2026, 20:42 BST",
+  "compiled_c_functions": 2357,
+  "compiled_c_bytes": 296940,
   "assembly_glue_bytes": 4060,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16476220,
+  "unconverted_rom_bytes": 16476216,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
-  "discovered_entries": 2538,
+  "discovered_entries": 2539,
   "bounded_control_flow_bodies": 131,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 98,
-  "mapped_extent_bytes": 325518,
+  "mapped_extent_bytes": 325522,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
-    "raw_instruction_union_bytes": 281946,
-    "qualified_observed_instruction_union_bytes": 281920,
-    "nonconflicting_qualified_instruction_bytes": 281920,
+    "raw_instruction_union_bytes": 281950,
+    "qualified_observed_instruction_union_bytes": 281924,
+    "nonconflicting_qualified_instruction_bytes": 281924,
     "raw_referenced_data_union_bytes": 35700,
     "qualified_referenced_data_union_bytes": 35700,
-    "source_glue_owned_extent_bytes": 300996,
-    "estimated_envelope_union_bytes": 325510,
+    "source_glue_owned_extent_bytes": 301000,
+    "estimated_envelope_union_bytes": 325514,
     "classification_bytes": {
       "estimated_envelope_unclassified": 3952,
       "instruction_and_referenced_data_dual_use": 4,
       "known_data": 22768,
       "owned_extent_unclassified": 34,
-      "strong_rooted_instruction": 281916,
+      "strong_rooted_instruction": 281920,
       "strong_rooted_referenced_data": 35696,
-      "unresolved": 16432846
+      "unresolved": 16432842
     }
   },
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents",
@@ -5487,6 +5487,13 @@
       "name": "frame_finish_optional_routes_12_23_60",
       "group": "ROM 0801xxxx",
       "rom_offset": 107592,
+      "size": 4,
+      "status": "exact_c"
+    },
+    {
+      "name": "frame_unrooted_return_zero_1a44c",
+      "group": "ROM 0801xxxx",
+      "rom_offset": 107596,
       "size": 4,
       "status": "exact_c"
     },
@@ -22759,10 +22766,10 @@
       "status": "exact_c"
     },
     {
-      "name": "Unresolved_01A44C",
+      "name": "frame_unrooted_return_zero_1a44c",
       "rom_offset": 107596,
       "size": 4,
-      "status": "unresolved"
+      "status": "exact_c"
     },
     {
       "name": "frame_step_optional_route_kind_12",
@@ -33944,8 +33951,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "0a17f47cc3c889ffd35a08ef71a21550d9fe96a07c5fbaa6cb890e1f8f1da02b",
-    "assets/rom-inventory.json": "76479ddef2d41986254d1db4ae827f7b8dffc056bdcc4e7f9c14de142284f791",
+    "config/build-us-eu.json": "fc662e2f197f31cde9d0542868a840aea7c1de942c7f578a8091c41e71bb32a8",
+    "assets/rom-inventory.json": "40d57e583c1fec6f4c7b8d6a80ced3f9ba0ca1180cd2f9d6f1b4296d5fb5a930",
     "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",

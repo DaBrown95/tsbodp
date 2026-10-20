@@ -1136,8 +1136,12 @@ compares the parameter against its previous value and advances phases 0/81/1.
 The initial direct-return dispatcher differed by 14 bytes; assigning the actual
 worker/default result before the common return restores native control flow.
 Row 128 writes only zero and returns success one. Known chooser paths stop or
-suppress zero. Its independent status dispatch recognizes 12, but neither fact
-grounds an EC case set; EC `0x0801A590` remains original and uncompiled.
+suppress zero; its independent status dispatch recognizes 12. EC `0x0801A590`
+consumes no observed input and returns one through an LR save/restore frame.
+No action cases need to be invented for that constant result. Ordinary matching
+constant-one C elsewhere emits four bytes, while this native body owns eight;
+the frame-producing source remains unexplained and EC stays original. Its
+generic delivery and incoming unused-formal contract also remain open.
 
 Rows 106–108 select optional action 45 or animation modes 56/57. The latter
 worker preserves modes 512/256 and its actual cue, animation and commit order.
