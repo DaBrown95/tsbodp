@@ -53460,6 +53460,62 @@
         "after": "display_scene_lookup_text(6223)"
       },
       "expected_sha256": "445f9530f3ee143c01b8f8ba1b596e0244e0f40928b9669efb66877ab2d02c39"
+    },
+    {
+      "name": "scene_contact_activity_zero_initialize",
+      "rom_offset": 148060,
+      "size": 452,
+      "source": "src/scene/scene_contact_activity_zero_initialize.c",
+      "symbols": {
+        "g_activity_zero_background_control": "0x0805954c",
+        "g_activity_zero_background": "0x0813b838",
+        "g_actor_24420_palette_by_id": "0x0805627c",
+        "g_activity_zero_palettes": "0x08056268",
+        "g_activity_zero_palette15": "0x080562f0",
+        "g_activity_zero_palette14": "0x080562f4",
+        "g_activity_zero_transient1": "0x08069500",
+        "g_activity_zero_transient0": "0x080694f0",
+        "g_scene_contact_state": "0x030043f4",
+        "g_activity_zero_start": "0x08056284",
+        "g_frame_scene_player_slots": "0x030040e0",
+        "g_display_countdown": "0x03003150",
+        "g_frame_actor_item_options": "0x0805628c",
+        "display_show_background": "0x800d579",
+        "display_fill_background": "0x800d6b9",
+        "display_load_background": "0x800da21",
+        "frame_define_palette_slot": "0x80301f1",
+        "frame_initialize_transient_definition": "0x80303d9",
+        "frame_create_actor_24420": "0x8024421",
+        "heap_clear": "0x8027a49",
+        "display_time_copy": "0x8010741",
+        "frame_create_actor_item": "0x8024561",
+        "frame_create_option_object": "0x8013445",
+        "frame_place_actor_item_on_land": "0x8024acd",
+        "frame_disable_object_flags": "0x8001c71",
+        "frame_enable_object_flags": "0x8001c69",
+        "frame_actor_item_contact_relation": "0x8024a8d"
+      },
+      "thumb_symbols": [
+        "display_show_background",
+        "display_fill_background",
+        "display_load_background",
+        "frame_define_palette_slot",
+        "frame_initialize_transient_definition",
+        "frame_create_actor_24420",
+        "heap_clear",
+        "display_time_copy",
+        "frame_create_actor_item",
+        "frame_create_option_object",
+        "frame_place_actor_item_on_land",
+        "frame_disable_object_flags",
+        "frame_enable_object_flags",
+        "frame_actor_item_contact_relation"
+      ],
+      "negative_control": {
+        "before": "heap_clear(used, 0, 43)",
+        "after": "heap_clear(used, 0, 42)"
+      },
+      "expected_sha256": "0aa3d5d7c1606e74bd442730bca1814118906f01b5f09076f065e4a2287cf10d"
     }
   ],
   "assembly": [

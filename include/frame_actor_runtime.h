@@ -1,3 +1,5 @@
+#ifndef FRAME_ACTOR_RUNTIME_H
+#define FRAME_ACTOR_RUNTIME_H
 #include "frame_actor_animation.h"
 #include "display_object_palette.h"
 struct FrameActorObject {
@@ -65,3 +67,5 @@ void frame_update_actor_movement(void *, struct FrameObject *);
 void frame_refresh_velocity(struct FrameObject *);
 #define g_frame_actor_multi_kinds g_frame_actor_definitions
 extern FrameU8 *g_frame_actor_commands_kind1[], *g_frame_actor_commands_other[];
+
+#endif

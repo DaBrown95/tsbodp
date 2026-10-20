@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,339 C functions / 293,684 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 297,744 bytes; original slices
-still supply 16,479,472 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,340 C functions / 294,136 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 298,196 bytes; original slices
+still supply 16,479,020 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The starting baseline was
 1,735 C functions / 250,064 C bytes and 500 glue bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **149 unowned rows / 27,770
+[inventory](../assets/rom-inventory.json) contain **148 unowned rows / 27,318
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -26,8 +26,11 @@ The [relation-grid refresh and getters](SCENE_RELATION_GRID.md) own 144 C
 extent bytes; their two callers remain exact. Its relation display owns another
 160 bytes with a consistent full-word percentage-provider contract. The
 [offer refresh](SCENE_LINK_ENTRY.md) owns 596 bytes with its canonical 24-byte
-record owner. These five source additions cover 900 bytes: 780 instruction,
-112 literal and eight alignment bytes. The former weak entry at `0x0800480E`
+record owner. The [activity-zero initializer](SCENE_CONTACT_ACTIVITY_ZERO.md)
+owns 452 bytes using the existing item, player, option and collision owners;
+its movement worker remains unconverted. These six source additions cover
+1,352 bytes: 1,170 instruction, 172 literal and ten alignment bytes.
+The former weak entry at `0x0800480E`
 lies inside the matching refresh extent and receives no separate credit.
 Sixteen previously unmapped trailing pool bytes are now owned; this is not
 newly discovered executable code.

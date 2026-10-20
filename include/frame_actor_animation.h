@@ -1,3 +1,5 @@
+#ifndef FRAME_ACTOR_ANIMATION_H
+#define FRAME_ACTOR_ANIMATION_H
 #include "frame_command.h"
 struct FrameVariantResource {
  FrameU8 *pixels;
@@ -14,3 +16,5 @@ extern FrameU8 g_frame_actor_special_event;
 extern FrameU32 g_frame_world_id;
 extern FrameU8 g_frame_actor_direction_variants[];
 void frame_set_animation_record(struct FrameObject *, struct FrameVariantResource *);
+
+#endif
