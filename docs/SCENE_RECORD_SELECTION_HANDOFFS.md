@@ -77,8 +77,9 @@ list, resets display state and slots, then frees the current scene allocation.
 The original second-handler table slot at `0x0806A248` contains Thumb target
 `0x08039041`; that callback has no accepted C owner in this batch. The original
 map service at `0x0800CEFC` and text renderer at `0x0801AA78` also remain explicit
-unconverted boundaries. The phase-seven initializer at `0x08024E18` is still
-unconverted. Their bodies are not transcribed into claimed C or a source model.
+unconverted boundaries. The phase-seven initializer at `0x08024E18` is
+reconstructed in the continuation below. The remaining boundary bodies are not
+transcribed into claimed C or a source model.
 
 The 32 public native roles cover the new four and the four existing field-path
 repairs, with full snapshots, dependencies, commands and ELF/source ownership.
@@ -92,6 +93,45 @@ Milestone 125 subsequently reconstructs the kind-12 second handler and its paire
 first handler as the [mosaic transitions](TRANSITION_MOSAIC_REFRESH.md). Each has
 its own matching source/control roles and separately scoped finite execution
 evidence. This closes the shutdown transition boundary described above; the map
-service, text renderer and phase-seven initializer remain unconverted. The
+service and text renderer remain unconverted. The
 first-handler kind-12 connection is still static table evidence without an
 observed executed caller.
+
+
+## Initializer continuation
+
+`scene_record_selection_initialize` at `0x08024E18` reproduces the complete
+544-byte extent ending at the owned update entry `0x08025038`: 462 instruction
+bytes, 76 literal bytes and six zero alignment bytes. Two internal two-byte
+pool gaps and the two-byte tail remain data. The earlier 542-byte CFG estimate
+excluded only that final alignment; the match discovers no new instructions.
+
+The initializer retains the existing sixteen-byte zeroed scene allocation and
+canonical map-pointer, request and save owners. Its four iterations test
+`valid[index]` before `records[index].unknown10[0]`, then write the corresponding
+occupied byte. The record expression addresses the existing 40-byte records
+inside the 204-byte save owner. Enabled flags retain the original mode/world
+guards, and selection is copied before the mode-one adjustment.
+
+A local IP constraint carries the actual save-owner pointer only through the
+loop, which contains no calls. Its value is dead before the following providers;
+the ordinary save pointer remains available for the selected-word read. The
+used unsigned `valid_address` value materializes the same canonical valid-array
+base before index addition. Its pointer/integer conversions are qualified to
+the 32-bit ARM target: indices zero through three address owner bytes 180–183
+without wrapping. No extra read, qualifier, backing object or field view is
+introduced.
+
+This closes the initializer source boundary. It adds no runtime or gameplay
+claim and does not extend the historical finite qualification of the update.
+Defined inputs still require live initialized owners, successful allocation,
+valid resource/text selections, map backing and the actual provider contracts.
+The map service, text renderer, complete incoming/writer domains and hardware
+behaviour remain separate work.
+
+Normal and strict qualification gives 46 exact positive roles and rejects 46 real
+changed-source controls; 24 actual-definition/layout checks pass and six wrong
+contracts reject. The full progress gate rebuilds all 2,405 owned extents with
+their controls, reproduces the fixed ROM and rejects the whole-ROM source
+control by two changed bytes; the inventory and treemap are refreshed, with no
+new runtime or gameplay evidence.

@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,349 C functions / 295,108 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 299,168 bytes; original slices
-still supply 16,478,048 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,350 C functions / 295,652 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 299,712 bytes; original slices
+still supply 16,477,504 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The starting baseline was
 1,735 C functions / 250,064 C bytes and 500 glue bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **139 unowned rows / 26,348
+[inventory](../assets/rom-inventory.json) contain **138 unowned rows / 25,806
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -45,6 +45,12 @@ C bytes: 542 instruction, 36 literal and two natural alignment bytes. The
 existing slot owner gains its native point fields without changing layout.
 The former pixel estimate omitted those two data bytes; no new executable code
 is claimed. Parent drawing, rasterization and input/writer domains remain open.
+
+The [record-selection initializer](SCENE_RECORD_SELECTION_HANDOFFS.md#initializer-continuation)
+adds 544 C bytes: 462 instruction, 76 literal and six alignment bytes. It
+reuses the canonical four-slot save and scene owners. Its matched extent
+includes two trailing data bytes absent from the old estimate; this discovers
+no new executable code. The map service and text renderer remain unconverted.
 
 The thirteen [independently bounded attachment checks](UNROOTED_ATTACHMENT_CHECKS.md)
 now own their complete extents; their incoming roots remain open.

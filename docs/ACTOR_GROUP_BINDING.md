@@ -152,8 +152,8 @@ four closes a two-instruction scheduling difference. Earlier folded-offset
 candidates and the four-byte mismatch retain raw evidence. The current header
 and complete 248-byte extent, including all literal words, are verified under
 `reports/audio-root/actor-palette-scene-canonical/`; changing flags 25 to 17
-produces one differing byte. The incomplete inventory records direct callers
-at `0x08024E18` and `0x08025038`, both still unconverted. No runtime visibility,
+produces one differing byte. The direct callers at `0x08024E18` and `0x08025038` now have
+matching C in the [record-selection reconstruction](RECORD_SELECTION_RECONSTRUCTION.md). No runtime visibility,
 animation or save-to-scene round-trip experiment has been performed.
 
 Three further functions add 648 bytes and close the menu constructor/update

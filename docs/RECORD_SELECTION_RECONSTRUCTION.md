@@ -6,12 +6,17 @@ bringing this connected group to ten functions and 1,940 bytes. All extents
 include their literal pools, dispatch data and alignment. Names describe
 observed behaviour and remain provisional.
 
+The later initializer continuation adds one function and 544 C extent bytes,
+bringing this connected group to eleven functions and 2,484 bytes. The
+milestone-123/124 counts above retain their historical scope.
+
 Milestone 124 adds four matching C functions and 804 C bytes after the full-ROM,
 changed-source and importer gates. Source coverage is 1,688 functions and
 238,632 C bytes, with 500 separately counted glue bytes.
 
 | ROM offset | Function | Bytes | Source batch |
 | --- | --- | ---: | --- |
+| `0x24E18` | Initialize record selection | 544 | Initializer continuation |
 | `0x25038` | Nine-state update | 708 | 123 |
 | `0x252FC` | Confirm selected slot | 180 | 123 |
 | `0x253B0` | Set phase handoff | 244 | 124 |
@@ -30,12 +35,14 @@ to `UINT_MAX` before the transition test.
 
 ## State and interface evidence
 
-The original initializer at `0x24E18` allocates sixteen zeroed bytes. The first
+The matching initializer at `0x24E18` allocates sixteen zeroed bytes. The first
 word is the return phase; the next two four-byte groups hold observed occupied
 and enabled flags. The last four bytes retain unknown names. The update and
 handoffs use allocation byte 13. This view applies to the scene allocation,
-not every use of the shared resource-pointer global. The initializer remains
-unconverted and earns no source credit.
+not every use of the shared resource-pointer global. Its complete 544-byte
+matching extent contains 462 instruction bytes, 76 literal bytes and six zero
+alignment bytes, including the two-byte tail absent from the old 542-byte
+estimate.
 
 The existing 24-byte `SceneRequest` owns scene, parameter, phase and timer words
 at offsets 8, 12, 16 and 20. The 52-byte input owner supplies its local-player
@@ -47,7 +54,7 @@ Confirming a load stores the save slot, suspends audio, reads the slot, resumes
 audio and tests the low byte of validation. Selection is reloaded after calls.
 Mode-one confirmation uses the scene allocation's enabled and occupied flags.
 The two recovered handoffs preserve byte direction and word phase arguments;
-they are not interchangeable with the original initializer.
+they retain distinct behaviour from the initializer.
 
 The [handoff and panel note](SCENE_RECORD_SELECTION_HANDOFFS.md) records the
 canonical map-pointer, saved-clock and frame-motion owners. Four existing
@@ -57,14 +64,15 @@ header; no alternate `FrameObject` or saved-record owner is introduced.
 
 ## Matching evidence and limits
 
-All four new bodies have fresh public normal and strict positives at their
+Milestone 124's four new bodies have fresh public normal and strict positives at their
 original addresses, plus genuine changed-source controls in both profiles.
 The same four roles were run for each repaired existing body: 32 roles in all.
 Every positive matches its complete fixed-ROM span. Each control changes an
 actual candidate byte, and all 32 candidates equal their retained private or
 earlier proofs. Commands, dependencies, snapshots, ELF ownership, differences
-and failed attempts are retained locally. No output patch, fixed-register
-variable, embedded instruction body or added low-level glue is used.
+and failed attempts are retained locally. Those milestone-123/124 bodies use
+no output patch, fixed-register variable, embedded instruction body or added
+low-level glue.
 
 The first batch's update initially had its correct 708-byte extent with 24
 differences. Real cached-player and input-array producers resolved those
@@ -95,6 +103,16 @@ contracts. Original background-map and text-render services remain boundaries.
 Shutdown's transition kind 12 still selects an original-ROM callback. The new
 static and compiler proofs do not establish those bodies, all provider effects,
 hardware behaviour or complete phase-seven gameplay.
+
+The initializer uses the canonical indexed record byte behind the valid-byte
+short circuit. Its local IP save-owner pointer lives only through the four
+iterations without calls. A used unsigned address value preserves the actual
+valid-array base before index addition under the 32-bit ARM pointer/integer
+contract; indices zero through three remain inside the existing owner. The
+[initializer continuation](SCENE_RECORD_SELECTION_HANDOFFS.md#initializer-continuation)
+records that source boundary separately. It adds no runtime evidence or new
+finite qualification, and leaves resource, allocation, provider and complete
+incoming/writer domains open.
 
 The [whole-ROM survey](WHOLE_ROM_INVENTORY.md) keeps mapping, instruction evidence
 and source coverage separate. Its fixed historical comparison remains 319,640
