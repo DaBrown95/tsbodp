@@ -126,8 +126,9 @@ alignment bytes. Seven callbacks are installed by observed rows 8/105/116;
 the two constant-return neighbours remain unrooted. Seven old rows cover 62
 estimated bytes; the other ten newly mapped bytes are eight instructions and
 two alignment bytes. This completes local source ownership from `0x46588` to
-`0x466B4` with the existing neighbours. Generic EC/FC delivery, unused formals,
-all incoming roots and input/writer/gameplay populations remain open.
+`0x466B4` with the existing neighbours. The existing averaging routine consumes
+the definition's value callback directly. Stored EC/FC delivery, unused formals,
+complete incoming roots and input/writer/gameplay populations remain open.
 
 Executable inventory remains incomplete. It separates instructions, data and
 unresolved bytes; its instruction union is not complete. Unclassified owned/envelope bytes,

@@ -634,7 +634,11 @@ offset-24 pointer to state `+FC`. The already-owned optional-percentage callback
 at `0802F30C` supplied the same concrete type/dataflow recipe. A live state with
 parameter one witnesses the compiling 100-to-99 control; it rejects by one byte.
 The full 24-byte extent contains 22 instruction bytes and two zero alignment
-bytes. No generic FC consumer or unique historical typedef is established.
+bytes. The matching [averaging routine](../src/frame/frame_need_effect_average.c)
+reads definition slot `+24` directly, passes the state and consumes the result's
+low byte through its [existing callback view](../include/frame_need_effect_average.h).
+This establishes that direct table path. Dispatch through the copied state
+`+FC` slot and a unique historical typedef remain unresolved.
 
 The LR-only leaf prologue follows the pinned compiler's cached far-jump
 predicate, rather than an invented call. Its complete RTL has no call and uses
@@ -964,7 +968,7 @@ profile change. Both useful failed sources remain local.
 
 Complete EC action sets were fixed before each single recipe. No assembly
 instructions, numeric register constraints, added qualifiers or fabricated
-operations supply these matches. Source ownership does not close generic EC/FC
+operations supply these matches. Source ownership does not close stored EC/FC
 consumers, table capacity, valid actor/record/sample backing, point-output
 success, arithmetic domains or runtime selection/gameplay.
 
@@ -1040,7 +1044,7 @@ buffer, a conventional record allocator/begin and a constant-two status. Its EC
 remains original: no action cases are evidenced. The neighbouring count
 predicate and constant-100 body likewise have no identified incoming edges.
 This module starts at `0x08013330`; the header-job rows' actual F8 pointer is
-`0x08012E75`. Complete callback populations, generic EC/FC delivery, live point
+`0x08012E75`. Complete callback populations, stored EC/FC delivery, live point
 and record backing, arithmetic domains and gameplay remain open.
 
 
@@ -1261,8 +1265,12 @@ zero, dispatch returns two, and tick changes no state. The value callback reads
 definition byte `+0x23` through the canonical owner kind at `+8`, returns
 `100 + 12 * byte` narrowed to an unsigned byte, and reuses the 36-byte definition
 layout. Its arithmetic fits an ARM32 signed int before the final narrowing.
-The seven callback words and allocator mapping are direct static evidence;
-complete generic EC/FC delivery is still unresolved.
+The seven callback words and allocator mapping are direct static evidence.
+`frame_need_effect_average` reads definition slot `+24`, calls the value
+callback with the actual state and consumes its low byte. It takes that path
+when optional mode is outside one and two and the definition callback is
+non-null. This is separate from the copied state `+FC` slot; delivery through
+stored EC/FC fields and complete callback populations remain unresolved.
 
 All nine normal and strict positive extents match; all eighteen genuine
 source-control comparisons reject. Final integration checks cover the shared
