@@ -54429,6 +54429,35 @@
       },
       "compiler_id": "agbcc",
       "mode": "Thumb"
+    },
+    {
+      "name": "frame_unrooted_code_in_range_2b25c",
+      "source": "src/frame/frame_unrooted_code_in_range_2b25c.c",
+      "rom_offset": 176732,
+      "size": 20,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "code <= 35u",
+        "after": "code <= 34u"
+      }
+    },
+    {
+      "name": "frame_unrooted_read_extra_map_cell_2b2c8",
+      "source": "src/frame/frame_unrooted_read_extra_map_cell_2b2c8.c",
+      "rom_offset": 176840,
+      "size": 52,
+      "symbols": {
+        "frame_get_map_dimensions": "0x0803a019",
+        "g_frame_map_extra_cell_types": "0x03001de0"
+      },
+      "thumb_symbols": [
+        "frame_get_map_dimensions"
+      ],
+      "negative_control": {
+        "before": "(x >> 5)",
+        "after": "(x >> 4)"
+      }
     }
   ],
   "assembly": [

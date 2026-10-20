@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,383 C functions / 298,036 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 302,096 bytes; original slices
-still supply 16,475,120 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,385 C functions / 298,108 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 302,168 bytes; original slices
+still supply 16,475,048 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **111 unowned rows / 23,464
+[inventory](../assets/rom-inventory.json) contain **109 unowned rows / 23,394
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -145,6 +145,16 @@ Four old rows cover 388 estimated bytes; the other four bytes are newly mapped
 zero alignment, with no new executable discovery. Incoming roots, historical
 unused formals, retry termination, backing and arithmetic/input populations
 remain open; no runtime or gameplay evidence is added.
+
+The independently bounded [word-range predicate](ACTOR_STATE_RECONSTRUCTION.md#independently-bounded-word-range-predicate)
+and [extra-map getter](FRAME_MAP_ANIMATION.md#independently-bounded-extra-map-getter)
+add two C functions / 72 extent bytes: 66 instruction, four literal and two
+alignment bytes. They are separate paths without established incoming callers.
+Two former rows cover 70 estimated bytes; the two newly mapped bytes are zero
+alignment, with no new executable discovery. The getter retains its actual
+dimensions provider and pointer owner, with aligned live backing and bounds as
+premises. Historical unused formals, wider input/writer populations and gameplay
+remain unresolved; no runtime evidence is added.
 
 Executable inventory remains incomplete. It separates instructions, data and
 unresolved bytes; its instruction union is not complete. Unclassified owned/envelope bytes,

@@ -141,3 +141,34 @@ cell-data bytes, then points the extra type map four bytes into the type-map
 buffer. Existing base/extra decoders corroborate the pointer roles. The
 allocation-size control preserves 68 bytes and rejects by one byte. This is
 source/static evidence; allocation success and gameplay are not established.
+
+## Independently bounded extra-map getter
+
+The [getter at `0x2B2C8`](../src/frame/frame_unrooted_read_extra_map_cell_2b2c8.c)
+owns 52 C extent bytes: 48 instruction bytes and the four-byte literal at
+`0x2B2F8` naming pointer storage `0x03001DE0`. It ends before the existing
+actor-state owner at `0x2B2FC`. No incoming caller has been established; its
+two consumed unsigned-halfword coordinates and halfword result describe the
+chosen interface, with historical unused formals unresolved.
+
+It calls the actual void dimensions provider with an ordinary `FramePoint`
+output, then reads the selected halfword at `(x >> 5) + (y >> 5) *
+(dimensions.x >> 5)`. A local address of the existing pointer owner is captured
+before index calculation; its sole pointer read follows byte scaling. This
+preserves the native value lifetimes without another memory observation,
+register binding, qualifier or shared-header change.
+
+The getter, dimensions provider and existing extra-map setter pass six
+normal/strict complete matches and six genuine source controls in their separate
+header contexts. Five interface checks and five meaningful wrong-contract
+controls corroborate the actual owners and signatures. The getter's control
+changes the x-cell shift from five to four and rejects by one byte.
+
+The actual dimensions provider bounds width by an unsigned halfword times 32;
+the getter's byte-offset arithmetic therefore fits signed 32 bits. It still
+requires an initialized pointer, live aligned halfword backing and an in-bounds
+selected cell. The startup allocation leaves 10,236 bytes after its four-byte
+prefix, conditionally enough for 5,118 halfwords; this does not prove all input,
+writer, lifetime or reachable-state populations. No new runtime or gameplay
+evidence is added, and this getter is separate from the unrooted range predicate
+at `0x2B25C`.

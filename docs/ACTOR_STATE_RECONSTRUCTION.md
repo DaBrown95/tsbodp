@@ -1448,3 +1448,21 @@ requires nonzero speed, a nonzero duration, the pinned unsigned-to-signed word
 conversion, a representable signed absolute value and valid signed divisions.
 Complete writers, selectors, aliases, historical signatures and gameplay remain
 unproven. These source matches add no runtime observation.
+
+## Independently bounded word-range predicate
+
+The [predicate at `0x2B25C`](../src/frame/frame_unrooted_code_in_range_2b25c.c)
+returns a full word one for unsigned word inputs 2 through 35 and zero otherwise.
+Its native unsigned subtraction and comparison agree with the readable pair of
+C bounds for every unsigned word input. No owner, provider or caller is invented
+for this leaf; its incoming roots, historical name and any unused formals remain
+unknown. Proximity does not connect it to the extra-map getter or movement paths.
+
+The complete 20-byte extent contains 18 instruction bytes followed by two zero
+alignment bytes at `0x2B26E`, before the existing setter at `0x2B270`. The preceding
+owned body ends at the predicate's entry. Normal and strict object mappings mark
+the tail as data, and the source emits only an ordinary alignment directive.
+Both full extents match; real controls changing the upper bound from 35 to 34
+compile and reject by one byte. The former estimate covered 18 bytes, so only the
+two alignment bytes are newly mapped. This establishes no new executable
+discovery, alternate-entry exclusion, runtime coverage or gameplay behavior.
