@@ -79,7 +79,7 @@ void scene_link_entry_initialize(void)
         display_text_select_font(3, 0, 0);
         display_text_draw_line(35, 23, 118, display_scene_lookup_text(445), 0);
         display_text_draw_line(53, 23, 138, display_scene_lookup_text(446), 0);
-        scene_link_entry_refresh_offers_original();
+        scene_link_entry_refresh_offers();
         scene_link_entry_build_objects_original();
     } else {
         i = 0;

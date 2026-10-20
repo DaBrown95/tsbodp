@@ -20,6 +20,10 @@ extern const unsigned int g_scene_link_entry_control_linked;
 extern const unsigned int g_scene_link_entry_control1;
 extern const unsigned int g_scene_link_entry_text_control;
 extern short g_link_offer_adjustment_timer;
+/* Readonly percentage windows; complete capacities remain unproved. */
+extern const unsigned char g_scene_link_offer_percent_first[];
+extern const unsigned char g_scene_link_offer_percent_last[];
+extern const struct DisplayTimeRecord g_scene_link_offer_countdown;
 /* Two-byte serialized rows observed by the native controller. */
 extern const unsigned char g_link_offer_difference_limits[][2];
 /* Existing canonical readonly declarations, not new mutable owners. */
@@ -43,9 +47,9 @@ void scene_link_entry_draw_header_value(void);
 void scene_link_entry_confirm_offer(void);
 void scene_link_entry_step_offers(void);
 void scene_link_entry_step_linked_offers(void);
-/* Explicit original service boundaries. No reconstructed C is claimed. */
+void scene_link_entry_refresh_offers(void);
+/* Explicit original service boundary. No reconstructed C is claimed. */
 void scene_link_entry_build_objects_original(void);
-void scene_link_entry_refresh_offers_original(void);
 
 void scene_link_entry_initialize(void);
 void scene_link_entry_step(void);

@@ -26,20 +26,20 @@ void scene_relation_grid_initialize(void)
  display_load_resource_palette((const struct BackgroundResource *)(palette-2),0);
  scene_relation_grid_create_objects();
  scene_relation_grid_draw_detail();
- scene_relation_grid_refresh_entries_original();
+ scene_relation_grid_refresh_entries();
  display_text_select_font(3,0,0);
  display_text_copy_field_zero((const char *)world);
  display_text_draw_line(151,74,4,display_scene_lookup_text(6223),1);
  display_text_number_field_zero(display_menu_read_relation_average((struct DisplayMenuRelationState *)world));
  display_text_draw_line(91,172,4,display_scene_lookup_text(443),1);
  display_text_select_font(1,0,-1);
- display_text_draw_line(61,65,26,display_scene_lookup_text((unsigned char)scene_relation_grid_descriptor_original(world+0x18)+451),1);
+ display_text_draw_line(61,65,26,display_scene_lookup_text((unsigned char)scene_relation_grid_read_descriptor(world+0x18)+451),1);
  tile=221;
  display_text_select_font(1,0,-1);
  index=0;icon_y=48;baseline=47;
  for(;index<5;index++){
   tile=display_text_draw_line(tile,4,baseline,display_scene_lookup_text(index+463),0);
-  frame=(unsigned char)scene_relation_grid_trait_original(world+0x18,index);
+  frame=(unsigned char)scene_relation_grid_read_trait(world+0x18,index);
   display_load_palette_alternate(g_scene_relation_grid_icon_palette,96,16);
   scene_relation_grid_create_indicator(frame,64,icon_y);
   icon_y+=10;baseline+=10;

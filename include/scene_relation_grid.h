@@ -14,14 +14,13 @@ extern const unsigned int g_scene_relation_grid_control3,g_scene_relation_grid_c
 extern const struct BackgroundResource g_scene_relation_grid_background3,g_scene_relation_grid_background2;
 extern const unsigned short g_scene_relation_grid_icon_palette[];
 extern struct FrameVariantResource g_scene_relation_grid_indicator_animation;
-/* Four explicit original service boundaries, not recovered C definitions. */
-unsigned int scene_relation_grid_trait_original(const void *,unsigned int);
-unsigned int scene_relation_grid_descriptor_original(const void *);
+unsigned int scene_relation_grid_read_trait(const void *,unsigned int);
+unsigned int scene_relation_grid_read_descriptor(const void *);
+/* This relation-detail service remains an explicit original boundary. */
 void scene_relation_grid_relation_original(struct FrameObject *,unsigned int,struct SceneRelationGridTextPoint,unsigned int);
 void scene_relation_grid_initialize(void),scene_relation_grid_step(void),scene_relation_grid_shutdown(void);
 void scene_relation_grid_create_objects(void),scene_relation_grid_draw_detail(void);
-/* Refresh remains original at 0x08036744; its two-byte candidate is unaccepted. */
-void scene_relation_grid_refresh_entries_original(void);
+void scene_relation_grid_refresh_entries(void);
 void scene_relation_grid_sort_relations(const struct DisplayMenuRelationValues *);
 struct FrameObject *scene_relation_grid_create_indicator(unsigned int,unsigned int,unsigned int);
 void frame_set_animation_frame(struct FrameTickObject *object, FrameU8 frame);

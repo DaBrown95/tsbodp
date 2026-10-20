@@ -5,7 +5,10 @@
 struct SceneLinkEffectOffer {
     unsigned int kind;
     int limit;
-    unsigned char unknown08[4];
+    union {
+        unsigned char unknown08[4];
+        unsigned int word08;
+    } storage08;
     int cost;
     unsigned short countdown, phase;
     unsigned char count, unknown15[3];

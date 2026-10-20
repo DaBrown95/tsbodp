@@ -78,10 +78,9 @@ has not been established.
 `scene_link_entry_initialize` at `0x08003750` reconstructs the 876-byte begin
 callback. It sets up offers, object slots, backgrounds, palettes, text and
 selection previews, then coordinates the original scene helpers, countdown and
-transition. It now calls twenty-four accepted C providers and two explicit original
-services. Those service declarations describe this caller's boundary with no
-supplied arguments and no consumed result; they do not recover the helpers' original C signatures,
-complete footprints or implementations.
+transition. Its previously original offer-refresh boundary is now reconstructed below.
+The providers retain their separate compilation contexts and existing argument
+contracts; their source matches do not establish complete runtime footprints.
 
 The full extent contains 738 instruction bytes, 132 referenced pool bytes, four
 internal zero alignment bytes and two trailing zero alignment bytes. Its sole
@@ -126,10 +125,10 @@ invented. Changed-source controls, strict declarations, actual field/API checks
 and deliberately wrong contracts accompany the byte comparisons. These remain
 static and compiler findings, with no new runtime or gameplay observation.
 
-The connected 596-byte offer-refresh helper remains unconverted. An indexed
-ordinary candidate is 592 bytes; compiler evidence identifies an extra generated
-cost-address variable and the resulting allocation pressure. Its wider proposed
-record fields and separate status access have not been adopted.
+The connected 596-byte offer-refresh helper is now reconstructed below. An earlier indexed
+ordinary candidate emitted 592 bytes with an extra generated cost-address
+variable and resulting allocation pressure. The matching canonical owner and
+loop-address cause are described below; that old candidate is superseded.
 
 ## Linked offer refresh
 
@@ -209,8 +208,8 @@ contracts. The tile-seventeen-to-sixteen source control changes one compiled
 byte. A static quantity-eight witness changes one backed map cell; quantity zero
 has zero height and cannot establish that effect. Normal and strict compiler
 comparisons, the caller's source control and full-build checks remain separate
-from runtime evidence. The 596-byte refresh helper and renderer/finalizer remain
-unconverted. The step callback is described below.
+from runtime evidence. The renderer/finalizer remain unconverted. The 596-byte
+refresh helper and step callback are reconstructed below.
 
 ## Linked participant quantity display
 
@@ -287,7 +286,7 @@ signedness, font formal width, field capacity and return type are rejected.
 Changing the font selection from one to two changes one compiled byte and has a
 defined selector-state witness when both banks are backed. Strict compilation,
 changed-source controls and the full-ROM comparison remain separate evidence.
-The offer refresh and renderer/finalizer remain explicit unconverted regions.
+The offer refresh is reconstructed below; renderer/finalizer remain explicit unconverted regions.
 
 ## Header value and link-dependent placement
 
@@ -574,3 +573,40 @@ storage; every controlling participant count must lie between zero and four.
 Evaluated signed products and differences must be representable. Opaque calls
 retain the original fresh reads. These are compiler and static findings, with
 no complete incoming-index, later-writer, callback-table or gameplay claim.
+
+
+## Unlinked offer refresh
+
+`scene_link_entry_refresh_offers` at `0x080045D0` now owns its complete
+596-byte extent: 512 instruction bytes, 80 referenced literal bytes and four
+alignment zeros. Normal and strict comparisons match; changing the real
+adjustment timer from two to one rejects by one byte in each profile. The
+renamed 876-byte initializer and its controls remain exact.
+
+The routine resets the adjustment timer, refreshes four captions when slot
+zero is populated, initializes four offer records, copies the countdown clock,
+clears two background rectangles, derives the scaled multiplier and clears
+selection. Non-42 kinds use the existing random percentage and signed category
+providers; kind 42 caps its limit by the saved amount and sets countdown two.
+The canonical 24-byte offer record now gives the existing four bytes at offset
+eight a named union with character and unsigned-word members. Size, alignment,
+all established offsets and the enclosing 104-byte state remain fixed; existing
+users need no access changes.
+
+The prior 596-byte candidate differed in nine bytes because LOOP selected a
+full-record pointer before the indexed cost offset, reversing two native
+initialization/increment pairs. The matching tail compares the actual next-row
+address to the fourth record. It retains the do-loop entry and forms a valid
+one-past pointer after its fourth iteration. This consumed late address changes
+the selected complete-pointer induction variable while preserving the useful
+offset chains. The first condition-assignment trial added a 12-byte entry guard
+and failed; capturing the cost destination had already failed. The accepted
+source adds no memory read, qualifier, register binding or instruction body.
+
+Separate actual definitions qualify twelve providers, the new body and its
+initializer. Target checks cover 33 layout facts and thirteen callable types;
+five wrong contracts reject. Full integration rebuilds all 21 existing offer
+owner importers. Readonly percentage windows and the countdown retain their
+existing canonical owners. Catalog, signed-category, allocation, text and later
+writer domains remain open; these are compiler/static results without new
+runtime or gameplay evidence.

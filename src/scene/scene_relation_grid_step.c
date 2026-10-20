@@ -11,7 +11,7 @@ void scene_relation_grid_step(void)
    if(g_scene_request.scene==0||g_scene_request.scene==3){
     if(g_scene_request.parameter){
      g_scene_request.parameter--;
-     scene_relation_grid_refresh_entries_original();
+     scene_relation_grid_refresh_entries();
      if(g_scene_request.parameter==0)g_display_scene_frame_objects[7]->flags&=~1u;
      g_display_scene_frame_objects[8]->flags|=1;
     }
@@ -20,7 +20,7 @@ void scene_relation_grid_step(void)
    if(g_scene_request.scene==2||g_scene_request.scene==5){
     if(g_scene_request.parameter<=8){
      g_scene_request.parameter++;
-     scene_relation_grid_refresh_entries_original();
+     scene_relation_grid_refresh_entries();
      if(g_scene_request.parameter==9)g_display_scene_frame_objects[8]->flags&=~1u;
      g_display_scene_frame_objects[7]->flags|=1;
     }

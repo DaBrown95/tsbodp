@@ -1,6 +1,6 @@
 # Relation-grid scene
 
-The inferred phase-17 lifecycle has seven recovered ordinary C functions totaling 1,780 bytes. Their complete original extents, including literal pools and alignment, match in normal and strict declaration profiles. Changed-source controls reject for every function. This is source and compiler evidence; it does not establish whole-scene gameplay or hardware behavior.
+The inferred phase-17 lifecycle has ten matching C functions totaling 1,924 bytes. Their complete original extents, including literal pools and alignment, match in normal and strict declaration profiles. Changed-source controls reject for every function. This is source and compiler evidence; it does not establish whole-scene gameplay or hardware behavior.
 
 | Function | ROM offset | Bytes |
 | --- | ---: | ---: |
@@ -11,10 +11,19 @@ The inferred phase-17 lifecycle has seven recovered ordinary C functions totalin
 | Sort relations | `0x367C8` | 124 |
 | Shutdown | `0x36844` | 36 |
 | Create indicator | `0x36868` | 108 |
+| Read trait | `0x3203C` | 8 |
+| Read descriptor | `0x32044` | 4 |
+| Refresh entries | `0x36744` | 132 |
 
 The lifecycle table at `0x5797C` has twelve-byte rows. Row 17 installs initialize, step and shutdown at `0x0803615D`, `0x0803637D` and `0x08036845`. Names and owner interpretations remain provisional.
 
-The refresh service at `0x36744` remains original and contributes no recovered C. Its held 132-byte candidate differs in two bytes. The trait getter at `0x3203C`, descriptor getter at `0x32044` and relation-detail service at `0x40D68` also remain explicit original boundaries. The last receives a four-byte pair of signed halfwords in the third argument word; the eight-byte `FramePoint` is a different interface.
+The relation-detail service at `0x40D68` remains an explicit original boundary. It receives a four-byte pair of signed halfwords in the third argument word; the eight-byte `FramePoint` is a different interface.
+
+The two getters read descriptor byte zero and trait byte `2 + index` through the actual input byte representation. The initializer supplies indices zero through four. Refresh examines six entries, reads the relation index before testing it against 23, writes the object subtype, refreshes the object and then reloads its flags. Invalid entries clear visibility. It preserves the two separate object-slot address lifetimes around the call.
+
+The ordinary refresh predecessor was 132 bytes with two differing bytes: local allocation tied the short array-base value to the call-crossing slot pointer. A GNU R0 constraint now describes only the genuine immutable array address loaded at `0x08036792` and consumed by the addition at `0x08036794`. That value dies before R0 receives the call argument; the resulting slot stays in callee-saved R4. The source adds no memory access, artificial value use or instruction body. This is one matching source spelling, not historical-source proof. Normal and strict full-byte comparisons and actual source controls cover all three additions and both renamed callers. Separate actual definition checks use the pinned compiler ABI; modern Clang layout assertions were an unsuitable fixture and did not cause production header changes.
+
+The new 144 extent bytes contain 122 instruction bytes, 20 referenced literal bytes and two alignment zeros. Resource backing, input populations and gameplay remain unproved.
 
 Initialization sorts 24 relation indices by signed relation value, configures backgrounds and text, creates the visible object group, and draws trait and parameter indicators. The step function navigates two rows of three entries, pages within the observed range, redraws the detail panel and issues scene requests. It preserves repeated input and slot loads around opaque calls.
 
