@@ -53944,6 +53944,142 @@
       },
       "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c",
       "source": "src/frame/frame_tick_attachment_job_87.c"
+    },
+    {
+      "name": "frame_step_optional_activation_job_82_86",
+      "rom_offset": 281432,
+      "size": 148,
+      "source": "src/frame/frame_step_optional_activation_job_82_86.c",
+      "symbols": {
+        "frame_direction_to_need_effect_center": "0x080018c9",
+        "frame_request_animation": "0x08001b5d",
+        "frame_commit_need_effect": "0x0802d9ad",
+        "audio_play_animation_cue": "0x08040ffd",
+        "audio_game_stop_sample": "0x08041341"
+      },
+      "thumb_symbols": [
+        "frame_direction_to_need_effect_center",
+        "frame_request_animation",
+        "frame_commit_need_effect",
+        "audio_play_animation_cue",
+        "audio_game_stop_sample"
+      ],
+      "negative_control": {
+        "before": "job->timer = 85;",
+        "after": "job->timer = 84;"
+      },
+      "expected_sha256": "4a3a76f269b99199d0a33ed966e247e0c3a302de377934a0f503e33a8a7579e0"
+    },
+    {
+      "name": "frame_initialize_optional_activation_context",
+      "rom_offset": 281580,
+      "size": 12,
+      "source": "src/frame/frame_initialize_optional_activation_context.c",
+      "negative_control": {
+        "before": "->active = 0;",
+        "after": "->active = 1;"
+      },
+      "expected_sha256": "431641ed2ea8ba355e66f2c8aa10caca36e493fdd0e97db9579272502a04253d"
+    },
+    {
+      "name": "frame_select_optional_activation_attachment_kind",
+      "rom_offset": 281592,
+      "size": 24,
+      "source": "src/frame/frame_select_optional_activation_attachment_kind.c",
+      "negative_control": {
+        "before": "*out = 82;",
+        "after": "*out = 81;"
+      },
+      "expected_sha256": "fd8c00828feed99aa9714accd82d4b32f7b1dabd7c963861f2fee0542bc5df9d"
+    },
+    {
+      "name": "frame_begin_optional_activation_attachment_job",
+      "rom_offset": 281624,
+      "size": 56,
+      "source": "src/frame/frame_begin_optional_activation_attachment_job.c",
+      "symbols": {
+        "frame_request_animation": "0x08001b5d",
+        "frame_allocate_actor_attachment_record": "0x0802e3c5",
+        "g_frame_registration": "0x03004330",
+        "frame_route_attachment_to_target": "0x0803bac1"
+      },
+      "thumb_symbols": [
+        "frame_request_animation",
+        "frame_allocate_actor_attachment_record",
+        "frame_route_attachment_to_target"
+      ],
+      "negative_control": {
+        "before": "actor, 6);",
+        "after": "actor, 5);"
+      },
+      "expected_sha256": "0710745f7c4b6ae1b86e08e30334591c542a24a4ee65e175d0c8210a27a0f517"
+    },
+    {
+      "name": "frame_dispatch_optional_activation_attachment_job",
+      "rom_offset": 281680,
+      "size": 120,
+      "source": "src/frame/frame_dispatch_optional_activation_attachment_job.c",
+      "symbols": {
+        "frame_step_optional_activation_job_82_86": "0x08044b59",
+        "frame_step_optional_activation_job_83_84": "0x08044cd1",
+        "frame_step_optional_activation_job_85": "0x08044cd5",
+        "frame_find_actor_attachment_record": "0x0802ed61"
+      },
+      "thumb_symbols": [
+        "frame_find_actor_attachment_record",
+        "frame_step_optional_activation_job_82_86",
+        "frame_step_optional_activation_job_83_84",
+        "frame_step_optional_activation_job_85"
+      ],
+      "negative_control": {
+        "before": "case 82:",
+        "after": "case 81:"
+      },
+      "expected_sha256": "ab67e2652259885126b04346e7fb2f234d757800cf8bd378832c3aff90a7adce"
+    },
+    {
+      "name": "frame_step_optional_activation_job_83_84",
+      "rom_offset": 281808,
+      "size": 4,
+      "source": "src/frame/frame_step_optional_activation_job_83_84.c",
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 2;"
+      },
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb"
+    },
+    {
+      "name": "frame_step_optional_activation_job_85",
+      "rom_offset": 281812,
+      "size": 4,
+      "source": "src/frame/frame_step_optional_activation_job_85.c",
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 2;"
+      },
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb"
+    },
+    {
+      "name": "frame_unrooted_optional_activation_finish_44cc8",
+      "rom_offset": 281800,
+      "size": 4,
+      "source": "src/frame/frame_unrooted_optional_activation_finish_44cc8.c",
+      "negative_control": {
+        "before": "{\n}",
+        "after": "{\n    for (;;) {\n    }\n}"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
+    },
+    {
+      "name": "frame_unrooted_optional_activation_value_44ccc",
+      "rom_offset": 281804,
+      "size": 4,
+      "source": "src/frame/frame_unrooted_optional_activation_value_44ccc.c",
+      "negative_control": {
+        "before": "return 100;",
+        "after": "return 99;"
+      },
+      "expected_sha256": "a2271e164827e90980393ec57efbeee0efeba93f9e67d5eff60d0043fc8970f8"
     }
   ],
   "assembly": [

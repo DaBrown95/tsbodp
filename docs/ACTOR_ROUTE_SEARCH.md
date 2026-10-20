@@ -1579,8 +1579,9 @@ full comparisons.
 
 The original eight-byte kind check at `0x449B0` still returns word one with LR
 preservation; ordinary leaf C is shorter, so it remains explicit original code.
-The adjoining `0x44B58..0x44D00` activation API has useful private matches, but
-no incoming pointer connection is established; it is not public source coverage.
+Nine independently bounded activation functions in `0x44B58..0x44D00` now
+match, as described below. No external incoming pointer connection is established;
+source ownership does not establish their installation or runtime use.
 The new guarded headers do not change existing headers. Four unchanged connected
 consumers—the factory walker, state allocator, attachment tick and mode publisher—
 are also rechecked with their real controls, covering 1,336 bytes without adding
@@ -1588,6 +1589,61 @@ coverage. Publication metadata is `frame-optional-playback-batch-manifest.json`;
 raw disassembly, bounded table scans, useful source failures and complete
 positive/negative comparisons remain private. Whole-ROM equality, these source
 matches and the static callback map remain separate from runtime evidence.
+
+
+## Independently bounded activation functions
+
+Nine functions add 376 C extent bytes: 340 instruction, 28 literal and eight
+alignment bytes. Their native boundaries and internal calls support source
+ownership despite unresolved incoming roots. The adjacent availability predicate
+at `0x44CD8` already owns 40 bytes and receives no additional credit.
+
+| Entry | Role | Complete bytes |
+| --- | --- | ---: |
+| `0x44B58` | Worker for kinds 82 and 86 | 148 |
+| `0x44BEC` | Clear active byte and return one | 12 |
+| `0x44BF8` | Select kind 82 or 86 | 24 |
+| `0x44C18` | Allocate, route and start animation | 56 |
+| `0x44C50` | Dispatch kinds 82 through 86 | 120 |
+| `0x44CC8` | Independent no-op leaf | 4 |
+| `0x44CCC` | Independent word-100 leaf | 4 |
+| `0x44CD0` | Return one for kinds 83/84 | 4 |
+| `0x44CD4` | Return one for kind 85 | 4 |
+
+The worker's initial phase faces the actor toward the owner, requests animation
+58 and retains cue 63's handle. Phase 85 waits for the native actor flag, requests
+animation one, and commits mode three or two while setting or clearing active.
+Phase one stops the retained sample and returns two. The selector emits 82 when
+inactive and 86 otherwise. Begin stores the full-word kind, routes the actual
+record and requests animation six; allocation failure returns zero. Dispatch
+requires a live found record and preserves its five native cases. The two
+constant-one worker bodies are actual native callees, with no consumed argument
+value; additional historical unused formals remain unknown.
+
+The source uses the existing active byte at `+0x64`, canonical attachment record
+and signed word sound handle at `+0xE0`. Audio's unsigned-word handle round trip
+uses the pinned 32-bit representation; it adds no alternate owner. Native timer
+selection uses the signed word's unsigned representation. No register bindings,
+private provider declarations or extra memory accesses are introduced.
+
+Normal and strict comparisons pass for the nine new definitions and nine actual
+connected definitions, with 36 genuine changed-source controls rejected. Actual
+provider and dispatcher contexts, meaningful wrong contracts and target layout
+and field types are checked separately. The ineffective signed-pointer witness
+accepted by the legacy compiler is preserved and excluded from rejection counts.
+
+Six earlier rows cover 354 estimated bytes. The initializer, two independent
+leaves and dispatcher alignment add 22 formerly unmapped bytes: 16 instructions
+and six data-alignment bytes. The complete dispatcher is 120 bytes; the old
+118-byte estimate omitted its final two zero bytes. Alignment directives emit
+data and do not exclude alternate incoming execution.
+
+The separate `0x44C10..0x44C18` word-one body retains its return address; ordinary
+leaf C compiles shorter, so its eight bytes remain original. The two independent
+leaves use chosen void/unsigned-word result views with no consumed inputs; their
+historical signatures and incoming roots are unresolved. Unchecked selectors,
+live state/record backing, all writers and runtime/gameplay populations remain
+outside these matching and static findings.
 
 
 ## Variant lifecycle leaves and selector
