@@ -18,7 +18,7 @@ void scene_step_request_handoff(void)
  scene_run_step_callback();
  frame_request_refresh();
  display_step_backgrounds();
- scene_update_windows_080489c4();
+ display_step_windows();
  display_step_palette_jobs();
  frame_prepare_oam_transfer();
 }

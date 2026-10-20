@@ -14943,8 +14943,8 @@
       },
       "thumb_symbols": [],
       "negative_control": {
-        "before": "window->bottom.position=bottom;",
-        "after": "window->bottom.position=bottom + 1;"
+        "before": "window->axes[1].current[1].position=bottom;",
+        "after": "window->axes[1].current[1].position=bottom + 1;"
       }
     },
     {
@@ -22176,20 +22176,20 @@
         "input_poll": "0x0801f169",
         "frame_request_refresh": "0x08001169",
         "display_step_backgrounds": "0x0800d17d",
-        "scene_update_windows_080489c4": "0x080489c5",
         "display_step_palette_jobs": "0x080117d5",
         "frame_prepare_oam_transfer": "0x0802d055",
         "scene_request_changed": "0x08027e21",
         "scene_run_begin_callback": "0x08027e45",
         "scene_run_step_callback": "0x08027e7d",
-        "scene_run_end_callback": "0x08027ea5"
+        "scene_run_end_callback": "0x08027ea5",
+        "display_step_windows": "0x080489c5"
       },
       "thumb_symbols": [
         "transition_link_update",
         "input_poll",
         "frame_request_refresh",
         "display_step_backgrounds",
-        "scene_update_windows_080489c4",
+        "display_step_windows",
         "display_step_palette_jobs",
         "frame_prepare_oam_transfer",
         "scene_request_changed",
@@ -40345,9 +40345,9 @@
         "scene_retain_display": "0x8026929",
         "frame_disable_primary_object_flags": "0x80012b9",
         "display_reset_palette_jobs": "0x80117bd",
-        "scene_choice_panel_original_disable_windows": "0x80489dd",
         "g_actor_scene_request": "0x3005a00",
-        "g_need_effect_choice_text": "0x30059f0"
+        "g_need_effect_choice_text": "0x30059f0",
+        "display_disable_window_layers": "0x80489dd"
       },
       "thumb_symbols": [
         "irq_default_vblank_callback",
@@ -40362,7 +40362,7 @@
         "scene_retain_display",
         "frame_disable_primary_object_flags",
         "display_reset_palette_jobs",
-        "scene_choice_panel_original_disable_windows"
+        "display_disable_window_layers"
       ],
       "negative_control": {
         "before": "heap_clear(g_need_effect_choice_text,0,10);",
@@ -40401,7 +40401,6 @@
         "scene_submit_default_request": "0x8027dc1",
         "scene_view_draw_frame": "0x8034481",
         "scene_choice_panel_original_window_begin": "0x8048725",
-        "scene_choice_panel_original_configure_windows": "0x80489ed",
         "scene_choice_panel_original_set_window": "0x8048a15",
         "scene_choice_panel_begin_close": "0x8034bb9",
         "g_actor_scene_request": "0x3005a00",
@@ -40411,7 +40410,8 @@
         "g_input_pressed": "0x3004228",
         "g_resource_scene_arg": "0x3004370",
         "g_scene_link_catalog_world": "0x3003950",
-        "scene_choice_panel_draw_text_original": "0x8034a55"
+        "scene_choice_panel_draw_text_original": "0x8034a55",
+        "display_configure_window_masks": "0x80489ed"
       },
       "thumb_symbols": [
         "input_step_vertical_pressed",
@@ -40420,7 +40420,7 @@
         "scene_submit_default_request",
         "scene_view_draw_frame",
         "scene_choice_panel_original_window_begin",
-        "scene_choice_panel_original_configure_windows",
+        "display_configure_window_masks",
         "scene_choice_panel_original_set_window",
         "scene_choice_panel_draw_text_original",
         "scene_choice_panel_begin_close"
@@ -52773,6 +52773,67 @@
       "negative_control": {
         "before": "{\n}\n",
         "after": "{\n    owner->unknown_60[0] = 1;\n}\n"
+      }
+    },
+    {
+      "name": "display_step_windows",
+      "source": "src/display/step_windows.c",
+      "rom_offset": 297412,
+      "size": 24,
+      "symbols": {
+        "display_step_window_axes": "0x08048a59"
+      },
+      "thumb_symbols": [
+        "display_step_window_axes"
+      ],
+      "negative_control": {
+        "before": "index<2",
+        "after": "index<1"
+      }
+    },
+    {
+      "name": "display_disable_window_layers",
+      "source": "src/display/disable_window_layers.c",
+      "rom_offset": 297436,
+      "size": 16,
+      "symbols": {
+        "display_disable_layers": "0x0800d671"
+      },
+      "thumb_symbols": [
+        "display_disable_layers"
+      ],
+      "negative_control": {
+        "before": "display_disable_layers(0x6000);",
+        "after": "display_disable_layers(0x2000);"
+      }
+    },
+    {
+      "name": "display_configure_window_masks",
+      "source": "src/display/configure_window_masks.c",
+      "rom_offset": 297452,
+      "size": 40,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "&0xff00",
+        "after": "&0xfe00"
+      }
+    },
+    {
+      "name": "display_step_window_axes",
+      "source": "src/display/step_window_axes.c",
+      "rom_offset": 297560,
+      "size": 160,
+      "symbols": {
+        "g_window_states": "0x03007460",
+        "display_divide": "0x0804cd2d"
+      },
+      "thumb_symbols": [
+        "display_divide"
+      ],
+      "negative_control": {
+        "before": "window->flags|=1;",
+        "after": "window->flags|=4;"
       }
     }
   ],

@@ -8,8 +8,8 @@ void display_begin_window_axis_move(unsigned int index,unsigned int axis,int fir
  offset+=4;
  address+=offset;
  pair=(struct DisplayWindowAxis *)address;
- pair->first_target=first;
- pair->last_target=last;
+ pair->target[0]=first;
+ pair->target[1]=last;
  pair->duration=duration;
  pair->flags|=2;
 }

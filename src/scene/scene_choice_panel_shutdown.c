@@ -4,7 +4,7 @@ void scene_choice_panel_shutdown(void)
  if(g_actor_scene_request.active==1 && g_actor_scene_request.object) g_actor_scene_request.object->flags|=2;
  heap_clear(&g_actor_scene_request,0,12);
  heap_clear(g_need_effect_choice_text,0,10);
- scene_choice_panel_original_disable_windows();
+ display_disable_window_layers();
  if(scene_queued_request_kind()==1)
   frame_disable_primary_object_flags(0x02000000U);
  else {

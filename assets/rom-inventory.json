@@ -5836,7 +5836,7 @@
   },
   "entry_count": 2539,
   "extent_count": 2540,
-  "mapped_extent_bytes": 325452,
+  "mapped_extent_bytes": 325458,
   "rows": [
     {
       "name": "rom_entry",
@@ -83718,13 +83718,14 @@
       "referenced_literal_bytes": 4
     },
     {
-      "name": "sub_080489C4",
+      "name": "display_step_windows",
       "rom_offset": 297412,
       "mode": "Thumb",
       "runtime_addresses": [
         134515140
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -83736,25 +83737,26 @@
       "return_offsets": [
         297432
       ],
-      "size": 22,
-      "extent_basis": "CFG envelope estimate",
+      "size": 24,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 297412,
       "body_rom_start": 297412,
       "body_rom_end": 297434,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0804xxxx",
       "decoded_instruction_bytes": 22,
       "referenced_literal_bytes": 0
     },
     {
-      "name": "sub_080489DC",
+      "name": "display_disable_window_layers",
       "rom_offset": 297436,
       "mode": "Thumb",
       "runtime_addresses": [
         134515164
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -83766,25 +83768,26 @@
       "return_offsets": [
         297448
       ],
-      "size": 14,
-      "extent_basis": "CFG envelope estimate",
+      "size": 16,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 297436,
       "body_rom_start": 297436,
       "body_rom_end": 297450,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0804xxxx",
       "decoded_instruction_bytes": 14,
       "referenced_literal_bytes": 0
     },
     {
-      "name": "sub_080489EC",
+      "name": "display_configure_window_masks",
       "rom_offset": 297452,
       "mode": "Thumb",
       "runtime_addresses": [
         134515180
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -83795,11 +83798,11 @@
         297484
       ],
       "size": 40,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 297452,
       "body_rom_start": 297452,
       "body_rom_end": 297486,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0804xxxx",
       "decoded_instruction_bytes": 34,
@@ -83836,13 +83839,14 @@
       "referenced_literal_bytes": 8
     },
     {
-      "name": "sub_08048A58",
+      "name": "display_step_window_axes",
       "rom_offset": 297560,
       "mode": "Thumb",
       "runtime_addresses": [
         134515288
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -83854,12 +83858,12 @@
       "return_offsets": [
         297716
       ],
-      "size": 158,
-      "extent_basis": "CFG envelope estimate",
+      "size": 160,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 297560,
       "body_rom_start": 297560,
       "body_rom_end": 297718,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0804xxxx",
       "decoded_instruction_bytes": 148,
@@ -109568,10 +109572,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "eefb4f8ed83237b5611bd9fa1872aa010deef7dee8ee7ec64644a37301d79383",
+      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
       "evidence": [
-        "Matching compiler output .align\t2, 0 at LF line70 emits padding containing relative122..124; actual source.o $d covers this span. ",
-        "Full retained 616-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
+        "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
       ],
       "status": "mapped_data"
     },
@@ -109582,10 +109586,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "eefb4f8ed83237b5611bd9fa1872aa010deef7dee8ee7ec64644a37301d79383",
+      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
       "evidence": [
-        "Matching compiler output .align\t2, 0 at LF line125 emits padding containing relative234..236; actual source.o $d covers this span. ",
-        "Full retained 616-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
+        "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
       ],
       "status": "mapped_data"
     },
@@ -109596,10 +109600,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "eefb4f8ed83237b5611bd9fa1872aa010deef7dee8ee7ec64644a37301d79383",
+      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
       "evidence": [
-        "Matching compiler output .align\t2, 0 at LF line194 emits padding containing relative370..372; actual source.o $d covers this span. ",
-        "Full retained 616-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
+        "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
       ],
       "status": "mapped_data"
     },
@@ -109610,10 +109614,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "eefb4f8ed83237b5611bd9fa1872aa010deef7dee8ee7ec64644a37301d79383",
+      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
       "evidence": [
-        "Matching compiler output .align\t2, 0 at LF line242 emits padding containing relative470..472; actual source.o $d covers this span. ",
-        "Full retained 616-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
+        "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
       ],
       "status": "mapped_data"
     },
@@ -109624,10 +109628,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "eefb4f8ed83237b5611bd9fa1872aa010deef7dee8ee7ec64644a37301d79383",
+      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
       "evidence": [
-        "Matching compiler output .align\t2, 0 at LF line261 emits padding containing relative510..512; actual source.o $d covers this span. ",
-        "Full retained 616-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
+        "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
       ],
       "status": "mapped_data"
     },
@@ -109638,10 +109642,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "eefb4f8ed83237b5611bd9fa1872aa010deef7dee8ee7ec64644a37301d79383",
+      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
       "evidence": [
-        "Matching compiler output .align\t2, 0 at LF line314 emits padding containing relative610..612; actual source.o $d covers this span. ",
-        "Full retained 616-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
+        "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
       ],
       "status": "mapped_data"
     },
@@ -115966,10 +115970,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "5eab21fd299ab30f5de377a5ed2f802a9346b41816dfb6a876312525f2276085",
+      "source_sha256": "6093d5a0a77ea3e83866d6adaa65140abfd9d14be8c188f1c7633dfcf9a45b46",
       "evidence": [
-        "Matching compiler output .align\t2, 0 at LF line59 emits padding containing relative90..92; actual source.o $d covers this span. ",
-        "Full retained 108-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
+        "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
       ],
       "status": "mapped_data"
     },
@@ -117914,11 +117918,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "9597e60c373290aa76cafbff76d8b16236873d3569a8c70aec5064c87dbb55b8",
+      "source_sha256": "9f8a0774f4404b9cdc0e65b98650911c38eac64daa57d5db24a051ea6157a637",
       "evidence": [
-        "Retained old GAS2.10.1 listing of unchanged compiler output associates .align\t2, 0 at LF line70 with relative138..140. Entire source.o text/relocations/symbol remain exact; no $d is invented.",
-        "Frozen full linked/native extent equality was physically checked in the prior role pass. Alignment data role only; no alternate-entry exclusion.",
-        "Revalidated against the current matching owner source, compiler assembly and whole object; current full linked/native equality and changed-source controls remain intact. This is data-role evidence only, with no instruction suppression or alternate-entry exclusion."
+        "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
+        "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
       ],
       "status": "mapped_data"
     },
@@ -120085,6 +120088,76 @@
       "evidence": [
         "Normal and strict private source qualifications emit the function .size before the explicit source .align 2,0. In both profiles source.o and fixed-address linked text have $t at relative0 and $d at relative2; text4/function2 leaves exactly two zero bytes at relative2..4.",
         "Full 4-byte linked extents equal the fixed original hash in both profiles. This source-emitted alignment data does not exclude alternate execution entries."
+      ],
+      "status": "mapped_data"
+    },
+    {
+      "name": "display_step_windows_alignment_0489da",
+      "owner": "display_step_windows",
+      "rom_offset": 297434,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "74055369421ae5efc6baaa2ddb749314a3834d720251781f9a62b83a94fef192",
+      "evidence": [
+        "Current matching compiler assembly .align 2,0 emits the two zero bytes at relative22; the actual source.o $d mapping covers this span.",
+        "The complete linked/native extent and actual changed-source control are verified. Source-emitted alignment data role only; no alternate-entry exclusion or instruction suppression."
+      ],
+      "status": "mapped_data"
+    },
+    {
+      "name": "display_disable_window_layers_alignment_0489ea",
+      "owner": "display_disable_window_layers",
+      "rom_offset": 297450,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "0983824e046a37d4aa6c3c323929a3e997e849f0749db5f8d708da1396e3b5d6",
+      "evidence": [
+        "Current matching compiler assembly .align 2,0 emits the two zero bytes at relative14; the actual source.o $d mapping covers this span.",
+        "The complete linked/native extent and actual changed-source control are verified. Source-emitted alignment data role only; no alternate-entry exclusion or instruction suppression."
+      ],
+      "status": "mapped_data"
+    },
+    {
+      "name": "display_configure_window_masks_alignment_048a0e",
+      "owner": "display_configure_window_masks",
+      "rom_offset": 297486,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "a1573840817bd0969c3c08a8a18e47406a7928865f6650ec661dde09fe3653a4",
+      "evidence": [
+        "Current matching compiler assembly .align 2,0 emits the two zero bytes at relative34; the actual source.o $d mapping covers this span.",
+        "The complete linked/native extent and actual changed-source control are verified. Source-emitted alignment data role only; no alternate-entry exclusion or instruction suppression."
+      ],
+      "status": "mapped_data"
+    },
+    {
+      "name": "display_step_window_axes_alignment_048ac2",
+      "owner": "display_step_window_axes",
+      "rom_offset": 297666,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "0bbb3b9a24596bf11e14ad4ff62be61fc9bdf42f06ca61e3617cb2c0e8ae548b",
+      "evidence": [
+        "Current matching compiler assembly .align 2,0 emits the two zero bytes at relative106; the actual source.o $d mapping covers this span.",
+        "The complete linked/native extent and actual changed-source control are verified. Source-emitted alignment data role only; no alternate-entry exclusion or instruction suppression."
+      ],
+      "status": "mapped_data"
+    },
+    {
+      "name": "display_step_window_axes_alignment_048af6",
+      "owner": "display_step_window_axes",
+      "rom_offset": 297718,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "0bbb3b9a24596bf11e14ad4ff62be61fc9bdf42f06ca61e3617cb2c0e8ae548b",
+      "evidence": [
+        "Current matching compiler assembly .align 2,0 emits the two zero bytes at relative158; the actual source.o $d mapping covers this span.",
+        "The complete linked/native extent and actual changed-source control are verified. Source-emitted alignment data role only; no alternate-entry exclusion or instruction suppression."
       ],
       "status": "mapped_data"
     }
@@ -134595,31 +134668,19 @@
       "status": "candidate"
     },
     {
-      "name": "sub_080489C4",
+      "name": "display_step_windows",
       "rom_offset": 297412,
-      "size": 22,
+      "size": 24,
       "status": "mapped_code"
     },
     {
-      "name": "Unresolved_0489DA",
-      "rom_offset": 297434,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_080489DC",
+      "name": "display_disable_window_layers",
       "rom_offset": 297436,
-      "size": 14,
+      "size": 16,
       "status": "mapped_code"
     },
     {
-      "name": "Unresolved_0489EA",
-      "rom_offset": 297450,
-      "size": 2,
-      "status": "unresolved"
-    },
-    {
-      "name": "sub_080489EC",
+      "name": "display_configure_window_masks",
       "rom_offset": 297452,
       "size": 40,
       "status": "mapped_code"
@@ -134631,16 +134692,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08048A58",
+      "name": "display_step_window_axes",
       "rom_offset": 297560,
-      "size": 158,
+      "size": 160,
       "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_048AF6",
-      "rom_offset": 297718,
-      "size": 2,
-      "status": "unresolved"
     },
     {
       "name": "sub_08048AF8",
@@ -136295,11 +136350,11 @@
     "tools/indirect_evidence.py": "5df8e0fa17096b86737b158d57fd2122b6b16d20aeda2994fecb087a1bf5f53d",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "f9cdb87bee5fbc3fb2527955eac07a2ac6da1c053d571812f132878e6057762f",
-    "config/code-evidence-us-eu.json": "de944be314fcfd432ccc3ca2067d55c1c47d8317baf5557bd0a09908ec2c105a",
+    "config/code-evidence-us-eu.json": "fdba6e1c7ef76da827f8ab990f3ba717cfbf89522d6b425a9ce3f669815bf8b4",
     "config/ram-map-us-eu.json": "67362238b648e40fbf3b51d8e466bfd12e709a38211c16e157d384243896410b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "f909e3593af669a8134538dd3821dbddc0df607529059bedcef945cca672e3d8",
-    "config/build-us-eu.json": "798526b9a895bee75a6f4763ab75758a876825ffc87ee7264801bba8593774db",
+    "config/build-us-eu.json": "efb1cac014a8a27975ae0fc3e57013fda4d852721e4bfe6b5a0d2ae992175846",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -136394,7 +136449,7 @@
     "src/display/commit_palette_jobs.c": "882fcca25af9724b7fcd33190a362293c1eddd8d936064ef2ecbb01a5e63c625",
     "src/display/commit_palette_range.c": "688ea22695ecfdd93cffdd50e13633c0aa1087a8ac35dce3ed970004fd43aa53",
     "src/display/commit_tile_frees.c": "6d905024ca57b147c5df921ff1eb4f665b78cd0ede17042cdc1b153d57df73a1",
-    "src/display/commit_windows.c": "5eab21fd299ab30f5de377a5ed2f802a9346b41816dfb6a876312525f2276085",
+    "src/display/commit_windows.c": "6093d5a0a77ea3e83866d6adaa65140abfd9d14be8c188f1c7633dfcf9a45b46",
     "src/display/condition_marker_create.c": "63f70b53175932304f7cdd511c855a4fa15bc3ccb80dce2a72f9e8e43775068c",
     "src/display/condition_marker_step.c": "9d08fa968b2d9154737c29fdbfc5c4604267a4172f6cb94097c6e11ebed315c8",
     "src/display/condition_panel_create_objects.c": "541fbfbf44945fc58d4b5f65bacbae3343d16fefa4a7b42fb6c23780c859d351",
@@ -136406,6 +136461,7 @@
     "src/display/configure_palette_range.c": "3da5c084c5c8fd266853b93cf8927b40b8344111a01d6a15d5abfcaed16633fc",
     "src/display/configure_tile_allocation.c": "c11a08ee14c1c05b53c1f23ae802a03daf39dd04746dc85f51c534be10174a44",
     "src/display/configure_window.c": "566e1768cdc6b8775a17a7f07f18e6ebadeac2eec4b1719255f156657a559c67",
+    "src/display/configure_window_masks.c": "a1573840817bd0969c3c08a8a18e47406a7928865f6650ec661dde09fe3653a4",
     "src/display/copy_background_map_backward.c": "d6606bc9bdbad0340dd669df7d5decb2aae063ddacf062f970c91128e6c36bdf",
     "src/display/copy_map_rectangle.c": "47cae5831a15cbd35834b4ab9e34532b85b141205693226e052ce85ccd0a22ce",
     "src/display/copy_tile_resource.c": "a0154a27efb2e61c9c32453d7c0d6273bd5f3ff9f001bc4c8f51cd296a514bfe",
@@ -136416,6 +136472,7 @@
     "src/display/create_palette_sequence.c": "5452e6705ffd821b5502fa490f7922a3bbcdd97cfc3ad2b56897b1c18f7e82a6",
     "src/display/decode_background.c": "81e44d41a1639332d865cd5c87bf73a717c4de00b4a3e10df4a5b1685bfcf8b5",
     "src/display/disable_window.c": "5dda2f6f6319091a736dca23130efb503871c2d44051da3576320184ff30ec48",
+    "src/display/disable_window_layers.c": "0983824e046a37d4aa6c3c323929a3e997e849f0749db5f8d708da1396e3b5d6",
     "src/display/display_bios_remainder.s": "4b3003f2e941cad9d854daff690494502c38ee123848f24ff88bd01680b641b4",
     "src/display/display_get_mode.c": "930df4fd123f4d4557d60110f8e9ee1f4c0bf85098c667c78cb12ba76123a621",
     "src/display/display_reset.c": "a0f05fde9194cb1987dad91f3ed8acbceea94f2974217d1db948a01284a6f1cb",
@@ -136528,6 +136585,8 @@
     "src/display/step_palette_jobs.c": "e71617386b8540ec161526fdd18940990da5dafa7dcc0ed406ac556379ce1de0",
     "src/display/step_palette_range.c": "a6dbc26a785c0f05bb505951ac6d53497d7b4dda6f2e0148533c37bd42d2090d",
     "src/display/step_palette_ranges.c": "6643fa395859616fb32ec8478b7e020228f4a7efd74e91abd2c73925ad8110c1",
+    "src/display/step_window_axes.c": "0bbb3b9a24596bf11e14ad4ff62be61fc9bdf42f06ca61e3617cb2c0e8ae548b",
+    "src/display/step_windows.c": "74055369421ae5efc6baaa2ddb749314a3834d720251781f9a62b83a94fef192",
     "src/display/text_copy_bytes.c": "c0197cffd99c3c1fcf55fa00459d3d67d93aad7d1ce7fad3acc1a3d4034a816e",
     "src/display/text_copy_expanded.c": "8d1b02462f682bda276731d95f64f62abd4b4557df2425735087fee798a61311",
     "src/display/text_copy_field_zero.c": "b96cef86cd1cec27a05ade77ac2c52e1e437dec1826445788077a61ecf5d1771",
@@ -137393,7 +137452,7 @@
     "src/scene/scene_catalog_selection.c": "db707e159df57cf8962f4673add1ede2c599b669771eff4b918e4576caa2aed0",
     "src/scene/scene_catalog_step.c": "56a7bcb4bd2bdc8dd02b1f7b17a41218e74269c3a92b49a0a127e9f867b362ce",
     "src/scene/scene_choice_panel_initialize.c": "fd5163c7f391e96e74f9410e42fcdff90b73ed2f2aab864d082e53c0c8a8884c",
-    "src/scene/scene_choice_panel_step.c": "eefb4f8ed83237b5611bd9fa1872aa010deef7dee8ee7ec64644a37301d79383",
+    "src/scene/scene_choice_panel_step.c": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
     "src/scene/scene_clear_retained_display.c": "9c2b73c9182a74bff26890abd7c186f391fdf688f5a418d3df01a7d68d64303b",
     "src/scene/scene_commit_character_transfer.c": "4399f8aba2eae5470c73579c146e838518b123c3efdeb3d72afe8cb364f7e609",
     "src/scene/scene_contact_activity_five_advance.c": "92d1ef3942ef4f555790cbfb43c6974845df7aa3af55a444d0ad33bb5a3d9496",
@@ -137608,7 +137667,7 @@
     "src/scene/scene_vblank_callback.c": "a208c91e8e663a98e32eb8e8d32cbd33e518328b5fbe0f862c73ca58dd4d2e51",
     "src/scene/scene_view_draw_frame.c": "c8fb7f6ca390001d00af29260ae6799758ccda8919d1a577a7b51018fdcc1334",
     "src/scene/scene_view_load_selected_resource.c": "efb8c775553c5a71215e8b7c03050ed3136b9189f1efc00397274005cf7ebdaf",
-    "src/scene/step_request_handoff.c": "9597e60c373290aa76cafbff76d8b16236873d3569a8c70aec5064c87dbb55b8",
+    "src/scene/step_request_handoff.c": "9f8a0774f4404b9cdc0e65b98650911c38eac64daa57d5db24a051ea6157a637",
     "src/scene/submit_default_request.c": "e774079f4f7fad69a97fd43b1a84b0b6914a9f7dc8cf5c7d3ec5b75187e49963",
     "src/set_word_0300217c.c": "8dec5a2ba3bd67c63af98f3afcd9c4fded109b1dbd2c7197dc34aa5d15d91e33",
     "src/set_word_03002180_bit0.c": "5ad163fcaa113605a44256cfbfc7c47c976162b3e187169be29d3f49c8b53d9d",
@@ -137725,16 +137784,16 @@
       "nonconflicting_qualified_instruction_bytes": 281384,
       "raw_referenced_data_union_bytes": 35692,
       "qualified_referenced_data_union_bytes": 35692,
-      "source_glue_owned_extent_bytes": 295512,
-      "estimated_envelope_union_bytes": 325452,
+      "source_glue_owned_extent_bytes": 295752,
+      "estimated_envelope_union_bytes": 325458,
       "classification_bytes": {
-        "estimated_envelope_unclassified": 4528,
+        "estimated_envelope_unclassified": 4524,
         "instruction_and_referenced_data_dual_use": 4,
-        "known_data": 22694,
+        "known_data": 22704,
         "owned_extent_unclassified": 34,
         "strong_rooted_instruction": 281380,
         "strong_rooted_referenced_data": 35688,
-        "unresolved": 16432888
+        "unresolved": 16432882
       }
     },
     "physical_unions": {
@@ -184976,6 +185035,26 @@
           297196
         ],
         [
+          297434,
+          297436
+        ],
+        [
+          297450,
+          297452
+        ],
+        [
+          297486,
+          297488
+        ],
+        [
+          297666,
+          297668
+        ],
+        [
+          297718,
+          297720
+        ],
+        [
           298114,
           298116
         ],
@@ -186058,6 +186137,14 @@
           297332
         ],
         [
+          297412,
+          297492
+        ],
+        [
+          297560,
+          297720
+        ],
+        [
           297848,
           297976
         ],
@@ -186473,18 +186560,6 @@
         ],
         [
           296632,
-          297434
-        ],
-        [
-          297436,
-          297450
-        ],
-        [
-          297452,
-          297718
-        ],
-        [
-          297720,
           297846
         ],
         [
@@ -303299,7 +303374,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -303307,10 +303383,14 @@
       {
         "rom_offset": 297434,
         "size": 2,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "known_data",
+        "roles": [
+          "estimated_envelope",
+          "known_data",
+          "source_owned"
+        ],
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 297436,
@@ -303320,7 +303400,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -303328,10 +303409,14 @@
       {
         "rom_offset": 297450,
         "size": 2,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "known_data",
+        "roles": [
+          "estimated_envelope",
+          "known_data",
+          "source_owned"
+        ],
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 297452,
@@ -303341,7 +303426,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -303349,12 +303435,14 @@
       {
         "rom_offset": 297486,
         "size": 2,
-        "classification": "estimated_envelope_unclassified",
+        "classification": "known_data",
         "roles": [
-          "estimated_envelope"
+          "estimated_envelope",
+          "known_data",
+          "source_owned"
         ],
-        "confidence": "low_estimated_boundary",
-        "evidence_basis": "Provisional discovery envelope only; neither byte role nor function boundary is established."
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 297488,
@@ -303362,7 +303450,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -303399,7 +303488,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -303410,7 +303500,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -303423,7 +303514,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -303431,12 +303523,14 @@
       {
         "rom_offset": 297666,
         "size": 2,
-        "classification": "estimated_envelope_unclassified",
+        "classification": "known_data",
         "roles": [
-          "estimated_envelope"
+          "estimated_envelope",
+          "known_data",
+          "source_owned"
         ],
-        "confidence": "low_estimated_boundary",
-        "evidence_basis": "Provisional discovery envelope only; neither byte role nor function boundary is established."
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 297668,
@@ -303444,7 +303538,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -303457,7 +303552,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -303465,10 +303561,14 @@
       {
         "rom_offset": 297718,
         "size": 2,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "known_data",
+        "roles": [
+          "estimated_envelope",
+          "known_data",
+          "source_owned"
+        ],
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 297720,
@@ -311256,12 +311356,12 @@
         "rom_offset": 262144,
         "size": 65536,
         "classification_bytes": {
-          "estimated_envelope_unclassified": 690,
-          "known_data": 786,
+          "estimated_envelope_unclassified": 686,
+          "known_data": 796,
           "owned_extent_unclassified": 34,
           "strong_rooted_instruction": 52158,
           "strong_rooted_referenced_data": 6480,
-          "unresolved": 5388
+          "unresolved": 5382
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -416165,8 +416265,9 @@
         "execution_address": 134515140,
         "entry_rom_offset": 297412,
         "mode": "Thumb",
-        "name": null,
+        "name": "display_step_windows",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -416198,8 +416299,9 @@
         "execution_address": 134515164,
         "entry_rom_offset": 297436,
         "mode": "Thumb",
-        "name": null,
+        "name": "display_disable_window_layers",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -416231,8 +416333,9 @@
         "execution_address": 134515180,
         "entry_rom_offset": 297452,
         "mode": "Thumb",
-        "name": null,
+        "name": "display_configure_window_masks",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -416307,8 +416410,9 @@
         "execution_address": 134515288,
         "entry_rom_offset": 297560,
         "mode": "Thumb",
-        "name": null,
+        "name": "display_step_window_axes",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -448342,6 +448446,46 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 2,
         "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "display_step_windows",
+        "rom_offset": 297412,
+        "size": 24,
+        "source": "src/display/step_windows.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 22,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "display_disable_window_layers",
+        "rom_offset": 297436,
+        "size": 16,
+        "source": "src/display/disable_window_layers.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 14,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "display_configure_window_masks",
+        "rom_offset": 297452,
+        "size": 40,
+        "source": "src/display/configure_window_masks.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 34,
+        "referenced_data_bytes_in_extent": 4
+      },
+      {
+        "name": "display_step_window_axes",
+        "rom_offset": 297560,
+        "size": 160,
+        "source": "src/display/step_window_axes.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 148,
+        "referenced_data_bytes_in_extent": 8
       },
       {
         "name": "irq_cpu_enable",

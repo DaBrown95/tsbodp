@@ -1,6 +1,7 @@
 #ifndef SCENE_CHOICE_PANEL_H
 #define SCENE_CHOICE_PANEL_H
 #include "frame.h"
+#include "display_window.h"
 #include "frame_actor_scene.h"
 #include "scene_request.h"
 #include "scene_retention.h"
@@ -25,13 +26,10 @@ void scene_choice_panel_initialize(void);
 void scene_choice_panel_shutdown(void);
 void scene_choice_panel_begin_close(void);
 
-/* The text drawer and window services remain original ROM services. */
+/* These text and transition services remain original ROM services. */
 void scene_choice_panel_draw_text_original(void);
 void scene_choice_panel_original_window_begin(unsigned short duration);
 void scene_choice_panel_original_window_end(unsigned short duration);
-void scene_choice_panel_original_disable_windows(void);
-void scene_choice_panel_original_configure_windows(unsigned short inside0,
- unsigned short inside1, unsigned short outside);
 void scene_choice_panel_original_set_window(int left, int top, int right, int bottom);
 
 /* Existing compatible providers; their owning headers are kept separate. */

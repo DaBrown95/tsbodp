@@ -178,6 +178,7 @@ matches all instructions and the literal word at `0x08048970`, ending at the
 next entry `0x08048974`. Its changed-source control sets flag four instead of
 two and rejects. Full raw evidence remains under
 `reports/audio-root/window-axis-starter-addresses/` and the connected canonical
-palette-menu transition reports. Static handoff and byte equality do not prove
-window animation at runtime; the unconverted axis update dependencies remain
-explicit.
+palette-menu transition reports. The [coordinate updater and frame driver](DISPLAY_WINDOW_MOTION.md)
+now have matching C using the same canonical window records. Static handoff and
+byte equality do not prove window animation at runtime or complete index/writer
+domains; the separate `0x48A14` rectangle setter remains unconverted.

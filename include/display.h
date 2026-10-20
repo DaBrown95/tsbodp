@@ -7,17 +7,19 @@ struct DisplayCommitContext {
     unsigned short commit_pending;
 };
 extern struct DisplayCommitContext *g_display_commit_context;
+/* Two coordinate records follow each window's commit flags. */
+union DisplayWindowFixedPoint {
+    int position;
+    struct { unsigned short fraction; short integer; } halves;
+};
+struct DisplayWindowAxis {
+    unsigned short flags, duration;
+    union DisplayWindowFixedPoint current[2];
+    int step[2], target[2];
+};
 struct WindowState {
     unsigned int flags;
-    unsigned char unknown_04[6];
-    short horizontal_start;
-    unsigned char unknown_0c[2];
-    short vertical_start;
-    unsigned char unknown_10[0x16];
-    short horizontal_end;
-    unsigned char unknown_28[2];
-    short vertical_end;
-    unsigned char unknown_2c[0x10];
+    struct DisplayWindowAxis axes[2];
 };
 extern struct WindowState g_window_states[2];
 #define DISPLAY_REG16(a) (*(volatile unsigned short *)(a))

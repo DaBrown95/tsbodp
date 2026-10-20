@@ -6,7 +6,7 @@ void scene_choice_panel_step(void)
  case 0: {
   unsigned int x,y;
   int left,top,right,bottom;
-  scene_choice_panel_original_configure_windows(63,62,63);
+  display_configure_window_masks(63,62,63);
   x=SCENE_CHOICE_PANEL_X;
   left=x<<19;
   y=SCENE_CHOICE_PANEL_Y;
