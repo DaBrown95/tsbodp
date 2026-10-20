@@ -64,7 +64,7 @@ own representable-input domains. Live object/resource ownership and callback
 contracts are not inferred from native equality.
 
 The panel selects the current record, distinguishes occupied and enabled flags,
-and passes the actual map pointer to the original map service. Its palette
+and passes the actual map pointer to the matching map service. Its palette
 comes from a conditional expression after the enabled-byte read. Record selection
 is freshly read where the original does so; the captured record and subsequent
 selector reads are not silently synchronized across calls. Valid calls require
@@ -75,9 +75,9 @@ buffer under the chosen text/format contracts.
 Shutdown invokes transition kind 12, clears indexed audio, releases the object
 list, resets display state and slots, then frees the current scene allocation.
 The original second-handler table slot at `0x0806A248` contains Thumb target
-`0x08039041`; that callback has no accepted C owner in this batch. The original
-map service at `0x0800CEFC` and text renderer at `0x0801AA78` also remain explicit
-unconverted boundaries. The phase-seven initializer at `0x08024E18` is
+`0x08039041`; that callback has no accepted C owner in this batch. The [map service at `0x0800CEFC`](DISPLAY_RECONSTRUCTION.md#dimension-prefixed-background-map-writer)
+now has matching C. The text renderer at `0x0801AA78` remains an explicit
+unconverted boundary. The phase-seven initializer at `0x08024E18` is
 reconstructed in the continuation below. The remaining boundary bodies are not
 transcribed into claimed C or a source model.
 
@@ -92,8 +92,8 @@ Hardware, complete allocator/resource behaviour and gameplay remain untested.
 Milestone 125 subsequently reconstructs the kind-12 second handler and its paired
 first handler as the [mosaic transitions](TRANSITION_MOSAIC_REFRESH.md). Each has
 its own matching source/control roles and separately scoped finite execution
-evidence. This closes the shutdown transition boundary described above; the map
-service and text renderer remain unconverted. The
+evidence. This closes the shutdown transition boundary described above. The map service
+now also matches; the text renderer remains unconverted. The
 first-handler kind-12 connection is still static table evidence without an
 observed executed caller.
 
@@ -126,8 +126,8 @@ This closes the initializer source boundary. It adds no runtime or gameplay
 claim and does not extend the historical finite qualification of the update.
 Defined inputs still require live initialized owners, successful allocation,
 valid resource/text selections, map backing and the actual provider contracts.
-The map service, text renderer, complete incoming/writer domains and hardware
-behaviour remain separate work.
+The map service now matches separately. The text renderer, complete
+incoming/writer domains and hardware behaviour remain separate work.
 
 Normal and strict qualification gives 46 exact positive roles and rejects 46 real
 changed-source controls; 24 actual-definition/layout checks pass and six wrong

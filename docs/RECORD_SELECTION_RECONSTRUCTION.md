@@ -99,9 +99,10 @@ controls pass. Converted helper interiors are not silently included.
 
 Defined connected inputs require initialized live owners, player indices 0–3,
 valid object/save slots, representable signed arithmetic and the stated provider
-contracts. Original background-map and text-render services remain boundaries.
-Shutdown's transition kind 12 still selects an original-ROM callback. The new
-static and compiler proofs do not establish those bodies, all provider effects,
+contracts. The [background-map service](DISPLAY_RECONSTRUCTION.md#dimension-prefixed-background-map-writer)
+and kind-12 [mosaic transitions](TRANSITION_MOSAIC_REFRESH.md) now match
+separately; the text renderer remains unconverted. These
+static and compiler proofs do not establish all provider effects,
 hardware behaviour or complete phase-seven gameplay.
 
 The initializer uses the canonical indexed record byte behind the valid-byte

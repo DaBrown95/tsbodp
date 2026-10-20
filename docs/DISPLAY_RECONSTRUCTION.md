@@ -194,8 +194,8 @@ base pointer and doubles first/count for 256-color tiles before CpuSet.
 The incrementing map rectangle at `0x0800d890` writes 16-bit tile indexes
 across rows with a 32-entry stride; `0x0800d864` selects the background's map
 destination. These provide a connected map initialization/upload/edit path.
-The more general dimension-prefixed map upload at `0x0800cefc` remains an
-unconverted region with a preserved semantic candidate and comparison evidence.
+The general dimension-prefixed map upload at `0x0800cefc` now has
+[matching C](../src/display/background_map.c), described below.
 
 The queued palette flush at `0x08011834` traverses 8-byte records at
 `0x03003260`, using a halfword count at `0x03003160`, then resets the count.
@@ -270,8 +270,8 @@ VBlank queue and DMA transfer already reconstructed.
 The scene/map producer at `0x0800da20` connects resource loading at `0x0800cd4c`
 to the dimension-prefixed map writer at `0x0800cefc` when the resource supplies
 a map. It returns that map pointer and preserves the two 16-bit tile/palette
-arguments and destination coordinates. The general writer remains unconverted;
-this wrapper's independent match does not credit its original callee.
+arguments and destination coordinates. The general writer now has its own
+complete match and changed-source control.
 
 The constant rectangle writer at `0x0800d828` writes a fixed tile across signed
 width/height ranges with a 32-entry screen-map stride. Its background selector at
@@ -301,8 +301,8 @@ first stage advances over the embedded palette: flag 1 selects 512 bytes, flag
 halfword count and enable bit `0x80000000`, including the original control
 readback. Its remaining map header, tile-size selection and codec dispatch
 agree with the existing resource decoder path. The coordinator supplies a map
-to `display_write_background_map` when the resource entry returns one; that
-640-byte writer remains explicitly unconverted.
+to the matching `display_write_background_map` when the resource entry returns
+one.
 
 The C uses an inline character-bank address helper and register-bound locals
 for the compiler's original address formation. These remain ordinary typed C
@@ -313,6 +313,38 @@ bit and the coordinator's map-null condition reject the replacements. Local
 failed variants and raw positive/control comparisons are retained under the
 ignored display-agent reports. These are compiler and static-link findings;
 no additional runtime or gameplay claim is made.
+
+## Dimension-prefixed background map writer
+
+`display_write_background_map` at `0x0800CEFC` owns its complete 640-byte
+extent: 634 instruction bytes, four literal bytes and two alignment bytes.
+It uses the existing four 108-byte background records and their canonical
+map destination, control and flag fields. The display control prefix is
+identified by its target 32-bit integer address, avoiding pointer arithmetic
+before the background array.
+
+The text path selects the native 32-by-32 screen blocks using the map dimensions
+and BGxCNT size bits. The affine path reads and modifies partial halfwords
+and writes paired bytes. Its paired iteration advances two source and destination bytes
+but decrements the column count once, exactly as the native routine does.
+Consequently a conventional width-times-height backing assumption is insufficient.
+Defined inputs require index 0–3, aligned readable dimensions, backing for every
+actual source read, destination read/modify/write and formed cursor, including
+neighboring bytes touched by partial stores. Tile-offset carry and OR behaviour
+follow the native routine; arbitrary offsets need not preserve that neighbor.
+Text dimensions at most 64 and affine width at most the selected stride prevent
+the corresponding unsigned
+stride underflow; they do not establish the remaining backing requirements.
+
+A short R0 row-address value is consumed before the later map-height and flags
+loads. It crosses no call or competing R0 lifetime. The other register variables
+retain the actual destination, stride and row lifetimes; no extra access or
+instruction body is introduced. The writer and all five actual callers match
+in separate normal and strict compilation contexts. Their twelve genuine
+changed-source controls reject; changing the writer's dirty flag from `0x20`
+to `0x10` changes one output byte. Target layout and API checks pass, and six
+wrong contracts reject. These are static and compiler results; resource/input
+populations, copied-RAM map workers and gameplay remain open.
 
 The copied pass at ROM `0x0800b0e8`, installed by `0x0800109c` at
 `0x03002a20`, now has 640 bytes of matching ARM C named

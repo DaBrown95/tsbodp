@@ -53791,6 +53791,26 @@
         "after": "heap_allocate_zeroed(20)"
       },
       "expected_sha256": "619c949ca1b2a7ab87d7dda247aa39272b500ef549cf342ddea57d7631d75095"
+    },
+    {
+      "name": "display_write_background_map",
+      "source": "src/display/background_map.c",
+      "rom_offset": 52988,
+      "size": 640,
+      "symbols": {
+        "g_background_states": "0x03002ef8",
+        "g_display_control": "0x03002ef0"
+      },
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "background->flags = flags | 0x20;",
+        "after": "background->flags = flags | 0x10;"
+      },
+      "expected_sha256": "03a2bfac5abe518c4a2c0357330eb30997be5c1520fd04fa252f276e933dc914"
     }
   ],
   "assembly": [
