@@ -554,8 +554,8 @@ one compared byte and rejects. Thirteen previously accepted random-range
 callers were reverified with their own real controls after the new definition
 was introduced. Complete bytes, commands and current-header snapshots are in
 `actor-attachment-job73-canonical/`; ready metadata is
-`actor-attachment-job73-batch-manifest.json`. The variant configuration callback, neighbor producer and target selector
-remain unconverted and receive no C coverage.
+`actor-attachment-job73-batch-manifest.json`. The separate target selector
+remains unconverted and receives no C coverage.
 
 
 ## Variant attachment controller and parameter indicator
@@ -649,8 +649,8 @@ animation refinement. The 128-byte map-registration source correction also
 remains exact with its control and adds zero coverage. Positive/control bytes,
 commands and current-header snapshots are retained under
 `actor-attachment-controller-canonical/`, with ready metadata in
-`actor-attachment-controller-batch-manifest.json`. The configuration selector,
-target selector, wider generator initialization and
+`actor-attachment-controller-batch-manifest.json`. The target selector,
+wider generator initialization and
 allocation/lookup guarantees remain unresolved. Full-ROM equality and static
 callback mapping are separate from runtime behavior, which was not tested.
 
@@ -1650,3 +1650,19 @@ word there; this does not define a seventh variant. The source contract requires
 a live owner with a matching kind and a live byte output. Complete incoming-kind,
 writer, backing and lifecycle domains remain open, including EC's generic
 consumer and unused formal roles. No runtime or gameplay evidence is added.
+
+The seven mapped direct spawn callers supply unsigned-byte kinds or constants
+135 and 146. On this established path, spawn preserves the same kind in its
+byte object field and halfword subtype; inputs 195 through 200 instead set both
+to 139. The allocator selects definition `kind * 36 + 4` for E8, and spawn's
+later state-kind assignment preserves that same value. With successful live
+backing, unchanged roots and no intervening kind or callback writes, the six
+retained canonical selector-word references therefore establish the matching
+six-kind relation. The choice builder passes that same effect-state pointer.
+
+This is a conditional construction-path result. A hypothetical spawn input 266
+would allocate byte row ten but publish state kind 266; direct allocator input
+`0x4000000A` wraps its unsigned row offset to row ten while retaining the full
+kind. Neither wide input has a known producer, and no callback delivery or
+gameplay path is demonstrated for them. Other callers, aliases, copied state,
+later writers and the connected selection controller remain open.
