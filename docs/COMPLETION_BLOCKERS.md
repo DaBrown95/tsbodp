@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,327 C functions / 292,212 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 296,272 bytes; original slices
-still supply 16,480,944 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,334 C functions / 292,784 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 296,844 bytes; original slices
+still supply 16,480,372 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The starting baseline was
 1,735 C functions / 250,064 C bytes and 500 glue bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **162 unowned rows / 29,220
+[inventory](../assets/rom-inventory.json) contain **155 unowned rows / 28,654
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -24,6 +24,9 @@ Unverified candidates receive no credit.
 
 The thirteen [independently bounded attachment checks](UNROOTED_ATTACHMENT_CHECKS.md)
 now own their complete extents; their incoming roots remain open.
+The seven [optional-route callbacks and workers](OPTIONAL_ROUTES_12_23_60.md)
+also match. Their shared sound field preserves the canonical owner layout;
+the unrooted neighboring word at `0x1A44C..0x1A450` remains an inventory question.
 
 Executable inventory remains incomplete. It separates instructions, data and
 unresolved bytes; its instruction union is not complete. Unclassified owned/envelope bytes,

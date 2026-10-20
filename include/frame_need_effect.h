@@ -12,7 +12,10 @@ struct FrameNeedEffectState {
  FrameU8 unknown_60[2], enabled, unknown_63[13];
  FrameU16 parameter;
  FrameU8 optional, unknown_73;
- FrameU8 unknown_74[0x80];
+ FrameU8 unknown_74[0x6c];
+ /* Sound handle used by optional attachment kind 12. */
+ int optional_sample;
+ FrameU8 unknown_e4[0x10];
  unsigned int (*step)(struct FrameNeedEffectState *,struct FrameObject *);
  FrameU8 unknown_f8[8];
 };
