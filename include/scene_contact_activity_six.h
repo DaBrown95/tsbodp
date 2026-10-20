@@ -12,7 +12,7 @@ void scene_contact_activity_six_set_channel_pair_volume(unsigned int);
 void scene_contact_activity_six_remove_finished(struct FrameObject*);
 unsigned int audio_game_get_channel_volume(unsigned int);
 void audio_game_set_channel_volume(unsigned int,unsigned int);
-int save_world_scale_percent(int,unsigned short);
+int save_world_scale_percent(int,int);
 int save_world_ratio_percent(int,int);
 void frame_set_animation_frame(struct FrameTickObject*,unsigned char);
 void scene_contact_add_activity_score(int);

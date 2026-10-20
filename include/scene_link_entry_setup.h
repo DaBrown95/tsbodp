@@ -48,7 +48,7 @@ void scene_link_entry_confirm_offer(void);
 void scene_link_entry_step_offers(void);
 void scene_link_entry_step_linked_offers(void);
 void scene_link_entry_refresh_offers(void);
-/* Explicit original service boundary. No reconstructed C is claimed. */
+/* Legacy symbol retained for the reconstructed object builder. */
 void scene_link_entry_build_objects_original(void);
 
 void scene_link_entry_initialize(void);

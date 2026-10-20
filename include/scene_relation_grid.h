@@ -16,8 +16,7 @@ extern const unsigned short g_scene_relation_grid_icon_palette[];
 extern struct FrameVariantResource g_scene_relation_grid_indicator_animation;
 unsigned int scene_relation_grid_read_trait(const void *,unsigned int);
 unsigned int scene_relation_grid_read_descriptor(const void *);
-/* This relation-detail service remains an explicit original boundary. */
-void scene_relation_grid_relation_original(struct FrameObject *,unsigned int,struct SceneRelationGridTextPoint,unsigned int);
+void scene_relation_grid_draw_relation(struct FrameObject *,unsigned int,struct SceneRelationGridTextPoint,unsigned int);
 void scene_relation_grid_initialize(void),scene_relation_grid_step(void),scene_relation_grid_shutdown(void);
 void scene_relation_grid_create_objects(void),scene_relation_grid_draw_detail(void);
 void scene_relation_grid_refresh_entries(void);

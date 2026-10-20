@@ -16323,7 +16323,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "28e27e534d37a4f7d5eb5d858ee27e0cff31b182d1a967720695b8e9c9402f69",
+      "source_sha256": "34c6ed9b5c5498a4ea3c3e1ec352fa5c6bf131ee61c07ed4356b2ec1f2a3b61c",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line84 emits padding containing relative162..164; actual source.o $d covers this span. ",
         "Full retained 312-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -16336,7 +16336,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "28e27e534d37a4f7d5eb5d858ee27e0cff31b182d1a967720695b8e9c9402f69",
+      "source_sha256": "34c6ed9b5c5498a4ea3c3e1ec352fa5c6bf131ee61c07ed4356b2ec1f2a3b61c",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line133 emits padding containing relative270..272; actual source.o $d covers this span. ",
         "Full retained 312-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -16349,7 +16349,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "28e27e534d37a4f7d5eb5d858ee27e0cff31b182d1a967720695b8e9c9402f69",
+      "source_sha256": "34c6ed9b5c5498a4ea3c3e1ec352fa5c6bf131ee61c07ed4356b2ec1f2a3b61c",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line152 emits padding containing relative306..308; actual source.o $d covers this span. ",
         "Full retained 312-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -23295,7 +23295,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "11796394f119c12bccd72d52a2ba23318762b038283a8d2200b39709303cb3a8",
+      "source_sha256": "e8dfe2677af620f10af45380746290c5d1acbe1c2c2c9b95e72102ea82c14efb",
       "evidence": [
         "Frozen linker script line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Source.o .text ends at relative18; actual externs.o .text is empty; linked/native full extent is exactly2 bytes longer.",
         "The full fixed original/native and linked text agree; two linker alignment bytes are zero. Distinct linker-emitted data role; no assembler $d or alternate-entry exclusion.",
@@ -25683,6 +25683,19 @@
       "evidence": [
         "The complete matching fixed-address ELF and compiler assembly identify these zero bytes as .align 2,0 after the completed code or before its literal pool. The object mapping marks the data span; literal words are counted separately.",
         "The full source extent matches without patches or masks and its genuine changed-source control differs. This data role does not exclude alternate execution entries."
+      ]
+    },
+    {
+      "name": "scene_relation_grid_draw_relation_alignment_040dfe",
+      "owner": "scene_relation_grid_draw_relation",
+      "rom_offset": 265726,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "5d789b992a17d168480f1bc4ac2743f787368f8428f13b1dd92e4804cfd88655",
+      "evidence": [
+        "Complete matching fixed-address object and compiler assembly identify these two zero bytes as source-emitted alignment before the trailing literal pool. Referenced words are counted separately.",
+        "Normal and strict full comparisons and genuine source controls cover all160 bytes; this data role does not exclude alternate execution entries."
       ]
     }
   ],

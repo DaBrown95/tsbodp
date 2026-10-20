@@ -856,3 +856,25 @@ ordinary map and display partition remain separate from these overlapping
 source-owned roles. Tests reject stale pins, malformed or overlapping records
 and preserve that execution conflict. Complete code inventory and executable
 write domains remain unresolved.
+
+## Named domains around the twelve-byte node-pool gap
+
+The twelve bytes at `0x1DB20..0x1DB2C` retain no independent executable entry or
+source owner. None of the ten known fixed installations' 19,188 distinct ROM
+source bytes intersects this span. The existing copy validator accepts all ten
+literal triples; an interval control at `0xB840` correctly finds two overlapping
+copies. These installations include initial data and are not ten wholly
+executable images or a complete writer population.
+
+All 84 callback words in the observed 28 scene rows at `0x5797C` exclude the gap.
+Row eight positively roots `0xF84C`, `0xF850` and `0xF854`, whose combined byte
+pattern equals the gap. Equality alone transfers neither those entries nor their
+source contracts. The actual request writer accepts a full-word kind, while the
+wrappers have no bounds check; indices beyond the observed prefix remain
+unproved backed data rather than evidence of additional code.
+
+The adjacent node-pool wrappers and generic providers write allocation state,
+data links and zeroes. They supply no callable target here; node payload bytes
+and later writers remain open. The gap stays unresolved, with no empty C bodies,
+assembly exception or new source credit. A computed producer, independent
+entry/data owner or calibrated target observation is still needed.

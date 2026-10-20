@@ -53,7 +53,7 @@ void scene_contact_activity_one_step_primary(struct FrameObject*),scene_contact_
 void scene_contact_activity_one_reward(void);
 struct SceneContactActivityOneTimer {unsigned char unknown00[0x58];unsigned int countdown;};
 unsigned int audio_play_animation_cue(unsigned int);
-int save_world_scale_percent(int,unsigned short);
+int save_world_scale_percent(int,int);
 void scene_contact_add_activity_score(int);
 void scene_contact_activity_one_accumulate_count(unsigned int,unsigned int);
 extern struct SceneContactActivityOneState *g_scene_contact_activity_one_state;

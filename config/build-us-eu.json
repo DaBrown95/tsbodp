@@ -40218,7 +40218,7 @@
         "display_text_select_font": "0x801ae75",
         "display_menu_relation_initialized": "0x8035fe1",
         "display_scene_lookup_text": "0x8045009",
-        "scene_relation_grid_relation_original": "0x8040d69"
+        "scene_relation_grid_draw_relation": "0x8040d69"
       },
       "thumb_symbols": [
         "display_clear_background_rectangle",
@@ -40228,7 +40228,7 @@
         "display_text_select_font",
         "display_menu_relation_initialized",
         "display_scene_lookup_text",
-        "scene_relation_grid_relation_original"
+        "scene_relation_grid_draw_relation"
       ],
       "negative_control": {
         "before": "rectangle(0,13,11,15,9,0)",
@@ -53425,6 +53425,41 @@
         "before": "g_link_offer_adjustment_timer = 2;",
         "after": "g_link_offer_adjustment_timer = 1;"
       }
+    },
+    {
+      "name": "scene_relation_grid_draw_relation",
+      "rom_offset": 265576,
+      "size": 160,
+      "source": "src/scene/scene_relation_grid_draw_relation.c",
+      "symbols": {
+        "g_display_menu_relation_values": "0x03003980",
+        "display_menu_read_relation": "0x08035fcd",
+        "save_world_ratio_percent": "0x08027539",
+        "save_world_scale_percent": "0x08027525",
+        "frame_set_animation_frame": "0x08000c6d",
+        "display_text_select_font": "0x0801ae75",
+        "display_text_number_field_zero": "0x0801b1cd",
+        "display_scene_lookup_text": "0x08045009",
+        "display_text_draw_line": "0x0801a959",
+        "display_text_copy_field_zero": "0x0801b151",
+        "g_scene_relation_grid_world": "0x03003960"
+      },
+      "thumb_symbols": [
+        "display_menu_read_relation",
+        "save_world_ratio_percent",
+        "save_world_scale_percent",
+        "frame_set_animation_frame",
+        "display_text_select_font",
+        "display_text_number_field_zero",
+        "display_scene_lookup_text",
+        "display_text_draw_line",
+        "display_text_copy_field_zero"
+      ],
+      "negative_control": {
+        "before": "display_scene_lookup_text(6222)",
+        "after": "display_scene_lookup_text(6223)"
+      },
+      "expected_sha256": "445f9530f3ee143c01b8f8ba1b596e0244e0f40928b9669efb66877ab2d02c39"
     }
   ],
   "assembly": [

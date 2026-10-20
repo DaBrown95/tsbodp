@@ -27,7 +27,7 @@ void save_world_finish_transition(unsigned int, unsigned char);
 void save_world_create_row_indicator(struct SaveWorldTransitionRow *, unsigned char);
 int save_world_scale_gauge(short, unsigned short, unsigned char);
 /* Products retain all 32 bits before the signed original division call. */
-int save_world_scale_percent(int, unsigned short);
+int save_world_scale_percent(int, int);
 int save_world_ratio_percent(int, int);
 
 unsigned int display_load_resource_palette(const struct BackgroundResource *, unsigned short);

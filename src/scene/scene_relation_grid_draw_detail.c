@@ -21,7 +21,7 @@ void scene_relation_grid_draw_detail(void)
   y=108;tile=361;
   while(*text){tile=display_text_draw(tile,110,y,110,&text,0,&limit);y+=9;}
   point.x=238;point.y=45;
-  scene_relation_grid_relation_original(g_display_scene_frame_objects[6],211,point,entry);
+  scene_relation_grid_draw_relation(g_display_scene_frame_objects[6],211,point,entry);
   g_display_scene_frame_objects[6]->flags|=1;
  }else g_display_scene_frame_objects[6]->flags&=~1u;
 }

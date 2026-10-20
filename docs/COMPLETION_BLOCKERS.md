@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,338 C functions / 293,524 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 297,584 bytes; original slices
-still supply 16,479,632 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,339 C functions / 293,684 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 297,744 bytes; original slices
+still supply 16,479,472 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The starting baseline was
 1,735 C functions / 250,064 C bytes and 500 glue bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **150 unowned rows / 27,930
+[inventory](../assets/rom-inventory.json) contain **149 unowned rows / 27,770
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -22,13 +22,15 @@ Unverified candidates receive no credit.
 | 6 | Executable inventory alongside rows 1–5. | Resolve 98 call-site plus 21 transfer observations at 112 physical sites, writable callbacks/jump tables and ten code installations (19,188 distinct ROM source bytes). Close the selector domains behind 6,699 unbacked serialized outcomes. Pending-display's 128 selected returns/controls/replays leave writer/index/target populations open, as do collision/audio writer and alias domains. Weak word `0xE40A40` naming `0x0803E8AF` remains unclassified incoming evidence. See [inventory](WHOLE_ROM_INVENTORY.md). |
 | 7 | Reproducibility and publication. | Remove executable instruction bodies from original-ROM slices, resolve material inventory uncertainty and justify assembly exceptions. Reproduce a clean build with pinned tools/local inputs. Pass matching/controls, applicable tool tests, inventory and progress gates; audit contents/history, publish to `main` and keep contribution features disabled. |
 
-The [relation-grid refresh and getters](SCENE_RELATION_GRID.md) now own 144 C
-extent bytes; their two callers remain exact. The [offer refresh](SCENE_LINK_ENTRY.md)
-now owns 596 C extent bytes with its canonical 24-byte record owner. These four
-new functions add 740 bytes, comprising 634 instruction bytes, 100 literal bytes
-and six alignment zeros. The former weak entry at `0x0800480E` lies inside the
-matching refresh extent and receives no separate credit. This adds sixteen
-previously unmapped trailing pool bytes; it is not newly discovered executable code.
+The [relation-grid refresh and getters](SCENE_RELATION_GRID.md) own 144 C
+extent bytes; their two callers remain exact. Its relation display owns another
+160 bytes with a consistent full-word percentage-provider contract. The
+[offer refresh](SCENE_LINK_ENTRY.md) owns 596 bytes with its canonical 24-byte
+record owner. These five source additions cover 900 bytes: 780 instruction,
+112 literal and eight alignment bytes. The former weak entry at `0x0800480E`
+lies inside the matching refresh extent and receives no separate credit.
+Sixteen previously unmapped trailing pool bytes are now owned; this is not
+newly discovered executable code.
 
 The thirteen [independently bounded attachment checks](UNROOTED_ATTACHMENT_CHECKS.md)
 now own their complete extents; their incoming roots remain open.
