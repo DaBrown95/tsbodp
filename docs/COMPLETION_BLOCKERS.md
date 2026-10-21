@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,406 C functions / 300,640 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 304,700 bytes; original slices
-still supply 16,472,516 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,410 C functions / 300,820 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 304,880 bytes; original slices
+still supply 16,472,336 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **88 unowned rows / 20,884
+[inventory](../assets/rom-inventory.json) contain **85 unowned rows / 20,712
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -22,241 +22,52 @@ Unverified candidates receive no credit.
 | 6 | Executable inventory alongside rows 1–5. | Resolve 98 call-site plus 21 transfer observations at 112 physical sites, writable callbacks/jump tables and ten code installations (19,188 distinct ROM source bytes). Close the selector domains behind 6,699 unbacked serialized outcomes. Pending-display's 128 selected returns/controls/replays leave writer/index/target populations open, as do collision/audio writer and alias domains. Word `0xE40A40` naming `0x0803E8AF` has a source-backed compressed-map data role; other aliases and alternate incoming execution remain open. See [inventory](WHOLE_ROM_INVENTORY.md). |
 | 7 | Reproducibility and publication. | Remove executable instruction bodies from original-ROM slices, resolve material inventory uncertainty and justify assembly exceptions. Reproduce a clean build with pinned tools/local inputs. Pass matching/controls, applicable tool tests, inventory and progress gates; audit contents/history, publish to `main` and keep contribution features disabled. |
 
-The [row-two descriptor callbacks](FRAME_ATTACHMENT_JOBS_42_94.md#row-two-descriptor-callbacks)
-add 228 C extent bytes: 82 instruction, four literal, 136 switch-table and six
-alignment bytes. All seven nonnull row-two descriptor targets are now
-source-owned (628 bytes including existing bodies). The eight-function local
-span `0x28738..0x28A10` owns 728 bytes. The descriptor and actual adapters
-establish the supplied state argument for initializer/tick and the F4 dispatch
-route; generic EC delivery, broader selectors/writers and live backing remain
-conditional. The dispatcher's `0x28424` child remains unconverted at a private
-788 / 42 register-only mismatch. Six newly mapped alignment bytes add no new
-instructions.
 
-The [optional attachment dispatcher and two workers](FRAME_ATTACHMENT_JOBS_42_94.md#optional-dispatch-and-workers-at-0x28378-0x288b4-and-0x28988)
-add 516 C extent bytes. Two [parameter-level setters](ACTOR_ROUTE_SEARCH.md#parameter-level-setters)
-add another 56. The combined 572 bytes contain 416 instruction bytes, twelve literal
-bytes, 136 switch-table bytes and eight alignment bytes. Six alignment bytes
-were absent from the old estimates; no new executable discovery is claimed.
-The dispatcher retains the explicit unconverted `0x28424` provider; incoming
-roots, backing, writer and gameplay populations remain unresolved.
+Other active dependencies include the [relation-grid delta](SCENE_RELATION_GRID.md)
+at `0x40AB4` (692 bytes), [activity-three parent and raster workers](SCENE_CONTACT_ACTIVITY_THREE.md)
+and the [record-selection text renderer](SCENE_RECORD_SELECTION_HANDOFFS.md) at
+`0x1AA78`. Their local source gains leave these workers unconverted.
 
-The independently bounded [route-49 worker and wrapper](FRAME_ATTACHMENT_JOBS_42_94.md#independently-bounded-route-49-worker)
-add 192 C extent bytes: 186 instruction, four literal and two internal alignment
-bytes. They retain the canonical owners and full-word wrapper result; incoming
-roots, backing, descriptor and writer populations remain unresolved. No runtime
-coverage or executable discovery is claimed.
+The latest [activity callbacks and unrooted neighbour](FRAME_ATTACHMENT_JOBS_42_94.md#activity-descriptor-callbacks-and-unrooted-neighbour)
+add four C functions / 180 extent bytes: 36 instruction, four literal, 136
+switch-table and four alignment bytes. All seven nonnull targets shared by
+observed rows 5–7 are source-owned (664 bytes), within twelve contiguous C
+functions / 1,888 bytes at `0x432CC..0x43A2C`. Three old rows covered 172
+estimated bytes. The separate unrooted return-100 leaf adds four newly identified
+instruction bytes; the other four newly mapped bytes are alignment. Its incoming
+roots and historical unused formals remain open. Generic EC delivery and the
+wider selector, writer, backing and gameplay populations remain unresolved.
 
-Two independently bounded [window corner setters](DISPLAY_WINDOW_MOTION.md)
-add 80 C extent bytes: 72 instruction and eight literal bytes. They retain the
-existing window/corner owner and complete the local `0x48944..0x48A14` source
-span. Their incoming roots remain unknown; this adds no runtime coverage or new
-executable discovery. The following rectangle setter remains unconverted.
+All seven nonnull [row-two descriptor targets](FRAME_ATTACHMENT_JOBS_42_94.md#row-two-descriptor-callbacks)
+are also source-owned (628 bytes), within eight contiguous C functions / 728
+bytes at `0x28738..0x28A10`. Its `0x28424` child remains original. The faithful
+private candidate is 788 / 42, with differences confined to R5/R6 instruction
+fields. The required pending-update operation increases the owner reference
+count from 15 to 16, crossing the allocator's priority threshold and reversing
+owner/job homes. Removing the operation would be incorrect. Further trials
+need a distinct actual source, lifetime, interface or build fact.
 
-The [relation-grid refresh and getters](SCENE_RELATION_GRID.md) own 144 C
-extent bytes; their two callers remain exact. Its relation display owns another
-160 bytes with a consistent full-word percentage-provider contract. The
-[shared relation prefix](SCENE_RELATION_GRID.md#shared-relation-prefix) now gives
-the average writer and condition reader one declared halfword owner; nine
-existing bodies remain exact with no added source credit. The 692-byte delta
-routine at `0x40AB4` remains unconverted. Its corrected criterion address and
-named actor route bound one input path, while other writers and inputs remain
-open.
+The [controlled installed tile-decoder fixture](RUNTIME_OBSERVATIONS.md#controlled-installed-tile-decoder-fixture)
+confirms the original parser order and 128-byte VRAM output for the fixed
+phase-25 sprite input, with controls and replay. The suspended-event context
+leaves broader writers open. The row-six map selections choose only codec-six
+chunks; repeating that search or the unchanged frame-one fixture adds no new
+evidence. The copied tile parser's source mismatch remains.
 
-The average-code reader at `0x36098` now owns 48 C extent bytes; its neighboring
-band reader remains a 44 / 9 nonmatch. The
-[row-3/4 empty tick](FRAME_NEED_TARGET_SELECTION.md#row-3-attachment-jobs-12-31-33-and-45)
-at `0x35D2C` owns four more C bytes, including two newly accounted alignment
-bytes. These additions establish no new runtime coverage or wider callback
-population.
+Four unconverted extents include their bounded trailing alignment: `0x219CC`
+(176), `0x3B75C` (356), `0x3F908` (1,112) and `0x42964` (656). These eight data
+bytes add no C or instruction credit. The last two retain four and eight
+unclassified internal bytes respectively.
 
-The row-3/4 initializer at `0x35C10` adds four C instruction bytes and completes
-ownership of those observed rows' seven nonnull targets (324 bytes including
-existing owners). Its full-word return is ignored by the observed spawn caller.
-The contiguous seven-function span `0x35C10..0x35D30` is now source-owned; wider
-callback, input, writer and gameplay domains remain unresolved.
-
-The [conditional map-row-6 append](FRAME_MAP_ANIMATION.md#conditional-map-row-6-append)
-now has fixed-stream model evidence: 2,288 plus 288 produced byte-data bytes fit
-the existing 16 KiB allocation. Queue, callback, allocation and intervening-writer
-premises remain explicit; type-map bounds are header arithmetic only. This
-narrows one generic-decoder destination question without closing copied-code
-writers, the renderer, source ownership or gameplay.
-
-The [fixed transient tile input](DISPLAY_RECONSTRUCTION.md#fixed-transient-tile-input)
-supplies a separate, conditional route to the copied tile decoder: a phase-25
-sprite frame expects 128 decoded bytes from a bounded fixed input. The row-six
-map selections themselves choose only codec-six chunks. These input findings
-add no C ownership or natural runtime coverage; the parser mismatch remains.
-The [controlled installed-code fixture](RUNTIME_OBSERVATIONS.md#controlled-installed-tile-decoder-fixture)
-now confirms the original parser order and 128-byte VRAM output for that input,
-with guards and replay. Its suspended-event context leaves broader writers open.
-
-The
-[offer refresh](SCENE_LINK_ENTRY.md) owns 596 bytes with its canonical 24-byte
-record owner. The [activity-zero initializer](SCENE_CONTACT_ACTIVITY_ZERO.md)
-owns 452 bytes using the existing item, player, option and collision owners;
-its movement worker now matches separately. These six source additions cover
-1,352 bytes: 1,170 instruction, 172 literal and ten alignment bytes.
-The former weak entry at `0x0800480E`
-lies inside the matching refresh extent and receives no separate credit.
-Sixteen previously unmapped trailing pool bytes are now owned; this is not
-newly discovered executable code.
-
-The six remaining [kind-68 attachment bodies](FRAME_ATTACHMENT_JOBS_42_94.md#observed-row-117-and-kind-68)
-add 392 C bytes: 344 instruction and 48 literal bytes. They complete ownership
-of the observed local 504-byte span together with two existing owners. The
-settlement provider, generic EC delivery and callback populations remain open.
-
-Three [activity-three line services](SCENE_CONTACT_ACTIVITY_THREE.md) add 580
-C bytes: 542 instruction, 36 literal and two natural alignment bytes. The
-existing slot owner gains its native point fields without changing layout.
-The former pixel estimate omitted those two data bytes; no new executable code
-is claimed. Parent drawing, rasterization and input/writer domains remain open.
-
-The [record-selection initializer](SCENE_RECORD_SELECTION_HANDOFFS.md#initializer-continuation)
-adds 544 C bytes: 462 instruction, 76 literal and six alignment bytes. It
-reuses the canonical four-slot save and scene owners. Its matched extent
-includes two trailing data bytes absent from the old estimate; this discovers
-no new executable code. The text renderer remains unconverted.
-
-The [dimension-prefixed background-map writer](DISPLAY_RECONSTRUCTION.md#dimension-prefixed-background-map-writer)
-adds 640 C bytes: 634 instruction, four literal and two alignment bytes. Its
-five actual callers remain exact with their canonical owners and separate
-compilation contexts. The native affine pair consumption and partial-halfword
-backing requirements are explicit; neither complete input domains nor gameplay
-are claimed. The copied-RAM map drawer remains unconverted.
-
-The [activity-zero movement worker](SCENE_CONTACT_ACTIVITY_ZERO.md#movement-worker)
-adds 472 C bytes: 430 instruction, 36 literal and six alignment bytes. Its
-existing states two, three and eight use a complete early dispatch before the
-handler bodies, preserving the native tree without added cases. Canonical actor,
-scene, option and vector interfaces remain consistent. Input/backing domains,
-signed vector arithmetic and complete gameplay remain conditional.
-
-The [variant configuration selector](ACTOR_ROUTE_SEARCH.md#variant-lifecycle-leaves-and-selector)
-adds 72 C bytes: 68 instruction and four literal bytes. Its entry, loop and
-address lifetimes now reproduce the complete native body with the existing
-canonical owners. Eight actual connected definitions pass normal/strict checks
-and their real source controls; the controller also gains its missing canonical
-provider include. The six matching kinds define the supported source domain;
-adjacent data does not establish a seventh variant or close writer/backing inputs.
-
-The [map tile reader](DISPLAY_MENU_PAGES.md#hint-resource-and-map-read) and
-[view interpolation setter](SCENE_CONTACT_MENU.md) add two C functions / 48
-extent bytes: 44 instruction and four literal bytes. They retain their actual
-caller interfaces and existing owners. The reader's row-address lifetime and
-the setter's byte index now match; their actual callers and connected view
-consumers pass normal/strict checks and real source controls. The motion table
-and arbitrary map backing/input populations remain open.
-
-The already-owned need-state allocator's callback cursor now uses actual
-target addresses instead of pointer-array arithmetic across separate members.
-Its full 248 bytes remain exact; it adds no source credit or generic EC consumer.
-The route-search table's corrected 134 rows / 16,216 bytes include four already
-owned entries and add no global credit.
-
-The [independently bounded background-dimensions reader](DISPLAY_MAP_RECONSTRUCTION.md#independently-bounded-background-dimensions)
-adds 52 C extent bytes: 42 instruction, eight literal and two compiler alignment
-bytes. It uses the canonical whole background owner and preserves two actual
-control observations around the first output store. Its incoming roots and
-historical signature remain provisional; no table-data ownership, new executable
-discovery or runtime coverage is claimed.
-
-The thirteen [independently bounded attachment checks](UNROOTED_ATTACHMENT_CHECKS.md)
-now own their complete extents; their incoming roots remain open.
-The seven [optional-route callbacks and workers](OPTIONAL_ROUTES_12_23_60.md)
-also match. Their shared sound field preserves the canonical owner layout.
-The independently bounded zero-return leaf at `0x1A44C..0x1A450` now adds four
-newly mapped instruction bytes. Its incoming roots and historical unused
-formals remain unresolved; that addition leaves the existing backlog unchanged.
-
-The two remaining [row-87 lifecycle callbacks](FRAME_NEED_TARGET_SELECTION.md#row-87-attachment-lifecycle)
-add eight C extent bytes: six instruction and two zero alignment bytes. The
-initializer returns one; the installed F8 tick leaves its state untouched. They
-complete eight C functions / 728 contiguous bytes at `0x21E98..0x22170`. Two old
-rows account for six estimated bytes; the other two bytes are newly mapped
-alignment, with no new executable discovery or runtime claim. Historical unused
-formals, wider callback assignments and live-state populations remain open.
-
-Nine independently bounded [optional-activation functions](ACTOR_ROUTE_SEARCH.md#independently-bounded-activation-functions)
-add 376 C extent bytes: 340 instruction, 28 literal and eight alignment bytes.
-They reuse the existing attachment, byte-state and sound-handle owners, with no
-new register bindings. Six old rows cover 354 estimated bytes; the other 22
-newly mapped bytes contain 16 instructions and six alignment bytes. The existing
-40-byte predicate gains no additional credit. One eight-byte LR-preserving
-constant-return body at `0x44C10` remains original. Incoming roots, historical
-unused formals, selector/backing populations and gameplay remain unresolved.
-
-The shared [inert need-effect callbacks](FRAME_NEED_TARGET_SELECTION.md#shared-inert-callbacks)
-add nine C functions / 72 extent bytes: 66 instruction, four literal and two
-alignment bytes. Seven callbacks are installed by observed rows 8/105/116;
-the two constant-return neighbours remain unrooted. Seven old rows cover 62
-estimated bytes; the other ten newly mapped bytes are eight instructions and
-two alignment bytes. This completes local source ownership from `0x46588` to
-`0x466B4` with the existing neighbours. The existing averaging routine consumes
-the definition's value callback directly. Stored EC/FC delivery, unused formals,
-complete incoming roots and input/writer/gameplay populations remain open.
-
-Two independently bounded [actor helpers](ACTOR_STATE_RECONSTRUCTION.md#independently-bounded-timed-phase-and-input-velocity)
-add 248 C extent bytes: 220 instruction and 28 literal bytes. The timed-phase
-helper preserves states 2/5/7, the low-16-bit duration and full-word timer store.
-The input-velocity helper retains both scale and animation-call paths. Existing
-actor, input, vector and animation owners/providers are reused. Incoming roots,
-historical unused formals, backing and complete writer/input/gameplay domains
-remain unresolved; these are source matches, with no new runtime discovery.
-
-Four [waypoint and destination-movement helpers](ACTOR_STATE_RECONSTRUCTION.md#waypoint-and-destination-movement) add 392 C extent bytes: 388 instruction and
-four source-emitted alignment bytes. Both independently bounded paths preserve
-their actual point, random-choice, direction and movement-provider interfaces.
-Four old rows cover 388 estimated bytes; the other four bytes are newly mapped
-zero alignment, with no new executable discovery. Incoming roots, historical
-unused formals, retry termination, backing and arithmetic/input populations
-remain open; no runtime or gameplay evidence is added.
-
-The independently bounded [word-range predicate](ACTOR_STATE_RECONSTRUCTION.md#independently-bounded-word-range-predicate)
-and [extra-map getter](FRAME_MAP_ANIMATION.md#independently-bounded-extra-map-getter)
-add two C functions / 72 extent bytes: 66 instruction, four literal and two
-alignment bytes. They are separate paths without established incoming callers.
-Two former rows cover 70 estimated bytes; the two newly mapped bytes are zero
-alignment, with no new executable discovery. The getter retains its actual
-dimensions provider and pointer owner, with aligned live backing and bounds as
-premises. Historical unused formals, wider input/writer populations and gameplay
-remain unresolved; no runtime evidence is added.
-
-The [kind-66 attachment worker](FRAME_NEED_TARGET_SELECTION.md#kind-66-attachment-worker)
-adds 248 C extent bytes: 216 instruction, 28 literal and four alignment bytes.
-Branch-local result narrowing and a separate ordinary query variable preserve
-the native value lifetimes without changing interfaces or adding bindings.
-Together with nine existing owners it completes ten C functions / 1,548
-contiguous bytes at `0x17A68..0x18074`. The entire added extent was already
-mapped; no new executable discovery or runtime evidence follows. Row 97 remains
-disabled, and complete callback, writer, backing and gameplay domains stay open.
-
-The four [scene phase row-25 bodies](SCENE_PHASE25.md) add 1,156 C extent
-bytes: 948 instruction, 176 literal, 20 switch-table and twelve alignment bytes.
-They complete the observed initializer, five-state dispatcher, object setup and
-shutdown span at `0x4694C..0x46DD0`. Existing canonical owners and actual provider
-interfaces are retained, with the shared callback header. Normal/strict source
-checks, genuine controls and independent review cover all four bodies. The
-entire source span was already mapped; this adds no executable discovery or
-runtime evidence. Palette indices, appearance-prefix backing, object slots and
-lifetimes, later writers and gameplay remain conditional. Shutdown reads the
-current audio option and does not restore the separately saved byte.
-
-Four still-unconverted extents now include their native two-byte trailing
-alignment: `0x219CC` (176), `0x3B75C` (356), `0x3F908` (1,112) and `0x42964`
-(656). These eight newly mapped data bytes add no C or instruction credit. The
-last two retain four and eight unclassified internal bytes respectively; the
-annotations do not establish complete alternate-entry or executable ownership.
-
-Executable inventory remains incomplete. It separates instructions, data and
-unresolved bytes; its instruction union is not complete. Unclassified owned/envelope bytes,
-authored NOPs and audio NOP tails need closure. Data roles cannot suppress execution or alternate entries. The
-initial EWRAM image has no established executable entry; later writes remain
-possible. Finite observations do not close populations.
+Executable inventory remains incomplete. Its instruction union is not a full
+code denominator. Unclassified owned/envelope bytes, authored NOPs and audio
+NOP tails need closure; data roles cannot suppress alternate execution. The
+initial EWRAM image has no established executable entry, and later writes remain
+possible. Finite observations do not close populations. Completed local source
+paths and their conditional domains are recorded in the linked owner documents;
+whole-ROM equality does not establish complete source ownership or gameplay.
 
 Keep one current paired proof and controls, unique attempts and bounded useful
 failures. Retire obsolete payloads under the existing
-[retention policy](LOCAL_OUTPUT_RETENTION.md); measure allocation and stay below
-5 GB. Hashes do not require permanent payloads. Leave backups/unrelated files alone.
+[retention policy](LOCAL_OUTPUT_RETENTION.md), keep the project below 5 GB and
+leave backups and unrelated files alone.

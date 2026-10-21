@@ -500,3 +500,43 @@ change the initializer result, replace the tick with a nonreturning loop,
 change only prepare case 12 to zero, or change begin's successful result to
 zero; each is rejected. The six trailing zero-alignment bytes absent from old
 estimates add mapped extent, with no new instruction or runtime credit.
+
+
+## Activity descriptor callbacks and unrooted neighbour
+
+Three matching callbacks complete the remaining nonnull targets shared by
+observed definition rows 5–7:
+
+| Field | Callback | Full extent | Instruction / literal / switch / alignment bytes |
+| --- | --- | ---: | --- |
+| `+0x00` | [Initializer](../src/frame/frame_optional_activity_initialize_437b0.c), `0x437B0` | 4 | 4 / 0 / 0 / 0 |
+| `+0x08` | [Prepare](../src/frame/frame_prepare_optional_activity_437dc.c), `0x437DC` | 168 | 26 / 4 / 136 / 2 |
+| `+0x14` | [Tick](../src/frame/frame_optional_activity_tick_439a4.c), `0x439A4` | 4 | 2 / 0 / 0 / 2 |
+
+The existing selector `0x432CC`, begin `0x43884`, dispatcher `0x438CC` and
+capacity check `0x2F348` supply the other four nonnull targets. The seven unique
+targets total 664 source extent bytes. Including the already owned primary,
+three child workers, adjacent check and new leaf below, the contiguous
+`0x432CC..0x43A2C` span contains twelve C functions / 1,888 bytes.
+
+The actual spawn adapter forwards state to the initializer and ignores its
+word-one result. The F8 driver supplies state to the empty void tick. Prepare
+consumes only the kind word in R2; its unsigned guard and all 34 table entries
+for kinds 12..45, plus the default, return one. Ordinary separate case arms
+reproduce the native switch. Initializer return type, prepare's unused formal
+roles and historical case grouping remain provisional. These static descriptor
+routes do not establish complete generic EC delivery, selector/writer bounds,
+live backing or gameplay populations.
+
+The independently bounded [return-100 leaf](../src/frame/frame_unrooted_optional_activity_hundred_439a8.c)
+at `0x439A8..0x439AC` consumes no input. It is separate from the tick's two zero
+alignment bytes and the following kind-22 worker. No incoming root is known;
+the no-argument declaration leaves historical unused formals unresolved. Its
+four newly identified instruction bytes add no reduction to the old backlog.
+
+All four complete extents pass normal/strict comparisons and genuine controls:
+initializer one to zero, prepare case 12 alone to zero, a state-byte write in
+the empty tick, and leaf 100 to 99. The four bodies own 180 extent bytes:
+36 instruction, four literal, 136 switch-table and four alignment bytes. The
+three old rows covered 172 estimated bytes; four additional alignment bytes
+and the separate four-instruction-byte leaf explain the map increase.

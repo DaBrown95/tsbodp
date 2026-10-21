@@ -54978,6 +54978,82 @@
         "after": "return 0;"
       },
       "expected_sha256": "d5a9c62950a2c6b9a76a490fa65ffb5ddb8969d1fb053a6ad4c2e8f464b4f82e"
+    },
+    {
+      "name": "frame_optional_activity_initialize_437b0",
+      "source": "src/frame/frame_optional_activity_initialize_437b0.c",
+      "rom_offset": 276400,
+      "size": 4,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      },
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb"
+    },
+    {
+      "name": "frame_prepare_optional_activity_437dc",
+      "source": "src/frame/frame_prepare_optional_activity_437dc.c",
+      "rom_offset": 276444,
+      "size": 168,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "case 12:\n        return 1;",
+        "after": "case 12:\n        return 0;"
+      },
+      "expected_sha256": "0610926bd7ffa5c7b0676cbb425ca46bbd2bcafbdcebec22d1eb987d885bc97b"
+    },
+    {
+      "name": "frame_optional_activity_tick_439a4",
+      "source": "src/frame/frame_optional_activity_tick_439a4.c",
+      "rom_offset": 276900,
+      "size": 4,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "(void)owner;",
+        "after": "owner->unknown_60[0] = 1;"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
+    },
+    {
+      "name": "frame_unrooted_optional_activity_hundred_439a8",
+      "source": "src/frame/frame_unrooted_optional_activity_hundred_439a8.c",
+      "rom_offset": 276904,
+      "size": 4,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 100;",
+        "after": "return 99;"
+      },
+      "expected_sha256": "a2271e164827e90980393ec57efbeee0efeba93f9e67d5eff60d0043fc8970f8"
     }
   ],
   "assembly": [
