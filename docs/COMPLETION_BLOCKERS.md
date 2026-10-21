@@ -19,7 +19,8 @@ complete input writers remain open. See [its current findings](SCENE_CONTACT_ACT
 The selected-tile worker has a current private owner/word-read diagnostic but
 still fails full comparison; see [the map path](FRAME_INPUT.md).
 The explicit 128-slot object pool bounds the renderer table only under intact
-membership and traversal premises; see [the callback limits](BOUNDED_INVENTORY.md#conditional-renderer-table-bound-21-october-2026).
+membership and traversal premises. A saved auxiliary pointer can already name
+a child returned to the free list; see [the callback limits](BOUNDED_INVENTORY.md#conditional-renderer-table-bound-21-october-2026).
 
 | Order | Remaining code | Blocker and next evidence |
 | --- | --- | --- |

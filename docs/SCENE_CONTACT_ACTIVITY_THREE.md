@@ -252,11 +252,19 @@ The serial controller supplies literal option two on its named request route;
 mode three is an additional premise for reaching this activity.
 Complete request, validation, backing and later-writer populations remain open.
 
+The named maintained routes also supply at least one available palette bank.
+Each valid option initializes a nonzero bank before row creation. The decrement
+helper sets completion flag bit zero when all three resulting values are zero;
+the controller tests that flag before its later row-creation loop. Its own flag
+updates preserve bit zero. This argument requires live distinct backing and no
+other value/flag writer or interleaving during creation. It does not prove the
+deterministic random sequence selects an available bank.
+
 The ordinary creators pass row IDs 0..4. With at most four initialized prior
 origins and representable coordinate arithmetic, the coordinate rejection test
 always has a valid candidate: on the two permitted Y boundaries, 32 and 104,
 there are 418 X/Y pairs. Each prior origin can exclude at most 63 pairs on only
 one boundary, leaving at least 166 pairs. This proves geometric feasibility;
 the deterministic random sequence has not been proved to reach those pairs.
-Palette availability, retry termination, arbitrary IDs and gameplay remain
-separate open questions. No source guards or new C credit accompany these facts.
+Complete palette-writer populations, retry termination, arbitrary IDs and
+gameplay remain open. No source guards or new C credit accompany these facts.

@@ -63,9 +63,14 @@ Removal calls `on_remove` before tombstoning or unlinking the object. The three
 currently backed constructor assignments install actor, scene-effect and
 need-effect removal callbacks. None directly removes the same owner again.
 With its state and auxiliary pointers present, the need-effect callback releases
-a separate state node and requests deferred removal through the backed
-indicator-child route. That child's distinct membership still depends on an
-intact pool. This bounded audit does not exhaust writable
+a separate state node and calls the auxiliary state setter. A live indicator
+child later handles that state by requesting removal. Pointer presence alone
+does not establish this live-child premise: head-first bulk cleanup can return
+the child to the free list before its parent uses the saved pointer. The child
+was pushed ahead of the parent, and its removal does not clear the parent's
+field. The setter then writes only the slot's state/pending bytes, leaving its
+list links unchanged. No intervening reuse is established by this route.
+This bounded audit does not exhaust writable
 callback provenance, before-step/step effects or generic aliases. Distinct pool
 membership and complete writer populations remain requirements for unconditional
 table safety. No renderer/finalizer match or new mapped extent follows.
