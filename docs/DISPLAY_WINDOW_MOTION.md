@@ -1,11 +1,13 @@
 # Window coordinate updates
 
 The frame-loop window path has matching C through both coordinate records of
-each window. Its four new complete extents total 240 bytes, including pools and
+each window. Six connected source extents total 320 bytes, including pools and
 alignment:
 
 | Function | ROM offset | Instructions | Literals | Alignment | Extent |
 | --- | --- | ---: | ---: | ---: | ---: |
+| [Set corner position](../src/display/set_window_corner_position_unrooted_48974.c) | `0x48974` | 32 | 4 | 0 | 36 |
+| [Set corner velocity](../src/display/set_window_corner_velocity_unrooted_48998.c) | `0x48998` | 40 | 4 | 0 | 44 |
 | [Step both windows](../src/display/step_windows.c) | `0x489C4` | 22 | 0 | 2 | 24 |
 | [Disable window layers](../src/display/disable_window_layers.c) | `0x489DC` | 14 | 0 | 2 | 16 |
 | [Configure masks](../src/display/configure_window_masks.c) | `0x489EC` | 34 | 4 | 2 | 40 |
@@ -44,3 +46,18 @@ four-scalar candidate emits 68 bytes with 15 differences. A tested two-point
 argument hypothesis changes both that body and its existing caller, so the
 four-scalar project declaration is retained. Other original code and the
 remaining executable-inventory uncertainties stay explicit.
+
+The two independently bounded corner setters add 80 C extent bytes: 72
+instruction bytes and eight literal bytes. Both use the existing 60-byte
+window and 28-byte corner records. The position setter changes only the two
+current words. The velocity setter writes both per-frame steps and sets active
+flag two; it preserves the duration, targets and owning window's commit flag.
+The updater commits active velocity changes when duration is zero. Defined
+backing requires window and corner indices in 0..1, with no added bounds check.
+
+Each setter passes complete normal/strict comparisons and a changed-source
+control that increments the second stored value. Neither has an established
+incoming caller; these matches add source ownership without runtime coverage.
+Together with the existing starter and three services at `0x489C4..0x48A14`,
+they complete source ownership of the local 208-byte span `0x48944..0x48A14`.
+The following rectangle setter and wider caller/writer populations remain open.
