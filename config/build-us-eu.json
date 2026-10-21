@@ -54688,6 +54688,32 @@
         "after": "transition_run_second(62, 0)"
       },
       "expected_sha256": "a9f7031d40af483fb913fdc5261b04936b6e24d8eac1aca0f1055957afa8dade"
+    },
+    {
+      "name": "display_menu_relation_average_code",
+      "rom_offset": 221336,
+      "size": 48,
+      "source": "src/display/menu_relation_average_code.c",
+      "symbols": {
+        "g_display_menu_relation_average_bands": "0x0806a080"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return index + 473;",
+        "after": "return index + 472;"
+      }
+    },
+    {
+      "name": "frame_tick_attachment_jobs_12_31_33_45",
+      "rom_offset": 220460,
+      "size": 4,
+      "source": "src/frame/frame_tick_attachment_jobs_12_31_33_45.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "(void)state;",
+        "after": "state->optional = 1;"
+      }
     }
   ],
   "assembly": [

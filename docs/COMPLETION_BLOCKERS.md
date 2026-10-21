@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,390 C functions / 299,512 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 303,572 bytes; original slices
-still supply 16,473,644 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,392 C functions / 299,564 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 303,624 bytes; original slices
+still supply 16,473,592 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **104 unowned rows / 21,998
+[inventory](../assets/rom-inventory.json) contain **102 unowned rows / 21,948
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -30,7 +30,16 @@ the average writer and condition reader one declared halfword owner; nine
 existing bodies remain exact with no added source credit. The 692-byte delta
 routine at `0x40AB4` remains unconverted. Its corrected criterion address and
 named actor route bound one input path, while other writers and inputs remain
-open. The
+open.
+
+The average-code reader at `0x36098` now owns 48 C extent bytes; its neighboring
+band reader remains a 44 / 9 nonmatch. The
+[row-3/4 empty tick](FRAME_NEED_TARGET_SELECTION.md#row-3-attachment-jobs-12-31-33-and-45)
+at `0x35D2C` owns four more C bytes, including two newly accounted alignment
+bytes. These additions establish no new runtime coverage or wider callback
+population.
+
+The
 [offer refresh](SCENE_LINK_ENTRY.md) owns 596 bytes with its canonical 24-byte
 record owner. The [activity-zero initializer](SCENE_CONTACT_ACTIVITY_ZERO.md)
 owns 452 bytes using the existing item, player, option and collision owners;

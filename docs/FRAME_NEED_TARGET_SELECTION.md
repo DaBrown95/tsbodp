@@ -357,8 +357,10 @@ state `+0xF4`. Its accepted action writer can emit 31, 33, 45 and an optional
 worker; other kinds return zero. The finder result is dereferenced without a
 null guard, so a matching live record remains a caller requirement. The four-body milestone left the row's
 eight-byte intermediate callback, 72-byte begin callback and intervening
-44-byte region original. The begin callback is covered by the follow-up below;
-the eight-byte callback and 44-byte region remain original. These finite assignments provide a conditional
+44-byte region original. The begin callback is covered by the follow-up below.
+Later source owns the eight-byte intermediate callback at `0x35C98` and the
+40-byte unrooted check at `0x35C14`; the four-byte callback at `0x35C10` remains
+original. These finite assignments provide a conditional
 source route, not proof of gameplay use or all writable callback populations.
 
 The kinds-31/33 worker captures the actor's need pointer before initializing
@@ -424,13 +426,27 @@ original.
 Matching builds, static routes and runtime behavior remain separate claims.
 
 
+The separate tick callback at `0x35D2C` now owns four C extent bytes: a two-byte
+return and two bytes of zero alignment before the independently owned
+`0x35D30` reader. Fixed definition rows 3 and 4 install this callback from
+row `+0x14` into state `+0xF8`; the existing driver passes that state through its
+`void (FrameNeedEffectState *)` callback field and ignores the result. The body
+has no accesses or calls and explicitly discards its unused argument.
+Normal and strict full-extent matches and genuine optional-byte-write controls
+pass. The callback type accepts the actual state argument and rejects the wrong
+object pointer and nonvoid return contracts. Additional historical unused
+formals, later callback writers and gameplay use remain unresolved. The two
+alignment bytes expand the prior two-byte map estimate; no new instructions
+are discovered.
+
+
 ## Row-3 allocation and route handoff
 
 `frame_begin_attachment_jobs_12_31_33_45` adds the complete 72-byte callback
 at `0x08035CA0`. This connects row 3's existing begin slot to the four published
 dispatch/step bodies. It adds no credit for those 932 bytes or for its four
-already matching providers. The row's eight-byte intermediate callback and
-44-byte neighboring region remain explicit original code.
+already matching providers. Later source owns the eight-byte intermediate
+callback and 40-byte check noted above; the four-byte callback remains original.
 
 The callback allocates one of the owner's three actor records. Failure returns
 zero. Success stores the supplied full-word kind, reads attachment point zero

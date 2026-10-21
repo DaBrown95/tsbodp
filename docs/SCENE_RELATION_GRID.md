@@ -99,3 +99,21 @@ their fourteen cells use thresholds three or seven and parameter indices zero
 through four, reading game bytes `+0x2A..+0x2E`. Mode-one returns retain the prior
 definition. Other definitions, serialized actors, later writers, original table
 bounds and gameplay remain unresolved.
+
+
+## Average code reader
+
+The independently bounded reader at `0x36098` owns 48 C extent bytes: 40
+instruction bytes and eight literal bytes. It reads the canonical signed
+halfword average once and compares it with signed thresholds in the eight-byte
+ROM rows at `0x0806A080`. It tests row 14 first, then decrements the row and
+index, exiting at zero before reading row zero. It returns 473 plus the index,
+from 473 through 487; it does not read the rows' second words.
+
+Normal and strict builds match the complete extent; changing 473 to 472
+rejects both. No incoming root is currently established. The names, historical
+unused formals, valid state backing and original table bounds remain
+provisional. The neighboring band reader at `0x3606C` remains original: its
+44-byte candidate has nine differing register-role bytes. The larger delta
+routine at `0x40AB4` also remains unconverted. These are static and compiler
+findings, with no new runtime or gameplay evidence.
