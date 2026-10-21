@@ -211,9 +211,9 @@ The C `1u << index` operation is defined only when the normalized count is below
 C domain whereas the original native variable LSL yields zero. The factory's
 valid index domain remains unestablished; arbitrary full-word query inputs are
 not covered by that native byte-domain observation. The
-nearby second-pair clear helper at `0x08010BE4` remains explicit original code:
-the current mapped graph and a full-ROM Thumb call-pattern scan found no
-inbound caller, which does not prove absence of indirect or runtime use.
+nearby second-pair clear helper is now reconstructed below. The current mapped
+graph and a full-ROM Thumb call-pattern scan found no inbound caller; indirect
+or runtime use remains unresolved.
 
 The factory, pending query and interaction use ordinary C without register
 constraints. Each setter has two branch-local R2 bindings for its actual world
@@ -223,3 +223,22 @@ flags, bank boundaries and the accepted owner state all reject. The seven-functi
 flag-object path totals 800 C extent bytes and joins the daily flag reset and
 save-word accessors. Whole-ROM equality and gameplay behavior remain separate
 claims. The weekly entry reconciliation remains unconverted.
+
+
+## Independently bounded pending-flag clearer
+
+The [clear helper](../src/frame/frame_clear_daily_pending_flag_unrooted_10be4.c)
+at `0x08010BE4` reproduces its complete 52-byte extent: 38 instruction, twelve
+literal and two internal alignment bytes. Unsigned indices through 31 select
+world word `+0x71C`; larger indices subtract 32 and select `+0x720`. It clears the
+selected bit in the existing `DisplayDailyWorld.daily_flag_words[2..3]` owner.
+The chosen one-word input and void result remain provisional without an incoming
+caller. Index zero through 63 and live canonical-world backing are conditional;
+no guard or universal full-word shift contract is added.
+
+Both branch-local R2 constraints refer to the actual world-base value and end
+at their address calculations without a call. They reuse the adjacent setter's
+supported compiler constraint; they do not identify an original register
+annotation. Normal and strict full comparisons and real clear-to-set controls
+pass, alongside actual-definition and owner-layout checks. These results replace
+one estimated source row and add no mapped extent, execution or gameplay claim.

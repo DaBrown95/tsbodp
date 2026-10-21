@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,422 C functions / 301,584 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 305,644 bytes; original slices
-still supply 16,471,572 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,427 C functions / 301,884 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 305,944 bytes; original slices
+still supply 16,471,272 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **74 unowned rows / 19,990
+[inventory](../assets/rom-inventory.json) contain **69 unowned rows / 19,690
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -117,3 +117,18 @@ unchanged manifest metadata. Its disappearing weak row is physical coverage,
 not an incoming-contract resolution. The known backlog is still not a complete
 code denominator; these source additions establish no gameplay or interior-entry
 execution.
+
+
+Five independently bounded helpers add 300 C extent bytes: the
+[pending-flag clearer](SEARCH_COST_AND_DAILY_CLOCK.md#independently-bounded-pending-flag-clearer),
+[panel-mode selector](SCENE_CATALOG.md#independently-bounded-panel-mode-selector)
+and [three VBlank-status helpers](DISPLAY_MAP_RECONSTRUCTION.md#independently-bounded-vblank-status-polling).
+They replace five existing rows of the same total extent: 230 instruction,
+64 literal/switch-table and six alignment bytes. Full normal/strict comparisons,
+genuine source controls and actual interface/dependency checks pass. Incoming
+roots and broader input, backing, writer and gameplay domains remain open;
+no mapped extent is added. The separate unrooted stepped scene-object creator
+at `0x28234` remains original: its first faithful candidate is 168 / 116 against
+160 native bytes. The compiler reduces both coordinate products where native
+reduces only X; no actual Y reload, escape or provider dependency supports a
+further trial. The main dependency-ordered blockers above remain unresolved.

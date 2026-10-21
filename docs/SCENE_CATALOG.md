@@ -523,3 +523,32 @@ matching. Normal and strict positives and actual changed-source controls are
 fresh, as are the complete current shared-header importer and provider closures.
 The confirmation handler remains an explicit original. These results establish
 static routing and compiler equality, not complete formats or gameplay behavior.
+
+
+## Independently bounded panel-mode selector
+
+The [selector at `0x080343EC`](../src/scene/scene_view_draw_panel_mode_unrooted_343ec.c)
+owns 148 complete bytes: 108 instruction, 36 literal/switch-table and four
+alignment bytes. It uses the existing word background at `0x03001F04` and the
+actual rectangle-fill and frame-draw providers. Its unsigned mode mapping is:
+
+| Mode | Clear rectangle `(x, y, width, height)` with tile zero | Draw frame `(x, y, width, height)` |
+| --- | --- | --- |
+| 0 | `(9, 14, 22, 1)` | `(9, 15, 22, 6)` |
+| 1 or 3 | None | `(9, 14, 22, 7)` |
+| 2 | `(9, 14, 22, 22)` | `(9, 15, 22, 6)` |
+| 4 | `(9, 15, 22, 6)` | None |
+| Other | None | None |
+
+The 22-row clear is preserved without a clamp; initialized background state and
+backing for every reached span remain conditional. The common height is an
+actual input to case four's clear as well as the frame draw. Case two separately
+prepares its clear height before the shared frame geometry, matching native
+value lifetimes with ordinary C and no register constraint.
+
+Normal and strict full matches and real case-two clear-height controls pass.
+Checks compile the actual new definition and each actual provider separately,
+with their existing contracts and dependencies. The current graph and bounded
+entry-word searches establish no incoming caller or entry pointer. The chosen
+one-word mode/void interface and any unused formals remain provisional. This
+replaces one 148-byte estimated row and adds no mapped extent or runtime claim.

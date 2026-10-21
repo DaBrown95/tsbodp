@@ -196,3 +196,28 @@ eight-byte E1EE candidate without adding a folded-entry record. This reflects
 physical source coverage; it does not establish a caller, root, ABI or runtime
 execution. E1EE remains instruction-bearing and receives no separate C-function
 credit.
+
+
+## Independently bounded VBlank-status polling
+
+Three unrooted helpers at `0x08024B7C`, `0x08024BB8` and `0x08024BE0` reproduce
+24, 40 and 36 complete bytes, respectively: 84 instruction and sixteen literal
+bytes in total. They use the existing volatile halfword display-register
+interface. Each [polls DISPSTAT bit zero](../src/display/display_wait_vblank_status_unrooted_24b7c.c)
+until it is high, returning immediately if it is already high. This is a status
+wait; it does not wait for a low-to-high edge and has no finite termination bound
+when the bit stays low.
+
+After that same wait, the [clear helper](../src/display/display_clear_forced_blank_vblank_unrooted_24bb8.c)
+reads and writes the DISPCNT halfword to clear bit seven. The
+[set helper](../src/display/display_set_forced_blank_vblank_unrooted_24be0.c)
+similarly sets bit seven. Other halfword bits are preserved by these operations;
+asynchronous writer and read/modify/write atomicity domains remain open.
+
+Ordinary pointer and mask values are initialized before a named polling label.
+This expresses the native preheader and single volatile load/test/backedge
+without extra accesses or register constraints. Normal and strict full matches,
+real poll-mask controls and actual macro-width/volatility checks pass. Current
+static searches establish no incoming caller or entry pointer; no historical
+unused-formal, runtime or gameplay claim follows. All three extents replace
+existing estimated rows and add no mapped bytes.

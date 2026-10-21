@@ -55246,6 +55246,75 @@
           "limitation": "Possible interior entry only. If executed, R0 supplies mask and R1 must already address readable word backing. No backed table/record consumer, R1 producer or runtime target is established; full E1EC source ownership does not resolve this entry and gives it no separate C credit."
         }
       ]
+    },
+    {
+      "name": "frame_clear_daily_pending_flag_unrooted_10be4",
+      "rom_offset": 68580,
+      "size": 52,
+      "source": "src/frame/frame_clear_daily_pending_flag_unrooted_10be4.c",
+      "symbols": {
+        "g_display_daily_world": "0x03003950"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "*flags &= ~(1u << index);",
+        "after": "*flags |= 1u << index;"
+      }
+    },
+    {
+      "name": "display_wait_vblank_status_unrooted_24b7c",
+      "source": "src/display/display_wait_vblank_status_unrooted_24b7c.c",
+      "rom_offset": 150396,
+      "size": 24,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "unsigned int mask = 1;",
+        "after": "unsigned int mask = 2;"
+      }
+    },
+    {
+      "name": "display_clear_forced_blank_vblank_unrooted_24bb8",
+      "source": "src/display/display_clear_forced_blank_vblank_unrooted_24bb8.c",
+      "rom_offset": 150456,
+      "size": 40,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "unsigned int mask = 1;",
+        "after": "unsigned int mask = 2;"
+      }
+    },
+    {
+      "name": "display_set_forced_blank_vblank_unrooted_24be0",
+      "source": "src/display/display_set_forced_blank_vblank_unrooted_24be0.c",
+      "rom_offset": 150496,
+      "size": 36,
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "unsigned int mask = 1;",
+        "after": "unsigned int mask = 2;"
+      }
+    },
+    {
+      "name": "scene_view_draw_panel_mode_unrooted_343ec",
+      "rom_offset": 213996,
+      "size": 148,
+      "source": "src/scene/scene_view_draw_panel_mode_unrooted_343ec.c",
+      "symbols": {
+        "g_scene_view_resource_background": "0x03001f04",
+        "display_fill_background_constant_rectangle": "0x0800d7fd",
+        "scene_view_draw_frame": "0x08034481"
+      },
+      "thumb_symbols": [
+        "display_fill_background_constant_rectangle",
+        "scene_view_draw_frame"
+      ],
+      "negative_control": {
+        "before": "unsigned int clear_height = 22;",
+        "after": "unsigned int clear_height = 21;"
+      }
     }
   ],
   "assembly": [
