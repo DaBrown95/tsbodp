@@ -54754,6 +54754,48 @@
         "before": "=y;",
         "after": "=y+1;"
       }
+    },
+    {
+      "symbols": {
+        "g_frame_need_effect_definitions": "0x08062e7c",
+        "frame_request_animation": "0x08001b5d",
+        "frame_clear_animation_pending": "0x08001bd5",
+        "frame_adjust_actor_needs": "0x0802b825",
+        "frame_step_attachment_need_timer": "0x0802eddd"
+      },
+      "thumb_symbols": [
+        "frame_request_animation",
+        "frame_clear_animation_pending",
+        "frame_adjust_actor_needs",
+        "frame_step_attachment_need_timer"
+      ],
+      "name": "frame_step_route_attachment_49_258c4",
+      "source": "src/frame/frame_step_route_attachment_49_258c4.c",
+      "rom_offset": 153796,
+      "size": 160,
+      "negative_control": {
+        "before": "frame_adjust_actor_needs(needs, 24,",
+        "after": "frame_adjust_actor_needs(needs, 23,"
+      }
+    },
+    {
+      "name": "frame_dispatch_route_attachment_49_259f0",
+      "source": "src/frame/frame_dispatch_route_attachment_49_259f0.c",
+      "rom_offset": 154096,
+      "size": 32,
+      "symbols": {
+        "frame_find_actor_attachment_record": "0x0802ed61",
+        "frame_step_route_attachment_49_258c4": "0x080258c5"
+      },
+      "thumb_symbols": [
+        "frame_find_actor_attachment_record",
+        "frame_step_route_attachment_49_258c4"
+      ],
+      "negative_control": {
+        "before": "job->kind == 49",
+        "after": "job->kind == 48"
+      },
+      "expected_sha256": "4479e7edf98ba14b905752274990ed46ffb0281c0c6d7ef7b6f114a11d9b9f94"
     }
   ],
   "assembly": [

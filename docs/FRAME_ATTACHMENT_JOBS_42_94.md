@@ -377,3 +377,33 @@ stored-target ownership. Runtime installation/populations, generic EC delivery,
 selector bounds, later writers, owner/object/world backing, allocation success
 and incoming signed-coordinate domains remain open. The following entries at
 `0x0802CB08`, `0x080464A0` and `0x0804658C` remain excluded.
+
+## Independently bounded route-49 worker
+
+The [worker at `0x258C4`](../src/frame/frame_step_route_attachment_49_258c4.c)
+and [wrapper at `0x259F0`](../src/frame/frame_dispatch_route_attachment_49_259f0.c)
+add 192 matching C extent bytes. The worker owns 154 instruction bytes, four
+literal bytes and two internal alignment bytes; the wrapper owns 32 instruction
+bytes. Both retain the existing need-effect, actor and attachment-record owners,
+with [shared declarations](../include/frame_route_attachment_49.h).
+
+State zero copies the owner's direction to the actor, sets state 41, requests
+animation 50 and stores countdown value 150 at actor `+0x58`. State 41 waits
+for animation flag `0x400000`, clears it through the existing provider and sets
+state 43. State 43 applies need criterion 24 using the definition byte at `+35`,
+then passes the countdown and argument four to the existing timer provider.
+A zero low-byte result sets state one and requests animation one. The worker
+returns two when the final state is one, and one otherwise.
+
+The wrapper looks up the actor's record, dispatches kind 49 to the worker and
+returns its full-word result; other kinds return zero. The lookup's null result
+is dereferenced without an added guard, preserving the native backing premise.
+The neighboring route-begin adapter at `0x259A0` was already owned and receives
+no additional credit. No incoming root connects these two new bodies to a
+complete callback or gameplay population.
+
+Complete normal/strict comparisons, real criterion/kind changes, actual provider
+contracts and full-ROM matching/control gates pass. These independently bounded
+bodies were already mapped; no executable discovery or runtime coverage is
+claimed. Record/actor lifetimes, descriptor indexing, countdown arithmetic and
+all other input/writer populations remain conditional.
