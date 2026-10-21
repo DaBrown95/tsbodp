@@ -54910,6 +54910,74 @@
         "after": "previous + 2"
       },
       "expected_sha256": "c76e0ac0dd664f225b75db99fc4f7d084216947f63fa196eaef71e87d0433b29"
+    },
+    {
+      "name": "frame_optional_attachment_initialize_28738",
+      "source": "src/frame/frame_optional_attachment_initialize_28738.c",
+      "rom_offset": 165688,
+      "size": 4,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      },
+      "expected_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb"
+    },
+    {
+      "name": "frame_optional_attachment_tick_28984",
+      "source": "src/frame/frame_optional_attachment_tick_28984.c",
+      "rom_offset": 166276,
+      "size": 4,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "(void)owner;",
+        "after": "for (;;) {\n    }"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
+    },
+    {
+      "name": "frame_prepare_optional_attachment_287d8",
+      "source": "src/frame/frame_prepare_optional_attachment_287d8.c",
+      "rom_offset": 165848,
+      "size": 168,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "case 12:\n        return 1;",
+        "after": "case 12:\n        return 0;"
+      },
+      "expected_sha256": "5989a31bb57763339c856ce7cd4d0bf2f32347dd9420c6e13c821c8daaee856b"
+    },
+    {
+      "name": "frame_begin_optional_direction_attachment_28880",
+      "source": "src/frame/frame_begin_optional_direction_attachment_28880.c",
+      "rom_offset": 166016,
+      "size": 52,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "symbols": {
+        "frame_allocate_actor_attachment_record": "0x0802e3c5",
+        "frame_direction_toward": "0x0800188d",
+        "frame_set_actor_direction": "0x08001c29"
+      },
+      "thumb_symbols": [
+        "frame_allocate_actor_attachment_record",
+        "frame_direction_toward",
+        "frame_set_actor_direction"
+      ],
+      "negative_control": {
+        "before": "return 1;",
+        "after": "return 0;"
+      },
+      "expected_sha256": "d5a9c62950a2c6b9a76a490fa65ffb5ddb8969d1fb053a6ad4c2e8f464b4f82e"
     }
   ],
   "assembly": [

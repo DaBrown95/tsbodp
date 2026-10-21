@@ -450,3 +450,53 @@ two bytes extend the old map estimate without adding instructions.
 These bodies establish the local dispatch paths, not complete incoming roots,
 callback/writer populations, descriptor bounds, object/sample lifetimes or
 gameplay. The `0x28424` dependency remains unconverted and receives no credit.
+
+
+## Row-two descriptor callbacks
+
+Four matching C entries complete the remaining nonnull targets in descriptor
+row two at ROM `0x62EC4`:
+
+| Field | Callback | Full extent | Instruction / literal / switch / alignment bytes |
+| --- | --- | ---: | --- |
+| `+0x00` | [Initializer](../src/frame/frame_optional_attachment_initialize_28738.c), `0x28738` | 4 | 4 / 0 / 0 / 0 |
+| `+0x08` | [Prepare](../src/frame/frame_prepare_optional_attachment_287d8.c), `0x287D8` | 168 | 26 / 4 / 136 / 2 |
+| `+0x0C` | [Begin](../src/frame/frame_begin_optional_direction_attachment_28880.c), `0x28880` | 52 | 50 / 0 / 0 / 2 |
+| `+0x14` | [Tick](../src/frame/frame_optional_attachment_tick_28984.c), `0x28984` | 4 | 2 / 0 / 0 / 2 |
+
+The existing selector at `0x28764`, dispatcher at `0x288B4` and capacity check
+at `0x2F348` supply the other three nonnull targets. Those seven targets total
+628 source extent bytes; the null `+0x18` slot adds no code. Including the
+adjacent independently bounded check and kind-12 worker, the contiguous
+`0x28738..0x28A10` span is eight C functions and 728 bytes. The separate worker
+at `0x28424` remains an original-code dependency for dispatcher kinds
+28/30/31/32/33.
+
+The initializer emits one in R0 and returns. The actual spawn adapter supplies
+the state pointer through the call veneer and ignores the result. Its chosen
+unsigned-word return view and any historical unused formals remain provisional.
+The tick consumes no state fields; the allocator copies descriptor `+0x14` to
+state `+0xF8`, and the actual driver calls it with the state pointer. These
+static references supersede the preliminary no-input/no-reference views.
+Descriptor `+0x10` also supplies the existing F4 dispatch route. They establish
+conditional source-backed routes, with runtime selector and writer populations
+still open.
+
+Prepare consumes the full kind word in R2. Its unsigned guard covers kinds
+12..45, and every one of the 34 table entries and the out-of-range path returns
+one. Separate ordinary C case arms reproduce that inert native dispatch with
+no fabricated operation or table payload. The original case-label grouping
+cannot be recovered from uniform targets; the first two unused formal roles
+and complete generic EC delivery remain provisional.
+
+Begin uses the existing canonical record allocator. Failure returns zero;
+success writes the full kind, obtains direction from the current record actor
+and owner object, narrows to a byte, reloads the actor for its setter and
+returns one. Matching record backing, actor/owner lifetimes and direction
+inputs retain their existing premises.
+
+All four complete extents pass normal/strict comparisons. Genuine controls
+change the initializer result, replace the tick with a nonreturning loop,
+change only prepare case 12 to zero, or change begin's successful result to
+zero; each is rejected. The six trailing zero-alignment bytes absent from old
+estimates add mapped extent, with no new instruction or runtime credit.
