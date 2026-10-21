@@ -142,6 +142,50 @@ buffer. Existing base/extra decoders corroborate the pointer roles. The
 allocation-size control preserves 68 bytes and rejects by one byte. This is
 source/static evidence; allocation success and gameplay are not established.
 
+## Conditional map-row-6 append
+
+The matching [scene-25 step](../src/scene/scene_phase25_step.c), state four,
+submits `(kind=1, mode=4, scene=6)`. If that queued request survives shutdown and
+object-removal callbacks until the handoff copy, the observed initialization
+path selects map row six and normalizes mode four to zero. This is a conditional
+source route; those intervening callback writers remain open.
+
+The 72-byte descriptor at `0x080565C4` contains these fixed stream headers:
+
+| Field offset | Stream | Address | Advertised bytes | Codec |
+| --- | --- | --- | ---: | ---: |
+| `+0x28` | Cell data | `0x08ED5DF0` | 2,288 | 6 |
+| `+0x2C` | Cell types | `0x08ED6048` | 1,044 | 3 |
+| `+0x30` | Extra cell data | `0x08ED61E4` | 288 | 6 |
+| `+0x34` | Extra cell types | `0x08ED6240` | 56 | 3 |
+
+[`resource_decode_bytes`](../src/resource/resource_decode_bytes.c) returns the
+outer header's advertised size. Codec six instead obtains its produced count
+from the installed [background decoder](RESOURCE_BACKGROUND_DECODER.md), whose
+input starts after that header. The codec flag for the optional delta pass is
+clear in all four headers.
+
+The existing calibrated original-instruction model produces exactly 2,288 and
+288 bytes for the two fixed codec-six payloads. A coupled fixture appends the
+second at the first advertised offset: 2,576 bytes total, leaving 13,808 bytes
+of the `0x4000` cell-data allocation. The first output and trailing 32-byte guard
+remain intact. Exact replay, sixteen independent expected fixtures and the
+existing malformed-input, instruction-budget and nullable-count controls pass.
+The input guards stop at the next separately referenced containers; they do not
+establish exact compressed-object extents.
+
+The type headers separately give `(1,044 - 4) / 2 = 520` primary cells and a
+52-byte extra DMA payload. Its destination ends at byte `1,044 + 52 = 1,096` of
+the `0x2800` type-map allocation; 56 advertised scratch bytes fit `0x2000`.
+This is header and source arithmetic; actual codec-three output and DMA
+execution remain separate questions.
+
+The byte-data observations use synthetic addresses and preloaded original
+instructions. Successful nonoverlapping live allocations, the installed decoder
+callback, and unchanged row, base and size across intervening providers remain
+premises. Wider selectors, writers, copied-code states and gameplay remain open.
+This adds no C ownership, executable discovery or native runtime coverage.
+
 ## Independently bounded extra-map getter
 
 The [getter at `0x2B2C8`](../src/frame/frame_unrooted_read_extra_map_cell_2b2c8.c)

@@ -45,6 +45,13 @@ existing owners). Its full-word return is ignored by the observed spawn caller.
 The contiguous seven-function span `0x35C10..0x35D30` is now source-owned; wider
 callback, input, writer and gameplay domains remain unresolved.
 
+The [conditional map-row-6 append](FRAME_MAP_ANIMATION.md#conditional-map-row-6-append)
+now has fixed-stream model evidence: 2,288 plus 288 produced byte-data bytes fit
+the existing 16 KiB allocation. Queue, callback, allocation and intervening-writer
+premises remain explicit; type-map bounds are header arithmetic only. This
+narrows one generic-decoder destination question without closing copied-code
+writers, the renderer, source ownership or gameplay.
+
 The
 [offer refresh](SCENE_LINK_ENTRY.md) owns 596 bytes with its canonical 24-byte
 record owner. The [activity-zero initializer](SCENE_CONTACT_ACTIVITY_ZERO.md)
