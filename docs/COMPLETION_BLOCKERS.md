@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,410 C functions / 300,820 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 304,880 bytes; original slices
-still supply 16,472,336 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,411 C functions / 300,824 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 304,884 bytes; original slices
+still supply 16,472,332 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **85 unowned rows / 20,712
+[inventory](../assets/rom-inventory.json) contain **84 unowned rows / 20,710
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -28,7 +28,17 @@ at `0x40AB4` (692 bytes), [activity-three parent and raster workers](SCENE_CONTA
 and the [record-selection text renderer](SCENE_RECORD_SELECTION_HANDOFFS.md) at
 `0x1AA78`. Their local source gains leave these workers unconverted.
 
-The latest [activity callbacks and unrooted neighbour](FRAME_ATTACHMENT_JOBS_42_94.md#activity-descriptor-callbacks-and-unrooted-neighbour)
+The [installed serial-slot callback](SCENE_CONTACT_MENU.md#installed-serial-slot-callback)
+adds four C extent bytes: two existing candidate bytes now qualified as
+instructions and two newly mapped zero-alignment bytes. The raw and qualified
+instruction census each gain two bytes; no new instruction extent is mapped. All fourteen C functions / 2,072 bytes at
+`0x1C9B8..0x1D1D0` are source-owned. The actual installer and driver establish
+its object-pointer callback route; wider writers, live objects, asynchronous
+IRQ/protocol inputs and gameplay remain conditional. Six alignment annotations
+now identify twelve source-owned bytes as data, including ten already owned
+before this callback; they add no separate C or instruction credit.
+
+The [activity callbacks and unrooted neighbour](FRAME_ATTACHMENT_JOBS_42_94.md#activity-descriptor-callbacks-and-unrooted-neighbour)
 add four C functions / 180 extent bytes: 36 instruction, four literal, 136
 switch-table and four alignment bytes. All seven nonnull targets shared by
 observed rows 5–7 are source-owned (664 bytes), within twelve contiguous C

@@ -29,5 +29,5 @@ void scene_contact_shutdown_serial_session(void);
 void scene_contact_stop_serial_input(void);
 void restore_irq_table_entry(unsigned int);
 void scene_contact_commit_serial_session(void);
-void scene_contact_original_serial_slot_noop(struct FrameObject *);
+void scene_contact_serial_slot_noop(struct FrameObject *);
 #endif

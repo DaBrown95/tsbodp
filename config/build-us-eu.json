@@ -33905,7 +33905,7 @@
         "frame_set_position": "0x080014a5",
         "frame_set_animation_record": "0x0800132d",
         "frame_set_animation_commands": "0x080015bd",
-        "scene_contact_original_serial_slot_noop": "0x0801d1cd",
+        "scene_contact_serial_slot_noop": "0x0801d1cd",
         "g_display_scene_frame_objects": "0x030043b0",
         "g_scene_contact_serial_slot_definitions": "0x080530c4",
         "g_scene_contact_serial_animation_commands": "0x08053114"
@@ -33919,7 +33919,7 @@
         "frame_set_position",
         "frame_set_animation_record",
         "frame_set_animation_commands",
-        "scene_contact_original_serial_slot_noop"
+        "scene_contact_serial_slot_noop"
       ],
       "source": "src/scene/scene_contact_prepare_serial_slot.c"
     },
@@ -55054,6 +55054,19 @@
         "after": "return 99;"
       },
       "expected_sha256": "a2271e164827e90980393ec57efbeee0efeba93f9e67d5eff60d0043fc8970f8"
+    },
+    {
+      "name": "scene_contact_serial_slot_noop",
+      "rom_offset": 119244,
+      "size": 4,
+      "source": "src/scene/scene_contact_serial_slot_noop.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "(void)object;",
+        "after": "for (;;) { }"
+      },
+      "expected_sha256": "6c1871acd4bd9950e81b2850fac7ddd44f28500d6bba63991c2599234ddbe61c"
     }
   ],
   "assembly": [

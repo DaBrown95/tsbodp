@@ -7,7 +7,7 @@ void scene_contact_prepare_serial_slot(unsigned int slot)
     object->flags = 17;
     object->unknown_0a = slot;
     object->display_palette = slot;
-    object->on_step = scene_contact_original_serial_slot_noop;
+    object->on_step = scene_contact_serial_slot_noop;
     frame_set_position(object, g_scene_contact_serial_slot_definitions[slot].x << 16,
                        g_scene_contact_serial_slot_definitions[slot].y << 16);
     frame_set_animation_record(object, &g_scene_contact_serial_slot_definitions[slot].resource);

@@ -954,8 +954,8 @@ indices remain preconditions, with no new guard or initialization. Cases
 `0x41`, `0x42`, `0x81` and `0x83` originally remained explicit child calls in
 this fold/dispatcher group; the later connected session group covers them
 with their complete discarded-result interfaces and separate C credit.
-The final string child ends at `0x0801D1CC`, before an independent four-byte
-return-only leaf, which is also excluded.
+The final string child ends at `0x0801D1CC`, before the independent serial-slot
+callback described below.
 
 Default command `0x84` returns zero without writing either output even when
 the parser's second parameter admits it. The parser's sending callback must
@@ -981,7 +981,7 @@ Five complete bodies add 744 bytes: initialization at `0x0801C9B8` (388),
 receiving game record and option notices at `0x0801D048` and `0x0801D088`
 (64 each), game-record reply at `0x0801D0D8` (128), and text-row reply at
 `0x0801D168` (100). The final body ends at `0x0801D1CC`; the independent
-four-byte return leaf that follows remains original and receives no credit.
+four-byte callback that follows is covered separately below.
 These five sources use ordinary C without register annotations or added
 reads, guards or initializers. The dispatcher changes only its four
 same-address child identifiers.
@@ -1066,8 +1066,8 @@ the row-ten step at `0x0801CB3C` (372), status drawing at `0x0801CCB0`
 (60), and save commit display at `0x0801CE90` (68). Full pools and zero
 alignment are included. The existing initializer changes only its
 same-address slot-provider identifier. Its previous 388 bytes receive no
-new credit. The independently bounded four-byte return leaf at
-`0x0801D1CC` remains original, with no new C or glue credit.
+new credit. The independently bounded four-byte callback at
+`0x0801D1CC` is covered separately below.
 
 The ordinary step calls the status drawer and switches on the existing
 request word at offset 16. Phase zero tests the actual pressed-input table
@@ -1202,3 +1202,32 @@ preserved as nullable stored collection pointers; the defaults body does
 not dereference that pointer. The game-value negative fixtures avoid signed
 overflow. These checks do not prove arbitrary pointer validity, allocator
 success, table capacity, hardware/IRQ or protocol behavior, or gameplay.
+
+
+## Installed serial-slot callback
+
+The [serial-slot callback](../src/scene/scene_contact_serial_slot_noop.c) owns
+four bytes at `0x0801D1CC`: two instruction bytes for the empty void return and
+two source-emitted zero-alignment bytes. The preceding text reply's literal
+ends exactly at the callback entry; the following condition-panel initializer
+begins at `0x0801D1D0`. The old candidate row counted only the two instruction
+bytes. This adds two mapped alignment bytes. Its existing two-byte candidate
+is now verified as instruction: the raw and qualified instruction census each
+gain two bytes, while newly mapped instruction extent remains zero.
+
+The [slot constructor](../src/scene/scene_contact_prepare_serial_slot.c) installs
+the odd callback address from literal `0x0801CE48` into object `on_step` at
+`+0x88`. The actual object driver supplies that same object in R0 through the
+BX-R2 adapter and ignores a result. The canonical `void(FrameObject*)` callback
+consumes no fields. Its declaration and the constructor's same-address import
+now use `scene_contact_serial_slot_noop`; the constructor's full 120 bytes
+remain identical, with no additional source credit.
+
+The complete `0x0801C9B8..0x0801D1D0` serial-session span is now fourteen C
+functions / 2,072 bytes, including seven functions / 392 bytes from `0x0801D048`.
+Normal/strict full extents and genuine nonreturn/constructor-flag controls pass.
+The real driver assignment and separate definitions retain the existing shared
+owner and callback type. Historical unused formals, complete writable callback
+populations, allocation/object lifetimes, asynchronous IRQ behavior, protocol
+inputs and gameplay remain conditional; this local source closure adds no
+natural runtime coverage.
