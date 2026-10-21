@@ -149,7 +149,9 @@ halfword offset table beginning at offset `0x0c`, then checks descriptor bits
 CpuFastSet; the
 object's flag selects whether the byte count is halved first. Both calculate
 the destination as `0x06010000 + first_tile * 32`. The custom callback slot is
-`0x03003360`; its concrete target remains unresolved.
+`0x03003360`. The matching
+[decoder installer](../src/resource/resource_install_decoders.c) writes
+`0x030036D0` there; later assignments and copied-code writers remain open.
 
 The initial tile resource copy at `0x0804766c` traverses the same offset table,
 adds 12 to each relative offset, reads descriptor dimensions at bytes 2/3 and
@@ -409,3 +411,39 @@ It now has a [source-backed compressed-map data role](WHOLE_ROM_INVENTORY.md#pha
 the original decoder model consumes its four bytes from scene-resource row 23's
 `combined0` input. That data use and the source-owned padding at `0x03E8AE`
 do not exclude other aliases or an alternate execution entry.
+
+## Fixed transient tile input
+
+The matching [phase-25 object initializer](../src/scene/scene_phase25_initialize_objects.c)
+passes resource `0x08069510` to
+[`frame_initialize_transient_definition`](../src/display/initialize_transient_definition.c).
+Its two words identify data `0x08FD90B4` and layout `0x08FD93D4`.
+The ten frame records have a summed pixel area of 2,240. The allocator receives
+that area and requests 35 tiles, corresponding to 1,120 expected VRAM bytes.
+Successful allocation causes
+[`display_copy_tile_resource`](../src/display/copy_tile_resource.c) to traverse
+all ten records; frames one through nine have custom-decoder flag `0x40`.
+
+Frame one has dimensions 16 by 16 and data offset `0x80`, so its callback input
+is `0x08FD9134` and its expected output is 128 bytes. The next frame starts at
+`0x08FD91A4`, providing a conservative 112-byte input guard. This is a direct
+sprite callback input, without an outer generic-stream header or four-byte skip.
+The caller supplies a nonnull count-word address and ignores the callback's R0
+result. Its destination is `0x06010000 + first_tile * 32 + 128`, after the raw
+first frame.
+
+The unchanged original-instruction model produces 128 bytes in 742 steps,
+consumes the 112-byte input guard and preserves the trailing output guard.
+Exact replay, five existing expected fixtures and three rejection controls pass.
+All five backward-copy load sites execute, with ten reads of bytes already
+written by decoder instructions. The five long-command parser observations have
+length three and distances 4, 9, 38, 76 and 72; this fixed frame does not take
+the extended-repeat branch. That branch has a separate expected fixture.
+The model preloads the original parser instructions; it does not sample live
+RAM code or execute the actual VRAM allocation.
+
+This is a conditional source and native-instruction route to the installed tile
+decoder. The queued scene request, phase/input selection, successful live VRAM
+allocation, resource/layout views, callback and copied-code state must remain
+valid. It does not establish natural scene execution, complete writer domains
+or a matching C replacement for the 504-byte decoder.

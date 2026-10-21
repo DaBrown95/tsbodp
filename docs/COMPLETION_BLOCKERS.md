@@ -52,6 +52,12 @@ premises remain explicit; type-map bounds are header arithmetic only. This
 narrows one generic-decoder destination question without closing copied-code
 writers, the renderer, source ownership or gameplay.
 
+The [fixed transient tile input](DISPLAY_RECONSTRUCTION.md#fixed-transient-tile-input)
+supplies a separate, conditional route to the copied tile decoder: a phase-25
+sprite frame expects 128 decoded bytes from a bounded fixed input. The row-six
+map selections themselves choose only codec-six chunks. These input findings
+add no C ownership or natural runtime coverage; the parser mismatch remains.
+
 The
 [offer refresh](SCENE_LINK_ENTRY.md) owns 596 bytes with its canonical 24-byte
 record owner. The [activity-zero initializer](SCENE_CONTACT_ACTIVITY_ZERO.md)

@@ -174,6 +174,24 @@ existing malformed-input, instruction-budget and nullable-count controls pass.
 The input guards stop at the next separately referenced containers; they do not
 establish exact compressed-object extents.
 
+The two cell streams and both fixed row-six selection streams also pass a
+passive history-read check in that unchanged model. All six native history-load
+sites are observed regardless of address: 2,527 loads access only bytes already
+written within their own output segments. All 5,576 produced bytes are written
+before inspection or the selections' delta pass. Controls detect an omitted
+write mark and a model load from a separately mapped prefix the decoder has not
+written. The fixed outputs, instruction counts and writes reproduce the earlier
+results.
+These observations concern the four fixed modeled outputs, with the runtime
+premises below.
+
+After the matched delta transformation, the selections contain 1,004 and 493
+tile indices. Their actual forward descriptor traversal visits only the two
+codec-six chunks of tile resource `0x08DC0D28`; every selected scratch span fits
+the allocated `0x8000` bytes. This does not establish the chunks' decoded pixel
+initialization. It supplies no entry to the separate copied tile decoder at
+`0x030036D0`.
+
 The type headers separately give `(1,044 - 4) / 2 = 520` primary cells and a
 52-byte extra DMA payload. Its destination ends at byte `1,044 + 52 = 1,096` of
 the `0x2800` type-map allocation; 56 advertised scratch bytes fit `0x2000`.
