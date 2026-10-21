@@ -188,3 +188,50 @@ four-byte literal and two compiler alignment bytes are newly mapped. The other
 three bodies replace existing inventory rows; their 144 bytes reduce the known
 source backlog. This does not establish an incoming root for the getter or a
 complete executable denominator.
+
+## Independently bounded point-equality helper
+
+The unrooted helper at `080273FC` compares two canonical `FramePoint` objects.
+It reads signed word coordinates at offsets zero and four, reaches the y reads
+only when x matches, and returns a word containing zero or one. The pointers may
+alias; each reached field requires valid aligned backing. The chosen two-const-
+pointer and unsigned-word result interface is provisional: no incoming caller
+establishes the original result typedef or unused formals.
+
+Its complete 36-byte extent contains 34 instruction bytes and two zero
+alignment bytes before the owned entry at `08027420`. The unchanged compiler
+output assembles to a 34-byte object with the pinned historical assembler;
+the existing linker supplies the two zeros. The modern assembler instead
+rounds the input section with a Thumb NOP and does not match. No authored
+padding or instruction replacement is used. Full normal/strict comparisons,
+genuine changed-result controls and actual-definition/layout checks pass.
+
+This replaces one 34-byte estimated row and maps two alignment bytes, with no
+new instruction extent. Incoming execution, complete object/input populations
+and gameplay remain open.
+
+## Independently bounded direction-step helper
+
+The unrooted 64-byte helper at `080274E4` narrows its current and target inputs
+to bytes and computes their difference modulo 32. Differences up to and
+including 16 choose a step of minus one; larger differences choose plus one.
+Equality therefore also chooses minus one. Each branch writes the actual
+signed-byte output, which is read back and added to the captured current byte.
+After byte truncation, results up to 31 are returned, 32 becomes zero, and
+other results become 31. Replacing these cases with general modulo 32 would
+change behaviour for some byte inputs.
+
+Branch-specific output stores preserve the native readback through early
+optimization; late tail sharing merges the store. The signed-byte output view
+also preserves the negative constant used by the native materialization.
+The unsigned-byte view converts it to 255 and does not match. Both views store
+the same byte and yield the same final byte sum here; the compiler match
+supports this reconstruction without establishing the original typedef.
+No volatile access, register binding or input restriction is introduced.
+
+Its full extent consists of 64 instruction bytes, with no literal or alignment
+bytes. Normal/strict comparisons and genuine changed-tie controls pass, as do
+actual-definition contract checks. This replaces the existing 64-byte row
+without adding mapped extent. Writable output backing is required; incoming
+execution, original unused formals, full input/backing populations and gameplay
+remain unproved.

@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,431 C functions / 301,992 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 306,052 bytes; original slices
-still supply 16,471,164 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,433 C functions / 302,092 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 306,152 bytes; original slices
+still supply 16,471,064 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **67 unowned rows / 19,606
+[inventory](../assets/rom-inventory.json) contain **65 unowned rows / 19,508
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -171,3 +171,13 @@ setter consumes all four coordinate inputs; its actual caller discards the resul
 inspected collection-count writer chains do not establish an IRQ alias that
 would justify volatile reads in the held removal helper. These findings add
 no source credit or gameplay evidence.
+
+The [unrooted point-equality helper](VIEW_EFFECTS_RECONSTRUCTION.md#independently-bounded-point-equality-helper)
+and [direction-step helper](VIEW_EFFECTS_RECONSTRUCTION.md#independently-bounded-direction-step-helper)
+at `0x273FC` and `0x274E4` add two ordinary C bodies / 100 extent bytes:
+98 instruction bytes and two linker zero-alignment bytes. They compare the
+canonical two-word points and select/store a signed-byte direction step with
+the native byte-wrap cases. Two existing rows / 98 estimated bytes are
+replaced; only the two alignment bytes are newly mapped. Incoming callers,
+original typedefs and complete input/backing populations remain open. This
+local gain leaves the priority blockers above unresolved.

@@ -26334,6 +26334,20 @@
         "Complete12-byte normal/strict positives match fixed-ROM; source.o $t0/$d6 and linked.elf $t@entry/$d@entry+6 independently checked. Actual .align 2,0 at source.s line14 supplies these two zero bytes before root literal at relative8.",
         "Leaf BX LR at relative4 precedes this alignment; no incoming entry or complete caller population is claimed."
       ]
+    },
+    {
+      "name": "frame_points_equal_unrooted_273fc_alignment_02741e",
+      "owner": "frame_points_equal_unrooted_273fc",
+      "rom_offset": 160798,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "7ae10c9bfbeb681fe1278926ba8a93197e8a8dbfe7a47600715f409d8ef7f731",
+      "evidence": [
+        "Pinned binutils2101 source.o .text ends at relative34; actual externs.o .text is empty. Frozen standard function.ld line1 includes only *(.text), then . = ALIGN(4), with explicit zero fill. Linked/native full extent is36bytes, exactly2bytes longer.",
+        "Complete fixed native and linked text agree; two linker alignment bytes are zero. Linker-emitted data role, with no trustworthy assembler $d boundary or alternate-entry exclusion.",
+        "Normal and strict full36-byte positives and genuine result1-to2 changed-source controls preserve the34-byte instruction object and empty externs object; the existing linker alone supplies the two zero bytes. This is alignment-role evidence only, without alternate-entry exclusion."
+      ]
     }
   ],
   "indirect_producers": [
