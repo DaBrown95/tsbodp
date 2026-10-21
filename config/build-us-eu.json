@@ -55189,6 +55189,63 @@
         "before": "dimensions->y = g_resource_view_dimensions[index].y;",
         "after": "dimensions->y = g_resource_view_dimensions[index].x;"
       }
+    },
+    {
+      "name": "frame_bounds_overlap_unrooted_1107c",
+      "rom_offset": 69756,
+      "size": 304,
+      "source": "src/frame/frame_bounds_overlap_unrooted_1107c.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "if (right < first_left)",
+        "after": "if (right <= first_left)"
+      },
+      "expected_sha256": "818b397271751d3d6cd5ab6e5ebd2d9c518a6e1877532e69435943a3dadbb1dd"
+    },
+    {
+      "name": "frame_stop_pair_and_wait_unrooted_1133c",
+      "rom_offset": 70460,
+      "size": 36,
+      "source": "src/frame/frame_stop_pair_and_wait_unrooted_1133c.c",
+      "symbols": {
+        "frame_need_effect_stop_at_position": "0x0802b3b9",
+        "frame_set_variant_state": "0x08001be1"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_stop_at_position",
+        "frame_set_variant_state"
+      ],
+      "negative_control": {
+        "before": "->timer = 60;",
+        "after": "->timer = 59;"
+      },
+      "expected_sha256": "3ef9ab2b8f4a42e05775ef2500f5d8e237dff3e90b4293ba5045eb1f4d950ef0"
+    },
+    {
+      "name": "display_read_control_flags_unrooted_e1ec",
+      "rom_offset": 57836,
+      "size": 16,
+      "source": "src/display/display_read_control_flags_unrooted_e1ec.c",
+      "symbols": {
+        "g_display_control": "0x03002ef0"
+      },
+      "negative_control": {
+        "before": "return g_display_control.flags & mask;",
+        "after": "return g_display_control.flags | mask;"
+      },
+      "expected_sha256": "d96477918ce48c49e097e9a463a5bef841153f5a8162ce2049e0acc22a89c33d",
+      "unresolved_interior_entries": [
+        {
+          "rom_offset": 57838,
+          "mode": "Thumb",
+          "pointer_rom_offsets": [
+            559892
+          ],
+          "pointer_word": "0x0800E1EF",
+          "limitation": "Possible interior entry only. If executed, R0 supplies mask and R1 must already address readable word backing. No backed table/record consumer, R1 producer or runtime target is established; full E1EC source ownership does not resolve this entry and gives it no separate C credit."
+        }
+      ]
     }
   ],
   "assembly": [

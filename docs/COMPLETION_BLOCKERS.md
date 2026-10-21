@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,419 C functions / 301,228 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 305,288 bytes; original slices
-still supply 16,471,928 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,422 C functions / 301,584 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 305,644 bytes; original slices
+still supply 16,471,572 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **77 unowned rows / 20,334
+[inventory](../assets/rom-inventory.json) contain **74 unowned rows / 19,990
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -101,3 +101,16 @@ Keep one current paired proof and controls, unique attempts and bounded useful
 failures. Retire obsolete payloads under the existing
 [retention policy](LOCAL_OUTPUT_RETENTION.md), keep the project below 5 GB and
 leave backups and unrelated files alone.
+
+Three independently bounded source bodies add 356 C extent bytes: the
+[collider-overlap predicate](FRAME_COLLISION_RESPONSE.md#unrooted-collider-overlap-predicate),
+[two-object stop/timer](ACTOR_STATE_RECONSTRUCTION.md#independently-bounded-two-object-stop-and-timer)
+and [display flags query](DISPLAY_MAP_RECONSTRUCTION.md#independently-bounded-display-control-flags-query).
+Their normal/strict matches and genuine controls preserve the existing owners
+and provider contexts. The former three rows totalled 344 estimated bytes;
+twelve newly mapped bytes comprise two instruction bytes, four literal bytes
+and six alignment bytes. The possible `0xE1EE` interior entry is covered by the full
+`0xE1EC` source, but its pointer owner, consumer and prepared-R1 contract remain
+unresolved in manifest metadata. Its disappearing weak row is physical coverage,
+not an incoming-contract resolution. The known backlog is still not a complete
+code denominator, and no runtime observation is added.

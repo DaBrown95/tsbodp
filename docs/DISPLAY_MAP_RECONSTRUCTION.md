@@ -156,5 +156,33 @@ Normal and strict compilation reproduce all 100 bytes. Real flag mutations rejec
 and checks against the actual caller sources, accepted heap provider definitions and
 canonical record layout preserve their separate compilation contexts. Names and
 incoming reachability remain provisional; these source comparisons add no runtime or
-gameplay observation. The separate `0xE1EC` leaf and possible `0xE1EE` alternate
-entry are outside this pair.
+gameplay observation. The separately reconstructed `0xE1EC` query and possible
+`0xE1EE` alternate entry remain outside this pair.
+
+## Independently bounded display-control flags query
+
+The [full leaf at
+`0xE1EC`](../src/display/display_read_control_flags_unrooted_e1ec.c) returns the
+complete word result of `g_display_control.flags & mask`. The canonical flags
+word is at `0x03002EF0`; the consumed mask arrives in R0. This is a bitmask
+result, with no boolean normalization, state mutation or additional consumed
+input at that full entry. The 16-byte extent contains ten instruction bytes, two
+zero alignment bytes at `0xE1F6` and the four-byte global-base literal at
+`0xE1F8`. Normal and strict positives match the full extent; real AND-to-OR
+source controls reject by one byte. Current source API/layout checks preserve
+the full word contract.
+
+The full 16-byte source owner at `0x0800E1EC` does not resolve a possible
+interior entry at `0x0800E1EE`. The sole aligned ROM word containing
+`0x0800E1EF` is at `0x08088B14`; its data owner and executable consumer remain
+unknown. Entry at `0x0800E1EE` skips the global-base load and would require R0
+as mask and R1 already addressing readable word backing. This is an unresolved
+register precondition, not a recovered second formal of the full-entry source.
+The manifest retains this observation in `unresolved_interior_entries`.
+
+The inventory seeds full source bodies before weak pointer candidates and skips
+pointer targets already decoded as instructions. It may therefore omit the old
+eight-byte E1EE candidate without adding a folded-entry record. This reflects
+physical source coverage; it does not establish a caller, root, ABI or runtime
+execution. E1EE remains instruction-bearing and receives no separate C-function
+credit.

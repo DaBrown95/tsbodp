@@ -13,11 +13,13 @@ are separate results; this does not establish complete game behaviour.
 
 The resolver ends at `0x1107C`. Its complete source symbol and allocated text
 include the 32-byte eight-way table and four-byte table-base literal. The next
-304-byte function remains original, including its two-byte alignment tail;
-the already accepted callbacks at `0x111AC` and `0x111F8` are separate. An early
-private 1,168-byte span hypothesis was rejected and preserved before source
-acceptance. Both new source symbols own their full declared extents; there is
-no additional source-tail or low-level glue credit in this path.
+304-byte unrooted collider-overlap predicate is separately source-owned,
+including its two-byte alignment tail; the accepted callbacks at `0x111AC` and
+`0x111F8` remain separate. Its proof does not extend the bounded runtime/model
+claims for this response path. An early private 1,168-byte span hypothesis was
+rejected and preserved before source acceptance. Both new source symbols own
+their full declared extents; there is no additional source-tail or low-level
+glue credit in this path.
 
 The callback receives two `CollisionObject` pointers in receiver/other order.
 It reads the receiver radius byte at `+0xAE`, compares the accepted distance
@@ -109,9 +111,49 @@ sets pending bits `0x12`. There is no additional direction guard.
 
 Both complete extents match under the normal and strict declaration checks, and
 genuine changed-source controls are rejected. The second extent includes its
-four-byte table-address literal; neither adds glue credit. Separate checks retain
-the actual variant setter in its original source context and reject wrong contracts
-and field layouts. Valid initialized object backing, a valid reached table index and
-the existing partial-view compatibility assumptions remain preconditions. Byte
-equality does not establish incoming callers, table capacity or gameplay
-reachability. The intervening original body at `0x1107C` remains separate.
+four-byte table-address literal; neither adds glue credit. Separate checks
+retain the actual variant setter in its original source context and reject wrong
+contracts and field layouts. Valid initialized object backing, a valid reached
+table index and the existing partial-view compatibility assumptions remain
+preconditions. Byte equality does not establish incoming callers, table capacity
+or gameplay reachability. The separately source-owned overlap predicate at
+`0x1107C` remains unrooted and outside this pair.
+
+## Unrooted collider-overlap predicate
+
+The [overlap predicate](../src/frame/frame_bounds_overlap_unrooted_1107c.c) at
+`0x0801107C` owns 304 C extent bytes: 302 instruction bytes and two terminal
+alignment bytes. It compares the second object's aggregate bounds with each
+active collider of the first and returns one when any pair overlaps, otherwise
+zero. Edge contact counts as overlap. The incoming two-pointer view and name
+remain provisional; no caller or callback installation is established.
+
+Both inputs use the existing `FrameAnimationObject` access view. Animation
+refresh, tick and part-collider writers already own its count byte at `0xAF` and
+two packed six-byte records at `0xB0`. This predicate interprets physical record
+bytes zero through three as signed left, right, top and bottom offsets. Existing
+member names `x`, `y`, `width` and `height` are provisional slot names here; the
+record does not compute right as `x + width` or bottom as `y + height`. Byte
+four is the signed nonzero activity kind. The second object's aggregate offsets
+occupy `0xBC..0xBF`. Signed fixed-point upper halves and the signed horizontal
+mirror bit reproduce the native geometry.
+
+The chosen C domain requires live compatible initialized object/record backing
+and a collider count no greater than two. Reached serialized counts and the
+complete incoming object population are not proved to satisfy that domain, and
+no count clamp is added. Adding or subtracting a signed byte from a signed upper
+half stays within the target integer range. The function makes no calls or
+object writes; that static effect comparison is not runtime or gameplay
+observation.
+
+Normal and strict builds match every extent byte, and genuine edge-comparison
+controls reject by one byte. Separate actual refresh and tick source contexts
+retain their canonical declarations and 25 layout/sign facts; wrong contracts,
+offsets, record stride and kind sign are rejected. Their unchanged
+full-body/control proofs are reused. Deriving the current record address from
+the actual index lets the pinned optimizer create the native cursor after the
+initial count guard and advance it before the byte offset and index. The earlier
+source attempts remain useful failures; no register binding or header change was
+needed. This independently bounded function replaces a 302-byte estimated
+backlog row. Its two alignment bytes are newly mapped; it adds no newly
+discovered instruction extent or glue credit.

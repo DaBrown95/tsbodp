@@ -1468,3 +1468,25 @@ Both full extents match; real controls changing the upper bound from 35 to 34
 compile and reject by one byte. The former estimate covered 18 bytes, so only the
 two alignment bytes are newly mapped. This establishes no new executable
 discovery, alternate-entry exclusion, runtime coverage or gameplay behavior.
+
+## Independently bounded two-object stop and timer
+
+The [36-byte body at
+`0x1133C`](../src/frame/frame_stop_pair_and_wait_unrooted_1133c.c) stops each of
+its two supplied objects at its current position, then selects variant seven on
+the first and writes its word timer at `+0x58` to 60. Both stop calls remain,
+including when the supplied objects alias. The existing stop provider copies
+current to next position, clears velocity and sets contact mask `0x1`; the
+existing variant setter updates its byte and pending mask `0x2` only when the
+variant changes. The source reuses the canonical timer view and provider
+declarations.
+
+Its complete extent has 34 instruction bytes and two zero alignment bytes at
+`0x1135E`, immediately before the owned `0x11360` entry. Normal and strict
+positives reproduce all 36 bytes, and genuine timer-60-to-59 controls reject by
+one byte. Actual source interface/layout checks and the unchanged accepted
+provider contexts preserve their separate compilation contexts. The chosen void
+interface consumes two object pointers; incoming roots, additional unused
+formals, live backing populations and gameplay remain unresolved. This
+independently bounded body is required source ownership, with no inferred
+collision installation or runtime observation.
