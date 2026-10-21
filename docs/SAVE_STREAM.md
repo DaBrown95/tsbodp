@@ -143,6 +143,33 @@ bound. One-bit fields at world `+0x747/+0x749`, byte fields at
 one retained unconverted module serializer and four accepted serializers, it
 writes byte `+0x740`. Their content roles remain provisional.
 
+The paired, still-unconverted loader at `0x0801B704` restores only
+`0x030040E7..0x030040EB` through those three byte-copy calls. Its fresh byte
+read at `0x0801B78C` instead selects the row through `0x03004111`. That address
+is shared by `InputConfig.local_player`, `TransitionViewContext.current_view`
+and the clock-selection row. The five restored bytes therefore do not bound
+the incoming row selector.
+
+There is a concrete additional writer: [world-default reset](../src/save/reset_world_defaults.c)
+clears 52 bytes at `0x030040E0`, including selector byte 49. Its following store
+sets byte 48 to one and leaves byte 49 zero. On the expiring phase-two path
+with `matched08 == 0`, the [serial-session step](../src/scene/scene_contact_step_serial_session.c)
+calls that reset and world initialization, commits slot three, then queues
+request kind one / mode five. Phase-table row ten names the serial-session
+callbacks. Once the handoff accepts the request, row one's begin callback reaches
+[scene preparation](../src/scene/scene_prepare_load.c), whose mode-five branch
+calls the buffer loader and then `0x0801B704`. This identifies a static producer
+and a connected possible load route, without establishing a natural runtime
+arrival or a preserved zero.
+
+After the serial step returns, the [handoff driver](../src/scene/step_request_handoff.c)
+refreshes live objects before processing the queued request. The serial end
+callback also runs a transition across VBlanks before the next begin callback.
+Object callbacks, interrupts and later aliases remain possible intervening
+writers. Establish the last writer and its preservation through `0x0801B78C`
+for each claimed incoming route; the reset does not close that population or
+explain the loader's remaining compiler mismatch.
+
 The connected 128-byte record producer at `0x08031F7C` writes its first sixteen
 bytes, two pairs and six nibbles, then invokes child serializers at offsets
 `+0x18/+0x20/+0x88/+0xA0`. The final child is the already accepted
