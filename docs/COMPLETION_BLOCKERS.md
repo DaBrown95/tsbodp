@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,430 C functions / 301,944 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 306,004 bytes; original slices
-still supply 16,471,212 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,431 C functions / 301,992 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 306,052 bytes; original slices
+still supply 16,471,164 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **68 unowned rows / 19,654
+[inventory](../assets/rom-inventory.json) contain **67 unowned rows / 19,606
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -154,3 +154,20 @@ unchanged by the inspected writers. The text row reader's current calibration
 reproduces 140 / 80: R8 is preserved, while the incoming tile pointer receives
 a four-byte spill frame. No source variant or shared compiler-switch explanation
 follows from those findings.
+
+
+The [unrooted transient/view coordinator](SCENE_REQUEST_HANDOFF.md#unrooted-transient-and-view-coordinator)
+at `0x27DF0` adds one ordinary C body / 48 extent bytes: 44 instruction bytes and
+four literal bytes. It steps transient effects, then passes each byte index to
+the existing view updater, reloading the shared count after every call. It
+replaces one estimated row without adding mapped extent; incoming roots and
+complete count/backing/writer domains remain open.
+
+The canonical glyph-renderer diagnostic retains the actual word buffer,
+font/state types and provider interfaces. It reproduces 684 / 559; argument
+values survive earlier passes, and GREG/reload assigns the differing stack
+homes. A native-sized frame alone does not resolve that mismatch. The window
+setter consumes all four coordinate inputs; its actual caller discards the result. The
+inspected collection-count writer chains do not establish an IRQ alias that
+would justify volatile reads in the held removal helper. These findings add
+no source credit or gameplay evidence.

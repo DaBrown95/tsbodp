@@ -55357,6 +55357,27 @@
         "before": "g_display_text_state.pixel_mode = value;",
         "after": "g_display_text_state.pixel_mode = value + 1;"
       }
+    },
+    {
+      "name": "scene_step_transient_and_views_unrooted_27df0",
+      "source": "src/scene/scene_step_transient_and_views_unrooted_27df0.c",
+      "rom_offset": 163312,
+      "size": 48,
+      "mode": "Thumb",
+      "compiler_id": "agbcc",
+      "symbols": {
+        "g_scene_primary_views": "0x030040e0",
+        "frame_step_transient_effects": "0x080310c5",
+        "scene_update_view": "0x0801e799"
+      },
+      "thumb_symbols": [
+        "frame_step_transient_effects",
+        "scene_update_view"
+      ],
+      "negative_control": {
+        "before": "++index;",
+        "after": "index += 2;"
+      }
     }
   ],
   "assembly": [

@@ -20,9 +20,10 @@ and is rejected by a compiler type-assignment diagnostic.
 Selection returns zero when eligibility or the random test fails. Otherwise it
 reads signed relation entry 13, treats the `-128` sentinel as zero, and passes
 `(relation + 100) / 2` to the matching signed random-range provider. A result
-greater than two fails. The original kind scanner selects result four;
-otherwise the original removal helper runs and the result is two. Both success
-paths store one in the requested byte. The existing byte-return selection
+greater than two fails. The [kind scanner](RESOURCE_COLLECTION_KIND_SCAN.md)
+selects result four; otherwise the original removal helper runs and the result
+is two. Both success paths store one in the requested byte. The existing
+byte-return selection
 interface remains unchanged, and all native exits return zero, two or four.
 Neither the inferred selection name nor those values establish actor-ID or
 gameplay meanings.
@@ -48,17 +49,19 @@ these proofs use its final current headers.
 Twenty-five bounded initialized Thumb fixtures check actual branch, argument,
 return and write traces. Eleven cases distinguish the source controls. Provider
 hooks supply explicit typed results and clobber caller-saved registers; they do
-not execute the original scanner, remover or count algorithm, or prove random
+not execute the scanner, remover or count algorithm, or prove random
 distribution. One negative relation yields a negative random upper argument;
 the fixture checks that argument flow under an abstract return, without adding
 a guard or establishing an interval-validity guarantee.
 
-The kind scanner at `0x0804573C` and remover at `0x080454DC` remain explicitly
-original. The connected count helper is recovered below. The scanner's collection pointer is
+The [kind scanner at `0x0804573C`](RESOURCE_COLLECTION_KIND_SCAN.md) is recovered;
+the remover at `0x080454DC` remains explicitly original. The connected count
+helper is recovered below. The scanner's collection pointer is
 the canonical actor-context member at `0x03003A2C + 0x31C`, rather than a new
-independent global. Its incomplete C trials are not credited. Arbitrary scene,
-actor, pointer, capacity, stage and random-interval validity remain unchecked;
-these static and compiler findings do not prove gameplay behavior.
+independent global. Its complete source and bounded verification are described
+in the scanner notes. Arbitrary scene, actor, pointer, capacity, stage and
+random-interval validity remain unchecked; these static and compiler findings
+do not prove gameplay behavior.
 
 
 ## Selectable collection-entry count
@@ -151,8 +154,9 @@ and pointer contracts even where native return constants cannot determine the
 original type spelling. Bounded instruction fixtures cover initialized and
 nonwriting output paths and high-word inputs; they do not establish hardware
 or gameplay behavior. Pointer validity, arbitrary output capacity and the
-original removal retry's stage/count validity remain unchecked. The scanner
-and complete random-removal body remain explicit original regions.
+original removal retry's stage/count validity remain unchecked. The
+[scanner](RESOURCE_COLLECTION_KIND_SCAN.md) is recovered; the complete
+random-removal body remains an explicit original region.
 
 ## Row collection publication
 
