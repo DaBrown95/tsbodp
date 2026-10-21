@@ -74,3 +74,15 @@ This bounded audit does not exhaust writable
 callback provenance, before-step/step effects or generic aliases. Distinct pool
 membership and complete writer populations remain requirements for unconditional
 table safety. No renderer/finalizer match or new mapped extent follows.
+
+The actor-presence bank has a separate conditional bound. In the retained
+50-root / 105-pack serialized population, all 463 distinct factory-seven actor
+payloads use IDs 6..41. IDs 18..41 address the bank's 24 bytes; lower IDs skip
+the store. An unchecked ID 54 would instead address the low byte of the
+need-effect free-list root, but no backed successful constructor route for that
+ID is established. The saved world `+0x740` byte is copied without semantic
+range validation, and its later eligibility test does not validate actor IDs.
+Reset 42 is skipped; the named default-interaction route from valid actors
+restores 18..41. Other saved/menu producers, constructor resource backing and
+later subtype or payload writers remain open. A possible numeric alias alone
+does not establish a valid write to the other pool.

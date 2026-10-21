@@ -237,9 +237,14 @@ constrains only the actual persistent object owner to native R8. Every object
 use, including the final position argument, uses that
 owner; the incoming duplicate dies before any random call. The actual providers
 preserve R8. This confirms the owner lifetime but emits 536 bytes with 499
-differences and displaces amount, palette and availability values. Further
-bindings, stack records or declaration-order searches do not follow from these
-results. The next source hypothesis needs a distinct storage or lifetime fact.
+differences and displaces amount, palette and availability values. One subsequent
+composition also preserves the actual native amount in R10 and palette in R9.
+All three homes survive, but the result is 536 bytes with 492 differences and
+a 48-byte frame rather than 52. The selected-row and accepted phase-snapshot
+homes now agree; the accepted flag, availability values and output arguments
+do not.
+This closes that register composition. Further bindings, stack records or
+declaration-order searches need a distinct storage or lifetime fact.
 
 The fixed tables establish a conditional bound for option 0..4: selection stays
 within the five row records, phase indices stay within 0..6, and acceptance

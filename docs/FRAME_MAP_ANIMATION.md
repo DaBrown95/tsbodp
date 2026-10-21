@@ -204,6 +204,40 @@ callback, and unchanged row, base and size across intervening providers remain
 premises. Wider selectors, writers, copied-code states and gameplay remain open.
 This adds no C ownership, executable discovery or native runtime coverage.
 
+## Row-six writer domain
+
+The drawer's separate row-six primary maps are both 20 by 26, with 520
+halfword cells after a four-byte prefix. The rectangle writer is the sole
+established maintained C caller of `frame_write_map_cell`; this does not prove
+the absence of other ROM callers. It passes the object's map byte, signed
+integer positions narrowed to unsigned halfwords, and its current byte index.
+The current index increments modulo 256 after each cell. Neither the width and
+height loop guards nor the animation endpoint guards validate map selection,
+coordinates or secondary backing.
+
+Each named secondary header advertises 56 bytes, leaving 26 halfwords after
+its prefix. A [controlled original-wrapper decode](RUNTIME_OBSERVATIONS.md#controlled-row-six-secondary-decoding)
+now produces all 56 bytes for each named stream. Its 26 values stay in 0..24
+and 0..18; adding the actual prefixes yields only initialized combined groups
+471..495 and 258..276. This establishes values for valid source indices, not
+the caller's index population.
+For a stable nonempty rectangle of `N = width * height` cells,
+every secondary read is backed exactly when the starting index is at most 25
+and `N <= 26 - starting_index`. A zero width or height issues no cell writes.
+The simple callback writes before its endpoint check. The reversible callback's
+initial endpoint tests also do not enforce this condition; its byte subtraction
+can wrap without further payload invariants.
+
+For the row-six primary backing, the actual narrowed destination index
+`(unsigned short)((x >> 5) + 20 * (y >> 5))` must be below 520. Conventional
+cell coordinates within 20 columns and 26 rows suffice, but no such caller
+checks are established. Serialized payloads supply coordinates, map, first
+index and frame count. The simple payload supplies dimensions directly; the
+reversible payload selects dimensions and step through a kind-indexed ROM
+definition without a proved table bound. No particular row-six animation
+payload or natural spawn population has been established. Live allocations,
+stable object/record state and later writers remain separate premises.
+
 ## Independently bounded extra-map getter
 
 The [getter at `0x2B2C8`](../src/frame/frame_unrooted_read_extra_map_cell_2b2c8.c)

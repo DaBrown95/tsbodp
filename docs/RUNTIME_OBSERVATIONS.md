@@ -343,6 +343,44 @@ other consumers and alternate execution remain open. No source, instruction,
 mapped-extent or inventory-count credit is added; generated assets and the
 current paired matching proof remain unchanged.
 
+## Controlled row-six secondary decoding
+
+A bounded mGBA 0.10.5 fixture executes the original dispatcher at `0x08016978`,
+its SWI-11 wrapper at `0x0804C8DC` and the delta pass at `0x08016B78` for the
+two named row-six secondary streams, `0x08DBFF38` and `0x08DC0D00`. These use
+codec nine: BIOS LZ77 followed by the native halfword delta operation. The
+replacement BIOS provides the HLE service; this is not retail BIOS or hardware
+execution. Synthetic EWRAM output and separate system/supervisor stacks are
+disjoint. The game path starts and returns with IRQ/FIQ masked; the unchanged
+BIOS stub temporarily clears F in its system/supervisor phases. Timing events
+remain suspended, IRQ/FIQ modes are excluded and execution is restricted to
+the named game bodies and actual small BIOS service/stall/return path.
+No game code or callback is changed.
+
+Both calls return 56 bytes naturally, after 1,001 and 1,163 CPU steps. Each
+output byte is initialized before inspection; all LZ77 history reads and native
+delta reads use initialized bytes. Each delta pass makes 27 halfword stores.
+The resulting header is `(26, 1)` for both streams. Their 26 data halfwords
+range from zero to 24 and zero to 18 respectively. Source bytes, output/stack
+guards, stack restoration and the inspected I/O state remain intact.
+
+Authored literal-only raw and delta calibrations distinguish the codec flag
+and check exact expected output. A one-instruction budget stops before decoding;
+a wrong-mode case rejects before execution. All six cases reproduce their
+results and rolling instruction/opcode checksums on fresh-core replay, without emulator
+errors. The first run caught an observer-attribution error: a fixture opcode
+inspection was counted as a game load. Restricting that accounting to execution
+steps fixes the observer; its failed packet and repair remain private.
+
+For source indices 0..25, adding the actual combined prefixes gives tile IDs
+471..495 and 258..276, all inside the separately modeled 496 and 277 initialized
+groups. This closes that finite secondary-value question. The
+[animation callers](FRAME_MAP_ANIMATION.md#row-six-writer-domain) do not establish
+the required index, coordinate or map domain. Actual serialized animation
+population, live heap/backing, installation context, other writers and natural
+scene execution remain open. No C, instruction, mapped-extent or inventory-count
+credit follows, and no unchanged full matching build is required.
+
 ## Meaning of an observation
 
 Hardware breakpoint checks run after one emulator step and compare the next

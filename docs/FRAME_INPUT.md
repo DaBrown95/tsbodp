@@ -925,12 +925,39 @@ for both color-bit reads. Splitting the real count calculation into its two
 evaluation phases then recovers native count-before-color read order, including
 the DMA source/destination stores before its count read. The resulting source
 emits 396 bytes with 212 byte differences, including four extra bytes, against
-the native 392-byte extent.
+the native 392-byte extent. Forming the complete unsigned integer DMA source
+address before converting it to a pointer then recovers the native base-add
+before subtraction, leaving 396 bytes with 205 differences. This avoids an
+out-of-object pointer intermediate; it does not establish live scratch backing.
 The frame remains 20 bytes instead of 24, with different resource, control,
 chunk-size and loop homes. Expression variants are closed pending a distinct
 storage or lifetime fact; native stack copies alone do not justify volatile
 storage or a fabricated work record. Allocation, decoded backing, initialized
 scratch spans, callback writers and hardware execution remain conditional.
+
+A review of the drawer's existing genuine eight-byte copies closes another
+apparent source variation. Their grouped loads survive through CSE2, but the ARM
+backend requires different base registers and separate pointer advances; later
+optimization also loses the native width reload. The retained direct-copy
+attempt is 332 bytes with 287 differences against 320 native bytes. This is a
+different cause from the scalar-address decomposition in the two-four-byte-copy
+attempt. Neither supplies a matching replacement.
+
+The named row-six initial maps now have a bounded data check: both are 20 by
+26, and all 1,040 stored tile indices select initialized 32-byte groups. Reusing
+the calibrated original-ARM-body model, all six primary/combined/alternate
+streams produce their advertised output. Applying the loader's alternate-first,
+primary-second order leaves 15,876 and 8,868 initialized combined bytes, or 496
+and 277 groups. The four-byte requested append tails remain uninitialized and
+excluded. Replay and initialization-observer controls pass, and an independent
+review reopens every map cell and assembled buffer. This is a controlled model
+result, not whole-loader execution or a natural scene observation.
+
+Initial validity does not close later animation writes. The rectangle caller
+passes a byte index 0..255 to a secondary buffer with only 26 backed halfwords;
+its loop and endpoint guards do not impose that backing limit. Map selection,
+destination coordinates, actual serialized animation payloads and live
+allocations remain open. See the [writer boundary](FRAME_MAP_ANIMATION.md#row-six-writer-domain).
 
 
 The copied row-transfer entry stored at `0xB6A4` now adds 216 verified C bytes,

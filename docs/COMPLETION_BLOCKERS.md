@@ -14,10 +14,15 @@ Unverified candidates receive no credit.
 
 The latest hard-target work adds no C coverage. Activity-three preparation now
 has measured phase lifetimes and eligibility storage, conditional
-table/retry bounds and a coordinate-feasibility proof; frame/value homes and
+table/retry bounds and a coordinate-feasibility proof. Preserving all three
+native high-register values still leaves a 536-byte / 492-difference attempt;
+frame/value homes and
 complete input writers remain open. See [its current findings](SCENE_CONTACT_ACTIVITY_THREE.md#preparation-worker-current-causes-and-input-bounds).
 The selected-tile worker has a current private owner/word-read diagnostic but
 still fails full comparison; see [the map path](FRAME_INPUT.md).
+Both row-six initial maps fit initialized combined data in the calibrated
+decoder model; later animation index, coordinate, map and lifetime domains
+remain conditional. See [the writer boundary](FRAME_MAP_ANIMATION.md#row-six-writer-domain).
 The explicit 128-slot object pool bounds the renderer table only under intact
 membership and traversal premises. A saved auxiliary pointer can already name
 a child returned to the free list; see [the callback limits](BOUNDED_INVENTORY.md#conditional-renderer-table-bound-21-october-2026).
