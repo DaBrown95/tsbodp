@@ -7,9 +7,9 @@ void display_menu_shutdown(void)
 {
     struct FrameObject *object = g_need_effect_player;
     unsigned char previous =
-        g_display_menu_relation_state.unknown_00[0x20];
+        g_display_menu_relation_state.values.baseline;
     unsigned char current = (unsigned char)display_menu_read_relation(
-        &g_display_menu_relation_state.unknown_00[0x20],
+        &g_display_menu_relation_state.values,
         g_display_menu_state.definition);
     int difference;
     unsigned char narrowed_difference;

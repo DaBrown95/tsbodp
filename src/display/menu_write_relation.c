@@ -4,8 +4,8 @@
 int display_menu_write_relation(struct DisplayMenuRelationState *state,
                                 unsigned int index, int value)
 {
-    state->records[index].value = value;
-    display_menu_refresh_relation((unsigned char *)state + 0x20);
+    state->values.records[index].value = value;
+    display_menu_refresh_relation(&state->values);
     condition_update_actor_context(state);
     return value;
 }

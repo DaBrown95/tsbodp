@@ -70,3 +70,32 @@ prove that population. Values with magnitude 110 through 127 can select frames
 21/22 or wrapped 254/255. These are invalid selections in an already known
 resource, not evidence of additional executable code. Raw writer, backing,
 text and runtime input domains remain open.
+
+## Shared relation prefix
+
+The relation providers now share one 104-byte values type: a signed baseline
+byte at zero, signed halfword average at two, byte counter at four and 24
+four-byte records at eight. The 136-byte state contains that child at `+0x20`;
+the game-state union exposes the state at `+0x10`. The average writer and
+condition reader therefore use the same declared halfword at game `+0x32`,
+without separate metrics or condition-meter structures. The pinned compiler
+aligns all three relation structures to four bytes. The game union remains
+1,876 bytes with four-byte alignment.
+
+Nine existing bodies retain all 1,232 native extent bytes under normal and
+strict compilation, with genuine changed-source controls. Shutdown keeps its
+unsigned-byte baseline snapshot before the provider call and passes the actual
+values child. This owner correction adds no functions or source bytes. Generic
+incoming pointers, other overlapping views and complete backing remain premises.
+
+The unconverted delta routine at `0x40AB4` uses criterion data at `0x08D736D0`:
+its load at `0x40B18` resolves the literal at `0x40B5C`. Older private metadata
+used an address 512 bytes too high; those nonmatching outputs receive no credit.
+A named route starts with scheduled actor IDs 18 through 41 and, while their
+default interaction and subtype remain unchanged, submits menu kind 15 with
+argument `subtype - 18`. Mode zero stores that argument as definition 0 through
+23. These fixed descriptor rows select criterion groups zero through six;
+their fourteen cells use thresholds three or seven and parameter indices zero
+through four, reading game bytes `+0x2A..+0x2E`. Mode-one returns retain the prior
+definition. Other definitions, serialized actors, later writers, original table
+bounds and gameplay remain unresolved.

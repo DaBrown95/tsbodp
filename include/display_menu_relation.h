@@ -7,24 +7,21 @@ struct DisplayMenuRelationRecord {
     signed char value;
     unsigned char unknown_02[2];
 };
+/* The observed child at main-state +0x20. The first signed byte's name is
+ * provisional; average and the byte threshold counter share this prefix. */
+struct DisplayMenuRelationValues {
+    signed char baseline;
+    unsigned char unknown_01;
+    short average;
+    unsigned char high_count;
+    unsigned char unknown_05[3];
+    struct DisplayMenuRelationRecord records[24];
+};
 /* Partial state view. The updater scans 24 records; callers establish no
  * general bound for their incoming index. Wider state storage is unknown. */
 struct DisplayMenuRelationState {
-    unsigned char unknown_00[0x24];
-    unsigned char high_count;
-    unsigned char unknown_25[3];
-    struct DisplayMenuRelationRecord records[24];
-};
-/* Getter and average views receive the state base plus 0x20. */
-struct DisplayMenuRelationValues {
-    unsigned char unknown_00[8];
-    struct DisplayMenuRelationRecord records[24];
-};
-struct DisplayMenuRelationMetrics {
-    unsigned char unknown_00[2];
-    short average;
-    unsigned char unknown_04[4];
-    struct DisplayMenuRelationRecord records[24];
+    unsigned char unknown_00[0x20];
+    struct DisplayMenuRelationValues values;
 };
 /* ROM tables have observed eight- and four-byte strides, respectively. */
 struct DisplayMenuRelationTraits {

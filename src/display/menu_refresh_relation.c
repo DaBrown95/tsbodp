@@ -2,7 +2,7 @@
 
 void display_menu_refresh_relation(void *pointer)
 {
-    struct DisplayMenuRelationMetrics *state = pointer;
+    struct DisplayMenuRelationValues *state = pointer;
     int total = 0;
     unsigned int index = 0;
     do {

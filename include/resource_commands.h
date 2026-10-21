@@ -89,7 +89,14 @@ struct ResourceActorState {
     unsigned char unknownf4[0x748 - 0xF4];
     unsigned char selected_actor;
 };
+/* Existing relation state at game +0x10, with its values child at +0x30.
+ * This view names only the observed prefix, not a complete game allocation. */
+struct ResourceGameRelationView {
+    unsigned char unknown00[0x10];
+    struct DisplayMenuRelationState state;
+};
 union ResourceGameState {
+    struct ResourceGameRelationView relation;
     struct ResourceConditionalState conditions;
     struct ResourceActorState actor;
     struct FrameActorSceneState scene;

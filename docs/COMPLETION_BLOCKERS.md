@@ -25,6 +25,12 @@ Unverified candidates receive no credit.
 The [relation-grid refresh and getters](SCENE_RELATION_GRID.md) own 144 C
 extent bytes; their two callers remain exact. Its relation display owns another
 160 bytes with a consistent full-word percentage-provider contract. The
+[shared relation prefix](SCENE_RELATION_GRID.md#shared-relation-prefix) now gives
+the average writer and condition reader one declared halfword owner; nine
+existing bodies remain exact with no added source credit. The 692-byte delta
+routine at `0x40AB4` remains unconverted. Its corrected criterion address and
+named actor route bound one input path, while other writers and inputs remain
+open. The
 [offer refresh](SCENE_LINK_ENTRY.md) owns 596 bytes with its canonical 24-byte
 record owner. The [activity-zero initializer](SCENE_CONTACT_ACTIVITY_ZERO.md)
 owns 452 bytes using the existing item, player, option and collision owners;
