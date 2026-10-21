@@ -442,6 +442,12 @@ the extended-repeat branch. That branch has a separate expected fixture.
 The model preloads the original parser instructions; it does not sample live
 RAM code or execute the actual VRAM allocation.
 
+A subsequent [controlled emulator fixture](RUNTIME_OBSERVATIONS.md#controlled-installed-tile-decoder-fixture)
+uses the game's ordinary boot-installed code and the fixed input. It reproduces
+the same 128 bytes in a chosen VRAM span, with actual parser-word readbacks,
+guards and replay. Its private CPU/data setup and suspended events remain
+separate from natural scene execution and the actual allocator.
+
 This is a conditional source and native-instruction route to the installed tile
 decoder. The queued scene request, phase/input selection, successful live VRAM
 allocation, resource/layout views, callback and copied-code state must remain

@@ -209,6 +209,43 @@ write/readback accounting. These observations add no C credit or static-census
 input and close no arbitrary writer, alias, queue-count, callback-index or target
 domain. Other paths and gameplay remain open.
 
+## Controlled installed tile-decoder fixture
+
+The [fixture summary](../config/runtime-tile-fixture-us-eu.json) records a
+controlled call to the tile decoder after ordinary reset and installation in
+the same pinned mGBA core. Startup reaches the installer at `0x08016A48` and
+its actual return to `0x08025C5A` after 1,955,632 instruction steps, 27 frames
+and 7,602,758 emulator ticks. The callback word contains `0x030036D0`; all
+528 installed bytes equal their fixed ROM source. The decoder occupies 504 of
+those bytes; the remaining 24 are the following body's copied prefix.
+
+The fixture then supplies the
+[fixed transient frame input](DISPLAY_RECONSTRUCTION.md#fixed-transient-tile-input)
+at `0x08FD9134`, with a 112-byte input guard and a chosen OBJ VRAM destination
+at `0x06010080`. The actual installed ARM code produces the expected 128 bytes
+in 742 instruction steps, using 64 halfword output stores and ten history reads.
+All five backward-copy load sites execute after the bytes they read have been
+written. Output, count, stack and code guards pass, and the stack and preserved
+registers are restored on return. The output hash equals the earlier model's.
+
+Twenty before/after parser samples cover five visits to the compare, shift,
+OR and conditional-add positions. Live RAM and prefetched instructions retain
+the original CMP/LSR/ORR order. The five lengths are three; distances are
+4, 9, 38, 76 and 72. The extended-repeat condition is false on this input.
+An authored four-byte literal control passes; missing-terminator, one-step
+budget and odd-output-pointer controls are rejected by the fixture's guards.
+These rejections do not establish native malformed-input safety.
+
+The whole observation repeats identically from a fresh emulator core. Its cases
+share one paused core with explicit CPU/data setup between calls. During each
+call, IRQ/FIQ are masked and timing events are suspended; the private EWRAM
+stack/count and chosen VRAM span do not observe the game's allocator. Natural
+scene execution and other input, callback, code-writer, IRQ/DMA and gameplay
+domains remain open. The 504-byte C candidate still differs by eleven bytes
+and gains no credit.
+Private source, expected data, freezes, commands and observations remain under
+ignored `analysis/tile-installed-native-fixture-20261021/`.
+
 ## Meaning of an observation
 
 Hardware breakpoint checks run after one emulator step and compare the next

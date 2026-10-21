@@ -57,6 +57,9 @@ supplies a separate, conditional route to the copied tile decoder: a phase-25
 sprite frame expects 128 decoded bytes from a bounded fixed input. The row-six
 map selections themselves choose only codec-six chunks. These input findings
 add no C ownership or natural runtime coverage; the parser mismatch remains.
+The [controlled installed-code fixture](RUNTIME_OBSERVATIONS.md#controlled-installed-tile-decoder-fixture)
+now confirms the original parser order and 128-byte VRAM output for that input,
+with guards and replay. Its suspended-event context leaves broader writers open.
 
 The
 [offer refresh](SCENE_LINK_ENTRY.md) owns 596 bytes with its canonical 24-byte

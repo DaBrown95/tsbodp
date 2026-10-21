@@ -1,0 +1,147 @@
+{
+  "target": "us-eu",
+  "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
+  "observation_kind": "controlled_mGBA_subroutine_fixture_after_ordinary_boot_installation",
+  "emulator": {
+    "source_commit": "26b7884bc25a5933960f3cdcd98bac1ae14d42e2",
+    "local_static_library_sha256": "2bf6624179d69b7541ac3d07f046009663d5d85182de4139f357f4c7e1bd8604",
+    "BIOS": "mGBA_HLE_skip",
+    "RTC": 0,
+    "keys": 0
+  },
+  "local_fixture_source_sha256": "d9496fbbcd6f7edd4daed0e3a242f2c8c5f5c95a139171dcb2db1dfdd30ee4ae",
+  "bootstrap": {
+    "steps": 1955632,
+    "frames": 27,
+    "ticks": 7602758,
+    "installer_entry": "0x08016A48",
+    "observed_LR": "0x08025C5B",
+    "retired_return_instruction": "0x08016A6E",
+    "return_PC": "0x08025C5A"
+  },
+  "installed_code": {
+    "callback_word_address": "0x03003360",
+    "callback_target": "0x030036D0",
+    "ROM_source": "0x0800B36C",
+    "copy_bytes": 528,
+    "copy_equals_ROM_before_and_after_cases": true,
+    "copy_sha256": "75b2414f3e849bddf857abdb01ed9047025f4122d7069ef04b747b0f4e8b25b5",
+    "function_bytes": 504,
+    "function_sha256": "c02678172a2f22c0cc3fd9424a25056abebea57d2d1b3fba1c882221c49732cf",
+    "following_body_prefix_bytes": 24,
+    "live_parser_instructions": [
+      "cmp r1, #2",
+      "lsr r2, r12, #5",
+      "orr r2, r2, r3, lsl #3"
+    ],
+    "live_parser_12bytes_sha256": "25e0424c2df9ff9d3e50ac1d585703eccb70ffc8584df48e8a15e80aaecfb3f4"
+  },
+  "fixed_input": {
+    "actual_caller_route": "phase25 object initializer -> transient2 definition -> tile allocation -> initial resource copy",
+    "caller_route_observed_in_this_run": false,
+    "ROM_input": "0x08FD9134",
+    "conservative_guard_end": "0x08FD91A4",
+    "guard_bytes": 112,
+    "VRAM_output": "0x06010080",
+    "expected_and_produced_bytes": 128,
+    "output_sha256": "747689c60020e4f1b18fee75d40d87c2bdfbc097e843a1f8c6743c29ce318604",
+    "ARM_instruction_steps": 742,
+    "halfword_output_writes": 64,
+    "checked_prior_written_history_reads": 10,
+    "all_five_history_load_sites_executed": true,
+    "parser_samples": [
+      {
+        "ordinal": 0,
+        "CMP_instruction_ordinal": 91,
+        "length": 3,
+        "output_cursor_offset": 16,
+        "input_consumed_bytes": 20,
+        "pending_byte": 1,
+        "distance": 4,
+        "repeat_condition_taken": false
+      },
+      {
+        "ordinal": 1,
+        "CMP_instruction_ordinal": 298,
+        "length": 3,
+        "output_cursor_offset": 40,
+        "input_consumed_bytes": 44,
+        "pending_byte": 1,
+        "distance": 9,
+        "repeat_condition_taken": false
+      },
+      {
+        "ordinal": 2,
+        "CMP_instruction_ordinal": 439,
+        "length": 3,
+        "output_cursor_offset": 72,
+        "input_consumed_bytes": 75,
+        "pending_byte": 0,
+        "distance": 38,
+        "repeat_condition_taken": false
+      },
+      {
+        "ordinal": 3,
+        "CMP_instruction_ordinal": 563,
+        "length": 3,
+        "output_cursor_offset": 96,
+        "input_consumed_bytes": 93,
+        "pending_byte": 0,
+        "distance": 76,
+        "repeat_condition_taken": false
+      },
+      {
+        "ordinal": 4,
+        "CMP_instruction_ordinal": 616,
+        "length": 3,
+        "output_cursor_offset": 100,
+        "input_consumed_bytes": 97,
+        "pending_byte": 0,
+        "distance": 72,
+        "repeat_condition_taken": false
+      }
+    ],
+    "extended_repeat_branch_observed": false,
+    "stack_and_callee_saved_registers_restored": true,
+    "VRAM_count_stack_and_code_guards_pass": true
+  },
+  "controls": [
+    {
+      "kind": "authored_literal_even",
+      "input_hex": "044142434400",
+      "expected_output": "ABCD",
+      "bytes": 4,
+      "instructions": 48,
+      "passed": true
+    },
+    {
+      "kind": "missing_terminator",
+      "scope": "fixture input guard before an outside read",
+      "instructions": 33,
+      "rejected": true
+    },
+    {
+      "kind": "one_instruction_budget",
+      "scope": "fixture execution budget",
+      "instructions": 1,
+      "rejected": true
+    },
+    {
+      "kind": "odd_output_pointer",
+      "scope": "fixture parameter validation before execution",
+      "instructions": 0,
+      "rejected": true
+    }
+  ],
+  "fresh_core_whole_observation_replay_identical": true,
+  "case_setup": "Cases share one paused core per observation; CPU and data state are explicitly reset for each case.",
+  "native_result_sha256": "45e1430ea950f210227f7c62be683635cf808b2dff6b261f5641d79156e232c3",
+  "fatal_error_warning_log_count": 0,
+  "limits": [
+    "Controlled callback invocation, not natural scene or gameplay execution.",
+    "Private SYSTEM/ARM registers, EWRAM stack/count and chosen VRAM destination; actual allocator result is not observed.",
+    "IRQ/FIQ masked and emulator events suspended during each call; no claim about concurrent game/IRQ/DMA/video writers.",
+    "One fixed stream; no complete callback, input, copied-code writer or executable-inventory domain is proven.",
+    "No matching C replacement or source ownership credit; tile candidate remains 504 bytes / 11 differing bytes."
+  ]
+}
