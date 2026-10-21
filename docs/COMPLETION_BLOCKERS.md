@@ -77,6 +77,13 @@ possible. Finite observations do not close populations. Completed local source
 paths and their conditional domains are recorded in the linked owner documents;
 whole-ROM equality does not establish complete source ownership or gameplay.
 
+Five further alignment annotations classify ten already source-owned bytes as
+data. Matching emitted directives, object and linked data symbols, and native
+branches or returns establish these roles. Owned unclassified bytes now total
+34: fifteen authored NOPs and two audio tails remain explicit. C, instruction,
+mapped extent and unfinished-source counts do not change; alternate entry and
+complete executable inventory remain open.
+
 Keep one current paired proof and controls, unique attempts and bounded useful
 failures. Retire obsolete payloads under the existing
 [retention policy](LOCAL_OUTPUT_RETENTION.md), keep the project below 5 GB and

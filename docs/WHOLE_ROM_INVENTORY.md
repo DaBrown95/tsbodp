@@ -840,8 +840,8 @@ denominator.
 ### Source-owned alignment and data roles
 
 The existing code-evidence configuration now records optional
-`source_owned_data_regions`. There are 1,870 exact spans accounting for 3,766
-bytes: the debugger's 28-byte inline packet and 3,738 alignment bytes. Each
+`source_owned_data_regions`. There are 1,974 exact spans accounting for 3,974
+bytes: the debugger's 28-byte inline packet and 3,946 alignment bytes. Each
 record pins the owning source, complete owner extent and original bytes.
 Compiler data mapping symbols and emitted alignment, together with native
 branches or returns, supply the role evidence. These classifications add no
@@ -866,11 +866,18 @@ verify the complete native extents. Eleven additional alignment spans / 22 bytes
 come from the matching row 85 counter-choice bodies, with actual compiler
 assembly, object data symbols and native bytes agreeing.
 
+Five further spans / ten bytes classify existing source-owned zeros: compiler
+pool alignment at `0x25956` and `0x289EE`, and explicit terminal alignment at
+`0x28982`, `0x3D1D6` and `0x3D1F2`. Current matching objects and linked outputs
+mark all five as data; the corresponding branches or returns skip them.
+They add no source, instruction or mapped extent bytes. Owned unclassified
+bytes fall from 44 to 34; known data increases from 22,816 to 22,826 bytes.
+
 The remaining seventeen gaps / 34 bytes stay explicit: fifteen are authored
 NOP instructions after returns and two audio tails have unresolved source-layout
-attribution. They have not been relabelled as padding. The known data total is
-22,618 bytes; 4,718 bytes inside estimated envelopes and 16,432,926 elsewhere
-remain unresolved.
+attribution. They have not been relabelled as padding. The current census also
+records 2,508 bytes inside estimated envelopes and 16,432,770 elsewhere as
+unresolved.
 
 The census validates those pins and feeds the spans through its existing known
 data handling. A conflicting strong instruction remains an explicit ambiguous
