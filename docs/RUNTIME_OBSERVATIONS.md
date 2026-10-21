@@ -297,6 +297,52 @@ natural peer delivery and handheld behavior remain open. Emulator/HLE limits
 still apply. The loader's 548 / 17 source mismatch is unchanged; this observation
 adds no C, instruction, mapped-extent or inventory-count credit.
 
+## Controlled palette-word data-copy fixture
+
+A named native-call fixture checks whether ROM word `0x08088B14`, containing
+`0x0800E1EF`, is consumed as palette data. After a fresh emulator reset, authored
+IWRAM scene globals select scene eight and period three. The palette pair points
+to a private aligned 512-byte EWRAM staging buffer at `0x02020000` and destination
+`0x05000000`; the private EWRAM stack begins at `0x0203F000`. Calls run in Thumb
+SYSTEM mode with IRQ/FIQ masked and timing events suspended. No game instruction
+or callback is written. This setup does not run natural scene initialization.
+
+The original selector at `0x08026794` returns `0x08088964` after 23 instructions.
+The original palette loader at `0x080116F8` calls the transfer and byte-copy
+bodies with count 256, producing 128 word loads and stores. After 694 instructions
+in this second call, execution stops at `0x080119EE`, before the DMA register
+sequence, with SP `0x0203EFE4`. All 512 staging bytes equal the source palette.
+At `0x08027AF0`, the native LDM reads the word at `0x08088B14` into R0;
+post-instruction observation records `0x0800E1EF`. The following STM at `0x08027AF2` stores that
+value at `0x020201B0`. The observer checks actual retired-load state and stored
+memory, without relying on the multiple-store watchpoint shim.
+
+The contrasting period-two selection copies a different palette and never
+reads the selected word. Count 216 copies 432 bytes and stops immediately before
+it; count 218 copies 436 bytes and includes it once. A one-instruction budget
+control stops before the copy. Recorded results and instruction-address/opcode
+hashes agree on fresh-core replay for all five cases; this is not a retained
+full-machine snapshot.
+Expected copied prefixes, surrounding guards and the original source word are
+checked; the emulator's DMA register shadow stays unchanged. DMA source and
+destination registers are write-only, so bus reads of them are not used as
+state evidence. No palette DMA or displayed-image result is claimed.
+
+The first fixture run rejected before the copy: its second call cleared the
+Thumb flag while the emulator was already in Thumb mode, producing an invalid
+prefetch setup. Explicit mode/flag consistency fixes that setup; the failed
+source, executable, outputs and diagnostic remain in the private evidence.
+The corrected run rejects emulator error logs and passes the count, stack and
+prefetch checks. The fixed reference and game source are unchanged.
+
+This establishes one bounded palette data use of the
+[pointer-shaped word](WHOLE_ROM_INVENTORY.md#palette-word-resembling-an-interior-entry).
+It establishes no executable consumer, prepared-R1 producer or execution at
+`0x0800E1EE`. Natural scene-eight reachability, full scene/table/backing domains,
+other consumers and alternate execution remain open. No source, instruction,
+mapped-extent or inventory-count credit is added; generated assets and the
+current paired matching proof remain unchanged.
+
 ## Meaning of an observation
 
 Hardware breakpoint checks run after one emulator step and compare the next

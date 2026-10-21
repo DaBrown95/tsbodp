@@ -174,11 +174,21 @@ the full word contract.
 
 The full 16-byte source owner at `0x0800E1EC` does not resolve a possible
 interior entry at `0x0800E1EE`. The sole aligned ROM word containing
-`0x0800E1EF` is at `0x08088B14`; its data owner and executable consumer remain
-unknown. Entry at `0x0800E1EE` skips the global-base load and would require R0
-as mask and R1 already addressing readable word backing. This is an unresolved
-register precondition, not a recovered second formal of the full-entry source.
-The manifest retains this observation in `unresolved_interior_entries`.
+`0x0800E1EF` is at `0x08088B14`. Its bounded palette data use is now established:
+scene ID eight and period three select row eight, slot two of the palette table
+at `0x0805747C`. The word at `0x08057504` supplies `0x08088964`, and the accepted
+scene initializer passes that source with first zero and count 256 to the palette
+loader. The native byte-copy phase covers 512 bytes, including the word at offset
+`0x1B0`. The adjacent pointer slot points to `0x08088B64`, the copy's end.
+
+That data use establishes no executable consumer or incoming entry. Entry at
+`0x0800E1EE` skips the global-base load and would require R0 as mask and R1
+already addressing readable word backing. This remains an unresolved register
+precondition, not a recovered second formal. The unchanged manifest's
+`unresolved_interior_entries` warning concerns a consumer treating the word as
+an executable entry; the palette-copy consumer does not resolve that warning.
+The [inventory note](WHOLE_ROM_INVENTORY.md#palette-word-resembling-an-interior-entry)
+keeps the data route and entry uncertainty separate.
 
 The inventory seeds full source bodies before weak pointer candidates and skips
 pointer targets already decoded as instructions. It may therefore omit the old

@@ -908,3 +908,32 @@ data links and zeroes. They supply no callable target here; node payload bytes
 and later writers remain open. The gap stays unresolved, with no empty C bodies,
 assembly exception or new source credit. A computed producer, independent
 entry/data owner or calibrated target observation is still needed.
+
+## Palette word resembling an interior entry
+
+The aligned ROM word at `0x08088B14` contains `0x0800E1EF`, the Thumb-looking
+value behind the possible interior entry at `0x0800E1EE`. A bounded data route
+now accounts for this word inside a palette. Scene ID eight and period three
+select the pointer at `0x0805747C + 8 * 16 + 8 = 0x08057504`, which contains
+`0x08088964`. The adjacent slot at `0x08057508` contains `0x08088B64`.
+
+The accepted scene initializer obtains that source from the
+[palette selector](SCENE_ENVIRONMENT.md#palette-selection-and-need-state-exit-cleanup)
+and calls the palette loader with first zero and count 256. The native transfer
+doubles the count and calls the accepted byte-copy routine at `0x08027AB4`.
+The resulting 512-byte source interval is `0x08088964..0x08088B64`; it includes
+the four-byte word at offset `0x1B0` as data. This bound comes from the actual
+consumer count, with the adjacent selected pointer corroborating its end.
+
+A [controlled native-copy fixture](RUNTIME_OBSERVATIONS.md#controlled-palette-word-data-copy-fixture)
+also observes the word loaded and stored as data, with contrasting selection,
+count boundaries and replay. It stops before the DMA register sequence.
+
+This establishes a data consumer for the word, without establishing a function
+pointer consumer or execution at `0x0800E1EE`. The unchanged manifest entry
+retains that executable-consumer uncertainty and the prepared-R1 precondition;
+the full `0x0800E1EC` source owner adds no separate interior C function or root.
+Complete scene-ID and palette-table bounds, other consumers and alternate
+execution remain open. This descriptive evidence changes no census annotation,
+source count, instruction count, mapped extent, generated asset or matching
+proof. See the [full-entry limits](DISPLAY_MAP_RECONSTRUCTION.md#independently-bounded-display-control-flags-query).

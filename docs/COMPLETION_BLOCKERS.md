@@ -109,8 +109,11 @@ and [display flags query](DISPLAY_MAP_RECONSTRUCTION.md#independently-bounded-di
 Their normal/strict matches and genuine controls preserve the existing owners
 and provider contexts. The former three rows totalled 344 estimated bytes;
 twelve newly mapped bytes comprise two instruction bytes, four literal bytes
-and six alignment bytes. The possible `0xE1EE` interior entry is covered by the full
-`0xE1EC` source, but its pointer owner, consumer and prepared-R1 contract remain
-unresolved in manifest metadata. Its disappearing weak row is physical coverage,
+and six alignment bytes. The possible `0xE1EE` interior entry is covered by the
+full `0xE1EC` source. Its sole pointer-looking word has a
+[bounded palette data use](WHOLE_ROM_INVENTORY.md#palette-word-resembling-an-interior-entry),
+but an executable consumer and prepared-R1 contract remain unresolved in the
+unchanged manifest metadata. Its disappearing weak row is physical coverage,
 not an incoming-contract resolution. The known backlog is still not a complete
-code denominator, and no runtime observation is added.
+code denominator; these source additions establish no gameplay or interior-entry
+execution.
