@@ -44,6 +44,9 @@ void frame_complete_attachment_parameter_indicator(struct FrameObject *);
 void frame_set_attachment_parameter_indicator(struct FrameObject *, unsigned char);
 void frame_attachment_parameter_indicator_tick(struct FrameObject *);
 unsigned int frame_read_parameter_percentage(const void *, unsigned int);
+/* Independently bounded level setters; incoming roots remain unknown. */
+void frame_decrement_parameter_level_unrooted_3d1bc(void *, unsigned int);
+void frame_increment_parameter_level_unrooted_3d1d8(void *, unsigned int);
 void frame_update_attachment_parameter(void *, unsigned int, struct FrameObject *);
 /* The original unsigned division backend is distinct from signed __divsi3. */
 unsigned int frame_indicator_unsigned_divide(unsigned int, unsigned int);

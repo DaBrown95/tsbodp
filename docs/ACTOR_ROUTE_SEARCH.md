@@ -1,6 +1,6 @@
 # Actor route-search support
 
-The table records 134 matching C functions and 16,216 extent bytes across
+The table records 136 matching C functions and 16,272 extent bytes across
 route search, attachment jobs, choices, playback and variant lifecycle entries.
 Every complete linked extent matches the fixed reference, including literal
 pools and alignment. Each real source mutation is rejected.
@@ -88,6 +88,8 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x3D024` | `frame_finish_variant_attachment_job` | 4 |
 | `0x3D02C` | `frame_update_attachment_parameter` | 188 |
 | `0x3D200` | `frame_read_parameter_percentage` | 20 |
+| `0x3D1BC` | `frame_decrement_parameter_level_unrooted_3d1bc` | 28 |
+| `0x3D1D8` | `frame_increment_parameter_level_unrooted_3d1d8` | 28 |
 | `0x2B9D8` | `frame_clear_attachment_need_countdown` | 16 |
 | `0x1A660` | `frame_create_attachment_parameter_indicator` | 156 |
 | `0x1A6FC` | `frame_complete_attachment_parameter_indicator` | 112 |
@@ -142,6 +144,30 @@ Neither these matches nor the full-ROM equality gate establish runtime behaviour
 | `0x443DC` | `frame_create_optional_view_object` | 168 |
 | `0x44484` | `frame_optional_view_step` | 296 |
 | `0x445AC` | `frame_optional_view_interact` | 36 |
+
+## Parameter-level setters
+
+The [decrement](../src/frame/frame_decrement_parameter_level_unrooted_3d1bc.c)
+and [increment](../src/frame/frame_increment_parameter_level_unrooted_3d1d8.c)
+own 56 C extent bytes: 52 instruction bytes and four trailing zero-alignment
+bytes. They complete the four-function, 88-byte span `0x3D1BC..0x3D214` with
+the existing signed and percentage readers. Incoming roots for the setters
+remain unknown.
+
+Each calls the actual signed high-byte reader, then updates the record pointer
+to the selected four-byte word. It adds or subtracts one from the signed value
+and stores the result in the high byte, clearing the low 24 bits. Unsigned
+conversion before the shift preserves the native word pattern, including
+eight-bit wraparound. Valid backing requires an aligned writable word at the
+unchecked index; no record capacity or wider input population is inferred.
+
+The initial indexed-lvalue candidates differed only in the address register.
+Updating the real record pointer after the reader call retains the native
+owner-to-selected-word value handoff and matches both complete bodies. This
+changes no memory traffic or calling convention. Normal/strict comparisons,
+actual arithmetic controls, provider/type checks and full matching gates pass.
+The four alignment bytes add mapped data, with no executable discovery or
+runtime claim.
 
 ## Static layout and connection evidence
 

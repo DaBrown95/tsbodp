@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,397 C functions / 299,840 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 303,900 bytes; original slices
-still supply 16,473,316 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,402 C functions / 300,412 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 304,472 bytes; original slices
+still supply 16,472,744 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **97 unowned rows / 21,672
+[inventory](../assets/rom-inventory.json) contain **92 unowned rows / 21,106
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -21,6 +21,14 @@ Unverified candidates receive no credit.
 | 5 | Serial IRQ `0x0803DC48` (1,616), poll (408), status (124), record provider (200). | IRQ remains unowned. The latest six-global-slot composition is 1,632 bytes / 1,498 differences. All six fast signed loads and protected incoming-flags, SEND and late-R3 phases work, but new high-register saves and host/retry tail sharing remain. The native E226 shared join is already present; this composition line is closed. Preserve the 1,624 / 809 causal baseline; further trials require a distinct supported producer. The 596-byte offer refresh matches. The provider remains 200 / 159. Participant/index, resource, allocation, descriptor and writer domains remain open. See [scene](SCENE_LINK_ENTRY.md) and [serial](SERIAL_HANDSHAKE.md). |
 | 6 | Executable inventory alongside rows 1–5. | Resolve 98 call-site plus 21 transfer observations at 112 physical sites, writable callbacks/jump tables and ten code installations (19,188 distinct ROM source bytes). Close the selector domains behind 6,699 unbacked serialized outcomes. Pending-display's 128 selected returns/controls/replays leave writer/index/target populations open, as do collision/audio writer and alias domains. Word `0xE40A40` naming `0x0803E8AF` has a source-backed compressed-map data role; other aliases and alternate incoming execution remain open. See [inventory](WHOLE_ROM_INVENTORY.md). |
 | 7 | Reproducibility and publication. | Remove executable instruction bodies from original-ROM slices, resolve material inventory uncertainty and justify assembly exceptions. Reproduce a clean build with pinned tools/local inputs. Pass matching/controls, applicable tool tests, inventory and progress gates; audit contents/history, publish to `main` and keep contribution features disabled. |
+
+The [optional attachment dispatcher and two workers](FRAME_ATTACHMENT_JOBS_42_94.md#optional-dispatch-and-workers-at-0x28378-0x288b4-and-0x28988)
+add 516 C extent bytes. Two [parameter-level setters](ACTOR_ROUTE_SEARCH.md#parameter-level-setters)
+add another 56. The combined 572 bytes contain 416 instruction bytes, twelve literal
+bytes, 136 switch-table bytes and eight alignment bytes. Six alignment bytes
+were absent from the old estimates; no new executable discovery is claimed.
+The dispatcher retains the explicit unconverted `0x28424` provider; incoming
+roots, backing, writer and gameplay populations remain unresolved.
 
 The independently bounded [route-49 worker and wrapper](FRAME_ATTACHMENT_JOBS_42_94.md#independently-bounded-route-49-worker)
 add 192 C extent bytes: 186 instruction, four literal and two internal alignment

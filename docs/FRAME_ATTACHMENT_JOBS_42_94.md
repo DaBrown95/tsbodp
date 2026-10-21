@@ -407,3 +407,46 @@ contracts and full-ROM matching/control gates pass. These independently bounded
 bodies were already mapped; no executable discovery or runtime coverage is
 claimed. Record/actor lifetimes, descriptor indexing, countdown arithmetic and
 all other input/writer populations remain conditional.
+
+## Optional dispatch and workers at 0x28378, 0x288B4 and 0x28988
+
+Three matching C extents add 516 bytes using the existing actor, need-effect,
+attachment, parameter-indicator and sample-handle owners:
+
+| Body | ROM offset | Instructions | Literals | Switch table | Alignment | Extent |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| [Kind-45 worker](../src/frame/frame_step_optional_attachment_kind_45_28378.c) | `0x28378` | 168 | 4 | 0 | 0 | 172 |
+| [Dispatcher](../src/frame/frame_dispatch_optional_attachment_288b4.c) | `0x288B4` | 66 | 4 | 136 | 2 | 208 |
+| [Kind-12 worker](../src/frame/frame_step_optional_attachment_kind_12_28988.c) | `0x28988` | 130 | 4 | 0 | 2 | 136 |
+
+The dispatcher looks up the actor record and switches on its full-word kind.
+Kind 12 selects the new worker at `0x28988`, kind 45 selects `0x28378`, and
+kinds 28/30/31/32/33 retain the original unconverted worker at `0x28424`.
+All other values return zero. The native 34-entry table covers kinds 12..45;
+its default entries remain explicit. Lookup results are dereferenced without
+an added null guard, so matching-record backing is still a premise.
+
+Kind 12 uses phases zero, four and one. It requests animation 14, starts cue
+26, applies need criterion 52 and consumes optional state through the existing
+provider. Phase one stops the saved sample, requests animation one and returns
+two; other phases return one. Running byte equality to one forces cleanup.
+The operation graph is shared with the existing worker at `0x1A450`, while the
+new body owns its separate original extent.
+
+Kind 45 treats any nonzero running byte as cleanup. Its phase-zero direction
+call precedes the actual effect query. A result other than one creates an
+indicator, requests animation 45, starts cue 19 and enters phase five. Phase
+five uses the existing optional-consumption provider; cleanup stops the sample, restores animation
+one and conditionally finishes and clears the indicator. The native call order
+is retained, with no inferred success path or extra observation.
+
+The [shared declarations](../include/frame_optional_attachment_dispatch.h)
+preserve two pointer arguments and full-word results. Complete normal/strict
+comparisons and real cue/animation/case controls pass. The dispatcher's first
+206 code/data bytes already matched; its two native zero tail bytes require
+explicit zero alignment rather than the assembler's default NOP fill. Those
+two bytes extend the old map estimate without adding instructions.
+
+These bodies establish the local dispatch paths, not complete incoming roots,
+callback/writer populations, descriptor bounds, object/sample lifetimes or
+gameplay. The `0x28424` dependency remains unconverted and receives no credit.

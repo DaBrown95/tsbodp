@@ -54796,6 +54796,120 @@
         "after": "job->kind == 48"
       },
       "expected_sha256": "4479e7edf98ba14b905752274990ed46ffb0281c0c6d7ef7b6f114a11d9b9f94"
+    },
+    {
+      "name": "frame_step_optional_attachment_kind_12_28988",
+      "source": "src/frame/frame_step_optional_attachment_kind_12_28988.c",
+      "rom_offset": 166280,
+      "size": 136,
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "symbols": {
+        "frame_request_animation": "0x08001b5d",
+        "g_frame_need_effect_definitions": "0x08062e7c",
+        "frame_adjust_actor_needs": "0x0802b825",
+        "audio_play_animation_cue": "0x08040ffd",
+        "audio_game_stop_sample": "0x08041341",
+        "frame_need_effect_consume_optional_two": "0x0802f241"
+      },
+      "thumb_symbols": [
+        "frame_request_animation",
+        "frame_adjust_actor_needs",
+        "audio_play_animation_cue",
+        "audio_game_stop_sample",
+        "frame_need_effect_consume_optional_two"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(26)",
+        "after": "audio_play_animation_cue(27)"
+      }
+    },
+    {
+      "name": "frame_step_optional_attachment_kind_45_28378",
+      "rom_offset": 164728,
+      "size": 172,
+      "symbols": {
+        "frame_need_effect_try_actor_effect": "0x0802e741",
+        "frame_create_attachment_parameter_indicator": "0x0801a661",
+        "g_actor_reverse_directions": "0x08052858",
+        "frame_set_actor_direction": "0x08001c29",
+        "frame_request_animation": "0x08001b5d",
+        "audio_play_animation_cue": "0x08040ffd",
+        "frame_need_effect_consume_optional": "0x0802e7d1",
+        "audio_game_stop_sample": "0x08041341",
+        "transition_object_set_state": "0x08001c05"
+      },
+      "thumb_symbols": [
+        "frame_need_effect_try_actor_effect",
+        "frame_create_attachment_parameter_indicator",
+        "frame_set_actor_direction",
+        "frame_request_animation",
+        "audio_play_animation_cue",
+        "frame_need_effect_consume_optional",
+        "audio_game_stop_sample",
+        "transition_object_set_state"
+      ],
+      "negative_control": {
+        "before": "job->actor, 45)",
+        "after": "job->actor, 46)"
+      },
+      "source": "src/frame/frame_step_optional_attachment_kind_45_28378.c"
+    },
+    {
+      "name": "frame_dispatch_optional_attachment_288b4",
+      "source": "src/frame/frame_dispatch_optional_attachment_288b4.c",
+      "rom_offset": 166068,
+      "size": 208,
+      "symbols": {
+        "frame_find_actor_attachment_record": "0x0802ed61",
+        "frame_step_optional_attachment_28424": "0x08028425",
+        "frame_step_optional_attachment_kind_12_28988": "0x08028989",
+        "frame_step_optional_attachment_kind_45_28378": "0x08028379"
+      },
+      "thumb_symbols": [
+        "frame_find_actor_attachment_record",
+        "frame_step_optional_attachment_28424",
+        "frame_step_optional_attachment_kind_12_28988",
+        "frame_step_optional_attachment_kind_45_28378"
+      ],
+      "negative_control": {
+        "before": "case 45:",
+        "after": "case 44:"
+      }
+    },
+    {
+      "name": "frame_decrement_parameter_level_unrooted_3d1bc",
+      "source": "src/frame/frame_decrement_parameter_level_unrooted_3d1bc.c",
+      "rom_offset": 250300,
+      "size": 28,
+      "symbols": {
+        "frame_read_signed_parameter": "0x0803d1f5"
+      },
+      "thumb_symbols": [
+        "frame_read_signed_parameter"
+      ],
+      "negative_control": {
+        "before": "previous - 1",
+        "after": "previous - 2"
+      },
+      "expected_sha256": "b1645e300c1942bbeefe0436f77a81f88de304913e17f931327a88366c93ce1c"
+    },
+    {
+      "name": "frame_increment_parameter_level_unrooted_3d1d8",
+      "source": "src/frame/frame_increment_parameter_level_unrooted_3d1d8.c",
+      "rom_offset": 250328,
+      "size": 28,
+      "symbols": {
+        "frame_read_signed_parameter": "0x0803d1f5"
+      },
+      "thumb_symbols": [
+        "frame_read_signed_parameter"
+      ],
+      "negative_control": {
+        "before": "previous + 1",
+        "after": "previous + 2"
+      },
+      "expected_sha256": "c76e0ac0dd664f225b75db99fc4f7d084216947f63fa196eaef71e87d0433b29"
     }
   ],
   "assembly": [
