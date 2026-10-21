@@ -152,3 +152,39 @@ linked outputs, complete expected/candidate extents and changed-source controls.
 Further connected targets are the view mode setter and the view
 projection/display handoff. No output
 patches, difference masks or reference changes were used.
+
+## Additional position and dimensions helpers
+
+Four additional independently bounded view helpers cover 172 C extent bytes:
+`transition_get_view_dimensions` at `0800EA68` (28 bytes),
+`transition_offset_view_position` at `0800EA84` (56 bytes),
+`transition_set_view_dimensions` at `0800EABC` (32 bytes), and
+`transition_get_view_origin_delta` at `0800EADC` (56 bytes).
+The getter reads each dimensions word and writes the corresponding output word
+before reading the next. The offset helper adds a two-word point to the current
+motion position and copies the updated point to the target. The setter copies
+two input words into the existing per-view dimensions record. The delta helper
+calls the separately owned origin reader
+at `08039FDC`, then subtracts its output from the signed upper halves of the
+motion position. The canonical position expressions compile to the original
+halfword loads without an incompatible subobject view.
+
+Normal and strict builds match each complete extent, including literal pools
+and alignment, and genuine changed-source controls reject each mutation. The actual origin
+reader is checked in its separate original source context; declaration and
+layout controls reject wrong value/pointer, index-width and record layouts.
+Defined C also requires initialized compatible word storage and representable signed
+additions and subtractions. These are compiler results for four unrooted bodies.
+Incoming callers,
+unused arguments, index/backing bounds, and runtime behavior remain unproved;
+the chosen names and consumed argument views are provisional. No new public
+prototype or original global declaration is asserted. The getter leaves R0
+holding the output pointer; the chosen void view does not prove that no original
+return value existed.
+
+The getter fills a previously unresolved 28-byte gap between the separately
+source-owned position reader and offset helper. Its 22 instruction bytes,
+four-byte literal and two compiler alignment bytes are newly mapped. The other
+three bodies replace existing inventory rows; their 144 bytes reduce the known
+source backlog. This does not establish an incoming root for the getter or a
+complete executable denominator.

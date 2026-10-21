@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,411 C functions / 300,824 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 304,884 bytes; original slices
-still supply 16,472,332 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,419 C functions / 301,228 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 305,288 bytes; original slices
+still supply 16,471,928 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **84 unowned rows / 20,710
+[inventory](../assets/rom-inventory.json) contain **77 unowned rows / 20,334
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -83,6 +83,19 @@ branches or returns establish these roles. Owned unclassified bytes now total
 34: fifteen authored NOPs and two audio tails remain explicit. C, instruction,
 mapped extent and unfinished-source counts do not change; alternate entry and
 complete executable inventory remain open.
+
+
+Eight ordinary C helpers add 404 extent bytes: two background-buffer operations,
+four view-position/dimensions helpers and two unrooted interaction bodies. Seven
+existing rows account for 376 bytes of the backlog reduction. The separate
+`0xEA68` getter adds 28 newly mapped bytes: 22 instructions, four literal and two
+alignment bytes. Across all eight bodies, 372 instruction bytes are newly
+qualified; 350 were already inside estimated mapped extents. Full extents,
+normal/strict checks and genuine source controls pass. Incoming callers, unused
+formals, valid input/backing populations and gameplay remain provisional. See
+[backgrounds](DISPLAY_MAP_RECONSTRUCTION.md#independently-bounded-background-buffer-lifetime),
+[views](VIEW_EFFECTS_RECONSTRUCTION.md#additional-position-and-dimensions-helpers)
+and [interactions](FRAME_COLLISION_RESPONSE.md#nearby-unrooted-interaction-bodies).
 
 Keep one current paired proof and controls, unique attempts and bounded useful
 failures. Retire obsolete payloads under the existing

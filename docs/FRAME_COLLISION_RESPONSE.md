@@ -89,3 +89,29 @@ The [activity-zero controller](SCENE_CONTACT_ACTIVITY_ZERO.md#movement-worker)
 at `0x24720` now has its own complete 472-byte C match and genuine source
 controls. That compiler proof does not extend the finite collision qualification
 above or establish complete activity gameplay.
+
+## Nearby unrooted interaction bodies
+
+Two adjacent C bodies cover another 132 bytes:
+`frame_propagate_layer_three_unrooted_114d8` at `0x114D8` (72) and
+`frame_obstacle_turn_unrooted_11520` at `0x11520` (60). Their names and incoming
+interfaces remain provisional; no caller or callback installation is established by
+this ownership work.
+
+The first reads both object pointers and sets both display-layer fields to three
+when either field is already three and the first object's signed position Y is less
+than the second's. It preserves the other display bits. The second uses incoming R1
+and leaves R0 unread; its first `void*` parameter records that unused argument slot
+without identifying its content. Unless the actor's variant is thirteen, it replaces
+the direction using the existing obstacle-direction table at twice the old
+direction, calls the accepted variant setter with thirteen, stores timer twenty and
+sets pending bits `0x12`. There is no additional direction guard.
+
+Both complete extents match under the normal and strict declaration checks, and
+genuine changed-source controls are rejected. The second extent includes its
+four-byte table-address literal; neither adds glue credit. Separate checks retain
+the actual variant setter in its original source context and reject wrong contracts
+and field layouts. Valid initialized object backing, a valid reached table index and
+the existing partial-view compatibility assumptions remain preconditions. Byte
+equality does not establish incoming callers, table capacity or gameplay
+reachability. The intervening original body at `0x1107C` remains separate.

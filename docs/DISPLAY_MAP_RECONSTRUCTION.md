@@ -131,3 +131,30 @@ writer separately. Actual-definition API checks, wrong-contract rejections and
 target layout facts preserve their distinct compilation contexts. The alignment
 role does not exclude alternate entry execution. No runtime or gameplay
 observation is added.
+
+## Independently bounded background buffer lifetime
+
+The background buffer pair at `0x0800E21C` and `0x0800E254` owns complete extents of
+56 and 44 bytes, including literals and alignment. Both use the canonical 108-byte
+`BackgroundState` records at `0x03002EF8`, with the source pointer at offset eight
+and the flags word at offset 24. The chosen one-word index and void interfaces
+describe the consumed native arguments and effects; incoming roots, additional
+unused formals and the complete index domain remain unknown. Indices zero through
+three stay within the declared four-record owner.
+
+The [enable
+operation](../src/display/display_enable_background_buffer_unrooted_e21c.c)
+allocates 2,048 zeroed bytes only when the source pointer is null, stores the
+result, and clears flag `0x20` on that branch even if allocation fails. It always
+sets flag `0x10`. The [release
+operation](../src/display/display_release_background_buffer_unrooted_e254.c) clears
+flags `0x30` before testing the pointer, then frees a non-null source and clears
+that pointer. Existing background reset and commit routines independently consume
+the same fields. No extra allocation guard or index check is added.
+
+Normal and strict compilation reproduce all 100 bytes. Real flag mutations reject,
+and checks against the actual caller sources, accepted heap provider definitions and
+canonical record layout preserve their separate compilation contexts. Names and
+incoming reachability remain provisional; these source comparisons add no runtime or
+gameplay observation. The separate `0xE1EC` leaf and possible `0xE1EE` alternate
+entry are outside this pair.
