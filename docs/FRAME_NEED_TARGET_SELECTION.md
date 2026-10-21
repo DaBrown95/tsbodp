@@ -359,8 +359,8 @@ null guard, so a matching live record remains a caller requirement. The four-bod
 eight-byte intermediate callback, 72-byte begin callback and intervening
 44-byte region original. The begin callback is covered by the follow-up below.
 Later source owns the eight-byte intermediate callback at `0x35C98` and the
-40-byte unrooted check at `0x35C14`; the four-byte callback at `0x35C10` remains
-original. These finite assignments provide a conditional
+40-byte unrooted check at `0x35C14`. The initializer and tick follow-ups below
+complete the observed callback targets. These finite assignments provide a conditional
 source route, not proof of gameplay use or all writable callback populations.
 
 The kinds-31/33 worker captures the actor's need pointer before initializing
@@ -439,6 +439,23 @@ formals, later callback writers and gameplay use remain unresolved. The two
 alignment bytes expand the prior two-byte map estimate; no new instructions
 are discovered.
 
+The initializer at `0x35C10` now owns its four instruction bytes. It accepts the
+same state pointer, performs no accesses and returns the full-word constant one.
+The observed spawn path calls definition row `+0` through the existing
+`_call_via_r1` assembly adapter and discards that result. The adapter's void
+declaration describes its caller's ignored result; the opaque table field does
+not establish a void-returning C callback type. Normal and strict matches pass,
+and changing the return from one to zero is rejected in both profiles. No
+shared header, adapter or existing body changes are needed.
+
+All seven nonnull targets in observed definition rows 3 and 4 now have matching
+C sources, totaling 324 extent bytes. This also completes the contiguous
+seven-function, 288-byte span `0x35C10..0x35D30`, including the independent
+40-byte check. Both totals include existing owners and are separate views of
+the same source coverage. The four added bytes were already mapped; no new
+instructions or runtime coverage are discovered. Historical unused formals,
+other table assignments, later writers, backing and gameplay remain open.
+
 
 ## Row-3 allocation and route handoff
 
@@ -446,7 +463,7 @@ are discovered.
 at `0x08035CA0`. This connects row 3's existing begin slot to the four published
 dispatch/step bodies. It adds no credit for those 932 bytes or for its four
 already matching providers. Later source owns the eight-byte intermediate
-callback and 40-byte check noted above; the four-byte callback remains original.
+callback, 40-byte check, initializer and tick noted above.
 
 The callback allocates one of the owner's three actor records. Failure returns
 zero. Success stores the supplied full-word kind, reads attachment point zero

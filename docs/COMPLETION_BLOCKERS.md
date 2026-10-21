@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,392 C functions / 299,564 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 303,624 bytes; original slices
-still supply 16,473,592 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,393 C functions / 299,568 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 303,628 bytes; original slices
+still supply 16,473,588 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **102 unowned rows / 21,948
+[inventory](../assets/rom-inventory.json) contain **101 unowned rows / 21,944
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -38,6 +38,12 @@ band reader remains a 44 / 9 nonmatch. The
 at `0x35D2C` owns four more C bytes, including two newly accounted alignment
 bytes. These additions establish no new runtime coverage or wider callback
 population.
+
+The row-3/4 initializer at `0x35C10` adds four C instruction bytes and completes
+ownership of those observed rows' seven nonnull targets (324 bytes including
+existing owners). Its full-word return is ignored by the observed spawn caller.
+The contiguous seven-function span `0x35C10..0x35D30` is now source-owned; wider
+callback, input, writer and gameplay domains remain unresolved.
 
 The
 [offer refresh](SCENE_LINK_ENTRY.md) owns 596 bytes with its canonical 24-byte

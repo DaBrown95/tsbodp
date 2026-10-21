@@ -63023,14 +63023,15 @@
       "referenced_literal_bytes": 132
     },
     {
-      "name": "sub_08035C10",
+      "name": "frame_initialize_attachment_jobs_12_31_33_45",
       "rom_offset": 220176,
       "mode": "Thumb",
       "runtime_addresses": [
         134437904
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [],
@@ -63040,11 +63041,11 @@
         220178
       ],
       "size": 4,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 220176,
       "body_rom_start": 220176,
       "body_rom_end": 220180,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0803xxxx",
       "decoded_instruction_bytes": 4,
@@ -131574,7 +131575,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08035C10",
+      "name": "frame_initialize_attachment_jobs_12_31_33_45",
       "rom_offset": 220176,
       "size": 4,
       "status": "mapped_code"
@@ -137046,7 +137047,7 @@
     "config/ram-map-us-eu.json": "67362238b648e40fbf3b51d8e466bfd12e709a38211c16e157d384243896410b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "60f4e6fad9fb476e389072fc17b045e8d8a6d8fb6238fc727f962db6160e278a",
+    "config/build-us-eu.json": "fe8be1b13a7e40d6836de74c6a5211c6a7dc3554eccd8f4b1f01d7a1b3dc7173",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -138516,7 +138517,7 @@
       "nonconflicting_qualified_instruction_bytes": 282986,
       "raw_referenced_data_union_bytes": 35768,
       "qualified_referenced_data_union_bytes": 35768,
-      "source_glue_owned_extent_bytes": 303624,
+      "source_glue_owned_extent_bytes": 303628,
       "estimated_envelope_union_bytes": 325564,
       "classification_bytes": {
         "estimated_envelope_unclassified": 2836,
@@ -186982,10 +186983,6 @@
         ],
         [
           217192,
-          220176
-        ],
-        [
-          220180,
           221292
         ],
         [
@@ -276134,34 +276131,7 @@
       },
       {
         "rom_offset": 220104,
-        "size": 72,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction",
-          "source_owned"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
-        "rom_offset": 220176,
-        "size": 4,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
-        "rom_offset": 220180,
-        "size": 38,
+        "size": 114,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -390840,9 +390810,10 @@
         "execution_address": 134437904,
         "entry_rom_offset": 220176,
         "mode": "Thumb",
-        "name": null,
+        "name": "frame_initialize_attachment_jobs_12_31_33_45",
         "evidence": [
-          "audited dispatch entry"
+          "audited dispatch entry",
+          "bounded audit"
         ],
         "raw_instruction_intervals": [
           [
@@ -451623,6 +451594,16 @@
         "mode": "Thumb",
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 2,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "frame_initialize_attachment_jobs_12_31_33_45",
+        "rom_offset": 220176,
+        "size": 4,
+        "source": "src/frame/frame_initialize_attachment_jobs_12_31_33_45.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 4,
         "referenced_data_bytes_in_extent": 0
       },
       {
