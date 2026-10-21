@@ -15,7 +15,7 @@ unsigned int display_text_draw(unsigned int tile, int x, int y, int max_width,
         }
         if (*cursor == '@') {
             ++cursor;
-            width += display_text_width_inline((const char *)g_display_text_substitutions[*cursor]);
+            width += display_text_width_inline((const char *)display_text_substitution_field(*cursor));
         } else {
             const struct DisplayFont *font;
             if (*cursor == ' ') split = cursor;

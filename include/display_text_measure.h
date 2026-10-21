@@ -10,7 +10,13 @@ struct DisplayFont {
     const unsigned char *glyph_pixels;
 };
 extern const struct DisplayFont *g_display_fonts[2];
-extern unsigned char g_display_text_substitutions[][64];
+/* The formatter bank begins at 0x03001A60. Text markers use character
+ * selectors starting at '1'; complete selector/backing bounds remain open. */
+extern unsigned char g_display_text_fields[][64];
+static __inline unsigned char *display_text_substitution_field(unsigned int selector)
+{
+    return g_display_text_fields[(int)selector - '1'];
+}
 extern int display_text_measure_width(const char *);
 extern int display_text_measure_height(const char *);
 extern int display_text_glyph_width(const struct DisplayFont *, unsigned short);

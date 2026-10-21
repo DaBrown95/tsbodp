@@ -6,9 +6,9 @@ unsigned int display_text_copy_expanded(const unsigned char *source, char *desti
     while (*source) {
         if (*source == '@') {
             ++source;
-            display_text_copy_string(destination, (void *)g_display_text_substitutions[*source]);
-            count += display_text_string_length((void *)g_display_text_substitutions[*source]);
-            destination += display_text_string_length((void *)g_display_text_substitutions[*source]);
+            display_text_copy_string(destination, (void *)display_text_substitution_field(*source));
+            count += display_text_string_length((void *)display_text_substitution_field(*source));
+            destination += display_text_string_length((void *)display_text_substitution_field(*source));
             ++source;
         } else {
             *destination = *source;

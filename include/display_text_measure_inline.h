@@ -16,7 +16,7 @@ static __inline int display_text_width_inline(const char *text)
     while (*cursor) {
         if (*cursor == '@') {
             ++cursor;
-            width += display_text_measure_width((char *)g_display_text_substitutions[*cursor]);
+            width += display_text_measure_width((char *)display_text_substitution_field(*cursor));
         } else {
             const struct DisplayFont *font;
             if (*(volatile const unsigned char *)cursor > 0xef) {

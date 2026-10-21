@@ -1,8 +1,7 @@
 #ifndef DISPLAY_TEXT_FIELDS_H
 #define DISPLAY_TEXT_FIELDS_H
 #include "display_text_measure.h"
-/* Distinct staging bank; the transfer to active substitutions is unconverted. */
-extern unsigned char g_display_text_fields[][64];
+/* Field storage and text-selector access share the declaration in the measurement header. */
 extern void display_text_copy_field(const char *, unsigned int);
 extern void display_text_copy_field_zero(const char *);
 extern void display_text_copy_field_one(const char *);

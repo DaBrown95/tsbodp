@@ -12,7 +12,7 @@ char *display_text_expand_resource(unsigned int id)
                 char *tail, *destination;
                 int next_index;
                 ++index;
-                replacement = (char *)g_display_text_substitutions[(unsigned char)text[index]];
+                replacement = (char *)display_text_substitution_field((unsigned char)text[index]);
                 length = display_text_string_length(replacement);
                 ++index;
                 destination = text + (index + length - 2);

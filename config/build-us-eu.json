@@ -8680,8 +8680,8 @@
       "size": 84,
       "symbols": {
         "g_display_fonts": "0x03001a20",
-        "g_display_text_substitutions": "0x03000e20",
-        "display_text_glyph_width": "0x0801b451"
+        "display_text_glyph_width": "0x0801b451",
+        "g_display_text_fields": "0x03001a60"
       },
       "thumb_symbols": [
         "display_text_glyph_width"
@@ -9221,10 +9221,10 @@
       "size": 400,
       "symbols": {
         "g_display_fonts": "0x03001a20",
-        "g_display_text_substitutions": "0x03000e20",
         "display_text_measure_width": "0x0801af29",
         "display_text_glyph_width": "0x0801b451",
-        "display_text_draw_line": "0x0801a959"
+        "display_text_draw_line": "0x0801a959",
+        "g_display_text_fields": "0x03001a60"
       },
       "thumb_symbols": [
         "display_text_measure_width",
@@ -9242,10 +9242,10 @@
       "size": 288,
       "symbols": {
         "g_display_fonts": "0x03001a20",
-        "g_display_text_substitutions": "0x03000e20",
         "display_text_measure_width": "0x0801af29",
         "display_text_glyph_width": "0x0801b451",
-        "display_text_render": "0x0801aa79"
+        "display_text_render": "0x0801aa79",
+        "g_display_text_fields": "0x03001a60"
       },
       "thumb_symbols": [
         "display_text_measure_width",
@@ -10250,9 +10250,9 @@
       "size": 96,
       "source": "src/display/text_copy_expanded.c",
       "symbols": {
-        "g_display_text_substitutions": "0x03000e20",
         "display_text_copy_string": "0x0804e9e1",
-        "display_text_string_length": "0x0804ea2d"
+        "display_text_string_length": "0x0804ea2d",
+        "g_display_text_fields": "0x03001a60"
       },
       "thumb_symbols": [
         "display_text_copy_string",
@@ -10269,12 +10269,12 @@
       "size": 148,
       "source": "src/display/text_expand_resource.c",
       "symbols": {
-        "g_display_text_substitutions": "0x03000e20",
         "display_text_string_length": "0x0804ea2d",
         "display_text_find_character": "0x0804e955",
         "display_text_move_bytes": "0x0804e831",
         "display_text_copy_bytes": "0x0804e7d1",
-        "display_scene_lookup_text": "0x08045009"
+        "display_scene_lookup_text": "0x08045009",
+        "g_display_text_fields": "0x03001a60"
       },
       "thumb_symbols": [
         "display_text_string_length",
@@ -55314,6 +55314,48 @@
       "negative_control": {
         "before": "unsigned int clear_height = 22;",
         "after": "unsigned int clear_height = 21;"
+      }
+    },
+    {
+      "name": "display_text_copy_field_three_unrooted_1b480",
+      "rom_offset": 111744,
+      "size": 36,
+      "source": "src/display/display_text_copy_field_three_unrooted_1b480.c",
+      "symbols": {
+        "g_display_text_fields": "0x03001a60"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "*destination = 0;",
+        "after": "*destination = 1;"
+      }
+    },
+    {
+      "name": "display_text_get_line_height_unrooted_1b204",
+      "rom_offset": 111108,
+      "size": 12,
+      "source": "src/display/display_text_get_line_height_unrooted_1b204.c",
+      "symbols": {
+        "g_display_text_state": "0x03001a20"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "return g_display_text_state.line_height;",
+        "after": "return g_display_text_state.line_height + 1;"
+      }
+    },
+    {
+      "name": "display_text_set_pixel_mode_unrooted_1b210",
+      "rom_offset": 111120,
+      "size": 12,
+      "source": "src/display/display_text_set_pixel_mode_unrooted_1b210.c",
+      "symbols": {
+        "g_display_text_state": "0x03001a20"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "g_display_text_state.pixel_mode = value;",
+        "after": "g_display_text_state.pixel_mode = value + 1;"
       }
     }
   ],

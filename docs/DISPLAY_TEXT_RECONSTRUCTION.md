@@ -106,8 +106,10 @@ Their receipts share
 with the connected heap batch.
 
 Width sums glyph advances until a zero byte. Marker `@` consumes the next byte
-as an index into 64-byte substitution records beginning at `0x03000E20` and
-recursively measures that record. A byte above `0xEF` consumes the following
+as a character selector: subtracting `'1'` as an integer selects a 64-byte field
+in the bank at `0x03001A60`, then width recursively measures that field. The
+native literal `0x03000E20` is the bank address minus `49 * 64`, folded into
+the indexed address; it does not establish a separate backing array. A byte above `0xEF` consumes the following
 glyph through the second font pointer; other bytes use the first pointer at
 `0x03001A20`. Height returns zero for an empty string and otherwise the first
 font's leading height byte. These routines do not check null strings,
@@ -330,16 +332,27 @@ provisional formatter name and pointer return. The shared
 inline address helper retains the ordinary C byte-offset calculation in
 the specialized copy forms. These bodies require no register constraints.
 
-The producer bank differs from the active substitutions at `0x03000E20`
-read by measurement, glyph rasterization and both new expansion consumers.
-Separate unsized declarations preserve that distinction. The transfer or
-selection between these banks remains unconverted; adjacency, equal slot
-stride and matching source do not establish a runtime handoff. The scene
-object constructor at `0x0800F168` supplies its state word at offset four
-to the slot-zero number producer before loading text ID `0x25`. Renaming
-that former address-only callee leaves the constructor and its actual
-changed-source control intact; the state's earlier `text_id` field name
-does not establish that the formatter argument itself is a text resource ID.
+The producers and substitution consumers share the bank at `0x03001A60`.
+Native consumers shift the raw following byte by six and add `0x03000E20`;
+ASCII `'1'` therefore selects field zero, `'2'` field one, and so on when the
+selected field has valid backing. Current C computes the integer selector
+minus `'1'` before indexing the canonical field array. It forms neither a
+pointer before that array nor an invented larger array spanning other globals.
+The five affected reader definitions retain all 1,016 original bytes; their
+object relocations reference the field bank with addend `-0xC40` and link to
+the same native biased literals.
+
+A concrete serialized route supports field zero. The six observed language-table
+entries at `0x08D7419C` decode resource `0x25` to `$@1` plus a terminator, except
+entry four, which places `$` after the same marker. The accepted constructor at
+`0x0800F168` passes its state word at offset four to the slot-zero number
+producer before requesting that text ID. In the native expansion consumer,
+`0x31 << 6` plus `0x03000E20` addresses exactly `0x03001A60`. No inter-bank
+transfer is required. This is static data and address evidence, with no new
+emulator or gameplay observation. Complete language/selector populations,
+capacities, termination, recursion and intervening writers remain unresolved.
+The state's earlier `text_id` name still does not make the formatter argument
+a resource ID.
 
 Copy expansion scans a source string, replacing each `@` plus following
 byte with the selected active slot string. It appends a terminator and
@@ -535,8 +548,9 @@ unsupported inferred name `description`: its observed use here is a decimal
 formatter argument. Its gameplay meaning remains unknown. The name consumer
 reads text word `+8`, while the multiline detail consumer reads text word
 `+4`; these roles are separate from the numeric word. The accepted drawing
-and numeric routines expose the inputs, but do not establish that the staging
-and substitution banks are connected at runtime.
+and numeric routines use the shared bank described above. Preservation of
+formatted values until later rendering, live backing and gameplay remain
+conditional.
 
 A small inline helper reads the category using its typed field address and a
 separate byte offset, while the record cursor advances by one 24-byte record.
@@ -599,3 +613,38 @@ Final normal and strict public-header positives match all 160 bytes. Changing
 the real backedge decrement from one to two rejects in both profiles by one
 byte. This is compiler/link evidence; gameplay and complete incoming/backing
 populations remain open.
+
+
+## Additional unrooted text helpers
+
+Three independently bounded bodies add 60 C extent bytes:
+
+| Function | Address | Instruction | Literal | Alignment | Extent |
+| --- | --- | ---: | ---: | ---: | ---: |
+| [Copy field three](../src/display/display_text_copy_field_three_unrooted_1b480.c) | `0x0801B480` | 32 | 4 | 0 | 36 |
+| [Get line height](../src/display/display_text_get_line_height_unrooted_1b204.c) | `0x0801B204` | 6 | 4 | 2 | 12 |
+| [Set pixel mode](../src/display/display_text_set_pixel_mode_unrooted_1b210.c) | `0x0801B210` | 6 | 4 | 2 | 12 |
+
+The copier writes a terminated byte string to bank offset `0xC0`, using the
+existing field-address helper and no added length guard. The 64-byte stride is
+not proof of complete bank capacity or every valid input length. The getter
+returns the canonical signed line-height word at state `+0x14`; the setter
+writes the full input word to pixel mode at `+0x38`. Both use the existing
+60-byte raster-state access view rooted at `0x03001A20`. No public layout or
+allocation is enlarged.
+
+The 36-byte copier replaces one estimated backlog row. The two 12-byte leaves
+were inside an unresolved gap between the already owned number-field wrapper
+and resource expander; they add 24 newly mapped bytes, including twelve
+instructions, eight literal and four alignment bytes. No current direct caller
+or entry word establishes incoming use for any of the three. Their chosen
+interfaces and unused formals remain provisional; the setter leaves R0 equal
+to its input at return, so an original meaningful word result is not ruled out
+by the chosen void effects interface.
+
+All three full extents and the five repaired reader contexts pass normal/strict
+comparison and genuine source controls using the current canonical headers.
+Actual-definition/API, field-layout and initialized selector-address checks
+cover the shared owner. Readable terminated strings and sufficient writable,
+nonoverlapping reached storage remain sufficient premises for the copy; no
+native check is inferred. These results add no runtime or gameplay observation.

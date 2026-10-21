@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,427 C functions / 301,884 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 305,944 bytes; original slices
-still supply 16,471,272 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,430 C functions / 301,944 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 306,004 bytes; original slices
+still supply 16,471,212 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **69 unowned rows / 19,690
+[inventory](../assets/rom-inventory.json) contain **68 unowned rows / 19,654
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -132,3 +132,25 @@ at `0x28234` remains original: its first faithful candidate is 168 / 116 against
 160 native bytes. The compiler reduces both coordinate products where native
 reduces only X; no actual Y reload, escape or provider dependency supports a
 further trial. The main dependency-ordered blockers above remain unresolved.
+
+
+The [additional text helpers](DISPLAY_TEXT_RECONSTRUCTION.md#additional-unrooted-text-helpers)
+add three C bodies / 60 extent bytes. One existing 36-byte row is replaced;
+two unrooted leaves add 24 newly mapped bytes: twelve instruction, eight literal
+and four alignment bytes. All three incoming-use populations remain open.
+The same work repairs the text-field owner: decoded resource `0x25` contains
+`@1`, whose raw selector addresses field zero directly. The old `0x03000E20`
+"bank" is a biased constant for the canonical `0x03001A60` bank. Five existing
+reader contexts retain 1,016 identical bytes using integer selector subtraction
+before indexing. Broader selector, backing, recursion and writer domains remain
+conditional. See the [shared-bank evidence](DISPLAY_TEXT_RECONSTRUCTION.md#staging-fields-and-expansion-consumers).
+
+Finalizer source still has two one-definition, compare-only upper-X loads that
+LOOP can pair and hoist. An actual additional definition, spanning consumer or
+dependency is needed to defeat that measured eligibility; adding one solely
+to force storage would not be supported. The serial R8/SEND/event audit supplies
+no missing consumer, and the drawer's captured equivalent addresses remain
+unchanged by the inspected writers. The text row reader's current calibration
+reproduces 140 / 80: R8 is preserved, while the incoming tile pointer receives
+a four-byte spill frame. No source variant or shared compiler-switch explanation
+follows from those findings.
