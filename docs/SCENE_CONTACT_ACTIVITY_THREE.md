@@ -219,3 +219,44 @@ returns correctly remain unchanged. Ten invalid model inputs are rejected.
 Background, audio and decrement calls remain abstract hooks, while score
 effects follow its accepted C body as a model. These are not nested native
 provider execution or hardware/gameplay evidence.
+
+## Preparation worker: current causes and input bounds
+
+Preparation at `0x08019640` still has no accepted replacement. Its native
+544-byte extent contains 522 instruction, 20 literal and two alignment bytes.
+A private source now separates the call-free phase search from the phase saved
+on its successful edge. The selected-row and working-phase inductions survive;
+of the two phase values, only the accepted snapshot crosses later calls.
+A four-word eligibility view and a short state-root
+snapshot also recover the native memory-backed flags and one root load for the
+three availability reads. That composition emits 532 bytes with 480 differences.
+It does not recover the native frame or value homes.
+
+A separate diagnostic starts from the ordinary scalar phase-split source and
+constrains only the actual persistent object owner to native R8. Every object
+use, including the final position argument, uses that
+owner; the incoming duplicate dies before any random call. The actual providers
+preserve R8. This confirms the owner lifetime but emits 536 bytes with 499
+differences and displaces amount, palette and availability values. Further
+bindings, stack records or declaration-order searches do not follow from these
+results. The next source hypothesis needs a distinct storage or lifetime fact.
+
+The fixed tables establish a conditional bound for option 0..4: selection stays
+within the five row records, phase indices stay within 0..6, and acceptance
+follows at most eight amount reductions without signed underflow. The successful
+progress writer stores only 1..4 into a backed `values[scene]` destination when
+the request's option is at most three; option four skips this write. This does
+not establish monotonic progression or every incoming option. The same bytes at
+world `+0x735` are restored by the saved-nibble reader, which permits 0..15.
+The serial controller supplies literal option two on its named request route;
+mode three is an additional premise for reaching this activity.
+Complete request, validation, backing and later-writer populations remain open.
+
+The ordinary creators pass row IDs 0..4. With at most four initialized prior
+origins and representable coordinate arithmetic, the coordinate rejection test
+always has a valid candidate: on the two permitted Y boundaries, 32 and 104,
+there are 418 X/Y pairs. Each prior origin can exclude at most 63 pairs on only
+one boundary, leaving at least 166 pairs. This proves geometric feasibility;
+the deterministic random sequence has not been proved to reach those pairs.
+Palette availability, retry termination, arbitrary IDs and gameplay remain
+separate open questions. No source guards or new C credit accompany these facts.

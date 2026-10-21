@@ -12,6 +12,15 @@ Follow this order. The [manifest](../config/build-us-eu.json) and
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
+The latest hard-target work adds no C coverage. Activity-three preparation now
+has measured phase lifetimes and eligibility storage, conditional
+table/retry bounds and a coordinate-feasibility proof; frame/value homes and
+complete input writers remain open. See [its current findings](SCENE_CONTACT_ACTIVITY_THREE.md#preparation-worker-current-causes-and-input-bounds).
+The selected-tile worker has a current private owner/word-read diagnostic but
+still fails full comparison; see [the map path](FRAME_INPUT.md).
+The explicit 128-slot object pool bounds the renderer table only under intact
+membership and traversal premises; see [the callback limits](BOUNDED_INVENTORY.md#conditional-renderer-table-bound-21-october-2026).
+
 | Order | Remaining code | Blocker and next evidence |
 | --- | --- | --- |
 | 1 | Renderer `0x080023E8` (1,400), finalizer `0x08003248` (348). | Renderer: 25 differing bytes, unresolved frame homes, no distinct supported producer; plain `register` does not change the relevant pseudos at `-O2`. Actual provider/caller audits identify no hidden aggregate-result temporary or interface mismatch. Finalizer: proper-owner 340 / 285 attempt retains an upper-X spill and wrong category/flags/previous-index homes. Native upper X/Y use SP8/SP12; category/flags/previous use SP16/SP20/SP24. R7 binding overwrites a live category through the frame-pointer exception and is invalid. Require a new hypothesis using [bounded failures](BOUNDED_INVENTORY.md) and [runtime limits](RUNTIME_OBSERVATIONS.md). |

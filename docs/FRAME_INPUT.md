@@ -911,6 +911,27 @@ The larger selected-tile consumer at `0x39CF0` remains a semantic C candidate
 with mismatching bytes and is excluded from coverage, alongside the copied ARM
 map bodies. No runtime display-memory restore or map drawing has been validated.
 
+Its current private owner view uses the actual unsigned control words, a
+four-byte resource prefix followed by eight-byte chunk descriptors, and a
+decoded halfword count followed by variable halfword indices. Required backing
+is explicit. Integer tile-offset arithmetic finishes before forming the final
+scratch pointer; older fixtures could form an out-of-object intermediate
+pointer. The historical 392-byte / 11-difference fixture also used unsupported
+volatile pointer homes and is not a current interface proof. No production
+header or caller repair has yet been admitted from these private attempts.
+
+A by-value control-word helper recovers the native word load and paired shifts
+for both color-bit reads. Splitting the real count calculation into its two
+evaluation phases then recovers native count-before-color read order, including
+the DMA source/destination stores before its count read. The resulting source
+emits 396 bytes with 212 byte differences, including four extra bytes, against
+the native 392-byte extent.
+The frame remains 20 bytes instead of 24, with different resource, control,
+chunk-size and loop homes. Expression variants are closed pending a distinct
+storage or lifetime fact; native stack copies alone do not justify volatile
+storage or a fabricated work record. Allocation, decoded backing, initialized
+scratch spans, callback writers and hardware execution remain conditional.
+
 
 The copied row-transfer entry stored at `0xB6A4` now adds 216 verified C bytes,
 linked at its installed execution address `0x03005E60`. It considers both map
