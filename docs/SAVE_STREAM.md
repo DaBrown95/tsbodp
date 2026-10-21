@@ -170,6 +170,13 @@ writers. Establish the last writer and its preservation through `0x0801B78C`
 for each claimed incoming route; the reset does not close that population or
 explain the loader's remaining compiler mismatch.
 
+The [controlled native fixture](RUNTIME_OBSERVATIONS.md#controlled-serial-reset-to-loader-fixture)
+now observes that reset as the sole physical selector writer through the
+retired loader read, which returns zero, for one authored unmatched-peer input
+and its actual callback/IRQ state. Native payload generation, complete save
+write/read comparison, replay and watch controls pass. This finite result does
+not establish preservation for other incoming routes or resolve the source match.
+
 The connected 128-byte record producer at `0x08031F7C` writes its first sixteen
 bytes, two pairs and six nibbles, then invokes child serializers at offsets
 `+0x18/+0x20/+0x88/+0xA0`. The final child is the already accepted

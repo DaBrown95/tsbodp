@@ -246,6 +246,57 @@ and gains no credit.
 Private source, expected data, freezes, commands and observations remain under
 ignored `analysis/tile-installed-native-fixture-20261021/`.
 
+## Controlled serial reset-to-loader fixture
+
+A controlled fixture follows the [serial reset/load route](SAVE_STREAM.md).
+Ordinary key input reaches serial-session kind 10 / mode 0 at frame 1,047.
+At its first step, three explicitly controlled Thumb calls run the original
+world initializer, 108-byte peer-record producer and receiver. Stack, control
+mode and preserved registers are checked on return. The peer payload stays
+unchanged; the receiving identity word is authored as one while the peer word
+is zero. The native receiver supplies phase two and countdown 45. This is
+controlled delivery after natural screen navigation, not a demonstrated
+multiplayer exchange.
+
+The real session, transport, save and actor allocations pass their backing
+checks. Native initialization supplies the 162 actor slots and empty fifty-group
+collection. The resulting save uses 831 bytes. All 2,040 native buffer bytes
+match after slot-three write/read, with checksum zero, validity set and slot
+three selected. The full buffer hash is
+`778f4363d9ec9730979d8c331d082aa3cf2bdd63a3960bb832f5b50650918c8a`.
+No host replacement supplies the media readback.
+
+Physical store hooks account for aligned byte, halfword, word and multiple
+stores, IWRAM mirrors and DMA, forwarding the original operations unchanged.
+Typed reads occur after the underlying store, rather than trusting the STM
+watchpoint shim. Seven authored ARM/Thumb calibration operations cover an
+unaligned word, decrementing multiple store, DMA, mirrored byte and unaligned
+halfword. A displaced-region control records zero writes with identical CPU
+state and timing.
+
+From receiver return through loader byte-load retirement, the fixture observes
+one physical selector write: the native clear's `STMIA` at `0x08027A8A` writes
+zero to the word containing `0x03004111`. The original `LDRB` at `0x0801B78C`
+then retires at `0x0801B78E` with R1 equal to zero. The run ends at frame 1,269
+after 40,302,530 total instruction steps. IRQs and timing remain active, with
+241 watched dispatcher-entry arrivals and 27 audio-handler arrivals. Callback
+snapshots describe arrivals, not retired-call counts.
+
+Cold replay is byte-identical. Displaced watches retain the same execution
+endpoint and record no writes. A separate positive control seeds the selector
+with 90 immediately before the actual clearing STM; its typed readback is zero
+and the execution endpoint is unchanged. No emulated instruction can consume
+that atomic calibration sentinel. No fatal, error, warning, stub or game-error
+logs occur. Private source, commands, complete observations, controls and two
+independent reviews remain under ignored
+`analysis/loader-selector-serial-native-fixture-20261021/`.
+
+This closes the named observation for one controlled input and callback/backing
+state. Other loader routes, writers, aliases, IRQ and backing populations,
+natural peer delivery and handheld behavior remain open. Emulator/HLE limits
+still apply. The loader's 548 / 17 source mismatch is unchanged; this observation
+adds no C, instruction, mapped-extent or inventory-count credit.
+
 ## Meaning of an observation
 
 Hardware breakpoint checks run after one emulator step and compare the next
