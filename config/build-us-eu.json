@@ -54486,6 +54486,208 @@
         "before": "read_collection(), 143, 0, 0",
         "after": "read_collection(), 142, 0, 0"
       }
+    },
+    {
+      "name": "scene_phase25_initialize",
+      "rom_offset": 289100,
+      "size": 284,
+      "source": "src/scene/scene_phase25_initialize.c",
+      "symbols": {
+        "display_show_background": "0x0800d579",
+        "display_set_mode": "0x0800d601",
+        "display_enable_layers": "0x0800d68d",
+        "display_fill_background": "0x0800d6b9",
+        "display_load_background": "0x0800da21",
+        "display_load_background_dma": "0x0800da5d",
+        "display_load_resource_palette": "0x0800da95",
+        "display_load_palette": "0x080116f9",
+        "display_text_draw": "0x0801a7c9",
+        "display_text_set_background_control": "0x0801ae2d",
+        "display_text_select_font": "0x0801ae75",
+        "transition_run_first": "0x080393fd",
+        "display_scene_lookup_text": "0x08045009",
+        "display_configure_tile_allocation": "0x08047741",
+        "g_scene_phase25_background3": "0x08fc8f0c",
+        "g_scene_phase25_background2": "0x08fca034",
+        "g_scene_phase25_background_control0": "0x0807fc10",
+        "g_scene_phase25_background_control2": "0x0807fc18",
+        "g_scene_phase25_background_control3": "0x0807fc14",
+        "g_resource_game_state": "0x03003950",
+        "g_display_scrolling_palette": "0x08ede3b8",
+        "g_scene_request": "0x03004350",
+        "g_audio_game_options": "0x03005d90",
+        "g_scene_phase25_saved_sample_volume": "0x03002248"
+      },
+      "thumb_symbols": [
+        "display_show_background",
+        "display_set_mode",
+        "display_enable_layers",
+        "display_fill_background",
+        "display_load_background",
+        "display_load_background_dma",
+        "display_load_resource_palette",
+        "display_load_palette",
+        "display_text_draw",
+        "display_text_set_background_control",
+        "display_text_select_font",
+        "transition_run_first",
+        "display_scene_lookup_text",
+        "display_configure_tile_allocation"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "display_text_select_font(3, 12, -1)",
+        "after": "display_text_select_font(3, 11, -1)"
+      },
+      "expected_sha256": "6df0f3b9419299180b70ab60fe9339c517b30a72f21ad4d63544010528d15396"
+    },
+    {
+      "name": "scene_phase25_step",
+      "rom_offset": 289384,
+      "size": 292,
+      "source": "src/scene/scene_phase25_step.c",
+      "symbols": {
+        "frame_step_transient_effects": "0x80310c5",
+        "transition_run_second": "0x8039435",
+        "audio_play_animation_cue": "0x8040ffd",
+        "frame_begin_position_move": "0x80034a1",
+        "frame_set_variant_state": "0x8001be1",
+        "resource_submit_scene": "0x8027dd1",
+        "scene_phase25_initialize_objects": "0x08046b8d",
+        "g_input_pressed": "0x03004228",
+        "g_input_config": "0x030040e0",
+        "g_scene_request": "0x03004350",
+        "g_display_scene_frame_objects": "0x030043b0"
+      },
+      "thumb_symbols": [
+        "frame_step_transient_effects",
+        "transition_run_second",
+        "audio_play_animation_cue",
+        "frame_begin_position_move",
+        "frame_set_variant_state",
+        "resource_submit_scene",
+        "scene_phase25_initialize_objects"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(180)",
+        "after": "audio_play_animation_cue(181)"
+      },
+      "expected_sha256": "f5a35f5d423cc85c4d543fc1c3964662cbbf7f29c606bf19e0c8a47c76a96d71"
+    },
+    {
+      "name": "scene_phase25_initialize_objects",
+      "rom_offset": 289676,
+      "size": 512,
+      "source": "src/scene/scene_phase25_initialize_objects.c",
+      "symbols": {
+        "display_load_background": "0x800da21",
+        "display_load_background_dma": "0x800da5d",
+        "display_hide_background": "0x800d5dd",
+        "frame_initialize_transient_definition": "0x80303d9",
+        "frame_allocate_object": "0x8001109",
+        "frame_enable_parts": "0x8001385",
+        "frame_load_actor_group_palette": "0x803aec9",
+        "frame_acquire_palette_slot": "0x8030221",
+        "frame_bind_actor_group": "0x803ad65",
+        "frame_set_animation_variant": "0x8000be9",
+        "frame_set_animation_commands": "0x80015bd",
+        "frame_set_part_order": "0x800156d",
+        "frame_enable_animation_part": "0x8001585",
+        "frame_set_position": "0x80014a5",
+        "frame_create_scene_object": "0x8027ee5",
+        "transition_object_set_state": "0x8001c05",
+        "frame_set_variant_state": "0x8001be1",
+        "display_load_palette_alternate": "0x8011709",
+        "frame_create_transient_effect": "0x803054d",
+        "transition_run_first": "0x80393fd",
+        "g_scene_phase25_object_background3": "0x08fcaa00",
+        "g_scene_phase25_object_background2": "0x08fd14dc",
+        "g_scene_startup_transient2": "0x08069510",
+        "g_frame_scene_player_group": "0x03003970",
+        "g_frame_actor_direction_variants_signed": "0x0804f1b0",
+        "g_frame_actor_commands_kind1": "0x08d729d8",
+        "g_frame_scene_player_commands_kind2": "0x08d734cc",
+        "g_display_scene_frame_objects": "0x030043b0",
+        "g_scene_phase25_object_palette": "0x08d74628",
+        "g_frame_actor_speed_effect": "0x03002e8c",
+        "g_actor_reverse_directions": "0x08052858"
+      },
+      "thumb_symbols": [
+        "display_load_background",
+        "display_load_background_dma",
+        "display_hide_background",
+        "frame_initialize_transient_definition",
+        "frame_allocate_object",
+        "frame_enable_parts",
+        "frame_load_actor_group_palette",
+        "frame_acquire_palette_slot",
+        "frame_bind_actor_group",
+        "frame_set_animation_variant",
+        "frame_set_animation_commands",
+        "frame_set_part_order",
+        "frame_enable_animation_part",
+        "frame_set_position",
+        "frame_create_scene_object",
+        "transition_object_set_state",
+        "frame_set_variant_state",
+        "display_load_palette_alternate",
+        "frame_create_transient_effect",
+        "transition_run_first"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "frame_set_variant_state(objects[0], 56)",
+        "after": "frame_set_variant_state(objects[0], 55)"
+      },
+      "expected_sha256": "ba24ca9dfb32d18529897d1449a9776b20f20fe5634e8c4f689fc711c7ab2864"
+    },
+    {
+      "name": "scene_phase25_shutdown",
+      "rom_offset": 290188,
+      "size": 68,
+      "source": "src/scene/scene_phase25_shutdown.c",
+      "symbols": {
+        "transition_run_second": "0x08039435",
+        "audio_game_clear_indexed_channels": "0x0804135d",
+        "audio_game_set_sample_volume": "0x080412ed",
+        "frame_destroy_transient_effect": "0x08031039",
+        "display_release_object_list": "0x08001189",
+        "display_reset": "0x0800dda5",
+        "display_reset_palette_jobs": "0x080117bd",
+        "display_scene_clear_object_slots": "0x08028361",
+        "g_audio_game_options": "0x03005d90",
+        "g_frame_actor_speed_effect": "0x03002e8c",
+        "g_frame_primary_list": "0x030024f0"
+      },
+      "thumb_symbols": [
+        "transition_run_second",
+        "audio_game_clear_indexed_channels",
+        "audio_game_set_sample_volume",
+        "frame_destroy_transient_effect",
+        "display_release_object_list",
+        "display_reset",
+        "display_reset_palette_jobs",
+        "display_scene_clear_object_slots"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "transition_run_second(63, 0)",
+        "after": "transition_run_second(62, 0)"
+      },
+      "expected_sha256": "a9f7031d40af483fb913fdc5261b04936b6e24d8eac1aca0f1055957afa8dade"
     }
   ],
   "assembly": [

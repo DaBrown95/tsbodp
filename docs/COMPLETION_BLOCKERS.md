@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,386 C functions / 298,356 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 302,416 bytes; original slices
-still supply 16,474,800 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,390 C functions / 299,512 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 303,572 bytes; original slices
+still supply 16,473,644 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **108 unowned rows / 23,146
+[inventory](../assets/rom-inventory.json) contain **104 unowned rows / 21,998
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -164,6 +164,23 @@ Together with nine existing owners it completes ten C functions / 1,548
 contiguous bytes at `0x17A68..0x18074`. The entire added extent was already
 mapped; no new executable discovery or runtime evidence follows. Row 97 remains
 disabled, and complete callback, writer, backing and gameplay domains stay open.
+
+The four [scene phase row-25 bodies](SCENE_PHASE25.md) add 1,156 C extent
+bytes: 948 instruction, 176 literal, 20 switch-table and twelve alignment bytes.
+They complete the observed initializer, five-state dispatcher, object setup and
+shutdown span at `0x4694C..0x46DD0`. Existing canonical owners and actual provider
+interfaces are retained, with the shared callback header. Normal/strict source
+checks, genuine controls and independent review cover all four bodies. The
+entire source span was already mapped; this adds no executable discovery or
+runtime evidence. Palette indices, appearance-prefix backing, object slots and
+lifetimes, later writers and gameplay remain conditional. Shutdown reads the
+current audio option and does not restore the separately saved byte.
+
+Four still-unconverted extents now include their native two-byte trailing
+alignment: `0x219CC` (176), `0x3B75C` (356), `0x3F908` (1,112) and `0x42964`
+(656). These eight newly mapped data bytes add no C or instruction credit. The
+last two retain four and eight unclassified internal bytes respectively; the
+annotations do not establish complete alternate-entry or executable ownership.
 
 Executable inventory remains incomplete. It separates instructions, data and
 unresolved bytes; its instruction union is not complete. Unclassified owned/envelope bytes,
