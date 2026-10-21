@@ -59,11 +59,12 @@ particular:
   provider. Both accesses use existing compatible unsigned-byte storage views.
   Text selection, variable resource tails,
   live text/limit backing and loop progress remain premises.
-- `FrameScenePlayerGroup` is an existing partial mode view. Palette and binding
-  providers consume a readable seven-byte appearance prefix; its one-byte
-  `sizeof` is not an allocation-size claim. Actor allocation is 320 bytes while
-  the current partial actor view covers 312. The nullable transient allocation
-  is 72 bytes.
+- `FrameScenePlayerGroup` is an existing partial mode view covering byte 0.
+  The pinned compiler rounds its size and alignment to four bytes. Palette and
+  binding providers consume a readable seven-byte appearance prefix; the partial
+  type's size does not establish its backing allocation. Actor allocation is
+  320 bytes while the current partial actor view covers 312. The nullable
+  transient allocation is 72 bytes.
 - The setup needs scene-object slots 0 and 1. The existing shutdown slot-clearing
   provider writes slots 0 through 16, requiring 17 writable slots. Allocation,
   object/list lifetimes, animation and resource indices, direction tables,
