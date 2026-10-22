@@ -194,6 +194,10 @@ before the initial calls removes its separate late handoff and gives it the
 native continuous R7 lifetime. It still fails at 680 / 548 against 692 bytes;
 tile, y and color spill homes remain wrong despite the native-sized frame.
 This measured lifetime cause permits no automatic declaration/binding grid.
+A [controlled restoration of historical live-range splitting](DISPLAY_TEXT_RECONSTRUCTION.md#bounded-historical-live-range-splitting-test)
+reproduces that baseline with the pass off, but yields 760 / 707 with it on.
+The predicted loop splits occur; the frame grows and native cursor placement
+is lost. That algorithm is not the missing cause for this canonical source.
 The window
 setter consumes all four coordinate inputs; its actual caller discards the result. The
 inspected collection-count writer chains do not establish an IRQ alias that

@@ -279,6 +279,30 @@ twelve missing bytes. The 316-byte frame remains; tile, y and color spill homes
 and the full body still differ. This private diagnostic adds no C credit and
 does not justify a declaration-order or binding grid.
 
+## Bounded historical live-range-splitting test
+
+Original Thumb/COFF target defaults enabled live-range splitting at `-O2`,
+while Thumb/ELF left it disabled. This follows from the imported target's
+[stabs preference](https://github.com/pret/agbcc/blob/be8b04496302184c6e8f04d6179f9c3afc50aeb6/gcc/config/arm/tcoff.h)
+and the original driver; it does not identify the game's compiler or flags.
+A private diagnostic restored the exact algorithm and allocation bookkeeping
+removed by the [upstream change](https://github.com/pret/agbcc/commit/ef3a1796662108f019de5d018269abb28250934f),
+with current host compatibility and the current ELF target preserved. The
+canonical C and its headers were unchanged. With the pass disabled, the
+complete 680-byte output, assembly and pre-pass intermediate output reproduced
+the retained baseline exactly.
+
+Enabling it selected both actual height loops and created seventeen copies,
+including color, pixel pointer and bit index. The first new transformation
+occurs after REGMOVE, as predicted. It produces 760 bytes / 707 differing,
+missing or extra bytes against the full 692-byte reference. The frame grows
+from 316 to 328 bytes, and the continuous cursor moves from R7 to SL. Tile,
+y and color retain the wrong initial spill homes. This exact algorithm does
+not explain the retained canonical source's native allocation. The diagnostic
+adds no C credit or gameplay evidence. Further source or compiler variants
+require a distinct supported cause; the historical COFF premise alone does
+not justify a profile grid.
+
 ## Height and line-limit consumers
 
 Three callers of the accepted line-selection path add another 260 matching C
