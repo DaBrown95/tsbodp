@@ -47,190 +47,65 @@ at `0x40AB4` (692 bytes), [activity-three parent and raster workers](SCENE_CONTA
 and the [record-selection text renderer](SCENE_RECORD_SELECTION_HANDOFFS.md) at
 `0x1AA78`. Their local source gains leave these workers unconverted.
 
-The [installed serial-slot callback](SCENE_CONTACT_MENU.md#installed-serial-slot-callback)
-adds four C extent bytes: two existing candidate bytes now qualified as
-instructions and two newly mapped zero-alignment bytes. The raw and qualified
-instruction census each gain two bytes; no new instruction extent is mapped. All fourteen C functions / 2,072 bytes at
-`0x1C9B8..0x1D1D0` are source-owned. The actual installer and driver establish
-its object-pointer callback route; wider writers, live objects, asynchronous
-IRQ/protocol inputs and gameplay remain conditional. Six alignment annotations
-now identify twelve source-owned bytes as data, including ten already owned
-before this callback; they add no separate C or instruction credit.
+The renderer's actual current/previous-frame address producers already agree
+with native code. Their spill homes remain SP60/SP56 instead of SP68/SP64;
+the missing order/counter allocation cause is not a missing byte snapshot or
+provider result. The finalizer's two compare-only upper-X temporaries are
+matched and hoisted by LOOP. No additional native definition, escape or
+consumer supports defeating that transformation. Preserve these closed source
+lines until a distinct semantic or original-build fact appears.
 
-The [activity callbacks and unrooted neighbour](FRAME_ATTACHMENT_JOBS_42_94.md#activity-descriptor-callbacks-and-unrooted-neighbour)
-add four C functions / 180 extent bytes: 36 instruction, four literal, 136
-switch-table and four alignment bytes. All seven nonnull targets shared by
-observed rows 5–7 are source-owned (664 bytes), within twelve contiguous C
-functions / 1,888 bytes at `0x432CC..0x43A2C`. Three old rows covered 172
-estimated bytes. The separate unrooted return-100 leaf adds four newly identified
-instruction bytes; the other four newly mapped bytes are alignment. Its incoming
-roots and historical unused formals remain open. Generic EC delivery and the
-wider selector, writer, backing and gameplay populations remain unresolved.
+The [activity-three preparation](SCENE_CONTACT_ACTIVITY_THREE.md#preparation-worker-current-causes-and-input-bounds)
+remains 536 / 492 against 544 bytes. The [attachment child](FRAME_ATTACHMENT_JOBS_42_94.md#row-two-descriptor-callbacks)
+remains 788 / 42: its required pending update crosses the allocator's reference
+priority threshold and exchanges R5/R6. Removing that update is incorrect.
+The [palette selection builder](SCENE_PALETTE_MENU.md#remaining-selection-transitions)
+at `0x1510C` remains unconverted. Binding its real column to R5 survives every
+intermediate stage, but disqualifies it from LOOP's pseudo-register induction
+recognition. The resulting 176 / 163 attempt loses the native incremental X
+and slot carriers. This composition is closed; another binding grid is not a
+new cause.
 
-All seven nonnull [row-two descriptor targets](FRAME_ATTACHMENT_JOBS_42_94.md#row-two-descriptor-callbacks)
-are also source-owned (628 bytes), within eight contiguous C functions / 728
-bytes at `0x28738..0x28A10`. Its `0x28424` child remains original. The faithful
-private candidate is 788 / 42, with differences confined to R5/R6 instruction
-fields. The required pending-update operation increases the owner reference
-count from 15 to 16, crossing the allocator's priority threshold and reversing
-owner/job homes. Removing the operation would be incorrect. Further trials
-need a distinct actual source, lifetime, interface or build fact.
+The [glyph renderer](DISPLAY_TEXT_RECONSTRUCTION.md#bounded-historical-live-range-splitting-test)
+retains 680 / 548 against 692 bytes despite its correct early cursor lifetime
+and frame size. Faithful historical live-range splitting produces the predicted
+splits but worsens the full result to 760 / 707. Tile, Y and color homes remain
+wrong. The text row reader remains 140 / 80, with the tile pointer spilled.
+No shared compiler-switch explanation follows.
 
-The [controlled installed tile-decoder fixture](RUNTIME_OBSERVATIONS.md#controlled-installed-tile-decoder-fixture)
-confirms the original parser order and 128-byte VRAM output for the fixed
-phase-25 sprite input, with controls and replay. The suspended-event context
-leaves broader writers open. The row-six map selections choose only codec-six
-chunks; repeating that search or the unchanged frame-one fixture adds no new
-evidence. The copied tile parser's source mismatch remains.
+The [point-to-cell converter](FRAME_INPUT.md) remains 116 / 121 against 128
+bytes with its actual two-point work and signed-word division API. Its context
+and output allocate to R5/R7 instead of native R7/R8. The inverse projector is
+also unowned. Its shared provisional zero/one declaration and canonical
+registration alias now agree with the native callers, including in-place
+points; the existing 104-byte before-step caller retains its match. That
+interface repair adds no C coverage or runtime evidence. The already-owned
+216-byte copied map transfer is counted once, separately from the unconverted
+320-byte first map drawer and both installation prefixes.
 
-Four unconverted extents include their bounded trailing alignment: `0x219CC`
-(176), `0x3B75C` (356), `0x3F908` (1,112) and `0x42964` (656). These eight data
-bytes add no C or instruction credit. The last two retain four and eight
-unclassified internal bytes respectively.
+The [controlled tile fixture](RUNTIME_OBSERVATIONS.md#controlled-installed-tile-decoder-fixture)
+confirms one original parser order and 128-byte output with controls and replay.
+Both row-six maps and eight animation payloads have conditional calibrated
+bounds. These finite results leave live backing, later writers, activation,
+completion and executable-target populations open; repeating unchanged fixtures
+adds no evidence. The selector's setup providers do not guarantee projection
+success or initialize its distinct output fields.
 
-Executable inventory remains incomplete. Its instruction union is not a full
-code denominator. Unclassified estimated-envelope and wider unresolved bytes
-still need closure. Fifteen authored veneer NOPs have a separate unrooted
-instruction-provenance role; data roles cannot suppress alternate execution. The
-initial EWRAM image has no established executable entry, and later writes remain
-possible. Finite observations do not close populations. Completed local source
-paths and their conditional domains are recorded in the linked owner documents;
-whole-ROM equality does not establish complete source ownership or gameplay.
+The instruction census is not a complete code denominator. Its current raw
+union is 284,500 bytes; qualified instructions occupy 284,474 bytes and
+referenced data 35,896 bytes. Known data totals 22,856 bytes. Source-owned data
+and alignment have 1,989 records / 4,004 bytes, with zero locally unclassified
+owned bytes. Estimated envelopes still have 1,260 unclassified bytes, and
+16,432,704 bytes remain outside resolved roles. Fifteen authored veneer NOPs
+have a separate 30-byte instruction role; two audio fills are implicit code
+alignment, without proof against alternate entry. The reachable `0x499B0` NOP
+remains a separate source mismatch. The `0xE1EE` interior-entry-shaped value has
+a palette-data use, while an executable consumer and prepared-R1 contract
+remain unresolved. Material selector, writer, alias and target domains remain
+completion blockers.
 
-Five further alignment annotations classify ten already source-owned bytes as
-data. Matching emitted directives, object and linked data symbols, and native
-branches or returns establish these roles. Owned unclassified bytes totalled
-34 at that checkpoint. The subsequent authored-instruction annotations classify
-the fifteen explicit veneer NOPs / 30 bytes separately. Two controlled assembler
-alignment changes then identify the remaining four owned audio bytes as implicit
-Thumb code fill, leaving zero owned unclassified bytes. Their code mapping and
-possible alternate execution remain explicit; the reachable NOP at `0x499B0`
-is a separate unresolved source mismatch. Raw and qualified observed instruction,
-C, mapped extent and unfinished-source counts do not change. Unowned code,
-alternate entry and complete executable inventory remain open.
-
-
-Eight ordinary C helpers add 404 extent bytes: two background-buffer operations,
-four view-position/dimensions helpers and two unrooted interaction bodies. Seven
-existing rows account for 376 bytes of the backlog reduction. The separate
-`0xEA68` getter adds 28 newly mapped bytes: 22 instructions, four literal and two
-alignment bytes. Across all eight bodies, 372 instruction bytes are newly
-qualified; 350 were already inside estimated mapped extents. Full extents,
-normal/strict checks and genuine source controls pass. Incoming callers, unused
-formals, valid input/backing populations and gameplay remain provisional. See
-[backgrounds](DISPLAY_MAP_RECONSTRUCTION.md#independently-bounded-background-buffer-lifetime),
-[views](VIEW_EFFECTS_RECONSTRUCTION.md#additional-position-and-dimensions-helpers)
-and [interactions](FRAME_COLLISION_RESPONSE.md#nearby-unrooted-interaction-bodies).
-
-Keep one current paired proof and controls, unique attempts and bounded useful
-failures. Retire obsolete payloads under the existing
-[retention policy](LOCAL_OUTPUT_RETENTION.md), keep the project below 5 GB and
-leave backups and unrelated files alone.
-
-The [choice-panel text drawer](SCENE_CHOICE_PANEL.md#text-drawer-and-native-counter-lifetime)
-at `0x34A54` adds one C body / 188 extent bytes: 166 instruction, twenty literal
-and two alignment bytes. It uses the canonical request owner and actual provider
-interfaces. Its real loop index remains in callee-saved R4 across the text calls;
-this preserves the native earlier Y calculation and resolves the ordinary
-nine-byte Y/index register exchange. The step's two calls retain their original
-address under the canonical function name. Full normal/strict checks, genuine
-Y-increment controls and the whole-ROM progress gates pass. Count changes,
-five-ID backing, resource and line-progress domains remain conditional; no
-runtime or gameplay credit is added. The priority blockers above remain open.
-
-Three independently bounded source bodies add 356 C extent bytes: the
-[collider-overlap predicate](FRAME_COLLISION_RESPONSE.md#unrooted-collider-overlap-predicate),
-[two-object stop/timer](ACTOR_STATE_RECONSTRUCTION.md#independently-bounded-two-object-stop-and-timer)
-and [display flags query](DISPLAY_MAP_RECONSTRUCTION.md#independently-bounded-display-control-flags-query).
-Their normal/strict matches and genuine controls preserve the existing owners
-and provider contexts. The former three rows totalled 344 estimated bytes;
-twelve newly mapped bytes comprise two instruction bytes, four literal bytes
-and six alignment bytes. The possible `0xE1EE` interior entry is covered by the
-full `0xE1EC` source. Its sole pointer-looking word has a
-[bounded palette data use](WHOLE_ROM_INVENTORY.md#palette-word-resembling-an-interior-entry),
-but an executable consumer and prepared-R1 contract remain unresolved in the
-unchanged manifest metadata. Its disappearing weak row is physical coverage,
-not an incoming-contract resolution. The known backlog is still not a complete
-code denominator; these source additions establish no gameplay or interior-entry
-execution.
-
-
-Five independently bounded helpers add 300 C extent bytes: the
-[pending-flag clearer](SEARCH_COST_AND_DAILY_CLOCK.md#independently-bounded-pending-flag-clearer),
-[panel-mode selector](SCENE_CATALOG.md#independently-bounded-panel-mode-selector)
-and [three VBlank-status helpers](DISPLAY_MAP_RECONSTRUCTION.md#independently-bounded-vblank-status-polling).
-They replace five existing rows of the same total extent: 230 instruction,
-64 literal/switch-table and six alignment bytes. Full normal/strict comparisons,
-genuine source controls and actual interface/dependency checks pass. Incoming
-roots and broader input, backing, writer and gameplay domains remain open;
-no mapped extent is added. The separate unrooted stepped scene-object creator
-at `0x28234` remains original: its first faithful candidate is 168 / 116 against
-160 native bytes. The compiler reduces both coordinate products where native
-reduces only X; no actual Y reload, escape or provider dependency supports a
-further trial. The main dependency-ordered blockers above remain unresolved.
-
-
-The [additional text helpers](DISPLAY_TEXT_RECONSTRUCTION.md#additional-unrooted-text-helpers)
-add three C bodies / 60 extent bytes. One existing 36-byte row is replaced;
-two unrooted leaves add 24 newly mapped bytes: twelve instruction, eight literal
-and four alignment bytes. All three incoming-use populations remain open.
-The same work repairs the text-field owner: decoded resource `0x25` contains
-`@1`, whose raw selector addresses field zero directly. The old `0x03000E20`
-"bank" is a biased constant for the canonical `0x03001A60` bank. Five existing
-reader contexts retain 1,016 identical bytes using integer selector subtraction
-before indexing. Broader selector, backing, recursion and writer domains remain
-conditional. See the [shared-bank evidence](DISPLAY_TEXT_RECONSTRUCTION.md#staging-fields-and-expansion-consumers).
-
-Finalizer source still has two one-definition, compare-only upper-X loads that
-LOOP can pair and hoist. An actual additional definition, spanning consumer or
-dependency is needed to defeat that measured eligibility; adding one solely
-to force storage would not be supported. The serial R8/SEND/event audit supplies
-no missing consumer, and the drawer's captured equivalent addresses remain
-unchanged by the inspected writers. The text row reader's current calibration
-reproduces 140 / 80: R8 is preserved, while the incoming tile pointer receives
-a four-byte spill frame. No source variant or shared compiler-switch explanation
-follows from those findings.
-
-
-The [unrooted transient/view coordinator](SCENE_REQUEST_HANDOFF.md#unrooted-transient-and-view-coordinator)
-at `0x27DF0` adds one ordinary C body / 48 extent bytes: 44 instruction bytes and
-four literal bytes. It steps transient effects, then passes each byte index to
-the existing view updater, reloading the shared count after every call. It
-replaces one estimated row without adding mapped extent; incoming roots and
-complete count/backing/writer domains remain open.
-
-The canonical glyph-renderer diagnostic retains the actual word buffer,
-font/state types and provider interfaces. Moving the existing cursor capture
-before the initial calls removes its separate late handoff and gives it the
-native continuous R7 lifetime. It still fails at 680 / 548 against 692 bytes;
-tile, y and color spill homes remain wrong despite the native-sized frame.
-This measured lifetime cause permits no automatic declaration/binding grid.
-A [controlled restoration of historical live-range splitting](DISPLAY_TEXT_RECONSTRUCTION.md#bounded-historical-live-range-splitting-test)
-reproduces that baseline with the pass off, but yields 760 / 707 with it on.
-The predicted loop splits occur; the frame grows and native cursor placement
-is lost. That algorithm is not the missing cause for this canonical source.
-The window
-setter consumes all four coordinate inputs; its actual caller discards the result. The
-inspected collection-count writer chains do not establish an IRQ alias that
-would justify volatile reads in the held removal helper. These findings add
-no source credit or gameplay evidence.
-
-The [unrooted point-equality helper](VIEW_EFFECTS_RECONSTRUCTION.md#independently-bounded-point-equality-helper)
-and [direction-step helper](VIEW_EFFECTS_RECONSTRUCTION.md#independently-bounded-direction-step-helper)
-at `0x273FC` and `0x274E4` add two ordinary C bodies / 100 extent bytes:
-98 instruction bytes and two linker zero-alignment bytes. They compare the
-canonical two-word points and select/store a signed-byte direction step with
-the native byte-wrap cases. Two existing rows / 98 estimated bytes are
-replaced; only the two alignment bytes are newly mapped. Incoming callers,
-original typedefs and complete input/backing populations remain open. This
-local gain leaves the priority blockers above unresolved.
-
-The [unrooted relation-average band reader](SCENE_RELATION_GRID.md#average-code-reader)
-at `0x3606C` adds one ordinary C body / 44 extent bytes: 38 instruction bytes,
-four literal bytes and two alignment bytes. A single GNU R1 register variable
-describes the actual index lifetime after the initial offset scratch and before
-the return-address pop. Normal/strict matches and genuine source controls pass,
-as do the complete matching and progress gates. One existing 44-byte row is
-replaced without adding mapped extent. Incoming roots, historical unused formals
-and full backing populations remain open; the larger relation delta and the
-priority blockers above remain original.
+Completed local paths and their source gains are recorded in the linked owner
+documents and publication history. Keep one current paired proof and controls,
+unique attempts and bounded useful failures. Retire only verified replaced
+payloads under the [retention policy](LOCAL_OUTPUT_RETENTION.md), stay below
+5 GB and leave backups and unrelated files alone.

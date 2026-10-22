@@ -407,6 +407,17 @@ Removing each of the five final scroll argument constraints separately changes
 native bytes while preserving the actual value and scope. These diagnostics do
 not count as additional C coverage.
 
+The builder's bounded R5-column trial remains a nonmatch: 176 emitted bytes
+and 163 differing or missing bytes against the fixed 184-byte native extent.
+The column's actual R5 lifetime spans both constructor loops and the real
+callee-saved constructor calls. The binding survives all intermediate stages;
+the first causal failure is LOOP's induction recognizer, which accepts only
+pseudo-register candidates. It therefore recalculates column-derived X and
+slot offsets instead of retaining the native increments. This composition is
+closed without another binding or profile grid. Five fresh byte-count row
+loops decrement an initial available count of 25 before the remaining-slot
+loop; the native code supplies no capacity or total-count guard.
+
 The 178 finite cases independently execute original and linked bodies against
 normalized call models, check callee-saved state and poison caller-clobbered
 registers. They include zero and maximum-word timers, the observed handoff

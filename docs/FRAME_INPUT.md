@@ -896,7 +896,9 @@ control `0x04000054`, and 228 bytes from `0x0800B6A4` to `0x03005E60` with
 `0x03001FCC`. Their provisional single argument selects an eight-byte view
 coordinate pair within a map record. Static ARM disassembly finds 320- and
 216-byte spans ending in returns, so the install copies also include 16 and
-12 bytes from the next ARM entries respectively. The second following entry
+12 bytes from the next ARM entries respectively. The second body is the owned
+`frame_transfer_map_tiles` at `0xB6A4`; its first sixteen bytes also occur at
+the end of the first installation. The second following entry
 is the tile allocator already reconstructed separately. These copy sizes are
 installation facts, not additional reconstructed C coverage. Raw disassembly,
 literal triples and provisional signatures are retained in the ignored
@@ -908,8 +910,9 @@ sixteen camera/map and decoder replacements and their controls were recompiled
 against the refined record and canonical heap declarations; all retained their
 matches and rejected their edits. Evidence is under `camera-map/map-lifecycle/`.
 The larger selected-tile consumer at `0x39CF0` remains a semantic C candidate
-with mismatching bytes and is excluded from coverage, alongside the copied ARM
-map bodies. No runtime display-memory restore or map drawing has been validated.
+with mismatching bytes and is excluded from coverage, alongside the first copied
+ARM map body at `0xB564`. The second body's 216 C bytes remain counted once.
+No runtime display-memory restore or map drawing has been validated.
 
 Its current private owner view uses the actual unsigned control words, a
 four-byte resource prefix followed by eight-byte chunk descriptors, and a
@@ -1111,9 +1114,9 @@ at `+0x38` into its data. Existing bounds registration, grid terrain and actor
 route consumers support the grid interpretation. The initializer's observed
 fields at `+4`, `+8`, `+0x0C`, `+0x10` and `+0x12` supply the partial origin,
 span, extent and cell-size view; their exact coordinate semantics remain under
-analysis. Allocation failure checks are absent in this path. The initializer,
-selected-tile loader, copied map staging body and central renderer remain
-explicitly unconverted and receive no coverage from this batch.
+analysis. Allocation failure checks are absent in this path. The selected-tile
+loader, first copied map staging body and central renderer remain explicitly
+unconverted. The initializer is owned by the continuation below.
 
 The grid initialization/projection continuation adds seven exact C replacements,
 524 bytes: `frame_initialize_map_registration` (`0x48B78`, 128),
@@ -1175,6 +1178,24 @@ chain survives optimization, but global allocation chooses context/output R5/R7
 instead of native R7/R8. Older near-match records with missing helper contexts
 or unjustified volatile output do not qualify this source. No C credit or
 automatic binding, qualifier or profile follow-up follows.
+
+The inverse `resource_project_point` at `0x48BF8` now has a shared provisional
+zero/one status declaration in `frame_grid_math.h`. Native exits set R0 to zero
+or one; both inspected callers ignore that result. The retained unsigned-byte
+return spelling is compatible with those values, not a uniquely recovered
+historical typedef. Its context is the canonical 20-byte registration selected
+by `g_frame_registration` at `0x03004330`; the duplicate resource-context alias
+and caller-local void declaration are removed. The existing 104-byte
+`resource_object_before_step` still matches with genuine controls.
+
+The unconverted controller at `0x3C688` passes the same point as input and
+output at its `0x3C810` call. The inverse reads both input words before its
+conditional output stores, so the shared declaration permits this aliasing.
+It writes both words only on success and retains the repeated Y upper-bound
+test without adding an X upper-bound test. The before-step caller copies its
+lower bounds to upper bounds even when projection fails; valid prior bounds
+and coordinate/backing domains remain caller premises. This interface repair
+adds no C coverage for the inverse or controller and no runtime evidence.
 
 The scene actor/view initializer `frame_initialize_scene_actors` at `0x26520`
 adds one exact 400-byte C extent, including its first literal island and final
@@ -2318,8 +2339,8 @@ The 104-byte resource callback supplies direct producer evidence: it passes the
 lower point to the projection routine at `0x08048BF8`, then copies lower to upper.
 Its other branch writes zero X and the signed integer part of the object's Y
 position to both points. The projector can return without writing output; no
-new initialization or success guard has been introduced. Its ignored return
-value and the coordinate names remain provisional. Need-effect registration,
+new initialization or success guard has been introduced. Its historical return
+type and the coordinate names remain provisional. Need-effect registration,
 center calculation and handoff consume the same two points. Actor creation,
 state changes and interaction update these members through the same owner.
 State twenty-seven copies the established 20-byte callback-and-points span

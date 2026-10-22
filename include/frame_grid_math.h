@@ -7,6 +7,8 @@
 
 /* Low bytes of a packed cell hold its two grid axes; upper bytes stay unspecified. */
 unsigned char frame_grid_coordinates_to_point(struct FrameMapRegistration *, const struct FramePoint *, struct FramePoint *);
+/* Provisional status API for the original inverse projection; points may alias. */
+unsigned char resource_project_point(void *, const struct FramePoint *, struct FramePoint *);
 unsigned char frame_grid_snap_point_to_center(void *, const struct FramePoint *, struct FramePoint *);
 unsigned char frame_grid_snap_point_to_corner(void *, const struct FramePoint *, struct FramePoint *);
 unsigned char frame_grid_cell_corner(void *, const int *, struct FramePoint *);
