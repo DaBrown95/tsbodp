@@ -15569,7 +15569,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
+      "source_sha256": "f3a9ae90f9c44a19a932e444d47480bca3f4f06e431eefb38ac426543fcfac14",
       "evidence": [
         "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
         "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
@@ -15582,7 +15582,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
+      "source_sha256": "f3a9ae90f9c44a19a932e444d47480bca3f4f06e431eefb38ac426543fcfac14",
       "evidence": [
         "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
         "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
@@ -15595,7 +15595,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
+      "source_sha256": "f3a9ae90f9c44a19a932e444d47480bca3f4f06e431eefb38ac426543fcfac14",
       "evidence": [
         "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
         "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
@@ -15608,7 +15608,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
+      "source_sha256": "f3a9ae90f9c44a19a932e444d47480bca3f4f06e431eefb38ac426543fcfac14",
       "evidence": [
         "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
         "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
@@ -15621,7 +15621,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
+      "source_sha256": "f3a9ae90f9c44a19a932e444d47480bca3f4f06e431eefb38ac426543fcfac14",
       "evidence": [
         "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
         "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
@@ -15634,7 +15634,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "ebb3f6e2e1e1546670166a9a56130663f1ab91888000d63e2e6811196b53530a",
+      "source_sha256": "f3a9ae90f9c44a19a932e444d47480bca3f4f06e431eefb38ac426543fcfac14",
       "evidence": [
         "Revalidated against the current complete matching owner and its compiler-emitted zero alignment; the fixed native span remains unchanged.",
         "Current full linked/native equality and a real changed-source control pass with the original assembler profile. Source-emitted alignment role only; no alternate-entry exclusion or instruction suppression."
@@ -26391,6 +26391,20 @@
         "The complete native44-byte body and both normal/strict linked positives agree. Its nineteen Thumb instructions end at relative38; GCC emits .align2,0 before the sole table-address word at relative40.",
         "Actual object and linked $d mapping begin at relative38 and include both padding and the literal. The sole ABS32 table-address relocation is at relative40, so explicit .align2,0 supplies the preceding two zeros. Both genuine index14-to13 controls retain that placement while rejecting one native byte.",
         "This establishes emitted alignment provenance inside the C extent; it does not exclude alternate entries or execution of these bytes. No separate instruction, mapped extent or C credit is added by this annotation."
+      ]
+    },
+    {
+      "name": "scene_choice_panel_draw_text_alignment_034a8e",
+      "owner": "scene_choice_panel_draw_text",
+      "rom_offset": 215694,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "a494df3604b82c9f143dd34845c2a375ef3db50a6c9e619c7b5a135bf4f32d89",
+      "evidence": [
+        "The complete188-byte native body and linked source positives agree. A branch at relative56 skips the internal pool; its next two bytes at relative58 are zeros emitted by GCC .align2,0 before the first word at relative60.",
+        "Object and linked mapping symbols identify $t0,$d58,$t68,$d176. Data mapping at58 includes the two alignment bytes and two pool words; the ABS32 request relocation at60 and emitted constant word at64 establish their starts. The final three words occupy176..188. Genuine source controls preserve these placements while changing the actual Y increment.",
+        "This establishes source-emitted alignment inside the owned C extent, with no separate C or instruction credit and no exclusion of alternate entries or execution."
       ]
     }
   ],

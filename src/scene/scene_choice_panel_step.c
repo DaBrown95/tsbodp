@@ -20,7 +20,7 @@ void scene_choice_panel_step(void)
  case 1:
   scene_view_draw_frame(SCENE_CHOICE_PANEL_X,SCENE_CHOICE_PANEL_Y,g_scene_choice_panel_size.width,g_scene_choice_panel_size.height);
   audio_play_animation_cue(4);
-  scene_choice_panel_draw_text_original();
+  scene_choice_panel_draw_text();
   scene_choice_panel_original_window_begin(10);
   g_scene_request.unknown_10=2;
   g_scene_request.unknown_14=10;
@@ -66,7 +66,7 @@ void scene_choice_panel_step(void)
      input_step_vertical_pressed(&g_scene_request.scene,1,SCENE_CHOICE_PANEL_COUNT-1,1,player);
     else input_step_vertical_pressed(&g_scene_request.scene,0,SCENE_CHOICE_PANEL_COUNT-1,1,SCENE_CHOICE_PANEL_LOCAL_PLAYER);
    }
-   scene_choice_panel_draw_text_original();
+   scene_choice_panel_draw_text();
   }
   break;
  }

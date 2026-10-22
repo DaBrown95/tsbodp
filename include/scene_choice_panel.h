@@ -26,8 +26,9 @@ void scene_choice_panel_initialize(void);
 void scene_choice_panel_shutdown(void);
 void scene_choice_panel_begin_close(void);
 
-/* These text and transition services remain original ROM services. */
-void scene_choice_panel_draw_text_original(void);
+void scene_choice_panel_draw_text(void);
+
+/* These transition services remain original ROM services. */
 void scene_choice_panel_original_window_begin(unsigned short duration);
 void scene_choice_panel_original_window_end(unsigned short duration);
 void scene_choice_panel_original_set_window(int left, int top, int right, int bottom);

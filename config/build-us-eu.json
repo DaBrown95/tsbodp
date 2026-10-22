@@ -40410,7 +40410,7 @@
         "g_input_pressed": "0x3004228",
         "g_resource_scene_arg": "0x3004370",
         "g_scene_link_catalog_world": "0x3003950",
-        "scene_choice_panel_draw_text_original": "0x8034a55",
+        "scene_choice_panel_draw_text": "0x8034a55",
         "display_configure_window_masks": "0x80489ed"
       },
       "thumb_symbols": [
@@ -40422,7 +40422,7 @@
         "scene_choice_panel_original_window_begin",
         "display_configure_window_masks",
         "scene_choice_panel_original_set_window",
-        "scene_choice_panel_draw_text_original",
+        "scene_choice_panel_draw_text",
         "scene_choice_panel_begin_close"
       ],
       "negative_control": {
@@ -55420,6 +55420,29 @@
       "negative_control": {
         "before": "register int index asm(\"r1\") = 14;",
         "after": "register int index asm(\"r1\") = 13;"
+      }
+    },
+    {
+      "name": "scene_choice_panel_draw_text",
+      "source": "src/scene/scene_choice_panel_draw_text.c",
+      "rom_offset": 215636,
+      "size": 188,
+      "symbols": {
+        "display_text_draw": "0x801a7c9",
+        "display_text_select_font": "0x801ae75",
+        "display_text_expand_resource": "0x801b21d",
+        "g_actor_scene_request": "0x3005a00",
+        "g_need_effect_choice_text": "0x30059f0",
+        "g_scene_request": "0x3004350"
+      },
+      "thumb_symbols": [
+        "display_text_draw",
+        "display_text_select_font",
+        "display_text_expand_resource"
+      ],
+      "negative_control": {
+        "before": "y += 12;",
+        "after": "y += 11;"
       }
     }
   ],

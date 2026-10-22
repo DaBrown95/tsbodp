@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,434 C functions / 302,136 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 306,196 bytes; original slices
-still supply 16,471,020 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,435 C functions / 302,324 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 306,384 bytes; original slices
+still supply 16,470,832 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **64 unowned rows / 19,464
+[inventory](../assets/rom-inventory.json) contain **63 unowned rows / 19,276
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -126,6 +126,17 @@ Keep one current paired proof and controls, unique attempts and bounded useful
 failures. Retire obsolete payloads under the existing
 [retention policy](LOCAL_OUTPUT_RETENTION.md), keep the project below 5 GB and
 leave backups and unrelated files alone.
+
+The [choice-panel text drawer](SCENE_CHOICE_PANEL.md#text-drawer-and-native-counter-lifetime)
+at `0x34A54` adds one C body / 188 extent bytes: 166 instruction, twenty literal
+and two alignment bytes. It uses the canonical request owner and actual provider
+interfaces. Its real loop index remains in callee-saved R4 across the text calls;
+this preserves the native earlier Y calculation and resolves the ordinary
+nine-byte Y/index register exchange. The step's two calls retain their original
+address under the canonical function name. Full normal/strict checks, genuine
+Y-increment controls and the whole-ROM progress gates pass. Count changes,
+five-ID backing, resource and line-progress domains remain conditional; no
+runtime or gameplay credit is added. The priority blockers above remain open.
 
 Three independently bounded source bodies add 356 C extent bytes: the
 [collider-overlap predicate](FRAME_COLLISION_RESPONSE.md#unrooted-collider-overlap-predicate),

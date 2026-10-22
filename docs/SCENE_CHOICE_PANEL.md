@@ -1,10 +1,10 @@
 # Choice panel setup, input and exit
 
-The four matching choice-panel bodies total 1,196 bytes: the 396-byte
-initializer, 616-byte step handler, 124-byte shutdown and 60-byte close request.
-The new source gain is the step handler alone, one function and 616 bytes.
-The existing three bodies retain their source and native bytes. The shared
-owner refinements add no C-byte credit. These matches do not reconstruct the
+The five matching choice-panel bodies total 1,384 bytes: the 396-byte
+initializer, 616-byte step handler, 188-byte text drawer, 124-byte shutdown and
+60-byte close request. The text drawer adds one C function and 188 extent bytes;
+the step uses its canonical name at the same address. The shared owner
+refinements add no separate C-byte credit. These matches do not reconstruct the
 complete phase or establish scheduler, display hardware or gameplay behavior.
 
 The phase-2 table stores initializer, step and shutdown callbacks at
@@ -94,7 +94,7 @@ comparisons remain preserved. The initializer control restores both wrong
 predicates; object/selector crosscases distinguish them. The initial request
 selection store still uses 0x03004358. When active == 1, a nonnull attached
 object must be a writable compatible FrameObject for flag and position access.
-These four bodies perform no allocation and do not infer object presence from
+These five bodies perform no allocation and do not infer object presence from
 the independent selector.
 
 State 1 and the close request store timer 10. States 2 and 3 use unsigned
@@ -128,15 +128,51 @@ results do not reconstruct every font, heap, window or renderer provider.
 Actual installed-artifact, full-ROM and publication gates remain separate
 requirements.
 
-The remaining original targets are the 188-byte
-scene_choice_panel_draw_text_original body and five separate window services:
-scene_choice_panel_original_configure_windows,
+## Text drawer and native counter lifetime
+
+The [text drawer](../src/scene/scene_choice_panel_draw_text.c) owns
+`0x08034A54..0x08034B10`: 166 instruction bytes, twenty literal bytes and two
+alignment bytes. It uses the sole twelve-byte actor-request owner directly,
+with no incompatible private request cast. The caller, font selector, resource
+expander and line-drawing provider retain their actual separate interfaces.
+
+The drawer captures X and Y from the request bytes, scales by eight and adds
+eight. Active value one with an attached object adds 32 to X and changes width
+from 200 to 168. Each entry selects font three, palette zero or three and fill
+minus one. Palette three requires active zero and equality between the full
+request selector word and the entry index. It expands the selected text ID,
+captures its first byte, then increments the index even for empty text. Every
+draw updates tile from the provider's return and adds twelve to Y. The actual text
+pointer and word limit are passed by address; limit starts at `0x7FFFFFFF` once
+for the whole traversal and is not reset for each string.
+
+One GNU register variable describes the actual counter in callee-saved R4.
+Its lifetime starts at `0x34A8A`, after coordinate setup and the optional object
+branch. It supplies the palette comparison, text-ID offset, increment before
+the first line draw and fresh count test, surviving the three provider calls.
+All providers preserve R4, and no other live R4 value overlaps it. The ordinary
+canonical source gives 188 bytes with nine Y/index R4/R5 differences. Keeping
+the later-born counter in R4 leaves the earlier Y calculation in R0 and its
+saved value in R5, matching the complete body. Binding Y instead coalesces its
+earlier temporary and removes the native move; that failed form is retained.
+These are measured source and compiler lifetimes, not recovered original
+declarations or compiler identity.
+
+The count is reloaded after provider calls. The five observed text IDs therefore
+require a valid index on every iteration, not merely an initial count bound.
+Strings, font/substitution storage, provider progress and representable line
+coordinates remain preconditions. The source preserves the unchecked reads
+and original loop behavior. No new runtime trace or finite gameplay population
+is claimed. Full normal/strict comparisons and genuine Y-increment controls
+qualify the complete extent, including its skipped internal alignment and pools.
+
+The remaining original targets include these separate window services:
 scene_choice_panel_original_set_window,
 scene_choice_panel_original_window_begin,
-scene_choice_panel_original_window_end and
-scene_choice_panel_original_disable_windows. They retain zero recovered-C
-credit here. Their effects are explicit external contracts, not reconstructed
-instruction bodies or an implicit complete lifecycle model.
+and scene_choice_panel_original_window_end at `0x48A14`, `0x48724` and `0x487BC`.
+They retain zero recovered-C credit here. Configuration and disable services
+are already owned by the canonical [window sources](DISPLAY_WINDOW_MOTION.md).
+The remaining external contracts do not establish a complete lifecycle model.
 
 A byte match, a type check and a bounded finite result answer different
 questions. Larger storage ownership, universal source domains, actual hardware
