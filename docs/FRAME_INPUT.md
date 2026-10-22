@@ -1167,6 +1167,15 @@ projection and point-to-cell converter themselves remain unconverted. These
 are compiler and static data findings, not runtime assertions about pathfinding
 or complete map input coverage.
 
+A clean current-header point-to-cell capture retains the actual two-point
+16-byte work object, duplicate Y-bound test, ordinary byte outputs and the
+existing signed-word BIOS division interface. It emits 116 bytes / 121 differing
+or missing bytes against the complete 128-byte native extent. The R0 inverse-sum
+chain survives optimization, but global allocation chooses context/output R5/R7
+instead of native R7/R8. Older near-match records with missing helper contexts
+or unjustified volatile output do not qualify this source. No C credit or
+automatic binding, qualifier or profile follow-up follows.
+
 The scene actor/view initializer `frame_initialize_scene_actors` at `0x26520`
 adds one exact 400-byte C extent, including its first literal island and final
 pool. It normalizes a zero or single-player count to one, clears the local

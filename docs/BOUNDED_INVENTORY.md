@@ -79,10 +79,30 @@ The actor-presence bank has a separate conditional bound. In the retained
 50-root / 105-pack serialized population, all 463 distinct factory-seven actor
 payloads use IDs 6..41. IDs 18..41 address the bank's 24 bytes; lower IDs skip
 the store. An unchecked ID 54 would instead address the low byte of the
-need-effect free-list root, but no backed successful constructor route for that
-ID is established. The saved world `+0x740` byte is copied without semantic
+need-effect free-list root. Its constructor has an independently established
+backing failure before that store. The saved world `+0x740` byte is copied without semantic
 range validation, and its later eligibility test does not validate actor IDs.
 Reset 42 is skipped; the named default-interaction route from valid actors
 restores 18..41. Other saved/menu producers, constructor resource backing and
 later subtype or payload writers remain open. A possible numeric alias alone
 does not establish a valid write to the other pool.
+
+Startup requests ten 44-byte actor-need states; the allocator rounds the
+440-byte request to 448. For a saved byte ID above 31, the actual constructor calls
+the initializer that writes eight words at `44 * (ID - 32) + [0,32)` relative to
+that allocation. IDs 32..41 have the necessary state backing. ID 54 instead
+writes offsets 968..999, outside even the rounded allocation. The inspected
+maintained routes neither enlarge nor replace this allocation; restart requests
+440 bytes again. This bound assumes a successful allocation and preservation
+of its pointer and backing.
+
+The saved route skips 42, while byte values 43..255 remain unchecked and exceed
+that state backing. These are invalid or unbacked constructor outcomes, not
+additional actor definitions or executable discoveries. No native guard proves
+they cannot reach the later presence store. ID 54's unchecked palette expression
+also produces `0x00022000` from ROM word `0x0805A608`; no owned game-palette
+backing is established for it. If the palette frame remains zero after reset,
+that word supplies the transfer source. Readable adjacent
+ROM data does not establish a longer resource table. IDs at most 31 avoid this
+state indexing, but still need valid resources, direction, object/palette
+capacity and lifetimes; in-range state backing alone does not prove success.

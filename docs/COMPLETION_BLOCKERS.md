@@ -27,6 +27,9 @@ writer populations and live backing remain open. See [the writer boundary](FRAME
 The explicit 128-slot object pool bounds the renderer table only under intact
 membership and traversal premises. A saved auxiliary pointer can already name
 a child returned to the free list; see [the callback limits](BOUNDED_INVENTORY.md#conditional-renderer-table-bound-21-october-2026).
+The separate actor-state allocation supplies a necessary bound of 32..41
+for saved IDs above 31. ID 54 exceeds that backing before its
+potential presence-bank alias write; this is not a native rejection guard.
 
 | Order | Remaining code | Blocker and next evidence |
 | --- | --- | --- |
