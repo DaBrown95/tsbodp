@@ -840,8 +840,8 @@ denominator.
 ### Source-owned alignment and data roles
 
 The existing code-evidence configuration now records optional
-`source_owned_data_regions`. There are 1,974 exact spans accounting for 3,974
-bytes: the debugger's 28-byte inline packet and 3,946 alignment bytes. Each
+`source_owned_data_regions`. There are 1,985 exact spans accounting for 3,996
+bytes: the debugger's 28-byte inline packet and 3,968 alignment bytes. Each
 record pins the owning source, complete owner extent and original bytes.
 Compiler data mapping symbols and emitted alignment, together with native
 branches or returns, supply the role evidence. These classifications add no
@@ -870,22 +870,44 @@ Five further spans / ten bytes classify existing source-owned zeros: compiler
 pool alignment at `0x25956` and `0x289EE`, and explicit terminal alignment at
 `0x28982`, `0x3D1D6` and `0x3D1F2`. Current matching objects and linked outputs
 mark all five as data; the corresponding branches or returns skip them.
-They add no source, instruction or mapped extent bytes. Owned unclassified
-bytes fall from 44 to 34; known data increases from 22,816 to 22,826 bytes.
+They add no source, instruction or mapped extent bytes. At that checkpoint,
+owned unclassified bytes fell from 44 to 34; known data increased from 22,816
+to 22,826 bytes.
 
-The remaining seventeen gaps / 34 bytes stay explicit: fifteen are authored
-NOP instructions after returns and two audio tails have unresolved source-layout
-attribution. They have not been relabelled as padding. The current census also
-records 2,508 bytes inside estimated envelopes and 16,432,770 elsewhere as
-unresolved.
+Fifteen of those gaps now have a separate source-authored, unrooted instruction
+role, accounting for 30 existing assembly bytes. Each is the explicit NOP after
+a terminal BX in the maintained and pinned upstream register-call source.
+Complete matching objects and linked images map both instructions as Thumb;
+the fixed halfword is `0x46C0`. This is positive instruction provenance, without
+an incoming execution root or a claim about historical padding intent.
+The two audio tails / four bytes retain unresolved source-layout attribution.
+The current census also records 1,306 bytes inside estimated envelopes and
+16,432,704 elsewhere as unresolved.
 
-The census validates those pins and feeds the spans through its existing known
-data handling. A conflicting strong instruction remains an explicit ambiguous
-instruction/data result; the field cannot suppress execution evidence. The
+The census validates the data-region pins and feeds those spans through its
+existing known-data handling. A conflicting strong instruction remains an
+explicit ambiguous instruction/data result; the field cannot suppress execution evidence. The
 ordinary map and display partition remain separate from these overlapping
 source-owned roles. Tests reject stale pins, malformed or overlapping records
 and preserve that execution conflict. Complete code inventory and executable
 write domains remain unresolved.
+
+The optional `source_owned_instruction_regions` records pin each assembly
+owner, source hash, exact halfword hash, mode and explicit source line. Validation
+supports only the actual four-byte BX/NOP veneer grammar; data directives,
+macros, foreign owners and stale evidence reject. It requires no retained
+private object or proof directory. The ordinary full build supplies object and
+linked verification separately, and the fifteen changed-source controls now
+alter the NOP halfword itself.
+
+These roles do not seed the scanner or change its entry observations. The raw
+and qualified observed instruction unions remain 284,462 and 284,436 bytes;
+the separately reported authored-instruction union is 30 bytes. Source, C,
+assembly and mapped extent totals do not change. Same-mode rooted evidence
+keeps its rooted classification; opposite modes and referenced/known-data
+overlaps retain explicit ambiguity. Excluded raw observations remain visible.
+Tests cover those conflicts, missing/changed evidence and serialized role/owner
+tampering. Complete code ownership and alternate incoming execution remain open.
 
 ## Named domains around the twelve-byte node-pool gap
 

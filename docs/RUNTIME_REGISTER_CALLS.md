@@ -23,9 +23,18 @@ The upstream copyright, GPL and linking-exception notices remain in every
 selected source; the full [GPL text](../licenses/GCC-GPL-2.0.txt) is retained.
 Changes split the upstream macro into standalone sources and make the GNU
 assembler directives explicit; the branch and NOP are unchanged. Every full
-four-byte extent matches and rejects a same-size change to the target
-register. Fresh local comparisons and controls are retained under ignored
-`analysis/compiler-call-veneers/`.
+four-byte extent matches. The original controls reject a same-size change to
+the target register; the current full proof changes the authored NOP halfword
+itself. Earlier local comparisons and controls remain under ignored
+`analysis/compiler-call-veneers/`; the current paired build owns the latest
+full-family verification.
+
+The census separately classifies those fifteen NOPs / 30 already owned bytes
+as source-authored unrooted instructions. Exact source/native evidence and
+current object/linked Thumb mappings establish that role, while rooted CFG
+instruction and entry totals remain unchanged. The source roles preserve
+opposite-mode and data ambiguity and require no private proof files to rebuild.
+See the [inventory accounting](WHOLE_ROM_INVENTORY.md#source-owned-alignment-and-data-roles).
 
 This source ownership does not close the incoming register values, complete
 caller set or writable callback populations. In particular, no caller or

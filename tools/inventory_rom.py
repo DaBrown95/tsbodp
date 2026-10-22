@@ -7,6 +7,7 @@ remain explicit; instruction decoding is not proof that bytes are executable.
 """
 import hashlib
 import json
+import re
 import struct
 from collections import defaultdict, deque
 from capstone import Cs, CS_ARCH_ARM, CS_MODE_ARM, CS_MODE_THUMB, __version__ as capstone_version
@@ -17,7 +18,7 @@ from control_flow import thumb_switch, constant_result, stack_return
 from ram_copies import validate_copy
 from indirect_evidence import record_tables, phase_targets, validate_fixed_target, annotate_records, literal_veneers
 from fixed_target_proof import prove_fixed_target
-from inventory_census import census, verify_census
+from inventory_census import census, verify_census, source_instruction_role_spans
 
 BASE = 0x08000000
 
@@ -76,6 +77,68 @@ def source_owned_data_regions(data, regions, owners, source_hash):
         names.add(name)
         spans.append((start, start + size))
         result.append({**row, 'status': 'mapped_data'})
+    return result
+
+
+def source_owned_instruction_regions(data, regions, assembly_owners, read_source):
+    """Validate only explicit NOPs in the supported four-byte Thumb veneers.
+
+    This is source provenance, not a CFG seed or an instruction observation.
+    Source-object/link checks remain the separate full matching build's job.
+    """
+    if not isinstance(regions, list):
+        raise ValueError('Source instruction regions must be a list')
+    by_name = {owner['name']: owner for owner in assembly_owners}
+    sources, owners, result = {}, [], []
+    for owner in assembly_owners:
+        if any(isinstance(row, dict) and row.get('owner') == owner['name'] for row in regions):
+            source = read_source(owner)
+            if not isinstance(source, bytes):
+                raise ValueError('Source instruction validation requires source bytes')
+            sources[owner['name']] = source
+            owner = {**owner, 'source_sha256': hashlib.sha256(source).hexdigest()}
+        owners.append(owner)
+    for row in regions:
+        if not isinstance(row, dict):
+            raise ValueError('Source instruction region must be an object')
+        result.append({**row, 'status': 'source_authored_instruction'})
+    # Structural validation precedes source/byte inspection, including owner,
+    # exact bounds/alignment, source/span hashes, mode and mandatory evidence.
+    source_instruction_role_spans(result, owners, len(data))
+    engine = Cs(CS_ARCH_ARM, CS_MODE_THUMB)
+    registers = {**{'r'+str(i): i for i in range(10)},
+                 'sl': 10, 'fp': 11, 'ip': 12, 'sp': 13, 'lr': 14}
+    for row in result:
+        owner = by_name[row['owner']]
+        try:
+            text = sources[row['owner']].decode('utf-8')
+        except UnicodeDecodeError as error:
+            raise ValueError('Assembly source is not UTF-8') from error
+        # Preserve physical source line numbers while ignoring comments. No
+        # .short/.word/.incbin, macro, fill or padding body can pass this grammar.
+        text = re.sub(r'/\*.*?\*/', lambda match: '\n'*match.group().count('\n'), text, flags=re.S)
+        statements = []
+        for number, line in enumerate(text.splitlines(), 1):
+            line = re.sub(r'\s+', ' ', line.split('@', 1)[0].strip())
+            line = re.sub(r'\s*,\s*', ',', line)
+            if line:
+                statements.append((number, line))
+        name = owner['name']; register = name[len('_call_via_'):]
+        expected = ['.syntax unified', '.cpu arm7tdmi', '.thumb', '.text', '.balign 4,0',
+                    '.global '+name, '.type '+name+',%function', '.thumb_func', name+':',
+                    'bx '+register, 'nop', '.size '+name+',.-'+name]
+        if ([line for number, line in statements] != expected
+                or row['source_line'] != statements[-2][0]):
+            raise ValueError('Source does not explicitly author the annotated veneer NOP')
+        start = owner['rom_offset']; body = data[start:start+4]
+        if (body != struct.pack('<HH', 0x4700 | registers[register] << 3, 0x46c0)
+                or hashlib.sha256(data[row['rom_offset']:row['rom_offset']+2]).hexdigest() != row['region_sha256']):
+            raise ValueError('Source-authored instruction differs from fixed native bytes')
+        decoded = list(engine.disasm(body, BASE+start))
+        if (len(decoded) != 2 or any(ins.size != 2 for ins in decoded)
+                or decoded[0].id != ARM_INS_BX or decoded[1].id != ARM_INS_MOV
+                or decoded[1].op_str != 'r8, r8'):
+            raise ValueError('Native veneer does not decode as Thumb BX and NOP alias')
     return result
 
 
@@ -306,6 +369,11 @@ def main():
         lambda owner: hashlib.sha256((ROOT/owner['source']).read_bytes()).hexdigest())
     evidence_inputs.update(next(owner['source'] for owner in manifest['functions'] + manifest.get('assembly', [])
                                 if owner['name'] == row['owner']) for row in source_data)
+    source_instructions = source_owned_instruction_regions(
+        data, evidence_config.get('source_owned_instruction_regions', []),
+        manifest.get('assembly', []), lambda owner: (ROOT/owner['source']).read_bytes())
+    evidence_inputs.update(row['source'] for row in source_instructions)
+    source_instruction_hashes = {row['owner']: row['source_sha256'] for row in source_instructions}
     observed_records = record_tables(data, evidence_config['observed_record_tables'], scanner.physical)
     for table in observed_records:
         for item in table['evidence']:
@@ -551,6 +619,7 @@ def main():
               'entry_count': len({r['entry_rom_offset'] for r in rows}), 'extent_count': len(rows),
               'mapped_extent_bytes': sum(r['size'] for r in rows), 'rows': rows,
               'source_owned_data_regions': source_data,
+              'source_owned_instruction_regions': source_instructions,
               'data_regions': data_regions, 'partition': partition(rows+data_regions, len(data)),
               'input_sha256': {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in
                               ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'tools/indirect_evidence.py', 'tools/fixed_target_proof.py', 'tools/inventory_census.py', 'config/code-evidence-us-eu.json', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt', *sorted(evidence_inputs))}}
@@ -559,10 +628,15 @@ def main():
     result['code_census'] = census(scanner, strong_entries, strong_results,
         rows=rows, data_regions=data_regions+source_data,
         source_code=[{**f, 'source_kind': f.get('kind', 'compiled_c'),
-                      'mode': f.get('mode', 'Thumb')}
+                      'mode': f.get('mode', 'Thumb'),
+                      **({'source_sha256': source_instruction_hashes[f['name']]}
+                         if f['name'] in source_instruction_hashes else {})}
                      for f in manifest['functions']+manifest.get('assembly', [])],
-        quality_annotations=evidence_config['quality_annotations'])
+        quality_annotations=evidence_config['quality_annotations'],
+        source_instruction_regions=source_instructions)
     verify_census(result['code_census'], len(data))
+    if any(result['input_sha256'][row['source']] != row['source_sha256'] for row in source_instructions):
+        raise ValueError('Source instruction inputs changed during inventory')
     out = ROOT/'assets/rom-inventory.json'
     out.write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps({k: result[k] for k in ('entry_count', 'initial_connected_entries', 'whole_rom_prologue_hits', 'sweep_seed_count', 'mapped_extent_bytes')}, indent=2))

@@ -376,8 +376,10 @@ For source indices 0..25, adding the actual combined prefixes gives tile IDs
 471..495 and 258..276, all inside the separately modeled 496 and 277 initialized
 groups. This closes that finite secondary-value question. The
 [animation callers](FRAME_MAP_ANIMATION.md#row-six-writer-domain) do not establish
-the required index, coordinate or map domain. Actual serialized animation
-population, live heap/backing, installation context, other writers and natural
+the complete index, coordinate or map domain. The separately projected eight
+fixed animation payloads and their direct-state activation chain remain
+conditional on actor/view completion and stable backing. Wider serialized
+populations, live heap/backing, installation context, other writers and natural
 scene execution remain open. No C, instruction, mapped-extent or inventory-count
 credit follows, and no unchanged full matching build is required.
 

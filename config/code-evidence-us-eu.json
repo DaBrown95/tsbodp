@@ -26350,6 +26350,278 @@
       ]
     }
   ],
+  "source_owned_instruction_regions": [
+    {
+      "name": "_call_via_r0_source_authored_nop",
+      "owner": "_call_via_r0",
+      "source": "src/frame/call_via_r0.s",
+      "rom_offset": 314610,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "30f678fe9bea4fa95fef0d1ae762fd2ed51afce6702ae3bbc04c43d9796e4dce",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_r1_source_authored_nop",
+      "owner": "_call_via_r1",
+      "source": "src/frame/call_via_r1.s",
+      "rom_offset": 314614,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "7cb0ba11a0f84e53394e4b811919099071b6278d597cc87a22423be9cd89c0bb",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_r2_source_authored_nop",
+      "owner": "_call_via_r2",
+      "source": "src/frame/call_via_r2.s",
+      "rom_offset": 314618,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "e81ae89a286f8255933b207a44cfe128ee7fb22442fe05831d51fbfc5d075d39",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_r3_source_authored_nop",
+      "owner": "_call_via_r3",
+      "source": "src/frame/call_via_r3.s",
+      "rom_offset": 314622,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "110133670da56cb4954980dfe96d1d0ef5243e2e3666473fab19fc4b7d215192",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_r4_source_authored_nop",
+      "owner": "_call_via_r4",
+      "source": "src/frame/call_via_r4.s",
+      "rom_offset": 314626,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "b4e345b7a51562d140a213d054c2b3852bdbe9bc08f7be0b6590d0b34ca8db44",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_r5_source_authored_nop",
+      "owner": "_call_via_r5",
+      "source": "src/frame/call_via_r5.s",
+      "rom_offset": 314630,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "80aeadfd1a756c8c2c61d9618bf2201c70d6acbdc8299c790bb663e482eafb94",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_r6_source_authored_nop",
+      "owner": "_call_via_r6",
+      "source": "src/frame/call_via_r6.s",
+      "rom_offset": 314634,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "a6d77cc769b5a1af785559ffebf3868e5416d08a5c2320375cbd26bd6dd0cf0c",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_r7_source_authored_nop",
+      "owner": "_call_via_r7",
+      "source": "src/frame/call_via_r7.s",
+      "rom_offset": 314638,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "f09ce268e6f4383a113d1932d65559f117aa601ef76eadd8d878e5b4a3de34c1",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_r8_source_authored_nop",
+      "owner": "_call_via_r8",
+      "source": "src/frame/call_via_r8.s",
+      "rom_offset": 314642,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "a4fe33adf2734e95cd1b88bf14001c2963efd29c1c68c9d22fd8eb13f12625b3",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_r9_source_authored_nop",
+      "owner": "_call_via_r9",
+      "source": "src/frame/call_via_r9.s",
+      "rom_offset": 314646,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "3c6afe6db1296c0698b246b08331cf953f78cf98ffb7b44bbe090c217c538b22",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_sl_source_authored_nop",
+      "owner": "_call_via_sl",
+      "source": "src/frame/call_via_sl.s",
+      "rom_offset": 314650,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "88d7c7066e925a3de49f09d1008f3f6ce406a5a0dcaca48fc4e3358c28ce36bf",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_fp_source_authored_nop",
+      "owner": "_call_via_fp",
+      "source": "src/frame/call_via_fp.s",
+      "rom_offset": 314654,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "34dacdba4fbba58e327c2086ccd030c81341797c313321711005c7bddfda1278",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_ip_source_authored_nop",
+      "owner": "_call_via_ip",
+      "source": "src/frame/call_via_ip.s",
+      "rom_offset": 314658,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "e2a52d0322dc3374e5bd69923c2e96b56cb5911157600f67ce14416117375e36",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_sp_source_authored_nop",
+      "owner": "_call_via_sp",
+      "source": "src/frame/call_via_sp.s",
+      "rom_offset": 314662,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "74474ffe02259e32b7247b3fe724d03e608302de03342627717798030a749865",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    },
+    {
+      "name": "_call_via_lr_source_authored_nop",
+      "owner": "_call_via_lr",
+      "source": "src/frame/call_via_lr.s",
+      "rom_offset": 314666,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "2634a309a65ba0fd0df2eaf067e8638c6f077ea4b76229950bedfb9a333eaa3c",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ]
+    }
+  ],
   "indirect_producers": [
     {
       "rom_offset": 604,
@@ -28020,9 +28292,9 @@
     ],
     "stride": 4,
     "instruction_bytes": 2,
-    "alignment_bytes": 2,
-    "evidence": "GNU GCC lib1funcs.asm call-via-register template: fifteen ordered register slots; actual original BX and following NOP checked independently.",
-    "confidence": "high original-image instruction role; caller coverage remains open"
+    "evidence": "GNU GCC lib1thumb.asm call-via-register template: fifteen ordered register slots; actual original BX and following authored NOP checked independently. Scanner seeds remain the preceding BX entries only.",
+    "confidence": "high original-image instruction role; caller coverage remains open",
+    "authored_nop_bytes": 2
   },
   "survey_counts": {
     "current_transfer_records": 301,

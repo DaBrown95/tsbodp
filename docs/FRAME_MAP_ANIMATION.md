@@ -234,9 +234,48 @@ cell coordinates within 20 columns and 26 rows suffice, but no such caller
 checks are established. Serialized payloads supply coordinates, map, first
 index and frame count. The simple payload supplies dimensions directly; the
 reversible payload selects dimensions and step through a kind-indexed ROM
-definition without a proved table bound. No particular row-six animation
-payload or natural spawn population has been established. Live allocations,
-stable object/record state and later writers remain separate premises.
+definition without a proved complete table bound.
+
+A read-only projection now identifies eight factory-two animation payloads in
+the shared base group of all three retained scene-six packs, and no factory-one
+payload among their fifteen distinct object groups. The same unchanged scene
+index selects the map row and object root. The mode-four path's reset selector
+zero selects physical pack two, which includes this base group; intervening
+scene, selector, callback and backing stability remain premises.
+
+Four payloads per map use first indices 0, 6, 14 and 22, with rectangle sizes
+3, 4, 4 and 2. Each has two frames and step equal to its rectangle size.
+Their initial rectangles select only cells 193..195, 212/213/232/233,
+214/215/234/235 and 252/253, all within the 520-cell primary backing. If a live
+object enters state four without signal diversion or field changes, its two
+forward writes cover its assigned secondary interval; together the four
+intervals partition indices 0..25 per map. Their composed tile IDs fit the
+initialized combined groups. The endpoint requests state zero; this is not an
+automatic continuing cycle.
+
+All eight constructors initialize enabled zero and state zero. Their state-zero
+callback does not activate them while enabled remains zero, but the retained
+pack-two programs supply a separate direct-state route:
+
+1. Initial program one tracks actor `(1, 2)` and programs view completion four.
+2. Program four configures that actor, then creates a countdown of 30 whose
+   later completion activates program three.
+3. Program three tracks the special view-zero object `(0, 255)`, with completion
+   two. Program two sends that object toward `(284, 283)` through actor state 13,
+   with completion five.
+4. Program five contains eight command-15 records targeting base group zero,
+   slots 7..14. For each nonnull object they request state four and variant zero;
+   the ID-two path also writes started byte `+0x67` to one when the current
+   program is enabled.
+
+The view/state-13 completions load those actual pairs and activate the requested
+groups. Command 15 bypasses the enabled-byte test; it does not write enabled
+`+0x66` or signal `+0x69`. The chain still requires the selected actor, initialized
+views and delay objects to exist, receive callbacks and complete their motion,
+with the arena, targets and fields remaining live. Countdown 30 needs 31 eligible
+decrements and a later state-one callback, not a proved number of frames.
+No natural spawn/execution or complete signal/writer population is established.
+These static projections add no decoder, runtime or source-qualification result.
 
 ## Independently bounded extra-map getter
 

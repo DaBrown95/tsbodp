@@ -21,8 +21,9 @@ complete input writers remain open. See [its current findings](SCENE_CONTACT_ACT
 The selected-tile worker has a current private owner/word-read diagnostic but
 still fails full comparison; see [the map path](FRAME_INPUT.md).
 Both row-six initial maps fit initialized combined data in the calibrated
-decoder model; later animation index, coordinate, map and lifetime domains
-remain conditional. See [the writer boundary](FRAME_MAP_ANIMATION.md#row-six-writer-domain).
+decoder model. Eight actual animation payloads and their program activation
+chain have conditional source/destination bounds; view/actor completion, wider
+writer populations and live backing remain open. See [the writer boundary](FRAME_MAP_ANIMATION.md#row-six-writer-domain).
 The explicit 128-slot object pool bounds the renderer table only under intact
 membership and traversal premises. A saved auxiliary pointer can already name
 a child returned to the free list; see [the callback limits](BOUNDED_INVENTORY.md#conditional-renderer-table-bound-21-october-2026).
@@ -85,8 +86,9 @@ bytes add no C or instruction credit. The last two retain four and eight
 unclassified internal bytes respectively.
 
 Executable inventory remains incomplete. Its instruction union is not a full
-code denominator. Unclassified owned/envelope bytes, authored NOPs and audio
-NOP tails need closure; data roles cannot suppress alternate execution. The
+code denominator. Unclassified owned/envelope bytes and the two audio
+NOP tails need closure. Fifteen authored veneer NOPs have a separate unrooted
+instruction-provenance role; data roles cannot suppress alternate execution. The
 initial EWRAM image has no established executable entry, and later writes remain
 possible. Finite observations do not close populations. Completed local source
 paths and their conditional domains are recorded in the linked owner documents;
@@ -94,10 +96,12 @@ whole-ROM equality does not establish complete source ownership or gameplay.
 
 Five further alignment annotations classify ten already source-owned bytes as
 data. Matching emitted directives, object and linked data symbols, and native
-branches or returns establish these roles. Owned unclassified bytes now total
-34: fifteen authored NOPs and two audio tails remain explicit. C, instruction,
-mapped extent and unfinished-source counts do not change; alternate entry and
-complete executable inventory remain open.
+branches or returns establish these roles. Owned unclassified bytes totalled
+34 at that checkpoint. The subsequent authored-instruction annotations classify
+the fifteen explicit veneer NOPs / 30 bytes separately, leaving the two audio
+tails / four owned bytes unresolved. Raw and qualified observed instruction,
+C, mapped extent and unfinished-source counts do not change; alternate entry
+and complete executable inventory remain open.
 
 
 Eight ordinary C helpers add 404 extent bytes: two background-buffer operations,

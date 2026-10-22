@@ -955,9 +955,13 @@ result, not whole-loader execution or a natural scene observation.
 
 Initial validity does not close later animation writes. The rectangle caller
 passes a byte index 0..255 to a secondary buffer with only 26 backed halfwords;
-its loop and endpoint guards do not impose that backing limit. Map selection,
-destination coordinates, actual serialized animation payloads and live
-allocations remain open. See the [writer boundary](FRAME_MAP_ANIMATION.md#row-six-writer-domain).
+its loop and endpoint guards do not impose that backing limit. Eight fixed
+scene-six payloads now satisfy the source and destination bounds for their
+initial rectangles and conditional two-write forward segments. All start
+disabled in state zero; the retained pack-two programs nevertheless provide a
+conditional direct-state-four activation chain. Actor/view completion, wider
+payload/writer populations and live allocations remain open. See the
+[writer boundary](FRAME_MAP_ANIMATION.md#row-six-writer-domain).
 
 
 The copied row-transfer entry stored at `0xB6A4` now adds 216 verified C bytes,

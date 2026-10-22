@@ -55,6 +55,12 @@ def verify_discovery(data, size, reference_sha256):
         if data.get('historical_mapped_extent_baseline') != 319640:
             raise ValueError('Historical comparison baseline changed')
         verify_census(data['code_census'], size)
+        authored = data.get('source_owned_instruction_regions', [])
+        if authored != data['code_census'].get('source_owned_instruction_regions', []):
+            raise ValueError('Inventory and census source instruction annotations differ')
+        if any(data.get('input_sha256', {}).get(row['source']) != row['source_sha256']
+               for row in authored):
+            raise ValueError('Source instruction provenance differs from input hashes')
     if (partition(data['rows']+data.get('data_regions', []), size) != data['partition']
             or data.get('extent_count', len(data['rows'])) != len(data['rows'])
             or data['entry_count'] != len({r.get('entry_rom_offset', r['rom_offset']) for r in data['rows']})

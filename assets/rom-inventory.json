@@ -121435,6 +121435,293 @@
       "status": "mapped_data"
     }
   ],
+  "source_owned_instruction_regions": [
+    {
+      "name": "_call_via_r0_source_authored_nop",
+      "owner": "_call_via_r0",
+      "source": "src/frame/call_via_r0.s",
+      "rom_offset": 314610,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "30f678fe9bea4fa95fef0d1ae762fd2ed51afce6702ae3bbc04c43d9796e4dce",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_r1_source_authored_nop",
+      "owner": "_call_via_r1",
+      "source": "src/frame/call_via_r1.s",
+      "rom_offset": 314614,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "7cb0ba11a0f84e53394e4b811919099071b6278d597cc87a22423be9cd89c0bb",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_r2_source_authored_nop",
+      "owner": "_call_via_r2",
+      "source": "src/frame/call_via_r2.s",
+      "rom_offset": 314618,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "e81ae89a286f8255933b207a44cfe128ee7fb22442fe05831d51fbfc5d075d39",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_r3_source_authored_nop",
+      "owner": "_call_via_r3",
+      "source": "src/frame/call_via_r3.s",
+      "rom_offset": 314622,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "110133670da56cb4954980dfe96d1d0ef5243e2e3666473fab19fc4b7d215192",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_r4_source_authored_nop",
+      "owner": "_call_via_r4",
+      "source": "src/frame/call_via_r4.s",
+      "rom_offset": 314626,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "b4e345b7a51562d140a213d054c2b3852bdbe9bc08f7be0b6590d0b34ca8db44",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_r5_source_authored_nop",
+      "owner": "_call_via_r5",
+      "source": "src/frame/call_via_r5.s",
+      "rom_offset": 314630,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "80aeadfd1a756c8c2c61d9618bf2201c70d6acbdc8299c790bb663e482eafb94",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_r6_source_authored_nop",
+      "owner": "_call_via_r6",
+      "source": "src/frame/call_via_r6.s",
+      "rom_offset": 314634,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "a6d77cc769b5a1af785559ffebf3868e5416d08a5c2320375cbd26bd6dd0cf0c",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_r7_source_authored_nop",
+      "owner": "_call_via_r7",
+      "source": "src/frame/call_via_r7.s",
+      "rom_offset": 314638,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "f09ce268e6f4383a113d1932d65559f117aa601ef76eadd8d878e5b4a3de34c1",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_r8_source_authored_nop",
+      "owner": "_call_via_r8",
+      "source": "src/frame/call_via_r8.s",
+      "rom_offset": 314642,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "a4fe33adf2734e95cd1b88bf14001c2963efd29c1c68c9d22fd8eb13f12625b3",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_r9_source_authored_nop",
+      "owner": "_call_via_r9",
+      "source": "src/frame/call_via_r9.s",
+      "rom_offset": 314646,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "3c6afe6db1296c0698b246b08331cf953f78cf98ffb7b44bbe090c217c538b22",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_sl_source_authored_nop",
+      "owner": "_call_via_sl",
+      "source": "src/frame/call_via_sl.s",
+      "rom_offset": 314650,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "88d7c7066e925a3de49f09d1008f3f6ce406a5a0dcaca48fc4e3358c28ce36bf",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_fp_source_authored_nop",
+      "owner": "_call_via_fp",
+      "source": "src/frame/call_via_fp.s",
+      "rom_offset": 314654,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "34dacdba4fbba58e327c2086ccd030c81341797c313321711005c7bddfda1278",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_ip_source_authored_nop",
+      "owner": "_call_via_ip",
+      "source": "src/frame/call_via_ip.s",
+      "rom_offset": 314658,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "e2a52d0322dc3374e5bd69923c2e96b56cb5911157600f67ce14416117375e36",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_sp_source_authored_nop",
+      "owner": "_call_via_sp",
+      "source": "src/frame/call_via_sp.s",
+      "rom_offset": 314662,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "74474ffe02259e32b7247b3fe724d03e608302de03342627717798030a749865",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    },
+    {
+      "name": "_call_via_lr_source_authored_nop",
+      "owner": "_call_via_lr",
+      "source": "src/frame/call_via_lr.s",
+      "rom_offset": 314666,
+      "size": 2,
+      "mode": "Thumb",
+      "instruction": "nop",
+      "proof_kind": "thumb_register_veneer_nop_v1",
+      "source_line": 50,
+      "source_sha256": "2634a309a65ba0fd0df2eaf067e8638c6f077ea4b76229950bedfb9a333eaa3c",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+        "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+        "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+      ],
+      "status": "source_authored_instruction"
+    }
+  ],
   "data_regions": [
     {
       "name": "Cartridge header",
@@ -137394,18 +137681,18 @@
     }
   ],
   "input_sha256": {
-    "tools/inventory_rom.py": "a400e3ace47b797d0eb7cc074d3aaded8d8c0a73b2ac53038404caae8d7c7909",
+    "tools/inventory_rom.py": "a9ce20f9ad8870a6e7b25a79f07277bfddd65c18bbe92850a6acf6845bdc9b28",
     "tools/control_flow.py": "225048329459429d84b7e44472833d05c7593ae14873ce0c36bc97653f5d97f9",
-    "tools/inventory_partition.py": "3195acdba4a15ebd39b73d11348b7c3d0dfa332a0434ab25f3ea101155ee2a35",
+    "tools/inventory_partition.py": "5838852221fa7a38767ccd701d27ca398309bc55951bc0f294e306f7bebbe89c",
     "tools/ram_copies.py": "5e429b3d6efa9666a90c97b892f66cf6203294dad0c277f82700b4f521b7f3c1",
     "tools/indirect_evidence.py": "5df8e0fa17096b86737b158d57fd2122b6b16d20aeda2994fecb087a1bf5f53d",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
-    "tools/inventory_census.py": "f9cdb87bee5fbc3fb2527955eac07a2ac6da1c053d571812f132878e6057762f",
-    "config/code-evidence-us-eu.json": "6a4bdfecbc7614334845a8f8109667ee42144fbc5a019cca00dd2957f3e0ec42",
+    "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
+    "config/code-evidence-us-eu.json": "155d3b68a28b3746afb4ac30f59d3b943b9a5272fe7837bce32941c6de851ca6",
     "config/ram-map-us-eu.json": "67362238b648e40fbf3b51d8e466bfd12e709a38211c16e157d384243896410b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "37033822e7166c8f597b370b928586480f271ddd758b324041b43f5a474961d2",
+    "config/build-us-eu.json": "7554ea3ff40d3d438c39be93e707cc2b3831e94ed4a589752c9fd2ea46bd7465",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -137698,6 +137985,21 @@
     "src/display/write_incrementing_background_map.c": "8ce242bcd73c55ecaa7bd0354caae7db9850fb13797f8da9740afa34c970cd0c",
     "src/display/write_map_palette_rectangle.c": "3716217c11a44529bebc80eb737355a1ea619b9b897631da3a8d71b28a2ffa02",
     "src/frame/actor_entry_mark_scene_collection.c": "11e6afb6c4d1c4d591fec24485a9b15b08cede3b3e911c6f64f1e22466d857d1",
+    "src/frame/call_via_fp.s": "34dacdba4fbba58e327c2086ccd030c81341797c313321711005c7bddfda1278",
+    "src/frame/call_via_ip.s": "e2a52d0322dc3374e5bd69923c2e96b56cb5911157600f67ce14416117375e36",
+    "src/frame/call_via_lr.s": "2634a309a65ba0fd0df2eaf067e8638c6f077ea4b76229950bedfb9a333eaa3c",
+    "src/frame/call_via_r0.s": "30f678fe9bea4fa95fef0d1ae762fd2ed51afce6702ae3bbc04c43d9796e4dce",
+    "src/frame/call_via_r1.s": "7cb0ba11a0f84e53394e4b811919099071b6278d597cc87a22423be9cd89c0bb",
+    "src/frame/call_via_r2.s": "e81ae89a286f8255933b207a44cfe128ee7fb22442fe05831d51fbfc5d075d39",
+    "src/frame/call_via_r3.s": "110133670da56cb4954980dfe96d1d0ef5243e2e3666473fab19fc4b7d215192",
+    "src/frame/call_via_r4.s": "b4e345b7a51562d140a213d054c2b3852bdbe9bc08f7be0b6590d0b34ca8db44",
+    "src/frame/call_via_r5.s": "80aeadfd1a756c8c2c61d9618bf2201c70d6acbdc8299c790bb663e482eafb94",
+    "src/frame/call_via_r6.s": "a6d77cc769b5a1af785559ffebf3868e5416d08a5c2320375cbd26bd6dd0cf0c",
+    "src/frame/call_via_r7.s": "f09ce268e6f4383a113d1932d65559f117aa601ef76eadd8d878e5b4a3de34c1",
+    "src/frame/call_via_r8.s": "a4fe33adf2734e95cd1b88bf14001c2963efd29c1c68c9d22fd8eb13f12625b3",
+    "src/frame/call_via_r9.s": "3c6afe6db1296c0698b246b08331cf953f78cf98ffb7b44bbe090c217c538b22",
+    "src/frame/call_via_sl.s": "88d7c7066e925a3de49f09d1008f3f6ce406a5a0dcaca48fc4e3358c28ce36bf",
+    "src/frame/call_via_sp.s": "74474ffe02259e32b7247b3fe724d03e608302de03342627717798030a749865",
     "src/frame/frame_acquire_palette_slot.c": "8b2a98c82517f1a9bc852ffeb086b679b7188922bb52cd6dc4267b2ea49cb4c0",
     "src/frame/frame_actor_acceleration_velocity.c": "7a27b8abf8f9a5d1f3ebf28828551097d35168fef8a930346d04d8c6c5d02c45",
     "src/frame/frame_actor_attachment_status.c": "fef4f2455c04b1cba724dd6494436aa80529032fc7f7ac63f2b8dfa1ff0e9f9a",
@@ -138842,6 +139144,10 @@
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
       },
+      "source_authored_unrooted_instruction": {
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
+      },
       "instruction_and_referenced_data_dual_use": {
         "confidence": "high_static_mixed_role",
         "evidence_basis": "Qualified instruction and data-reference observations with reviewed dual-use evidence."
@@ -138868,15 +139174,15 @@
       },
       "ambiguous_mode_conflict": {
         "confidence": "ambiguous",
-        "evidence_basis": "Both ARM and Thumb instruction observations; no mode is selected as confirmed."
+        "evidence_basis": "ARM and Thumb rooted or source-authored instruction roles overlap; no mode is selected as confirmed."
       },
       "ambiguous_instruction_known_data": {
         "confidence": "ambiguous",
-        "evidence_basis": "Qualified instruction overlaps an independently supplied data role."
+        "evidence_basis": "Rooted or source-authored instruction overlaps an independently supplied data role."
       },
       "ambiguous_instruction_data_overlap": {
         "confidence": "ambiguous",
-        "evidence_basis": "Instruction and referenced-data observations overlap without reviewed dual-use evidence."
+        "evidence_basis": "Rooted or source-authored instruction and referenced-data roles overlap without reviewed dual-use evidence."
       },
       "contingent_unqualified_observation": {
         "confidence": "ambiguous_contingent_execution",
@@ -138886,6 +139192,7 @@
     "limitations": [
       "CFG unions do not prove function ownership or runtime reachability; table prefixes may be incomplete.",
       "Owned extents include pools/alignment. Weak seeds, linked-only tags and copies cannot establish code.",
+      "Source-authored instruction roles establish static assembly provenance only; they add no CFG observations or entries.",
       "Unresolved bytes may contain code; no whole-code denominator is inferred."
     ],
     "strong_execution_entries": 2558,
@@ -138896,13 +139203,15 @@
       "nonconflicting_qualified_instruction_bytes": 284436,
       "raw_referenced_data_union_bytes": 35892,
       "qualified_referenced_data_union_bytes": 35892,
+      "source_authored_instruction_union_bytes": 30,
       "source_glue_owned_extent_bytes": 306152,
       "estimated_envelope_union_bytes": 325652,
       "classification_bytes": {
         "estimated_envelope_unclassified": 1306,
         "instruction_and_referenced_data_dual_use": 4,
         "known_data": 22848,
-        "owned_extent_unclassified": 34,
+        "owned_extent_unclassified": 4,
+        "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 284432,
         "strong_rooted_referenced_data": 35888,
         "unresolved": 16432704
@@ -167701,6 +168010,69 @@
         [
           322204,
           322272
+        ]
+      ],
+      "source_instruction_ARM": [],
+      "source_instruction_Thumb": [
+        [
+          314610,
+          314612
+        ],
+        [
+          314614,
+          314616
+        ],
+        [
+          314618,
+          314620
+        ],
+        [
+          314622,
+          314624
+        ],
+        [
+          314626,
+          314628
+        ],
+        [
+          314630,
+          314632
+        ],
+        [
+          314634,
+          314636
+        ],
+        [
+          314638,
+          314640
+        ],
+        [
+          314642,
+          314644
+        ],
+        [
+          314646,
+          314648
+        ],
+        [
+          314650,
+          314652
+        ],
+        [
+          314654,
+          314656
+        ],
+        [
+          314658,
+          314660
+        ],
+        [
+          314662,
+          314664
+        ],
+        [
+          314666,
+          314668
         ]
       ],
       "referenced_data": [
@@ -310814,13 +311186,14 @@
       {
         "rom_offset": 314610,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314612,
@@ -310839,13 +311212,14 @@
       {
         "rom_offset": 314614,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314616,
@@ -310864,13 +311238,14 @@
       {
         "rom_offset": 314618,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314620,
@@ -310889,13 +311264,14 @@
       {
         "rom_offset": 314622,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314624,
@@ -310914,13 +311290,14 @@
       {
         "rom_offset": 314626,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314628,
@@ -310939,13 +311316,14 @@
       {
         "rom_offset": 314630,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314632,
@@ -310964,13 +311342,14 @@
       {
         "rom_offset": 314634,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314636,
@@ -310989,13 +311368,14 @@
       {
         "rom_offset": 314638,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314640,
@@ -311014,13 +311394,14 @@
       {
         "rom_offset": 314642,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314644,
@@ -311039,13 +311420,14 @@
       {
         "rom_offset": 314646,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314648,
@@ -311064,13 +311446,14 @@
       {
         "rom_offset": 314650,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314652,
@@ -311089,13 +311472,14 @@
       {
         "rom_offset": 314654,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314656,
@@ -311114,13 +311498,14 @@
       {
         "rom_offset": 314658,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314660,
@@ -311139,13 +311524,14 @@
       {
         "rom_offset": 314662,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314664,
@@ -311164,13 +311550,14 @@
       {
         "rom_offset": 314666,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "source_authored_unrooted_instruction",
         "roles": [
           "estimated_envelope",
+          "source_instruction_Thumb",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "high_static_source_instruction_provenance",
+        "evidence_basis": "Explicit matching assembly instruction and fixed native encoding; no execution root or runtime claim."
       },
       {
         "rom_offset": 314668,
@@ -313802,7 +314189,8 @@
         "classification_bytes": {
           "estimated_envelope_unclassified": 88,
           "known_data": 832,
-          "owned_extent_unclassified": 34,
+          "owned_extent_unclassified": 4,
+          "source_authored_unrooted_instruction": 30,
           "strong_rooted_instruction": 52734,
           "strong_rooted_referenced_data": 6516,
           "unresolved": 5332
@@ -313811,6 +314199,7 @@
           "estimated_envelope_unclassified",
           "known_data",
           "owned_extent_unclassified",
+          "source_authored_unrooted_instruction",
           "strong_rooted_instruction",
           "strong_rooted_referenced_data",
           "unresolved"
@@ -454685,7 +455074,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "7cb0ba11a0f84e53394e4b811919099071b6278d597cc87a22423be9cd89c0bb",
+        "source_instruction_regions": [
+          "_call_via_r1_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_r3",
@@ -454695,7 +455088,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "110133670da56cb4954980dfe96d1d0ef5243e2e3666473fab19fc4b7d215192",
+        "source_instruction_regions": [
+          "_call_via_r3_source_authored_nop"
+        ]
       },
       {
         "name": "display_bios_div",
@@ -454795,7 +455192,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "30f678fe9bea4fa95fef0d1ae762fd2ed51afce6702ae3bbc04c43d9796e4dce",
+        "source_instruction_regions": [
+          "_call_via_r0_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_r2",
@@ -454805,7 +455206,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "e81ae89a286f8255933b207a44cfe128ee7fb22442fe05831d51fbfc5d075d39",
+        "source_instruction_regions": [
+          "_call_via_r2_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_r4",
@@ -454815,7 +455220,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "b4e345b7a51562d140a213d054c2b3852bdbe9bc08f7be0b6590d0b34ca8db44",
+        "source_instruction_regions": [
+          "_call_via_r4_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_r5",
@@ -454825,7 +455234,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "80aeadfd1a756c8c2c61d9618bf2201c70d6acbdc8299c790bb663e482eafb94",
+        "source_instruction_regions": [
+          "_call_via_r5_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_r6",
@@ -454835,7 +455248,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "a6d77cc769b5a1af785559ffebf3868e5416d08a5c2320375cbd26bd6dd0cf0c",
+        "source_instruction_regions": [
+          "_call_via_r6_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_r7",
@@ -454845,7 +455262,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "f09ce268e6f4383a113d1932d65559f117aa601ef76eadd8d878e5b4a3de34c1",
+        "source_instruction_regions": [
+          "_call_via_r7_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_r8",
@@ -454855,7 +455276,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "a4fe33adf2734e95cd1b88bf14001c2963efd29c1c68c9d22fd8eb13f12625b3",
+        "source_instruction_regions": [
+          "_call_via_r8_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_r9",
@@ -454865,7 +455290,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "3c6afe6db1296c0698b246b08331cf953f78cf98ffb7b44bbe090c217c538b22",
+        "source_instruction_regions": [
+          "_call_via_r9_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_sl",
@@ -454875,7 +455304,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "88d7c7066e925a3de49f09d1008f3f6ce406a5a0dcaca48fc4e3358c28ce36bf",
+        "source_instruction_regions": [
+          "_call_via_sl_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_fp",
@@ -454885,7 +455318,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "34dacdba4fbba58e327c2086ccd030c81341797c313321711005c7bddfda1278",
+        "source_instruction_regions": [
+          "_call_via_fp_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_ip",
@@ -454895,7 +455332,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "e2a52d0322dc3374e5bd69923c2e96b56cb5911157600f67ce14416117375e36",
+        "source_instruction_regions": [
+          "_call_via_ip_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_sp",
@@ -454905,7 +455346,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "74474ffe02259e32b7247b3fe724d03e608302de03342627717798030a749865",
+        "source_instruction_regions": [
+          "_call_via_sp_source_authored_nop"
+        ]
       },
       {
         "name": "_call_via_lr",
@@ -454915,7 +455360,11 @@
         "mode": "Thumb",
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 2,
-        "referenced_data_bytes_in_extent": 0
+        "referenced_data_bytes_in_extent": 0,
+        "source_sha256": "2634a309a65ba0fd0df2eaf067e8638c6f077ea4b76229950bedfb9a333eaa3c",
+        "source_instruction_regions": [
+          "_call_via_lr_source_authored_nop"
+        ]
       },
       {
         "name": "__divsi3",
@@ -455106,6 +455555,293 @@
         "kind": "assembly_glue",
         "instruction_bytes_in_extent": 28,
         "referenced_data_bytes_in_extent": 4
+      }
+    ],
+    "source_owned_instruction_regions": [
+      {
+        "name": "_call_via_r0_source_authored_nop",
+        "owner": "_call_via_r0",
+        "source": "src/frame/call_via_r0.s",
+        "rom_offset": 314610,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "30f678fe9bea4fa95fef0d1ae762fd2ed51afce6702ae3bbc04c43d9796e4dce",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_r1_source_authored_nop",
+        "owner": "_call_via_r1",
+        "source": "src/frame/call_via_r1.s",
+        "rom_offset": 314614,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "7cb0ba11a0f84e53394e4b811919099071b6278d597cc87a22423be9cd89c0bb",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_r2_source_authored_nop",
+        "owner": "_call_via_r2",
+        "source": "src/frame/call_via_r2.s",
+        "rom_offset": 314618,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "e81ae89a286f8255933b207a44cfe128ee7fb22442fe05831d51fbfc5d075d39",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_r3_source_authored_nop",
+        "owner": "_call_via_r3",
+        "source": "src/frame/call_via_r3.s",
+        "rom_offset": 314622,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "110133670da56cb4954980dfe96d1d0ef5243e2e3666473fab19fc4b7d215192",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_r4_source_authored_nop",
+        "owner": "_call_via_r4",
+        "source": "src/frame/call_via_r4.s",
+        "rom_offset": 314626,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "b4e345b7a51562d140a213d054c2b3852bdbe9bc08f7be0b6590d0b34ca8db44",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_r5_source_authored_nop",
+        "owner": "_call_via_r5",
+        "source": "src/frame/call_via_r5.s",
+        "rom_offset": 314630,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "80aeadfd1a756c8c2c61d9618bf2201c70d6acbdc8299c790bb663e482eafb94",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_r6_source_authored_nop",
+        "owner": "_call_via_r6",
+        "source": "src/frame/call_via_r6.s",
+        "rom_offset": 314634,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "a6d77cc769b5a1af785559ffebf3868e5416d08a5c2320375cbd26bd6dd0cf0c",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_r7_source_authored_nop",
+        "owner": "_call_via_r7",
+        "source": "src/frame/call_via_r7.s",
+        "rom_offset": 314638,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "f09ce268e6f4383a113d1932d65559f117aa601ef76eadd8d878e5b4a3de34c1",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_r8_source_authored_nop",
+        "owner": "_call_via_r8",
+        "source": "src/frame/call_via_r8.s",
+        "rom_offset": 314642,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "a4fe33adf2734e95cd1b88bf14001c2963efd29c1c68c9d22fd8eb13f12625b3",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_r9_source_authored_nop",
+        "owner": "_call_via_r9",
+        "source": "src/frame/call_via_r9.s",
+        "rom_offset": 314646,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "3c6afe6db1296c0698b246b08331cf953f78cf98ffb7b44bbe090c217c538b22",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_sl_source_authored_nop",
+        "owner": "_call_via_sl",
+        "source": "src/frame/call_via_sl.s",
+        "rom_offset": 314650,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "88d7c7066e925a3de49f09d1008f3f6ce406a5a0dcaca48fc4e3358c28ce36bf",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_fp_source_authored_nop",
+        "owner": "_call_via_fp",
+        "source": "src/frame/call_via_fp.s",
+        "rom_offset": 314654,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "34dacdba4fbba58e327c2086ccd030c81341797c313321711005c7bddfda1278",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_ip_source_authored_nop",
+        "owner": "_call_via_ip",
+        "source": "src/frame/call_via_ip.s",
+        "rom_offset": 314658,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "e2a52d0322dc3374e5bd69923c2e96b56cb5911157600f67ce14416117375e36",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_sp_source_authored_nop",
+        "owner": "_call_via_sp",
+        "source": "src/frame/call_via_sp.s",
+        "rom_offset": 314662,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "74474ffe02259e32b7247b3fe724d03e608302de03342627717798030a749865",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
+      },
+      {
+        "name": "_call_via_lr_source_authored_nop",
+        "owner": "_call_via_lr",
+        "source": "src/frame/call_via_lr.s",
+        "rom_offset": 314666,
+        "size": 2,
+        "mode": "Thumb",
+        "instruction": "nop",
+        "proof_kind": "thumb_register_veneer_nop_v1",
+        "source_line": 50,
+        "source_sha256": "2634a309a65ba0fd0df2eaf067e8638c6f077ea4b76229950bedfb9a333eaa3c",
+        "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+        "evidence": [
+          "Maintained standalone assembly explicitly authors BX register followed by NOP inside this exact four-byte Thumb function; the pre-label .balign directive emits none of the annotated halfword.",
+          "Pinned native 46C0 decodes as Thumb MOV R8,R8, the authored NOP alias. Reviewed source-object and linked $t mappings cover this instruction; full matching builds validate the complete owner separately.",
+          "Selected libgcc L_call_via_rX assembly origin and licence are documented in docs/RUNTIME_REGISTER_CALLS.md; this role supplies no execution entry, fallthrough, runtime evidence or C credit."
+        ],
+        "status": "source_authored_instruction"
       }
     ],
     "copy_accounting": {
