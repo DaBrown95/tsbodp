@@ -86,8 +86,8 @@ bytes add no C or instruction credit. The last two retain four and eight
 unclassified internal bytes respectively.
 
 Executable inventory remains incomplete. Its instruction union is not a full
-code denominator. Unclassified owned/envelope bytes and the two audio
-NOP tails need closure. Fifteen authored veneer NOPs have a separate unrooted
+code denominator. Unclassified estimated-envelope and wider unresolved bytes
+still need closure. Fifteen authored veneer NOPs have a separate unrooted
 instruction-provenance role; data roles cannot suppress alternate execution. The
 initial EWRAM image has no established executable entry, and later writes remain
 possible. Finite observations do not close populations. Completed local source
@@ -98,10 +98,13 @@ Five further alignment annotations classify ten already source-owned bytes as
 data. Matching emitted directives, object and linked data symbols, and native
 branches or returns establish these roles. Owned unclassified bytes totalled
 34 at that checkpoint. The subsequent authored-instruction annotations classify
-the fifteen explicit veneer NOPs / 30 bytes separately, leaving the two audio
-tails / four owned bytes unresolved. Raw and qualified observed instruction,
-C, mapped extent and unfinished-source counts do not change; alternate entry
-and complete executable inventory remain open.
+the fifteen explicit veneer NOPs / 30 bytes separately. Two controlled assembler
+alignment changes then identify the remaining four owned audio bytes as implicit
+Thumb code fill, leaving zero owned unclassified bytes. Their code mapping and
+possible alternate execution remain explicit; the reachable NOP at `0x499B0`
+is a separate unresolved source mismatch. Raw and qualified observed instruction,
+C, mapped extent and unfinished-source counts do not change. Unowned code,
+alternate entry and complete executable inventory remain open.
 
 
 Eight ordinary C helpers add 404 extent bytes: two background-buffer operations,

@@ -840,11 +840,14 @@ denominator.
 ### Source-owned alignment and data roles
 
 The existing code-evidence configuration now records optional
-`source_owned_data_regions`. There are 1,985 exact spans accounting for 3,996
-bytes: the debugger's 28-byte inline packet and 3,968 alignment bytes. Each
+`source_owned_data_regions`. There are 1,987 exact spans accounting for 4,000
+bytes: the debugger's 28-byte inline packet and 3,972 alignment bytes. Four
+alignment bytes are implicit Thumb code fill, as distinguished below. Each
 record pins the owning source, complete owner extent and original bytes.
-Compiler data mapping symbols and emitted alignment, together with native
-branches or returns, supply the role evidence. These classifications add no
+For the earlier spans, compiler data mapping symbols and emitted alignment,
+together with native branches or returns, supply the role evidence. The two
+implicit Thumb code fills use the causal assembler controls described below.
+These classifications add no
 C bytes or new ownership.
 
 A bounded pass over 1,863 previously unclassified two-byte gaps qualified 1,685
@@ -880,7 +883,15 @@ a terminal BX in the maintained and pinned upstream register-call source.
 Complete matching objects and linked images map both instructions as Thumb;
 the fixed halfword is `0x46C0`. This is positive instruction provenance, without
 an incoming execution root or a claim about historical padding intent.
-The two audio tails / four bytes retain unresolved source-layout attribution.
+The two audio tails / four bytes now have positive implicit alignment evidence.
+Their compiler function sizes are 30 and 38 bytes inside 32- and 40-byte object
+text sections. Changing only the initial `.align 2` to `.align 1` removes
+exactly the terminal `0x46C0`, preserving every prior byte, symbol and relocation.
+This establishes current assembler code-fill provenance despite the `$t`
+mapping. The alignment role does not assert literal data, exclude alternate
+execution, identify the historical toolchain or turn these fills into authored
+assembly instructions. Owned unclassified bytes fall to zero; the separate
+reachable NOP discrepancy inside the master-volume worker remains unresolved.
 The current census also records 1,306 bytes inside estimated envelopes and
 16,432,704 elsewhere as unresolved.
 

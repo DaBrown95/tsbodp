@@ -1500,3 +1500,22 @@ audio initialization, but earlier entry/transitive producers are not exhausted. 
 volume C producer and converter read/fit domains remain separate blockers. The private reproducible
 receipt is `analysis/audio-converter-shift-cohort/receipt.json`; it adds no
 source ownership and repeats no runtime trace.
+
+## Implicit alignment after two owned functions
+
+The halfwords at `0x49716` and `0x4C872` are current assembler code-alignment
+fill after `audio_initialize` and `audio_volume_effect_portamento`. Their
+compiler-emitted function sizes are 30 and 38 bytes; object text sizes are 32
+and 40. The extra `0x46C0` already exists before linking, outside each function
+size, under Thumb `$t` mapping. There is no authored terminal instruction.
+
+Two assembler-only controls change each output's sole initial `.align 2` to
+`.align 1`. Both remove only the final halfword, lower section alignment from
+four to two, and preserve all previous bytes, symbols and relocations. The
+fixed unmodified object, linked extent and native bytes agree. These are positive
+alignment-role facts, without new source or observed instruction credit,
+historical-toolchain identification or alternate-execution exclusion.
+
+The reachable NOP at `0x499B0` lies inside the separate master-volume worker
+at `0x49968`; this section-completion mechanism does not explain its mismatch.
+Its ordinary C reconstruction and writable-state domains remain open.

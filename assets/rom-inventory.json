@@ -121433,6 +121433,38 @@
         "Normal and strict full36-byte positives and genuine result1-to2 changed-source controls preserve the34-byte instruction object and empty externs object; the existing linker alone supplies the two zero bytes. This is alignment-role evidence only, without alternate-entry exclusion."
       ],
       "status": "mapped_data"
+    },
+    {
+      "name": "audio_initialize_implicit_thumb_subsection_alignment",
+      "owner": "audio_initialize",
+      "rom_offset": 300822,
+      "size": 2,
+      "role": "alignment",
+      "source_sha256": "b1ac1582b8fe1d560c53541a1c149a727b895f3d79e60436f7a075c10c19397f",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Pinned GCC3.0.2 compiler output emits sole initial .align 2; the function .size ends at 30 bytes before the extra two-byte text tail. No explicit instruction or terminal alignment directive emits this halfword.",
+        "Current source.o already contains the two-byte Thumb no-op fill outside STT_FUNC; pilot and whole linked text preserve it exactly at the fixed native address. $t mapping marks Thumb code, including this no-op fill; this is not a literal-data or nonexecution claim.",
+        "A single assembler-only cause control changes only initial .align 2 to .align 1 using the exact pinned current assembler flags. It removes only the terminal halfword and preserves all prior text, symbols and relocations, while lowering text alignment from four to two.",
+        "The pinned current assembler text-subsection finisher calls frag_align_code with min(section alignment exponent,2), and arm_handle_align selects its Thumb no-op fill. These facts establish emitted alignment provenance without C credit, CFG roots, alternate-entry exclusion or historical-toolchain identity."
+      ],
+      "status": "mapped_data"
+    },
+    {
+      "name": "audio_volume_effect_portamento_implicit_thumb_subsection_alignment",
+      "owner": "audio_volume_effect_portamento",
+      "rom_offset": 313458,
+      "size": 2,
+      "role": "alignment",
+      "source_sha256": "02d2ba6a7f9c103c3ba0df311f249eb550d4d65d345b582c74c7250e87efc615",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Pinned GCC3.0.2 compiler output emits sole initial .align 2; the function .size ends at 38 bytes before the extra two-byte text tail. No explicit instruction or terminal alignment directive emits this halfword.",
+        "Current source.o already contains the two-byte Thumb no-op fill outside STT_FUNC; pilot and whole linked text preserve it exactly at the fixed native address. $t mapping marks Thumb code, including this no-op fill; this is not a literal-data or nonexecution claim.",
+        "A single assembler-only cause control changes only initial .align 2 to .align 1 using the exact pinned current assembler flags. It removes only the terminal halfword and preserves all prior text, symbols and relocations, while lowering text alignment from four to two.",
+        "The pinned current assembler text-subsection finisher calls frag_align_code with min(section alignment exponent,2), and arm_handle_align selects its Thumb no-op fill. These facts establish emitted alignment provenance without C credit, CFG roots, alternate-entry exclusion or historical-toolchain identity."
+      ],
+      "status": "mapped_data"
     }
   ],
   "source_owned_instruction_regions": [
@@ -137688,7 +137720,7 @@
     "tools/indirect_evidence.py": "5df8e0fa17096b86737b158d57fd2122b6b16d20aeda2994fecb087a1bf5f53d",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
-    "config/code-evidence-us-eu.json": "155d3b68a28b3746afb4ac30f59d3b943b9a5272fe7837bce32941c6de851ca6",
+    "config/code-evidence-us-eu.json": "9f8a4629b7ab32cb163f41a45048c053c52f5384cd42709e86e46884a5c2b89b",
     "config/ram-map-us-eu.json": "67362238b648e40fbf3b51d8e466bfd12e709a38211c16e157d384243896410b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
@@ -137737,6 +137769,7 @@
     "src/audio/game_stop_sequence.c": "ef479921fdf81f7db1f3617bfaeba22602b9e58f252d4db3acc6a1ebd2022e80",
     "src/audio/get_channel_frequency.c": "e6be1e217d6c05a30ce856e65e3ea4f182ebbb90d7a72784bb20f35b06c1d8d8",
     "src/audio/get_channel_pan.c": "fe68dea9c1126f7ca699b5c8e131e1fecb8657e12faa8324033c6968425247d8",
+    "src/audio/initialize.c": "b1ac1582b8fe1d560c53541a1c149a727b895f3d79e60436f7a075c10c19397f",
     "src/audio/initialize_hardware.c": "e65afb99d3108c3ed7961ac35080976b3a26b944f8bd34e4178df73bd66ecab6",
     "src/audio/instrument_handle_valid.c": "e2fff91f39c7f5b39cc60001e58709281a558a2653d9b35ee6bd1ba606044f79",
     "src/audio/instrument_initialize.c": "8e157337e24188e4f2806e0d6a58cf04e5ee5ee5e802583cc6818e190367a884",
@@ -137761,6 +137794,7 @@
     "src/audio/select_sequence.c": "12d414118fe110244ff5a96bb2168b38cf93b3e70e74c81bf1f6a4f3b5be739c",
     "src/audio/sync_game_state.c": "cd3adb15e543544a96470f02a0c034056279f2998c3c936ddd645c05e342daa2",
     "src/audio/update_channel_volumes.c": "c9278af986b4c2c46ee968e486316f4c8c3ad36141715ac12f323b8dfc342cc9",
+    "src/audio/volume_effect_portamento.c": "02d2ba6a7f9c103c3ba0df311f249eb550d4d65d345b582c74c7250e87efc615",
     "src/audio/volume_effect_slide_down.c": "d07c3a79c8a2162b58ea6fab4ab6723f781f61b0b43f62c4d873ca5bc960f7ba",
     "src/audio/volume_effect_slide_down_fine.c": "9248ccbcb0b38f630fd019c5e5321ae2919e84df1b9aa9fc5391fc2db14128a8",
     "src/audio/volume_effect_slide_up.c": "40ffe10687e00545111bb19972b4f400c9493f9ae6e345575e9bf8e30b75319f",
@@ -139209,8 +139243,7 @@
       "classification_bytes": {
         "estimated_envelope_unclassified": 1306,
         "instruction_and_referenced_data_dual_use": 4,
-        "known_data": 22848,
-        "owned_extent_unclassified": 4,
+        "known_data": 22852,
         "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 284432,
         "strong_rooted_referenced_data": 35888,
@@ -187343,6 +187376,10 @@
           300756
         ],
         [
+          300822,
+          300824
+        ],
+        [
           300882,
           300884
         ],
@@ -187529,6 +187566,10 @@
         [
           313038,
           313040
+        ],
+        [
+          313458,
+          313460
         ],
         [
           313500,
@@ -307291,13 +307332,14 @@
       {
         "rom_offset": 300822,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "known_data",
         "roles": [
           "estimated_envelope",
+          "known_data",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 300824,
@@ -310594,13 +310636,14 @@
       {
         "rom_offset": 313458,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "known_data",
         "roles": [
           "estimated_envelope",
+          "known_data",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 313460,
@@ -314188,8 +314231,7 @@
         "size": 65536,
         "classification_bytes": {
           "estimated_envelope_unclassified": 88,
-          "known_data": 832,
-          "owned_extent_unclassified": 4,
+          "known_data": 836,
           "source_authored_unrooted_instruction": 30,
           "strong_rooted_instruction": 52734,
           "strong_rooted_referenced_data": 6516,
@@ -314198,7 +314240,6 @@
         "classification_profiles": [
           "estimated_envelope_unclassified",
           "known_data",
-          "owned_extent_unclassified",
           "source_authored_unrooted_instruction",
           "strong_rooted_instruction",
           "strong_rooted_referenced_data",

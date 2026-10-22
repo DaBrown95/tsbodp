@@ -26348,6 +26348,36 @@
         "Complete fixed native and linked text agree; two linker alignment bytes are zero. Linker-emitted data role, with no trustworthy assembler $d boundary or alternate-entry exclusion.",
         "Normal and strict full36-byte positives and genuine result1-to2 changed-source controls preserve the34-byte instruction object and empty externs object; the existing linker alone supplies the two zero bytes. This is alignment-role evidence only, without alternate-entry exclusion."
       ]
+    },
+    {
+      "name": "audio_initialize_implicit_thumb_subsection_alignment",
+      "owner": "audio_initialize",
+      "rom_offset": 300822,
+      "size": 2,
+      "role": "alignment",
+      "source_sha256": "b1ac1582b8fe1d560c53541a1c149a727b895f3d79e60436f7a075c10c19397f",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Pinned GCC3.0.2 compiler output emits sole initial .align 2; the function .size ends at 30 bytes before the extra two-byte text tail. No explicit instruction or terminal alignment directive emits this halfword.",
+        "Current source.o already contains the two-byte Thumb no-op fill outside STT_FUNC; pilot and whole linked text preserve it exactly at the fixed native address. $t mapping marks Thumb code, including this no-op fill; this is not a literal-data or nonexecution claim.",
+        "A single assembler-only cause control changes only initial .align 2 to .align 1 using the exact pinned current assembler flags. It removes only the terminal halfword and preserves all prior text, symbols and relocations, while lowering text alignment from four to two.",
+        "The pinned current assembler text-subsection finisher calls frag_align_code with min(section alignment exponent,2), and arm_handle_align selects its Thumb no-op fill. These facts establish emitted alignment provenance without C credit, CFG roots, alternate-entry exclusion or historical-toolchain identity."
+      ]
+    },
+    {
+      "name": "audio_volume_effect_portamento_implicit_thumb_subsection_alignment",
+      "owner": "audio_volume_effect_portamento",
+      "rom_offset": 313458,
+      "size": 2,
+      "role": "alignment",
+      "source_sha256": "02d2ba6a7f9c103c3ba0df311f249eb550d4d65d345b582c74c7250e87efc615",
+      "region_sha256": "3e39ed78e50103716c788d4147df413950e5eba73c6e33acd923f15865795676",
+      "evidence": [
+        "Pinned GCC3.0.2 compiler output emits sole initial .align 2; the function .size ends at 38 bytes before the extra two-byte text tail. No explicit instruction or terminal alignment directive emits this halfword.",
+        "Current source.o already contains the two-byte Thumb no-op fill outside STT_FUNC; pilot and whole linked text preserve it exactly at the fixed native address. $t mapping marks Thumb code, including this no-op fill; this is not a literal-data or nonexecution claim.",
+        "A single assembler-only cause control changes only initial .align 2 to .align 1 using the exact pinned current assembler flags. It removes only the terminal halfword and preserves all prior text, symbols and relocations, while lowering text alignment from four to two.",
+        "The pinned current assembler text-subsection finisher calls frag_align_code with min(section alignment exponent,2), and arm_handle_align selects its Thumb no-op fill. These facts establish emitted alignment provenance without C credit, CFG roots, alternate-entry exclusion or historical-toolchain identity."
+      ]
     }
   ],
   "source_owned_instruction_regions": [

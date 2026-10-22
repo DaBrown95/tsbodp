@@ -277,6 +277,17 @@ decrements and a later state-one callback, not a proved number of frames.
 No natural spawn/execution or complete signal/writer population is established.
 These static projections add no decoder, runtime or source-qualification result.
 
+The actual common allocator clears all 320 bytes before returning any successful
+slot, including reused slots. Pending, latch and signal therefore begin zero;
+the constructor also explicitly sets started to zero. Requesting the already-zero
+state adds no pending bit. Each completed disabled state-zero callback clears
+pending and signal again. If the delay's eligible invocations occur during complete
+stable primary-list passes, those callbacks supply a prior clear before the
+later direct-state activation. Preservation until the first state-four signal
+read remains a premise: no complete intervening-writer, alias, target-lifetime or
+natural scheduling population is established. Stale free-slot contents are
+not an unresolved initialization source on this successful allocation route.
+
 ## Independently bounded extra-map getter
 
 The [getter at `0x2B2C8`](../src/frame/frame_unrooted_read_extra_map_cell_2b2c8.c)
