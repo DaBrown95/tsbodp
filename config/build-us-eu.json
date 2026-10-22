@@ -55407,6 +55407,20 @@
         "before": "difference <= 16",
         "after": "difference <= 15"
       }
+    },
+    {
+      "name": "display_menu_relation_average_band",
+      "rom_offset": 221292,
+      "size": 44,
+      "source": "src/display/menu_relation_average_band.c",
+      "symbols": {
+        "g_display_menu_relation_average_bands": "0x0806a080"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "register int index asm(\"r1\") = 14;",
+        "after": "register int index asm(\"r1\") = 13;"
+      }
     }
   ],
   "assembly": [

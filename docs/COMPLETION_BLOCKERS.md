@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,433 C functions / 302,092 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 306,152 bytes; original slices
-still supply 16,471,064 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,434 C functions / 302,136 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 306,196 bytes; original slices
+still supply 16,471,020 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **65 unowned rows / 19,508
+[inventory](../assets/rom-inventory.json) contain **64 unowned rows / 19,464
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -213,3 +213,13 @@ the native byte-wrap cases. Two existing rows / 98 estimated bytes are
 replaced; only the two alignment bytes are newly mapped. Incoming callers,
 original typedefs and complete input/backing populations remain open. This
 local gain leaves the priority blockers above unresolved.
+
+The [unrooted relation-average band reader](SCENE_RELATION_GRID.md#average-code-reader)
+at `0x3606C` adds one ordinary C body / 44 extent bytes: 38 instruction bytes,
+four literal bytes and two alignment bytes. A single GNU R1 register variable
+describes the actual index lifetime after the initial offset scratch and before
+the return-address pop. Normal/strict matches and genuine source controls pass,
+as do the complete matching and progress gates. One existing 44-byte row is
+replaced without adding mapped extent. Incoming roots, historical unused formals
+and full backing populations remain open; the larger relation delta and the
+priority blockers above remain original.

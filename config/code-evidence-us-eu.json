@@ -26378,6 +26378,20 @@
         "A single assembler-only cause control changes only initial .align 2 to .align 1 using the exact pinned current assembler flags. It removes only the terminal halfword and preserves all prior text, symbols and relocations, while lowering text alignment from four to two.",
         "The pinned current assembler text-subsection finisher calls frag_align_code with min(section alignment exponent,2), and arm_handle_align selects its Thumb no-op fill. These facts establish emitted alignment provenance without C credit, CFG roots, alternate-entry exclusion or historical-toolchain identity."
       ]
+    },
+    {
+      "name": "display_menu_relation_average_band_alignment_036092",
+      "owner": "display_menu_relation_average_band",
+      "rom_offset": 221330,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2c112f658b61c59ad39b3f967f5adfc0bd782007fc397002eaeb8058f8a8e752",
+      "evidence": [
+        "The complete native44-byte body and both normal/strict linked positives agree. Its nineteen Thumb instructions end at relative38; GCC emits .align2,0 before the sole table-address word at relative40.",
+        "Actual object and linked $d mapping begin at relative38 and include both padding and the literal. The sole ABS32 table-address relocation is at relative40, so explicit .align2,0 supplies the preceding two zeros. Both genuine index14-to13 controls retain that placement while rejecting one native byte.",
+        "This establishes emitted alignment provenance inside the C extent; it does not exclude alternate entries or execution of these bytes. No separate instruction, mapped extent or C credit is added by this annotation."
+      ]
     }
   ],
   "source_owned_instruction_regions": [

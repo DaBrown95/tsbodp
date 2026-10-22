@@ -13,6 +13,7 @@ extern const struct DisplayMenuRelationAverageBand
 
 /* Provisional consumed views of unrooted readers. Historical unused formals
  * and incoming roots remain unknown. Results are full words. */
+int display_menu_relation_average_band(struct DisplayMenuRelationState *);
 int display_menu_relation_average_code(struct DisplayMenuRelationState *);
 
 #endif

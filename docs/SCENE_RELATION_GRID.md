@@ -113,7 +113,26 @@ from 473 through 487; it does not read the rows' second words.
 Normal and strict builds match the complete extent; changing 473 to 472
 rejects both. No incoming root is currently established. The names, historical
 unused formals, valid state backing and original table bounds remain
-provisional. The neighboring band reader at `0x3606C` remains original: its
-44-byte candidate has nine differing register-role bytes. The larger delta
-routine at `0x40AB4` also remains unconverted. These are static and compiler
-findings, with no new runtime or gameplay evidence.
+provisional. The larger delta routine at `0x40AB4` remains unconverted.
+
+The neighboring [band reader](../src/display/menu_relation_average_band.c) at
+`0x3606C` matches all 44 extent bytes: 38 instruction bytes, four literal bytes and
+two zero-alignment bytes. It reads the same signed-halfword average and the
+same eight-byte threshold rows, returning the index from zero through fourteen.
+Row fourteen is tested first; the loop exits at zero before reading row zero.
+
+The ordinary predecessor differed in nine bytes because the allocator exchanged
+the table pointer's R1 and the index's R2 roles. The matching source holds the
+actual loop index in native R1. Its lifetime starts after the signed-halfword
+offset scratch has died and ends at the result copy, before the return-address
+pop reuses R1. No call crosses this lifetime. The pointer occupies R2 and the
+average R3, preserving every original read and branch. This is one supported
+GNU register-variable spelling, without identifying the historical source.
+
+Normal and strict complete comparisons pass; changing the actual starting index
+from fourteen to thirteen rejects one byte in each. The actual definition and
+shared owner/row layout checks pass, while incompatible byte-result and
+four-byte-row fixtures reject. Incoming roots, historical unused formals and
+complete table/backing populations remain provisional. The full matching,
+changed-source control and progress gates pass. These source and compiler
+findings add no runtime or gameplay evidence.
