@@ -47,6 +47,21 @@ the code does not clear the upper byte on a positive value. Field content names
 remain provisional. This is a decoded 40-byte view, not a claim that the full
 save format has been identified.
 
+The separate game-state loader at `0x0801B704` likewise reads three bytes into
+the full value word at `0x03003954`, ORing `0xFF000000` only when bit 23 is set.
+A positive value preserves byte `0x03003957`. Cold startup and the defaults
+reset establish zero locally, but the serial-session step subsequently replaces
+the entire word with received record word one on both its matched and unmatched
+routes. The sender copies its full value word; the inspected receiver checks
+identity word zero without a range check on word one. An earlier reset therefore
+does not establish the high byte at the later load.
+
+The peer-value domain and last writer between loading and settlement remain
+open. The existing controlled serial/load fixture used a zero peer word and zero
+serialized low 24 bits; its selector watch does not establish high-byte
+preservation. These are static producer facts, without a natural stale-value
+execution or universal nonnegative/capped settlement-input claim.
+
 ## Transfer and checksum boundary
 
 Slots use 255 transfers of eight bytes, with block address `255 * slot + 2`, so

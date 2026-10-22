@@ -267,6 +267,18 @@ transfer and catalog closures also match after the shared font refinement,
 and their actual controls remain preserved. This compiler evidence does not
 independently establish safe runtime inputs or gameplay behavior.
 
+A single current canonical rasterizer diagnostic moves the existing unsigned
+text cursor initialization before the initial map/read-or-fill calls. Native
+entry `0x0801AA88` carries that same cursor in R7 through those calls; the prior
+source instead introduced a separate cursor at their join. First CSE now folds
+the incoming text into one cursor, whose lifetime spans six calls and receives
+R7. The late R5-to-R7 handoff disappears without a binding, new access or API
+change. This explains one actual lifetime difference, but the full candidate
+still fails: 680 bytes / 548 differing or missing bytes against 692, including
+twelve missing bytes. The 316-byte frame remains; tile, y and color spill homes
+and the full body still differ. This private diagnostic adds no C credit and
+does not justify a declaration-order or binding grid.
+
 ## Height and line-limit consumers
 
 Three callers of the accepted line-selection path add another 260 matching C

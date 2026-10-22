@@ -236,6 +236,15 @@ declaration checks add no provider execution or source ownership. Choice-index
 capacity, overlapping scene/menu views, later writers, resource validity,
 object lifetimes and gameplay reachability remain open.
 
+The settlement's actual callers pass zero or one and ignore its result. The
+remaining initial signed-value home differs during register allocation, with
+no newly identified native consumer or interface mismatch. Its input is not
+universally proved nonnegative or capped: the [game-state loader](SAVE_STREAM.md#shared-storage-and-format-limits)
+preserves the existing fourth byte when loading a positive three-byte value,
+and the named serial
+predecessor replaces the reset word with a full peer value. Those producer
+facts do not explain the register mismatch or justify changing the source type.
+
 ## Observed row 117 and kind 68
 
 Six further C bodies own 392 bytes: initialization, selection, preparation,

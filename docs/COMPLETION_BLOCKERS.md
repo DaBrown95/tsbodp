@@ -186,9 +186,12 @@ replaces one estimated row without adding mapped extent; incoming roots and
 complete count/backing/writer domains remain open.
 
 The canonical glyph-renderer diagnostic retains the actual word buffer,
-font/state types and provider interfaces. It reproduces 684 / 559; argument
-values survive earlier passes, and GREG/reload assigns the differing stack
-homes. A native-sized frame alone does not resolve that mismatch. The window
+font/state types and provider interfaces. Moving the existing cursor capture
+before the initial calls removes its separate late handoff and gives it the
+native continuous R7 lifetime. It still fails at 680 / 548 against 692 bytes;
+tile, y and color spill homes remain wrong despite the native-sized frame.
+This measured lifetime cause permits no automatic declaration/binding grid.
+The window
 setter consumes all four coordinate inputs; its actual caller discards the result. The
 inspected collection-count writer chains do not establish an IRQ alias that
 would justify volatile reads in the held removal helper. These findings add

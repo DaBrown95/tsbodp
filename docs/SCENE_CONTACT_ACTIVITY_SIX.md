@@ -162,6 +162,33 @@ their actual accepted SDK headers under its GCC 3.0.2 profile. Omitting the
 getter prototype still legacy-matches the 12-byte wrapper but is rejected by the
 separate strict declaration diagnostic.
 
+On the named uninterrupted initialization route, sequence volume 255 makes the
+selector active. A previously set completion-notice flag `0x02` forces a sequence
+start followed by its clear; a skipped start requires that flag already clear.
+Stale completion is therefore excluded at that return. This does not establish
+freshness of notice flag `0x04` or its parameter. Later callback kinds two and six
+set notice flag `0x02`, and the controller sets event flag `0x10`. All inspected
+activity event masks preserve existing flag `0x10` within one live allocation
+under serialized named writers. The primary checks completion before a pending
+miss, so that entry does not increment failures when both are set.
+
+The five observed option records contain these thresholds:
+
+| Option | First | Second | Third | Failures |
+| ---: | ---: | ---: | ---: | ---: |
+| 0 | 5 | 255 | 255 | 10 |
+| 1 | 5 | 10 | 255 | 8 |
+| 2 | 5 | 10 | 255 | 6 |
+| 3 | 5 | 10 | 15 | 5 |
+| 4 | 5 | 10 | 15 | 4 |
+
+These records do not prove amount at most fifteen or failures capped by these
+thresholds.
+Animation state one skips the primary's threshold checks while pair input can
+still increment amount; no animation-duration/input-rate bound is established.
+Complete writers, IRQ interleaving, option validity, allocation and backing
+remain open. These static facts add no compiler match or runtime observation.
+
 ## Verification limits and next targets
 
 Every new body has a positive and a genuine changed-source control under both
