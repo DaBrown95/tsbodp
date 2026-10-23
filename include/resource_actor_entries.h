@@ -1,6 +1,7 @@
 #ifndef RESOURCE_ACTOR_ENTRIES_H
 #define RESOURCE_ACTOR_ENTRIES_H
 #include "resource_condition_entries.h"
+#include "actor_entry_collection.h"
 #include "condition_actor.h"
 #include "resource_commands.h"
 #include "resource_conditions.h"
@@ -8,18 +9,6 @@
 #include "display_catalog_text.h"
 #include "frame_random.h"
 /* Partial context through +31C; the complete context allocation is unknown. */
-struct ActorEntryCollectionRecord {
- struct ConditionActorEntry entry;
- unsigned int unknown04, unknown08;
-};
-struct ActorEntryCollectionGroup {
- unsigned char start, count, flags, unknown03;
-};
-struct ActorEntryCollection {
- unsigned short count, unknown02;
- struct ActorEntryCollectionRecord records[160];
- struct ActorEntryCollectionGroup groups[50];
-};
 struct ActorEntryContext {
     unsigned char unknown00[0x14];
     struct ConditionActorEntries *secondary, *active;

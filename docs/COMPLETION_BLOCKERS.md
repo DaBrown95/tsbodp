@@ -47,6 +47,15 @@ at `0x40AB4` (692 bytes), [activity-three parent and raster workers](SCENE_CONTA
 and the [record-selection text renderer](SCENE_RECORD_SELECTION_HANDOFFS.md) at
 `0x1AA78`. Their local source gains leave these workers unconverted.
 
+The linked-catalog builder at `0x21658` remains unowned. Its native entry-pointer,
+shared-mask and existing-owner phases survive a private composition in its
+retained pre-repair context, but the full result is 360 bytes / 189 differences
+against 356. The early entry
+handoff and ordinary cursor allocation remain wrong. Its eight indexed reads
+now have a [producer-backed initialized-list bound](SCENE_LINK_CATALOG.md#access-and-compiler-evidence).
+The maintained controller and permission reader share the canonical actor-entry
+list and collection owners; that repair adds no C coverage or runtime proof.
+
 The renderer's actual current/previous-frame address producers already agree
 with native code. Their spill homes remain SP60/SP56 instead of SP68/SP64;
 the missing order/counter allocation cause is not a missing byte snapshot or

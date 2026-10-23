@@ -10,12 +10,10 @@
 #include "frame_actor_idle.h"
 #include "audio_game.h"
 #include "input.h"
+#include "resource_condition_entries.h"
+#include "actor_entry_collection.h"
 
 /* Observed access prefixes; complete dynamic storage and names are provisional. */
-struct SceneLinkCatalogContext {
-    unsigned char unknown00, count, unknown02[2];
-    struct DisplayCatalogType *entries;
-};
 #include "scene_link_catalog_world.h"
 struct SceneLinkCatalogActor {
     unsigned char unknown00[77], state, unknown4e[26], selected, unknown69[3];

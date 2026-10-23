@@ -92,9 +92,9 @@ void scene_link_catalog_step(void)
     scene_submit_default_request(17);audio_play_animation_cue(4);
    } else {
     if((g_input_pressed[g_scene_link_catalog_input.local_player])&1) {
-     struct SceneLinkCatalogContext *context=g_scene_link_catalog_world.context;
+     struct ConditionActorEntries *context=g_scene_link_catalog_world.context;
      unsigned int selection=g_scene_request.scene;
-     if(!(unsigned char)scene_link_catalog_try_entry(actor,context->entries[selection-5].unknown_00[0]))audio_play_animation_cue(3);
+     if(!(unsigned char)scene_link_catalog_try_entry(actor,context->entries[selection-5].kind))audio_play_animation_cue(3);
     } else if((g_input_pressed[g_scene_link_catalog_input.local_player])&10) {
      resource_submit_scene(1,2,g_scene_id);audio_play_animation_cue(2);
     }
@@ -121,17 +121,17 @@ void scene_link_catalog_step(void)
  case 3:
   {
    if((g_input_local_pressed[g_scene_link_catalog_input.local_player])&1) {
-    struct SceneLinkCatalogContext *context=g_scene_link_catalog_world.context;
+    struct ConditionActorEntries *context=g_scene_link_catalog_world.context;
     unsigned int selection=g_scene_request.scene;
-    if(context->entries[selection-5].unknown_00[0]>117) {
+    if(context->entries[selection-5].kind>117) {
      display_fill_background_constant_rectangle(1,1,12,28,8,0);
      display_text_select_font(3,0,-1);
      display_text_draw_line(226,120,96,display_scene_lookup_text(450),1);
      audio_play_animation_cue(3);
     } else {
-     payload.storage.bytes[0]=context->entries[selection-5].unknown_00[0];
-     payload.storage.bytes[1]=context->entries[selection-5].unknown_00[1];
-     payload.storage.bytes[2]=context->entries[selection-5].type;
+     payload.storage.bytes[0]=context->entries[selection-5].kind;
+     payload.storage.bytes[1]=context->entries[selection-5].value1;
+     payload.storage.bytes[2]=context->entries[selection-5].value2;
      transition_record_event(5,payload);
      g_link_received_join.entry_index=g_scene_request.scene-5;
     }

@@ -36,10 +36,12 @@ The common header records access views rather than complete ownership types:
 
 - The request at `0x03004350` has selection, quantity and phase words at offsets
   8, 12 and 16.
-- The world view at `0x03003950` exposes a value at offset 4, context pointer at
-  `0xf0`, policy pointer at `0x3f8`, and requested-kind byte at `0x73f`.
-- The context prefix has a count byte at offset 1 and a pointer to four-byte
-  entries at offset 4. Known entry bytes are at offsets 0, 1 and 2.
+- The world view at `0x03003950` exposes a value at offset 4, entry-list pointer at
+  `0xf0`, collection pointer at `0x3f8`, and requested-kind byte at `0x73f`.
+- The list uses the canonical `ConditionActorEntries`: count at zero, capacity
+  at one and entry pointer at four. Its four-byte records expose `kind`,
+  `value1` and `value2` at offsets zero, one and two. The former catalog `count`
+  name referred to the capacity byte; this correction preserves every access.
 - The owner slots at `0x030043b0` contain the first object, eight entry slots,
   five caption slots and two detail slots, spanning an observed 64 bytes.
 - The input view at `0x030040e0` exposes the actor pointer and player bytes at
@@ -54,9 +56,30 @@ changes are required. The pinned compiler's physical layout checks and actual
 provider-definition assignments qualify the declared interfaces. They do not
 identify unique original source types.
 
-Array capacity, object validity and supported callback domains remain
-provisional. On reached typed entry reads, the initialized C fixtures require
-selection at least 5 and a valid `selection - 5` element. Native wrapping reads
+The matching world reset passes world `+0xDC` to `actor_entry_prepare`. That
+producer installs list fourteen at world `+0x168` through the pointer at `+0xF0`.
+The fixed fifteen definition capacities are thirteen eights, fifty and eight.
+Their sum is 162; list fourteen's eight records occupy context
+`+0x2FC..+0x31C`, or world `+0x3D8..+0x3F8`. Thus the unconverted builder's
+fixed indices seven through zero fit this initialized list. This is a
+producer-backed conditional bound, not an added native guard or proof of every
+later pointer/capacity writer.
+
+The pointer at world `+0x3F8` is the same producer's separate `0x84C`-byte
+`ActorEntryCollection` allocation. The former byte access at
+`collection + 0x785 + 4 * scene` is its `groups[scene].count`: groups start at
+`0x784`, have four-byte stride and count at offset one. The canonical collection
+types are shared with the actor-entry services through a focused header.
+The permission reader reaches this access only after the idle-exclusion
+predicate accepts scene 16, 17, 18, 21, 23, 24, 25, 39, 40, 46, 47 or 48.
+Its special entry-141/scene-9 edge skips the collection read. Those accepted
+indices fit fifty groups, provided the scene ID stays unchanged between its
+predicate argument and subsequent native reload. Valid initialized allocation,
+scene stability and later writers remain premises.
+
+Object validity and supported callback domains remain provisional. On reached
+typed entry reads, selection must be at least 5 and `selection - 5` must select
+one of the eight initialized records. Native wrapping reads
 for smaller selections do not establish a defined C array access. Panel kinds
 0 through 4 have explicit text paths; the native default passes a null text
 pointer and is not silently admitted to the ordinary string-provider domain.
@@ -66,7 +89,15 @@ leave bytes unwritten that their recorder kind does not consume. Those bytes
 are preserved, without fabricated initialization; any seeded-stack transport
 observations are separate native diagnostics. Full-ROM byte equality, bounded
 initialized behavior checks, static connections and gameplay evidence are
-separate claims. No hardware or gameplay execution is established here.
+separate claims. These owner and bound findings add no C extent or runtime
+credit. The builder and both acceptance handlers remain unconverted.
+
+The two edited bodies retain all 1,616 extent bytes. All sixty affected source
+contexts match under normal and strict compilation, with their genuine
+changed-source controls rejected in both profiles. Five actual-definition
+contexts verify 26 distinct layout facts; seven wrong pointer/layout cases
+reject. The full-ROM, control, inventory and progress gates pass. Nine existing
+alignment annotations receive only the controller's updated source hash.
 
 ## Explicit no-payload cancel event
 

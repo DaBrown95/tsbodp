@@ -5,9 +5,7 @@ unsigned int scene_link_catalog_try_entry(struct FrameObject *actor,unsigned int
  if(entry==141 && g_scene_id==9 && ((struct SceneLinkCatalogActor*)actor)->state==16)goto allowed;
  if(entry==255 || !frame_world_in_idle_exclusion_set(g_scene_id) || ((struct SceneLinkCatalogActor*)actor)->state!=16){error=1;goto denied;}
  if(entry<=117 || entry==125 || entry==141){
-  unsigned char *policies=g_scene_link_catalog_world.policies;
-  policies+=g_scene_id*4;
-  if(policies[0x785]>24){error=4;goto denied;}
+  if(g_scene_link_catalog_world.collection->groups[g_scene_id].count>24){error=4;goto denied;}
  }else if(entry!=139 && entry-195>5)goto denied_kind;
 allowed:
  entry=1;

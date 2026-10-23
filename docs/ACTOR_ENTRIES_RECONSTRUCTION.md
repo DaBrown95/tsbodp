@@ -47,6 +47,17 @@ Their records are assigned successive positions in the inline storage beginning
 at `94`, using the capacities in the eight-byte definitions at `080535A4`.
 Context pointers at `18` and `14` select headers thirteen and fourteen.
 
+The fixed capacities are thirteen eights, fifty and eight, totaling 162 records.
+The final eight records begin at context `2FC` and end at `31C`, immediately
+before the collection pointer. Under the world-reset producer at context
+base world `DC`, these are world `3D8..3F8`; its secondary list header is at
+world `168`. The linked catalog now reuses the canonical list and collection
+types. Its former byte-`+1` count name was capacity, and its collection policy
+byte is the existing four-byte group's count. See the
+[catalog bounds](SCENE_LINK_CATALOG.md#access-and-compiler-evidence) for the
+unchanged-pointer, allocation and scene-ID premises. This does not establish
+all later writer or serialized-state populations.
+
 The definition table is the same table already used by
 `condition_record_actor_selection`. Its shared declaration now names byte zero
 `capacity`, byte two `retained` and byte three `fallback`; byte one remains
