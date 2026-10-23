@@ -155,7 +155,7 @@ The 72-byte descriptor at `0x080565C4` contains these fixed stream headers:
 | Field offset | Stream | Address | Advertised bytes | Codec |
 | --- | --- | --- | ---: | ---: |
 | `+0x28` | Cell data | `0x08ED5DF0` | 2,288 | 6 |
-| `+0x2C` | Cell types | `0x08ED6048` | 1,044 | 3 |
+| `+0x2C` | Cell types | `0x08ED6048` | 1,044 | 6 |
 | `+0x30` | Extra cell data | `0x08ED61E4` | 288 | 6 |
 | `+0x34` | Extra cell types | `0x08ED6240` | 56 | 3 |
 
@@ -195,10 +195,27 @@ initialization. It supplies no entry to the separate copied tile decoder at
 The type headers separately give `(1,044 - 4) / 2 = 520` primary cells and a
 52-byte extra DMA payload. Its destination ends at byte `1,044 + 52 = 1,096` of
 the `0x2800` type-map allocation; 56 advertised scratch bytes fit `0x2000`.
-This is header and source arithmetic; actual codec-three output and DMA
-execution remain separate questions.
+The primary type stream uses codec six, as its actual header `0x00041460`
+and retained 1,044-byte decoder observation confirm. The extra type stream
+uses codec three, the BIOS run-length service.
 
-The byte-data observations use synthetic addresses and preloaded original
+A bounded call to mGBA 0.10.5's existing BIOS-service implementation now
+produces all 56 extra-type bytes. An independent bounded parser agrees on
+every byte and the 51 consumed input bytes. A known mixed literal/repeat
+control, output guards and a fresh-process exact replay pass. This fixture
+calls the emulator service directly; it executes no game instructions and
+does not establish physical BIOS behavior or live DMA completion. The measured
+input end is not proof of the compressed object's complete ownership.
+
+After its four-byte prefix, the output contains 26 halfwords in `0..17`.
+The [extra-cell writer](../src/frame/frame_write_extra_map_cell.c) adds the
+primary header's 143 and stores the low halfword. All 26 results are `143..160`,
+without wrap. Every full sixteen-byte pattern fits the retained initialized
+2,576-byte cell-data output; the highest ends exactly at byte 2,576.
+This resolves the fixed entries' pattern backing under the completed-load
+premises, separately from live allocation and writer history.
+
+The codec-six byte-data observations use synthetic addresses and preloaded original
 instructions. Successful nonoverlapping live allocations, the installed decoder
 callback, and unchanged row, base and size across intervening providers remain
 premises. Wider selectors, writers, copied-code states and gameplay remain open.
@@ -252,6 +269,13 @@ forward writes cover its assigned secondary interval; together the four
 intervals partition indices 0..25 per map. Their composed tile IDs fit the
 initialized combined groups. The endpoint requests state zero; this is not an
 automatic continuing cycle.
+
+The extra collision-type writer uses shared type storage without a map
+selector, so both payload sets select the same 26 decoded extra-type entries.
+Under these same stable
+payload and loading premises, their collision patterns also fit the combined
+cell-data output. The entry count, payload ranges and destination-cell bounds
+precede this decode; the new evidence supplies the actual extra-type values.
 
 All eight constructors initialize enabled zero and state zero. Their state-zero
 callback does not activate them while enabled remains zero, but the retained

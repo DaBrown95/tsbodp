@@ -24,6 +24,10 @@ Both row-six initial maps fit initialized combined data in the calibrated
 decoder model. Eight actual animation payloads and their program activation
 chain have conditional source/destination bounds; view/actor completion, wider
 writer populations and live backing remain open. See [the writer boundary](FRAME_MAP_ANIMATION.md#row-six-writer-domain).
+The fixed extra collision-type stream now has a complete 56-byte emulator-service
+decode and independent parser comparison. All 26 entries compose to initialized
+patterns 143..160 under the existing loading and eight-payload premises; live
+DMA, activation, aliases and later writers remain open.
 The explicit 128-slot object pool bounds the renderer table only under intact
 membership and traversal premises. A saved auxiliary pointer can already name
 a child returned to the free list; see [the callback limits](BOUNDED_INVENTORY.md#conditional-renderer-table-bound-21-october-2026).
