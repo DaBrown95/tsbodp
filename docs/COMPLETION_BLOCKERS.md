@@ -82,7 +82,9 @@ The [kind-20 mode inputs](SCENE_CONTACT_MENU.md#conditional-mode-inputs) now hav
 a fixed resource population: ten factory-ten records across 24 copy occurrences
 in the retained 50-root/105-pack census all supply `0..7`. Valid construction,
 unchanged fields and an accepted handoff conditionally keep those modes within
-the observed eight-row prefix. Option values remain separately unchecked.
+the observed eight-row prefix. Reset plus preserved guarded progress writes
+conditionally bound option values to `0..4`, fitting the six label halfwords;
+arbitrary save imports still supply `0..15`, and other writers remain open.
 The serial route's eight-entry mode prefix is identity, but input byte eight
 and minimum packet length have no receiver guard or proven peer-producer bound.
 Its local eight-label reply does not close that input population. No C or

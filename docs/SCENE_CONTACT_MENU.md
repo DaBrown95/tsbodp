@@ -236,6 +236,26 @@ modes two through seven use secondary ticks whose six observed callback words
 are nonzero. The kind also fits the immediate eight-byte world-value prefix,
 but the option byte read from that prefix needs its own bound.
 
+The [world reset](../src/save/reset_world_defaults.c) clears 1,876 bytes,
+including those eight values at world `+0x735..+0x73C`. A successful
+[progress test](../src/scene/scene_contact_test_progress.c) replaces one value
+with the selected option plus one, under its `option <= 3` guard. Its two
+parameter getters only read signed bytes. With valid backing, scene and option
+preserved from the guard through the store, and no other writes to the values,
+histories starting at reset therefore keep each value in `0..4`. If the option
+also survives the end callback, request copies and later state uses, initializer
+label indices stay in `0..4` and completion's in `1..5`, within the six halfwords
+at resource-row `+20..+31`. The four costs at `+12..+19` and four thresholds
+still require the guarded `0..3` option range.
+
+The save nibble writer and reader preserve `0..4` on a valid same-stream
+roundtrip with matching cursor/alignment and unchanged backing. An arbitrary
+imported stream supplies `0..15` instead. The named serial option copy at
+`0x03003970` and 220-byte capture at `0x03003950` are disjoint from these value
+bytes at `0x03004085..0x0300408C`. Other imports, aliases, callbacks and later
+writers remain open; the conditional fresh-history bound is not a receiver
+guard or a complete writer population.
+
 The other maintained direct literal-kind-20 submission is the serial session
 controller, using the request mode and option two. The receiver indexes the
 mode table at `0x08053126` with packet byte eight. Its first eight entries are
