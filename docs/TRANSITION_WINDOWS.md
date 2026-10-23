@@ -223,8 +223,22 @@ the two observed prefixes** are source-owned. Only first-slot-10 `0x08038B90`
 R6 trial emitted 216 / 188 and a subsequent word-sized R6 coordinate emitted
 220 / 184. Both failed. The word-sized coordinate preserved the initial pack
 but diverged from the promoted-short read/update graph in the first RTL expansion;
-COMBINE never formed its scaled step. Further
-trials are stopped pending a distinct supported cause. Owning this finite
+COMBINE never formed its scaled step. A separate shared-step composition does
+preserve both the initial constant and the native unsigned writeback/signed pack
+consumers, but remains 228 / 109 with wrong coordinate/window homes and a
+different DISPCNT reload.
+
+One bounded diagnostic explicitly forms the scaled calculation before assigning
+it to the existing halfword R6 coordinate. It emits 224 bytes / 182 differences
+against all 228 native bytes. The shift and add survive optimization: the
+predicted immediate-add collapse does not occur. The separate signed pack
+consumer is already absent in initial intermediate output, which packs the hard
+halfword directly. COMBINE then replaces the assignment's arithmetic shift with
+a logical shift. Native code instead keeps the scaled sum for both a logical
+shift into persistent R6 and an arithmetic shift into the pack. This identifies
+a failed consumer graph, without a new source match or an automatic sequel;
+the already-tested shared-step composition supplies that fork. Further trials
+require a distinct supported cause. Owning this finite
 prefix population would still leave complete table extents, arbitrary selectors,
 later writers, backing and runtime populations open.
 

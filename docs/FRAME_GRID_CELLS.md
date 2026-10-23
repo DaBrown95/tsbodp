@@ -140,3 +140,35 @@ then reports zero because it stops at a zero low halfword. Moving the anchor to
 stored-value examples, not naturally reached gameplay observations. Valid
 projection, terrain, live ownership, later writers and the target selector's
 failure-path outputs remain open. No C coverage or runtime credit is added.
+
+## Conditional scene-zero selector inputs
+
+A fixed serialized setup now supplies a concrete geometric input for the
+unconverted selector. Scene zero's base group contains constructors for actor
+subtype 28 at `(1210,507)` and three kind-79 owners. Reusing the calibrated
+decoder model for exactly its primary map and registration streams gives a
+49 by 25 tile map and
+a 99 by 99 registration grid. The model confirms initialized reads and bounded
+writes throughout both decodes. The 9,804-byte registration output fits the
+9,808-byte rounded allocation for the 9,801 logical cells. This is a static
+resource observation, without a new gameplay trace.
+
+The actor projects successfully to cell `(56,69)`. The last of those three
+owners has direction five and snaps to `(1150,88)`, giving anchor `(80,40)`.
+Its pattern has three target cells and three candidate cells:
+`(79,40)`, `(79,39)` and `(79,38)`. All six initial cells have terrain two and
+zero occupancy; all three candidate coordinates are nonzero. Successful
+registration followed by an intact bank would therefore give mode-four count
+three, avoiding the zero-coordinate sentinel example above. Initial cell data
+does not prove registration succeeded after earlier objects or that later
+occupancy writes preserve it.
+
+Kind 79's actual search descriptor and choice callback expose action 49 despite
+its serialized enabled byte being zero. Actor 28's schedule permits world zero
+at hour ten on each weekday, including the fixed default clock, and its default
+state can request that action after a successful random check. The actor-use
+path reaches the selector directly through `frame_actor_route_to_target` at
+`0x8CFC`; it does not establish the separate caller at `0x3BAC0`.
+The retained natural route reaches scene six, without a scene-zero arrival or
+same-live owner, bank, actor-projection and random-request observations. Those
+history premises remain open; neither C coverage nor runtime credit changes.
