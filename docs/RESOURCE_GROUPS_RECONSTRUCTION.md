@@ -76,7 +76,7 @@ an explicit unconverted region and the next connected builder dependency. A
 fresh current-header replay of its original authored candidate is 64 bytes / 61 differences against the native
 68-byte extent. Its eight-byte assignment lowers as a DI copy rather than the
 native block transfer. A fixed eight-byte representation copy from the existing
-four-aligned typed records instead selects the native block transfer without
+four-aligned access-view records instead selects the native block transfer without
 a helper or stack frame. Retaining the actual offset-table base at source +2,
 as in the neighboring owned builders, then gives 68 bytes / seven differences.
 Materializing the actual per-record byte offset and typed element pointers
@@ -147,3 +147,28 @@ Serialized directory and selected-record extents, source alignment, clear/input
 aliasing and the arena's available capacity remain caller obligations. The
 zero-length arena tail does not establish a valid selector or blob population.
 No runtime or complete resource-system claim follows from the controller.
+
+## Retained word-group storage domain
+
+The existing decoded ledger covers 50 scene roots and 105 physical packs. Four
+retained cases have nonempty word groups: scenes 1, 6, 31 and 39 contain eight,
+four, five and two records respectively. All 19 records have trailing word
+`0xFFFFFF00`. Their source group addresses and derived arena offsets are
+four-aligned; a four-aligned live arena base is still required. This finite
+ledger does not establish every selector, writer or valid runtime input.
+
+The owned point readers share the word-data root `0x03002EE0`. Their stored
+record has two signed halfword coordinates and four unspecified bytes, with
+eight-byte stride and two-byte C type alignment. The returned two-int
+`FramePoint` is a converted value. That conversion omits the four trailing
+bytes and expands the packed coordinates; its result cannot replace the
+stored record in a faithful representation copy. Physical alignment in the
+selected cases does not establish a four-byte alignment requirement for the
+canonical stored type.
+
+Both actual builder calls consume only the copier's advanced `R0` pointer.
+They supply no second size result or tail-size lifetime. The 68-byte / three-
+difference candidate remains unowned: LOCAL ties the compatible dying count-
+and-size quantities, while the retained fixed-register attempt loses its
+intermediate copy at COMBINE. These storage facts do not justify repeating
+those closed source/register trials.

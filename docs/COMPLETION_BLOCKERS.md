@@ -52,7 +52,10 @@ its three literal pools. The canonical 162-record backing and existing common
 scene-owner array make its descending cursors defined under the prepared
 pointer/backing premises. Actual native register phases preserve the entry,
 owner, table and short address/kind lifetimes. The two acceptance handlers
-remain original; valid existing objects, later writers and runtime populations
+remain original. A restored collection record can construct kind 33/34 with
+enabled one, but its returned object is discarded by the restore loop and no
+catalog owner-slot publication follows from primary-list retention. Natural
+record producers, valid existing owners, later writers and runtime populations
 remain open. See the [builder evidence](SCENE_LINK_CATALOG.md#builder-and-shared-array-lifetimes).
 
 The renderer's actual current/previous-frame address producers already agree

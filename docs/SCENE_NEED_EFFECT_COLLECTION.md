@@ -47,3 +47,30 @@ recovered-C credit. Finite models initialize stack representation patterns to
 observe transported bytes, execute both new bodies and the accepted reservation
 body through their actual calls, and abstract only the original converter;
 they cannot establish arbitrary provider effects, hardware behavior or gameplay.
+
+## Restoration and enabled-state
+
+The accepted [collection-effect restorer](../src/frame/actor_entry_restore_collection_effect.c)
+at `0x20C70` passes constant one as the fifth `frame_spawn_need_effect` argument.
+The constructor stores it at the fresh state's `+0x62`. For a backed kind-33/34
+record, successful allocations and valid placement, this constructs an enabled
+state without an enabled field in the stream. Kind, packed mode/optional,
+parameter, two cell bytes and direction consume six stream bytes per record.
+The loader clears the collection before decoding those fields; reserved record
+bytes remain zero on this path.
+
+The actor-entry reader needs initialized list descriptors and mutable context
+backing through `+0x347`, beyond its declared `0x320`-byte prefix. Its separately
+backed `0x84C`-byte collection has 160 records and 50 groups. The cumulative
+restored record count must stay within 160, and restoration needs a scene index
+below 50. Checksum validation does not enforce those bounds. Kind bytes are not
+filtered by this reader. These are backing and input premises, not guarantees
+supplied by the native parser.
+
+The snapshot's predicate uses `+0x62` alone. A state whose `+0x62` stays zero is
+skipped even if the separate eligibility predicate accepts a one at `+0x63`.
+Restoration normalizes the snapshot's nonzero enabled values to one in a new
+state. An actual naturally produced kind-33/34 saved record and its later
+preservation remain unproved. The [catalog owner obligation](SCENE_LINK_CATALOG.md#secondary-kinds-and-existing-owner-inputs)
+also remains separate from construction and primary-list retention. No runtime
+or gameplay observation is added by these static contracts.

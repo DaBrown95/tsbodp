@@ -201,6 +201,24 @@ retained programs for this selected case contain only commands 0, 15, 33 and
 slot zero, or another writer to the same live state, remains unestablished.
 The handler's existence does not prove this enabling event occurs.
 
+A separate [collection-restoration path](SCENE_NEED_EFFECT_COLLECTION.md#restoration-and-enabled-state)
+constructs each saved effect with constant enabled argument one. A backed
+kind-33/34 record can therefore produce a fresh state with `+0x62 == 1`, under
+successful allocation and valid placement premises. The stream contains six
+record bytes and no enabled byte. This supplies another construction route;
+a naturally produced kind-33/34 saved collection record remains unproved.
+The snapshot requires nonzero `+0x62`, so setting only `+0x63` on the original
+enabled-zero payload state does not make that state enter the snapshot.
+
+Restoration returns each new object, but the scene-collection loop discards
+that result. The object is published to primary list `0x030024F0`; a queued-16
+primary exit can retain that list at `0x03002CA0` when flag `0x20000` is clear.
+Neither operation publishes catalog owner slot two at `0x030043B8`. Placement
+toggles the object's linked byte `+0x83`; it does not publish that owner slot.
+The known kind-14/17/23 clearing handoffs still apply when reached from this
+restored scene. A valid retained primary object and a valid catalog owner
+require separate identity and lifetime evidence.
+
 After reset plus one successful kind-33 or kind-34 insertion, entry one selects
 subtype 317 and owner slot two at `0x030043B8`. The builder reaches that slot
 before any constructor for it; its 317 arm reads the old owner and clears its
@@ -214,9 +232,10 @@ helpers' valid, disjoint backing premises.
 
 A cleared or stale owner is a backing/lifetime outcome, not evidence of a new
 executable target. No hardware fault or nonexecution claim follows. The next
-needed evidence is an enabling/interaction history for the named payload and
-any intervening owner-slot writer; other aliases, IRQ writes, serialized entries
-and incoming routes remain open. No guard, new C match or runtime coverage is added here.
+needed evidence is a valid producer and interaction history for the original
+payload or restored record, plus an actual owner-slot publisher and lifetime.
+Other aliases, IRQ writes, serialized entries and incoming routes remain open.
+No guard, new C match or runtime coverage is added here.
 
 ## Explicit no-payload cancel event
 
