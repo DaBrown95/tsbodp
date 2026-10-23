@@ -56,6 +56,18 @@ agreement support this finite observation. Every source extent retains its
 changed-source control. Bitmap aliases are data, and arbitrary writer, index,
 count and target domains remain open; no C credit follows from the route.
 
+The separate [controlled insertion fixture](RUNTIME_OBSERVATIONS.md#controlled-pending-row-copy-and-consumption)
+starts from genuine initialization and calls the native insertion, flush and
+VCount APIs. Inserting line 2, then line 1, with the ROM's default callback
+shifts the first inserted row through the copy helper's backward-offset edge.
+Its callback becomes `0x04708108` and its line becomes 512. Flush stages the
+malformed row; two valid callbacks retire, then the consumer loads its malformed
+target. The fixture stops before the indirect call. The count remains one and
+does not bound callback traversal. Baseline, single-insertion, calibration,
+budget and cold-replay checks pass. This closes one concrete writer-to-load
+chain, without establishing a natural insertion caller, a valid malformed
+target, hardware IRQ delivery or the complete writer/target domain.
+
 Palette jobs have two observed layouts. The twelve range records are 8 bytes
 at `0x030032f0`; the twelve block records are 20 bytes at `0x03003170`. Bit 1
 marks a pending DMA3 transfer and bit 2 chooses the second 8-byte buffer pair

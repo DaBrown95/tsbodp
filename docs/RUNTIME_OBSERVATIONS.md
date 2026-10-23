@@ -209,6 +209,60 @@ write/readback accounting. These observations add no C credit or static-census
 input and close no arbitrary writer, alias, queue-count, callback-index or target
 domain. Other paths and gameplay remain open.
 
+## Controlled pending-row copy and consumption
+
+A private mGBA 0.10.5 fixture boots the fixed ROM normally and pauses at
+`0x08025CA6`, immediately after the native pending-display initializer returns.
+The twelve queued rows, eleven staged rows, count one and default callback
+`0x08047081` are checked before any controlled call. The fixture calls the
+native flush, insertion and VCount APIs, preserving event processing, interrupt
+control and deadlines. It writes caller arguments and return linkage, without
+patching game code or queue data. No natural incoming insertion caller is known.
+
+After an initial flush, insertion of line 2 and a flush, insertion of line 1
+again selects index one. Both calls supply auxiliary zero and the ROM's default
+callback. Each invokes `heap_move(0x03002324, 0x03002314, 144)` and retires 36
+word loads and 36 word stores. The helper's backward trailing-byte decrement
+leaves an offset of minus one. On the second shift, the load at `0x08027816`
+uses bus address `0x03002323`: the aligned word `0x08047081` rotates right by
+24 bits to `0x04708108`. The store at `0x08027818` uses `0x03002333` and writes
+that value to aligned queued callback word `0x03002330`. Retired-instruction
+checks and readbacks establish both accesses. The shifted line 2 becomes 512.
+
+The native flush copies the malformed callback to `0x03002280`. Two controlled
+VCount calls retire the valid default callback and advance the flag to two.
+A third retires the target load at `0x08046E6C`, yielding `r2=0x04708108`,
+`r0=0x03002278` and `r1=0x0300227C`. Execution stops at `0x08046E6E`, before the
+indirect BL; the malformed target is never executed. Count stays one throughout
+and is not consulted by that traversal. Line 512 is also malformed: this is
+direct native API consumption, not proof of a naturally scheduled scanline IRQ.
+
+| Fresh-core case | Retired copy loads/stores | Retired default callbacks | Endpoint |
+| --- | --- | --- | --- |
+| Baseline | 0 / 0 | 1 | Flag wraps to zero. |
+| One insertion | 36 / 36 | 2 | Flag wraps to zero. |
+| Two insertions | 72 / 72 | 2 | Third target loaded; stopped before BL. |
+
+Each case has a byte-identical cold replay. A separate authored calibration and
+its replay verify aligned `0x12345678`, low-address-bits-three load
+`0x34567812`, aligned-down store and surrounding guards in 24 CPU steps.
+A one-step budget control stops after insertion's initial stack push,
+with all row bytes unchanged; it does not claim a completed callee return.
+All nine runtime commands pass with zero warning/error logs. Complete calls
+preserve SP, callee-saved registers, control bits and four fixed guard spans;
+the stopped callback frame is checked separately. Observation records retired
+instruction state without memory hooks.
+
+The double-insertion endpoint is frame 29, 2,124,986 steps and 8,168,013
+ticks. Its 11,047-byte trace has SHA-256
+`0dd51137e639947c21582295ed3e96cdd3c93e5ef41cd309f27baa240b701657`.
+Sources, frozen inputs, commands, calibration and full replays are retained in
+ignored `analysis/pending-row-shift-native-fixture-20261023/`.
+This establishes one conditional native writer-to-target-load counterexample
+to callback preservation. It adds no C credit or executable entry and does not
+close caller validity, natural scheduling, other writers, backing or target
+populations. An invalid data-derived target is not evidence of undiscovered code.
+
 ## Controlled installed tile-decoder fixture
 
 The [fixture summary](../config/runtime-tile-fixture-us-eu.json) records a

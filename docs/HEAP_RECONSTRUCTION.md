@@ -145,7 +145,15 @@ byte offset when forming word pointers; native 32-bit address adds wrap to
 source/destination minus one. Those word accesses can therefore be misaligned
 even when incoming addresses are aligned. This is the original compiled
 behavior, not a portable `memmove` contract or a corrected algorithm. Caller
-validity, target-specific pointer/alignment behavior and execution of this
-path remain separate questions. Source snapshots, failed lifetime hypotheses,
+validity and the complete input domain remain separate questions. A
+[controlled native fixture](RUNTIME_OBSERVATIONS.md#controlled-pending-row-copy-and-consumption)
+now retires this path: each 144-byte shift performs 36 word loads and stores.
+The ARM7TDMI load rotates the aligned source word for its low address bits;
+the store writes the aligned destination word. A second insertion therefore
+changes an existing callback from `0x08047081` to `0x04708108`, rather than
+preserving it. The native consumer loads that malformed word, with execution
+stopped before its indirect call. This is conditional API evidence, without a
+natural incoming insertion caller or hardware IRQ-dispatch claim.
+Source snapshots, failed lifetime hypotheses,
 RTL, complete comparisons and the control are retained under ignored
 `analysis/display-pending-inventory/`.
