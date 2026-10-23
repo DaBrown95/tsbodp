@@ -39713,13 +39713,14 @@
       "referenced_literal_bytes": 288
     },
     {
-      "name": "sub_08021658",
+      "name": "scene_link_catalog_build",
       "rom_offset": 136792,
       "mode": "Thumb",
       "runtime_addresses": [
         134354520
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -39733,11 +39734,11 @@
         137142
       ],
       "size": 356,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 136792,
       "body_rom_start": 136792,
       "body_rom_end": 137144,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0802xxxx",
       "decoded_instruction_bytes": 324,
@@ -103230,7 +103231,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "bffccb93ca74b736cc55fa4602fd1d948be33b25ab1f2087da1267a99f02a182",
+      "source_sha256": "62df71c912e3314b519581751c9edd024f449b9cb7232e8000eedc9e7eadaff4",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line57 emits padding containing relative90..92; actual source.o $d covers this span. ",
         "Full retained 104-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -128200,7 +128201,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08021658",
+      "name": "scene_link_catalog_build",
       "rom_offset": 136792,
       "size": 356,
       "status": "mapped_code"
@@ -137844,11 +137845,11 @@
     "tools/indirect_evidence.py": "5df8e0fa17096b86737b158d57fd2122b6b16d20aeda2994fecb087a1bf5f53d",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
-    "config/code-evidence-us-eu.json": "9b2ed36dc3dec0485cac7f178721198ebb474663a69944ac6023cd852a6253ca",
+    "config/code-evidence-us-eu.json": "118326ac68888c3532ea343ea5b8f5cb09ce7012799d0c8fa4590bc23191e48a",
     "config/ram-map-us-eu.json": "67362238b648e40fbf3b51d8e466bfd12e709a38211c16e157d384243896410b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "90fd5b01840636603fe6a0ee505d0ea44c77cb7231447f76e262eac02b2007a1",
+    "config/build-us-eu.json": "c94ded78abab8fa54ae10ae53baf652b7905cf7b47b3ab4bfc90ab7f576b69fa",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -138827,7 +138828,7 @@
     "src/resource/actor_entries/actor_entry_empty_hook.c": "731a230915aed07c4ae5e45770b54d58731ebc52f7d3b6bccba718f51919ebf0",
     "src/resource/actor_entries/actor_entry_is_empty.c": "a699ad56cad1d024bc9909ed94deed4abdf120b791c32504fc6b202fc522e213",
     "src/resource/actor_entries/actor_entry_mark_seen.c": "91f5d75bdfde7513fb9de91a0efb17d1126c78fad243155f7b02c678735de8b7",
-    "src/resource/actor_entries/actor_entry_prepare.c": "bffccb93ca74b736cc55fa4602fd1d948be33b25ab1f2087da1267a99f02a182",
+    "src/resource/actor_entries/actor_entry_prepare.c": "62df71c912e3314b519581751c9edd024f449b9cb7232e8000eedc9e7eadaff4",
     "src/resource/actor_entries/actor_entry_publish_collection_group.c": "056a1751351392389366d4127aa7b00a17e96d492842f12f24ff45388ccb4050",
     "src/resource/actor_entries/actor_entry_remove_collection_record.c": "12abb6b5f63b2350c4c05b93f9c96c911021b42c37e231f1403cf0ed820c01aa",
     "src/resource/actor_entries/actor_entry_reserve_collection_record.c": "c5604eec84364b8da6af9dfc8fe7d02f6c80f41701ef851f036c73273211f89c",
@@ -139365,7 +139366,7 @@
       "raw_referenced_data_union_bytes": 35896,
       "qualified_referenced_data_union_bytes": 35896,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 307172,
+      "source_glue_owned_extent_bytes": 307528,
       "estimated_envelope_union_bytes": 325654,
       "classification_bytes": {
         "estimated_envelope_unclassified": 1248,
@@ -188222,10 +188223,6 @@
         ],
         [
           131272,
-          136792
-        ],
-        [
-          137148,
           137676
         ],
         [
@@ -247120,7 +247117,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -247131,7 +247129,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -247144,7 +247143,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -247155,7 +247155,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -247168,7 +247169,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -247179,7 +247181,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -362912,8 +362915,9 @@
         "execution_address": 134354520,
         "entry_rom_offset": 136792,
         "mode": "Thumb",
-        "name": null,
+        "name": "scene_link_catalog_build",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -455270,6 +455274,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 490,
         "referenced_data_bytes_in_extent": 284
+      },
+      {
+        "name": "scene_link_catalog_build",
+        "rom_offset": 136792,
+        "size": 356,
+        "source": "src/scene/scene_link_catalog_build.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 324,
+        "referenced_data_bytes_in_extent": 32
       },
       {
         "name": "irq_cpu_enable",

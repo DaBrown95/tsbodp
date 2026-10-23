@@ -13,7 +13,7 @@ struct ActorEntryContext {
     unsigned char unknown00[0x14];
     struct ConditionActorEntries *secondary, *active;
     struct ConditionActorEntries lists[15];
-    unsigned char unknown94[0x31c - 0x94];
+    struct ConditionActorEntry storage[162];
     struct ActorEntryCollection *collection;
 };
 extern unsigned char g_actor_entry_initial_values[][2];

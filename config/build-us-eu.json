@@ -55480,6 +55480,29 @@
         "before": "audio_play_animation_cue(172)",
         "after": "audio_play_animation_cue(171)"
       }
+    },
+    {
+      "name": "scene_link_catalog_build",
+      "rom_offset": 136792,
+      "size": 356,
+      "source": "src/scene/scene_link_catalog_build.c",
+      "symbols": {
+        "g_scene_request": "0x03004350",
+        "g_scene_link_catalog_definitions": "0x080616cc",
+        "frame_create_scene_object": "0x08027ee5",
+        "frame_set_variant_state": "0x08001be1",
+        "g_scene_link_catalog_world": "0x03003950",
+        "g_scene_link_catalog_owners": "0x030043b0",
+        "g_display_scene_frame_objects": "0x030043b0"
+      },
+      "thumb_symbols": [
+        "frame_create_scene_object",
+        "frame_set_variant_state"
+      ],
+      "negative_control": {
+        "before": "subtype != 317",
+        "after": "subtype != 316"
+      }
     }
   ],
   "assembly": [

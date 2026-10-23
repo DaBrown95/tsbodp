@@ -48,6 +48,14 @@ at `94`, using the capacities in the eight-byte definitions at `080535A4`.
 Context pointers at `18` and `14` select headers thirteen and fourteen.
 
 The fixed capacities are thirteen eights, fifty and eight, totaling 162 records.
+The canonical context now declares those records as one `storage[162]` array
+at `94`, occupying 648 bytes through `31C`; its collection pointer and all
+established context offsets are unchanged. Prepare uses `storage + offset` and
+retains all 104 matching bytes. This common producer-backed array makes the
+catalog's last unused cursor decrement reach element 153 after reading list
+fourteen's elements 161 through 154, rather than before an eight-record C
+subarray. The captured prepared pointer and continuing backing remain premises;
+this is not a universal contract for arbitrary alias-list or serialized inputs.
 The final eight records begin at context `2FC` and end at `31C`, immediately
 before the collection pointer. Under the world-reset producer at context
 base world `DC`, these are world `3D8..3F8`; its secondary list header is at

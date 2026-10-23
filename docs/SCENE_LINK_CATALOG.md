@@ -11,12 +11,13 @@ The connected C replacements are:
 | --- | --- | ---: |
 | `scene_link_catalog_initialize` | `0x20f34` | 428 |
 | `scene_link_catalog_step` | `0x210e0` | 1,400 |
+| `scene_link_catalog_build` | `0x21658` | 356 |
 | `scene_link_catalog_try_entry` | `0x218f4` | 216 |
 | `scene_link_catalog_draw_quantity` | `0x21a7c` | 156 |
 | `scene_link_catalog_draw_panel` | `0x21b9c` | 368 |
 | `scene_link_catalog_shutdown` | `0x21d0c` | 64 |
 
-The total is 2,632 bytes, including the compared literal pools and alignment.
+The total is 2,988 bytes, including the compared literal pools and alignment.
 These bodies use ordinary C with explicit alignment where needed; they add no
 instruction-body assembly or low-level glue coverage. Each replacement has a
 changed-source negative control and a separate strict declaration diagnostic.
@@ -26,9 +27,9 @@ five quantity captions, then builds and draws the catalog objects. The
 controller handles navigation, confirmation, request submission, link events
 and quantity adjustment. Its helpers apply the observed actor-entry policy,
 format the selected quantity and draw explanatory panels. The exit path selects
-a transition and clears its display objects and jobs. The object builder at
-`0x21658` and the two acceptance handlers at `0x219cc` and `0x21b18` remain
-explicit original providers until separately matched and qualified.
+a transition and clears its display objects and jobs. The builder creates the
+phase-specific details and five captions, and manages eight entry slots. The two
+acceptance handlers at `0x219cc` and `0x21b18` remain explicit original providers.
 
 ## Access and compiler evidence
 
@@ -43,7 +44,10 @@ The common header records access views rather than complete ownership types:
   `value1` and `value2` at offsets zero, one and two. The former catalog `count`
   name referred to the capacity byte; this correction preserves every access.
 - The owner slots at `0x030043b0` contain the first object, eight entry slots,
-  five caption slots and two detail slots, spanning an observed 64 bytes.
+  five caption slots and two detail slots, spanning an observed 64 bytes. The
+  existing canonical frame-object array also serves the matching clear routine,
+  which clears slots zero through sixteen; that producer requires 68 bytes of
+  backing without proving the complete allocation size or valid pointees.
 - The input view at `0x030040e0` exposes the actor pointer and player bytes at
   offsets 48 and 49. Input arrays retain their canonical halfword accesses.
 - Background control words at `0x08053644` and `0x08053648` use distinct C names
@@ -51,8 +55,8 @@ The common header records access views rather than complete ownership types:
 
 Direct input-array expressions, the decrement-success navigation edge, and
 repeated typed context-entry reads reproduce the controller's two request-root
-lifetimes and address calculations. No register bindings or compiler profile
-changes are required. The pinned compiler's physical layout checks and actual
+lifetimes and address calculations. That controller repair requires no register
+bindings or compiler profile changes. The pinned compiler's physical layout checks and actual
 provider-definition assignments qualify the declared interfaces. They do not
 identify unique original source types.
 
@@ -60,8 +64,8 @@ The matching world reset passes world `+0xDC` to `actor_entry_prepare`. That
 producer installs list fourteen at world `+0x168` through the pointer at `+0xF0`.
 The fixed fifteen definition capacities are thirteen eights, fifty and eight.
 Their sum is 162; list fourteen's eight records occupy context
-`+0x2FC..+0x31C`, or world `+0x3D8..+0x3F8`. Thus the unconverted builder's
-fixed indices seven through zero fit this initialized list. This is a
+`+0x2FC..+0x31C`, or world `+0x3D8..+0x3F8`. Thus the builder's
+eight reads fit this initialized list. This is a
 producer-backed conditional bound, not an added native guard or proof of every
 later pointer/capacity writer.
 
@@ -90,7 +94,7 @@ are preserved, without fabricated initialization; any seeded-stack transport
 observations are separate native diagnostics. Full-ROM byte equality, bounded
 initialized behavior checks, static connections and gameplay evidence are
 separate claims. These owner and bound findings add no C extent or runtime
-credit. The builder and both acceptance handlers remain unconverted.
+credit. Both acceptance handlers remain unconverted.
 
 The two edited bodies retain all 1,616 extent bytes. All sixty affected source
 contexts match under normal and strict compilation, with their genuine
@@ -98,6 +102,57 @@ changed-source controls rejected in both profiles. Five actual-definition
 contexts verify 26 distinct layout facts; seven wrong pointer/layout cases
 reject. The full-ROM, control, inventory and progress gates pass. Nine existing
 alignment annotations receive only the controller's updated source hash.
+
+## Builder and shared array lifetimes
+
+The builder owns all 356 bytes at `0x21658`: 324 instruction bytes and 32
+literal bytes in three pools. Its snapshot of the prepared secondary list's
+entry pointer precedes the first constructor. The request phase selects the detail
+objects; eight descending entry records then select a constructor, the empty
+entry object, or the existing-owner subtype-317 arm. Five captions follow.
+The existing-owner arm still requires a valid object; the source adds no null
+guard or invented initialization.
+
+`ActorEntryContext` now declares the producer's common inline backing as
+`ConditionActorEntry storage[162]`, preserving offset `94`, 648 bytes and the
+collection pointer at `31C`. The matching prepare routine assigns pointers as
+`storage + offset`. Under that prepared pointer and continuing backing lifetime,
+the builder reads elements 161 through 154 and its final unused decrement
+reaches element 153 in the same array. An unrelated eight-element list does
+not satisfy this contract. Later selector retargeting alone does not change
+the already captured pointer.
+
+The existing canonical `g_display_scene_frame_objects` array supplies the
+separate owner cursors. Entry slots run from eight through one, ending at
+unused slot zero. Caption slots run from thirteen through nine, ending at
+unused slot eight. Under continuing common-array backing, both cursors stay
+within that array; neither is
+formed by decrementing before a separate structure member array.
+
+GNU local register constraints name actual consumed native values: the saved
+entry pointer and later mask use separate R9 phases, the entry cursor uses R4,
+the entry-owner cursor R6 and the definition-table base R10. Short R0 phases
+carry each owner base and the entry kind before calls; the existing-owner
+flags arm consumes R1 without a call. Earlier prefix scratch values have died,
+and the caption cursor reuses R4 after the entry phase. No R7 constraint,
+extra observation, barrier or instruction body is added.
+
+The useful private progression separates the causes: an early cursor removed
+the saved-base/derived-cursor path; its real R4 phase restored the native homes;
+the common owner array supplied defined cursor decrements; real R0 base
+handoffs prevented folded offset literals. The remaining owner/index swap
+came from LOCAL's constant-equivalence priority penalty, and the native R6
+owner handoff preserves its actual call-spanning lifetime. The complete result
+matches without patches or ignored bytes. The genuine subtype comparison
+control differs in 42 bytes under normal and strict compilation. These source
+results do not close later writers, invalid serialized state, valid object
+populations or runtime/gameplay behavior.
+
+The builder and all 41 importers of the refined actor-entry context pass normal
+and strict compilation with their genuine changed-source controls. Seven
+separate actual-definition contexts verify 37 distinct layout assertions;
+ten wrong pointer or layout cases reject. The full-ROM, control, inventory and
+progress gates pass.
 
 ## Explicit no-payload cancel event
 

@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,436 C functions / 303,112 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 307,172 bytes; original slices
-still supply 16,470,044 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,437 C functions / 303,468 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 307,528 bytes; original slices
+still supply 16,469,688 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **62 unowned rows / 18,490
+[inventory](../assets/rom-inventory.json) contain **61 unowned rows / 18,134
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -47,14 +47,13 @@ at `0x40AB4` (692 bytes), [activity-three parent and raster workers](SCENE_CONTA
 and the [record-selection text renderer](SCENE_RECORD_SELECTION_HANDOFFS.md) at
 `0x1AA78`. Their local source gains leave these workers unconverted.
 
-The linked-catalog builder at `0x21658` remains unowned. Its native entry-pointer,
-shared-mask and existing-owner phases survive a private composition in its
-retained pre-repair context, but the full result is 360 bytes / 189 differences
-against 356. The early entry
-handoff and ordinary cursor allocation remain wrong. Its eight indexed reads
-now have a [producer-backed initialized-list bound](SCENE_LINK_CATALOG.md#access-and-compiler-evidence).
-The maintained controller and permission reader share the canonical actor-entry
-list and collection owners; that repair adds no C coverage or runtime proof.
+The linked-catalog builder at `0x21658` now matches all 356 bytes, including
+its three literal pools. The canonical 162-record backing and existing common
+scene-owner array make its descending cursors defined under the prepared
+pointer/backing premises. Actual native register phases preserve the entry,
+owner, table and short address/kind lifetimes. The two acceptance handlers
+remain original; valid existing objects, later writers and runtime populations
+remain open. See the [builder evidence](SCENE_LINK_CATALOG.md#builder-and-shared-array-lifetimes).
 
 The renderer's actual current/previous-frame address producers already agree
 with native code. Their spill homes remain SP60/SP56 instead of SP68/SP64;
