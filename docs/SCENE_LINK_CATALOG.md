@@ -15,10 +15,11 @@ The connected C replacements are:
 | `scene_link_catalog_try_entry` | `0x218f4` | 216 |
 | `scene_link_catalog_accept_entry` | `0x219cc` | 176 |
 | `scene_link_catalog_draw_quantity` | `0x21a7c` | 156 |
+| `scene_link_catalog_accept_quantity` | `0x21b18` | 132 |
 | `scene_link_catalog_draw_panel` | `0x21b9c` | 368 |
 | `scene_link_catalog_shutdown` | `0x21d0c` | 64 |
 
-The eight bodies total 3,164 bytes, including the compared literal pools and
+The nine bodies total 3,296 bytes, including the compared literal pools and
 alignment.
 These bodies use ordinary C with explicit alignment where needed; they add no
 instruction-body assembly or low-level glue coverage. Each replacement has a
@@ -30,8 +31,8 @@ controller handles navigation, confirmation, request submission, link events
 and quantity adjustment. Its helpers apply the observed actor-entry policy,
 format the selected quantity and draw explanatory panels. The exit path selects
 a transition and clears its display objects and jobs. The builder creates the
-phase-specific details and five captions, and manages eight entry slots. The
-quantity-acceptance handler at `0x21b18` remains an explicit original provider.
+phase-specific details and five captions, and manages eight entry slots. Both
+acceptance handlers now have C owners.
 
 ## Access and compiler evidence
 
@@ -96,7 +97,7 @@ are preserved, without fabricated initialization; any seeded-stack transport
 observations are separate native diagnostics. Full-ROM byte equality, bounded
 initialized behavior checks, static connections and gameplay evidence are
 separate claims. These owner and bound findings by themselves add no C extent
-or runtime credit. Quantity acceptance remains unconverted.
+or runtime credit.
 
 The earlier controller and permission-reader repair retained all 1,616 extent
 bytes. Its sixty affected source contexts matched under normal and strict
@@ -137,6 +138,34 @@ supplies only the earlier conditional bound. Later capacity/pointer writers,
 input populations, request delivery and runtime/gameplay behavior remain open.
 The match replaces an existing extent without discovering an entry or proving
 original C spelling.
+
+## Quantity acceptance
+
+The quantity-acceptance handler at `0x21b18` matches all 132 bytes: 124
+instruction bytes and eight literal bytes, with no alignment tail. It seeds the
+mask with the selected record's bit, then scans while the unsigned quantity
+remainder and capacity permit. The scan skips the selected index and adds
+matching kinds, treating 119..123 as one family. Each added bit consumes one
+remaining item. The handler submits kind 15, mode one and the accumulated mask,
+even if the scan reaches capacity before satisfying that remainder.
+
+A short IP phase carries the actual entry base. The excluded-index R8 phase
+begins only inside the nonempty guard, and R4 carries the one actual mask from
+its initial selected bit through the final submission argument. Ordinary
+indexed record reads let LOOP place the existing mask seed before its induced
+cursor. These values have real consumers; there is no extra access, artificial
+observation or R7 frame-pointer exception. The capacity remains the canonical
+unsigned byte at context offset one, with no increment.
+
+Eight actual owner contexts pass normal and strict compilation across 2,500
+extent bytes: sixteen positive cases match, and sixteen genuine changed-source
+controls reject in 32 pipelines / 160 commands. Three separate actual-definition
+API contexts pass and eight wrong-signature or layout fixtures reject. The
+full-ROM, changed-source control, inventory and progress gates pass. Valid
+context and record backing, selected index, every reached shift index below 32,
+and continuing input/field preservation remain premises. The source adds no quantity-range guard or
+complete writer/runtime claim. This is an existing entry and extent, with no
+new code discovery or proof of original C spelling.
 
 ## Builder and shared array lifetimes
 
@@ -306,7 +335,7 @@ For that controller repair, strict checks retained the eight-byte/four-aligned
 payload, twelve-byte event record, actual mode/input field geometry and by-value
 recorder API. All seventeen import declarations and fifteen actual owned
 provider definitions passed; wrong recorder-formal and input-offset fixtures
-were rejected. Quantity acceptance remains an explicit original provider;
-the later entry-acceptance match is described above. Other partial payloads,
+were rejected. Both acceptance handlers were then original; their subsequent
+source work is described above. Other partial payloads,
 existing representation casts, selection/input domains and runtime/gameplay
 limits remain qualified. This repair adds no new function or C-byte ownership.

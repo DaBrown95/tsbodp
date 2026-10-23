@@ -109,12 +109,12 @@ capacity and lifetimes; in-range state backing alone does not prove success.
 
 ## Current scene-request frontier, 24 October 2026
 
-The retained 74 direct call sites to `resource_submit_scene` now have 71 sites
-covered by 48 current C owners. Entry acceptance at `0x219CC` owns two existing
-kind-15 sites. Three sites remain in the unowned bodies at `0x21B18` and
-`0x42964`: one passes literal kind 15, one passes 23 and one passes 1. The 46
-recorded default-wrapper entry records are all covered by 43 distinct owners;
-interior records account for the duplicates. The former
+The retained 74 direct call sites to `resource_submit_scene` now have 72 sites
+covered by 49 current C owners. Entry acceptance at `0x219CC` owns two existing
+kind-15 sites; quantity acceptance adds the kind-15 site at `0x21B86`. The two
+remaining sites are both in `0x42964`: `0x429E4` passes literal kind 23 and
+`0x42B22` passes kind 1. The 46 recorded default-wrapper entry records are all
+covered by 43 distinct owners; interior records account for the duplicates. The former
 unowned `0x23578` entry is now the 212-byte row-24 selection step, with literal
 kind 11. This frontier reconciliation uses the current source and paired proof;
 it adds no call-site scan, code discovery or source credit itself.

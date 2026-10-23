@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,447 C functions / 305,544 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 309,604 bytes; original slices
-still supply 16,467,612 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,448 C functions / 305,676 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 309,736 bytes; original slices
+still supply 16,467,480 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **52 unowned rows / 16,070
+[inventory](../assets/rom-inventory.json) contain **51 unowned rows / 15,938
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -59,7 +59,10 @@ owner, table and short address/kind lifetimes. The entry-acceptance handler
 now owns 176 C bytes: 162 instruction bytes, twelve literal bytes and two
 alignment bytes. Its canonical capacity byte at offset one supplies a short
 R0 guard and the actual R6 loop-bound phase; its context-to-record byte cursor
-remains ordinary. Only quantity acceptance at `0x21B18` remains original.
+remains ordinary. The [quantity-acceptance handler](SCENE_LINK_CATALOG.md#quantity-acceptance)
+at `0x21B18` now owns 132 C bytes: 124 instruction bytes and eight literal bytes,
+with no alignment tail. Its short IP entry base, guarded R8 exclusion index and
+persistent R4 mask preserve actual consumed phases without an R7 exception.
 See the [entry evidence](SCENE_LINK_CATALOG.md#entry-acceptance).
 A restored collection record can construct kind 33/34 with
 enabled one, but its returned object is discarded by the restore loop and no
@@ -175,7 +178,7 @@ The earlier shared-step 228 / 109 composition already supplies that consumer
 fork, so these findings do not authorize repeating its type or binding grid.
 
 The [request frontier](BOUNDED_INVENTORY.md#current-scene-request-frontier-24-october-2026)
-is reconciled against current ownership: 71 of 74 direct submission sites and
+is reconciled against current ownership: 72 of 74 direct submission sites and
 all 46 recorded default-wrapper entry records are covered. A bounded natural
 new-game route follows the initialization store of kind 14 through primary
 Start to row 14's begin entry, with cold replay and displaced-watch control.

@@ -55720,6 +55720,25 @@
         "after": "selected!=128"
       },
       "expected_sha256": "478f75ec4ded30de4978cb316c21192aa1845f4f7ac4ee4ff4f7889aa26b4a93"
+    },
+    {
+      "name": "scene_link_catalog_accept_quantity",
+      "rom_offset": 138008,
+      "size": 132,
+      "source": "src/scene/scene_link_catalog_accept_quantity.c",
+      "symbols": {
+        "g_scene_link_catalog_world": "0x03003950",
+        "g_scene_request": "0x03004350",
+        "resource_submit_scene": "0x8027dd1"
+      },
+      "thumb_symbols": [
+        "resource_submit_scene"
+      ],
+      "negative_control": {
+        "before": "g_scene_request.parameter-1",
+        "after": "g_scene_request.parameter-2"
+      },
+      "expected_sha256": "620575df3d743c4086f3b0fe06aea8d54a260a70415ad800572a3203d4dccc5f"
     }
   ],
   "assembly": [
