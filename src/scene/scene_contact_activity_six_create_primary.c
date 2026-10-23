@@ -9,7 +9,7 @@ struct FrameObject *scene_contact_activity_six_create_primary(void) {
  ((struct SceneContactActivitySixObject *)object)->layer=1;
 
  frame_enable_object_flags((struct FrameObject *)object,25);
- object->on_step=scene_contact_activity_six_original_step_primary;
+ object->on_step=scene_contact_activity_six_step_primary;
  appearance=&g_scene_contact_activity_six_primary_appearance;
  frame_load_actor_group_palette(appearance,0);
  frame_enable_parts((struct FrameObject *)object);

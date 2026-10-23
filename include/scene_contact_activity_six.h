@@ -69,8 +69,7 @@ extern struct FrameSpriteVariant ***g_scene_contact_activity_six_part1_tables[];
 extern struct FrameSpriteVariant **g_scene_contact_activity_six_part2_tables[];
 extern const void *const g_scene_contact_activity_six_character_palette[];
 void frame_set_part_variants(struct FrameObject*,unsigned char,struct FrameSpriteVariant**,unsigned int);
-/* The installed 728-byte primary update remains original. */
-void scene_contact_activity_six_original_step_primary(struct FrameObject*);
+void scene_contact_activity_six_step_primary(struct FrameObject*);
 void scene_contact_activity_six_step_secondary(struct FrameObject*);
 void frame_disable_object_flags(struct FrameObject*,unsigned int);
 unsigned char frame_object_has_flags(struct FrameObject*,unsigned int);

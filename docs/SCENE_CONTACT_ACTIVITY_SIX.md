@@ -1,8 +1,8 @@
 # Contact activity definition six
 
-This reconstructed path adds 19 matching C functions and 2,776 bytes at their
+This reconstructed path adds 20 matching C functions and 3,504 bytes at their
 original entries. It follows definition row six through its initializer,
-controller, five object factories, four installed object updates, input-pair
+controller, five object factories, five installed object updates, input-pair
 decision, cleanup and channel-volume helpers, and the connected audio notices.
 The names describe observed roles; they do not identify the original game names.
 Full-ROM equality, static ownership, compiler type/layout checks and the finite
@@ -19,6 +19,7 @@ instruction fixtures remain separate evidence.
 | scene_contact_activity_six_step_second | 229C4 | 172 |
 | scene_contact_activity_six_step_gauge | 22A70 | 176 |
 | scene_contact_activity_six_create_primary | 22B20 | 292 |
+| scene_contact_activity_six_step_primary | 22C44 | 728 |
 | scene_contact_activity_six_create_secondary | 22F1C | 292 |
 | scene_contact_activity_six_step_secondary | 23040 | 344 |
 | scene_contact_activity_six_set_channel_pair_volume | 23198 | 48 |
@@ -33,10 +34,11 @@ instruction fixtures remain separate evidence.
 Each complete extent includes its original literal pools and alignment. The
 controller at 22630 ends at 226DC: its two zero bytes and final three literal
 words belong to the 172-byte extent. The earlier 168-byte mapping was provisional.
-All 19 sources use ordinary C with no register bindings; their alignment
-directives only express the original zero section alignment.
+The preceding 19 sources use ordinary C without register bindings. The primary
+update uses four register constraints on actual values, described below.
+Alignment directives only express the original zero section alignment.
 
-## Dispatch and remaining original code
+## Dispatch and primary update
 
 The 28-byte definition at 08059604 is row six of the table at 0805955C. Its first
 two words are 0802252D and 08022631. The accepted secondary-activity initializer
@@ -46,13 +48,28 @@ callback is loaded from offset 136. Five factories install those exact callback
 types without a function-pointer cast. Primary and secondary factories also
 install the accepted `resource_object_before_step` at 08001AE0.
 
-The primary constructor still installs the original update at **22C44..22F1C,
-728 bytes**. That body is explicitly declared original and receives no C credit.
-It coordinates the main character's reward/miss/completion animation and volume
-restoration. Its difficult source attempts, including incorrect early type and
-allocation hypotheses, remain in ignored local evidence. Its existence limits
-the completeness of this character's update path even though the controller,
-input, moving objects, secondary character and gauge now match.
+The primary constructor now installs the matching
+[primary update](../src/scene/scene_contact_activity_six_step_primary.c) at
+**22C44..22F1C, 728 bytes**: 700 instruction bytes and 28 literal-pool bytes,
+with no terminal alignment bytes. Its canonical callback remains
+`void(struct FrameObject *)`; the constructor changes only the same-address
+provider name.
+
+State zero handles completion, misses and the three amount thresholds. It
+chooses the original primary/secondary animations and cues, updates score and
+failure fields, and advances the variant state. States one and two wait for
+the established completion flag; state two restores the saved sequence and
+sample volumes. The final pending-update test selects the requested direction
+variant before clearing that byte. Option indexing, pointers and backing keep
+their existing preconditions; no guard or initialization is added.
+
+Two short byte results use R0: the miss-path `events & 0xF1` value ends at its
+byte store, and `events & 8` ends at its conversion to the separate word value.
+Neither byte value crosses a call. The normalized word uses R5 through its
+actual post-animation amount store, and the option-table pointer uses R9
+through its real later lookups. Capturing the byte results after the AND
+preserves the retained anonymous byte constant and later OR dataflow. This closes the retained five-byte mismatch without extra reads,
+invented liveness, clobbers or instruction bodies. Failed attempts remain local.
 
 The accepted `_call_via_r1` and `_call_via_r3` bridges are existing zero-C glue.
 The four-byte R0/R2 transfer veneers at 0804CCF0/0804CCF8 remain original. No
@@ -198,7 +215,8 @@ closures, source/native ownership, relocated pools and alignment. Compiler
 assertions and initialized bytes independently test access layouts; wrong
 field widths, signs, callback arity and SDK types are rejected.
 
-The finite proof checks 1,102 initialized cases across all 19 bodies, including
+The retained finite proof checks 1,102 initialized cases across the preceding
+19 bodies, including
 signed/unsigned coordinate edges, option/subtype domains, input success/failure,
 timer wrap, frame identity, channel bounds, callback kinds and injected post-call
 state changes. There are 338 changed-source divergences and five interpreter or
@@ -210,7 +228,10 @@ effects are ABI/model cases beyond the concrete byte effect producer. These
 fixtures do not execute the whole game, prove hardware interleaving or resolve
 unchecked allocation, array and gameplay domains.
 
-The substantial next connected target is the original primary update at 22C44.
-Its boundary, installed word, fields and semantics are known more precisely than
-its current compiler match. Complete capacities and original structure names
-remain provisional. Useful failed source and raw native evidence stays private.
+The primary update has fresh normal and strict full-extent matches and genuine
+score-40-to-41 controls. All 15 current importers of its role header have fresh
+normal/strict positives and changed-source controls. Actual definitions and
+interfaces are checked separately. The new primary match adds no runtime cases
+to the retained 19-body fixture set. Complete capacities, later writers and
+original structure names remain provisional; matching this path does not close
+the game's remaining executable ownership.
