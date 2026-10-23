@@ -26536,6 +26536,20 @@
         "Complete 56-byte canonical-owner C output matches the fixed native extent in normal and strict qualification; genuine capacity-equality controls reject. The final source .align 2,0 emits two zero alignment bytes after 54 instruction bytes.",
         "Modern assembler object and linked text have a 54-byte function symbol, 56-byte four-aligned .text and data mapping at relative 54. The next independent entry is at 0x46200. Source-emitted alignment provenance only; no alternate-entry exclusion or instruction suppression."
       ]
+    },
+    {
+      "name": "window_opening_alignment_0487b2",
+      "owner": "scene_choice_panel_original_window_begin",
+      "rom_offset": 296882,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "8e08cae5133cc00874cb301c576dbe1f51c49a5c03343115940854d5a5c4f0e0",
+      "evidence": [
+        "Matching compiler source.s .align 2,0 at LF line81 emits two zero bytes at relative142..144 after BX at140; following literal words start144 and148.",
+        "Legacy binutils2101 source.o and linked ELF each have complete152-byte .text/function extent; object padding and linked/raw bytes equal fixed native padding. No modern mapping-symbol assumption.",
+        "Source-emitted alignment/data role only; this does not exclude alternate incoming execution or establish runtime/writer populations."
+      ]
     }
   ],
   "source_owned_instruction_regions": [

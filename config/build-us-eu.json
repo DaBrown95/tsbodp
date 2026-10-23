@@ -55673,6 +55673,25 @@
         "before": "if((unsigned char)(kind+61)<=5)",
         "after": "if((unsigned char)(kind+61)<=4)"
       }
+    },
+    {
+      "name": "scene_choice_panel_original_window_begin",
+      "source": "src/display/begin_window_from_center.c",
+      "rom_offset": 296740,
+      "size": 152,
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "g_window_states": "0x03007460",
+        "display_enable_layers": "0x0800d68d"
+      },
+      "thumb_symbols": [
+        "display_enable_layers"
+      ],
+      "negative_control": {
+        "before": "display_enable_layers(0x2000);",
+        "after": "display_enable_layers(0x6000);"
+      },
+      "expected_sha256": "85b417b7361adf1fcf270212b272bca0eabe22d284359630176f3ba1487b0b74"
     }
   ],
   "assembly": [

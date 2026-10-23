@@ -166,13 +166,15 @@ and original loop behavior. No new runtime trace or finite gameplay population
 is claimed. Full normal/strict comparisons and genuine Y-increment controls
 qualify the complete extent, including its skipped internal alignment and pools.
 
-The remaining original window targets are
-scene_choice_panel_original_set_window at `0x48A14` and
-scene_choice_panel_original_window_begin at `0x48724`.
-The 152-byte [close-to-center service](DISPLAY_WINDOW_MOTION.md#closing-to-center)
-at `0x487BC` now matches from the canonical window owner under its existing
-scene_choice_panel_original_window_end interface. Configuration and disable
-services are already owned by the canonical [window sources](DISPLAY_WINDOW_MOTION.md).
+The remaining original window target is
+scene_choice_panel_original_set_window at `0x48A14`.
+The 152-byte [opening](DISPLAY_WINDOW_MOTION.md#opening-from-center) and
+[closing](DISPLAY_WINDOW_MOTION.md#closing-to-center) services at `0x48724` and
+`0x487BC` now match from the canonical window owner under their existing
+unsigned-halfword duration interfaces. The opening source preserves four
+existing post-MMIO coordinate-word observations without adding a read.
+Configuration and disable services are already owned by the canonical
+[window sources](DISPLAY_WINDOW_MOTION.md).
 The remaining external contracts do not establish a complete lifecycle model.
 
 A byte match, a type check and a bounded finite result answer different

@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,445 C functions / 305,216 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 309,276 bytes; original slices
-still supply 16,467,940 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,446 C functions / 305,368 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 309,428 bytes; original slices
+still supply 16,467,788 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **54 unowned rows / 16,398
+[inventory](../assets/rom-inventory.json) contain **53 unowned rows / 16,246
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -178,11 +178,14 @@ This closes that selected reachable-input question; complete kind writers,
 aliases, saved-state producers and target populations remain open. Source and
 map totals are unchanged.
 
-The [window-to-center helper](DISPLAY_WINDOW_MOTION.md#closing-to-center) at
-`0x487BC` now owns all 152 bytes from C using the existing two-window array and
-coordinate subobjects. The opening helper at `0x48724` and rectangle setter at
-`0x48A14` remain original; this source gain does not close their lifecycle or
-writer domains.
+The [opening](DISPLAY_WINDOW_MOTION.md#opening-from-center) and
+[closing](DISPLAY_WINDOW_MOTION.md#closing-to-center) window helpers at
+`0x48724` and `0x487BC` each own 152 C bytes using the existing two-window array
+and coordinate subobjects. The opening service qualifies four existing
+post-MMIO word reads through their canonical `int` members; it adds no read
+or bound and proves no original qualifier, IRQ writer or runtime timing.
+The rectangle setter at `0x48A14` remains original. Window lifecycle, coordinate
+bounds and complete writer domains remain open.
 
 The [unrooted detachment loop](DISPLAY_NEED_EFFECT_LIFECYCLE.md#unrooted-actor-detachment)
 at `0x2F400` now owns 48 bytes from C: 46 instruction bytes and two alignment
@@ -235,9 +238,9 @@ writer and retry-termination premises conditional and adds no runtime claim.
 
 The instruction census is not a complete code denominator. Its current raw
 union is 285,360 bytes; qualified instructions occupy 285,334 bytes and
-referenced data 35,932 bytes. Known data totals 22,876 bytes. Source-owned data
-and alignment have 1,999 records / 4,024 bytes, with zero locally unclassified
-owned bytes. Estimated envelopes still have 358 unclassified bytes, and
+referenced data 35,932 bytes. Known data totals 22,878 bytes. Source-owned data
+and alignment have 2,000 records / 4,026 bytes, with zero locally unclassified
+owned bytes. Estimated envelopes still have 356 unclassified bytes, and
 16,432,690 bytes remain outside resolved roles. Fifteen authored veneer NOPs
 have a separate 30-byte instruction role; two audio fills are implicit code
 alignment, without proof against alternate entry. The reachable `0x499B0` NOP

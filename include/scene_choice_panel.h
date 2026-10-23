@@ -28,7 +28,7 @@ void scene_choice_panel_begin_close(void);
 
 void scene_choice_panel_draw_text(void);
 
-/* The window-end service has a C owner; the other two remain dependencies. */
+/* Window begin/end have C owners; the rectangle setter remains a dependency. */
 void scene_choice_panel_original_window_begin(unsigned short duration);
 void scene_choice_panel_original_window_end(unsigned short duration);
 void scene_choice_panel_original_set_window(int left, int top, int right, int bottom);
