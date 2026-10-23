@@ -100,3 +100,43 @@ header receipts and static caller evidence remain under ignored
 `reports/agents/vblank-wrapper/grid-cell-producers/`. No runtime or gameplay
 claim is made. The next connected targets are the difficult target selector,
 its owner-candidate lifecycle and upstream cell-data initialization.
+
+## Conditional pattern write bounds
+
+The registration provider now has a finite bound on its two append indices
+for the fixed ROM patterns. The 149 pointer words before the separate appearance
+records at `0x08062D78` contain 138 non-null patterns at 50 distinct addresses
+and eleven null entries. Each backed pattern has two coordinate-offset bytes
+and 25 action bytes in `0..5`. The largest pattern has twelve action-four
+positions; the largest total for actions one, two, three and five is nine.
+This physical prefix does not establish the complete table extent or valid
+kind population.
+
+The [registration scan](../src/frame/frame_register_need_effect.c) visits each
+position once. Under stable ROM contents, intact state/frame backing and normal
+provider returns, its candidate indices stay within `0..11` and target indices
+within `0..8`, fitting the existing twelve- and ten-record banks. Rotation changes
+coordinates, not append opportunities; unavailable cells and early returns
+shorten the scan. Commit one first calls the target-writing commit-zero probe,
+then clears the work area and scans again. Thus it can append eighteen target
+records across the two scans while each scan uses at most nine slots. A failed
+probe can leave partial target writes; no rollback is established.
+
+The native registration index comes from an object byte. Interpreting all 256
+possible index words gives 188 complete fixed-ROM images, including a GamePak
+mirror, whose counts also fit those banks. Beyond the 149-word prefix these
+include appearance, definition and instruction bytes; they are not additional
+valid patterns or newly discovered execution. Other interpretations address
+mutable IWRAM or palette storage, BIOS-prefetch or open-bus data. The fixed-ROM
+bound does not cover those inputs. Neighbor lookup separately indexes by a
+full state-kind word, so it does not inherit this byte-sized domain.
+
+Capacity does not guarantee a usable candidate. With a cleared work bank and
+the required cells available, a static coordinate model for kind zero with
+direction three and anchor `(1,1)` appends eight candidates but puts `(0,0)` first.
+The [native counter](../src/frame/frame_actor_owner_cell_count.c)
+then reports zero because it stops at a zero low halfword. Moving the anchor to
+`(2,2)` gives eight visible records in the same model. These are conditional
+stored-value examples, not naturally reached gameplay observations. Valid
+projection, terrain, live ownership, later writers and the target selector's
+failure-path outputs remain open. No C coverage or runtime credit is added.

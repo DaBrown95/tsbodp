@@ -418,6 +418,17 @@ closed without another binding or profile grid. Five fresh byte-count row
 loops decrement an initial available count of 25 before the remaining-slot
 loop; the native code supplies no capacity or total-count guard.
 
+The five row counts now have an identified save-input origin. Initialization
+points `parameters` at game state `+0x28`; bytes two through six are the five
+`SaveStreamSixNibbles.values` bytes written by
+[the six-nibble reader](../src/save/read_six_nibbles.c). The
+[world-record loader](../src/save/read_world_record.c) reaches that record at
+game `+0x10+0x18`. A completed load with valid backing and no later writer
+therefore gives each count a range of `0..15`. It does not prove the ten-slot
+per-row capacity or the total of 25 available objects. The builder already
+reloads these bytes after constructor calls; this backing identity supplies
+no missing source dependency or new matching-code credit.
+
 The 178 finite cases independently execute original and linked bodies against
 normalized call models, check callee-saved state and poison caller-clobbered
 registers. They include zero and maximum-word timers, the observed handoff

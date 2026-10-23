@@ -120,6 +120,17 @@ completion and executable-target populations open; repeating unchanged fixtures
 adds no evidence. The selector's setup providers do not guarantee projection
 success or initialize its distinct output fields.
 
+The [fixed pattern domain](FRAME_GRID_CELLS.md#conditional-pattern-write-bounds)
+now bounds each registration scan to twelve candidate and nine target slots
+for the 138 backed patterns in the inspected 149-word prefix. The full byte-index
+interpretation also exposes mutable and history-dependent data, so it does not
+close valid kind populations or later writers. A concrete zero-coordinate
+sentinel example shows why a populated candidate bank can still appear empty.
+The [palette count input](SCENE_PALETTE_MENU.md#remaining-selection-transitions)
+is now tied to five loaded nibbles, giving `0..15` per row under the completed-load
+premises; neither row nor total capacity follows. These are static input bounds,
+with no new source extent or runtime credit.
+
 The [request frontier](BOUNDED_INVENTORY.md#current-scene-request-frontier-23-october-2026)
 is reconciled against current ownership: 69 of 74 direct submission sites and
 all 46 recorded default-wrapper entry records are covered. A bounded natural
