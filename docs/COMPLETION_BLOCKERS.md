@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,435 C functions / 302,324 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 306,384 bytes; original slices
-still supply 16,470,832 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,436 C functions / 303,112 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 307,172 bytes; original slices
+still supply 16,470,044 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **63 unowned rows / 19,276
+[inventory](../assets/rom-inventory.json) contain **62 unowned rows / 18,490
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -56,9 +56,12 @@ consumer supports defeating that transformation. Preserve these closed source
 lines until a distinct semantic or original-build fact appears.
 
 The [activity-three preparation](SCENE_CONTACT_ACTIVITY_THREE.md#preparation-worker-current-causes-and-input-bounds)
-remains 536 / 492 against 544 bytes. The [attachment child](FRAME_ATTACHMENT_JOBS_42_94.md#row-two-descriptor-callbacks)
-remains 788 / 42: its required pending update crosses the allocator's reference
-priority threshold and exchanges R5/R6. Removing that update is incorrect.
+remains 536 / 492 against 544 bytes. The [shared attachment worker](FRAME_ATTACHMENT_JOBS_42_94.md#shared-optional-worker-at-0x28424)
+now matches all 788 bytes, including the required pending update. Its real
+case-zero owner uses R6 only during that call phase; the sample-field address
+uses R4 across its five calls. Ordinary owner field accesses remain available
+to common-subexpression elimination. This replaces one 786-byte estimate and
+owns two following alignment bytes, without a newly discovered entry.
 The [palette selection builder](SCENE_PALETTE_MENU.md#remaining-selection-transitions)
 at `0x1510C` remains unconverted. Binding its real column to R5 survives every
 intermediate stage, but disqualifies it from LOOP's pseudo-register induction
@@ -93,10 +96,10 @@ success or initialize its distinct output fields.
 
 The instruction census is not a complete code denominator. Its current raw
 union is 284,500 bytes; qualified instructions occupy 284,474 bytes and
-referenced data 35,896 bytes. Known data totals 22,856 bytes. Source-owned data
-and alignment have 1,989 records / 4,004 bytes, with zero locally unclassified
-owned bytes. Estimated envelopes still have 1,260 unclassified bytes, and
-16,432,704 bytes remain outside resolved roles. Fifteen authored veneer NOPs
+referenced data 35,896 bytes. Known data totals 22,870 bytes. Source-owned data
+and alignment have 1,996 records / 4,018 bytes, with zero locally unclassified
+owned bytes. Estimated envelopes still have 1,248 unclassified bytes, and
+16,432,702 bytes remain outside resolved roles. Fifteen authored veneer NOPs
 have a separate 30-byte instruction role; two audio fills are implicit code
 alignment, without proof against alternate entry. The reachable `0x499B0` NOP
 remains a separate source mismatch. The `0xE1EE` interior-entry-shaped value has

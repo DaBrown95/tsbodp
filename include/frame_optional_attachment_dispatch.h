@@ -23,7 +23,7 @@ unsigned int frame_begin_optional_direction_attachment_28880(struct FrameNeedEff
     struct FrameObject *, unsigned int);
 void frame_optional_attachment_tick_28984(struct FrameNeedEffectState *);
 
-/* Explicit original-code dependency; this worker remains unconverted. */
+/* Shared worker for kinds 28, 30, 31, 32 and 33. */
 unsigned int frame_step_optional_attachment_28424(struct FrameNeedEffectState *,
     struct FrameActorAttachmentRecord *);
 

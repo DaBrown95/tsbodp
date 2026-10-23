@@ -55444,6 +55444,42 @@
         "before": "y += 12;",
         "after": "y += 11;"
       }
+    },
+    {
+      "name": "frame_step_optional_attachment_28424",
+      "source": "src/frame/frame_step_optional_attachment_28424.c",
+      "rom_offset": 164900,
+      "size": 788,
+      "symbols": {
+        "condition_is_complete": "0x802a7c5",
+        "frame_gate_attachment_game_value": "0x802f20d",
+        "frame_need_effect_try_optional": "0x802e689",
+        "frame_need_effect_accumulate_optional": "0x802e6f1",
+        "frame_request_animation": "0x8001b5d",
+        "audio_play_animation_cue": "0x8040ffd",
+        "frame_commit_need_effect": "0x802d9ad",
+        "frame_adjust_actor_needs": "0x802b825",
+        "audio_game_stop_sample": "0x8041341",
+        "frame_set_actor_direction": "0x8001c29",
+        "g_frame_interaction_settings": "0x03003950",
+        "g_frame_need_effect_definitions": "0x08062e7c"
+      },
+      "thumb_symbols": [
+        "condition_is_complete",
+        "frame_gate_attachment_game_value",
+        "frame_need_effect_try_optional",
+        "frame_need_effect_accumulate_optional",
+        "frame_request_animation",
+        "audio_play_animation_cue",
+        "frame_commit_need_effect",
+        "frame_adjust_actor_needs",
+        "audio_game_stop_sample",
+        "frame_set_actor_direction"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(172)",
+        "after": "audio_play_animation_cue(171)"
+      }
     }
   ],
   "assembly": [

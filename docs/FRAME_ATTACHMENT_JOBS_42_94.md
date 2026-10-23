@@ -430,7 +430,7 @@ attachment, parameter-indicator and sample-handle owners:
 
 The dispatcher looks up the actor record and switches on its full-word kind.
 Kind 12 selects the new worker at `0x28988`, kind 45 selects `0x28378`, and
-kinds 28/30/31/32/33 retain the original unconverted worker at `0x28424`.
+kinds 28/30/31/32/33 select the shared worker at `0x28424`, reconstructed below.
 All other values return zero. The native 34-entry table covers kinds 12..45;
 its default entries remain explicit. Lookup results are dereferenced without
 an added null guard, so matching-record backing is still a premise.
@@ -458,7 +458,7 @@ two bytes extend the old map estimate without adding instructions.
 
 These bodies establish the local dispatch paths, not complete incoming roots,
 callback/writer populations, descriptor bounds, object/sample lifetimes or
-gameplay. The `0x28424` dependency remains unconverted and receives no credit.
+gameplay. The shared worker is now reconstructed below; complete incoming and writer populations remain open.
 
 
 ## Row-two descriptor callbacks
@@ -478,8 +478,7 @@ at `0x2F348` supply the other three nonnull targets. Those seven targets total
 628 source extent bytes; the null `+0x18` slot adds no code. Including the
 adjacent independently bounded check and kind-12 worker, the contiguous
 `0x28738..0x28A10` span is eight C functions and 728 bytes. The separate worker
-at `0x28424` remains an original-code dependency for dispatcher kinds
-28/30/31/32/33.
+at `0x28424`, described below, supplies dispatcher kinds 28/30/31/32/33.
 
 The initializer emits one in R0 and returns. The actual spawn adapter supplies
 the state pointer through the call veneer and ignores the result. Its chosen
@@ -549,3 +548,59 @@ the empty tick, and leaf 100 to 99. The four bodies own 180 extent bytes:
 36 instruction, four literal, 136 switch-table and four alignment bytes. The
 three old rows covered 172 estimated bytes; four additional alignment bytes
 and the separate four-instruction-byte leaf explain the map increase.
+
+## Shared optional worker at 0x28424
+
+The [shared worker](../src/frame/frame_step_optional_attachment_28424.c) adds
+788 matching C extent bytes: 490 instruction bytes, 36 literal bytes, 248
+switch-table bytes and 14 zero alignment bytes. Its complete extent ends at
+`0x28738`; this replaces the prior 786-byte control-flow estimate and owns the
+two following alignment bytes. It adds no newly discovered executable entry.
+Together with the adjacent entries, ten C bodies now cover the contiguous
+`0x28378..0x28A10` interval, totaling 1,688 extent bytes. The separate unrooted
+check retains its incoming-root uncertainty.
+
+The full-word timer selects phases 0, 1, 6, 8, 9, 25, 26 and 49; other values
+return one. Running byte exactly one forces cleanup. Phase zero first sets
+timer six, then checks condition four. Kinds 28/30/32 require game value 20;
+kinds 31/33 require ten. A gate result exactly one calls the existing optional
+providers; failure requests animation five, selects cue 85 or 86 from the
+attachment mode and sets timer eight.
+
+Phase six commits the owner object, freshly rereads it after that call and
+sets its pending-update bit four. It starts cue 172, saves the returned sample
+handle, sets the actor's 16-bit countdown to 150 and enters phase 49. On
+countdown wrap to 65535, phase 49 stops the saved sample, plays cue 173 and
+calls the commit provider with mode zero. The kind group selects countdown 150/phase 25
+or countdown 60/phase 26. Animation 23 and cue 20 follow, with the new sample
+handle stored through the same field address.
+
+Phases 25 and 26 use adjustment rows seven and eight and the definition's byte
+35. Running byte one or countdown wrap selects phase nine, which sets direction
+four and enters cleanup. Phase eight waits for actor flag `0x400000`; cleanup
+stops the sample, calls the commit provider with mode zero, requests animation
+one and returns two.
+These are native control and data operations, not proof of gameplay durations
+or complete valid input populations.
+
+The matching source preserves three real register lifetimes. A short R0 needs
+argument feeds the shared adjustment call. The case-zero owner uses callee-saved
+R6 across its actual provider calls; other phases retain an ordinary owner value
+so their field loads can share correctly. In phase 49 the actual sample-field
+address occupies R4 across five provider calls and feeds both its read and final
+store. The ordinary return value receives R7 with normal save/restore; it has
+no explicit R7 binding. Whole-function pointer bindings blocked the compiler's
+first common-subexpression pass. Capturing the object-field address repaired
+that reuse but retained an extra address across the commit call, so that failed
+composition was rejected.
+
+The two-pointer, full-word-result declaration is shared with the actual
+dispatcher. Normal and strict builds match all 788 bytes; changing cue 172 to
+171 rejects one byte under each profile. Thirteen actual target, dispatcher,
+finder and provider definitions compile in separate interface contexts; twelve
+wrong contract or layout cases reject. Full-ROM matching and its genuine
+changed-source control also pass. The target context checks eighteen
+canonical layout facts. Canonical owner, actor, job, sample and need-state
+layouts are retained. Record/actor/sample lifetimes, complete selector and writer domains,
+definition backing and provider effects remain conditional. No new runtime
+trace or gameplay coverage is claimed.
