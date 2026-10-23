@@ -102,6 +102,15 @@ completion and executable-target populations open; repeating unchanged fixtures
 adds no evidence. The selector's setup providers do not guarantee projection
 success or initialize its distinct output fields.
 
+The [request frontier](BOUNDED_INVENTORY.md#current-scene-request-frontier-23-october-2026)
+is reconciled against current ownership: 69 of 74 direct submission sites and
+all 46 recorded default-wrapper entry records are covered. A bounded natural
+new-game route follows the initialization store of kind 14 through primary
+Start to row 14's begin entry, with cold replay and displaced-watch control.
+This closes that selected reachable-input question; complete kind writers,
+aliases, saved-state producers and target populations remain open. Source and
+map totals are unchanged.
+
 The instruction census is not a complete code denominator. Its current raw
 union is 284,500 bytes; qualified instructions occupy 284,474 bytes and
 referenced data 35,896 bytes. Known data totals 22,870 bytes. Source-owned data

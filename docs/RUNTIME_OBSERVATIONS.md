@@ -162,6 +162,41 @@ unresolved. Adding these probes preserved the previous counters and complete
 final machine state; obsolete trace payloads were retired after replay/control
 verification, while the unique older harness draft was retained locally.
 
+## Natural request-byte route, 23 October 2026
+
+A bounded new-game route now connects one writable scene-kind byte to its
+native consumer. It uses normal keys only, the fixed ROM, HLE BIOS and RTC zero.
+After the existing language/name/appearance route, 25 Right presses reduce the
+selector budget from 25 to zero and leave row counts `[10,10,5,0,0]`; two Down
+presses change rows. Every sampled selector state preserves budget plus row
+counts equal to 25. Confirmation and the phase-25 A inputs then reach primary
+gameplay.
+
+At frame 2,003, probes immediately before and after `0x0801B63C` record
+`STRB R0,[R1]` with `R0=14`, `R1=0x0300408F`, and byte readback changing from
+zero to 14. At frame 2,471, guarded Start input reaches `0x080260EE`: the
+before-load address is `0x0300408F`, and the following probe retains `R0=14`.
+The default-request entry receives 14 with `LR=0x080260F5`; the actual submitter
+then receives `(14,0,0)`. The scene handoff reaches row 14's begin callback at
+`0x0801D1D0` with active kind 14 and previous kind 1. Observation stops at
+that entry, before its first instruction; completed menu setup is not claimed.
+
+The endpoint is frame 2,489, after 96,192,151 steps and 699,070,957 emulator
+ticks, within the fixed 3,600-frame / 100-million-step bound. The cold replay is
+byte-identical: each trace is 332,579 bytes, SHA-256
+`cdc01cd1360142102040385e909c1ef8fc059d24bad793be298478b87801c1bf`.
+Displacing the inherited write watches preserves the entry counts, sampled
+route and final CPU/timing state while producing zero watched writes. All three
+runs have empty stderr and zero fatal, error, warning, stub and game-error logs.
+The calibrated entry/register timing and renderer classifier are reused.
+Sources, commands and full traces remain in ignored
+`analysis/scene-request-natural-route-20261023/`.
+
+This establishes one initialization-to-load-to-target route. Frame samples are
+not a complete byte-write watch. Other writers and aliases, saved-state inputs,
+arbitrary scene-kind bounds and other gameplay paths remain open. No new code
+entry, mapped extent or matching C coverage follows.
+
 ## Pending-display storage follow-up
 
 The latest canonical private observer watches all 23 syntactic callback-shaped
