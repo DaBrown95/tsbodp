@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,446 C functions / 305,368 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 309,428 bytes; original slices
-still supply 16,467,788 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,447 C functions / 305,544 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 309,604 bytes; original slices
+still supply 16,467,612 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **53 unowned rows / 16,246
+[inventory](../assets/rom-inventory.json) contain **52 unowned rows / 16,070
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -55,8 +55,13 @@ The linked-catalog builder at `0x21658` now matches all 356 bytes, including
 its three literal pools. The canonical 162-record backing and existing common
 scene-owner array make its descending cursors defined under the prepared
 pointer/backing premises. Actual native register phases preserve the entry,
-owner, table and short address/kind lifetimes. The two acceptance handlers
-remain original. A restored collection record can construct kind 33/34 with
+owner, table and short address/kind lifetimes. The entry-acceptance handler
+now owns 176 C bytes: 162 instruction bytes, twelve literal bytes and two
+alignment bytes. Its canonical capacity byte at offset one supplies a short
+R0 guard and the actual R6 loop-bound phase; its context-to-record byte cursor
+remains ordinary. Only quantity acceptance at `0x21B18` remains original.
+See the [entry evidence](SCENE_LINK_CATALOG.md#entry-acceptance).
+A restored collection record can construct kind 33/34 with
 enabled one, but its returned object is discarded by the restore loop and no
 catalog owner-slot publication follows from primary-list retention. Natural
 record producers, valid existing owners, later writers and runtime populations
@@ -169,14 +174,14 @@ pack consumer already in initial intermediate output; it remains 224 / 182.
 The earlier shared-step 228 / 109 composition already supplies that consumer
 fork, so these findings do not authorize repeating its type or binding grid.
 
-The [request frontier](BOUNDED_INVENTORY.md#current-scene-request-frontier-23-october-2026)
-is reconciled against current ownership: 69 of 74 direct submission sites and
+The [request frontier](BOUNDED_INVENTORY.md#current-scene-request-frontier-24-october-2026)
+is reconciled against current ownership: 71 of 74 direct submission sites and
 all 46 recorded default-wrapper entry records are covered. A bounded natural
 new-game route follows the initialization store of kind 14 through primary
 Start to row 14's begin entry, with cold replay and displaced-watch control.
 This closes that selected reachable-input question; complete kind writers,
 aliases, saved-state producers and target populations remain open. Source and
-map totals are unchanged.
+map totals are unchanged by that route observation.
 
 The [opening](DISPLAY_WINDOW_MOTION.md#opening-from-center) and
 [closing](DISPLAY_WINDOW_MOTION.md#closing-to-center) window helpers at
@@ -238,9 +243,9 @@ writer and retry-termination premises conditional and adds no runtime claim.
 
 The instruction census is not a complete code denominator. Its current raw
 union is 285,360 bytes; qualified instructions occupy 285,334 bytes and
-referenced data 35,932 bytes. Known data totals 22,878 bytes. Source-owned data
-and alignment have 2,000 records / 4,026 bytes, with zero locally unclassified
-owned bytes. Estimated envelopes still have 356 unclassified bytes, and
+referenced data 35,932 bytes. Known data totals 22,880 bytes. Source-owned data
+and alignment have 2,001 records / 4,028 bytes, with zero locally unclassified
+owned bytes. Estimated envelopes still have 354 unclassified bytes, and
 16,432,690 bytes remain outside resolved roles. Fifteen authored veneer NOPs
 have a separate 30-byte instruction role; two audio fills are implicit code
 alignment, without proof against alternate entry. The reachable `0x499B0` NOP

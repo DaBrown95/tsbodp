@@ -13,11 +13,13 @@ The connected C replacements are:
 | `scene_link_catalog_step` | `0x210e0` | 1,400 |
 | `scene_link_catalog_build` | `0x21658` | 356 |
 | `scene_link_catalog_try_entry` | `0x218f4` | 216 |
+| `scene_link_catalog_accept_entry` | `0x219cc` | 176 |
 | `scene_link_catalog_draw_quantity` | `0x21a7c` | 156 |
 | `scene_link_catalog_draw_panel` | `0x21b9c` | 368 |
 | `scene_link_catalog_shutdown` | `0x21d0c` | 64 |
 
-The total is 2,988 bytes, including the compared literal pools and alignment.
+The eight bodies total 3,164 bytes, including the compared literal pools and
+alignment.
 These bodies use ordinary C with explicit alignment where needed; they add no
 instruction-body assembly or low-level glue coverage. Each replacement has a
 changed-source negative control and a separate strict declaration diagnostic.
@@ -28,8 +30,8 @@ controller handles navigation, confirmation, request submission, link events
 and quantity adjustment. Its helpers apply the observed actor-entry policy,
 format the selected quantity and draw explanatory panels. The exit path selects
 a transition and clears its display objects and jobs. The builder creates the
-phase-specific details and five captions, and manages eight entry slots. The two
-acceptance handlers at `0x219cc` and `0x21b18` remain explicit original providers.
+phase-specific details and five captions, and manages eight entry slots. The
+quantity-acceptance handler at `0x21b18` remains an explicit original provider.
 
 ## Access and compiler evidence
 
@@ -93,15 +95,48 @@ leave bytes unwritten that their recorder kind does not consume. Those bytes
 are preserved, without fabricated initialization; any seeded-stack transport
 observations are separate native diagnostics. Full-ROM byte equality, bounded
 initialized behavior checks, static connections and gameplay evidence are
-separate claims. These owner and bound findings add no C extent or runtime
-credit. Both acceptance handlers remain unconverted.
+separate claims. These owner and bound findings by themselves add no C extent
+or runtime credit. Quantity acceptance remains unconverted.
 
-The two edited bodies retain all 1,616 extent bytes. All sixty affected source
-contexts match under normal and strict compilation, with their genuine
-changed-source controls rejected in both profiles. Five actual-definition
-contexts verify 26 distinct layout facts; seven wrong pointer/layout cases
-reject. The full-ROM, control, inventory and progress gates pass. Nine existing
-alignment annotations receive only the controller's updated source hash.
+The earlier controller and permission-reader repair retained all 1,616 extent
+bytes. Its sixty affected source contexts matched under normal and strict
+compilation, with their genuine changed-source controls rejected in both
+profiles. Five actual-definition contexts verified 26 distinct layout facts;
+seven wrong pointer/layout cases rejected. That milestone passed the full-ROM,
+control, inventory and progress gates. Nine existing alignment annotations
+received only the controller's updated source hash.
+
+## Entry acceptance
+
+The [entry-acceptance handler](../src/scene/scene_link_catalog_accept_entry.c)
+owns all 176 bytes at `0x219cc`: 162 instruction bytes, twelve literal bytes and
+two alignment bytes. It reads the selected four-byte record through the
+canonical list. Kind 255 queues kind 15, mode one, argument zero and cue two.
+Kind 129 uses a count of one. Other kinds scan the capacity byte's number of
+records, counting equal kinds and treating 119..123 as one family. Multiple
+matches select phase two with initial quantity one and update the quantity
+display and byte limit. Otherwise it queues kind 15, mode one, with the selected
+bit and cue seven.
+
+The scan bound is the existing unsigned capacity byte at list offset one;
+there is no added bound or capacity increment. A short R0 phase carries that
+read through the first guard. The R6 loop-bound phase begins only after the
+guard and ends before any provider call. The ordinary byte cursor first names
+the actual context, then the record backing and advances four bytes for each
+existing kind read. No extra read, consumer, barrier or register constraint on
+that cursor is added.
+
+The target, controller and five actual providers pass normal and strict
+compilation across 2,368 extent bytes, with fourteen genuine changed-source
+controls rejected. Seven separate actual-definition contexts pass API and
+layout checks; fourteen wrong-signature, global-type or layout fixtures reject.
+The source requires a live canonical context and scan storage. Each reached
+selection read requires `scene >= 5` and a backed selected record; the shifted-bit
+path also requires `scene - 5 < 32`. The initialized eight-record secondary list
+supplies only the earlier conditional bound. Later capacity/pointer writers,
+input populations, request delivery and runtime/gameplay behavior remain open.
+The match replaces an existing extent without discovering an entry or proving
+original C spelling.
 
 ## Builder and shared array lifetimes
 
@@ -148,11 +183,11 @@ control differs in 42 bytes under normal and strict compilation. These source
 results do not close later writers, invalid serialized state, valid object
 populations or runtime/gameplay behavior.
 
-The builder and all 41 importers of the refined actor-entry context pass normal
-and strict compilation with their genuine changed-source controls. Seven
-separate actual-definition contexts verify 37 distinct layout assertions;
-ten wrong pointer or layout cases reject. The full-ROM, control, inventory and
-progress gates pass.
+At the builder milestone, the builder and all 41 importers of the refined
+actor-entry context passed normal and strict compilation with their genuine
+changed-source controls. Seven separate actual-definition contexts verified 37
+distinct layout assertions; ten wrong pointer or layout cases rejected. That
+milestone passed the full-ROM, control, inventory and progress gates.
 
 ## Secondary kinds and existing-owner inputs
 
@@ -267,10 +302,11 @@ two differing bytes. The normal optimization/interworking profile is unchanged;
 `-da` captures diagnostic output only, and the publication gate uses the literal
 normal flags.
 
-Strict checks retain the eight-byte/four-aligned payload, twelve-byte event
-record, actual mode/input field geometry and by-value recorder API. All seventeen
-import declarations and fifteen actual owned provider definitions pass; wrong
-recorder-formal and input-offset fixtures are rejected. The two original accept
-services remain explicit without recovered definitions. Other partial payloads,
+For that controller repair, strict checks retained the eight-byte/four-aligned
+payload, twelve-byte event record, actual mode/input field geometry and by-value
+recorder API. All seventeen import declarations and fifteen actual owned
+provider definitions passed; wrong recorder-formal and input-offset fixtures
+were rejected. Quantity acceptance remains an explicit original provider;
+the later entry-acceptance match is described above. Other partial payloads,
 existing representation casts, selection/input domains and runtime/gameplay
 limits remain qualified. This repair adds no new function or C-byte ownership.

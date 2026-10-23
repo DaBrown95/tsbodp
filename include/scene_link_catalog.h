@@ -45,7 +45,7 @@ void transition_fade_black_in_record(unsigned short), transition_fade_black_out_
 void scene_link_catalog_initialize(void), scene_link_catalog_shutdown(void);
 unsigned int scene_link_catalog_try_entry(struct FrameObject *, unsigned int);
 void scene_link_catalog_draw_quantity(void), scene_link_catalog_draw_panel(unsigned int);
-/* Controller and connected interfaces; builder and accept handlers remain original. */
+/* Builder and entry acceptance have C owners; quantity acceptance remains original. */
 void scene_link_catalog_build(void), scene_link_catalog_step(void);
 void scene_link_catalog_accept_entry(void), scene_link_catalog_accept_quantity(void);
 void scene_submit_default_request(unsigned int);

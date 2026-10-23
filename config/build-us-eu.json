@@ -55692,6 +55692,34 @@
         "after": "display_enable_layers(0x6000);"
       },
       "expected_sha256": "85b417b7361adf1fcf270212b272bca0eabe22d284359630176f3ba1487b0b74"
+    },
+    {
+      "name": "scene_link_catalog_accept_entry",
+      "rom_offset": 137676,
+      "size": 176,
+      "source": "src/scene/scene_link_catalog_accept_entry.c",
+      "symbols": {
+        "g_scene_link_catalog_world": "0x03003950",
+        "g_scene_request": "0x03004350",
+        "g_scene_link_catalog_quantity_limit": "0x03001db0",
+        "scene_link_catalog_draw_panel": "0x8021b9d",
+        "audio_play_animation_cue": "0x8040ffd",
+        "resource_submit_scene": "0x8027dd1",
+        "display_text_number_field_zero": "0x801b1cd",
+        "scene_link_catalog_draw_quantity": "0x8021a7d"
+      },
+      "thumb_symbols": [
+        "scene_link_catalog_draw_panel",
+        "audio_play_animation_cue",
+        "resource_submit_scene",
+        "display_text_number_field_zero",
+        "scene_link_catalog_draw_quantity"
+      ],
+      "negative_control": {
+        "before": "selected!=129",
+        "after": "selected!=128"
+      },
+      "expected_sha256": "478f75ec4ded30de4978cb316c21192aa1845f4f7ac4ee4ff4f7889aa26b4a93"
     }
   ],
   "assembly": [
