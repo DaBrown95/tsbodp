@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,438 C functions / 303,620 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 307,680 bytes; original slices
-still supply 16,469,536 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,439 C functions / 303,668 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 307,728 bytes; original slices
+still supply 16,469,488 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **60 unowned rows / 17,982
+[inventory](../assets/rom-inventory.json) contain **59 unowned rows / 17,936
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -124,12 +124,19 @@ coordinate subobjects. The opening helper at `0x48724` and rectangle setter at
 `0x48A14` remain original; this source gain does not close their lifecycle or
 writer domains.
 
+The [unrooted detachment loop](DISPLAY_NEED_EFFECT_LIFECYCLE.md#unrooted-actor-detachment)
+at `0x2F400` now owns 48 bytes from C: 46 instruction bytes and two alignment
+bytes. It uses the existing three-record owner and actor-detachment provider.
+An actual incoming caller and complete live-backing/writer populations remain
+open. Its source-audited instruction observation adds 46 bytes to the census;
+this is not a newly discovered entry or a runtime root.
+
 The instruction census is not a complete code denominator. Its current raw
-union is 284,500 bytes; qualified instructions occupy 284,474 bytes and
-referenced data 35,896 bytes. Known data totals 22,872 bytes. Source-owned data
-and alignment have 1,997 records / 4,020 bytes, with zero locally unclassified
-owned bytes. Estimated envelopes still have 1,246 unclassified bytes, and
-16,432,702 bytes remain outside resolved roles. Fifteen authored veneer NOPs
+union is 284,546 bytes; qualified instructions occupy 284,520 bytes and
+referenced data 35,896 bytes. Known data totals 22,874 bytes. Source-owned data
+and alignment have 1,998 records / 4,022 bytes, with zero locally unclassified
+owned bytes. Estimated envelopes still have 1,200 unclassified bytes, and
+16,432,700 bytes remain outside resolved roles. Fifteen authored veneer NOPs
 have a separate 30-byte instruction role; two audio fills are implicit code
 alignment, without proof against alternate entry. The reachable `0x499B0` NOP
 remains a separate source mismatch. The `0xE1EE` interior-entry-shaped value has

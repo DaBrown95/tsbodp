@@ -55521,6 +55521,22 @@
         "before": "display_enable_layers(0x6000);",
         "after": "display_enable_layers(0x2000);"
       }
+    },
+    {
+      "name": "frame_detach_need_effect_actors_unrooted_2f400",
+      "source": "src/frame/frame_detach_need_effect_actors_unrooted_2f400.c",
+      "rom_offset": 193536,
+      "size": 48,
+      "symbols": {
+        "frame_detach_actor": "0x080016b9"
+      },
+      "thumb_symbols": [
+        "frame_detach_actor"
+      ],
+      "negative_control": {
+        "before": "index <= 2",
+        "after": "index <= 1"
+      }
     }
   ],
   "assembly": [

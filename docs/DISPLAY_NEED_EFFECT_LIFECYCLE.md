@@ -366,3 +366,29 @@ recompiled and rejected their own changed-source controls after the signature
 refinement. The failed initial halfword-expression and bitfield candidates remain
 in ignored raw reports. These static type and matching findings make no claim
 about actual indirect-call or gameplay behavior.
+
+## Unrooted actor detachment
+
+The independently bounded entry at `0x0802F400` now has a
+[C replacement](../src/frame/frame_detach_need_effect_actors_unrooted_2f400.c)
+covering 48 bytes: 46 instruction bytes and two explicit zero alignment bytes
+before the next entry at `0x0802F430`. It visits the canonical state's three
+24-byte attachment records. For each non-null actor it calls
+`frame_detach_actor(actor, state_address)`. That accepted helper compares the
+state address against the actor's two attachment slots and clears the first
+matching slot. The outer loop neither clears the records nor releases or
+unregisters the state.
+
+The provisional definition takes one state pointer and returns no value.
+No actual incoming caller was recovered; historical unused formals remain
+unknown. The state, all three records and each non-null actor's slot backing
+must be live and aligned. The target-address cast is used only for pointer
+comparison in the provider. No additional dereference or writer guarantee is
+inferred.
+
+Normal and strict qualification match the complete extent. Changing the loop
+bound to omit record two rejects in both modes. Separate actual target and
+provider definitions pass the API/layout checks; wrong return, provider formal,
+record offset, stride and count cases reject. Alignment provenance does not
+exclude alternate incoming execution. These static and compiler results add no
+runtime or gameplay evidence.

@@ -171,8 +171,35 @@ the [common choice builder](../src/display/build_need_effect_choices.c) can
 append action 40. Selecting it and continuing the state/animation sequence
 reaches [finish action](../src/display/finish_need_effect_action.c), which
 inserts the object's kind into the secondary list through world `+0xF0`.
-Backed payload occurrence, the live selected object, intact choice data and
-actual UI-result delivery remain premises; this is not a natural-input trace.
+The live selected object, intact choice data and actual UI-result delivery
+remain premises; this is not a natural-input trace.
+
+A concrete retained payload now supplies an initial kind 33: the 16-byte
+factory-five record at `0x08D75CA8`, selected by scene four, physical pack one,
+selector zero. It becomes runtime object group three, slot zero; the two actual
+payload offsets resolve to arena byte 1,440. Initial setup spawns groups zero
+and one. Its initial program one can additionally spawn group three: command
+33 at `0x08D75CE4` requires condition row four, column zero to be complete.
+Completion kind 91 has a matching table row and writer, but a valid natural
+history reaching that condition remains unproved.
+
+This payload does not establish an action-40-ready object. It passes enabled
+zero; allocation clears state byte `+0x63`, and both kind-33/34 initializers only
+return one. With stable fields in scene four, the eligibility predicate is false
+and the common choice builder does not append action 40. Action seven still
+exists. A later writer to this same live state's `+0x62` or `+0x63`, or an
+established change of world/history, is needed before that insertion route can
+be claimed for this payload. Allocation, backing, later writers and actual UI
+delivery remain premises; no natural runtime route or C coverage is added.
+
+The accepted resource command 40 is a concrete possible enabling writer. It
+loads the selected object's word at `+0x64`, then writes one at that pointer's
+`+0x63`. For this need-effect object, the pointer is its effect state, so the
+store can satisfy eligibility without changing enabled byte `+0x62`. The five
+retained programs for this selected case contain only commands 0, 15, 33 and
+43. An actual record or caller selecting resource command 40 for group three,
+slot zero, or another writer to the same live state, remains unestablished.
+The handler's existence does not prove this enabling event occurs.
 
 After reset plus one successful kind-33 or kind-34 insertion, entry one selects
 subtype 317 and owner slot two at `0x030043B8`. The builder reaches that slot
@@ -187,9 +214,9 @@ helpers' valid, disjoint backing premises.
 
 A cleared or stale owner is a backing/lifetime outcome, not evidence of a new
 executable target. No hardware fault or nonexecution claim follows. The next
-needed evidence is an actual payload/interaction history and any intervening
-owner-slot writer; other aliases, IRQ writes, serialized entries and incoming
-routes remain open. No guard, new C match or runtime coverage is added here.
+needed evidence is an enabling/interaction history for the named payload and
+any intervening owner-slot writer; other aliases, IRQ writes, serialized entries
+and incoming routes remain open. No guard, new C match or runtime coverage is added here.
 
 ## Explicit no-payload cancel event
 
