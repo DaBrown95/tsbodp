@@ -210,6 +210,18 @@ a naturally produced kind-33/34 saved collection record remains unproved.
 The snapshot requires nonzero `+0x62`, so setting only `+0x63` on the original
 enabled-zero payload state does not make that state enter the snapshot.
 
+Actor state 22 provides another enabled-one construction call. In mode one,
+it reads the selected four-byte record through world `+0xF0`, then passes its
+kind, two values and mode to the same factory with fifth argument one. This
+requires an existing secondary-list record; it does not supply that record's
+origin. The fifteen fixed list definitions contain 53 counted seed records,
+none with kind 33 or 34. The general random chooser rejects both kinds because
+their catalog ID is 317; the other three choosers return only 195..216.
+Reset inserts kind 142 into the secondary list and refreshes groups 0..12.
+These prepared reset/refresh paths do not establish a natural kind-33/34
+producer. Later list, serialized and alias writers remain open; a seeded
+state-22 fixture would assume the missing input.
+
 Restoration returns each new object, but the scene-collection loop discards
 that result. The object is published to primary list `0x030024F0`; a queued-16
 primary exit can retain that list at `0x03002CA0` when flag `0x20000` is clear.

@@ -66,6 +66,12 @@ matched and hoisted by LOOP. No additional native definition, escape or
 consumer supports defeating that transformation. Preserve these closed source
 lines until a distinct semantic or original-build fact appears.
 
+The audio patcher's full master-input arithmetic has a conditional set of
+1,024 completed converter images from the fixed installation, closed under
+serial completed calls without other writers. This bounds stored encodings,
+not valid execution or reachable game inputs; intermediate interleavings and
+other writers remain open. It does not explain the master worker's native NOP.
+
 The [activity-three preparation](SCENE_CONTACT_ACTIVITY_THREE.md#preparation-worker-current-causes-and-input-bounds)
 remains 536 / 492 against 544 bytes. The [shared attachment worker](FRAME_ATTACHMENT_JOBS_42_94.md#shared-optional-worker-at-0x28424)
 now matches all 788 bytes, including the required pending update. Its real

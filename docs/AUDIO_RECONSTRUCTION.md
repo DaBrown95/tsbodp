@@ -1501,6 +1501,30 @@ volume C producer and converter read/fit domains remain separate blockers. The p
 receipt is `analysis/audio-converter-shift-cohort/receipt.json`; it adds no
 source ownership and repeats no runtime trace.
 
+## Full master-input converter storage domain
+
+Starting from the fixed installed image, the native master's complete
+32-bit input domain selects high halfwords 1 through 65535, with zero selecting
+five. Under completed serial patcher calls, without another writer or nested
+entry, these inputs produce exactly 1,024 distinct completed eight-word images.
+Each image contains four copies of one word pair; the eight words are not
+independent choices. Further completed calls stay within that set. The five
+shift bits are replaced, while five other initially zero bits can only become
+one through the patcher's unmasked OR.
+
+The wider input domain can change the encoded writeback, base and destination
+register fields as well as the shift. The encoded ASR field ranges from zero
+through 31; zero encodes ASR 32. Some encodings name PC or combine writeback
+with overlapping registers. This is a finite integer storage result, without
+proof that those inputs occur in the game or that every encoding is valid or
+executed. The eight separate stores still expose intermediate images; this
+completed-image count does not count all interleavings or replace the separate
+nine-state four/five initialization result. The retained derivation is
+`analysis/audio-patcher-full-master-domain-20261023/assessment.json`, with
+witness reachability recorded as unproved in its `semantic-correction.json`.
+It supplies no explanation for the native NOP at `0x499B0`, new source coverage
+or closure of competing writers and incoming targets.
+
 ## Implicit alignment after two owned functions
 
 The halfwords at `0x49716` and `0x4C872` are current assembler code-alignment
