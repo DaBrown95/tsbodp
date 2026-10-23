@@ -78,6 +78,16 @@ serial completed calls without other writers. This bounds stored encodings,
 not valid execution or reachable game inputs; intermediate interleavings and
 other writers remain open. It does not explain the master worker's native NOP.
 
+The [kind-20 mode inputs](SCENE_CONTACT_MENU.md#conditional-mode-inputs) now have
+a fixed resource population: ten factory-ten records across 24 copy occurrences
+in the retained 50-root/105-pack census all supply `0..7`. Valid construction,
+unchanged fields and an accepted handoff conditionally keep those modes within
+the observed eight-row prefix. Option values remain separately unchecked.
+The serial route's eight-entry mode prefix is identity, but input byte eight
+and minimum packet length have no receiver guard or proven peer-producer bound.
+Its local eight-label reply does not close that input population. No C or
+runtime credit is added; other requests, writers and aliases remain open.
+
 The [activity-three preparation](SCENE_CONTACT_ACTIVITY_THREE.md#preparation-worker-current-causes-and-input-bounds)
 remains 536 / 492 against 544 bytes. The [shared attachment worker](FRAME_ATTACHMENT_JOBS_42_94.md#shared-optional-worker-at-0x28424)
 now matches all 788 bytes, including the required pending update. Its real

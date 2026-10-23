@@ -214,6 +214,44 @@ produced a shorter, unmatched body and remain preserved as failed candidates.
 The observed record prefix and alignment do not establish arbitrary incoming
 index validity or complete resource capacity.
 
+# Conditional mode inputs
+
+A new field projection of the retained 50 scene roots and 105 backed pack cases
+checks all 213 distinct object groups against their saved hashes, record counts,
+ends and factory histograms. It finds ten distinct factory-ten records across
+24 group-copy occurrences. Every record is twelve bytes; its byte at `+8` is
+in `0..7`, with every value represented. This is a fixed serialized population,
+not evidence that each object spawns or reaches its action state.
+
+The [constructor](../src/frame/frame_create_contact_resource.c) copies that byte
+to object `+0x64`. At tick state five, the
+[contact action](../src/frame/frame_tick_contact_action.c) submits it as kind
+20's mode when the previous request parameter equals one. The request provider
+preserves the full mode word, and initialization stores its low byte at state
+`+0x12`. With a valid copied payload,
+live object, unchanged kind, accepted request handoff and stable state/table
+backing, these ten records therefore select the observed eight-row definition
+and resource prefixes. Modes zero and one use the guarded primary tick;
+modes two through seven use secondary ticks whose six observed callback words
+are nonzero. The kind also fits the immediate eight-byte world-value prefix,
+but the option byte read from that prefix needs its own bound.
+
+The other maintained direct literal-kind-20 submission is the serial session
+controller, using the request mode and option two. The receiver indexes the
+mode table at `0x08053126` with packet byte eight. Its first eight entries are
+the identity `0..7`; the receiver checks neither input length nor index range.
+The upstream word store supplies byte eight from incoming word bits 8..15
+at receive index four. Checksum acceptance imposes no `0..7` bound, and
+the receive header can dispatch a zero-length packet. A readable, initialized
+byte eight is thus a separate premise.
+
+The local `0x83` reply advertises eight labels, but the peer UI and packet
+constructor that would consume that count and produce `0x42` byte eight remain
+unidentified. The local reply transmitter uses marker `0xA0`; it does not
+establish that peer selection bound. Other request writers, aliases, arbitrary
+serialized selectors and later field changes remain open. These static findings
+add no C extent, executable-target closure or runtime/gameplay evidence.
+
 # Connected top-level initialization
 
 The initializer has a 446-byte function symbol and two original zero alignment
