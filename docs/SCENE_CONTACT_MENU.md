@@ -248,6 +248,14 @@ label indices stay in `0..4` and completion's in `1..5`, within the six halfword
 at resource-row `+20..+31`. The four costs at `+12..+19` and four thresholds
 still require the guarded `0..3` option range.
 
+The [initializer-provider bounds](SAVE_WORLD_INITIALIZATION.md#conditional-initializer-data-writes)
+now identify finite condition and prepared actor-reset data destinations that
+exclude these option bytes. Collection and PRNG buffers still require live,
+disjoint backing and preserved allocation history; arbitrary aliases, other
+initializer children and later writers remain separate premises. The condition
+sequence selects row zero and initializes display kinds 0–23 in its cleared
+15-byte prefix, without bounding the complete condition table or bitmap.
+
 The save nibble writer and reader preserve `0..4` on a valid same-stream
 roundtrip with matching cursor/alignment and unchanged backing. An arbitrary
 imported stream supplies `0..15` instead. The named serial option copy at

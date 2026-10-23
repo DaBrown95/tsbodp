@@ -85,6 +85,9 @@ unchanged fields and an accepted handoff conditionally keep those modes within
 the observed eight-row prefix. Reset plus preserved guarded progress writes
 conditionally bound option values to `0..4`, fitting the six label halfwords;
 arbitrary save imports still supply `0..15`, and other writers remain open.
+The [initializer-provider bounds](SAVE_WORLD_INITIALIZATION.md#conditional-initializer-data-writes)
+exclude the named condition and prepared actor-reset writes from these values;
+live buffer, allocation-history and interfering-writer premises remain open.
 The serial route's eight-entry mode prefix is identity, but input byte eight
 and minimum packet length have no receiver guard or proven peer-producer bound.
 Its local eight-label reply does not close that input population. No C or

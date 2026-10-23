@@ -23,8 +23,9 @@ mutations reject. This is compiler/static evidence, not a runtime or gameplay te
 The initializer uses the established world root at `0x03003950`. It copies the
 complete eight-byte clock from an original ROM resource, initializes the child at
 `+0x10`, resets the actor-entry context at `+0xDC`, and clears the 724-byte condition
-region rooted at `+0x440`. The condition reset clears all display bits, sets kinds
-0 through 22, and republishes the selected row. The relation initializer copies
+region rooted at `+0x440`. The condition reset clears a 15-byte display-bit
+prefix, selects row zero, sets kinds 0 through 22, then publishes that row's
+kind 23; its other four entries are skipped sentinels. The relation initializer copies
 only each seed's flag byte into 24 four-byte records, gives each value the existing
 `-128` sentinel, then refreshes the signed average. Other relation bytes stay as
 they were.
@@ -56,6 +57,52 @@ the countdown address consumed by the clock updater. These partial views retain
 neutral names for unestablished roles; they do not establish a complete world
 allocation or the full valid domains of its state fields. The default clock's
 resource bytes remain in the original unconverted ROM region.
+
+## Conditional initializer data writes
+
+The condition block is `0x03003D90..0x03004063`. Its first word is both the
+reset's selected field and the publisher's row at world `+0x440`. After clearing
+the block, the reset explicitly stores zero there. The display bitmap is a
+separate array at `0x03001E00`: the intervening kind setters touch only its
+first three bytes and preserve the row word. Row zero's five bytes at
+`0x08059A3C` are kind 23 followed by four `255` sentinels. Consequently this
+sequence leaves bitmap bytes 0–2 equal to `0xFF` and bytes 3–14 zero: kinds
+0–23 set and 24–119 clear in the initialized prefix. Valid live backing,
+normal returns and no interfering alias, IRQ or DMA writer are premises.
+Neither the full bitmap nor other condition rows receive a capacity claim.
+
+The actor reset has a separate conditional write bound. Prepared lists use
+15 eight-byte headers at world `+0xF8`, followed by 162 four-byte records at
+`+0x170..+0x3F7`. The fixed capacities are eight for groups 0–12, fifty for
+group 13 and eight for group 14. Reset marks every record kind empty and clears
+the counts. The subsequent refresh of groups 0–12 skips cleanup and generates
+53 records within storage ending at `+0x2FF`. Five random reset
+values occupy `+0xE9..+0xED`. The final insertion of kind 142 writes the first
+secondary record at `+0x3D8..+0x3DA`, increments its count at `+0x168`, and sets
+the seen bit in the word at `+0x40C..+0x40F`; none of its special-kind branches
+applies. These bounds require the prepared pointers, capacities and selectors
+to survive the calls, with returning helpers and valid backing.
+
+The separate collection clear still requires a live, disjoint `0x84C`-byte
+buffer. Preparation allocates it only when the global pointer is null, without
+checking failure; non-null reuse does not prove provenance. The PRNG likewise
+needs its initialized live buffer and valid advancing pointer/counter; refill
+writes 624 words within its 2,500-byte requested allocation. The retained startup
+sequence supplies a conditional provenance route through the initial EWRAM heap
+arena at `0x02002800..0x0203FFFF`. The allocator searches all registered arenas,
+so this route requires preserved valid startup/heap history and successful
+allocations, rather than assuming every later allocation comes from arena zero.
+The allocator's separate arena-zero free-head word at `0x03001DC4` is also
+disjoint from the option bytes.
+
+Under these premises, the named condition and actor reset data writes exclude
+the eight option values at world `+0x735..+0x73C`
+(`0x03004085..0x0300408C`). This refines the
+[fresh option-history bound](SCENE_CONTACT_MENU.md#conditional-mode-inputs);
+it does not close arbitrary pointers, stack effects, other initializer children,
+imports, later writers or chooser termination. The condition row word is also
+distinct from the transition selector byte at `0x03004111`. These source/static
+bounds add no C coverage, executable target or runtime/gameplay evidence.
 
 The selected row comes from the published clock-selection byte at
 `0x030040E0 + 0x31`, also the save-selection prefix's byte 42. Rows start at
