@@ -291,6 +291,25 @@ owner reaching definitions and remaining topology, not another volatile
 qualifier. The 200-byte provider also remains unmatched; its separate
 setup-address producers already appear in initial compiler output.
 
+The six-global-slot composition remains 1,632 bytes / 1,498 differences. Its
+duplicate setup-address carrier receives five constant-equivalence priority
+penalties in LOCAL, increasing its recorded live length from 262 to 8,384.
+This compiler metric affects allocation priority; it is not a runtime lifetime.
+One later experiment removes only the forced IP home from the canonical setup
+owner. The owner then naturally receives IP, but GCSE still creates a separate
+carrier that receives R8. Their recorded live lengths grow from 329 to 10,528
+and from 248 to 1,984 respectively. COMBINE also removes the existing late R3
+handoff. The complete result is 1,604 bytes / 1,456 differences against the fixed
+1,616 bytes, so this owner-relaxation line is closed without source credit.
+
+A proposed composition of six native low-register address handoffs was stopped
+before compilation. Three use R7; the pinned Thumb backend rejects byte and
+halfword addresses mentioning its frame-pointer register before reload, even
+when the function has no local data frame. The earlier R3-only experiment does
+not establish that those R7 phases can survive. No R7 workaround or subset
+binding trial follows from the proposal. A new owner, consumer or applicable
+original-build fact is still required.
+
 The pinned compiler's union-punning exception requires direct union access.
 Taking an escaped halfword pointer, including through an integer address, does
 not inherit that exception after fields-view writes. Known pointer banks and
