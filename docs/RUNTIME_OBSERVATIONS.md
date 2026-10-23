@@ -472,6 +472,72 @@ populations, live heap/backing, installation context, other writers and natural
 scene execution remain open. No C, instruction, mapped-extent or inventory-count
 credit follows, and no unchanged full matching build is required.
 
+## Natural scene-six terrain redirection
+
+A bounded continuation of the natural new-game route asks why holding Left
+also changes the player's Y coordinate. The fixed reference runs with blank
+in-memory save state, fixed RTC and the same replacement BIOS and pregame keys.
+No game memory, code, random result or saved state is injected. The first idle
+point is `(286.3115234375,285.2626953125)`, rather than the earlier nominal
+spawn point. The initial scene program moves the player toward `(284,283)`;
+its state-13 completion test permits the observed residual within three pixels
+on each axis.
+This agreement does not uniquely identify every earlier position store.
+
+The approach holds Down for 86 sampled frames, then Left for ten. Read-only
+probes cover the same live actor during native frames 2558–2566, before and
+after velocity integration, terrain response, offset acceptance and later
+frame stages. The observation-only replay preserves all 1,427 earlier JSON
+records exactly, including step counts, after removing only the new probe
+records, summary and entry-counter rows. It records 26 snapshots with zero
+dropped records or invalid spans. Actual input is Left, input disabling is
+zero, direction is six, response is three and velocity is `(-3,0)`.
+
+At native frame 2563, terrain contact three resets the integrated Left proposal
+and accepts offset `(0,-2)`. At frame 2565, contact 15 accepts `(-2,-1)`.
+The changed proposed points are observed after redirection and terrain
+collection, before global collision and optional animation preparation.
+Earlier contact-zero samples preserve the ordinary Left proposal. Thus these
+two deflections occur in the
+[terrain response](../src/frame/frame_apply_movement_contact.c) and
+[redirect worker](../src/frame/frame_redirect_movement.c).
+Equal post-collection and pre-commit points establish no net later change;
+they do not exclude intervening writes that cancel.
+
+A separate continuation keeps the same keys and extends only the observer's
+vertical stop band to `378..452`, the first portal object's own Y extent.
+Its first 1,450 records, including all early probes, match the earlier replay
+exactly through its last frame-2566 point. After 86
+Down and 158 Left samples, it stops at frame 2714 at
+`(87.3115234375,377.2626953125)`, without a portal request or scene-one arrival.
+There are no later terrain probes after frame 2566, so the later motion has no
+unique writer attribution. The object's extent is not a necessary or sufficient
+player-contact domain. This closes one finite approach, without proving portal
+absence or inaccessibility. No separate replay or displaced-watch control is
+claimed for this longer continuation. Both executions report zero fatal,
+error, warning, stub and game-error messages.
+
+An initial static map query independently reproduces all four observed
+contacts and their filter values; the contacts are zero, zero, three and 15.
+The unchanged calibrated decoder model decodes the 1,044-byte primary type map
+and reuses the two earlier pattern
+streams in memory. All 520 initial block indices are in `0..142` and fit the
+2,576-byte pattern backing. The separate 56-byte BIOS run-length stream is
+deferred; it is not input to that decoder. Of 75 integer Down-then-Left
+polylines ending at X16 and Y378..452, none has both legs clear of terrain
+contact. These integer-center tests use the small movement footprint and stop
+each segment at its first contact. They do not simulate fixed-point movement,
+redirection or object collisions.
+The portal uses the same world-coordinate space, but overlap also depends on
+the player's separate active collision box. Animation can change the live
+type map, and the initial query closes neither those writers nor actual
+allocation/backing and installation history.
+
+The static portal chain toward scene zero remains conditional on actual
+traversal. These observations neither reach the scene-zero selector nor close
+live collision-map writers, actor/owner history or executable-target
+populations. Matching source, inventory and mapped-extent counts are unchanged.
+
 ## Meaning of an observation
 
 Hardware breakpoint checks run after one emulator step and compare the next

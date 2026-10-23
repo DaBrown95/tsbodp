@@ -171,4 +171,7 @@ path reaches the selector directly through `frame_actor_route_to_target` at
 `0x8CFC`; it does not establish the separate caller at `0x3BAC0`.
 The retained natural route reaches scene six, without a scene-zero arrival or
 same-live owner, bank, actor-projection and random-request observations. Those
-history premises remain open; neither C coverage nor runtime credit changes.
+history premises remain open. The separate
+[terrain observations](RUNTIME_OBSERVATIONS.md#natural-scene-six-terrain-redirection)
+explain two movement deflections during a finite approach to the first portal;
+they do not establish arrival or add matching C coverage.

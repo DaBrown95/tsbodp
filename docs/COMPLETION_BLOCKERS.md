@@ -135,8 +135,14 @@ The [scene-zero selector setup](FRAME_GRID_CELLS.md#conditional-scene-zero-selec
 now has a real actor/owner pattern with successful modeled projection and three
 nonzero, initially usable candidates. The actual default-clock schedule permits
 that actor. Earlier registration, later occupancy, a natural scene-zero arrival
-and the same-live action request remain unproved. The rectangle handler's new
-explicit scaled update preserves its producer but loses the separate signed
+and the same-live action request remain unproved.
+
+The separate [scene-six terrain observations](RUNTIME_OBSERVATIONS.md#natural-scene-six-terrain-redirection)
+bracket two native response-three deflections with exact replay. A longer
+Left approach leaves its observation band without reaching the first portal;
+it proves no portal absence, later writer closure or scene-zero arrival.
+
+The rectangle handler's new explicit scaled update preserves its producer but loses the separate signed
 pack consumer already in initial intermediate output; it remains 224 / 182.
 The earlier shared-step 228 / 109 composition already supplies that consumer
 fork, so these findings do not authorize repeating its type or binding grid.
