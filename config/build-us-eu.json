@@ -55503,6 +55503,24 @@
         "before": "subtype != 317",
         "after": "subtype != 316"
       }
+    },
+    {
+      "name": "scene_choice_panel_original_window_end",
+      "rom_offset": 296892,
+      "size": 152,
+      "source": "src/display/begin_window_to_center.c",
+      "symbols": {
+        "g_window_states": "0x03007460",
+        "display_enable_layers": "0x0800d68d"
+      },
+      "thumb_symbols": [
+        "display_enable_layers"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "display_enable_layers(0x6000);",
+        "after": "display_enable_layers(0x2000);"
+      }
     }
   ],
   "assembly": [
