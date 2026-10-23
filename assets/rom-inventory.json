@@ -79243,13 +79243,14 @@
       "referenced_literal_bytes": 16
     },
     {
-      "name": "sub_080454DC",
+      "name": "resource_remove_random_selectable_actor_entry",
       "rom_offset": 283868,
       "mode": "Thumb",
       "runtime_addresses": [
         134501596
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -79266,11 +79267,11 @@
         284038
       ],
       "size": 192,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 283868,
       "body_rom_start": 283868,
       "body_rom_end": 284040,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0804xxxx",
       "decoded_instruction_bytes": 172,
@@ -115162,7 +115163,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "1ae349d027430e1b6c322571ce111825c93337c73a92d64962c07d5cc01032bd",
+      "source_sha256": "db6a64c3d54909ecfda4c003e024ceb8805d97c8f4f41ee8606e4212226e18c8",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line45 emits padding containing relative74..76; actual source.o $d covers this span. ",
         "Full retained 112-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -119841,7 +119842,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "43558d4095bf5066a19d34850e1071008ddd9c3ea8497e5384ca5ec2b03497d5",
+      "source_sha256": "b5f6ad0575c137af2b02982c1088fc1b8ac831f9f3240a4146a1ea352ca29b3e",
       "evidence": [
         "Matching compiler output .align 2,0 at LF line20 emits padding covering relative18..20; source.o $d covers this exact span. C source explicitly supplies post-function alignment.",
         "Full retained 20-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
@@ -135358,7 +135359,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_080454DC",
+      "name": "resource_remove_random_selectable_actor_entry",
       "rom_offset": 283868,
       "size": 192,
       "status": "mapped_code"
@@ -137892,11 +137893,11 @@
     "tools/indirect_evidence.py": "5df8e0fa17096b86737b158d57fd2122b6b16d20aeda2994fecb087a1bf5f53d",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
-    "config/code-evidence-us-eu.json": "2ab4de54738fe8c3c91510542ff3f17c92fd8cf077be2bcf58b816eb8b387d65",
+    "config/code-evidence-us-eu.json": "f9f8329d1ca75a326f85dae8bf49896e2a7068dc985e5d430123212434bf976b",
     "config/ram-map-us-eu.json": "77bdc9b4c55a9bf180ecfb2585630044a55e756beff96d130d72cfd483b21d41",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "10a2419a13a03d73c301d60c077a2f9e1e18a1b7fb88fd15c6050b2b0545f8f3",
+    "config/build-us-eu.json": "bebe1f17206154ca4a596dd41746707af5f1557e0127018021494b2c394c55b4",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -138590,7 +138591,7 @@
     "src/frame/frame_release_oam.c": "fd937f81fc6b50ca45f4bfe926eb5ad33b32a1490d8ead914993339bdff25f12",
     "src/frame/frame_release_scene_transient_tiles.c": "3f42942c1e9782ecfa497679435620ae407f6d44908fbdc60094b61aaa78d391",
     "src/frame/frame_release_transient_definition_tiles.c": "10a8644768c071c9c864c15317e1c055e86735e59294d5df0c39a9b03353f235",
-    "src/frame/frame_remove_counter_attachment_selection.c": "43558d4095bf5066a19d34850e1071008ddd9c3ea8497e5384ca5ec2b03497d5",
+    "src/frame/frame_remove_counter_attachment_selection.c": "b5f6ad0575c137af2b02982c1088fc1b8ac831f9f3240a4146a1ea352ca29b3e",
     "src/frame/frame_remove_object.c": "d1b52a1fb0d0e9989f5f0a1482f5231759fb21e7104d77ce6f8c2e12e3285d91",
     "src/frame/frame_render_effect_terrain.c": "51532e3e1209d90800d7766089f5f512bb3b61e859fe6ff2ffc94cc6d830699b",
     "src/frame/frame_request_actor_animation.c": "cbfbf0a986bd68008477d44c2d32b6bfc2d366419cb98a1f82e7272b53f93bdf",
@@ -138951,7 +138952,7 @@
     "src/resource/resource_scene_selector_interact.c": "7be32758d6c12b9000d13cce2988df34d28d87c86fefe64f95bb2b103e909458",
     "src/resource/resource_scene_selector_interact_alternate.c": "fb2d7b2a3cd7d8b42dca13955d1d390fa231c9c3f4be77df584342b77aa30a00",
     "src/resource/resource_scene_selector_tick.c": "00c118981d1e5c54b778a7d19790357d7403257c343b2fcb930ba68eb89aec2e",
-    "src/resource/resource_select_actor.c": "1ae349d027430e1b6c322571ce111825c93337c73a92d64962c07d5cc01032bd",
+    "src/resource/resource_select_actor.c": "db6a64c3d54909ecfda4c003e024ceb8805d97c8f4f41ee8606e4212226e18c8",
     "src/resource/resource_selection_group_count_080456f4.c": "fc3f3d5eb78df406c434e74d3710eff6709e7fa3b5b6b8c20d983e53c6d3ec30",
     "src/resource/resource_selection_kind_available_0804565c.c": "54d75c1c7329234c5670bc1ded0cdc3927d0e7282ed78ca50ae3f564fdb36900",
     "src/resource/resource_set_object.c": "53bcd4e6184b1eb98d7707974b38171c50aa5301bae87cfae2bb8254ef3e23ce",
@@ -139416,7 +139417,7 @@
       "raw_referenced_data_union_bytes": 35932,
       "qualified_referenced_data_union_bytes": 35932,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 309084,
+      "source_glue_owned_extent_bytes": 309276,
       "estimated_envelope_union_bytes": 325666,
       "classification_bytes": {
         "estimated_envelope_unclassified": 358,
@@ -188521,10 +188522,6 @@
         ],
         [
           283048,
-          283868
-        ],
-        [
-          284060,
           292228
         ],
         [
@@ -301488,7 +301485,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -301499,7 +301497,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -416335,8 +416334,9 @@
         "execution_address": 134501596,
         "entry_rom_offset": 283868,
         "mode": "Thumb",
-        "name": null,
+        "name": "resource_remove_random_selectable_actor_entry",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -455899,6 +455899,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 504,
         "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "resource_remove_random_selectable_actor_entry",
+        "rom_offset": 283868,
+        "size": 192,
+        "source": "src/resource/resource_remove_random_selectable_actor_entry.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 172,
+        "referenced_data_bytes_in_extent": 20
       },
       {
         "name": "irq_cpu_enable",

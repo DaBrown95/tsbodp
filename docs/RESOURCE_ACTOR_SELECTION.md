@@ -55,7 +55,8 @@ the fixture checks that argument flow under an abstract return, without adding
 a guard or establishing an interval-validity guarantee.
 
 The [kind scanner at `0x0804573C`](RESOURCE_COLLECTION_KIND_SCAN.md) is recovered;
-the remover at `0x080454DC` remains explicitly original. The connected count
+the [remover at `0x080454DC`](ACTOR_ENTRIES_RECONSTRUCTION.md#random-selectable-record-removal)
+now has matching C source. The connected count
 helper is recovered below. The scanner's collection pointer is
 the canonical actor-context member at `0x03003A2C + 0x31C`, rather than a new
 independent global. Its complete source and bounded verification are described
@@ -132,7 +133,7 @@ no stage guard or fallback initialization has been added.
 The kind predicate compares the full incoming word. It returns zero for kinds
 118, 124, 127, 133, 134, 135, 140, 141, 144 and 146, and one for every other
 word. For example, `0x10076` is accepted while 118 is rejected; narrowing the
-input would change that behavior. The existing count and original remover
+input would change that behavior. The count helper and selection remover
 consume the observed result's low byte. Full-word return declarations model the
 native constants but do not uniquely establish the original C return widths
 or signedness. The unsigned stage view is likewise a supported model of the
@@ -154,9 +155,10 @@ and pointer contracts even where native return constants cannot determine the
 original type spelling. Bounded instruction fixtures cover initialized and
 nonwriting output paths and high-word inputs; they do not establish hardware
 or gameplay behavior. Pointer validity, arbitrary output capacity and the
-original removal retry's stage/count validity remain unchecked. The
-[scanner](RESOURCE_COLLECTION_KIND_SCAN.md) is recovered; the complete
-random-removal body remains an explicit original region.
+removal retry's stage/count validity remain unchecked. The
+[scanner](RESOURCE_COLLECTION_KIND_SCAN.md) and
+[complete random-removal body](ACTOR_ENTRIES_RECONSTRUCTION.md#random-selectable-record-removal)
+now have matching C source.
 
 ## Row collection publication
 

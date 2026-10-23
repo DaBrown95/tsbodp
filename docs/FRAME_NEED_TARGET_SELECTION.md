@@ -1256,7 +1256,8 @@ The three new EC switches use action sets established before compilation.
 Generic delivery, choice tails, writable targets, found/live records, counter
 and serialized-index domains, scheduling and gameplay remain open. The private
 row-117 and row-85 paths receive no credit here: their shared settlement provider
-still mismatches, and row 85 also requires its original selection remover.
+still mismatches. Row 85's [selection remover](ACTOR_ENTRIES_RECONSTRUCTION.md#random-selectable-record-removal)
+is now separately source-owned.
 
 ## Complete need-state record backing and route constructors
 

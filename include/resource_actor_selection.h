@@ -4,8 +4,12 @@
 #include "display_menu_relation.h"
 
 /* Two overlapping access views. Neither describes the complete game state. */
+struct ActorEntryCollection;
 struct ResourceSelectionWorld {
-    unsigned char unknown00[0x440];
+    unsigned char unknown00[0x3f8];
+    struct ActorEntryCollection *collection;
+    unsigned char unknown3fc[0x43e - 0x3fc];
+    unsigned char unknown43e, unknown43f;
     unsigned int stage;
     unsigned char unknown444[0x747 - 0x444];
     unsigned char requested;
@@ -25,10 +29,11 @@ unsigned char resource_actor_selection_available(unsigned int, unsigned int);
 extern unsigned char g_scene_entry_data[];
 int resource_count_selectable_actor_entries(void);
 
-/* Explicit original dependencies; their names and roles remain provisional. */
+/* Owned selection entries and dependencies; names remain provisional. */
 unsigned char resource_selection_has_kind_0804573c(void);
-void resource_selection_remove_080454dc(void);
+void resource_remove_random_selectable_actor_entry(void);
 void resource_selection_group_ids_08045794(int *);
+unsigned int resource_selection_group_count_080456f4(void);
 unsigned int resource_selection_kind_available_0804565c(unsigned int);
 
 #endif

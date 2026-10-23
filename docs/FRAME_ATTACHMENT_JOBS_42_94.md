@@ -231,10 +231,11 @@ Settlement `0x0801BA40` remains a 188-byte original dependency. Its latest priva
 counter-record candidate is 188 bytes with 22 differing bytes: native
 zero-before-STRH and read-cursor producers are recovered, while register homes
 still differ. That record/header adaptation remains unqualified and unadopted.
-Selection removal `0x080454DC` remains a 192-byte original dependency. Their
-declaration checks add no provider execution or source ownership. Choice-index
-capacity, overlapping scene/menu views, later writers, resource validity,
-object lifetimes and gameplay reachability remain open.
+Selection removal `0x080454DC` now has
+[matching 192-byte C source](ACTOR_ENTRIES_RECONSTRUCTION.md#random-selectable-record-removal)
+through its canonical shared interface. Declaration checks remain static
+evidence. Choice-index capacity, overlapping scene/menu views, later writers,
+resource validity, object lifetimes and gameplay reachability remain open.
 
 The settlement's actual callers pass zero or one and ignore its result. The
 remaining initial signed-value home differs during register allocation, with

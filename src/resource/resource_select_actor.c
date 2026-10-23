@@ -15,7 +15,7 @@ unsigned char resource_select_actor(unsigned int scene, unsigned int actor)
                 g_resource_selection_relation_view.selection_requested = 1;
                 return 4;
             } else {
-                resource_selection_remove_080454dc();
+                resource_remove_random_selectable_actor_entry();
                 g_resource_selection_relation_view.selection_requested = 1;
                 return 2;
             }

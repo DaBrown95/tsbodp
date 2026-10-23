@@ -3,6 +3,6 @@
 void frame_remove_counter_attachment_selection(void)
 {
     if (resource_count_selectable_actor_entries())
-        resource_selection_remove_080454dc();
+        resource_remove_random_selectable_actor_entry();
 }
 asm(".align 2,0");

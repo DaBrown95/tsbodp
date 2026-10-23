@@ -31741,15 +31741,15 @@
         "display_menu_read_relation": "0x08035fcd",
         "frame_random_range": "0x080353d9",
         "resource_selection_has_kind_0804573c": "0x0804573d",
-        "resource_selection_remove_080454dc": "0x080454dd",
-        "g_resource_selection_relation_view": "0x03003980"
+        "g_resource_selection_relation_view": "0x03003980",
+        "resource_remove_random_selectable_actor_entry": "0x080454dd"
       },
       "thumb_symbols": [
         "resource_actor_selection_available",
         "display_menu_read_relation",
         "frame_random_range",
         "resource_selection_has_kind_0804573c",
-        "resource_selection_remove_080454dc"
+        "resource_remove_random_selectable_actor_entry"
       ],
       "negative_control": {
         "before": "return 4;",
@@ -51501,11 +51501,11 @@
       "size": 20,
       "symbols": {
         "resource_count_selectable_actor_entries": "0x8045411",
-        "resource_selection_remove_080454dc": "0x80454dd"
+        "resource_remove_random_selectable_actor_entry": "0x80454dd"
       },
       "thumb_symbols": [
         "resource_count_selectable_actor_entries",
-        "resource_selection_remove_080454dc"
+        "resource_remove_random_selectable_actor_entry"
       ],
       "source": "src/frame/frame_remove_counter_attachment_selection.c",
       "negative_control": {
@@ -55641,6 +55641,37 @@
       "negative_control": {
         "before": "length = tail + 0x42;",
         "after": "length = tail + 0x43;"
+      }
+    },
+    {
+      "name": "resource_remove_random_selectable_actor_entry",
+      "source": "src/resource/resource_remove_random_selectable_actor_entry.c",
+      "rom_offset": 283868,
+      "size": 192,
+      "symbols": {
+        "g_scene_entry_data": "0x03003a2c",
+        "g_resource_selection_world": "0x03003950",
+        "frame_random_range": "0x080353d9",
+        "resource_selection_group_count_080456f4": "0x080456f5",
+        "resource_selection_kind_available_0804565c": "0x0804565d",
+        "resource_selection_group_ids_08045794": "0x08045795",
+        "actor_entry_remove_collection_record": "0x08020575"
+      },
+      "thumb_symbols": [
+        "frame_random_range",
+        "resource_selection_group_count_080456f4",
+        "resource_selection_kind_available_0804565c",
+        "resource_selection_group_ids_08045794",
+        "actor_entry_remove_collection_record"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "cab57f3c3bd7568a42f5c8dd6179e3ad7c70f1a35fc1f72c0303647c920a83bc",
+      "negative_control": {
+        "before": "if((unsigned char)(kind+61)<=5)",
+        "after": "if((unsigned char)(kind+61)<=4)"
       }
     }
   ],

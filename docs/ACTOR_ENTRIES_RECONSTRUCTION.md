@@ -1,11 +1,11 @@
 # Actor entry list lifecycle and condition handoff
 
-The 25 connected source extents listed here cover 3,224 bytes of matching C,
-including the newly qualified grouped reader and writer: two functions and
-868 bytes beyond the previous 23-extent, 2,356-byte snapshot. Complete linked
-extents, pools and alignment match at the original addresses. Every replacement
-has a compiled changed-source control that rejects. The full-project matching
-and progress gates also pass with the paired transfer installed.
+The 26 connected source extents listed here cover 3,416 bytes of matching C,
+including the grouped reader and writer and the 192-byte selection remover.
+Complete linked extents, pools and alignment match at the original addresses.
+Every replacement has a compiled changed-source control that rejects. The
+full-project matching and progress gates also pass with these shared interfaces
+installed.
 The list setup, reset, insertion and selection paths connect to the accepted
 condition lookup/removal and completion code. These are static and compiler
 results; no gameplay behavior or complete executable inventory is claimed.
@@ -30,6 +30,7 @@ results; no gameplay behavior or complete executable inventory is claimed.
 | `actor_entry_clear_collection_group` | `08020234` | 172 |
 | `actor_entry_publish_collection_group` | `08020614` | 216 |
 | `actor_entry_remove_collection_record` | `08020574` | 160 |
+| `resource_remove_random_selectable_actor_entry` | `080454DC` | 192 |
 | `actor_entry_refresh_list` | `08020368` | 328 |
 | `actor_entry_reserve_collection_record` | `080204B0` | 196 |
 | `actor_entry_empty_hook` | `0800EB2C` | 4 |
@@ -244,6 +245,41 @@ bounds. Changing the capacity rejection from 159 to 160 rejects one byte.
 The canonical proof index is
 `reports/audio-root/collection-reserve-canonical/1791851836572880000/ready.json`.
 
+## Random selectable-record removal
+
+The [selection remover](../src/resource/resource_remove_random_selectable_actor_entry.c)
+rebuilds all 192 bytes at `080454DC`: 172 instruction bytes and 20 literal-pool
+bytes, with no alignment tail. Its two maintained callers use the same-address
+canonical name and retain their native bytes.
+
+The shared `ResourceSelectionWorld` view now exposes the collection pointer at
+world `+0x3F8` and the byte at `+0x43E`. Its `stage` at `+0x440`, `requested` at
+`+0x747`, size `0x748` and four-byte alignment are unchanged. The word at
+`0x03003950 + 0x3F8` is the same collection-pointer word as context
+`0x03003A2C + 0x31C`, at `0x03003D48`. Both views use the canonical
+`ActorEntryCollection` type; this remains a partial world view.
+
+The empty-group test and random-record bound consume separate native byte
+count reads. Only the second existing read is expressed through a volatile
+unsigned-byte lvalue of the canonical group's count. The first read and later
+loop reads remain ordinary. This source choice preserves the separate native
+load without adding an access. The guard cannot bound the second value if it
+changes: a zero second read passes `-1` as the random upper argument, with no
+second guard. Historical qualifiers and IRQ behavior remain unproved.
+
+The body retries empty groups and disallowed kinds, clears world `+0x43E` for
+kinds 195 through 200, and calls the matching single-record remover. Normal
+and strict matching checks cover all 236 owners in the affected shared-header
+closure, including this body, and their changed-source controls reject.
+Changing this body's kind-range bound from five to four rejects one byte.
+Separate actual-definition and layout/API checks cover its five direct
+providers, two maintained callers and the connected count helper, with wrong
+signature, field, alias and missing-declaration controls. The stage group-count
+provider retains its actual unsigned-word result; each collection group count
+remains an unsigned byte.
+No new bounds guard or runtime observation is added. The input and retry
+premises below remain conditional.
+
 ## Conditional collection partition and remover bounds
 
 For a live, disjoint collection, let `C[g]` and `S[g]` be each group's count
@@ -255,8 +291,9 @@ The reservation guard prevents growth beyond 160. This is an induction over
 those named writers with valid group/index arguments and stable backing;
 allocation alone, arbitrary writers and concurrent changes do not establish it.
 
-Under that partition and stable stage 2, 3 or 4, the original selection remover
-at `0x454DC` draws only initialized group IDs. The stages select groups
+Under that partition, stable stage 2, 3 or 4 and an unchanged selected-group
+count between the empty test and record draw, the selection remover at
+`0x454DC` draws only initialized group IDs. The stages select groups
 `23/25/24`, `46/48/47` and `39/40`, respectively. Empty groups retry before the
 record draw. For a nonempty count `m <= 160`, the matched random-range helper
 computes `floor(m * (random & 32767) / 32768)`, so its result is in `0..m-1`;
@@ -274,9 +311,9 @@ address calculation at the first descriptor overlap, not a valid C-array access
 or evidence that a natural save takes that path. Slot checksum validation does
 not inspect these counts. A saved-input argument therefore needs backed count
 prefixes or an actual valid writer history, in addition to the checksum.
-Complete writer, alias, stage and lifetime populations remain open. Neither
-this conditional bound nor the failed 192-byte / two-difference remover source
-adds matching-C credit.
+Complete writer, alias, stage and lifetime populations remain open. This
+conditional bound is separate from the 192-byte source match and does not
+establish those populations or retry termination.
 
 ## Definition-driven refresh
 
