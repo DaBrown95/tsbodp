@@ -291,6 +291,24 @@ controls against the final union/header closure. The buffer builder, higher
 game-state loader and retained condition module remain explicit unconverted
 interfaces. Static transfer order and compiler equality do not establish save compatibility or gameplay behaviour.
 
+## Condition table and serialized backing
+
+The fixed ROM condition table contains five 32-byte rows and thirty pointed
+definitions; the separately identified scene/mode table follows immediately.
+Row counts select 29 groups with 95 entries, and no definition has more than
+five entries. These finite records support the usual row 0–4, selected-column
+and selected-entry bounds; they do not validate incoming indices or other
+writers. Both unconverted condition modules transfer all 360 flag positions
+in the 724-byte reset span, including 112 positions outside that
+definition-selected subset. Those additional transfers remain required.
+With valid stream state, live backing and no interfering writes, the completed
+reader normalizes all 360 flag bytes to zero or one. Its separate selected-row
+transfer replaces only the first byte of a word, retaining the upper three
+bytes and adding no row-range check. Setter count tests occur after relevant
+state writes and therefore provide no general incoming-index guard. These
+storage findings add no C coverage or explanation for the remaining register
+differences in either module.
+
 ## Condition display-bit transfer and completion
 
 The paired 20-byte routines at `0x0802C90C/0x0802C920` write and read fifteen

@@ -94,6 +94,28 @@ worker remains unconverted. The shared display header now declares the existing
 plural `display_step_palette_blocks(void)` API, matching its actual definition;
 all 511 existing matching header importers pass the fresh full build gate.
 
+## Unrooted slow brightness ramp
+
+The independently bounded [routine at `0x08039370`](../src/transition/transition_fade_black_slow_unrooted_39370.c)
+owns 60 C extent bytes: 52 instruction bytes and eight literal bytes, without
+alignment fill. It narrows its second argument to a halfword, writes that value
+OR `0xC0` to blend control, then visits unsigned-halfword levels 0 through 127.
+Each iteration divides the level by eight through the existing BIOS quotient
+glue, writes the low halfword to brightness and waits for VBlank. No incoming
+caller was recovered; the unused first formal and historical prototype remain
+provisional. This adds no runtime or gameplay observation.
+
+The quotient is an unsigned word containing the zero-extended low halfword of
+the provider's word result. Its R0 phase precedes the R1 brightness-address
+phase; both values are consumed before the VBlank call. These real C values
+preserve the native narrowing and per-iteration address load without extra
+accesses, a barrier or an instruction body. An initial private halfword local
+failed to express that word phase and remains a preserved 56-byte failure.
+Normal and strict compilation match all 60 bytes; reducing the loop bound from
+128 to 127 rejects in both profiles. Separate actual-definition and header
+checks preserve the quotient and VBlank interfaces. The hardware glue remains
+separately counted assembly.
+
 ## Remaining selector domains
 
 Transition selector domains remain open. The direct-call census finds 32

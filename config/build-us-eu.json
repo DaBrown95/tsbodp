@@ -55555,6 +55555,25 @@
         "before": "frame_need_effect_attachment_count(owner) >= owner->unknown_58[5]",
         "after": "frame_need_effect_attachment_count(owner) > owner->unknown_58[5]"
       }
+    },
+    {
+      "name": "transition_fade_black_slow_unrooted_39370",
+      "source": "src/transition/transition_fade_black_slow_unrooted_39370.c",
+      "rom_offset": 234352,
+      "size": 60,
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "display_bios_div": "0x0804c8c9",
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "display_bios_div",
+        "irq_wait_vblank"
+      ],
+      "negative_control": {
+        "before": "level < 128",
+        "after": "level < 127"
+      }
     }
   ],
   "assembly": [

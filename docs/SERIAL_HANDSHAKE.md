@@ -139,9 +139,9 @@ the historical prototype or callback population.
 
 The main identifier poll and status reader remain held. Static startup,
 interrupt-enable and writer evidence supports asynchronous identifier/slot
-accesses under compatible guards. Making only the actual identifier poll read
-volatile reproduces the prior 408-byte / 101-difference candidate exactly;
-that read already stays inside the loop. Slot volatility also does not explain
+accesses under compatible guards. The current unbound identifier-poll attempt
+remains 408 bytes / 91 differences; its required volatile read stays inside
+the loop while LOOP moves bound and mask setup. Slot volatility does not explain
 the native unsigned snapshot and retained all-ones OR: the pinned compiler folds
 that OR even when it retains a volatile read. No qualifier is added merely to
 force those instructions, and no runtime or complete protocol claim is made.
