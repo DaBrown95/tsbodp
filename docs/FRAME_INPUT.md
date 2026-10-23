@@ -1197,6 +1197,18 @@ lower bounds to upper bounds even when projection fails; valid prior bounds
 and coordinate/backing domains remain caller premises. This interface repair
 adds no C coverage for the inverse or controller and no runtime evidence.
 
+A current canonical-header inverse diagnostic retains 88 bytes / two differing
+bytes. Its source binding of the origin sum to R5 is already explicit in initial
+RTL; COMBINE folds the preceding sum into that assignment, and the R5 use
+survives through the final machine output. It is not a late allocator mistake. Native code
+saves R5 without using it in the body. The installed compiler can preserve a
+reload-time save mask after later cleanup, so that unused save does not require
+an invented source consumer; this failed source does not exhibit such a
+deletion. The global-register dump follows allocation, reload, hard-register
+cleanup and flow analysis together, and cannot isolate those passes. Existing
+ordinary-sum and fixed-register-policy diagnostics already fail differently.
+No new binding, extra access or profile trial follows from this capture.
+
 The scene actor/view initializer `frame_initialize_scene_actors` at `0x26520`
 adds one exact 400-byte C extent, including its first literal island and final
 pool. It normalizes a zero or single-player count to one, clears the local

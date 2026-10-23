@@ -154,6 +154,43 @@ separate actual-definition contexts verify 37 distinct layout assertions;
 ten wrong pointer or layout cases reject. The full-ROM, control, inventory and
 progress gates pass.
 
+## Secondary kinds and existing-owner inputs
+
+With intact prepared aliases and no later writer, reset leaves the eight
+secondary kinds as `142` followed by seven `255` sentinels. Definition 142 has
+subtype 135, so this domain avoids the builder's subtype-317 existing-owner
+arm. With valid constructor results and initializer phase 0, 1 or 3, the
+builder makes sixteen constructor calls.
+This is a conditional reset domain, not a complete list-writer population.
+
+There is a named later insertion path. The
+[need-effect factory](../src/frame/frame_create_need_effect_resource.c) can
+preserve a payload kind of 33 or 34. Its installed selector writes action 7;
+under the existing enabled, attachment, optional and choice-space conditions,
+the [common choice builder](../src/display/build_need_effect_choices.c) can
+append action 40. Selecting it and continuing the state/animation sequence
+reaches [finish action](../src/display/finish_need_effect_action.c), which
+inserts the object's kind into the secondary list through world `+0xF0`.
+Backed payload occurrence, the live selected object, intact choice data and
+actual UI-result delivery remain premises; this is not a natural-input trace.
+
+After reset plus one successful kind-33 or kind-34 insertion, entry one selects
+subtype 317 and owner slot two at `0x030043B8`. The builder reaches that slot
+before any constructor for it; its 317 arm reads the old owner and clears its
+flags. Earlier construction fills slots zero, fourteen and fifteen, and the
+later entry-zero construction cannot establish slot two before this read.
+The examined kind-14, kind-17 and kind-23 handoffs to catalog kind 16 call end
+routines that clear all seventeen slots before begin. The examined kind-9
+shutdown releases the primary list while leaving the owner words uncleared.
+Neither supplies a live-owner guarantee for this case under the accepted
+helpers' valid, disjoint backing premises.
+
+A cleared or stale owner is a backing/lifetime outcome, not evidence of a new
+executable target. No hardware fault or nonexecution claim follows. The next
+needed evidence is an actual payload/interaction history and any intervening
+owner-slot writer; other aliases, IRQ writes, serialized entries and incoming
+routes remain open. No guard, new C match or runtime coverage is added here.
+
 ## Explicit no-payload cancel event
 
 The catalog controller's existing kind-11 cancel edge now selects an initialized

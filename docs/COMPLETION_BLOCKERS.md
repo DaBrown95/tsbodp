@@ -84,6 +84,13 @@ splits but worsens the full result to 760 / 707. Tile, Y and color homes remain
 wrong. The text row reader remains 140 / 80, with the tile pointer spilled.
 No shared compiler-switch explanation follows.
 
+A [conditional collection invariant](ACTOR_ENTRIES_RECONSTRUCTION.md#conditional-collection-partition-and-remover-bounds)
+now bounds the selection remover's draws after reset and valid reserve, clear
+and remove histories, with stable stage 2–4. Serialized counts still need their
+own prefix bound of 160; checksum validation does not establish it. An allowed
+record's existence does not prove retry termination or complete writer coverage.
+The remover remains 192 bytes / two differences, without new C credit.
+
 The [point-to-cell converter](FRAME_INPUT.md) remains 116 / 121 against 128
 bytes with its actual two-point work and signed-word division API. Its context
 and output allocate to R5/R7 instead of native R7/R8. The inverse projector is

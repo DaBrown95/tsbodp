@@ -244,6 +244,40 @@ bounds. Changing the capacity rejection from 159 to 160 rejects one byte.
 The canonical proof index is
 `reports/audio-root/collection-reserve-canonical/1791851836572880000/ready.json`.
 
+## Conditional collection partition and remover bounds
+
+For a live, disjoint collection, let `C[g]` and `S[g]` be each group's count
+and start, and `N` the total. The reset clear establishes
+`S[g] = sum(C[h], h < g)` and `N = sum(C) <= 160`. Valid reservation,
+nonempty indexed removal and group clearing preserve those equations: each
+shifts the affected suffix and adjusts all later starts by the same amount.
+The reservation guard prevents growth beyond 160. This is an induction over
+those named writers with valid group/index arguments and stable backing;
+allocation alone, arbitrary writers and concurrent changes do not establish it.
+
+Under that partition and stable stage 2, 3 or 4, the original selection remover
+at `0x454DC` draws only initialized group IDs. The stages select groups
+`23/25/24`, `46/48/47` and `39/40`, respectively. Empty groups retry before the
+record draw. For a nonempty count `m <= 160`, the matched random-range helper
+computes `floor(m * (random & 32767) / 32768)`, so its result is in `0..m-1`;
+the product fits a signed word. Consequently `S[g] + selected < N <= 160`.
+A positive selectable-count result proves that an allowed record exists under
+the same stable partition and the fixed kind predicate. It does not prove
+that the retry loop terminates. Stages above four leave the group output
+unwritten; a test for stage greater than one is insufficient by itself.
+
+The [serialized reader](SAVE_STREAM.md) establishes the same prefix equations
+only when every incoming count prefix is at most 160. It has no such capacity
+test. After a fresh clear, a first group count of 161 reaches record index 160
+at collection `+0x784`, exactly the first group descriptor. This is the native
+address calculation at the first descriptor overlap, not a valid C-array access
+or evidence that a natural save takes that path. Slot checksum validation does
+not inspect these counts. A saved-input argument therefore needs backed count
+prefixes or an actual valid writer history, in addition to the checksum.
+Complete writer, alias, stage and lifetime populations remain open. Neither
+this conditional bound nor the failed 192-byte / two-difference remover source
+adds matching-C credit.
+
 ## Definition-driven refresh
 
 The central refresh at `08020368` now matches all 328 bytes. When the current
