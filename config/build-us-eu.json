@@ -55537,6 +55537,24 @@
         "before": "index <= 2",
         "after": "index <= 1"
       }
+    },
+    {
+      "name": "frame_check_attachment_capacity_unrooted_461c8",
+      "source": "src/frame/frame_check_attachment_capacity_unrooted_461c8.c",
+      "rom_offset": 287176,
+      "size": 56,
+      "symbols": {
+        "frame_count_actor_attachments": "0x08001a65",
+        "frame_need_effect_attachment_count": "0x0802eca1"
+      },
+      "thumb_symbols": [
+        "frame_count_actor_attachments",
+        "frame_need_effect_attachment_count"
+      ],
+      "negative_control": {
+        "before": "frame_need_effect_attachment_count(owner) >= owner->unknown_58[5]",
+        "after": "frame_need_effect_attachment_count(owner) > owner->unknown_58[5]"
+      }
     }
   ],
   "assembly": [

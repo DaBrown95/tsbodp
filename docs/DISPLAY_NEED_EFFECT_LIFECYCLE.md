@@ -392,3 +392,28 @@ provider definitions pass the API/layout checks; wrong return, provider formal,
 record offset, stride and count cases reject. Alignment provenance does not
 exclude alternate incoming execution. These static and compiler results add no
 runtime or gameplay evidence.
+
+## Unrooted attachment capacity check
+
+The [predicate at `0x080461C8`](../src/frame/frame_check_attachment_capacity_unrooted_461c8.c)
+rebuilds 56 bytes: 54 instruction bytes and two zero alignment bytes before
+`0x08046200`. It first queries the actor's existing two-slot attachment counter.
+If that byte result is nonzero and state byte `+0x60` equals one, it returns
+zero. Otherwise it queries the state's existing three-record counter and
+returns one only when that word count is below state byte `+0x5D`. These bytes
+receive definition bytes `+0x21` and `+0x20` respectively during allocation.
+The state threshold read occurs after the second call, as in the native body.
+No header layout, provider contract or register binding changes.
+
+The provisional definition returns a word zero/one and takes state and actor
+pointers. No incoming caller was recovered; historical unused formals remain
+unknown. The actor's two slots and state's three records must have live,
+aligned backing. Counting non-null pointers does not establish the pointed-to
+objects' lifetimes or a complete writer/serialized-input domain.
+
+A shared failure path preserves the native branch and return-block order.
+Normal and strict positives match the complete extent; changing `>=` to `>`
+rejects in both modes and changes the result at exact capacity. Separate actual
+target and two-provider definitions pass API/layout checks; six wrong return
+or layout cases reject. The full-ROM and changed-source controls also pass.
+No runtime, gameplay or incoming-root claim follows from this source gain.
