@@ -45,7 +45,12 @@ source and interface evidence, not runtime or complete writer/index domains.
 The separate rectangle setter at `0x48A14` remains unconverted. Its best
 four-scalar candidate emits 68 bytes with 15 differences. A tested two-point
 argument hypothesis changes both that body and its existing caller, so the
-four-scalar project declaration is retained. Other original code and the
+four-scalar project declaration is retained. One canonical opening-helper trial
+captured each post-MMIO coordinate pair as separate signed words before forming
+its destination. INITIAL retained those fresh reads, but CSE2 forwarded them
+to the earlier coordinate values and FLOW deleted the copies. The resulting
+164-byte / 162-difference attempt remains excluded; this does not justify a
+qualifier or another binding/profile grid. Other original code and the
 remaining executable-inventory uncertainties stay explicit.
 
 ## Closing to center

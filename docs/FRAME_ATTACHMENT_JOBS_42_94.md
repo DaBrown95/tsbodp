@@ -417,6 +417,24 @@ bodies were already mapped; no executable discovery or runtime coverage is
 claimed. Record/actor lifetimes, descriptor indexing, countdown arithmetic and
 all other input/writer populations remain conditional.
 
+## Separate unrooted choice-49 leaf
+
+The [eight-byte leaf at `0x25990`](../src/frame/frame_select_attachment_job_49_unrooted_25990.c)
+writes 49 to the first byte of its second argument and returns the word value
+one. It starts after the preceding check's return and zero alignment, and ends
+before the separate held body at `0x25998`. All eight bytes are instructions;
+there is no pool or alignment fill. This newly bounded region was previously
+unresolved and lies outside the known 57-row unfinished worklist.
+
+The source follows the existing choice-49 selector's state/output interface.
+Only one live writable output byte is required; the owner is not dereferenced.
+No incoming caller or installed callback is established. The historical unused
+first formal, additional unused formals and result type remain provisional.
+Normal and strict builds match the full extent, and changing the stored value
+from 49 to 48 rejects both. Separate actual-definition checks qualify the new
+leaf and existing selector, while four incompatible contracts reject. These
+source results add no runtime or complete callback-population evidence.
+
 ## Optional dispatch and workers at 0x28378, 0x288B4 and 0x28988
 
 Three matching C extents add 516 bytes using the existing actor, need-effect,

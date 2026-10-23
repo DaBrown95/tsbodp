@@ -1,8 +1,8 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,441 C functions / 303,784 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 307,844 bytes; original slices
-still supply 16,469,372 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,442 C functions / 303,792 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 307,852 bytes; original slices
+still supply 16,469,364 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
@@ -64,7 +64,9 @@ the missing order/counter allocation cause is not a missing byte snapshot or
 provider result. The finalizer's two compare-only upper-X temporaries are
 matched and hoisted by LOOP. No additional native definition, escape or
 consumer supports defeating that transformation. Preserve these closed source
-lines until a distinct semantic or original-build fact appears.
+lines until a distinct semantic or original-build fact appears. A bounded
+53/64-bit precision model of 368 retained allocation rows changes nine scores
+by one but changes no rank or tie. It does not identify the historical host.
 
 The audio patcher's full master-input arithmetic has a conditional set of
 1,024 completed converter images from the fixed installation, closed under
@@ -152,12 +154,17 @@ bytes. Its actual quotient and destination phases end before each VBlank call.
 An incoming caller, historical unused formal and runtime population remain
 unproved; the BIOS glue remains separately counted assembly.
 
+The [separate choice-49 leaf](FRAME_ATTACHMENT_JOBS_42_94.md#separate-unrooted-choice-49-leaf)
+at `0x25990` adds eight source-audited instruction bytes from a previously
+unresolved region. It is outside the existing 57-row worklist, so that backlog
+does not shrink. An incoming caller and installed callback remain unproved.
+
 The instruction census is not a complete code denominator. Its current raw
-union is 284,652 bytes; qualified instructions occupy 284,626 bytes and
+union is 284,660 bytes; qualified instructions occupy 284,634 bytes and
 referenced data 35,904 bytes. Known data totals 22,876 bytes. Source-owned data
 and alignment have 1,999 records / 4,024 bytes, with zero locally unclassified
 owned bytes. Estimated envelopes still have 1,086 unclassified bytes, and
-16,432,698 bytes remain outside resolved roles. Fifteen authored veneer NOPs
+16,432,690 bytes remain outside resolved roles. Fifteen authored veneer NOPs
 have a separate 30-byte instruction role; two audio fills are implicit code
 alignment, without proof against alternate entry. The reachable `0x499B0` NOP
 remains a separate source mismatch. The `0xE1EE` interior-entry-shaped value has
