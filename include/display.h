@@ -115,7 +115,7 @@ struct DisplayTileRecord {
 };
 extern int display_bios_div(int, int);
 extern void display_bios_swi_15(const void *, void *);
-extern void (*g_display_tile_decompress)(const void *, void *, unsigned int *);
+extern void *(*g_display_tile_decompress)(const void *, void *, unsigned int *);
 extern void display_bios_swi_12(const void *, void *);
 extern void (*g_display_background_decompress)(const void *, void *, unsigned int *);
 struct BackgroundResource {

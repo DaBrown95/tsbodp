@@ -14,7 +14,7 @@ void display_copy_tile_resource(struct DisplayTileResource *resource, unsigned s
         destination = (unsigned char *)0x06010000 + first * 32 + offset;
         offset += display_bios_div(record->width * record->height, 2);
         if (record->flags & 0x40) {
-            register void (**decoder)(const void *, void *, unsigned int *) __asm__("r2") = &g_display_tile_decompress;
+            register void *(**decoder)(const void *, void *, unsigned int *) __asm__("r2") = &g_display_tile_decompress;
             (*decoder)(resource->data + record->data_offset, destination, &scratch);
         }
         else if (record->flags & 0x20)

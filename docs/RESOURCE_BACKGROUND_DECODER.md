@@ -1,4 +1,4 @@
-# Copied background decoder
+# Copied resource decoders
 
 [`background_decoder.s`](../src/resource/background_decoder.s) rebuilds all
 812 bytes at ROM `0x080002EC..0x08000618`, also linked independently at the copied
@@ -59,7 +59,7 @@ The existing original-instruction models exercise selected compressed inputs,
 and the bounded HLE boot observes one entry. Source ownership, these finite
 observations and whole-ROM equality do not close all input bounds, malformed
 streams, writable entry assignments, copied-memory modifications or gameplay.
-The other custom tile decoder remains for matching C reconstruction.
+The separate [tile decoder](#matching-tile-decoder) now has matching C source.
 
 
 ## Startup callback writer
@@ -81,3 +81,52 @@ absence of a synchronous call to this site in that normal startup prefix under
 the existing decoder, ordinary-call and BIOS assumptions. IRQ entry, nonordinary
 re-entry, later aliases and writers remain open. Pre-install zero is a storage
 state, not an additional executable target; the transfer remains unresolved.
+
+
+## Matching tile decoder
+
+The [tile-run decoder](../src/resource/resource_decode_tile_runs.c) rebuilds all
+504 bytes at ROM `0x0800B36C..0x0800B564`, independently linked for execution at
+`0x030036D0..0x030038C8`. These are 126 ARM instructions, with no literal pool
+or alignment tail. The 528-byte installation also copies the first 24 bytes
+of the following, still unconverted map drawer; it is not a 528-byte C owner.
+ROM and copied-RAM bytes are counted once.
+
+The stream has literal, repeated-byte and backward-copy runs, ending at a zero
+command. A pending byte combines with the next output byte before a halfword
+store; the final odd byte is flushed separately. The source preserves the
+native aligned halfword loops and overlapping backward-copy order. Valid
+stream, backing, alignment and destination-capacity premises remain required;
+no bounds guard or malformed-stream policy is added.
+
+One ordinary scratch variable holds the count field, then distance, then the
+odd-byte tail in their actual phases. A short R2 low-field value has one real
+producer and feeds the distance OR; the R1 length feeds the copy and repeat
+paths. This preserves the native compare, shift and OR order and the later
+register phases. The leaf's R14 byte/pair scratch values end before the saved
+return address is restored. Its R0 output cursor is the actual returned value.
+There are no inserted instructions, clobbers, extra observations or artificial
+consumers. The source experiments and full failed comparisons remain local.
+
+The canonical tile callback now returns `void *`, the advanced output cursor,
+and still writes the decoded byte count through its required third argument.
+Both shared declarations, the provider prototype and the copy caller's local
+callback type agree. All five located callers discard that return. This is
+compatible with the observed native postcondition; the historical C prototype
+is not uniquely recovered from an ignored return. The separate background
+callback remains `void`, with its nullable count pointer; the two-argument
+resource dispatchers keep their unsigned count returns.
+
+The new provider, five callers and installer pass normal and strict matching
+checks. Their genuine changed-source controls each reject by one byte. Actual
+separate definitions and layout/API checks also pass, with meaningful wrong
+signature and declaration controls. Full-ROM equality and source controls,
+these static interface checks and the earlier finite decoder models and boot
+observations remain separate evidence. This milestone adds no runtime execution
+or complete writer/input population claim.
+
+The broader shared-header check covers all 679 affected owners normally and
+675 strictly. Four owners reproduce their existing strict warnings under both
+old and new headers; none is counted as a strict success. Every affected owner
+has exact normal output and a rejecting source control. No declaration or
+warning suppression was added for those unrelated cases.

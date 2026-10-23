@@ -14173,14 +14173,15 @@
       "referenced_literal_bytes": 0
     },
     {
-      "name": "resource_tile_decoder_iwram",
+      "name": "resource_decode_tile_runs",
       "rom_offset": 45932,
       "mode": "ARM",
       "runtime_addresses": [
         50345680
       ],
       "evidence": [
-        "audited RAM entry"
+        "audited RAM entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [],
@@ -14190,11 +14191,11 @@
         46432
       ],
       "size": 504,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 45932,
       "body_rom_start": 45932,
       "body_rom_end": 46436,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0800xxxx",
       "decoded_instruction_bytes": 504,
@@ -115875,7 +115876,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "a0154a27efb2e61c9c32453d7c0d6273bd5f3ff9f001bc4c8f51cd296a514bfe",
+      "source_sha256": "ca953591693ef071a1b4fe77cd9007d59f6ea384c6a97ed7a6f54022c3c6e454",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line61 emits padding containing relative102..104; actual source.o $d covers this span. ",
         "Full retained 184-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -123543,7 +123544,7 @@
       "status": "unresolved"
     },
     {
-      "name": "resource_tile_decoder_iwram",
+      "name": "resource_decode_tile_runs",
       "rom_offset": 45932,
       "size": 504,
       "status": "mapped_code"
@@ -137891,11 +137892,11 @@
     "tools/indirect_evidence.py": "5df8e0fa17096b86737b158d57fd2122b6b16d20aeda2994fecb087a1bf5f53d",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
-    "config/code-evidence-us-eu.json": "ec3b611b62372ef6eb189004745c47b03b8d831bfbc5548cb414327f4fa06ec6",
-    "config/ram-map-us-eu.json": "67362238b648e40fbf3b51d8e466bfd12e709a38211c16e157d384243896410b",
+    "config/code-evidence-us-eu.json": "2ab4de54738fe8c3c91510542ff3f17c92fd8cf077be2bcf58b816eb8b387d65",
+    "config/ram-map-us-eu.json": "77bdc9b4c55a9bf180ecfb2585630044a55e756beff96d130d72cfd483b21d41",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "a0f28fdae6168827ff6de97ff74777e69f3156c1ea7c35b1a9ddce24c7e1641d",
+    "config/build-us-eu.json": "10a2419a13a03d73c301d60c077a2f9e1e18a1b7fb88fd15c6050b2b0545f8f3",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -138009,7 +138010,7 @@
     "src/display/configure_window_masks.c": "a1573840817bd0969c3c08a8a18e47406a7928865f6650ec661dde09fe3653a4",
     "src/display/copy_background_map_backward.c": "d6606bc9bdbad0340dd669df7d5decb2aae063ddacf062f970c91128e6c36bdf",
     "src/display/copy_map_rectangle.c": "47cae5831a15cbd35834b4ab9e34532b85b141205693226e052ce85ccd0a22ce",
-    "src/display/copy_tile_resource.c": "a0154a27efb2e61c9c32453d7c0d6273bd5f3ff9f001bc4c8f51cd296a514bfe",
+    "src/display/copy_tile_resource.c": "ca953591693ef071a1b4fe77cd9007d59f6ea384c6a97ed7a6f54022c3c6e454",
     "src/display/count_free_object_palettes.c": "2e524b6a763accfc9282043844f5b630ebef13022a82b170c251285d66f680ed",
     "src/display/create_need_effect_state_node.c": "e9d355ea4d173694755f54a6d93086a2a9e9e155cddd7ef6168d14748f3a1ef1",
     "src/display/create_palette_block.c": "454d8feb79e6fd3c1e5a24304cfab24c884a122291ad6cc11893b82b2b2670f9",
@@ -139415,7 +139416,7 @@
       "raw_referenced_data_union_bytes": 35932,
       "qualified_referenced_data_union_bytes": 35932,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 308580,
+      "source_glue_owned_extent_bytes": 309084,
       "estimated_envelope_union_bytes": 325666,
       "classification_bytes": {
         "estimated_envelope_unclassified": 358,
@@ -188271,6 +188272,10 @@
           45928
         ],
         [
+          45932,
+          46436
+        ],
+        [
           46756,
           47168
         ],
@@ -215710,7 +215715,21 @@
       },
       {
         "rom_offset": 45932,
-        "size": 808,
+        "size": 504,
+        "classification": "strong_rooted_instruction",
+        "roles": [
+          "ARM",
+          "estimated_envelope",
+          "instruction",
+          "raw_instruction",
+          "source_owned"
+        ],
+        "confidence": "high_static_instruction_provenance",
+        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
+      },
+      {
+        "rom_offset": 46436,
+        "size": 304,
         "classification": "strong_rooted_instruction",
         "roles": [
           "ARM",
@@ -318524,7 +318543,8 @@
         "mode": "ARM",
         "name": "resource_tile_decoder_iwram",
         "evidence": [
-          "audited RAM entry"
+          "audited RAM entry",
+          "bounded audit"
         ],
         "raw_instruction_intervals": [
           [
@@ -455869,6 +455889,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 700,
         "referenced_data_bytes_in_extent": 28
+      },
+      {
+        "name": "resource_decode_tile_runs",
+        "rom_offset": 45932,
+        "size": 504,
+        "source": "src/resource/resource_decode_tile_runs.c",
+        "mode": "ARM",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 504,
+        "referenced_data_bytes_in_extent": 0
       },
       {
         "name": "irq_cpu_enable",

@@ -9,7 +9,8 @@ struct ResourceStream {
 };
 unsigned int resource_decoded_size(const void *);
 unsigned int resource_decode_bytes(const void *, void *);
-extern void (*g_display_tile_decompress)(const void *, void *, unsigned int *);
+void *resource_decode_tile_runs(const void *, void *, unsigned int *);
+extern void *(*g_display_tile_decompress)(const void *, void *, unsigned int *);
 extern void (*g_display_background_decompress)(const void *, void *, unsigned int *);
 
 /* Observed SWI numbers. Providers are explicit glue with zero C coverage. */
@@ -24,7 +25,7 @@ void resource_decode_delta_alternate(void *, unsigned int);
 unsigned int resource_decode_alternate(const void *, void *);
 void resource_install_decoders(void);
 
-/* These copied ARM bodies remain unconverted. */
+/* ROM/RAM installation symbols; source extents are recorded separately. */
 extern unsigned char g_resource_tile_decoder_rom[], g_resource_tile_decoder_ram[];
 extern unsigned char g_resource_background_decoder_rom[], g_resource_background_decoder_ram[];
 void resource_bios_swi_0c(const void *, void *, unsigned int);

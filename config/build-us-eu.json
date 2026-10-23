@@ -55621,6 +55621,27 @@
         "after": "scene_contact_add_activity_score(41)"
       },
       "source": "src/scene/scene_contact_activity_six_step_primary.c"
+    },
+    {
+      "name": "resource_decode_tile_runs",
+      "source": "src/resource/resource_decode_tile_runs.c",
+      "rom_offset": 45932,
+      "size": 504,
+      "mode": "ARM",
+      "ram_address": 50345680,
+      "ram_copy": "resource_tile_decoder_iwram",
+      "symbols": {},
+      "compiler_id": "agbcc_arm",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer"
+      ],
+      "expected_sha256": "c02678172a2f22c0cc3fd9424a25056abebea57d2d1b3fba1c882221c49732cf",
+      "negative_control": {
+        "before": "length = tail + 0x42;",
+        "after": "length = tail + 0x43;"
+      }
     }
   ],
   "assembly": [
