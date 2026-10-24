@@ -23315,10 +23315,10 @@
       "symbols": {
         "g_game_flags": "0x03004310",
         "g_link_flags": "0x03007334",
-        "g_link_endpoint": "0x03002cb0",
         "g_link_recording": "0x03002180",
         "link_transfer_finished": "0x0803d851",
-        "transition_record_event": "0x0803a41d"
+        "transition_record_event": "0x0803a41d",
+        "g_link_setup_state": "0x03002cb0"
       },
       "thumb_symbols": [
         "link_transfer_finished",
@@ -24259,12 +24259,12 @@
       "rom_offset": 255032,
       "size": 16,
       "symbols": {
-        "g_link_endpoint": "0x03002cb0"
+        "g_link_setup_state": "0x03002cb0"
       },
       "assembler_id": "binutils2101",
       "negative_control": {
-        "before": "(signed char)g_link_endpoint.slot",
-        "after": "(signed char)g_link_endpoint.active"
+        "before": "(signed char)g_link_setup_state.slot",
+        "after": "(signed char)g_link_setup_state.active"
       }
     },
     {
@@ -55891,6 +55891,28 @@
       "negative_control": {
         "before": "value=width+31;",
         "after": "value=width+30;"
+      }
+    },
+    {
+      "name": "link_transfer_finished",
+      "source": "src/link/link_transfer_finished.c",
+      "rom_offset": 251984,
+      "size": 408,
+      "symbols": {
+        "g_link_flags": "0x03007334",
+        "g_irq_context": "0x03004280",
+        "link_apply_received_events": "0x0803a1a5",
+        "g_link_setup_state": "0x03002cb0",
+        "g_link_last_serial_vblank": "0x03002188",
+        "g_link_word_03007354": "0x03007354"
+      },
+      "thumb_symbols": [
+        "link_apply_received_events"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "work = 300;",
+        "after": "work = 302;"
       }
     }
   ],

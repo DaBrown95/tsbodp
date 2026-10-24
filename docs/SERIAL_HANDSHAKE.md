@@ -135,14 +135,22 @@ MMIO access and actual-definition API checks pass. No incoming transfer is
 identified; `void(void)` describes the recovered side effects and does not prove
 the historical prototype or callback population.
 
-The main identifier poll and status reader remain held. Static startup,
+The transfer-completion poll at `0x0803D850` now owns all 408 bytes from
+[C](../src/link/link_transfer_finished.c): 328 instruction bytes and 80 literal
+bytes. Its call-free address, timestamp and mask phases reproduce the native
+read order; an ordinary late flags alias lets the compiler allocate and preserve
+R7. The accepted source uses the existing canonical endpoint and timestamp word
+owners. The 200-byte caller and 16-byte slot reader use that same endpoint view,
+and the unused partial endpoint declaration is removed. Normal/strict matches,
+genuine changed-source controls, actual-definition interfaces, full-ROM and
+progress gates pass.
+
+The separate 124-byte status reader remains held. Slot volatility does not
+explain its native unsigned snapshot and retained all-ones OR: the pinned
+compiler folds that OR even when it retains a volatile read. Static startup,
 interrupt-enable and writer evidence supports asynchronous identifier/slot
-accesses under compatible guards. The current unbound identifier-poll attempt
-remains 408 bytes / 91 differences; its required volatile read stays inside
-the loop while LOOP moves bound and mask setup. Slot volatility does not explain
-the native unsigned snapshot and retained all-ones OR: the pinned compiler folds
-that OR even when it retains a volatile read. No qualifier is added merely to
-force those instructions, and no runtime or complete protocol claim is made.
+accesses under compatible guards; neither this evidence nor the poll's match
+closes runtime, participant, writer or complete protocol domains.
 
 
 ## Surrounding serial-scene source
@@ -191,8 +199,8 @@ Earlier private notes conflated this entry with the heavily tried 408-byte
 `link_transfer_finished` at `0x0803D850`: an old private row-nine alias reused
 that name for `0x0803E48C`. Exact-address and definition review separates them.
 No authored prior attempt was found for this 64-byte predicate; its first
-canonical short-circuit recipe matches. The 408-byte failures and the separate
-124-byte status-reader hold remain unchanged.
+canonical short-circuit recipe matches. The distinct 408-byte poll now matches
+as described above; the separate 124-byte status-reader hold remains unchanged.
 
 The canonical API repair first preserved the controller's 1,224-byte /
 eleven-difference candidate: all 39 native calls retained their 21 targets.
@@ -240,9 +248,10 @@ The initializer (352), controller (1,224), notice helper (164), indicator helper
 (120) and shutdown (32) now own the complete local interval
 `0x0801BD18..0x0801C47C`: five C bodies and 1,892 extent bytes. The observed scene
 table row and its accepted phase consumers support the begin/step/end linkage;
-they do not establish every runtime scene index. The 408-byte poll, 124-byte
-status reader and 1,616-byte next-stage IRQ remain separate reconstruction
-blockers. An earlier actual-owner IRQ recipe lowered two-byte representation
+they do not establish every runtime scene index. The 124-byte status reader
+and 1,616-byte next-stage IRQ remain separate reconstruction blockers. The
+accepted 408-byte poll does not close their domains. An earlier actual-owner
+IRQ recipe lowered two-byte representation
 copies inline but materialized two stack stores and four frame bytes absent
 from the native body; that rejected attempt earns no C credit.
 

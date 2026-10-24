@@ -1,5 +1,6 @@
 #include "event_record.h"
 #include "link_state.h"
+#include "link_endpoint_setup.h"
 #define LINK_REG16(a) (*(volatile unsigned short *)(a))
 
 int transition_link_update(void) {
@@ -10,13 +11,13 @@ int transition_link_update(void) {
    unsigned int mask = ~0x20u;
    g_link_flags &= ~4;
    g_game_flags = flags & mask;
-   g_link_endpoint.identifier = -1;
+   g_link_setup_state.identifier = -1;
    if (!(LINK_REG16(0x04000128) & 4))
     LINK_REG16(0x04000200) &= 0xFFBF;
    LINK_REG16(0x04000200) &= 0xFF7F;
    LINK_REG16(0x0400012A) = 0xFFFF;
-   g_link_endpoint.active = 0;
-   g_link_endpoint.slot = 0xFF;
+   g_link_setup_state.active = 0;
+   g_link_setup_state.slot = 0xFF;
    return 1;
   } else {
    *(unsigned int *)payload.storage.bytes = 0;
