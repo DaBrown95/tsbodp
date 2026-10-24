@@ -257,7 +257,7 @@
         304002,
         304120
       ],
-      "consumer_semantics": "Assignments to writable slots are provenance edges, not exhaustive dispatch target sets.",
+      "consumer_semantics": "On-row call at ROM0x4A382 captures a register-derived selector bounded to0..9 by the unsigned volume-byte guard and subtraction. Between-row call at ROM0x4A3F8 independently reloads writable track byte+0x5D.",
       "evidence": [
         {
           "function": "audio_player_process_row",
@@ -271,7 +271,7 @@
         }
       ],
       "confidence": "High pointer-role/actual indexed consumer or assignment mapping; destination byte extent and source ownership remain separate.",
-      "limitation": "Nibble gives0..15 but only10 immediate callback records are corroborated. Values10..15 overlap numeric wave data; valid-song/index invariant remains unproven."
+      "limitation": "On ordinary local paths through audio_player_process_row, vol>0x60 and vol<=0xFF imply stored vol-0x60 in1..0x9F and immediate index0..9. This bound needs no valid-song assumption. Table-wide targets_complete remains false because the separate between-row consumer reads a saved byte without that local bound."
     },
     {
       "name": "audio_game_callbacks",
@@ -27906,15 +27906,15 @@
     {
       "rom_offset": 304002,
       "target_origin": "fixed_ROM_table",
-      "producer": "ROM0x08D6F77C +8*(volume_effect byte>>4) +0",
+      "producer": "ROM0x08D6F77C +8*(((unsigned volume byte-0x60)&0xFF)>>4) +0, reached only after unsigned volume byte>0x60; target capturedR4 and called through0804CD00 BX R4.",
       "observed_table": "audio_volume_effects",
       "field": 0,
       "writer_roles": [],
       "source_owners": [
         "audio_player_process_row"
       ],
-      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
-      "confidence": "static native/source producer; populations and ABI remain provisional"
+      "remaining_uncertainty": "Immediate selector is locally bounded to0..9 for every byte on ordinary paths from owner entry08049F64. Other volume-table consumers and arbitrary interior entries are not covered; this does not close the later writable-track dispatch.",
+      "confidence": "Complete local original-image selector bound: R4 reaching definitions at0804A042 are MOVS0 at08049F96 or LDRB at08049FD8; unsigned guard0804A046/48 dominates the call;0804A04A is the sole incoming edge to0804A36A..0804A382. Selector is formed in registers before STRB at0804A378, with no track reload, branch or intervening callback before target capture."
     },
     {
       "rom_offset": 304120,
@@ -29584,5 +29584,21 @@
       "Known buffer operations require their documented valid pointer/count/channel domains. This audit does not prove all writers, absence of later installation/execution in data, or all dispatch-table indices.",
       "Original-image source ownership does not close self-modified states, writable callbacks or arbitrary incoming transfers. Audio Thumb/ARM veneers outside this copy remain separate."
     ]
-  }
+  },
+  "bounded_indirect_calls": [
+    {
+      "proof_kind": "thumb_volume_byte_table_v1",
+      "owner": "audio_player_process_row",
+      "source_sha256": "94c8988e4cf0f10dde90c029e7439967c528b10ec1e1dd9df1515d0a7c1a5e9c",
+      "rom_offset": 304002,
+      "guard_rom_offset": 303174,
+      "dispatch_rom_offset": 303978,
+      "literal_rom_offset": 304068,
+      "table_rom_offset": 14088060,
+      "table_rows": 10,
+      "record_stride": 8,
+      "table_sha256": "cfe3d1cf62348779e975e3637fce6339016a3d2f83d48a691c41fcb92dadfb5a",
+      "veneer_rom_offset": 314624
+    }
+  ]
 }

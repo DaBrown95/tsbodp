@@ -101,9 +101,13 @@ class ScannerTests(unittest.TestCase):
              'targets': [BASE + 100], 'targets_complete': True},
             {'rom_offset': 20, 'kind': 'register_dispatch',
              'targets': [], 'targets_complete': False},
+            {'rom_offset': 24, 'kind': 'bounded_table_call',
+             'targets': [BASE + 100], 'targets_complete': False},
+            {'rom_offset': 28, 'kind': 'bounded_table_call',
+             'targets': [BASE + 100], 'targets_complete': True},
         ]
         self.assertEqual(unresolved_callback_sites([{'transfer_records': records}]),
-                         [4, 8, 12])
+                         [4, 8, 12, 24])
 
     def test_copied_and_rom_aliases_count_one_callback_site(self):
         rows = [{'transfer_records': [

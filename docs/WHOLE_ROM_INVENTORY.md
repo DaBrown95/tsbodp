@@ -226,10 +226,17 @@ all three. Runtime target completeness remains false for observed tables.
 
 The route table has eight descriptors, with a null callback in mode seven. The
 need-effect prefix has 149 observed records; its next object is the threshold
-table. The volume-effect prefix has ten corroborated records. A four-bit selector
-alone does not establish sixteen valid records. Three resource-transition callbacks
-and two audio activity callbacks are assignments into writable slots, not closed
-target sets at every downstream consumer.
+table. The volume-effect prefix has ten corroborated records. Its on-row call at
+`0x0804A382` has a complete local selector bound: an unsigned volume byte greater
+than `0x60`, minus `0x60`, lies in `1..0x9F`, so its high nibble selects only
+records zero through nine. Native control flow and register dataflow establish
+this for every byte on ordinary paths from the owned function entry; the call
+does not reload the stored track field. The separate between-row call at
+`0x0804A3F8` does reload that writable field and retains an open target domain.
+The table-wide completeness flag therefore remains false. A separate validated
+per-site rule marks only the on-row call complete after rechecking its native
+control flow and selector. Three resource-transition callbacks and two audio activity callbacks are assignments into writable slots,
+not closed target sets at every downstream consumer.
 
 The adjacent fifteen-register veneer sequence corroborates six previously
 unindexed entries. Their BX instructions and following NOP alignment are kept

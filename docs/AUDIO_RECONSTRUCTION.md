@@ -933,6 +933,41 @@ explicit, and runtime/audible behavior remains untested. Remaining envelope
 callers, player/mixer entries and those callers' input domains are the next
 connected audio targets; the core 776-byte instrument processor already matches.
 
+## On-row volume-column selector bound
+
+The indirect volume-column call at `0x0804A382` can select only the ten
+corroborated callback records at `0x08D6F77C`. This is a local static target
+bound, adding no source bytes or runtime observation. The separate between-row
+call at `0x0804A3F8` remains dependent on saved track state.
+
+On every ordinary local path from `audio_player_process_row` at `0x08049F64`,
+the volume register comes from zero initialization or an unsigned byte load.
+The call's sole incoming branch follows the unsigned `vol > 0x60` test.
+Subtracting `0x60` therefore produces `1..0x9F`, and the native shift pair
+selects rows zero through nine. Checking all 256 byte values gives 97 values
+that skip this call and 159 that select one of those ten nonnull, source-owned
+Thumb callbacks. No restriction on serialized volume-byte content is needed.
+
+The dispatch block computes the selector in registers before storing the value
+to track byte `+0x5D`. It then loads the callback from immutable ROM into R4 and
+calls the `BX R4` veneer. There is no intervening branch, callback or track-field
+reload. Changes to the stored track field therefore cannot change this already
+captured immediate target. Native local predecessor and reaching-definition
+checks corroborate the accepted C expression; entry into an arbitrary interior
+instruction is outside this function-entry claim.
+
+The between-row consumer instead freshly reads track byte `+0x5D`; its local
+byte/shift sequence admits indices zero through fifteen. Row decoding writes
+zero or the bounded difference, and player startup clears the track buffer, but
+jingle restoration copies saved player/track state and callbacks run between
+row and tick processing. This result does not supply the complete reaching-writer
+invariant for that later read. The shared observed table retains
+`targets_complete: false`. The inventory separately validates the on-row native
+control flow, byte provenance, guard, selector operations, table and veneer
+before marking that physical call site complete. A stale source pin, bypassing
+path or changed operation rejects the annotation. This removes one unresolved
+call-site observation without adding an entry, instruction or source byte.
+
 ## Standalone instrument lifecycle and activity handoff
 
 Twelve connected extents add **1,400 matching C bytes**, including a copied ARM

@@ -145,12 +145,32 @@ and the unused partial endpoint declaration is removed. Normal/strict matches,
 genuine changed-source controls, actual-definition interfaces, full-ROM and
 progress gates pass.
 
-The separate 124-byte status reader remains held. Slot volatility does not
-explain its native unsigned snapshot and retained all-ones OR: the pinned
-compiler folds that OR even when it retains a volatile read. Static startup,
-interrupt-enable and writer evidence supports asynchronous identifier/slot
-accesses under compatible guards; neither this evidence nor the poll's match
-closes runtime, participant, writer or complete protocol domains.
+The separate 124-byte status reader remains unconverted. A real unsigned
+snapshot in R3 now preserves the native all-ones OR. Its two signed volatile
+observations still compile to byte loads and shifts instead of the native signed
+byte loads; the complete candidate differs by 106 bytes. An alternate
+`-fvolatile` diagnostic produces the same nonmatch and establishes no new
+compiler profile. Static startup, interrupt-enable and writer evidence supports
+asynchronous identifier/slot accesses under compatible guards; neither this
+evidence nor the poll's match closes runtime, participant, writer or complete
+protocol domains.
+
+The 200-byte record provider at `0x0803D788` also remains unconverted. Its current
+canonical source differs by one byte: the second-record pointer load uses R0
+instead of native R4. Both full extents, including all twenty literal bytes,
+are compared without masks. The actual entry sentinel, received-array offset,
+checksum loop and final halfword-pointer lifetimes account for the preceding
+improvements. Integer address arithmetic preserves the received-record stride
+without crossing a character view of one record. The checksum is at most 2,805
+after zeroing the two reserved bytes and adding the actual unsigned random-byte
+provider; signed addition and negation therefore remain representable.
+
+Reading through the retained R4 owner makes the compiler remove the preceding
+R0-to-R4 copy. Reading through the short R0 value retains that copy but leaves
+the load based on R0. An inlined accessor, a two-member result and a volatile
+register pointer do not resolve this difference. These are rejected source
+diagnostics, with no matching credit, runtime observation or complete peer,
+backing or writer-domain claim.
 
 
 ## Surrounding serial-scene source

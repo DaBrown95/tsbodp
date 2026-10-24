@@ -17,6 +17,7 @@ from inventory_partition import partition, overlay
 from control_flow import thumb_switch, constant_result, stack_return
 from ram_copies import validate_copy
 from indirect_evidence import record_tables, phase_targets, validate_fixed_target, annotate_records, literal_veneers
+from bounded_indirect import validate_bounded_table, annotate_bounded_records
 from fixed_target_proof import prove_fixed_target
 from inventory_census import census, verify_census, source_instruction_role_spans
 
@@ -41,7 +42,8 @@ def finalize_extent_observations(rows):
 
 def unresolved_callback_sites(rows):
     """Observed table entries do not prove the runtime index is bounded."""
-    calls = ('register_veneer_call', 'dynamic_call', 'observed_table_call')
+    calls = ('register_veneer_call', 'dynamic_call', 'observed_table_call',
+             'bounded_table_call')
     return sorted({record['rom_offset'] for row in rows
                    for record in row.get('transfer_records', [])
                    if record['kind'] in calls
@@ -389,6 +391,16 @@ def main():
         validate_fixed_target(row, data, manifest['functions'],
                               lambda f: hashlib.sha256((ROOT/f['source']).read_bytes()).hexdigest(), scanner.physical)
         evidence_inputs.add(next(f['source'] for f in manifest['functions'] if f['name'] == row['owner']))
+    bounded_calls = []
+    fixed_sites = {row['rom_offset'] for row in evidence_config['fixed_targets']}
+    for row in evidence_config.get('bounded_indirect_calls', []):
+        if row['rom_offset'] in fixed_sites:
+            raise ValueError('Bounded table call also has a fixed-target annotation')
+        bounded_calls.append(validate_bounded_table(
+            row, scanner, manifest['functions'],
+            lambda f: hashlib.sha256((ROOT/f['source']).read_bytes()).hexdigest()))
+        evidence_inputs.add(next(f['source'] for f in manifest['functions']
+                                 if f['name'] == row['owner']))
     for address in literal_veneers(scanner, evidence_config['audio_literal_veneers']):
         scanner.seed(address, 'Thumb', 'audited dispatch entry')
     veneers = evidence_config['register_veneer_sequence']
@@ -515,6 +527,7 @@ def main():
                                   table_bytes=4*table['count'], limitation=table['limitation'])
     annotate_records(scanner.results, scanner.physical,
                      evidence_config['indirect_producers'], evidence_config['fixed_targets'])
+    annotate_bounded_records(scanner.results, scanner.physical, bounded_calls)
     # Merge RAM/ROM aliases at physical entry. They receive a single ROM tile.
     merged = {}
     for key, result in scanner.results.items():
@@ -622,7 +635,7 @@ def main():
               'source_owned_instruction_regions': source_instructions,
               'data_regions': data_regions, 'partition': partition(rows+data_regions, len(data)),
               'input_sha256': {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in
-                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'tools/indirect_evidence.py', 'tools/fixed_target_proof.py', 'tools/inventory_census.py', 'config/code-evidence-us-eu.json', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt', *sorted(evidence_inputs))}}
+                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'tools/indirect_evidence.py', 'tools/bounded_indirect.py', 'tools/fixed_target_proof.py', 'tools/inventory_census.py', 'config/code-evidence-us-eu.json', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt', *sorted(evidence_inputs))}}
     result['inventory_schema_version'] = 2
     result['historical_mapped_extent_baseline'] = 319640
     result['code_census'] = census(scanner, strong_entries, strong_results,

@@ -3924,24 +3924,112 @@
     },
     {
       "site": 134521730,
-      "kind": "register_veneer_call",
+      "kind": "bounded_table_call",
       "veneer_address": 134532352,
-      "targets_complete": false,
-      "targets": [],
+      "targets_complete": true,
+      "targets": [
+        134527636,
+        134530532,
+        134530612,
+        134530696,
+        134530772,
+        134530848,
+        134530876,
+        134530968,
+        134531056,
+        134531148
+      ],
       "producer_evidence": {
         "rom_offset": 304002,
         "target_origin": "fixed_ROM_table",
-        "producer": "ROM0x08D6F77C +8*(volume_effect byte>>4) +0",
+        "producer": "ROM0x08D6F77C +8*(((unsigned volume byte-0x60)&0xFF)>>4) +0, reached only after unsigned volume byte>0x60; target capturedR4 and called through0804CD00 BX R4.",
         "observed_table": "audio_volume_effects",
         "field": 0,
         "writer_roles": [],
         "source_owners": [
           "audio_player_process_row"
         ],
-        "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
-        "confidence": "static native/source producer; populations and ABI remain provisional"
+        "remaining_uncertainty": "Immediate selector is locally bounded to0..9 for every byte on ordinary paths from owner entry08049F64. Other volume-table consumers and arbitrary interior entries are not covered; this does not close the later writable-track dispatch.",
+        "confidence": "Complete local original-image selector bound: R4 reaching definitions at0804A042 are MOVS0 at08049F96 or LDRB at08049FD8; unsigned guard0804A046/48 dominates the call;0804A04A is the sole incoming edge to0804A36A..0804A382. Selector is formed in registers before STRB at0804A378, with no track reload, branch or intervening callback before target capture."
       },
-      "rom_offset": 304002
+      "rom_offset": 304002,
+      "target_modes": [
+        {
+          "address": 134527636,
+          "mode": "Thumb"
+        },
+        {
+          "address": 134530532,
+          "mode": "Thumb"
+        },
+        {
+          "address": 134530612,
+          "mode": "Thumb"
+        },
+        {
+          "address": 134530696,
+          "mode": "Thumb"
+        },
+        {
+          "address": 134530772,
+          "mode": "Thumb"
+        },
+        {
+          "address": 134530848,
+          "mode": "Thumb"
+        },
+        {
+          "address": 134530876,
+          "mode": "Thumb"
+        },
+        {
+          "address": 134530968,
+          "mode": "Thumb"
+        },
+        {
+          "address": 134531056,
+          "mode": "Thumb"
+        },
+        {
+          "address": 134531148,
+          "mode": "Thumb"
+        }
+      ],
+      "target_origin": "validated_guarded_byte_ROM_table",
+      "table_rom_offset": 14088060,
+      "table_bytes": 80,
+      "record_stride": 8,
+      "selector_bounds": [
+        0,
+        9
+      ],
+      "bounded_selector_proof": {
+        "kind": "thumb_volume_byte_table_v1",
+        "owner": "audio_player_process_row",
+        "source_sha256": "94c8988e4cf0f10dde90c029e7439967c528b10ec1e1dd9df1515d0a7c1a5e9c",
+        "guard_rom_offset": 303174,
+        "dispatch_rom_offset": 303978,
+        "byte_definition_rom_offsets": [
+          302998,
+          303064
+        ],
+        "reachable_instruction_count": 509,
+        "byte_inputs": 256,
+        "dispatch_inputs": 159,
+        "target_owners": [
+          "audio_volume_effect_slide_down",
+          "audio_volume_effect_slide_up",
+          "audio_volume_effect_slide_down_fine",
+          "audio_volume_effect_slide_up_fine",
+          "audio_volume_effect_vibrato_speed",
+          "audio_volume_effect_vibrato",
+          "audio_volume_effect_pan",
+          "audio_volume_effect_pan_slide_left",
+          "audio_volume_effect_pan_slide_right",
+          "audio_volume_effect_portamento"
+        ]
+      },
+      "limitation": "Ordinary local paths from the pinned source owner entry; other table consumers, arbitrary interior entry, argument validity and runtime behavior remain separate."
     },
     {
       "site": 134521848,
@@ -5735,7 +5823,6 @@
     303550,
     303682,
     303900,
-    304002,
     304120,
     304156,
     304178,
@@ -85760,24 +85847,112 @@
         },
         {
           "site": 134521730,
-          "kind": "register_veneer_call",
+          "kind": "bounded_table_call",
           "veneer_address": 134532352,
-          "targets_complete": false,
-          "targets": [],
+          "targets_complete": true,
+          "targets": [
+            134527636,
+            134530532,
+            134530612,
+            134530696,
+            134530772,
+            134530848,
+            134530876,
+            134530968,
+            134531056,
+            134531148
+          ],
           "producer_evidence": {
             "rom_offset": 304002,
             "target_origin": "fixed_ROM_table",
-            "producer": "ROM0x08D6F77C +8*(volume_effect byte>>4) +0",
+            "producer": "ROM0x08D6F77C +8*(((unsigned volume byte-0x60)&0xFF)>>4) +0, reached only after unsigned volume byte>0x60; target capturedR4 and called through0804CD00 BX R4.",
             "observed_table": "audio_volume_effects",
             "field": 0,
             "writer_roles": [],
             "source_owners": [
               "audio_player_process_row"
             ],
-            "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
-            "confidence": "static native/source producer; populations and ABI remain provisional"
+            "remaining_uncertainty": "Immediate selector is locally bounded to0..9 for every byte on ordinary paths from owner entry08049F64. Other volume-table consumers and arbitrary interior entries are not covered; this does not close the later writable-track dispatch.",
+            "confidence": "Complete local original-image selector bound: R4 reaching definitions at0804A042 are MOVS0 at08049F96 or LDRB at08049FD8; unsigned guard0804A046/48 dominates the call;0804A04A is the sole incoming edge to0804A36A..0804A382. Selector is formed in registers before STRB at0804A378, with no track reload, branch or intervening callback before target capture."
           },
-          "rom_offset": 304002
+          "rom_offset": 304002,
+          "target_modes": [
+            {
+              "address": 134527636,
+              "mode": "Thumb"
+            },
+            {
+              "address": 134530532,
+              "mode": "Thumb"
+            },
+            {
+              "address": 134530612,
+              "mode": "Thumb"
+            },
+            {
+              "address": 134530696,
+              "mode": "Thumb"
+            },
+            {
+              "address": 134530772,
+              "mode": "Thumb"
+            },
+            {
+              "address": 134530848,
+              "mode": "Thumb"
+            },
+            {
+              "address": 134530876,
+              "mode": "Thumb"
+            },
+            {
+              "address": 134530968,
+              "mode": "Thumb"
+            },
+            {
+              "address": 134531056,
+              "mode": "Thumb"
+            },
+            {
+              "address": 134531148,
+              "mode": "Thumb"
+            }
+          ],
+          "target_origin": "validated_guarded_byte_ROM_table",
+          "table_rom_offset": 14088060,
+          "table_bytes": 80,
+          "record_stride": 8,
+          "selector_bounds": [
+            0,
+            9
+          ],
+          "bounded_selector_proof": {
+            "kind": "thumb_volume_byte_table_v1",
+            "owner": "audio_player_process_row",
+            "source_sha256": "94c8988e4cf0f10dde90c029e7439967c528b10ec1e1dd9df1515d0a7c1a5e9c",
+            "guard_rom_offset": 303174,
+            "dispatch_rom_offset": 303978,
+            "byte_definition_rom_offsets": [
+              302998,
+              303064
+            ],
+            "reachable_instruction_count": 509,
+            "byte_inputs": 256,
+            "dispatch_inputs": 159,
+            "target_owners": [
+              "audio_volume_effect_slide_down",
+              "audio_volume_effect_slide_up",
+              "audio_volume_effect_slide_down_fine",
+              "audio_volume_effect_slide_up_fine",
+              "audio_volume_effect_vibrato_speed",
+              "audio_volume_effect_vibrato",
+              "audio_volume_effect_pan",
+              "audio_volume_effect_pan_slide_left",
+              "audio_volume_effect_pan_slide_right",
+              "audio_volume_effect_portamento"
+            ]
+          },
+          "limitation": "Ordinary local paths from the pinned source owner entry; other table consumers, arbitrary interior entry, argument validity and runtime behavior remain separate."
         }
       ],
       "return_offsets": [
@@ -137958,14 +138133,15 @@
     }
   ],
   "input_sha256": {
-    "tools/inventory_rom.py": "a9ce20f9ad8870a6e7b25a79f07277bfddd65c18bbe92850a6acf6845bdc9b28",
+    "tools/inventory_rom.py": "452b30758e765b20d390f04d05b39892cb86e075e0945ab8ee22fdd6dd411957",
     "tools/control_flow.py": "225048329459429d84b7e44472833d05c7593ae14873ce0c36bc97653f5d97f9",
     "tools/inventory_partition.py": "5838852221fa7a38767ccd701d27ca398309bc55951bc0f294e306f7bebbe89c",
     "tools/ram_copies.py": "5e429b3d6efa9666a90c97b892f66cf6203294dad0c277f82700b4f521b7f3c1",
     "tools/indirect_evidence.py": "5df8e0fa17096b86737b158d57fd2122b6b16d20aeda2994fecb087a1bf5f53d",
+    "tools/bounded_indirect.py": "d088b8112475def63678ba18b4f6df83bc1a37020a81cf21bd77d0c434c33cee",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
-    "config/code-evidence-us-eu.json": "b7066f51992eb4da8ea3f54798327cd96c5838b859516a18078b86700cbe7938",
+    "config/code-evidence-us-eu.json": "49c383b3be4353d4bcfa365223d4d0f6a419b17732c39a86d0bcacc19a16cb21",
     "config/ram-map-us-eu.json": "77bdc9b4c55a9bf180ecfb2585630044a55e756beff96d130d72cfd483b21d41",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
