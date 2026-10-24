@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,449 C functions / 305,744 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 309,804 bytes; original slices
-still supply 16,467,412 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,452 C functions / 305,768 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 309,828 bytes; original slices
+still supply 16,467,388 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **50 unowned rows / 15,870
+[inventory](../assets/rom-inventory.json) contain **47 unowned rows / 15,846
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -243,6 +243,14 @@ pointer, and both maintained callers retain the same target address. Only the
 second existing byte-count read is qualified to preserve its native load; no
 access or bounds guard is added. The source match leaves collection, stage,
 writer and retry-termination premises conditional and adds no runtime claim.
+
+Three [installed constant-result EC bodies](FRAME_ATTACHMENT_JOBS_42_94.md#installed-constant-result-ec-bodies)
+at `0x13360`, `0x1A590` and `0x35060` now own eight C instruction bytes each.
+Their equal-result switches preserve the pinned compiler's link-register save;
+normal/strict positives and changed-case-result controls cover all three slots.
+The modeled formals, EC kind delivery and historical case structure remain
+inferred. These matches remove three existing rows, with no new entry, mapped
+extent or runtime claim. The separate unrooted constant-one entries remain open.
 
 The instruction census is not a complete code denominator. Its current raw
 union is 285,360 bytes; qualified instructions occupy 285,334 bytes and

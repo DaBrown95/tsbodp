@@ -6,6 +6,8 @@
 /* Observed rows68/70/72; the E8 selector writes no action bytes. */
 unsigned int frame_initialize_no_choice_attachment(struct FrameNeedEffectState *);
 unsigned int frame_select_no_choice_attachment(struct FrameNeedEffectState *, unsigned char *);
+/* EC formals and kind delivery remain inferred; every value returns one. */
+unsigned int frame_prepare_no_choice_attachment(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 unsigned int frame_begin_no_choice_attachment(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 unsigned int frame_complete_no_choice_attachment(struct FrameNeedEffectState *, struct FrameObject *);
 void frame_finish_no_choice_attachment(struct FrameNeedEffectState *);

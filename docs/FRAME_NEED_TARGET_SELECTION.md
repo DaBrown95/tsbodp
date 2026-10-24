@@ -1092,10 +1092,10 @@ backing and gameplay remain open.
 | 50 | `0x0802A974..0x0802AA78` | 8 / 260 |
 | 56, 58 | `0x08016C68..0x08016E28` | 5 / 64; 384 already owned |
 | 57 | `0x0800F4DC..0x0800F754` | 4 / 24; 608 already owned |
-| 68, 70, 72 | `0x08013330..0x08013390` | 7 / 88; eight EC bytes remain original |
+| 68, 70, 72 | `0x08013330..0x08013390` | 8 / 96, including the eight-byte EC |
 | No installed row identified | `0x08016E28..0x08016F24` | 7 / 180; 72 already owned |
 
-These attachment additions own 31 definitions / 616 extent bytes: 592
+These attachment additions own 32 definitions / 624 extent bytes: 600
 instruction bytes, four pool bytes and twenty zero-alignment bytes. Actual
 definitions and target layouts pass API checks; every changed-source control
 rejects. Full matching/control and progress gates pass. Existing bodies were
@@ -1118,7 +1118,8 @@ callback or incoming role is inferred from this source grouping.
 
 Rows 68/70/72 use an E8 selector that returns one without writing the choices
 buffer, a conventional record allocator/begin and a constant-two status. Its EC
-remains original: no action cases are evidenced. The neighbouring count
+now matches a constant-result switch modeling the installed row numbers;
+historical case structure and EC kind delivery remain inferred. The neighbouring count
 predicate and constant-100 body likewise have no identified incoming edges.
 This module starts at `0x08013330`; the header-job rows' actual F8 pointer is
 `0x08012E75`. Complete callback populations, stored EC/FC delivery, live point
@@ -1176,9 +1177,9 @@ now close that family's 1,212-byte local interval.
 | Row 131 | `0x08023AA0..0x08023D00` | 9 / 608 |
 | Row 96 | `0x08016680..0x080167B8` | 7 / 312 |
 | Row 133 | `0x0802BC10..0x0802BDAC` | 10 / 412 |
-| Shared fallback rows | `0x08035028..0x080350A4` | 7 / 116; eight EC bytes remain original |
+| Shared fallback rows | `0x08035028..0x080350A4` | 8 / 124, including the eight-byte EC |
 
-These additions own 33 C definitions / 1,448 bytes: 1,352 instructions,
+These families own 34 C definitions / 1,456 bytes: 1,360 instructions,
 60 literal bytes and 36 native zero-alignment bytes. Actual definitions,
 provider declarations and target layouts pass API checks. All genuine source
 controls reject, including size changes. Full matching/control and progress
@@ -1205,8 +1206,11 @@ consumer domains remain separate.
 
 The fallback selector writes nothing. Its status recognizes record kind 40,
 but the generic chooser intercepts common choices 40/34 before F0; those writes
-do not supply a grounded EC case set. EC `0x08035060` stays original and
-uncompiled. Its constant-100 neighbour at `0x080350A0` is installed as FC by
+do not prove the EC argument population. EC `0x08035060` now has an eight-byte
+[constant-result C switch](FRAME_ATTACHMENT_JOBS_42_94.md#installed-constant-result-ec-bodies)
+modeling case 40 and the same result for every other value. Its historical
+case structure and EC delivery remain inferred. Its constant-100 neighbour at
+`0x080350A0` is installed as FC by
 rows 10/103: the actual byte-result/state-argument declaration replaces an
 initial private word/void guess before publication. The separate predicate
 remains unrooted. This differs from the 13 published four-byte default-100
@@ -1221,11 +1225,11 @@ serialized indices, signed arithmetic and scheduling/gameplay remain open.
 | Observed row | Local interval | New C functions / extent bytes |
 | --- | --- | ---: |
 | 95 | `0x0800F858..0x0800FA50` | 9 / 504 |
-| 128 | `0x0801A55C..0x0801A660` | 8 / 252; eight EC bytes remain original |
+| 128 | `0x0801A55C..0x0801A660` | 9 / 260, including the eight-byte EC |
 | 106, 107, 108 | `0x08023D00..0x08023F34` | 10 / 564 |
 | 146, 147 | `0x080465D4..0x080466B4` | 8 / 224 |
 
-These paths add 35 C definitions / 1,544 bytes: 1,476 instructions, 32 literal
+These paths own 36 C definitions / 1,552 bytes: 1,484 instructions, 32 literal
 bytes and 36 native zero-alignment bytes. All external providers have source.
 Actual definitions and target layouts pass API checks; every genuine source
 control rejects. Full matching/control and progress gates pass. The separate
@@ -1239,10 +1243,11 @@ worker/default result before the common return restores native control flow.
 Row 128 writes only zero and returns success one. Known chooser paths stop or
 suppress zero; its independent status dispatch recognizes 12. EC `0x0801A590`
 consumes no observed input and returns one through an LR save/restore frame.
-No action cases need to be invented for that constant result. Ordinary matching
-constant-one C elsewhere emits four bytes, while this native body owns eight;
-the frame-producing source remains unexplained and EC stays original. Its
-generic delivery and incoming unused-formal contract also remain open.
+Plain constant-return C emits four bytes. A constant-result switch modeling
+case 12 now reproduces all eight bytes through the pinned compiler's cached
+far-jump flag and retained LR save. Normal/strict positives, genuine changed
+case-result controls and actual-definition interface checks pass. This does
+not prove the historical case structure, EC delivery or unused-formal contract.
 
 Rows 106–108 select optional action 45 or animation modes 56/57. The latter
 worker preserves modes 512/256 and its actual cue, animation and commit order.
@@ -1252,7 +1257,9 @@ Both initial failures remain retained. Rows 146/147 separately select action
 12, stop motion and use direction 2, animation 27 and timer 120 before the
 actual need adjustment and completion transition.
 
-The three new EC switches use action sets established before compilation.
+The three EC switches in the initial 35-definition batch used action sets
+established before compilation; the later row-128 constant-result match keeps
+its separate case-structure inference.
 Generic delivery, choice tails, writable targets, found/live records, counter
 and serialized-index domains, scheduling and gameplay remain open. The private
 row-117 and row-85 paths receive no credit here: their shared settlement provider

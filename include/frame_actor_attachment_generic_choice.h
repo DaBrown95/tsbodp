@@ -4,9 +4,11 @@
 #include "display_actor_interaction.h"
 
 /* Shared observed rows118..148 listed in the receipt. The selector writes no
- * action bytes; its EC entry remains unowned pending an actual action producer. */
+ * action bytes; EC kind delivery remains unresolved. */
 unsigned int frame_initialize_generic_choice_attachment(struct FrameNeedEffectState *);
 unsigned int frame_select_generic_choice_attachment(struct FrameNeedEffectState *, unsigned char *);
+/* EC formals and kind delivery remain inferred; every value returns one. */
+unsigned int frame_prepare_generic_choice_attachment(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 unsigned int frame_begin_generic_choice_attachment(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 unsigned int frame_complete_generic_choice_attachment(struct FrameNeedEffectState *, struct FrameObject *);
 void frame_finish_generic_choice_attachment(struct FrameNeedEffectState *);

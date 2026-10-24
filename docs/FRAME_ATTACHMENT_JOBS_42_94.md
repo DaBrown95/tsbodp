@@ -623,3 +623,42 @@ canonical layout facts. Canonical owner, actor, job, sample and need-state
 layouts are retained. Record/actor/sample lifetimes, complete selector and writer domains,
 definition backing and provider effects remain conditional. No new runtime
 trace or gameplay coverage is claimed.
+
+## Installed constant-result EC bodies
+
+Three installed EC callbacks now match from C, each with eight instruction
+bytes and no literal pool or alignment tail:
+
+| Entry | Source | Installed definition rows | Modeled switch cases |
+| --- | --- | --- | --- |
+| `0x13360` | `frame_prepare_no_choice_attachment` | 68, 70, 72 | 68, 70, 72 |
+| `0x1A590` | `frame_prepare_counter_attachment_job_12` | 128 | 12 |
+| `0x35060` | `frame_prepare_generic_choice_attachment` | 118–124, 127, 129, 130, 134, 140, 142–145, 148 | 40 |
+
+Every unsigned input returns word one without memory accesses or calls. Plain
+constant-return C emits four bytes. The equal-result switch preserves real
+branches through register allocation; the second jump pass merges the returns
+while the pinned Thumb backend's cached far-jump flag retains the link-register
+save. The
+complete emitted bodies match the native push, constant result, pop and return.
+No padding, dummy call, register binding, qualifier or embedded instruction body
+supplies the extra instructions.
+
+The latter two cases have connected evidence: their begin callbacks store the
+incoming kind and their completion callbacks recognize 12 and 40. The first
+case set models its installed rows. Installation does not prove EC receives
+those row numbers. All three EC formal lists, kind delivery and historical case
+structure remain inferred. The allocator copies raw definition pointers into
+untyped state storage; it is not a validated typed EC caller. The switches have
+the same observable result for every value, including values outside the cases.
+Rows 10/103 install the separate generic-choice query at `0x350A0`, not this EC.
+
+Each definition includes its canonical family header. Normal and strict
+positives match all eight bytes; changing the case result to two rejects all
+three under both profiles, including the complete larger control outputs.
+Actual-definition interface checks accept the modeled declarations and reject
+incompatible arities. These checks establish the C interfaces used here, without
+closing native EC delivery, input populations, later pointer writers or runtime
+reachability. Three existing worklist rows are removed; no new entry or mapped
+extent is added. The independently bounded entries at `0x25998` and `0x44C10`
+remain unconverted.
