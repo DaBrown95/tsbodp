@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,455 C functions / 305,812 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 309,872 bytes; original slices
-still supply 16,467,344 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,456 C functions / 305,912 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 309,972 bytes; original slices
+still supply 16,467,244 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **44 unowned rows / 15,802
+[inventory](../assets/rom-inventory.json) contain **43 unowned rows / 15,704
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -20,6 +20,15 @@ The 41/45, 49 and 82..86 cases are grounded in adjacent selectors/dispatchers;
 historical case intent, unused formals and incoming unrooted callers remain
 inferred. Normal/strict comparisons, genuine controls and actual definition
 interfaces pass. These source gains do not close runtime or inventory domains.
+
+The [connection-start provider](SERIAL_HANDSHAKE.md#connection-start-provider)
+now owns its full 100-byte C extent: 82 instruction, 16 literal and two zero
+alignment bytes. The canonical eight-byte payload union has an active word
+member for its initialized low word; the remaining four representation bytes
+are unspecified and unconsumed by event kinds one and two. Its actual handshake
+caller and provider interfaces are qualified. This closes one existing
+98-byte estimate and classifies two adjacent alignment bytes, without a new
+entry or instruction observation. Protocol and wider writer domains stay open.
 
 The latest activity-three preparation work adds no C coverage. It now
 has measured phase lifetimes and eligibility storage, conditional

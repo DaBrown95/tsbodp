@@ -26,6 +26,7 @@ extern struct EventRecord g_link_received_events[],g_event_record;
 void link_set_tick_callback(unsigned int (*)(void));
 unsigned int link_tick_clock(void);
 void link_reset_random_bytes(void);
+void link_start_connection(void);
 unsigned int link_current_random_byte(void);
 unsigned int link_saved_random_byte(void);
 void link_snapshot_random_byte(void);

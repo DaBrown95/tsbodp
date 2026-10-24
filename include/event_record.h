@@ -5,6 +5,9 @@
 struct EventNoPayload {};
 union EventPayloadStorage {
  struct EventNoPayload no_payload;
+ /* Active word initializes the low four bytes; the remaining union
+  * representation is unspecified and is not read by event kinds1/2. */
+ unsigned int word;
  unsigned char bytes[8];
 };
 struct EventPayload {

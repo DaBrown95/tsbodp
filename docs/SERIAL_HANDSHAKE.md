@@ -21,8 +21,8 @@ order. `0xBEEF`, `0xC0DE`, `0xBABE` and `0xDEAD` select an early count-five resu
 When that flag is set, slot zero checks the other active channels for `0xB0CA`;
 the nonzero-slot path checks channel zero. A ready path installs the timeout,
 captures the VBlank count, installs the original next-stage IRQ address, resets
-the identifier and random-byte state, updates flags, and calls the original
-start provider. Other paths send `0xB0CA` or `0xFEED`. The existing common restart
+the identifier and random-byte state, updates flags, and calls the
+rebuilt start provider. Other paths send `0xB0CA` or `0xFEED`. The existing common restart
 operation updates the control and timer halfwords when mask `0x4` is absent.
 These access sequences do not establish a complete serial protocol.
 
@@ -52,13 +52,11 @@ payloads were retired. They establish historical candidate lineage, not a replay
 or a current match. The adopted bodies change only their first include line from those retained attempts.
 There are no register bindings, copied instructions or new volatile qualifiers.
 
-The original 100-byte start provider, 1,616-byte next-stage IRQ and downstream
-200-byte record helper remain explicit boundaries with zero new C credit. Their
-call/address ABI views do not qualify their implementations. The canonical
-whole-record representation is qualified separately below. The start provider's unwritten payload
-suffix is not promoted to initialized C. The separate 124-byte status reader
-also remains on hold. No runtime fixture, peripheral timing or gameplay claim
-is made for these functions.
+The 100-byte start provider now matches from C as described below. The
+1,616-byte next-stage IRQ, downstream 200-byte record helper and separate
+124-byte status reader remain unowned. Their call/address views do not qualify
+those implementations. The start payload's upper representation remains
+unspecified; no runtime fixture, peripheral timing or gameplay claim follows.
 
 Normal and strict positive/control builds agree on all seven retained native
 artifacts per role. Changing the early count result from five to six changes one
@@ -315,5 +313,40 @@ Taking an escaped halfword pointer, including through an integer address, does
 not inherit that exception after fields-view writes. Known pointer banks and
 record extents do not establish initialized bytes, all incoming indices,
 asynchronous writers, callback populations or complete protocol behavior. The
-IRQ, provider and status-reader boundaries remain original code, with zero
-additional source credit from this owner change.
+IRQ, 200-byte record helper and status-reader boundaries remain original code,
+with zero additional source credit from that owner change.
+
+## Connection-start provider
+
+The [provider at `0x0803A550`](../src/link/link_start_connection.c) owns 100 C
+extent bytes: 82 instruction bytes, 16 literal bytes and two final zero
+alignment bytes. Its function symbol ends after 98 bytes; the next independent
+entry begins at `0x0803A5B4`. One existing 98-byte worklist row is removed, and
+the two previously unresolved tail bytes are classified as alignment. No new
+entry or instruction observation is added.
+
+It sets game flag `0x20`, caches the actual active-byte provider's word result
+at `0x03007358`, and caches the signed-slot provider's low byte at
+`0x03007340`. A zero cached slot obtains the existing bounded-random result
+with limit 65535, writes that value to the payload word and records kind two.
+Other slots write a zero word and record kind one. The actual two handshake
+call sites now use this shared declaration; their addresses and compiled bytes
+are unchanged. Names and complete protocol roles remain provisional.
+
+The canonical eight-byte, four-aligned payload union retains its empty member
+and byte view and adds a real unsigned-word member at offset zero. Writing it
+initializes the four bytes consumed by kind two. The upper four representation
+bytes remain unspecified, and kind one reads no payload; this is not a claim
+that the whole argument is initialized. No type-punned byte array, fabricated
+load, tail zeroing or instruction body is used.
+
+Normal and strict positives match the complete 100 bytes, and changing kind
+two to three rejects by one byte. The recorder, seven existing by-value
+callers, aggregate receiver, three actual providers and handshake caller pass
+current-header positive/control qualification in separate contexts. Actual
+definition checks preserve the random helper's unsigned-short API, the active
+provider's unsigned-word result and the slot provider's signed-word result.
+Payload size/alignment/word offset and record layout are checked, with wrong
+contracts rejected. Full-ROM and changed-source gates remain separate from
+these compiler/interface results. No endpoint population, complete protocol,
+writer-domain or runtime evidence is added.

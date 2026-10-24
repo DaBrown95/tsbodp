@@ -41151,13 +41151,13 @@
         "link_serial_timeout": "0x0803e4ed",
         "link_serial_interrupt": "0x0803dc49",
         "link_reset_random_bytes": "0x0803a53d",
-        "link_original_start_connection": "0x0803a551"
+        "link_start_connection": "0x0803a551"
       },
       "thumb_symbols": [
         "link_serial_timeout",
         "link_serial_interrupt",
         "link_reset_random_bytes",
-        "link_original_start_connection"
+        "link_start_connection"
       ],
       "negative_control": {
         "before": "g_link_word_0300218c=5;",
@@ -55844,6 +55844,32 @@
         "after": "case 86:\n        return 2;"
       },
       "expected_sha256": "c1f16de3829320e098d9abfaeef9984357bdd4dcedadc91466dbb7a7be8e67f2"
+    },
+    {
+      "name": "link_start_connection",
+      "rom_offset": 238928,
+      "size": 100,
+      "source": "src/link/link_start_connection.c",
+      "symbols": {
+        "g_game_flags": "0x03004310",
+        "g_link_peer_count": "0x03007358",
+        "g_link_byte_03007340": "0x03007340",
+        "event_get_link_slot": "0x0803e439",
+        "link_read_endpoint_active": "0x0803e42d",
+        "frame_random_bounded": "0x0803542d",
+        "transition_record_event": "0x0803a41d"
+      },
+      "thumb_symbols": [
+        "event_get_link_slot",
+        "link_read_endpoint_active",
+        "frame_random_bounded",
+        "transition_record_event"
+      ],
+      "expected_sha256": "0a397bfce2986ff8c3451070afe8b111ef99f684eb0f8d4783546bf64a336c04",
+      "negative_control": {
+        "before": "transition_record_event(2, payload);",
+        "after": "transition_record_event(3, payload);"
+      }
     }
   ],
   "assembly": [

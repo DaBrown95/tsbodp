@@ -51,7 +51,7 @@ void link_serial_handshake(void)
    if(ready) {
     install_transfer_callback();
     LINK_REG16(0x0400010c)=0xc352;
-    link_original_start_connection();
+    link_start_connection();
     return;
    }
    HANDSHAKE_SEND=0xb0ca;
@@ -61,7 +61,7 @@ void link_serial_handshake(void)
     HANDSHAKE_SEND=reply;
     install_transfer_callback();
     LINK_REG16(0x0400010c)=0xc352;
-    link_original_start_connection();
+    link_start_connection();
     return;
    }
    HANDSHAKE_SEND=0xfeed;

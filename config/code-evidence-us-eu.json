@@ -18273,7 +18273,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "8ab043c0470dab4a94282890be6099b35c47c997a0269d9d59f1780d4f26b779",
+      "source_sha256": "e01fe531a8fa7d217f491370e5e925a259053748d4cf4a4271c92fe19c55a1a4",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line212 emits padding containing relative414..416; actual source.o $d covers this span. ",
         "Full retained 608-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -18286,7 +18286,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "8ab043c0470dab4a94282890be6099b35c47c997a0269d9d59f1780d4f26b779",
+      "source_sha256": "e01fe531a8fa7d217f491370e5e925a259053748d4cf4a4271c92fe19c55a1a4",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line297 emits padding containing relative590..592; actual source.o $d covers this span. ",
         "Full retained 608-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -26563,6 +26563,20 @@
         "Complete176-byte canonical-owner C output matches fixed native extent in normal and strict qualification; genuine selected-kind controls reject. Final source.s .align 2,0 at LF line99 emits zero bytes174..176 after the function ends.",
         "Modern assembler object and linked ELF have174-byte function symbols and176-byte four-aligned .text; the two zero tail bytes are source-emitted alignment. The body also contains12 literal bytes, leaving162 instruction bytes.",
         "Alignment/data role only; this does not exclude alternate incoming execution or close runtime, selector, backing or writer populations."
+      ]
+    },
+    {
+      "name": "link_start_connection_alignment_03a5b2",
+      "owner": "link_start_connection",
+      "rom_offset": 239026,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c258f544d8bf7a4ad9e22f8817c4da87c0f50583b2dc9bd534d224bcad5a0124",
+      "evidence": [
+        "Complete100-byte C extent matches fixed reference in normal and strict qualification, with genuine kind2-to3 controls rejected. Source.s final .align 2,0 emits bytes98..100 after the98-byte function symbol.",
+        "Object and linked ELF map the final2 bytes as $d at relative0x62 and ROM0x3A5B2, before the separate next entry0x3A5B4. The preceding body contains82 instruction bytes and16 literal bytes.",
+        "Alignment/data role only; no alternate-entry exclusion or runtime, protocol, backing or writer-population closure is asserted."
       ]
     }
   ],
