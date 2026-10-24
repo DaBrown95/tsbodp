@@ -1265,12 +1265,140 @@ Activity six is a distinct zero-volume producer: initialization saves the
 previous volume, forces 255 and selects its option ID; completion later
 restores the saved byte without clearing pause mask `0x01`. The retained
 250-group resource population contains one pause command, at `0x08D7994C`
-in scene 28 / pack 2 / group 10, and no resume or sequence-volume command.
-Record presence does not establish execution or an intervening pause during
-activity six. That lifetime relation, wider writers and other incoming paths
-remain open. If mask `0x01` is supplied at the re-enable return suffix, 255
-survives; no normal initialized call-order witness for that premise has been
-established.
+in world resource 28 / physical pack 2 / serialized program 10, and no resume
+or sequence-volume command. Its conditional activation and the named
+activity-six scheduling exclusions are now established below. Alternate entry,
+object reinsertion, unfreezing and wider writers remain open. If mask `0x01`
+is supplied at the re-enable return suffix, 255 survives; no normal initialized
+call-order witness for that premise has been established.
+
+## Fixed pause marker and activity-six scheduling
+
+The native byte selector value four chooses physical pack two at `0x08D79700`
+under world-resource root `0x08D7951C`. Resource flag one prepends base groups,
+so serialized program ten becomes runtime group eleven, spanning
+`0x08D79930..0x08D79954`. Only runtime groups zero and one are initially
+requested. Four further raw-byte lookup aliases remain unadmitted; the
+physical pack number is not itself the byte selector.
+
+Initial object group one, slot five uses factory 22 and payload `0x08D7976C`.
+Its marker ID is 22, its position is (50,93), and its completion condition is
+row four / column four / entry two. The owned getter reads `0x03004041`.
+A nonzero result requests marker state one; a later admitted step marks it for
+removal and activates object group two plus program group eleven. This trigger
+does not require animation completion.
+
+Program eleven performs view motion toward object 2/0, stores resource selector
+one, plays cue 38, and executes pause command five before its terminator.
+Object 2/0 is a conditional actor-23 record. A missing view target makes that
+handler a no-op; it does not abort the program. The selector store affects a
+future resource prepare, without rebuilding the current arena. Each preceding
+handler must return with valid walker and backing storage before pause is
+reached. Thirty current source/control pairs, ten native instruction-model
+fragments and four walker-to-handler boundary fragments qualify this case.
+They do not establish a natural gameplay execution or all activation routes.
+
+The pause wrapper checks nonzero volume and player state other than one.
+For state zero the player provider does nothing, but the wrapper still sets
+control mask `0x01` after return. An inactive player therefore does not make
+a surviving pause marker harmless while activity six temporarily sets volume
+255. World resource 28 and scene phase 20 also name different domains;
+their numeric difference does not establish scheduling exclusion.
+
+The named scheduler and lifecycle supply a narrower exclusion:
+
+- Completed world initialization leaves the current request mode zero. Its
+  exit toward phase 20 calls `scene_release_display`, then the mode-zero branch
+  in `scene_primary_exit` removes the primary objects before the queued request
+  is installed and contact initialization runs. The serial-session exit also
+  removes that list. Marker ID 22 passes the removal guard, and its cleared
+  allocation has no removal callback installed by its constructor.
+- Choice-panel entry freezes primary objects with mask `0x02000000`. Exit to
+  world phase one clears it. Other exits retain the display: when game flag
+  `0x20000` is clear, the frozen list moves to retained storage and the primary
+  head/tail become zero. When that flag is set, detachment is skipped and
+  exclusion requires the marker's freeze bit to remain set.
+- The frame refresh schedules primary list `0x030024F0`, not retained list
+  `0x03002CA0`. Freezing still permits `before_step`; the marker's installed
+  hook only updates spatial bounds under its provider and backing premises.
+  The native gate reads flags after that hook and skips `on_step` while the
+  freeze bit is set. Four call-free model cases qualify that gate.
+- Activity six installs five dedicated step roles. Their local bodies contain
+  no pause, resource-program activation, retained-list restore or blanket
+  unfreeze. The primary role restores the saved volume after its completion
+  animation. A separate window-transition object's state four can activate
+  groups, and state five can unfreeze the primary list; it is not one of those
+  five constructors, but arbitrary insertion or survival is not excluded.
+
+Thus an admitted activity-six interval entered with saved volume zero and
+mask `0x01` clear restores zero with that mask clear if cleanup succeeds,
+the original marker remains removed, detached or frozen, and only the named
+hooks and qualified audio callbacks execute. Coherent lists, valid mode and
+resource/object storage, no reinsertion or intervening unfreeze, and preservation
+by other providers, aliases and interrupts remain premises. The renderer,
+finalizer and copied collision/sorter uncertainties are not closed by this
+relation. Seventy-two current source/control pairs support the scheduling
+audit; it is not a full-game induction or a new initialized pause witness.
+
+## Conditional ring-buffer and sample-count bounds
+
+After the fixed startup copy, the ring phase/offset pair is zero/zero; the
+hardware initializer sets two/552. The acquisition routine preserves phase
+`0..3` with offset `276 * phase`. A successful call returns 276 and selects
+one 276-byte slice from each 1,104-byte output bank at `0x02000000` and
+`0x02000450`, then advances with wraparound. It otherwise returns zero.
+Ninety-six native instruction-model cases cover all four phases, disabled and
+nonzero enabled states, and equal/unequal first stamp reads with stable or
+changed second reads. While enabled, acquisition advances if the first stamp
+equals the previous stamp or the current phase is one or two. The second read,
+made on a mismatch, updates history without an atomic-stamp assumption.
+
+Acquisition can write output pointers even on a zero return; the actual frame
+caller ignores them in that case. Its two output words and the acquisition
+leaf's saved return word are at caller-entry SP minus 32, 36 and 40 respectively.
+They are mutually disjoint, while valid stack storage separate from control
+and output buffers remains required. Unaccounted writers of phase or offset
+are not admitted by this local invariant.
+
+The ordinary byte-tempo paths give period
+`4 * floor(245760 / max(24 * tempo, 384))`: all 256 byte values produce 147
+distinct positive periods from 160 through 2,560. Start sets timing before
+enabling its tick callback. Pause saves a positive active remainder; resume
+requires paused state and restores it. Stop first sets inactive state and can
+then save zero from a paused player; ordinary resume rejects inactive state.
+Finish-jingle resets timing from the restored tempo before enabling ticks.
+That tempo is physically
+a halfword; its byte range depends on the named byte writes, fixed live/backup
+copies and preservation by other writers.
+
+The reset saved tick at `0x02000E34` is zero. Current count and period initialize
+to 32,768 with a null callback; `0x02001640` is volume 128, not saved timing.
+An arbitrary nonnull callback installation can therefore restore zero and is
+outside the admitted transition relation. With a null callback, current count
+can also wrap or reach zero legitimately: the frame still supplies its positive
+remaining amount to the mixer. With the named active callback, a positive
+current remainder supplies either that remainder or the smaller remaining
+frame amount. Exact exhaustion calls the callback and reloads the period.
+
+Finite integer checks cover 44,160 active and 1,130,496 inactive one-step cases,
+alongside the byte-tempo domain. Under the stated transition and interference
+premises, every mixer handoff is a multiple of four in `4..276`. Sixteen current
+source/control pairs and native instruction checks qualify the named count
+flow. The frame reloads current count after mixing, callback before transfer,
+and period after callback return. Mixer preservation of that count, validity of
+the fresh callback, positive returned period and noninterleaved transitions
+are necessary premises, not consequences of the arithmetic checks.
+
+For every amount `4,8,...,276`, the native clear-loop model writes exactly
+`4 * amount` intermediate-buffer bytes starting at `0x0300115C`, plus the two
+volume sums and its two saved stack words. The maximum ends at `0x030015AC`,
+before the instrument-generation word. All 69 positive cases preserve the
+following sentinel and restore saved registers. A separate constructed zero
+input clears the first sixteen bytes and underflows its counter before the
+next loop iteration; it is not an admitted game handoff or a crash observation.
+The converter has the same unguarded count-divided-by-four loop dependency.
+These results establish a conditional clear footprint, not complete sample
+geometry, conversion arithmetic, mixer safety, IRQ/DMA behavior or audio output.
 
 ## Standalone instrument lifecycle and activity handoff
 

@@ -30,10 +30,24 @@ valid, nonoverlapping stack premise. Other handle/slot writers remain open.
 Option/current-ID copies supply no membership guard, but the named startup
 and options mute/enable paths now have a conditional admitted-ID relation.
 The constructed sentinel-255 read is still not an initialized execution
-witness. The remaining specific relation concerns pause mask `0x01` across
-activity-six saved-volume restoration. Global index and program-storage
-premises, other callbacks, saved pointers and wider call ordering remain open;
-neither shared audio callback site gains completeness.
+witness. The [fixed pause marker](AUDIO_RECONSTRUCTION.md#fixed-pause-marker-and-activity-six-scheduling)
+now has a condition-byte activation path to runtime program eleven. Named
+world/serial cleanup and choice-panel detach/freeze paths conditionally exclude
+it during activity-six saved-volume restoration. Alternate entry, reinsertion,
+window-transition unfreezing and provider/writer preservation remain open.
+Global index and program-storage premises, other callbacks, saved pointers
+and wider call ordering remain open; neither shared callback site gains
+completeness.
+
+The [ring and sample-count relation](AUDIO_RECONSTRUCTION.md#conditional-ring-buffer-and-sample-count-bounds)
+now bounds named mixer handoffs to positive multiples of four at most 276 and
+the clear loop's intermediate-buffer writes to its 1,104-byte buffer, under
+valid timing, stack and interference premises. The reset saved count is zero; arbitrary
+callback installation is not covered. Inactive current counts may reach zero
+without passing zero to the mixer. Byte-tempo provenance, fresh postmix count
+and callback/period loads, other mixer/sample writers and interrupts remain
+dependencies. These scheduling, native-model and arithmetic results add no
+C coverage or full-mixer/gameplay claim.
 
 The [contact-scene need adjustment](SCENE_CONTACT_MENU.md) now owns another
 100 C bytes, including 80 instruction and 20 literal bytes. Its real lower
