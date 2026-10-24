@@ -26667,6 +26667,18 @@
       "evidence": [
         "Matching pinned compiler emits two zero alignment bytes at ROM0x40382 before its following word pool; the source and linked ELF cover the complete512-byte owner. ARM ELF mapping symbol $d begins at this offset; the next literal word is at ROM0x40384. Normal/strict positives and changed-caption controls preserve this padding. Alignment/data role does not exclude alternate incoming execution."
       ]
+    },
+    {
+      "name": "background_character_fill_alignment_00d776",
+      "owner": "display_fill_background_tile",
+      "rom_offset": 55158,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "f4193f1713301351f126f4881b51491cf7b6fcb57d03b99e05af2a95ffeb6877",
+      "evidence": [
+        "Both normal and strict builds emit .align 2,0 before the g_background_states pool at ROM 0xD778. The linked $d mapping starts at relative 70 and $t resumes at relative 76. The full 116-byte comparison and genuine mask controls qualify this alignment/data role; alternate incoming execution remains open."
+      ]
     }
   ],
   "source_owned_instruction_regions": [

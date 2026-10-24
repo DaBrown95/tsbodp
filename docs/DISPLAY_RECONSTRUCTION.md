@@ -202,14 +202,26 @@ This does not close the renderer/finalizer or establish gameplay coverage.
 The background map initializer at `0x0800d6c8` calls the character fill routine,
 then fills the staged screen map with a tile/palette halfword through CpuSet.
 A four-byte table at `0x0804f808` supplies the screen-block count indexed by
-BGxCNT bits 14-15. The character-fill candidate at `0x0800d730` is still
-unconverted. Character upload at `0x0800d7a4` uses the state's character
+BGxCNT bits 14-15. The [character fill](../src/display/background_character_fill.c)
+at `0x0800d730` now matches its complete 116-byte extent. Character upload at `0x0800d7a4` uses the state's character
 base pointer and doubles first/count for 256-color tiles before CpuSet.
 The incrementing map rectangle at `0x0800d890` writes 16-bit tile indexes
 across rows with a 32-entry stride; `0x0800d864` selects the background's map
 destination. These provide a connected map initialization/upload/edit path.
 The general dimension-prefixed map upload at `0x0800cefc` now has
 [matching C](../src/display/background_map.c), described below.
+
+Character fill reads the configured control byte once, repeats a four-bit
+color through four pixels or an eight-bit color through two, then fills a
+32- or 64-byte tile through the existing CpuSet wrapper. An inline helper
+captures the real full-word sum in R0 before its halfword conversion. A second
+helper keeps that initialized halfword alive as the synchronous copy source
+and converts the actual byte count at the call. All 110 instruction bytes,
+four literal bytes and two zero alignment bytes match in normal and strict
+builds; genuine changed-mask controls differ by one byte. The current caller
+and BIOS veneer retain their existing interfaces. Index 0..3, configured
+writable tile storage and the synchronous BIOS contract remain premises;
+these compiler and full-ROM checks add no gameplay evidence.
 
 The queued palette flush at `0x08011834` traverses 8-byte records at
 `0x03003260`, using a halfword count at `0x03003160`, then resets the count.

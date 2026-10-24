@@ -56048,6 +56048,23 @@
         "before": "display_scene_lookup_text(6222)",
         "after": "display_scene_lookup_text(6223)"
       }
+    },
+    {
+      "name": "display_fill_background_tile",
+      "rom_offset": 55088,
+      "size": 116,
+      "source": "src/display/background_character_fill.c",
+      "symbols": {
+        "g_background_states": "0x03002ef8",
+        "display_cpu_copy": "0x0804c8c5"
+      },
+      "thumb_symbols": [
+        "display_cpu_copy"
+      ],
+      "negative_control": {
+        "before": "color &= 15;",
+        "after": "color &= 14;"
+      }
     }
   ],
   "assembly": [

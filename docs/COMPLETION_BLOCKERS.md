@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,463 C functions / 307,452 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 311,512 bytes; original slices
-still supply 16,465,704 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,464 C functions / 307,568 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 311,628 bytes; original slices
+still supply 16,465,588 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **36 unowned rows / 14,166
+[inventory](../assets/rom-inventory.json) contain **35 unowned rows / 14,050
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -18,6 +18,15 @@ executable-inventory gap. Test plausible source hypotheses even when their
 explanation is uncertain: a compiler experiment can supply that evidence.
 Use retained attempts to avoid exact repetitions, then apply the full validity,
 matching, control and publication gates to any successful candidate.
+
+The [background character fill](../src/display/background_character_fill.c)
+now owns 116 C bytes at `0xD730`: 110 instruction, four literal and two alignment
+bytes. Its real full-word sum is captured in R0 before halfword conversion;
+the initialized halfword parameter supplies the synchronous CpuSet source,
+and the byte count becomes a halfword count at that copy boundary. Normal and
+strict positives match, while changing the four-bit pixel mask rejects both
+by one byte. The full-ROM and progress gates pass. Valid background indexes,
+configured writable tile storage and BIOS behavior remain explicit premises.
 
 The [menu footer](DISPLAY_MENU_RESULTS.md#footer-and-relation-indicator) now owns
 512 C bytes at `0x401B8`, including 432 instruction, 76 literal and four alignment

@@ -25,8 +25,10 @@ under every display or commit state.
 
 The fill wrapper forwards its background index and halfword tile argument to
 `display_fill_background_map`, using zero for its palette/color argument.
-That accepted map fill still calls the explicitly unconverted tile-fill
-function at `0x0800D730`; the wrapper does not convert that dependency.
+Its tile-fill dependency at `0x0800D730` now also has
+[matching C](../src/display/background_character_fill.c), including the full
+116-byte extent and real changed-source controls. This closes that source
+dependency without establishing runtime VRAM bounds.
 
 ## Partial views and boundaries
 
