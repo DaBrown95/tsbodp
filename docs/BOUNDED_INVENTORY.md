@@ -148,8 +148,26 @@ Moving only the pure separation calculation after containment produces
 containment, but introduces two extra copies of own upper Y at SP28/SP32.
 The existing game-memory reads stay in their original order.
 
-All ten experiments retain complete outputs and use the current compiler
-profile. The value-unit form supplies a new source graph for further distinct
-experiments; every acceptance still requires the entire original extent and
+These initial ten experiments retain complete outputs and use the current
+compiler profile. The value-unit form supplies the baseline for the later
+follow-ups below; every acceptance still requires the entire original extent and
 changed-source controls. These stack observations add no runtime, table-bound
 or complete-source claim.
+
+A later six-case follow-up passes one cached own lower coordinate to containment
+as a `const int *` pointing to its initialized automatic subobject. The lower-Y
+form produces 348 bytes / 206 differences; lower X produces 348 / 208. Both
+recover the native 28-byte frame and all seven homes at SP0..SP24, with no extra
+stack slot. They add no game-memory reads: all four other-object coordinates
+are still captured in their original order. Passing the complete named 16-byte
+local by pointer instead collapses to the earlier 340 / 285 output; passing
+only the lower `FramePoint` by pointer produces 340 / 249 with a 24-byte frame
+and the previous index in ordinary compiler-allocated R7.
+
+An entry-value variant with explicit R7 bindings produces 344 / 297 but is
+rejected on emitted semantics: flags come from an uninitialized stack slot and
+category from the stack address. Removing only those two bindings corrects
+both faults, but remains nonmatching at 344 / 288. The cached-local forms retain
+the existing object/table backing, index and lifetime premises; source and
+emitted-code review does not establish runtime behavior. All six remain
+nonexact and add no accepted source or coverage.
