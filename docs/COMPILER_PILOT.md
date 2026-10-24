@@ -72,6 +72,28 @@ Copied C receives coverage only after its complete linked extent matches and
 its changed-source control rejects. The interrupt dispatcher remains explicitly
 separate assembly glue. Other copied regions remain unconverted.
 
+## Bounded host and compilation-context checks, 24 October 2026
+
+Separate x86_64-host builds of the pinned Thumb and ARM backends were compared
+with the existing ARM64-host builds. Each used private source copies, the same
+target configuration and effective options, and unchanged assemblers and linkers.
+All four source pairs per backend produced identical preprocessed source,
+assembly and complete linked bytes. The Thumb checks covered the scene-list
+builder, serial-record provider, condition writer and renderer. The ARM checks
+covered the sorter, map drawer, an alternate sorter priority representation and
+the already-matching tile decoder as a control. The ARM checks retained the
+actual RAM execution addresses. Changing between these two host builds did not
+change any of these eight source outputs. This does not identify the historical
+host or exhaust other compiler-build differences. No default compiler profile
+changed.
+
+Four further scene-list-builder experiments compiled real contiguous groups
+with its accepted update, detail-redraw and object-creation neighbours. Every
+neighbour retained its bytes at its original address, while the builder still
+differed at four bytes in its complete 308-byte extent. Complete combined spans
+were checked; a matching neighbour or target subsection was not accepted as a
+matching compilation unit. These experiments add no source coverage.
+
 ## 1. Establish the reference
 
 Run `make audit`. Stop on a mismatch and identify the dump rather than changing

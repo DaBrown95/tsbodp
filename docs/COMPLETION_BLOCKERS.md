@@ -193,6 +193,16 @@ its allocator explanation is established. A bounded
 53/64-bit precision model of 368 retained allocation rows changes nine scores
 by one but changes no rank or tie. It does not identify the historical host.
 
+The scene-list builder at `0xF034` retains a 308-byte candidate with four
+differing bytes, all in its initial pointer-register choices. Its real halfword
+stride and narrowed first-offset phases preserve the remaining instructions
+and all 28 literal bytes. Four complete compilation units containing real,
+accepted neighbouring functions leave those same four differences. Separate
+x86_64-host builds also reproduce the existing Thumb and ARM outputs on eight
+source cases, including the copied decoder as an exact control. These
+[bounded context checks](COMPILER_PILOT.md#bounded-host-and-compilation-context-checks-24-october-2026)
+add no coverage and leave other source and compiler-build hypotheses open.
+
 The audio patcher's full master-input arithmetic has a conditional set of
 1,024 completed converter images from the fixed installation, closed under
 serial completed calls without other writers. This bounds stored encodings,
