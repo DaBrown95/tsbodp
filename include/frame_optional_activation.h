@@ -13,6 +13,10 @@ unsigned int frame_step_optional_activation_job_82_86(struct FrameNeedEffectStat
 unsigned int frame_initialize_optional_activation_context(struct FrameNeedEffectState *);
 unsigned int frame_select_optional_activation_attachment_kind(struct FrameNeedEffectState *,
     unsigned char *);
+/* Modeled kind82..86 preparation; original unused formals and delivery remain
+ * inferred, with no incoming callback root established. */
+unsigned int frame_prepare_optional_activation_unrooted_44c10(struct FrameNeedEffectState *,
+    struct FrameObject *, unsigned int);
 unsigned int frame_begin_optional_activation_attachment_job(struct FrameNeedEffectState *,
     struct FrameObject *, unsigned int);
 unsigned int frame_dispatch_optional_activation_attachment_job(struct FrameNeedEffectState *,

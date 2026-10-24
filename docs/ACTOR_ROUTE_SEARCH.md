@@ -1497,10 +1497,16 @@ unchanged valid page permits up to four appended entries. The writer's 24-byte
 span and its current job caller's page arithmetic do not prove arbitrary-page
 safety or wider buffer ownership.
 
-The 28-byte kind-check provider at `0x4432C` remains explicit original code.
-It retains its third argument in a saved register although no subsequent use
-is established. The natural predicate wrapper emits 24 bytes and differs from
-the full original extent; no artificial dead-copy constraint is inserted.
+The [28-byte kind-check provider at `0x4432C`](../src/frame/frame_check_optional_choice_attachment_kind.c)
+now matches from ordinary C. It returns zero when the actual byte-result
+predicate rejects the object; otherwise it returns word one. A modeled 41/45
+kind switch, grounded in the adjacent selector and dispatcher, keeps the third
+argument live across the predicate call. Late jump optimization merges its
+equal returns after register allocation, preserving the native saved copy.
+No register binding, extra access or artificial call is used. Historical cases
+and EC argument delivery remain inferred. Normal/strict matches and genuine
+case-result controls pass, with the actual byte-result predicate qualified in
+its own definition context.
 
 All nine accepted providers use ordinary C, with separate zero alignment where
 needed, and have real changed-source controls. All fourteen previously accepted
@@ -1664,8 +1670,13 @@ and six data-alignment bytes. The complete dispatcher is 120 bytes; the old
 118-byte estimate omitted its final two zero bytes. Alignment directives emit
 data and do not exclude alternate incoming execution.
 
-The separate `0x44C10..0x44C18` word-one body retains its return address; ordinary
-leaf C compiles shorter, so its eight bytes remain original. The two independent
+The separate [eight-byte preparation body at `0x44C10`](../src/frame/frame_prepare_optional_activation_unrooted_44c10.c)
+now matches ordinary C. A modeled switch over kinds 82..86, grounded in this
+family's actual selector and dispatcher, returns word one for every input.
+Its equal branches merge late enough to retain the native LR save/restore.
+The complete extent has no pool or alignment; normal/strict comparisons and
+genuine case-result controls pass. Its incoming root, original unused formals
+and historical case intent remain inferred. The two independent
 leaves use chosen void/unsigned-word result views with no consumed inputs; their
 historical signatures and incoming roots are unresolved. Unchecked selectors,
 live state/record backing, all writers and runtime/gameplay populations remain

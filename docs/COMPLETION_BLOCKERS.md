@@ -1,16 +1,25 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,452 C functions / 305,768 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 309,828 bytes; original slices
-still supply 16,467,388 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,455 C functions / 305,812 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 309,872 bytes; original slices
+still supply 16,467,344 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **47 unowned rows / 15,846
+[inventory](../assets/rom-inventory.json) contain **44 unowned rows / 15,802
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
+
+Three connected choice providers now own 44 further C bytes: the 28-byte
+optional-choice check at `0x4432C` and independent eight-byte preparation
+bodies at `0x25998` and `0x44C10`. Their equal-result kind switches preserve
+the native saved-register/return-address shapes until late jump optimization.
+The 41/45, 49 and 82..86 cases are grounded in adjacent selectors/dispatchers;
+historical case intent, unused formals and incoming unrooted callers remain
+inferred. Normal/strict comparisons, genuine controls and actual definition
+interfaces pass. These source gains do not close runtime or inventory domains.
 
 The latest activity-three preparation work adds no C coverage. It now
 has measured phase lifetimes and eligibility storage, conditional
@@ -250,7 +259,8 @@ Their equal-result switches preserve the pinned compiler's link-register save;
 normal/strict positives and changed-case-result controls cover all three slots.
 The modeled formals, EC kind delivery and historical case structure remain
 inferred. These matches remove three existing rows, with no new entry, mapped
-extent or runtime claim. The separate unrooted constant-one entries remain open.
+extent or runtime claim. The separate unrooted constant-one entries now match
+from C, with their incoming roots and historical unused formals still open.
 
 The instruction census is not a complete code denominator. Its current raw
 union is 285,360 bytes; qualified instructions occupy 285,334 bytes and

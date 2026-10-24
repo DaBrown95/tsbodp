@@ -55799,6 +55799,51 @@
       "expected_sha256": "c1f16de3829320e098d9abfaeef9984357bdd4dcedadc91466dbb7a7be8e67f2",
       "compiler_id": "agbcc",
       "mode": "Thumb"
+    },
+    {
+      "name": "frame_check_optional_choice_attachment_kind",
+      "rom_offset": 279340,
+      "size": 28,
+      "symbols": {
+        "frame_object_has_zero_id": "0x08001b49"
+      },
+      "thumb_symbols": [
+        "frame_object_has_zero_id"
+      ],
+      "source": "src/frame/frame_check_optional_choice_attachment_kind.c",
+      "negative_control": {
+        "before": "case 45:\n        return 1;",
+        "after": "case 45:\n        return 2;"
+      },
+      "expected_sha256": "382e9faa038ac863105c90a51cd28ca79458bff9a978fa6b1268a4d8fa0f8983"
+    },
+    {
+      "name": "frame_prepare_route_attachment_49_unrooted_25998",
+      "rom_offset": 154008,
+      "size": 8,
+      "source": "src/frame/frame_prepare_route_attachment_49_unrooted_25998.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "mode": "Thumb",
+      "negative_control": {
+        "before": "case 49:\n        return 1;",
+        "after": "case 49:\n        return 2;"
+      },
+      "expected_sha256": "c1f16de3829320e098d9abfaeef9984357bdd4dcedadc91466dbb7a7be8e67f2"
+    },
+    {
+      "name": "frame_prepare_optional_activation_unrooted_44c10",
+      "rom_offset": 281616,
+      "size": 8,
+      "source": "src/frame/frame_prepare_optional_activation_unrooted_44c10.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "mode": "Thumb",
+      "negative_control": {
+        "before": "case 86:\n        return 1;",
+        "after": "case 86:\n        return 2;"
+      },
+      "expected_sha256": "c1f16de3829320e098d9abfaeef9984357bdd4dcedadc91466dbb7a7be8e67f2"
     }
   ],
   "assembly": [

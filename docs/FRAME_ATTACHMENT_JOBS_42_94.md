@@ -423,7 +423,7 @@ all other input/writer populations remain conditional.
 The [eight-byte leaf at `0x25990`](../src/frame/frame_select_attachment_job_49_unrooted_25990.c)
 writes 49 to the first byte of its second argument and returns the word value
 one. It starts after the preceding check's return and zero alignment, and ends
-before the separate held body at `0x25998`. All eight bytes are instructions;
+before the separate preparation body at `0x25998`. All eight bytes are instructions;
 there is no pool or alignment fill. This newly bounded region was previously
 unresolved and lies outside the known 57-row unfinished worklist.
 
@@ -435,6 +435,15 @@ Normal and strict builds match the full extent, and changing the stored value
 from 49 to 48 rejects both. Separate actual-definition checks qualify the new
 leaf and existing selector, while four incompatible contracts reject. These
 source results add no runtime or complete callback-population evidence.
+
+The adjoining [eight-byte preparation body at `0x25998`](../src/frame/frame_prepare_route_attachment_49_unrooted_25998.c)
+now matches ordinary C. The modeled case 49 follows the actual neighboring
+selector, begin adapter and dispatcher; every input returns word one without
+a memory access or call. The compiler merges equal branches late, retaining
+the original LR save/restore. Normal/strict matches, genuine case-result
+controls and separate actual-definition interface checks pass. Incoming roots,
+original unused formals and historical case intent remain inferred; this adds
+source ownership without a runtime or callback-population claim.
 
 ## Optional dispatch and workers at 0x28378, 0x288B4 and 0x28988
 
@@ -661,4 +670,5 @@ incompatible arities. These checks establish the C interfaces used here, without
 closing native EC delivery, input populations, later pointer writers or runtime
 reachability. Three existing worklist rows are removed; no new entry or mapped
 extent is added. The independently bounded entries at `0x25998` and `0x44C10`
-remain unconverted.
+also now match from C, as documented in their separate family sections; their
+incoming roots and historical unused formals remain unresolved.
