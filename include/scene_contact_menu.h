@@ -74,9 +74,6 @@ void scene_contact_mark_conditions(void);
 void scene_contact_clear_activity_objects(void);
 void scene_contact_start_activity(void);
 void scene_contact_show_completion(void);
-
-/* Explicit original providers. Their declarations describe observed call
- * operands; these bodies are not new C coverage in this batch. */
 void scene_contact_apply_need_adjustments(void);
 
 int frame_read_signed_parameter(const void *, unsigned int);

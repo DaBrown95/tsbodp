@@ -55935,6 +55935,28 @@
         "before": "counter_address->value = remaining;",
         "after": "counter_address->value = remaining + 1;"
       }
+    },
+    {
+      "name": "scene_contact_apply_need_adjustments",
+      "rom_offset": 169036,
+      "size": 100,
+      "symbols": {
+        "g_scene_contact_state": "0x30043f4",
+        "g_scene_previous_request": "0x3004370",
+        "g_scene_contact_definitions": "0x805955c",
+        "g_scene_contact_serial_capture": "0x03003950"
+      },
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "i < 8",
+        "after": "i < 7"
+      },
+      "source": "src/scene/scene_contact_apply_need_adjustments.c",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "43e8c3ed71da7e3188824827da9e206ef4c56cbfff0b13a4e6010b0fdd310b90"
     }
   ],
   "assembly": [

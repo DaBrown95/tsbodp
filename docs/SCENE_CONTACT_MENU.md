@@ -151,11 +151,28 @@ that arbitrary inputs stay within the observed resource or label prefix.
 No register bindings, added reads or fabricated values were needed; the actual
 audio notification 54-to-55 control changes the compiled result.
 
-Need adjustment `0x0802944C` / 100 bytes remains original. Its typed call
-declaration is a local, provisional description of observed operands and
-carries no new C credit. The input status service is covered by the
-IRQ-shared reset and polling section below. The view-mode setter at `0x0800E8B4`
-is already source-owned.
+The [need-adjustment provider](../src/scene/scene_contact_apply_need_adjustments.c)
+at `0x0802944C` now owns all 100 C extent bytes: 80 instruction and 20 literal
+bytes, with no alignment tail. When the previous request kind is one, it adds
+eight selected definition-byte deltas to the existing word values, using
+unsigned 32-bit arithmetic before the target's signed interpretation, and
+clamps the result to `0x14000000..0x64000000`. The lower comparison first uses
+`0x13FFFFFF`; incrementing that same scalar only on the lower-clamp path
+supplies the actual stored minimum. This consumed comparator/result phase
+keeps the native loop structure without register bindings or extra reads.
+
+The existing capture union supplies word indices 44 through 51, all within its
+55-word backing. Definition deltas remain at offset 16 of the 28-byte record;
+the native unchecked scene stride uses explicit target integer-address
+arithmetic. Normal/strict whole-extent comparisons, genuine source controls and
+actual-definition interface/layout checks pass for this provider and its
+556-byte `scene_contact_step` caller. The chosen `void(void)` interface is
+consistent with the observed unused result, without establishing historical
+unused formals. Live state, initialization, admitted scene/table extent,
+aliasing writers and gameplay populations remain conditional.
+
+The input status service is covered by the IRQ-shared reset and polling section
+below. The view-mode setter at `0x0800E8B4` is already source-owned.
 
 The [interpolation setter](../src/transition/transition_set_view_interpolation.c)
 at `0x0800EB14` now owns its full 24 bytes: 20 instruction and four literal bytes.
@@ -590,7 +607,7 @@ representations before the target's signed interpretation. The source adds no
 signed-overflow dependency or new guard; these casts describe the pinned 32-bit
 target model, without a portable arbitrary conversion claim. The primary and
 auxiliary callbacks and the activity coordinator are recovered below. The
-need-adjustment provider remains an explicit original body.
+need-adjustment provider is now source-owned as described above.
 
 Fresh complete native comparisons include actual source controls, strict
 provider declarations, current importer proofs and independent layout/type
@@ -718,7 +735,7 @@ the checked stack and callee-saved protocol; its effects are abstracted rather
 than executed. Three injected post-call effects test the observed reloads
 without asserting that the actual provider produces them. Pointer validity,
 arbitrary storage, gameplay and hardware behavior remain unproved; the
-need-adjustment provider stays original.
+need-adjustment provider is now source-owned as described above.
 
 # Definition-row-four activity coordinator
 

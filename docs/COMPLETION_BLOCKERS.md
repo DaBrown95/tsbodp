@@ -1,16 +1,25 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,459 C functions / 306,648 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 310,708 bytes; original slices
-still supply 16,466,508 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,460 C functions / 306,748 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 310,808 bytes; original slices
+still supply 16,466,408 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **40 unowned rows / 14,970
+[inventory](../assets/rom-inventory.json) contain **39 unowned rows / 14,870
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
+
+The [contact-scene need adjustment](SCENE_CONTACT_MENU.md) now owns another
+100 C bytes, including 80 instruction and 20 literal bytes. Its real lower
+comparison/result phase preserves the native loop without bindings or extra
+reads. Unsigned delta addition and target signed interpretation avoid a signed
+overflow dependency; the canonical 55-word capture covers all eight accessed
+words. The actual caller, normal/strict controls and chosen interfaces are
+qualified. This removes one existing 100-byte estimate; scene/table, writer,
+initialization and runtime domains remain open.
 
 The [actor scene-counter settlement](FRAME_ATTACHMENT_JOBS_42_94.md#actor-scene-counter-settlement)
 now owns 188 further C bytes, including 146 instruction bytes, 40 literal bytes

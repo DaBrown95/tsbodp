@@ -984,6 +984,28 @@ the streams admitted by player setup and restoration. The neighbouring words
 retain their established volume-table roles; no additional track-effect rows
 or complete target set are claimed.
 
+One actual producer now has a bounded pattern certificate. The owned
+[`save_world_show_row_flag_notice`](../src/save/world_show_row_flag_notice.c)
+passes descriptor 58 to notification playback. Its fixed module at
+`0x08B2F2A8` has one order selecting the 596-byte pattern at `0x08B2F054`:
+64 rows, 132 events, channels zero through seven, and explicit effects only
+5, 6 and 11. All sixteen seek indices agree with independently parsed row
+boundaries. For this intact module/order-zero state, all 256 row-byte inputs
+to the native loader select the parsed row `r & 63`. A ROM-backed row-one
+loader-to-consumer fixture reaches effect 6 at the actual indirect call;
+absence of an intervening writer is an explicit fixture condition. No complete
+scheduler or gameplay execution is established.
+
+Saved-stream provenance also depends on channel bounds. The unchecked track
+calculation places track 20 at the backup player's base, so its instrument
+field overlaps `backup.stream`. A separate hypothetical prefix with instrument mode set to one
+and bytes `[0x34, 2, 1, 0]` reaches a write of ROM word `0x00270000` to that
+saved pointer before any external call. The model stops before dereferencing
+the loaded word; no shipped pattern or subsequent restoration is shown to
+admit this prefix. Descriptor 58 excludes it through its channel and mode
+values. Wider closure still requires the admitted descriptor, channel, effect
+and saved-state writer domains; the shared calls remain unresolved.
+
 ## Standalone instrument lifecycle and activity handoff
 
 Twelve connected extents add **1,400 matching C bytes**, including a copied ARM
