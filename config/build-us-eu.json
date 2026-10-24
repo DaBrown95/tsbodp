@@ -55994,6 +55994,60 @@
         "-mthumb-interwork"
       ],
       "expected_sha256": "43e8c3ed71da7e3188824827da9e206ef4c56cbfff0b13a4e6010b0fdd310b90"
+    },
+    {
+      "name": "display_menu_prepare_footer",
+      "rom_offset": 262584,
+      "size": 512,
+      "source": "src/display/menu_prepare_footer.c",
+      "symbols": {
+        "g_display_menu_state": "0x03002198",
+        "g_display_menu_relation_values": "0x03003980",
+        "g_display_menu_relation_state": "0x03003960",
+        "g_display_menu_control0": "0x0807f688",
+        "g_display_menu_control1": "0x0807f68c",
+        "frame_create_scene_object": "0x08027ee5",
+        "display_menu_read_relation": "0x08035fcd",
+        "frame_set_animation_frame": "0x08000c6d",
+        "display_text_select_font": "0x0801ae75",
+        "display_text_set_background_control": "0x0801ae2d",
+        "display_text_number_field_zero": "0x0801b1cd",
+        "display_text_draw_line": "0x0801a959",
+        "display_text_copy_field_zero": "0x0801b151",
+        "display_scene_lookup_text": "0x08045009",
+        "display_load_palette_alternate": "0x08011709",
+        "g_menu_footer_slot4": "0x08069530",
+        "g_menu_footer_slot5": "0x08069540",
+        "g_menu_footer_slot6": "0x08069550",
+        "g_menu_footer_slot7": "0x08069560",
+        "g_menu_footer_palette5": "0x08fda3f8",
+        "g_menu_footer_palette6": "0x08fda418",
+        "g_menu_footer_palette7": "0x08fda438",
+        "g_menu_footer_palette8": "0x08fda458",
+        "frame_initialize_transient_definition": "0x080303d9",
+        "g_display_menu_objects": "0x030043b0",
+        "save_world_ratio_percent": "0x08027539",
+        "save_world_scale_percent": "0x08027525"
+      },
+      "thumb_symbols": [
+        "frame_create_scene_object",
+        "display_menu_read_relation",
+        "save_world_scale_percent",
+        "save_world_ratio_percent",
+        "frame_set_animation_frame",
+        "display_text_select_font",
+        "display_text_set_background_control",
+        "display_text_number_field_zero",
+        "display_text_draw_line",
+        "display_text_copy_field_zero",
+        "display_scene_lookup_text",
+        "display_load_palette_alternate",
+        "frame_initialize_transient_definition"
+      ],
+      "negative_control": {
+        "before": "display_scene_lookup_text(6222)",
+        "after": "display_scene_lookup_text(6223)"
+      }
     }
   ],
   "assembly": [

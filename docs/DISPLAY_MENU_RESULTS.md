@@ -1,6 +1,6 @@
 # Menu row execution and result presentation
 
-This connected batch reconstructs eight C functions / 2,464 bytes. Each current
+This connected path reconstructs nine C functions / 2,976 bytes. Each current
 source compiles and links to the complete original extent, including its literal
 pools and alignment; each has an actual compiled changed-source control. The
 names describe the observed menu roles and remain provisional. These are static
@@ -13,6 +13,7 @@ and compiler-match findings, with no new runtime or gameplay evidence.
 | `0x3F548` | 420 | Transfer and draw a primary result |
 | `0x3F6EC` | 328 | Transfer and draw a choice result |
 | `0x3F834` | 212 | Transfer and draw a secondary result |
+| `0x401B8` | 512 | Prepare the footer and relation indicator |
 | `0x40E84` | 128 | Apply a secondary result |
 | `0x40F04` | 12 | Reset through the accepted choice-text producer |
 | `0x40F94` | 104 | Stage result text with font/window setup |
@@ -99,7 +100,8 @@ menu storage declaration is unchanged. This is an access view, without an
 inference that an interrupt writes this byte, that asynchronous changes occur,
 or that the original global declaration was volatile.
 
-Only the primary handler retains a fixed C register binding: a short scene
+Within the original eight-body result batch, only the primary handler retains
+a fixed C register binding: a short scene
 request pointer in `r2`, confined to the selected-code/store scope and ending
 before the result-consumer calls. No constrained values overlap in a register
 or survive a call. The other seven functions use ordinary C without fixed
@@ -115,7 +117,33 @@ is `menu-results-ready.json`. Earlier row-array models, redundant fixed-register
 attempts and raw comparison files are retained as failed or superseded evidence.
 
 The connected next targets are the unconverted relation gauge `0x40AB4/692`,
-secondary menu preparation `0x3F908/1112`, footer/indicator producer
-`0x401B8/512`. Their analysis and unsuccessful source trials remain outside
+and secondary menu preparation `0x3F908/1112`. Their unsuccessful trials remain outside
 C coverage. The connected notice handoff `0x27DD0` is reconstructed in the
 queued scene-request path.
+
+## Footer and relation indicator
+
+The footer now owns all 512 bytes at `0x401B8`: 432 instruction bytes, 76 literal
+bytes and four zero alignment bytes. It initializes seven observed menu object
+slots, selects the indicator frame through the accepted signed relation and
+percentage helpers, and draws caption 6222 at `(238, 96)` with style two and
+tile value 442. It also initializes transient definitions four through seven,
+loads the four observed palette blocks and restores the background control.
+
+A small inline helper consumes the five real caption values in the order
+`style, text, x, y, tile` and forwards them to the unchanged canonical draw API
+in its existing order. This source form recovers the native argument lifetimes
+without a new call, observation, binding or interface override. The local signed
+16-bit position fields contain the representable constants 238 and 96. This is
+one matching source spelling, without identifying the original source.
+The footer retains R0/R1 constraints for the menu pointer and the numerator,
+percentage and font arguments. The menu pointer ends at its field read; the
+argument phases end at their consuming calls.
+
+Normal and strict builds match the complete extent. Changing the caption lookup
+from 6222 to 6223 produces a one-byte mismatch in each control. The actual menu
+initializer and all thirteen distinct providers retain their current interfaces
+and matching source proofs; the footer has 29 direct call sites. Allocation,
+definition, text, resource and palette backing, later writers and runtime
+populations remain conditional. This adds source ownership without a new
+gameplay or complete-inventory claim.

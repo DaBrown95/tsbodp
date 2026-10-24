@@ -167,8 +167,8 @@ bindings. Raw bytes, commands, snapshots and controls are indexed in the
 ignored `catalog-presentation/menu-relation-events-ready.json` receipt. No
 pre-existing accepted source or shared header needs an ABI change.
 
-The connected row-execution and result-presentation path now has eight matching
-C functions / 2,464 bytes, described in [DISPLAY_MENU_RESULTS.md](DISPLAY_MENU_RESULTS.md).
+The connected row-execution, footer and result-presentation path now has nine matching
+C functions / 2,976 bytes, described in [DISPLAY_MENU_RESULTS.md](DISPLAY_MENU_RESULTS.md).
 It connects the relation chance/delay helpers and world-clock producer to
 result pairs, background transfers, cue selection and text staging. Its
 serialized result views express the observed row strides without asserting
@@ -176,7 +176,7 @@ complete table bounds.
 
 ## Reader word-return refinement
 
-The connected, still unconverted footer at `0x080401B8` uses the result of
+The connected, source-owned footer at `0x080401B8` uses the result of
 `display_menu_read_relation` directly as a signed word: its call at
 `0x08040214` is followed by a word copy and comparison, without a caller-side
 byte extension. The reader itself uses `LDRSB` and therefore returns a
@@ -189,7 +189,7 @@ The primary-result probability explicitly narrows the returned word to
 Fresh exact proofs pass for the reader (12 bytes), initializer (744 bytes),
 and primary-result application (364 bytes). Their actual changed-source
 controls reject with 7, 1, and 1 differing bytes, respectively. This refinement
-adds no coverage. The footer, percentage helpers, and sequence-tile producer
-remain unconverted; their consumer evidence does not establish runtime
-behavior or wider index bounds. The ignored receipt is
+adds no coverage. The footer and percentage helpers now have matching C;
+the sequence-tile producer remains unconverted. These findings do not establish
+runtime behavior or wider index bounds. The ignored refinement receipt is
 `catalog-presentation/relation-word-return-ready.json`.

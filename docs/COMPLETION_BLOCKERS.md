@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,462 C functions / 306,940 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 311,000 bytes; original slices
-still supply 16,466,216 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,463 C functions / 307,452 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 311,512 bytes; original slices
+still supply 16,465,704 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **37 unowned rows / 14,678
+[inventory](../assets/rom-inventory.json) contain **36 unowned rows / 14,166
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -18,6 +18,14 @@ executable-inventory gap. Test plausible source hypotheses even when their
 explanation is uncertain: a compiler experiment can supply that evidence.
 Use retained attempts to avoid exact repetitions, then apply the full validity,
 matching, control and publication gates to any successful candidate.
+
+The [menu footer](DISPLAY_MENU_RESULTS.md#footer-and-relation-indicator) now owns
+512 C bytes at `0x401B8`, including 432 instruction, 76 literal and four alignment
+bytes. An inline helper carrying the five actual caption values preserves the
+native call setup through the existing draw API. Normal and strict positives,
+changed-caption controls, the actual initializer and all thirteen providers are
+qualified. This removes one existing 512-byte estimate; backing, writer and
+runtime populations remain open.
 
 The [audio descriptor producers](AUDIO_RECONSTRUCTION.md#conditional-descriptor-producers)
 now have a conditional union of 68 IDs, adding checked selector literals,
@@ -378,9 +386,9 @@ from C, with their incoming roots and historical unused formals still open.
 
 The instruction census is not a complete code denominator. Its current raw
 union is 285,436 bytes; qualified instructions occupy 285,410 bytes and
-referenced data 35,940 bytes. Known data totals 22,892 bytes. Source-owned data
-and alignment have 2,007 records / 4,040 bytes, with zero locally unclassified
-owned bytes. Estimated envelopes still have 262 unclassified bytes, and
+referenced data 35,940 bytes. Known data totals 22,896 bytes. Source-owned data
+and alignment have 2,009 records / 4,044 bytes, with zero locally unclassified
+owned bytes. Estimated envelopes still have 258 unclassified bytes, and
 16,432,686 bytes remain outside resolved roles. Fifteen authored veneer NOPs
 have a separate 30-byte instruction role; two audio fills are implicit code
 alignment, without proof against alternate entry. The reachable `0x499B0` NOP
