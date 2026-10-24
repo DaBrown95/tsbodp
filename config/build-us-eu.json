@@ -55739,6 +55739,21 @@
         "after": "g_scene_request.parameter-2"
       },
       "expected_sha256": "620575df3d743c4086f3b0fe06aea8d54a260a70415ad800572a3203d4dccc5f"
+    },
+    {
+      "name": "resource_build_word_group",
+      "rom_offset": 45080,
+      "size": 68,
+      "source": "src/resource/resource_build_word_group.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "negative_control": {
+        "before": "*(unsigned int *)destination = count;",
+        "after": "*(unsigned int *)destination = count + 1;"
+      },
+      "expected_sha256": "df7d6b7b09559ea3028b9d505ca5f77612371c4475fbdadbd78d72b29ad3c9d3",
+      "compiler_id": "agbcc",
+      "mode": "Thumb"
     }
   ],
   "assembly": [

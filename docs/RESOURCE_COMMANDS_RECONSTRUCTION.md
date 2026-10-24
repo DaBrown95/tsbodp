@@ -137,6 +137,6 @@ helper and produce real linked differences. All formatted public sources and
 controls were reverified, as were the affected published resource builders and
 scene initializer. The resource controller at `0800AD1C` is now C-owned; see
 [resource groups](RESOURCE_GROUPS_RECONSTRUCTION.md) for its producer and backing
-limits. The object lookup at `0800AEE4` was already C-owned. Remaining connected
-targets include the word-group copier at `0800B018`, view effect updates and the
-called scene/configuration operations.
+limits. The object lookup at `0800AEE4` was already C-owned. The word-group copier at `0800B018` now also owns its complete 68-byte body
+from C; see the same resource-group evidence. View effect updates and the called
+scene/configuration operations remain connected targets.

@@ -4,6 +4,7 @@ The original connected batch added 14 verified C replacements covering 1,352 byt
 All full extents match at their original ROM addresses, including literal pools
 and zero tail alignment. Every replacement has a changed-source negative control.
 This is static/compiler evidence; no runtime or gameplay claim follows from it.
+The later word-group copier adds 68 C bytes. The table includes both milestones.
 
 | Address | Provisional name | Bytes |
 | --- | --- | ---: |
@@ -18,6 +19,7 @@ This is static/compiler evidence; no runtime or gameplay claim follows from it.
 | `0800AE24` | `resource_group_is_enabled` | 44 |
 | `0800AFA8` | `resource_copy_arena_header` | 72 |
 | `0800AFF0` | `resource_copy_object_payload` | 40 |
+| `0800B018` | `resource_build_word_group` | 68 |
 | `0800B05C` | `resource_build_program_group` | 68 |
 | `0800B0A0` | `resource_offset_table_bytes` | 32 |
 | `0800B0C0` | `resource_align_word` | 40 |
@@ -70,25 +72,23 @@ to `A4/A8`. These fields are represented by a partial object view rather than
 claiming the entire unknown object area has been decoded. The exact role of the
 projection context and the flag remains provisional.
 
-Useful mismatches, compiler inputs, linked outputs and raw comparisons remain
-in the ignored local agent reports. The word-group copy at `0800B018` remains
-an explicit unconverted region and the next connected builder dependency. A
-fresh current-header replay of its original authored candidate is 64 bytes / 61 differences against the native
-68-byte extent. Its eight-byte assignment lowers as a DI copy rather than the
-native block transfer. A fixed eight-byte representation copy from the existing
-four-aligned access-view records instead selects the native block transfer without
-a helper or stack frame. Retaining the actual offset-table base at source +2,
-as in the neighboring owned builders, then gives 68 bytes / seven differences.
-Materializing the actual per-record byte offset and typed element pointers
-avoids the compiler's deferred-multiplication address ordering and repairs the
-two loop ADD instructions, giving 68 bytes / three differences. Only the two
-return-size instructions differ. A previously authored late byte-count model
-repairs the native shift but still misses the full-size result. Replaying its
-existing two-value form also fails: combine removes the explicit result copy
-before local allocation. A compound form has no established protection from an
-earlier legal combine, so it does not justify another trial. Unique attempts
-and selected compiler passes remain; retired old raw outputs do not establish
-another current match. This candidate has no source credit or assembly exception.
+The [word-group copier](../src/resource/resource_build_word_group.c) at
+`0800B018` now matches all 68 bytes: 34 Thumb instructions, with no literal pool
+or alignment tail. It reads the selected halfword displacement, stores the byte
+record count as a word, copies each eight-byte record and returns the advanced
+cursor. One ordinary unsigned scalar holds the selected displacement and is
+later reused for the payload byte extent. These real, separate value phases
+preserve the native return-size instructions without a register constraint,
+instruction assembly or copied instruction bytes. The loop retains its actual
+byte-offset and typed record-address producers.
+
+Normal and strict target, caller and offset-helper builds match, and genuine
+source mutations are rejected. Actual definitions verify the pointer/const/byte
+argument contract and the record's eight-byte size/four-byte alignment. This
+compiler evidence leaves resource selection, source/destination backing,
+alignment and non-overlap premises open; it does not close the serialized
+input domains or establish new runtime coverage. Useful failed sources and
+complete comparisons remain in ignored local reports.
 The resource selection/cleanup operations, object lookup and view effect
 updates remain next connected targets. The group object-count reader at
 `0800AE50` is now accepted with the command continuation.

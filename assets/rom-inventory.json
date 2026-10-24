@@ -13971,13 +13971,14 @@
       "referenced_literal_bytes": 0
     },
     {
-      "name": "sub_0800B018",
+      "name": "resource_build_word_group",
       "rom_offset": 45080,
       "mode": "Thumb",
       "runtime_addresses": [
         134262808
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -13988,11 +13989,11 @@
         45146
       ],
       "size": 68,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 45080,
       "body_rom_start": 45080,
       "body_rom_end": 45148,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0800xxxx",
       "decoded_instruction_bytes": 68,
@@ -123541,7 +123542,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0800B018",
+      "name": "resource_build_word_group",
       "rom_offset": 45080,
       "size": 68,
       "status": "mapped_code"
@@ -137929,7 +137930,7 @@
     "config/ram-map-us-eu.json": "77bdc9b4c55a9bf180ecfb2585630044a55e756beff96d130d72cfd483b21d41",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "6592fb0bdad6f2632d70f8ac7585c84715d8730307fc381f5e907c2494967499",
+    "config/build-us-eu.json": "81ffb20382356dfd2e12f2c48b9463d8eb99934b8b5601cac53a791eba71132f",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -139451,7 +139452,7 @@
       "raw_referenced_data_union_bytes": 35932,
       "qualified_referenced_data_union_bytes": 35932,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 309736,
+      "source_glue_owned_extent_bytes": 309804,
       "estimated_envelope_union_bytes": 325666,
       "classification_bytes": {
         "estimated_envelope_unclassified": 354,
@@ -188308,10 +188309,6 @@
         ],
         [
           43320,
-          45080
-        ],
-        [
-          45148,
           45928
         ],
         [
@@ -215615,34 +215612,7 @@
       },
       {
         "rom_offset": 45040,
-        "size": 40,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction",
-          "source_owned"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
-        "rom_offset": 45080,
-        "size": 68,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
-        "rom_offset": 45148,
-        "size": 64,
+        "size": 172,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -329708,8 +329678,9 @@
         "execution_address": 134262808,
         "entry_rom_offset": 45080,
         "mode": "Thumb",
-        "name": null,
+        "name": "resource_build_word_group",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -455968,6 +455939,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 124,
         "referenced_data_bytes_in_extent": 8
+      },
+      {
+        "name": "resource_build_word_group",
+        "rom_offset": 45080,
+        "size": 68,
+        "source": "src/resource/resource_build_word_group.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 68,
+        "referenced_data_bytes_in_extent": 0
       },
       {
         "name": "irq_cpu_enable",
