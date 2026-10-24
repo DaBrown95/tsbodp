@@ -1006,6 +1006,63 @@ admit this prefix. Descriptor 58 excludes it through its channel and mode
 values. Wider closure still requires the admitted descriptor, channel, effect
 and saved-state writer domains; the shared calls remain unresolved.
 
+## Conditional descriptor producers
+
+Three independently checked producer populations now supply a union of 37
+descriptor IDs. Each retains its own conditions; this is not the complete
+set of audio callers or a declared descriptor-table length.
+
+| Producer population | Descriptor IDs | Conditions |
+| --- | --- | --- |
+| Thirteen literal notification sites in ten owned callers, plus the optional playback selector | 27, 54–58, 60, 61, 63, 68–70 | Each literal call has one immediate argument definition. The optional selector's complete local paths produce only 68, 69 or 70 after its random-number call. Reaching a call is not established by this static proof. |
+| Four period fields in each of the fifty backed scene records | 0, 2–4, 7–11, 13, 15–23, 26, 65–67 | The scene index must remain in 0–49 while periods 0–3 select the record's bytes 8–11. Other unsigned period values return zero without reading the scene table. |
+| Handler 7 records in the retained fifty-root, 105-pack resource population | 12, 24, 58, 65 | Correct program copying, unchanged command/parameter bytes and execution reaching the record remain premises. |
+
+The period helper's native body was checked for all 200 physical field
+combinations and six default-path boundary values. Its unsigned branch
+partition separately establishes the default result for every other 32-bit
+period. The underlying 600-byte table has twelve-byte records; the fifty-row
+backing follows the existing independent adjacent-table evidence. The helper
+has no scene-index guard, and scene-request/writer provenance remains open.
+
+The resource projection reopens all 250 distinct program groups across 354
+copied contexts with the existing parser. Exactly six physical handler-7
+records occur, in scenes 2, 9 and 28: two supply 12, two supply 24, one supplies
+58 and one supplies 65. Complete record lengths, terminators, hashes and
+retained selector contexts agree. Only the first ID-24 record belongs to an
+initially requested group; even that membership does not prove execution.
+The producer, copy walkers and audio consumer retain their current exact
+positive builds and rejected changed-source controls.
+
+These 37 IDs reference thirty modules and 272 distinct, nonoverlapping pattern
+spans: 290,929 encoded bytes, 17,408 rows and 77,759 events. The projection
+includes every non-marker pattern referenced by a declared order, as a data
+superset without asserting that every order plays. Eight order entries contain
+marker 254 and remain part of the control-state/restoration dependency. All
+sixteen seek indices per pattern match independently parsed row starts;
+69,632 native-loader model cases check all 256 row-byte values for every
+pattern. An independent parser rechecks the complete population and current
+consumer/target positive and changed-source-control artifacts.
+
+The observed events use channels 0–15, seventeen explicit effect IDs no greater
+than 45, and volume bytes 16–80. All thirty module instrument-mode flags are
+zero. Thus these encoded events stay inside the twenty-track span cleared at startup and
+inside the observed effect-table prefix. They supply no nonzero volume-column
+effect assignment; an omitted volume can still preserve an earlier saved
+value. None of these data facts closes intervening writers or restoration.
+
+The stronger claim that every event channel is below its module's declared
+channel count is false for this population. Eighteen patterns contain 1,116
+events on channel 8 with a declared count of 8, or channel 15 with a declared
+count of 15, in descriptors 15 and 20 respectively. Independent parsing and
+the native row-seek checks agree. No exceptional event is the first event of
+its row, so no call-free loader-to-consumer trace for such an event is claimed.
+These records remain inside the twenty-track span cleared at startup; their
+playback consequences are unverified. The tighter count must not be used to
+close the writer domain. Other selector literals, contact tables, option/current
+ID replay, saved pointers and callback/alias writers remain outstanding, and
+both shared callback sites remain open.
+
 ## Standalone instrument lifecycle and activity handoff
 
 Twelve connected extents add **1,400 matching C bytes**, including a copied ARM

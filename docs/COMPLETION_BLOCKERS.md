@@ -12,6 +12,17 @@ Follow this order. The [manifest](../config/build-us-eu.json) and
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
+The [audio descriptor producers](AUDIO_RECONSTRUCTION.md#conditional-descriptor-producers)
+now have a conditional union of 37 IDs: literal notification/optional paths,
+the 200 period fields of fifty backed scene records, and six handler-7 records
+from the retained resource population. Native arguments, fixed bytes and current
+source/control proofs support these subsets. Their thirty modules supply 272
+patterns with event channels below twenty and explicit effects no greater than
+45. The stronger module-header channel-count bound is false: eighteen patterns
+contain 1,116 exceptions in descriptors 15 and 20. Scene indices, mutable
+program storage, remaining producers and saved-player provenance are not
+closed; neither shared audio callback site gains a completeness annotation.
+
 The [contact-scene need adjustment](SCENE_CONTACT_MENU.md) now owns another
 100 C bytes, including 80 instruction and 20 literal bytes. Its real lower
 comparison/result phase preserves the native loop without bindings or extra
