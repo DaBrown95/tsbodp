@@ -125,3 +125,31 @@ previous request kind and link-menu selector word. The
 connects the initialization store of 14 at `0x0300408F` to primary Start and
 row 14's begin entry. It does not close all aliases, writers, saved-state
 producers or the complete scene-kind population.
+
+## Finalizer coordinate-value experiment, 24 October 2026
+
+A real inline containment predicate taking eight cached coordinate values
+recovers the native locations of all seven local words: own lower X/Y at
+SP0/SP4, own upper X/Y at SP8/SP12, category at SP16, saved flags at SP20 and
+previous index at SP24. The four reads of the other object's bounds retain
+their source order and canonical `FrameObject` fields. No R7 binding is used.
+
+The complete candidate is 352 bytes with 229 differences against the fixed
+348-byte reference, including the four extra bytes. It still spills the other
+object's upper X at SP28, expanding the local frame to 32 bytes instead of the
+native 28. Other coordinate allocation and control-flow differences remain;
+the region receives no C credit.
+
+Three follow-ups also fail full comparison: four by-value coordinate pairs
+produce 368 bytes / 283 differences; early-failure predicate returns produce
+352 / 230; combining containment and flag-priority units produces 360 / 264.
+Moving only the pure separation calculation after containment produces
+352 / 241 and a 36-byte frame. It frees the other upper X into R9 during
+containment, but introduces two extra copies of own upper Y at SP28/SP32.
+The existing game-memory reads stay in their original order.
+
+All ten experiments retain complete outputs and use the current compiler
+profile. The value-unit form supplies a new source graph for further distinct
+experiments; every acceptance still requires the entire original extent and
+changed-source controls. These stack observations add no runtime, table-bound
+or complete-source claim.
