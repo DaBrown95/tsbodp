@@ -5,7 +5,7 @@
 void irq_wait_vblank(void);
 unsigned int link_start_status_poll(unsigned int);
 void link_wait_for_status_confirmation(void);
-/* Original service boundaries; these declarations add no recovered C. */
 unsigned int link_read_status_original(void);
+/* Remaining original-address IRQ service. */
 void link_handshake_irq_original(void);
 #endif

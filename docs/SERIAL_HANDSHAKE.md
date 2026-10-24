@@ -52,10 +52,10 @@ payloads were retired. They establish historical candidate lineage, not a replay
 or a current match. The adopted bodies change only their first include line from those retained attempts.
 There are no register bindings, copied instructions or new volatile qualifiers.
 
-The 100-byte start provider now matches from C as described below. The
-1,616-byte next-stage IRQ, downstream 200-byte record helper and separate
-124-byte status reader remain unowned. Their call/address views do not qualify
-those implementations. The start payload's upper representation remains
+The 100-byte start provider and 124-byte status reader now match from C as
+described below. The 1,616-byte next-stage IRQ and downstream 200-byte record
+helper remain unowned. Their call/address views do not qualify those
+implementations. The start payload's upper representation remains
 unspecified; no runtime fixture, peripheral timing or gameplay claim follows.
 
 Normal and strict positive/control builds agree on all seven retained native
@@ -106,10 +106,10 @@ layout checks pass; wrong offset and byte-return contracts reject. All 256
 initialized byte values agree in a finite source witness, which supplies no
 peripheral or runtime execution evidence.
 
-The larger controller, next-stage IRQ, connection starter and status reader
-remain explicit original-code boundaries. In particular, matching this getter
-does not initialize another caller's unwritten event payload or establish its
-complete storage ownership. Fresh full matching/control and progress gates
+The later controller, connection-starter and status-reader matches are described
+below; the next-stage IRQ remains an original-code boundary. Matching this
+getter does not initialize another caller's unwritten event payload or establish
+its complete storage ownership. Fresh full matching/control and progress gates
 cover the getter together with land placement; no assembly instruction body or
 new compiler profile is used.
 
@@ -145,13 +145,31 @@ and the unused partial endpoint declaration is removed. Normal/strict matches,
 genuine changed-source controls, actual-definition interfaces, full-ROM and
 progress gates pass.
 
-The separate 124-byte status reader remains unconverted, now with two differing
-bytes across its complete extent. Ordinary signed-character views of the
-canonical object retain both native signed-byte load sites, and a shared return
-value restores the native branch and literal-pool order. The reset OR and byte
-store still use R3 instead of native R0. Moving that full-word reset value into
-the actual R0 return/result lifetime makes the compiler remove the OR again;
-this 120-byte nonmatch is a rejected diagnostic, not an improvement.
+## Status reader
+
+[`link_read_status_original`](../src/link/read_status.c) at `0x0803E298` now
+owns all 124 bytes from C: 86 instruction bytes, 32 literal bytes and six zero
+alignment bytes. The three two-byte alignment spans begin at `0x0803E2AE`,
+`0x0803E2C6` and `0x0803E2FE`; their compiler-emitted data role does not exclude
+alternate entries.
+
+The initial snapshot in R3 and the reset value in R0 are actual unsigned-byte
+(QI) values. The reset value starts at 255, is ORed with that snapshot and is
+consumed by the existing slot-byte store. The earlier signed comparison value
+in R0 is dead before this reset phase, and no call crosses the constrained
+lifetimes. Ordinary signed-character views retain the two native signed-byte
+load sites, while the shared word result preserves the native branches and
+literal-pool order. This introduces no extra read, fabricated consumer, copied
+instruction body or output modification.
+
+Normal and strict compilation both match the complete extent. Changing the
+actual final result from six to five rejects with one differing byte in each
+profile. The existing `unsigned int (void)` API and name are retained. Its two
+maintained callers, `link_start_status_poll` and `scene_link_status_step`, also
+pass normal/strict matching and their real controls without implementation
+changes. Native direct calls at `0x0803D6A8`, `0x0801BF50` and `0x0801C016`
+corroborate those three uses; actual-definition interface and target-layout
+checks pass. This is a named caller set, not a complete incoming population.
 
 Only the initial unsigned snapshot is volatile. The later distinct signed loads
 are verified output of the pinned compiler, without a source-level guarantee of
@@ -159,8 +177,10 @@ fresh asynchronous observations. The sentinel path performs two observations;
 the other paths reach the third. Signed-character access stays within the
 complete unqualified object, and all register phases are call-free. Static
 startup, interrupt-enable and writer evidence supports possible hardware
-interleaving under compatible guards; neither this evidence nor the poll's
+interleaving under compatible guards; neither this evidence nor the reader's
 match closes runtime, participant, writer or complete protocol domains.
+
+## Remaining record provider
 
 The 200-byte record provider at `0x0803D788` also remains unconverted. Its current
 canonical source differs by one byte: the second-record pointer load uses R0
@@ -226,8 +246,9 @@ Earlier private notes conflated this entry with the heavily tried 408-byte
 `link_transfer_finished` at `0x0803D850`: an old private row-nine alias reused
 that name for `0x0803E48C`. Exact-address and definition review separates them.
 No authored prior attempt was found for this 64-byte predicate; its first
-canonical short-circuit recipe matches. The distinct 408-byte poll now matches
-as described above; the separate 124-byte status-reader hold remains unchanged.
+canonical short-circuit recipe matches. The distinct 408-byte poll and 124-byte
+status reader now match as described above, with their runtime and writer
+domains still open.
 
 The canonical API repair first preserved the controller's 1,224-byte /
 eleven-difference candidate: all 39 native calls retained their 21 targets.
@@ -260,8 +281,8 @@ The kind-11 path initializes the GNU empty member of the existing payload union.
 Its by-value ABI copies eight bytes of unspecified representation; this does
 not initialize an eight-byte array or promise zero padding. Current canonical
 header checks include the actual controller, recorder and all 20 owned direct
-providers; the 124-byte status reader at `0x0803E298` remains an original
-word-returning boundary. The peer predicate has its own word API and an explicit
+providers. The 124-byte status reader at `0x0803E298` now matches from C with
+the same word-returning API. The peer predicate has its own word API and an explicit
 low-byte conversion at this consumer, distinct from the 408-byte serial poll.
 
 This ordinary-C recipe requires the complete input object through its 50 member
@@ -275,9 +296,9 @@ The initializer (352), controller (1,224), notice helper (164), indicator helper
 (120) and shutdown (32) now own the complete local interval
 `0x0801BD18..0x0801C47C`: five C bodies and 1,892 extent bytes. The observed scene
 table row and its accepted phase consumers support the begin/step/end linkage;
-they do not establish every runtime scene index. The 124-byte status reader
-and 1,616-byte next-stage IRQ remain separate reconstruction blockers. The
-accepted 408-byte poll does not close their domains. An earlier actual-owner
+they do not establish every runtime scene index. The 1,616-byte next-stage IRQ
+and 200-byte record provider remain separate reconstruction blockers. The
+accepted poll and status reader do not close their domains. An earlier actual-owner
 IRQ recipe lowered two-byte representation
 copies inline but materialized two stack stores and four frame bytes absent
 from the native body; that rejected attempt earns no C credit.
@@ -349,8 +370,9 @@ Taking an escaped halfword pointer, including through an integer address, does
 not inherit that exception after fields-view writes. Known pointer banks and
 record extents do not establish initialized bytes, all incoming indices,
 asynchronous writers, callback populations or complete protocol behavior. The
-IRQ, 200-byte record helper and status-reader boundaries remain original code,
-with zero additional source credit from that owner change.
+IRQ and 200-byte record helper remain original code. The separately matched
+status reader adds 124 C bytes; the record-owner change itself adds no source
+credit.
 
 ## Connection-start provider
 
