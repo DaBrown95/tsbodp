@@ -13,15 +13,23 @@ estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
 The [audio descriptor producers](AUDIO_RECONSTRUCTION.md#conditional-descriptor-producers)
-now have a conditional union of 37 IDs: literal notification/optional paths,
-the 200 period fields of fifty backed scene records, and six handler-7 records
-from the retained resource population. Native arguments, fixed bytes and current
-source/control proofs support these subsets. Their thirty modules supply 272
-patterns with event channels below twenty and explicit effects no greater than
-45. The stronger module-header channel-count bound is false: eighteen patterns
-contain 1,116 exceptions in descriptors 15 and 20. Scene indices, mutable
-program storage, remaining producers and saved-player provenance are not
-closed; neither shared audio callback site gains a completeness annotation.
+now have a conditional union of 68 IDs, adding checked selector literals,
+three contact prefixes and eleven attachment-94 parameter rows. Their 44 modules
+supply 418 patterns and 104,488 events; 107,008 native seek-model cases are
+certified, including retained cases. Event channels are below twenty and
+explicit effects no greater than 45. The stronger module-header channel-count
+bound is false: nineteen patterns contain 1,117 exceptions in descriptors 15,
+20 and 44. The observed 71-record physical prefix does not establish an original
+array capacity, and IDs 59, 62 and 64 still lack producer admission.
+
+The reset image seeds both live and saved player states with zero, supporting
+a conditional paired volume-state invariant. Valid mixer handles and
+callback/alias preservation remain necessary. Option/current-ID copies supply
+no membership guard; an ordinary selector fixture with sentinel 255 and mask
+`0x02` set reads adjacent object-directory data before the model stops its
+player-start call. This does not establish natural reachability. Global index
+and program-storage premises, callback writes, saved pointers and normal call
+ordering remain open; neither shared audio callback site gains completeness.
 
 The [contact-scene need adjustment](SCENE_CONTACT_MENU.md) now owns another
 100 C bytes, including 80 instruction and 20 literal bytes. Its real lower

@@ -1008,15 +1008,18 @@ and saved-state writer domains; the shared calls remain unresolved.
 
 ## Conditional descriptor producers
 
-Three independently checked producer populations now supply a union of 37
-descriptor IDs. Each retains its own conditions; this is not the complete
-set of audio callers or a declared descriptor-table length.
+Six independently checked producer populations now supply a conditional union
+of 68 descriptor IDs. Each retains its own input and writer premises; this is
+not a complete gameplay population or a declared descriptor-table length.
 
 | Producer population | Descriptor IDs | Conditions |
 | --- | --- | --- |
 | Thirteen literal notification sites in ten owned callers, plus the optional playback selector | 27, 54–58, 60, 61, 63, 68–70 | Each literal call has one immediate argument definition. The optional selector's complete local paths produce only 68, 69 or 70 after its random-number call. Reaching a call is not established by this static proof. |
 | Four period fields in each of the fifty backed scene records | 0, 2–4, 7–11, 13, 15–23, 26, 65–67 | The scene index must remain in 0–49 while periods 0–3 select the record's bytes 8–11. Other unsigned period values return zero without reading the scene table. |
 | Handler 7 records in the retained fifty-root, 105-pack resource population | 12, 24, 58, 65 | Correct program copying, unchanged command/parameter bytes and execution reaching the record remain premises. |
+| Thirty-one physical literal selector calls in nineteen owned callers | 0–7, 9, 14, 21, 22, 28, 29, 35, 37–39, 46, 47, 60, 61 | Complete local control-flow and argument checks corroborate the literals, including three guarded switches. Thirty-three source occurrences merge into thirty-one native calls. Reaching those callers remains a separate question. |
+| Three contact-table prefixes | 3, 25, 26, 28, 30–34, 36, 40–45, 65 | Main scene index 0–7, activity-three subtype 0–4, or activity-six option 0–4, with intact table and object storage. Main scene 6 skips its call. These are conditional prefixes, not global index bounds. |
+| Eleven attachment-94 parameter rows | 48–53 | Execution reaches phase zero with a valid object and freshly read signed parameter 0–10. The provider itself has no such range guard. |
 
 The period helper's native body was checked for all 200 physical field
 combinations and six default-path boundary values. Its unsigned branch
@@ -1034,34 +1037,140 @@ initially requested group; even that membership does not prove execution.
 The producer, copy walkers and audio consumer retain their current exact
 positive builds and rejected changed-source controls.
 
-These 37 IDs reference thirty modules and 272 distinct, nonoverlapping pattern
-spans: 290,929 encoded bytes, 17,408 rows and 77,759 events. The projection
+The contact prefixes contain eighteen records and seventeen delivered calls.
+Each native index case agrees with its record: eight 28-byte main records,
+five 56-byte activity-three records and five 12-byte activity-six records.
+The last prefix ends before independently consumed palette data. Attachment
+94 reads an eleven-row, four-byte-stride prefix at `0x080534D8`; the next
+independently consumed viewpoint data begins at `0x08053504`. Its twelve-byte
+parameter provider sign-extends a byte. All 256 byte cases confirm a range of
+minus 128 through 127, so the eleven checked call compositions establish only
+the stated `0..10` subset. They do not establish how callers populate it.
+
+The descriptor root at `0x08D73F34` has a separate physical frontier at
+`0x08D7416C`, where an owned render-resource consumer reads an animation-pointer
+table. The intervening 568 bytes hold 71 eight-byte records. This is adjacent
+data evidence, not an original array-size declaration or a selector guard.
+IDs 59, 62 and 64 are the only numbers in that observed `0..70` prefix absent
+from the conditional producer union; no producer is inferred merely to fill
+those slots, and they are not classified as unused.
+
+The current inventory identifies 32 source owners with a direct selector call,
+ten with a direct notification call and two with a direct player-start call:
+43 distinct owned callers because these groups overlap. Their current sources,
+positive builds and genuine changed-source controls have been rechecked. All
+inventoried selector owners fit the populations above or stored-ID replay.
+An independent native BL-call census across all 2,460 accepted C bodies
+confirms the same owner sets: 46 selector, thirteen notification and two
+player-start call sites, 61 in total. Legacy assembler outputs without useful
+code/data mapping symbols use their retained compiler assembly to distinguish
+instructions from literal pools. No additional direct BL caller is found in
+those bodies. Tail transfers, assembly-only and unconverted code, and indirect
+incoming execution remain outside this census; the inventory's complete-code
+flag remains false.
+
+These 68 IDs reference 44 modules and 418 distinct, nonoverlapping pattern
+spans: 404,644 encoded bytes, 26,752 rows and 104,488 events. The projection
 includes every non-marker pattern referenced by a declared order, as a data
-superset without asserting that every order plays. Eight order entries contain
+superset without asserting that every order plays. Twenty-three order entries contain
 marker 254 and remain part of the control-state/restoration dependency. All
 sixteen seek indices per pattern match independently parsed row starts;
-69,632 native-loader model cases check all 256 row-byte values for every
-pattern. An independent parser rechecks the complete population and current
-consumer/target positive and changed-source-control artifacts.
+107,008 certified native-loader model cases cover all 256 row-byte values for
+every pattern. The two new deltas execute 37,376 cases and retain the earlier
+69,632 after artifact and fixed-ROM checks. A separate fresh parser checks the
+complete combined population, all declared non-marker orders and disjoint
+spans; it does not rerun those native cases. Current consumer and target
+positive/control artifacts remain qualified.
 
-The observed events use channels 0–15, seventeen explicit effect IDs no greater
-than 45, and volume bytes 16–80. All thirty module instrument-mode flags are
-zero. Thus these encoded events stay inside the twenty-track span cleared at startup and
-inside the observed effect-table prefix. They supply no nonzero volume-column
-effect assignment; an omitted volume can still preserve an earlier saved
-value. None of these data facts closes intervening writers or restoration.
+The observed events use channels 0–15, nineteen explicit effect IDs no greater
+than 45, and volume bytes 16–80. All 44 module instrument-mode flags are zero;
+their channel counts are 4–15. Thus these encoded events stay inside the
+twenty-track span cleared at startup and inside the observed effect-table
+prefix. They supply no nonzero volume-column effect assignment; an omitted
+volume can still preserve an earlier saved value. The newly admitted mark
+effect calls the player callback with code 3, adding an explicit callback
+preservation premise. These data facts alone do not close intervening writers
+or restoration.
 
 The stronger claim that every event channel is below its module's declared
-channel count is false for this population. Eighteen patterns contain 1,116
-events on channel 8 with a declared count of 8, or channel 15 with a declared
-count of 15, in descriptors 15 and 20 respectively. Independent parsing and
-the native row-seek checks agree. No exceptional event is the first event of
-its row, so no call-free loader-to-consumer trace for such an event is claimed.
+channel count is false for this population. Nineteen patterns contain 1,117
+exceptional events in descriptors 15, 20 and 44: respectively channel/count
+8/8, 15/15 and 9/9. The additional descriptor-44 event is at `0x08B209C2`,
+the eighth event of row zero in pattern `0x08B2098C`. Independent parsing and
+the native row-seek checks agree. No exceptional event is first in its row,
+so no call-free loader-to-consumer trace for such an event is claimed.
 These records remain inside the twenty-track span cleared at startup; their
 playback consequences are unverified. The tighter count must not be used to
-close the writer domain. Other selector literals, contact tables, option/current
-ID replay, saved pointers and callback/alias writers remain outstanding, and
-both shared callback sites remain open.
+close the writer domain. Input admission, mutable program storage, option/current
+ID replay, saved pointers and callback/alias writers remain outstanding. Both
+shared callback sites remain open.
+
+## Reset-seeded live and saved volume state
+
+The accepted reset copy installs EWRAM from `0x08FDBA28` into
+`0x02000000..0x020027F8`. In that fixed ROM image, both complete 1,972-byte
+player states at `0x02001644` and `0x02001DF8` are zero. The later unused-RAM
+clear begins at `0x020027F8`. This supplies an initialized base case for all
+twenty `volume_effect` bytes in each player, rather than assuming the backup
+was cleared by the audio initializer.
+
+For valid canonical track pointers and the conditional 68-ID stream domain,
+named row assignments either clear `volume_effect` or preserve it. Startup
+clears all twenty tracks; the fixed 1,972-byte save and restore copies carry
+the predicate between live and backup states. All eighteen distinct admitted
+effect owners preserve this field through their named writes. The mark effect's
+external callback must separately preserve it. Under these premises, induction
+over the named transitions keeps all forty protected bytes zero, including
+when a later jingle replaces one while retaining an earlier backup. The weaker
+generic named-writer bound `0..0x9F` also survives these copies without the
+encoded-volume restriction.
+
+Provider footprints are a real dependency. The owned ARM pan setter indexes
+44-byte mixer channels using `handle & 255` and checks handle equality, without
+an index-below-32 guard. Static address arithmetic shows that indices 104, 127
+and 151 can alias protected bytes in the live or saved players. Its disabled
+hardware path writes `0xC0`. This is not evidence that such handles are
+produced: valid indices 0–31 have a disjoint footprint. Handle provenance,
+sample/object pointer validity, callbacks, DMA/IRQ writers and interference
+during copy/restore still need their own preservation arguments.
+
+A separate constructed-state model copies a pre-existing `0xA0` byte into
+backup, clears live tracks, restores it and reaches selector 10 at the later
+volume call. It reads the actual following-data flag 50 and pointer
+`0x00190000`, then stops before the call. That fixture refutes a bound derived
+only from the current module; it is not a counterexample to the reset-seeded
+induction or a demonstrated gameplay path. The native copy/clear/restore
+fixtures and thirty zero-state consumer cases remain retained evidence.
+The additional fourteen modules share the checked count and field conditions;
+no new native consumer execution is claimed for them. Global writer closure
+at `0x0804A3F8` is still open.
+
+## Current-selection sentinel and option replay
+
+The option paths preserve a byte, not its membership in the admitted ID set.
+Three native suffixes checked over all 256 values show that the current ID is
+copied to the cache unless the previous kind is 13, that kind 13 preserves the
+cache, and that re-enabling playback passes the previous byte to the selector
+after setting the current byte to 255. These 768 conditional cases require
+the preceding calls to return and the stated object/storage premises; no
+startup-to-options execution is claimed.
+
+The selector does not unconditionally reject sentinel 255. With volume off it
+stores the byte and returns. With volume on, current ID 255 and clear flags it
+returns without a descriptor read. If `flags & 0x02` is set, the same ordinary
+entry instead loads the computed slot at `0x08D7472C` and prepares a player
+start with `R0 = 0x0C101010`, `R1 = 12`, `R2 = 12`. That slot overlaps the
+independently backed scene-zero object-group length directory beginning at
+`0x08D74728`; it is not admitted as another audio descriptor.
+
+The actual default callback sets mask `0x02` for kinds 2 and 6 while preserving
+the current ID. A conditional callback-to-selector composition therefore
+reaches that load with current ID 255. It stops before the player-start call,
+without a crash, hardware-address interpretation or natural call-order claim.
+The initialization suffix seeds 255 with flags zero, but the complete startup
+and normal-selection/cache ordering has not been established. Copying a
+previous ID is insufficient to transfer the conditional descriptor-domain
+proof without those writer and ordering premises.
 
 ## Standalone instrument lifecycle and activity handoff
 
