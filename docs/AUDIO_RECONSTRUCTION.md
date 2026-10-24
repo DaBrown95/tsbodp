@@ -1119,7 +1119,8 @@ named row assignments either clear `volume_effect` or preserve it. Startup
 clears all twenty tracks; the fixed 1,972-byte save and restore copies carry
 the predicate between live and backup states. All eighteen distinct admitted
 effect owners preserve this field through their named writes. The mark effect's
-external callback must separately preserve it. Under these premises, induction
+external callback has a preserving footprint for either named installed target,
+as qualified below; other targets still need their own argument. Under these premises, induction
 over the named transitions keeps all forty protected bytes zero, including
 when a later jingle replaces one while retaining an earlier backup. The weaker
 generic named-writer bound `0..0x9F` also survives these copies without the
@@ -1134,6 +1135,24 @@ produced: valid indices 0–31 have a disjoint footprint. Handle provenance,
 sample/object pointer validity, callbacks, DMA/IRQ writers and interference
 during copy/restore still need their own preservation arguments.
 
+The extended sample allocator preserves the low-byte range `0..31` when its
+input already has that range. A matching identity retains its input index;
+a mismatch scans the 32 channels and returns a bounded index or zero. The
+generation shift does not change that low byte. This is range preservation,
+not arbitrary-handle validation: a matching out-of-range identity bypasses
+the scan. The exhausted scan also reads the active byte at index 32 before
+returning; no C array-safety claim follows.
+
+Reset seeds all twenty live, twenty saved and six standalone track handle
+words with zero. Live-track clearing, fixed player save/restore copies and
+the named assignments from allocator returns preserve their low-byte range,
+provided all other writers and object indices preserve it. The standalone
+initializer does not clear its handles; their base case comes from reset.
+Its separate outer instrument identity still needs an index in `0..5`.
+The 1,568 allocator and 128 pan model cases corroborate the native range and
+footprint paths. Stale generations may fail equality, or repeat after
+`2^24` allocations; identity validity and address range are separate properties.
+
 A separate constructed-state model copies a pre-existing `0xA0` byte into
 backup, clears live tracks, restores it and reaches selector 10 at the later
 volume call. It reads the actual following-data flag 50 and pointer
@@ -1144,6 +1163,56 @@ fixtures and thirty zero-state consumer cases remain retained evidence.
 The additional fourteen modules share the checked count and field conditions;
 no new native consumer execution is claimed for them. Global writer closure
 at `0x0804A3F8` is still open.
+
+## Named player callback preservation
+
+The accepted C direct-BL population contains two caller sites for the activity
+callback selector: audio initialization supplies index zero, and activity-six
+initialization supplies one. Local predecessor and argument checks corroborate
+both constants. The selector reads `0x080414C1` or `0x080414F5` from the
+observed table prefix at `0x0807FA84`; its sole mapped setter call stores that
+pointer at `0x020025B4`. Reset seeds the slot with zero. The selector has no
+general index guard, and the setter accepts arbitrary pointers, so these
+named installations do not establish every possible slot writer or target.
+
+Both installed targets are complete owned leaf functions. Their full native
+control flow and store-base definitions give these non-stack writes:
+
+| Target | Callback kind | Writes |
+| --- | --- | --- |
+| Default `0x080414C0` | 2 or 6 | OR mask `0x02` into flags at `0x03007366` |
+| Default | 5 | OR mask `0x10` into the same flags byte |
+| Parameter `0x080414F4` | 2 or 6 | OR mask `0x02` into the same flags byte |
+| Parameter | 3 | Store the parameter word at `0x03007360`, then OR mask `0x04` into flags |
+| Either target | Other kinds for that target | No non-stack writes |
+
+For every 32-bit kind and parameter, these footprints preserve the forty
+volume bytes and 46 handle low bytes. Each leaf also saves its return address
+at entry SP minus four. A valid call stack must keep that word separate from
+both the protected bytes and the eight notice bytes `0x03007360..0x03007367`;
+otherwise a parameter store could overwrite the saved return address. The
+initialized IRQ/system stack locations and model fixtures meet this condition.
+The kind partition and native stores support the general claim; 22,528 model
+cases corroborate it without claiming hardware execution.
+
+The mark producer supplies kind 3 and its encoded byte operand; the checked
+finish-jingle suffix supplies kind 5 and parameter zero after its preceding
+restore/providers return. Given either named installed target and the stack
+premise, these two callback boundaries preserve the protected bytes. Slot
+aliases, other installation paths, period/frequency callbacks, mixer providers
+and other writers remain separate dependencies. Notice writes can still
+change later control flow and do not prove descriptor admission.
+
+The standalone instrument entrypoints have no additional static producer in
+the checked incoming population. Across all 2,460 accepted C bodies, including
+conditional and unconditional B/BL instructions, only the instrument initializer
+has a direct incoming call. A raw aligned branch-encoding scan using the
+physical `0x08000000` ROM origin finds the same call; exact even/odd entry
+words, including ROM mirrors, occur nowhere. The branch scan does not model
+copied or ROM-mirrored instruction-PC origins. These searches also do not
+exclude computed, split, compressed or mutable pointers. The five playback/query
+entries are not classified as unreachable or unused, and the six standalone
+handle premises remain explicit.
 
 ## Current-selection sentinel and option replay
 
@@ -1167,10 +1236,41 @@ The actual default callback sets mask `0x02` for kinds 2 and 6 while preserving
 the current ID. A conditional callback-to-selector composition therefore
 reaches that load with current ID 255. It stops before the player-start call,
 without a crash, hardware-address interpretation or natural call-order claim.
-The initialization suffix seeds 255 with flags zero, but the complete startup
-and normal-selection/cache ordering has not been established. Copying a
-previous ID is insufficient to transfer the conditional descriptor-domain
-proof without those writer and ordering premises.
+The initialization suffix seeds 255 with flags zero. The actual named startup
+handoffs choose language selection (kind 12) or timed notice (kind 3), then
+proceed through kind 3 to pages (kind 4) and the default menu (kind 5).
+Both the timed notice and default menu select literal ID zero before their
+later input paths. This is a conditional ordering result for those dispatch
+edges and returning providers, not a complete startup or scene-reachability
+trace. It supplies no initialized witness for the constructed sentinel case.
+
+The options menu's own mute-and-enable cycle has a more specific relation.
+Its positive-to-zero branch stops sequence playback before setting zero
+volume; the actual stop-return suffix clears pause mask `0x01`. On re-enable,
+the selector receives the captured prior ID, while 255 is only the temporary
+stored current ID. After playback and synchronization return, the selector
+clears mask `0x02` and restores the requested ID only if its fresh read finds
+mask `0x01` clear. All 256 flag bytes were checked at the stop and return
+suffixes, using three representative requested IDs for the latter, for 1,024
+native model cases. Calls before the suffixes are not emulated.
+
+Thus this named options cycle preserves an admitted current/cache ID when
+its providers and intervening writers preserve the stated fields and flag
+relation. The named callbacks preserve mask `0x01` and current ID under their
+stack premise. The scroll-text detour retains the earlier cache while selecting
+ID 9; the language detour copies the still-admitted current ID. Neither copy
+adds a membership guard.
+
+Activity six is a distinct zero-volume producer: initialization saves the
+previous volume, forces 255 and selects its option ID; completion later
+restores the saved byte without clearing pause mask `0x01`. The retained
+250-group resource population contains one pause command, at `0x08D7994C`
+in scene 28 / pack 2 / group 10, and no resume or sequence-volume command.
+Record presence does not establish execution or an intervening pause during
+activity six. That lifetime relation, wider writers and other incoming paths
+remain open. If mask `0x01` is supplied at the re-enable return suffix, 255
+survives; no normal initialized call-order witness for that premise has been
+established.
 
 ## Standalone instrument lifecycle and activity handoff
 

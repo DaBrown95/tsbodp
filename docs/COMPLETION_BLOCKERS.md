@@ -23,13 +23,17 @@ bound is false: nineteen patterns contain 1,117 exceptions in descriptors 15,
 array capacity, and IDs 59, 62 and 64 still lack producer admission.
 
 The reset image seeds both live and saved player states with zero, supporting
-a conditional paired volume-state invariant. Valid mixer handles and
-callback/alias preservation remain necessary. Option/current-ID copies supply
-no membership guard; an ordinary selector fixture with sentinel 255 and mask
-`0x02` set reads adjacent object-directory data before the model stops its
-player-start call. This does not establish natural reachability. Global index
-and program-storage premises, callback writes, saved pointers and normal call
-ordering remain open; neither shared audio callback site gains completeness.
+a conditional paired volume-state invariant. The allocator preserves bounded
+handle indices, and the two named player callbacks have concrete write
+footprints preserving all forty volume bytes and 46 handle low bytes under a
+valid, nonoverlapping stack premise. Other handle/slot writers remain open.
+Option/current-ID copies supply no membership guard, but the named startup
+and options mute/enable paths now have a conditional admitted-ID relation.
+The constructed sentinel-255 read is still not an initialized execution
+witness. The remaining specific relation concerns pause mask `0x01` across
+activity-six saved-volume restoration. Global index and program-storage
+premises, other callbacks, saved pointers and wider call ordering remain open;
+neither shared audio callback site gains completeness.
 
 The [contact-scene need adjustment](SCENE_CONTACT_MENU.md) now owns another
 100 C bytes, including 80 instruction and 20 literal bytes. Its real lower
