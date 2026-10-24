@@ -28,6 +28,7 @@ void frame_release_scene_transient_tiles(void);
 void frame_clear_scene_effects(void);
 void frame_spawn_counter_effect(struct FrameObject *,signed char);
 void frame_clear_transient_effects(void);
+void frame_reset_effect_lists_unrooted_30f70(void);
 void frame_step_transient_effects(void);
 void frame_step_owner_transient_effects(struct FrameObject *);
 void frame_step_transient_effect(struct FrameTransientEffect *);

@@ -204,3 +204,32 @@ transient/emission consumers, totaling 2,644 bytes, with every real control
 rejected. That total includes the three cleanup functions once and includes the
 1,372-byte emitter. These are source and static-call findings; full-ROM
 integration and runtime behavior remain separate claims.
+
+## Unrooted definition-index reset
+
+[`frame_reset_effect_lists_unrooted_30f70`](../src/frame/frame_reset_effect_lists_unrooted.c)
+at `0x08030F70` adds 68 matching C bytes: 60 instruction bytes and eight literal
+bytes, with no alignment bytes. This source addition changes no other C
+implementation.
+
+The function reads and writes the eight index halfwords in group zero of
+`g_frame_transient_definitions`, setting each to `0xFFFF`. The canonical
+[`FrameTransientDefinition`](../include/frame_transient_effect.h) has a
+40-byte stride and its index at byte 36, so these accesses are
+`0x030058C4 + 40 * slot` for slots zero through seven. It then calls
+`frame_clear_transient_effects` at `0x0803105C`, followed by
+`frame_clear_render_effects` at `0x08031098`.
+
+The source separates the real R0 address-arithmetic phase from the halfword
+value loaded, ORed with the R4 halfword mask, and stored. Their lifetimes do
+not overlap; the constrained phases finish before the cleanup calls. The
+first-field address in R5 is also consumed by the loop. No fabricated
+consumer, copied instruction body or output modification is used.
+
+Normal and strict compilation both match all 68 bytes with zero differences.
+Changing the loop's remaining count from seven to six removes one record
+update and rejects with one differing byte in each profile. Actual-definition
+interface and target-layout checks also pass. Incoming callers remain unknown:
+this entry remains unrooted, and the match establishes no runtime execution,
+complete table backing, global writer closure or cleanup validity for arbitrary
+list state.

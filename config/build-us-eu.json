@@ -18599,6 +18599,26 @@
       "thumb_symbols": []
     },
     {
+      "name": "frame_reset_effect_lists_unrooted_30f70",
+      "rom_offset": 200560,
+      "size": 68,
+      "assembler_id": "binutils2101",
+      "symbols": {
+        "g_frame_transient_definitions": "0x030058a0",
+        "frame_clear_transient_effects": "0x803105d",
+        "frame_clear_render_effects": "0x8031099"
+      },
+      "thumb_symbols": [
+        "frame_clear_transient_effects",
+        "frame_clear_render_effects"
+      ],
+      "source": "src/frame/frame_reset_effect_lists_unrooted.c",
+      "negative_control": {
+        "before": "remaining = 7;",
+        "after": "remaining = 6;"
+      }
+    },
+    {
       "name": "frame_render_effect_terrain",
       "rom_offset": 201676,
       "size": 64,

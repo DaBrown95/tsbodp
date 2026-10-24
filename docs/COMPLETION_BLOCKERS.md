@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,460 C functions / 306,748 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 310,808 bytes; original slices
-still supply 16,466,408 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,461 C functions / 306,816 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 310,876 bytes; original slices
+still supply 16,466,340 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **39 unowned rows / 14,870
+[inventory](../assets/rom-inventory.json) contain **38 unowned rows / 14,802
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -48,6 +48,14 @@ without passing zero to the mixer. Byte-tempo provenance, fresh postmix count
 and callback/period loads, other mixer/sample writers and interrupts remain
 dependencies. These scheduling, native-model and arithmetic results add no
 C coverage or full-mixer/gameplay claim.
+
+The [unrooted definition-index reset](FRAME_TRANSIENT_EFFECTS.md#unrooted-definition-index-reset)
+now owns 68 C bytes at `0x08030F70`: 60 instruction and eight literal bytes.
+Its real halfword mask and loaded/stored value preserve the native register
+phases while resetting eight canonical definition slots. Normal and strict
+matches, changed-loop controls and actual cleanup interfaces pass. This removes
+one existing 68-byte estimate; incoming callers and runtime execution remain
+unproved.
 
 The [contact-scene need adjustment](SCENE_CONTACT_MENU.md) now owns another
 100 C bytes, including 80 instruction and 20 literal bytes. Its real lower
@@ -124,7 +132,7 @@ potential presence-bank alias write; this is not a native rejection guard.
 
 | Order | Remaining code | Blocker and next evidence |
 | --- | --- | --- |
-| 1 | Renderer `0x080023E8` (1,400), finalizer `0x08003248` (348). | Renderer: 25 differing bytes, unresolved frame homes, no distinct supported producer; plain `register` does not change the relevant pseudos at `-O2`. Actual provider/caller audits identify no hidden aggregate-result temporary or interface mismatch. Finalizer: proper-owner 340 / 285 attempt retains an upper-X spill and wrong category/flags/previous-index homes. Native upper X/Y use SP8/SP12; category/flags/previous use SP16/SP20/SP24. R7 binding overwrites a live category through the frame-pointer exception and is invalid. Require a new hypothesis using [bounded failures](BOUNDED_INVENTORY.md) and [runtime limits](RUNTIME_OBSERVATIONS.md). |
+| 1 | Renderer `0x080023E8` (1,400), finalizer `0x08003248` (348). | Renderer: 21 differing bytes after reforming the two frame-member addresses at the terminal fresh-byte copy; remaining differences are stack homes and one order-load register. Further real result/counter/control variants have not matched. Actual provider/caller audits identify no hidden aggregate-result temporary or interface mismatch. Finalizer: proper-owner 340 / 285 attempt retains an upper-X spill and wrong category/flags/previous-index homes. Native upper X/Y use SP8/SP12; category/flags/previous use SP16/SP20/SP24. R7 binding overwrites a live category through the frame-pointer exception and is invalid. Use [bounded failures](BOUNDED_INVENTORY.md) and [runtime limits](RUNTIME_OBSERVATIONS.md) to avoid repeated trials while testing plausible new source forms. |
 | 2 | Connected actor, attachment, save and transition workers. | Prioritize weekly `0x0802005C` (108), loader `0x0801B704` (548), generic EC consumer and palette worker (400). Resolve twelve bytes at `0x1DB20..0x1DB2C` and unrooted entries. Backing, selector, serialized-index, writable-target and later-writer domains remain open; generic EC delivery and unused formals are provisional. The six single-window, horizontal/vertical slots 6–9 and three rectangle bodies are owned. Of 28 bodies in the observed prefixes, only first-slot-10 `0x08038B90` (228 bytes) remains unowned. Its best candidate remains 228 / 8. A shared-step composition emits 228 / 109: its initial constant and shared-step expression match, but coordinate/window homes and the DISPCNT reload remain wrong. Further trials await a distinct supported cause. The frame-loop [window coordinate updater](DISPLAY_WINDOW_MOTION.md) and its driver now match, as do the layer/mask services; the separate `0x48A14` setter remains 68 / 15 with its four-scalar declaration. Selector, table, writer and backing populations remain open. See [actor state](ACTOR_STATE_RECONSTRUCTION.md), [entries](ACTOR_ENTRIES_RECONSTRUCTION.md), [attachments](FRAME_ATTACHMENT_JOBS_42_94.md), [save](SAVE_STREAM.md) and [transitions](TRANSITION_WINDOWS.md). |
 | 3 | Copied-RAM resources: ROM `0xB840` (284), `0xB564` (320). | Sorter retains a 284 / 2 best candidate. Its actual final-pass return yields 288 / 33. A real sum bound to R0 yields 284 / 8 by also moving the preceding priority; the native R3 sum binding yields 284 / 28 after earlier scheduling. These measured return and binding lines are closed. The word-group copier at `0x0800B018` now owns all 68 bytes from C, with normal/strict matches and genuine changed-source controls; its actual selected displacement and final payload extent share one ordinary scalar. The tile decoder now owns its complete 504-byte ARM body from C; its 528-byte installation also copies 24 bytes of the following unconverted map drawer. Aggregate/by-reference drawer attempts remain 348 / 313 and 356 / 321: optimization recreates pointer equivalence and spills. Preserve API contracts; prove RAM execution addresses and copy prefixes separately. Serialized selection, alignment and arena/backing remain open; the 812-byte assembly decoder leaves C workers open. See [RAM map](../config/ram-map-us-eu.json) and [decoder](RESOURCE_BACKGROUND_DECODER.md). |
 | 4 | Audio `0x08049968` (124), saved-register adapters and executable patches. | The pinned GCC 3.0.2 and assembler path leaves the C store intact; its optimized output, alignment, fixups and veneers do not explain the reachable native NOP. Known startup copies and code writers are disjoint from this site. Original source/build or later-writer evidence is still required; close caller/stack protocols, incoming transfers, patcher inputs and IRQ targets. Rebuild every reachable modified code state. Glue and observed shifts do not close those domains. See [audio](AUDIO_RECONSTRUCTION.md). |
@@ -341,10 +349,10 @@ extent or runtime claim. The separate unrooted constant-one entries now match
 from C, with their incoming roots and historical unused formals still open.
 
 The instruction census is not a complete code denominator. Its current raw
-union is 285,376 bytes; qualified instructions occupy 285,350 bytes and
-referenced data 35,932 bytes. Known data totals 22,886 bytes. Source-owned data
+union is 285,436 bytes; qualified instructions occupy 285,410 bytes and
+referenced data 35,940 bytes. Known data totals 22,886 bytes. Source-owned data
 and alignment have 2,004 records / 4,034 bytes, with zero locally unclassified
-owned bytes. Estimated envelopes still have 336 unclassified bytes, and
+owned bytes. Estimated envelopes still have 268 unclassified bytes, and
 16,432,686 bytes remain outside resolved roles. Fifteen authored veneer NOPs
 have a separate 30-byte instruction role; two audio fills are implicit code
 alignment, without proof against alternate entry. The reachable `0x499B0` NOP
