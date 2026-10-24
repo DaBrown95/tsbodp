@@ -17,7 +17,7 @@ unsigned int frame_step_attachment_job_68(struct FrameNeedEffectState *owner,
         break;
     case 78:
         if (g_resource_game_state.actor_values.value == 0 &&
-                g_resource_game_state.scene.counter != 0) {
+                g_resource_game_state.scene.counter.value != 0) {
             job->timer = 1;
             g_actor_scene_result_id.id = 0x125;
             frame_activate_actor_scene_request();
@@ -39,7 +39,7 @@ unsigned int frame_step_attachment_job_68(struct FrameNeedEffectState *owner,
         audio_play_animation_cue(60);
         frame_commit_need_effect(owner->object, 0);
         frame_set_animation_frame((struct FrameTickObject *)owner->object,
-            g_resource_game_state.scene.counter != 0);
+            g_resource_game_state.scene.counter.value != 0);
         frame_request_animation((struct FrameCommandObject *)job->actor, 1);
         result = 2;
         break;

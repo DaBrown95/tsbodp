@@ -7782,7 +7782,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "d7ad82fae1f7a10d339c73bff5ef080d05ee5eb581c72cf9dbad189a92b21240",
+      "source_sha256": "5cd36970940dd8f7eb985eb3d6b54cccb320f14737883be92a2b35db4ae8de26",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line18 emits padding containing relative14..16; actual source.o $d covers this span. ",
         "Full retained 24-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -7795,7 +7795,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "679bf20ca901bbf7d4962006757bb751082608be7554db97f6781edeb9102bb9",
+      "source_sha256": "2d142b3395c107201c11a51def1c99e4585d61d35fa39cf33b70fc013c94bf3f",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line32 emits padding containing relative50..52; actual source.o $d covers this span. ",
         "Full retained 68-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -7808,7 +7808,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "bc36c0b9bccf35065c4f41f9f9389f552c6e747fc97d4425039dcefe0cef4e9a",
+      "source_sha256": "25e1ed8e0b8a4d588d30fde44f2a6ed362be046b2b1e45651ed7045aa5ffe0bf",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line26 emits padding containing relative30..32; actual source.o $d covers this span. ",
         "Full retained 44-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -24735,7 +24735,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "5b0b046212289570d9d6e0a680d714f5f307fc563a700275fd7bf333be810f56",
+      "source_sha256": "f9d6c9f42024202d3bc0f90355dea078e876058a6f0bed3b046035cb9f30f726",
       "evidence": [
         "Matching C emits .align 2,0 at retained normal source.s LF28; source.o $d begins relative34 and covers two zero alignment bytes before the pool at relative36. The native branch at 0x08023284 targets 0x080232BC and skips this span.",
         "All96B linked normal/strict positives equal fixednativebec515; real20\u219221 controls differonebyte. This is a source-emitted data role only, not alternate-entry or runtime proof."
@@ -24800,7 +24800,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "fb41aae82ca58b76af1052abe7787e8d9ebe4c1b909c0e9d3b5b06bfead212e4",
+      "source_sha256": "d6c812b6821645499b5dc355283bdbaab73af8f683c0dd8b95166fa07cd110ee",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line36 emits padding covering relative50..52; source.o $d covers this exact span. Compiler pool alignment within function.",
         "Full retained 128-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
@@ -24813,7 +24813,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "fb41aae82ca58b76af1052abe7787e8d9ebe4c1b909c0e9d3b5b06bfead212e4",
+      "source_sha256": "d6c812b6821645499b5dc355283bdbaab73af8f683c0dd8b95166fa07cd110ee",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line67 emits padding covering relative110..112; source.o $d covers this exact span. Compiler pool alignment within function.",
         "Full retained 128-byte linked/candidate text equals fixed original extent; object padding agrees. Source-emitted alignment/data role only, not alternate-entry exclusion."
@@ -26590,6 +26590,19 @@
       "evidence": [
         "The C function emits 138 instruction bytes followed by its explicit .align 2, 0 directive; source.o marks relative138..140 with $d and contains two zero bytes.",
         "The complete140-byte source-linked extent matches the fixed reference at its original address. This records source-emitted alignment, not exclusion of alternate executable entries."
+      ]
+    },
+    {
+      "name": "frame_settle_actor_scene_counter_alignment_01ba9e",
+      "owner": "frame_settle_actor_scene_counter",
+      "rom_offset": 113310,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "6c99ff02e7ce0803be53eb3a241c5e5905e5c2fbc3e1433d4274033bc303b2c2",
+      "evidence": [
+        "The matching compiler output .align 2, 0 before .L14 emits two zero bytes at relative94..96; source.o marks the following pool interval with $d.",
+        "All188 bytes at the original address match, including146 instruction bytes,40 literal bytes and this two-byte alignment. This source-emitted alignment role does not exclude alternate entries."
       ]
     }
   ],

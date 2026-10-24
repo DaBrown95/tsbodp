@@ -4,12 +4,15 @@
 union ResourceGameState;
 struct FrameObject;
 extern union ResourceGameState g_resource_game_state;
+struct FrameActorSceneCounter {
+ unsigned short value;
+ unsigned char unknown02[2];
+};
 struct FrameActorSceneState {
  unsigned char unknown_00[0x440];
  unsigned int stage;
  unsigned char unknown_444[0x300];
- unsigned short counter;
- unsigned char unknown_746[2];
+ struct FrameActorSceneCounter counter;
  unsigned char selected_actor, variant, unknown_74a[2];
  int timer;
  unsigned char ready;

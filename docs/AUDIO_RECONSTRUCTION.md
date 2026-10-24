@@ -1495,9 +1495,18 @@ master path permits high halves 1 through 65535, while exhaustive incoming
 producers, writer/reinstallation aliases and nested patching remain open. The
 known Timer-1 self-store is disjoint, and the writable IRQ dispatcher at
 `03001C9C` still has an incomplete target population. IME (`04000208`) on entry
-to the two master calls is also unproved: the explicit startup enable follows
-audio initialization, but earlier entry/transitive producers are not exhausted. The ordinary master-
-volume C producer and converter read/fit domains remain separate blockers. The private reproducible
+to the two master calls remains unproved. A bounded native walk now closes the
+earlier named software callee frontier: 25 startup calls before the audio wrapper
+expand to 97 source-owned bodies and 109 direct call edges, without an unresolved
+body transfer. The two literal loads of the IME address occur in the same
+save-transfer DMA helper. That leaf saves IME into R6, clears IME, waits for DMA
+completion and restores R6; R6 is unchanged between those operations. The three
+leaves between the two master calls do not access IME. BIOS/reset entry state,
+the SWI 0B boundary, data/DMA aliases and asynchronous writers remain open;
+this does not establish unconditional IRQ exclusion. The bounded receipt is
+`analysis/audio-startup-ime-callee-closure-20261024/receipt.json` and adds no source,
+instruction-census or runtime credit. The ordinary master-volume C producer and
+converter read/fit domains remain separate blockers. The private reproducible
 receipt is `analysis/audio-converter-shift-cohort/receipt.json`; it adds no
 source ownership and repeats no runtime trace.
 

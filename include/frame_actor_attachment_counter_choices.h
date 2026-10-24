@@ -6,8 +6,7 @@
 #include "display_text_fields.h"
 #include "resource_actor_selection.h"
 #include "resource_commands.h"
-/* Explicit original dependency; byte flag and word result from native ABI.
- * Its held candidate earns no source credit here. */
+/* Byte flag and word result from the matched settlement interface. */
 unsigned int frame_settle_actor_scene_counter(unsigned char);
 unsigned int frame_initialize_counter_attachment_choices(struct FrameNeedEffectState *);
 unsigned int frame_check_counter_attachment_choices(struct FrameNeedEffectState *,struct FrameObject *);

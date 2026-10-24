@@ -7265,8 +7265,8 @@
       },
       "thumb_symbols": [],
       "negative_control": {
-        "before": "counter+=20",
-        "after": "counter+=21"
+        "before": "counter.value+=20",
+        "after": "counter.value+=21"
       }
     },
     {
@@ -9589,8 +9589,8 @@
         "__fixunsdfsi"
       ],
       "negative_control": {
-        "before": "counter*0.1",
-        "after": "counter*0.2"
+        "before": "counter.value*0.1",
+        "after": "counter.value*0.2"
       }
     },
     {
@@ -55913,6 +55913,27 @@
       "negative_control": {
         "before": "work = 300;",
         "after": "work = 302;"
+      }
+    },
+    {
+      "name": "frame_settle_actor_scene_counter",
+      "rom_offset": 113216,
+      "size": 188,
+      "symbols": {
+        "g_resource_game_state": "0x03003950",
+        "g_attachment_parameter_ui": "0x03004130",
+        "g_input_config": "0x030040e0"
+      },
+      "thumb_symbols": [],
+      "expected_sha256": "761ad677535a408dde884fb8f707bb5a891b44bea42df64270f5a3617b9bed2e",
+      "source": "src/frame/frame_settle_actor_scene_counter.c",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "counter_address->value = remaining;",
+        "after": "counter_address->value = remaining + 1;"
       }
     }
   ],

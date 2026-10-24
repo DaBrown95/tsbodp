@@ -227,24 +227,34 @@ changed-source control checks cover all 96 bytes, including its literal pools
 and two-byte alignment. These constraints describe the matched values and
 lifetimes, without establishing the original source spelling.
 
-Settlement `0x0801BA40` remains a 188-byte original dependency. Its latest private
-counter-record candidate is 188 bytes with 22 differing bytes: native
-zero-before-STRH and read-cursor producers are recovered, while register homes
-still differ. That record/header adaptation remains unqualified and unadopted.
-Selection removal `0x080454DC` now has
-[matching 192-byte C source](ACTOR_ENTRIES_RECONSTRUCTION.md#random-selectable-record-removal)
-through its canonical shared interface. Declaration checks remain static
-evidence. Choice-index capacity, overlapping scene/menu views, later writers,
-resource validity, object lifetimes and gameplay reachability remain open.
+## Actor scene-counter settlement
 
-The settlement's actual callers pass zero or one and ignore its result. The
-remaining initial signed-value home differs during register allocation, with
-no newly identified native consumer or interface mismatch. Its input is not
-universally proved nonnegative or capped: the [game-state loader](SAVE_STREAM.md#shared-storage-and-format-limits)
-preserves the existing fourth byte when loading a positive three-byte value,
-and the named serial
-predecessor replaces the reset word with a full peer value. Those producer
-facts do not explain the register mismatch or justify changing the source type.
+The [settlement provider](../src/frame/frame_settle_actor_scene_counter.c) at
+`0x0801BA40` now owns all 188 bytes from C: 146 instruction bytes, 40 literal
+bytes and two zero alignment bytes. Its native halfword counter and signed
+value inputs use R2/R3 only until their real arithmetic consumers; the two
+subtraction results use separate R0 lifetimes. No call crosses those lifetimes.
+The sufficient-value branch has a nonnegative, representable signed difference.
+The insufficient-value branch uses unsigned subtraction and halfword narrowing,
+so even a negative input such as `INT_MIN` has defined modulo-65536 behavior.
+
+The canonical scene counter is a four-byte child containing its unsigned
+halfword and the existing two reserved bytes. This preserves selected actor
+`+0x748`, variant `+0x749`, timer `+0x74C` and the `0x754`-byte scene/world
+extent under the pinned compiler. Its existing idle view is now a named union
+member; the reduction tick remains at `+0x741`. Seven updated counter consumers
+retain all 700 matching bytes. The actual settlement callers still pass zero
+or one and ignore the result. Positive comparisons, genuine changed-source
+controls and actual interface/layout checks cover this connected change.
+
+Its input is not universally proved nonnegative or capped: the
+[game-state loader](SAVE_STREAM.md#shared-storage-and-format-limits) preserves the
+existing fourth byte when loading a positive three-byte value, and the serial
+predecessor replaces the reset word with a full peer value. The source match
+adds no runtime claim or complete input/writer population. Selection removal
+has separate [matching 192-byte C source](ACTOR_ENTRIES_RECONSTRUCTION.md#random-selectable-record-removal).
+Choice-index capacity, overlapping scene/menu views, later writers, resource
+validity, object lifetimes and gameplay reachability remain open.
 
 ## Observed row 117 and kind 68
 
@@ -259,7 +269,7 @@ The worker uses phases 0, 78, 79 and 1. It reverses the owner's facing,
 requests animations and cues, changes need-effect status, and reads the
 canonical game-state value and scene counter. A running record selects phase
 1. Phase 78 may activate request `0x125`, advance to phase 79 when the actor
-flag is set, and call the still-unconverted settlement provider. The dispatcher
+flag is set, and call the settlement provider described above. The dispatcher
 uses the canonical record finder and accepts only kind 68. The refresh callback
 updates the owner's animation on a selected-row check, resetting its byte clock
 to 100 before decrementing it.
@@ -269,14 +279,14 @@ Current normal and strict comparisons match every byte; genuine cue, kind,
 clock and return changes reject. The preparation control changes its kind-68
 return and grows from eight to sixteen bytes; the other five controls retain
 size and differ by one byte. Actual owned definitions remain exact in separate
-source contexts; the settlement declaration is checked separately from byte
-ownership. No instruction-body assembly or new register constraint is used.
+source contexts; the settlement provider is now separately source-owned. These
+callback sources use no instruction-body assembly or new register constraint.
 
 The observed definition row connects these callbacks; it does not close the
 generic EC caller or establish all incoming formal roles. Record lookup success,
 actor/owner lifetime, reverse-direction index, saved selection, clock writers,
 and wider callback populations remain preconditions. The 188-byte settlement
-provider remains an original-ROM dependency and receives no C credit here.
+provider is counted separately from this 392-byte callback batch.
 
 ## Definition rows 76, 77 and 78
 

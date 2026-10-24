@@ -9,7 +9,7 @@ unsigned int frame_select_counter_attachment_choices(struct FrameNeedEffectState
     case 1:
         if (world->actor_values.value == 0) choices[count] = 19;
         else {
-            register unsigned short *counter asm("r0") = &world->scene.counter;
+            register unsigned short *counter asm("r0") = &world->scene.counter.value;
             display_text_number_field_two(*counter);
             choices[count] = 68;
         }

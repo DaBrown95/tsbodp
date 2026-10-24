@@ -20,7 +20,7 @@ unsigned int frame_step_counter_attachment_job_19(struct FrameNeedEffectState *o
             result = 2;
             world = &g_resource_game_state.scene;
             world->timer = -2;
-            world->counter = 0;
+            world->counter.value = 0;
             g_scene_mode_bytes[0] = 8;
             resource_submit_scene(1,0,12);
         }
