@@ -15,7 +15,7 @@ void frame_release_display(struct FrameObject *object)
         if (object->sharing_flags & 1)
             slot = 0;
         else
-            slot = object->shared_slot;
+            slot = object->display_payload.shared.shared_slot;
         if (--g_frame_shared_display[group].counts[slot] == 0) {
             g_frame_shared_display[group].indices[slot] = 0xffff;
             frame_free_display_range(object->display_index,

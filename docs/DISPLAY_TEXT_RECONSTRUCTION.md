@@ -9,7 +9,7 @@ to seven rejects by one byte. The ignored receipt index is
 
 This is the direct update called by the reconstructed text object allocator
 at `0x080450A0` and the scene label factory at `0x080282D4`. It first calls the
-explicit unconverted sizing routine at `0x0804511C`, allocates a 120-byte work
+sizing routine at `0x0804511C`, allocates a 120-byte work
 buffer and `(tile_size_bit + 1) * 1920` bytes of pixel storage, installs both
 buffers through `0x0801AE5C`, and calls the drawing routine at `0x0801A7C8`
 with width 240 and an initial limit of `0x7FFFFFFF`. It releases the pixel
@@ -26,14 +26,15 @@ pair writes a row and its partner 128 bytes later, advances the source by
 the original body. These are direct hardware accesses; this function does not
 establish a VBlank scheduling guarantee.
 
-The partial `DisplayTextObject` view exposes OAM at `0xD0`, halfword width,
-height and column count at `0xD8`, `0xDA` and `0xDC`, and halfword byte count and
-tile index at `0xFC` and `0xFE`. The sizing candidate corroborates width and
-height semantics but remains unaccepted. This view overlaps sprite-resource
-fields in the general frame object, so it is used only for the text object's
-accesses. Gaps and complete allocation bounds remain unknown. The public ABI
-retains `struct FrameObject *` and uses explicit per-field text views, avoiding
-conflicting declarations in the already accepted allocator.
+Text sizing and this caller now use the canonical `FrameObject` directly.
+Its named payload union exposes halfword width, height and column count at
+`0xD8`, `0xDA` and `0xDC`; the alternative shared-display slot remains at
+`0xDA`. Byte count and tile index retain their existing fields at `0xFC` and
+`0xFE`. The former partial `DisplayTextObject` cast is removed. The object
+remains `0x138` bytes, aligned to four, within the actual 320-byte pool slot.
+Role-specific union accesses do not establish arbitrary writer or live-pool
+integrity. The actual caller and four connected slot readers keep all 1,028
+previously matching bytes after the owner repair.
 
 All body logic is ordinary C with no register constraints or assembly glue.
 An earlier separately named view pointer created an extra copy and a
@@ -43,10 +44,33 @@ The raw failures and exact comparison are preserved locally. The allocation
 calls distinguish the fixed work buffer and variable pixel buffer. The
 [reconstructed heap lifecycle](HEAP_RECONSTRUCTION.md) now supplies the general
 allocator at `0x08027864`, zeroed allocation at `0x080278E4`, and release at
-`0x08027988`; sizing remains an explicit unconverted dependency. Buffer setup
+`0x08027988`. Buffer setup
 is reconstructed with the tile row path below.
 The connected line selection and alignment consumers are reconstructed below. This compiler
 match does not independently prove runtime or gameplay behavior.
+
+## Text object sizing
+
+`display_scene_set_text_size` at `0x0804511C` owns 140 matching C extent bytes:
+138 instruction bytes and two zero alignment bytes. Normal and strict builds
+match the complete extent; changing the width rounding constant from 31 to
+30 rejects by one byte. Actual measurement, release and tile-allocation
+definitions retain their separate checked interfaces.
+
+The routine captures both measurement results as unsigned halfwords, stores
+width and height capped at 240 and 16, and derives columns and tile bytes from
+the uncapped captures. Signed division by 32 and 8 preserves the native sum
+handoff and halfword conversions. Direct shifts produced 132 bytes with 78
+differences; division by 32 recovered the first 74 native bytes, and division
+by 8 recovered the remaining instructions. This is compiler-match evidence,
+not proof of the historical source spelling. The only assembly directive
+specifies the observed zero alignment; no instruction body is embedded.
+
+Both division numerators are nonnegative. The actual height provider returns
+zero or an unsigned font-height byte, so rows are at most 32. Together with
+the captured width this keeps the final promoted shift within signed-word
+range. Valid strings, font backing, terminating width measurement and pool
+membership remain premises; this match adds no runtime or writer-domain proof.
 
 ## Catalog text selection
 
@@ -90,15 +114,15 @@ pointer on status zero or null otherwise. It reloads the pointer after the
 call, preserving a possible loader update. Reordering the success/error
 returns produced a five-byte branch-layout mismatch; ordinary success-first
 C matches naturally. Earlier switch, return-width and branch-order failures
-remain local. Catalog description/page rendering and text sizing remain
-unconverted connected targets.
+remain local. Catalog description/page rendering remains a connected
+reconstruction target.
 
 ## Font measurement
 
 Three connected measurement routines add 160 matching C bytes: width at
 `0x0801AF28` (84), height at `0x0801AF7C` (28), and glyph width at
 `0x0801B450` (48). Width is used by the catalog name helper, both measurements
-feed the unconverted text sizing routine, and the width loop directly calls
+feed the text sizing routine, and the width loop directly calls
 the glyph helper. Changing the substitution marker, height font slot, and
 fallback width index each rejects by one byte after public closure compilation.
 Their receipts share
@@ -175,7 +199,7 @@ without fixed registers or embedded instruction bodies. Earlier loop-break,
 local initialization and register-lifetime failures remain in ignored reports.
 
 This closes line selection and alignment feeding the text update's transfer
-path. Tile rasterization, row reading, sizing and further setup callers remain
+path. Tile rasterization, row reading and further setup callers remain
 connected reconstruction targets; the row emission and font producers are
 reconstructed below. Full-ROM equality,
 static data roles and runtime/gameplay behavior remain separate evidence.

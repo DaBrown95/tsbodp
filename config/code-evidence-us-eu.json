@@ -671,7 +671,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "46be5296d63d1636e5b9859becd7dbe1aa15df9fa60d6589d29a23c3f8940952",
+      "source_sha256": "6b8e84f1126d3b2a53a632cae6500dddc9c83a58a28ed880e78592b8c6b2ed5a",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line49 emits padding containing relative74..76; actual source.o $d covers this span. ",
         "Full retained 296-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -684,7 +684,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "46be5296d63d1636e5b9859becd7dbe1aa15df9fa60d6589d29a23c3f8940952",
+      "source_sha256": "6b8e84f1126d3b2a53a632cae6500dddc9c83a58a28ed880e78592b8c6b2ed5a",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line95 emits padding containing relative162..164; actual source.o $d covers this span. ",
         "Full retained 296-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -2868,7 +2868,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "f02c802389322182e637f1288ffcbe52407cdf6b6ae9f744c084f3d21435ea3a",
+      "source_sha256": "120141de5b0efe15074ffb1b78641f7cafaea1f5ae45447e4f5f167f08739695",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line24 emits padding containing relative26..28; actual source.o $d covers this span. ",
         "Full retained 176-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -2881,7 +2881,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "f02c802389322182e637f1288ffcbe52407cdf6b6ae9f744c084f3d21435ea3a",
+      "source_sha256": "120141de5b0efe15074ffb1b78641f7cafaea1f5ae45447e4f5f167f08739695",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line56 emits padding containing relative86..88; actual source.o $d covers this span. ",
         "Full retained 176-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -6989,7 +6989,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "c58d81737625b46c0a9e72cc0f12711d0b3b7579c237d6ba854d831fc5838f5e",
+      "source_sha256": "e4a141960607e9963c91a92001d6c2a76edd66dd557e7cd67bb26cf9faac5eb0",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line100 emits padding containing relative178..180; actual source.o $d covers this span. ",
         "Full retained 192-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -26577,6 +26577,19 @@
         "Complete100-byte C extent matches fixed reference in normal and strict qualification, with genuine kind2-to3 controls rejected. Source.s final .align 2,0 emits bytes98..100 after the98-byte function symbol.",
         "Object and linked ELF map the final2 bytes as $d at relative0x62 and ROM0x3A5B2, before the separate next entry0x3A5B4. The preceding body contains82 instruction bytes and16 literal bytes.",
         "Alignment/data role only; no alternate-entry exclusion or runtime, protocol, backing or writer-population closure is asserted."
+      ]
+    },
+    {
+      "name": "display_scene_set_text_size_alignment_0451a6",
+      "owner": "display_scene_set_text_size",
+      "rom_offset": 283046,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "88db1ad7e5e7ced286dff069e9688b9fa765ce134e1df5dbc03009734f70e61f",
+      "evidence": [
+        "The C function emits 138 instruction bytes followed by its explicit .align 2, 0 directive; source.o marks relative138..140 with $d and contains two zero bytes.",
+        "The complete140-byte source-linked extent matches the fixed reference at its original address. This records source-emitted alignment, not exclusion of alternate executable entries."
       ]
     }
   ],

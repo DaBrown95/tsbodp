@@ -21,7 +21,7 @@ void scene_contact_activity_two_step(void) {
    { struct SceneContactActivityTwoControlWord flags=scene_contact_activity_two_read_control(other->secondary);
    flags.bits &= ~16u;
    scene_contact_activity_two_write_control(other->secondary,flags); }
-   scene_contact_activity_two_begin_transfer(other->secondary->shared_slot,other->primary->shared_slot);
+   scene_contact_activity_two_begin_transfer(other->secondary->display_payload.shared.shared_slot,other->primary->display_payload.shared.shared_slot);
    STATE->flags|=2;
   }
  }

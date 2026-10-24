@@ -55870,6 +55870,28 @@
         "before": "transition_record_event(2, payload);",
         "after": "transition_record_event(3, payload);"
       }
+    },
+    {
+      "name": "display_scene_set_text_size",
+      "rom_offset": 282908,
+      "size": 140,
+      "symbols": {
+        "display_text_measure_width": "0x801af29",
+        "display_text_measure_height": "0x801af7d",
+        "display_release_tile_bytes_immediately": "0x8047905",
+        "display_allocate_object_tiles": "0x8001305"
+      },
+      "thumb_symbols": [
+        "display_text_measure_width",
+        "display_text_measure_height",
+        "display_release_tile_bytes_immediately",
+        "display_allocate_object_tiles"
+      ],
+      "source": "src/display/set_text_size.c",
+      "negative_control": {
+        "before": "value=width+31;",
+        "after": "value=width+30;"
+      }
     }
   ],
   "assembly": [

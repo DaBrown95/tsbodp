@@ -46,6 +46,19 @@ union FramePointStorage {
         short y_pixel;
     } halves;
 };
+/* Text geometry and the shared-display slot occupy the same object payload.
+ * The alternatives are role-specific; unrelated bytes retain their storage. */
+union FrameObjectDisplayPayloadStorage {
+    struct {
+        FrameU8 unknown_d8[2];
+        FrameU8 shared_slot;
+        FrameU8 unknown_db[29];
+    } shared;
+    struct {
+        FrameU16 width, height, columns;
+        FrameU8 unknown_de[26];
+    } text;
+};
 struct FrameObject {
     struct FrameObject *next, *previous;
     FrameU16 id, unknown_0a;
@@ -75,13 +88,13 @@ struct FrameObject {
     unsigned char render_unknown_d3_0 : 4;
     signed char render_special : 1;
     signed char render_reverse_y : 1;
-    unsigned char render_unknown_d3_6 : 2;
+    unsigned char display_size : 2;
     unsigned short display_tile : 10;
     unsigned short display_layer : 2;
     unsigned short display_palette : 4;
-    FrameU8 unknown_d6[4];
-    FrameU8 shared_slot;
-    FrameU8 unknown_db[31];
+    FrameU8 unknown_d6[2];
+    union FrameObjectDisplayPayloadStorage display_payload;
+    FrameU8 unknown_f8[2];
     FrameU16 affine_handle;
     FrameU16 display_bytes, display_index;
     FrameU8 forced_visible;

@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,456 C functions / 305,912 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 309,972 bytes; original slices
-still supply 16,467,244 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,457 C functions / 306,052 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 310,112 bytes; original slices
+still supply 16,467,104 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **43 unowned rows / 15,704
+[inventory](../assets/rom-inventory.json) contain **42 unowned rows / 15,566
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -35,6 +35,14 @@ source-validity repair: a real clock child, canonical comparison input and
 integer address calculation replace incompatible partial storage accesses.
 This adds no coverage. The initializer remains unconverted at 168 bytes with
 six scheduling differences; private failures receive no source credit.
+
+The [text-sizing routine](DISPLAY_TEXT_RECONSTRUCTION.md#text-object-sizing)
+now owns 140 further C bytes, including two zero alignment bytes. Signed
+division preserves the native value handoffs and narrowing operations. Its
+canonical frame-object payload also repairs the actual text-update caller
+and four shared-slot readers without changing their 1,028 matching bytes.
+Normal/strict comparisons, genuine controls and actual interfaces pass;
+font, string, pool and writer domains remain conditional.
 
 The latest activity-three preparation work adds no C coverage. It now
 has measured phase lifetimes and eligibility storage, conditional
@@ -278,11 +286,11 @@ extent or runtime claim. The separate unrooted constant-one entries now match
 from C, with their incoming roots and historical unused formals still open.
 
 The instruction census is not a complete code denominator. Its current raw
-union is 285,360 bytes; qualified instructions occupy 285,334 bytes and
-referenced data 35,932 bytes. Known data totals 22,880 bytes. Source-owned data
-and alignment have 2,001 records / 4,028 bytes, with zero locally unclassified
-owned bytes. Estimated envelopes still have 354 unclassified bytes, and
-16,432,690 bytes remain outside resolved roles. Fifteen authored veneer NOPs
+union is 285,376 bytes; qualified instructions occupy 285,350 bytes and
+referenced data 35,932 bytes. Known data totals 22,884 bytes. Source-owned data
+and alignment have 2,003 records / 4,032 bytes, with zero locally unclassified
+owned bytes. Estimated envelopes still have 338 unclassified bytes, and
+16,432,686 bytes remain outside resolved roles. Fifteen authored veneer NOPs
 have a separate 30-byte instruction role; two audio fills are implicit code
 alignment, without proof against alternate entry. The reachable `0x499B0` NOP
 remains a separate source mismatch. The `0xE1EE` interior-entry-shaped value has

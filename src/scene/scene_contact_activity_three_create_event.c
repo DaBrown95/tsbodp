@@ -11,9 +11,9 @@ struct FrameObject *scene_contact_activity_three_create_event(void) {
  object->id=5;object->contact_mode=0;object->double_size=0;object->layer=1;object->palette=15;object->flags=9;
  observer_absolute_point(&point);
  frame_set_position((struct FrameObject*)object,point.x,point.y);
- value=STATE->primary->shared_slot;
+ value=STATE->primary->display_payload.shared.shared_slot;
  if(value<=6)object->direction=value+25;else object->direction=value-7;
- object->speed=STATE->secondary->shared_slot<<15;
+ object->speed=STATE->secondary->display_payload.shared.shared_slot<<15;
  frame_set_animation_record((struct FrameObject*)object,&g_scene_contact_activity_three_event_animation);
  object->on_step=scene_contact_activity_three_step_event;
  object->outcome=0;object->phase=0;
