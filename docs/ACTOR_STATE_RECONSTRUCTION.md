@@ -846,6 +846,22 @@ pointer at node `+0x54`. No match returns zero. The larger cleanup at `0xA0A4`
 also touches serialized world records, but remains an explicit unconverted
 extent; its best failed candidate and raw comparisons receive no C credit.
 
+Private cleanup experiments compare all 292 bytes ending at `0xA1C8`
+(exclusive), including two trailing zero alignment bytes beyond the inventory's
+290-byte estimate.
+A real local volatile word result recovers the native four-byte stack slot.
+A private word-return declaration also preserves the actual 364-byte state
+31/32/33 caller, which explicitly truncates the returned value to a byte.
+This proves compatibility for that caller only: the provider still fails, and
+the public byte-return declaration remains unchanged.
+
+Measured value-width and register-lifetime changes recover the three native
+high-register saves, with a full-size 292-byte / 116-difference candidate.
+Further combinations reach 288 bytes / 101 differences, including the four
+missing bytes. These are retained source hypotheses, with no C or runtime
+credit. They justify further compiler experiments without establishing the
+original declaration, qualifier or source spelling.
+
 The previously canonical `frame_actor_use_target` alias is retained at `0x2E0B8`:
 its first argument is the choice target and its second is the actor. It accepts
 only owner callback `+0xE4` return byte 1, then calls the new route helper at
