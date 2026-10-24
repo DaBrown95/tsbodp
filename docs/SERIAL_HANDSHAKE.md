@@ -145,15 +145,22 @@ and the unused partial endpoint declaration is removed. Normal/strict matches,
 genuine changed-source controls, actual-definition interfaces, full-ROM and
 progress gates pass.
 
-The separate 124-byte status reader remains unconverted. A real unsigned
-snapshot in R3 now preserves the native all-ones OR. Its two signed volatile
-observations still compile to byte loads and shifts instead of the native signed
-byte loads; the complete candidate differs by 106 bytes. An alternate
-`-fvolatile` diagnostic produces the same nonmatch and establishes no new
-compiler profile. Static startup, interrupt-enable and writer evidence supports
-asynchronous identifier/slot accesses under compatible guards; neither this
-evidence nor the poll's match closes runtime, participant, writer or complete
-protocol domains.
+The separate 124-byte status reader remains unconverted, now with two differing
+bytes across its complete extent. Ordinary signed-character views of the
+canonical object retain both native signed-byte load sites, and a shared return
+value restores the native branch and literal-pool order. The reset OR and byte
+store still use R3 instead of native R0. Moving that full-word reset value into
+the actual R0 return/result lifetime makes the compiler remove the OR again;
+this 120-byte nonmatch is a rejected diagnostic, not an improvement.
+
+Only the initial unsigned snapshot is volatile. The later distinct signed loads
+are verified output of the pinned compiler, without a source-level guarantee of
+fresh asynchronous observations. The sentinel path performs two observations;
+the other paths reach the third. Signed-character access stays within the
+complete unqualified object, and all register phases are call-free. Static
+startup, interrupt-enable and writer evidence supports possible hardware
+interleaving under compatible guards; neither this evidence nor the poll's
+match closes runtime, participant, writer or complete protocol domains.
 
 The 200-byte record provider at `0x0803D788` also remains unconverted. Its current
 canonical source differs by one byte: the second-record pointer load uses R0

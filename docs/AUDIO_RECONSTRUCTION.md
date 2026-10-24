@@ -968,6 +968,22 @@ before marking that physical call site complete. A stale source pin, bypassing
 path or changed operation rejects the annotation. This removes one unresolved
 call-site observation without adding an entry, instruction or source byte.
 
+The neighbouring track-effect call at `0x0804A1A0` remains open. Its effect byte
+is multiplied by twelve without a capacity guard. A fixed-ROM instruction model
+from the ordinary row entry, using explicit RAM backing and the minimal stream
+`[0x80, effect, 0, 0]`, reaches that call for effect 51 or 52 after 90 instructions
+and no earlier call. Effect 51 selects the first volume callback at
+`0x08D6F77C`; effect 52 reads the volume flag word `1` at `0x08D6F788`, which
+passes the non-null target test. These are concrete counterexamples to a local
+bound within the 51 observed track-effect rows.
+
+The model checks all 256 effect bytes and stops before the indirect call. It
+does not establish that shipped patterns admit those bytes or that gameplay
+reaches them. Closing this site requires an upstream effect-domain proof for
+the streams admitted by player setup and restoration. The neighbouring words
+retain their established volume-table roles; no additional track-effect rows
+or complete target set are claimed.
+
 ## Standalone instrument lifecycle and activity handoff
 
 Twelve connected extents add **1,400 matching C bytes**, including a copied ARM
