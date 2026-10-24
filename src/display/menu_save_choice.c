@@ -6,7 +6,7 @@ void display_menu_save_choice(struct DisplayMenuSelectionState *record)
         record->definition = 24;
         record->text_kind = 24;
     }
-    frame_write_save_value(&record->major, 4);
+    frame_write_save_value(&record->stamp, 4);
     frame_write_save_value(&record->definition, 1);
     frame_write_save_value(&record->text_kind, 1);
 }

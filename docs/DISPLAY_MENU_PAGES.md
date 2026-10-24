@@ -68,10 +68,13 @@ than replacing it with a signed comparison.
 
 It invokes the unconverted choice initializer at `0x080180D4` with the partial
 selection record at `0x03003D68`, the definition narrowed to a byte, and output
-address `0x03003958`. The source retains this output as an offset of -1040 from
-the selection record's anchor. Static address arithmetic resolves the shared
-storage location; this caller does not establish the output's complete layout,
-length or callback meaning.
+clock address `0x03003958`. The source retains the native selection anchor and
+subtracts 1040 in the target's 32-bit integer address space before converting
+to a clock pointer. This avoids pointer arithmetic outside the twelve-byte
+selection object. The connected clock provider establishes the eight-byte
+clock input and clock child described in [the choice lifecycle](DISPLAY_MENU_CHOICE.md).
+Valid shared backing and the pinned pointer/address-conversion ABI remain
+required; this is static evidence, not a runtime chronology claim.
 
 A nonzero byte result stages text based on the selection record's byte `+2`
 plus 6025 into substitution field 1. It loads the greeting descriptor's

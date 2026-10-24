@@ -1,6 +1,7 @@
 #ifndef DISPLAY_MENU_PAGES_H
 #define DISPLAY_MENU_PAGES_H
 #include "display_map_fill.h"
+#include "display_time.h"
 #include "display_menu_primary.h"
 #include "display_scene_setup.h"
 #include "display_catalog_text.h"
@@ -28,15 +29,12 @@ void display_menu_prepare_state_42(void);
 /* Observed twelve-byte view; surrounding storage and complete bounds are unknown. */
 struct DisplayMenuSelectionState {
     unsigned char enabled, definition, text_kind, unknown_03;
-    short major;
-    signed char minor, part;
-    signed char second, tick;
-    unsigned short reserved;
+    struct DisplayTimeRecord stamp;
 };
 extern struct DisplayMenuSelectionState g_display_menu_selection_state;
 extern unsigned char g_frame_actor_social_probe[];
 int frame_read_signed_parameter(const void *, unsigned int);
 /* Caller observes a byte return; output points into shared game-state storage. */
-unsigned char display_menu_prepare_choice(void *, unsigned char, void *);
+unsigned char display_menu_prepare_choice(void *, unsigned int, void *);
 void display_menu_prepare_choice_text(void);
 #endif

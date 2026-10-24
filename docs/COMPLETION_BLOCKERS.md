@@ -30,6 +30,12 @@ caller and provider interfaces are qualified. This closes one existing
 98-byte estimate and classifies two adjacent alignment bytes, without a new
 entry or instruction observation. Protocol and wider writer domains stay open.
 
+Four existing choice-clock owners retain all 524 matching bytes after a
+source-validity repair: a real clock child, canonical comparison input and
+integer address calculation replace incompatible partial storage accesses.
+This adds no coverage. The initializer remains unconverted at 168 bytes with
+six scheduling differences; private failures receive no source credit.
+
 The latest activity-three preparation work adds no C coverage. It now
 has measured phase lifetimes and eligibility storage, conditional
 table/retry bounds and a coordinate-feasibility proof. Preserving all three

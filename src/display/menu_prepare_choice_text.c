@@ -1,4 +1,5 @@
 #include "display_menu_pages.h"
+#include "save_game_serialization.h"
 #include "display_text_fields.h"
 #include "audio_game.h"
 
@@ -12,8 +13,8 @@ void display_menu_prepare_choice_text(void)
     else
         text_id = 2241;
     result = display_menu_prepare_choice(&g_display_menu_selection_state,
-        g_display_menu_state.definition,
-        (unsigned char *)&g_display_menu_selection_state - 1040);
+        (unsigned char)g_display_menu_state.definition,
+        (struct DisplayTimeRecord *)((unsigned int)&g_display_menu_selection_state - 1040));
     if (result) {
         display_text_copy_field_one(display_scene_lookup_text(
             g_display_menu_selection_state.text_kind + 6025));
