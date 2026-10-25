@@ -56065,6 +56065,23 @@
         "before": "color &= 15;",
         "after": "color &= 14;"
       }
+    },
+    {
+      "name": "transition_expand_rectangle_window",
+      "source": "src/transition/transition_expand_rectangle_window.c",
+      "rom_offset": 232336,
+      "size": 228,
+      "symbols": {
+        "irq_wait_vblank": "0x0801f971"
+      },
+      "thumb_symbols": [
+        "irq_wait_vblank"
+      ],
+      "expected_sha256": "0fb554c0085808b0fc29319ed0e470362033ec3956a14640135f3d922bcc3c83",
+      "negative_control": {
+        "before": "REG16(0x04000048) = 0x3F;",
+        "after": "REG16(0x04000048) = 0x3E;"
+      }
     }
   ],
   "assembly": [

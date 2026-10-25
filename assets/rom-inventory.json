@@ -67041,14 +67041,15 @@
       "referenced_literal_bytes": 36
     },
     {
-      "name": "sub_08038B90",
+      "name": "transition_expand_rectangle_window",
       "rom_offset": 232336,
       "mode": "Thumb",
       "runtime_addresses": [
         134450064
       ],
       "evidence": [
-        "audited dispatch entry"
+        "audited dispatch entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [
@@ -67060,11 +67061,11 @@
         232518
       ],
       "size": 228,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 232336,
       "body_rom_start": 232336,
       "body_rom_end": 232520,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0803xxxx",
       "decoded_instruction_bytes": 184,
@@ -133499,7 +133500,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08038B90",
+      "name": "transition_expand_rectangle_window",
       "rom_offset": 232336,
       "size": 228,
       "status": "mapped_code"
@@ -138228,7 +138229,7 @@
     "config/ram-map-us-eu.json": "77bdc9b4c55a9bf180ecfb2585630044a55e756beff96d130d72cfd483b21d41",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "e874da8eec749f5557ddd36f00bcbd8980c7df5f05b03bf50bfa237056d89f5a",
+    "config/build-us-eu.json": "a85ecb3f65e79ff04bf1f4e89892c10aeb54994a13bc116b8e436befc35cb868",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -139756,7 +139757,7 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 311628,
+      "source_glue_owned_extent_bytes": 311856,
       "estimated_envelope_union_bytes": 325670,
       "classification_bytes": {
         "estimated_envelope_unclassified": 256,
@@ -188785,10 +188786,6 @@
         ],
         [
           204800,
-          232336
-        ],
-        [
-          232564,
           236784
         ],
         [
@@ -283205,7 +283202,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -283216,7 +283214,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -399593,9 +399592,10 @@
         "execution_address": 134450064,
         "entry_rom_offset": 232336,
         "mode": "Thumb",
-        "name": null,
+        "name": "transition_expand_rectangle_window",
         "evidence": [
-          "audited dispatch entry"
+          "audited dispatch entry",
+          "bounded audit"
         ],
         "raw_instruction_intervals": [
           [
@@ -456389,6 +456389,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 110,
         "referenced_data_bytes_in_extent": 4
+      },
+      {
+        "name": "transition_expand_rectangle_window",
+        "rom_offset": 232336,
+        "size": 228,
+        "source": "src/transition/transition_expand_rectangle_window.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 184,
+        "referenced_data_bytes_in_extent": 44
       },
       {
         "name": "irq_cpu_enable",

@@ -198,49 +198,36 @@ remain open.
 
 ## Rectangle window handlers
 
-Three readable rectangle handlers cover **632 native bytes** with the existing
-`void(unsigned short)` callback interface: **516 instruction bytes, 112 literal
+Four readable rectangle handlers cover **860 native bytes** with the existing
+`void(unsigned short)` callback interface: **700 instruction bytes, 156 literal
 bytes and four internal alignment bytes**. The alignment is inside the C extents
 and adds no separate code credit. The [shared header](../include/transition_rectangle_windows.h)
-declares only these three interfaces; names and original source spelling remain
+declares only these four interfaces; names and original source spelling remain
 provisional.
 
 | Provisional role | Observed prefix slot | ROM entry | Instructions | Literals | Alignment | Whole extent |
 | --- | --- | --- | ---: | ---: | ---: | ---: |
+| [Expand](../src/transition/transition_expand_rectangle_window.c) | First 10 | `0x08038B90` | 184 | 44 | 0 | 228 |
 | [Expand outside](../src/transition/transition_expand_rectangle_outside_window.c) | Second 10 | `0x08038C74` | 174 | 40 | 2 | 216 |
 | [Contract](../src/transition/transition_contract_rectangle_window.c) | First 11 | `0x08038D4C` | 172 | 36 | 0 | 208 |
 | [Contract inside](../src/transition/transition_contract_rectangle_inside_window.c) | Second 11 | `0x08038E1C` | 170 | 36 | 2 | 208 |
 
 The sources retain genuine word-sized initial packs and ordinary short coordinate
-updates. The expanding handler gives its actual two-store hardware cursor an R2
+updates. The outside-expanding handler gives its actual two-store hardware cursor an R2
 storage annotation; that cursor dies before the first IRQ call. Its native R1
 values and R2 address explain the earlier six differing bytes. This records a
 compiler explanation without instruction assembly or a claim to original syntax.
 
-Together with the six single-window handlers below, **27 of the 28 bodies in
-the two observed prefixes** are source-owned. Only first-slot-10 `0x08038B90`
-(228 bytes) remains. Its best candidate remains full 228 / 8; a named halfword
-R6 trial emitted 216 / 188 and a subsequent word-sized R6 coordinate emitted
-220 / 184. Both failed. The word-sized coordinate preserved the initial pack
-but diverged from the promoted-short read/update graph in the first RTL expansion;
-COMBINE never formed its scaled step. A separate shared-step composition does
-preserve both the initial constant and the native unsigned writeback/signed pack
-consumers, but remains 228 / 109 with wrong coordinate/window homes and a
-different DISPCNT reload.
+The first-slot-10 expansion now matches all 228 bytes. A local permuter search
+found the source shape after 641 iterations: two genuine short values capture
+the initial right and bottom endpoints before their existing window writes.
+The cleaned C preserves the coordinate loop, MMIO order and IRQ waits; changing
+WININ from `0x3F` to `0x3E` rejects the match by one byte.
 
-One bounded diagnostic explicitly forms the scaled calculation before assigning
-it to the existing halfword R6 coordinate. It emits 224 bytes / 182 differences
-against all 228 native bytes. The shift and add survive optimization: the
-predicted immediate-add collapse does not occur. The separate signed pack
-consumer is already absent in initial intermediate output, which packs the hard
-halfword directly. COMBINE then replaces the assignment's arithmetic shift with
-a logical shift. Native code instead keeps the scaled sum for both a logical
-shift into persistent R6 and an arithmetic shift into the pack. This identifies
-a failed consumer graph, without a new source match or an automatic sequel;
-the already-tested shared-step composition supplies that fork. Further trials
-require a distinct supported cause. Owning this finite
-prefix population would still leave complete table extents, arbitrary selectors,
-later writers, backing and runtime populations open.
+Together with the six single-window handlers below, **all 28 bodies in the two
+observed prefixes** are source-owned. This finite population leaves complete
+table extents, arbitrary selectors, later writers, backing and runtime
+populations open.
 
 ## Single-window handlers
 

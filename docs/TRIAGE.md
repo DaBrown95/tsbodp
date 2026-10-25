@@ -1,6 +1,6 @@
 # Remaining C triage
 
-35 unowned inventory rows / 14,050 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
+34 unowned inventory rows / 13,822 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
 
 Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py --check`. Private evidence may be unavailable on another checkout; recorded rows then say so. Historical active effort and search wall time are unrecorded, not zero.
 
@@ -27,14 +27,13 @@ Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py -
 | `0x28234` | `sub_08028234` | 160 | 168 / 116 | 160 | attempted | — | canonical-current |
 | `0x29C8C` | `sub_08029C8C` | 140 | 140 / 2 | 140 | near-miss | — | canonical-current |
 | `0x29D18` | `sub_08029D18` | 140 | 140 / 2 | 140 | near-miss | — | canonical-current |
-| `0x38B90` | `sub_08038B90` | 228 | 228 / 8 | 228 | near-miss | 5 | canonical-current |
 | `0x39CF0` | `sub_08039CF0` | 392 | 392 / 109 | 392 | attempted | — | private-provisional |
 | `0x3B75C` | `sub_0803B75C` | 356 | 356 / 26 | 356 | near-miss | — | canonical-current |
 | `0x3C688` | `sub_0803C688` | 720 | 720 / 307 | 720 | attempted | — | private-provisional |
 | `0x3D788` | `sub_0803D788` | 200 | 200 / 1 | 200 | near-miss | 1 | canonical-current |
 | `0x3DC48` | `link_serial_interrupt` | 1616 | 1624 / 809 | 1616 | attempted | — | private-provisional |
 | `0x3F908` | `sub_0803F908` | 1112 | 1116 / 840 | 1112 | attempted | — | private-provisional |
-| `0x40AB4` | `sub_08040AB4` | 692 | 668 / 606 | 692 | attempted | — | canonical-current |
+| `0x40AB4` | `sub_08040AB4` | 692 | 696 / 458 | 692 | attempted | — | canonical-current |
 | `0x42964` | `sub_08042964` | 656 | 652 / 297 | 656 | attempted | — | private-provisional |
 | `0x48A14` | `sub_08048A14` | 68 | 68 / 15 | 68 | near-miss | 6 | canonical-current |
 | `0x48AF8` | `sub_08048AF8` | 126 | 128 / 112 | 128 | attempted | — | canonical-current |
