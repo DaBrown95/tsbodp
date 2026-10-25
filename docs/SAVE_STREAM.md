@@ -1,5 +1,11 @@
 # Save-stream reconstruction
 
+The [game-state loader](../src/save/load_game_state.c) at `0x1B704` now owns
+548 matching C bytes (468 instructions, 80 literals). Its shared world-address
+snapshot preserves all 27 provider calls; normal/strict matches and changed-column
+controls pass. The condition-column table, selected word and reset byte reuse
+existing overlapping views. Input, row/count and backing domains remain open.
+
 The reconstructed path connects the published menu-choice and actor-need
 save/load callers to a shared byte/bit cursor, record views, slot transfers,
 header initialization and audio/display-status handoff. Its historical snapshot
@@ -158,7 +164,7 @@ bound. One-bit fields at world `+0x747/+0x749`, byte fields at
 one retained unconverted module serializer and four accepted serializers, it
 writes byte `+0x740`. Their content roles remain provisional.
 
-The paired, still-unconverted loader at `0x0801B704` restores only
+The paired, now source-owned loader at `0x0801B704` restores only
 `0x030040E7..0x030040EB` through those three byte-copy calls. Its fresh byte
 read at `0x0801B78C` instead selects the row through `0x03004111`. That address
 is shared by `InputConfig.local_player`, `TransitionViewContext.current_view`
@@ -183,7 +189,7 @@ callback also runs a transition across VBlanks before the next begin callback.
 Object callbacks, interrupts and later aliases remain possible intervening
 writers. Establish the last writer and its preservation through `0x0801B78C`
 for each claimed incoming route; the reset does not close that population or
-explain the loader's remaining compiler mismatch.
+establish the loader's complete runtime domains.
 
 The [controlled native fixture](RUNTIME_OBSERVATIONS.md#controlled-serial-reset-to-loader-fixture)
 now observes that reset as the sole physical selector writer through the
@@ -252,8 +258,8 @@ prefix bytes, two pairs and six separate nibbles as the producer, then calls
 the inverse children at `+0x18/+0x20/+0x88/+0xA0`. The final child is the
 already accepted `frame_load_actor_needs` at `0x0802B934`; its eight word
 stores cover the same 32-byte span. The higher game-state loader at
-`0x0801B704` remains unconverted, so this batch closes its record/field
-dependencies rather than claiming the complete load path.
+`0x0801B704` is now source-owned; this earlier batch closed its record/field
+dependencies. Complete runtime load domains remain unproved.
 
 The relation consumer at `0x08035D30` reads 24 value bytes, clears prefix
 byte four, reads 24 flag nibbles and counts those with bit two set, then reads
@@ -287,8 +293,9 @@ not establish separate allocations or a complete world-state size.
 All eight inverse sources use ordinary C, match their full original extents
 including pools and alignment, and have real compiled changed-source controls.
 All 75 previously accepted save-header consumers were also rebuilt with their
-controls against the final union/header closure. The buffer builder and higher
-game-state loader remain explicit unconverted interfaces. Static transfer order and compiler equality do not establish save compatibility or gameplay behaviour.
+controls against the final union/header closure. The buffer builder remains an
+explicit unconverted interface. Static transfer order and compiler equality do
+not establish save compatibility or gameplay behaviour.
 
 ## Condition table and serialized backing
 
@@ -337,18 +344,18 @@ provisional; the code supplies no kind-range check or independent table bound.
 All three ordinary C sources match their original addresses, complete extents,
 literal pools and alignment. Their real changed-source controls reject. The
 five accepted byte-transfer and condition providers were also rebuilt with
-controls against current headers. The larger row/cell modules and complete game
-loader remain excluded from matching coverage; the grouped record pair now has
-its own full qualification below.
+controls against current headers. The larger row/cell modules remain excluded
+from matching coverage; the grouped record pair now has its own qualification below.
 
 ## Buffer-load wrapper and saved text-resource selection
 
 The 64-byte wrapper at `0x08037C8C` resets the byte cursor to the current
-buffer and clears the signed bit position, calls the still-unconverted game
+buffer and clears the signed bit position, calls the now source-owned game
 loader at `0x0801B704`, then stores the cursor difference as used bytes and
 computes its unsigned percentage of 2,040 bytes. The source preserves the
 word multiplication before division and adds no capacity check. This accepts
-the wrapper, not its larger callee or the complete load transaction.
+the wrapper; its larger callee now has a separate matching proof. Complete
+load-transaction domains remain open.
 
 The saved header option now has a bounded source-level role: the 60-byte
 selector at `0x08044FC0` stores its low byte at `0x030021F8`, uses the original
@@ -404,9 +411,8 @@ There are no embedded original instructions, output modifications or artificial
 volatile accesses. A real mask change from fifteen to fourteen changes the
 compiled bytes. All current accepted save-header consumers are recompiled with
 their own source controls after removing the old unconverted-writer comment.
-The main game-state loader, condition modules and buffer builder remain
-explicit unconverted paths. The grouped actor pair and write-mode gate are
-qualified separately below.
+The condition modules and buffer builder remain explicit unconverted paths.
+The grouped actor pair and write-mode gate are qualified separately below.
 
 ## Parameter selection, DMA handoff and serial read
 
@@ -570,8 +576,8 @@ first-list-limit controls changing fifteen to fourteen reject by one byte.
 The actual-definition reader API unit passes 35 target facts and rejects nine
 incompatible contracts; the writer unit passes 31 facts and rejects seven. The
 reader unit uses its six actual providers plus the copy dependency; native incoming evidence
-from the still-unconverted `0x0801B704` loader is recorded separately, with no
-fabricated caller definition. The weekly/secondary-flag routine at
+from the now source-owned `0x0801B704` loader is recorded separately. The
+weekly/secondary-flag routine at
 `0x0802005C` remains unconverted; its target domains and those of the condition
 modules remain open. The actor-entry family's 25 extents and 3,224 bytes do not establish the
 complete save format, executable inventory, valid save population or runtime

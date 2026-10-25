@@ -22050,6 +22050,54 @@
       }
     },
     {
+      "name": "save_stream_load_game_state",
+      "rom_offset": 112388,
+      "size": 548,
+      "source": "src/save/load_game_state.c",
+      "symbols": {
+        "g_save_serialized_marker": "0x03004334",
+        "g_save_selection_prefix": "0x030040e7",
+        "g_save_world_rows": "0x03004130",
+        "g_save_world_event": "0x03002edc",
+        "frame_load_save_value": "0x08037d19",
+        "save_stream_read_world_record": "0x08031efd",
+        "save_stream_read_bits": "0x08037d59",
+        "save_stream_read_nibble_state": "0x08029381",
+        "save_stream_read_world_fields": "0x08038351",
+        "save_stream_read_auxiliary_fields": "0x08033611",
+        "save_stream_read_flag_words": "0x08010aad",
+        "condition_is_complete": "0x0802a7c5",
+        "condition_group_complete": "0x0802a815",
+        "g_save_world_init_state": "0x03003950",
+        "save_stream_read_actor_entries": "0x0801fcf9",
+        "save_read_condition_state": "0x08029c8d",
+        "g_condition_panel_definition_columns": "0x08059a44",
+        "g_scene_mode_bytes": "0x03004114"
+      },
+      "thumb_symbols": [
+        "frame_load_save_value",
+        "save_stream_read_world_record",
+        "save_stream_read_actor_entries",
+        "save_stream_read_bits",
+        "save_read_condition_state",
+        "save_stream_read_nibble_state",
+        "save_stream_read_world_fields",
+        "save_stream_read_auxiliary_fields",
+        "save_stream_read_flag_words",
+        "condition_is_complete",
+        "condition_group_complete"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "column <= 5",
+        "after": "column <= 4"
+      },
+      "expected_sha256": "b68d6e2b59f65dbde3929165784942eadf56d737a19f74555e69d0e489666721"
+    },
+    {
       "name": "display_text_select_bank",
       "rom_offset": 282560,
       "size": 60,

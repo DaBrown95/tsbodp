@@ -17,17 +17,10 @@ struct ConditionPanelWorld {
     unsigned int row;
     struct ConditionPanelCell cells[1][6];
 };
-/* Starts at the first column pointer of a 32-byte ConditionRow. The stride
- * tail overlaps the following row header; it is not another pointer column. */
-struct ConditionPanelDefinitionColumns {
-    struct ConditionDefinition *entries[6];
-    unsigned char stride_tail[8];
-};
 struct ConditionPanelLabelCoordinate {
     unsigned char x, y, unknown02[2];
 };
 extern struct ConditionPanelWorld g_condition_panel_world;
-extern struct ConditionPanelDefinitionColumns g_condition_panel_definition_columns[];
 extern struct FrameObject *g_condition_panel_objects[15];
 extern const struct ConditionPanelLabelCoordinate g_condition_panel_label_coordinates[5];
 

@@ -11,6 +11,7 @@ struct ConditionDisplayCompletion {
 };
 extern const struct ConditionDisplayCompletion g_condition_display_completions[];
 
+void save_read_condition_state(void);
 void save_stream_write_condition_display_bits(void);
 void save_stream_read_condition_display_bits(void);
 void condition_finish_display_kind(unsigned int);

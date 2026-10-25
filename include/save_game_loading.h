@@ -4,7 +4,7 @@
 
 /* Incoming word is unused by the accepted body; the original caller passes 3. */
 void save_stream_load_buffer(unsigned int);
-/* Larger game-state deserializer at 0x0801B704 remains unconverted. */
+/* Restores the game-state fields and derives the pending condition columns. */
 void save_stream_load_game_state(void);
 void save_stream_read_world_record(struct SaveStreamWorldRecord *);
 void save_stream_read_relation_values(struct DisplayMenuRelationValues *);

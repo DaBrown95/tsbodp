@@ -10,6 +10,15 @@ struct ConditionRow {
     struct ConditionDefinition *columns[6];
 };
 extern struct ConditionRow g_condition_definitions[];
+
+/* Starts at the first column pointer of a 32-byte ConditionRow. The stride
+ * tail overlaps the following row header; it is not another pointer column. */
+struct ConditionPanelDefinitionColumns {
+    struct ConditionDefinition *entries[6];
+    unsigned char stride_tail[8];
+};
+extern struct ConditionPanelDefinitionColumns g_condition_panel_definition_columns[];
+
 struct ConditionRowScene { unsigned char scene,mode,unknown02[2]; };
 extern struct ConditionRowScene g_condition_row_scenes[];
 void condition_select_row(unsigned int);
