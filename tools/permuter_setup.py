@@ -218,6 +218,28 @@ def profile_context(selection, root=ROOT):
     return profile, files
 
 
+def reference_assembly(name, mode, reference):
+    """Emit target-only data using directives shared by both pinned assemblers.
+
+    Legacy GNU as lacks .syntax and .incbin. Numeric bytes need neither and
+    preserve the complete reference extent without instruction interpretation.
+    Candidate compiler assembly still uses its original selected assembler.
+    """
+    if not isinstance(name, str) or not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*', name):
+        raise ValueError('Invalid reference function name')
+    if mode not in ('Thumb', 'ARM'):
+        raise ValueError('Unsupported reference instruction mode')
+    if not isinstance(reference, (bytes, bytearray)) or not reference:
+        raise ValueError('Reference must contain bytes')
+    lines = ['.text', '.global ' + name, '.type ' + name + ',%function']
+    lines += ['.thumb', '.thumb_func'] if mode == 'Thumb' else ['.arm']
+    lines.append(name + ':')
+    for offset in range(0, len(reference), 16):
+        lines.append('.byte ' + ','.join(str(byte) for byte in reference[offset:offset + 16]))
+    lines.append('.size ' + name + ',.-' + name)
+    return '\n'.join(lines) + '\n'
+
+
 def setup(function, source, output, gate_path, overrides=None, root=ROOT, metadata_path=None):
     """Snapshot once; generate no target/code artifacts outside the private job."""
     output = private_path(output, root)
@@ -283,11 +305,7 @@ def setup(function, source, output, gate_path, overrides=None, root=ROOT, metada
     reference = rom[offset:offset + size]
     (output / 'reference.bin').write_bytes(reference)
     mode = function.get('mode', 'Thumb')
-    prefix = '.thumb\n.thumb_func\n' if mode == 'Thumb' else '.arm\n'
-    (output / 'target.s').write_text('.syntax unified\n.text\n.global ' + function['name']
-        + '\n.type ' + function['name'] + ',%function\n' + prefix + function['name']
-        + ':\n.incbin ' + json.dumps(str(output / 'reference.bin')) + '\n.size '
-        + function['name'] + ',.-' + function['name'] + '\n')
+    (output / 'target.s').write_text(reference_assembly(function['name'], mode, reference))
     (output / 'function.ld').write_text(f'SECTIONS {{ .text {address:#x} : {{ *(.text) . = ALIGN(4); }} = 0 }}\n')
     # The target itself has the exact reference size, independent of candidate alignment.
     (output / 'target.ld').write_text(f'SECTIONS {{ .text {address:#x} : {{ *(.text) }} }}\n')

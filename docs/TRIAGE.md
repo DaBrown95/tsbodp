@@ -1,6 +1,6 @@
 # Remaining C triage
 
-34 unowned inventory rows / 13,822 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
+32 unowned inventory rows / 13,542 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
 
 Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py --check`. Private evidence may be unavailable on another checkout; recorded rows then say so. Historical active effort and search wall time are unrecorded, not zero.
 
@@ -25,8 +25,6 @@ Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py -
 | `0x1B704` | `sub_0801B704` | 548 | 548 / 17 | 548 | near-miss | — | private-provisional |
 | `0x2005C` | `sub_0802005C` | 108 | 104 / 68 | 108 | attempted | — | canonical-current |
 | `0x28234` | `sub_08028234` | 160 | 168 / 116 | 160 | attempted | — | canonical-current |
-| `0x29C8C` | `sub_08029C8C` | 140 | 140 / 2 | 140 | near-miss | — | canonical-current |
-| `0x29D18` | `sub_08029D18` | 140 | 140 / 2 | 140 | near-miss | — | canonical-current |
 | `0x39CF0` | `sub_08039CF0` | 392 | 392 / 109 | 392 | attempted | — | private-provisional |
 | `0x3B75C` | `sub_0803B75C` | 356 | 356 / 26 | 356 | near-miss | — | canonical-current |
 | `0x3C688` | `sub_0803C688` | 720 | 720 / 307 | 720 | attempted | — | private-provisional |
@@ -35,11 +33,18 @@ Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py -
 | `0x3F908` | `sub_0803F908` | 1112 | 1116 / 840 | 1112 | attempted | — | private-provisional |
 | `0x40AB4` | `sub_08040AB4` | 692 | 696 / 458 | 692 | attempted | — | canonical-current |
 | `0x42964` | `sub_08042964` | 656 | 652 / 297 | 656 | attempted | — | private-provisional |
-| `0x48A14` | `sub_08048A14` | 68 | 68 / 15 | 68 | near-miss | 6 | canonical-current |
+| `0x48A14` | `sub_08048A14` | 68 | 68 / 10 | 68 | near-miss | 6 | canonical-current |
 | `0x48AF8` | `sub_08048AF8` | 126 | 128 / 112 | 128 | attempted | — | canonical-current |
 | `0x48BF8` | `sub_08048BF8` | 86 | 88 / 2 | 88 | near-miss | — | canonical-current |
 | `0x495C4` | `sub_080495C4` | 116 | 116 / 3 | 116 | near-miss | — | canonical-current |
 | `0x49968` | `sub_08049968` | 124 | unqualified/unavailable | — | suspected-not-C | — | — |
+
+Fresh search comparisons awaiting source review:
+- `0x023E8`: 1400 bytes / 19 differences over 1400 bytes; no source credit.
+- `0x3B75C`: 356 bytes / 26 differences over 356 bytes; no source credit.
+- `0x48A14`: 68 bytes / 10 differences over 68 bytes; no source credit.
+- `0x48BF8`: 88 bytes / 2 differences over 88 bytes; no source credit.
+- `0x495C4`: 116 bytes / 3 differences over 116 bytes; no source credit.
 
 Priority1–7 follows the requested near-miss order; other full-size candidates with at most32 differing bytes also enter the near-miss queue. Existing attempts override the older “untouched” list. Private types and backing/API premises still require acceptance review.
 

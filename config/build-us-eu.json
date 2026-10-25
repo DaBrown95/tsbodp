@@ -56082,6 +56082,62 @@
         "before": "REG16(0x04000048) = 0x3F;",
         "after": "REG16(0x04000048) = 0x3E;"
       }
+    },
+    {
+      "name": "save_world_write_module_29d18",
+      "rom_offset": 171288,
+      "size": 140,
+      "source": "src/save/world_write_condition_module.c",
+      "symbols": {
+        "frame_write_save_value": "0x08037e21",
+        "save_stream_write_bits": "0x08037b39",
+        "g_save_world_condition_block": "0x03003d90",
+        "save_stream_write_condition_display_bits": "0x0802c90d"
+      },
+      "thumb_symbols": [
+        "frame_write_save_value",
+        "save_stream_write_bits",
+        "save_stream_write_condition_display_bits"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "group < 5",
+        "after": "group < 4"
+      },
+      "expected_sha256": "5a6de76d740242403dbba4f7ee256fdc39344a04f5d9bbb1737aa0c87ec8ebdd"
+    },
+    {
+      "name": "save_read_condition_state",
+      "rom_offset": 171148,
+      "size": 140,
+      "source": "src/save/read_condition_state.c",
+      "symbols": {
+        "frame_load_save_value": "0x08037d19",
+        "save_stream_read_bits": "0x08037d59",
+        "g_save_world_condition_block": "0x03003d90",
+        "save_stream_read_condition_display_bits": "0x0802c921"
+      },
+      "thumb_symbols": [
+        "frame_load_save_value",
+        "save_stream_read_bits",
+        "save_stream_read_condition_display_bits"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "group < 5",
+        "after": "group < 4"
+      },
+      "expected_sha256": "ba510164466b00329a61d719e6b768e58087d8118b2edfa022b0b0a96a2a60c5"
     }
   ],
   "assembly": [

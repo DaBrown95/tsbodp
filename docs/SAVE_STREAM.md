@@ -215,8 +215,8 @@ The 28-byte child at
 one byte. The 52-byte module at `0x08010AE0` writes four words at
 `0x03004064`; nearby bit-mask readers support the flag-word name. These four
 functions are direct producer dependencies, with their own full-extent matches
-and real negative controls. The retained condition module at `0x08029D18`
-remains unconverted; the grouped actor serializer is described below.
+and real negative controls. The condition modules at `0x08029D18/0x08029C8C`
+now match all 140 bytes each.
 
 The first decoded record's two pair bytes and six nibble bytes also form an
 eight-byte selector view at `0x03005DC4`, with subsequent records forty bytes
@@ -287,18 +287,24 @@ not establish separate allocations or a complete world-state size.
 All eight inverse sources use ordinary C, match their full original extents
 including pools and alignment, and have real compiled changed-source controls.
 All 75 previously accepted save-header consumers were also rebuilt with their
-controls against the final union/header closure. The buffer builder, higher
-game-state loader and retained condition module remain explicit unconverted
-interfaces. Static transfer order and compiler equality do not establish save compatibility or gameplay behaviour.
+controls against the final union/header closure. The buffer builder and higher
+game-state loader remain explicit unconverted interfaces. Static transfer order and compiler equality do not establish save compatibility or gameplay behaviour.
 
 ## Condition table and serialized backing
+
+The [writer](../src/save/world_write_condition_module.c) and
+[reader](../src/save/read_condition_state.c) now own 280 bytes: 272 instruction
+bytes and eight literal bytes. Fixed owner address snapshots before the first
+transfer preserve native register allocation. Normal/strict matches and real
+loop limit controls pass. Backing and save populations remain open; unused
+original formals remain provisional.
 
 The fixed ROM condition table contains five 32-byte rows and thirty pointed
 definitions; the separately identified scene/mode table follows immediately.
 Row counts select 29 groups with 95 entries, and no definition has more than
 five entries. These finite records support the usual row 0–4, selected-column
 and selected-entry bounds; they do not validate incoming indices or other
-writers. Both unconverted condition modules transfer all 360 flag positions
+writers. Both condition modules transfer all 360 flag positions
 in the 724-byte reset span, including 112 positions outside that
 definition-selected subset. Those additional transfers remain required.
 With valid stream state, live backing and no interfering writes, the completed
@@ -306,14 +312,14 @@ reader normalizes all 360 flag bytes to zero or one. Its separate selected-row
 transfer replaces only the first byte of a word, retaining the upper three
 bytes and adding no row-range check. Setter count tests occur after relevant
 state writes and therefore provide no general incoming-index guard. These
-storage findings add no C coverage or explanation for the remaining register
-differences in either module.
+storage findings do not establish valid save populations or runtime save
+compatibility.
 
 ## Condition display-bit transfer and completion
 
 The paired 20-byte routines at `0x0802C90C/0x0802C920` write and read fifteen
 bytes of the existing `g_condition_display_bits` view at `0x03001E00`. The
-still-unconverted 140-byte condition modules at `0x08029D18/0x08029C8C` call
+140-byte condition modules at `0x08029D18/0x08029C8C` call
 these direct children after transferring their row and cell bits. The already
 accepted clear/set routines use this same byte array; the accepted menu fallback
 indicator also reads it. The transfer length establishes a 120-bit storage span,
@@ -565,8 +571,8 @@ The actual-definition reader API unit passes 35 target facts and rejects nine
 incompatible contracts; the writer unit passes 31 facts and rejects seven. The
 reader unit uses its six actual providers plus the copy dependency; native incoming evidence
 from the still-unconverted `0x0801B704` loader is recorded separately, with no
-fabricated caller definition. The `0x08029D18` condition serializer, connected
-weekly/secondary-flag routine at `0x0802005C` and their target domains remain
-open. The actor-entry family's 25 extents and 3,224 bytes do not establish the
+fabricated caller definition. The weekly/secondary-flag routine at
+`0x0802005C` remains unconverted; its target domains and those of the condition
+modules remain open. The actor-entry family's 25 extents and 3,224 bytes do not establish the
 complete save format, executable inventory, valid save population or runtime
 save compatibility.

@@ -54,6 +54,49 @@ class PermuterSetupTests(unittest.TestCase):
                 p.checked_gate(file)
         file.write_text(json.dumps(gate));self.assertEqual(p.checked_gate(file), gate)
 
+    def test_reference_data_rejects_directive_injection_empty_and_wrong_mode(self):
+        for name, mode, data in [('f\n.incbin payload', 'Thumb', b'\x01'),
+                                 ('f', 'MIPS', b'\x01'), ('f', 'Thumb', b''),
+                                 ('f', 'Thumb', 'payload.bin')]:
+            with self.subTest(name=name, mode=mode, data=data), self.assertRaises(ValueError):
+                p.reference_assembly(name, mode, data)
+
+    @unittest.skipUnless((p.ROOT / 'toolchains/binutils/bin/arm-none-eabi-ld').is_file(),
+                         'optional pinned local linker')
+    def test_reference_data_roundtrip_preserves_bytes_mode_and_unaligned_extent(self):
+        # Synthetic data covers every byte, plus a six-byte Thumb function
+        # which must not acquire section padding. No ROM fixture is used.
+        tested = 0
+        for assembler_id in ('binutils', 'binutils2101'):
+            for mode, data in [('Thumb', bytes(range(256))),
+                               ('Thumb', b'\x00\xff\x7f\x80\x0a\x22'),
+                               ('ARM', bytes(reversed(range(256))))]:
+                assembler = p.assembler_selection({'mode': mode, 'assembler_id': assembler_id})
+                executable = p.ROOT / assembler['executable']
+                if not executable.is_file():
+                    continue
+                with self.subTest(assembler=assembler_id, mode=mode, size=len(data)):
+                    folder = self.root / (assembler_id + '-' + mode + '-' + str(len(data)))
+                    folder.mkdir()
+                    source = folder / 'target.s'
+                    source.write_text(p.reference_assembly('synthetic_target', mode, data))
+                    self.assertNotIn('.incbin', source.read_text())
+                    self.assertNotIn('.syntax', source.read_text())
+                    script = folder / 'target.ld'
+                    script.write_text('SECTIONS { .text 0x08001000 : { *(.text) } }\n')
+                    obj, linked = folder / 'target.o', folder / 'target.elf'
+                    commands = []
+                    p.run([executable, *assembler['source_flags'], source, '-o', obj], commands)
+                    p.run([p.ROOT / 'toolchains/binutils/bin/arm-none-eabi-ld',
+                           '-T', script, '--entry=synthetic_target', obj, '-o', linked], commands)
+                    self.assertEqual(p.text_bytes(linked, 0x08001000, 'synthetic_target', mode), data)
+                    wrong_mode = 'ARM' if mode == 'Thumb' else 'Thumb'
+                    with self.assertRaisesRegex(ValueError, 'instruction mode'):
+                        p.text_bytes(linked, 0x08001000, 'synthetic_target', wrong_mode)
+                    tested += 1
+        if not tested:
+            self.skipTest('optional pinned assemblers absent')
+
     def test_optional_host_profile_absence_keeps_public_pin(self):
         pin = self.root / 'config/public-profile.json'
         contents = {'native_tool_sha256': {'compiler': 'a' * 64}, 'host_clang': 'fixture'}
