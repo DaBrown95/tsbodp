@@ -2,16 +2,16 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 30,
-    "inventory_bytes": 12466,
+    "rows": 29,
+    "inventory_bytes": 12182,
     "statuses": {
-      "near-miss": 9,
+      "near-miss": 8,
       "attempted": 20,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
-      "near-miss": 3178,
+      "near-miss": 2894,
       "attempted": 9164,
       "untouched": 0,
       "suspected-not-C": 124
@@ -96,11 +96,11 @@
           "-mthumb-interwork"
         ]
       },
-      "retained_attempt_contexts": 60,
+      "retained_attempt_contexts": 63,
       "eligible_diagnostic_contexts": 44,
       "excluded_contexts": {
         "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 7,
+        "Missing or malformed retained input": 10,
         "No retained assessment": 5,
         "Retained linked ELF unavailable": 1,
         "Stale or unqualified private header": 2
@@ -216,8 +216,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 12,
-      "eligible_diagnostic_contexts": 10,
+      "retained_attempt_contexts": 14,
+      "eligible_diagnostic_contexts": 12,
       "excluded_contexts": {
         "Missing or malformed retained input": 1,
         "Stale or unqualified private header": 1
@@ -356,81 +356,6 @@
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
     {
-      "name": "frame_draw_iwram",
-      "rom_offset": 47168,
-      "inventory_bytes": 284,
-      "mode": "ARM",
-      "compiler_id": "agbcc_arm",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-fomit-frame-pointer"
-      ],
-      "runtime_addresses": [
-        50342144
-      ],
-      "status": "near-miss",
-      "user_priority": 2,
-      "user_far_off": false,
-      "c_draft": "analysis/sorter-b840-consumed-score-operands-20261025/actual_completed_priority_score_result/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 285.96772737498395
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 3317.617104541976
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 2220.6782447909936
-        }
-      ],
-      "best_candidate": {
-        "source": "analysis/sorter-b840-consumed-score-operands-20261025/actual_completed_priority_score_result/source.c",
-        "source_sha256": "0e887f3cac7fc0ee259c37e2c2a08fc5387a4e8628c978f2880ea71d51324e24",
-        "metadata": "analysis/sorter-b840-consumed-score-operands-20261025/actual_completed_priority_score_result/metadata.json",
-        "metadata_sha256": "e0e889a7b875f4d21ec1e3306c1d28e598a680906de30bc85dd58fec23dc5dc9",
-        "receipt": "analysis/sorter-b840-consumed-score-operands-20261025/actual_completed_priority_score_result/result.json",
-        "receipt_sha256": "02271de7e691a32cf55add0c7cdfd7b0fb37bfe8283e6ab2026d9f4dda04d3d0",
-        "assessment": "analysis/sorter-b840-consumed-score-operands-20261025/assessment.json",
-        "assessment_sha256": "ece7b9d39183c5a0f04fdc73f842300d049806afb06c4ed3b003aa062d2bd558",
-        "candidate_bytes": 284,
-        "comparison_extent_bytes": 284,
-        "full_byte_differences": 2,
-        "candidate_sha256": "d56eef6024f25f7f0222c5178dd385fec1f807dd08bfff6800b6c1862a839cde",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc_arm",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-fomit-frame-pointer"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": null,
-      "retained_attempt_contexts": 50,
-      "eligible_diagnostic_contexts": 34,
-      "excluded_contexts": {
-        "Missing or malformed retained input": 8,
-        "No retained assessment": 1,
-        "Stale or unqualified private header": 7
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
-    },
-    {
       "name": "sub_0800F034",
       "rom_offset": 61492,
       "inventory_bytes": 308,
@@ -496,12 +421,12 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 39,
+      "retained_attempt_contexts": 40,
       "eligible_diagnostic_contexts": 34,
       "excluded_contexts": {
         "Different experimental compiler backend": 1,
         "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 1,
+        "Missing or malformed retained input": 2,
         "No retained assessment": 1,
         "Stale or unqualified private header": 1
       },
@@ -557,9 +482,10 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 40,
-      "eligible_diagnostic_contexts": 34,
+      "retained_attempt_contexts": 43,
+      "eligible_diagnostic_contexts": 36,
       "excluded_contexts": {
+        "Missing or malformed retained input": 1,
         "No retained assessment": 2,
         "Stale or unqualified private header": 4
       },
@@ -746,11 +672,12 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 23,
+      "retained_attempt_contexts": 24,
       "eligible_diagnostic_contexts": 14,
       "excluded_contexts": {
         "Different experimental compiler backend": 1,
         "Explicit semantic rejection or unqualified source": 2,
+        "Missing or malformed retained input": 1,
         "No retained assessment": 5,
         "Retained linked ELF unavailable": 1
       },
@@ -1111,10 +1038,10 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 20,
+      "retained_attempt_contexts": 21,
       "eligible_diagnostic_contexts": 17,
       "excluded_contexts": {
-        "Missing or malformed retained input": 2,
+        "Missing or malformed retained input": 3,
         "No retained assessment": 1
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -1128,7 +1055,7 @@
       "compiler_flags": [
         "-O2",
         "-mthumb-interwork",
-        "-da"
+        "-drsfclg"
       ],
       "runtime_addresses": [
         134348892
@@ -1136,25 +1063,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": false,
-      "c_draft": "analysis/weekly-2005c-real-byte-results-batch-20261024/actual_byte_flag_snapshot/source.c",
+      "c_draft": "analysis/weekly-2005c-prechecked-current-canonical-20261025/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/weekly-2005c-real-byte-results-batch-20261024/actual_byte_flag_snapshot/source.c",
-        "source_sha256": "a6cc2a7cccdeca6eda3e6165dbfd4c04a9d301e2f295ecb6c227e46772911291",
-        "metadata": "analysis/weekly-2005c-real-byte-results-batch-20261024/actual_byte_flag_snapshot/metadata.json",
-        "metadata_sha256": "158bd4fede3de5f44524b70cc38b775391bad77b28f3f4fa9f399fd682a12e06",
-        "receipt": "analysis/weekly-2005c-real-byte-results-batch-20261024/actual_byte_flag_snapshot/result.json",
-        "receipt_sha256": "59b604a9613d229dc0f90f3e77bc0c2b313c0b3fd4945200ab2127acad3b76db",
-        "assessment": "analysis/weekly-2005c-real-byte-results-batch-20261024/assessment.json",
-        "assessment_sha256": "dbed9fdfd2f0ed044e06aae059a9b163914ac32c90e04c1ed1a0dc6c3de7ca1e",
-        "candidate_bytes": 104,
+        "source": "analysis/weekly-2005c-prechecked-current-canonical-20261025/source.c",
+        "source_sha256": "b951a67508a4994986c02ca0875dbf784a7995cdc73223a5bb05b5e00f8946e9",
+        "metadata": "analysis/weekly-2005c-prechecked-current-canonical-20261025/metadata.json",
+        "metadata_sha256": "c7fdb97055c16b4a39714b28926c3214287fe26205a0c94fba73860f1335fde0",
+        "receipt": "analysis/weekly-2005c-prechecked-current-canonical-20261025/result.json",
+        "receipt_sha256": "b2a7dc35445c2976191dd77d35b726eaefa159e47ed70b4c8732fb99fd7ebbad",
+        "assessment": "analysis/weekly-2005c-prechecked-current-canonical-20261025/assessment.json",
+        "assessment_sha256": "74688fda11990e9d216db101281222e50131790c9f38eaa7b9c6bb028c35ec09",
+        "candidate_bytes": 108,
         "comparison_extent_bytes": 108,
-        "full_byte_differences": 68,
-        "candidate_sha256": "aaecf59b6fb2b0df8724f81bf63f2aab2c7e1aafe824f3c9edb550bba5b3b930",
+        "full_byte_differences": 56,
+        "candidate_sha256": "81a9f0668e7c0f8216c26d63a8a60594fbb6d5a3665a35966cbba67c4a9470e6",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -1164,14 +1091,15 @@
         "compiler_flags": [
           "-O2",
           "-mthumb-interwork",
-          "-da"
+          "-drsfclg"
         ],
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 30,
-      "eligible_diagnostic_contexts": 9,
+      "retained_attempt_contexts": 33,
+      "eligible_diagnostic_contexts": 11,
       "excluded_contexts": {
+        "Different experimental compiler backend": 1,
         "Missing or malformed retained input": 2,
         "No retained assessment": 3,
         "Retained linked ELF unavailable": 13,
@@ -1293,8 +1221,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 26,
-      "eligible_diagnostic_contexts": 12,
+      "retained_attempt_contexts": 27,
+      "eligible_diagnostic_contexts": 13,
       "excluded_contexts": {
         "Missing or malformed retained input": 6,
         "No retained assessment": 8
@@ -1367,12 +1295,12 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 54,
+      "retained_attempt_contexts": 55,
       "eligible_diagnostic_contexts": 31,
       "excluded_contexts": {
         "Different experimental compiler backend": 1,
         "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 4,
+        "Missing or malformed retained input": 5,
         "No retained assessment": 17
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -1976,13 +1904,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "bb87c30709490503dc1dea2e0f6a151aa1bcb7d4d5150e1e28e7f6f4f75fee3f",
-    "assets/rom-inventory.json": "5bec8e5f3e48ff9498b3ffc545d08411ec4d05e27d9cc48315915d387b9123bc",
-    "docs/COMPLETION_BLOCKERS.md": "30de43d839f90b47e6a3fd2779594153ec9ed9c7ee5de26e33527300fa92c83c"
+    "assets/progress.json": "af8eb99566dd2ad9cbbe31fef37e36332742733841775aeb6b14a8b7392ac1a8",
+    "assets/rom-inventory.json": "a0119eb81c5a524fe80729a4dffe3bda91b52be2b39a19e6a1ded58fa274ceb6",
+    "docs/COMPLETION_BLOCKERS.md": "3438fb54c9bd7881e054352910923b6eec75d93d2204427a46f850c5cf76074c"
   },
   "documented_inventory": {
-    "rows": 30,
-    "bytes": 12466
+    "rows": 29,
+    "bytes": 12182
   },
   "documentation_count_current": true,
   "scan": {
@@ -1991,7 +1919,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 1561,
+    "metadata_files": 1580,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 3,

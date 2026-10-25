@@ -1,6 +1,6 @@
 # Remaining C triage
 
-30 unowned inventory rows / 12,466 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
+29 unowned inventory rows / 12,182 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
 
 Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py --check`. Private evidence may be unavailable on another checkout; recorded rows then say so. Historical active effort and search wall time are unrecorded, not zero.
 
@@ -11,7 +11,6 @@ Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py -
 | `0x067E0` | `sub_080067E0` | 148 | 152 / 92 | 148 | attempted | — | canonical-current |
 | `0x0A0A4` | `sub_0800A0A4` | 290 | 288 / 77 | 292 | attempted | — | private-provisional |
 | `0x0B564` | `frame_map_draw_iwram` | 320 | 332 / 286 | 320 | attempted | — | canonical-current |
-| `0x0B840` | `frame_draw_iwram` | 284 | 284 / 2 | 284 | near-miss | 2 | canonical-current |
 | `0x0F034` | `sub_0800F034` | 308 | 308 / 4 | 308 | near-miss | 3 | canonical-current |
 | `0x11C60` | `sub_08011C60` | 400 | 400 / 108 | 400 | attempted | — | canonical-current |
 | `0x14834` | `sub_08014834` | 548 | 548 / 286 | 548 | attempted | — | canonical-current |
@@ -23,7 +22,7 @@ Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py -
 | `0x1AA78` | `sub_0801AA78` | 692 | 692 / 483 | 692 | attempted | — | private-provisional |
 | `0x1B300` | `sub_0801B300` | 140 | 140 / 73 | 140 | attempted | — | canonical-current |
 | `0x1B704` | `sub_0801B704` | 548 | 548 / 17 | 548 | near-miss | — | private-provisional |
-| `0x2005C` | `sub_0802005C` | 108 | 104 / 68 | 108 | attempted | — | canonical-current |
+| `0x2005C` | `sub_0802005C` | 108 | 108 / 56 | 108 | attempted | — | canonical-current |
 | `0x28234` | `sub_08028234` | 160 | 168 / 116 | 160 | attempted | — | canonical-current |
 | `0x39CF0` | `sub_08039CF0` | 392 | 392 / 109 | 392 | attempted | — | private-provisional |
 | `0x3D788` | `sub_0803D788` | 200 | 200 / 1 | 200 | near-miss | 1 | canonical-current |

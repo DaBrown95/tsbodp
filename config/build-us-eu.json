@@ -747,6 +747,30 @@
       }
     },
     {
+      "name": "frame_sort_display_objects",
+      "rom_offset": 47168,
+      "size": 284,
+      "mode": "ARM",
+      "ram_address": 50342144,
+      "ram_copy": "frame_draw_iwram",
+      "symbols": {
+        "g_frame_count": "0x03002ca8",
+        "g_frame_objects": "0x03002700"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer"
+      ],
+      "compiler_id": "agbcc_arm",
+      "expected_sha256": "ccf0e630b339d600ae3b79ebbb0a74a7910c57125869116977cc13f6d26f9432",
+      "source": "src/frame/frame_sort_display_objects.c",
+      "negative_control": {
+        "before": "0x15070301",
+        "after": "0x15070302"
+      }
+    },
+    {
       "name": "frame_step_object",
       "rom_offset": 7372,
       "size": 256,

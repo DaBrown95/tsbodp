@@ -40,8 +40,8 @@ selector writes no action bytes, so no grounded LR-saving switch is invented.
 
 These are source and compiler findings. They do not close arbitrary definition
 indices, writable callbacks, transitive dependencies or runtime populations.
-The copied sorter's legal direct halfword loads still leave two mismatching
-bytes; it receives no C credit. See the [remaining work](COMPLETION_BLOCKERS.md).
+The copied sorter now matches all 284 ARM bytes using these signed pixel halves
+and an actual ordering-test temporary. See the [remaining work](COMPLETION_BLOCKERS.md).
 
 The copied map drawer at ROM `0x0800B564` also remains unconverted. Genuine
 per-copy aggregate initializers kill the prior incoming partial-pair live range.

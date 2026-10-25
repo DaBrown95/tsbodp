@@ -61,7 +61,10 @@ copied sort entry at `0x03002900`, applies updates, prepares render entries and
 coordinates display completion. Numeric typed function pointers keep these
 RAM calls explicit and preserve the original interworking thunks. The copied
 collision dispatcher now has a verified 640-byte semantic ARM C replacement;
-the 284-byte sort body remains unconverted and receives no C credit.
+the [sorter](../src/frame/frame_sort_display_objects.c) now owns all 284 ARM bytes
+at ROM `0xB840`, linked for copied address `0x03002900`. It orders the prefix
+before the first excluded object by layer, priority flags and signed pixel Y,
+using gaps 21, 7, 3 and 1. Pinned normal/strict builds and changed-gap controls pass.
 
 `frame_install_runtime` at `0x109C` now matches its complete 108-byte C extent:
 72 instruction bytes and 36 literal bytes. It allocates 40,960 zeroed bytes for
@@ -82,7 +85,7 @@ it still compiles to 108 bytes and rejects by one byte. Source/header snapshots,
 linked bytes and comparisons are retained under ignored
 `analysis/frame-install-runtime/`. This reconstructs the installer and its
 allocation/copy operations. It does not establish observed execution, complete
-callback domains, or matching C ownership of the copied sorter.
+callback domains, or valid object-array and count populations.
 
 `frame_initialize_effect_pools` at `0x30338` matches its complete 160-byte
 extent: 112 Thumb instruction bytes and 48 literal bytes. It allocates and
