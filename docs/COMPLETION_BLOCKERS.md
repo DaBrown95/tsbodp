@@ -200,9 +200,18 @@ record producers, valid existing owners, later writers and runtime populations
 remain open. See the [builder evidence](SCENE_LINK_CATALOG.md#builder-and-shared-array-lifetimes).
 
 The renderer's actual current/previous-frame address producers already agree
-with native code. Their spill homes remain SP60/SP56 instead of SP68/SP64;
-the missing order/counter allocation cause is not a missing byte snapshot or
-provider result. Earlier scalar finalizer trials have two compare-only upper-X
+with native code. In the current 1,400 / 21 candidate, their spill homes are
+SP76/SP72 instead of native SP68/SP64; SP60/SP56 described an older candidate.
+The counter uses SP68 instead of native SP56, and next-order uses SP64 instead
+of native SP84. The difference is not a missing byte snapshot or provider
+result. All local aggregates whose addresses reach external providers already
+have function scope; the inner part-index address reaches only its visible,
+nonescaping increment helper. No lifetime extension is supported by that route.
+A retained natural tail decrement recovers the native SP84 next-order home but
+still differs by 37 bytes. A complete ordered-pass result unit emits
+1,396 / 1,285 with a 92-byte frame, so the 1,400 / 21 candidate remains best.
+
+Earlier scalar finalizer trials have two compare-only upper-X
 temporaries matched and hoisted by LOOP. No additional native definition,
 escape or consumer was found to defeat that transformation. The later cached
 lower-field pointer forms recover the native stack layout but remain nonexact.
