@@ -53,6 +53,13 @@ Output: `build/us-eu/bustin-out.gba`. The build fails if any byte differs.
 | `make progress` | Rebuild and update the treemap. |
 | `make audit-all` | Check both the USA/Europe and USA revision 1 dumps. |
 
+The generated [triage table](docs/TRIAGE.md) records remaining mapped rows and
+retained candidate scores. `make progress` refreshes it. Optional local search
+uses the separate search environment:
+`toolchains/search-venv/bin/python tools/permuter_setup.py --help`.
+Search output must pass the normal matching and changed-source controls before
+acceptance.
+
 ## Repository
 
 ```text

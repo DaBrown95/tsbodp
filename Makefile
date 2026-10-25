@@ -50,3 +50,4 @@ inventory:
 
 progress: build inventory
 	$(PROGRESS_PYTHON) tools/render_progress.py
+	$(PROGRESS_PYTHON) tools/triage.py
