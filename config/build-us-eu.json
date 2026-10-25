@@ -56138,6 +56138,82 @@
         "after": "group < 4"
       },
       "expected_sha256": "ba510164466b00329a61d719e6b768e58087d8118b2edfa022b0b0a96a2a60c5"
+    },
+    {
+      "name": "frame_find_target_cell",
+      "rom_offset": 243548,
+      "size": 356,
+      "source": "src/frame/frame_find_target_cell.c",
+      "symbols": {
+        "frame_point_to_integer": "0x080273dd",
+        "frame_grid_point_to_cell": "0x08048af9",
+        "frame_actor_owner_cell_count": "0x0802e56d",
+        "frame_grid_cell_data_pointer": "0x0803bb81"
+      },
+      "thumb_symbols": [
+        "frame_point_to_integer",
+        "frame_grid_point_to_cell",
+        "frame_actor_owner_cell_count",
+        "frame_grid_cell_data_pointer"
+      ],
+      "negative_control": {
+        "before": "best = 10000",
+        "after": "best = 9999"
+      },
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "ce4f0f51853072e67ef22171bacf7a5ccfd99cf1c1571e17719c4e25171dadbb"
+    },
+    {
+      "name": "frame_update_grid_need_effect_selection",
+      "rom_offset": 247432,
+      "size": 720,
+      "source": "src/frame/frame_update_grid_need_effect_selection.c",
+      "symbols": {
+        "g_frame_world_id": "0x03004334",
+        "g_frame_registration": "0x03004330",
+        "g_frame_need_effect_active_list": "0x03005868",
+        "g_grid_selected_need_effect_object": "0x03002170",
+        "g_frame_scene_active_actor": "0x03005894",
+        "g_grid_selection_x_offsets": "0x0807f430",
+        "g_grid_selection_y_offsets": "0x0807f434",
+        "g_grid_selection_kind_height": "0x08062dd8",
+        "frame_world_in_idle_exclusion_set": "0x080269f5",
+        "resource_scene_selector_release_player": "0x0802fb75",
+        "frame_grid_point_to_cell": "0x08048af9",
+        "frame_grid_occupancy": "0x0803b8ed",
+        "frame_need_effect_contains_candidate": "0x0802ec19",
+        "frame_grid_cell_to_point": "0x08048d11",
+        "frame_grid_coordinates_to_point": "0x08048cc5",
+        "resource_scene_selector_activate_player": "0x0802fb41",
+        "save_world_scene_in_selected_row": "0x080262b5",
+        "resource_project_point": "0x08048bf9"
+      },
+      "thumb_symbols": [
+        "frame_world_in_idle_exclusion_set",
+        "resource_scene_selector_release_player",
+        "frame_grid_point_to_cell",
+        "frame_grid_occupancy",
+        "frame_need_effect_contains_candidate",
+        "save_world_scene_in_selected_row",
+        "frame_grid_cell_to_point",
+        "resource_project_point",
+        "frame_grid_coordinates_to_point",
+        "resource_scene_selector_activate_player"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "14a63e5f46df3cdfb7882e93a3163373c70d39545ef763381501503144067af9",
+      "negative_control": {
+        "before": "state != 16",
+        "after": "state != 15"
+      }
     }
   ],
   "assembly": [

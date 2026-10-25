@@ -1,14 +1,14 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,467 C functions / 308,076 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 312,136 bytes; original slices
-still supply 16,465,080 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,469 C functions / 309,152 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 313,212 bytes; original slices
+still supply 16,464,004 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The 20 October goal baseline was
 2,334 C functions / 292,784 C bytes and 4,060 assembly bytes. The fixed 319,640 mapped
 extent bytes are solely a historical comparison.
 
 Follow this order. The [manifest](../config/build-us-eu.json) and
-[inventory](../assets/rom-inventory.json) contain **32 unowned rows / 13,542
+[inventory](../assets/rom-inventory.json) contain **30 unowned rows / 12,466
 estimated bytes**. This finite worklist is not a complete code denominator.
 Unverified candidates receive no credit.
 
@@ -18,6 +18,13 @@ executable-inventory gap. Test plausible source hypotheses even when their
 explanation is uncertain: a compiler experiment can supply that evidence.
 Use retained attempts to avoid exact repetitions, then apply the full validity,
 matching, control and publication gates to any successful candidate.
+
+The [target-cell selector](ACTOR_STATE_RECONSTRUCTION.md#target-cell-count-and-bounded-grid-lookup)
+at `0x3B75C` (356 bytes) and [grid need-effect controller](FRAME_INPUT.md)
+at `0x3C688` (720 bytes) now close two source rows. Original unset-value failure
+paths are retained with short `BUG` comments under the authorized policy for
+matching original bugs. Reliable pinned-compiler equality and real controls remain required;
+source credit does not imply bug-free behavior or complete gameplay domains.
 
 The [background character fill](../src/display/background_character_fill.c)
 now owns 116 C bytes at `0xD730`: 110 instruction, four literal and two alignment

@@ -23,13 +23,13 @@ prototype. All accepted consumers of the changed need-effect header receive
 fresh positive and changed-source comparisons; no old proof is described as
 current after a header change.
 
-The 720-byte placement/selection controller at `0x0803C688` is a second original
-caller and remains unconverted. Its complete raw body, independently decoded
-literal-pool tail, semantic candidate and failed comparisons are retained locally.
-It scans active need-effect nodes, tests candidate membership and directional
-bounds, and activates or releases the existing row selector object. The retained
-356-byte target-cell selector also remains unconverted. These static connections
-do not add C coverage or establish runtime reachability.
+The [720-byte placement/selection controller](../src/frame/frame_update_grid_need_effect_selection.c)
+at `0x0803C688` is a second original caller and now matches. It scans active
+need-effect nodes, tests candidate membership and directional bounds, and
+activates or releases the existing row selector object. The
+[356-byte target-cell selector](../src/frame/frame_find_target_cell.c) also matches.
+Their documented original unset-value paths remain; source ownership does not
+establish runtime reachability.
 
 The provider's actual negative control changes the first row test from `<= 1`
 to `<= 2` and must reject the fixed reference. The low-byte option conversion was

@@ -41,5 +41,6 @@ expression recover the original compiler scheduling without register constraints
 Earlier 144-byte and type/lifetime variants are retained with complete raw
 comparisons in ignored reports. Changed-source controls alter default average
 50 to 51 and the wrapper's zero-count target 25 to 26; both must reject. The
-adjoining 720-byte placement controller and its unresolved selection dependencies
-remain explicit unconverted targets, as does the retained 356-byte target selector.
+adjoining [720-byte placement controller](../src/frame/frame_update_grid_need_effect_selection.c)
+and [356-byte target selector](../src/frame/frame_find_target_cell.c) now match;
+their documented original bugs and wider selection input domains remain explicit.

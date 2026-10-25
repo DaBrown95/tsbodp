@@ -423,7 +423,8 @@ State 22 connects the accepted input direction and pressed-key arrays to a need
 effect interaction. Its selector-specific work stores the effect object at
 `+0x64`, a mode byte at `+0x68` and an option index at `+0x6C`. Substate 0
 requests animation 49, optionally constructs the effect from a four-byte option
-record, enables its flags and hands it to the unconverted interaction controller.
+record, enables its flags and hands it to the matching interaction controller
+at `0x3C688`.
 Substate 18 cancels on key bit 2 or empty-need mask `0x25`; key bit 1 confirms.
 The confirm path calls the accepted world-condition helper, records selected
 worlds for IDs 195 through 200, and uses the word at `+0x0C` in a 24-byte action
@@ -869,7 +870,7 @@ only owner callback `+0xE4` return byte 1, then calls the new route helper at
 converts the cell to a point and then to fixed coordinates, starts the route,
 selects substate 3 / outer state 39, requests animation 6 and saves the action
 byte at `+0x6A`. The route-start result is intentionally ignored, matching the
-original handoff. The target-cell search remains a separate unconverted boundary.
+original handoff. The target-cell search now also matches its complete extent.
 The failure helper assigns request IDs 502, 503, 501 or 500 by subtype, creates
 scene object 193 with definitions 263–265 for subtypes 0, 2 and 3 and activates
 the scene request. Subtype 4 assigns ID 501 without creating a new object.
@@ -882,7 +883,7 @@ relationships rather than established gameplay identities.
 
 ## Target-cell count and bounded grid lookup
 
-The accepted route-to-target helper calls the still-unconverted selector at
+The accepted route-to-target helper calls the matching selector at
 `0x3B75C`. That selector calls these two matching dependencies. The owner counter
 uses the word at owner `+8` to select a descriptor from `0x08062B24`. For modes
 other than one and four, a non-null descriptor supplies a five-by-five byte
@@ -923,10 +924,13 @@ from one to two rejects one byte.
 Private comparison evidence is retained under `actor-target-cell-canonical4-contiguous-*`
 and `actor-target-neighbor-return-consumers-*`.
 Earlier width, loop-order and register-lifetime trials remain under
-`actor-target-*`. The 356-byte selector itself still differs and receives no C
-coverage. It appears to prefer the actor's current cell or a nearest usable
-candidate, with optional matching on either restricted axis; its outputs and
-failure assumptions remain under investigation.
+`actor-target-*`. The [target-cell selector](../src/frame/frame_find_target_cell.c)
+now matches all 356 bytes: 346 instruction, eight literal and two alignment bytes.
+A shared, consumed mask value closes the match without changing its API or reads.
+It prefers the actor's current cell or a nearest usable candidate, optionally
+matching either restricted axis. Short `BUG` comments preserve the original
+unset actor-cell read after failed projection and unset selection write when no
+candidate is accepted; this matching result does not prove gameplay admission.
 
 ## State 46 relation, facing and audio handoff
 
@@ -987,13 +991,11 @@ centered-width divisor, velocity arithmetic, move countdown, social countdown,
 value-reader field, terrain class, option ID range, condition action ID, descriptor lookup bound, action notification ID,
 game-value ceiling, parameter level bound, state-41 animation ID, sequence mode and state-42 cue threshold, effect flags, completion mode and state-43 countdown and state-47 bound adjustment.
 
-All 29 direct handler functions are reconstructed here. Useful next
-connected targets include the candidate-cell selector `0x3B75C` and buffer
-lifetime dependencies.
-Camera-margin predicate `0x67E0` and terrain query `0x2ABB0` remain connected
-next targets. World-choice cleanup `0xA0A4` and target-cell search `0x3B75C` are additional
+All 29 direct handler functions and the candidate-cell selector `0x3B75C`
+are reconstructed here. Buffer lifetime dependencies, camera-margin predicate
+`0x67E0`, terrain query `0x2ABB0` and world-choice cleanup `0xA0A4` remain
 connected next targets. The retained CFGs are closed; those scans alone do not establish C coverage, final function boundaries
-or runtime reachability. These bodies remain explicit unconverted ROM regions
+or runtime reachability. These remaining bodies stay explicit unconverted ROM regions
 in the full build.
 
 ## Action-target list and cell-property queries
@@ -1034,8 +1036,8 @@ Current-header receipts are `actor-action-target-canonical1-*`; affected state35
 state39, walk-direction and direction-availability consumers all remain exact
 with their real controls rejected in `actor-action-target-consumers-canonical1-*`.
 The ready manifest is `actor-action-target-batch-manifest.json`. The larger
-candidate-cell selector at `0x3B75C` remains unconverted; its contiguous-array
-private view and best failed comparison remain explicit.
+candidate-cell selector at `0x3B75C` now matches with the canonical contiguous
+owner array; its historical failed comparisons remain retained.
 
 ## Route-search support closure
 
@@ -1052,13 +1054,13 @@ unresolved; runtime behaviour is not claimed.
 
 
 The two target-route/attachment consumers add 384 verified bytes. The 104-byte
-requester passes restricted-axis flag one to the still unconverted target
+requester passes restricted-axis flag one to the now-matching target
 selector; the 280-byte interaction step restores position and the resource
-callback through the still unconverted neighbor producer. Their complete C
+callback through the later-matched neighbor producer. Their complete C
 extents match and actual flag/phase controls reject. The detailed phase,
 packed-coordinate, ignored-result and reachability evidence is recorded in
-`ACTOR_ROUTE_SEARCH.md`; the larger 284-byte and 356-byte candidates remain
-unconverted and receive no source credit.
+`ACTOR_ROUTE_SEARCH.md`; the later attachment-neighbor and target-cell selector
+matches close those two source extents without closing their input domains.
 
 
 The attachment-job closure adds eight functions and 732 verified bytes. Full-word
@@ -1159,7 +1161,7 @@ initialized; the upper bytes remain opaque and are copied without an integer
 read. The full source and its mask mutation pass/reject respectively, and the
 existing interaction callback remains exact with its own rejected control.
 `ACTOR_ROUTE_SEARCH.md` records offset-table bounds, null-result behavior,
-unused/conversion preconditions and the unresolved 356-byte target selector.
+unused/conversion preconditions and the target selector's preserved failure paths.
 This adds source coverage without a runtime/gameplay claim.
 
 ## Startup allocation of actor and need-effect resources

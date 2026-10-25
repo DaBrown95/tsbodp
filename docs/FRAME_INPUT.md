@@ -1188,14 +1188,19 @@ by `g_frame_registration` at `0x03004330`; the duplicate resource-context alias
 and caller-local void declaration are removed. The existing 104-byte
 `resource_object_before_step` still matches with genuine controls.
 
-The unconverted controller at `0x3C688` passes the same point as input and
-output at its `0x3C810` call. The inverse reads both input words before its
-conditional output stores, so the shared declaration permits this aliasing.
-It writes both words only on success and retains the repeated Y upper-bound
-test without adding an X upper-bound test. The before-step caller copies its
-lower bounds to upper bounds even when projection fails; valid prior bounds
-and coordinate/backing domains remain caller premises. This interface repair
-adds no C coverage for the inverse or controller and no runtime evidence.
+The [grid need-effect selection controller](../src/frame/frame_update_grid_need_effect_selection.c)
+at `0x3C688` now matches all 720 bytes: 654 instruction, 60 literal and six
+alignment bytes. Real X/Y offset-table address lifetimes close the match using
+canonical provider declarations. It passes the same point as input and output
+at `0x3C810`; the inverse reads both input words before its conditional stores.
+The inverse remains unconverted and writes both words only on success, retaining
+the repeated Y upper-bound test without adding an X upper-bound test.
+
+Short `BUG` comments preserve the controller's unset-point uses after inner or
+center projection failure. Valid backing, list/index and arithmetic domains
+remain explicit; matching the original bugs adds no gameplay or bug-free claim.
+The before-step caller still copies lower to upper bounds after projection
+failure, with valid prior bounds remaining its caller premise.
 
 A current canonical-header inverse diagnostic retains 88 bytes / two differing
 bytes. Its source binding of the origin sum to R5 is already explicit in initial

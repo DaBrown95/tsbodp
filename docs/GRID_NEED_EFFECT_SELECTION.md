@@ -29,12 +29,12 @@ need 7, then calls selection, interaction and attachment marking in that order.
 The explicit address calculation captures the observed row stride without
 claiming a complete input-state layout or a bound on the time-step selector.
 
-The 720-byte controller at `0x0803C688` remains unconverted. A retained private
-candidate has its complete 720-byte extent but still differs from the original;
-it contributes no coverage. Its static calls connect the published occupancy,
-candidate membership and coordinate helpers with the selected-row predicate,
-selector display and these interaction consumers. The separate 356-byte target
-selector and 88-byte inverse transform also remain explicit unconverted targets.
+The [720-byte controller](../src/frame/frame_update_grid_need_effect_selection.c)
+at `0x0803C688` now matches, connecting occupancy, candidate membership and
+coordinate helpers to the selected-row predicate, selector display and these
+interaction consumers. The [356-byte target selector](../src/frame/frame_find_target_cell.c)
+also matches. Both retain documented original unset-value bugs; the 88-byte
+inverse transform and broader input domains remain open.
 
 ## Input and attachment handoff
 

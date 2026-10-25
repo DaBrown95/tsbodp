@@ -257,8 +257,9 @@ under `path-search-support-canonical/`; the integration manifest is
 `actor-search-support-batch-manifest.json`. Useful failed natural-C and compiler
 lifetime trials remain alongside those proofs.
 
-The next coherent targets are buffer lifetime and release dependencies and
-the 356-byte actor target cell selector at `0x3B75C`. The latter remains a separate failed candidate. Static
+Buffer lifetime and release dependencies remain open. The
+[356-byte actor target-cell selector](../src/frame/frame_find_target_cell.c)
+at `0x3B75C` now matches with its original unset-value paths documented. Static
 CFG closure, a matching helper and a byte-identical full-ROM build are different
 claims from execution or gameplay evidence.
 
@@ -383,8 +384,8 @@ toolchain checks remain in `path-reverse-canonical/`; the ready manifest is
 ## Target-route and interaction consumers
 
 The 104-byte function at `0x3BAC0` converts its attachment record's actor
-position to integer coordinates and then a packed cell. It invokes the still
-unconverted 356-byte target selector at `0x3B75C` with the record's actor,
+position to integer coordinates and then a packed cell. It invokes the matching
+356-byte target selector at `0x3B75C` with the record's actor,
 owner's object, the packed cell and restricted-axis flag one. A nonzero byte
 result converts that cell back to a fixed-point position, requests mode-four
 routing with the record's status word, and requests animation six. The initial
@@ -491,9 +492,9 @@ The label refinement revalidation covers 65 affected functions spanning 9,652
 bytes, including the three previously published record writers/dispatchers.
 All full positive extents match and every actual source control rejects.
 The snapshot and comparison receipt is `actor-attachment-jobs-canonical/`;
-ready metadata is `actor-attachment-jobs-batch-manifest.json`. The unmatched
-284-byte neighbor producer and 356-byte target selector remain explicit ROM
-regions and receive no C coverage. No runtime test is claimed.
+ready metadata is `actor-attachment-jobs-batch-manifest.json`. The later
+284-byte neighbor and 356-byte target-selector matches close those source
+extents; their input domains remain qualified. No runtime test is claimed.
 
 
 ## Variant initialization and attachment job 73
@@ -757,7 +758,8 @@ byte, and the connected 280-byte interaction consumer remains exact with its
 control rejected. Proofs and useful earlier failures remain under ignored
 `attachment-neighbor-canonical/` and its predecessor trial directories; ready
 metadata is `attachment-neighbor-batch-manifest.json`. No runtime behavior was
-tested. The adjoining 356-byte target selector remains unconverted.
+tested. The adjoining 356-byte target selector now matches, preserving its
+documented original failure behavior.
 
 ## Seed coordination and secondary random stream
 

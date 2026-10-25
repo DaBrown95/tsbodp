@@ -15,6 +15,9 @@ are pinned in `config/targets/`. Follow the user's instructions over this file.
   mean the whole game has been decompiled.
 - Treat inferred names, types and function boundaries as provisional. Distinguish
   static findings, compiler matches and runtime/gameplay evidence.
+- Matching C may retain an original bug when the function reliably matches with
+  the pinned compiler and flags, without unrelated setup outside the function.
+  Mark it with a short `// BUG:` comment naming the unset value and failing path.
 - Work in small connected batches. Keep one latest verified full-build proof,
   including its changed-source negative controls, and a bounded set of useful
   failure evidence for active work. Preserve unique source attempts and concise

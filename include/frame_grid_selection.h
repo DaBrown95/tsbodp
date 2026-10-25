@@ -27,7 +27,6 @@ void frame_need_effect_mark_attachment_running(struct FrameNeedEffectState *, st
 void frame_grid_selection_interact(struct FrameObject *);
 void frame_grid_selection_mark_attachments(struct FrameObject *);
 void frame_step_local_need_effect_selection(void);
-/* The 720-byte selection controller remains unconverted. */
 void frame_update_grid_need_effect_selection(struct FrameObject *);
 unsigned char frame_scene_actor_allowed(unsigned int, unsigned int, const struct DisplayTimeRecord *);
 struct FrameObject *frame_create_actor(unsigned int, unsigned char, int, int);

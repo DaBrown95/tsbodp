@@ -6,6 +6,7 @@ unsigned char frame_grid_cell_to_point(void *context,const int *cell,struct Fram
  if(index[0]>=registration->extent || index[1]>=registration->extent)return 0;
  coordinates.x=index[0]*registration->cell_size+registration->cell_size/2;
  coordinates.y=index[1]*registration->cell_size+registration->cell_size/2;
+ // BUG: point stays unset if inner projection fails, but this function returns 1.
  frame_grid_project_coordinates(registration,&coordinates,point);
  return 1;
 }

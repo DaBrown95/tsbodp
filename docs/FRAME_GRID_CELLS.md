@@ -3,9 +3,9 @@
 Eight connected functions add 356 matching C bytes. Together with the two
 previously accepted 24-byte property getters, they reconstruct the contiguous
 404-byte cell API block at `0x3B8C0..0x3BA54`. The linked extents include all
-original alignment. The larger target selector at `0x3B75C` remains an
-unconverted 356-byte function; its closest retained candidate differs in 26
-bytes. Neither this block nor whole-ROM equality establishes runtime behavior
+original alignment. The larger [target selector](../src/frame/frame_find_target_cell.c)
+at `0x3B75C` now matches all 356 bytes, retaining its documented original
+unset-value failure paths. Neither this block nor whole-ROM equality establishes runtime behavior
 or a complete code inventory.
 
 | ROM offset | C function | Verified bytes |
