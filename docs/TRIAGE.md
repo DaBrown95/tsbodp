@@ -20,7 +20,7 @@ Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py -
 | `0x19EF0` | `sub_08019EF0` | 320 | 316 / 186 | 320 | attempted | — | canonical-current |
 | `0x1AA78` | `sub_0801AA78` | 692 | 692 / 483 | 692 | attempted | — | private-provisional |
 | `0x1B300` | `sub_0801B300` | 140 | 140 / 73 | 140 | attempted | — | canonical-current |
-| `0x2005C` | `sub_0802005C` | 108 | 108 / 56 | 108 | attempted | — | canonical-current |
+| `0x2005C` | `sub_0802005C` | 108 | 112 / 48 | 108 | attempted | — | canonical-current |
 | `0x28234` | `sub_08028234` | 160 | 160 / 71 | 160 | attempted | — | canonical-current |
 | `0x39CF0` | `sub_08039CF0` | 392 | 392 / 109 | 392 | attempted | — | private-provisional |
 | `0x3D788` | `sub_0803D788` | 200 | 200 / 1 | 200 | near-miss | 1 | canonical-current |

@@ -44,6 +44,16 @@ findings remain in the owner documents and publication history.
 | Serial IRQ `0x3DC48` (1,616) | Preserve the 1,624/809 baseline. Prior owner relaxation loses the R3 handoff and leaves a duplicate high-register carrier. A distinct source-consumption hypothesis is needed. See [serial](SERIAL_HANDSHAKE.md). |
 | Audio master worker `0x49968` (124) | Reachable native NOP at `0x499B0` remains unexplained by tested C, compiler, alignment or known code writers. Preserve original-source/build and late-writer questions; no assembly escape. See [audio](AUDIO_RECONSTRUCTION.md). |
 
+The weekly worker's typed native load destinations now bypass GCSE/PRE caching
+without volatile qualifiers. It still differs: COMBINE removes the real R0
+pointer load/R2 copy in favor of a direct R2 load. The 108-byte output has 106
+instruction bytes plus two alignment bytes and 70 complete byte differences;
+its normalized instruction correspondence does not grant source credit. O1,
+disabled expensive optimizations, the older pinned backend and a volatile
+initial pointer do not repair it. A real source topology must preserve that
+copy without extra reads or unrelated liveness. Private reproduction is
+`analysis/weekly-ownership-causal-20261026/`.
+
 The serial record provider **`0x3D788` is parked** at 200 bytes / one difference.
 Preserve its best candidate and both compiler investigations described in
 [SERIAL_HANDSHAKE.md](SERIAL_HANDSHAKE.md#remaining-record-provider). Reopen only

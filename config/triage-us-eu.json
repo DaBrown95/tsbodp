@@ -899,7 +899,8 @@
       "compiler_id": "agbcc",
       "compiler_flags": [
         "-O2",
-        "-mthumb-interwork"
+        "-mthumb-interwork",
+        "-da"
       ],
       "runtime_addresses": [
         134348892
@@ -907,25 +908,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": false,
-      "c_draft": "analysis/current-resource-conditions-context-refresh-20261025/2005c/source.c",
+      "c_draft": "analysis/weekly-ownership-causal-20261026/typed_volatile_initial/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/current-resource-conditions-context-refresh-20261025/2005c/source.c",
-        "source_sha256": "b951a67508a4994986c02ca0875dbf784a7995cdc73223a5bb05b5e00f8946e9",
-        "metadata": "analysis/current-resource-conditions-context-refresh-20261025/2005c/metadata.json",
-        "metadata_sha256": "ba307656419b25352c8df49a13f4f489a5dcf01b5e3c01886a7094ffa44d22ae",
-        "receipt": "analysis/current-resource-conditions-context-refresh-20261025/2005c/result.json",
-        "receipt_sha256": "b54be903a2d81818c968e3852c529f90f7497dc46ff23efffe4c5e555772aa31",
-        "assessment": "analysis/current-resource-conditions-context-refresh-20261025/assessment.json",
-        "assessment_sha256": "c83a77fbc1f30725d2a348519571e2ec3035a7fb0271ae3466238d725f2bf173",
-        "candidate_bytes": 108,
+        "source": "analysis/weekly-ownership-causal-20261026/typed_volatile_initial/source.c",
+        "source_sha256": "2de6c61aa9f1f06a3c9e0818babc409fa672416f7a7d435ad670f12304ad8cc3",
+        "metadata": "analysis/weekly-ownership-causal-20261026/typed_volatile_initial/metadata.json",
+        "metadata_sha256": "ca5bbe6c8a216d8c55b6fe07452a00d08ff08af40191f7dc3ddcb5fb682adbbf",
+        "receipt": "analysis/weekly-ownership-causal-20261026/typed_volatile_initial/result.json",
+        "receipt_sha256": "4d4ed38881d63c359546cb03f0160c5807d50c0d5b3b5b806a421323c50ec068",
+        "assessment": "analysis/weekly-ownership-causal-20261026/assessment.json",
+        "assessment_sha256": "4f5d83621cb81a95d61f6e6db3582364ab79096685d3a2c60f7491e991bf1175",
+        "candidate_bytes": 112,
         "comparison_extent_bytes": 108,
-        "full_byte_differences": 56,
-        "candidate_sha256": "81a9f0668e7c0f8216c26d63a8a60594fbb6d5a3665a35966cbba67c4a9470e6",
+        "full_byte_differences": 48,
+        "candidate_sha256": "b1d87e7573e6aa8e43b8ee9ce54b5a66f2370cb094f93788fdf5a2242a511e01",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -934,18 +935,20 @@
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
-          "-mthumb-interwork"
+          "-mthumb-interwork",
+          "-da"
         ],
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 42,
-      "eligible_diagnostic_contexts": 2,
+      "retained_attempt_contexts": 48,
+      "eligible_diagnostic_contexts": 9,
       "excluded_contexts": {
         "Different experimental compiler backend": 2,
+        "Explicit semantic rejection or unqualified source": 2,
         "Missing or ambiguous full comparison": 2,
         "Missing or malformed retained input": 2,
-        "No retained assessment": 6,
+        "No retained assessment": 3,
         "Stale or unqualified private header": 28
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -1747,7 +1750,7 @@
   "inputs": {
     "assets/progress.json": "faab32f0e8a165a1f95f6e298128932e9d3e4e680f2ce875577b728db3f51b31",
     "assets/rom-inventory.json": "1553534fca793071d9918c17b91d5d17f529f12af874911a8cbb02723013492d",
-    "docs/COMPLETION_BLOCKERS.md": "4b0c1d841b42d247c69dc998e2fc900a6383b7a06e4e3954d0a50a032997a3c0"
+    "docs/COMPLETION_BLOCKERS.md": "9343707865c8abd7c9be355b9762c07fc549ce12edf0c64cd30b8f3c391fb7d7"
   },
   "documented_inventory": {
     "rows": 27,
@@ -1760,7 +1763,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 1740,
+    "metadata_files": 1746,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 3,
