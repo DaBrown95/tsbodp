@@ -60,3 +60,19 @@ instructions belong in the README.
 
 Keep the README lean, retain the AI experiment disclosure and no-contributions
 policy, and describe results plainly without inflated progress claims.
+
+## Cursor Cloud specific instructions
+
+Cloud Agents run on Linux. `make setup` stops immediately: compiler provisioning
+is macOS-only and records the host `xcrun clang` fingerprint. The environment
+install creates `toolchains/analysis-venv` from `config/analysis-requirements.txt`
+and `config/progress-requirements.txt`. `make test` and `make doctor` use that
+virtualenv when it exists.
+
+- `make test` is the ROM-free check. Tests that need the provisioned compilers,
+  assembler, linker, host `xcrun` preprocessor, or optional mGBA core stay skipped
+  on this host.
+- `make doctor` reports host tools and whether the analysis virtualenv is present.
+- `make build`, `make pilot`, and `make progress` need the owner's USA/Europe ROM
+  in ignored `baseroms/` and the macOS toolchain from `make setup`. Leave ROMs,
+  extracted assets, and built game binaries out of the repository.
