@@ -66,7 +66,7 @@ reader at the social-probe address `0x030039E8`, is greater than 3 after unsigne
 interpretation. The explicit cast retains the observed unsigned branch rather
 than replacing it with a signed comparison.
 
-It invokes the unconverted choice initializer at `0x080180D4` with the partial
+It invokes the matching choice initializer at `0x080180D4` with the partial
 selection record at `0x03003D68`, the definition narrowed to a byte, and output
 clock address `0x03003958`. The source retains the native selection anchor and
 subtracts 1040 in the target's 32-bit integer address space before converting

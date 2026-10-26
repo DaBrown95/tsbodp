@@ -76,7 +76,8 @@ compiled control are retained in the ignored catalog-presentation reports;
 The marker producer's canonical source is
 [menu_show_change.c](../src/display/menu_show_change.c).
 
-The retained 168-byte choice initializer still has six scheduling differences.
+The 168-byte choice initializer now matches; see its
+[acceptance and remaining domains](DISPLAY_MENU_CHOICE.md#choice-initializer).
 The relation lifecycle now has its own exact connected batch described in
 [DISPLAY_MENU_RELATION.md](DISPLAY_MENU_RELATION.md). The secondary menu and
 its remaining gauge/resource consumers remain useful connected targets. Whole-ROM matching is independently gated by the publisher and is not

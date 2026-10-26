@@ -2,16 +2,16 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 28,
-    "inventory_bytes": 11634,
+    "rows": 27,
+    "inventory_bytes": 11466,
     "statuses": {
-      "near-miss": 7,
+      "near-miss": 6,
       "attempted": 20,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
-      "near-miss": 2346,
+      "near-miss": 2178,
       "attempted": 9164,
       "untouched": 0,
       "suspected-not-C": 124
@@ -40,6 +40,11 @@
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [
+        {
+          "receipt": "reports/current-goal/final-stretch-automation-20261025/continuation.json",
+          "receipt_sha256": "6c8e9291d0b571fb780cb52f0cd01417700cb909a33c472e3f648d7c771e233f",
+          "search_wall_seconds": 2569.457622051239
+        },
         {
           "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
           "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
@@ -96,12 +101,12 @@
           "-mthumb-interwork"
         ]
       },
-      "retained_attempt_contexts": 63,
-      "eligible_diagnostic_contexts": 44,
+      "retained_attempt_contexts": 66,
+      "eligible_diagnostic_contexts": 45,
       "excluded_contexts": {
         "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 10,
-        "No retained assessment": 5,
+        "Missing or malformed retained input": 11,
+        "No retained assessment": 6,
         "Retained linked ELF unavailable": 1,
         "Stale or unqualified private header": 2
       },
@@ -115,8 +120,7 @@
       "compiler_id": "agbcc",
       "compiler_flags": [
         "-O2",
-        "-mthumb-interwork",
-        "-da"
+        "-mthumb-interwork"
       ],
       "runtime_addresses": [
         134230600
@@ -124,25 +128,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": true,
-      "c_draft": "analysis/finalizer-3248-bounded-boolean-values-20261024/qi_order_outcome/source.c",
+      "c_draft": "analysis/finalizer-3248-consumed-previous-slot-proposal-20261026/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/finalizer-3248-bounded-boolean-values-20261024/qi_order_outcome/source.c",
-        "source_sha256": "ebae9858791155d6c48fd68a93aef0b6e996d7aae2358319a66996b36ee7c2f0",
-        "metadata": "analysis/finalizer-3248-bounded-boolean-values-20261024/qi_order_outcome/metadata.json",
-        "metadata_sha256": "b8f9e90ba103f224b6c5fd2343ec40af520a6f26c8c5f61501616eab025fb744",
-        "receipt": "analysis/finalizer-3248-bounded-boolean-values-20261024/qi_order_outcome/result.json",
-        "receipt_sha256": "0f932e71269d8972f8da5ef660089057cbbbafb2fce44ef039b4c852b82b52bd",
-        "assessment": "analysis/finalizer-3248-bounded-boolean-values-20261024/assessment.json",
-        "assessment_sha256": "732f7e92fedbb6f50ccc1bdfebbb6c40b6ef5d8836d370f59a975fee8b262f72",
-        "candidate_bytes": 348,
+        "source": "analysis/finalizer-3248-consumed-previous-slot-proposal-20261026/source.c",
+        "source_sha256": "6b691e16e49456348e1b66071d075c209e07ea53f636a92a3775402806264ddf",
+        "metadata": "analysis/finalizer-3248-consumed-previous-slot-proposal-20261026/metadata.json",
+        "metadata_sha256": "4b3844d3f86ccc2fc7c980fa4abd2a3a3018a8e439dc0d56ac7cd12a87315669",
+        "receipt": "analysis/finalizer-3248-consumed-previous-slot-proposal-20261026/result.json",
+        "receipt_sha256": "2c4c3d38918933cd1001e6e4828672ef1111d18f3e5c2c68a5ad5d73f9d89722",
+        "assessment": "analysis/finalizer-3248-consumed-previous-slot-proposal-20261026/assessment.json",
+        "assessment_sha256": "337bbb15f8fa1c4f6605b81929a5fc2dd3f5a6a2f9ced23cf40862066e2e98c3",
+        "candidate_bytes": 336,
         "comparison_extent_bytes": 348,
-        "full_byte_differences": 206,
-        "candidate_sha256": "48b4f4acfce111046d5c380148ef16ad8a21105eea2d37f35f43296372c1d8ad",
+        "full_byte_differences": 187,
+        "candidate_sha256": "8dc9da24c8d725e6169ddf48d4a19164df178094d72e5284dd37217da688fa79",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -151,14 +155,13 @@
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
-          "-mthumb-interwork",
-          "-da"
+          "-mthumb-interwork"
         ],
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 41,
-      "eligible_diagnostic_contexts": 17,
+      "retained_attempt_contexts": 44,
+      "eligible_diagnostic_contexts": 20,
       "excluded_contexts": {
         "Missing or malformed retained input": 7,
         "No retained assessment": 15,
@@ -216,8 +219,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 14,
-      "eligible_diagnostic_contexts": 12,
+      "retained_attempt_contexts": 16,
+      "eligible_diagnostic_contexts": 14,
       "excluded_contexts": {
         "Missing or malformed retained input": 1,
         "Stale or unqualified private header": 1
@@ -300,8 +303,7 @@
       "compiler_flags": [
         "-O2",
         "-mthumb-interwork",
-        "-fomit-frame-pointer",
-        "-da"
+        "-fomit-frame-pointer"
       ],
       "runtime_addresses": [
         50360672
@@ -309,25 +311,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": true,
-      "c_draft": "analysis/map-drawer-b564-complete-row-cursors-20261025/actual_complete_row_cursor_result/source.c",
+      "c_draft": "analysis/map-drawer-b564-direct-pair-assignment-proposal-20261026/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/map-drawer-b564-complete-row-cursors-20261025/actual_complete_row_cursor_result/source.c",
-        "source_sha256": "16e451667896f58a05647c781467262882873a2421e0c9dc8681aa885e3572a0",
-        "metadata": "analysis/map-drawer-b564-complete-row-cursors-20261025/actual_complete_row_cursor_result/metadata.json",
-        "metadata_sha256": "cd38e446b70b42face22e2ec8e4f347e7b2345996b2c23e34f8cbdf271d7bd40",
-        "receipt": "analysis/map-drawer-b564-complete-row-cursors-20261025/actual_complete_row_cursor_result/result.json",
-        "receipt_sha256": "8e5df16874ff356bbb54ed70d3c7684fb2f6fd4a7e7844ed21ffa20d6e461ab4",
-        "assessment": "analysis/map-drawer-b564-complete-row-cursors-20261025/assessment.json",
-        "assessment_sha256": "1dacd121a963596ea7d0ee571f2d67bc7e69b42b324fdb373862995205c24b8e",
-        "candidate_bytes": 332,
+        "source": "analysis/map-drawer-b564-direct-pair-assignment-proposal-20261026/source.c",
+        "source_sha256": "da41809de591fbf4139e008d2d3b8b6d2d851b65710007b7d38a62a1965bf473",
+        "metadata": "analysis/map-drawer-b564-direct-pair-assignment-proposal-20261026/metadata.json",
+        "metadata_sha256": "acffee1667e5ea5478eef30cedd60780f29a15a709d05ae4b2a1e660f7c6ebe8",
+        "receipt": "analysis/map-drawer-b564-direct-pair-assignment-proposal-20261026/result.json",
+        "receipt_sha256": "13ad0356368bb726592064477bfe54686c342f31128139f60b76edaa5f51c925",
+        "assessment": "analysis/map-drawer-b564-direct-pair-assignment-proposal-20261026/assessment.json",
+        "assessment_sha256": "7303253ba7cef9ee4ac5f8e0eed3ecee2b02d53b3dc5dc512fb9555eef415faf",
+        "candidate_bytes": 320,
         "comparison_extent_bytes": 320,
-        "full_byte_differences": 286,
-        "candidate_sha256": "b2fbd1e9dd4f6919baacff619eba0ee60eba191de975fab658c88d6eaad49b42",
+        "full_byte_differences": 117,
+        "candidate_sha256": "4809f3e67b655d14832be5edfcef378302f20b6a87591775d5635b36befcf48a",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -337,17 +339,16 @@
         "compiler_flags": [
           "-O2",
           "-mthumb-interwork",
-          "-fomit-frame-pointer",
-          "-da"
+          "-fomit-frame-pointer"
         ],
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 26,
-      "eligible_diagnostic_contexts": 15,
+      "retained_attempt_contexts": 32,
+      "eligible_diagnostic_contexts": 20,
       "excluded_contexts": {
         "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 3,
+        "Missing or malformed retained input": 4,
         "No retained assessment": 5,
         "Stale or unqualified private header": 2
       },
@@ -419,13 +420,13 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 41,
-      "eligible_diagnostic_contexts": 35,
+      "retained_attempt_contexts": 53,
+      "eligible_diagnostic_contexts": 40,
       "excluded_contexts": {
         "Different experimental compiler backend": 1,
         "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 2,
-        "No retained assessment": 1,
+        "Missing or malformed retained input": 3,
+        "No retained assessment": 7,
         "Stale or unqualified private header": 1
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -480,8 +481,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 43,
-      "eligible_diagnostic_contexts": 36,
+      "retained_attempt_contexts": 46,
+      "eligible_diagnostic_contexts": 39,
       "excluded_contexts": {
         "Missing or malformed retained input": 1,
         "No retained assessment": 2,
@@ -505,25 +506,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": false,
-      "c_draft": "analysis/palette-navigation-14834-scene-switch-control-20261025/source.c",
+      "c_draft": "analysis/palette-navigation-14834-take-slot-result-20261026/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/palette-navigation-14834-scene-switch-control-20261025/source.c",
-        "source_sha256": "7ade08e59bc396d692f543613664f9452a9d1ac0bcb4ee9a8caa988969ad3aed",
-        "metadata": "analysis/palette-navigation-14834-scene-switch-control-20261025/metadata.json",
-        "metadata_sha256": "a49ae9b48c9887c2124acf7857b3a422aef6fe1edc23826fb57474433b3bffbf",
-        "receipt": "analysis/palette-navigation-14834-scene-switch-control-20261025/result.json",
-        "receipt_sha256": "ae2cb52d62b34fa5e2577058f40e8be507c2f13734a938100b0601c3c1259fdc",
-        "assessment": "analysis/palette-navigation-14834-scene-switch-control-20261025/assessment.json",
-        "assessment_sha256": "35dcd02fafd6e2d417a40816657ca04283e25cb4a9a8778e9105e9d8b38e80e2",
+        "source": "analysis/palette-navigation-14834-take-slot-result-20261026/source.c",
+        "source_sha256": "67d7eaa873c6f893961aa6acc153b04fc4ba040714ffd2d23ca8fd380396ec9d",
+        "metadata": "analysis/palette-navigation-14834-take-slot-result-20261026/metadata.json",
+        "metadata_sha256": "846d1cd40d3b130ad0d71f7760e98dcfbef7d4794bcd6612b5232edd6872abdc",
+        "receipt": "analysis/palette-navigation-14834-take-slot-result-20261026/result.json",
+        "receipt_sha256": "45b45818c9c4ba69c8591f5ee3b2b20fe954d9de567adf6a04057dda1be7e0bb",
+        "assessment": "analysis/palette-navigation-14834-take-slot-result-20261026/assessment.json",
+        "assessment_sha256": "a90c6656922550430f1daa19482e8f47f859aed1a49d2b163dc1ec50a852adb9",
         "candidate_bytes": 548,
         "comparison_extent_bytes": 548,
-        "full_byte_differences": 284,
-        "candidate_sha256": "58bdb2a6816528c2e2d05d9fa4df08f91281cfeacb364b3bc267ac95ed0a4daa",
+        "full_byte_differences": 276,
+        "candidate_sha256": "955d2668bedaeea2c67b95029b6cf1a9b86003141160963f371cbfdeb65ca986",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -537,8 +538,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 19,
-      "eligible_diagnostic_contexts": 13,
+      "retained_attempt_contexts": 22,
+      "eligible_diagnostic_contexts": 16,
       "excluded_contexts": {
         "Missing or malformed retained input": 1,
         "No retained assessment": 4,
@@ -554,8 +555,7 @@
       "compiler_id": "agbcc",
       "compiler_flags": [
         "-O2",
-        "-mthumb-interwork",
-        "-da"
+        "-mthumb-interwork"
       ],
       "runtime_addresses": [
         134304012
@@ -563,25 +563,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": true,
-      "c_draft": "analysis/palette-selection-1510c-real-consuming-units-20261025/actual_group_constructor_unit/source.c",
+      "c_draft": "analysis/palette-selection-1510c-commit-next-count-proposal-20261026/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/palette-selection-1510c-real-consuming-units-20261025/actual_group_constructor_unit/source.c",
-        "source_sha256": "4adcc8320bea11efb8f197e1c1ff2659068ae72c1a766f7865c60654eaa0d955",
-        "metadata": "analysis/palette-selection-1510c-real-consuming-units-20261025/actual_group_constructor_unit/metadata.json",
-        "metadata_sha256": "38618055d7da1390b231bea0c2ab4ea733f2935557bbfe2041c339da056cacf8",
-        "receipt": "analysis/palette-selection-1510c-real-consuming-units-20261025/actual_group_constructor_unit/result.json",
-        "receipt_sha256": "b3ed6d914bb17dae989a6ca5c2f03f979c72479b7e6867f1903b5f908f975a86",
-        "assessment": "analysis/palette-selection-1510c-real-consuming-units-20261025/assessment.json",
-        "assessment_sha256": "22c05dd64ff3910c4d48392012d29f0bbe3db0732025863274a99ccd4ddf9ec0",
+        "source": "analysis/palette-selection-1510c-commit-next-count-proposal-20261026/source.c",
+        "source_sha256": "096ee4353502ed2e8c34c472e86d454f3925e154a622c5a8826b78f080302963",
+        "metadata": "analysis/palette-selection-1510c-commit-next-count-proposal-20261026/metadata.json",
+        "metadata_sha256": "c02394a42d113a17dcfc9d709943648fe01cfdf70ba3fa98e4fd9223d0c634d4",
+        "receipt": "analysis/palette-selection-1510c-commit-next-count-proposal-20261026/result.json",
+        "receipt_sha256": "8f3d94c26d6478fcaf88608d3503544e93ddbf2e5c5821db027cc1aae23e6c55",
+        "assessment": "analysis/palette-selection-1510c-commit-next-count-proposal-20261026/assessment.json",
+        "assessment_sha256": "39de202b3604f44a1889068a41555678076126ae79c9cb1e62f601f9f2d07e0c",
         "candidate_bytes": 180,
         "comparison_extent_bytes": 184,
         "full_byte_differences": 99,
-        "candidate_sha256": "7e72c18bf8009fdf7001740e4db80ccaf0fac63cf6f7a350bd0cb6164ad2d335",
+        "candidate_sha256": "064e94fb48b550af0ae5d407a857498e186b320af48224a67bb5ab18ac242d12",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -590,96 +590,18 @@
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
-          "-mthumb-interwork",
-          "-da"
+          "-mthumb-interwork"
         ],
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 20,
-      "eligible_diagnostic_contexts": 12,
+      "retained_attempt_contexts": 21,
+      "eligible_diagnostic_contexts": 13,
       "excluded_contexts": {
         "No retained assessment": 7,
         "Stale or unqualified private header": 1
       },
       "closed_note": "Rejected induction-register collision excluded."
-    },
-    {
-      "name": "sub_080180D4",
-      "rom_offset": 98516,
-      "inventory_bytes": 168,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-da"
-      ],
-      "runtime_addresses": [
-        134316244
-      ],
-      "status": "near-miss",
-      "user_priority": 4,
-      "user_far_off": false,
-      "c_draft": "analysis/permuter/choice-180d4-post-loader-context-20261025/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 285.96772737498395
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 3317.617104541976
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 7426.875807916978
-        }
-      ],
-      "best_candidate": {
-        "source": "analysis/permuter/choice-180d4-post-loader-context-20261025/source.c",
-        "source_sha256": "65e6b4c8fd8adfa722f643d35c99fba88445f8dcb4ef57889eef6c4b8f1ac5ee",
-        "metadata": "analysis/permuter/choice-180d4-post-loader-context-20261025/metadata.json",
-        "metadata_sha256": "83e72ed9ec7aae4363f62a4210ea2dbde9e4fb9fd9e22b590dbb403fd980d19f",
-        "receipt": "analysis/permuter/choice-180d4-post-loader-context-20261025/result.json",
-        "receipt_sha256": "63db08915928c6ebb09f7b986cb03ac814aeb8e9d3a6845a261dd5a76fafd27d",
-        "assessment": "analysis/permuter/choice-180d4-post-loader-context-20261025/assessment.json",
-        "assessment_sha256": "ddcd3d5e6d7b4b3a5072759bb0863275ac5da36a672e649499bcd2e217de587e",
-        "candidate_bytes": 168,
-        "comparison_extent_bytes": 168,
-        "full_byte_differences": 6,
-        "candidate_sha256": "9ea7e5254d8ab1a233b2a18b232ef1b6c2aa09121eff2b6836e30720bd3a5dcc",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": null,
-      "retained_attempt_contexts": 26,
-      "eligible_diagnostic_contexts": 1,
-      "excluded_contexts": {
-        "Different experimental compiler backend": 1,
-        "Explicit semantic rejection or unqualified source": 2,
-        "Missing or malformed retained input": 2,
-        "No retained assessment": 5,
-        "Stale or unqualified private header": 15
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
     },
     {
       "name": "sub_08019640",
@@ -731,10 +653,10 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 19,
-      "eligible_diagnostic_contexts": 11,
+      "retained_attempt_contexts": 22,
+      "eligible_diagnostic_contexts": 13,
       "excluded_contexts": {
-        "Missing or malformed retained input": 2,
+        "Missing or malformed retained input": 3,
         "Stale or unqualified private header": 6
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -747,8 +669,7 @@
       "compiler_id": "agbcc",
       "compiler_flags": [
         "-O2",
-        "-mthumb-interwork",
-        "-da"
+        "-mthumb-interwork"
       ],
       "runtime_addresses": [
         134323584
@@ -756,25 +677,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": false,
-      "c_draft": "analysis/activity-three-19d80-nonvolatile-consuming-units-20261025/actual_two_point_delta_result/source.c",
+      "c_draft": "analysis/activity-three-19d80-horizontal-step-result-proposal-20261026/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/activity-three-19d80-nonvolatile-consuming-units-20261025/actual_two_point_delta_result/source.c",
-        "source_sha256": "f8790aadf3f52f2397645498c30ae335c93cc6151d5f2de0f1bbd50f5ddc6621",
-        "metadata": "analysis/activity-three-19d80-nonvolatile-consuming-units-20261025/actual_two_point_delta_result/metadata.json",
-        "metadata_sha256": "11789dba015992c46222f3db1a0b8b9fa4924d63b212d2dc47f8975bc54d417c",
-        "receipt": "analysis/activity-three-19d80-nonvolatile-consuming-units-20261025/actual_two_point_delta_result/result.json",
-        "receipt_sha256": "267f31a0e6f9a3572663c775cba762ac0ee015fd8f85377f3570261b6ed01d77",
-        "assessment": "analysis/activity-three-19d80-nonvolatile-consuming-units-20261025/assessment.json",
-        "assessment_sha256": "bfd51a17d57079bb79cad4fafc4f6240d75ade9422338f8d2f1769397b09be11",
-        "candidate_bytes": 352,
+        "source": "analysis/activity-three-19d80-horizontal-step-result-proposal-20261026/source.c",
+        "source_sha256": "20666028aec7dea75d742e0cb3b62e3d2cd120fe09569ee6f4a3910a1a756886",
+        "metadata": "analysis/activity-three-19d80-horizontal-step-result-proposal-20261026/metadata.json",
+        "metadata_sha256": "783ee5af50c23233434e1cfd724b76511789a5ddf06fa14b356b2f6621cff3bb",
+        "receipt": "analysis/activity-three-19d80-horizontal-step-result-proposal-20261026/result.json",
+        "receipt_sha256": "e4866e9eea4a9be684f0b34965878d095b13eea5a1aa0db9edeadd004cb1e146",
+        "assessment": "analysis/activity-three-19d80-horizontal-step-result-proposal-20261026/assessment.json",
+        "assessment_sha256": "1fbf07c8da4c4fff37227922bbbedd08a1c3cc11e47b783f74a71b1dd9270d04",
+        "candidate_bytes": 356,
         "comparison_extent_bytes": 368,
-        "full_byte_differences": 340,
-        "candidate_sha256": "c5fca61203937104017d1d3a7a2b65b2d597535a85075a78eceb591df54ade31",
+        "full_byte_differences": 311,
+        "candidate_sha256": "0337e7375c6f619d1ae4c356e990e4f1520dad559d9f5d9c573d735c8dd587f1",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -783,14 +704,13 @@
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
-          "-mthumb-interwork",
-          "-da"
+          "-mthumb-interwork"
         ],
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 44,
-      "eligible_diagnostic_contexts": 5,
+      "retained_attempt_contexts": 46,
+      "eligible_diagnostic_contexts": 7,
       "excluded_contexts": {
         "Explicitly unqualified historical workspace model": 32,
         "Missing or malformed retained input": 1,
@@ -849,8 +769,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 20,
-      "eligible_diagnostic_contexts": 13,
+      "retained_attempt_contexts": 22,
+      "eligible_diagnostic_contexts": 15,
       "excluded_contexts": {
         "Missing or ambiguous full comparison": 7
       },
@@ -908,8 +828,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 18,
-      "eligible_diagnostic_contexts": 10,
+      "retained_attempt_contexts": 19,
+      "eligible_diagnostic_contexts": 11,
       "excluded_contexts": {
         "Missing or malformed retained input": 1,
         "No retained assessment": 7
@@ -924,8 +844,7 @@
       "compiler_id": "agbcc",
       "compiler_flags": [
         "-O2",
-        "-mthumb-interwork",
-        "-da"
+        "-mthumb-interwork"
       ],
       "runtime_addresses": [
         134329088
@@ -933,25 +852,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": true,
-      "c_draft": "analysis/text-read-rows-1b300-next-state-handoff-20261025/actual_next_row_and_map_handoff/source.c",
+      "c_draft": "analysis/text-read-rows-1b300-committed-word-cursor-proposal-20261026/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/text-read-rows-1b300-next-state-handoff-20261025/actual_next_row_and_map_handoff/source.c",
-        "source_sha256": "1829957d6a8bafeb910c5a19ab8bac6f48a88dbaf65eb619c78e5e8aae7fbf1e",
-        "metadata": "analysis/text-read-rows-1b300-next-state-handoff-20261025/actual_next_row_and_map_handoff/metadata.json",
-        "metadata_sha256": "dfff8dee1987ba5eb5ceb455c5cae89a47ac04e0504358a160f56b4521c1a296",
-        "receipt": "analysis/text-read-rows-1b300-next-state-handoff-20261025/actual_next_row_and_map_handoff/result.json",
-        "receipt_sha256": "4f0ebc2f227079b28fa62f93b4b2eae205fd97f8da5ede43bcc6f6087ccfdef9",
-        "assessment": "analysis/text-read-rows-1b300-next-state-handoff-20261025/assessment.json",
-        "assessment_sha256": "79f68d177b9ee3abec7c9dce2fce6dc6b27f737d90250b17068c073eccf61bde",
+        "source": "analysis/text-read-rows-1b300-committed-word-cursor-proposal-20261026/source.c",
+        "source_sha256": "bd08bebb1eaa3c5724a70c7710999ee0996d6fbac0af6cdcf9683a8cdedd971d",
+        "metadata": "analysis/text-read-rows-1b300-committed-word-cursor-proposal-20261026/metadata.json",
+        "metadata_sha256": "3c19070ab450c400edb75eb0863673e01c9551a3b50ab76477f491e5297fb51a",
+        "receipt": "analysis/text-read-rows-1b300-committed-word-cursor-proposal-20261026/result.json",
+        "receipt_sha256": "bf75e4b1a9c38179c65f15855fe02fcd23c56dd4d8ea146b446f9d679843a812",
+        "assessment": "analysis/text-read-rows-1b300-committed-word-cursor-proposal-20261026/assessment.json",
+        "assessment_sha256": "5ca791150aaf22089e22ca6a8870c183a55c14dc0088af668899b67ce5530d4c",
         "candidate_bytes": 140,
         "comparison_extent_bytes": 140,
         "full_byte_differences": 73,
-        "candidate_sha256": "c7306f1751b9bbe3f0158417d58cfbd8543ad1a940162e167ca992f7bc9e7436",
+        "candidate_sha256": "081111f6b76d3717830e1ac157e3a40ff901e5ae45de54b1379fbb780c8c274b",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -960,14 +879,13 @@
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
-          "-mthumb-interwork",
-          "-da"
+          "-mthumb-interwork"
         ],
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 18,
-      "eligible_diagnostic_contexts": 17,
+      "retained_attempt_contexts": 21,
+      "eligible_diagnostic_contexts": 20,
       "excluded_contexts": {
         "Stale or unqualified private header": 1
       },
@@ -1021,12 +939,13 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 34,
-      "eligible_diagnostic_contexts": 1,
+      "retained_attempt_contexts": 42,
+      "eligible_diagnostic_contexts": 2,
       "excluded_contexts": {
-        "Different experimental compiler backend": 1,
-        "Missing or malformed retained input": 1,
-        "No retained assessment": 3,
+        "Different experimental compiler backend": 2,
+        "Missing or ambiguous full comparison": 2,
+        "Missing or malformed retained input": 2,
+        "No retained assessment": 6,
         "Stale or unqualified private header": 28
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -1039,8 +958,7 @@
       "compiler_id": "agbcc",
       "compiler_flags": [
         "-O2",
-        "-mthumb-interwork",
-        "-da"
+        "-mthumb-interwork"
       ],
       "runtime_addresses": [
         134382132
@@ -1048,25 +966,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": false,
-      "c_draft": "analysis/scene-object-steps-28234-halfword-product-batch-20261024/inline_actual_position_result/source.c",
+      "c_draft": "analysis/scene-steps-real-register-phases-20261026/real_packed_value_fork/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/scene-object-steps-28234-halfword-product-batch-20261024/inline_actual_position_result/source.c",
-        "source_sha256": "32a218fa2c0944a693873c65e7f7349786b6007ec226010d711b8ba469e3db77",
-        "metadata": "analysis/scene-object-steps-28234-halfword-product-batch-20261024/inline_actual_position_result/metadata.json",
-        "metadata_sha256": "e4420a32b0c1ade342a77fcced4513f4799e2c0be8d88ae692cff44e4ce246c9",
-        "receipt": "analysis/scene-object-steps-28234-halfword-product-batch-20261024/inline_actual_position_result/result.json",
-        "receipt_sha256": "ff274feaaae2567700faf9384fe7edc76ffde970ebfbe01d4be766b3e5411bc9",
-        "assessment": "analysis/scene-object-steps-28234-halfword-product-batch-20261024/assessment.json",
-        "assessment_sha256": "6df1fcf0d93cc7e90f073f50b5dbfa8c22faa73300302ece6b4eac6ad59ff6ff",
-        "candidate_bytes": 168,
+        "source": "analysis/scene-steps-real-register-phases-20261026/real_packed_value_fork/source.c",
+        "source_sha256": "1a382ae9b7591607ad1c5f1a22b83c64cb2b44399fb1b2f270b188e70712ff0c",
+        "metadata": "analysis/scene-steps-real-register-phases-20261026/real_packed_value_fork/metadata.json",
+        "metadata_sha256": "5d173250e06cb1c6f56a72f896e18cbb1736ff6c4797b124230d5cf821b228f1",
+        "receipt": "analysis/scene-steps-real-register-phases-20261026/real_packed_value_fork/result.json",
+        "receipt_sha256": "48433c9b3ea7504534246c0b9de196ae2819c888affc162a3b5150c560109ea2",
+        "assessment": "analysis/scene-steps-real-register-phases-20261026/assessment.json",
+        "assessment_sha256": "d043484b5a89185987e4f89c5095d3af708ee14933e36268c8cf94e7a6bed19b",
+        "candidate_bytes": 160,
         "comparison_extent_bytes": 160,
-        "full_byte_differences": 116,
-        "candidate_sha256": "65d8f7515eddde214f70f47e859c71c104984b46b0d6f742c7a0542e311995cd",
+        "full_byte_differences": 71,
+        "candidate_sha256": "d975112c84f24bdb3d1889e8b0e9cfa884c99c2ba578d338a7c785600dbfd94b",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -1075,14 +993,13 @@
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
-          "-mthumb-interwork",
-          "-da"
+          "-mthumb-interwork"
         ],
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 16,
-      "eligible_diagnostic_contexts": 11,
+      "retained_attempt_contexts": 39,
+      "eligible_diagnostic_contexts": 34,
       "excluded_contexts": {
         "No retained assessment": 5
       },
@@ -1096,8 +1013,7 @@
       "compiler_id": "agbcc",
       "compiler_flags": [
         "-O2",
-        "-mthumb-interwork",
-        "-da"
+        "-mthumb-interwork"
       ],
       "runtime_addresses": [
         134454512
@@ -1105,21 +1021,21 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": false,
-      "c_draft": "analysis/selected-map-39cf0-real-transfer-units-20261025/actual_destination_byte_offset_result/source.c",
+      "c_draft": "analysis/selected-map-39cf0-preincrement-selection-control-trial-20261026/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/selected-map-39cf0-real-transfer-units-20261025/actual_destination_byte_offset_result/source.c",
-        "source_sha256": "55fee1674ccb33ffd32bb00d8a9671ca96ecc36935ce287b901b743a395afda0",
-        "metadata": "analysis/selected-map-39cf0-real-transfer-units-20261025/actual_destination_byte_offset_result/metadata.json",
-        "metadata_sha256": "ee41a748cd8bfd2f4b7d740f88c905f840f0763578d2136477988657dfe1e4aa",
-        "receipt": "analysis/selected-map-39cf0-real-transfer-units-20261025/actual_destination_byte_offset_result/result.json",
-        "receipt_sha256": "089bce27b3e39e81f0b2394967889a87b9ab88ca654b05447b84bd7114f568e5",
-        "assessment": "analysis/selected-map-39cf0-real-transfer-units-20261025/assessment.json",
-        "assessment_sha256": "6c9b82181aa3e654d54b48ec4ada00fd2a2f3376ad738da88910169ce67cafb9",
+        "source": "analysis/selected-map-39cf0-preincrement-selection-control-trial-20261026/source.c",
+        "source_sha256": "13a06fc27f0715b55cd567dff756b2c7e8b5bdb533a86e28afca36097b23d84e",
+        "metadata": "analysis/selected-map-39cf0-preincrement-selection-control-trial-20261026/metadata.json",
+        "metadata_sha256": "ca08b2ca5693642d7aa60c993aeb79d3cbf28a4f80a3dd1511ca334f6a354f75",
+        "receipt": "analysis/selected-map-39cf0-preincrement-selection-control-trial-20261026/result.json",
+        "receipt_sha256": "b70e7caf615765b7235499f986f8fa83ac7d36f12df1ff8ffa56205171698492",
+        "assessment": "analysis/selected-map-39cf0-preincrement-selection-control-trial-20261026/assessment.json",
+        "assessment_sha256": "e66255d6679e885d2d8b65da3abcde5d636fd9374eb2902d27b9e579bf36ef51",
         "candidate_bytes": 392,
         "comparison_extent_bytes": 392,
         "full_byte_differences": 109,
@@ -1139,14 +1055,13 @@
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
-          "-mthumb-interwork",
-          "-da"
+          "-mthumb-interwork"
         ],
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 27,
-      "eligible_diagnostic_contexts": 13,
+      "retained_attempt_contexts": 29,
+      "eligible_diagnostic_contexts": 15,
       "excluded_contexts": {
         "Missing or malformed retained input": 6,
         "No retained assessment": 8
@@ -1219,13 +1134,13 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 55,
-      "eligible_diagnostic_contexts": 31,
+      "retained_attempt_contexts": 65,
+      "eligible_diagnostic_contexts": 33,
       "excluded_contexts": {
         "Different experimental compiler backend": 1,
         "Missing or ambiguous full comparison": 1,
         "Missing or malformed retained input": 5,
-        "No retained assessment": 17
+        "No retained assessment": 25
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
@@ -1281,8 +1196,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 34,
-      "eligible_diagnostic_contexts": 4,
+      "retained_attempt_contexts": 36,
+      "eligible_diagnostic_contexts": 6,
       "excluded_contexts": {
         "Missing or malformed retained input": 1,
         "No retained assessment": 10,
@@ -1350,10 +1265,10 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 19,
-      "eligible_diagnostic_contexts": 1,
+      "retained_attempt_contexts": 27,
+      "eligible_diagnostic_contexts": 6,
       "excluded_contexts": {
-        "Missing or malformed retained input": 2,
+        "Missing or malformed retained input": 5,
         "No retained assessment": 3,
         "Stale or unqualified private header": 13
       },
@@ -1379,8 +1294,14 @@
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
+      "search_wall_seconds": 2534.465286254883,
+      "search_wall_time_records": [
+        {
+          "receipt": "reports/current-goal/final-stretch-automation-20261025/continuation.json",
+          "receipt_sha256": "6c8e9291d0b571fb780cb52f0cd01417700cb909a33c472e3f648d7c771e233f",
+          "search_wall_seconds": 2534.465286254883
+        }
+      ],
       "best_candidate": {
         "source": "analysis/current-resource-conditions-context-refresh-20261025/40ab4/source.c",
         "source_sha256": "774a956ecb6ffe39878e18753aaf062bc1fc969642ae218cf3622c03df5a1626",
@@ -1407,8 +1328,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 26,
-      "eligible_diagnostic_contexts": 1,
+      "retained_attempt_contexts": 28,
+      "eligible_diagnostic_contexts": 3,
       "excluded_contexts": {
         "Missing or malformed retained input": 7,
         "Stale or unqualified private header": 18
@@ -1472,8 +1393,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 22,
-      "eligible_diagnostic_contexts": 1,
+      "retained_attempt_contexts": 23,
+      "eligible_diagnostic_contexts": 2,
       "excluded_contexts": {
         "Explicit semantic rejection or unqualified source": 1,
         "Missing or ambiguous full comparison": 7,
@@ -1567,11 +1488,11 @@
           "-da"
         ]
       },
-      "retained_attempt_contexts": 23,
-      "eligible_diagnostic_contexts": 15,
+      "retained_attempt_contexts": 28,
+      "eligible_diagnostic_contexts": 17,
       "excluded_contexts": {
         "Missing or malformed retained input": 5,
-        "No retained assessment": 3
+        "No retained assessment": 6
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
@@ -1703,13 +1624,14 @@
           "-da"
         ]
       },
-      "retained_attempt_contexts": 22,
-      "eligible_diagnostic_contexts": 16,
+      "retained_attempt_contexts": 26,
+      "eligible_diagnostic_contexts": 18,
       "excluded_contexts": {
-        "Different experimental compiler backend": 1,
+        "Different experimental compiler backend": 2,
         "Missing or ambiguous full comparison": 1,
         "Missing or malformed retained input": 3,
-        "Stale or unqualified private header": 1
+        "Stale or unqualified private header": 1,
+        "Stale source snapshot": 1
       },
       "closed_note": "Inventory86; retained full comparison88 includes trailing alignment."
     },
@@ -1730,21 +1652,21 @@
       "status": "near-miss",
       "user_priority": null,
       "user_far_off": false,
-      "c_draft": "analysis/map-collapse-495c4-actual-phase-units-20261025/actual_start_cleanup_unit/source.c",
+      "c_draft": "analysis/collapse-phase-causal-20261026/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/map-collapse-495c4-actual-phase-units-20261025/actual_start_cleanup_unit/source.c",
-        "source_sha256": "6ae974f768fb88cffc28c3e0b5d6ce447479eb3e5912d575407de66859d1145d",
-        "metadata": "analysis/map-collapse-495c4-actual-phase-units-20261025/actual_start_cleanup_unit/metadata.json",
-        "metadata_sha256": "f34ab6dbf06b47a1d1dadec98e2bd969485b6d4f9d6cf67d9f837d514fad2fb1",
-        "receipt": "analysis/map-collapse-495c4-actual-phase-units-20261025/actual_start_cleanup_unit/result.json",
-        "receipt_sha256": "911ed82262252bed1719b07a55116bb7faf3b73227e06c5bd34dbd06abd5a0ad",
-        "assessment": "analysis/map-collapse-495c4-actual-phase-units-20261025/assessment.json",
-        "assessment_sha256": "e5344ff61b7ca3c4edb8bad57878be26b893a7b98d24e2cac067aa1f8ea1a932",
+        "source": "analysis/collapse-phase-causal-20261026/source.c",
+        "source_sha256": "6a5b72301dbbec5e7ca1a9302751c01836d397f6a4cb18548a9894e2a3183144",
+        "metadata": "analysis/collapse-phase-causal-20261026/metadata.json",
+        "metadata_sha256": "cefadca3cc2a01a44928424e2243fe7d525bd25d03b83e49275d6387626a7395",
+        "receipt": "analysis/collapse-phase-causal-20261026/result.json",
+        "receipt_sha256": "dd825862011610861d44f887c3aff0e271916b5a35a132b3bffc9c0d2454f237",
+        "assessment": "analysis/collapse-phase-causal-20261026/assessment.json",
+        "assessment_sha256": "f4b84ecf7654ff9a11ed673b885934497ea98ef08a463e272f49c619ed609d8e",
         "candidate_bytes": 116,
         "comparison_extent_bytes": 116,
         "full_byte_differences": 3,
@@ -1783,9 +1705,10 @@
           "-da"
         ]
       },
-      "retained_attempt_contexts": 13,
-      "eligible_diagnostic_contexts": 10,
+      "retained_attempt_contexts": 22,
+      "eligible_diagnostic_contexts": 16,
       "excluded_contexts": {
+        "Missing or malformed retained input": 3,
         "Stale or unqualified private header": 3
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -1822,13 +1745,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "7628e3349cceffb31258893a9d8daef021dff50c6f611f15bb297f4f22a829b0",
-    "assets/rom-inventory.json": "01b1c344b54aefc5af6c3937f7f2421fbc4ed1a7597282ad212a199ec1c54bf2",
-    "docs/COMPLETION_BLOCKERS.md": "3f18718b4da44b314f13c339bb3e6ccaa19226ceca3892142bc6f9cb5a480765"
+    "assets/progress.json": "faab32f0e8a165a1f95f6e298128932e9d3e4e680f2ce875577b728db3f51b31",
+    "assets/rom-inventory.json": "1553534fca793071d9918c17b91d5d17f529f12af874911a8cbb02723013492d",
+    "docs/COMPLETION_BLOCKERS.md": "4b0c1d841b42d247c69dc998e2fc900a6383b7a06e4e3954d0a50a032997a3c0"
   },
   "documented_inventory": {
-    "rows": 28,
-    "bytes": 11634
+    "rows": 27,
+    "bytes": 11466
   },
   "documentation_count_current": true,
   "scan": {
@@ -1837,7 +1760,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 1599,
+    "metadata_files": 1740,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 3,

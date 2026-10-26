@@ -199,6 +199,51 @@ register pointer do not resolve this difference. These are rejected source
 diagnostics, with no matching credit, runtime observation or complete peer,
 backing or writer-domain claim.
 
+This 200-byte provider is parked at its one-byte mismatch for the completion
+work. Preserve both compiler investigations below; reopen only when new evidence
+changes the available source or allocation explanation.
+
+The retained compiler dumps and a three-case reduction isolate this decision.
+The baseline's initial RTL already addresses the second pointer through the
+source's R0-bound `entry`. Using the R4-bound `current` instead puts R4 in the
+initial RTL, but flow marks R0 dead at the copy. In `combine.c`, `try_combine`
+uses `!dead_or_set_p(i3, i2dest)` to decide whether to retain the earlier set;
+the recognizable replacement loads the address directly into R4. With a later
+R0 use, the earlier set must survive and the combined two-set pattern is not
+recognized. A diagnostic observer confirmed both decisions without changing
+the emitted assembly.
+
+The reduced C examples and commands are retained in
+`analysis/serial-reproducer-20261026/`. Reading the real identifier through
+R0 before the copy loop keeps R0 live and produces the desired R4-based load
+after the copy. The analogous complete-function experiment matches byte
+`0x76` but differs in 18 bytes over the 200-byte extent: it moves the identifier
+observation before the loop and keeps it in another register. That change can
+also affect behavior if the copy aliases the state, so it is a diagnostic, not
+an accepted reconstruction. A source expression preserving the native sequence
+and observation timing remains unestablished.
+
+The earlier R0-liveness result concerns those hard-register-bound pointers. A
+separate ordinary-pointer reduction tests the later allocation route. When the
+address assignment and pointer copy are adjacent, the first CSE stage replaces
+the two pseudo owners with one before combine. When a real intervening call
+separates them, the copy survives combine, but global allocation assigns both
+pseudos to R4; reload produces an R4-to-R4 copy, which post-reload CSE deletes.
+An output-preserving observer verifies these stages. The reduced cases preserve
+their ordered memory accesses but are not matches.
+
+In the complete function, making the final `entry` and `current` ordinary
+pointer temporaries and dereferencing `current` preserves the original source
+access order. CSE's cheaper-destination rule redirects the address producer to
+the second pseudo and reverses the copy; dead-insn cleanup then removes that
+copy. The remaining owner is allocated to R4, producing a direct R4 address
+load. The linked extent is 200 bytes with 61 differences. These cases exclude
+the tested source structures, not every possible allocation or reload path.
+Reproduction and selected dumps
+are retained in `analysis/serial-unbound-reduction-20261026/`,
+`analysis/serial-allocation-path-20261026/` and
+`analysis/serial-unbound-full-20261026/`.
+
 
 ## Surrounding serial-scene source
 

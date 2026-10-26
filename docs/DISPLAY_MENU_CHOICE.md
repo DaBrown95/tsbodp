@@ -2,8 +2,8 @@
 
 Four connected Thumb extents add 172 matching C bytes. They follow the choice
 record produced by the accepted menu choice-text stage, and the secondary
-stage's explicit stamp-check call. The choice initializer remains unconverted;
-its clock-copy/add dependency is reconstructed in [DISPLAY_TIME.md](DISPLAY_TIME.md).
+stage's explicit stamp-check call. The choice initializer now has matching C;
+its clock-copy/add dependency is described in [DISPLAY_TIME.md](DISPLAY_TIME.md).
 Static layouts and compiler matching do not establish
 runtime chronology, save-file compatibility or gameplay behavior.
 
@@ -82,8 +82,8 @@ owners covering 524 bytes and add no C coverage. The initializer declaration
 accepts a word and its caller explicitly narrows the definition to a byte,
 preserving the native load. This is an inferred native-boundary contract, not
 proof of the historical source spelling. Normal/strict controls and actual
-definition/caller and layout checks qualify the repair separately from the
-still-unconverted initializer.
+definition/caller and layout checks qualify that repair separately from the
+initializer acceptance below.
 Actual compiled controls change the comparator's enable reset from 0 to 1,
 the save definition sentinel from 24 to 23, the load text-kind comparison from
 24 to 23, and the accessor field from enable to definition. These reject with
@@ -96,9 +96,28 @@ retained under `reports/agents/display_audio/catalog-presentation/`; ready
 metadata is `menu-choice-lifecycle-ready.json`. Earlier useful failures remain
 unchanged.
 
-The direct initializer at `0x080180D4` has an exact-size 168-byte private semantic
-candidate with six remaining scheduling bytes. It still receives no
-source coverage. It observes the same enable and selector fields, chooses from
-an eight-byte-stride definition table, adds an actor entry and invokes the
-now-reconstructed clock-copy/add helper. Closing this initializer and the 1,112-byte
-secondary stage would connect both lifecycle directions more fully.
+## Choice initializer
+
+The [initializer](../src/display/menu_prepare_choice.c) at `0x080180D4` owns
+168 C bytes: 150 instruction bytes, 16 literal bytes and two zero-alignment
+bytes. It retains the existing byte-returning, word-definition and shared-clock
+interface. When the selection is not enabled, the actor-entry collection has
+capacity and the stage is nonzero, it selects a different text kind, enables
+the record, adds its actor entry and copies the next-day deadline.
+
+The random upper bound is the high half of an initialized unsigned word. On
+the pinned little-endian GNU C target, its union halfword view preserves
+`(unsigned short)(count - 1)`, including 65535 when count is zero. The table
+offset and pointer-column address retain their real R2/R1 phases. Neither the
+union nor the register variables add game-memory reads, calls or instructions
+to the source. Count and ID-column accesses address their declared eight-byte
+row subobjects through the target's integer-address ABI.
+
+Normal and strict-aliasing positives match the entire extent. Changing the
+enabled store from one to two rejects both by one byte. The actual 356-byte
+choice-text caller and four providers preserve 800 existing bytes with their
+controls. The full-ROM build and regenerated progress gate verify the source
+integration. Valid stage/table and ID backing, actor-entry storage, selection
+record lifetime, clock storage, later writers and retry termination remain
+premises. No new runtime execution or complete selector population is claimed.
+The 1,112-byte secondary menu stage remains unconverted.

@@ -201,8 +201,9 @@ are retained under `reports/agents/display_audio/catalog-presentation/`; the
 ready metadata is `time-core-ready.json`. Historical receipts retain their old
 names and bytes.
 
-The 168-byte choice initializer and 1,112-byte secondary menu stage remain
-unconverted connected consumers. The producers that advance shared clock state and render its formatted text
+The 168-byte choice initializer now has matching source, including its
+next-day deadline handoff. The 1,112-byte secondary menu stage remains an
+unconverted connected consumer. The producers that advance shared clock state and render its formatted text
 are useful next targets. These
 boundaries and clock names are evidence-led inferences, not claims of an
 original source API or tested runtime scheduling.

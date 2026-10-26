@@ -26679,6 +26679,18 @@
       "evidence": [
         "Both normal and strict builds emit .align 2,0 before the g_background_states pool at ROM 0xD778. The linked $d mapping starts at relative 70 and $t resumes at relative 76. The full 116-byte comparison and genuine mask controls qualify this alignment/data role; alternate incoming execution remains open."
       ]
+    },
+    {
+      "name": "display_menu_prepare_choice_alignment_01815e",
+      "owner": "display_menu_prepare_choice",
+      "rom_offset": 98654,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "d313b77bdf3ff1566a1d6ea43f4303b9ca88e7cd56fc6d8dd06197f2570e5020",
+      "evidence": [
+        "Pinned normal and strict compiler output emits .align 2,0 at relative 138 before the four-word literal pool at relative 140. The source object and complete matching linked ELF map $d at ROM 0x1815E and resume $t at 0x18170. Full 168-byte positives and genuine changed-enable controls qualify this alignment/data role; alternate incoming execution remains open."
+      ]
     }
   ],
   "source_owned_instruction_regions": [

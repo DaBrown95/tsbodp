@@ -56286,6 +56286,33 @@
         "before": "state != 16",
         "after": "state != 15"
       }
+    },
+    {
+      "name": "display_menu_prepare_choice",
+      "rom_offset": 98516,
+      "size": 168,
+      "source": "src/display/menu_prepare_choice.c",
+      "symbols": {
+        "actor_entry_is_full": "0x08020a71",
+        "actor_entry_add": "0x080200c9",
+        "frame_random_bounded": "0x0803542d",
+        "g_menu_choice_definitions": "0x08052a98",
+        "g_menu_choice_actor_ids": "0x08052910",
+        "g_menu_choice_next_day_delta": "0x08d70d48",
+        "display_time_copy_add": "0x0801074d",
+        "g_resource_game_state": "0x03003950"
+      },
+      "thumb_symbols": [
+        "actor_entry_is_full",
+        "actor_entry_add",
+        "frame_random_bounded",
+        "display_time_copy_add"
+      ],
+      "negative_control": {
+        "before": "record->enabled = 1;",
+        "after": "record->enabled = 2;"
+      },
+      "expected_sha256": "24a64b0c9a81d989919194f3e29d771cc9494f770b8d0e7e10c88cf981cd25fd"
     }
   ],
   "assembly": [
