@@ -246,6 +246,20 @@ class TriageTests(unittest.TestCase):
         self.assertEqual(row['search_best']['source_review'], 'pending')
         self.assertEqual(row['search_best']['source_credit'], 0)
 
+    def test_review_rejects_search_even_when_full_bytes_match(self):
+        source, receipt = self.make_search_validation()
+        original_source = source.read_bytes()
+        record = json.loads(receipt.read_text())
+        record['source_valid_under_recorded_premises'] = False
+        record['source_review'] = 'REJECT_UNCONSUMED_HARD_REGISTER_ADDRESS'
+        receipt.write_text(json.dumps(record))
+        report = triage.build(self.root)
+        self.assertIsNone(report['rows'][0]['search_best'])
+        self.assertEqual(report['scan']['rejected_search_validations'], 1)
+        self.assertEqual(source.read_bytes(), original_source)
+        self.assertEqual(json.loads(receipt.read_text())['comparison']
+                         ['differing_bytes_including_missing_or_extra'], 0)
+
     def test_changed_search_source_or_header_cannot_reuse_validation(self):
         source, receipt = self.make_search_validation()
         source.write_text('changed')

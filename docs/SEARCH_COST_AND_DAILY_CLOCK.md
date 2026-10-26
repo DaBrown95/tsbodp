@@ -34,9 +34,9 @@ The second phase clears flag `+0x747`, invokes the original four-word flag
 reset, resets accepted actor-entry values rooted at world `+0xDC`, invokes the
 original relation-value adjustment at world `+0x30`, clears byte `+0x73D`, and
 resets the hour interval. On a signed day divisible by seven it calls the
-original weekly actor-entry operation. The signed remainder helper is the
+matching weekly actor-entry operation. The signed remainder helper is the
 established `__modsi3` at `0x0804CE08`; the explicit signed-short result test
-preserves the observed narrowing. The weekly operation remains an explicit original region. The three other
+preserves the observed narrowing. The weekly operation now has the matching owner below. The three other
 direct daily providers are reconstructed below; their historical private
 receipts retain their previous aliases and extent evidence.
 
@@ -95,11 +95,10 @@ and 528 distinct C bytes. The new child controls change the increment, final
 flag-word store and record loop bound, rejecting by 18, 16 and one byte
 respectively. Both previous daily-header consumers remain exact and each
 rejects its real control by one byte after the final header refinement.
-The weekly actor-entry reconciliation at `0x0802005C` remains original code.
-Its observed scan reconciles flag bits with kind-125 secondary records and
-clears at most one bit per invocation, but its private compiler trials receive
-no coverage. Runtime invocation, list consistency and table/index domains
-remain unproved.
+The weekly actor-entry reconciliation at `0x0802005C` now has a matching
+source owner, qualified below. Its scan reconciles flag bits with kind-125
+secondary records and clears at most one bit per invocation. Runtime invocation,
+list consistency and complete table/index domains remain unproved.
 
 ## Daily flag object handoff
 
@@ -151,7 +150,7 @@ through 63 remain unproved; no new guards are invented. The unsigned source
 shift describes the bank operation within that domain, while the complete
 pinned-compiler comparison preserves the original machine bytes. The flag
 setters, factory and interaction callback are reconstructed below; the weekly
-reconciliation remains unconverted.
+reconciliation is reconstructed below.
 
 ## Daily flag factory and interaction closure
 
@@ -222,7 +221,7 @@ literal pools and original zero tail alignment match; controls changing factory
 flags, bank boundaries and the accepted owner state all reject. The seven-function
 flag-object path totals 800 C extent bytes and joins the daily flag reset and
 save-word accessors. Whole-ROM equality and gameplay behavior remain separate
-claims. The weekly entry reconciliation remains unconverted.
+claims. The weekly entry reconciliation is reconstructed below.
 
 
 ## Independently bounded pending-flag clearer
@@ -242,3 +241,36 @@ supported compiler constraint; they do not identify an original register
 annotation. Normal and strict full comparisons and real clear-to-set controls
 pass, alongside actual-definition and owner-layout checks. These results replace
 one estimated source row and add no mapped extent, execution or gameplay claim.
+
+## Weekly entry reconciliation
+
+The [weekly worker](../src/display/time_weekly_entries.c) at `0x0802005C` owns
+all 108 bytes from C: 108 instruction bytes, no literals or alignment. The
+condition-one check gates a scan of the eight captured flag bits. For each set
+bit, it samples the secondary-list pointer, searches the current capacity for
+a kind-125 record with matching value, then observes capacity again. If the
+index equals that final capacity, it rereads the flag byte, clears that bit and
+stops. No additional guard or observation is introduced.
+
+Actual byte-load results use QI register phases, so GCSE does not replace the
+native repeated capacity and entry-pointer reads with cached pseudo values.
+Only the existing secondary-pointer read is expressed through a volatile-
+qualified compatible pointer-object lvalue. This preserves the R0 load and
+R2 copy; a volatile local register failed to do so. Later list reads remain
+ordinary accesses whose separate emitted loads are pinned compiler facts,
+without a source-level guarantee of asynchronous freshness. No historical
+qualifier or IRQ-writer population is inferred.
+
+The record offset is computed in the target's 32-bit integer-address model;
+the intermediate offset pointer is converted back before dereference. The
+actual initializer installs list 14, and the maintained day-event caller passes
+world plus `0xDC` on a day divisible by seven. Valid context/list/record backing,
+aliases, later writers and complete incoming/runtime populations remain premises.
+Every local is initialized on its use paths; no original-bug exception is needed.
+
+Normal and strict-aliasing positives match the full native extent. Changing
+kind 125 to 124 rejects both by one byte. The actual 168-byte day-event caller,
+44-byte condition provider, 104-byte initializer and 48-byte capacity-search
+control all match and reject their existing controls in both profiles, retaining
+364 prior bytes. The full-ROM and progress gates verify source integration;
+this adds no runtime execution evidence or complete code denominator.

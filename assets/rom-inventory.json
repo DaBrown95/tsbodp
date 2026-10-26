@@ -38563,13 +38563,14 @@
       "referenced_literal_bytes": 8
     },
     {
-      "name": "sub_0802005C",
+      "name": "display_time_weekly_entries",
       "rom_offset": 131164,
       "mode": "Thumb",
       "runtime_addresses": [
         134348892
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -38582,11 +38583,11 @@
         131270
       ],
       "size": 108,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 131164,
       "body_rom_start": 131164,
       "body_rom_end": 131272,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0802xxxx",
       "decoded_instruction_bytes": 108,
@@ -122018,6 +122019,58 @@
         "Pinned normal and strict compiler output emits .align 2,0 at relative 138 before the four-word literal pool at relative 140. The source object and complete matching linked ELF map $d at ROM 0x1815E and resume $t at 0x18170. Full 168-byte positives and genuine changed-enable controls qualify this alignment/data role; alternate incoming execution remains open."
       ],
       "status": "mapped_data"
+    },
+    {
+      "name": "frame_find_target_cell_alignment_03b8be",
+      "owner": "frame_find_target_cell",
+      "rom_offset": 243902,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "0a4f26a0463895238c802842579e2cbe30df6e831bd6478a8be90d5e43b6930d",
+      "evidence": [
+        "The pinned compiler/assembler emits two zero alignment bytes at relative 354 after the function return, from the explicit final .align 2,0. Exact full-extent source and changed-source control proofs qualify this owner; source-object and linked $d mapping begins at this span. This is source-emitted alignment/data evidence, without excluding alternate incoming execution."
+      ],
+      "status": "mapped_data"
+    },
+    {
+      "name": "frame_update_grid_need_effect_selection_alignment_03c6c2",
+      "owner": "frame_update_grid_need_effect_selection",
+      "rom_offset": 247490,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "f1a12819ec0ee0451b19ab5e21e5259d8ac8f188f06b29c4c9f596a826f1f4ab",
+      "evidence": [
+        "The pinned compiler/assembler emits two zero alignment bytes at relative 58 before the word pool at relative 60; $t resumes at relative 72. Exact full-extent source and changed-source control proofs qualify this owner; source-object and linked $d mapping begins at this span. This is source-emitted alignment/data evidence, without excluding alternate incoming execution."
+      ],
+      "status": "mapped_data"
+    },
+    {
+      "name": "frame_update_grid_need_effect_selection_alignment_03c906",
+      "owner": "frame_update_grid_need_effect_selection",
+      "rom_offset": 248070,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "f1a12819ec0ee0451b19ab5e21e5259d8ac8f188f06b29c4c9f596a826f1f4ab",
+      "evidence": [
+        "The pinned compiler/assembler emits two zero alignment bytes at relative 638 before the word pool at relative 640. Exact full-extent source and changed-source control proofs qualify this owner; source-object and linked $d mapping begins at this span. This is source-emitted alignment/data evidence, without excluding alternate incoming execution."
+      ],
+      "status": "mapped_data"
+    },
+    {
+      "name": "frame_update_grid_need_effect_selection_alignment_03c94e",
+      "owner": "frame_update_grid_need_effect_selection",
+      "rom_offset": 248142,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "f1a12819ec0ee0451b19ab5e21e5259d8ac8f188f06b29c4c9f596a826f1f4ab",
+      "evidence": [
+        "The pinned compiler/assembler emits two zero alignment bytes at relative 710 before the final word pool at relative 712. Exact full-extent source and changed-source control proofs qualify this owner; source-object and linked $d mapping begins at this span. This is source-emitted alignment/data evidence, without excluding alternate incoming execution."
+      ],
+      "status": "mapped_data"
     }
   ],
   "source_owned_instruction_regions": [
@@ -128407,7 +128460,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0802005C",
+      "name": "display_time_weekly_entries",
       "rom_offset": 131164,
       "size": 108,
       "status": "mapped_code"
@@ -138244,11 +138297,11 @@
     "tools/bounded_indirect.py": "d088b8112475def63678ba18b4f6df83bc1a37020a81cf21bd77d0c434c33cee",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
-    "config/code-evidence-us-eu.json": "d95f6819375fe9b9a1912a81437afb2d929a882a7eb97201bd10bae832290151",
+    "config/code-evidence-us-eu.json": "e501b9d9fc10fb38fc03d306965f1791bf8f62b0a195b0432a3102392c9d71b3",
     "config/ram-map-us-eu.json": "77bdc9b4c55a9bf180ecfb2585630044a55e756beff96d130d72cfd483b21d41",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "01f3fdf69ab821015e5e43093cd780c7a58282e6ab44548db53703c1bd70445a",
+    "config/build-us-eu.json": "65af5e369587e3bfaa8e0cc59a33aa3999b171dcb5baecb9dfe0116e13a486c0",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -138766,6 +138819,7 @@
     "src/frame/frame_find_objects.c": "d51500a426b425c8af4c4b2e6f64ec1732bb36df1a3967662a54fdab3364ff80",
     "src/frame/frame_find_pending_action.c": "cab4b39dee347d7c664ffcfebb59fdd825db2f1e4852f8c607eef3a7c73fec1d",
     "src/frame/frame_find_scene_target.c": "c3251d998cc8126667ed1718db89d069138d4757da67ac7d5e1f237aaba12285",
+    "src/frame/frame_find_target_cell.c": "0a4f26a0463895238c802842579e2cbe30df6e831bd6478a8be90d5e43b6930d",
     "src/frame/frame_finish_actor_attachment.c": "954922df9d1b8138dad403eb266edab572e15136fd002c6c60a82b0d8a23344c",
     "src/frame/frame_finish_attachment_control_jobs.c": "d1cf2a63ed9b5b196c263eab7a678b069e26ade29bc49f82dc524caf9b8f30bc",
     "src/frame/frame_finish_attachment_definition_76.c": "7d1d8f9308ca5579bf3000b370861eb074f136d54bf1759831a8ac4ca3839e84",
@@ -139170,6 +139224,7 @@
     "src/frame/frame_update_affine.c": "d048056e5099838f241fa0582c4db31043154af89556969e047b0de5536aafc5",
     "src/frame/frame_update_attachment_parameter.c": "1c61cf97f368011af985926ff6920de6d8f2deab8aa78a6835b835d6e41b753c",
     "src/frame/frame_update_bounds.c": "2425f93a0e7ce55d34949bad6f8f28b82ca3e8a032d66a7ebd2fb38e72a931f7",
+    "src/frame/frame_update_grid_need_effect_selection.c": "f1a12819ec0ee0451b19ab5e21e5259d8ac8f188f06b29c4c9f596a826f1f4ab",
     "src/frame/frame_update_map_view.c": "ef3d9b00da9b3a2d71f43559e8ca7724fbe545fe6488f62407f0e9883a5edc04",
     "src/frame/frame_update_need7_from_effects.c": "e8078812354232c17f48d57fd7ff6cb93ddcc2c19e3efde87f0749b3c39bb6c4",
     "src/frame/frame_update_palette_menu_actor.c": "53a8f1d2dbd2430684418085d9495f58fb871e96fce249ddf91e8db3e23f9aa9",
@@ -139777,13 +139832,12 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 314212,
+      "source_glue_owned_extent_bytes": 314320,
       "estimated_envelope_union_bytes": 325670,
       "classification_bytes": {
         "estimated_envelope_unclassified": 246,
         "instruction_and_referenced_data_dual_use": 4,
-        "known_data": 22900,
-        "owned_extent_unclassified": 8,
+        "known_data": 22908,
         "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 285406,
         "strong_rooted_referenced_data": 35936,
@@ -186612,6 +186666,10 @@
           243468
         ],
         [
+          243902,
+          243904
+        ],
+        [
           243946,
           243948
         ],
@@ -186718,6 +186776,18 @@
         [
           247430,
           247432
+        ],
+        [
+          247490,
+          247492
+        ],
+        [
+          248070,
+          248072
+        ],
+        [
+          248142,
+          248144
         ],
         [
           248418,
@@ -188755,10 +188825,6 @@
         ],
         [
           121644,
-          131164
-        ],
-        [
-          131272,
           150364
         ],
         [
@@ -245308,20 +245374,7 @@
       },
       {
         "rom_offset": 131164,
-        "size": 108,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
-        "rom_offset": 131272,
-        "size": 106,
+        "size": 214,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -287020,13 +287073,14 @@
       {
         "rom_offset": 243902,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "known_data",
         "roles": [
           "estimated_envelope",
+          "known_data",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 243904,
@@ -288343,13 +288397,14 @@
       {
         "rom_offset": 247490,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "known_data",
         "roles": [
           "estimated_envelope",
+          "known_data",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 247492,
@@ -288380,13 +288435,14 @@
       {
         "rom_offset": 248070,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "known_data",
         "roles": [
           "estimated_envelope",
+          "known_data",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 248072,
@@ -288417,13 +288473,14 @@
       {
         "rom_offset": 248142,
         "size": 2,
-        "classification": "owned_extent_unclassified",
+        "classification": "known_data",
         "roles": [
           "estimated_envelope",
+          "known_data",
           "source_owned"
         ],
-        "confidence": "high_owned_boundary_unknown_role",
-        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 248144,
@@ -314901,8 +314958,7 @@
         "size": 65536,
         "classification_bytes": {
           "estimated_envelope_unclassified": 30,
-          "known_data": 802,
-          "owned_extent_unclassified": 8,
+          "known_data": 810,
           "strong_rooted_instruction": 57044,
           "strong_rooted_referenced_data": 7580,
           "unresolved": 72
@@ -314910,7 +314966,6 @@
         "classification_profiles": [
           "estimated_envelope_unclassified",
           "known_data",
-          "owned_extent_unclassified",
           "strong_rooted_instruction",
           "strong_rooted_referenced_data",
           "unresolved"
@@ -361583,8 +361638,9 @@
         "execution_address": 134348892,
         "entry_rom_offset": 131164,
         "mode": "Thumb",
-        "name": null,
+        "name": "display_time_weekly_entries",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -456459,6 +456515,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 150,
         "referenced_data_bytes_in_extent": 16
+      },
+      {
+        "name": "display_time_weekly_entries",
+        "rom_offset": 131164,
+        "size": 108,
+        "source": "src/display/time_weekly_entries.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 108,
+        "referenced_data_bytes_in_extent": 0
       },
       {
         "name": "irq_cpu_enable",

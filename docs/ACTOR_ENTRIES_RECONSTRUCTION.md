@@ -359,8 +359,11 @@ The two collection controls change the later-group bound and the catalog
 category filter, rejecting by two and one bytes respectively. Their proof index
 is `reports/audio-root/actor-entry-collection-canonical/1791849007996878000/ready.json`.
 
-The connected weekly/secondary-flag routine at `0802005C`, the higher game-state
-loader at `0801B704` and condition serializer at `08029D18` remain unconverted.
+The connected weekly/secondary-flag routine at `0802005C` now has a matching
+[108-byte owner](SEARCH_COST_AND_DAILY_CLOCK.md#weekly-entry-reconciliation).
+The [548-byte game-state loader](../src/save/load_game_state.c) and
+[140-byte condition serializer](../src/save/world_write_condition_module.c)
+also have source owners. Earlier failed bodies remain historical diagnostics.
 Useful failed bodies and raw comparisons remain in ignored local reports. The
 paired transfer does not close their target domains, valid save populations or
 whole-game execution. Whole-ROM equality, storage mapping and runtime behavior

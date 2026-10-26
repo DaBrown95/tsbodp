@@ -56313,6 +56313,23 @@
         "after": "record->enabled = 2;"
       },
       "expected_sha256": "24a64b0c9a81d989919194f3e29d771cc9494f770b8d0e7e10c88cf981cd25fd"
+    },
+    {
+      "name": "display_time_weekly_entries",
+      "rom_offset": 131164,
+      "size": 108,
+      "source": "src/display/time_weekly_entries.c",
+      "symbols": {
+        "condition_is_complete": "0x0802a7c5"
+      },
+      "thumb_symbols": [
+        "condition_is_complete"
+      ],
+      "negative_control": {
+        "before": "kind != 125",
+        "after": "kind != 124"
+      },
+      "expected_sha256": "83063c544a5b8222c75a6eeae744b590ac05b449bbef0730b472ef956cadd41c"
     }
   ],
   "assembly": [

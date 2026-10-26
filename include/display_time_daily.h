@@ -35,7 +35,7 @@ void display_time_day_event(void);
 void display_time_add_cycle_value(void);
 void display_time_reset_daily_counters(void);
 void display_menu_relax_relation_values(struct DisplayMenuRelationValues *);
-/* Original dependency remains unconverted in the matching build. */
+/* Clears the first weekly flag without a matching secondary-list entry. */
 void display_time_weekly_entries(struct ActorEntryContext *);
 
 /* Existing providers; declarations preserve their established ABI. */

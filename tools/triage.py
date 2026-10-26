@@ -372,6 +372,8 @@ def validated_searches(root, rows, reference_sha256):
             source = local(root, source_record['path'])
             if sha(job_path) != manifest['sha256'] or sha(source) != source_record['sha256']:
                 raise ValueError('Stale search input')
+            if rejected(result, source_record['sha256'], path.parent.name):
+                raise ValueError('Explicit semantic rejection or unqualified search source')
             job = read_json(job_path)
             function = job['function']
             off = function['rom_offset']
