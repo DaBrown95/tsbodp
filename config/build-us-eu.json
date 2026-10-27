@@ -56570,6 +56570,26 @@
         "after": "audio_play_animation_cue(4);"
       },
       "expected_sha256": "5d0fe4cca5b463f7b0a1424b39cc03526f3cb956097bbabed79d18822a5e06d1"
+    },
+    {
+      "name": "display_step_palette_block",
+      "rom_offset": 72800,
+      "size": 400,
+      "source": "src/display/palette_block_step.c",
+      "symbols": {
+        "g_palette_block_count": "0x03003350",
+        "g_palette_buffer_pairs": "0x030018d0",
+        "display_set_bytes": "0x08027a49",
+        "display_divide": "0x0804cd2d"
+      },
+      "thumb_symbols": [
+        "display_set_bytes",
+        "display_divide"
+      ],
+      "negative_control": {
+        "before": "job->flags & 0x20",
+        "after": "job->flags & 0x40"
+      }
     }
   ],
   "assembly": [

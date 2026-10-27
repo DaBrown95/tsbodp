@@ -1,13 +1,13 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,480 C functions / 313,624 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 317,684 bytes; original slices
-still supply 16,459,532 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,481 C functions / 314,024 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 318,084 bytes; original slices
+still supply 16,459,132 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The fixed 319,640 mapped extent
 bytes are solely a historical comparison, not a complete code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **19 unowned rows / 7,994 estimated
+and generated [triage](TRIAGE.md) contain **18 unowned rows / 7,594 estimated
 bytes**. The triage records complete candidate comparisons and retained inputs;
 none of those candidates receives source credit. Completed paths and their
 findings remain in the owner documents and publication history.
@@ -38,7 +38,6 @@ findings remain in the owner documents and publication history.
 | Scene-list builder `0xF034` (308) | Canonical 308/4 remains. A real bottom-bound lifetime admits R2 and repairs the initial transfers; an HI pre-fill phase gives 308/6, with only the bottom literal/MOV/ADD order wrong. Inline consumers, first-value width, counter ownership and qualification of the existing count increment do not close it. A compatible word-return provider/byte-consumer contract also reproduces 308/4 while preserving 304 existing bytes and controls. In the 308/6 candidate, the final reload need excludes R0/R1 and selects R2. Each needs iteration clears `used_spill_regs`, so a transient R2 reservation cannot be assumed to survive later address rematerialization; an actual final need must retain it. See [compiler context](COMPILER_PILOT.md). |
 | Map-collapse `0x495C4` (116), inverse projector `0x48BF8` (88 compared) | Collapse remains 116/3; its earlier offset reload advances the spill rotation before the duration address. A scan of 2,276 matched Thumb owners with mapping symbols supplied no peer for its scratch reuse; objects without mappings were excluded. The inverse's 88/2 remains unqualified because its local-point stores have no source consumer. Genuine wide affine partials demonstrate a retained R5 save after late high-word deletion, but regroup the arithmetic and remain nonexact. A native-order late addend pair survives, yet its copies remain; binding that real pair to R4 is bypassed by COMBINE. Another owner binding repeats this cause. See [map selection](SCENE_MAP_SELECTION.md) and [projection](FRAME_INPUT.md). |
 | Copied ARM map drawer `0xB564` (320) | A private trial with two field consumers and declared union subobjects retains four pair loads, fresh metadata reads and no local stack allocation, but remains 316/188 over the full 320 bytes. CSE/COMBINE delete the three real IP destination phases; positive-offset scalar stores fail to form the remaining native grouped stores. A different producer/reload graph must retain both load and store shapes. Map transfer, decoder and sorter have source. The two installation tails of 16 and 12 bytes already belong to matching C owners; the decoder's extra 24 bytes remain part of this same drawer gap. See [RAM installations](../config/ram-map-us-eu.json) and [decoder](RESOURCE_BACKGROUND_DECODER.md). |
-| Palette `0x11C60` (400) | Palette observation and induction boundaries remain unresolved. Navigation and the selection builder now have matching source owners. See [actor entries](ACTOR_ENTRIES_RECONSTRUCTION.md), [palette menu](SCENE_PALETTE_MENU.md) and [palette lifecycle](DISPLAY_PALETTE_LIFECYCLE.md). |
 | Scene objects `0x28234` (160), activity-three preparation `0x19640` (544) | A real packed-step/X-consumer fork improves the object candidate to 160/71 and preserves one X recurrence with an in-loop Y multiply; a shared R2 origin reader recovers the loop loads but swaps high roles, while an explicit preheader lets GCSE hoist Y and create the unwanted second recurrence. Preparation recovers native geometry roles and its two bound-memory reloads, but remains 528/371: the fourth availability flag stays in R7 and displaces output pointers. Its ordinary accepted test already survives; a hard phase-R4 constraint breaks induction optimization. Drawing now has a matching 368-byte source owner: separate incoming/raster Y values and a read-only working-X snapshot recover the native twelve-byte frame; actual consumed native register owners recover the remaining phases. Hard-R7 models remain rejected by emitted behavior. The connected 320-byte raster worker also has source. Full input/writer domains remain open. See [activity three](SCENE_CONTACT_ACTIVITY_THREE.md) and [object interfaces](FRAME_INPUT.md). |
 | Relation delta `0x40AB4` (692), catalog confirmation `0x42964` (656) | A genuine body-local history address keeps normal GCSE from hoisting it over the earlier criterion loop; the delta's actual history/request/code setup order now agrees, but field-pointer/byte-carrier allocation remains wrong (692/306). Disabling GCSE breaks the matched neighbor. Confirmation now retains all four outcome stores/two reads; a real R2 success producer prevents late cross-jump merging. Its early request/state/list/record lifetimes and zero producer remain wrong (652/596). These are source/dataflow constraints, not missing constant offsets. |
 | Other menu, geometry, text and resource workers | Pending cleanup `0xA0A4` remains 292/2. Its first reload pool is sorted R0/R1/R2; changing admission chronology cannot select native R2 while R0 stays free. A real first-count producer admits R2 but splits the common loop header (308/212), so that formulation is closed. A fresh by-value `0x67E0` sample adds a separate input spill. Selected-tile `0x39CF0` reproduces 392/109 under the canonical API; inner-loop syntax does not explain its reloads. At `0x48A14`, a real SI left reload survives LOOP but is forwarded in second CSE; a later R2 consumer cannot force the native MOV+ASR because the backend permits a distinct shift destination. Its covered copy is deleted by COMBINE. `0x48AF8` also remains open. The 692-byte text renderer now has a matching source owner. |
@@ -98,6 +97,13 @@ The current census separately counts instructions, data, alignment, estimated
 extents and unresolved bytes. Source matches establish no new runtime execution.
 
 ## Latest accepted gain and final gate
+
+The [palette block worker](DISPLAY_PALETTE_LIFECYCLE.md#block-interpolation) at
+`0x11C60` adds one function / 400 C extent bytes. Two-byte input value owners
+retain the native current word and late target spill; ordinary flag reads
+preserve the remaining prefix. Normal/strict positives, actual controls and
+the full matching/progress gate cover all bytes, including pools and alignment.
+No register bindings or new runtime/domain claims are introduced.
 
 The [text row reader](DISPLAY_TEXT_RECONSTRUCTION.md) at `0x1B300` adds one
 function / 140 C extent bytes. Bounded halfword masks and narrowing the actual

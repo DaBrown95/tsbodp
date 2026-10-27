@@ -911,8 +911,8 @@ denominator.
 ### Source-owned alignment and data roles
 
 The existing code-evidence configuration now records optional
-`source_owned_data_regions`. There are 1,987 exact spans accounting for 4,000
-bytes: the debugger's 28-byte inline packet and 3,972 alignment bytes. Four
+`source_owned_data_regions`. There are 2,029 exact spans accounting for 4,084
+bytes: the debugger's 28-byte inline packet and 4,056 alignment bytes. Four
 alignment bytes are implicit Thumb code fill, as distinguished below. Each
 record pins the owning source, complete owner extent and original bytes.
 For the earlier spans, compiler data mapping symbols and emitted alignment,

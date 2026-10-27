@@ -41,8 +41,9 @@ buffers, supplies palette RAM destinations `0x05000000` and `0x05000200`, then
 resets the jobs. The pair initializer at `0x080119b0` retains the original
 unchecked allocation result. The connected 216-byte lookup-curve provider at
 `0x0801155c` is reconstructed in the next batch described below. The 400-byte interpolation body at
-`0x08011c60` remains unconverted. Valid argument domains, complete ownership
-and runtime behavior are not established by the matching lifecycle sources.
+`0x08011c60` now has a matching source owner, described below. Valid argument
+domains, complete ownership and runtime behavior are not established by the
+matching lifecycle sources.
 
 All fifteen source bodies use ordinary C with no register bindings or added
 memory traffic. Each full extent includes its literal pools and alignment up
@@ -100,4 +101,26 @@ valid caller domains remain unestablished. The source preserves unchecked
 division and index behavior; it adds no zero-denominator handling, clipping of
 negative inputs or capacity guard. Matching extents and these static data-flow
 connections do not prove palette appearance or gameplay behavior. The
-400-byte interpolation routine remains an explicit original dependency.
+400-byte interpolation routine is reconstructed below.
+
+## Block interpolation
+
+The worker at `0x08011c60` now has matching C for its complete 400-byte extent,
+including three literal words and four alignment bytes. It advances byte delay
+and duration counters, rotates configured palette sequences or clears completed
+jobs, then interpolates changed RGB555 entries toward the selected target.
+Each color pair is captured once; the remaining-step byte is captured once
+for its three signed divisions. Channel results retain their unsigned-halfword
+conversions before the final masked pack. Equal input words skip the output
+store. The unchecked backing, counts and original completion behavior remain.
+
+Two packed local word owners retain the actual two-byte input values through
+the masked reads, without overlaying game memory. Their aggregate HI mode keeps
+the current word separate from the blue result and reproduces the late target
+spill. Restoring the ordinary job flag reads supplies the remaining compiler
+copy in buffer selection. This matches with the pinned compiler without register
+bindings, extra observations or output repairs; it does not identify historical
+source declarations. Normal/strict complete comparisons and changed-delay-flag
+controls pass. The connected constructor, reset, scheduler and arithmetic owners
+are rechecked by the full build. Source ownership adds no runtime observation
+or closure of palette backing, writer or callback populations.

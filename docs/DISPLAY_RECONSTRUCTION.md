@@ -242,8 +242,9 @@ first/last/count at 5/6/7, palette count/index at 8/9, and palette pointers at
 not add a bounds guard. The active count at `0x03003350` is updated by free
 selection/reset. The manager preserves its observed `visited <= active_count`
 condition. These static names do not establish safe behavior for exhausted
-records. The per-record RGB interpolation at `0x08011c60` remains unconverted,
-with its semantic candidate and raw comparison evidence retained locally.
+records. The per-record RGB interpolation at `0x08011c60` now has a matching
+400-byte [source owner](DISPLAY_PALETTE_LIFECYCLE.md#block-interpolation), including
+its pools and alignment. Palette backing and valid input domains remain open.
 
 The matching palette range step at `0x08011a74` rotates a range forward or
 backward when its byte countdown expires. Flag `0x10` reverses at endpoints;
