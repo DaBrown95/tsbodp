@@ -12,6 +12,7 @@ unsigned char frame_find_actor_route(struct FrameActorRouteJob *job)
  start.y=((short*)&job->object->position)[3];
  destination.x=((short*)&job->destination)[1];
  destination.y=((short*)&job->destination)[3];
+ // BUG: failed projections leave start_cell.index or destination_cell.index unset for comparison.
  frame_grid_point_to_cell(g_frame_registration,&start,&start_cell);
  frame_grid_point_to_cell(g_frame_registration,&destination,&destination_cell);
  finished=0;result=2;

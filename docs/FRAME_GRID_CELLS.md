@@ -44,6 +44,15 @@ unregistration (336) and need-effect registration (964). Their observed masks
 include 1, 2, 4, 8, 13, 16 and 61. The 1,648 bytes in those callers gain no new
 coverage from the alias correction.
 
+The unconverted point-to-cell provider at `0x48AF8` writes only the two low
+coordinate bytes on success and leaves its output untouched on failure.
+Bounds refresh, direction availability, need-effect configuration, route search
+and attachment-neighbor search retain unchecked failed-projection paths that
+can read unset local coordinates. Their sources now mark those paths with
+`BUG` comments. Bounds refresh also transfers the unwritten upper half of its
+local word when the cell changes. These are native write and local control-flow
+findings; failure reachability during normal play remains unproved.
+
 The retained static inventory records those direct callers and two cleanup
 callers. It records no direct inbound call for the clear-occupancy helper,
 terrain writer trio or temporary-position probe; an aligned whole-ROM search

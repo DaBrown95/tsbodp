@@ -20,6 +20,7 @@ unsigned char frame_actor_direction_available(struct FrameObject *object, unsign
   frame_add_points(&velocity,&destination,&point);
   point.x>>=16;
   point.y=((short *)&point)[3];
+  // BUG: cell.index is read unset if the first projection fails.
   frame_grid_point_to_cell(g_frame_registration,&point,&cell);
   new_cell=cell.index;
   old_cell=((struct FrameActorPackedCellView *)object)->cell.index;

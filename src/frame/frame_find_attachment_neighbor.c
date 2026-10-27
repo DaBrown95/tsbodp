@@ -26,6 +26,7 @@ unsigned char frame_find_attachment_neighbor(void *context,
     frame_grid_point_to_cell(context, &attached,
                             (struct FrameActorPackedCell *)&attached_cell);
     frame_point_to_integer(&actor->position, &position);
+    // BUG: actor_cell axes are read unset if this projection fails.
     frame_grid_point_to_cell(context, &position,
                             (struct FrameActorPackedCell *)&actor_cell);
     dx = attached.x - position.x;

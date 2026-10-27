@@ -14,6 +14,7 @@ unsigned char frame_configure_need_effect(struct FrameObject *base, int directio
  frame_set_position((struct FrameObject *)object,position.x<<16,position.y<<16);
  if(frame_need_effect_action_available(object->effect_state,2)) {
   struct FrameNeedEffectState *neighbor;
+  // BUG: cell is unset on projection failure, but a nonempty neighbor search reads it.
   frame_grid_point_to_cell(g_frame_registration,&position,&cell);
   neighbor=frame_need_effect_find_neighbor(&cell,3);
   if(neighbor)frame_need_effect_handoff_bounds((struct FrameObject *)object,neighbor,1);
