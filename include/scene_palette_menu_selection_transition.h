@@ -13,7 +13,7 @@ struct FrameObject *scene_palette_menu_create_selection_object(unsigned int,
 void scene_palette_menu_finish_mode_seven(void);
 void scene_palette_menu_prepare_selected_exit(void);
 
-/* The builder remains original; both handoffs have no arguments or return. */
+/* Construction and release share the owner/count layout; both return void. */
 void scene_palette_menu_build_selection_objects(void);
 void scene_palette_menu_release_selection_objects(void);
 void display_set_background_position(unsigned int, int, int);

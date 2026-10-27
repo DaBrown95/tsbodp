@@ -56408,6 +56408,24 @@
         "after": "kind == 128"
       },
       "expected_sha256": "92783b704f51ec876ff7d6c644a43243506cb006b17a68efea6e83cd8c3f01e0"
+    },
+    {
+      "name": "scene_palette_menu_build_selection_objects",
+      "source": "src/scene/scene_palette_menu_build_selection_objects.c",
+      "rom_offset": 86284,
+      "size": 184,
+      "symbols": {
+        "g_scene_palette_menu_owner": "0x03001954",
+        "scene_palette_menu_create_selection_object": "0x08016101"
+      },
+      "thumb_symbols": [
+        "scene_palette_menu_create_selection_object"
+      ],
+      "negative_control": {
+        "before": "initial_word = 25;",
+        "after": "initial_word = 24;"
+      },
+      "expected_sha256": "6d8e7fc2d249f5ba852f2f0726c5307f6640b9542202ac52ec5804f0ba225eb7"
     }
   ],
   "assembly": [

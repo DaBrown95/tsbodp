@@ -359,8 +359,8 @@ at `0x14584`, `0x146E4`, `0x14CB0` and `0x14F08` own 352, 336, 600 and
 96 bytes; background handoffs at `0x16078` and `0x16160` own 136 and 76.
 All boundaries include their original pools and alignment. The apparent region
 after state ten contains independent entries: the selection-list builder at
-`0x1510C..0x151C4` remains original, while the release helper through
-`0x15270` is reconstructed below. Navigation remains unconverted; the following
+`0x1510C..0x151C4` and the release helper through `0x15270` now have source
+as described below. Navigation remains unconverted; the following
 text-transition section covers states eleven and twelve separately.
 
 State six acts at timers thirty and fifteen, prepares window/background moves
@@ -370,7 +370,7 @@ handoffs from the parameter word. State nine prepares rows eight through
 fourteen, uses two distinct actual object-table snapshots around the branch's
 variant call and loads the selected pair of palette entries. Its real ID-eleven
 assignment supplies the later palette-offset base; no unused initialization or
-additional read is introduced. At zero it invokes the original list builder
+additional read is introduced. At zero it invokes the matching list builder
 before checking the fresh owner word and updating slot eight's visibility.
 
 State ten invokes the list release, reverses object/window movement,
@@ -438,6 +438,31 @@ pools and exhausted execution budgets are rejected separately. Called providers,
 allocation, original list operations and window/background hardware are
 abstracted; no complete menu, gameplay or arbitrary capacity claim follows.
 
+## Selection object construction
+
+The builder at `0x1510C..0x151C4` owns all 184 C extent bytes: 178 instruction,
+four literal and two zero-alignment bytes. It starts the available word at 25,
+visits five groups using parameter bytes two through six, and creates each
+object at `(106 + 3*column, 46 + 20*row)`. Each grouped store decrements that
+word. It then creates the remaining available objects at `(83 + 3*column, 28)`.
+The owner and parameter/count reads retain the native observations around the
+factory calls; allocation failure and malformed counts remain unchecked.
+
+The ordinary source reuses the actual column and returned object word across
+the two loops, while each post-call owner has its own body lifetime. This
+recovers the native induction and result staging without register bindings,
+additional reads or unused work. The object address is carried through an
+unsigned word and converted back only for its real pointer store, using the
+pinned 32-bit target representation.
+
+Normal and strict-aliasing/warning builds match; changing the initial count to
+24 rejects. The actual factory, timer-nine caller, release and initializer also
+retain their complete bytes and reject their real controls. The shared owner
+still represents 308 allocated bytes, 25 available slots and five groups of
+ten. Per-row counts at most ten, totals at most 25, live parameter backing,
+valid owners and nonnull object allocation remain source premises. This adds
+no runtime or gameplay claim and establishes no wider count/writer domain.
+
 ## Selection object release
 
 The independent function at `0x151C4..0x15270` adds 172 complete C extent
@@ -472,7 +497,8 @@ as uninitialized-memory inputs in both interpreted bodies, without a new
 source guard or a claim about hardware faults. Native read/write traces pin the real
 root/count reloads. These normalized fixtures do not validate arbitrary
 serialized counts, pointers, aliasing, allocation failure or gameplay. The
-184-byte builder and 548-byte navigation routine remain explicitly original.
+548-byte navigation routine remains explicitly original; the builder above
+now has a verified source owner.
 
 ## Selected text transitions
 
