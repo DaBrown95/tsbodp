@@ -949,6 +949,19 @@ and later writers remain open. The gap stays unresolved, with no empty C bodies,
 assembly exception or new source credit. A computed producer, independent
 entry/data owner or calibrated target observation is still needed.
 
+A later execution/data observer tests this exact interval across its three
+mapped ROM aliases. Authored calibration catches all eighteen halfword entries
+and seventy-two byte, halfword, word and multiple-load reads. On the retained
+natural route it records no gap entry or CPU/DMA data-read hit in 96,192,151
+steps. Its real positive control captures the load at `0x27E54` reading callback
+`0x1D1D1` from table word `0x57A24`, with the value confirmed after the step.
+Cold replay is identical and displaced probes preserve CPU state and timing.
+Revision 1 retains the same twelve-byte pattern at `0x1DB64`; this supplies no
+entry or owner. These are route-bounded negative observations. A future useful
+probe needs a concrete selecting producer, consumer, installer or route, rather
+than replaying the same exclusion. The calibrated observer and evidence remain
+in `analysis/node-pool-gap-code-data-witness-20261027/`.
+
 ## Palette word resembling an interior entry
 
 The aligned ROM word at `0x08088B14` contains `0x0800E1EF`, the Thumb-looking

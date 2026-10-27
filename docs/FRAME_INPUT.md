@@ -1205,17 +1205,29 @@ remain explicit; matching the original bugs adds no gameplay or bug-free claim.
 The before-step caller still copies lower to upper bounds after projection
 failure, with valid prior bounds remaining its caller premise.
 
-A current canonical-header inverse diagnostic retains 88 bytes / two differing
-bytes. Its source binding of the origin sum to R5 is already explicit in initial
-RTL; COMBINE folds the preceding sum into that assignment, and the R5 use
-survives through the final machine output. It is not a late allocator mistake. Native code
-saves R5 without using it in the body. The installed compiler can preserve a
-reload-time save mask after later cleanup, so that unused save does not require
-an invented source consumer; this failed source does not exhibit such a
-deletion. The global-register dump follows allocation, reload, hard-register
-cleanup and flow analysis together, and cannot isolate those passes. Existing
-ordinary-sum and fixed-register-policy diagnostics already fail differently.
-No new binding, extra access or profile trial follows from this capture.
+The earlier canonical-header inverse diagnostic remains 88 bytes / two
+differences, with unconsumed local-point stores. Its actual R5 origin-sum use
+survives from initial RTL through final output; native saves R5 without a body
+use. This source does not exhibit a late deletion and remains unqualified.
+An explicit R7 context binding also fails semantically: frame-pointer
+elimination rewrites its actual context reads into SP references, including
+with omit-frame-pointer. Preserve these failures rather than inheriting their
+owners as source contracts.
+
+Genuine wide affine partials now demonstrate the previously missing save-mask
+mechanism: LREG assigns a consumed conversion to R4/R5, then high-word
+definitions disappear by GREG while the R5 save remains. The full source is
+92 bytes / 64 differences; it regroups the arithmetic and is not a match.
+Modular arithmetic checks retain the native word results. Native-order named
+partials instead spill their conversions and expand the frame. An actual late
+two-addend aggregate starts after the X store and consumes both fields in Y,
+but takes R1/R2 and remains 92/54. Its explicit R4/R5 owner and inline-formal
+copy are deleted by COMBINE before allocation. These findings close that owner
+route without qualifying the old unused-store candidate. The known 104-byte
+caller and actual changed-mask control remain exact/rejecting respectively.
+Private source, pass evidence and full comparisons are retained in
+`analysis/inverse-modular-affine-partials-20261026/` and
+`analysis/inverse-y-addends-r4-owner-20261027/`.
 
 The scene actor/view initializer `frame_initialize_scene_actors` at `0x26520`
 adds one exact 400-byte C extent, including its first literal island and final

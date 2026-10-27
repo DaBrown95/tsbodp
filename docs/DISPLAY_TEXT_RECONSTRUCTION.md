@@ -291,6 +291,29 @@ transfer and catalog closures also match after the shared font refinement,
 and their actual controls remain preserved. This compiler evidence does not
 independently establish safe runtime inputs or gameplay behavior.
 
+The row reader's native inner sequence is now traced to the pinned compiler's
+`inc_for_reload`: a `POST_INC` cursor allocated to a high register needs a low
+scratch, commits the advanced high value, restores the old address, then uses
+STM. An explicit R8 cursor is rejected as a postincrement address before that
+stage. Safe four-byte representation copies scalarize and retain the failed
+136/117 output. Removing the explicit destination owner permits real LDM/STM
+postincrements and removes the local frame, but chooses R7 and remains 124/111.
+A genuine inline copy operation returning the advanced ordinary cursor also
+retains both postincrements; its shorter call-free cursor takes R2, with R8
+updated only at loop exit, and remains 132/125. Neither matches the native
+140-byte extent. Giving the one existing tile-size load its native R2 phase
+preserves both real consumers and repairs entry R3, word count R2 and inner
+sentinel R1, but still assigns destination R7/state R8 and remains 124/123.
+This closes the current copy branch. The next useful source must explain the
+ordinary cursor's high-register lifetime; another aggregate-copy spelling does
+not address it.
+The existing 160-byte emitter and 104-byte flip provider still match with
+their actual controls. Sources and pass evidence remain in
+`analysis/text-row5-representation-copy-20261027/` and
+`analysis/text-row6-copy-result-20261027/`, with the final phase test in
+`analysis/text-row7-size-load-phase-20261027/`; backing and alignment premises
+remain conditional, with no new source or runtime credit.
+
 A single current canonical rasterizer diagnostic moves the existing unsigned
 text cursor initialization before the initial map/read-or-fill calls. Native
 entry `0x0801AA88` carries that same cursor in R7 through those calls; the prior
