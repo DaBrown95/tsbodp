@@ -9795,6 +9795,35 @@
       "source": "src/frame/frame_transfer_map_tiles.c"
     },
     {
+      "name": "display_text_render",
+      "source": "src/display/text_render.c",
+      "rom_offset": 109176,
+      "size": 692,
+      "symbols": {
+        "g_display_text_state": "0x03001a20",
+        "display_text_map_position": "0x0801b42d",
+        "display_text_fill_rows": "0x0801b2b1",
+        "display_text_read_rows": "0x0801b301",
+        "display_text_emit_rows": "0x0801b38d",
+        "g_display_text_fields": "0x03001a60"
+      },
+      "thumb_symbols": [
+        "display_text_map_position",
+        "display_text_fill_rows",
+        "display_text_read_rows",
+        "display_text_emit_rows"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "g_display_text_state.dirty = 1;",
+        "after": "g_display_text_state.dirty = 2;"
+      },
+      "expected_sha256": "8f55f33bbe3d83f8c9663a0e1a8d162649b86dae7789b4235c59916ff47a1427"
+    },
+    {
       "name": "display_text_map_position",
       "rom_offset": 111660,
       "size": 36,

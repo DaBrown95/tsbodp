@@ -1,13 +1,13 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,477 C functions / 312,424 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 316,484 bytes; original slices
-still supply 16,460,732 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,478 C functions / 313,116 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 317,176 bytes; original slices
+still supply 16,460,040 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The fixed 319,640 mapped extent
 bytes are solely a historical comparison, not a complete code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **22 unowned rows / 9,194 estimated
+and generated [triage](TRIAGE.md) contain **21 unowned rows / 8,502 estimated
 bytes**. The triage records complete candidate comparisons and retained inputs;
 none of those candidates receives source credit. Completed paths and their
 findings remain in the owner documents and publication history.
@@ -42,7 +42,7 @@ findings remain in the owner documents and publication history.
 | Scene objects `0x28234` (160), activity-three workers `0x19640`, `0x19D80` | A real packed-step/X-consumer fork improves the object candidate to 160/71 and preserves one X recurrence with an in-loop Y multiply; restoring the origin's R4-to-R8 phase loses that shape. Preparation can recover ten native fixed word homes, but its accepted-flag reload and coordinate lifetimes remain wrong. Drawing's genuine clipped point recovers the native twelve-byte frame but spills the slope where native stores working X; a scalar working-X boundary is the next constraint. Hard-R7 models are rejected by emitted behavior. The 320-byte raster worker now has a matching source owner without register bindings. Full input/writer domains remain open. See [activity three](SCENE_CONTACT_ACTIVITY_THREE.md) and [object interfaces](FRAME_INPUT.md). |
 | Text row reader `0x1B300` (140) | Canonical 140/73 remains. Native's scratch/update/store sequence is GCC's high-register `POST_INC` reload fallback. The inherited explicit R8 cursor prevents this operation forming; an ordinary cursor retains LDM/STM and removes the frame, but takes R7 (124/111). A real inline copy-result boundary takes R2 (132/125); the native tile-size phase repairs three other homes without repairing the cursor (124/123). This copy branch is closed. A new source must explain a genuinely ordinary cursor's high home. See [text reconstruction](DISPLAY_TEXT_RECONSTRUCTION.md). |
 | Relation delta `0x40AB4` (692), catalog confirmation `0x42964` (656) | A genuine body-local history address keeps normal GCSE from hoisting it over the earlier criterion loop; the delta's actual history/request/code setup order now agrees, but field-pointer/byte-carrier allocation remains wrong (692/306). Disabling GCSE breaks the matched neighbor. Confirmation now retains all four outcome stores/two reads; a real R2 success producer prevents late cross-jump merging. Its early request/state/list/record lifetimes and zero producer remain wrong (652/596). These are source/dataflow constraints, not missing constant offsets. |
-| Other menu, geometry, text and resource workers | Pending cleanup `0xA0A4` remains 292/2; its disputed load is the first reload allocation, so an earlier spill-rotation explanation is false for this source. A fresh by-value `0x67E0` sample adds a separate input spill. Selected-tile `0x39CF0` now reproduces 392/109 under the canonical API without header overrides; inner-loop control forms do not explain its reloads. Rasterizer `0x1AA78` recovers thirteen real spill homes but remains 688/501; font/pixel/counter interference and sum allocation remain. Other rows include `0x48A14` and `0x48AF8`. These are diagnostic findings only. |
+| Other menu, geometry, text and resource workers | Pending cleanup `0xA0A4` remains 292/2. Its first reload pool is sorted R0/R1/R2; changing admission chronology cannot select native R2 while R0 stays free. A real first-count producer admits R2 but splits the common loop header (308/212), so that formulation is closed. A fresh by-value `0x67E0` sample adds a separate input spill. Selected-tile `0x39CF0` reproduces 392/109 under the canonical API; inner-loop syntax does not explain its reloads. Other rows include `0x48A14` and `0x48AF8`. The 692-byte text renderer now has a matching source owner. |
 | Serial IRQ `0x3DC48` (1,616) | Preserve the 1,624/809 baseline. A symbolic MMIO member owner adds reads; scalar indirect accesses restore the read/write sites but derive receive addresses from control and create an extra R9 SEND carrier. These formulations are closed. A genuine owner/consumer fact must preserve the independent native accesses and R3 handoff. See [serial](SERIAL_HANDSHAKE.md). |
 | Audio master worker `0x49968` (124) | The recovered original November 2002 SDK has two identical 92-byte master providers with the bad literal and an actual byte store. It establishes lineage without explaining the later reachable NOP at `0x499B0`. A later commercial object/build chain or demonstrated C producer is still needed; no assembly exception follows. See [audio](AUDIO_RECONSTRUCTION.md). |
 

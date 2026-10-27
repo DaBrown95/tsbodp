@@ -178,8 +178,8 @@ observed body; safe input bounds are not established by this match.
 
 After terminating the line, it updates the caller's text cursor, calls the
 alignment consumer, then consumes one newline and any following spaces. Both
-functions return the first word supplied by the tile-rendering dependency at
-`0x0801AA78`. That still-unconverted body advances it after tile-row writes,
+functions return the first word supplied by the tile renderer at
+`0x0801AA78`. Its matching source advances it after tile-row writes,
 supporting a provisional tile index/cursor role. Existing callers that ignore
 this return remain byte-identical. Coordinate and maximum-width declarations
 use signed words, supported by the signed comparisons and division in the
@@ -188,7 +188,7 @@ bodies; earlier unsigned callers pass the same register words.
 Alignment compares the complete style word against one for horizontal center,
 two for right alignment, four for vertical center, and eight for bottom
 alignment. It subtracts `(width + 1) / 2`, width, `(height + 1) / 2`, or height
-as appropriate, then forwards to the explicit unconverted tile renderer.
+as appropriate, then forwards to the matching tile renderer.
 These are equality tests, not independently combinable style bits. The shared
 inline measurement header produces the observed expanded C loops naturally.
 The separately callable width (84) and height (28) wrappers still match; real
@@ -283,24 +283,33 @@ Tile flipping reverses eight rows of eight bytes in mode one. Otherwise it
 reverses four packed bytes per row and swaps each byte's nibbles, preserving
 the corresponding eight-pixel horizontal flip. This is the direct dependency
 of the still-unconverted row reader when map flip bit `0x400` is set. The
-remaining row reader at `0x0801B300` (140) and rasterizer at `0x0801AA78` (692)
-remain outside coverage; their semantic candidates and raw mismatches are
-retained locally. All nine accepted bodies are ordinary C without fixed
+remaining row reader at `0x0801B300` (140) remains outside coverage; its semantic
+candidates and raw mismatches are retained locally. The preceding nine accepted
+bodies are ordinary C without fixed
 register constraints. Fresh font measurement, line selection, alignment,
 transfer and catalog closures also match after the shared font refinement,
 and their actual controls remain preserved. This compiler evidence does not
 independently establish safe runtime inputs or gameplay behavior.
 
-A fresh rasterizer source separates the incoming tile from its evolving copy
-and places real parser state before later scalar work. The compiler preserves
-that identity through CSE/REGMOVE and recovers thirteen native spill homes at
-SP+0x104 through SP+0x134, with the native 316-byte frame. It still emits
-688/501 against the full 692-byte reference. Font, pixel, bit and counter
-allocation differ; the real packed sum takes R2 while next-X spills where the
-native sum spills. Sharing the alternative height counters preserves those
-homes but remains 688/502. The actual 80-byte fill provider/control pass. These
-are source-dataflow findings, not permission for a dummy consumer or scratch
-object, and earn no coverage.
+The rasterizer at `0x0801AA78` now has a matching 692-byte C owner: 662
+instruction, 24 literal and six alignment bytes. Its 316-byte frame includes
+the actual word[64] scratch, outgoing argument and fourteen scalar word homes.
+The packed parity consumer keeps original X live beside next-X, recovering the
+native next-width and sum spills. Pixels use direct scratch addresses; later
+row providers use the cached buffer pointer. One callee-saved R5 constraint
+retains the live font. The leading-byte and second font-first reads preserve
+the native memory observations without asserting historical volatile intent.
+Reusing the consumed glyph word for wide-pixel decoding recovers the actual
+R1 value and separate color stores; computing the next cursor after the width
+decrement recovers its handoff even for a zero-width glyph.
+
+Normal and strict complete comparisons are exact. Changing the final dirty
+flag from one to two rejects by one byte; an independent real color mutation
+also rejects. Seven connected functions pass normal/strict comparisons and
+their source controls. The parser, font tables, pixel and formed-pointer
+domains, 256-byte scratch capacity and row/map/tile provider contracts remain
+unchecked native preconditions; matching source does not establish safe input
+populations or gameplay behavior. The original row reader remains explicit.
 
 The row reader's native inner sequence is now traced to the pinned compiler's
 `inc_for_reload`: a `POST_INC` cursor allocated to a high register needs a low
