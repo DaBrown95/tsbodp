@@ -93,6 +93,7 @@ void scene_contact_activity_three_initialize(void);
 void scene_contact_add_activity_score(int);
 extern struct FrameVariantResource g_scene_contact_activity_three_line_animation;
 void scene_contact_activity_three_ensure_line_slot(unsigned int,int,int);
+unsigned int scene_contact_activity_three_raster_line_slot(unsigned int);
 void scene_contact_activity_three_plot_line_pixel(unsigned short*,int,int);
 void scene_contact_activity_three_update_line_slots(void);
 #endif

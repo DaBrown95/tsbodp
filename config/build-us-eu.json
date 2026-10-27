@@ -53764,6 +53764,30 @@
       "expected_sha256": "c1f16de3829320e098d9abfaeef9984357bdd4dcedadc91466dbb7a7be8e67f2"
     },
     {
+      "name": "scene_contact_activity_three_raster_line_slot",
+      "source": "src/scene/scene_contact_activity_three_raster_line_slot.c",
+      "rom_offset": 106224,
+      "size": 320,
+      "symbols": {
+        "g_scene_contact_activity_three_slots": "0x030038e0",
+        "display_cpu_copy": "0x0804c8c5",
+        "scene_contact_activity_three_plot_line_pixel": "0x0801a275"
+      },
+      "thumb_symbols": [
+        "display_cpu_copy",
+        "scene_contact_activity_three_plot_line_pixel"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "0x05000020",
+        "after": "0x0500001f"
+      },
+      "expected_sha256": "80493ae46fd845e01ad595b3dae08ee0be4163b519ee2f04115c7e5215bb0486"
+    },
+    {
       "name": "scene_contact_activity_three_ensure_line_slot",
       "source": "src/scene/scene_contact_activity_three_ensure_line_slot.c",
       "rom_offset": 107020,

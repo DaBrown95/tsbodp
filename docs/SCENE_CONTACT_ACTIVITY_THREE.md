@@ -1,12 +1,11 @@
 # Definition row three: selection controller, moving event and row actors
 
-This connected path has twenty-five matching C functions covering 4,812 bytes,
+This connected path has twenty-six matching C functions covering 5,132 bytes,
 including their original literal pools and alignment. It follows selection input
 through initialization, value updates, object creators and the installed event
 and row updates, coordinate and vector helpers, animation resets, palette
-requests and temporary-object removal. Row preparation at `0x08019640` (544
-bytes), event drawing at `0x08019D80` (368) and line rasterization at
-`0x08019EF0` (320) remain explicit original
+requests, line rasterization and temporary-object removal. Row preparation at
+`0x08019640` (544 bytes) and event drawing at `0x08019D80` (368) remain explicit original
 dependencies and receive no C credit.
 An exact source match does not recover those dependencies or establish gameplay.
 
@@ -47,8 +46,23 @@ existing BIOS service-0B glue and hides unused slots. The ensure-slot helper
 retains its full-word index and original allocation assumptions. The pixel
 writer clamps X only. Valid slot/count, object-zero, allocation, source-tile,
 pixel Y/buffer and later-writer domains remain preconditions; these matches do
-not establish all drawing inputs or hardware behavior. The parent draw and
-raster bodies remain original dependencies.
+not establish all drawing inputs or hardware behavior. The parent draw remains
+an original dependency.
+
+The raster worker at `0x08019EF0` now has a matching 320-byte source owner:
+296 instruction, 20 literal and four alignment bytes. It clears the selected
+tile, visits sixteen pixels, updates the line count and copies the object's
+current position to its next-position words. An ordinary word display-index
+local recovers the native object/remainder allocation. Keeping the clipped Y
+start separate from the loop's Y value and reading the actual X step before
+forming the initial X coordinate recovers the remaining value lifetimes. The
+initialized clear word stays an ordinary addressable local. No register binding
+is needed. Normal and strict comparisons are exact; changing the real clear
+count rejects by one byte. A bounded full-body replay agrees on memory, calls,
+ordered writes and return for 386 initialized cases, with 194 clear-control
+divergences. Its synchronous clear/pixel models and caller-saved register
+poisoning check the interface; they do not establish hardware or gameplay
+behavior or close the remaining input/writer domains.
 
 The activity's object view is 224 bytes, four-aligned, within the separately
 verified 320-byte allocation. It names only observed positions, velocity,

@@ -2,17 +2,17 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 23,
-    "inventory_bytes": 9514,
+    "rows": 22,
+    "inventory_bytes": 9194,
     "statuses": {
       "near-miss": 7,
-      "attempted": 15,
+      "attempted": 14,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
       "near-miss": 2468,
-      "attempted": 6922,
+      "attempted": 6602,
       "untouched": 0,
       "suspected-not-C": 124
     }
@@ -101,8 +101,8 @@
           "-mthumb-interwork"
         ]
       },
-      "retained_attempt_contexts": 75,
-      "eligible_diagnostic_contexts": 53,
+      "retained_attempt_contexts": 77,
+      "eligible_diagnostic_contexts": 55,
       "excluded_contexts": {
         "Missing or ambiguous full comparison": 1,
         "Missing or malformed retained input": 12,
@@ -423,13 +423,13 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 77,
+      "retained_attempt_contexts": 81,
       "eligible_diagnostic_contexts": 63,
       "excluded_contexts": {
         "Different experimental compiler backend": 1,
         "Missing or ambiguous full comparison": 1,
         "Missing or malformed retained input": 3,
-        "No retained assessment": 7,
+        "No retained assessment": 11,
         "Stale or unqualified private header": 2
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -510,25 +510,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": true,
-      "c_draft": "analysis/activity-three-19640-direct-predicate-20261027/coordinate_pair_arrays/source.c",
+      "c_draft": "analysis/activity-three-19640-canonical-replay-20261027/canonical-current/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/activity-three-19640-direct-predicate-20261027/coordinate_pair_arrays/source.c",
-        "source_sha256": "d71009dcf3c8a77b6e6ea5a003772e7734918837ed3e671156c8f746beab4eb4",
-        "metadata": "analysis/activity-three-19640-direct-predicate-20261027/coordinate_pair_arrays/metadata.json",
-        "metadata_sha256": "c3d8751549894297991811c6c42cf70415e0288a3bfc7e9ff7bf6f0d8fd3bf3d",
-        "receipt": "analysis/activity-three-19640-direct-predicate-20261027/coordinate_pair_arrays/result.json",
-        "receipt_sha256": "55966eb6e7f24a4a2e3daade42762f14704bcdab4671f6b0db170250d18e41e5",
-        "assessment": "analysis/activity-three-19640-direct-predicate-20261027/assessment.json",
-        "assessment_sha256": "1f986fb62009d6ca8086aa1c95032c363cb28825272cf84af5208be8d652ee9f",
+        "source": "analysis/activity-three-19640-canonical-replay-20261027/canonical-current/source.c",
+        "source_sha256": "28215dc6779996d5010af4f47fefe4262f11f5778eabd65036431f8b206912d9",
+        "metadata": "analysis/activity-three-19640-canonical-replay-20261027/canonical-current/metadata.json",
+        "metadata_sha256": "906cd13d6d4484f32263375f914ff6e32c4cbe7af079e53d3ee038d20d9bb46d",
+        "receipt": "analysis/activity-three-19640-canonical-replay-20261027/canonical-current/result.json",
+        "receipt_sha256": "f9e6711fe6613e825f6cdb0c191b5e4370f7fd8368d1bf16f4b5fef18b7780bd",
+        "assessment": "analysis/activity-three-19640-canonical-replay-20261027/assessment.json",
+        "assessment_sha256": "4e1c9519daf8f0d1d333fc37a6f0faf23fe36af3eca6697bdc5d3c869e8bb08c",
         "candidate_bytes": 532,
         "comparison_extent_bytes": 544,
         "full_byte_differences": 417,
-        "candidate_sha256": "42a292b5c1d667037106b73abf0b13e276b925ea94a2b10d9ced49488e905204",
+        "candidate_sha256": "f5cf2eb48f1063fc33324300e4dab038dd524a0d91d0ec05c8c21660447cf42e",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -543,11 +543,12 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 32,
-      "eligible_diagnostic_contexts": 21,
+      "retained_attempt_contexts": 44,
+      "eligible_diagnostic_contexts": 1,
       "excluded_contexts": {
-        "Missing or malformed retained input": 5,
-        "Stale or unqualified private header": 6
+        "Explicit semantic rejection or unqualified source": 1,
+        "Missing or malformed retained input": 6,
+        "Stale or unqualified private header": 36
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
@@ -559,7 +560,8 @@
       "compiler_id": "agbcc",
       "compiler_flags": [
         "-O2",
-        "-mthumb-interwork"
+        "-mthumb-interwork",
+        "-da"
       ],
       "runtime_addresses": [
         134323584
@@ -567,84 +569,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": false,
-      "c_draft": "analysis/activity-three-19d80-horizontal-step-result-proposal-20261026/source.c",
+      "c_draft": "analysis/activity-three-19d80-step-vector-20261027/mutable-clipped-point/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/activity-three-19d80-horizontal-step-result-proposal-20261026/source.c",
-        "source_sha256": "20666028aec7dea75d742e0cb3b62e3d2cd120fe09569ee6f4a3910a1a756886",
-        "metadata": "analysis/activity-three-19d80-horizontal-step-result-proposal-20261026/metadata.json",
-        "metadata_sha256": "783ee5af50c23233434e1cfd724b76511789a5ddf06fa14b356b2f6621cff3bb",
-        "receipt": "analysis/activity-three-19d80-horizontal-step-result-proposal-20261026/result.json",
-        "receipt_sha256": "e4866e9eea4a9be684f0b34965878d095b13eea5a1aa0db9edeadd004cb1e146",
-        "assessment": "analysis/activity-three-19d80-horizontal-step-result-proposal-20261026/assessment.json",
-        "assessment_sha256": "1fbf07c8da4c4fff37227922bbbedd08a1c3cc11e47b783f74a71b1dd9270d04",
-        "candidate_bytes": 356,
+        "source": "analysis/activity-three-19d80-step-vector-20261027/mutable-clipped-point/source.c",
+        "source_sha256": "f019cf90c887d42b06b056b47fcf2457998bf4786e2cb222049ad25484a9fb77",
+        "metadata": "analysis/activity-three-19d80-step-vector-20261027/mutable-clipped-point/metadata.json",
+        "metadata_sha256": "16906533de435a58c7c7f69e6f264b48072cfd22c52d1de7e4948f18767eb9ef",
+        "receipt": "analysis/activity-three-19d80-step-vector-20261027/mutable-clipped-point/result.json",
+        "receipt_sha256": "a67ba59e8a60b9a0c1098372c8d408490e1a640bdde603d3a99e1a606e839262",
+        "assessment": "analysis/activity-three-19d80-step-vector-20261027/assessment.json",
+        "assessment_sha256": "c988bbde54866560178cf55f9e5b990858421ddd42625c9057f02523f62e9010",
+        "candidate_bytes": 352,
         "comparison_extent_bytes": 368,
-        "full_byte_differences": 311,
-        "candidate_sha256": "0337e7375c6f619d1ae4c356e990e4f1520dad559d9f5d9c573d735c8dd587f1",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": null,
-      "retained_attempt_contexts": 52,
-      "eligible_diagnostic_contexts": 7,
-      "excluded_contexts": {
-        "Explicitly unqualified historical workspace model": 32,
-        "Missing or malformed retained input": 7,
-        "No retained assessment": 1,
-        "Stale or unqualified private header": 5
-      },
-      "closed_note": "Historical volatile368/121 is unqualified; use ordinary-state evidence."
-    },
-    {
-      "name": "sub_08019EF0",
-      "rom_offset": 106224,
-      "inventory_bytes": 320,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-da"
-      ],
-      "runtime_addresses": [
-        134323952
-      ],
-      "status": "attempted",
-      "user_priority": null,
-      "user_far_off": false,
-      "c_draft": "analysis/activity-three-19ef0-actual-work-units-20261025/actual_addressable_clear_formal/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
-      "best_candidate": {
-        "source": "analysis/activity-three-19ef0-actual-work-units-20261025/actual_addressable_clear_formal/source.c",
-        "source_sha256": "f1c414012e966ba908d8ccf2ff682e75ea0272f7fd3b166d3904c446eba15969",
-        "metadata": "analysis/activity-three-19ef0-actual-work-units-20261025/actual_addressable_clear_formal/metadata.json",
-        "metadata_sha256": "57e5ee48510cef65c06ba66b7bbd0369ba6a6a99e9619e683b47ce7896597985",
-        "receipt": "analysis/activity-three-19ef0-actual-work-units-20261025/actual_addressable_clear_formal/result.json",
-        "receipt_sha256": "40223bf5b7ff1a1e3800c2db18f371d2c86d2b85fa37c5854d67cb70d38934d4",
-        "assessment": "analysis/activity-three-19ef0-actual-work-units-20261025/assessment.json",
-        "assessment_sha256": "4bdeb8ea0f31334ec6a8c9b9ef88f984393097fdb32ba0211b7bcc93e520b1ee",
-        "candidate_bytes": 316,
-        "comparison_extent_bytes": 320,
-        "full_byte_differences": 186,
-        "candidate_sha256": "3a61f70c0f8053eb98382eadf4cc85f4850584c2d29a36fe96092826545bc3c3",
+        "full_byte_differences": 334,
+        "candidate_sha256": "c76f6e96b4606d04a9cac38c032ff0258999a7d0c14b6af4e8dfc6a8bd0c23b4",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -659,12 +602,16 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 22,
-      "eligible_diagnostic_contexts": 15,
+      "retained_attempt_contexts": 57,
+      "eligible_diagnostic_contexts": 3,
       "excluded_contexts": {
-        "Missing or ambiguous full comparison": 7
+        "Explicit semantic rejection or unqualified source": 1,
+        "Explicitly unqualified historical workspace model": 32,
+        "Missing or malformed retained input": 8,
+        "No retained assessment": 1,
+        "Stale or unqualified private header": 12
       },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
+      "closed_note": "Historical volatile368/121 is unqualified; use ordinary-state evidence."
     },
     {
       "name": "sub_0801AA78",
@@ -718,8 +665,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 21,
-      "eligible_diagnostic_contexts": 13,
+      "retained_attempt_contexts": 24,
+      "eligible_diagnostic_contexts": 16,
       "excluded_contexts": {
         "Missing or malformed retained input": 1,
         "No retained assessment": 7
@@ -1500,13 +1447,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "1465a282a20922b57e94fdfd8fd51948d3f3cc94375980b9a3f5b85421a2a86f",
-    "assets/rom-inventory.json": "b039770fb6cc12271995ffaf4e964823b171212062b7b29eae5bfd688909d420",
-    "docs/COMPLETION_BLOCKERS.md": "785119c3dd91293e561b6f3775b2f4ef0cd2f264af721d7cadb0f68c587881f1"
+    "assets/progress.json": "a9097265c7d0cdae557f7ae6423924c058fc43c5cf9efc37ee1bd8c722fc4288",
+    "assets/rom-inventory.json": "94b980321a5e9108b109974f2c764d543468ec15bc4f16f625058f8b01cff033",
+    "docs/COMPLETION_BLOCKERS.md": "9f995b09c444341d752a8bb3a26b7eb169ae056857b2dd4ff8239757a34df7b2"
   },
   "documented_inventory": {
-    "rows": 23,
-    "bytes": 9514
+    "rows": 22,
+    "bytes": 9194
   },
   "documentation_count_current": true,
   "scan": {
@@ -1515,7 +1462,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 1995,
+    "metadata_files": 2079,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 1,

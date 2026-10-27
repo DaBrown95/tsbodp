@@ -1,6 +1,6 @@
 # Remaining C triage
 
-23 unowned inventory rows / 9,514 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
+22 unowned inventory rows / 9,194 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
 
 Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py --check`. Private evidence may be unavailable on another checkout; recorded rows then say so. Historical active effort and search wall time are unrecorded, not zero.
 
@@ -14,8 +14,7 @@ Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py -
 | `0x0F034` | `sub_0800F034` | 308 | 308 / 4 | 308 | near-miss | 3 | canonical-current |
 | `0x11C60` | `sub_08011C60` | 400 | 400 / 108 | 400 | attempted | — | canonical-current |
 | `0x19640` | `sub_08019640` | 544 | 532 / 417 | 544 | attempted | — | canonical-current |
-| `0x19D80` | `sub_08019D80` | 368 | 356 / 311 | 368 | attempted | — | canonical-current |
-| `0x19EF0` | `sub_08019EF0` | 320 | 316 / 186 | 320 | attempted | — | canonical-current |
+| `0x19D80` | `sub_08019D80` | 368 | 352 / 334 | 368 | attempted | — | canonical-current |
 | `0x1AA78` | `sub_0801AA78` | 692 | 692 / 483 | 692 | attempted | — | private-provisional |
 | `0x1B300` | `sub_0801B300` | 140 | 140 / 73 | 140 | attempted | — | canonical-current |
 | `0x28234` | `sub_08028234` | 160 | 160 / 71 | 160 | attempted | — | canonical-current |

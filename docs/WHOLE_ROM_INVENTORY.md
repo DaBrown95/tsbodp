@@ -848,6 +848,15 @@ it does not normalize arbitrary loaded values. Save decoding admits a nibble
 arbitrary retained parameter bytes, later pointer/selector writes and remaining
 indicator/activity resource families stay open.
 
+Serial identity checking does not supply the missing appearance bound. A native
+replay of all sixteen nibble values under both identity classes runs the actual
+reset/initialize path on mismatch: it clears the byte to zero, then imports the
+incoming value unchanged. The apparent appearance reset hook is a matched empty
+function. A real import-offset control detects the copied field. This closes
+the normalization question at that boundary, while the first production of an
+invalid value, complete writer/alias coverage and external input provenance
+remain unresolved; the fixtures are not evidence of normal gameplay reachability.
+
 The checks reject mutations to the native selector/count guards and actual
 data, confined to private copies. No callback site is declared complete, no
 source bytes are added and no arbitrary-alias or runtime-state closure follows
