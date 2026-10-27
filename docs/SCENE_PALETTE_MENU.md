@@ -295,8 +295,8 @@ menu behavior, hardware timing or gameplay.
 Three connected functions add 696 matching C extent bytes: selector input at
 `0x14B40..0x14CB0` owns 368, confirmation at `0x15270..0x152D0` owns 96,
 and the redraw helper at `0x14A58..0x14B40` owns 232. The complete extents
-include their literal pools and zero alignment; the adjacent navigation body
-at `0x14834..0x14A58` remains an explicit original dependency with no C credit.
+include their literal pools and zero alignment. Navigation at
+`0x14834..0x14A58` now has its own 548-byte matching C owner.
 
 Selector input reads the selected player's linked pressed-input halfword from
 `0x03004228`, separately from the local array used by character entry. Confirm
@@ -304,7 +304,7 @@ mask nine has priority over cancel mask two and directional mask 240. Confirm
 returns without a handoff when the allocation's initial word is nonzero;
 otherwise it selects state ten, timer thirty and parameter five. Cancel selects
 the same state and timer with parameter six. Both play cue twelve. Directional
-input calls original navigation, then redraws the previous and fresh selected
+input calls navigation, then redraws the previous and fresh selected
 scenes when they differ. Fresh scene thirteen or fourteen hides slots three,
 four and six and shows five. Other scenes update three IDs and variant 58,
 with fresh object-table reads after variant calls. The selected value supplies
@@ -322,7 +322,7 @@ The enabled declaration now covers the observed fifteen-byte prefix at
 `0x08051FA0..0x08051FAF`, including the actual selector reads through index
 fourteen. The separate count declaration remains eight bytes at `0x08051F70`.
 This extends a partial access view, not an allocator or universal table-capacity
-claim. The original navigation and earlier choice/draw providers corroborate
+claim. Navigation and earlier choice/draw providers corroborate
 these reads; all sixteen accepted literal header importers are rechecked.
 
 Confirmation uses the same linked input snapshot. Mask nine selects state
@@ -351,6 +351,32 @@ input indices zero through three bound these checks. Navigation, text, variant,
 palette and audio providers are abstracted; these checks establish no gameplay,
 hardware timing, arbitrary storage validity or complete menu reconstruction.
 
+## Navigation and selection transfer
+
+Navigation at `0x14834..0x14A58` owns 548 C extent bytes: 512 instruction,
+32 literal and four alignment bytes. The vertical provider wraps rows eight
+through fourteen, skipping disabled entries. Rows eight through twelve move
+objects between a group and the available list; row thirteen adjusts parameter
+byte zero horizontally; row fourteen has no local adjustment. Transfers retain
+the original count checks, flag changes, text/rectangle calls, positioning and
+cue order, with fresh owner reads at the native boundaries.
+
+The already matched choice-step function supplies the actual entered-loop
+field-pointer copy and enabled-table lifetime. An explicit case fourteen makes
+the pinned compiler balance its switch around case thirteen, recovering the
+native guards. Two short register constraints carry the real parameter-prefix
+address and null object pointer; both are consumed before any call. Separate
+source/destination owner lifetimes preserve the transfer observations without
+extra reads or unused work.
+
+Normal and strict-aliasing/warning builds match all bytes; changing rejection
+cue three to four rejects. The actual selector caller, redraw, both input
+providers, selection builder and matched choice-step sibling also retain their
+bytes and reject their controls. Live disjoint backing, valid object pointers,
+group counts at most ten, an available prefix within 25 slots and terminating
+enabled-row search remain premises. These compiler checks add no gameplay or
+complete writer-domain evidence.
+
 ## Remaining selection transitions
 
 Seven connected C functions add 2,112 complete extent bytes. Four timer handlers
@@ -360,7 +386,7 @@ at `0x14584`, `0x146E4`, `0x14CB0` and `0x14F08` own 352, 336, 600 and
 All boundaries include their original pools and alignment. The apparent region
 after state ten contains independent entries: the selection-list builder at
 `0x1510C..0x151C4` and the release helper through `0x15270` now have source
-as described below. Navigation remains unconverted; the following
+as described below. Navigation is covered above; the following
 text-transition section covers states eleven and twelve separately.
 
 State six acts at timers thirty and fifteen, prepares window/background moves
@@ -497,8 +523,7 @@ as uninitialized-memory inputs in both interpreted bodies, without a new
 source guard or a claim about hardware faults. Native read/write traces pin the real
 root/count reloads. These normalized fixtures do not validate arbitrary
 serialized counts, pointers, aliasing, allocation failure or gameplay. The
-548-byte navigation routine remains explicitly original; the builder above
-now has a verified source owner.
+navigation and builder now have verified source owners.
 
 ## Selected text transitions
 

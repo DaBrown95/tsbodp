@@ -1,13 +1,13 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,475 C functions / 311,556 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 315,616 bytes; original slices
-still supply 16,461,600 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,476 C functions / 312,104 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 316,164 bytes; original slices
+still supply 16,461,052 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The fixed 319,640 mapped extent
 bytes are solely a historical comparison, not a complete code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **24 unowned rows / 10,062 estimated
+and generated [triage](TRIAGE.md) contain **23 unowned rows / 9,514 estimated
 bytes**. The triage records complete candidate comparisons and retained inputs;
 none of those candidates receives source credit. Completed paths and their
 findings remain in the owner documents and publication history.
@@ -38,13 +38,13 @@ findings remain in the owner documents and publication history.
 | Scene-list builder `0xF034` (308) | Canonical 308/4 remains. A real bottom-bound lifetime admits R2 and repairs the initial transfers; an HI pre-fill phase gives 308/6, with only the bottom literal/MOV/ADD order wrong. Inline consumers, first-value width, counter ownership and qualification of the existing count increment do not close it. A compatible word-return provider/byte-consumer contract also reproduces 308/4 while preserving 304 existing bytes and controls. Next evidence must preserve the reload topology while restoring the literal's later materialization. See [compiler context](COMPILER_PILOT.md). |
 | Map-collapse `0x495C4` (116), inverse projector `0x48BF8` (88 compared) | Collapse remains 116/3; its earlier offset reload advances the spill rotation before the duration address. The inverse's 88/2 remains unqualified because its local-point stores have no source consumer. Genuine wide affine partials demonstrate a retained R5 save after late high-word deletion, but regroup the arithmetic and remain nonexact. A native-order late addend pair survives, yet its copies remain; binding that real pair to R4 is bypassed by COMBINE. Another owner binding repeats this cause. See [map selection](SCENE_MAP_SELECTION.md) and [projection](FRAME_INPUT.md). |
 | Copied ARM map drawer `0xB564` (320) | Map transfer, tile decoder and 284-byte sorter now have source; this drawer and additional copied prefixes remain original. Aggregate/row-cursor forms remain nonexact. See [RAM installations](../config/ram-map-us-eu.json) and [decoder](RESOURCE_BACKGROUND_DECODER.md). |
-| Palette `0x11C60` (400), navigation `0x14834` (548) | Palette observation and induction boundaries remain unresolved. Fresh navigation 548/264 recovers native high roles and the add-path sequence with actual owner reuse. Its prefix coalesces two of three native input addresses; further pointer-type/scope permutations repeat that cause. The selection builder now has source. See [actor entries](ACTOR_ENTRIES_RECONSTRUCTION.md), [palette menu](SCENE_PALETTE_MENU.md) and [palette lifecycle](DISPLAY_PALETTE_LIFECYCLE.md). |
-| Scene objects `0x28234` (160), activity-three workers `0x19640`, `0x19D80`, `0x19EF0` | A real packed-step/X-consumer fork improves the object candidate to 160/71 and preserves one X recurrence with an in-loop Y multiply. Restoring the origin's R4-to-R8 phase changes LOOP's cost decision and loses that shape; hard-R7 recurrence collides with compiler-generated Y state and is disqualified. Activity-three phase homes and full input/writer domains remain open. See [activity three](SCENE_CONTACT_ACTIVITY_THREE.md) and [object interfaces](FRAME_INPUT.md). |
+| Palette `0x11C60` (400) | Palette observation and induction boundaries remain unresolved. Navigation and the selection builder now have matching source owners. See [actor entries](ACTOR_ENTRIES_RECONSTRUCTION.md), [palette menu](SCENE_PALETTE_MENU.md) and [palette lifecycle](DISPLAY_PALETTE_LIFECYCLE.md). |
+| Scene objects `0x28234` (160), activity-three workers `0x19640`, `0x19D80`, `0x19EF0` | A real packed-step/X-consumer fork improves the object candidate to 160/71 and preserves one X recurrence with an in-loop Y multiply. Restoring the origin's R4-to-R8 phase changes LOOP's cost decision and loses that shape; hard-R7 recurrence collides with compiler-generated Y state and is disqualified. Activity-three phase homes and full input/writer domains remain open. A fresh R7 owner constraint is rejected: reload rewrites it to SP and all 128 bounded executions fail, while removing it restores memory/call/write agreement. See [activity three](SCENE_CONTACT_ACTIVITY_THREE.md) and [object interfaces](FRAME_INPUT.md). |
 | Text row reader `0x1B300` (140) | Canonical 140/73 remains. Native's scratch/update/store sequence is GCC's high-register `POST_INC` reload fallback. The inherited explicit R8 cursor prevents this operation forming; an ordinary cursor retains LDM/STM and removes the frame, but takes R7 (124/111). A real inline copy-result boundary takes R2 (132/125); the native tile-size phase repairs three other homes without repairing the cursor (124/123). This copy branch is closed. A new source must explain a genuinely ordinary cursor's high home. See [text reconstruction](DISPLAY_TEXT_RECONSTRUCTION.md). |
 | Relation delta `0x40AB4` (692), catalog confirmation `0x42964` (656) | A genuine body-local history address keeps normal GCSE from hoisting it over the earlier criterion loop; the delta's actual history/request/code setup order now agrees, but field-pointer/byte-carrier allocation remains wrong (692/306). Disabling GCSE breaks the matched neighbor. Confirmation now retains all four outcome stores/two reads; a real R2 success producer prevents late cross-jump merging. Its early request/state/list/record lifetimes and zero producer remain wrong (652/596). These are source/dataflow constraints, not missing constant offsets. |
-| Other menu, geometry, text and resource workers | Remaining rows include `0x67E0`, `0xA0A4`, `0x1AA78`, `0x39CF0`, `0x48A14` and `0x48AF8`. Use triage's current complete extents and owner documents; private type/backing premises and original memory order remain acceptance questions. |
+| Other menu, geometry, text and resource workers | Pending cleanup `0xA0A4` now has a fresh 292/2 private word-return candidate: actual shared code/flag values remove most inherited allocation constraints; only the initial root-address reload differs. Other rows include `0x67E0`, `0x1AA78`, `0x39CF0`, `0x48A14` and `0x48AF8`. Use triage and owner documents; private type/backing/API premises remain acceptance questions. |
 | Serial IRQ `0x3DC48` (1,616) | Preserve the 1,624/809 baseline. Prior owner relaxation loses the R3 handoff and leaves a duplicate high-register carrier. A distinct source-consumption hypothesis is needed. See [serial](SERIAL_HANDSHAKE.md). |
-| Audio master worker `0x49968` (124) | Reachable native NOP at `0x499B0` remains unexplained by tested C, compiler, alignment or known code writers. Preserve original-source/build and late-writer questions; no assembly escape. See [audio](AUDIO_RECONSTRUCTION.md). |
+| Audio master worker `0x49968` (124) | The recovered original November 2002 SDK has two identical 92-byte master providers with the bad literal and an actual byte store. It establishes lineage without explaining the later reachable NOP at `0x499B0`. A later commercial object/build chain or demonstrated C producer is still needed; no assembly exception follows. See [audio](AUDIO_RECONSTRUCTION.md). |
 
 The weekly worker `0x2005C` now has a matching source owner. Typed actual load
 destinations remove the unwanted PRE caching; qualifying its one existing
@@ -60,7 +60,7 @@ the native eight-byte coordinate work; their failed sources remain private.
 The serial record provider **`0x3D788` is parked** at 200 bytes / one difference.
 Preserve its best candidate and both compiler investigations described in
 [SERIAL_HANDSHAKE.md](SERIAL_HANDSHAKE.md#remaining-record-provider). Reopen only
-when new evidence changes its prospects; initially work on the other 23 rows.
+when new evidence changes its prospects; work on the other 22 rows.
 
 ## Executable-inventory obligations
 
@@ -86,12 +86,12 @@ extents and unresolved bytes. Source matches establish no new runtime execution.
 
 ## Latest accepted gain and final gate
 
-The [selection builder](SCENE_PALETTE_MENU.md#selection-object-construction) at
-`0x1510C` adds one function / 184 C extent bytes: 178 instruction, four literal
-and two alignment bytes. Ordinary column/result reuse and separate actual
-post-call owner lifetimes recover the native loops without bindings. Its
-normal/strict positives and changed-count controls pass, with the actual
-factory, timer-nine caller, release and initializer reverified. The prior
+The [navigation owner](SCENE_PALETTE_MENU.md#navigation-and-selection-transfer)
+at `0x14834` adds one function / 548 C extent bytes: 512 instruction, 32 literal
+and four alignment bytes. The matched sibling's input-loop pattern, actual
+transfer-owner lifetimes and explicit no-op row fourteen recover the complete
+native body. Normal/strict positives and real rejection-cue controls pass with
+six connected callers/providers/siblings. The prior selection-builder,
 secondary, weekly and choice gains remain.
 
 The canonical action-work view now exposes the native halfword variation

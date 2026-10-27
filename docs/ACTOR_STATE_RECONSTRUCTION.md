@@ -856,12 +856,14 @@ A private word-return declaration also preserves the actual 364-byte state
 This proves compatibility for that caller only: the provider still fails, and
 the public byte-return declaration remains unchanged.
 
-Measured value-width and register-lifetime changes recover the three native
-high-register saves, with a full-size 292-byte / 116-difference candidate.
-Further combinations reach 288 bytes / 101 differences, including the four
-missing bytes. These are retained source hypotheses, with no C or runtime
-credit. They justify further compiler experiments without establishing the
-original declaration, qualifier or source spelling.
+Fresh ordinary C shares the actual stored-code and match values across both
+passes, recovering 292 bytes / 22 differences without bindings. A real shared
+success value recovers its native producer; one consumed category constraint
+then reaches 292 / two differences. Only the initial collection-root literal
+load/copy uses R0 rather than native R2. Its bytes, branches, pools, stack work
+and three per-record root observations otherwise agree. Scoped address/counter
+lifetimes do not recover that reload choice. These remain private source/API
+hypotheses, with no C or runtime credit.
 
 The previously canonical `frame_actor_use_target` alias is retained at `0x2E0B8`:
 its first argument is the choice target and its second is the actor. It accepts

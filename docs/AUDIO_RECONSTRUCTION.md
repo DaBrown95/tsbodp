@@ -1510,6 +1510,13 @@ still emits a store where the reference has a no-op. That unexplained two-byte
 difference is preserved; no store is suppressed, output patched or candidate
 credited. Original sample/instrument/frequency data remains explicit. This
 static and compiler evidence does not establish audible playback or gameplay.
+The recovered original [November 2002 free SDK](https://web.archive.org/web/20060504134155/http://synk.at:80/krawall/Krawall%20Free%20SDK%20November%202002.zip)
+contains two identical 92-byte `kramSetMasterVol` providers with the same bad
+`0x1FFFFC00` literal and an actual byte store. This establishes older binary
+lineage, without locating the game's later NOP or identifying assembly origin.
+The intact distribution and restrictive original notices remain private; none
+of its source or binaries is imported into production. The discriminator remains the
+later 124-byte commercial object/build chain or a demonstrated C producer.
 The fade mixer's adapted LGPL source, full extent and changed-source control
 are retained in `fade-mixer-canonical/`; the independent original-expression
 trials are in `fade-mixer/`. No assembly or value constraints are used there.

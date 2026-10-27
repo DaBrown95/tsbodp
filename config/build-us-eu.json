@@ -56426,6 +56426,42 @@
         "after": "initial_word = 24;"
       },
       "expected_sha256": "6d8e7fc2d249f5ba852f2f0726c5307f6640b9542202ac52ec5804f0ba225eb7"
+    },
+    {
+      "name": "scene_palette_menu_adjust_selection",
+      "rom_offset": 84020,
+      "size": 548,
+      "source": "src/scene/scene_palette_menu_adjust_selection.c",
+      "symbols": {
+        "g_scene_request": "0x03004350",
+        "g_frame_actor_palette_menu_enabled": "0x08051fa0",
+        "g_input_local_pressed": "0x03004250",
+        "g_scene_palette_menu_owner": "0x03001954",
+        "g_frame_actor_palette_menu_objects": "0x030043b0",
+        "input_step_local_vertical_pressed": "0x0801f5c9",
+        "input_step_local_horizontal_pressed": "0x0801f625",
+        "audio_play_animation_cue": "0x08040ffd",
+        "display_clear_background_rectangle": "0x0800d7e5",
+        "display_scene_lookup_text": "0x08045009",
+        "display_text_draw_line": "0x0801a959",
+        "frame_set_position": "0x080014a5",
+        "scene_palette_menu_refresh_selector": "0x08014a59"
+      },
+      "thumb_symbols": [
+        "input_step_local_vertical_pressed",
+        "input_step_local_horizontal_pressed",
+        "audio_play_animation_cue",
+        "display_clear_background_rectangle",
+        "display_scene_lookup_text",
+        "display_text_draw_line",
+        "frame_set_position",
+        "scene_palette_menu_refresh_selector"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(3);",
+        "after": "audio_play_animation_cue(4);"
+      },
+      "expected_sha256": "5d0fe4cca5b463f7b0a1424b39cc03526f3cb956097bbabed79d18822a5e06d1"
     }
   ],
   "assembly": [
