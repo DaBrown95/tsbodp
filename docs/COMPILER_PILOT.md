@@ -182,3 +182,24 @@ Header copies fell from 344 to 48. Measured compilation time stayed approximatel
 0.39 seconds in both cases; the established benefit is reduced file/disk growth,
 not faster compilation. Tests cover unresolved includes, relative cycles, inactive
 branches, comments, line splicing, deleted headers and snapshot independence.
+
+## Checked comparison reuse
+
+[`permuter_reuse.py`](../tools/permuter_reuse.py) checks and performs one
+deterministic comparison extraction. It independently includes scalar-assignment
+RHS reads, follows old values through structured branches and loop backedges,
+and rejects unsupported types, escapes and movement. Its subset is a pure
+whole-`if` integer comparison and an ordinary dead local; switch/case, field
+observations and general random mutations are outside that qualification.
+Recheck the current AST after every transformation. This is separate from the
+upstream availability predicate and does not alter search admission or weights.
+
+Current sorter calibration reproduces the useful 284/2 source, accepted 284/0
+and one unchanged-upstream generated 284/0, with real rejecting controls. The
+guard also admits a collapse comparison, but its compiler output materializes a
+new boolean and grows to 124/104 against the 116-byte native extent. Three
+separately reviewed pending-action reuse forms remain nonmatches under their
+existing private return-type view. Source-read qualification therefore adds no
+C credit and does not establish a native value lifetime. Nineteen new regression
+tests cover the missed RHS, repeated loop reads, typedef shadows, VLA reads and
+other rejected boundaries; the maintained suite passes 402 tests.
