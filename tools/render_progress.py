@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 from project import ROOT
 from rom_layout import layout
 from source_coverage import inline_glue, coverage_rows
+from copy_ownership import project_copy_ownership
 
 COLORS = {'exact_c': '#00b800', 'exact_glue': '#b08030', 'mapped_code': '#373a3e', 'candidate': '#292c30', 'unresolved': '#202226', 'mapped_data': '#44505a'}
 BACKGROUND, FOREGROUND, MUTED = '#141619', '#f0f2f5', '#a5aeb8'
@@ -92,6 +93,8 @@ def inventory():
     # Green intervals come only from compiler/build receipts, never the scanner.
     for f in exact:
         f['group'] = source_group(f, discovered['rows'])
+    ram = json.loads((ROOT / 'config/ram-map-us-eu.json').read_text())
+    copied_sources = project_copy_ownership(ram['copies'], exact, target['size'])
     rows = overlay(discovered['rows'], exact)
     layout(rows, target['size'])
     stamp = datetime.fromisoformat(build['recorded_at_utc'].replace('Z', '+00:00'))
@@ -109,12 +112,15 @@ def inventory():
             'mapped_extent_bytes': sum(r['size'] for r in rows),
             'historical_mapped_extent_baseline': discovered.get('historical_mapped_extent_baseline', 319640),
             'code_census_summary': discovered['code_census']['counts'] if 'code_census' in discovered else None,
+            'copied_source_ownership': copied_sources,
             'scope': discovered['method'],
             'rows': [{k: r[k] for k in ('name', 'group', 'rom_offset', 'size', 'status')} for r in rows],
             'partition': partition([{k: r[k] for k in ('name', 'rom_offset', 'size', 'status')} for r in rows] + discovered['data_regions'], target['size']),
             'input_sha256': {name: sha(ROOT / name) for name in
                              ('config/build-us-eu.json', 'assets/rom-inventory.json',
-                              'tools/render_progress.py', 'tools/source_coverage.py', 'tools/inventory_partition.py', 'config/progress-requirements.txt')}}
+                              'tools/render_progress.py', 'tools/source_coverage.py',
+                              'tools/copy_ownership.py', 'config/ram-map-us-eu.json',
+                              'tools/inventory_partition.py', 'config/progress-requirements.txt')}}
 
 
 def binary_layout(items, box):

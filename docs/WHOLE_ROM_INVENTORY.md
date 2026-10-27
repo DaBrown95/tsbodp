@@ -251,6 +251,15 @@ execution addresses remain aliases. Copy length does not establish function size
 The initial EWRAM image has no established executable entry; later executable
 writes remain possible.
 
+The verified progress report now projects matching source extents onto each
+installation, including partial tails and separately counted inline glue.
+The drawer installation's final 16 bytes belong to the matching map-transfer
+owner; the transfer installation's final 12 belong to the matching tile
+allocator. These were stale unconverted-prefix descriptions, with no new C
+credit. The tile decoder's extra 24 bytes still belong to the same unconverted
+320-byte drawer. A partial copied tail establishes neither a complete function
+at that alias nor a new runtime entry.
+
 The custom background decoder now has 812 separately counted assembly-origin
 source bytes, verified at ROM `0x2EC` and RAM `0x03003370`. Its whole-function
 Pucrunch ARM lineage is documented in [the origin review](RESOURCE_BACKGROUND_DECODER.md);

@@ -1,7 +1,7 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "27 Oct 2026, 10:22 GMT",
+  "verified_at": "27 Oct 2026, 11:23 GMT",
   "compiled_c_functions": 2480,
   "compiled_c_bytes": 313624,
   "assembly_glue_bytes": 4060,
@@ -35,6 +35,538 @@
       "strong_rooted_referenced_data": 35936,
       "unresolved": 16432686
     }
+  },
+  "copied_source_ownership": {
+    "scope": "Physical intersections with receipt-verified source extents, including their pools and alignment. Other bytes retain their existing inventory classification. No new source credit, runtime entry or complete function at a partial copied alias.",
+    "installation_bytes": 19360,
+    "unique_rom_bytes": 19188,
+    "duplicate_installation_bytes": 172,
+    "unique_rom_counts": {
+      "compiled_c": 4508,
+      "assembly_glue": 3000,
+      "without_verified_source": 11680
+    },
+    "installations": [
+      {
+        "name": "audio_iwram",
+        "rom_offset": 16622712,
+        "ram_address": 50331648,
+        "size": 5552,
+        "counts": {
+          "compiled_c": 2632,
+          "assembly_glue": 1800,
+          "without_verified_source": 1120
+        },
+        "segments": [
+          {
+            "rom_offset": 16622712,
+            "ram_address": 50331648,
+            "size": 4,
+            "source_kind": "without_verified_source"
+          },
+          {
+            "rom_offset": 16622716,
+            "ram_address": 50331652,
+            "size": 140,
+            "source_kind": "assembly_glue",
+            "source_extent_name": "audio_timer_irq",
+            "source": "src/audio/timer_irq.s",
+            "source_extent_rom_offset": 16622716,
+            "source_extent_size": 140,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16622856,
+            "ram_address": 50331792,
+            "size": 4,
+            "source_kind": "without_verified_source"
+          },
+          {
+            "rom_offset": 16622860,
+            "ram_address": 50331796,
+            "size": 600,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_start_sample_extended",
+            "source": "src/audio/start_sample_extended.c",
+            "source_extent_rom_offset": 16622860,
+            "source_extent_size": 600,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16623460,
+            "ram_address": 50332396,
+            "size": 52,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_start_sample",
+            "source": "src/audio/start_sample.c",
+            "source_extent_rom_offset": 16623460,
+            "source_extent_size": 52,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16623512,
+            "ram_address": 50332448,
+            "size": 200,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_sample_release",
+            "source": "src/audio/sample_release.c",
+            "source_extent_rom_offset": 16623512,
+            "source_extent_size": 200,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16623712,
+            "ram_address": 50332648,
+            "size": 76,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_set_sample_step",
+            "source": "src/audio/set_sample_step.c",
+            "source_extent_rom_offset": 16623712,
+            "source_extent_size": 76,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16623788,
+            "ram_address": 50332724,
+            "size": 128,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_set_channel_volume",
+            "source": "src/audio/set_channel_volume.c",
+            "source_extent_rom_offset": 16623788,
+            "source_extent_size": 128,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16623916,
+            "ram_address": 50332852,
+            "size": 196,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_set_channel_pan",
+            "source": "src/audio/set_channel_pan.c",
+            "source_extent_rom_offset": 16623916,
+            "source_extent_size": 196,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16624112,
+            "ram_address": 50333048,
+            "size": 80,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_set_channel_position",
+            "source": "src/audio/set_channel_position.c",
+            "source_extent_rom_offset": 16624112,
+            "source_extent_size": 80,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16624192,
+            "ram_address": 50333128,
+            "size": 56,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_sample_active_ram",
+            "source": "src/audio/sample_active_ram.c",
+            "source_extent_rom_offset": 16624192,
+            "source_extent_size": 56,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16624248,
+            "ram_address": 50333184,
+            "size": 4,
+            "source_kind": "without_verified_source"
+          },
+          {
+            "rom_offset": 16624252,
+            "ram_address": 50333188,
+            "size": 1604,
+            "source_kind": "assembly_glue",
+            "source_extent_name": "audio_mixer_primitives",
+            "source": "src/audio/mixer_primitives.s",
+            "source_extent_rom_offset": 16624252,
+            "source_extent_size": 1604,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16625856,
+            "ram_address": 50334792,
+            "size": 288,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_mix_channels_c_1",
+            "source": "src/audio/mix_channels.c",
+            "source_extent_rom_offset": 16625856,
+            "source_extent_size": 288,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16626144,
+            "ram_address": 50335080,
+            "size": 28,
+            "source_kind": "assembly_glue",
+            "source_extent_name": "audio_mix_channels_glue_1",
+            "source": "src/audio/mix_channels.c",
+            "source_extent_rom_offset": 16626144,
+            "source_extent_size": 28,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16626172,
+            "ram_address": 50335108,
+            "size": 368,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_mix_channels_c_2",
+            "source": "src/audio/mix_channels.c",
+            "source_extent_rom_offset": 16626172,
+            "source_extent_size": 368,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16626540,
+            "ram_address": 50335476,
+            "size": 28,
+            "source_kind": "assembly_glue",
+            "source_extent_name": "audio_mix_channels_glue_2",
+            "source": "src/audio/mix_channels.c",
+            "source_extent_rom_offset": 16626540,
+            "source_extent_size": 28,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16626568,
+            "ram_address": 50335504,
+            "size": 368,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_mix_channels_c_3",
+            "source": "src/audio/mix_channels.c",
+            "source_extent_rom_offset": 16626568,
+            "source_extent_size": 368,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16626936,
+            "ram_address": 50335872,
+            "size": 220,
+            "source_kind": "compiled_c",
+            "source_extent_name": "audio_mix_frame",
+            "source": "src/audio/mix_frame.c",
+            "source_extent_rom_offset": 16626936,
+            "source_extent_size": 220,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 16627156,
+            "ram_address": 50336092,
+            "size": 1108,
+            "source_kind": "without_verified_source"
+          }
+        ]
+      },
+      {
+        "name": "initial_ewram",
+        "rom_offset": 16628264,
+        "ram_address": 33554432,
+        "size": 10232,
+        "counts": {
+          "compiled_c": 0,
+          "assembly_glue": 0,
+          "without_verified_source": 10232
+        },
+        "segments": [
+          {
+            "rom_offset": 16628264,
+            "ram_address": 33554432,
+            "size": 10232,
+            "source_kind": "without_verified_source"
+          }
+        ]
+      },
+      {
+        "name": "irq_dispatcher",
+        "rom_offset": 352,
+        "ram_address": 50338720,
+        "size": 512,
+        "counts": {
+          "compiled_c": 0,
+          "assembly_glue": 504,
+          "without_verified_source": 8
+        },
+        "segments": [
+          {
+            "rom_offset": 352,
+            "ram_address": 50338720,
+            "size": 296,
+            "source_kind": "assembly_glue",
+            "source_extent_name": "irq_dispatcher",
+            "source": "src/irq/irq_dispatcher.s",
+            "source_extent_rom_offset": 352,
+            "source_extent_size": 296,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 648,
+            "ram_address": 50339016,
+            "size": 24,
+            "source_kind": "assembly_glue",
+            "source_extent_name": "startup_copy_words",
+            "source": "src/startup/copy_words.s",
+            "source_extent_rom_offset": 648,
+            "source_extent_size": 24,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 672,
+            "ram_address": 50339040,
+            "size": 8,
+            "source_kind": "assembly_glue",
+            "source_extent_name": "irq_dispatcher_literals",
+            "source": "src/irq/irq_dispatcher_literals.s",
+            "source_extent_rom_offset": 672,
+            "source_extent_size": 8,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 680,
+            "ram_address": 50339048,
+            "size": 8,
+            "source_kind": "without_verified_source"
+          },
+          {
+            "rom_offset": 688,
+            "ram_address": 50339056,
+            "size": 60,
+            "source_kind": "assembly_glue",
+            "source_extent_name": "startup_debug_display_word",
+            "source": "src/startup/debug_display_word.s",
+            "source_extent_rom_offset": 688,
+            "source_extent_size": 60,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 748,
+            "ram_address": 50339116,
+            "size": 116,
+            "source_kind": "assembly_glue",
+            "source_extent_name": "resource_background_decoder",
+            "source": "src/resource/background_decoder.s",
+            "source_extent_rom_offset": 748,
+            "source_extent_size": 812,
+            "whole_source_extent": false
+          }
+        ]
+      },
+      {
+        "name": "frame_draw_iwram",
+        "rom_offset": 47168,
+        "ram_address": 50342144,
+        "size": 284,
+        "counts": {
+          "compiled_c": 284,
+          "assembly_glue": 0,
+          "without_verified_source": 0
+        },
+        "segments": [
+          {
+            "rom_offset": 47168,
+            "ram_address": 50342144,
+            "size": 284,
+            "source_kind": "compiled_c",
+            "source_extent_name": "frame_sort_display_objects",
+            "source": "src/frame/frame_sort_display_objects.c",
+            "source_extent_rom_offset": 47168,
+            "source_extent_size": 284,
+            "whole_source_extent": true
+          }
+        ]
+      },
+      {
+        "name": "frame_emit_iwram",
+        "rom_offset": 45288,
+        "ram_address": 50342432,
+        "size": 640,
+        "counts": {
+          "compiled_c": 640,
+          "assembly_glue": 0,
+          "without_verified_source": 0
+        },
+        "segments": [
+          {
+            "rom_offset": 45288,
+            "ram_address": 50342432,
+            "size": 640,
+            "source_kind": "compiled_c",
+            "source_extent_name": "frame_dispatch_collisions",
+            "source": "src/display/dispatch_collisions.c",
+            "source_extent_rom_offset": 45288,
+            "source_extent_size": 640,
+            "whole_source_extent": true
+          }
+        ]
+      },
+      {
+        "name": "display_tile_allocator_iwram",
+        "rom_offset": 46972,
+        "ram_address": 50361232,
+        "size": 200,
+        "counts": {
+          "compiled_c": 200,
+          "assembly_glue": 0,
+          "without_verified_source": 0
+        },
+        "segments": [
+          {
+            "rom_offset": 46972,
+            "ram_address": 50361232,
+            "size": 196,
+            "source_kind": "compiled_c",
+            "source_extent_name": "display_find_tile_run",
+            "source": "src/display/find_tile_run.c",
+            "source_extent_rom_offset": 46972,
+            "source_extent_size": 196,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 47168,
+            "ram_address": 50361428,
+            "size": 4,
+            "source_kind": "compiled_c",
+            "source_extent_name": "frame_sort_display_objects",
+            "source": "src/frame/frame_sort_display_objects.c",
+            "source_extent_rom_offset": 47168,
+            "source_extent_size": 284,
+            "whole_source_extent": false
+          }
+        ]
+      },
+      {
+        "name": "resource_tile_decoder_iwram",
+        "rom_offset": 45932,
+        "ram_address": 50345680,
+        "size": 528,
+        "counts": {
+          "compiled_c": 504,
+          "assembly_glue": 0,
+          "without_verified_source": 24
+        },
+        "segments": [
+          {
+            "rom_offset": 45932,
+            "ram_address": 50345680,
+            "size": 504,
+            "source_kind": "compiled_c",
+            "source_extent_name": "resource_decode_tile_runs",
+            "source": "src/resource/resource_decode_tile_runs.c",
+            "source_extent_rom_offset": 45932,
+            "source_extent_size": 504,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 46436,
+            "ram_address": 50346184,
+            "size": 24,
+            "source_kind": "without_verified_source"
+          }
+        ]
+      },
+      {
+        "name": "resource_background_decoder_iwram",
+        "rom_offset": 748,
+        "ram_address": 50344816,
+        "size": 848,
+        "counts": {
+          "compiled_c": 36,
+          "assembly_glue": 812,
+          "without_verified_source": 0
+        },
+        "segments": [
+          {
+            "rom_offset": 748,
+            "ram_address": 50344816,
+            "size": 812,
+            "source_kind": "assembly_glue",
+            "source_extent_name": "resource_background_decoder",
+            "source": "src/resource/background_decoder.s",
+            "source_extent_rom_offset": 748,
+            "source_extent_size": 812,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 1560,
+            "ram_address": 50345628,
+            "size": 36,
+            "source_kind": "compiled_c",
+            "source_extent_name": "frame_schedule",
+            "source": "src/frame/frame_schedule.c",
+            "source_extent_rom_offset": 1560,
+            "source_extent_size": 648,
+            "whole_source_extent": false
+          }
+        ]
+      },
+      {
+        "name": "frame_map_draw_iwram",
+        "rom_offset": 46436,
+        "ram_address": 50360672,
+        "size": 336,
+        "counts": {
+          "compiled_c": 16,
+          "assembly_glue": 0,
+          "without_verified_source": 320
+        },
+        "segments": [
+          {
+            "rom_offset": 46436,
+            "ram_address": 50360672,
+            "size": 320,
+            "source_kind": "without_verified_source"
+          },
+          {
+            "rom_offset": 46756,
+            "ram_address": 50360992,
+            "size": 16,
+            "source_kind": "compiled_c",
+            "source_extent_name": "frame_transfer_map_tiles",
+            "source": "src/frame/frame_transfer_map_tiles.c",
+            "source_extent_rom_offset": 46756,
+            "source_extent_size": 216,
+            "whole_source_extent": false
+          }
+        ]
+      },
+      {
+        "name": "frame_map_scroll_iwram",
+        "rom_offset": 46756,
+        "ram_address": 50355808,
+        "size": 228,
+        "counts": {
+          "compiled_c": 228,
+          "assembly_glue": 0,
+          "without_verified_source": 0
+        },
+        "segments": [
+          {
+            "rom_offset": 46756,
+            "ram_address": 50355808,
+            "size": 216,
+            "source_kind": "compiled_c",
+            "source_extent_name": "frame_transfer_map_tiles",
+            "source": "src/frame/frame_transfer_map_tiles.c",
+            "source_extent_rom_offset": 46756,
+            "source_extent_size": 216,
+            "whole_source_extent": true
+          },
+          {
+            "rom_offset": 46972,
+            "ram_address": 50356024,
+            "size": 12,
+            "source_kind": "compiled_c",
+            "source_extent_name": "display_find_tile_run",
+            "source": "src/display/find_tile_run.c",
+            "source_extent_rom_offset": 46972,
+            "source_extent_size": 196,
+            "whole_source_extent": false
+          }
+        ]
+      }
+    ]
   },
   "scope": "ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents",
   "rows": [
@@ -33879,9 +34411,11 @@
   ],
   "input_sha256": {
     "config/build-us-eu.json": "eab68f2630797ba062da73e74801e5b57c6c8e5bdd4db0aeab7421913be455ae",
-    "assets/rom-inventory.json": "7f0f2dbae9fe4123736629b3f9a186b3ef00affa05e31b92df7f0afd92e6ded5",
-    "tools/render_progress.py": "d32edd075eba6f6b3278b6897045b07035f98a2c43e40cc70a376d060f8af6b1",
+    "assets/rom-inventory.json": "5d31f75c2b058e773c46c0c61c37c96db755be7d3434381539c98eeba086a3a6",
+    "tools/render_progress.py": "17a4d66dc994101759f2be2495f51577c20c1652eaef1d4e1fd604c9d2c24098",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
+    "tools/copy_ownership.py": "0b3766167169d1ab1e5a4931e6988d0089e11d4493c08d256bc77a0531bdaa4e",
+    "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "tools/inventory_partition.py": "5838852221fa7a38767ccd701d27ca398309bc55951bc0f294e306f7bebbe89c",
     "config/progress-requirements.txt": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"
   }

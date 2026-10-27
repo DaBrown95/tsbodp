@@ -42,7 +42,7 @@
         4340
       ],
       "word_copy_control": 67108935,
-      "classification": "Copied ARM object-table ordering/sort: static 272 instruction bytes and 12 literal bytes; historical key retained, ordinary matching C unresolved.",
+      "classification": "Copied ARM object-table sorter: complete 284-byte matching C frame_sort_display_objects extent at ROM 0xB840; 272 instruction bytes and 12 literal bytes; historical copy key retained.",
       "exports": "frame_draw_iwram.bin"
     },
     {
@@ -72,7 +72,7 @@
         292668
       ],
       "word_copy_control": 67108914,
-      "classification": "copied ARM tile-range search: 196-byte matching C extent plus first word of following frame-copy source at 0xB840; the 200-byte installation and C extent are distinct",
+      "classification": "Copied ARM tile-range search: 196-byte matching C display_find_tile_run extent plus the first four ROM source bytes of matching C frame_sort_display_objects at 0xB840; the 200-byte installation and source extents are distinct.",
       "exports": "display_tile_allocator_iwram.bin"
     },
     {
@@ -117,7 +117,7 @@
       ],
       "word_copy_control": 67108948,
       "phase": "map routine initialization at 0x08039e78",
-      "classification": "Copied ARM map routine with provisional 320-byte body and 16-byte following ARM prefix; entire copied body remains unconverted",
+      "classification": "Copied ARM map drawer: unconverted 320-byte extent at ROM 0xB564 plus the first 16 ROM source bytes of matching C frame_transfer_map_tiles at 0xB6A4; the 336-byte installation and source extents are distinct.",
       "exports": "frame_map_draw_iwram.bin"
     },
     {
@@ -132,7 +132,7 @@
       ],
       "word_copy_control": 67108921,
       "phase": "map routine initialization at 0x08039e78",
-      "classification": "Copied ARM map transfer: 216-byte body verified matching C at its original RAM execution address; following 12-byte ARM prefix remains unconverted",
+      "classification": "Copied ARM map transfer: complete 216-byte matching C frame_transfer_map_tiles extent at ROM 0xB6A4, linked for 0x03005E60, plus the first 12 ROM source bytes of matching C display_find_tile_run at 0xB77C; the 228-byte installation and source extents are distinct.",
       "exports": "frame_map_scroll_iwram.bin"
     }
   ],
@@ -242,14 +242,14 @@
       "ram_address": 50345680,
       "mode": "ARM",
       "pointer_rom_offset": 92788,
-      "evidence": "Matching installer 0x08016a48 publishes destination to callback word 0x03003360; copy literals establish source, destination and count; inferred signature void(const void *input, void *destination, unsigned int *decoded_size); original ARM body remains unconverted"
+      "evidence": "Matching installer 0x08016a48 publishes destination 0x030036d0 to callback word 0x03003360; source/destination/control literals establish the 528-byte copy. The first 504 ROM bytes are matching C resource_decode_tile_runs; the following 24 bytes are the unconverted map-drawer prefix."
     },
     {
       "name": "resource_background_decoder_iwram",
       "ram_address": 50344816,
       "mode": "ARM",
       "pointer_rom_offset": 92804,
-      "evidence": "Matching installer 0x08016a48 publishes destination to callback word 0x030036c0; copy literals establish source, destination and count; inferred signature void(const void *input, void *destination, unsigned int *decoded_size); original ARM body remains unconverted"
+      "evidence": "Matching installer 0x08016a48 publishes destination 0x03003370 to callback word 0x030036c0; source/destination/control literals establish the 848-byte copy. The first 812 ROM bytes are source-owned assembly-origin resource_background_decoder; the following 36 bytes belong to matching C frame_schedule."
     },
     {
       "name": "frame_map_draw_iwram",
@@ -263,7 +263,7 @@
       "ram_address": 50355808,
       "mode": "ARM",
       "pointer_rom_offset": 237232,
-      "evidence": "Matching installer 0x08039e78 publishes destination 0x03005e60 to callback word 0x03001fcc; source/destination/control literals establish 228-byte copy. The first 216 bytes are matching C frame_transfer_map_tiles at the RAM execution address; copied following ARM prefix remains unconverted. View argument is narrowed to a byte; allowed indices remain unresolved."
+      "evidence": "Matching installer 0x08039e78 publishes destination 0x03005e60 to callback word 0x03001fcc; source/destination/control literals establish the 228-byte copy. The first 216 bytes are matching C frame_transfer_map_tiles at its RAM link address; the following 12 ROM source bytes belong to matching C display_find_tile_run. View argument is narrowed to a byte; allowed indices remain unresolved."
     },
     {
       "ram_address": 50333128,
