@@ -667,6 +667,12 @@ fail full-byte comparison, so it remains unconverted and receives no source
 credit. Full comparisons and changed distance, saved-speed, terrain-mask and
 timer controls pass for all four accepted extents.
 
+A fresh by-value per-view sample places its origin/input/integer work at the
+native offsets, but retains a separate DI input across calls. Reload adds an
+eight-byte spill and a per-iteration copy: frame 32 rather than native 24,
+152/121 against all 148 bytes. The connected 100-byte predicate and its real
+margin control pass. This formulation supplies no missing input-storage fact.
+
 ## Transient effects and shared intrusive allocation
 
 State 28 reads a signed delta byte at `+0x64` and the indicator pointer at
@@ -864,6 +870,16 @@ load/copy uses R0 rather than native R2. Its bytes, branches, pools, stack work
 and three per-record root observations otherwise agree. Scoped address/counter
 lifetimes do not recover that reload choice. These remain private source/API
 hypotheses, with no C or runtime credit.
+
+An observation-only compiler replay now identifies the disputed literal as the
+frontier's first reload allocation: previous index minus one selects R0. Earlier
+spill rotation cannot explain this source. All sixteen retained input, assembly
+and pass files agree between pinned and logging builds for the target, actual
+caller and its control.
+A one-word status object and native-byte code scalar reproduce 292/2 unchanged.
+Binding the world counter to R1 is rejected: it remains live across the actual
+predicate, whose return clobbers R1. Further work needs a real address/value
+lifetime that survives optimization, without adding pressure or observations.
 
 The previously canonical `frame_actor_use_target` alias is retained at `0x2E0B8`:
 its first argument is the choice target and its second is the actor. It accepts

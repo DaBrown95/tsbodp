@@ -291,6 +291,17 @@ transfer and catalog closures also match after the shared font refinement,
 and their actual controls remain preserved. This compiler evidence does not
 independently establish safe runtime inputs or gameplay behavior.
 
+A fresh rasterizer source separates the incoming tile from its evolving copy
+and places real parser state before later scalar work. The compiler preserves
+that identity through CSE/REGMOVE and recovers thirteen native spill homes at
+SP+0x104 through SP+0x134, with the native 316-byte frame. It still emits
+688/501 against the full 692-byte reference. Font, pixel, bit and counter
+allocation differ; the real packed sum takes R2 while next-X spills where the
+native sum spills. Sharing the alternative height counters preserves those
+homes but remains 688/502. The actual 80-byte fill provider/control pass. These
+are source-dataflow findings, not permission for a dummy consumer or scratch
+object, and earn no coverage.
+
 The row reader's native inner sequence is now traced to the pinned compiler's
 `inc_for_reload`: a `POST_INC` cursor allocated to a high register needs a low
 scratch, commits the advanced high value, restores the old address, then uses

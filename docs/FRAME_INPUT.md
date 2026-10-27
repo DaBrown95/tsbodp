@@ -926,6 +926,15 @@ pointer. The historical 392-byte / 11-difference fixture also used unsupported
 volatile pointer homes and is not a current interface proof. No production
 header or caller repair has yet been admitted from these private attempts.
 
+A fresh interface qualification reproduces the current 392/109 body using the
+canonical opaque formal and the caller's actual unsigned control-word object,
+without overriding a header. Its provisional resource/selection views and
+backing premises remain explicit; normal/strict bytes and real DMA-count
+controls agree. A native-shaped inner search restores the repeated layout load
+but loses offset strength reduction (384/321). Carrying the real descriptor
+offset restores its recurrence but hoists both pointers (388/311). Loop syntax
+alone does not explain the remaining native ownership and reloads.
+
 A by-value control-word helper recovers the native word load and paired shifts
 for both color-bit reads. Splitting the real count calculation into its two
 evaluation phases then recovers native count-before-color read order, including

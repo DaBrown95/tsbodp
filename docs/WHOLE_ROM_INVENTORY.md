@@ -807,6 +807,52 @@ route. Count/header and base-alias closure remain required. All selected
 consumers, count producers and callers already have source. No new compiler or
 runtime observation, source credit or complete target set follows.
 
+### Selected-sequence backing and count bounds
+
+Typed native producers now support these finite resource checks. Sequence
+populations overlap and must not be added into a game-wide denominator.
+
+| Selected resource family | Distinct sequences | Complete declared frames | Maximum collider count |
+| --- | ---: | ---: | ---: |
+| 317-record scene descriptor prefix | 316 | 388 | 1 |
+| Simple actors, normal directions | 336 | 4,496 | 2 |
+| Fourteen multipart prefixes, normal directions | 2,145 | 30,186 | 2 |
+| Multipart animation 86, doubled directions | 117 | 936 | 1 |
+| Need-effect directional/appearance prefixes | 220 | 700 | 1 |
+
+The simple-actor selector's actual computational prefix covers all 32 subtypes,
+256 animation bytes and four event/world equality classes: 32,768 checks select
+columns zero through six or return. Its 32-by-seven eight-byte table references
+90 complete five-descriptor arrays. Multipart checking covers animations 0..86
+in fourteen observed pointer prefixes with normal direction 0..7; the named
+animation-86 row separately has all nine doubled variants backed. Every declared
+frame follows its real offset table and contiguous serialized geometry. These
+are data/backing and bounded native-prefix checks, not gameplay observations or
+exclusive-data classification of whole ROM banks.
+
+The part refresher does not sum counts across parts: its native conditional
+increment preserves an existing count at most two when each selected sequence
+count is at most two. Six additional constructor aliases at object `+0xAF`
+write one: the three trigger constructors, scene selector, contact resource and
+optional-view constructor. Exact-name searches alone miss those writers.
+For collision calls `0xB2B0/0xB2D8`, count must remain at most two at every loop
+test, including after callbacks; an initial bound alone is insufficient.
+
+Need-effect checking covers 149 observed resource rows, twelve appearance rows,
+nonnull backing, directions 1/3/5/7 and installation modes 0..5. The appearance
+byte is exactly `0x03003978`: the matched palette-menu initializer publishes its
+address, navigation row thirteen edits it through the horizontal provider, and
+the need-effect commit reads it at world `+0x28`. The UI preserves valid 0..11;
+it does not normalize arbitrary loaded values. Save decoding admits a nibble
+0..15 without establishing the twelve-row semantic domain. Values 12..15,
+arbitrary retained parameter bytes, later pointer/selector writes and remaining
+indicator/activity resource families stay open.
+
+The checks reject mutations to the native selector/count guards and actual
+data, confined to private copies. No callback site is declared complete, no
+source bytes are added and no arbitrary-alias or runtime-state closure follows
+from these named bounds.
+
 
 ## Installed serial IRQ target
 

@@ -19,7 +19,7 @@ Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py -
 | `0x1AA78` | `sub_0801AA78` | 692 | 692 / 483 | 692 | attempted | — | private-provisional |
 | `0x1B300` | `sub_0801B300` | 140 | 140 / 73 | 140 | attempted | — | canonical-current |
 | `0x28234` | `sub_08028234` | 160 | 160 / 71 | 160 | attempted | — | canonical-current |
-| `0x39CF0` | `sub_08039CF0` | 392 | 392 / 109 | 392 | attempted | — | private-provisional |
+| `0x39CF0` | `sub_08039CF0` | 392 | 392 / 109 | 392 | attempted | — | canonical-current |
 | `0x3D788` | `sub_0803D788` | 200 | 200 / 1 | 200 | near-miss | 1 | canonical-current |
 | `0x3DC48` | `link_serial_interrupt` | 1616 | 1624 / 809 | 1616 | attempted | — | private-provisional |
 | `0x40AB4` | `sub_08040AB4` | 692 | 692 / 306 | 692 | attempted | — | canonical-current |

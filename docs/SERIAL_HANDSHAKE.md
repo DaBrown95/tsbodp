@@ -410,6 +410,15 @@ not establish that those R7 phases can survive. No R7 workaround or subset
 binding trial follows from the proposal. A new owner, consumer or applicable
 original-build fact is still required.
 
+Two symbolic MMIO-owner experiments separate access and lifetime failures.
+Volatile scalar struct-member stores already expand into extra read/mask/write
+operations in initial RTL (1,476/1,516). Scalar indirect halfword accesses
+restore the baseline read/write sites, but first CSE derives receive addresses
+from the control owner and GCSE creates an additional SEND carrier in R9
+(1,576/1,508). The connected 356-byte initializer and real flags control pass.
+These owner formulations are closed; retain independent scalar MMIO accesses
+until a native-supported ownership fact changes the experiment.
+
 The pinned compiler's union-punning exception requires direct union access.
 Taking an escaped halfword pointer, including through an integer address, does
 not inherit that exception after fields-view writes. Known pointer banks and
