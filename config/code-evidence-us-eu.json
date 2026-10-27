@@ -28275,15 +28275,15 @@
     {
       "rom_offset": 304120,
       "target_origin": "fixed_ROM_table",
-      "producer": "ROM0x08D6F77C +8*(volume_effect byte>>4) +0",
+      "producer": "Captured unsigned track byte+0x5D, high-nibble index, immutable ROM flag byte and target word at0x08D6F77C+8*index; full256-byte first-hop operand domain is validated separately.",
       "observed_table": "audio_volume_effects",
       "field": 0,
       "writer_roles": [],
       "source_owners": [
         "audio_player_process_between_row"
       ],
-      "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
-      "confidence": "static native/source producer; populations and ABI remain provisional"
+      "remaining_uncertainty": "The ten-row callback-table and saved-state validity invariant remain open. The separate bounded first-hop proof covers every byte without asserting table capacity, reaching writers, non-game execution or runtime safety.",
+      "confidence": "Native source-entry CFG, unique load-to-capture predecessors, immutable128-byte read window and BX-R3 veneer; all game-ROM direct operands have exact source owners. This does not set targets_complete."
     },
     {
       "rom_offset": 304156,
@@ -29955,6 +29955,19 @@
       "record_stride": 8,
       "table_sha256": "cfe3d1cf62348779e975e3637fce6339016a3d2f83d48a691c41fcb92dadfb5a",
       "veneer_rom_offset": 314624
+    }
+  ],
+  "bounded_branch_operands": [
+    {
+      "proof_kind": "thumb_saved_volume_operands_v1",
+      "owner": "audio_player_process_between_row",
+      "source_sha256": "f541ed81a46529f10a6179c656949d712e59fce9f94e4e9295a5dbfa8d09eefc",
+      "rom_offset": 304120,
+      "load_rom_offset": 304092,
+      "literal_rom_offset": 304200,
+      "read_window_rom_offset": 14088060,
+      "read_window_sha256": "86b3f81fd2c6b1a059cf29c9bf0c93b18d857e7a626415b4386d68f6d11e92bf",
+      "veneer_rom_offset": 314620
     }
   ]
 }

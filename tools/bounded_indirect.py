@@ -1,9 +1,9 @@
 """Validate bounded indirect calls without closing other table consumers.
 
-The first proof grammar is deliberately narrow: a Thumb byte is guarded above
-96, subtracts 96, and supplies the high nibble to a ten-row ROM table. It proves
-ordinary paths from one pinned source owner, not arbitrary interior entries or
-the state read by a later consumer of the same table.
+The on-row grammar bounds a guarded byte to ten callback records. The saved-byte
+grammar instead enumerates every captured byte and its ROM-loaded branch
+operand. That separate ownership fact does not establish valid table capacity,
+saved-state invariants or runtime safety.
 """
 import hashlib
 import struct
@@ -17,6 +17,7 @@ from capstone.arm import (ARM_CC_AL, ARM_CC_INVALID, ARM_INS_B, ARM_INS_BL,
 
 BASE = 0x08000000
 PROOF_KIND = 'thumb_volume_byte_table_v1'
+OPERAND_PROOF_KIND = 'thumb_saved_volume_operands_v1'
 
 
 def _require(condition, message):
@@ -293,3 +294,199 @@ def annotate_bounded_records(results, physical, validated):
     _require(found == set(by_site), 'bounded annotation lacks a decoded call')
     for record, row in pending:
         record.update(row)
+
+
+def validate_saved_volume_operands(row, scanner, functions, source_hash):
+    """Bound one saved-byte call's operands without closing its runtime domain.
+
+    The supported native grammar captures one LDRB, tests its high nibble's
+    flag byte in an immutable 128-byte read window, and calls its loaded word
+    through BX R3. The window is an address-read bound, not sixteen records.
+    Only exact C ROM entries and raw region-00 operands are supported.
+    """
+    _require(isinstance(row, dict)
+             and row.get('proof_kind') == OPERAND_PROOF_KIND,
+             'unsupported saved-volume operand grammar')
+    _require(not any(key in row for key in
+                     ('raw_operands', 'game_targets', 'targets',
+                      'non_game_region00_operands', 'bounded_branch_operands',
+                      'targets_complete', 'branch_operands_complete',
+                      'game_direct_targets_owned')),
+             'branch operands must be derived, not supplied by metadata')
+    owners = [f for f in functions if f.get('name') == row.get('owner')]
+    _require(len(owners) == 1, 'missing or ambiguous source owner')
+    owner = owners[0]
+    fields = ('rom_offset', 'load_rom_offset', 'literal_rom_offset',
+              'read_window_rom_offset', 'veneer_rom_offset')
+    _require(all(type(row.get(key)) is int for key in fields),
+             'integer operand-proof locations required')
+    _require('read_window_bytes' not in row
+             or type(row['read_window_bytes']) is int
+             and row['read_window_bytes'] == 128,
+             'saved-volume read window must be exactly 128 bytes')
+    off, size = owner.get('rom_offset'), owner.get('size')
+    _require(type(off) is int and type(size) is int and off >= 0
+             and 0 < size <= 0x20000 and off + size <= len(scanner.data)
+             and owner.get('kind', 'compiled_c') == 'compiled_c'
+             and owner.get('mode', 'Thumb') == 'Thumb'
+             and owner.get('ram_address', BASE + off) == BASE + off,
+             'operand proof requires a bounded C ROM Thumb owner')
+    _require(isinstance(row.get('source_sha256'), str)
+             and len(row['source_sha256']) == 64
+             and source_hash(owner) == row['source_sha256'],
+             'source owner pin differs')
+    site, load, literal, window, veneer = (row[key] for key in fields)
+    start = load - 4
+    _require(site == load + 28
+             and off <= start <= site and site + 4 <= off + size
+             and start % 2 == 0
+             and off <= literal and literal + 4 <= off + size
+             and literal % 4 == 0
+             and window >= 0 and window % 4 == 0
+             and window + 128 <= len(scanner.data)
+             and veneer >= 0 and veneer % 2 == 0
+             and veneer + 2 <= len(scanner.data),
+             'invalid owner, load, literal, read-window or veneer bounds')
+    entry, end = BASE + off, BASE + off + size
+    nodes, predecessors = _cfg(scanner, entry, end)
+    R = lambda reg: ('reg', reg)
+    I = lambda value: ('imm', value)
+    M = lambda base, index=0, disp=0: ('mem', base, index, disp)
+    skip = BASE + site + 4
+    expected = [
+        ('adds', (R(ARM_REG_R2), R(ARM_REG_R4), I(0))),
+        ('adds', (R(ARM_REG_R2), I(93))),
+        ('ldrb', (R(ARM_REG_R0), M(ARM_REG_R2))),
+        ('lsls', (R(ARM_REG_R3), R(ARM_REG_R0), I(24))),
+        ('cmp', (R(ARM_REG_R3), I(0))),
+        ('beq', (I(skip),)),
+        ('lsrs', (R(ARM_REG_R0), R(ARM_REG_R3), I(28))),
+        ('lsls', (R(ARM_REG_R2), R(ARM_REG_R0), I(3))),
+        ('ldr', (R(ARM_REG_R1), M(ARM_REG_PC,
+                                disp=literal - ((start + 20) & ~3)))),
+        ('adds', (R(ARM_REG_R3), R(ARM_REG_R2), I(4))),
+        ('ldrb', (R(ARM_REG_R0), M(ARM_REG_R1, ARM_REG_R3))),
+        ('cmp', (R(ARM_REG_R0), I(0))),
+        ('beq', (I(skip),)),
+        ('ldr', (R(ARM_REG_R3), M(ARM_REG_R1, ARM_REG_R2))),
+        ('adds', (R(ARM_REG_R0), R(ARM_REG_R4), I(0))),
+        ('movs', (R(ARM_REG_R1), I(0))),
+        ('bl', (I(BASE + veneer),)),
+    ]
+    for index, signature in enumerate(expected):
+        pc = BASE + start + 2 * index
+        _require(pc in nodes and _signature(nodes[pc]) == signature
+                 and not nodes[pc].writeback
+                 and nodes[pc].size == (4 if index == 16 else 2),
+                 'saved byte, zero guard, selector, flag, capture or call differs')
+        if index:
+            _require(predecessors[pc] == {pc - 2},
+                     'saved-byte instruction has an extra incoming edge')
+    _require(struct.unpack_from('<I', scanner.data, literal)[0] == BASE + window,
+             'literal does not select the pinned immutable ROM read window')
+    raw = scanner.data[window:window + 128]
+    _require(hashlib.sha256(raw).hexdigest() == row.get('read_window_sha256'),
+             'read-window pin differs')
+    stub = scanner.decode(BASE + veneer, 'Thumb')
+    _require(stub is not None and scanner.arm7_instruction(stub, 'Thumb')
+             and stub.size == 2
+             and _signature(stub) == ('bx', (R(ARM_REG_R3),)),
+             'veneer does not use the captured R3 operand')
+
+    operands, call_inputs = set(), 0
+    operand_inputs = defaultdict(int)
+    for value in range(256):
+        if value == 0:
+            continue
+        index = ((value << 24) & 0xffffffff) >> 28
+        if raw[index * 8 + 4] == 0:
+            continue
+        operand = struct.unpack_from('<I', raw, index * 8)[0]
+        operands.add(operand)
+        operand_inputs[operand] += 1
+        call_inputs += 1
+    game, non_game = [], []
+    for operand in sorted(operands):
+        # Region 00 is deliberately retained as a raw word: no alignment,
+        # effective-PC, BIOS execution or invalid-fetch behavior is inferred.
+        if operand < 0x01000000:
+            non_game.append(operand)
+            continue
+        _require(BASE <= operand < 0x0e000000,
+                 'branch operand is RAM or an unsupported address region')
+        address, mode = operand & ~1, 'Thumb' if operand & 1 else 'ARM'
+        _require(address % (2 if mode == 'Thumb' else 4) == 0,
+                 'game ROM operand is misaligned for its instruction mode')
+        # The three cartridge waitstate windows alias the same 32-MiB bus.
+        # Do not treat physical(None) as proof that an alias is non-game.
+        physical = (address - BASE) % 0x02000000
+        canonical = BASE + physical
+        _require(physical < len(scanner.data)
+                 and scanner.physical(canonical) == physical,
+                 'game ROM operand lies outside the fixed image')
+        matches = [f for f in functions
+                   if f.get('kind', 'compiled_c') == 'compiled_c'
+                   and f.get('rom_offset') == physical
+                   and f.get('mode', 'Thumb') == mode
+                   and f.get('ram_address', canonical) == canonical]
+        _require(len(matches) == 1,
+                 'game ROM operand lacks an exact mode-correct C source entry')
+        game.append({'owner': matches[0]['name'], 'raw': operand,
+                     'address': address, 'mode': mode})
+    return {
+        'rom_offset': site, 'veneer_address': BASE + veneer,
+        'bounded_branch_operands': {
+            'proof_kind': OPERAND_PROOF_KIND,
+            'branch_operands_complete': True,
+            'game_direct_targets_owned': True,
+            'raw_operands': sorted(operands), 'game_targets': game,
+            'non_game_region00_operands': non_game,
+            'byte_inputs': 256, 'call_inputs': call_inputs,
+            'game_call_inputs': sum(operand_inputs[item['raw']] for item in game),
+            'non_game_region00_call_inputs': sum(operand_inputs[v] for v in non_game),
+            'owner': owner['name'], 'source_sha256': row['source_sha256'],
+            'owner_entry_address': entry, 'load_rom_offset': load,
+            'literal_rom_offset': literal,
+            'read_window_rom_offset': window, 'read_window_bytes': 128,
+            'read_window_sha256': row['read_window_sha256'],
+            'veneer_address': BASE + veneer,
+            'reachable_instruction_count': len(nodes),
+            'scope': ('First branch on ordinary paths from the pinned ROM owner '
+                      'entry, through the captured byte, immutable ROM read '
+                      'window and BX R3 veneer. All 256 byte values are included.'),
+            'limitation': ('Read-window size is not callback-table capacity. '
+                           'Saved-state validity, arbitrary interior entry, '
+                           'modified code/data, region-00 fetch behavior, '
+                           'subsequent execution and runtime safety remain separate.'),
+        },
+    }
+
+
+def annotate_operand_records(results, physical, validated):
+    """Atomically attach ownership facts without changing callback semantics."""
+    _require(all(isinstance(row, dict)
+                 and type(row.get('rom_offset')) is int
+                 and type(row.get('veneer_address')) is int
+                 and isinstance(row.get('bounded_branch_operands'), dict)
+                 for row in validated), 'invalid validated operand record')
+    by_site = {row['rom_offset']: row for row in validated}
+    _require(len(by_site) == len(validated), 'duplicate operand call site')
+    found, pending = set(), []
+    for result in results.values():
+        for record in result['transfer_records']:
+            site = physical(record['site'])
+            if site not in by_site:
+                continue
+            row = by_site[site]
+            _require(record['site'] == BASE + site,
+                     'ROM operand proof cannot annotate a copied call alias')
+            _require(record['kind'] in ('register_veneer_call', 'observed_table_call')
+                     and record.get('veneer_address') == row['veneer_address'],
+                     'decoded transfer does not match the operand veneer call')
+            _require('bounded_branch_operands' not in record,
+                     'decoded call already has operand evidence')
+            pending.append((record, row['bounded_branch_operands']))
+            found.add(site)
+    _require(found == set(by_site), 'operand annotation lacks a decoded call')
+    for record, bounded in pending:
+        record['bounded_branch_operands'] = bounded

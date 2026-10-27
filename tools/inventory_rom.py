@@ -17,7 +17,8 @@ from inventory_partition import partition, overlay
 from control_flow import thumb_switch, constant_result, stack_return
 from ram_copies import validate_copy
 from indirect_evidence import record_tables, phase_targets, validate_fixed_target, annotate_records, literal_veneers
-from bounded_indirect import validate_bounded_table, annotate_bounded_records
+from bounded_indirect import (validate_bounded_table, annotate_bounded_records,
+                              validate_saved_volume_operands, annotate_operand_records)
 from fixed_target_proof import prove_fixed_target
 from inventory_census import census, verify_census, source_instruction_role_spans
 
@@ -401,6 +402,18 @@ def main():
             lambda f: hashlib.sha256((ROOT/f['source']).read_bytes()).hexdigest()))
         evidence_inputs.add(next(f['source'] for f in manifest['functions']
                                  if f['name'] == row['owner']))
+    operand_domains = []
+    for row in evidence_config.get('bounded_branch_operands', []):
+        if row['rom_offset'] in fixed_sites:
+            raise ValueError('Branch-operand proof also has a fixed-target annotation')
+        domain = validate_saved_volume_operands(
+            row, scanner, manifest['functions'],
+            lambda f: hashlib.sha256((ROOT/f['source']).read_bytes()).hexdigest())
+        operand_domains.append(domain)
+        proof_owners = {row['owner']} | {
+            target['owner'] for target in domain['bounded_branch_operands']['game_targets']}
+        evidence_inputs.update(f['source'] for f in manifest['functions']
+                               if f['name'] in proof_owners)
     for address in literal_veneers(scanner, evidence_config['audio_literal_veneers']):
         scanner.seed(address, 'Thumb', 'audited dispatch entry')
     veneers = evidence_config['register_veneer_sequence']
@@ -528,6 +541,7 @@ def main():
     annotate_records(scanner.results, scanner.physical,
                      evidence_config['indirect_producers'], evidence_config['fixed_targets'])
     annotate_bounded_records(scanner.results, scanner.physical, bounded_calls)
+    annotate_operand_records(scanner.results, scanner.physical, operand_domains)
     # Merge RAM/ROM aliases at physical entry. They receive a single ROM tile.
     merged = {}
     for key, result in scanner.results.items():
@@ -619,6 +633,8 @@ def main():
               'folded_block_entries': folded, 'discarded_mode_candidates': discarded_modes, 'mode_conflicts': mode_conflicts,
               'transfer_records': sorted({r['rom_offset']: r for row in rows for r in row.get('transfer_records', [])}.values(), key=lambda r: r['rom_offset']),
               'unresolved_indirect_call_sites': unresolved_callback_sites(rows),
+              'bounded_branch_operand_sites': sorted(
+                  domain['rom_offset'] for domain in operand_domains),
               'initial_connected_entries': graph_count, 'connected_main_last_instruction': main_end,
               'unresolved_transfer_sites': sorted({p for r in rows for p in r['unresolved_transfer_offsets']}), 'whole_rom_prologue_hits': len(prologues),
               'sweep_seed_count': len(sweep_candidates),

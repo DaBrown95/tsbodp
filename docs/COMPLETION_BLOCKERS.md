@@ -84,9 +84,11 @@ when new evidence changes its prospects; work on the remaining non-provider rows
   writers give zero through three or 255. Excluding view four requires that
   every fresh count preserve this domain across providers, callbacks, IRQ work
   and other aliases; complete writer/target populations remain open.
-- The immediate audio volume selector has ten validated targets; its later
-  saved-byte consumer and shared dispatch table remain open. Collision/audio
-  writers, aliases and executable modifications still need ownership evidence.
+- The immediate audio volume selector has ten validated targets. The later
+  [saved-byte call's first-hop operands](WHOLE_ROM_INVENTORY.md#saved-volume-first-hop-operands)
+  now require only six existing game-code owners; six other operands lie outside
+  game ROM and work RAM. Saved-state/table validity and subsequent execution
+  remain open, as do collision/audio writers, aliases and executable changes.
 - The `0xE1EE` interior-entry-shaped value has a palette-data role but no proven
   executable consumer/prepared-R1 contract. Other code-looking data and copied
   prefixes retain explicit uncertainty.

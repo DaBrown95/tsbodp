@@ -938,7 +938,8 @@ connected audio targets; the core 776-byte instrument processor already matches.
 The indirect volume-column call at `0x0804A382` can select only the ten
 corroborated callback records at `0x08D6F77C`. This is a local static target
 bound, adding no source bytes or runtime observation. The separate between-row
-call at `0x0804A3F8` remains dependent on saved track state.
+call at `0x0804A3F8` retains an open saved-state/table validity invariant. Its
+direct game-code ownership is now bounded separately.
 
 On every ordinary local path from `audio_player_process_row` at `0x08049F64`,
 the volume register comes from zero initialization or an unsigned byte load.
@@ -967,6 +968,13 @@ control flow, byte provenance, guard, selector operations, table and veneer
 before marking that physical call site complete. A stale source pin, bypassing
 path or changed operation rejects the annotation. This removes one unresolved
 call-site observation without adding an entry, instruction or source byte.
+
+A separate [first-hop operand proof](WHOLE_ROM_INVENTORY.md#saved-volume-first-hop-operands)
+now checks all 256 byte values at the between-row call. Its twelve possible raw
+operands comprise six accepted game entries and six region-`0x00` values outside
+game ROM and work RAM. No additional direct game-code owner is required. This
+does not establish valid saved state, enlarge the ten-record table or close its
+existing callback-completeness flag. No new runtime execution is claimed.
 
 The neighbouring track-effect call at `0x0804A1A0` remains open. Its effect byte
 is multiplied by twelve without a capacity guard. A fixed-ROM instruction model

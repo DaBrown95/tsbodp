@@ -991,6 +991,32 @@ overlaps retain explicit ambiguity. Excluded raw observations remain visible.
 Tests cover those conflicts, missing/changed evidence and serialized role/owner
 tampering. Complete code ownership and alternate incoming execution remain open.
 
+## Saved volume first-hop operands
+
+The between-row call at `0x0804A3F8` now has a complete local **branch-operand**
+domain. Its captured unsigned byte, high-nibble selector, immutable ROM reads
+and `BX R3` veneer admit twelve raw operands across all 256 byte values. Six
+select exact accepted Thumb source entries. The other six have address region
+`0x00`, outside cartridge and work RAM; no additional direct game-code owner is
+required by this call. Their later execution or invalid-fetch behavior is not
+established, including an ARM operand with bit one set.
+
+The separate `bounded_branch_operands` proof in
+[code evidence](../config/code-evidence-us-eu.json) validates the complete owner
+CFG, sole sequential predecessors from byte load to capture, native arithmetic,
+flag-byte read, source/data pins and veneer. The 128-byte **read window** is not
+a declaration of sixteen callback records: its final 48 bytes already have a
+sine-data role. The checker derives the operands and source-owner entries;
+metadata cannot supply a trusted target list. A RAM target, an unowned game
+entry, a wrong-mode entry, bypass edge or changed native premise rejects it.
+
+This property quantifies every possible saved byte, so earlier writers cannot
+enlarge its direct operand set. It does not prove that saved state is valid or
+extend the ten-row callback table. Existing `targets_complete: false`, the
+97 unresolved callback observations, source counts and mapped extents remain
+unchanged. Other consumers, arbitrary interior entries, modified code/data and
+behavior after the six non-game operands remain separate obligations.
+
 ## Named domains around the twelve-byte node-pool gap
 
 The twelve bytes at `0x1DB20..0x1DB2C` retain no independent executable entry or

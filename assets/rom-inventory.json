@@ -4040,15 +4040,96 @@
       "producer_evidence": {
         "rom_offset": 304120,
         "target_origin": "fixed_ROM_table",
-        "producer": "ROM0x08D6F77C +8*(volume_effect byte>>4) +0",
+        "producer": "Captured unsigned track byte+0x5D, high-nibble index, immutable ROM flag byte and target word at0x08D6F77C+8*index; full256-byte first-hop operand domain is validated separately.",
         "observed_table": "audio_volume_effects",
         "field": 0,
         "writer_roles": [],
         "source_owners": [
           "audio_player_process_between_row"
         ],
-        "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
-        "confidence": "static native/source producer; populations and ABI remain provisional"
+        "remaining_uncertainty": "The ten-row callback-table and saved-state validity invariant remain open. The separate bounded first-hop proof covers every byte without asserting table capacity, reaching writers, non-game execution or runtime safety.",
+        "confidence": "Native source-entry CFG, unique load-to-capture predecessors, immutable128-byte read window and BX-R3 veneer; all game-ROM direct operands have exact source owners. This does not set targets_complete."
+      },
+      "bounded_branch_operands": {
+        "proof_kind": "thumb_saved_volume_operands_v1",
+        "branch_operands_complete": true,
+        "game_direct_targets_owned": true,
+        "raw_operands": [
+          1638400,
+          7864418,
+          12910772,
+          14745836,
+          15991020,
+          16646399,
+          134527637,
+          134530533,
+          134530613,
+          134530969,
+          134531057,
+          134531149
+        ],
+        "game_targets": [
+          {
+            "owner": "audio_volume_effect_vibrato",
+            "raw": 134527637,
+            "address": 134527636,
+            "mode": "Thumb"
+          },
+          {
+            "owner": "audio_volume_effect_slide_down",
+            "raw": 134530533,
+            "address": 134530532,
+            "mode": "Thumb"
+          },
+          {
+            "owner": "audio_volume_effect_slide_up",
+            "raw": 134530613,
+            "address": 134530612,
+            "mode": "Thumb"
+          },
+          {
+            "owner": "audio_volume_effect_pan_slide_left",
+            "raw": 134530969,
+            "address": 134530968,
+            "mode": "Thumb"
+          },
+          {
+            "owner": "audio_volume_effect_pan_slide_right",
+            "raw": 134531057,
+            "address": 134531056,
+            "mode": "Thumb"
+          },
+          {
+            "owner": "audio_volume_effect_portamento",
+            "raw": 134531149,
+            "address": 134531148,
+            "mode": "Thumb"
+          }
+        ],
+        "non_game_region00_operands": [
+          1638400,
+          7864418,
+          12910772,
+          14745836,
+          15991020,
+          16646399
+        ],
+        "byte_inputs": 256,
+        "call_inputs": 191,
+        "game_call_inputs": 95,
+        "non_game_region00_call_inputs": 96,
+        "owner": "audio_player_process_between_row",
+        "source_sha256": "f541ed81a46529f10a6179c656949d712e59fce9f94e4e9295a5dbfa8d09eefc",
+        "owner_entry_address": 134521800,
+        "load_rom_offset": 304092,
+        "literal_rom_offset": 304200,
+        "read_window_rom_offset": 14088060,
+        "read_window_bytes": 128,
+        "read_window_sha256": "86b3f81fd2c6b1a059cf29c9bf0c93b18d857e7a626415b4386d68f6d11e92bf",
+        "veneer_address": 134532348,
+        "reachable_instruction_count": 59,
+        "scope": "First branch on ordinary paths from the pinned ROM owner entry, through the captured byte, immutable ROM read window and BX R3 veneer. All 256 byte values are included.",
+        "limitation": "Read-window size is not callback-table capacity. Saved-state validity, arbitrary interior entry, modified code/data, region-00 fetch behavior, subsequent execution and runtime safety remain separate."
       },
       "rom_offset": 304120
     },
@@ -5851,6 +5932,9 @@
     16626380,
     16626452,
     16627112
+  ],
+  "bounded_branch_operand_sites": [
+    304120
   ],
   "initial_connected_entries": 2567,
   "connected_main_last_instruction": 134539998,
@@ -86014,15 +86098,96 @@
           "producer_evidence": {
             "rom_offset": 304120,
             "target_origin": "fixed_ROM_table",
-            "producer": "ROM0x08D6F77C +8*(volume_effect byte>>4) +0",
+            "producer": "Captured unsigned track byte+0x5D, high-nibble index, immutable ROM flag byte and target word at0x08D6F77C+8*index; full256-byte first-hop operand domain is validated separately.",
             "observed_table": "audio_volume_effects",
             "field": 0,
             "writer_roles": [],
             "source_owners": [
               "audio_player_process_between_row"
             ],
-            "remaining_uncertainty": "Other writable assignments/caller domains are not exhausted.",
-            "confidence": "static native/source producer; populations and ABI remain provisional"
+            "remaining_uncertainty": "The ten-row callback-table and saved-state validity invariant remain open. The separate bounded first-hop proof covers every byte without asserting table capacity, reaching writers, non-game execution or runtime safety.",
+            "confidence": "Native source-entry CFG, unique load-to-capture predecessors, immutable128-byte read window and BX-R3 veneer; all game-ROM direct operands have exact source owners. This does not set targets_complete."
+          },
+          "bounded_branch_operands": {
+            "proof_kind": "thumb_saved_volume_operands_v1",
+            "branch_operands_complete": true,
+            "game_direct_targets_owned": true,
+            "raw_operands": [
+              1638400,
+              7864418,
+              12910772,
+              14745836,
+              15991020,
+              16646399,
+              134527637,
+              134530533,
+              134530613,
+              134530969,
+              134531057,
+              134531149
+            ],
+            "game_targets": [
+              {
+                "owner": "audio_volume_effect_vibrato",
+                "raw": 134527637,
+                "address": 134527636,
+                "mode": "Thumb"
+              },
+              {
+                "owner": "audio_volume_effect_slide_down",
+                "raw": 134530533,
+                "address": 134530532,
+                "mode": "Thumb"
+              },
+              {
+                "owner": "audio_volume_effect_slide_up",
+                "raw": 134530613,
+                "address": 134530612,
+                "mode": "Thumb"
+              },
+              {
+                "owner": "audio_volume_effect_pan_slide_left",
+                "raw": 134530969,
+                "address": 134530968,
+                "mode": "Thumb"
+              },
+              {
+                "owner": "audio_volume_effect_pan_slide_right",
+                "raw": 134531057,
+                "address": 134531056,
+                "mode": "Thumb"
+              },
+              {
+                "owner": "audio_volume_effect_portamento",
+                "raw": 134531149,
+                "address": 134531148,
+                "mode": "Thumb"
+              }
+            ],
+            "non_game_region00_operands": [
+              1638400,
+              7864418,
+              12910772,
+              14745836,
+              15991020,
+              16646399
+            ],
+            "byte_inputs": 256,
+            "call_inputs": 191,
+            "game_call_inputs": 95,
+            "non_game_region00_call_inputs": 96,
+            "owner": "audio_player_process_between_row",
+            "source_sha256": "f541ed81a46529f10a6179c656949d712e59fce9f94e4e9295a5dbfa8d09eefc",
+            "owner_entry_address": 134521800,
+            "load_rom_offset": 304092,
+            "literal_rom_offset": 304200,
+            "read_window_rom_offset": 14088060,
+            "read_window_bytes": 128,
+            "read_window_sha256": "86b3f81fd2c6b1a059cf29c9bf0c93b18d857e7a626415b4386d68f6d11e92bf",
+            "veneer_address": 134532348,
+            "reachable_instruction_count": 59,
+            "scope": "First branch on ordinary paths from the pinned ROM owner entry, through the captured byte, immutable ROM read window and BX R3 veneer. All 256 byte values are included.",
+            "limitation": "Read-window size is not callback-table capacity. Saved-state validity, arbitrary interior entry, modified code/data, region-00 fetch behavior, subsequent execution and runtime safety remain separate."
           },
           "rom_offset": 304120
         },
@@ -138535,15 +138700,15 @@
     }
   ],
   "input_sha256": {
-    "tools/inventory_rom.py": "452b30758e765b20d390f04d05b39892cb86e075e0945ab8ee22fdd6dd411957",
+    "tools/inventory_rom.py": "c7f582dffd53c5e38d387f9472f8006a5f7e855c4b2d25379c5ba60421d24b36",
     "tools/control_flow.py": "225048329459429d84b7e44472833d05c7593ae14873ce0c36bc97653f5d97f9",
     "tools/inventory_partition.py": "5838852221fa7a38767ccd701d27ca398309bc55951bc0f294e306f7bebbe89c",
     "tools/ram_copies.py": "5e429b3d6efa9666a90c97b892f66cf6203294dad0c277f82700b4f521b7f3c1",
     "tools/indirect_evidence.py": "5df8e0fa17096b86737b158d57fd2122b6b16d20aeda2994fecb087a1bf5f53d",
-    "tools/bounded_indirect.py": "d088b8112475def63678ba18b4f6df83bc1a37020a81cf21bd77d0c434c33cee",
+    "tools/bounded_indirect.py": "5deae998a3ba064943059b73862aa93220490f69e0ecc6d708de8ca8d3c79563",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
-    "config/code-evidence-us-eu.json": "82a2dc7e5d3623704ce169339588c234584df1868e9bd38c5f61b81ef2f4294c",
+    "config/code-evidence-us-eu.json": "401a4b4c5a66fe105c12f2fc8c95f96b43bee17eca9d6cd4603e0e55bc3f3645",
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
@@ -138617,6 +138782,8 @@
     "src/audio/select_sequence.c": "12d414118fe110244ff5a96bb2168b38cf93b3e70e74c81bf1f6a4f3b5be739c",
     "src/audio/sync_game_state.c": "cd3adb15e543544a96470f02a0c034056279f2998c3c936ddd645c05e342daa2",
     "src/audio/update_channel_volumes.c": "c9278af986b4c2c46ee968e486316f4c8c3ad36141715ac12f323b8dfc342cc9",
+    "src/audio/volume_effect_pan_slide_left.c": "fe3a0f3090ef63d3ac4e870f6f3525227cc6569c6252d842566f305ed8061b5a",
+    "src/audio/volume_effect_pan_slide_right.c": "2e3205ccda741c3184105c3a98729e675e452b88b6afabc7b9bdf730b9649345",
     "src/audio/volume_effect_portamento.c": "02d2ba6a7f9c103c3ba0df311f249eb550d4d65d345b582c74c7250e87efc615",
     "src/audio/volume_effect_slide_down.c": "d07c3a79c8a2162b58ea6fab4ab6723f781f61b0b43f62c4d873ca5bc960f7ba",
     "src/audio/volume_effect_slide_down_fine.c": "9248ccbcb0b38f630fd019c5e5321ae2919e84df1b9aa9fc5391fc2db14128a8",
