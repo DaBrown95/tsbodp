@@ -261,27 +261,27 @@ provider execution or hardware/gameplay evidence.
 
 Preparation at `0x08019640` still has no accepted replacement. Its native
 544-byte extent contains 522 instruction, 20 literal and two alignment bytes.
-A private source now separates the call-free phase search from the phase saved
-on its successful edge. The selected-row and working-phase inductions survive;
-of the two phase values, only the accepted snapshot crosses later calls.
-A four-word eligibility view and a short state-root
-snapshot also recover the native memory-backed flags and one root load for the
-three availability reads. That composition emits 532 bytes with 480 differences.
-It does not recover the native frame or value homes.
+The preferred private source remains a nonmatch: 528 bytes / 371 full-extent
+byte differences, with a 48-byte frame instead of 52. Native position R5/R6,
+call-free X/Y streams R2/R3, count IP and index R4 are recovered. Four ordinary
+bound stores retain their SP+0/+4/+8/+12 backing; qualifying only the existing
+lower-X and upper-Y reads recovers the two native reloads. This records memory
+observations, without asserting an original volatile declaration.
 
-A separate diagnostic starts from the ordinary scalar phase-split source and
-constrains only the actual persistent object owner to native R8. Every object
-use, including the final position argument, uses that
-owner; the incoming duplicate dies before any random call. The actual providers
-preserve R8. This confirms the owner lifetime but emits 536 bytes with 499
-differences and displaces amount, palette and availability values. One subsequent
-composition also preserves the actual native amount in R10 and palette in R9.
-All three homes survive, but the result is 536 bytes with 492 differences and
-a 48-byte frame rather than 52. The selected-row and accepted phase-snapshot
-homes now agree; the accepted flag, availability values and output arguments
-do not.
-This closes that register composition. Further bindings, stack records or
-declaration-order searches need a distinct storage or lifetime fact.
+The ordinary accepted flag already retains its initial loop test. No hidden
+writer or volatile flag is needed to explain it. Moving the three output
+pointer declarations to their actual first producer recovers the measured
+spill order: accepted at SP+24 and two availability flags at SP+28/+32. The
+third availability flag still occupies R7, leaving the output pointers at
+SP+36/+40/+44 instead of SP+40/+44/+48.
+
+The next constraint is ordinary phase induction and allocation: native working
+phase R4, state-address base R7 and the fourth flag spill must coexist. A hard
+R4 induction constraint is rejected because the compiler excludes hard
+registers from its induction optimization and loses native pointer stepping.
+Retained single-phase sources instead spill on resets and decrements; existing
+matching scans do not establish an automatic working/snapshot split. Neither
+forced flag storage nor another declaration or register grid follows.
 
 The fixed tables establish a conditional bound for option 0..4: selection stays
 within the five row records, phase indices stay within 0..6, and acceptance

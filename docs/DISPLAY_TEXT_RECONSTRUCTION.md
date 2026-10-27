@@ -282,10 +282,8 @@ separate from the DMA transfer performed by the text object update.
 Tile flipping reverses eight rows of eight bytes in mode one. Otherwise it
 reverses four packed bytes per row and swaps each byte's nibbles, preserving
 the corresponding eight-pixel horizontal flip. This is the direct dependency
-of the still-unconverted row reader when map flip bit `0x400` is set. The
-remaining row reader at `0x0801B300` (140) remains outside coverage; its semantic
-candidates and raw mismatches are retained locally. The preceding nine accepted
-bodies are ordinary C without fixed
+of the reconstructed row reader when map flip bit `0x400` is set. The preceding
+nine support bodies are ordinary C without fixed
 register constraints. Fresh font measurement, line selection, alignment,
 transfer and catalog closures also match after the shared font refinement,
 and their actual controls remain preserved. This compiler evidence does not
@@ -309,30 +307,35 @@ also rejects. Seven connected functions pass normal/strict comparisons and
 their source controls. The parser, font tables, pixel and formed-pointer
 domains, 256-byte scratch capacity and row/map/tile provider contracts remain
 unchecked native preconditions; matching source does not establish safe input
-populations or gameplay behavior. The original row reader remains explicit.
+populations or gameplay behavior. The row reader now has its own matching owner.
 
-The row reader's native inner sequence is now traced to the pinned compiler's
-`inc_for_reload`: a `POST_INC` cursor allocated to a high register needs a low
-scratch, commits the advanced high value, restores the old address, then uses
-STM. An explicit R8 cursor is rejected as a postincrement address before that
-stage. Safe four-byte representation copies scalarize and retain the failed
-136/117 output. Removing the explicit destination owner permits real LDM/STM
-postincrements and removes the local frame, but chooses R7 and remains 124/111.
-A genuine inline copy operation returning the advanced ordinary cursor also
-retains both postincrements; its shorter call-free cursor takes R2, with R8
-updated only at loop exit, and remains 132/125. Neither matches the native
-140-byte extent. Giving the one existing tile-size load its native R2 phase
-preserves both real consumers and repairs entry R3, word count R2 and inner
-sentinel R1, but still assigns destination R7/state R8 and remains 124/123.
-This closes the current copy branch. The next useful source must explain the
-ordinary cursor's high-register lifetime; another aggregate-copy spelling does
-not address it.
-The existing 160-byte emitter and 104-byte flip provider still match with
-their actual controls. Sources and pass evidence remain in
-`analysis/text-row5-representation-copy-20261027/` and
-`analysis/text-row6-copy-result-20261027/`, with the final phase test in
-`analysis/text-row7-size-load-phase-20261027/`; backing and alignment premises
-remain conditional, with no new source or runtime credit.
+The row reader at `0x0801B300` now has a matching 140-byte C owner: 132
+instruction and eight literal bytes. It reads the map's ten-bit tile index,
+copies `tile_bytes / 4` words, flips the copied tile when bit `0x400` is set,
+and advances the map by 32 halfwords per row. The ordinary destination cursor
+naturally occupies R8. Its word postincrement reaches the compiler's genuine
+high-register reload fallback, which uses a low scratch to advance the high
+cursor and store through the old address. No explicit high-cursor constraint
+or copied instruction sequence is used.
+
+The current map and next-map snapshot have distinct lifetimes. Actual native
+register owners preserve those phases, the shared tile-index/sentinel/mask
+word, and the fresh tile-size observation before flipping. The ten-bit mask
+fits a halfword. The flip condition is narrowed only after its AND with the
+zero-extended map entry, so its entire result also fits a halfword. These
+promotions preserve the native copies without extra zero-extension operations.
+A logging-only compiler observer independently explains why the prior two-byte
+near miss selected a different scratch; its emitted output agrees with the
+pinned compiler. Acceptance compares the complete unmodified linked extent.
+
+Normal and strict builds are exact; changing the real flip mask rejects by
+two bytes. The existing 160-byte emitter and 104-byte flip provider retain
+their matches and source controls. A bounded native replay passes 136 cases,
+including actual font-renderer output and compatible word-buffer aliases;
+the original flip provider executes, and the mask control changes 32 cases.
+Five invalid fixtures reject. Backing, alignment, formed pointers and
+map/tile/state alias restrictions remain conditional; source ownership does
+not establish all inputs, writers or gameplay behavior.
 
 A single current canonical rasterizer diagnostic moves the existing unsigned
 text cursor initialization before the initial map/read-or-fill calls. Native
@@ -400,8 +403,8 @@ all-lines loop does not detect a line-selection call that leaves the string
 pointer unchanged, and the height loop does not validate a positive line
 height. Progress, valid buffer capacity and safe text inputs remain runtime
 questions. These three bodies use ordinary C without register constraints or
-assembly, and the row reader and rasterizer remain explicit unconverted
-dependencies.
+assembly. Their row reader and rasterizer dependencies now have matching
+source owners; the caller matches alone do not prove runtime safety.
 
 ## Staging fields and expansion consumers
 

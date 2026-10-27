@@ -1,13 +1,13 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,479 C functions / 313,484 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 317,544 bytes; original slices
-still supply 16,459,672 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,480 C functions / 313,624 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 317,684 bytes; original slices
+still supply 16,459,532 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The fixed 319,640 mapped extent
 bytes are solely a historical comparison, not a complete code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **20 unowned rows / 8,134 estimated
+and generated [triage](TRIAGE.md) contain **19 unowned rows / 7,994 estimated
 bytes**. The triage records complete candidate comparisons and retained inputs;
 none of those candidates receives source credit. Completed paths and their
 findings remain in the owner documents and publication history.
@@ -39,8 +39,7 @@ findings remain in the owner documents and publication history.
 | Map-collapse `0x495C4` (116), inverse projector `0x48BF8` (88 compared) | Collapse remains 116/3; its earlier offset reload advances the spill rotation before the duration address. The inverse's 88/2 remains unqualified because its local-point stores have no source consumer. Genuine wide affine partials demonstrate a retained R5 save after late high-word deletion, but regroup the arithmetic and remain nonexact. A native-order late addend pair survives, yet its copies remain; binding that real pair to R4 is bypassed by COMBINE. Another owner binding repeats this cause. See [map selection](SCENE_MAP_SELECTION.md) and [projection](FRAME_INPUT.md). |
 | Copied ARM map drawer `0xB564` (320) | Map transfer, tile decoder and 284-byte sorter now have source; this drawer and additional copied prefixes remain original. Aggregate/row-cursor forms remain nonexact. See [RAM installations](../config/ram-map-us-eu.json) and [decoder](RESOURCE_BACKGROUND_DECODER.md). |
 | Palette `0x11C60` (400) | Palette observation and induction boundaries remain unresolved. Navigation and the selection builder now have matching source owners. See [actor entries](ACTOR_ENTRIES_RECONSTRUCTION.md), [palette menu](SCENE_PALETTE_MENU.md) and [palette lifecycle](DISPLAY_PALETTE_LIFECYCLE.md). |
-| Scene objects `0x28234` (160), activity-three preparation `0x19640` (544) | A real packed-step/X-consumer fork improves the object candidate to 160/71 and preserves one X recurrence with an in-loop Y multiply; restoring the origin's R4-to-R8 phase loses that shape. Preparation can recover ten native fixed word homes, but its accepted-flag reload and coordinate lifetimes remain wrong. Drawing now has a matching 368-byte source owner: separate incoming/raster Y values and a read-only working-X snapshot recover the native twelve-byte frame; actual consumed native register owners recover the remaining phases. Hard-R7 models remain rejected by emitted behavior. The connected 320-byte raster worker also has source. Full input/writer domains remain open. See [activity three](SCENE_CONTACT_ACTIVITY_THREE.md) and [object interfaces](FRAME_INPUT.md). |
-| Text row reader `0x1B300` (140) | Canonical 140/73 remains. Native's scratch/update/store sequence is GCC's high-register `POST_INC` reload fallback. The inherited explicit R8 cursor prevents this operation forming; an ordinary cursor retains LDM/STM and removes the frame, but takes R7 (124/111). A real inline copy-result boundary takes R2 (132/125); the native tile-size phase repairs three other homes without repairing the cursor (124/123). This copy branch is closed. A new source must explain a genuinely ordinary cursor's high home. See [text reconstruction](DISPLAY_TEXT_RECONSTRUCTION.md). |
+| Scene objects `0x28234` (160), activity-three preparation `0x19640` (544) | A real packed-step/X-consumer fork improves the object candidate to 160/71 and preserves one X recurrence with an in-loop Y multiply; restoring the origin's R4-to-R8 phase loses that shape. Preparation recovers native geometry roles and its two bound-memory reloads, but remains 528/371: the fourth availability flag stays in R7 and displaces output pointers. Its ordinary accepted test already survives; a hard phase-R4 constraint breaks induction optimization. Drawing now has a matching 368-byte source owner: separate incoming/raster Y values and a read-only working-X snapshot recover the native twelve-byte frame; actual consumed native register owners recover the remaining phases. Hard-R7 models remain rejected by emitted behavior. The connected 320-byte raster worker also has source. Full input/writer domains remain open. See [activity three](SCENE_CONTACT_ACTIVITY_THREE.md) and [object interfaces](FRAME_INPUT.md). |
 | Relation delta `0x40AB4` (692), catalog confirmation `0x42964` (656) | A genuine body-local history address keeps normal GCSE from hoisting it over the earlier criterion loop; the delta's actual history/request/code setup order now agrees, but field-pointer/byte-carrier allocation remains wrong (692/306). Disabling GCSE breaks the matched neighbor. Confirmation now retains all four outcome stores/two reads; a real R2 success producer prevents late cross-jump merging. Its early request/state/list/record lifetimes and zero producer remain wrong (652/596). These are source/dataflow constraints, not missing constant offsets. |
 | Other menu, geometry, text and resource workers | Pending cleanup `0xA0A4` remains 292/2. Its first reload pool is sorted R0/R1/R2; changing admission chronology cannot select native R2 while R0 stays free. A real first-count producer admits R2 but splits the common loop header (308/212), so that formulation is closed. A fresh by-value `0x67E0` sample adds a separate input spill. Selected-tile `0x39CF0` reproduces 392/109 under the canonical API; inner-loop syntax does not explain its reloads. Other rows include `0x48A14` and `0x48AF8`. The 692-byte text renderer now has a matching source owner. |
 | Serial IRQ `0x3DC48` (1,616) | Preserve the 1,624/809 baseline. A symbolic MMIO member owner adds reads; scalar indirect accesses restore the read/write sites but derive receive addresses from control and create an extra R9 SEND carrier. These formulations are closed. A genuine owner/consumer fact must preserve the independent native accesses and R3 handoff. See [serial](SERIAL_HANDSHAKE.md). |
@@ -60,7 +59,7 @@ the native eight-byte coordinate work; their failed sources remain private.
 The serial record provider **`0x3D788` is parked** at 200 bytes / one difference.
 Preserve its best candidate and both compiler investigations described in
 [SERIAL_HANDSHAKE.md](SERIAL_HANDSHAKE.md#remaining-record-provider). Reopen only
-when new evidence changes its prospects; work on the other nineteen rows.
+when new evidence changes its prospects; work on the other eighteen rows.
 
 ## Executable-inventory obligations
 
@@ -91,6 +90,12 @@ The current census separately counts instructions, data, alignment, estimated
 extents and unresolved bytes. Source matches establish no new runtime execution.
 
 ## Latest accepted gain and final gate
+
+The [text row reader](DISPLAY_TEXT_RECONSTRUCTION.md) at `0x1B300` adds one
+function / 140 C extent bytes. Bounded halfword masks and narrowing the actual
+condition after its AND preserve the native copies and reload order. The
+ordinary high cursor retains native postincrement behavior; no forced R8
+cursor, extra observation or output patch is used.
 
 The [event drawing owner](SCENE_CONTACT_ACTIVITY_THREE.md) at `0x19D80` adds
 one function / 368 C extent bytes, including its literal pools and alignment.

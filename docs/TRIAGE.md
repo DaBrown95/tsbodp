@@ -1,6 +1,6 @@
 # Remaining C triage
 
-20 unowned inventory rows / 8,134 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
+19 unowned inventory rows / 7,994 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
 
 Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py --check`. Private evidence may be unavailable on another checkout; recorded rows then say so. Historical active effort and search wall time are unrecorded, not zero.
 
@@ -13,14 +13,13 @@ Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py -
 | `0x0B564` | `frame_map_draw_iwram` | 320 | 320 / 116 | 320 | attempted | — | canonical-current |
 | `0x0F034` | `sub_0800F034` | 308 | 308 / 4 | 308 | near-miss | 3 | canonical-current |
 | `0x11C60` | `sub_08011C60` | 400 | 400 / 108 | 400 | attempted | — | canonical-current |
-| `0x19640` | `sub_08019640` | 544 | 532 / 417 | 544 | attempted | — | canonical-current |
-| `0x1B300` | `sub_0801B300` | 140 | 140 / 73 | 140 | attempted | — | canonical-current |
+| `0x19640` | `sub_08019640` | 544 | 528 / 371 | 544 | attempted | — | canonical-current |
 | `0x28234` | `sub_08028234` | 160 | 160 / 71 | 160 | attempted | — | canonical-current |
 | `0x39CF0` | `sub_08039CF0` | 392 | 392 / 109 | 392 | attempted | — | canonical-current |
 | `0x3D788` | `sub_0803D788` | 200 | 200 / 1 | 200 | near-miss | 1 | canonical-current |
 | `0x3DC48` | `link_serial_interrupt` | 1616 | 1624 / 809 | 1616 | attempted | — | private-provisional |
 | `0x40AB4` | `sub_08040AB4` | 692 | 692 / 306 | 692 | attempted | — | canonical-current |
-| `0x42964` | `sub_08042964` | 656 | 652 / 596 | 656 | attempted | — | private-provisional |
+| `0x42964` | `sub_08042964` | 656 | 652 / 594 | 656 | attempted | — | private-provisional |
 | `0x48A14` | `sub_08048A14` | 68 | 68 / 10 | 68 | near-miss | 6 | canonical-current |
 | `0x48AF8` | `sub_08048AF8` | 126 | 128 / 112 | 128 | attempted | — | canonical-current |
 | `0x48BF8` | `sub_08048BF8` | 86 | 88 / 2 | 88 | near-miss | — | canonical-current |

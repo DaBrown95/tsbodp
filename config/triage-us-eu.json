@@ -2,17 +2,17 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 20,
-    "inventory_bytes": 8134,
+    "rows": 19,
+    "inventory_bytes": 7994,
     "statuses": {
       "near-miss": 7,
-      "attempted": 12,
+      "attempted": 11,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
       "near-miss": 2468,
-      "attempted": 5542,
+      "attempted": 5402,
       "untouched": 0,
       "suspected-not-C": 124
     }
@@ -101,11 +101,12 @@
           "-mthumb-interwork"
         ]
       },
-      "retained_attempt_contexts": 77,
-      "eligible_diagnostic_contexts": 55,
+      "retained_attempt_contexts": 81,
+      "eligible_diagnostic_contexts": 57,
       "excluded_contexts": {
+        "Explicit semantic rejection or unqualified source": 1,
         "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 12,
+        "Missing or malformed retained input": 13,
         "No retained assessment": 6,
         "Retained linked ELF unavailable": 1,
         "Stale or unqualified private header": 2
@@ -219,10 +220,11 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 17,
-      "eligible_diagnostic_contexts": 15,
+      "retained_attempt_contexts": 21,
+      "eligible_diagnostic_contexts": 17,
       "excluded_contexts": {
-        "Missing or malformed retained input": 1,
+        "Explicit semantic rejection or unqualified source": 1,
+        "Missing or malformed retained input": 2,
         "Stale or unqualified private header": 1
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -511,25 +513,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": true,
-      "c_draft": "analysis/activity-three-19640-canonical-replay-20261027/canonical-current/source.c",
+      "c_draft": "analysis/activity-three-19640-control-owner-20261027/pointer-birth/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/activity-three-19640-canonical-replay-20261027/canonical-current/source.c",
-        "source_sha256": "28215dc6779996d5010af4f47fefe4262f11f5778eabd65036431f8b206912d9",
-        "metadata": "analysis/activity-three-19640-canonical-replay-20261027/canonical-current/metadata.json",
-        "metadata_sha256": "906cd13d6d4484f32263375f914ff6e32c4cbe7af079e53d3ee038d20d9bb46d",
-        "receipt": "analysis/activity-three-19640-canonical-replay-20261027/canonical-current/result.json",
-        "receipt_sha256": "f9e6711fe6613e825f6cdb0c191b5e4370f7fd8368d1bf16f4b5fef18b7780bd",
-        "assessment": "analysis/activity-three-19640-canonical-replay-20261027/assessment.json",
-        "assessment_sha256": "4e1c9519daf8f0d1d333fc37a6f0faf23fe36af3eca6697bdc5d3c869e8bb08c",
-        "candidate_bytes": 532,
+        "source": "analysis/activity-three-19640-control-owner-20261027/pointer-birth/source.c",
+        "source_sha256": "bafac9aa1303410306337c45368311fb9ec5c5bcf6a46fd4b59dcd2b1e1e18ef",
+        "metadata": "analysis/activity-three-19640-control-owner-20261027/pointer-birth/metadata.json",
+        "metadata_sha256": "54c77bab21c87ec5d64e7e059efeed340f13416306632acef7f16cfd48aad658",
+        "receipt": "analysis/activity-three-19640-control-owner-20261027/pointer-birth/result.json",
+        "receipt_sha256": "1c23f3791c453be43fb58586cdc739d377690b834fc8f0bca97e52537cbe62fb",
+        "assessment": "analysis/activity-three-19640-control-owner-20261027/assessment.json",
+        "assessment_sha256": "e9243df0cac5f78613d23997e95ad026d9c7a68420230f51313b2c256c5eb465",
+        "candidate_bytes": 528,
         "comparison_extent_bytes": 544,
-        "full_byte_differences": 417,
-        "candidate_sha256": "f5cf2eb48f1063fc33324300e4dab038dd524a0d91d0ec05c8c21660447cf42e",
+        "full_byte_differences": 371,
+        "candidate_sha256": "4009fdf297385f7105b9dcdcdd2f2313eb813274c055470f592c145fb04afd38",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -544,69 +546,12 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 48,
-      "eligible_diagnostic_contexts": 3,
+      "retained_attempt_contexts": 64,
+      "eligible_diagnostic_contexts": 11,
       "excluded_contexts": {
-        "Explicit semantic rejection or unqualified source": 2,
+        "Explicit semantic rejection or unqualified source": 10,
         "Missing or malformed retained input": 7,
         "Stale or unqualified private header": 36
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
-    },
-    {
-      "name": "sub_0801B300",
-      "rom_offset": 111360,
-      "inventory_bytes": 140,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork"
-      ],
-      "runtime_addresses": [
-        134329088
-      ],
-      "status": "attempted",
-      "user_priority": null,
-      "user_far_off": true,
-      "c_draft": "analysis/text-read-rows-1b300-committed-word-cursor-proposal-20261026/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
-      "best_candidate": {
-        "source": "analysis/text-read-rows-1b300-committed-word-cursor-proposal-20261026/source.c",
-        "source_sha256": "bd08bebb1eaa3c5724a70c7710999ee0996d6fbac0af6cdcf9683a8cdedd971d",
-        "metadata": "analysis/text-read-rows-1b300-committed-word-cursor-proposal-20261026/metadata.json",
-        "metadata_sha256": "3c19070ab450c400edb75eb0863673e01c9551a3b50ab76477f491e5297fb51a",
-        "receipt": "analysis/text-read-rows-1b300-committed-word-cursor-proposal-20261026/result.json",
-        "receipt_sha256": "bf75e4b1a9c38179c65f15855fe02fcd23c56dd4d8ea146b446f9d679843a812",
-        "assessment": "analysis/text-read-rows-1b300-committed-word-cursor-proposal-20261026/assessment.json",
-        "assessment_sha256": "5ca791150aaf22089e22ca6a8870c183a55c14dc0088af668899b67ce5530d4c",
-        "candidate_bytes": 140,
-        "comparison_extent_bytes": 140,
-        "full_byte_differences": 73,
-        "candidate_sha256": "081111f6b76d3717830e1ac157e3a40ff901e5ae45de54b1379fbb780c8c274b",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": null,
-      "retained_attempt_contexts": 44,
-      "eligible_diagnostic_contexts": 31,
-      "excluded_contexts": {
-        "Explicit semantic rejection or unqualified source": 6,
-        "Missing or malformed retained input": 6,
-        "Stale or unqualified private header": 1
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
@@ -932,7 +877,8 @@
       "compiler_id": "agbcc",
       "compiler_flags": [
         "-O2",
-        "-mthumb-interwork"
+        "-mthumb-interwork",
+        "-da"
       ],
       "runtime_addresses": [
         134490468
@@ -940,25 +886,25 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": false,
-      "c_draft": "analysis/catalog-confirm-canonical-context-20261027/42964/source.c",
+      "c_draft": "analysis/catalog-confirm-native-owner-cohort-20261027/actual-list9-balance-ip/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/catalog-confirm-canonical-context-20261027/42964/source.c",
-        "source_sha256": "37b345d85abafc5d7e6533a4b0dc76bc64f8b7d5406ca1576f2f0766c61112bc",
-        "metadata": "analysis/catalog-confirm-canonical-context-20261027/42964/metadata.json",
-        "metadata_sha256": "bf870c0de5c11f887bdde415ad1c20ab8ed87c5287c9b7e43220ab0cac480467",
-        "receipt": "analysis/catalog-confirm-canonical-context-20261027/42964/result.json",
-        "receipt_sha256": "eedd87d8b1b18f8e79855fbb824c2508ca180e8e54df941b5c0e9b1c52e85170",
-        "assessment": "analysis/catalog-confirm-canonical-context-20261027/assessment.json",
-        "assessment_sha256": "a139c0dd8779765fb98cf7f0cab2a829c58deffed0529cfa0d1f97d6f9ac273a",
+        "source": "analysis/catalog-confirm-native-owner-cohort-20261027/actual-list9-balance-ip/source.c",
+        "source_sha256": "7e38adb74e5759cba0e7b9d205be729e97b8350fd2785a981b07c88cf090d819",
+        "metadata": "analysis/catalog-confirm-native-owner-cohort-20261027/actual-list9-balance-ip/metadata.json",
+        "metadata_sha256": "7ad4ad45aa6cd97e01a7d09d4f6fc856cdbe8b9382fc6f559e815d153c7a4bc2",
+        "receipt": "analysis/catalog-confirm-native-owner-cohort-20261027/actual-list9-balance-ip/result.json",
+        "receipt_sha256": "4dad2ab5a2e40342768159821dbcf7baefd2e27a3a8959abd7e6fe874ae67684",
+        "assessment": "analysis/catalog-confirm-native-owner-cohort-20261027/assessment.json",
+        "assessment_sha256": "8e0ca64dc35961f10c2916bbbab0de7cff04f168e8e3cc61fc673f28eaa6e30e",
         "candidate_bytes": 652,
         "comparison_extent_bytes": 656,
-        "full_byte_differences": 596,
-        "candidate_sha256": "4563624944e860fc63248d1363a9bd0d309ee3c42a3d00f7851ff9f650d24151",
+        "full_byte_differences": 594,
+        "candidate_sha256": "d69a5f4edb2b913b40043860b2dae10aed8b7b579e747586b95da6451f80a6b0",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "private-provisional",
         "header_overrides": {},
@@ -969,15 +915,16 @@
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
-          "-mthumb-interwork"
+          "-mthumb-interwork",
+          "-da"
         ],
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 34,
-      "eligible_diagnostic_contexts": 1,
+      "retained_attempt_contexts": 45,
+      "eligible_diagnostic_contexts": 7,
       "excluded_contexts": {
-        "Explicit semantic rejection or unqualified source": 1,
+        "Explicit semantic rejection or unqualified source": 6,
         "Missing or ambiguous full comparison": 7,
         "Missing or malformed retained input": 10,
         "Stale or unqualified private header": 15
@@ -1328,13 +1275,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "6e080e325b5f3c25e83a88be65e5d83076fe776ace3bca411d2d31c06697f472",
-    "assets/rom-inventory.json": "07457c91c37566a06f72cab9fbdca8165d820ede01dc431f12944a117a1f15da",
-    "docs/COMPLETION_BLOCKERS.md": "ea2b87bc4579c3ab8ea9692fc24b259499c5b706ff148ced56152df441474853"
+    "assets/progress.json": "f96e2377d4d17009015454385494a2a9990cbb03b7145960395300d51421645a",
+    "assets/rom-inventory.json": "7bb60c88f7d17caab59a4d44aabbd888199fbbea711ca225feece8f446e066d4",
+    "docs/COMPLETION_BLOCKERS.md": "763623dbdb3b8539c09b1254a83dee1fe104e6855262b62e6ccd25e420ff3ae1"
   },
   "documented_inventory": {
-    "rows": 20,
-    "bytes": 8134
+    "rows": 19,
+    "bytes": 7994
   },
   "documentation_count_current": true,
   "scan": {
@@ -1343,7 +1290,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 2294,
+    "metadata_files": 2439,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 1,
