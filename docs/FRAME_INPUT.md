@@ -896,8 +896,8 @@ The heap names now follow the separately reconstructed allocation lifecycle.
 The installer copies 336 bytes from `0x0800B564` to `0x03007160` with word
 control `0x04000054`, and 228 bytes from `0x0800B6A4` to `0x03005E60` with
 `0x04000039`. It publishes the entries at pointer locations `0x03001FC8` and
-`0x03001FCC`. Their provisional single argument selects an eight-byte view
-coordinate pair within a map record. Static ARM disassembly finds 320- and
+`0x03001FCC`. Their provisional single argument selects an eight-byte pair
+in the view-origin table. Static ARM disassembly finds 320- and
 216-byte spans ending in returns, so the install copies also include 16 and
 12 bytes from the next ARM entries respectively. The second body is the owned
 `frame_transfer_map_tiles` at `0xB6A4`; its first sixteen bytes also occur at
@@ -906,6 +906,19 @@ is the tile allocator already reconstructed separately. These copy sizes are
 installation facts, not additional reconstructed C coverage. Raw disassembly,
 literal triples and provisional signatures are retained in the ignored
 `map-copy-evidence.json` and `map-copy-original.txt`.
+
+The origin root at `0x03001FA8` gives a concrete callback-writer obligation:
+index four selects both installed words at `0x03001FC8/0x03001FCC`. The native
+setter has no range guard; its snapshot/release callers pass the zero default
+point and a fresh local-player byte. The map updater separately stores computed
+coordinates through this indexed origin path before loading its draw callback
+at `0x08039BE2`. A native post-provider fixture with view and local player both
+four overwrites and captures zero; controls zero through three preserve the
+installed target. This proves the write-to-load dependency, not whole-caller or
+gameplay reachability. Named local-player producers supply zero through three
+or 255, but alias/interference writers and the updater's fresh count/index
+domain remain open. No complete callback population or new executable target
+follows from the installer or this malformed-state witness.
 
 All four accepted linked images match, including pools and alignment. Their
 changed-source controls reject by 19, 1, 1 and 1 bytes respectively. The prior
@@ -2402,6 +2415,14 @@ The ordinary finalizer was retried against these actual members and emits
 C credit. Earlier register-bound near-matches do not establish ordinary source
 reconstruction. The renderer is also unconverted. These are static and compiler
 results; runtime and gameplay behavior have not been established.
+
+Two ordinary early-exit comparators now test actual pointers to cached geometry.
+Separate addressed points retain backing but emit 360/313; one local two-point
+cache recovers lower/upper order without a per-iteration copy but emits 352/258.
+LOOP hoists pointer/value consumers into extra homes, leaving 32 local frame
+bytes against native 28 and displacing the naturally obtained register roles.
+Both complete sources and changed-source controls remain nonmatches; preserving
+backing alone does not recover the native geometry observations.
 
 
 ### Complete display-part record ownership
