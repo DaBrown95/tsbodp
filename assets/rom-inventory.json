@@ -31841,13 +31841,14 @@
       "referenced_literal_bytes": 12
     },
     {
-      "name": "sub_08019D80",
+      "name": "scene_contact_activity_three_original_draw_event",
       "rom_offset": 105856,
       "mode": "Thumb",
       "runtime_addresses": [
         134323584
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -31865,11 +31866,11 @@
         106218
       ],
       "size": 368,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 105856,
       "body_rom_start": 105856,
       "body_rom_end": 106220,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0801xxxx",
       "decoded_instruction_bytes": 354,
@@ -122229,6 +122230,20 @@
         "Source-emitted alignment role only, without alternate-entry exclusion or new instruction credit."
       ],
       "status": "mapped_data"
+    },
+    {
+      "name": "scene_contact_activity_three_original_draw_event_alignment_019e7e",
+      "owner": "scene_contact_activity_three_original_draw_event",
+      "rom_offset": 106110,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "c5add6898aa51eaa47d391943bc09b516be57bfeee6443f8f6bc6a6ebc6612a8",
+      "evidence": [
+        "Matching compiler .align 2, 0 before a literal pool emits the halfword at relative254..256. Actual source.o and linked.elf mark $d at relative254; the full368-byte fixed-address comparison includes the padding and genuine changed-source controls reject.",
+        "Source-emitted alignment role only, without alternate-entry exclusion or new instruction credit."
+      ],
+      "status": "mapped_data"
     }
   ],
   "source_owned_instruction_regions": [
@@ -127376,7 +127391,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_08019D80",
+      "name": "scene_contact_activity_three_original_draw_event",
       "rom_offset": 105856,
       "size": 368,
       "status": "mapped_code"
@@ -138455,11 +138470,11 @@
     "tools/bounded_indirect.py": "d088b8112475def63678ba18b4f6df83bc1a37020a81cf21bd77d0c434c33cee",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
-    "config/code-evidence-us-eu.json": "98bea91383fbbe35f7b27bc55a5ef8e701613de62b660998a6668d7d2ba8908a",
+    "config/code-evidence-us-eu.json": "487492a160e9e8acc8c97f60fbbb1c784a8e5caca525733a5060eb918ba3caa6",
     "config/ram-map-us-eu.json": "77bdc9b4c55a9bf180ecfb2585630044a55e756beff96d130d72cfd483b21d41",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "2fd012135544a5fbbc171d33d6ddd06e3e14861421f05e14d1aeedbe6c36ae08",
+    "config/build-us-eu.json": "e7f31880138aa6f8093aa9ec131c447f857d68dc91cd2ae3fbefe6092b989fed",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -139698,6 +139713,7 @@
     "src/scene/scene_contact_activity_three_decrement_value.c": "74c86c4b980113148b3207a9078f1540727583c1170c12f4b01f08f487522e3d",
     "src/scene/scene_contact_activity_three_get_observer_point.c": "340098c38d7f2cefd56490840456942bff24a39351581565296a8d852cbc516d",
     "src/scene/scene_contact_activity_three_get_value.c": "4d7240c8f7d92dcb7c0d39e7b3cee1c739788b6020b6500f7544fecbf3c0e3a4",
+    "src/scene/scene_contact_activity_three_original_draw_event.c": "c5add6898aa51eaa47d391943bc09b516be57bfeee6443f8f6bc6a6ebc6612a8",
     "src/scene/scene_contact_activity_three_plot_line_pixel.c": "45ff55d7caddf575ec4f46271cd080462e74c91b36e58050aecbf7bfa9c3a458",
     "src/scene/scene_contact_activity_three_queue_row_palette.c": "338aef80a361067e3830c5415fdc279a0bccaad587a56a32e2e90f1bb0eecbc1",
     "src/scene/scene_contact_activity_three_raster_line_slot.c": "25b1d6e5c9ace59ffe0d7c96dcc32e1f3bd691840f5cc6f23a542844f0c4c7fb",
@@ -139995,12 +140011,12 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 317176,
+      "source_glue_owned_extent_bytes": 317544,
       "estimated_envelope_union_bytes": 325670,
       "classification_bytes": {
-        "estimated_envelope_unclassified": 224,
+        "estimated_envelope_unclassified": 222,
         "instruction_and_referenced_data_dual_use": 4,
-        "known_data": 22930,
+        "known_data": 22932,
         "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 285406,
         "strong_rooted_referenced_data": 35936,
@@ -183061,6 +183077,10 @@
           105852
         ],
         [
+          106110,
+          106112
+        ],
+        [
           106362,
           106364
         ],
@@ -189000,10 +189020,6 @@
         ],
         [
           104544,
-          105856
-        ],
-        [
-          106224,
           111360
         ],
         [
@@ -236339,7 +236355,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -236350,7 +236367,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -236363,7 +236381,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -236371,12 +236390,14 @@
       {
         "rom_offset": 106110,
         "size": 2,
-        "classification": "estimated_envelope_unclassified",
+        "classification": "known_data",
         "roles": [
-          "estimated_envelope"
+          "estimated_envelope",
+          "known_data",
+          "source_owned"
         ],
-        "confidence": "low_estimated_boundary",
-        "evidence_basis": "Provisional discovery envelope only; neither byte role nor function boundary is established."
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 106112,
@@ -236384,7 +236405,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -236397,7 +236419,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -236408,7 +236431,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -315175,8 +315199,8 @@
         "rom_offset": 65536,
         "size": 65536,
         "classification_bytes": {
-          "estimated_envelope_unclassified": 8,
-          "known_data": 888,
+          "estimated_envelope_unclassified": 6,
+          "known_data": 890,
           "strong_rooted_instruction": 58008,
           "strong_rooted_referenced_data": 6592,
           "unresolved": 40
@@ -352787,8 +352811,9 @@
         "execution_address": 134323584,
         "entry_rom_offset": 105856,
         "mode": "Thumb",
-        "name": null,
+        "name": "scene_contact_activity_three_original_draw_event",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -455563,6 +455588,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 8,
         "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "scene_contact_activity_three_original_draw_event",
+        "rom_offset": 105856,
+        "size": 368,
+        "source": "src/scene/scene_contact_activity_three_original_draw_event.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 354,
+        "referenced_data_bytes_in_extent": 12
       },
       {
         "name": "scene_contact_activity_three_raster_line_slot",

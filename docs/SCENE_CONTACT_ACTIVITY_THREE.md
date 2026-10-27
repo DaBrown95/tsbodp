@@ -1,12 +1,12 @@
 # Definition row three: selection controller, moving event and row actors
 
-This connected path has twenty-six matching C functions covering 5,132 bytes,
+This connected path has twenty-seven matching C functions covering 5,500 bytes,
 including their original literal pools and alignment. It follows selection input
 through initialization, value updates, object creators and the installed event
 and row updates, coordinate and vector helpers, animation resets, palette
-requests, line rasterization and temporary-object removal. Row preparation at
-`0x08019640` (544 bytes) and event drawing at `0x08019D80` (368) remain explicit original
-dependencies and receive no C credit.
+requests, event drawing, line rasterization and temporary-object removal. Row
+preparation at `0x08019640` (544 bytes) remains an explicit original dependency
+and receives no C credit.
 An exact source match does not recover those dependencies or establish gameplay.
 
 The observed definition row at `0x080595B0` installs the reconstructed initializer
@@ -46,8 +46,7 @@ existing BIOS service-0B glue and hides unused slots. The ensure-slot helper
 retains its full-word index and original allocation assumptions. The pixel
 writer clamps X only. Valid slot/count, object-zero, allocation, source-tile,
 pixel Y/buffer and later-writer domains remain preconditions; these matches do
-not establish all drawing inputs or hardware behavior. The parent draw remains
-an original dependency.
+not establish all drawing inputs or hardware behavior.
 
 The raster worker at `0x08019EF0` now has a matching 320-byte source owner:
 296 instruction, 20 literal and four alignment bytes. It clears the selected
@@ -63,6 +62,30 @@ ordered writes and return for 386 initialized cases, with 194 clear-control
 divergences. Its synchronous clear/pixel models and caller-saved register
 poisoning check the interface; they do not establish hardware or gameplay
 behavior or close the remaining input/writer domains.
+
+Event drawing at `0x08019D80` now has a matching 368-byte C owner: 354
+instruction, twelve literal and two alignment bytes. The incoming endpoint Y
+and later raster snapshot are separate values. Keeping working X read-only
+recovers its native stack home at SP+8; the observer point occupies SP+0/+4.
+The scalar slope and actual coordinate owners use native register constraints.
+The swap point and vertical address/offset values have short, call-free
+lifetimes; no synthetic consumer or hard-R7 binding is used. The ordinary
+orientation bound and the reused numerator/slope word recover the remaining
+native allocation and instruction order.
+
+Normal and strict builds match; changing the actual flags test rejects by one
+byte, and changing the vertical clipping shift rejects by two. A bounded
+native ABI/model replay agrees on 566 initialized cases, including swaps,
+clipping, orientation thresholds and slot masks. The controls
+diverge in 502 and 58 cases; five invalid fixtures reject. Abstract provider
+effects and caller-saved register poisoning check this interface, without
+establishing nested provider execution or gameplay.
+
+The original observer helper ignores attachment-read failure. Its caller's
+point is then unset; a `BUG` comment preserves this failing path without adding
+initialization. Successful attachment reads, valid objects/slots, representable
+division inputs and provider effects remain input obligations. Exact source
+ownership does not establish their complete writer population or gameplay.
 
 The activity's object view is 224 bytes, four-aligned, within the separately
 verified 320-byte allocation. It names only observed positions, velocity,

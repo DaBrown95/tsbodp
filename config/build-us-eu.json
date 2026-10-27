@@ -53793,6 +53793,38 @@
       "expected_sha256": "c1f16de3829320e098d9abfaeef9984357bdd4dcedadc91466dbb7a7be8e67f2"
     },
     {
+      "name": "scene_contact_activity_three_original_draw_event",
+      "source": "src/scene/scene_contact_activity_three_original_draw_event.c",
+      "rom_offset": 105856,
+      "size": 368,
+      "symbols": {
+        "g_scene_contact_activity_three_slots": "0x030038e0",
+        "scene_contact_activity_three_get_observer_point": "0x08019af9",
+        "frame_remove_object": "0x08000929",
+        "__divsi3": "0x0804cd2d",
+        "scene_contact_activity_three_ensure_line_slot": "0x0801a20d",
+        "scene_contact_activity_three_raster_line_slot": "0x08019ef1",
+        "scene_contact_activity_three_update_line_slots": "0x0801a031"
+      },
+      "thumb_symbols": [
+        "scene_contact_activity_three_get_observer_point",
+        "frame_remove_object",
+        "__divsi3",
+        "scene_contact_activity_three_ensure_line_slot",
+        "scene_contact_activity_three_raster_line_slot",
+        "scene_contact_activity_three_update_line_slots"
+      ],
+      "negative_control": {
+        "before": "base->flags & 4096",
+        "after": "base->flags & 8192"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "8af0bf632a13489fbdda83a67b1b3cc78ce4e049125c053ba4436598c2a43189"
+    },
+    {
       "name": "scene_contact_activity_three_raster_line_slot",
       "source": "src/scene/scene_contact_activity_three_raster_line_slot.c",
       "rom_offset": 106224,
