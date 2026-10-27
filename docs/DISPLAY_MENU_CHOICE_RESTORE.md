@@ -56,7 +56,8 @@ guards or fabricated initialization.
 A real changed-source control changes the 200-unit subtraction to 201 and must
 fail byte comparison. Twelve accepted direct providers and the accepted primary
 preparation caller are freshly checked with their own source controls and
-current header closures. The relation-delta coordinator at `0x08040AB4` and the
-indicator-kind fallback at `0x0802C9C0` remain explicit unconverted dependencies.
+current header closures. The [relation-delta coordinator](SCENE_RELATION_GRID.md#relation-delta)
+at `0x08040AB4` now has source; the indicator-kind fallback at `0x0802C9C0`
+remains an explicit unconverted dependency.
 Whole-ROM equality and source coverage are verified by the publication gates;
 they do not establish runtime reachability for every descriptor flag.

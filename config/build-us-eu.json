@@ -56590,6 +56590,64 @@
         "before": "job->flags & 0x20",
         "after": "job->flags & 0x40"
       }
+    },
+    {
+      "name": "display_menu_apply_delta",
+      "rom_offset": 264884,
+      "size": 692,
+      "source": "src/display/menu_apply_delta.c",
+      "symbols": {
+        "frame_set_animation_frame": "0x08000c6d",
+        "display_copy_background_rectangle": "0x0800d969",
+        "display_text_draw_line": "0x0801a959",
+        "display_text_set_background_control": "0x0801ae2d",
+        "display_text_select_font": "0x0801ae75",
+        "display_text_copy_field_zero": "0x0801b151",
+        "display_text_number_field_zero": "0x0801b1cd",
+        "save_world_scale_percent": "0x08027525",
+        "save_world_ratio_percent": "0x08027539",
+        "frame_random_range": "0x080353d9",
+        "display_menu_adjust_relation": "0x08035d99",
+        "display_menu_read_relation": "0x08035fcd",
+        "display_menu_set_relation_delay": "0x08036019",
+        "display_menu_show_change": "0x080408a9",
+        "audio_play_animation_cue": "0x08040ffd",
+        "display_scene_lookup_text": "0x08045009",
+        "g_resource_game_state": "0x03003950",
+        "g_display_menu_state": "0x03002198",
+        "g_display_scene_request_state": "0x03004350",
+        "g_frame_actor_greetings": "0x080612a4",
+        "g_menu_relation_criteria": "0x08d736d0",
+        "g_display_menu_objects": "0x030043b0",
+        "g_display_menu_relation_values": "0x03003980",
+        "g_display_menu_control0": "0x0807f688",
+        "g_display_menu_control1": "0x0807f68c",
+        "g_menu_secondary_relation_owner": "0x03003960",
+        "g_menu_delta_history_owner": "0x030021ac"
+      },
+      "thumb_symbols": [
+        "frame_set_animation_frame",
+        "display_copy_background_rectangle",
+        "display_text_draw_line",
+        "display_text_set_background_control",
+        "display_text_select_font",
+        "display_text_copy_field_zero",
+        "display_text_number_field_zero",
+        "save_world_scale_percent",
+        "save_world_ratio_percent",
+        "frame_random_range",
+        "display_menu_adjust_relation",
+        "display_menu_read_relation",
+        "display_menu_set_relation_delay",
+        "display_menu_show_change",
+        "audio_play_animation_cue",
+        "display_scene_lookup_text"
+      ],
+      "negative_control": {
+        "before": "display_text_draw_line(442,",
+        "after": "display_text_draw_line(443,"
+      },
+      "expected_sha256": "681651444d40b88fbbdf19c518cf05b6d2f450be9b6556ca786830b063ada4e2"
     }
   ],
   "assembly": [

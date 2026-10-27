@@ -2,17 +2,17 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 18,
-    "inventory_bytes": 7594,
+    "rows": 17,
+    "inventory_bytes": 6902,
     "statuses": {
       "near-miss": 7,
-      "attempted": 10,
+      "attempted": 9,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
       "near-miss": 2468,
-      "attempted": 5002,
+      "attempted": 4310,
       "untouched": 0,
       "suspected-not-C": 124
     }
@@ -486,11 +486,11 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 64,
+      "retained_attempt_contexts": 87,
       "eligible_diagnostic_contexts": 11,
       "excluded_contexts": {
         "Explicit semantic rejection or unqualified source": 10,
-        "Missing or malformed retained input": 7,
+        "Missing or malformed retained input": 30,
         "Stale or unqualified private header": 36
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -743,70 +743,6 @@
         "Missing or malformed retained input": 16,
         "No retained assessment": 10,
         "Stale or unqualified private header": 19
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
-    },
-    {
-      "name": "sub_08040AB4",
-      "rom_offset": 264884,
-      "inventory_bytes": 692,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-da"
-      ],
-      "runtime_addresses": [
-        134482612
-      ],
-      "status": "attempted",
-      "user_priority": null,
-      "user_far_off": false,
-      "c_draft": "analysis/menu-delta-natural-owner-rebuild-20261027/actual-shared-index-r4/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": 2534.465286254883,
-      "search_wall_time_records": [
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/continuation.json",
-          "receipt_sha256": "6c8e9291d0b571fb780cb52f0cd01417700cb909a33c472e3f648d7c771e233f",
-          "search_wall_seconds": 2534.465286254883
-        }
-      ],
-      "best_candidate": {
-        "source": "analysis/menu-delta-natural-owner-rebuild-20261027/actual-shared-index-r4/source.c",
-        "source_sha256": "da6c4a9aa1ff3b1779a2290e7c5596e487283168c62bd6d1b69171d5dd527978",
-        "metadata": "analysis/menu-delta-natural-owner-rebuild-20261027/actual-shared-index-r4/metadata.json",
-        "metadata_sha256": "dceddda5b365f0ed182f38785dc0cf7f33d7f83268bf98255021fcb9f1e90715",
-        "receipt": "analysis/menu-delta-natural-owner-rebuild-20261027/actual-shared-index-r4/result.json",
-        "receipt_sha256": "bc97eef1dfb1d7e57f3103c8a90f993b7be42c3049c0a2757f0ac3e0140b2ff6",
-        "assessment": "analysis/menu-delta-natural-owner-rebuild-20261027/assessment.json",
-        "assessment_sha256": "cabd61db0dd302a770ad76a9b544a755f8c00e530cfb1fc4a52007cf61c718d7",
-        "candidate_bytes": 692,
-        "comparison_extent_bytes": 692,
-        "full_byte_differences": 306,
-        "candidate_sha256": "2adb0e6ed15f4f3b4efef8cb5d72bbcef7394d249f4f00292b0799bea12ff2b2",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": null,
-      "retained_attempt_contexts": 41,
-      "eligible_diagnostic_contexts": 8,
-      "excluded_contexts": {
-        "Missing or malformed retained input": 7,
-        "Stale or unqualified private header": 26
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
@@ -1217,13 +1153,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "8b8e9b143163453e6d5c892532800b3aa474ab53a7e5e5176d3597790e827f4f",
-    "assets/rom-inventory.json": "2b3f5fef5e7a2bf488fb9407937ca81659436d08336777d4468a3a0ddb92d407",
-    "docs/COMPLETION_BLOCKERS.md": "77aae90e2f9f6147168cb476b2d5ca3ef184bf6a355121754fbe60f732dcaa73"
+    "assets/progress.json": "47a91c54d6e29694aa1cec8ff53f536943aaa2497f8ac4ff09a6e7f459e70876",
+    "assets/rom-inventory.json": "665af2e2c61ad85fc2cb7d77add1ccfaa3986b6f5fc8217af29552ad80471552",
+    "docs/COMPLETION_BLOCKERS.md": "ca238fa7b0b697ad0dbbf38a646b018ac7616a7d295c7e1328a9ff6fe6ef91d8"
   },
   "documented_inventory": {
-    "rows": 18,
-    "bytes": 7594
+    "rows": 17,
+    "bytes": 6902
   },
   "documentation_count_current": true,
   "scan": {
@@ -1232,7 +1168,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 2599,
+    "metadata_files": 2652,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 1,

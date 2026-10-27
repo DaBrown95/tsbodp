@@ -56,7 +56,8 @@ font and line height, draws a bounded block through the accepted text API and
 restores the background control. A null text pointer takes the accepted primary
 menu setup path. The reset wrapper calls the accepted choice-text producer.
 The background DMA, cue, relation-gauge and notice callees retain their separate
-conversion status. The gauge at `0x40AB4` remains unconverted; the notice
+conversion status. The [gauge at `0x40AB4`](SCENE_RELATION_GRID.md#relation-delta)
+now has a matching 692-byte source owner; the notice
 producer at `0x27DD0` is now the accepted `resource_submit_scene` alias described
 in [the queued handoff](SCENE_REQUEST_HANDOFF.md).
 
@@ -138,7 +139,7 @@ open. The real menu initializer and nine connected providers retain 1,648
 existing bytes and reject their source controls. These static/compiler findings
 add no gameplay evidence. The native reward formatter is field two at `0x1B1F0`;
 the inherited private field-one label was corrected before integration. The
-relation gauge `0x40AB4/692` remains unconverted;
+relation gauge [`0x40AB4/692`](SCENE_RELATION_GRID.md#relation-delta) now has source;
 the connected notice handoff `0x27DD0` has source in the queued scene-request path.
 
 ## Footer and relation indicator

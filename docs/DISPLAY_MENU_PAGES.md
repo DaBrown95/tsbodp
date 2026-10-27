@@ -48,8 +48,9 @@ original control flow is introduced.
 ## Connected state-42 producer
 
 The adjacent producer at `0x0803FEC4` writes byte 42 to actor-selection offset
-`+740` in the same game-state storage and invokes the unconverted `0x08040AB4`
-consumer with -10. A partial access view reuses the existing catalog-state
+`+740` in the same game-state storage and invokes the matching
+[`0x08040AB4` consumer](SCENE_RELATION_GRID.md#relation-delta) with -10.
+A partial access view reuses the existing catalog-state
 symbol at `0x03003950`; it does not imply a complete catalog or game-state size.
 The callee's entry narrows the argument to a byte and makes signed and unsigned
 interpretations of that byte, supporting the signed-byte request prototype.

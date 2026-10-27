@@ -152,8 +152,8 @@ word at game base `0x03003950 + 0x74C` if it is nonnegative and the byte at
 unknown. Callback frequency and gameplay scheduling are not tested.
 
 The retained menu stages at `0x0803F3DC` and `0x08040E84` directly call the
-chance helper; the unconverted adjustment path at `0x08040AB4` calls the delay
-setter. These links connect the new helpers to the existing menu and relation
+chance helper; the matching [adjustment path](SCENE_RELATION_GRID.md#relation-delta)
+at `0x08040AB4` calls the delay setter. These links connect the helpers to the menu and relation
 core rather than treating them as independent byte totals. The world-clock
 producer connects that state to the published clock arithmetic.
 

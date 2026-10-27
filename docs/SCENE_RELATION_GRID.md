@@ -88,7 +88,8 @@ unsigned-byte baseline snapshot before the provider call and passes the actual
 values child. This owner correction adds no functions or source bytes. Generic
 incoming pointers, other overlapping views and complete backing remain premises.
 
-The unconverted delta routine at `0x40AB4` uses criterion data at `0x08D736D0`:
+The matching [delta routine](../src/display/menu_apply_delta.c) at `0x40AB4`
+uses criterion data at `0x08D736D0`:
 its load at `0x40B18` resolves the literal at `0x40B5C`. Older private metadata
 used an address 512 bytes too high; those nonmatching outputs receive no credit.
 A named route starts with scheduled actor IDs 18 through 41 and, while their
@@ -113,7 +114,7 @@ from 473 through 487; it does not read the rows' second words.
 Normal and strict builds match the complete extent; changing 473 to 472
 rejects both. No incoming root is currently established. The names, historical
 unused formals, valid state backing and original table bounds remain
-provisional. The larger delta routine at `0x40AB4` remains unconverted.
+provisional. The larger delta routine is described below.
 
 The neighboring [band reader](../src/display/menu_relation_average_band.c) at
 `0x3606C` matches all 44 extent bytes: 38 instruction bytes, four literal bytes and
@@ -136,3 +137,25 @@ four-byte-row fixtures reject. Incoming roots, historical unused formals and
 complete table/backing populations remain provisional. The full matching,
 changed-source control and progress gates pass. These source and compiler
 findings add no runtime or gameplay evidence.
+
+## Relation delta
+
+`display_menu_apply_delta` owns all 692 bytes at `0x40AB4`: 614 instruction,
+72 literal and six alignment bytes. It tests two criteria, shifts the three
+history bytes, filters a delta that crosses the incoming sign, updates the
+relation and delay, then selects a cue, indicator frame and caption.
+
+The ordinary signed-byte accumulator preserves the native wrap and sign
+operations. Constraining its actual history pointer leaves that accumulator
+in R5. Separating the early getter result from the later scaling/caption value
+recovers the remaining lifetimes. Real call-free sum, offset and next-index
+values retain their native homes; no R7 binding, added observation, dummy use
+or instruction body is supplied. Explicit 32-bit address sums preserve the
+same byte reads, with compile-time guards for their layouts.
+
+Normal and strict builds match the complete original extent. Both genuine
+caption controls change the output and reject equality. The full matching and
+progress gates cover the owner, including the three emitted alignment
+halfwords. These are compiler/source findings, not historical declaration or
+runtime proof. The backwards random bounds, signed-history/unsigned-code
+comparison and unchecked original input/backing assumptions remain intact.
