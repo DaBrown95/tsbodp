@@ -915,10 +915,14 @@ coordinates through this indexed origin path before loading its draw callback
 at `0x08039BE2`. A native post-provider fixture with view and local player both
 four overwrites and captures zero; controls zero through three preserve the
 installed target. This proves the write-to-load dependency, not whole-caller or
-gameplay reachability. Named local-player producers supply zero through three
-or 255, but alias/interference writers and the updater's fresh count/index
-domain remain open. No complete callback population or new executable target
-follows from the installer or this malformed-state witness.
+gameplay reachability. Native range checks of the inspected handshake/copy
+chain give counts zero through four and local-player bytes zero through three
+or 255: diagnostic five returns before active-count publication. The primary
+loop excludes view four only if every fresh count remains within that domain;
+an initial snapshot bound is insufficient. Provider, callback, IRQ and indexed
+alias writes still need noninterference evidence. Neither the installer nor
+these conditional bounds establish a complete callback population or a new
+executable target.
 
 All four accepted linked images match, including pools and alignment. Their
 changed-source controls reject by 19, 1, 1 and 1 bytes respectively. The prior
