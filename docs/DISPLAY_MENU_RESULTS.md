@@ -1,6 +1,6 @@
 # Menu row execution and result presentation
 
-This connected path reconstructs nine C functions / 2,976 bytes. Each current
+This connected path reconstructs ten C functions / 4,088 bytes. Each current
 source compiles and links to the complete original extent, including its literal
 pools and alignment; each has an actual compiled changed-source control. The
 names describe the observed menu roles and remain provisional. These are static
@@ -13,6 +13,7 @@ and compiler-match findings, with no new runtime or gameplay evidence.
 | `0x3F548` | 420 | Transfer and draw a primary result |
 | `0x3F6EC` | 328 | Transfer and draw a choice result |
 | `0x3F834` | 212 | Transfer and draw a secondary result |
+| `0x3F908` | 1,112 | Prepare the selected secondary entries and relation display |
 | `0x401B8` | 512 | Prepare the footer and relation indicator |
 | `0x40E84` | 128 | Apply a secondary result |
 | `0x40F04` | 12 | Reset through the accepted choice-text producer |
@@ -116,10 +117,29 @@ current-source receipts and all useful failed attempts remain under the ignored
 is `menu-results-ready.json`. Earlier row-array models, redundant fixed-register
 attempts and raw comparison files are retained as failed or superseded evidence.
 
-The connected next targets are the unconverted relation gauge `0x40AB4/692`,
-and secondary menu preparation `0x3F908/1112`. Their unsuccessful trials remain outside
-C coverage. The connected notice handoff `0x27DD0` is reconstructed in the
-queued scene-request path.
+Secondary preparation at `0x3F908` now owns all 1,112 bytes: 994 instruction,
+112 literal and six zero-alignment bytes. It counts selected secondary-list
+entries, keeps the first kind, tests descriptor eligibility or the choice stamp,
+and compacts selected entries on the observed acceptance paths. It then selects
+resources, cues, reward/relationship updates and scrolling text. The nested
+relation display retains a packed caption point by value through its calls and
+narrows the ratio result only for the halfword scale argument. Its sole register
+constraint holds the actual negative numerator in R0 for that call; there are no
+cursor, kind or acceptance bindings. The changed-kind control rejects under
+normal, warning-strict and strict-aliasing compilation.
+
+The new [secondary views](../include/display_menu_secondary.h) express the
+44-byte descriptor and the native world/relation prefixes. Their fixed-address
+aliases remain explicit role views, not a recovered complete C object identity.
+Reset installs secondary list fourteen with capacity eight; the named catalog
+senders supply its eight selection bits. Signed shifts retain the original
+valid-index premise, and descriptor/definition bounds and other writers remain
+open. The real menu initializer and nine connected providers retain 1,648
+existing bytes and reject their source controls. These static/compiler findings
+add no gameplay evidence. The native reward formatter is field two at `0x1B1F0`;
+the inherited private field-one label was corrected before integration. The
+relation gauge `0x40AB4/692` remains unconverted;
+the connected notice handoff `0x27DD0` has source in the queued scene-request path.
 
 ## Footer and relation indicator
 

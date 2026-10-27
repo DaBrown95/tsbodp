@@ -10,7 +10,7 @@ void frame_actor_state_19(struct FrameObject *object)
  unsigned int finished=0;
  unsigned char index=frame_find_actor_action(((struct FrameActorActionWork *)object)->action);
  unsigned char animation=g_frame_actor_action_definitions[index].animation;
- if(((struct FrameActorActionWork *)object)->action==170) index+=((struct FrameActorActionWork *)object)->variation;
+ if(((struct FrameActorActionWork *)object)->action==170) index+=((struct FrameActorActionWork *)object)->variation.bytes[0];
  switch(((struct FrameActorObject *)object)->variant_state) {
  case 0:
   frame_request_animation((struct FrameCommandObject *)object,g_frame_actor_action_definitions[index].animation);

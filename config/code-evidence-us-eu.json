@@ -1802,7 +1802,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "be8bc0e0bfcfd2a720ac4df578fc1f9e9e01a7989a85f0b53af85221364da84c",
+      "source_sha256": "f322045b44f410714a29dcc0bd3fbeaab9870d24b2f7152bff26825b05317656",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line105 emits padding containing relative186..188; actual source.o $d covers this span. ",
         "Full retained 292-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -1815,7 +1815,7 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "be8bc0e0bfcfd2a720ac4df578fc1f9e9e01a7989a85f0b53af85221364da84c",
+      "source_sha256": "f322045b44f410714a29dcc0bd3fbeaab9870d24b2f7152bff26825b05317656",
       "evidence": [
         "Matching compiler output .align\t2, 0 at LF line151 emits padding containing relative278..280; actual source.o $d covers this span. ",
         "Full retained 292-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
@@ -26738,6 +26738,45 @@
       "source_sha256": "f1a12819ec0ee0451b19ab5e21e5259d8ac8f188f06b29c4c9f596a826f1f4ab",
       "evidence": [
         "The pinned compiler/assembler emits two zero alignment bytes at relative 710 before the final word pool at relative 712. Exact full-extent source and changed-source control proofs qualify this owner; source-object and linked $d mapping begins at this span. This is source-emitted alignment/data evidence, without excluding alternate incoming execution."
+      ]
+    },
+    {
+      "name": "display_menu_prepare_secondary_alignment_03fc8a",
+      "owner": "display_menu_prepare_secondary",
+      "rom_offset": 261258,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2192df1425fec4b4ab1d5e37c423793e2befdadcb3ae86bc3e629a7f271445e6",
+      "evidence": [
+        "Matching compiler source.o and linked ELF $d mapping cover relative898..900; emitted .align 2, 0 supplies the zero halfword. Whole1112-byte original/candidate comparison includes it.",
+        "Source-emitted alignment role only; no exclusion of alternate incoming execution or new instruction credit."
+      ]
+    },
+    {
+      "name": "display_menu_prepare_secondary_alignment_03fd26",
+      "owner": "display_menu_prepare_secondary",
+      "rom_offset": 261414,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2192df1425fec4b4ab1d5e37c423793e2befdadcb3ae86bc3e629a7f271445e6",
+      "evidence": [
+        "Matching compiler source.o and linked ELF $d mapping cover relative1054..1056; emitted .align 2, 0 supplies the zero halfword. Whole1112-byte original/candidate comparison includes it.",
+        "Source-emitted alignment role only; no exclusion of alternate incoming execution or new instruction credit."
+      ]
+    },
+    {
+      "name": "display_menu_prepare_secondary_alignment_03fd5e",
+      "owner": "display_menu_prepare_secondary",
+      "rom_offset": 261470,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "2192df1425fec4b4ab1d5e37c423793e2befdadcb3ae86bc3e629a7f271445e6",
+      "evidence": [
+        "Matching compiler source.o and linked ELF $d mapping cover relative1110..1112; emitted .align 2, 0 supplies the zero halfword. Whole1112-byte original/candidate comparison includes it.",
+        "Source-emitted alignment role only; no exclusion of alternate incoming execution or new instruction credit."
       ]
     }
   ],

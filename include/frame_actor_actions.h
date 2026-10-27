@@ -5,8 +5,15 @@ struct SceneModeFlags;
 /* Partial views of timed actor action descriptors and notification state. */
 struct FrameActorActionWork {
  unsigned char unknown00[0x58]; int timer; unsigned char unknown5c[8];
- unsigned short action; unsigned char variation,unknown67; unsigned int cue_handle;
+ unsigned short action;
+ /* Catalog confirmation writes the halfword; state 19 consumes its low byte. */
+ union __attribute__((packed,aligned(2))) {
+  unsigned char bytes[2];
+  unsigned short word;
+ } variation;
+ unsigned int cue_handle;
 };
+typedef char frame_actor_action_work_layout[(sizeof(struct FrameActorActionWork)==108&&__alignof__(struct FrameActorActionWork)==4&&(unsigned int)&((struct FrameActorActionWork*)0)->action==0x64&&(unsigned int)&((struct FrameActorActionWork*)0)->variation==0x66&&sizeof(((struct FrameActorActionWork*)0)->variation)==2&&(unsigned int)&((struct FrameActorActionWork*)0)->cue_handle==0x68)?1:-1];
 struct FrameActorActionDefinition {
  unsigned int id; unsigned short duration; unsigned char animation,variant;
  unsigned char need,amount,unknown0a[2];

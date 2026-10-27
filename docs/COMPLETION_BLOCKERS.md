@@ -1,13 +1,13 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,473 C functions / 310,260 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 314,320 bytes; original slices
-still supply 16,462,896 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,474 C functions / 311,372 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 315,432 bytes; original slices
+still supply 16,461,784 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The fixed 319,640 mapped extent
 bytes are solely a historical comparison, not a complete code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **26 unowned rows / 11,358 estimated
+and generated [triage](TRIAGE.md) contain **25 unowned rows / 10,246 estimated
 bytes**. The triage records complete candidate comparisons and retained inputs;
 none of those candidates receives source credit. Completed paths and their
 findings remain in the owner documents and publication history.
@@ -41,7 +41,7 @@ findings remain in the owner documents and publication history.
 | Palette `0x11C60` (400), navigation `0x14834` (548), selection `0x1510C` (184) | Native observation and induction boundaries remain unresolved. The selection's R5 column binding disables LOOP's required induction, so another binding grid repeats that cause. See [actor entries](ACTOR_ENTRIES_RECONSTRUCTION.md), [palette menu](SCENE_PALETTE_MENU.md) and [palette lifecycle](DISPLAY_PALETTE_LIFECYCLE.md). |
 | Scene objects `0x28234` (160), activity-three workers `0x19640`, `0x19D80`, `0x19EF0` | A real packed-step/X-consumer fork improves the object candidate to 160/71 and preserves one X recurrence with an in-loop Y multiply. Restoring the origin's R4-to-R8 phase changes LOOP's cost decision and loses that shape; hard-R7 recurrence collides with compiler-generated Y state and is disqualified. Activity-three phase homes and full input/writer domains remain open. See [activity three](SCENE_CONTACT_ACTIVITY_THREE.md) and [object interfaces](FRAME_INPUT.md). |
 | Text row reader `0x1B300` (140) | Canonical 140/73 remains. Native's scratch/update/store sequence is GCC's high-register `POST_INC` reload fallback. The inherited explicit R8 cursor prevents this operation forming; an ordinary cursor retains LDM/STM and removes the frame, but takes R7 (124/111). A real inline copy-result boundary takes R2 (132/125); the native tile-size phase repairs three other homes without repairing the cursor (124/123). This copy branch is closed. A new source must explain a genuinely ordinary cursor's high home. See [text reconstruction](DISPLAY_TEXT_RECONSTRUCTION.md). |
-| Other menu, geometry, text and resource workers | Remaining rows include `0x67E0`, `0xA0A4`, `0x1AA78`, `0x39CF0`, `0x3F908`, `0x40AB4`, `0x42964`, `0x48A14` and `0x48AF8`. Use triage's current complete extents and owner documents; private type/backing premises and original memory order remain acceptance questions. |
+| Other menu, geometry, text and resource workers | Remaining rows include `0x67E0`, `0xA0A4`, `0x1AA78`, `0x39CF0`, `0x40AB4`, `0x42964`, `0x48A14` and `0x48AF8`. Use triage's current complete extents and owner documents; private type/backing premises and original memory order remain acceptance questions. |
 | Serial IRQ `0x3DC48` (1,616) | Preserve the 1,624/809 baseline. Prior owner relaxation loses the R3 handoff and leaves a duplicate high-register carrier. A distinct source-consumption hypothesis is needed. See [serial](SERIAL_HANDSHAKE.md). |
 | Audio master worker `0x49968` (124) | Reachable native NOP at `0x499B0` remains unexplained by tested C, compiler, alignment or known code writers. Preserve original-source/build and late-writer questions; no assembly escape. See [audio](AUDIO_RECONSTRUCTION.md). |
 
@@ -54,7 +54,7 @@ the original declaration or establish an interrupt writer.
 The serial record provider **`0x3D788` is parked** at 200 bytes / one difference.
 Preserve its best candidate and both compiler investigations described in
 [SERIAL_HANDSHAKE.md](SERIAL_HANDSHAKE.md#remaining-record-provider). Reopen only
-when new evidence changes its prospects; initially work on the other 25 rows.
+when new evidence changes its prospects; initially work on the other 24 rows.
 
 ## Executable-inventory obligations
 
@@ -80,12 +80,19 @@ extents and unresolved bytes. Source matches establish no new runtime execution.
 
 ## Latest accepted gain and final gate
 
-The [weekly reconciliation](SEARCH_COST_AND_DAILY_CLOCK.md#weekly-entry-reconciliation)
-at `0x2005C` adds one function / 108 C instruction bytes, with no literal pool or
-alignment. Normal/strict positives and a changed-kind control pass; the actual
-day-event caller, condition provider, list initializer and capacity-search
-control retain 364 existing bytes. List backing, complete writers and runtime
-invocation remain conditional. The prior choice initializer gain is preserved.
+The [secondary preparation](DISPLAY_MENU_RESULTS.md) at `0x3F908` adds one
+function / 1,112 C extent bytes: 994 instruction, 112 literal and six alignment
+bytes. Normal/strict positives and the actual changed-kind controls pass. Its
+fresh source uses indexed entries, native owner reuse, a consumed by-value
+caption point and full-word percentage temporaries. Only the actual negative
+numerator has a register constraint. The prior weekly and choice gains remain.
+
+The canonical action-work view now exposes the native halfword variation
+producer and existing low-byte consumer in one two-byte union at actor+0x66.
+The action remains at+0x64 and cue handle at+0x68. Nine existing functions retain
+852 bytes under normal/strict compilation with controls; the full importer
+closure is verified in the current build. Catalog confirmation itself remains
+unconverted and receives no credit from this owner repair.
 
 Eight previously unclassified bytes inside two existing C owners now have
 compiler-emitted alignment roles, supported by their exact objects, linked

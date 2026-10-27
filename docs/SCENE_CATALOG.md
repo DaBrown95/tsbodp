@@ -159,6 +159,16 @@ alignment, current literal headers, source changes and global aliases are
 audited separately. Whole-ROM integration remains a subsequent publication
 gate, not a claim made by these local proofs.
 
+Confirmation's native stores at actor `+0x64/+0x66` now share the canonical
+`FrameActorActionWork` view with the accepted state-19 consumer. The action is
+a halfword; variation is a two-byte union exposing the producer's halfword and
+the consumer's low byte. Explicit two-byte alignment preserves variation at
+`+0x66`, cue handle at `+0x68` and the 108-byte partial layout. Nine existing
+functions retain 852 exact bytes under normal/strict compilation and reject
+their real controls; the full current importer closure also matches. This
+resolves that producer/consumer view without accepting the confirmation body,
+proving arbitrary actor backing or establishing runtime invocation.
+
 ## Quantity and text continuation
 
 The second connected batch adds five extents, 1,060 bytes. The initializer and
