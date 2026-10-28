@@ -11438,6 +11438,24 @@
       }
     },
     {
+      "name": "frame_clear_pending_actions",
+      "rom_offset": 41124,
+      "size": 292,
+      "source": "src/frame/frame_clear_pending_actions.c",
+      "symbols": {
+        "g_frame_pending_action_head": "0x03005868",
+        "g_scene_entry_data": "0x03003a2c",
+        "frame_world_in_idle_exclusion_set": "0x080269f5"
+      },
+      "thumb_symbols": [
+        "frame_world_in_idle_exclusion_set"
+      ],
+      "negative_control": {
+        "before": "node->timer = 0;",
+        "after": "node->timer = 1;"
+      }
+    },
+    {
       "name": "frame_actor_show_action_failure",
       "rom_offset": 41416,
       "size": 144,

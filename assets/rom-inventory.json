@@ -5992,7 +5992,7 @@
   },
   "entry_count": 2549,
   "extent_count": 2550,
-  "mapped_extent_bytes": 325670,
+  "mapped_extent_bytes": 325672,
   "rows": [
     {
       "name": "rom_entry",
@@ -12963,13 +12963,14 @@
       "referenced_literal_bytes": 4
     },
     {
-      "name": "sub_0800A0A4",
+      "name": "frame_clear_pending_actions",
       "rom_offset": 41124,
       "mode": "Thumb",
       "runtime_addresses": [
         134258852
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -12981,12 +12982,12 @@
       "return_offsets": [
         41412
       ],
-      "size": 290,
-      "extent_basis": "CFG envelope estimate",
+      "size": 292,
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 41124,
       "body_rom_start": 41124,
       "body_rom_end": 41414,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0800xxxx",
       "decoded_instruction_bytes": 274,
@@ -96038,6 +96039,20 @@
       "status": "mapped_data"
     },
     {
+      "name": "frame_clear_pending_actions_alignment_00a1c6",
+      "owner": "frame_clear_pending_actions",
+      "rom_offset": 41414,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "f9e8599de99890ec1059cc6c0d7b83420130a066885c83f899377ddf0f31e314",
+      "evidence": [
+        "The C source explicitly emits post-function .align 2, 0. The function symbol spans 290 bytes; source.o $d covers relative290..292 after its terminal return.",
+        "The full 292-byte linked text equals the fixed original extent, including all literal pools and the final two zero alignment bytes. Source-emitted alignment role only, not alternate-entry exclusion."
+      ],
+      "status": "mapped_data"
+    },
+    {
       "name": "frame_actor_show_action_failure_alignment_00a23a",
       "owner": "frame_actor_show_action_failure",
       "rom_offset": 41530,
@@ -124101,16 +124116,10 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0800A0A4",
+      "name": "frame_clear_pending_actions",
       "rom_offset": 41124,
-      "size": 290,
+      "size": 292,
       "status": "mapped_code"
-    },
-    {
-      "name": "Unresolved_00A1C6",
-      "rom_offset": 41414,
-      "size": 2,
-      "status": "unresolved"
     },
     {
       "name": "frame_actor_show_action_failure",
@@ -138708,11 +138717,11 @@
     "tools/bounded_indirect.py": "5deae998a3ba064943059b73862aa93220490f69e0ecc6d708de8ca8d3c79563",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
-    "config/code-evidence-us-eu.json": "401a4b4c5a66fe105c12f2fc8c95f96b43bee17eca9d6cd4603e0e55bc3f3645",
+    "config/code-evidence-us-eu.json": "37082cf0145d07524bbf175413f134c09140b82c54a76c1c1629b836f14e97c4",
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "9ed96a6ec4f9a70916c355da58fb28077f510608bc75ea9c99580c3e2ca99b28",
+    "config/build-us-eu.json": "4f177f48ddea3941ab3e5d79b3f13728b9864d1a3d8bc0cd9041312a5e544ecb",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -139170,6 +139179,7 @@
     "src/frame/frame_check_route_attachment_12b04.c": "df960a241b3984278270c8a5039b06bd021420683d5c919d101a06f8d592ba9f",
     "src/frame/frame_check_special_need_actor.c": "1caa37622138f92161fa9cc4cdcf467396bb979fd7d7341e861e54d7f088e295",
     "src/frame/frame_clear_daily_pending_flag_unrooted_10be4.c": "b162f47ac208e12cf6e1cf91b34fb0a870915d2e5f099470b54782b75572e69d",
+    "src/frame/frame_clear_pending_actions.c": "f9e8599de99890ec1059cc6c0d7b83420130a066885c83f899377ddf0f31e314",
     "src/frame/frame_collision_variant_resource_step.c": "d1d523ff3817f7d8b9f4e5937344dd87383654d81267c53de6f5c85c3f92cbdd",
     "src/frame/frame_commit_affine.c": "bcc0c8de1b1bb439d97ee0d58f1c8c1f8bca94861226850eafd9b09e30e8bd06",
     "src/frame/frame_compose_actor_group_alternate_palette.c": "38cc028cba0843917a8c79762e8abb29e6646a6e0eb4f8686fe8e28da24fda88",
@@ -140253,16 +140263,16 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 318776,
-      "estimated_envelope_union_bytes": 325670,
+      "source_glue_owned_extent_bytes": 319068,
+      "estimated_envelope_union_bytes": 325672,
       "classification_bytes": {
         "estimated_envelope_unclassified": 212,
         "instruction_and_referenced_data_dual_use": 4,
-        "known_data": 22942,
+        "known_data": 22944,
         "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 285406,
         "strong_rooted_referenced_data": 35936,
-        "unresolved": 16432686
+        "unresolved": 16432684
       }
     },
     "physical_unions": {
@@ -181671,6 +181681,10 @@
           41056
         ],
         [
+          41414,
+          41416
+        ],
+        [
           41530,
           41532
         ],
@@ -189218,10 +189232,6 @@
         ],
         [
           32196,
-          41124
-        ],
-        [
-          41416,
           43204
         ],
         [
@@ -189464,10 +189474,6 @@
         ],
         [
           32196,
-          41414
-        ],
-        [
-          41416,
           43204
         ],
         [
@@ -214824,7 +214830,7 @@
       },
       {
         "rom_offset": 41060,
-        "size": 64,
+        "size": 116,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -214837,25 +214843,13 @@
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
       },
       {
-        "rom_offset": 41124,
-        "size": 52,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
         "rom_offset": 41176,
         "size": 4,
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -214868,7 +214862,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -214879,7 +214874,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -214892,7 +214888,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -214900,10 +214897,14 @@
       {
         "rom_offset": 41414,
         "size": 2,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "known_data",
+        "roles": [
+          "estimated_envelope",
+          "known_data",
+          "source_owned"
+        ],
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 41416,
@@ -315433,10 +315434,10 @@
         "size": 65536,
         "classification_bytes": {
           "estimated_envelope_unclassified": 14,
-          "known_data": 852,
+          "known_data": 854,
           "strong_rooted_instruction": 57312,
           "strong_rooted_referenced_data": 6784,
-          "unresolved": 574
+          "unresolved": 572
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -328803,8 +328804,9 @@
         "execution_address": 134258852,
         "entry_rom_offset": 41124,
         "mode": "Thumb",
-        "name": null,
+        "name": "frame_clear_pending_actions",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -438352,6 +438354,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 110,
         "referenced_data_bytes_in_extent": 4
+      },
+      {
+        "name": "frame_clear_pending_actions",
+        "rom_offset": 41124,
+        "size": 292,
+        "source": "src/frame/frame_clear_pending_actions.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 274,
+        "referenced_data_bytes_in_extent": 16
       },
       {
         "name": "frame_actor_show_action_failure",

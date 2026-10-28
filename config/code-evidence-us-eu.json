@@ -2394,6 +2394,19 @@
       ]
     },
     {
+      "name": "frame_clear_pending_actions_alignment_00a1c6",
+      "owner": "frame_clear_pending_actions",
+      "rom_offset": 41414,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "f9e8599de99890ec1059cc6c0d7b83420130a066885c83f899377ddf0f31e314",
+      "evidence": [
+        "The C source explicitly emits post-function .align 2, 0. The function symbol spans 290 bytes; source.o $d covers relative290..292 after its terminal return.",
+        "The full 292-byte linked text equals the fixed original extent, including all literal pools and the final two zero alignment bytes. Source-emitted alignment role only, not alternate-entry exclusion."
+      ]
+    },
+    {
       "name": "frame_actor_show_action_failure_alignment_00a23a",
       "owner": "frame_actor_show_action_failure",
       "rom_offset": 41530,

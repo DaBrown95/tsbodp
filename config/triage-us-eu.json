@@ -2,16 +2,16 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 17,
-    "inventory_bytes": 6902,
+    "rows": 16,
+    "inventory_bytes": 6612,
     "statuses": {
-      "near-miss": 7,
+      "near-miss": 6,
       "attempted": 9,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
-      "near-miss": 2468,
+      "near-miss": 2178,
       "attempted": 4310,
       "untouched": 0,
       "suspected-not-C": 124
@@ -230,74 +230,6 @@
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
     {
-      "name": "sub_0800A0A4",
-      "rom_offset": 41124,
-      "inventory_bytes": 290,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-da"
-      ],
-      "runtime_addresses": [
-        134258852
-      ],
-      "status": "near-miss",
-      "user_priority": null,
-      "user_far_off": false,
-      "c_draft": "analysis/pending-cleanup-fresh-20261027/native-input-lifetime.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
-      "best_candidate": {
-        "source": "analysis/pending-cleanup-fresh-20261027/native-input-lifetime.c",
-        "source_sha256": "09ed3f139fd08204fd00b405e7b58a051e67c21e4d108f906e7127a8c56e8690",
-        "metadata": "analysis/pending-cleanup-fresh-20261027/native-input-lifetime/metadata.json",
-        "metadata_sha256": "84a7bb37bdbd744563eb2ebf8064f9c1452dc81f4623e0de3bbd49f73eb5bb95",
-        "receipt": "analysis/pending-cleanup-fresh-20261027/native-input-lifetime/result.json",
-        "receipt_sha256": "974ecefd616334bc33abae32a052c4a6dda68c8e804917fb418e0b742dfc6b52",
-        "assessment": "analysis/pending-cleanup-fresh-20261027/assessment.json",
-        "assessment_sha256": "01934c0b52d6c6057b79f79c1737ce5a93805ecc741a811b7f5b867401404691",
-        "candidate_bytes": 292,
-        "comparison_extent_bytes": 292,
-        "full_byte_differences": 2,
-        "candidate_sha256": "780c2ec5fd23314befccf7612eacbda716ad464781a394beea563fd15f1cca23",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "private-provisional",
-        "header_overrides": {
-          "frame_actor_choices.h": {
-            "path": "analysis/pending-cleanup-fresh-20261027/word-return-header.h",
-            "sha256": "1be8673701571a411486378326de0cd48d0e702454814407c01dc9fea41d7221"
-          }
-        },
-        "private_headers": [
-          "frame_actor_choices.h"
-        ],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": null,
-      "retained_attempt_contexts": 120,
-      "eligible_diagnostic_contexts": 7,
-      "excluded_contexts": {
-        "Explicit semantic rejection or unqualified source": 13,
-        "Invalid relative evidence path": 1,
-        "Missing or malformed retained input": 4,
-        "No retained assessment": 4,
-        "Stale or unqualified private header": 91
-      },
-      "closed_note": "Inventory290; retained full comparison292. Rejected cursor/header models excluded."
-    },
-    {
       "name": "frame_map_draw_iwram",
       "rom_offset": 46436,
       "inventory_bytes": 320,
@@ -425,12 +357,12 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 85,
+      "retained_attempt_contexts": 86,
       "eligible_diagnostic_contexts": 70,
       "excluded_contexts": {
         "Different experimental compiler backend": 1,
         "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 4,
+        "Missing or malformed retained input": 5,
         "No retained assessment": 7,
         "Stale or unqualified private header": 2
       },
@@ -798,12 +730,12 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 45,
+      "retained_attempt_contexts": 55,
       "eligible_diagnostic_contexts": 7,
       "excluded_contexts": {
         "Explicit semantic rejection or unqualified source": 6,
         "Missing or ambiguous full comparison": 7,
-        "Missing or malformed retained input": 10,
+        "Missing or malformed retained input": 20,
         "Stale or unqualified private header": 15
       },
       "closed_note": "Rejected request/ordinal binding collision excluded; private owner remains provisional."
@@ -894,11 +826,11 @@
           "-da"
         ]
       },
-      "retained_attempt_contexts": 35,
+      "retained_attempt_contexts": 36,
       "eligible_diagnostic_contexts": 20,
       "excluded_contexts": {
         "Missing or ambiguous full comparison": 4,
-        "Missing or malformed retained input": 5,
+        "Missing or malformed retained input": 6,
         "No retained assessment": 6
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -953,10 +885,10 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 13,
+      "retained_attempt_contexts": 15,
       "eligible_diagnostic_contexts": 9,
       "excluded_contexts": {
-        "Missing or malformed retained input": 3,
+        "Missing or malformed retained input": 5,
         "No retained assessment": 1
       },
       "closed_note": "Inventory126; retained full comparison128 includes trailing alignment."
@@ -1031,12 +963,12 @@
           "-da"
         ]
       },
-      "retained_attempt_contexts": 51,
+      "retained_attempt_contexts": 54,
       "eligible_diagnostic_contexts": 41,
       "excluded_contexts": {
         "Different experimental compiler backend": 2,
         "Missing or ambiguous full comparison": 3,
-        "Missing or malformed retained input": 3,
+        "Missing or malformed retained input": 6,
         "Stale or unqualified private header": 1,
         "Stale source snapshot": 1
       },
@@ -1153,13 +1085,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "7678eae9bd35f83f5b08bcd67b6717fdc7a05f7add34a4db77ca778cdc4df5fa",
-    "assets/rom-inventory.json": "a395826bdfb21b9e694725327ceb66be8b188c21870660c6032cfcdff03c49b6",
-    "docs/COMPLETION_BLOCKERS.md": "22c5210be8f890f0122510023a00324407893b77b72d4d333d3cada8d1b16cdb"
+    "assets/progress.json": "6625a595d346551df3d5e763c2c4821e8d9315f7f448f0ff1c25aa6e378ef7ee",
+    "assets/rom-inventory.json": "e76cd094d68d66723c625d6df0bedbc6cd64bd1829a8d0b0f827ecc77c00d17e",
+    "docs/COMPLETION_BLOCKERS.md": "cfec846c910591a6a7076315bd7336fa5990341efc8131c440e85e638003227c"
   },
   "documented_inventory": {
-    "rows": 17,
-    "bytes": 6902
+    "rows": 16,
+    "bytes": 6612
   },
   "documentation_count_current": true,
   "scan": {
@@ -1168,7 +1100,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 2655,
+    "metadata_files": 2672,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 1,

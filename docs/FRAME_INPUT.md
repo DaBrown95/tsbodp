@@ -2514,3 +2514,25 @@ select pressed bit `0x100` instead of `0x200`. Actual-definition type checks
 cover the chosen interfaces and reject a word-pointer toggle, a byte counter
 result and a word fifth parameter. These checks establish neither historical
 unused arity nor all caller, callback, index, lifetime or gameplay domains.
+
+## Pending-action cleanup
+
+`frame_clear_pending_actions` at `0xA0A4` owns a complete 292-byte C extent:
+274 instruction bytes, 16 literal bytes and two trailing zero alignment bytes.
+Categories 1, 2 and 3 select stored categories 2, 1 and 3 respectively. The
+first pass clears matching linked-list categories and timers. The second
+examines 50 collection groups, uses the existing world predicate, and clears
+matching records' two value bytes. The unsigned-byte result reports whether
+either pass changed an entry. All pointer, collection and record backing
+requirements remain those of the original code.
+
+The source uses an ordinary unsigned result known to contain only 0 or 1.
+The pinned compiler spills it to the native stack word and removes redundant
+return narrowing under the canonical byte-return declaration. No private
+header override is needed. The full extent includes the original root-address
+load through R2 and both alignment bytes before the next owner at `0xA1C8`.
+Changing the actual timer clear from zero to one produces 284 bytes and rejects
+at 236 positions, including eight missing bytes. Fresh pilot/control pairs,
+full-ROM equality and the whole-ROM changed-source control pass. These are
+source and ABI-compatibility results; complete caller and runtime domains remain
+open.
