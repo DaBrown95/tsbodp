@@ -1,6 +1,6 @@
 # Remaining C triage
 
-15 unowned inventory rows / 5,956 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
+14 unowned inventory rows / 5,888 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
 
 Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py --check`. Private evidence may be unavailable on another checkout; recorded rows then say so. Historical active effort and search wall time are unrecorded, not zero.
 
@@ -16,15 +16,13 @@ Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py -
 | `0x39CF0` | `sub_08039CF0` | 392 | 392 / 109 | 392 | attempted | — | canonical-current |
 | `0x3D788` | `sub_0803D788` | 200 | 200 / 1 | 200 | near-miss | 1 | canonical-current |
 | `0x3DC48` | `link_serial_interrupt` | 1616 | 1624 / 809 | 1616 | attempted | — | private-provisional |
-| `0x48A14` | `sub_08048A14` | 68 | 68 / 10 | 68 | near-miss | 6 | canonical-current |
-| `0x48AF8` | `sub_08048AF8` | 126 | 128 / 112 | 128 | attempted | — | canonical-current |
+| `0x48AF8` | `sub_08048AF8` | 126 | 128 / 10 | 128 | near-miss | — | canonical-current |
 | `0x48BF8` | `sub_08048BF8` | 86 | 88 / 2 | 88 | near-miss | — | canonical-current |
 | `0x495C4` | `sub_080495C4` | 116 | 116 / 3 | 116 | near-miss | — | canonical-current |
 | `0x49968` | `sub_08049968` | 124 | unqualified/unavailable | — | suspected-not-C | — | — |
 
 Fresh search comparisons awaiting source review:
 - `0x023E8`: 1400 bytes / 22 differences over 1400 bytes; no source credit.
-- `0x48A14`: 68 bytes / 10 differences over 68 bytes; no source credit.
 - `0x48BF8`: 88 bytes / 2 differences over 88 bytes; no source credit.
 - `0x495C4`: 116 bytes / 3 differences over 116 bytes; no source credit.
 

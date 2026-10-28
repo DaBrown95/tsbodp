@@ -1080,3 +1080,36 @@ Complete scene-ID and palette-table bounds, other consumers and alternate
 execution remain open. This descriptive evidence changes no census annotation,
 source count, instruction count, mapped extent, generated asset or matching
 proof. See the [full-entry limits](DISPLAY_MAP_RECONSTRUCTION.md#independently-bounded-display-control-flags-query).
+
+## Mixer operand inside a scene-map stream
+
+The mixer's unrestricted two-byte sum can read `0x08ED0975` from ROM
+`0xD6FA20` at numeric index 351. This is a possible operand, without an
+established selecting state or executable entry at `0xED0974`. Both input
+bytes would need to be at least 96; the named mode-zero/eight writer paths
+cannot select that index. Complete writer populations remain open.
+
+There is now a positive data route for the apparent destination. Physical row
+48 of the observed 50-row, 72-byte table at `0x56414` supplies `combined0`:
+word `0x571A0` points to resource `0xED0924`. The matching
+[scene-map loader](../src/frame/frame_load_scene_map_resources.c) reaches the
+combined-map loader and resource decoder. Header `0x00146460` selects codec
+six without the delta filter and declares 5,220 output bytes.
+
+A bounded original-instruction evaluation reads the word at `0xED0974` as
+four compressed-input bytes. Both nullable-count cases produce identical
+5,220-byte output and 672 input reads, consuming `0xED0928..0xED13A8`.
+The end equals row 48's independently referenced `primary1` resource.
+Truncating immediately before the selected word rejects before its read or
+the count write. The earlier row-23 calibration reproduces exactly, and an
+independent replay reproduces all six case results. Private source pins,
+read/count evidence and controls remain in
+`analysis/ed0974-scene48-map-input-native-20261028/`.
+
+This resolves the selected point's data-consumer role. It does not establish
+scene-48 gameplay execution, a legitimate mixer-index-351 state or exclusive
+non-execution. The raw operand, indirect-domain uncertainty and possible
+alternate entry remain recorded. The physical prefix is not a selector
+capacity. This data-role finding changes no source ownership, census counts,
+mapped extents or matching-build credit. The source-work rows remain a finite
+worklist.

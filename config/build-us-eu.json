@@ -56724,6 +56724,30 @@
       "compiler_id": "agbcc",
       "mode": "Thumb",
       "expected_sha256": "4ebd45856dc41a88152d2b8d791a413a62a12a0326a808d2e73dc03c5d9b1ee4"
+    },
+    {
+      "name": "scene_choice_panel_original_set_window",
+      "source": "src/scene/scene_choice_panel_original_set_window.c",
+      "rom_offset": 297492,
+      "size": 68,
+      "symbols": {
+        "g_window_states": "0x03007460",
+        "display_enable_layers": "0x0800d68d"
+      },
+      "thumb_symbols": [
+        "display_enable_layers"
+      ],
+      "negative_control": {
+        "before": "display_enable_layers(0x4000);",
+        "after": "display_enable_layers(0x2000);"
+      },
+      "expected_sha256": "1f479d08208baaa1b825400e7825eac5239a1539307136ef78d3244e8c0d3ab5",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb"
     }
   ],
   "assembly": [

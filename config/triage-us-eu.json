@@ -2,17 +2,17 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 15,
-    "inventory_bytes": 5956,
+    "rows": 14,
+    "inventory_bytes": 5888,
     "statuses": {
       "near-miss": 6,
-      "attempted": 8,
+      "attempted": 7,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
-      "near-miss": 2178,
-      "attempted": 3654,
+      "near-miss": 2236,
+      "attempted": 3528,
       "untouched": 0,
       "suspected-not-C": 124
     }
@@ -103,12 +103,12 @@
           "-mthumb-interwork"
         ]
       },
-      "retained_attempt_contexts": 85,
+      "retained_attempt_contexts": 87,
       "eligible_diagnostic_contexts": 61,
       "excluded_contexts": {
         "Explicit semantic rejection or unqualified source": 1,
         "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 13,
+        "Missing or malformed retained input": 15,
         "No retained assessment": 6,
         "Retained linked ELF unavailable": 1,
         "Stale or unqualified private header": 2
@@ -681,101 +681,6 @@
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
     {
-      "name": "sub_08048A14",
-      "rom_offset": 297492,
-      "inventory_bytes": 68,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-da"
-      ],
-      "runtime_addresses": [
-        134515220
-      ],
-      "status": "near-miss",
-      "user_priority": 6,
-      "user_far_off": false,
-      "c_draft": "analysis/window-48a14-clean-permuter-result-20261025/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 285.96772737498395
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 3317.617104541976
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 7426.875807916978
-        }
-      ],
-      "best_candidate": {
-        "source": "analysis/window-48a14-clean-permuter-result-20261025/source.c",
-        "source_sha256": "ea458227084ef47f11c124ca4d92ba683ce8c970379d2532c4a118856ee62b47",
-        "metadata": "analysis/window-48a14-clean-permuter-result-20261025/metadata.json",
-        "metadata_sha256": "55dce54de22298c64057535bf5bb42041d93b618045c68e2b5182bea20700bd6",
-        "receipt": "analysis/window-48a14-clean-permuter-result-20261025/result.json",
-        "receipt_sha256": "59d580733cc324fc9f1c471cb6cde2631183203ee90c7487fc525408867c09c0",
-        "assessment": "analysis/window-48a14-clean-permuter-result-20261025/assessment.json",
-        "assessment_sha256": "335757025438f989e8c450f023e0c0a107e019272347cd979425ad6b9c92c887",
-        "candidate_bytes": 68,
-        "comparison_extent_bytes": 68,
-        "full_byte_differences": 10,
-        "candidate_sha256": "0e4b58a1d096fc9ae80b52c346a7159a63b6ea8fd8a3df952fbd6ab64532c9ae",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": {
-        "source": "analysis/permuter/sub_08048A14/output-490-1/source.c",
-        "source_sha256": "43d1fbb162ba3b29c54f0892bc70236e4435e21e859b43be9fa18b7187fccf6e",
-        "receipt": "analysis/permuter/sub_08048A14/validation-best490-20261025/result.json",
-        "receipt_sha256": "9eef9866bdb367e00bd32cf65e022b0cee480de4db147b846b1100307287b41d",
-        "job_manifest": "analysis/permuter/sub_08048A14/setup.json",
-        "job_manifest_sha256": "0e976c7a277934a4c269f27b4abd10e34888768e4e271dd03937e7d0b3443548",
-        "candidate_bytes": 68,
-        "comparison_extent_bytes": 68,
-        "full_byte_differences": 10,
-        "candidate_sha256": "0e4b58a1d096fc9ae80b52c346a7159a63b6ea8fd8a3df952fbd6ab64532c9ae",
-        "source_review": "pending",
-        "source_credit": 0,
-        "private_header_qualification": "canonical-current",
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ]
-      },
-      "retained_attempt_contexts": 36,
-      "eligible_diagnostic_contexts": 20,
-      "excluded_contexts": {
-        "Missing or ambiguous full comparison": 4,
-        "Missing or malformed retained input": 6,
-        "No retained assessment": 6
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
-    },
-    {
       "name": "sub_08048AF8",
       "rom_offset": 297720,
       "inventory_bytes": 126,
@@ -789,28 +694,28 @@
       "runtime_addresses": [
         134515448
       ],
-      "status": "attempted",
+      "status": "near-miss",
       "user_priority": null,
       "user_far_off": false,
-      "c_draft": "analysis/grid-point-to-cell-narrow-phases-20261024/byte_axis_loop/source.c",
+      "c_draft": "analysis/grid-point-48af8-call-owners-20261028/source.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
       "best_candidate": {
-        "source": "analysis/grid-point-to-cell-narrow-phases-20261024/byte_axis_loop/source.c",
-        "source_sha256": "e0fda2f87db4f0c964719ce6c3ebddded16b654b3aa0459af1a691b67838a89f",
-        "metadata": "analysis/grid-point-to-cell-narrow-phases-20261024/byte_axis_loop/metadata.json",
-        "metadata_sha256": "90df511bc615bdbb8f07e764f705ba410db9830aaa142eaa944692e82ce75e00",
-        "receipt": "analysis/grid-point-to-cell-narrow-phases-20261024/byte_axis_loop/result.json",
-        "receipt_sha256": "1dffb43c9554fc246c7be63804047db2d459b1076056c43fd2529bdbefbda78d",
-        "assessment": "analysis/grid-point-to-cell-narrow-phases-20261024/assessment.json",
-        "assessment_sha256": "6542b8acb0d0f5e2958769e6aa97888cd26b304ebb669c5ee9e538e8fca3691f",
+        "source": "analysis/grid-point-48af8-call-owners-20261028/source.c",
+        "source_sha256": "23c1805b6b41ba171a743e0dd15facc0fd687c4f1daf4de35bfd17ebd7de0c1a",
+        "metadata": "analysis/grid-point-48af8-current-frontier-index-20261028/metadata.json",
+        "metadata_sha256": "aa2074be6a8c12a15cf43619653f8dc2fd5ef6141b83773d40b154ab6c7c4f2f",
+        "receipt": "analysis/grid-point-48af8-current-frontier-index-20261028/result.json",
+        "receipt_sha256": "7f18a7ce725ee78c4980ba3207b27b321f1bbe64c44f96ea17936e8917bdfb74",
+        "assessment": "analysis/grid-point-48af8-current-frontier-index-20261028/assessment.json",
+        "assessment_sha256": "8f69ef882b9b2c3614718ab4282ff9cff83bd70372fe85ea0b68a8b864af47c7",
         "candidate_bytes": 128,
         "comparison_extent_bytes": 128,
-        "full_byte_differences": 112,
-        "candidate_sha256": "04e26f7ef0dc3d02e4f1b0896a37a3e6d8d7baf32d94a96fe4c0412878f58d91",
+        "full_byte_differences": 10,
+        "candidate_sha256": "c524ec821a4857f344e933153f25e6bef7aafe0465bcb1562f329f63d9a3ce27",
         "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
         "header_overrides": {},
@@ -825,8 +730,8 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 15,
-      "eligible_diagnostic_contexts": 9,
+      "retained_attempt_contexts": 16,
+      "eligible_diagnostic_contexts": 10,
       "excluded_contexts": {
         "Missing or malformed retained input": 5,
         "No retained assessment": 1
@@ -1025,13 +930,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "162308eccac3e581deb97a5ffb8f3a31608b617f47777d8c5b1b15d46ddf78af",
-    "assets/rom-inventory.json": "88f176c1f2af41d6ad1d5a6f3b2c4b0728f6f06d58308ca39ee963b3355de88d",
-    "docs/COMPLETION_BLOCKERS.md": "03030983609610fcfdf0b5d7ff281683cc463844fb8ca6bd44fddbe6b0ca6097"
+    "assets/progress.json": "9fb39888ae1f202c111336404d58fe09b57072c4d5c9c5efa9edb23b99e3d4d6",
+    "assets/rom-inventory.json": "7983de731e5eb241b6ad7afc9e708e6bc4e6ca497425460c4115f9ade9530a40",
+    "docs/COMPLETION_BLOCKERS.md": "a175d205ab9fe58feb32bef8edb5eff49bd7b4ce5cd2031d31ef4d130b9c8ff2"
   },
   "documented_inventory": {
-    "rows": 15,
-    "bytes": 5956
+    "rows": 14,
+    "bytes": 5888
   },
   "documentation_count_current": true,
   "scan": {
@@ -1040,7 +945,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 2679,
+    "metadata_files": 2685,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 1,
