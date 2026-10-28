@@ -17,8 +17,8 @@ resources through the accepted loader at `0x0800DA20`. It loads a resource
 palette and sixteen alternate palette entries, then sets background three's
 x/y velocity to `0x10000` through `display_set_background_velocity`. This
 connects the setup to the accepted background state/update/VBlank path.
-It also clears selector state, calls two unconverted preparation routines
-and the reconstructed object creation and page control update,
+It also clears selector state, calls preparation routines
+and the reconstructed list population, object creation and page control update,
 clears one owner's flag bit and initializes a counter to four. The inferred
 scrolling-scene name does not identify the assets or assert visible behavior
 under every display or commit state.
@@ -55,7 +55,8 @@ addresses. The resource and palette symbols refer to original unconverted
 ROM data; no asset data is included in source.
 
 The setup's unconverted calls keep address-based names for `0x0801AE2C`,
-`0x0800EF2C` and `0x0800F034`. The address-based
+`0x0800EF2C`. The address-based list-population alias at `0x0800F034` now
+has a complete source owner, described below. The address-based
 `display_scene_stage_0800f168`, `display_scene_stage_0800f29c` and
 `display_scene_stage_0800f478` call aliases now resolve to the reconstructed
 object creation, label redraw and page control update; the remaining aliases imply no
@@ -142,12 +143,42 @@ runtime evidence.
 
 The bitset predicate rejects indices above 148 and tests the selected bit of
 the caller's word array, returning an unsigned byte normalized to zero/one.
-Its two still-unconverted redraw callers statically walk 149 catalog records
+Its redraw callers statically walk 149 catalog records
 at `0x080616CC`, each 24 bytes, filtering category and an ID `0x13D` exclusion.
-Those caller layouts remain analysis evidence, outside the verified C count.
+The list-population caller now has matching C; other inferred caller layouts
+remain analysis evidence.
 The predicate does not validate the supplied pointer or the underlying array
 allocation. Object creation, label redraw and this predicate use ordinary C
 without fixed register constraints.
+
+## Catalog list population
+
+The complete 308-byte source at `0x0800F034` adds one matching function to this
+connected path: 280 instruction bytes and seven literal words, without padding.
+It clears the active bit on four existing item objects, scans 149 24-byte catalog
+records, excludes ID `0x13D` and filters the request category and enabled bitset.
+It populates up to four eligible records after the page offset, refreshes their
+objects, and fills any remaining slots with ID `0xE2` under the original count
+comparison. The page still uses its low byte, and the source adds no pointer,
+allocation or catalog-domain validation.
+
+Two local word pairs hold only the actual clear-loop values: flags/object and
+mask/next-slot pointer. After that loop, the low words change role to the
+eligible-count and catalog addresses. Each active field is assigned before its
+own read; the source never reads an uninitialized whole pair. Real scalar input
+lifetimes preserve the native address materializations and partial-field
+transfers. This representation reuses the successful lifetime findings from
+catalog confirmation and window packing without adding game observations.
+The initial related 312-byte experiment exposed PRE hoisting; composing the
+actual full-word inputs with the surviving partial assignments restores the
+complete 308-byte function. These declarations establish a matching source
+representation, not the historical source's local types.
+
+The existing canonical byte-return predicate, refresh and variant providers and
+all shared headers remain unchanged. Changing the scan bound from 148 to 147
+rejects by one byte. The normal pinned compilation, all changed-source controls
+and the complete ROM pass. No new indirect-target population or runtime route
+is established by this source gain.
 
 ## Preserved comparisons
 

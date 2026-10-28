@@ -56748,6 +56748,39 @@
       ],
       "compiler_id": "agbcc",
       "mode": "Thumb"
+    },
+    {
+      "name": "display_scene_stage_0800f034",
+      "rom_offset": 61492,
+      "size": 308,
+      "symbols": {
+        "g_display_scene_catalog": "0x080616cc",
+        "g_display_scene_item_mask": "0x03003d4c",
+        "g_display_scene_request_state": "0x03004350",
+        "g_display_scene_byte0": "0x030018b8",
+        "g_display_scene_byte1": "0x030018b9",
+        "g_display_scene_frame_objects": "0x030043b0",
+        "display_scene_item_enabled": "0x0800eb69",
+        "display_scene_refresh_item": "0x08028321",
+        "frame_set_variant_state": "0x08001be1"
+      },
+      "thumb_symbols": [
+        "display_scene_item_enabled",
+        "display_scene_refresh_item",
+        "frame_set_variant_state"
+      ],
+      "source": "src/display/populate_scrolling_scene.c",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "negative_control": {
+        "before": "i <= 148",
+        "after": "i <= 147"
+      },
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "expected_sha256": "6b038688b6c49e2354a6ade50230473ff7b7d92fba4d97aec2d5ff39ea78b591"
     }
   ],
   "assembly": [

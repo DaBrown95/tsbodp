@@ -1,13 +1,13 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,485 C functions / 315,732 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 319,792 bytes; original slices
-still supply 16,457,424 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,486 C functions / 316,040 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 320,100 bytes; original slices
+still supply 16,457,116 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The fixed 319,640 mapped extent
 bytes are solely a historical comparison, not a complete code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **14 unowned rows / 5,888 estimated
+and generated [triage](TRIAGE.md) contain **13 unowned rows / 5,580 estimated
 bytes**. The triage records complete candidate comparisons and retained inputs;
 none of those candidates receives source credit. Completed paths and their
 findings remain in the owner documents and publication history.
@@ -46,12 +46,11 @@ These mapping totals remain separate from source coverage and executable totals.
 | Connected region | Current obstacle and useful next evidence |
 | --- | --- |
 | Renderer `0x23E8` (1,400), finalizer `0x3248` (348) | Renderer canonical 1,400/15: the real early counter, R6/R8 recurrences and independent roots recover native counter/index/OAM homes. Five other homes and the R3/R4 comparison scratch remain. The unconsumed-register-address search source remains rejected. Finalizer canonical 336/187 remains; scalar-pointer consumers recover guarded lower-X and one native seven-home frame, but indexed/four-pointer compositions replace it with nonnative carriers or a duplicated upper-X spill. These bounded families are parked. See [renderer](FRAME_INPUT.md) and [bounds](BOUNDED_INVENTORY.md). |
-| Scene-list builder `0xF034` (308) | Canonical 308/4 remains. A real bottom-bound lifetime admits R2 and repairs the initial transfers; an HI pre-fill phase gives 308/6, with only the bottom literal/MOV/ADD order wrong. Inline consumers, first-value width, counter ownership and qualification of the existing count increment do not close it. A compatible word-return provider/byte-consumer contract also reproduces 308/4 while preserving 304 existing bytes and controls. In the 308/6 candidate, the final reload need excludes R0/R1 and selects R2. Each needs iteration clears `used_spill_regs`, so a transient R2 reservation cannot be assumed to survive later address rematerialization; an actual final need must retain it. See [compiler context](COMPILER_PILOT.md). |
 | Map-collapse `0x495C4` (116), inverse projector `0x48BF8` (88 compared) | Preferred complete results remain 116/3 and qualified 88/6. Collapse's genuine true-arm owner preserves the R2 constant but loses native address/base continuity. Inverse origin subobject pointers reproduce 88/6; a real early sum changes allocation without restoring the native save/context roles. The old unconsumed-local 88/2 stays unqualified; no narrowing or nonalias premise follows from the two actual callers. See [map selection](SCENE_MAP_SELECTION.md) and [projection](FRAME_INPUT.md). |
 | Copied ARM map drawer `0xB564` (320) | Canonical 320/116 remains. A distinct actual header/address-word graph reaches 324/189 and preserves three native source writebacks, but conservative pair liveness excludes the native payload registers; counter composition adds a frame. These families are parked. Map transfer, decoder, sorter and both installation tails already have source. See [RAM installations](../config/ram-map-us-eu.json) and [decoder](RESOURCE_BACKGROUND_DECODER.md). |
 | Scene objects `0x28234` (160), activity-three preparation `0x19640` (544) | A real packed-step/X-consumer fork improves the object candidate to 160/71 and preserves one X recurrence with an in-loop Y multiply; a shared R2 origin reader recovers the loop loads but swaps high roles, while an explicit preheader lets GCSE hoist Y and create the unwanted second recurrence. Preparation recovers native geometry roles and its two bound-memory reloads, but remains 528/371: the fourth availability flag stays in R7 and displaces output pointers. Its ordinary accepted test already survives; a hard phase-R4 constraint breaks induction optimization. Drawing now has a matching 368-byte source owner: separate incoming/raster Y values and a read-only working-X snapshot recover the native twelve-byte frame; actual consumed native register owners recover the remaining phases. Hard-R7 models remain rejected by emitted behavior. The connected 320-byte raster worker also has source. Full input/writer domains remain open. See [activity three](SCENE_CONTACT_ACTIVITY_THREE.md) and [object interfaces](FRAME_INPUT.md). |
 | Other menu, geometry, text and resource workers | Point `0x67E0` remains 152/92; a genuine two-SI interface gives 144/106 with native entry stores but nonnative PRE-promoted address owners. Selected-tile `0x39CF0` remains 392/109 under the canonical API. The complete `0x48AF8` candidate is canonical 128/10; the earlier 128/112 queue selection was stale. Its context and save-register obligations remain. The window worker `0x48A14` and the 692-byte text renderer now have matching source owners. |
-| Serial IRQ `0x3DC48` (1,616) | Preserve the 1,624/809 baseline. A symbolic MMIO member owner adds reads; scalar indirect accesses restore the read/write sites but derive receive addresses from control and create an extra R9 SEND carrier. These formulations are closed. A genuine owner/consumer fact must preserve the independent native accesses and R3 handoff. See [serial](SERIAL_HANDSHAKE.md). |
+| Serial IRQ `0x3DC48` (1,616) | Preserve the 1,624/809 baseline. A symbolic MMIO member owner adds reads; scalar indirect accesses restore the read/write sites but derive receive addresses from control and create an extra R9 SEND carrier. These formulations are closed. The native R3 receive/readiness lifetimes cross no call. Auditing the dispatcher, callbacks and opaque provider call supplies no missing R3 argument or return consumer; that contract-repair route is closed. A distinct real value-owner fact is required. See [serial](SERIAL_HANDSHAKE.md). |
 | Audio master worker `0x49968` (124) | The recovered original November 2002 SDK has two identical 92-byte master providers with the bad literal and an actual byte store. It establishes lineage without explaining the later reachable NOP at `0x499B0`. A later commercial object/build chain or demonstrated C producer is still needed; no assembly exception follows. See [audio](AUDIO_RECONSTRUCTION.md). |
 
 The weekly worker `0x2005C` now has a matching source owner. Typed actual load
@@ -115,6 +114,19 @@ The current census separately counts instructions, data, alignment, estimated
 extents and unresolved bytes. Source matches establish no new runtime execution.
 
 ## Latest accepted gain and final gate
+
+[Scrolling-scene list population](../src/display/populate_scrolling_scene.c) at
+`0xF034` adds one function / 308 C extent bytes: 280 instruction and 28 literal
+bytes, with no alignment bytes. Two individually assigned word pairs own the
+four actual clear-loop values. Their low words then hold the catalog and
+eligible-count addresses; full scalar input lifetimes preserve the native
+initializers, while partial word assignments retain the transfers into the
+scan. Every field is assigned before its own read. The first complete related
+experiment regressed to 312 bytes but isolated address hoisting in GCSE; the
+informed follow-up matches all 308 bytes. The real 148-to-147 scan-bound control
+rejects by one byte. Normal flags, canonical headers and the full build gates
+pass. This closes one source row and adds no callback-domain, runtime or
+assembly-exception credit. See [scene setup](DISPLAY_SCENE_SETUP.md#catalog-list-population).
 
 [Choice-panel window packing](../src/scene/scene_choice_panel_original_set_window.c)
 at `0x48A14` adds one function / 68 C extent bytes: 60 instruction and eight

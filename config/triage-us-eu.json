@@ -2,16 +2,16 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 14,
-    "inventory_bytes": 5888,
+    "rows": 13,
+    "inventory_bytes": 5580,
     "statuses": {
-      "near-miss": 6,
+      "near-miss": 5,
       "attempted": 7,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
-      "near-miss": 2236,
+      "near-miss": 1928,
       "attempted": 3528,
       "untouched": 0,
       "suspected-not-C": 124
@@ -290,83 +290,6 @@
         "Missing or malformed retained input": 6,
         "No retained assessment": 5,
         "Stale or unqualified private header": 6
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
-    },
-    {
-      "name": "sub_0800F034",
-      "rom_offset": 61492,
-      "inventory_bytes": 308,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-da"
-      ],
-      "runtime_addresses": [
-        134279220
-      ],
-      "status": "near-miss",
-      "user_priority": 3,
-      "user_far_off": false,
-      "c_draft": "analysis/scene-list-bottom-address-producer-20261027/canonical/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 285.96772737498395
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 3317.617104541976
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 7426.875807916978
-        }
-      ],
-      "best_candidate": {
-        "source": "analysis/scene-list-bottom-address-producer-20261027/canonical/source.c",
-        "source_sha256": "9364344a4bbe32194fcec9b058f4da387ed3409a54ef346f707e0c2844263d99",
-        "metadata": "analysis/scene-list-bottom-address-producer-20261027/canonical/metadata.json",
-        "metadata_sha256": "86755d3b9eaa1046ff750a27640730ab4f501510bef7bcaef5c8c65e1f964c83",
-        "receipt": "analysis/scene-list-bottom-address-producer-20261027/canonical/result.json",
-        "receipt_sha256": "960ddb097cb24f06b8335ab94fe91ffe3a1456d20d5978c1a61abaeaafb898ac",
-        "assessment": "analysis/scene-list-bottom-address-producer-20261027/assessment.json",
-        "assessment_sha256": "feca9ee6df3dd8fcb3cfaee4657bf9cca3d70406b2a4ac2209e3c4649bc2cbd0",
-        "candidate_bytes": 308,
-        "comparison_extent_bytes": 308,
-        "full_byte_differences": 4,
-        "candidate_sha256": "cc751434b5754d2338c7ae40ee2981014d33db2fedd4953864670267ca953788",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": null,
-      "retained_attempt_contexts": 86,
-      "eligible_diagnostic_contexts": 70,
-      "excluded_contexts": {
-        "Different experimental compiler backend": 1,
-        "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 5,
-        "No retained assessment": 7,
-        "Stale or unqualified private header": 2
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
@@ -930,13 +853,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "9fb39888ae1f202c111336404d58fe09b57072c4d5c9c5efa9edb23b99e3d4d6",
-    "assets/rom-inventory.json": "7983de731e5eb241b6ad7afc9e708e6bc4e6ca497425460c4115f9ade9530a40",
-    "docs/COMPLETION_BLOCKERS.md": "a175d205ab9fe58feb32bef8edb5eff49bd7b4ce5cd2031d31ef4d130b9c8ff2"
+    "assets/progress.json": "ec0c531d5a48f5231b855c02211310db7439d5692de9bcf336b9d5cb5d4b0bfc",
+    "assets/rom-inventory.json": "fdd0a0a890c166508ee40011522a7490c7bab130418a7f84abdf927ffd7419df",
+    "docs/COMPLETION_BLOCKERS.md": "c7dd48b9f120ff030f72f375211e04c6b437d0684028eed4e2e23f67259a611d"
   },
   "documented_inventory": {
-    "rows": 14,
-    "bytes": 5888
+    "rows": 13,
+    "bytes": 5580
   },
   "documentation_count_current": true,
   "scan": {
@@ -945,7 +868,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 2685,
+    "metadata_files": 2688,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 1,

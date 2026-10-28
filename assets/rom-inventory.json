@@ -18674,13 +18674,14 @@
       "referenced_literal_bytes": 24
     },
     {
-      "name": "sub_0800F034",
+      "name": "display_scene_stage_0800f034",
       "rom_offset": 61492,
       "mode": "Thumb",
       "runtime_addresses": [
         134279220
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -18695,11 +18696,11 @@
         61770
       ],
       "size": 308,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 61492,
       "body_rom_start": 61492,
       "body_rom_end": 61772,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0800xxxx",
       "decoded_instruction_bytes": 280,
@@ -125292,7 +125293,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_0800F034",
+      "name": "display_scene_stage_0800f034",
       "rom_offset": 61492,
       "size": 308,
       "status": "mapped_code"
@@ -138787,7 +138788,7 @@
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "ee2881a71b9bb47f88d0bf7258722717772f34d753868ca47d1121a25ea9c9bd",
+    "config/build-us-eu.json": "75506c177ada692195b987cebee15256585d3e20a378cc092bff059b983346ca",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -140330,7 +140331,7 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 319792,
+      "source_glue_owned_extent_bytes": 320100,
       "estimated_envelope_union_bytes": 325672,
       "classification_bytes": {
         "estimated_envelope_unclassified": 202,
@@ -189351,10 +189352,6 @@
         ],
         [
           57884,
-          61492
-        ],
-        [
-          61800,
           76748
         ],
         [
@@ -221536,7 +221533,8 @@
           "Thumb",
           "estimated_envelope",
           "instruction",
-          "raw_instruction"
+          "raw_instruction",
+          "source_owned"
         ],
         "confidence": "high_static_instruction_provenance",
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
@@ -221547,7 +221545,8 @@
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -336177,8 +336176,9 @@
         "execution_address": 134279220,
         "entry_rom_offset": 61492,
         "mode": "Thumb",
-        "name": null,
+        "name": "display_scene_stage_0800f034",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -457291,6 +457291,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 60,
         "referenced_data_bytes_in_extent": 8
+      },
+      {
+        "name": "display_scene_stage_0800f034",
+        "rom_offset": 61492,
+        "size": 308,
+        "source": "src/display/populate_scrolling_scene.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 280,
+        "referenced_data_bytes_in_extent": 28
       },
       {
         "name": "irq_cpu_enable",
