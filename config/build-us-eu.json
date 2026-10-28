@@ -56666,6 +56666,64 @@
         "after": "display_text_draw_line(443,"
       },
       "expected_sha256": "681651444d40b88fbbdf19c518cf05b6d2f450be9b6556ca786830b063ada4e2"
+    },
+    {
+      "name": "scene_catalog_confirm_original",
+      "source": "src/scene/scene_catalog_confirm_original.c",
+      "rom_offset": 272740,
+      "size": 656,
+      "symbols": {
+        "g_scene_catalog_state": "0x030021c8",
+        "g_scene_request": "0x03004350",
+        "g_scene_queued_request": "0x03004390",
+        "g_display_scene_catalog": "0x080616cc",
+        "g_scene_catalog_value_rates": "0x0807fb6c",
+        "g_frame_world_id": "0x03004334",
+        "g_display_scene_frame_objects": "0x030043b0",
+        "actor_entry_is_full": "0x08020a71",
+        "resource_submit_scene": "0x08027dd1",
+        "condition_update_actor": "0x080209cd",
+        "audio_play_animation_cue": "0x08040ffd",
+        "scene_catalog_notice": "0x0804311d",
+        "actor_entry_add": "0x080200c9",
+        "transition_object_set_state": "0x08001c05",
+        "frame_set_variant_state": "0x08001be1",
+        "frame_random_bounded": "0x0803542d",
+        "scene_catalog_has_next": "0x080430f5",
+        "frame_add_game_value": "0x0801bc1d",
+        "scene_catalog_build": "0x080430a5",
+        "resource_set_triple": "0x0802a1e9",
+        "frame_actor_has_action": "0x08007f59",
+        "g_frame_actor_need_input": "0x030040e0",
+        "g_catalog_world": "0x03003950"
+      },
+      "thumb_symbols": [
+        "actor_entry_is_full",
+        "resource_submit_scene",
+        "condition_update_actor",
+        "audio_play_animation_cue",
+        "scene_catalog_notice",
+        "frame_actor_has_action",
+        "actor_entry_add",
+        "transition_object_set_state",
+        "frame_set_variant_state",
+        "frame_random_bounded",
+        "scene_catalog_has_next",
+        "frame_add_game_value",
+        "scene_catalog_build",
+        "resource_set_triple"
+      ],
+      "negative_control": {
+        "before": "scene_catalog_notice(297)",
+        "after": "scene_catalog_notice(296)"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "expected_sha256": "4ebd45856dc41a88152d2b8d791a413a62a12a0326a808d2e73dc03c5d9b1ee4"
     }
   ],
   "assembly": [

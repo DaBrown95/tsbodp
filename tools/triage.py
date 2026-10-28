@@ -28,7 +28,7 @@ CLOSED = {
     0xA0A4: 'Inventory290; retained full comparison292. Rejected cursor/header models excluded.',
     0x48AF8: 'Inventory126; retained full comparison128 includes trailing alignment.',
     0x48BF8: 'Inventory86; retained full comparison88 includes trailing alignment.',
-    0x42964: 'Rejected request/ordinal binding collision excluded; private owner remains provisional.',
+    0x42964: 'Matching 656-byte C owner accepted; earlier request/ordinal binding collision excluded.',
     0x19D80: 'Historical volatile368/121 is unqualified; use ordinary-state evidence.',
     0x1510C: 'Rejected induction-register collision excluded.',
 }
