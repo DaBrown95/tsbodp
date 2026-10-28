@@ -11,7 +11,7 @@ struct FrameActorFleeWork {
  unsigned char unknown00[0x5e]; unsigned short countdown; unsigned char unknown60[4];
  int saved_speed; unsigned short leave_range,enter_range,turn_delay,wait_delay;
 };
-unsigned char frame_point_near_any_view(struct FramePoint);
+unsigned int frame_point_near_any_view(int,int);
 unsigned char frame_actor_terrain_step(struct FrameObject *,unsigned char);
 void frame_actor_follow_target(struct FrameObject *,struct FrameObject *);
 extern unsigned char g_actor_obstacle_directions[];

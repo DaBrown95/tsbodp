@@ -10,15 +10,19 @@ void frame_actor_state_8(struct FrameObject *object)
   return;
  }
  {
-  struct FramePoint position;
+  register struct FramePoint position asm("r4");
   int distance;
   position=target->position;
   distance=view_point_distance(object->position,position)>>16;
   if(distance>220 && !(object->flags&0x1000)) {
    position.y+=85<<16;
-   if(frame_point_near_any_view(position)) {
-    object->position=position;
-    return;
+   {
+    register int y_argument asm("r1")=position.y;
+    register int x_argument asm("r0")=position.x;
+    if((unsigned char)frame_point_near_any_view(x_argument,y_argument)) {
+     object->position=position;
+     return;
+    }
    }
   }
   switch(((struct FrameActorObject *)object)->variant_state) {

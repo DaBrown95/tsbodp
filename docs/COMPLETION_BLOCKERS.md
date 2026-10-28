@@ -1,13 +1,13 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,486 C functions / 316,040 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 320,100 bytes; original slices
-still supply 16,457,116 bytes of assets and unconverted code. Whole-ROM equality
+The current gates verify **2,487 C functions / 316,188 C extent bytes**, plus
+**4,060 assembly bytes**. C and assembly occupy 320,248 bytes; original slices
+still supply 16,456,968 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The fixed 319,640 mapped extent
 bytes are solely a historical comparison, not a complete code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **13 unowned rows / 5,580 estimated
+and generated [triage](TRIAGE.md) contain **12 unowned rows / 5,432 estimated
 bytes**. The triage records complete candidate comparisons and retained inputs;
 none of those candidates receives source credit. Completed paths and their
 findings remain in the owner documents and publication history.
@@ -49,7 +49,7 @@ These mapping totals remain separate from source coverage and executable totals.
 | Map-collapse `0x495C4` (116), inverse projector `0x48BF8` (88 compared) | Preferred complete results remain 116/3 and qualified 88/6. Collapse's genuine true-arm owner preserves the R2 constant but loses native address/base continuity. Inverse origin subobject pointers reproduce 88/6; a real early sum changes allocation without restoring the native save/context roles. The old unconsumed-local 88/2 stays unqualified; no narrowing or nonalias premise follows from the two actual callers. See [map selection](SCENE_MAP_SELECTION.md) and [projection](FRAME_INPUT.md). |
 | Copied ARM map drawer `0xB564` (320) | Canonical 320/116 remains. A distinct actual header/address-word graph reaches 324/189 and preserves three native source writebacks, but conservative pair liveness excludes the native payload registers; counter composition adds a frame. These families are parked. Map transfer, decoder, sorter and both installation tails already have source. See [RAM installations](../config/ram-map-us-eu.json) and [decoder](RESOURCE_BACKGROUND_DECODER.md). |
 | Scene objects `0x28234` (160), activity-three preparation `0x19640` (544) | A real packed-step/X-consumer fork improves the object candidate to 160/71 and preserves one X recurrence with an in-loop Y multiply; a shared R2 origin reader recovers the loop loads but swaps high roles, while an explicit preheader lets GCSE hoist Y and create the unwanted second recurrence. Preparation recovers native geometry roles and its two bound-memory reloads, but remains 528/371: the fourth availability flag stays in R7 and displaces output pointers. Its ordinary accepted test already survives; a hard phase-R4 constraint breaks induction optimization. Drawing now has a matching 368-byte source owner: separate incoming/raster Y values and a read-only working-X snapshot recover the native twelve-byte frame; actual consumed native register owners recover the remaining phases. Hard-R7 models remain rejected by emitted behavior. The connected 320-byte raster worker also has source. Full input/writer domains remain open. See [activity three](SCENE_CONTACT_ACTIVITY_THREE.md) and [object interfaces](FRAME_INPUT.md). |
-| Other menu, geometry, text and resource workers | Point `0x67E0` remains 152/92; a genuine two-SI interface gives 144/106 with native entry stores but nonnative PRE-promoted address owners. Selected-tile `0x39CF0` remains 392/109 under the canonical API. The complete `0x48AF8` candidate is canonical 128/10; the earlier 128/112 queue selection was stale. Its context and save-register obligations remain. The window worker `0x48A14` and the 692-byte text renderer now have matching source owners. |
+| Other menu, geometry, text and resource workers | Selected-tile `0x39CF0` remains 392/109 under the canonical API. The complete `0x48AF8` candidate is canonical 128/10; the earlier 128/112 queue selection was stale. Its context and save-register obligations remain. The window worker `0x48A14` and the 692-byte text renderer now have matching source owners. |
 | Serial IRQ `0x3DC48` (1,616) | Preserve the 1,624/809 baseline. A symbolic MMIO member owner adds reads; scalar indirect accesses restore the read/write sites but derive receive addresses from control and create an extra R9 SEND carrier. These formulations are closed. The native R3 receive/readiness lifetimes cross no call. Auditing the dispatcher, callbacks and opaque provider call supplies no missing R3 argument or return consumer; that contract-repair route is closed. A distinct real value-owner fact is required. See [serial](SERIAL_HANDSHAKE.md). |
 | Audio master worker `0x49968` (124) | The recovered original November 2002 SDK has two identical 92-byte master providers with the bad literal and an actual byte store. It establishes lineage without explaining the later reachable NOP at `0x499B0`. A later commercial object/build chain or demonstrated C producer is still needed; no assembly exception follows. See [audio](AUDIO_RECONSTRUCTION.md). |
 
@@ -114,6 +114,21 @@ The current census separately counts instructions, data, alignment, estimated
 extents and unresolved bytes. Source matches establish no new runtime execution.
 
 ## Latest accepted gain and final gate
+
+[Camera-margin predicate](../src/frame/point_near_any_view.c) at `0x67E0`
+adds one function / 148 C extent bytes: 144 instruction and four literal bytes,
+with no alignment bytes. Individually assigned word pairs retain the real count,
+coordinate and bound lifetimes. Full input scalars preserve the entry stores;
+the actual caller keeps its position across calls and supplies Y then X before
+the existing low-byte result test. Every field is assigned before its own read.
+Related complete candidates at 156 and 152 bytes exposed the remaining input
+coalescence and argument ordering, leading to the exact result. The two-word
+input and word-result source interface matches this edge; historical types and
+broader input domains remain open. The real margin and caller-distance controls
+each reject by one byte. All four existing header users, the new provider and
+the full build gates pass with normal flags and canonical headers. This closes
+one source row and adds no material executable-inventory, runtime or
+assembly-exception credit. See [actor state](ACTOR_STATE_RECONSTRUCTION.md#distance-movement-and-terrain-handoff).
 
 [Scrolling-scene list population](../src/display/populate_scrolling_scene.c) at
 `0xF034` adds one function / 308 C extent bytes: 280 instruction and 28 literal

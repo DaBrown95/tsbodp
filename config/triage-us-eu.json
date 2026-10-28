@@ -2,17 +2,17 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 13,
-    "inventory_bytes": 5580,
+    "rows": 12,
+    "inventory_bytes": 5432,
     "statuses": {
       "near-miss": 5,
-      "attempted": 7,
+      "attempted": 6,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
       "near-miss": 1928,
-      "attempted": 3528,
+      "attempted": 3380,
       "untouched": 0,
       "suspected-not-C": 124
     }
@@ -169,65 +169,6 @@
         "Missing or malformed retained input": 16,
         "No retained assessment": 15,
         "Retained linked ELF unavailable": 2
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
-    },
-    {
-      "name": "sub_080067E0",
-      "rom_offset": 26592,
-      "inventory_bytes": 148,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-da"
-      ],
-      "runtime_addresses": [
-        134244320
-      ],
-      "status": "attempted",
-      "user_priority": null,
-      "user_far_off": false,
-      "c_draft": "analysis/point-near-view-67e0-consumed-geometry-results-20261025/actual_per_view_sample_result/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
-      "best_candidate": {
-        "source": "analysis/point-near-view-67e0-consumed-geometry-results-20261025/actual_per_view_sample_result/source.c",
-        "source_sha256": "6ef822e53746f0a38b341205d242c091eff55d602281643b80e639858dd041e9",
-        "metadata": "analysis/point-near-view-67e0-consumed-geometry-results-20261025/actual_per_view_sample_result/metadata.json",
-        "metadata_sha256": "afa938a5a799509a6e6ffaaf7be94e7e0cf6e984b56bb1ed5646b260a6eb73f1",
-        "receipt": "analysis/point-near-view-67e0-consumed-geometry-results-20261025/actual_per_view_sample_result/result.json",
-        "receipt_sha256": "610d60eb0c8de3764e70571326be5cc13ca9c3548f46eaf48e5b9b9a7d653948",
-        "assessment": "analysis/point-near-view-67e0-consumed-geometry-results-20261025/assessment.json",
-        "assessment_sha256": "ba440f3f147fdc10eff2dc7948ef051358679a6aaf22da3c29c906f1b673da8b",
-        "candidate_bytes": 152,
-        "comparison_extent_bytes": 148,
-        "full_byte_differences": 92,
-        "candidate_sha256": "70d3df226ddb62f4e6701684c48adfc609583614af16fca465632904ed1c9c67",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": null,
-      "retained_attempt_contexts": 21,
-      "eligible_diagnostic_contexts": 17,
-      "excluded_contexts": {
-        "Explicit semantic rejection or unqualified source": 1,
-        "Missing or malformed retained input": 2,
-        "Stale or unqualified private header": 1
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
@@ -853,13 +794,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "ec0c531d5a48f5231b855c02211310db7439d5692de9bcf336b9d5cb5d4b0bfc",
-    "assets/rom-inventory.json": "fdd0a0a890c166508ee40011522a7490c7bab130418a7f84abdf927ffd7419df",
-    "docs/COMPLETION_BLOCKERS.md": "c7dd48b9f120ff030f72f375211e04c6b437d0684028eed4e2e23f67259a611d"
+    "assets/progress.json": "f62af5662233f07162fcb5c939f2156345b20caf88b7ca59d2a7c5d3401195ad",
+    "assets/rom-inventory.json": "621600fd23f23323c4e0ab57ddb6a17aebe4795bca3b8fb2d12f797dad7742de",
+    "docs/COMPLETION_BLOCKERS.md": "f5bbe9b2cd9bc11047468d928246c6bc26b8f7e94dcffa5d1b199a08aaea5dcf"
   },
   "documented_inventory": {
-    "rows": 13,
-    "bytes": 5580
+    "rows": 12,
+    "bytes": 5432
   },
   "documentation_count_current": true,
   "scan": {
@@ -868,7 +809,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 2688,
+    "metadata_files": 2707,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 1,

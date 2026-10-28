@@ -642,8 +642,9 @@ leave ranges at `+0x6A` and `+0x68`. Entering substate 9 saves the actor speed a
 Leaving that range restores the saved speed. Substates 3 and 7 alternate timed
 movement and wait phases; substate 5 responds to animation completion by marking
 outer state 1 and clearing flag `0x10`. A shared full-word distance local matches
-both comparisons in ordinary C; no fixed-register binding is used in either
-handler. These inferred roles do not establish the in-game identity of the states.
+both comparisons in ordinary C. State 8 now constrains the actual position and
+argument lifetimes for the connected predicate; state 9 needs no such binding.
+These inferred roles do not establish the in-game identity of the states.
 
 The connected 236-byte terrain step computes direction/speed velocity, adds the
 actor position and shifts to integer coordinates. Its eight direction cases
@@ -661,17 +662,30 @@ Two blocked alternatives enter substate 7 with timer 10; a passable alternative
 enters substate 13 with timer 20. Two C argument variables constrained to `r1`
 preserve the original ordering of register moves at those calls; these are
 compiler constraints, with no instruction statements or byte bodies. The table
-and the larger terrain query remain explicit original data/code. Camera predicate
-`0x67E0` has an inspected 148-byte extent. Its current-header candidates still
-fail full-byte comparison, so it remains unconverted and receives no source
-credit. Full comparisons and changed distance, saved-speed, terrain-mask and
-timer controls pass for all four accepted extents.
+and the larger terrain query remain explicit original data/code. Full comparisons
+and changed distance, saved-speed, terrain-mask and timer controls pass for all
+four accepted extents.
 
-A fresh by-value per-view sample places its origin/input/integer work at the
-native offsets, but retains a separate DI input across calls. Reload adds an
-eight-byte spill and a per-iteration copy: frame 32 rather than native 24,
-152/121 against all 148 bytes. The connected 100-byte predicate and its real
-margin control pass. This formulation supplies no missing input-storage fact.
+The connected [camera-margin predicate](../src/frame/point_near_any_view.c) at
+`0x67E0` now has a complete 148-byte C owner: 144 instruction and four literal
+bytes, with no alignment bytes. It converts the input to integer coordinates
+for each selected view and tests inclusive bounds from origin minus `(100,100)`
+to origin plus `(340,260)`. A zero count uses one view. Its byte index and wider
+count retain the original behavior; this source match establishes no complete
+view-count or writer domain.
+
+The matching source uses two full coordinate arguments and a word 0/1 result;
+state 8 explicitly consumes its low byte. Original transport and all linked
+bytes agree, but historical C formals remain provisional. Individually assigned
+word pairs carry the actual count-address/count, height/X and bound/Y epochs.
+Each field is initialized before its own read. Real scalar input lifetimes
+preserve entry stores and the caller's Y-then-X moves. No whole uninitialized
+record is read. Complete related trials at 156 and 152 bytes isolated the last
+input-copy and argument-order differences before the exact match. The real
+100-to-101 margin control and 220-to-219 caller control each differ by one byte;
+all four existing header users, this new provider and the full-ROM gates pass
+under normal flags and canonical headers. This closes one source row, with no
+runtime, callback-domain or material executable-inventory closure.
 
 ## Transient effects and shared intrusive allocation
 
@@ -1010,11 +1024,11 @@ value-reader field, terrain class, option ID range, condition action ID, descrip
 game-value ceiling, parameter level bound, state-41 animation ID, sequence mode and state-42 cue threshold, effect flags, completion mode and state-43 countdown and state-47 bound adjustment.
 
 All 29 direct handler functions and the candidate-cell selector `0x3B75C`
-are reconstructed here. Buffer lifetime dependencies, camera-margin predicate
-`0x67E0`, terrain query `0x2ABB0` and world-choice cleanup `0xA0A4` remain
-connected next targets. The retained CFGs are closed; those scans alone do not establish C coverage, final function boundaries
-or runtime reachability. These remaining bodies stay explicit unconverted ROM regions
-in the full build.
+are reconstructed here. The camera-margin predicate `0x67E0` and world-choice
+cleanup `0xA0A4` now also have complete source owners. Buffer lifetime dependencies
+and terrain query `0x2ABB0` remain connected work. The retained CFGs are closed;
+those scans alone do not establish C coverage, final function boundaries or runtime
+reachability. Remaining bodies stay explicit unconverted ROM regions in the full build.
 
 ## Action-target list and cell-property queries
 

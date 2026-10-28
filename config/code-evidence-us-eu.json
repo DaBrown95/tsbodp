@@ -2127,9 +2127,9 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "10a7490b6f6b021d6159e9c9eb023be87b5482e48a9a74c259b3621d44099222",
+      "source_sha256": "d5a296edb852b42f6c42ecce4d9c0fa8274c252c3567eee194d57632ece9f080",
       "evidence": [
-        "Matching compiler output .align 2, 0 at LF line141 emits padding containing relative254..256; actual source.o $d covers this span. C source explicitly supplies post-function alignment.",
+        "Matching compiler output .align 2, 0 emits padding at relative254..256; the current source.o $d marker begins at254. C source explicitly supplies post-function alignment.",
         "Full retained 256-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
       ]
     },

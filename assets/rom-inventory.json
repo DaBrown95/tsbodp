@@ -10627,13 +10627,14 @@
       "referenced_literal_bytes": 36
     },
     {
-      "name": "sub_080067E0",
+      "name": "frame_point_near_any_view",
       "rom_offset": 26592,
       "mode": "Thumb",
       "runtime_addresses": [
         134244320
       ],
       "evidence": [
+        "bounded audit",
         "direct call"
       ],
       "issues": [],
@@ -10647,11 +10648,11 @@
         26734
       ],
       "size": 148,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 26592,
       "body_rom_start": 26592,
       "body_rom_end": 26736,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0800xxxx",
       "decoded_instruction_bytes": 144,
@@ -95753,9 +95754,9 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "10a7490b6f6b021d6159e9c9eb023be87b5482e48a9a74c259b3621d44099222",
+      "source_sha256": "d5a296edb852b42f6c42ecce4d9c0fa8274c252c3567eee194d57632ece9f080",
       "evidence": [
-        "Matching compiler output .align 2, 0 at LF line141 emits padding containing relative254..256; actual source.o $d covers this span. C source explicitly supplies post-function alignment.",
+        "Matching compiler output .align 2, 0 emits padding at relative254..256; the current source.o $d marker begins at254. C source explicitly supplies post-function alignment.",
         "Full retained 256-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
       ],
       "status": "mapped_data"
@@ -123835,7 +123836,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "sub_080067E0",
+      "name": "frame_point_near_any_view",
       "rom_offset": 26592,
       "size": 148,
       "status": "mapped_code"
@@ -138784,11 +138785,11 @@
     "tools/bounded_indirect.py": "5deae998a3ba064943059b73862aa93220490f69e0ecc6d708de8ca8d3c79563",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
-    "config/code-evidence-us-eu.json": "45ab86f55a4c1d683e9c75349d11f2d7b5d345c1b0d33ab2a2e2da5f07e47404",
+    "config/code-evidence-us-eu.json": "dc937aca2130f7d61256d0f57a6764c6f1df93e01cd6af0ccf8ab54973661c6b",
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "75506c177ada692195b987cebee15256585d3e20a378cc092bff059b983346ca",
+    "config/build-us-eu.json": "33daf9a00e7cfa797c235e80037c3735a3f3fec3c6baea00a9955747391d34af",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -139150,7 +139151,7 @@
     "src/frame/frame_actor_state_44.c": "ba70ee71ea7368ea41d7a9d35d480ed8f977e5d35a3f35b1ef34292baddcd39a",
     "src/frame/frame_actor_state_45.c": "84291d38b85120eee82e3901b9b3a9a0a55f7cfec9a5fbc514c64e848106a281",
     "src/frame/frame_actor_state_47.c": "847209a4211f2ba4d236272be48be3ffd3bad7f347f7c046e9c005720a1b08e0",
-    "src/frame/frame_actor_state_8.c": "10a7490b6f6b021d6159e9c9eb023be87b5482e48a9a74c259b3621d44099222",
+    "src/frame/frame_actor_state_8.c": "d5a296edb852b42f6c42ecce4d9c0fa8274c252c3567eee194d57632ece9f080",
     "src/frame/frame_actor_state_9.c": "38b9af2138c55ed98f825e31cba74c45956887f866bb4fcc8dafbed329cffbc5",
     "src/frame/frame_actor_step_wait_phase.c": "c196d2c6293660339856133e74413c73bf4d04c62ce596b67e47daffeb882997",
     "src/frame/frame_actor_trigger_interact.c": "2bd9d3968114a46b6e7f806826897cf702788ce482e83677b706601f047e78c6",
@@ -140331,7 +140332,7 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 320100,
+      "source_glue_owned_extent_bytes": 320248,
       "estimated_envelope_union_bytes": 325672,
       "classification_bytes": {
         "estimated_envelope_unclassified": 202,
@@ -189312,10 +189313,6 @@
         ],
         [
           13768,
-          26592
-        ],
-        [
-          26740,
           32192
         ],
         [
@@ -211674,7 +211671,7 @@
       },
       {
         "rom_offset": 26448,
-        "size": 144,
+        "size": 288,
         "classification": "strong_rooted_instruction",
         "roles": [
           "Thumb",
@@ -211687,25 +211684,13 @@
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
       },
       {
-        "rom_offset": 26592,
-        "size": 144,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "Thumb",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
         "rom_offset": 26736,
         "size": 4,
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
@@ -326043,8 +326028,9 @@
         "execution_address": 134244320,
         "entry_rom_offset": 26592,
         "mode": "Thumb",
-        "name": null,
+        "name": "frame_point_near_any_view",
         "evidence": [
+          "bounded audit",
           "direct call"
         ],
         "raw_instruction_intervals": [
@@ -457301,6 +457287,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 280,
         "referenced_data_bytes_in_extent": 28
+      },
+      {
+        "name": "frame_point_near_any_view",
+        "rom_offset": 26592,
+        "size": 148,
+        "source": "src/frame/point_near_any_view.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 144,
+        "referenced_data_bytes_in_extent": 4
       },
       {
         "name": "irq_cpu_enable",

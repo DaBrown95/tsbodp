@@ -56781,6 +56781,32 @@
       "compiler_id": "agbcc",
       "mode": "Thumb",
       "expected_sha256": "6b038688b6c49e2354a6ade50230473ff7b7d92fba4d97aec2d5ff39ea78b591"
+    },
+    {
+      "name": "frame_point_near_any_view",
+      "rom_offset": 26592,
+      "size": 148,
+      "source": "src/frame/point_near_any_view.c",
+      "symbols": {
+        "g_frame_actor_need_input": "0x30040e0",
+        "frame_get_view_origin": "0x8039fdd",
+        "frame_point_to_integer": "0x80273dd"
+      },
+      "thumb_symbols": [
+        "frame_get_view_origin",
+        "frame_point_to_integer"
+      ],
+      "negative_control": {
+        "before": "lower_x-=100;",
+        "after": "lower_x-=101;"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "expected_sha256": "6a75748556b304fcd4e88f1b46ca461ea99821fb765d815a6431832a14dcf139"
     }
   ],
   "assembly": [
