@@ -36,6 +36,10 @@ def verify_functions(functions, receipts, source_hash):
             raise ValueError(f"Unverified or stale source: {f['name']}")
         if r.get('inline_glue') != f.get('inline_glue'):
             raise ValueError(f"Stale inline glue coverage: {f['name']}")
+        if r.get('entry_offset') != f.get('entry_offset'):
+            raise ValueError(f"Stale source entry offset: {f['name']}")
+        if 'entry_offset' in f and r.get('entry_address') != f"{0x08000000 + f['rom_offset'] + f['entry_offset']:#010x}":
+            raise ValueError(f"Stale source entry address: {f['name']}")
         if inline_glue(f):
             if (r.get('inline_glue') != f['inline_glue'] or not r.get('inline_glue_verified')
                     or not r.get('inline_glue_control', {}).get('rejected')):

@@ -129,12 +129,42 @@ def compile_function(function, source, folder, flags, copies=None, header_overri
 
 def assemble_glue(region, source, folder):
     """Assemble explicit low-level glue. It is never matching C coverage."""
+    from source_addresses import entry_offset
+    offset = entry_offset(region)
+    if 'entry_offset' in region and ('ram_address' in region or 'ram_copy' in region):
+        raise ValueError('Prefixed glue entry currently requires a ROM execution address')
     folder.mkdir(parents=True, exist_ok=True)
     commands = []
     assembler = ROOT / 'toolchains/binutils/bin/arm-none-eabi-as'
     obj, linked = folder / 'source.o', folder / 'linked.elf'
     run([assembler, '-mcpu=arm7tdmi', '--no-pad-sections', *modern_assembler_abi_flags(),
          source, '-o', obj], commands)
+    with obj.open('rb') as stream:
+        elf = ELFFile(stream)
+        text = elf.get_section_by_name('.text')
+        symbols = elf.get_section_by_name('.symtab')
+        named = symbols.get_symbol_by_name(region['name']) or []
+        function = next((s for s in named if s['st_info']['type'] == 'STT_FUNC'), None)
+        functions = [s for s in symbols.iter_symbols()
+                     if s['st_info']['type'] == 'STT_FUNC'
+                     and s['st_shndx'] == elf.get_section_index('.text')]
+        alignment = text['sh_addralign']
+        base = 0x08000000 + region['rom_offset']
+        if functions and 'entry_offset' not in region and (-base) % alignment:
+            raise ValueError('Glue function alignment prefix requires an explicit entry offset')
+        if functions and region.get('defines_symbol', True) and function is None:
+            raise ValueError('Glue function does not match its declared entry name')
+        if 'entry_offset' in region:
+            if (function is None or len(functions) != 1
+                    or function['st_shndx'] != elf.get_section_index('.text')
+                    or (function['st_value'] & ~1) != 0
+                    or function['st_size'] <= 0
+                    or function['st_size'] > text['sh_size']
+                    or alignment < 1 or alignment & (alignment - 1)
+                    or offset != (-base) % alignment
+                    or offset + text['sh_size'] != region['size']):
+                raise ValueError('Glue entry prefix is not natural input-section alignment')
+        check_function = function is not None or 'entry_offset' in region
     externs = folder / 'externs.s'
     externs.write_text('\n'.join(declarations(region.get('symbols', {})))+'\n')
     extern_obj = folder / 'externs.o'
@@ -142,8 +172,9 @@ def assemble_glue(region, source, folder):
     address = 0x08000000 + region['rom_offset']
     script = folder / 'function.ld'
     script.write_text(f'SECTIONS {{ .text {address:#x} : {{ *(.text) }} }}\n')
+    entry_flags = [f"--entry={region['name']}"] if 'entry_offset' in region else []
     run([ROOT / 'toolchains/binutils/bin/arm-none-eabi-ld', '-T', script,
-         obj, extern_obj, '-o', linked], commands)
+         *entry_flags, obj, extern_obj, '-o', linked], commands)
     with linked.open('rb') as stream:
         elf = ELFFile(stream)
         allocated = [s for s in elf.iter_sections() if s['sh_flags'] & 2 and s['sh_size']]
@@ -152,6 +183,22 @@ def assemble_glue(region, source, folder):
         if any(s['sh_type'] in ('SHT_REL', 'SHT_RELA') and s['sh_size'] for s in elf.iter_sections()):
             raise ValueError('Glue retains unresolved relocations')
         data = allocated[0].data()
+        if check_function:
+            named = elf.get_section_by_name('.symtab').get_symbol_by_name(region['name']) or []
+            function = next((s for s in named if s['st_info']['type'] == 'STT_FUNC'), None)
+            expected = address + offset
+            if (function is None or (function['st_value'] & ~1) != expected
+                    or expected + function['st_size'] > address + len(data)):
+                raise ValueError('Glue function entry differs from its declared entry offset')
+            if 'entry_offset' in region:
+                # The input-object gate above requires a positive size here.
+                # Existing non-prefix assembly can omit an ELF .size directive.
+                thumb = region['mode'] == 'Thumb'
+                if (bool(function['st_value'] & 1) != thumb
+                        or (elf['e_entry'] & ~1) != expected
+                        or bool(elf['e_entry'] & 1) != thumb
+                        or data[:offset] != bytes(offset)):
+                    raise ValueError('Glue entry or linker alignment prefix differs')
     return data, commands
 
 

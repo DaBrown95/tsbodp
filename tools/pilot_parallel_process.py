@@ -97,6 +97,8 @@ def compile_candidate(function, run_folder, flags, rom, copies, *, negative_cont
                    'rom_address': f"{0x08000000 + function['rom_offset']:#010x}",
                    "source_sha256": hashlib.sha256(snapshot.read_bytes()).hexdigest(),
                    "commands": compile_commands, "expected_sha256": hashlib.sha256(expected).hexdigest()})
+    if 'entry_offset' in function:
+        result['entry_address'] = f"{address + function['entry_offset']:#010x}"
     if is_c:
         selection = compiler_selection(function, manifest['compiler_flags'])
         result.update({'compiler_id': selection['compiler_id'], 'compiler_flags': selection['flags']})

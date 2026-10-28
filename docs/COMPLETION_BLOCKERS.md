@@ -1,8 +1,8 @@
 # Remaining reconstruction and closure work
 
 The current gates verify **2,487 C functions / 316,188 C extent bytes**, plus
-**4,060 assembly bytes**. C and assembly occupy 320,248 bytes; original slices
-still supply 16,456,968 bytes of assets and unconverted code. Whole-ROM equality
+**4,068 assembly bytes**. C and assembly occupy 320,256 bytes; original slices
+still supply 16,456,960 bytes of assets and unconverted code. Whole-ROM equality
 is proven; complete source ownership is not. The fixed 319,640 mapped extent
 bytes are solely a historical comparison, not a complete code denominator.
 
@@ -18,8 +18,8 @@ spill and root-address load without a private header override. Its 290-byte
 function includes 16 literal bytes; the last two extent bytes are explicit
 source alignment. See [frame input](FRAME_INPUT.md).
 
-The scanner's entry extents total 325,672 bytes. The progress source overlay
-totals 325,680 bytes because it also includes eight already-owned IRQ literal
+The inventory's entry and audited extents total 325,680 bytes. The progress
+source overlay totals 325,688 bytes because it also includes eight already-owned IRQ literal
 data bytes at `0x2A0`; those bytes are already counted within assembly glue.
 These mapping totals remain separate from source coverage and executable totals.
 
@@ -114,6 +114,18 @@ The current census separately counts instructions, data, alignment, estimated
 extents and unresolved bytes. Source matches establish no new runtime execution.
 
 ## Latest accepted gain and final gate
+
+The existing [debugger adapter](../src/startup/debug_display_word.s) now owns
+`0x2A8..0x2EC`: its unchanged 60-byte object has a genuine internal packet
+alignment of 16 bytes. Normal linking after the preceding pool ends at `0x2A8`
+therefore emits eight leading alignment bytes and retains the function at
+`0x2B0`. All 68 bytes match; the real read control rejects by one byte. Strict
+entry-offset validation checks the natural prefix, input layout, actual
+function and ELF entry; the scanner seeds `0x2B0`, never the prefix.
+This resolves the eight-byte copied-gap ownership question and adds eight
+separately counted glue alignment bytes, zero C bytes, instructions or entries.
+The broader executable inventory and runtime writer/target populations remain
+open. See [IRQ layout](RAM_AND_INTERRUPTS.md#irq-copy-linker-alignment).
 
 [Camera-margin predicate](../src/frame/point_near_any_view.c) at `0x67E0`
 adds one function / 148 C extent bytes: 144 instruction and four literal bytes,

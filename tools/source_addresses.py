@@ -1,15 +1,35 @@
-"""Validate source execution addresses separately from ROM storage extents."""
+"""Keep source section extents, entry points and ROM storage addresses distinct."""
 
 ROM_BASE = 0x08000000
 
 
+def entry_offset(function):
+    """Only defining assembly may own natural linker alignment before its entry."""
+    offset = function.get('entry_offset', 0)
+    if 'entry_offset' not in function:
+        return 0
+    if (function.get('kind', 'compiled_c') != 'assembly_glue'
+            or not function.get('defines_symbol', True)
+            or function.get('mode') not in ('ARM', 'Thumb')):
+        raise ValueError('An entry offset requires defining ARM/Thumb assembly')
+    width = 4 if function['mode'] == 'ARM' else 2
+    size = function.get('size')
+    if (type(size) is not int or size <= 0
+            or type(offset) is not int or offset < 0 or offset >= size
+            or offset % width):
+        raise ValueError('Invalid source entry offset')
+    return offset
+
+
 def execution_address(function, copies=(), entries=()):
+    """Execution address of the complete source section, including alignment."""
     mode = function.get('mode', 'Thumb')
     if mode not in ('Thumb', 'ARM'):
         raise ValueError('Unsupported C instruction mode')
     offset, size = function['rom_offset'], function['size']
     if not isinstance(offset, int) or not isinstance(size, int) or offset < 0 or size <= 0:
         raise ValueError('Invalid source storage extent')
+    prefix = entry_offset(function)
     address = function.get('ram_address', ROM_BASE + offset)
     alignment = 4 if mode == 'ARM' else 2
     if not isinstance(address, int) or address % alignment or offset % alignment:
@@ -28,9 +48,14 @@ def execution_address(function, copies=(), entries=()):
             raise ValueError('Copied source lies outside GBA work RAM')
     elif 'ram_copy' in function:
         raise ValueError('RAM copy name requires an execution address')
-    if any(entry['ram_address'] == address and entry['mode'] != mode for entry in entries):
+    if any(entry['ram_address'] == address + prefix and entry['mode'] != mode for entry in entries):
         raise ValueError('Source instruction mode differs from its observed RAM entry')
     return address
+
+
+def entry_address(function, copies=(), entries=()):
+    """Actual instruction entry; leading linker data is never an entry seed."""
+    return execution_address(function, copies, entries) + entry_offset(function)
 
 
 def validate_execution_layout(functions, copies=(), entries=()):
@@ -49,7 +74,7 @@ def validate_symbol_definitions(manifest, copies=(), entries=()):
             name = function['name']
             if name in definitions:
                 raise ValueError('Duplicate source symbol definition')
-            definitions[name] = (execution_address(function, copies, entries),
+            definitions[name] = (entry_address(function, copies, entries),
                                  function.get('mode', 'Thumb'))
     for source in sources:
         thumb_symbols = set(source.get('thumb_symbols', ()))

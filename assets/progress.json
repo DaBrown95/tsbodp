@@ -1,12 +1,12 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "28 Oct 2026, 20:24 GMT",
+  "verified_at": "28 Oct 2026, 21:10 GMT",
   "compiled_c_functions": 2487,
   "compiled_c_bytes": 316188,
-  "assembly_glue_bytes": 4060,
+  "assembly_glue_bytes": 4068,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16456968,
+  "unconverted_rom_bytes": 16456960,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
@@ -15,7 +15,7 @@
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 97,
-  "mapped_extent_bytes": 325680,
+  "mapped_extent_bytes": 325688,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
     "raw_instruction_union_bytes": 285436,
@@ -24,16 +24,16 @@
     "raw_referenced_data_union_bytes": 35940,
     "qualified_referenced_data_union_bytes": 35940,
     "source_authored_instruction_union_bytes": 30,
-    "source_glue_owned_extent_bytes": 320248,
-    "estimated_envelope_union_bytes": 325672,
+    "source_glue_owned_extent_bytes": 320256,
+    "estimated_envelope_union_bytes": 325680,
     "classification_bytes": {
       "estimated_envelope_unclassified": 202,
       "instruction_and_referenced_data_dual_use": 4,
-      "known_data": 22954,
+      "known_data": 22962,
       "source_authored_unrooted_instruction": 30,
       "strong_rooted_instruction": 285406,
       "strong_rooted_referenced_data": 35936,
-      "unresolved": 16432684
+      "unresolved": 16432676
     }
   },
   "copied_source_ownership": {
@@ -43,8 +43,8 @@
     "duplicate_installation_bytes": 172,
     "unique_rom_counts": {
       "compiled_c": 4508,
-      "assembly_glue": 3000,
-      "without_verified_source": 11680
+      "assembly_glue": 3008,
+      "without_verified_source": 11672
     },
     "installations": [
       {
@@ -286,8 +286,8 @@
         "size": 512,
         "counts": {
           "compiled_c": 0,
-          "assembly_glue": 504,
-          "without_verified_source": 8
+          "assembly_glue": 512,
+          "without_verified_source": 0
         },
         "segments": [
           {
@@ -326,18 +326,12 @@
           {
             "rom_offset": 680,
             "ram_address": 50339048,
-            "size": 8,
-            "source_kind": "without_verified_source"
-          },
-          {
-            "rom_offset": 688,
-            "ram_address": 50339056,
-            "size": 60,
+            "size": 68,
             "source_kind": "assembly_glue",
             "source_extent_name": "startup_debug_display_word",
             "source": "src/startup/debug_display_word.s",
-            "source_extent_rom_offset": 688,
-            "source_extent_size": 60,
+            "source_extent_rom_offset": 680,
+            "source_extent_size": 68,
             "whole_source_extent": true
           },
           {
@@ -622,8 +616,8 @@
     {
       "name": "startup_debug_display_word",
       "group": "ROM 0800xxxx",
-      "rom_offset": 688,
-      "size": 60,
+      "rom_offset": 680,
+      "size": 68,
       "status": "exact_glue"
     },
     {
@@ -18569,15 +18563,9 @@
       "status": "exact_glue"
     },
     {
-      "name": "Unresolved_0002A8",
-      "rom_offset": 680,
-      "size": 8,
-      "status": "unresolved"
-    },
-    {
       "name": "startup_debug_display_word",
-      "rom_offset": 688,
-      "size": 60,
+      "rom_offset": 680,
+      "size": 68,
       "status": "exact_glue"
     },
     {
@@ -34404,9 +34392,9 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "33daf9a00e7cfa797c235e80037c3735a3f3fec3c6baea00a9955747391d34af",
-    "assets/rom-inventory.json": "621600fd23f23323c4e0ab57ddb6a17aebe4795bca3b8fb2d12f797dad7742de",
-    "tools/render_progress.py": "17a4d66dc994101759f2be2495f51577c20c1652eaef1d4e1fd604c9d2c24098",
+    "config/build-us-eu.json": "c7eb3da4d62532f96390977a5514dfb28204305b7bbcab6318ac22780b0bdab2",
+    "assets/rom-inventory.json": "c35c55d7c3aa72e0a806e54c0f8dfd95e6df92a4115af852d2d0125afc58a8e1",
+    "tools/render_progress.py": "4499424ee9895c386d0885b113dfb31c37eeb0dd109efa7b06e14f0023aad98f",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/copy_ownership.py": "0b3766167169d1ab1e5a4931e6988d0089e11d4493c08d256bc77a0531bdaa4e",
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",

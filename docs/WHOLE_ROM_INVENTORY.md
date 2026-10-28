@@ -35,11 +35,11 @@ bodies, ROM payload or extracted assets are published as inventory metadata.
 
 The table below is a historical survey snapshot. Current source ownership is
 recorded in the generated [progress data](../assets/progress.json) and the
-[remaining-work list](COMPLETION_BLOCKERS.md). The separately counted 4,060
+[remaining-work list](COMPLETION_BLOCKERS.md). The separately counted 4,068
 assembly extent bytes include the 1,604-byte mixer family,
 140-byte timer IRQ, 140-byte startup exceptions, eight-byte BIOS wait wrapper,
 60-byte compiler register-call family, 672-byte division/remainder family and
-812-byte background decoder and 72-byte audio interworking entries/pools and 60-byte debugger adapter, with
+812-byte background decoder and 72-byte audio interworking entries/pools and 68-byte debugger-adapter extent, with
 their genuine data and alignment; it is not a C gain. Exact source and full-ROM/control gates verify these replacements.
 See [audio](AUDIO_RECONSTRUCTION.md),
 [startup](STARTUP_RECONSTRUCTION.md), [compiler assembly](RUNTIME_REGISTER_CALLS.md) and the concise

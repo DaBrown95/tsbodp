@@ -29,6 +29,19 @@ class ProgressTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             verify_functions([self.function], [self.receipt], lambda f: 'changed')
 
+    def test_changed_entry_metadata_cannot_reuse_a_matching_glue_extent(self):
+        glue = {**self.function, 'kind': 'assembly_glue', 'mode': 'ARM',
+                'entry_offset': 4}
+        receipt = {**self.receipt, **glue, 'assembly_glue_verified': True,
+                   'entry_address': '0x08000008'}
+        self.assertEqual(verify_functions([glue], [receipt], lambda f: 'original')[0]['status'],
+                         'exact_glue')
+        for change in ({'entry_offset': 0}, {'entry_address': '0x08000004'}):
+            with self.subTest(change=change), self.assertRaisesRegex(ValueError, 'entry'):
+                verify_functions([glue], [{**receipt, **change}], lambda f: 'original')
+        with self.assertRaisesRegex(ValueError, 'entry'):
+            verify_functions([self.function], [receipt], lambda f: 'original')
+
     def test_inline_glue_requires_current_span_receipt_and_rejected_control(self):
         f = {**self.function, 'mode': 'ARM', 'inline_glue': {
             'source': 'include/bios.h', 'begin_prefix': '__tsbodp_glue_bios_begin_',

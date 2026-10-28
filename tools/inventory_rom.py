@@ -21,6 +21,7 @@ from bounded_indirect import (validate_bounded_table, annotate_bounded_records,
                               validate_saved_volume_operands, annotate_operand_records)
 from fixed_target_proof import prove_fixed_target
 from inventory_census import census, verify_census, source_instruction_role_spans
+from source_addresses import entry_address
 
 BASE = 0x08000000
 
@@ -355,10 +356,13 @@ def main():
     scanner.seed(BASE+0xc0, 'ARM', 'startup', 'ARM startup')
     scanner.seed(BASE+0xec, 'Thumb', 'startup', 'Thumb startup')
     scanner.seed(BASE+0x25c0c, 'Thumb', 'startup main pointer', 'Entry routine')
-    for row in bounded['unconverted_extents'] + source_code:
+    for row in bounded['unconverted_extents']:
         scanner.seed(row.get('ram_address', BASE+row['rom_offset']),
                      row.get('mode', 'ARM' if row['name'].startswith('ARM') else 'Thumb'),
                      'bounded audit', row['name'])
+    for row in source_code:
+        scanner.seed(entry_address(row, ram['copies'], ram['entries']),
+                     row.get('mode', 'Thumb'), 'bounded audit', row['name'])
     for entry in ram['entries']:
         scanner.seed(entry['ram_address'], entry['mode'], 'audited RAM entry', entry['name'])
     dispatch_config = json.loads((ROOT/'config/indirect-transfers-us-eu.json').read_text())
@@ -594,9 +598,10 @@ def main():
     audited = []
     for known in overlay(bounded['unconverted_extents'], source_code):
         off = known['rom_offset']
-        discovered = merged.get(off, {})
+        entry_off = off + known.get('entry_offset', 0)
+        discovered = merged.get(entry_off, {})
         audited.append({**discovered, **{k: known[k] for k in ('name', 'rom_offset', 'size')},
-                        'status': 'mapped_code', 'extent_basis': 'bounded audit', 'boundary_confidence': 'bounded audit', 'entry_rom_offset': off,
+                        'status': 'mapped_code', 'extent_basis': 'bounded audit', 'boundary_confidence': 'bounded audit', 'entry_rom_offset': entry_off,
                         'group': 'Startup / ARM' if off < 0x2a0 else f'ROM {0x0800+off//0x10000:04X}xxxx'})
     rows = overlay(rows, audited)
     # Do not emit sets retained in rejected/overlaid discovery records.
@@ -651,7 +656,7 @@ def main():
               'source_owned_instruction_regions': source_instructions,
               'data_regions': data_regions, 'partition': partition(rows+data_regions, len(data)),
               'input_sha256': {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in
-                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'tools/indirect_evidence.py', 'tools/bounded_indirect.py', 'tools/fixed_target_proof.py', 'tools/inventory_census.py', 'config/code-evidence-us-eu.json', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt', *sorted(evidence_inputs))}}
+                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'tools/indirect_evidence.py', 'tools/bounded_indirect.py', 'tools/fixed_target_proof.py', 'tools/inventory_census.py', 'tools/source_addresses.py', 'config/code-evidence-us-eu.json', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt', *sorted(evidence_inputs))}}
     result['inventory_schema_version'] = 2
     result['historical_mapped_extent_baseline'] = 319640
     result['code_census'] = census(scanner, strong_entries, strong_results,

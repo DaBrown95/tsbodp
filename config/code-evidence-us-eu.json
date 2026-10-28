@@ -27033,6 +27033,20 @@
       "evidence": [
         "Exact linked C emits zero alignment at relative 654; source object $d begins there after bx r0 at 0x8042bf0. Matching compiler .align 2,0 and the full original 656-byte proof establish alignment/data; alternate incoming entries remain unexcluded."
       ]
+    },
+    {
+      "name": "startup_debug_display_word_leading_alignment_0002a8",
+      "owner": "startup_debug_display_word",
+      "rom_offset": 680,
+      "size": 8,
+      "role": "alignment",
+      "region_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "source_sha256": "950417003db51325d2db691ebdb98bf0b4175df519c8e2963146a583b1fcc9c9",
+      "evidence": [
+        "The unchanged accepted debugger source has a genuine internal packet .balign 16 directive; its input .text has sh_addralign16, size60 and sole function at input offset0. The preceding owned pool ends2A8; normal linking at2A8 aligns that input to2B0 and emits exactly8 leading zero bytes.",
+        "Complete68-byte positive and real changed-read control retain function symbol and ELF entry at080002B0. Strict entry_offset8 validation checks natural input alignment, sole function at input0, full extent, zero prefix and actual entry. Scanner seeds2B0, never2A8.",
+        "This assigns a source-emitted linker-alignment role within the existing glue owner. It adds no instructions, entry, C, runtime observation, universal execution exclusion or historical source-file identity."
+      ]
     }
   ],
   "source_owned_instruction_regions": [

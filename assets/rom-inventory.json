@@ -5992,7 +5992,7 @@
   },
   "entry_count": 2549,
   "extent_count": 2550,
-  "mapped_extent_bytes": 325672,
+  "mapped_extent_bytes": 325680,
   "rows": [
     {
       "name": "rom_entry",
@@ -6216,7 +6216,7 @@
     },
     {
       "name": "startup_debug_display_word",
-      "rom_offset": 688,
+      "rom_offset": 680,
       "mode": "ARM",
       "runtime_addresses": [
         134218416
@@ -6231,7 +6231,7 @@
       "return_offsets": [
         740
       ],
-      "size": 60,
+      "size": 68,
       "extent_basis": "bounded audit",
       "entry_rom_offset": 688,
       "body_rom_start": 688,
@@ -122565,6 +122565,21 @@
         "Exact linked C emits zero alignment at relative 654; source object $d begins there after bx r0 at 0x8042bf0. Matching compiler .align 2,0 and the full original 656-byte proof establish alignment/data; alternate incoming entries remain unexcluded."
       ],
       "status": "mapped_data"
+    },
+    {
+      "name": "startup_debug_display_word_leading_alignment_0002a8",
+      "owner": "startup_debug_display_word",
+      "rom_offset": 680,
+      "size": 8,
+      "role": "alignment",
+      "region_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "source_sha256": "950417003db51325d2db691ebdb98bf0b4175df519c8e2963146a583b1fcc9c9",
+      "evidence": [
+        "The unchanged accepted debugger source has a genuine internal packet .balign 16 directive; its input .text has sh_addralign16, size60 and sole function at input offset0. The preceding owned pool ends2A8; normal linking at2A8 aligns that input to2B0 and emits exactly8 leading zero bytes.",
+        "Complete68-byte positive and real changed-read control retain function symbol and ELF entry at080002B0. Strict entry_offset8 validation checks natural input alignment, sole function at input0, full extent, zero prefix and actual entry. Scanner seeds2B0, never2A8.",
+        "This assigns a source-emitted linker-alignment role within the existing glue owner. It adds no instructions, entry, C, runtime observation, universal execution exclusion or historical source-file identity."
+      ],
+      "status": "mapped_data"
     }
   ],
   "source_owned_instruction_regions": [
@@ -123022,13 +123037,13 @@
     {
       "name": "Unresolved_0002A0",
       "rom_offset": 672,
-      "size": 16,
+      "size": 8,
       "status": "unresolved"
     },
     {
       "name": "startup_debug_display_word",
-      "rom_offset": 688,
-      "size": 60,
+      "rom_offset": 680,
+      "size": 68,
       "status": "mapped_code"
     },
     {
@@ -138777,7 +138792,7 @@
     }
   ],
   "input_sha256": {
-    "tools/inventory_rom.py": "c7f582dffd53c5e38d387f9472f8006a5f7e855c4b2d25379c5ba60421d24b36",
+    "tools/inventory_rom.py": "3d213182b8012cd0fae3d8412544e192842479247178b2403e60c43631535326",
     "tools/control_flow.py": "225048329459429d84b7e44472833d05c7593ae14873ce0c36bc97653f5d97f9",
     "tools/inventory_partition.py": "5838852221fa7a38767ccd701d27ca398309bc55951bc0f294e306f7bebbe89c",
     "tools/ram_copies.py": "5e429b3d6efa9666a90c97b892f66cf6203294dad0c277f82700b4f521b7f3c1",
@@ -138785,11 +138800,12 @@
     "tools/bounded_indirect.py": "5deae998a3ba064943059b73862aa93220490f69e0ecc6d708de8ca8d3c79563",
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
-    "config/code-evidence-us-eu.json": "dc937aca2130f7d61256d0f57a6764c6f1df93e01cd6af0ccf8ab54973661c6b",
+    "tools/source_addresses.py": "7c18cbe496668c2f074f6c55609eb8aabb923ded5b0add51f3be908634612485",
+    "config/code-evidence-us-eu.json": "756d74f1480194448d77a69183a59f898a63ab1073fe8fb8df634669663121cb",
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "33daf9a00e7cfa797c235e80037c3735a3f3fec3c6baea00a9955747391d34af",
+    "config/build-us-eu.json": "c7eb3da4d62532f96390977a5514dfb28204305b7bbcab6318ac22780b0bdab2",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -140332,16 +140348,16 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 320248,
-      "estimated_envelope_union_bytes": 325672,
+      "source_glue_owned_extent_bytes": 320256,
+      "estimated_envelope_union_bytes": 325680,
       "classification_bytes": {
         "estimated_envelope_unclassified": 202,
         "instruction_and_referenced_data_dual_use": 4,
-        "known_data": 22954,
+        "known_data": 22962,
         "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 285406,
         "strong_rooted_referenced_data": 35936,
-        "unresolved": 16432684
+        "unresolved": 16432676
       }
     },
     "physical_unions": {
@@ -181035,7 +181051,7 @@
         ],
         [
           670,
-          680
+          688
         ],
         [
           708,
@@ -189261,10 +189277,6 @@
         ],
         [
           192,
-          680
-        ],
-        [
-          688,
           5100
         ],
         [
@@ -189502,7 +189514,7 @@
           672
         ],
         [
-          688,
+          680,
           5100
         ],
         [
@@ -204303,10 +204315,14 @@
       {
         "rom_offset": 680,
         "size": 8,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "known_data",
+        "roles": [
+          "estimated_envelope",
+          "known_data",
+          "source_owned"
+        ],
+        "confidence": "moderate_static_data_role",
+        "evidence_basis": "Independently supplied data region or explicit data-only source/glue extent."
       },
       {
         "rom_offset": 688,
@@ -315524,10 +315540,10 @@
         "size": 65536,
         "classification_bytes": {
           "estimated_envelope_unclassified": 14,
-          "known_data": 854,
+          "known_data": 862,
           "strong_rooted_instruction": 57312,
           "strong_rooted_referenced_data": 6784,
-          "unresolved": 572
+          "unresolved": 564
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -457900,8 +457916,8 @@
       },
       {
         "name": "startup_debug_display_word",
-        "rom_offset": 688,
-        "size": 60,
+        "rom_offset": 680,
+        "size": 68,
         "source": "src/startup/debug_display_word.s",
         "mode": "ARM",
         "kind": "assembly_glue",

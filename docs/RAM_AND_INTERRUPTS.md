@@ -76,18 +76,46 @@ nested sources masked by `0x20F4`, switches to system mode for the handler,
 then restores the IRQ context. The Game Pak branch writes its selected value
 to the sound register and loops. No runtime execution is claimed.
 
-The dispatcher code owns only `0x160..0x288`; its separate pool owns
-`0x2A0..0x2A8`. The intervening Thumb startup copy helper remains unconverted.
-The pool aliases preserve the same PC-relative displacements in ROM and after
-the 512-byte IWRAM copy; the full-ROM link compares both source extents.
-Real source mutations of each glue region must fail comparison. Audio ARM
-code remains unconverted, including the self-modifying mixer.
+The dispatcher code owns `0x160..0x288`; its separate pool owns
+`0x2A0..0x2A8`. The intervening 24-byte [Thumb startup copy helper](../src/startup/copy_words.s)
+also has a matching assembly owner. The pool aliases preserve the same
+PC-relative displacements in ROM and after the 512-byte IWRAM copy; the full-ROM
+link compares the complete source extents. Real source mutations of each glue
+region must fail comparison. The separately documented [audio owners](AUDIO_RECONSTRUCTION.md)
+include the copied IRQ and mixer; runtime writer domains remain open.
 
 External Thumb function symbols are declared as Thumb to avoid invented ARM
 interworking veneers. The two pool-free callback units express zero alignment
 with a translation-unit assembly alignment directive; no original instruction
 body is embedded. The linker checks each entire extent at its original address.
 Headers and source snapshots, commands, objects and failures remain local.
+
+## IRQ-copy linker alignment
+
+The eight bytes at ROM `0x2A8..0x2B0`, installed at `0x03001CE8..0x03001CF0`,
+now belong to the existing [debugger adapter](../src/startup/debug_display_word.s)
+source extent. Its source is unchanged. The documented GNU packet alignment
+already gives the input object's `.text` a 16-byte alignment, with a 60-byte
+body and its function at input offset zero. Linking directly after the preceding
+pool at `0x2A8` naturally emits eight zero bytes before that input section. The
+function remains at `0x080002B0`; the complete storage extent is 68 bytes,
+including 28 instruction, 28 packet, four literal and eight linker-alignment
+bytes. The real read control changes one byte; changing the genuine alignment
+rule instead removes the prefix and fails the complete comparison.
+
+The manifest records storage start and entry offset separately. The source gate
+requires a sole, sized function at input offset zero, the exact natural prefix
+from input alignment, the complete extent, zero prefix and the real function
+symbol and ELF entry. Renaming metadata or omitting the offset cannot hide a
+function-bearing alignment prefix. The inventory seeds the actual function,
+never the prefix, and its helper dependency and entry metadata are pinned.
+Normal full-ROM and changed-source gates pass. This extends the existing glue
+owner by eight data-alignment bytes. All 512 bytes of this configured IRQ copy
+then have matching source owners: 296 dispatcher, 24 startup helper, eight
+pool, 68 debugger extent and 116 already-owned decoder-prefix bytes. The partial
+decoder alias is not another complete function or source gain. This adds no C,
+instructions, function entry or runtime observation. It does not establish a historical source filename,
+a universal protocol alignment requirement or complete execution exclusion.
 
 ## Complete ROM layout, partial source reconstruction
 
