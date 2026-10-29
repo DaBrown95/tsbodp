@@ -19,6 +19,8 @@ the original dump.
 The ROM map separately records rooted static instructions, estimated extents,
 data and unresolved regions. It does not yet establish a complete game-code
 denominator. The historical 319,640 mapped extent bytes remain a fixed comparison.
+A source-owned extent can still lack an established incoming call; source
+ownership and reachability are separate claims.
 The [verified progress data](assets/progress.json) records source ownership for
 known RAM copies and counts overlapping ROM bytes once.
 Local evidence retains the current verified build and a bounded set of useful

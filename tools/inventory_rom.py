@@ -26,6 +26,26 @@ from source_addresses import entry_address
 BASE = 0x08000000
 
 
+def source_cfg_root(row):
+    """A source extent can be owned without supplying an entry root."""
+    rooted = row.get('cfg_root', True)
+    if type(rooted) is not bool:
+        raise ValueError('Source cfg_root must be a boolean')
+    if not rooted and (not isinstance(row.get('cfg_root_reason'), str)
+                       or not row['cfg_root_reason'].strip()):
+        raise ValueError('Unrooted source owner requires cfg_root_reason')
+    return rooted
+
+
+def seed_source_owners(scanner, source_code, copies, entries):
+    """Skip source-only roots, without suppressing independent evidence."""
+    rooted = [row for row in source_code if source_cfg_root(row)]
+    for row in rooted:
+        scanner.seed(entry_address(row, copies, entries),
+                     row.get('mode', 'Thumb'), 'bounded audit', row['name'])
+    return rooted
+
+
 def observed_extent_counts(observed, start, size):
     """Count observed byte roles inside an estimate or replacement extent."""
     return {count: sum(start <= offset < start + size for offset in observed[field])
@@ -360,9 +380,7 @@ def main():
         scanner.seed(row.get('ram_address', BASE+row['rom_offset']),
                      row.get('mode', 'ARM' if row['name'].startswith('ARM') else 'Thumb'),
                      'bounded audit', row['name'])
-    for row in source_code:
-        scanner.seed(entry_address(row, ram['copies'], ram['entries']),
-                     row.get('mode', 'Thumb'), 'bounded audit', row['name'])
+    root_source_code = seed_source_owners(scanner, source_code, ram['copies'], ram['entries'])
     for entry in ram['entries']:
         scanner.seed(entry['ram_address'], entry['mode'], 'audited RAM entry', entry['name'])
     dispatch_config = json.loads((ROOT/'config/indirect-transfers-us-eu.json').read_text())
@@ -596,7 +614,7 @@ def main():
             continue  # Uncorroborated pointer/prologue coincidences stay unresolved.
         rows.append(row)
     audited = []
-    for known in overlay(bounded['unconverted_extents'], source_code):
+    for known in overlay(bounded['unconverted_extents'], root_source_code):
         off = known['rom_offset']
         entry_off = off + known.get('entry_offset', 0)
         discovered = merged.get(entry_off, {})

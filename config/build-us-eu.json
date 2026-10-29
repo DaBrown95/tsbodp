@@ -56807,6 +56807,38 @@
       "compiler_id": "agbcc",
       "mode": "Thumb",
       "expected_sha256": "6a75748556b304fcd4e88f1b46ca461ea99821fb765d815a6431832a14dcf139"
+    },
+    {
+      "name": "display_replace_mode_control",
+      "rom_offset": 54824,
+      "size": 36,
+      "source": "src/display/display_replace_mode_control.c",
+      "symbols": {
+        "g_display_control": "0x03002ef0"
+      },
+      "negative_control": {
+        "before": "g_display_control.flags |= 2;",
+        "after": "g_display_control.flags |= 4;"
+      },
+      "expected_sha256": "eccf6e7064b778a6f14c3d7f1d9a77650851abefcaf15a886832fb974801e18f",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete matching C extent; no original incoming entry evidence established."
+    },
+    {
+      "name": "display_replace_layer_control",
+      "rom_offset": 54860,
+      "size": 36,
+      "source": "src/display/display_replace_layer_control.c",
+      "symbols": {
+        "g_display_control": "0x03002ef0"
+      },
+      "negative_control": {
+        "before": "g_display_control.flags |= 2;",
+        "after": "g_display_control.flags |= 4;"
+      },
+      "expected_sha256": "c0d63ffd474fa2837079889b972a28dfe95fd742002ec5f7434afb5b97b22449",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete matching C extent; no original incoming entry evidence established."
     }
   ],
   "assembly": [

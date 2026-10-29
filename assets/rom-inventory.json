@@ -138792,7 +138792,7 @@
     }
   ],
   "input_sha256": {
-    "tools/inventory_rom.py": "3d213182b8012cd0fae3d8412544e192842479247178b2403e60c43631535326",
+    "tools/inventory_rom.py": "f2099f6c7a3ad631547369fe7d8ee3cc2aa6aa34bd98243b961a3176a87ff9d4",
     "tools/control_flow.py": "225048329459429d84b7e44472833d05c7593ae14873ce0c36bc97653f5d97f9",
     "tools/inventory_partition.py": "5838852221fa7a38767ccd701d27ca398309bc55951bc0f294e306f7bebbe89c",
     "tools/ram_copies.py": "5e429b3d6efa9666a90c97b892f66cf6203294dad0c277f82700b4f521b7f3c1",
@@ -138805,7 +138805,7 @@
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "c7eb3da4d62532f96390977a5514dfb28204305b7bbcab6318ac22780b0bdab2",
+    "config/build-us-eu.json": "5aa097a6717acff65b29bbac0a09bf12219738e3175981a8009daa51f7dd86f4",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -140348,16 +140348,17 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 320256,
+      "source_glue_owned_extent_bytes": 320328,
       "estimated_envelope_union_bytes": 325680,
       "classification_bytes": {
         "estimated_envelope_unclassified": 202,
         "instruction_and_referenced_data_dual_use": 4,
         "known_data": 22962,
+        "owned_extent_unclassified": 72,
         "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 285406,
         "strong_rooted_referenced_data": 35936,
-        "unresolved": 16432676
+        "unresolved": 16432604
       }
     },
     "physical_unions": {
@@ -189349,10 +189350,6 @@
         ],
         [
           47456,
-          54824
-        ],
-        [
-          54896,
           57800
         ],
         [
@@ -218555,10 +218552,12 @@
       {
         "rom_offset": 54824,
         "size": 72,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 54896,
@@ -315541,13 +315540,15 @@
         "classification_bytes": {
           "estimated_envelope_unclassified": 14,
           "known_data": 862,
+          "owned_extent_unclassified": 72,
           "strong_rooted_instruction": 57312,
           "strong_rooted_referenced_data": 6784,
-          "unresolved": 564
+          "unresolved": 492
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
           "known_data",
+          "owned_extent_unclassified",
           "strong_rooted_instruction",
           "strong_rooted_referenced_data",
           "unresolved"
@@ -457313,6 +457314,26 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 144,
         "referenced_data_bytes_in_extent": 4
+      },
+      {
+        "name": "display_replace_mode_control",
+        "rom_offset": 54824,
+        "size": 36,
+        "source": "src/display/display_replace_mode_control.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 0,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "display_replace_layer_control",
+        "rom_offset": 54860,
+        "size": 36,
+        "source": "src/display/display_replace_layer_control.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 0,
+        "referenced_data_bytes_in_extent": 0
       },
       {
         "name": "irq_cpu_enable",
