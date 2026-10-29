@@ -57092,6 +57092,26 @@
       "cfg_root": false,
       "cfg_root_reason": "Complete word-field source-role reconstruction within the valid FrameObject storage domain; original incoming entry, historical ABI and runtime populations remain unproved.",
       "expected_sha256": "0841f21679584a7940f9d4b2bc3ecaeaf895b22657b40a37ffae53370a35ef3c"
+    },
+    {
+      "source": "src/frame/frame_read_sequence_header_pair.c",
+      "name": "frame_read_sequence_header_pair",
+      "rom_offset": 5908,
+      "size": 16,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming witness established; body/source storage domain is separate from entry/ABI qualification",
+      "symbols": {},
+      "expected_sha256": "6b9e79dd12387fb3ff20cc9f648d3effbe7d89a2682187582e58d82a354a0313",
+      "negative_control": {
+        "before": "point->y = sequence->unknown_00[1];",
+        "after": "point->y = sequence->unknown_00[0];"
+      }
     }
   ],
   "assembly": [
