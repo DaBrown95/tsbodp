@@ -49980,7 +49980,8 @@
       "negative_control": {
         "before": "parameters, 12);",
         "after": "parameters, 8);"
-      }
+      },
+      "assembler_id": "binutils2101"
     },
     {
       "name": "display_fixed_reciprocal",
@@ -56839,6 +56840,36 @@
       "expected_sha256": "c0d63ffd474fa2837079889b972a28dfe95fd742002ec5f7434afb5b97b22449",
       "cfg_root": false,
       "cfg_root_reason": "Complete matching C extent; no original incoming entry evidence established."
+    },
+    {
+      "name": "frame_reset_motion_x",
+      "rom_offset": 13632,
+      "size": 20,
+      "source": "src/frame/frame_reset_motion_x.c",
+      "symbols": {},
+      "expected_sha256": "02c86716479776c790702c6db572cf7e2a5dc8e6fbcf0d7f075be027851df0eb",
+      "cfg_root": false,
+      "cfg_root_reason": "Incoming calls and original entry evidence have not been established.",
+      "negative_control": {
+        "before": "phase_x = 0;",
+        "after": "phase_x = 1;"
+      },
+      "assembler_id": "binutils2101"
+    },
+    {
+      "name": "frame_reset_motion_y",
+      "rom_offset": 13652,
+      "size": 20,
+      "source": "src/frame/frame_reset_motion_y.c",
+      "symbols": {},
+      "expected_sha256": "77e51abc00ca06b4070896cd4bb0cdbf47acb6a2ce7143039b22ec8de4c6c12a",
+      "cfg_root": false,
+      "cfg_root_reason": "Incoming calls and original entry evidence have not been established.",
+      "negative_control": {
+        "before": "phase_y = 0;",
+        "after": "phase_y = 1;"
+      },
+      "assembler_id": "binutils2101"
     }
   ],
   "assembly": [

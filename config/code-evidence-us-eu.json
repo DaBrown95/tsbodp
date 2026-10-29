@@ -1308,10 +1308,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "e794828e450c5f5eab06e81dacee1d4c0c53d39fa8fd6b44f67e67da3bee6f6f",
+      "source_sha256": "ec261a64d92d86b20946b59fe48808d08a76a304ec9b91652866d9667a9c7dfc",
       "evidence": [
-        "Matching compiler output .align 2,0 at LF line19 emits padding containing relative14..16; actual source.o $d covers this span. C source explicitly supplies post-function alignment.",
-        "Full retained 16-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Matching pinned agbcc/binutils2101 output has a 14-byte function and 14-byte input .text without an authored post-function alignment directive. The unchanged pilot linker ALIGN(4) with zero fill supplies relative14..16 of the full16-byte linked extent.",
+        "The complete 16-byte linked candidate equals the fixed original extent and the memcpy12-to8 changed-source control rejects. These two alignment bytes keep their original region hash and source owner; alignment role does not exclude alternative execution."
       ]
     },
     {

@@ -94872,10 +94872,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "e794828e450c5f5eab06e81dacee1d4c0c53d39fa8fd6b44f67e67da3bee6f6f",
+      "source_sha256": "ec261a64d92d86b20946b59fe48808d08a76a304ec9b91652866d9667a9c7dfc",
       "evidence": [
-        "Matching compiler output .align 2,0 at LF line19 emits padding containing relative14..16; actual source.o $d covers this span. C source explicitly supplies post-function alignment.",
-        "Full retained 16-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Matching pinned agbcc/binutils2101 output has a 14-byte function and 14-byte input .text without an authored post-function alignment directive. The unchanged pilot linker ALIGN(4) with zero fill supplies relative14..16 of the full16-byte linked extent.",
+        "The complete 16-byte linked candidate equals the fixed original extent and the memcpy12-to8 changed-source control rejects. These two alignment bytes keep their original region hash and source owner; alignment role does not exclude alternative execution."
       ],
       "status": "mapped_data"
     },
@@ -138801,11 +138801,11 @@
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
     "tools/source_addresses.py": "7c18cbe496668c2f074f6c55609eb8aabb923ded5b0add51f3be908634612485",
-    "config/code-evidence-us-eu.json": "756d74f1480194448d77a69183a59f898a63ab1073fe8fb8df634669663121cb",
+    "config/code-evidence-us-eu.json": "06eb588d6db8906e8bd176af34c0faeb18c11f09a25ca8da7a1a3ff5e07b8f46",
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "5aa097a6717acff65b29bbac0a09bf12219738e3175981a8009daa51f7dd86f4",
+    "config/build-us-eu.json": "6704bfae353614215eb4aa44944db2004e8178c5984517c84bc65cfafbf3fce9",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -139578,7 +139578,7 @@
     "src/frame/frame_set_animation_variant.c": "ad4a6ad075971d8931a11c6097e5db8b998dc7c02e2d7c0331a108815bf3ce9e",
     "src/frame/frame_set_attachment_parameter_indicator.c": "fd2efba9cc990f4ca32bed6e5aafc7d4ce6972e763ddb208f9b68e938c56a741",
     "src/frame/frame_set_game_value.c": "e8547f7915021921610a6c8ccd7c07e9c7152268c811fed7d401003529122ce6",
-    "src/frame/frame_set_motion_parameters.c": "e794828e450c5f5eab06e81dacee1d4c0c53d39fa8fd6b44f67e67da3bee6f6f",
+    "src/frame/frame_set_motion_parameters.c": "ec261a64d92d86b20946b59fe48808d08a76a304ec9b91652866d9667a9c7dfc",
     "src/frame/frame_set_oriented_velocity_x.c": "dc7abce401a03817726d862d2188ccfc4d9eddd5f333228bff388112d87750d4",
     "src/frame/frame_set_oriented_velocity_y.c": "f1efffd78a01118b5636d7c772cdadafdc5cf7679443357385317e34c0d6b676",
     "src/frame/frame_set_part_order.c": "af3d5f07f4c5e8146f6de262d89c745d7f009de9d5ecb19db9816bed592b5bf2",
@@ -140348,17 +140348,17 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 320328,
+      "source_glue_owned_extent_bytes": 320368,
       "estimated_envelope_union_bytes": 325680,
       "classification_bytes": {
         "estimated_envelope_unclassified": 202,
         "instruction_and_referenced_data_dual_use": 4,
         "known_data": 22962,
-        "owned_extent_unclassified": 72,
+        "owned_extent_unclassified": 112,
         "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 285406,
         "strong_rooted_referenced_data": 35936,
-        "unresolved": 16432604
+        "unresolved": 16432564
       }
     },
     "physical_unions": {
@@ -189318,10 +189318,6 @@
         ],
         [
           13220,
-          13632
-        ],
-        [
-          13672,
           13688
         ],
         [
@@ -207937,10 +207933,12 @@
       {
         "rom_offset": 13632,
         "size": 40,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 13672,
@@ -315540,10 +315538,10 @@
         "classification_bytes": {
           "estimated_envelope_unclassified": 14,
           "known_data": 862,
-          "owned_extent_unclassified": 72,
+          "owned_extent_unclassified": 112,
           "strong_rooted_instruction": 57312,
           "strong_rooted_referenced_data": 6784,
-          "unresolved": 492
+          "unresolved": 452
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -457330,6 +457328,26 @@
         "rom_offset": 54860,
         "size": 36,
         "source": "src/display/display_replace_layer_control.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 0,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "frame_reset_motion_x",
+        "rom_offset": 13632,
+        "size": 20,
+        "source": "src/frame/frame_reset_motion_x.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 0,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "frame_reset_motion_y",
+        "rom_offset": 13652,
+        "size": 20,
+        "source": "src/frame/frame_reset_motion_y.c",
         "mode": "Thumb",
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 0,
