@@ -1,12 +1,12 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "29 Oct 2026, 18:36 GMT",
-  "compiled_c_functions": 2502,
-  "compiled_c_bytes": 316504,
+  "verified_at": "29 Oct 2026, 19:27 GMT",
+  "compiled_c_functions": 2503,
+  "compiled_c_bytes": 316524,
   "assembly_glue_bytes": 4068,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16456644,
+  "unconverted_rom_bytes": 16456624,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
@@ -15,7 +15,7 @@
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 97,
-  "mapped_extent_bytes": 326004,
+  "mapped_extent_bytes": 326024,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
     "raw_instruction_union_bytes": 285436,
@@ -24,17 +24,17 @@
     "raw_referenced_data_union_bytes": 35940,
     "qualified_referenced_data_union_bytes": 35940,
     "source_authored_instruction_union_bytes": 30,
-    "source_glue_owned_extent_bytes": 320572,
+    "source_glue_owned_extent_bytes": 320592,
     "estimated_envelope_union_bytes": 325680,
     "classification_bytes": {
       "estimated_envelope_unclassified": 202,
       "instruction_and_referenced_data_dual_use": 4,
       "known_data": 22962,
-      "owned_extent_unclassified": 316,
+      "owned_extent_unclassified": 336,
       "source_authored_unrooted_instruction": 30,
       "strong_rooted_instruction": 285406,
       "strong_rooted_referenced_data": 35936,
-      "unresolved": 16432360
+      "unresolved": 16432340
     }
   },
   "copied_source_ownership": {
@@ -815,6 +815,13 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 4996,
       "size": 104,
+      "status": "exact_c"
+    },
+    {
+      "name": "frame_clear_sharing_flag40",
+      "group": "Verified source",
+      "rom_offset": 5100,
+      "size": 20,
       "status": "exact_c"
     },
     {
@@ -18843,10 +18850,10 @@
       "status": "exact_c"
     },
     {
-      "name": "Unresolved_0013EC",
+      "name": "frame_clear_sharing_flag40",
       "rom_offset": 5100,
       "size": 20,
-      "status": "unresolved"
+      "status": "exact_c"
     },
     {
       "name": "frame_clear_part_variants",
@@ -34552,8 +34559,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "bb0f8cab843531871d57bc537f51d69ec9c5315ee24924be51dc3bdadab4939f",
-    "assets/rom-inventory.json": "822e5febb68628a8a6da111fdc392d056b612d2b337297ec114cb8fdcf461c3a",
+    "config/build-us-eu.json": "9cdeb11acd3da6cc9a0a457c173d3f6b8d21291f6cdf0fa521d653096d4dfbfd",
+    "assets/rom-inventory.json": "f03d0ad494acb218b0557664e7f26ed340683639d1196bb200406471fe456179",
     "tools/render_progress.py": "4499424ee9895c386d0885b113dfb31c37eeb0dd109efa7b06e14f0023aad98f",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/copy_ownership.py": "0b3766167169d1ab1e5a4931e6988d0089e11d4493c08d256bc77a0531bdaa4e",

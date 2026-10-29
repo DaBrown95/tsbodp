@@ -57034,6 +57034,20 @@
       "expected_sha256": "2f1ba6d36b8389dc322c7e6c1cee7c5b78a243264f01c5d6a9a3a268edf6491d",
       "cfg_root": false,
       "cfg_root_reason": "Complete source-role reconstruction without an established original incoming entry; no qualified executable-entry or historical ABI claim."
+    },
+    {
+      "name": "frame_clear_sharing_flag40",
+      "rom_offset": 5100,
+      "size": 20,
+      "source": "src/frame/frame_clear_sharing_flag40.c",
+      "symbols": {},
+      "negative_control": {
+        "before": "*sharing_flags &= ~0x40u;",
+        "after": "*sharing_flags &= ~0x20u;"
+      },
+      "expected_sha256": "de17400d0d872d36adba233492d117a53a293a99ccb1b9b9c3412a2572cd0dcc",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete source-role reconstruction without a supplied original incoming entry; no executable-entry or historical ABI claim."
     }
   ],
   "assembly": [
