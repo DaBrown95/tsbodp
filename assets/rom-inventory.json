@@ -94256,10 +94256,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "c19e3f89fc1ad992094cbf76c24de403b71736439e95bf09882e54f32a6f8937",
+      "source_sha256": "0b43c6603979c49942c18ed09e56de9378a023be254a5e3e7fb935f6f662ee7b",
       "evidence": [
-        "Matching compiler output .align 2, 0 at LF line15 emits padding containing relative6..8; actual source.o $d covers this span. C source explicitly supplies post-function alignment.",
-        "Full retained 8-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Pure matching C with pinned binutils2101 produces six-byte input .text and a six-byte function, without an explicit end-alignment directive or input-object padding.",
+        "The unchanged isolated linker ALIGN(4) supplies two zero tail bytes at relative6..8; complete eight-byte linked text/candidate equals the fixed original extent. Natural linked section alignment only, not alternate-entry exclusion."
       ],
       "status": "mapped_data"
     },
@@ -138801,11 +138801,11 @@
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
     "tools/source_addresses.py": "7c18cbe496668c2f074f6c55609eb8aabb923ded5b0add51f3be908634612485",
-    "config/code-evidence-us-eu.json": "06eb588d6db8906e8bd176af34c0faeb18c11f09a25ca8da7a1a3ff5e07b8f46",
+    "config/code-evidence-us-eu.json": "cd177d8262fcacbe24474504c04cb39f13c6f963666535e1d7c63a7508996e71",
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "73e7ccbc92300f94b49776010e656884ebd225713cd13b9d2a1fd56f82950a5d",
+    "config/build-us-eu.json": "d2616b016369178c0b9dec2ac17947f6403032c0399738d90ad08a7eeffa211a",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -139586,7 +139586,7 @@
     "src/frame/frame_set_random_seed.c": "33be742542320e40db82f43e6c093561cfeea09f08df833daa5b69d36b00d99b",
     "src/frame/frame_set_scene_actor_eligibility.c": "3ed1adf92ec29186b644d4b380d282c708f6e3706e9c1444cc8b2164053357ac",
     "src/frame/frame_set_variant_state.c": "ec352a949ae537737e7e21a2113630a1f5531d0020137c5b7e9144f47c95ac81",
-    "src/frame/frame_set_velocity.c": "c19e3f89fc1ad992094cbf76c24de403b71736439e95bf09882e54f32a6f8937",
+    "src/frame/frame_set_velocity.c": "0b43c6603979c49942c18ed09e56de9378a023be254a5e3e7fb935f6f662ee7b",
     "src/frame/frame_settle_actor_scene_counter.c": "6c99ff02e7ce0803be53eb3a241c5e5905e5c2fbc3e1433d4274033bc303b2c2",
     "src/frame/frame_shared_optional_choices.c": "a969efcaffa1f3bb19cdf7c68480721e9cbce63a0e3af3c3b10269a281e16fa5",
     "src/frame/frame_shared_optional_timed_step.c": "2be7340e6f028f0d4a21c7b6449f55264d7d9c421e4a74c76e02fdf449f731ad",
@@ -140348,17 +140348,17 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 320644,
+      "source_glue_owned_extent_bytes": 320652,
       "estimated_envelope_union_bytes": 325680,
       "classification_bytes": {
         "estimated_envelope_unclassified": 202,
         "instruction_and_referenced_data_dual_use": 4,
         "known_data": 22962,
-        "owned_extent_unclassified": 388,
+        "owned_extent_unclassified": 396,
         "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 285406,
         "strong_rooted_referenced_data": 35936,
-        "unresolved": 16432288
+        "unresolved": 16432280
       }
     },
     "physical_unions": {
@@ -189278,10 +189278,6 @@
         ],
         [
           192,
-          5276
-        ],
-        [
-          5284,
           5684
         ],
         [
@@ -205529,10 +205525,12 @@
       {
         "rom_offset": 5276,
         "size": 8,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 5284,
@@ -315524,10 +315522,10 @@
         "classification_bytes": {
           "estimated_envelope_unclassified": 14,
           "known_data": 862,
-          "owned_extent_unclassified": 388,
+          "owned_extent_unclassified": 396,
           "strong_rooted_instruction": 57312,
           "strong_rooted_referenced_data": 6784,
-          "unresolved": 176
+          "unresolved": 168
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -457474,6 +457472,16 @@
         "rom_offset": 5460,
         "size": 24,
         "source": "src/frame/frame_set_part_palette.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 0,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "frame_set_destination_words",
+        "rom_offset": 5276,
+        "size": 8,
+        "source": "src/frame/frame_set_destination_words.c",
         "mode": "Thumb",
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 0,

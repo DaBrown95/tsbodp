@@ -7455,7 +7455,8 @@
       "negative_control": {
         "before": "object->velocity.x=x",
         "after": "object->velocity.x=x+1"
-      }
+      },
+      "assembler_id": "binutils2101"
     },
     {
       "name": "frame_step_position_move",
@@ -57076,6 +57077,21 @@
       "expected_sha256": "57734f32b37b71527a0a1a9d3c2fbb517808cb044e30d0783cce1d0fd0bf4d8d",
       "cfg_root": false,
       "cfg_root_reason": "Complete independently reconstructed native source role without supplied original incoming entry; no qualified-entry or historical ABI claim."
+    },
+    {
+      "name": "frame_set_destination_words",
+      "rom_offset": 5276,
+      "size": 8,
+      "source": "src/frame/frame_set_destination_words.c",
+      "symbols": {},
+      "negative_control": {
+        "before": "object->destination.y=y",
+        "after": "object->destination.y=x"
+      },
+      "assembler_id": "binutils2101",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete word-field source-role reconstruction within the valid FrameObject storage domain; original incoming entry, historical ABI and runtime populations remain unproved.",
+      "expected_sha256": "0841f21679584a7940f9d4b2bc3ecaeaf895b22657b40a37ffae53370a35ef3c"
     }
   ],
   "assembly": [

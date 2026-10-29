@@ -736,10 +736,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "c19e3f89fc1ad992094cbf76c24de403b71736439e95bf09882e54f32a6f8937",
+      "source_sha256": "0b43c6603979c49942c18ed09e56de9378a023be254a5e3e7fb935f6f662ee7b",
       "evidence": [
-        "Matching compiler output .align 2, 0 at LF line15 emits padding containing relative6..8; actual source.o $d covers this span. C source explicitly supplies post-function alignment.",
-        "Full retained 8-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Pure matching C with pinned binutils2101 produces six-byte input .text and a six-byte function, without an explicit end-alignment directive or input-object padding.",
+        "The unchanged isolated linker ALIGN(4) supplies two zero tail bytes at relative6..8; complete eight-byte linked text/candidate equals the fixed original extent. Natural linked section alignment only, not alternate-entry exclusion."
       ]
     },
     {
