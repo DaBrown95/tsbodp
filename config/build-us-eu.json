@@ -57112,6 +57112,26 @@
         "before": "point->y = sequence->unknown_00[1];",
         "after": "point->y = sequence->unknown_00[0];"
       }
+    },
+    {
+      "source": "src/frame/frame_read_oam_position.c",
+      "name": "frame_read_oam_position",
+      "rom_offset": 5852,
+      "size": 20,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming witness established for16DC; source storage domain is separate from entry/ABI qualification.",
+      "symbols": {},
+      "expected_sha256": "3933549e67fb62d9711c0bfec2f866ab86fb8ca329c7c46340ffb521b5d630e8",
+      "negative_control": {
+        "before": "point->x = object->display.oam.x;",
+        "after": "point->x = object->display.oam.x ^ 1u;"
+      }
     }
   ],
   "assembly": [
