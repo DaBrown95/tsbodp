@@ -57132,6 +57132,46 @@
         "before": "point->x = object->display.oam.x;",
         "after": "point->x = object->display.oam.x ^ 1u;"
       }
+    },
+    {
+      "source": "src/frame/frame_set_part_flag2.c",
+      "name": "frame_set_part_flag2",
+      "rom_offset": 5684,
+      "size": 28,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming witnesses established for these bounded entries; original formals/prototypes and selector domains remain unknown.",
+      "symbols": {},
+      "expected_sha256": "e0445f9a0aefa3c400944485ac9527ff6ee17a2ff174ff12dcd6d8aca09d8f58",
+      "negative_control": {
+        "before": "selected->flags |= 4;",
+        "after": "selected->flags |= 8;"
+      }
+    },
+    {
+      "source": "src/frame/frame_clear_part_flag2.c",
+      "name": "frame_clear_part_flag2",
+      "rom_offset": 5712,
+      "size": 28,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming witnesses established for these bounded entries; original formals/prototypes and selector domains remain unknown.",
+      "symbols": {},
+      "expected_sha256": "8e29adc9990d92d5b2d41a8a08dc4aecbf310bfe90c16526a124049ba547e387",
+      "negative_control": {
+        "before": "*flags &= ~4u;",
+        "after": "*flags &= ~8u;"
+      }
     }
   ],
   "assembly": [
