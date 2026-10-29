@@ -57048,6 +57048,20 @@
       "expected_sha256": "de17400d0d872d36adba233492d117a53a293a99ccb1b9b9c3412a2572cd0dcc",
       "cfg_root": false,
       "cfg_root_reason": "Complete source-role reconstruction without a supplied original incoming entry; no executable-entry or historical ABI claim."
+    },
+    {
+      "name": "frame_clear_part_flag1",
+      "rom_offset": 5536,
+      "size": 28,
+      "source": "src/frame/frame_clear_part_flag1.c",
+      "symbols": {},
+      "negative_control": {
+        "before": "*flags &= ~2u;",
+        "after": "*flags &= ~1u;"
+      },
+      "expected_sha256": "0dcdb880c8749940d9c6bd7cc3aa9d898ab01167aeebb9817b30d3935d2eb304",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete native source-role reconstruction without a supplied original incoming entry; no qualified-entry or historical ABI claim."
     }
   ],
   "assembly": [
