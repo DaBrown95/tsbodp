@@ -57002,6 +57002,38 @@
       "expected_sha256": "70c1cbc9e8fe1f576f6f0b13f3041bcc40d8749ca6d414feffa111bb5250caa7",
       "cfg_root": false,
       "cfg_root_reason": "Complete independently reconstructed native extent without an established original incoming entry; no executable-root or historical ABI claim."
+    },
+    {
+      "name": "display_clear_control_flags",
+      "rom_offset": 57852,
+      "size": 16,
+      "source": "src/display/display_clear_control_flags.c",
+      "symbols": {
+        "g_display_control": "0x03002ef0"
+      },
+      "negative_control": {
+        "before": "g_display_control.flags &= ~mask;",
+        "after": "g_display_control.flags &= mask;"
+      },
+      "expected_sha256": "b7d5d5b42e9071e528d52e6cb8a3c54d5178c04922d96e89860268a90a30975a",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete source-role reconstruction without an established original incoming entry; no qualified executable-entry or historical ABI claim."
+    },
+    {
+      "name": "display_set_control_flags",
+      "rom_offset": 57868,
+      "size": 16,
+      "source": "src/display/display_set_control_flags.c",
+      "symbols": {
+        "g_display_control": "0x03002ef0"
+      },
+      "negative_control": {
+        "before": "g_display_control.flags |= mask;",
+        "after": "g_display_control.flags &= mask;"
+      },
+      "expected_sha256": "2f1ba6d36b8389dc322c7e6c1cee7c5b78a243264f01c5d6a9a3a268edf6491d",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete source-role reconstruction without an established original incoming entry; no qualified executable-entry or historical ABI claim."
     }
   ],
   "assembly": [
