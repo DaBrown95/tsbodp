@@ -56942,6 +56942,38 @@
         "before": "object->amplitude_x = amplitude_x;",
         "after": "object->amplitude_x = amplitude_x ^ 1;"
       }
+    },
+    {
+      "name": "display_clear_control_bit0",
+      "rom_offset": 57800,
+      "size": 20,
+      "source": "src/display/display_clear_control_bit0.c",
+      "symbols": {
+        "g_display_control": "0x03002ef0"
+      },
+      "negative_control": {
+        "before": "g_display_control.flags &= ~1u;",
+        "after": "g_display_control.flags &= ~2u;"
+      },
+      "expected_sha256": "642417c054fe542e57f9df8d57284d103735293a407eb5593b8fc4b739c95059",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete native source-role reconstruction attempted without an established original incoming entry; no qualified entry or historical ABI claim."
+    },
+    {
+      "name": "display_set_control_bit0",
+      "rom_offset": 57820,
+      "size": 16,
+      "source": "src/display/display_set_control_bit0.c",
+      "symbols": {
+        "g_display_control": "0x03002ef0"
+      },
+      "negative_control": {
+        "before": "g_display_control.flags |= 1u;",
+        "after": "g_display_control.flags |= 2u;"
+      },
+      "expected_sha256": "f9036ee820a66cfc4fd7fecbe436f6d9a0bcd64f57b7ef70cbd924e1f7a9025a",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete native source-role reconstruction attempted without an established original incoming entry; no qualified entry or historical ABI claim."
     }
   ],
   "assembly": [

@@ -1,12 +1,12 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "29 Oct 2026, 16:42 GMT",
-  "compiled_c_functions": 2496,
-  "compiled_c_bytes": 316380,
+  "verified_at": "29 Oct 2026, 17:01 GMT",
+  "compiled_c_functions": 2498,
+  "compiled_c_bytes": 316416,
   "assembly_glue_bytes": 4068,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16456768,
+  "unconverted_rom_bytes": 16456732,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
@@ -15,7 +15,7 @@
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 97,
-  "mapped_extent_bytes": 325880,
+  "mapped_extent_bytes": 325916,
   "historical_mapped_extent_baseline": 319640,
   "code_census_summary": {
     "raw_instruction_union_bytes": 285436,
@@ -24,17 +24,17 @@
     "raw_referenced_data_union_bytes": 35940,
     "qualified_referenced_data_union_bytes": 35940,
     "source_authored_instruction_union_bytes": 30,
-    "source_glue_owned_extent_bytes": 320448,
+    "source_glue_owned_extent_bytes": 320484,
     "estimated_envelope_union_bytes": 325680,
     "classification_bytes": {
       "estimated_envelope_unclassified": 202,
       "instruction_and_referenced_data_dual_use": 4,
       "known_data": 22962,
-      "owned_extent_unclassified": 192,
+      "owned_extent_unclassified": 228,
       "source_authored_unrooted_instruction": 30,
       "strong_rooted_instruction": 285406,
       "strong_rooted_referenced_data": 35936,
-      "unresolved": 16432484
+      "unresolved": 16432448
     }
   },
   "copied_source_ownership": {
@@ -2999,6 +2999,20 @@
       "group": "ROM 0800xxxx",
       "rom_offset": 57700,
       "size": 100,
+      "status": "exact_c"
+    },
+    {
+      "name": "display_clear_control_bit0",
+      "group": "Verified source",
+      "rom_offset": 57800,
+      "size": 20,
+      "status": "exact_c"
+    },
+    {
+      "name": "display_set_control_bit0",
+      "group": "Verified source",
+      "rom_offset": 57820,
+      "size": 16,
       "status": "exact_c"
     },
     {
@@ -20751,10 +20765,16 @@
       "status": "exact_c"
     },
     {
-      "name": "Unresolved_00E1C8",
+      "name": "display_clear_control_bit0",
       "rom_offset": 57800,
-      "size": 36,
-      "status": "unresolved"
+      "size": 20,
+      "status": "exact_c"
+    },
+    {
+      "name": "display_set_control_bit0",
+      "rom_offset": 57820,
+      "size": 16,
+      "status": "exact_c"
     },
     {
       "name": "display_read_control_flags_unrooted_e1ec",
@@ -34492,8 +34512,8 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "48fd19ddc912b93dda5d5463e97de42471dcdb419259bc7d19654ec14abfe98a",
-    "assets/rom-inventory.json": "e63621dfbed2b60520f45d8ecab8d87d9c0c0dd09fa6d42ec649278c930b5ef5",
+    "config/build-us-eu.json": "edcd3f254b79e9bbb191f98e26cc572ebf24330473157c444f9f9907c5422e28",
+    "assets/rom-inventory.json": "ff830a0ac47627a0d363a4f9f2cd9cabe7440fa071a26d9663672d2560d9ac4b",
     "tools/render_progress.py": "4499424ee9895c386d0885b113dfb31c37eeb0dd109efa7b06e14f0023aad98f",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/copy_ownership.py": "0b3766167169d1ab1e5a4931e6988d0089e11d4493c08d256bc77a0531bdaa4e",

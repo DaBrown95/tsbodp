@@ -138805,7 +138805,7 @@
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "48fd19ddc912b93dda5d5463e97de42471dcdb419259bc7d19654ec14abfe98a",
+    "config/build-us-eu.json": "edcd3f254b79e9bbb191f98e26cc572ebf24330473157c444f9f9907c5422e28",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -140348,17 +140348,17 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 320448,
+      "source_glue_owned_extent_bytes": 320484,
       "estimated_envelope_union_bytes": 325680,
       "classification_bytes": {
         "estimated_envelope_unclassified": 202,
         "instruction_and_referenced_data_dual_use": 4,
         "known_data": 22962,
-        "owned_extent_unclassified": 192,
+        "owned_extent_unclassified": 228,
         "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 285406,
         "strong_rooted_referenced_data": 35936,
-        "unresolved": 16432484
+        "unresolved": 16432448
       }
     },
     "physical_unions": {
@@ -189342,10 +189342,6 @@
         ],
         [
           47456,
-          57800
-        ],
-        [
-          57836,
           57852
         ],
         [
@@ -220098,10 +220094,12 @@
       {
         "rom_offset": 57800,
         "size": 36,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 57836,
@@ -315536,10 +315534,10 @@
         "classification_bytes": {
           "estimated_envelope_unclassified": 14,
           "known_data": 862,
-          "owned_extent_unclassified": 192,
+          "owned_extent_unclassified": 228,
           "strong_rooted_instruction": 57312,
           "strong_rooted_referenced_data": 6784,
-          "unresolved": 372
+          "unresolved": 336
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -457396,6 +457394,26 @@
         "rom_offset": 13756,
         "size": 12,
         "source": "src/frame/frame_set_motion_amplitudes.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 0,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "display_clear_control_bit0",
+        "rom_offset": 57800,
+        "size": 20,
+        "source": "src/display/display_clear_control_bit0.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 0,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "display_set_control_bit0",
+        "rom_offset": 57820,
+        "size": 16,
+        "source": "src/display/display_set_control_bit0.c",
         "mode": "Thumb",
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 0,
