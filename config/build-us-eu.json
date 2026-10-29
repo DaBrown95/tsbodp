@@ -57062,6 +57062,20 @@
       "expected_sha256": "0dcdb880c8749940d9c6bd7cc3aa9d898ab01167aeebb9817b30d3935d2eb304",
       "cfg_root": false,
       "cfg_root_reason": "Complete native source-role reconstruction without a supplied original incoming entry; no qualified-entry or historical ABI claim."
+    },
+    {
+      "name": "frame_set_part_palette",
+      "rom_offset": 5460,
+      "size": 24,
+      "source": "src/frame/frame_set_part_palette.c",
+      "symbols": {},
+      "negative_control": {
+        "before": "*palette_byte = (unsigned char)palette;",
+        "after": "*palette_byte = (unsigned char)(palette ^ 1u);"
+      },
+      "expected_sha256": "57734f32b37b71527a0a1a9d3c2fbb517808cb044e30d0783cce1d0fd0bf4d8d",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete independently reconstructed native source role without supplied original incoming entry; no qualified-entry or historical ABI claim."
     }
   ],
   "assembly": [
