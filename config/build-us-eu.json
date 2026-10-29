@@ -56870,6 +56870,78 @@
         "after": "phase_y = 1;"
       },
       "assembler_id": "binutils2101"
+    },
+    {
+      "name": "frame_set_motion_x",
+      "rom_offset": 13688,
+      "size": 20,
+      "source": "src/frame/frame_set_motion_x.c",
+      "symbols": {},
+      "expected_sha256": "8c7793a78bd9413b9a145c75603fbb4c0a15717281f0870d02b770323187bb0f",
+      "cfg_root": false,
+      "cfg_root_reason": "Original incoming calls and historical entry contracts remain unproved.",
+      "negative_control": {
+        "before": "phase << 8;",
+        "after": "phase << 7;"
+      },
+      "assembler_id": "binutils2101"
+    },
+    {
+      "name": "frame_set_motion_y",
+      "rom_offset": 13708,
+      "size": 20,
+      "source": "src/frame/frame_set_motion_y.c",
+      "symbols": {},
+      "expected_sha256": "eec38bc2f2d6be2e4138a998e38ca3debdbb102a4399c19fe10394638b7492e1",
+      "cfg_root": false,
+      "cfg_root_reason": "Original incoming calls and historical entry contracts remain unproved.",
+      "negative_control": {
+        "before": "phase << 8;",
+        "after": "phase << 7;"
+      },
+      "assembler_id": "binutils2101"
+    },
+    {
+      "name": "frame_set_motion_phases",
+      "rom_offset": 13728,
+      "size": 16,
+      "source": "src/frame/frame_set_motion_phases.c",
+      "symbols": {},
+      "expected_sha256": "0ba0ccbf358b891b53f9bddfaf0577ca2b53544375face48d71d78214dfeba1f",
+      "cfg_root": false,
+      "cfg_root_reason": "Original incoming calls and historical entry contracts remain unproved.",
+      "negative_control": {
+        "before": "phase_x << 8;",
+        "after": "phase_x << 7;"
+      }
+    },
+    {
+      "name": "frame_set_motion_rates",
+      "rom_offset": 13744,
+      "size": 12,
+      "source": "src/frame/frame_set_motion_rates.c",
+      "symbols": {},
+      "expected_sha256": "4ab44d43d45fecee8937c28414b6fc81b3d9df40837a71c73171d965e21dcb5f",
+      "cfg_root": false,
+      "cfg_root_reason": "Original incoming calls and historical entry contracts remain unproved.",
+      "negative_control": {
+        "before": "object->rate_x = rate_x;",
+        "after": "object->rate_x = rate_x ^ 1;"
+      }
+    },
+    {
+      "name": "frame_set_motion_amplitudes",
+      "rom_offset": 13756,
+      "size": 12,
+      "source": "src/frame/frame_set_motion_amplitudes.c",
+      "symbols": {},
+      "expected_sha256": "6b16c71b43f78e81a2f594a39860f13de70c620c07b98434feb66df1b5987ba4",
+      "cfg_root": false,
+      "cfg_root_reason": "Original incoming calls and historical entry contracts remain unproved.",
+      "negative_control": {
+        "before": "object->amplitude_x = amplitude_x;",
+        "after": "object->amplitude_x = amplitude_x ^ 1;"
+      }
     }
   ],
   "assembly": [
