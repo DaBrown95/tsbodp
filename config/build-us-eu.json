@@ -56974,6 +56974,34 @@
       "expected_sha256": "f9036ee820a66cfc4fd7fecbe436f6d9a0bcd64f57b7ef70cbd924e1f7a9025a",
       "cfg_root": false,
       "cfg_root_reason": "Complete native source-role reconstruction attempted without an established original incoming entry; no qualified entry or historical ABI claim."
+    },
+    {
+      "name": "frame_set_part_flag0",
+      "rom_offset": 5144,
+      "size": 28,
+      "source": "src/frame/frame_set_part_flag0.c",
+      "symbols": {},
+      "negative_control": {
+        "before": "selected->flags |= 1;",
+        "after": "selected->flags |= 2;"
+      },
+      "expected_sha256": "8ee7f08f231b3f54bfe25fc0c52d80f8f63b83da8e41ae283bf0928b76a6fbe6",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete independently reconstructed native extent without an established original incoming entry; no executable-root or historical ABI claim."
+    },
+    {
+      "name": "frame_clear_part_flag0",
+      "rom_offset": 5172,
+      "size": 28,
+      "source": "src/frame/frame_clear_part_flag0.c",
+      "symbols": {},
+      "negative_control": {
+        "before": "*flags &= ~1u;",
+        "after": "*flags &= ~2u;"
+      },
+      "expected_sha256": "70c1cbc9e8fe1f576f6f0b13f3041bcc40d8749ca6d414feffa111bb5250caa7",
+      "cfg_root": false,
+      "cfg_root_reason": "Complete independently reconstructed native extent without an established original incoming entry; no executable-root or historical ABI claim."
     }
   ],
   "assembly": [
