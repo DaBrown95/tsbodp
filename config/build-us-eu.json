@@ -57634,6 +57634,40 @@
         "after": "return 99;"
       },
       "expected_sha256": "a2271e164827e90980393ec57efbeee0efeba93f9e67d5eff60d0043fc8970f8"
+    },
+    {
+      "name": "frame_grid_point_to_cell",
+      "rom_offset": 297720,
+      "size": 128,
+      "source": "src/frame/frame_grid_point_to_cell.c",
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "symbols": {
+        "display_bios_div": "0x0804c8c9"
+      },
+      "thumb_symbols": [
+        "display_bios_div"
+      ],
+      "negative_control": {
+        "before": "point_y-8",
+        "after": "point_y-9"
+      },
+      "assembler_id": "binutils"
+    },
+    {
+      "name": "resource_project_point",
+      "rom_offset": 297976,
+      "size": 88,
+      "source": "src/frame/frame_grid_inverse_point.c",
+      "symbols": {},
+      "thumb_symbols": [],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "point_y-8",
+        "after": "point_y-9"
+      }
     }
   ],
   "assembly": [

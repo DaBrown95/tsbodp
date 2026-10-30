@@ -15,7 +15,8 @@ cell bytes on success and leaves them untouched on failure. Equal packed cells
 skip both property queries. The occupied and marked bits, captured mode and
 surface flags, and terrain mask 2 select the observed stopping paths. A blocked
 probe calls the stop helper and applies contact 37. The original converter at
-`0x08048AF8` remains explicit and receives no C credit from this caller match.
+`0x08048AF8` now has a separately verified [source owner](GRID_INVERSE_RECONSTRUCTION.md);
+that gain is counted separately from this caller match.
 
 The point union is eight bytes with alignment four; its signed halfword at byte
 six supplies the Y high half without a short-pointer alias to the point object.

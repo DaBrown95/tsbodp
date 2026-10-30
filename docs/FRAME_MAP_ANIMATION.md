@@ -127,8 +127,8 @@ boundary; it is not new source credit for those providers.
 The generic actor-state dispatcher still covers additional object states. The
 resource factory and program-handler tables retain their existing unresolved
 index bounds. The flagged projection branch of `resource_object_before_step`
-still calls the explicit unconverted helper at `0x08048BF8`; it is not newly
-reconstructed here. Whole-ROM integration is checked by the publication gates,
+calls the inverse helper at `0x08048BF8`, which now has a separately verified
+[source owner](GRID_INVERSE_RECONSTRUCTION.md). Whole-ROM integration is checked by the publication gates,
 separately from these static connections and from runtime behavior.
 
 ## Map-cell startup storage

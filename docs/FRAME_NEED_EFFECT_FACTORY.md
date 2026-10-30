@@ -76,6 +76,7 @@ payload, descriptor/list allocation, spawn, configuration, collection-mark,
 restoration, reset and projection providers/callers are freshly checked with their
 own controls and current literal headers. This includes all accepted spawn,
 configuration, group-mark and group-clear importers in the current batch.
-The configuration's point-to-cell helper at `0x08048AF8` remains an explicit
-original region. Existing verified providers gain no new source credit, and
+The configuration's point-to-cell helper at `0x08048AF8` now has a separately
+verified [source owner](GRID_INVERSE_RECONSTRUCTION.md). Existing providers gain
+no new source credit from this factory batch, and
 the finite static closure does not establish gameplay behavior.

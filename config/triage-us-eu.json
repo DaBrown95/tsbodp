@@ -2,16 +2,16 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 12,
-    "inventory_bytes": 5432,
+    "rows": 10,
+    "inventory_bytes": 5220,
     "statuses": {
-      "near-miss": 5,
+      "near-miss": 3,
       "attempted": 6,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
-      "near-miss": 1928,
+      "near-miss": 1716,
       "attempted": 3380,
       "untouched": 0,
       "suspected-not-C": 124
@@ -103,12 +103,12 @@
           "-mthumb-interwork"
         ]
       },
-      "retained_attempt_contexts": 87,
+      "retained_attempt_contexts": 92,
       "eligible_diagnostic_contexts": 61,
       "excluded_contexts": {
         "Explicit semantic rejection or unqualified source": 1,
-        "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 15,
+        "Missing or ambiguous full comparison": 2,
+        "Missing or malformed retained input": 19,
         "No retained assessment": 6,
         "Retained linked ELF unavailable": 1,
         "Stale or unqualified private header": 2
@@ -545,145 +545,6 @@
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
     {
-      "name": "sub_08048AF8",
-      "rom_offset": 297720,
-      "inventory_bytes": 126,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-da"
-      ],
-      "runtime_addresses": [
-        134515448
-      ],
-      "status": "near-miss",
-      "user_priority": null,
-      "user_far_off": false,
-      "c_draft": "analysis/grid-point-48af8-call-owners-20261028/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
-      "best_candidate": {
-        "source": "analysis/grid-point-48af8-call-owners-20261028/source.c",
-        "source_sha256": "23c1805b6b41ba171a743e0dd15facc0fd687c4f1daf4de35bfd17ebd7de0c1a",
-        "metadata": "analysis/grid-point-48af8-current-frontier-index-20261028/metadata.json",
-        "metadata_sha256": "aa2074be6a8c12a15cf43619653f8dc2fd5ef6141b83773d40b154ab6c7c4f2f",
-        "receipt": "analysis/grid-point-48af8-current-frontier-index-20261028/result.json",
-        "receipt_sha256": "7f18a7ce725ee78c4980ba3207b27b321f1bbe64c44f96ea17936e8917bdfb74",
-        "assessment": "analysis/grid-point-48af8-current-frontier-index-20261028/assessment.json",
-        "assessment_sha256": "8f69ef882b9b2c3614718ab4282ff9cff83bd70372fe85ea0b68a8b864af47c7",
-        "candidate_bytes": 128,
-        "comparison_extent_bytes": 128,
-        "full_byte_differences": 10,
-        "candidate_sha256": "c524ec821a4857f344e933153f25e6bef7aafe0465bcb1562f329f63d9a3ce27",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": null,
-      "retained_attempt_contexts": 16,
-      "eligible_diagnostic_contexts": 10,
-      "excluded_contexts": {
-        "Missing or malformed retained input": 5,
-        "No retained assessment": 1
-      },
-      "closed_note": "Inventory126; retained full comparison128 includes trailing alignment."
-    },
-    {
-      "name": "sub_08048BF8",
-      "rom_offset": 297976,
-      "inventory_bytes": 86,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-da"
-      ],
-      "runtime_addresses": [
-        134515704
-      ],
-      "status": "near-miss",
-      "user_priority": null,
-      "user_far_off": false,
-      "c_draft": "analysis/grid-inverse-48bf8-boolean-domain-types-20261024/byte_outer_guard/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
-      "best_candidate": {
-        "source": "analysis/grid-inverse-48bf8-boolean-domain-types-20261024/byte_outer_guard/source.c",
-        "source_sha256": "90a35edf0a2bd07f4674bf0ab358caee24e16f3363192826fd91da40fc80bc6d",
-        "metadata": "analysis/grid-inverse-48bf8-boolean-domain-types-20261024/byte_outer_guard/metadata.json",
-        "metadata_sha256": "76a1eeb6aedbf0134c0a72a818f683e83adc5435bb472401d4e48f607d70ea55",
-        "receipt": "analysis/grid-inverse-48bf8-boolean-domain-types-20261024/byte_outer_guard/result.json",
-        "receipt_sha256": "5246d8d213d789e201bfd92ac179db3d42d709a6a148bd551bd80891afa57163",
-        "assessment": "analysis/grid-inverse-48bf8-boolean-domain-types-20261024/assessment.json",
-        "assessment_sha256": "efabdcfafc605e686c536f0b12ef28920e96a3e7894ff778675e5e86a2723796",
-        "candidate_bytes": 88,
-        "comparison_extent_bytes": 88,
-        "full_byte_differences": 2,
-        "candidate_sha256": "ddae664628c68fdd4d1928562da91d0821ed690e897c5c99eabf3be1c9031e7a",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": {
-        "source": "analysis/permuter/sub_08048BF8-pass1-byte-target/base.c",
-        "source_sha256": "1a1ce5acb924d57488c100d840f3c5723a39bbb8d30e64cfe7eb26234adacd85",
-        "receipt": "analysis/permuter/sub_08048BF8-pass1-byte-target/validation-base/result.json",
-        "receipt_sha256": "7dc18f453523b3e0ba2f807f404978ede414b3642e3825327361eeeff4c3cf3d",
-        "job_manifest": "analysis/permuter/sub_08048BF8-pass1-byte-target/setup.json",
-        "job_manifest_sha256": "8b6c268c717b27fe517ba1ded46943769852680357af070e64bddd9f0ca4a7b6",
-        "candidate_bytes": 88,
-        "comparison_extent_bytes": 88,
-        "full_byte_differences": 2,
-        "candidate_sha256": "ddae664628c68fdd4d1928562da91d0821ed690e897c5c99eabf3be1c9031e7a",
-        "source_review": "pending",
-        "source_credit": 0,
-        "private_header_qualification": "canonical-current",
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ]
-      },
-      "retained_attempt_contexts": 54,
-      "eligible_diagnostic_contexts": 41,
-      "excluded_contexts": {
-        "Different experimental compiler backend": 2,
-        "Missing or ambiguous full comparison": 3,
-        "Missing or malformed retained input": 6,
-        "Stale or unqualified private header": 1,
-        "Stale source snapshot": 1
-      },
-      "closed_note": "Inventory86; retained full comparison88 includes trailing alignment."
-    },
-    {
       "name": "sub_080495C4",
       "rom_offset": 300484,
       "inventory_bytes": 116,
@@ -794,13 +655,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "0d8c36f5969c55667e30aeec366778928673f56d9bfe312790b105fbf261abdd",
-    "assets/rom-inventory.json": "6027f745fec38e00c2a09bacaa9bd3a414e27c51e53e15555a37a46ab1da3fed",
-    "docs/COMPLETION_BLOCKERS.md": "7f2bee9cfbe55a216b2bbcd0362023bafb39bc7d6100574aea9daa3363a72f3e"
+    "assets/progress.json": "83a442d1149d946425285f1b18178cb6b72d6435156a3cd76d1e082ca332e255",
+    "assets/rom-inventory.json": "69718c4f18d569466cb49555933a3b3e45e91b54e7ff08d41581a1959124bce6",
+    "docs/COMPLETION_BLOCKERS.md": "7a59913af0104db6d28a55eda771832cbbf085dabf6a28a1a71c1924ffdf5e6e"
   },
   "documented_inventory": {
-    "rows": 12,
-    "bytes": 5432
+    "rows": 10,
+    "bytes": 5220
   },
   "documentation_count_current": true,
   "scan": {
@@ -809,7 +670,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 2758,
+    "metadata_files": 2773,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 1,

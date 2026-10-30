@@ -27086,6 +27086,32 @@
         "Pinned2.10.1 pure C object/function are14 bytes; unchanged linkerALIGN4 supplies zero2 at14..16 in the exact16-byte output. No input/source pad or source$d claim.",
         "Full positive and real changed-source controls were independently checked. Alignment source role only; no original mode, incoming entry, execution exclusion or runtime population claim."
       ]
+    },
+    {
+      "name": "frame_grid_point_to_cell_alignment_048b76",
+      "owner": "frame_grid_point_to_cell",
+      "rom_offset": 297846,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "e54e2e4c97afb1ebbf2f3d79512e75e17f3c2176508c2fc7cdc0334276216af3",
+      "evidence": [
+        "The pinned default compiler emits .align 2,0 after the 126-byte function. The 128-byte input object has $d at relative 126 and two zero bytes after BX R1. The full 128-byte linked extent and real eight-to-nine control verify every byte, including this natural alignment.",
+        "This data/alignment role adds no instruction or executable entry and does not exclude alternate incoming execution. The bytes are already included in the full C owner."
+      ]
+    },
+    {
+      "name": "resource_project_point_alignment_048c4e",
+      "owner": "resource_project_point",
+      "rom_offset": 298062,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "7019d28a14adc42ef496948fa39a8ce53a0acfebf1f9cf635df2c1f76cd31085",
+      "evidence": [
+        "The pinned default compiler and binutils2101 emit an 86-byte .text input with four-byte alignment and one 86-byte function ending in BX R1. The unchanged function linker script ALIGN(4) emits the two zero trailing bytes. Full linked 88-byte normal and real eight-to-nine control comparisons verify this natural linker alignment; no source padding or instruction is inserted.",
+        "This data/alignment role adds no instruction or executable entry and does not exclude alternate incoming execution. The bytes are already included in the full C owner."
+      ]
     }
   ],
   "source_owned_instruction_regions": [
