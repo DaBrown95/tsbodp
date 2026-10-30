@@ -689,6 +689,40 @@ changed-source controls. The save startup and header updater now call the
 canonical interfaces at the same addresses. This is static connected
 evidence, not a runtime language-selection or save-compatibility claim.
 
+### Initialized buffer and the pre-jingle text copy
+
+The named startup sequence now establishes the initial buffer's numeric
+storage range. Original RAM zeroing covers both the arena count at
+`0x03001DD0` and pointer cell at `0x030021F4`. Heap initialization then creates
+arena zero in `[0x02002800,0x02040000)` with count one. Its initial payload
+capacity is 251,872 bytes; the actual 2,048-byte text-state allocation and
+following 1,024-byte buffer allocation both succeed, leaving 249,808 and
+248,768 bytes respectively. Intervening named startup leaves preserve these
+inputs. This is a conditional static proof of the completed startup path,
+independently checked against 23 matched source/control pairs and original
+initialization words; it is not a gameplay observation.
+
+The initial stored pointer B therefore satisfies
+`0x02002800 <= B <= 0x0203FC00`. Its entire 1,024-byte output range is above
+the audio player/backup interval ending at `0x020025AC`, with at least 596
+bytes of separation. Exact allocation identity and continuing allocation
+liveness are unnecessary for this numeric separation. Later pointer
+replacement and asynchronous or aliased writes remain separate obligations.
+
+On the named pre-jingle offer path, a successful lookup decodes between one
+and 1,024 bytes including its NUL. The following field-zero leaf copies those
+bytes to fixed storage within `[0x03001A60,0x03001E60)`, below the pointer cell
+and disjoint from the EWRAM player. This composition requires the retained
+pointer and decoded output to survive until the copy. It does not prove a
+64-byte field capacity: a sufficiently long copy could overlap heap metadata,
+although no actual such string or overwrite is established. The caller copies
+without checking lookup failure, so a null result is outside this theorem.
+The actual string/resource domain, callback epoch and other intervening
+writers remain open. These findings establish bounded storage and successful-
+copy footprints under the stated conditions; they add no C bytes, executable
+entries or global inventory closure. See the
+[open ownership question](COMPLETION_BLOCKERS.md).
+
 ## Template record walker
 
 `display_text_draw_template` at `0x08044F00` owns its complete 160-byte extent:
