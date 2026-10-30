@@ -57422,6 +57422,29 @@
         "after": "g_actor_group_part0_tables[definition[0]]"
       },
       "expected_sha256": "1a895e182b86f4bb11d8b737bedcfba2324487d51b5eb4cd13f71bbd835c414e"
+    },
+    {
+      "name": "frame_reverse_movement",
+      "source": "src/frame/frame_reverse_movement.c",
+      "rom_offset": 176936,
+      "size": 48,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "mode": "Thumb",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming or mode-selecting witness established for this bounded motion-reversal extent. Historical formals, returns and caller/selector populations remain unknown.",
+      "symbols": {
+        "g_frame_movement_reverse_directions": "0x08059b04"
+      },
+      "negative_control": {
+        "before": "->pending |= 16;",
+        "after": "->pending |= 8;"
+      },
+      "expected_sha256": "817f26776a61b0cb7c1794a2a8d36787fab22c4a4281d67bd7a65a1e13635174"
     }
   ],
   "assembly": [

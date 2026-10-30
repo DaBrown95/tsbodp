@@ -138847,7 +138847,7 @@
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "0c2a8e90e2040c692df5048f6072fe1e0883c7ed82021f15621d9e252e9e4560",
+    "config/build-us-eu.json": "4fea91be363321394006b7106dafd58bf16a83315d7cf294f6e24ccc76481b62",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -140393,17 +140393,17 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 320932,
+      "source_glue_owned_extent_bytes": 320980,
       "estimated_envelope_union_bytes": 325680,
       "classification_bytes": {
         "estimated_envelope_unclassified": 202,
         "instruction_and_referenced_data_dual_use": 4,
         "known_data": 22968,
-        "owned_extent_unclassified": 670,
+        "owned_extent_unclassified": 718,
         "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 285406,
         "strong_rooted_referenced_data": 35936,
-        "unresolved": 16432000
+        "unresolved": 16431952
       }
     },
     "physical_unions": {
@@ -189411,10 +189411,6 @@
         ],
         [
           173912,
-          176936
-        ],
-        [
-          176984,
           183048
         ],
         [
@@ -262044,10 +262040,12 @@
       {
         "rom_offset": 176936,
         "size": 48,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 176984,
@@ -315654,10 +315652,10 @@
         "classification_bytes": {
           "estimated_envelope_unclassified": 160,
           "known_data": 964,
-          "owned_extent_unclassified": 62,
+          "owned_extent_unclassified": 110,
           "strong_rooted_instruction": 55962,
           "strong_rooted_referenced_data": 8320,
-          "unresolved": 68
+          "unresolved": 20
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -457740,6 +457738,16 @@
         "rom_offset": 241624,
         "size": 24,
         "source": "src/frame/frame_read_actor_group_part1_variants.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 0,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "frame_reverse_movement",
+        "rom_offset": 176936,
+        "size": 48,
+        "source": "src/frame/frame_reverse_movement.c",
         "mode": "Thumb",
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 0,
