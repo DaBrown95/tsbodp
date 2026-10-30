@@ -531,6 +531,26 @@ table capacity. Signed products, sums and the running difference must remain
 representable. Those domains, later writers and runtime populations remain
 open.
 
+### Named unlinked domain
+
+Completed unlinked initialization writes kind 42 to record zero and
+`frame_random_bounded(23)` to records one through three. The matched RNG masks
+its word to 15 bits before multiplying by 24 and shifting, giving 0–23 without
+overflow. With preserved records and selected index 0–3, the non-42 confirmation
+lookup therefore uses IDs 6025–6048. The named bank-zero
+[text calculation](DISPLAY_TEXT_RECONSTRUCTION.md#initialized-buffer-and-the-pre-jingle-text-copy)
+establishes successful strings of at most 19 bytes under its separate epochs.
+
+The adjustment loop uses slots one through three. Their 24 reached original
+trait bytes select exactly indices 0–6 of the adjustment table; all seven
+reached words name the existing matching Thumb callback owners. Their direct
+stores affect only the slot's countdown, phase and count, preserving kind and
+selected index. The controller's final selection loop writes only indices
+0–3. These are conditional named-domain facts, not a complete writer or caller
+census. Transitive RNG-buffer/refill, cue/audio synchronization, alias and
+normal-return frames remain open. No executable entry, C byte or global
+callback-site closure is added.
+
 ## Linked offer controller and common state
 
 `scene_link_entry_step_linked_offers` owns the complete 444-byte interval

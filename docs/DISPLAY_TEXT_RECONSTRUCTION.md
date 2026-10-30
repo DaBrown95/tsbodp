@@ -723,6 +723,19 @@ copy footprints under the stated conditions; they add no C bytes, executable
 entries or global inventory closure. See the
 [open ownership question](COMPLETION_BLOCKERS.md).
 
+The [named unlinked constructor](SCENE_LINK_ENTRY.md#named-unlinked-domain)
+provides a narrower subcase. Its non-42 kinds yield the admissible ID
+range 6025–6048. All 24 original bank-zero streams decode successfully in
+9–19 bytes including NUL, limiting the field-zero copy to
+`[0x03001A60,0x03001A73)`. An independent bit-cursor calculation agrees with
+the native decoder's byte prefetch, including after an eighth bit terminating
+the string. The same original ID 6038 with capacity 18 returns failure before
+its byte-19 NUL. Only the 560 original bytes reached by these calculations were
+needed; no table capacity or other bank population is inferred. This discharges
+lookup success and metadata-overlap concerns for this subcase under its
+record, selection, bank-zero, pointer and helper/writer survival conditions.
+Those epochs and the linked route remain open; no global site closure follows.
+
 ## Template record walker
 
 `display_text_draw_template` at `0x08044F00` owns its complete 160-byte extent:
