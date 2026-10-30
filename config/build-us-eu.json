@@ -3349,7 +3349,8 @@
       "negative_control": {
         "before": "stride+=8",
         "after": "stride+=4"
-      }
+      },
+      "assembler_id": "binutils2101"
     },
     {
       "name": "resource_build_word_groups",
@@ -57251,6 +57252,26 @@
       "negative_control": {
         "before": "return animation->resource->sequence->frame_count;",
         "after": "return animation->resource->sequence->unknown_08;"
+      }
+    },
+    {
+      "name": "frame_read_frame_part_count",
+      "source": "src/frame/frame_read_frame_part_count.c",
+      "rom_offset": 43312,
+      "size": 8,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming witness established for this bounded byte-field reader; historical prototype and complete selected-frame backing domain remain unknown.",
+      "symbols": {},
+      "expected_sha256": "6e2829e325364259b0da0b86be6226658b926fc27496c1c5aaa5b0aff342dc19",
+      "negative_control": {
+        "before": "frame->count_flags & 0x1f",
+        "after": "frame->count_flags & 0x0f"
       }
     }
   ],

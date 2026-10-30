@@ -2569,10 +2569,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "ad270d15b66246f7ef72975605aae7bd9e16fde51ed5b52ea6f65573a3abe977",
+      "source_sha256": "1fc215aeaaa2d075790986dcf057638b4b3fa5d22178f088def801ded8f13b71",
       "evidence": [
-        "Matching compiler output .align 2, 0 at LF line76 emits padding containing relative130..132; actual source.o $d covers this span. C source explicitly supplies post-function alignment.",
-        "Full retained 132-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Pure C compiled with the pinned binutils2101 profile has input .text and function size130. The input ends at the function; the unchanged linker ALIGN(4) supplies the final two zero bytes at relative130..132.",
+        "Complete132-byte positive and actual stride-control linked extents equal the prior verified positive/control proofs, including the fixed original alignment bytes. This alignment role does not exclude alternate entry or establish instruction/root population."
       ]
     },
     {

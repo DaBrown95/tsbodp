@@ -96230,10 +96230,10 @@
       "size": 2,
       "role": "alignment",
       "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
-      "source_sha256": "ad270d15b66246f7ef72975605aae7bd9e16fde51ed5b52ea6f65573a3abe977",
+      "source_sha256": "1fc215aeaaa2d075790986dcf057638b4b3fa5d22178f088def801ded8f13b71",
       "evidence": [
-        "Matching compiler output .align 2, 0 at LF line76 emits padding containing relative130..132; actual source.o $d covers this span. C source explicitly supplies post-function alignment.",
-        "Full retained 132-byte linked text/candidate equals the fixed original extent; object padding agrees. Source-emitted alignment role only, not alternate-entry exclusion."
+        "Pure C compiled with the pinned binutils2101 profile has input .text and function size130. The input ends at the function; the unchanged linker ALIGN(4) supplies the final two zero bytes at relative130..132.",
+        "Complete132-byte positive and actual stride-control linked extents equal the prior verified positive/control proofs, including the fixed original alignment bytes. This alignment role does not exclude alternate entry or establish instruction/root population."
       ],
       "status": "mapped_data"
     },
@@ -138801,11 +138801,11 @@
     "tools/fixed_target_proof.py": "c8c245ed2b99b243ab46a17984b175299f1a5231db181d1b5139569c09fd0c2a",
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
     "tools/source_addresses.py": "7c18cbe496668c2f074f6c55609eb8aabb923ded5b0add51f3be908634612485",
-    "config/code-evidence-us-eu.json": "cd177d8262fcacbe24474504c04cb39f13c6f963666535e1d7c63a7508996e71",
+    "config/code-evidence-us-eu.json": "5a7990f7b8d4f4056beb0545f065a9c92f52523852f76899b4c32d4e5476ec8c",
     "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "14163fe5550ae0467805a09b13b0325c293d190a1f58814c61cc6218e4e25ab9",
+    "config/build-us-eu.json": "eb8f2f2484a195e5a61158b008b7e11fbb29dd07895cb0e1eaec55bb64309c1b",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -139855,7 +139855,7 @@
     "src/resource/conditions/resource_set_triple.c": "7a44ce7f7a7d1c48b970e85394526514d43c9986f5eafb3bceabc66f8e6cd307",
     "src/resource/resource_actor_selection_available.c": "9525fcba4fb59cb58008de4975d2eb54159b063833d60f28d7d75a50341c74e9",
     "src/resource/resource_align_word.c": "ef27aa5c6aa473885649a8721ff9bc867019fb30ca088efe91838b5c56a7d311",
-    "src/resource/resource_build_object_group.c": "ad270d15b66246f7ef72975605aae7bd9e16fde51ed5b52ea6f65573a3abe977",
+    "src/resource/resource_build_object_group.c": "1fc215aeaaa2d075790986dcf057638b4b3fa5d22178f088def801ded8f13b71",
     "src/resource/resource_build_object_groups.c": "f70ddbfa3acafebd9bdbba6de3b5706246f4d893a7d1498d0a01320d9a81dbc3",
     "src/resource/resource_build_program_groups.c": "dd92b25f99599dd30534780f34ca7fc2ecb16aafb412f067aff3c19dc11d4194",
     "src/resource/resource_build_word_groups.c": "d9d320eac50efac9f8210eb1a9e2829df7089cf131359f272e503b890553cb63",
@@ -140348,17 +140348,17 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 320800,
+      "source_glue_owned_extent_bytes": 320808,
       "estimated_envelope_union_bytes": 325680,
       "classification_bytes": {
         "estimated_envelope_unclassified": 202,
         "instruction_and_referenced_data_dual_use": 4,
         "known_data": 22962,
-        "owned_extent_unclassified": 544,
+        "owned_extent_unclassified": 552,
         "source_authored_unrooted_instruction": 30,
         "strong_rooted_instruction": 285406,
         "strong_rooted_referenced_data": 35936,
-        "unresolved": 16432132
+        "unresolved": 16432124
       }
     },
     "physical_unions": {
@@ -189290,10 +189290,6 @@
         ],
         [
           32196,
-          43312
-        ],
-        [
-          43320,
           45928
         ],
         [
@@ -215669,10 +215665,12 @@
       {
         "rom_offset": 43312,
         "size": 8,
-        "classification": "unresolved",
-        "roles": [],
-        "confidence": "unknown",
-        "evidence_basis": "No supplied strong instruction/data observation or owned/estimated extent."
+        "classification": "owned_extent_unclassified",
+        "roles": [
+          "source_owned"
+        ],
+        "confidence": "high_owned_boundary_unknown_role",
+        "evidence_basis": "Independent source/glue extent, without a qualified instruction or data role here."
       },
       {
         "rom_offset": 43320,
@@ -315514,10 +315512,10 @@
         "classification_bytes": {
           "estimated_envelope_unclassified": 14,
           "known_data": 862,
-          "owned_extent_unclassified": 544,
+          "owned_extent_unclassified": 552,
           "strong_rooted_instruction": 57312,
           "strong_rooted_referenced_data": 6784,
-          "unresolved": 20
+          "unresolved": 12
         },
         "classification_profiles": [
           "estimated_envelope_unclassified",
@@ -457554,6 +457552,16 @@
         "rom_offset": 43252,
         "size": 8,
         "source": "src/frame/frame_read_animation_sequence_frame_count.c",
+        "mode": "Thumb",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 0,
+        "referenced_data_bytes_in_extent": 0
+      },
+      {
+        "name": "frame_read_frame_part_count",
+        "rom_offset": 43312,
+        "size": 8,
+        "source": "src/frame/frame_read_frame_part_count.c",
         "mode": "Thumb",
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 0,

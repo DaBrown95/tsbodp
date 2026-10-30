@@ -28,4 +28,3 @@ unsigned char *resource_build_object_group(const unsigned char *source,unsigned 
  destination+=stride;
  return destination;
 }
-asm(".align 2, 0");
