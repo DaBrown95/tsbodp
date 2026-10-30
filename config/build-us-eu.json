@@ -57685,6 +57685,29 @@
         "after": "register FrameU32 gate_input asm(\"r1\") = 0x1000;"
       },
       "mode": "Thumb"
+    },
+    {
+      "name": "frame_stage_map_tiles",
+      "rom_offset": 46436,
+      "size": 320,
+      "mode": "ARM",
+      "ram_address": 50360672,
+      "ram_copy": "frame_map_draw_iwram",
+      "symbols": {
+        "g_frame_map_records": "0x03005f54"
+      },
+      "thumb_symbols": [],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer"
+      ],
+      "source": "src/frame/frame_stage_map_tiles.c",
+      "compiler_id": "agbcc_arm",
+      "negative_control": {
+        "before": "rows = available_rows < 7 ? available_rows : 7;",
+        "after": "rows = available_rows < 7 ? available_rows : 6;"
+      }
     }
   ],
   "assembly": [

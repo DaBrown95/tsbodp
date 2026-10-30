@@ -89,7 +89,8 @@ The [tile-run decoder](../src/resource/resource_decode_tile_runs.c) rebuilds all
 504 bytes at ROM `0x0800B36C..0x0800B564`, independently linked for execution at
 `0x030036D0..0x030038C8`. These are 126 ARM instructions, with no literal pool
 or alignment tail. The 528-byte installation also copies the first 24 bytes
-of the following, still unconverted map drawer; it is not a 528-byte C owner.
+of the separately matching [map drawer](FRAME_MAP_STAGING.md); it is not a
+528-byte C owner.
 ROM and copied-RAM bytes are counted once.
 
 The stream has literal, repeated-byte and backward-copy runs, ending at a zero

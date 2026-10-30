@@ -43,7 +43,9 @@ indices, writable callbacks, transitive dependencies or runtime populations.
 The copied sorter now matches all 284 ARM bytes using these signed pixel halves
 and an actual ordering-test temporary. See the [remaining work](COMPLETION_BLOCKERS.md).
 
-The copied map drawer at ROM `0x0800B564` also remains unconverted. Genuine
+The copied map drawer at ROM `0x0800B564` now has a separately verified
+[source owner](FRAME_MAP_STAGING.md). The following describes an earlier
+failed representation, with zero credit. Genuine
 per-copy aggregate initializers kill the prior incoming partial-pair live range.
 Evaluating the representation reads inside those initializers removes three
 copies and retains the primary, combined-resource and row-width reads. The

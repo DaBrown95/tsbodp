@@ -1,37 +1,36 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,535 C functions / 317,512 C extent bytes**, plus
-**4,068 assembly bytes**. Original slices still supply 16,455,636 bytes of assets
+The current gates verify **2,536 C functions / 317,832 C extent bytes**, plus
+**4,068 assembly bytes**. Original slices still supply 16,455,316 bytes of assets
 and unconverted code. Whole-ROM equality is proven; complete source ownership
 is not. The fixed 319,640 bytes remain a historical comparison, not a complete
 code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **9 unowned rows / 4,872 estimated
+and generated [triage](TRIAGE.md) contain **8 unowned rows / 4,552 estimated
 bytes**. This finite worklist does not establish that all executable regions
 have been discovered. Candidate scores grant no source credit.
 
 ## Latest accepted source
 
-The [object finalizer](../src/frame/frame_finalize_object_original.c) at
-`0x3248` adds **one C function / 348 extent bytes**: 326 instruction, twenty
-literal and two natural alignment bytes. Real table-base and object inputs
-retain the native commit lifetime. The first byte offset precedes the table
-birth; target-width address arithmetic preserves the original addition order.
-All source fields are assigned before their own reads. The existing gate-mask
-control rejects by one byte; normal flags, canonical headers, full-ROM equality
-and the changed-source ROM control pass. See [finalization](FRAME_OBJECT_FINALIZATION.md).
+The [copied ARM map drawer](../src/frame/frame_stage_map_tiles.c) at `0xB564`
+adds **one C function / 320 extent bytes**: 316 instruction and four literal
+bytes. Whole payload inputs and native scalar phases preserve the four load/
+store groups and three source writebacks. One ordinary destination receiver
+retains all three address lifetimes, recovering the final IP allocation and
+instruction order. Default ARM flags, the real row-cap control, full-ROM
+identity and its source control pass. See [map staging](FRAME_MAP_STAGING.md).
 
-The two [inverse projection owners](GRID_INVERSE_RECONSTRUCTION.md) previously
-added 216 C extent bytes. These source gains add no new runtime, callback-domain
-or independent executable-inventory closure.
+The [finalizer](FRAME_OBJECT_FINALIZATION.md) previously added 348 C bytes;
+the two [inverse projection owners](GRID_INVERSE_RECONSTRUCTION.md) added 216.
+These gains add no new runtime, callback-domain or independent executable-
+inventory closure. Copy extents remain separately accounted.
 
 ## Remaining source work
 
 | Region | Consequential obstacle |
 | --- | --- |
 | Renderer `0x23E8` (1,400) | Recover the remaining real stack homes and comparison lifetimes. Native input and partial-word ownership have improved complete candidates; exhausted binding and address-only families stay parked. |
-| ARM map drawer `0xB564` (320) | Preserve native traversal, source writebacks and payload carriers together. Individually successful fragments have not produced a complete match. |
 | Activity preparation `0x19640` (544) | Preserve geometry roles and bound reloads while recovering the native availability and output-pointer allocation. |
 | Scene object `0x28234` (160) | Its entry remains weakly supported. Incoming searches have no qualified hit; coordinate graph candidates remain nonmatches. No absence or executable exclusion follows. |
 | Selected-map worker `0x39CF0` (392), map collapse `0x495C4` (116) | Remaining producer and address/base continuity differences need complete source matches. |
@@ -61,7 +60,10 @@ operands, including `0x08ED0975`. Their source words have independent numeric
 data uses; that does not exclude alternate callback interpretation. No actual
 selecting module/state, complete effect domain or new executable entry has
 been established. Resolve the reaching selector domain before seeding bodies
-from these words. This diagnostic adds **zero source or ownership closures**.
+from these words. A named pre-jingle caller now has a conditional native
+producer/effect-domain proof. Its actual text backing and intervening callback/
+writer preservation remain open; this establishes no new entry. These audio
+diagnostics add **zero source or ownership closures**.
 
 Within existing source extents, historical formals, field names and event
 meanings are semantic uncertainties. Unknown code/data/padding roles and

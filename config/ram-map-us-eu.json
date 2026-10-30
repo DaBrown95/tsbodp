@@ -87,7 +87,7 @@
       ],
       "word_copy_control": 67108996,
       "phase": "resource decoder initialization at 0x08016a48",
-      "classification": "Copied ARM tile decoder: 504-byte matching C body with no literal pool or alignment tail, plus the first 24 bytes of the following unconverted map drawer; installation and source extent remain distinct",
+      "classification": "Copied ARM tile decoder: 504-byte matching C body with no literal pool or alignment tail, plus the first 24 bytes of the separately matching map drawer; installation and source extent remain distinct.",
       "exports": "resource_tile_decoder_iwram.bin"
     },
     {
@@ -117,7 +117,7 @@
       ],
       "word_copy_control": 67108948,
       "phase": "map routine initialization at 0x08039e78",
-      "classification": "Copied ARM map drawer: unconverted 320-byte extent at ROM 0xB564 plus the first 16 ROM source bytes of matching C frame_transfer_map_tiles at 0xB6A4; the 336-byte installation and source extents are distinct.",
+      "classification": "Copied ARM map drawer: matching 320-byte C owner frame_stage_map_tiles at ROM 0xB564 plus the first 16 ROM source bytes of matching C frame_transfer_map_tiles at 0xB6A4; the 336-byte installation and source extents are distinct.",
       "exports": "frame_map_draw_iwram.bin"
     },
     {
@@ -242,7 +242,7 @@
       "ram_address": 50345680,
       "mode": "ARM",
       "pointer_rom_offset": 92788,
-      "evidence": "Matching installer 0x08016a48 publishes destination 0x030036d0 to callback word 0x03003360; source/destination/control literals establish the 528-byte copy. The first 504 ROM bytes are matching C resource_decode_tile_runs; the following 24 bytes are the unconverted map-drawer prefix."
+      "evidence": "Matching installer 0x08016a48 publishes destination 0x030036d0 to callback word 0x03003360; source/destination/control literals establish the 528-byte copy. The first 504 ROM bytes are matching C resource_decode_tile_runs; the following 24 bytes are a partial copy of separately matching C frame_stage_map_tiles; this adds no source credit or incoming-entry proof."
     },
     {
       "name": "resource_background_decoder_iwram",
@@ -256,7 +256,7 @@
       "ram_address": 50360672,
       "mode": "ARM",
       "pointer_rom_offset": 237220,
-      "evidence": "Matching installer 0x08039e78 publishes destination to callback word 0x03001fc8; source/destination/control literals establish copy extent; inferred signature void(unsigned int view_index) [provisional narrowed byte-index interpretation]; original ARM body remains unconverted"
+      "evidence": "Matching installer 0x08039e78 publishes even destination 0x03007160 to callback word 0x03001fc8. Source/destination/control literals establish the 336-byte copy: 320-byte matching C frame_stage_map_tiles plus 16 source bytes of matching C frame_transfer_map_tiles. Compatible one-argument source interface uses the low byte of view_index; complete index, writer and incoming-entry populations remain open."
     },
     {
       "name": "frame_map_scroll_iwram",

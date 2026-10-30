@@ -41,7 +41,7 @@ void frame_set_map_sources(const void *, const void *);
 void frame_snapshot_map_vram(void);
 void frame_restore_map_vram(void);
 void frame_install_map_routines(void);
-/* Provisional one-argument copied ARM routines; installed bodies remain original. */
+/* Provisional one-argument interfaces for the copied ARM map routines. */
 extern void (*g_frame_map_draw_routine)(unsigned int);
 extern void (*g_frame_map_scroll_routine)(unsigned int);
 extern unsigned char g_frame_map_draw_rom[], g_frame_map_draw_ram[];

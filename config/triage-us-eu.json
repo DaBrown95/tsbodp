@@ -2,17 +2,17 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 9,
-    "inventory_bytes": 4872,
+    "rows": 8,
+    "inventory_bytes": 4552,
     "statuses": {
       "near-miss": 3,
-      "attempted": 5,
+      "attempted": 4,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
       "near-miss": 1716,
-      "attempted": 3032,
+      "attempted": 2712,
       "untouched": 0,
       "suspected-not-C": 124
     }
@@ -112,68 +112,6 @@
         "No retained assessment": 6,
         "Retained linked ELF unavailable": 1,
         "Stale or unqualified private header": 2
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
-    },
-    {
-      "name": "frame_map_draw_iwram",
-      "rom_offset": 46436,
-      "inventory_bytes": 320,
-      "mode": "ARM",
-      "compiler_id": "agbcc_arm",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-fomit-frame-pointer",
-        "-drFGLtcglSR"
-      ],
-      "runtime_addresses": [
-        50360672
-      ],
-      "status": "attempted",
-      "user_priority": null,
-      "user_far_off": true,
-      "c_draft": "analysis/map-drawer-real-traversal-20261026/native-cell-multiply-consumption/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
-      "best_candidate": {
-        "source": "analysis/map-drawer-real-traversal-20261026/native-cell-multiply-consumption/source.c",
-        "source_sha256": "62a9d3fd0eed9f2681bc16b12c9f7fa0770c46c8d90f460622fbaa09ee305239",
-        "metadata": "analysis/map-drawer-real-traversal-20261026/native-cell-multiply-consumption/metadata.json",
-        "metadata_sha256": "ede15c2175ae3334e0ead62038ab8744a51dfe6b111a67fdcd2784e46c56d038",
-        "receipt": "analysis/map-drawer-real-traversal-20261026/native-cell-multiply-consumption/result.json",
-        "receipt_sha256": "7d10d1f76390bd82d0720e773418c6f9e633f9f790ce4f77c5b512023e03c663",
-        "assessment": "analysis/map-drawer-real-traversal-20261026/assessment.json",
-        "assessment_sha256": "5e09dfa3f933456f1db16a3f2c2c58161f21d97f1b5f4c7b24f7dcd1ae4af723",
-        "candidate_bytes": 320,
-        "comparison_extent_bytes": 320,
-        "full_byte_differences": 116,
-        "candidate_sha256": "4ceb0a5cfa82361b2235fb8e8e6ad4332a2fb1d9e4efc248d7c1a0297cbd6e86",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc_arm",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-fomit-frame-pointer",
-          "-drFGLtcglSR"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": null,
-      "retained_attempt_contexts": 52,
-      "eligible_diagnostic_contexts": 32,
-      "excluded_contexts": {
-        "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 8,
-        "No retained assessment": 5,
-        "Stale or unqualified private header": 6
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
@@ -309,43 +247,20 @@
       "status": "attempted",
       "user_priority": null,
       "user_far_off": false,
-      "c_draft": "analysis/selected-map-39cf0-native-search-control-20261027/source-canonical-baseline.c",
+      "c_draft": "analysis/permuter/m2c-drafts/frame_load_selected_map_tiles/clean.c",
       "historical_active_effort_seconds": null,
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
       "search_wall_time_records": [],
-      "best_candidate": {
-        "source": "analysis/selected-map-39cf0-native-search-control-20261027/source-canonical-baseline.c",
-        "source_sha256": "ff59bd3d8971a867b1f5eed256169a86ad17ceef3f356f8c50dad0caed7aba45",
-        "metadata": "analysis/selected-map-39cf0-native-search-control-20261027/canonical-owner/metadata.json",
-        "metadata_sha256": "95c76abb73f8b9838a090599c590e8d01ada602418e84d95db15b8302f0cbec1",
-        "receipt": "analysis/selected-map-39cf0-native-search-control-20261027/canonical-owner/result.json",
-        "receipt_sha256": "8c3d211c4ed476c88e2715040431e3b6408f726a9182ac20a421aed4267edaed",
-        "assessment": "analysis/selected-map-39cf0-native-search-control-20261027/canonical-owner/assessment.json",
-        "assessment_sha256": "72a34f9859c950c2c99a854d68e23d2d0cb7a47ae8653a7f2187309b8ddf8914",
-        "candidate_bytes": 392,
-        "comparison_extent_bytes": 392,
-        "full_byte_differences": 109,
-        "candidate_sha256": "b17245b193810b485b8dd636e70790e10b2c8a302f6807eaab452290454a23ea",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
+      "best_candidate": null,
       "search_best": null,
       "retained_attempt_contexts": 46,
-      "eligible_diagnostic_contexts": 16,
+      "eligible_diagnostic_contexts": 0,
       "excluded_contexts": {
         "Missing or malformed retained input": 22,
-        "No retained assessment": 8
+        "No retained assessment": 8,
+        "Stale or unqualified private header": 16
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
@@ -598,13 +513,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "e3c9c0ab390ca0473bcd4fd1ea003b8dcee7ad5ce8534005bd36d2732f1a36fb",
-    "assets/rom-inventory.json": "3d9403e09240648cf7665e6b59d8c1c41ad6ee90d77b82a2d5ca8f7c0fc6e052",
-    "docs/COMPLETION_BLOCKERS.md": "ece5a23d05e60186f7890f83e8f64ac5a88727a53895c03b13f407080bd2b347"
+    "assets/progress.json": "a4c72587e5483920d3785d9be458dd598fd49bb9c54bfdcfb4bbcb978f3e9ed2",
+    "assets/rom-inventory.json": "82bc3e36596a3499fb8a27df92c2970669194b0bb8e6bb5840405304c4c9172c",
+    "docs/COMPLETION_BLOCKERS.md": "05a63688b74a818efe572c0e1fb8ec306fddc1b0532829ae9151f541628ca606"
   },
   "documented_inventory": {
-    "rows": 9,
-    "bytes": 4872
+    "rows": 8,
+    "bytes": 4552
   },
   "documentation_count_current": true,
   "scan": {
@@ -613,7 +528,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 2782,
+    "metadata_files": 2792,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 1,

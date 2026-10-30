@@ -14377,14 +14377,15 @@
       "referenced_literal_bytes": 0
     },
     {
-      "name": "frame_map_draw_iwram",
+      "name": "frame_stage_map_tiles",
       "rom_offset": 46436,
       "mode": "ARM",
       "runtime_addresses": [
         50360672
       ],
       "evidence": [
-        "audited RAM entry"
+        "audited RAM entry",
+        "bounded audit"
       ],
       "issues": [],
       "call_targets": [],
@@ -14394,11 +14395,11 @@
         46752
       ],
       "size": 320,
-      "extent_basis": "CFG envelope estimate",
+      "extent_basis": "bounded audit",
       "entry_rom_offset": 46436,
       "body_rom_start": 46436,
       "body_rom_end": 46756,
-      "boundary_confidence": "control_flow_bounded",
+      "boundary_confidence": "bounded audit",
       "status": "mapped_code",
       "group": "ROM 0800xxxx",
       "decoded_instruction_bytes": 316,
@@ -124556,7 +124557,7 @@
       "status": "mapped_code"
     },
     {
-      "name": "frame_map_draw_iwram",
+      "name": "frame_stage_map_tiles",
       "rom_offset": 46436,
       "size": 320,
       "status": "mapped_code"
@@ -138877,10 +138878,10 @@
     "tools/inventory_census.py": "34f702d9168f0b0d543a42e8756ba8d983e80aa06918bf1566de85e733a04a5f",
     "tools/source_addresses.py": "7c18cbe496668c2f074f6c55609eb8aabb923ded5b0add51f3be908634612485",
     "config/code-evidence-us-eu.json": "7e41d0e3c671d6f73a1f85b9aedd09d2483695eb80852300e2899b77a0442f7b",
-    "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
+    "config/ram-map-us-eu.json": "aaf8e908a2827fad6b813be7a7ef1cee6c376e0dfecad1ad04393d8aa8bd52fc",
     "config/indirect-transfers-us-eu.json": "3bdd9be9c04e0db5e9690d6d452cf19e764cbc0e9e47c9044035df94f7d6ee51",
     "config/progress-regions-us-eu.json": "67739eea4b7b05f71ac5c52630d9ff625f93599c2fb02d5905aeb14f1728f8d6",
-    "config/build-us-eu.json": "917bd9866fffd77a547100c4252aad575256f67cfdb7cc8d1172409a8fa17bb8",
+    "config/build-us-eu.json": "469948677fd7f30287ce771d07aebcc6813f082adf0b5f742161dc441d2b7e7d",
     "config/analysis-requirements.txt": "73d4666dfa907f8649192a244c79a8c908292d0c6dcdb50515673f506bbbca2c",
     "src/animation/background_animation_configure_alpha.c": "47fe69bf748f73a05770e8bb35409307d07550011354a9db7977e0622497f03c",
     "src/animation/background_animation_force_reload.c": "125e3f867a3ad1769f5a648e6b06bd8b27ab79084780ef84f822cb165e1a67c9",
@@ -140429,7 +140430,7 @@
       "raw_referenced_data_union_bytes": 35940,
       "qualified_referenced_data_union_bytes": 35940,
       "source_authored_instruction_union_bytes": 30,
-      "source_glue_owned_extent_bytes": 321580,
+      "source_glue_owned_extent_bytes": 321900,
       "estimated_envelope_union_bytes": 325684,
       "classification_bytes": {
         "estimated_envelope_unclassified": 200,
@@ -189395,10 +189396,6 @@
         ],
         [
           45932,
-          46436
-        ],
-        [
-          46756,
           47452
         ],
         [
@@ -216597,7 +216594,7 @@
       },
       {
         "rom_offset": 45932,
-        "size": 504,
+        "size": 808,
         "classification": "strong_rooted_instruction",
         "roles": [
           "ARM",
@@ -216610,45 +216607,20 @@
         "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
       },
       {
-        "rom_offset": 46436,
-        "size": 304,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "ARM",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
         "rom_offset": 46740,
         "size": 4,
         "classification": "strong_rooted_referenced_data",
         "roles": [
           "estimated_envelope",
-          "referenced_data"
+          "referenced_data",
+          "source_owned"
         ],
         "confidence": "high_referenced_data_role_execution_exclusion_provisional",
         "evidence_basis": "Strong-rooted literal/table references; role does not prove bytes can never execute."
       },
       {
         "rom_offset": 46744,
-        "size": 12,
-        "classification": "strong_rooted_instruction",
-        "roles": [
-          "ARM",
-          "estimated_envelope",
-          "instruction",
-          "raw_instruction"
-        ],
-        "confidence": "high_static_instruction_provenance",
-        "evidence_basis": "ARM/Thumb CFG observation from corroborated roots; not runtime or function ownership."
-      },
-      {
-        "rom_offset": 46756,
-        "size": 200,
+        "size": 212,
         "classification": "strong_rooted_instruction",
         "roles": [
           "ARM",
@@ -319566,7 +319538,8 @@
         "mode": "ARM",
         "name": "frame_map_draw_iwram",
         "evidence": [
-          "audited RAM entry"
+          "audited RAM entry",
+          "bounded audit"
         ],
         "raw_instruction_intervals": [
           [
@@ -457893,6 +457866,16 @@
         "kind": "compiled_c",
         "instruction_bytes_in_extent": 326,
         "referenced_data_bytes_in_extent": 20
+      },
+      {
+        "name": "frame_stage_map_tiles",
+        "rom_offset": 46436,
+        "size": 320,
+        "source": "src/frame/frame_stage_map_tiles.c",
+        "mode": "ARM",
+        "kind": "compiled_c",
+        "instruction_bytes_in_extent": 316,
+        "referenced_data_bytes_in_extent": 4
       },
       {
         "name": "irq_cpu_enable",

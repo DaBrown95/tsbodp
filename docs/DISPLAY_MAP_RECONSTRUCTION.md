@@ -97,7 +97,7 @@ from incrementing tiles by one to incrementing by two rejects by one byte.
 The [640-byte background-map writer](DISPLAY_RECONSTRUCTION.md#dimension-prefixed-background-map-writer)
 at `0x0800CEFC` and the [24-byte tile reader](DISPLAY_MENU_PAGES.md#hint-resource-and-map-read)
 at `0x0800DA08` are separately source-owned. They are outside this document's
-nine-function subtotal. The copied-RAM map drawer remains unconverted.
+nine-function subtotal. The copied-RAM map drawer now has a separately verified [source owner](FRAME_MAP_STAGING.md).
 
 ## Independently bounded background dimensions
 

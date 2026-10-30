@@ -1,16 +1,15 @@
 # Remaining C triage
 
-9 unowned inventory rows / 4,872 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
+8 unowned inventory rows / 4,552 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
 
 Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py --check`. Private evidence may be unavailable on another checkout; recorded rows then say so. Historical active effort and search wall time are unrecorded, not zero.
 
 | ROM | Name | Inventory | Best bytes / differences | Compared extent | Status | Priority | Context |
 | --- | --- | ---: | ---: | ---: | --- | ---: | --- |
 | `0x023E8` | `sub_080023E8` | 1400 | 1400 / 15 | 1400 | near-miss | 7 | canonical-current |
-| `0x0B564` | `frame_map_draw_iwram` | 320 | 320 / 116 | 320 | attempted | — | canonical-current |
 | `0x19640` | `sub_08019640` | 544 | 528 / 371 | 544 | attempted | — | canonical-current |
 | `0x28234` | `sub_08028234` | 160 | 160 / 71 | 160 | attempted | — | canonical-current |
-| `0x39CF0` | `sub_08039CF0` | 392 | 392 / 109 | 392 | attempted | — | canonical-current |
+| `0x39CF0` | `sub_08039CF0` | 392 | unqualified/unavailable | — | attempted | — | — |
 | `0x3D788` | `sub_0803D788` | 200 | 200 / 1 | 200 | near-miss | 1 | canonical-current |
 | `0x3DC48` | `link_serial_interrupt` | 1616 | 1624 / 809 | 1616 | attempted | — | private-provisional |
 | `0x495C4` | `sub_080495C4` | 116 | 116 / 3 | 116 | near-miss | — | canonical-current |

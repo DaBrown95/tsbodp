@@ -1,17 +1,17 @@
 {
   "target": "us-eu",
   "reference_sha256": "92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e",
-  "verified_at": "30 Oct 2026, 17:22 GMT",
-  "compiled_c_functions": 2535,
-  "compiled_c_bytes": 317512,
+  "verified_at": "30 Oct 2026, 18:32 GMT",
+  "compiled_c_functions": 2536,
+  "compiled_c_bytes": 317832,
   "assembly_glue_bytes": 4068,
   "rom_bytes": 16777216,
-  "unconverted_rom_bytes": 16455636,
+  "unconverted_rom_bytes": 16455316,
   "whole_rom_identical": true,
   "complete_code_inventory": false,
   "complete_rom_partition": true,
   "discovered_entries": 2549,
-  "bounded_control_flow_bodies": 8,
+  "bounded_control_flow_bodies": 7,
   "bounded_switch_tables": 100,
   "unresolved_dispatch_sites": 21,
   "unresolved_callback_call_sites": 97,
@@ -24,7 +24,7 @@
     "raw_referenced_data_union_bytes": 35940,
     "qualified_referenced_data_union_bytes": 35940,
     "source_authored_instruction_union_bytes": 30,
-    "source_glue_owned_extent_bytes": 321580,
+    "source_glue_owned_extent_bytes": 321900,
     "estimated_envelope_union_bytes": 325684,
     "classification_bytes": {
       "estimated_envelope_unclassified": 200,
@@ -43,9 +43,9 @@
     "unique_rom_bytes": 19188,
     "duplicate_installation_bytes": 172,
     "unique_rom_counts": {
-      "compiled_c": 4508,
+      "compiled_c": 4828,
       "assembly_glue": 3008,
-      "without_verified_source": 11672
+      "without_verified_source": 11352
     },
     "installations": [
       {
@@ -437,9 +437,9 @@
         "ram_address": 50345680,
         "size": 528,
         "counts": {
-          "compiled_c": 504,
+          "compiled_c": 528,
           "assembly_glue": 0,
-          "without_verified_source": 24
+          "without_verified_source": 0
         },
         "segments": [
           {
@@ -457,7 +457,12 @@
             "rom_offset": 46436,
             "ram_address": 50346184,
             "size": 24,
-            "source_kind": "without_verified_source"
+            "source_kind": "compiled_c",
+            "source_extent_name": "frame_stage_map_tiles",
+            "source": "src/frame/frame_stage_map_tiles.c",
+            "source_extent_rom_offset": 46436,
+            "source_extent_size": 320,
+            "whole_source_extent": false
           }
         ]
       },
@@ -502,16 +507,21 @@
         "ram_address": 50360672,
         "size": 336,
         "counts": {
-          "compiled_c": 16,
+          "compiled_c": 336,
           "assembly_glue": 0,
-          "without_verified_source": 320
+          "without_verified_source": 0
         },
         "segments": [
           {
             "rom_offset": 46436,
             "ram_address": 50360672,
             "size": 320,
-            "source_kind": "without_verified_source"
+            "source_kind": "compiled_c",
+            "source_extent_name": "frame_stage_map_tiles",
+            "source": "src/frame/frame_stage_map_tiles.c",
+            "source_extent_rom_offset": 46436,
+            "source_extent_size": 320,
+            "whole_source_extent": true
           },
           {
             "rom_offset": 46756,
@@ -2337,11 +2347,11 @@
       "status": "exact_c"
     },
     {
-      "name": "frame_map_draw_iwram",
+      "name": "frame_stage_map_tiles",
       "group": "ROM 0800xxxx",
       "rom_offset": 46436,
       "size": 320,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_transfer_map_tiles",
@@ -20367,10 +20377,10 @@
       "status": "exact_c"
     },
     {
-      "name": "frame_map_draw_iwram",
+      "name": "frame_stage_map_tiles",
       "rom_offset": 46436,
       "size": 320,
-      "status": "mapped_code"
+      "status": "exact_c"
     },
     {
       "name": "frame_transfer_map_tiles",
@@ -34798,12 +34808,12 @@
     }
   ],
   "input_sha256": {
-    "config/build-us-eu.json": "917bd9866fffd77a547100c4252aad575256f67cfdb7cc8d1172409a8fa17bb8",
-    "assets/rom-inventory.json": "3d9403e09240648cf7665e6b59d8c1c41ad6ee90d77b82a2d5ca8f7c0fc6e052",
+    "config/build-us-eu.json": "469948677fd7f30287ce771d07aebcc6813f082adf0b5f742161dc441d2b7e7d",
+    "assets/rom-inventory.json": "82bc3e36596a3499fb8a27df92c2970669194b0bb8e6bb5840405304c4c9172c",
     "tools/render_progress.py": "4499424ee9895c386d0885b113dfb31c37eeb0dd109efa7b06e14f0023aad98f",
     "tools/source_coverage.py": "e53030f77a57191ac58efd438c04d3282a5e003882a118b31be422892ff06913",
     "tools/copy_ownership.py": "0b3766167169d1ab1e5a4931e6988d0089e11d4493c08d256bc77a0531bdaa4e",
-    "config/ram-map-us-eu.json": "92055e7568172fe1087cf364eb2f673866f258362cc1463451598ea23aa3667b",
+    "config/ram-map-us-eu.json": "aaf8e908a2827fad6b813be7a7ef1cee6c376e0dfecad1ad04393d8aa8bd52fc",
     "tools/inventory_partition.py": "5838852221fa7a38767ccd701d27ca398309bc55951bc0f294e306f7bebbe89c",
     "config/progress-requirements.txt": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"
   }

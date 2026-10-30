@@ -858,7 +858,8 @@ at `0x614`, followed by the accepted Thumb frame scheduler at `0x618`: its
 The second body now has [complete assembly-origin source ownership](RESOURCE_BACKGROUND_DECODER.md),
 including its carry-sensitive private readers. Its independently reconstructed
 assembly matches at both ROM and RAM addresses, with no C credit or embedded
-instruction data. The first decoder remains unconverted. Raw copy words, ARM
+instruction data. The first decoder now has a separately verified
+[504-byte C owner](RESOURCE_BACKGROUND_DECODER.md). Raw copy words, ARM
 disassembly, inferred entry signatures and boundary distinctions are retained
 in the ignored `decoder-copy-evidence.json` and accompanying raw files.
 
@@ -892,6 +893,8 @@ has no allocation-failure or null-prefix guard; adding such behavior would not
 be supported by these linked bytes. The snapshot and loaded combined resource
 reuse the same prefix pointer, but their runtime sequencing remains untested.
 The heap names now follow the separately reconstructed allocation lifecycle.
+
+The map drawer now has a separately verified [320-byte source owner](FRAME_MAP_STAGING.md).
 
 The installer copies 336 bytes from `0x0800B564` to `0x03007160` with word
 control `0x04000054`, and 228 bytes from `0x0800B6A4` to `0x03005E60` with
@@ -930,8 +933,9 @@ sixteen camera/map and decoder replacements and their controls were recompiled
 against the refined record and canonical heap declarations; all retained their
 matches and rejected their edits. Evidence is under `camera-map/map-lifecycle/`.
 The larger selected-tile consumer at `0x39CF0` remains a semantic C candidate
-with mismatching bytes and is excluded from coverage, alongside the first copied
-ARM map body at `0xB564`. The second body's 216 C bytes remain counted once.
+with mismatching bytes and is excluded from coverage. The first copied ARM
+map body at `0xB564` now has a separately verified [320-byte owner](FRAME_MAP_STAGING.md).
+The second body's 216 C bytes remain counted once.
 No runtime display-memory restore or map drawing has been validated.
 
 Its current private owner view uses the actual unsigned control words, a
@@ -1030,10 +1034,10 @@ pool. Reducing the row count to 21 rejects by one byte. Public-source canonical
 and control proofs are under `camera-map/copied-layout-revalidation-v2/`.
 
 The two installed map copies total 564 bytes, while the separately bounded
-staging and transfer bodies total 536 bytes. Only the transfer body's 216
-bytes are reconstructed at this point. The staging body at `0xB564` and the
-16- and 12-byte following prefixes remain explicit original code, excluded
-from C coverage. The selected-tile consumer at `0x39CF0` and central renderer
+staging and transfer bodies total 536 bytes and now both have source owners.
+The following 16- and 12-byte prefixes are partial copies of separately owned
+source bytes; these aliases add no C credit or entry-population proof.
+The selected-tile consumer at `0x39CF0` and central renderer
 at `0x23E8` also remain unmatched candidates.
 
 
@@ -1144,8 +1148,9 @@ route consumers support the grid interpretation. The initializer's observed
 fields at `+4`, `+8`, `+0x0C`, `+0x10` and `+0x12` supply the partial origin,
 span, extent and cell-size view; their exact coordinate semantics remain under
 analysis. Allocation failure checks are absent in this path. The selected-tile
-loader, first copied map staging body and central renderer remain explicitly
-unconverted. The initializer is owned by the continuation below.
+loader and central renderer remain explicitly unconverted. The copied map
+staging body now has a separately verified [source owner](FRAME_MAP_STAGING.md).
+The initializer is owned by the continuation below.
 
 The grid initialization/projection continuation adds seven exact C replacements,
 524 bytes: `frame_initialize_map_registration` (`0x48B78`, 128),
