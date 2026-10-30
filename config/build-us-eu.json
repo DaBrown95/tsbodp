@@ -57172,6 +57172,86 @@
         "before": "*flags &= ~4u;",
         "after": "*flags &= ~8u;"
       }
+    },
+    {
+      "source": "src/frame/frame_read_animation_sequence_word08.c",
+      "name": "frame_read_animation_sequence_word08",
+      "rom_offset": 43204,
+      "size": 8,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming witness established for this bounded source extent; historical formals, table-selector backing and runtime domain remain unknown.",
+      "symbols": {},
+      "expected_sha256": "6b2418af11540c85dde4100ea44ca2f25ab24842181b3c5eeed57d1d93c05ecf",
+      "negative_control": {
+        "before": "return animation->resource->sequence->unknown_08;",
+        "after": "return animation->resource->sequence->frame_count;"
+      }
+    },
+    {
+      "source": "src/frame/frame_read_resource_sequence_header_pair.c",
+      "name": "frame_read_resource_sequence_header_pair",
+      "rom_offset": 43212,
+      "size": 12,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming witness established for this bounded source extent; historical formals, table-selector backing and runtime domain remain unknown.",
+      "symbols": {},
+      "expected_sha256": "b3b8fc023eef3cb902ab75518811b3cfb5d368e406db2ed0f21b338552e5092b",
+      "negative_control": {
+        "before": "point->x = sequence->unknown_00[0];",
+        "after": "point->x = sequence->unknown_00[0] ^ 1u;"
+      }
+    },
+    {
+      "source": "src/frame/frame_read_resource_frame_dimensions.c",
+      "name": "frame_read_resource_frame_dimensions",
+      "rom_offset": 43224,
+      "size": 28,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming witness established for this bounded source extent; historical formals, table-selector backing and runtime domain remain unknown.",
+      "symbols": {},
+      "expected_sha256": "c283301e049994a8b19b58ec6ad9a21ddcf8f78dcda06e239adf8b5719ea0407",
+      "negative_control": {
+        "before": "dimensions->x = frame->width;",
+        "after": "dimensions->x = frame->width ^ 1u;"
+      }
+    },
+    {
+      "source": "src/frame/frame_read_animation_sequence_frame_count.c",
+      "name": "frame_read_animation_sequence_frame_count",
+      "rom_offset": 43252,
+      "size": 8,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming witness established for this bounded source extent; historical formals, table-selector backing and runtime domain remain unknown.",
+      "symbols": {},
+      "expected_sha256": "8da1c5811e8a0670b100b9987901ff011c64613e6289ee02e7db9ef68ff1694e",
+      "negative_control": {
+        "before": "return animation->resource->sequence->frame_count;",
+        "after": "return animation->resource->sequence->unknown_08;"
+      }
     }
   ],
   "assembly": [
