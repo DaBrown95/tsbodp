@@ -57353,6 +57353,75 @@
         "before": " |= 0x80;",
         "after": " |= 0x40;"
       }
+    },
+    {
+      "name": "frame_read_actor_group_part0_variants",
+      "source": "src/frame/frame_read_actor_group_part0_variants.c",
+      "rom_offset": 241592,
+      "size": 16,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming or mode-selecting witness established for this bounded actor-group table reader. Historical formals/returns, full table capacities and selector/caller populations remain unknown.",
+      "symbols": {
+        "g_actor_group_part0_tables": "0x08d72028",
+        "g_actor_group_part2_tables": "0x08d72030"
+      },
+      "negative_control": {
+        "before": "g_actor_group_part0_tables[definition[0]]",
+        "after": "g_actor_group_part2_tables[definition[0]]"
+      },
+      "expected_sha256": "3f57883ec173dd68625da2c460049d838313a51da7f2c647c1bee3ddc9cef10d"
+    },
+    {
+      "name": "frame_read_actor_group_part2_variants",
+      "source": "src/frame/frame_read_actor_group_part2_variants.c",
+      "rom_offset": 241608,
+      "size": 16,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming or mode-selecting witness established for this bounded actor-group table reader. Historical formals/returns, full table capacities and selector/caller populations remain unknown.",
+      "symbols": {
+        "g_actor_group_part2_tables": "0x08d72030",
+        "g_actor_group_part0_tables": "0x08d72028"
+      },
+      "negative_control": {
+        "before": "g_actor_group_part2_tables[definition[0]]",
+        "after": "g_actor_group_part0_tables[definition[0]]"
+      },
+      "expected_sha256": "00d061b1d6ea36954d150aee65c4eb4de576380bf8079db87de91e6dd17e8b2c"
+    },
+    {
+      "name": "frame_read_actor_group_part1_variants",
+      "source": "src/frame/frame_read_actor_group_part1_variants.c",
+      "rom_offset": 241624,
+      "size": 24,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming or mode-selecting witness established for this bounded actor-group table reader. Historical formals/returns, full table capacities and selector/caller populations remain unknown.",
+      "symbols": {
+        "g_actor_group_part1_tables": "0x08d72038",
+        "g_actor_group_part0_tables": "0x08d72028"
+      },
+      "negative_control": {
+        "before": "g_actor_group_part1_tables[definition[0]][definition[2]]",
+        "after": "g_actor_group_part0_tables[definition[0]]"
+      },
+      "expected_sha256": "1a895e182b86f4bb11d8b737bedcfba2324487d51b5eb4cd13f71bbd835c414e"
     }
   ],
   "assembly": [
