@@ -57273,6 +57273,86 @@
         "before": "frame->count_flags & 0x1f",
         "after": "frame->count_flags & 0x0f"
       }
+    },
+    {
+      "name": "display_read_status_bit0",
+      "source": "src/display/display_read_status_bit0.c",
+      "rom_offset": 150364,
+      "size": 16,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming or mode-selecting witness established; native Thumb shape and matching-source extent hypotheses are separate from historical prototype, complete MMIO-use domain and runtime entry qualification.",
+      "symbols": {},
+      "expected_sha256": "346ac69628c538a98cf2a1ea084a7e2711b0fdfa47ff9998dfaa7416af182ccf",
+      "negative_control": {
+        "before": " & 1;",
+        "after": " & 2;"
+      }
+    },
+    {
+      "name": "display_read_forced_blank",
+      "source": "src/display/display_read_forced_blank.c",
+      "rom_offset": 150380,
+      "size": 16,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming or mode-selecting witness established; native Thumb shape and matching-source extent hypotheses are separate from historical prototype, complete MMIO-use domain and runtime entry qualification.",
+      "symbols": {},
+      "expected_sha256": "64dd6ec9ecb7a6203cf5528844d335fb97eeb5afea759629ab808739d8f26d1e",
+      "negative_control": {
+        "before": " & 0x80;",
+        "after": " & 0x40;"
+      }
+    },
+    {
+      "name": "display_clear_forced_blank",
+      "source": "src/display/display_clear_forced_blank.c",
+      "rom_offset": 150420,
+      "size": 20,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming or mode-selecting witness established; native Thumb shape and matching-source extent hypotheses are separate from historical prototype, complete MMIO-use domain and runtime entry qualification.",
+      "symbols": {},
+      "expected_sha256": "e9dc2cd6c74e78246e28f20b05a78a5e6e2fc9276c04953b2db28108207cf726",
+      "negative_control": {
+        "before": " &= 0xff7f;",
+        "after": " &= 0xffbf;"
+      }
+    },
+    {
+      "name": "display_set_forced_blank",
+      "source": "src/display/display_set_forced_blank.c",
+      "rom_offset": 150440,
+      "size": 16,
+      "compiler_id": "agbcc",
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "assembler_id": "binutils2101",
+      "cfg_root": false,
+      "cfg_root_reason": "No original incoming or mode-selecting witness established; native Thumb shape and matching-source extent hypotheses are separate from historical prototype, complete MMIO-use domain and runtime entry qualification.",
+      "symbols": {},
+      "expected_sha256": "01899cae64134f9922709c9b922d68f9138d96729d599c2afb67f00803fe302f",
+      "negative_control": {
+        "before": " |= 0x80;",
+        "after": " |= 0x40;"
+      }
     }
   ],
   "assembly": [
