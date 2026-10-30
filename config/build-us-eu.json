@@ -57668,6 +57668,23 @@
         "before": "point_y-8",
         "after": "point_y-9"
       }
+    },
+    {
+      "name": "frame_finalize_object",
+      "rom_offset": 12872,
+      "size": 348,
+      "source": "src/frame/frame_finalize_object_original.c",
+      "symbols": {
+        "g_frame_count": "0x03002ca8",
+        "g_frame_objects": "0x03002700"
+      },
+      "thumb_symbols": [],
+      "compiler_id": "agbcc",
+      "negative_control": {
+        "before": "register FrameU32 gate_input asm(\"r1\") = 0x800;",
+        "after": "register FrameU32 gate_input asm(\"r1\") = 0x1000;"
+      },
+      "mode": "Thumb"
     }
   ],
   "assembly": [

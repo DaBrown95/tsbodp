@@ -1,35 +1,36 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,534 C functions / 317,164 C extent bytes**, plus
-**4,068 assembly bytes**. Original slices still supply 16,455,984 bytes of assets
+The current gates verify **2,535 C functions / 317,512 C extent bytes**, plus
+**4,068 assembly bytes**. Original slices still supply 16,455,636 bytes of assets
 and unconverted code. Whole-ROM equality is proven; complete source ownership
 is not. The fixed 319,640 bytes remain a historical comparison, not a complete
 code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **10 unowned rows / 5,220 estimated
+and generated [triage](TRIAGE.md) contain **9 unowned rows / 4,872 estimated
 bytes**. This finite worklist does not establish that all executable regions
 have been discovered. Candidate scores grant no source credit.
 
 ## Latest accepted source
 
-The [point-to-cell converter](../src/frame/frame_grid_point_to_cell.c) at
-`0x48AF8` and [inverse projector](../src/frame/frame_grid_inverse_point.c) at
-`0x48BF8` add **two C functions / 216 extent bytes**. Their native function
-bodies are 126 and 86 bytes; each extent also owns two alignment bytes. Real
-origin inputs retain the partial-word lifetime that produces the original
-save history, while the complex view lets the compiler forward the high word.
-Both words are assigned before their own reads. The same producer works in
-both complete functions, with their distinct output and stack lifetimes.
-Both real eight-to-nine source controls reject by one byte; the full-ROM
-control also rejects. The original repeated upper-Y test and missing upper-X
-test remain documented bugs. See [projection](GRID_INVERSE_RECONSTRUCTION.md).
+The [object finalizer](../src/frame/frame_finalize_object_original.c) at
+`0x3248` adds **one C function / 348 extent bytes**: 326 instruction, twenty
+literal and two natural alignment bytes. Real table-base and object inputs
+retain the native commit lifetime. The first byte offset precedes the table
+birth; target-width address arithmetic preserves the original addition order.
+All source fields are assigned before their own reads. The existing gate-mask
+control rejects by one byte; normal flags, canonical headers, full-ROM equality
+and the changed-source ROM control pass. See [finalization](FRAME_OBJECT_FINALIZATION.md).
+
+The two [inverse projection owners](GRID_INVERSE_RECONSTRUCTION.md) previously
+added 216 C extent bytes. These source gains add no new runtime, callback-domain
+or independent executable-inventory closure.
 
 ## Remaining source work
 
 | Region | Consequential obstacle |
 | --- | --- |
-| Renderer `0x23E8` (1,400), finalizer `0x3248` (348) | Recover the remaining real stack homes and comparison lifetimes. Native input and partial-word ownership have improved complete candidates; exhausted binding and address-only families stay parked. |
+| Renderer `0x23E8` (1,400) | Recover the remaining real stack homes and comparison lifetimes. Native input and partial-word ownership have improved complete candidates; exhausted binding and address-only families stay parked. |
 | ARM map drawer `0xB564` (320) | Preserve native traversal, source writebacks and payload carriers together. Individually successful fragments have not produced a complete match. |
 | Activity preparation `0x19640` (544) | Preserve geometry roles and bound reloads while recovering the native availability and output-pointer allocation. |
 | Scene object `0x28234` (160) | Its entry remains weakly supported. Incoming searches have no qualified hit; coordinate graph candidates remain nonmatches. No absence or executable exclusion follows. |

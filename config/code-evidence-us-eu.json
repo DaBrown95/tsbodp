@@ -27112,6 +27112,19 @@
         "The pinned default compiler and binutils2101 emit an 86-byte .text input with four-byte alignment and one 86-byte function ending in BX R1. The unchanged function linker script ALIGN(4) emits the two zero trailing bytes. Full linked 88-byte normal and real eight-to-nine control comparisons verify this natural linker alignment; no source padding or instruction is inserted.",
         "This data/alignment role adds no instruction or executable entry and does not exclude alternate incoming execution. The bytes are already included in the full C owner."
       ]
+    },
+    {
+      "name": "frame_finalize_object_alignment_00334e",
+      "owner": "frame_finalize_object",
+      "rom_offset": 13134,
+      "size": 2,
+      "role": "alignment",
+      "region_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "source_sha256": "9053574178a801725c8df6f4ff367e08cc17a7333760de0f90594e5e3be569f4",
+      "evidence": [
+        "The exact 348-byte C object and linked text have $d at relative 262, where compiler .align 2,0 emits two zero bytes before the referenced table literal at 0x3350. The native branch at 0x334C skips this alignment and pool to 0x335E; $t resumes at 0x3354.",
+        "This compiler-emitted alignment is included in the C extent. It adds no instructions, execution entry, runtime evidence or universal exclusion of alternate execution."
+      ]
     }
   ],
   "source_owned_instruction_regions": [

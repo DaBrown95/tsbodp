@@ -113,7 +113,7 @@ At this batch's publication, the three-cell probe at `0x0802AA78` (312 bytes),
 terrain classifier at `0x0802ABB0` (188), and redirection body at `0x0802ADF8`
 (284) remained explicit original regions. The grid point converter
 at `0x08048AF8` now has a separately verified
-[source owner](GRID_INVERSE_RECONSTRUCTION.md). The renderer and its
-finalizer also remain unaccepted. These connected targets receive no C credit
+[source owner](GRID_INVERSE_RECONSTRUCTION.md). The [finalizer](FRAME_OBJECT_FINALIZATION.md) also has a separately verified
+source owner; the renderer remains unaccepted. These connected targets receive no C credit
 from the nine matches; byte-identical full-ROM integration is checked
 separately and does not imply their source reconstruction or runtime execution.
