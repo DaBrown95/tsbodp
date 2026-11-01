@@ -78,8 +78,7 @@ def snapshot_headers(source, destination, include_root, *, project_header_store=
     source_data = source.read_bytes()
     if len(source_data) > MAX_LOCAL_BYTES:
         raise ValueError('Source bundle exceeds its byte limit')
-    project = {_safe_file(path, include_root): path.read_bytes()
-               for path in include_root.rglob('*.h')}
+    project = {}
     # Resolve only after clearing generated inputs. A reused folder must never
     # consume a deleted live header through its previous retained copy.
     for root in generated:
@@ -141,6 +140,12 @@ def snapshot_headers(source, destination, include_root, *, project_header_store=
     while pending or (fallback and not expanded_fallback):
         if not pending:
             expanded_fallback = True
+            # Literal closures must not inspect unrelated project inputs.
+            # Enumerate and validate the broad .h set only for fallback.
+            for candidate in include_root.rglob('*.h'):
+                path = _safe_file(candidate, include_root)
+                if path not in project:
+                    project[path] = path.read_bytes()
             selected.update(project)
             pending.extend(project.items())
             fallback_locals()

@@ -46,13 +46,54 @@ class HeaderSnapshotTests(unittest.TestCase):
         self.assertEqual(set(receipt['headers']), {'nested/a.h', 'b.h'})
         self.assertFalse((self.output / 'unused.h').exists())
 
+    def test_literal_closures_do_not_read_unselected_project_headers(self):
+        (self.includes / 'dependency.h').write_text('value\n')
+        (self.root / 'private.h').write_text('#include <dependency.h>\n')
+        unused = self.includes / 'unused.h'
+        read_bytes = Path.read_bytes
+
+        def selected_reads_only(path):
+            if path == unused:
+                raise AssertionError('Unselected project header was opened')
+            return read_bytes(path)
+
+        for text in ('#include <dependency.h>\n', '#include "private.h"\n'):
+            with self.subTest(text=text), patch.object(Path, 'read_bytes', selected_reads_only):
+                receipt = self.snapshot(text)
+                self.assertEqual(receipt['selection'], 'literal include closure')
+                self.assertEqual(set(receipt['headers']), {'dependency.h'})
+
+    def test_literal_project_extensions_and_both_branches_are_retained(self):
+        (self.includes / 'active.inc').write_text('#include "nested.def"\n')
+        (self.includes / 'nested.def').write_text('nested\n')
+        (self.includes / 'inactive.inc').write_text('inactive\n')
+        receipt = self.snapshot('#if 1\n#include <active.inc>\n'
+                                '#else\n#include <inactive.inc>\n#endif\n')
+        self.assertEqual(receipt['selection'], 'literal include closure')
+        self.assertEqual(set(receipt['headers']),
+                         {'active.inc', 'nested.def', 'inactive.inc'})
+        self.assertFalse((self.output / 'unused.h').exists())
+
+    def test_unselected_project_symlink_is_ignored_but_selected_or_fallback_fails(self):
+        outside = self.root / 'outside.h'
+        outside.write_text('outside\n')
+        (self.includes / 'alias.h').symlink_to(outside)
+        (self.includes / 'dependency.h').write_text('value\n')
+        receipt = self.snapshot('#include <dependency.h>\n')
+        self.assertEqual(set(receipt['headers']), {'dependency.h'})
+        for text in ('#include <alias.h>\n', '#include HEADER\n'):
+            with self.subTest(text=text):
+                with self.assertRaisesRegex(ValueError, 'escape|symlink'):
+                    self.snapshot(text)
+
     def test_macro_and_include_next_use_conservative_fallback(self):
         (self.includes / 'dependency.h').write_text('value\n')
-        for text in ['#include HEADER\n', '#include_next "dependency.h"\n']:
+        for text in ['#include HEADER\n', '#include_next "dependency.h"\n',
+                     '#include "missing.h"\n']:
             with self.subTest(text=text):
                 receipt = self.snapshot(text)
                 self.assertEqual(receipt['selection'], 'all project headers')
-                self.assertIn('dependency.h', receipt['headers'])
+                self.assertEqual(set(receipt['headers']), {'dependency.h', 'unused.h'})
 
     def test_private_closure_avoids_unrelated_project_copies(self):
         (self.root / 'private.h').write_text('#include "nested/local.h"\n')
