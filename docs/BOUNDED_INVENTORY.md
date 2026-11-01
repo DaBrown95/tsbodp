@@ -191,3 +191,27 @@ word 81, byte 2. Reaching that write, with the mode preserved, is not proved.
 No C functions, source bytes or executable entries are added. The 97 callback
 and 21 dispatch observations remain unresolved at their broader scope, and the
 executable inventory remains incomplete.
+
+## Conditional BIOS-copy writer bounds, 1 November 2026
+
+Joining physical callees and source aliases reconciles 27 current caller
+functions to 31 direct BIOS-copy calls. Their seven fixed code installations
+match the existing copy ledger. Other calls include writable or parameter-supplied
+destinations; this cohort does not exhaust copy mechanisms or installed code.
+
+The [received-event loop](../src/transition/link_apply_received_events.c) clears
+12 bytes at `0x030072B0 + 12*i`. Iteration 14 clears its own count byte at
+`0x03007358`; the native loop freshly reloads that byte after the copy returns.
+Under the normal three-word CpuSet zero-fill contract, with preserved loop
+registers, valid disjoint stack/RAM backing and no intervening count write,
+iteration 15 cannot begin. This does not assume
+a four-peer entry bound or establish valid event records beyond four.
+The clear union `[0x030072B0,0x03007364)` misses all ten configured installation
+spans. Tile-allocator overlap would first require iteration 18. Other event
+handlers, aliases and asynchronous writes remain separate obligations.
+
+The [background commit](../src/display/commit_backgrounds.c) copy has a separate
+conditional exclusion: it clears flag `0x20` when set, then freshly reloads flags and
+requires both `0x10` and `0x20`. Stable canonical backing without intervening
+writes therefore excludes that copy edge. Neither result adds C, source owners,
+mapped bytes or a global writer-population closure.
