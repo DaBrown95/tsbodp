@@ -128,46 +128,37 @@ producers or the complete scene-kind population.
 
 ## Finalizer coordinate-value experiment, 24 October 2026
 
-A real inline containment predicate taking eight cached coordinate values
-recovers the native locations of all seven local words: own lower X/Y at
-SP0/SP4, own upper X/Y at SP8/SP12, category at SP16, saved flags at SP20 and
-previous index at SP24. The four reads of the other object's bounds retain
-their source order and canonical `FrameObject` fields. No R7 binding is used.
+The nonmatching coordinate experiments established that pointers to initialized
+coordinate subobjects could recover the native 28-byte frame and seven local
+homes without extra game-memory reads. The detailed trial journal is retained
+privately; those candidates earned no C credit at that checkpoint.
 
-The complete candidate is 352 bytes with 229 differences against the fixed
-348-byte reference, including the four extra bytes. It still spills the other
-object's upper X at SP28, expanding the local frame to 32 bytes instead of the
-native 28. Other coordinate allocation and control-flow differences remain;
-the region receives no C credit.
+The function now has [matching C](../src/frame/frame_finalize_object_original.c).
+Its entire 348-byte extent, including pools and alignment, matches, and its
+changed-source control is rejected. Byte equality does not establish historical
+field names or every caller's backing and lifetime conditions.
 
-Three follow-ups also fail full comparison: four by-value coordinate pairs
-produce 368 bytes / 283 differences; early-failure predicate returns produce
-352 / 230; combining containment and flag-priority units produces 360 / 264.
-Moving only the pure separation calculation after containment produces
-352 / 241 and a 36-byte frame. It frees the other upper X into R9 during
-containment, but introduces two extra copies of own upper Y at SP28/SP32.
-The existing game-memory reads stay in their original order.
+## Factory-five definition operands, 1 November 2026
 
-These initial ten experiments retain complete outputs and use the current
-compiler profile. The value-unit form supplies the baseline for the later
-follow-ups below; every acceptance still requires the entire original extent and
-changed-source controls. These stack observations add no runtime, table-bound
-or complete-source claim.
+Across the retained 50-root / 105-pack physical population, 249 distinct
+factory-five records supply 75 original kind values. The
+[constructor's](../src/frame/frame_create_need_effect_resource.c) kind-33/34
+choice gives 76 definition rows. Their 608 initializer and callback operands
+contain 541 nonzero pointers to exact Thumb entries owned by 300 currently
+verified C functions, plus 67 nulls. Complete linked extents, actual entry modes,
+current source/header identities and changed-source controls were independently
+checked against the current proof. Truncated records, stale proofs, interior
+pointers and mode mismatches are rejected by the audit's failure controls.
 
-A later six-case follow-up passes one cached own lower coordinate to containment
-as a `const int *` pointing to its initialized automatic subobject. The lower-Y
-form produces 348 bytes / 206 differences; lower X produces 348 / 208. Both
-recover the native 28-byte frame and all seven homes at SP0..SP24, with no extra
-stack slot. They add no game-memory reads: all four other-object coordinates
-are still captured in their original order. Passing the complete named 16-byte
-local by pointer instead collapses to the earlier 340 / 285 output; passing
-only the lower `FramePoint` by pointer produces 340 / 249 with a 24-byte frame
-and the previous index in ordinary compiler-allocated R7.
+This resolves the finite pristine-template value image through
+[definition lookup and copy](../src/display/allocate_need_effect_state.c) and
+[initializer selection](../src/frame/frame_spawn_need_effect.c), under successful
+disjoint allocations and preservation of the selected kind across helpers and
+unrelated writes. It does not establish the callbacks remaining after an
+initializer or later update, null safety at subsequent calls, other creators'
+inputs, or runtime scene/selector domains. Dormant stored groups are included;
+the physical population is not a checked array bound or an execution trace.
 
-An entry-value variant with explicit R7 bindings produces 344 / 297 but is
-rejected on emitted semantics: flags come from an uninitialized stack slot and
-category from the stack address. Removing only those two bindings corrects
-both faults, but remains nonmatching at 344 / 288. The cached-local forms retain
-the existing object/table backing, index and lifetime premises; source and
-emitted-code review does not establish runtime behavior. All six remain
-nonexact and add no accepted source or coverage.
+No C functions, source bytes or executable entries are added. The 97 callback
+and 21 dispatch observations remain unresolved at their broader scope, and the
+executable inventory remains incomplete.
