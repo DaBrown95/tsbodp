@@ -2,17 +2,17 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 8,
-    "inventory_bytes": 4552,
+    "rows": 7,
+    "inventory_bytes": 4160,
     "statuses": {
       "near-miss": 3,
-      "attempted": 4,
+      "attempted": 3,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
       "near-miss": 1716,
-      "attempted": 2712,
+      "attempted": 2320,
       "untouched": 0,
       "suspected-not-C": 124
     }
@@ -103,12 +103,12 @@
           "-mthumb-interwork"
         ]
       },
-      "retained_attempt_contexts": 92,
+      "retained_attempt_contexts": 99,
       "eligible_diagnostic_contexts": 61,
       "excluded_contexts": {
         "Explicit semantic rejection or unqualified source": 1,
         "Missing or ambiguous full comparison": 2,
-        "Missing or malformed retained input": 19,
+        "Missing or malformed retained input": 26,
         "No retained assessment": 6,
         "Retained linked ELF unavailable": 1,
         "Stale or unqualified private header": 2
@@ -165,11 +165,11 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 107,
+      "retained_attempt_contexts": 118,
       "eligible_diagnostic_contexts": 11,
       "excluded_contexts": {
         "Explicit semantic rejection or unqualified source": 10,
-        "Missing or malformed retained input": 50,
+        "Missing or malformed retained input": 61,
         "Stale or unqualified private header": 36
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -222,45 +222,12 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 61,
+      "retained_attempt_contexts": 62,
       "eligible_diagnostic_contexts": 46,
       "excluded_contexts": {
         "Missing or ambiguous full comparison": 2,
-        "Missing or malformed retained input": 8,
+        "Missing or malformed retained input": 9,
         "No retained assessment": 5
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
-    },
-    {
-      "name": "sub_08039CF0",
-      "rom_offset": 236784,
-      "inventory_bytes": 392,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork"
-      ],
-      "runtime_addresses": [
-        134454512
-      ],
-      "status": "attempted",
-      "user_priority": null,
-      "user_far_off": false,
-      "c_draft": "analysis/permuter/m2c-drafts/frame_load_selected_map_tiles/clean.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
-      "best_candidate": null,
-      "search_best": null,
-      "retained_attempt_contexts": 46,
-      "eligible_diagnostic_contexts": 0,
-      "excluded_contexts": {
-        "Missing or malformed retained input": 22,
-        "No retained assessment": 8,
-        "Stale or unqualified private header": 16
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
@@ -392,11 +359,11 @@
         "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
       },
       "search_best": null,
-      "retained_attempt_contexts": 53,
+      "retained_attempt_contexts": 67,
       "eligible_diagnostic_contexts": 7,
       "excluded_contexts": {
         "Explicit semantic rejection or unqualified source": 1,
-        "Missing or malformed retained input": 16,
+        "Missing or malformed retained input": 30,
         "No retained assessment": 10,
         "Stale or unqualified private header": 19
       },
@@ -472,11 +439,11 @@
           "-da"
         ]
       },
-      "retained_attempt_contexts": 37,
+      "retained_attempt_contexts": 39,
       "eligible_diagnostic_contexts": 18,
       "excluded_contexts": {
         "Missing header closure": 2,
-        "Missing or malformed retained input": 14,
+        "Missing or malformed retained input": 16,
         "Stale or unqualified private header": 3
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
@@ -513,13 +480,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "a4c72587e5483920d3785d9be458dd598fd49bb9c54bfdcfb4bbcb978f3e9ed2",
-    "assets/rom-inventory.json": "82bc3e36596a3499fb8a27df92c2970669194b0bb8e6bb5840405304c4c9172c",
-    "docs/COMPLETION_BLOCKERS.md": "05a63688b74a818efe572c0e1fb8ec306fddc1b0532829ae9151f541628ca606"
+    "assets/progress.json": "908f2af8a312f974171f1d8020f552edd512fcb7322c0fdb1807e94cb3eccf70",
+    "assets/rom-inventory.json": "adfff66448b4a90f7dbdd4ccbd70d5f647575920e74a1e58e21f59e32a7987fa",
+    "docs/COMPLETION_BLOCKERS.md": "afdb28de1b365e6b2edbda07be2ad150d612f604617119797787f9da77daf8d9"
   },
   "documented_inventory": {
-    "rows": 8,
-    "bytes": 4552
+    "rows": 7,
+    "bytes": 4160
   },
   "documentation_count_current": true,
   "scan": {
@@ -528,7 +495,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 2792,
+    "metadata_files": 2835,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 1,

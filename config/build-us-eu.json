@@ -57708,6 +57708,39 @@
         "before": "rows = available_rows < 7 ? available_rows : 7;",
         "after": "rows = available_rows < 7 ? available_rows : 6;"
       }
+    },
+    {
+      "name": "frame_load_selected_map_tiles",
+      "rom_offset": 236784,
+      "size": 392,
+      "symbols": {
+        "resource_decoded_size": "0x08016a91",
+        "resource_decode_bytes": "0x08016979",
+        "resource_bios_swi_11": "0x0804c8dd",
+        "resource_bios_swi_13": "0x0804c8d5",
+        "resource_bios_swi_14": "0x0804c8e9",
+        "g_display_tile_decompress": "0x03003360",
+        "g_display_background_decompress": "0x030036c0",
+        "_call_via_r3": "0x0804ccfd",
+        "heap_allocate": "0x08027865",
+        "heap_free": "0x08027989"
+      },
+      "thumb_symbols": [
+        "resource_decoded_size",
+        "resource_decode_bytes",
+        "heap_allocate",
+        "heap_free",
+        "resource_bios_swi_11",
+        "resource_bios_swi_13",
+        "resource_bios_swi_14",
+        "_call_via_r3"
+      ],
+      "source": "src/frame/frame_load_selected_map_tiles.c",
+      "negative_control": {
+        "before": "destination_dma->control = 0x80000010;",
+        "after": "destination_dma->control = 0x8000000F;"
+      },
+      "expected_sha256": "3dda83dcac115fe9c19d90cf0fa80faa0c0a80fd52562cad0f106a471efb653c"
     }
   ],
   "assembly": [

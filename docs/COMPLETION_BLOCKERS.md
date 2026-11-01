@@ -1,27 +1,28 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,536 C functions / 317,832 C extent bytes**, plus
-**4,068 assembly bytes**. Original slices still supply 16,455,316 bytes of assets
+The current gates verify **2,537 C functions / 318,224 C extent bytes**, plus
+**4,068 assembly bytes**. Original slices still supply 16,454,924 bytes of assets
 and unconverted code. Whole-ROM equality is proven; complete source ownership
 is not. The fixed 319,640 bytes remain a historical comparison, not a complete
 code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **8 unowned rows / 4,552 estimated
+and generated [triage](TRIAGE.md) contain **7 unowned rows / 4,160 estimated
 bytes**. This finite worklist does not establish that all executable regions
 have been discovered. Candidate scores grant no source credit.
 
 ## Latest accepted source
 
-The [copied ARM map drawer](../src/frame/frame_stage_map_tiles.c) at `0xB564`
-adds **one C function / 320 extent bytes**: 316 instruction and four literal
-bytes. Whole payload inputs and native scalar phases preserve the four load/
-store groups and three source writebacks. One ordinary destination receiver
-retains all three address lifetimes, recovering the final IP allocation and
-instruction order. Default ARM flags, the real row-cap control, full-ROM
-identity and its source control pass. See [map staging](FRAME_MAP_STAGING.md).
+The [selected-map tile loader](../src/frame/frame_load_selected_map_tiles.c)
+at `0x39CF0` adds **one C function / 392 extent bytes**, including its pools
+and alignment. Real background/scale, initial-counter, descriptor/payload and
+DMA phases retain the native producers. Explicit descriptor-byte progression
+and numeric counter lifetimes preserve the loop and shared guard. Default
+Thumb flags, the changed DMA-control source, full-ROM equality and whole-ROM
+control pass. See [selected-map tiles](SELECTED_MAP_TILES.md).
 
-The [finalizer](FRAME_OBJECT_FINALIZATION.md) previously added 348 C bytes;
+The [copied ARM map drawer](FRAME_MAP_STAGING.md) previously added 320 C bytes;
+the [finalizer](FRAME_OBJECT_FINALIZATION.md) added 348 C bytes;
 the two [inverse projection owners](GRID_INVERSE_RECONSTRUCTION.md) added 216.
 These gains add no new runtime, callback-domain or independent executable-
 inventory closure. Copy extents remain separately accounted.
@@ -33,7 +34,7 @@ inventory closure. Copy extents remain separately accounted.
 | Renderer `0x23E8` (1,400) | Recover the remaining real stack homes and comparison lifetimes. Native input and partial-word ownership have improved complete candidates; exhausted binding and address-only families stay parked. |
 | Activity preparation `0x19640` (544) | Preserve geometry roles and bound reloads while recovering the native availability and output-pointer allocation. |
 | Scene object `0x28234` (160) | Its entry remains weakly supported. Incoming searches have no qualified hit; coordinate graph candidates remain nonmatches. No absence or executable exclusion follows. |
-| Selected-map worker `0x39CF0` (392), map collapse `0x495C4` (116) | Remaining producer and address/base continuity differences need complete source matches. |
+| Map collapse `0x495C4` (116) | Remaining address/base continuity differences need a complete source match. |
 | Serial provider `0x3D788` (200) | Parked at one byte different, with both compiler investigations preserved. Reopen only for materially new evidence. |
 | Serial IRQ `0x3DC48` (1,616) | Preserve the 1,624-byte nonmatch and native receive/readiness lifetimes. Prior callback/contract repairs supplied no missing source fact. |
 | Audio master `0x49968` (124) | Two bytes remain unexplained around a reachable native NOP. Original SDK lineage does not justify an assembly exception. |
@@ -67,9 +68,12 @@ diagnostics add **zero source or ownership closures**.
 
 Within existing source extents, historical formals, field names and event
 meanings are semantic uncertainties. Unknown code/data/padding roles and
-alternate entries require a separate ownership assessment: **754 owned-extent
-bytes still have unresolved roles**. Neither category becomes closed merely
-because the containing source extent matches.
+alternate entries require a separate ownership assessment. The census retains
+**760 owned-extent bytes without qualified independent roles**: the previous
+754 bytes plus six alignment bytes emitted by the newly matched selected-map
+owner. Current compiler-output provenance does not establish historical intent
+or exclude alternate entries. Neither category becomes closed merely because
+the containing source extent matches.
 
 Known copies cover 19,188 distinct ROM source bytes, including data. Writer and
 incoming-target populations remain open. The twelve bytes at `0x1DB20..0x1DB2C`
