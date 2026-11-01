@@ -176,6 +176,18 @@ update depends on the still-open appearance input domain. A suspected stale
 mode byte was ruled out: the pool allocator clears all 256 state bytes on each
 allocation, including reuse.
 
+For the four pristine kind-82 records, the immediate spawn update with
+appearance values `0..11` now has a qualified footprint. The frame-zero program
+word is null, the three selected
+sequence records have zero colliders, and the cleared object's part-collider
+branch is skipped. Under the same entry, backing and no-interference premises,
+this update preserves the state callback words and writes zero to `object+C8`.
+This does not establish a universal appearance bound or later-update behavior.
+The conservative byte-wide lookup still includes wider inputs whose resource
+backing is unresolved. Values `12..15` select first-load addresses outside the
+fixed ROM; their conditional palette expression would address collision-worklist
+word 81, byte 2. Reaching that write, with the mode preserved, is not proved.
+
 No C functions, source bytes or executable entries are added. The 97 callback
 and 21 dispatch observations remain unresolved at their broader scope, and the
 executable inventory remains incomplete.
