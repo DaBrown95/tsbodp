@@ -35,3 +35,33 @@ ROM source control are separate acceptance gates. No assembly bytes, runtime
 observations or independent executable-inventory closure are added. The wider
 336-byte installation and the tile decoder's overlapping 24-byte copy retain
 their existing mapping and incoming-entry uncertainties.
+
+## Updater alias operands
+
+The normal Thumb entry of
+[`frame_update_map_view`](../src/frame/frame_update_map_view.c) masks its view
+argument to eight bits. Of its eighteen direct global-store instructions, only
+the origin pair at `0x08039B84/86`, with index four, can overwrite the drawer
+and scroll slots at `0x03001FC8/CC`.
+
+Native signed shifts first bound each coordinate to `[-32768,32767]`. The
+[dimensions helper](../src/frame/frame_get_map_dimensions.c) writes distinct
+stack words and derives dimensions from unsigned halfwords shifted by five,
+or the fixed screen size. Signed clamps therefore produce X in
+`[-240,32767]` and Y in `[-160,32767]`. The other direct global-store starts
+lie in `0x03005F6C..0x03007068`; byte-index arithmetic neither wraps nor aliases the
+two slots through an IWRAM mirror.
+
+Consequently, this writer's own slot stores cannot supply direct game-ROM or
+work-RAM operands: branch mode/alignment masking leaves address region `00`
+or `FF`, outside work RAM `02/03` and Game Pak ROM `08..0D`. This assumes the
+normal entry and fixed helper returns, a valid stack physically disjoint from
+the slots and global data (including IWRAM mirrors), and no asynchronous
+mutation during the checked flow. It makes no claim about BIOS/open-bus
+behavior or later execution after these operands.
+
+This resolves one named writer's direct-operand question. Other writers,
+arbitrary interior entrances, reaching callback values and copied-code
+integrity remain open. The 97 callback and 21 dispatch observations are
+unchanged. No C bytes, executable entry or global target-domain closure are
+added.
