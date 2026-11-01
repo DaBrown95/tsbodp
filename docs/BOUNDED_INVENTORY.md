@@ -154,10 +154,27 @@ This resolves the finite pristine-template value image through
 [definition lookup and copy](../src/display/allocate_need_effect_state.c) and
 [initializer selection](../src/frame/frame_spawn_need_effect.c), under successful
 disjoint allocations and preservation of the selected kind across helpers and
-unrelated writes. It does not establish the callbacks remaining after an
-initializer or later update, null safety at subsequent calls, other creators'
-inputs, or runtime scene/selector domains. Dormant stored groups are included;
-the physical population is not a checked array bound or an execution trace.
+unrelated writes. Dormant stored groups are included; the physical population
+is not a checked array bound or an execution trace.
+
+A subsequent native write audit extends that image through initializer return.
+The 76 initializer operands select 48 existing C owners: 38 return stubs and ten
+other functions. Their 17 direct data stores miss state offsets `0xE4..0xFF`;
+object and stack writes require physically disjoint backing. The three possible
+callee arms are skipped for the four corresponding pristine records: kinds 43
+and 104 retain parameter zero, while kind 49 receives optional value one.
+Allocator clear ranges, constructor byte/halfword stores and native branch
+conditions establish those values. Other arguments do not inherit this result.
+
+Thus the seven stored words per definition row remain the same through this
+bounded interval: 532 cells, comprising 465 nonzero pointers to 252 existing C
+entries and 67 nulls. This assumes successful live allocations, normal entries,
+valid stack and helper backing, and no unrelated alias or asynchronous writes.
+It does not establish the subsequent update, other creators, later writers,
+null safety at consumers or runtime selector domains. The immediate kind-82
+update depends on the still-open appearance input domain. A suspected stale
+mode byte was ruled out: the pool allocator clears all 256 state bytes on each
+allocation, including reuse.
 
 No C functions, source bytes or executable entries are added. The 97 callback
 and 21 dispatch observations remain unresolved at their broader scope, and the
