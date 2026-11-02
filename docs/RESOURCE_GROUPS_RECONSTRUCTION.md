@@ -35,7 +35,9 @@ are now reconstructed in the connected continuation documented in
 [RESOURCE_COMMANDS_RECONSTRUCTION.md](RESOURCE_COMMANDS_RECONSTRUCTION.md). A
 [recorded installed program list](RUNTIME_OBSERVATIONS.md#selected-resource-program-list-2-november-2026)
 now connects one actual selection epoch to two existing handler owners; the
-global command and writer domains remain open.
+global command and writer domains remain open. A subsequent
+[delayed activation](RUNTIME_OBSERVATIONS.md#delayed-view-activation-2-november-2026)
+joins group four's actual loaded RAM root and two further existing handlers.
 
 The arena allocator reserves 8,192 bytes and stores the pointer at `03002EE8`.
 The selected resource controller at `0800AD1C`, `resource_prepare`, is now a

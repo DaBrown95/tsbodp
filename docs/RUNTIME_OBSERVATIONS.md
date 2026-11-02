@@ -598,3 +598,33 @@ source owner, qualified entry or global callback-domain closure. Equal bytes
 at installation and consumption do not establish absent intervening writers,
 allocation liveness, table capacity or later program domains. The 97 callback
 and 21 dispatch observations remain open at their broader scope.
+
+## Delayed view activation, 2 November 2026
+
+A bounded continuation of the retained key sequence joins command 16's view
+effect to the actual mode-one activation at `0x0800E604`. At frame 2,169 the
+arguments are object group zero and program group four. The exact group-enabled
+helper excludes object spawning in this call. At the interpreter's first record,
+the native loaded root is `R2=0x020272DC` and the cursor is
+`R5=0x0202732C`, at offset 80. This is observed separately from the program-cell
+snapshot at function entry.
+
+Group four consumes commands 24, 11 and zero, with byte steps 16, 8 and 4.
+The actual operands name the already matching
+[object-interval handler](../src/resource/commands/resource_command_start_object_interval.c)
+at `0x08012349` and [delay handler](../src/resource/commands/resource_command_start_delay.c)
+at `0x0801211D`. Both return. Every byte of the reconstructed 176-byte image
+matches the builder output and eight observed program-image points. The paired
+activation returns to `0x0800E608` with no open interpreter frame, after
+85,906,412 observer steps.
+
+Replay is byte-identical. Displaced probes preserve the keys, navigation and
+CPU/timing endpoint while recording no scoped events. Six observer argument
+failures and twelve derived observation/source-pin failures are rejected.
+Artifacts remain under ignored
+`analysis/resource-view-mode1-delayed-consumer-capture-20261102/`.
+
+This qualifies one initializer, delayed selector and program-consumption epoch
+against existing source owners. It adds no C, source owner, qualified entry or
+global domain closure. Equal point images do not establish absent intervening
+writers, allocation liveness, complete selector domains or later delivery.
