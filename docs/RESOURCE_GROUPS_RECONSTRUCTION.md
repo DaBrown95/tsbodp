@@ -32,7 +32,10 @@ one when the resource flags contain bit zero. The object factory walker at
 `08051B18` account for the indirect calls. The factory table's complete entry
 inventory and callback semantics remain incomplete. All 47 nonzero command callbacks
 are now reconstructed in the connected continuation documented in
-[RESOURCE_COMMANDS_RECONSTRUCTION.md](RESOURCE_COMMANDS_RECONSTRUCTION.md).
+[RESOURCE_COMMANDS_RECONSTRUCTION.md](RESOURCE_COMMANDS_RECONSTRUCTION.md). A
+[recorded installed program list](RUNTIME_OBSERVATIONS.md#selected-resource-program-list-2-november-2026)
+now connects one actual selection epoch to two existing handler owners; the
+global command and writer domains remain open.
 
 The arena allocator reserves 8,192 bytes and stores the pointer at `03002EE8`.
 The selected resource controller at `0800AD1C`, `resource_prepare`, is now a

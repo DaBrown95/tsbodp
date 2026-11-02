@@ -566,3 +566,35 @@ Probe hits and a finite no-input boot cannot identify complete callback domains,
 jump-table targets, later gameplay paths, or every modified code location.
 Per-probe output limits preserve bounded examples; total hit counters remain
 separate from the retained event samples. No trace result adds matching C credit.
+
+## Selected resource-program list, 2 November 2026
+
+The natural new-game route now supplies an actual installed program-list epoch
+at the command call `0x0800AE0C`. While preparing root
+`0x08D76254`, the native program-group builder receives selected pack
+`0x08D7680C`, then writes a 176-byte program image beginning at
+`0x020272DC`. Reconstructing its six groups from the fixed ROM matches every
+installed byte. The selected-pack pointer is observed at the builder call;
+the earlier selection-byte observation is kept separate.
+
+Group zero contains only its terminator. Group one consumes commands 16, 14
+and zero, with native byte steps 12, 8 and 4. Its consumed records equal the
+corresponding installed bytes. The two actual callback operands name the
+already matching [view-motion handler](../src/resource/commands/resource_command_start_view_motion.c)
+at `0x08011E41` and [resource selector](../src/resource/commands/resource_command_select_resource.c)
+at `0x08012189`. Both callbacks return. Observation stops before the group's
+first epilogue instruction at frame 2,033, after 80,856,202 observer steps.
+
+The cold replay is byte-identical. Displaced probes record no hits
+and preserve the CPU and timing endpoint; the added installer probes also
+preserve the earlier record, operand, step and navigation observations. Six
+observer failure commands and six corrupted-observation/source-pin controls
+are rejected. The observer uses the retained normal-key route. Commands,
+observers, traces and the source-owner checks remain under ignored
+`analysis/resource-program-selected-list-capture-20261102/`.
+
+This resolves one selecting epoch and its finite operand image. It adds no C,
+source owner, qualified entry or global callback-domain closure. Equal bytes
+at installation and consumption do not establish absent intervening writers,
+allocation liveness, table capacity or later program domains. The 97 callback
+and 21 dispatch observations remain open at their broader scope.
