@@ -124,8 +124,8 @@ alias. Original source and diagnostic evidence are retained privately.
 The zero-length member describes the observed variable-count access rather
 than a valid-capacity guarantee. Serialized counts, pointers, source alignment,
 byte-size values and the arena's remaining capacity stay unchecked.
-The 68-byte word-group copier remains unconverted; no runtime, hardware or gameplay
-result follows from this declaration correction or the controller match.
+These declaration checks and the controller match establish no runtime, hardware
+or gameplay result.
 
 ## Selected resource controller
 
@@ -171,9 +171,29 @@ stored record in a faithful representation copy. Physical alignment in the
 selected cases does not establish a four-byte alignment requirement for the
 canonical stored type.
 
-Both actual builder calls consume only the copier's advanced `R0` pointer.
-They supply no second size result or tail-size lifetime. The 68-byte / three-
-difference candidate remains unowned: LOCAL ties the compatible dying count-
-and-size quantities, while the retained fixed-register attempt loses its
-intermediate copy at COMBINE. These storage facts do not justify repeating
-those closed source/register trials.
+Both actual builder calls consume only the matched copier's advanced `R0`
+pointer. They supply no second size result or tail-size lifetime. These storage
+facts add no execution or complete input-domain claim.
+
+## Pristine command operands, 2 November 2026
+
+The retained 50-root / 105-pack physical population now has a complete command
+operand audit. Its 354 copied group contexts contain 819 records: 465 nonzero
+command occurrences select 27 exact Thumb entries owned by current matching C,
+and 354 zero records terminate without dispatch. Repeated contexts account for
+390 distinct nonzero ROM record locations.
+
+The audit derives original record boundaries, byte lengths, halfword offsets
+and the preceding header/object/word layout. It joins each operand to the
+current complete linked source extent, changed-source control and source/header
+closure. Independent rederivation agrees; thirteen malformed-input controls
+reject truncated records, invalid operands and stale or tampered proof inputs.
+The scripts and evidence remain in ignored
+`analysis/resource-pristine-command-owner-image-20261102/`.
+
+This resolves the finite pristine-record operand image under successful aligned,
+disjoint copying and preserved source, table, root, cursor and command bytes.
+It does not prove those bytes survive handlers, bound arbitrary group selectors
+or establish execution of dormant groups. No native builder execution or gameplay
+replay was used. C, source-owner, entry and mapped-extent counts do not change;
+the broader 97 callback and 21 dispatch observations remain unresolved.
