@@ -57741,6 +57741,31 @@
         "after": "destination_dma->control = 0x8000000F;"
       },
       "expected_sha256": "3dda83dcac115fe9c19d90cf0fa80faa0c0a80fd52562cad0f106a471efb653c"
+    },
+    {
+      "name": "frame_create_scene_objects_at_steps_unrooted_28234",
+      "rom_offset": 164404,
+      "size": 160,
+      "source": "src/frame/frame_create_scene_objects_at_steps_unrooted_28234.c",
+      "symbols": {
+        "g_frame_scene_positions": "0x08057acc",
+        "frame_create_scene_object": "0x08027ee5",
+        "frame_set_position": "0x080014a5"
+      },
+      "thumb_symbols": [
+        "frame_create_scene_object",
+        "frame_set_position"
+      ],
+      "negative_control": {
+        "before": "object->flags &= ~0x10u;",
+        "after": "object->flags &= ~0x20u;"
+      },
+      "compiler_id": "agbcc",
+      "assembler_id": "binutils",
+      "mode": "Thumb",
+      "cfg_root": false,
+      "cfg_root_reason": "Incoming execution evidence remains unqualified; matching source owns only the 160-byte extent.",
+      "expected_sha256": "e2c060776623adc387ec9631e9628153f58f2fd0af0f7842f70fb6fb7e796184"
     }
   ],
   "assembly": [

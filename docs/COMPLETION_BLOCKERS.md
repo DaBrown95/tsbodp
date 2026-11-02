@@ -1,31 +1,36 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,537 C functions / 318,224 C extent bytes**, plus
-**4,068 assembly bytes**. Original slices still supply 16,454,924 bytes of assets
+The current gates verify **2,538 C functions / 318,384 C extent bytes**, plus
+**4,068 assembly bytes**. Original slices still supply 16,454,764 bytes of assets
 and unconverted code. Whole-ROM equality is proven; complete source ownership
 is not. The fixed 319,640 bytes remain a historical comparison, not a complete
 code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **7 unowned rows / 4,160 estimated
+and generated [triage](TRIAGE.md) contain **6 unowned rows / 4,000 estimated
 bytes**. This finite worklist does not establish that all executable regions
 have been discovered. Candidate scores grant no source credit.
 
 ## Latest accepted source
 
-The [selected-map tile loader](../src/frame/frame_load_selected_map_tiles.c)
-at `0x39CF0` adds **one C function / 392 extent bytes**, including its pools
-and alignment. Real background/scale, initial-counter, descriptor/payload and
-DMA phases retain the native producers. Explicit descriptor-byte progression
-and numeric counter lifetimes preserve the loop and shared guard. Default
-Thumb flags, the changed DMA-control source, full-ROM equality and whole-ROM
-control pass. See [selected-map tiles](SELECTED_MAP_TILES.md).
+The [scene-object step builder](../src/frame/frame_create_scene_objects_at_steps_unrooted_28234.c)
+at `0x28234` adds **one C function / 160 extent bytes**, including its pool.
+Two initialized step fields preserve the native partial-word producer. A late
+two-byte X capture retains the loop induction without a redundant whole-word
+snapshot; ordinary origin lifetimes and direct field assignments preserve the
+native prefix, frame and loop. The pinned default profile and changed-source
+control are verified with the full-ROM and progress gates.
 
-The [copied ARM map drawer](FRAME_MAP_STAGING.md) previously added 320 C bytes;
-the [finalizer](FRAME_OBJECT_FINALIZATION.md) added 348 C bytes;
-the two [inverse projection owners](GRID_INVERSE_RECONSTRUCTION.md) added 216.
-These gains add no new runtime, callback-domain or independent executable-
-inventory closure. Copy extents remain separately accounted.
+Incoming execution evidence and the six-formal interface remain provisional.
+This owner has `cfg_root: false`: source ownership supplies no new incoming
+entry, rooted instruction/data qualification, runtime observation or callback-
+domain closure. Its 160 bytes remain independently role-unclassified.
+
+The [selected-map tile loader](../src/frame/frame_load_selected_map_tiles.c)
+previously added 392 C bytes; the [copied ARM map drawer](FRAME_MAP_STAGING.md)
+added 320; the [finalizer](FRAME_OBJECT_FINALIZATION.md) added 348;
+the [inverse projection owners](GRID_INVERSE_RECONSTRUCTION.md) added 216.
+Copy extents remain separately accounted.
 
 ## Remaining source work
 
@@ -33,7 +38,6 @@ inventory closure. Copy extents remain separately accounted.
 | --- | --- |
 | Renderer `0x23E8` (1,400) | Recover the remaining real stack homes and comparison lifetimes. Native input and partial-word ownership have improved complete candidates; exhausted binding and address-only families stay parked. |
 | Activity preparation `0x19640` (544) | Preserve geometry roles and bound reloads while recovering the native availability and output-pointer allocation. |
-| Scene object `0x28234` (160) | Its entry remains weakly supported. Incoming searches have no qualified hit; coordinate graph candidates remain nonmatches. No absence or executable exclusion follows. |
 | Map collapse `0x495C4` (116) | Remaining address/base continuity differences need a complete source match. |
 | Serial provider `0x3D788` (200) | Parked at one byte different, with both compiler investigations preserved. Reopen only for materially new evidence. |
 | Serial IRQ `0x3DC48` (1,616) | Preserve the 1,624-byte nonmatch and native receive/readiness lifetimes. Prior callback/contract repairs supplied no missing source fact. |
@@ -69,9 +73,9 @@ diagnostics add **zero source or ownership closures**.
 Within existing source extents, historical formals, field names and event
 meanings are semantic uncertainties. Unknown code/data/padding roles and
 alternate entries require a separate ownership assessment. The census retains
-**760 owned-extent bytes without qualified independent roles**: the previous
-754 bytes plus six alignment bytes emitted by the newly matched selected-map
-owner. Current compiler-output provenance does not establish historical intent
+**920 owned-extent bytes without qualified independent roles**: the previous
+760 bytes plus the new unrooted scene-step owner's 160 bytes. Current compiler-
+output provenance does not establish historical intent
 or exclude alternate entries. Neither category becomes closed merely because
 the containing source extent matches.
 

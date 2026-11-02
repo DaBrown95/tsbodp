@@ -2,17 +2,17 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 7,
-    "inventory_bytes": 4160,
+    "rows": 6,
+    "inventory_bytes": 4000,
     "statuses": {
       "near-miss": 3,
-      "attempted": 3,
+      "attempted": 2,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
       "near-miss": 1716,
-      "attempted": 2320,
+      "attempted": 2160,
       "untouched": 0,
       "suspected-not-C": 124
     }
@@ -40,23 +40,7 @@
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
-      "search_wall_time_records": [
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/continuation.json",
-          "receipt_sha256": "6c8e9291d0b571fb780cb52f0cd01417700cb909a33c472e3f648d7c771e233f",
-          "search_wall_seconds": 2569.457622051239
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 2353.166351917025
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 6815.584553542023
-        }
-      ],
+      "search_wall_time_records": [],
       "best_candidate": {
         "source": "analysis/renderer23e8-independent-complete-attempt-20261028/06_independent_native_roots/source.c",
         "source_sha256": "1a225ba9f5fa1df43bb6c501c5e849bdc1fea6c4bad2cb86da9f5a2e6baa1c80",
@@ -70,49 +54,23 @@
         "comparison_extent_bytes": 1400,
         "full_byte_differences": 15,
         "candidate_sha256": "903a655a529ce0679ad92b92dc4547302c157a7bff4dbc356fadfca770c070b1",
-        "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
-        "header_overrides": {},
         "private_headers": [],
         "source_local_headers": [],
+        "header_overrides": {},
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
           "-mthumb-interwork",
           "-da"
         ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
+        "evidence_state": "recorded-not-revalidated",
+        "qualification": "Recorded diagnostic only; private inputs unavailable for current revalidation."
       },
-      "search_best": {
-        "source": "analysis/permuter/sub_080023E8-opaque-retry/output-228-1/source.c",
-        "source_sha256": "970c55f9fc1cc7bf9d8631c3872733620e3f3c58ea01aa5925695b4095870e08",
-        "receipt": "analysis/permuter/sub_080023E8-opaque-retry/validation-best228-20261025/result.json",
-        "receipt_sha256": "231b2446ffde597c95302ee47df04699d960019ca44bbfb513dfcbe32ada08dd",
-        "job_manifest": "analysis/permuter/sub_080023E8-opaque-retry/setup.json",
-        "job_manifest_sha256": "b3ce50fcf00bc30c88cbb716b87862544ead2d8eefcc8fbd5baebc120e920e79",
-        "candidate_bytes": 1400,
-        "comparison_extent_bytes": 1400,
-        "full_byte_differences": 22,
-        "candidate_sha256": "0db24de3e415239622ddf539f6585cd7b4a2545f2918902d9db47da14976e932",
-        "source_review": "pending",
-        "source_credit": 0,
-        "private_header_qualification": "canonical-current",
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork"
-        ]
-      },
-      "retained_attempt_contexts": 104,
-      "eligible_diagnostic_contexts": 61,
-      "excluded_contexts": {
-        "Explicit semantic rejection or unqualified source": 1,
-        "Missing or ambiguous full comparison": 2,
-        "Missing or malformed retained input": 31,
-        "No retained assessment": 6,
-        "Retained linked ELF unavailable": 1,
-        "Stale or unqualified private header": 2
-      },
+      "search_best": null,
+      "retained_attempt_contexts": 0,
+      "eligible_diagnostic_contexts": 0,
+      "excluded_contexts": {},
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
     {
@@ -151,84 +109,23 @@
         "comparison_extent_bytes": 544,
         "full_byte_differences": 371,
         "candidate_sha256": "4009fdf297385f7105b9dcdcdd2f2313eb813274c055470f592c145fb04afd38",
-        "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
-        "header_overrides": {},
         "private_headers": [],
         "source_local_headers": [],
+        "header_overrides": {},
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
           "-mthumb-interwork",
           "-da"
         ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
+        "evidence_state": "recorded-not-revalidated",
+        "qualification": "Recorded diagnostic only; private inputs unavailable for current revalidation."
       },
       "search_best": null,
-      "retained_attempt_contexts": 118,
-      "eligible_diagnostic_contexts": 11,
-      "excluded_contexts": {
-        "Explicit semantic rejection or unqualified source": 10,
-        "Missing or malformed retained input": 61,
-        "Stale or unqualified private header": 36
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
-    },
-    {
-      "name": "sub_08028234",
-      "rom_offset": 164404,
-      "inventory_bytes": 160,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork"
-      ],
-      "runtime_addresses": [
-        134382132
-      ],
-      "status": "attempted",
-      "user_priority": null,
-      "user_far_off": false,
-      "c_draft": "analysis/scene-steps-real-register-phases-20261026/real_packed_value_fork/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
-      "best_candidate": {
-        "source": "analysis/scene-steps-real-register-phases-20261026/real_packed_value_fork/source.c",
-        "source_sha256": "1a382ae9b7591607ad1c5f1a22b83c64cb2b44399fb1b2f270b188e70712ff0c",
-        "metadata": "analysis/scene-steps-real-register-phases-20261026/real_packed_value_fork/metadata.json",
-        "metadata_sha256": "5d173250e06cb1c6f56a72f896e18cbb1736ff6c4797b124230d5cf821b228f1",
-        "receipt": "analysis/scene-steps-real-register-phases-20261026/real_packed_value_fork/result.json",
-        "receipt_sha256": "48433c9b3ea7504534246c0b9de196ae2819c888affc162a3b5150c560109ea2",
-        "assessment": "analysis/scene-steps-real-register-phases-20261026/assessment.json",
-        "assessment_sha256": "d043484b5a89185987e4f89c5095d3af708ee14933e36268c8cf94e7a6bed19b",
-        "candidate_bytes": 160,
-        "comparison_extent_bytes": 160,
-        "full_byte_differences": 71,
-        "candidate_sha256": "d975112c84f24bdb3d1889e8b0e9cfa884c99c2ba578d338a7c785600dbfd94b",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": null,
-      "retained_attempt_contexts": 63,
-      "eligible_diagnostic_contexts": 46,
-      "excluded_contexts": {
-        "Missing or ambiguous full comparison": 2,
-        "Missing or malformed retained input": 10,
-        "No retained assessment": 5
-      },
+      "retained_attempt_contexts": 0,
+      "eligible_diagnostic_contexts": 0,
+      "excluded_contexts": {},
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
     {
@@ -253,23 +150,7 @@
       "effort_status": "unrecorded",
       "active_effort_seconds": null,
       "search_wall_seconds": null,
-      "search_wall_time_records": [
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 285.96772737498395
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 3317.617104541976
-        },
-        {
-          "receipt": "reports/current-goal/final-stretch-automation-20261025/search-ledger.json",
-          "receipt_sha256": "3daaaa225c5740560b9bdb860c6a539ed32be32448aa62f942c835314f771f0e",
-          "search_wall_seconds": 7426.875807916978
-        }
-      ],
+      "search_wall_time_records": [],
       "best_candidate": {
         "source": "analysis/serial-record-3d788-checksum-identifier-units-20261025/complete_checksum_halfword_result/source.c",
         "source_sha256": "65550fe9daa3e00b12d0574ff48b1842c99cb53eeccf0610fd8c270f3858f21e",
@@ -283,28 +164,23 @@
         "comparison_extent_bytes": 200,
         "full_byte_differences": 1,
         "candidate_sha256": "b8507b97c2a77b6c5a02b0d291574a0f4688293c6315778baec9c87d0b3ec81f",
-        "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
-        "header_overrides": {},
         "private_headers": [],
         "source_local_headers": [],
+        "header_overrides": {},
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
           "-mthumb-interwork",
           "-da"
         ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
+        "evidence_state": "recorded-not-revalidated",
+        "qualification": "Recorded diagnostic only; private inputs unavailable for current revalidation."
       },
       "search_best": null,
-      "retained_attempt_contexts": 65,
-      "eligible_diagnostic_contexts": 33,
-      "excluded_contexts": {
-        "Different experimental compiler backend": 1,
-        "Missing or ambiguous full comparison": 1,
-        "Missing or malformed retained input": 5,
-        "No retained assessment": 25
-      },
+      "retained_attempt_contexts": 0,
+      "eligible_diagnostic_contexts": 0,
+      "excluded_contexts": {},
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
     {
@@ -343,30 +219,25 @@
         "comparison_extent_bytes": 1616,
         "full_byte_differences": 809,
         "candidate_sha256": "097ced39af35a3fc4be85784f4667ae1103d7005eb0d21ba0284cfe12efd1053",
-        "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "private-provisional",
-        "header_overrides": {},
         "private_headers": [],
         "source_local_headers": [
           "serial_irq_contract.h"
         ],
+        "header_overrides": {},
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
           "-mthumb-interwork",
           "-da"
         ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
+        "evidence_state": "recorded-not-revalidated",
+        "qualification": "Recorded diagnostic only; private inputs unavailable for current revalidation."
       },
       "search_best": null,
-      "retained_attempt_contexts": 67,
-      "eligible_diagnostic_contexts": 7,
-      "excluded_contexts": {
-        "Explicit semantic rejection or unqualified source": 1,
-        "Missing or malformed retained input": 30,
-        "No retained assessment": 10,
-        "Stale or unqualified private header": 19
-      },
+      "retained_attempt_contexts": 0,
+      "eligible_diagnostic_contexts": 0,
+      "excluded_contexts": {},
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
     {
@@ -405,47 +276,23 @@
         "comparison_extent_bytes": 116,
         "full_byte_differences": 3,
         "candidate_sha256": "c4d19c36f74244d1a9c0966a4add7446e1d8559ad34b6a38d4818265aed1ebfc",
-        "evidence_state": "retained-inputs-revalidated",
         "private_header_qualification": "canonical-current",
-        "header_overrides": {},
         "private_headers": [],
         "source_local_headers": [],
+        "header_overrides": {},
         "compiler_id": "agbcc",
         "compiler_flags": [
           "-O2",
           "-mthumb-interwork",
           "-da"
         ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
+        "evidence_state": "recorded-not-revalidated",
+        "qualification": "Recorded diagnostic only; private inputs unavailable for current revalidation."
       },
-      "search_best": {
-        "source": "analysis/permuter/sub_080495C4-pass1/base.c",
-        "source_sha256": "9609453e8b923f7bf7343dbc9351586f8c6e69b796763d912511b5b4f7cf0946",
-        "receipt": "analysis/permuter/sub_080495C4-pass1/validation-baseline/result.json",
-        "receipt_sha256": "8ab897d9ce7f38853f96c8f0f431265045bda817da55293a2d55521e7774f227",
-        "job_manifest": "analysis/permuter/sub_080495C4-pass1/setup.json",
-        "job_manifest_sha256": "5f489f3d22296540eda9836309aeafb4ea9dd756e0ecaa8a207ce1600bc2d827",
-        "candidate_bytes": 116,
-        "comparison_extent_bytes": 116,
-        "full_byte_differences": 3,
-        "candidate_sha256": "c4d19c36f74244d1a9c0966a4add7446e1d8559ad34b6a38d4818265aed1ebfc",
-        "source_review": "pending",
-        "source_credit": 0,
-        "private_header_qualification": "canonical-current",
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ]
-      },
-      "retained_attempt_contexts": 42,
-      "eligible_diagnostic_contexts": 18,
-      "excluded_contexts": {
-        "Missing header closure": 2,
-        "Missing or malformed retained input": 19,
-        "Stale or unqualified private header": 3
-      },
+      "search_best": null,
+      "retained_attempt_contexts": 0,
+      "eligible_diagnostic_contexts": 0,
+      "excluded_contexts": {},
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
     {
@@ -480,13 +327,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "242381463515d736ffbdfcadb89ef703824b225039b521bd9137d6687adb5604",
-    "assets/rom-inventory.json": "adfff66448b4a90f7dbdd4ccbd70d5f647575920e74a1e58e21f59e32a7987fa",
-    "docs/COMPLETION_BLOCKERS.md": "afdb28de1b365e6b2edbda07be2ad150d612f604617119797787f9da77daf8d9"
+    "assets/progress.json": "b95ed040dbdd7b50cc9aa53234cbbefa8fa30ab735a9fc2d089e4bdfdad72909",
+    "assets/rom-inventory.json": "8493f313f3f079b3de24e43c7662de909893b951b89c5dea360dec388363c228",
+    "docs/COMPLETION_BLOCKERS.md": "51e3aa2626cd137c3b2721743e7abd1b7bf5f2d78a9e30ba5100daa131663ef3"
   },
   "documented_inventory": {
-    "rows": 7,
-    "bytes": 4160
+    "rows": 6,
+    "bytes": 4000
   },
   "documentation_count_current": true,
   "scan": {
@@ -495,10 +342,10 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 2844,
+    "metadata_files": 0,
     "malformed_metadata": 0,
-    "current_goal_receipts": 29,
-    "rejected_search_validations": 1,
+    "current_goal_receipts": 0,
+    "rejected_search_validations": 0,
     "private_files_required_for_fresh_revalidation": true,
     "historical_effort": "Not inferred from file timestamps or first/last activity.",
     "search_wall_time": "Separate from active effort; no retrospective time inferred."
