@@ -197,3 +197,31 @@ It does not prove those bytes survive handlers, bound arbitrary group selectors
 or establish execution of dormant groups. No native builder execution or gameplay
 replay was used. C, source-owner, entry and mapped-extent counts do not change;
 the broader 97 callback and 21 dispatch observations remain unresolved.
+
+## Record-supplied group selectors, 9 November 2026
+
+The same physical population contains 26 distinct command43 records. Their 52
+branch pairs supply 48 zero program groups and four nonzero program groups.
+Every nonzero selector is inside its initial copied table; these particular
+bytes are zero or at least two, so their enablement does not depend on flag bit
+zero. This supplies no general bound for arbitrary group inputs.
+
+The four program arms now have conditional preservation checks through the
+clock helpers and intervening trigger, actor and group-selector constructors.
+They select existing handlers for reset-object, sequence selection, stop-effect
+and view-flag commands. The proof starts with pristine program bytes on
+constructor entry and requires maintained allocation/pointer identities, valid
+backing, normal ABI and no unrelated interference. It derives preservation to
+the next interpreter operand; continuity from startup to scene7 remains open.
+
+A bounded cold-start observation identifies the relevant allocations. Replay
+is identical and displaced probes preserve the CPU/timing endpoint. The actor's
+palette-slot finder can return 255: its potential 32-byte staging overrun falls
+in need-effect pool slot28's link/kind/attachment prefix. Stored callback words
+are not directly overlapped. This write was not executed by the observation;
+its possible effects on later allocation and dispatch remain open, as do the
+separate fixed-slot metadata writes at `0x03002644..0x0300264B`.
+
+Independent review and complete source/control pairs support the conditional
+checks. No C, source owner, executable entry, mapped extent or global inventory
+closure is added. The 97 callback and 21 dispatch observations remain open.
