@@ -57794,6 +57794,35 @@
       ],
       "expected_sha256": "628675248277ae9b187187095693d1c952fe1942025ce3816dbe4d6a5f334dbf",
       "compiler_id": "agbcc"
+    },
+    {
+      "name": "scene_map_selection_collapse_details",
+      "source": "src/scene/scene_map_selection_collapse_details.c",
+      "rom_offset": 300484,
+      "size": 116,
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "symbols": {
+        "g_display_background_system": "0x03002ef0",
+        "display_set_background_scroll_target": "0x0800dd81",
+        "g_display_scene_frame_objects": "0x030043b0",
+        "g_scene_map_selection_palette_block": "0x030074e0",
+        "display_remove_palette_block": "0x0801192d"
+      },
+      "thumb_symbols": [
+        "display_set_background_scroll_target",
+        "display_remove_palette_block"
+      ],
+      "negative_control": {
+        "before": "display_set_background_scroll_target(3, 0, 0x100000, 4)",
+        "after": "display_set_background_scroll_target(3, 0, 0x100000, 5)"
+      },
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "assembler_id": "binutils",
+      "expected_sha256": "02f7c395633d779bb7960acfc2e87a0e476d93493c632c221e593d6a945e4a63"
     }
   ],
   "assembly": [

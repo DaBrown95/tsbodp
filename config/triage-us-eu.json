@@ -2,16 +2,16 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 5,
-    "inventory_bytes": 3800,
+    "rows": 4,
+    "inventory_bytes": 3684,
     "statuses": {
-      "near-miss": 2,
+      "near-miss": 1,
       "attempted": 2,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
-      "near-miss": 1516,
+      "near-miss": 1400,
       "attempted": 2160,
       "untouched": 0,
       "suspected-not-C": 124
@@ -103,12 +103,12 @@
           "-mthumb-interwork"
         ]
       },
-      "retained_attempt_contexts": 224,
+      "retained_attempt_contexts": 266,
       "eligible_diagnostic_contexts": 61,
       "excluded_contexts": {
         "Explicit semantic rejection or unqualified source": 1,
         "Missing or ambiguous full comparison": 2,
-        "Missing or malformed retained input": 151,
+        "Missing or malformed retained input": 193,
         "No retained assessment": 6,
         "Retained linked ELF unavailable": 1,
         "Stale or unqualified private header": 2
@@ -248,85 +248,6 @@
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
     {
-      "name": "sub_080495C4",
-      "rom_offset": 300484,
-      "inventory_bytes": 116,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork",
-        "-da"
-      ],
-      "runtime_addresses": [
-        134518212
-      ],
-      "status": "near-miss",
-      "user_priority": null,
-      "user_far_off": false,
-      "c_draft": "analysis/checked-reuse-targets-20261027/collapse-baseline/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
-      "best_candidate": {
-        "source": "analysis/checked-reuse-targets-20261027/collapse-baseline/source.c",
-        "source_sha256": "6a5b72301dbbec5e7ca1a9302751c01836d397f6a4cb18548a9894e2a3183144",
-        "metadata": "analysis/checked-reuse-targets-20261027/collapse-baseline/metadata.json",
-        "metadata_sha256": "f5ebbae4e355d652a73b1dbc130d4666389cd985005568948062d39526367978",
-        "receipt": "analysis/checked-reuse-targets-20261027/collapse-baseline/result.json",
-        "receipt_sha256": "6a21aa9aeaa717ce18685ccf59575a5461a9384f3ee3347afda58046501dd612",
-        "assessment": "analysis/checked-reuse-targets-20261027/assessment.json",
-        "assessment_sha256": "35bc1a972edbbb57fc16f0ab94b6991adbc7205429ab9e4916528894a38a6467",
-        "candidate_bytes": 116,
-        "comparison_extent_bytes": 116,
-        "full_byte_differences": 3,
-        "candidate_sha256": "c4d19c36f74244d1a9c0966a4add7446e1d8559ad34b6a38d4818265aed1ebfc",
-        "evidence_state": "retained-inputs-revalidated",
-        "private_header_qualification": "canonical-current",
-        "header_overrides": {},
-        "private_headers": [],
-        "source_local_headers": [],
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ],
-        "qualification": "Diagnostic only; source/backing/API premises and full acceptance gates remain."
-      },
-      "search_best": {
-        "source": "analysis/permuter/sub_080495C4-pass1/base.c",
-        "source_sha256": "9609453e8b923f7bf7343dbc9351586f8c6e69b796763d912511b5b4f7cf0946",
-        "receipt": "analysis/permuter/sub_080495C4-pass1/validation-baseline/result.json",
-        "receipt_sha256": "8ab897d9ce7f38853f96c8f0f431265045bda817da55293a2d55521e7774f227",
-        "job_manifest": "analysis/permuter/sub_080495C4-pass1/setup.json",
-        "job_manifest_sha256": "5f489f3d22296540eda9836309aeafb4ea9dd756e0ecaa8a207ce1600bc2d827",
-        "candidate_bytes": 116,
-        "comparison_extent_bytes": 116,
-        "full_byte_differences": 3,
-        "candidate_sha256": "c4d19c36f74244d1a9c0966a4add7446e1d8559ad34b6a38d4818265aed1ebfc",
-        "source_review": "pending",
-        "source_credit": 0,
-        "private_header_qualification": "canonical-current",
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork",
-          "-da"
-        ]
-      },
-      "retained_attempt_contexts": 135,
-      "eligible_diagnostic_contexts": 18,
-      "excluded_contexts": {
-        "Missing header closure": 2,
-        "Missing or malformed retained input": 112,
-        "Stale or unqualified private header": 3
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
-    },
-    {
       "name": "sub_08049968",
       "rom_offset": 301416,
       "inventory_bytes": 124,
@@ -358,13 +279,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "9c34daa29a6502deb228b9ca8da4b0a7dafef40225cb290c202cfd2ef0eefd0c",
-    "assets/rom-inventory.json": "8ba29b0dcec6581715f2479f473c31896fd1bfbf4c958d01dca5e75549c60c32",
-    "docs/COMPLETION_BLOCKERS.md": "11156226cf6c43102ebdb5123a8b8356d5f3241f37e8b0bff854736281388b50"
+    "assets/progress.json": "a367a94e0e3f8050c8889f4aa764ad203f81390d5b2decabfbfafced0b93daf9",
+    "assets/rom-inventory.json": "f016f82029dcbdfd76c246e0d41b14b51a5146081f115cbf1cf54a7f785df65d",
+    "docs/COMPLETION_BLOCKERS.md": "15713b9431edf3c29ea4acb3d4e27b60457279b671043a77c299efe5420f4643"
   },
   "documented_inventory": {
-    "rows": 5,
-    "bytes": 3800
+    "rows": 4,
+    "bytes": 3684
   },
   "documentation_count_current": true,
   "scan": {
@@ -373,7 +294,7 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 3481,
+    "metadata_files": 3531,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
     "rejected_search_validations": 5,

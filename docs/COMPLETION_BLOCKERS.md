@@ -1,26 +1,30 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,539 C functions / 318,584 C extent bytes**, plus
-**4,068 assembly bytes**. Original slices still supply 16,454,564 bytes of assets
+The current gates verify **2,540 C functions / 318,700 C extent bytes**, plus
+**4,068 assembly bytes**. Original slices still supply 16,454,448 bytes of assets
 and unconverted code. Whole-ROM equality is proven; complete source ownership
 is not. The fixed 319,640 bytes remain a historical comparison, not a complete
 code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **5 unowned rows / 3,800 estimated
+and generated [triage](TRIAGE.md) contain **4 unowned rows / 3,684 estimated
 bytes**. This finite worklist does not establish that all executable regions
 have been discovered. Candidate scores grant no source credit.
 
 ## Latest accepted source
 
+The [map-selection collapse handler](../src/scene/scene_map_selection_collapse_details.c)
+at `0x495C4` adds **one C function / 116 extent bytes**, including its pool.
+It starts the detail-panel scroll, releases the palette block, updates object
+flags and reports when the scroll has finished. A wide field-offset temporary
+preserves the native R2 lifetime with the pinned compiler; its low word forms
+the scroll-duration address. The complete extent and changed-source control
+pass the pilot, full-ROM and progress gates. Names and UI roles remain
+inferred; this adds no runtime observation.
+
 The [serial record provider](../src/link/link_prepare_serial_records.c) at
-`0x3D788` adds **one C function / 200 extent bytes**, including its pool.
-It copies received records, calculates the outgoing checksum, updates the
-record banks and sets transfer flags. A wide address temporary preserves the
-native R0-to-R4 transfer with the pinned compiler; only the low 32 bits form
-the pointer. The complete extent and changed-source control pass the pilot,
-full-ROM and progress gates. Names and protocol roles remain inferred; this
-adds no runtime observation.
+`0x3D788` previously added 200 C bytes. Its wide address temporary preserves
+the native R0-to-R4 transfer; only the low 32 bits form the pointer.
 
 The earlier [scene-object step builder](../src/frame/frame_create_scene_objects_at_steps_unrooted_28234.c)
 at `0x28234` still has provisional incoming execution evidence and a provisional
@@ -40,7 +44,6 @@ Copy extents remain separately accounted.
 | --- | --- |
 | Renderer `0x23E8` (1,400) | Recover the remaining real stack homes and comparison lifetimes. Native input and partial-word ownership have improved complete candidates; exhausted binding and address-only families stay parked. |
 | Activity preparation `0x19640` (544) | Preserve geometry roles and bound reloads while recovering the native availability and output-pointer allocation. |
-| Map collapse `0x495C4` (116) | Remaining address/base continuity differences need a complete source match. |
 | Serial IRQ `0x3DC48` (1,616) | The latest private candidate has the correct size and 353 differing bytes. Preserve native receive/readiness lifetimes while resolving loop and shared-tail allocation. No C credit. |
 | Audio master `0x49968` (124) | Two bytes remain unexplained around a reachable native NOP. Original SDK lineage does not justify an assembly exception. |
 

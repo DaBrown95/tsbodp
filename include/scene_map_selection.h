@@ -46,7 +46,6 @@ void scene_map_selection_shutdown(void), scene_map_selection_initialize_objects(
 unsigned int scene_map_selection_entry_under_cursor(void);
 /* Both word inputs are consumed through their low bytes in the original entry. */
 void scene_map_selection_select_entry(unsigned int, unsigned int);
-/* Explicit original provider: 495C4..49638 (116 bytes), not C coverage. */
 unsigned int scene_map_selection_collapse_details(void);
 
 /* Existing provider interfaces, retained at their established original addresses. */
