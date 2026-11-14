@@ -57766,6 +57766,34 @@
       "cfg_root": false,
       "cfg_root_reason": "Incoming execution evidence remains unqualified; matching source owns only the 160-byte extent.",
       "expected_sha256": "e2c060776623adc387ec9631e9628153f58f2fd0af0f7842f70fb6fb7e796184"
+    },
+    {
+      "name": "link_prepare_serial_records",
+      "source": "src/link/link_prepare_serial_records.c",
+      "rom_offset": 251784,
+      "size": 200,
+      "symbols": {
+        "g_link_setup_state": "0x03002cb0",
+        "g_link_word_03007348": "0x03007348",
+        "g_link_word_03007354": "0x03007354",
+        "g_link_flags": "0x03007334",
+        "link_current_random_byte": "0x0803a511",
+        "link_snapshot_random_byte": "0x0803a529"
+      },
+      "thumb_symbols": [
+        "link_current_random_byte",
+        "link_snapshot_random_byte"
+      ],
+      "negative_control": {
+        "before": "return -sum;",
+        "after": "return 1 - sum;"
+      },
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "expected_sha256": "628675248277ae9b187187095693d1c952fe1942025ce3816dbe4d6a5f334dbf",
+      "compiler_id": "agbcc"
     }
   ],
   "assembly": [

@@ -1,28 +1,30 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,538 C functions / 318,384 C extent bytes**, plus
-**4,068 assembly bytes**. Original slices still supply 16,454,764 bytes of assets
+The current gates verify **2,539 C functions / 318,584 C extent bytes**, plus
+**4,068 assembly bytes**. Original slices still supply 16,454,564 bytes of assets
 and unconverted code. Whole-ROM equality is proven; complete source ownership
 is not. The fixed 319,640 bytes remain a historical comparison, not a complete
 code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **6 unowned rows / 4,000 estimated
+and generated [triage](TRIAGE.md) contain **5 unowned rows / 3,800 estimated
 bytes**. This finite worklist does not establish that all executable regions
 have been discovered. Candidate scores grant no source credit.
 
 ## Latest accepted source
 
-The [scene-object step builder](../src/frame/frame_create_scene_objects_at_steps_unrooted_28234.c)
-at `0x28234` adds **one C function / 160 extent bytes**, including its pool.
-Two initialized step fields preserve the native partial-word producer. A late
-two-byte X capture retains the loop induction without a redundant whole-word
-snapshot; ordinary origin lifetimes and direct field assignments preserve the
-native prefix, frame and loop. The pinned default profile and changed-source
-control are verified with the full-ROM and progress gates.
+The [serial record provider](../src/link/link_prepare_serial_records.c) at
+`0x3D788` adds **one C function / 200 extent bytes**, including its pool.
+It copies received records, calculates the outgoing checksum, updates the
+record banks and sets transfer flags. A wide address temporary preserves the
+native R0-to-R4 transfer with the pinned compiler; only the low 32 bits form
+the pointer. The complete extent and changed-source control pass the pilot,
+full-ROM and progress gates. Names and protocol roles remain inferred; this
+adds no runtime observation.
 
-Incoming execution evidence and the six-formal interface remain provisional.
-This owner has `cfg_root: false`: source ownership supplies no new incoming
+The earlier [scene-object step builder](../src/frame/frame_create_scene_objects_at_steps_unrooted_28234.c)
+at `0x28234` still has provisional incoming execution evidence and a provisional
+six-formal interface. Its `cfg_root: false` owner supplies no new incoming
 entry, rooted instruction/data qualification, runtime observation or callback-
 domain closure. Its 160 bytes remain independently role-unclassified.
 
@@ -39,8 +41,7 @@ Copy extents remain separately accounted.
 | Renderer `0x23E8` (1,400) | Recover the remaining real stack homes and comparison lifetimes. Native input and partial-word ownership have improved complete candidates; exhausted binding and address-only families stay parked. |
 | Activity preparation `0x19640` (544) | Preserve geometry roles and bound reloads while recovering the native availability and output-pointer allocation. |
 | Map collapse `0x495C4` (116) | Remaining address/base continuity differences need a complete source match. |
-| Serial provider `0x3D788` (200) | Parked at one byte different, with both compiler investigations preserved. Reopen only for materially new evidence. |
-| Serial IRQ `0x3DC48` (1,616) | Preserve the 1,624-byte nonmatch and native receive/readiness lifetimes. Prior callback/contract repairs supplied no missing source fact. |
+| Serial IRQ `0x3DC48` (1,616) | The latest private candidate has the correct size and 353 differing bytes. Preserve native receive/readiness lifetimes while resolving loop and shared-tail allocation. No C credit. |
 | Audio master `0x49968` (124) | Two bytes remain unexplained around a reachable native NOP. Original SDK lineage does not justify an assembly exception. |
 
 Further compiler or tool work needs a concrete unfinished consumer and a

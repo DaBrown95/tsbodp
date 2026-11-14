@@ -30,5 +30,6 @@ void link_start_connection(void);
 unsigned int link_current_random_byte(void);
 unsigned int link_saved_random_byte(void);
 void link_snapshot_random_byte(void);
+void link_prepare_serial_records(struct EventRecord *,struct EventRecord *);
 #define LINK_REG16(a) (*(volatile unsigned short *)(a))
 #endif

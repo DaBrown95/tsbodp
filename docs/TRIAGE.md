@@ -1,17 +1,22 @@
 # Remaining C triage
 
-6 unowned inventory rows / 4,000 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
+5 unowned inventory rows / 3,800 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
 
 Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py --check`. Private evidence may be unavailable on another checkout; recorded rows then say so. Historical active effort and search wall time are unrecorded, not zero.
 
 | ROM | Name | Inventory | Best bytes / differences | Compared extent | Status | Priority | Context |
 | --- | --- | ---: | ---: | ---: | --- | ---: | --- |
-| `0x023E8` | `sub_080023E8` | 1400 | 1400 / 15 | 1400 | near-miss | 7 | canonical-current; recorded |
-| `0x19640` | `sub_08019640` | 544 | 528 / 371 | 544 | attempted | — | canonical-current; recorded |
-| `0x3D788` | `sub_0803D788` | 200 | 200 / 1 | 200 | near-miss | 1 | canonical-current; recorded |
-| `0x3DC48` | `link_serial_interrupt` | 1616 | 1624 / 809 | 1616 | attempted | — | private-provisional; recorded |
-| `0x495C4` | `sub_080495C4` | 116 | 116 / 3 | 116 | near-miss | — | canonical-current; recorded |
+| `0x023E8` | `sub_080023E8` | 1400 | 1400 / 15 | 1400 | near-miss | 7 | canonical-current |
+| `0x19640` | `sub_08019640` | 544 | 528 / 371 | 544 | attempted | — | canonical-current |
+| `0x3DC48` | `link_serial_interrupt` | 1616 | unqualified/unavailable | — | attempted | — | — |
+| `0x495C4` | `sub_080495C4` | 116 | 116 / 3 | 116 | near-miss | — | canonical-current |
 | `0x49968` | `sub_08049968` | 124 | unqualified/unavailable | — | suspected-not-C | — | — |
+
+Fresh search comparisons awaiting source review:
+- `0x023E8`: 1400 bytes / 22 differences over 1400 bytes; no source credit.
+- `0x19640`: 544 bytes / 34 differences over 544 bytes; no source credit.
+- `0x3DC48`: 1616 bytes / 373 differences over 1616 bytes; no source credit.
+- `0x495C4`: 116 bytes / 3 differences over 116 bytes; no source credit.
 
 Priority1–7 follows the requested near-miss order; other full-size candidates with at most32 differing bytes also enter the near-miss queue. Existing attempts override the older “untouched” list. Private types and backing/API premises still require acceptance review.
 
