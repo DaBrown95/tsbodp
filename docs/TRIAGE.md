@@ -1,18 +1,16 @@
 # Remaining C triage
 
-3 unowned inventory rows / 2,284 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
+2 unowned inventory rows / 668 bytes. Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.
 
 Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py --check`. Private evidence may be unavailable on another checkout; recorded rows then say so. Historical active effort and search wall time are unrecorded, not zero.
 
 | ROM | Name | Inventory | Best bytes / differences | Compared extent | Status | Priority | Context |
 | --- | --- | ---: | ---: | ---: | --- | ---: | --- |
 | `0x19640` | `sub_08019640` | 544 | 528 / 371 | 544 | attempted | — | canonical-current |
-| `0x3DC48` | `link_serial_interrupt` | 1616 | unqualified/unavailable | — | attempted | — | — |
 | `0x49968` | `sub_08049968` | 124 | unqualified/unavailable | — | suspected-not-C | — | — |
 
 Fresh search comparisons awaiting source review:
 - `0x19640`: 544 bytes / 14 differences over 544 bytes; no source credit.
-- `0x3DC48`: 1616 bytes / 2 differences over 1616 bytes; no source credit.
 
 Priority1–7 follows the requested near-miss order; other full-size candidates with at most32 differing bytes also enter the near-miss queue. Existing attempts override the older “untouched” list. Private types and backing/API premises still require acceptance review.
 

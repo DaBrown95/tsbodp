@@ -1,17 +1,23 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,541 C functions / 320,100 C extent bytes**, plus
-**4,068 assembly bytes**. Original slices still supply 16,453,048 bytes of assets
+The current gates verify **2,542 C functions / 321,716 C extent bytes**, plus
+**4,068 assembly bytes**. Original slices still supply 16,451,432 bytes of assets
 and unconverted code. Whole-ROM equality is proven; complete source ownership
 is not. The fixed 319,640 bytes remain a historical comparison, not a complete
 code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **3 unowned rows / 2,284 estimated
+and generated [triage](TRIAGE.md) contain **2 unowned rows / 668 estimated
 bytes**. This finite worklist does not establish that all executable regions
 have been discovered. Candidate scores grant no source credit.
 
 ## Latest accepted source
+
+The [serial interrupt handler](../src/link/link_serial_interrupt.c) at `0x3DC48`
+adds **one C function / 1,616 extent bytes**. It exchanges six halfwords per
+event record, validates each peer's checksum and swaps the receive buffers on
+success. Both failure branches reach the original bookkeeping code. Changing
+the retry limit from five to six changes one byte in the full linked extent.
 
 The [object renderer](../src/frame/frame_render_object.c) at `0x23E8` adds
 **one C function / 1,400 extent bytes**, including its pools and alignment.
@@ -53,7 +59,6 @@ Copy extents remain separately accounted.
 | Region | Consequential obstacle |
 | --- | --- |
 | Activity preparation `0x19640` (544) | Preserve geometry roles and bound reloads while recovering the native availability and output-pointer allocation. |
-| Serial IRQ `0x3DC48` (1,616) | The latest private candidate has the correct size and two differing branch bytes. Recover the native shared-failure entry without changing setup and flags-load order. No C credit. |
 | Audio master `0x49968` (124) | Two bytes remain unexplained around a reachable native NOP. Original SDK lineage does not justify an assembly exception. |
 
 Further compiler or tool work needs a concrete unfinished consumer and a
@@ -86,9 +91,9 @@ diagnostics add **zero source or ownership closures**.
 Within existing source extents, historical formals, field names and event
 meanings are semantic uncertainties. Unknown code/data/padding roles and
 alternate entries require a separate ownership assessment. The census retains
-**932 owned-extent bytes without qualified independent roles**: the previous
-920 bytes, including the unrooted scene-step owner's 160 bytes, plus 12 bytes
-within the newly owned renderer extent. Current compiler-output provenance
+**950 owned-extent bytes without qualified independent roles**. These include
+160 bytes in the unrooted scene-step owner, 12 bytes in the renderer, and 18
+bytes of compiler alignment in the serial interrupt handler. Current compiler-output provenance
 does not establish historical intent
 or exclude alternate entries. Neither category becomes closed merely because
 the containing source extent matches.

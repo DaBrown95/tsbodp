@@ -2,17 +2,17 @@
   "schema_version": 1,
   "target": "us-eu",
   "totals": {
-    "rows": 3,
-    "inventory_bytes": 2284,
+    "rows": 2,
+    "inventory_bytes": 668,
     "statuses": {
       "near-miss": 0,
-      "attempted": 2,
+      "attempted": 1,
       "untouched": 0,
       "suspected-not-C": 1
     },
     "status_inventory_bytes": {
       "near-miss": 0,
-      "attempted": 2160,
+      "attempted": 544,
       "untouched": 0,
       "suspected-not-C": 124
     }
@@ -87,66 +87,13 @@
           "-mthumb-interwork"
         ]
       },
-      "retained_attempt_contexts": 561,
+      "retained_attempt_contexts": 635,
       "eligible_diagnostic_contexts": 11,
       "excluded_contexts": {
         "Explicit semantic rejection or unqualified source": 10,
-        "Missing or malformed retained input": 501,
+        "Missing or malformed retained input": 575,
         "No retained assessment": 3,
         "Stale or unqualified private header": 36
-      },
-      "closed_note": "Prior bounded source experiments remain nonmatches."
-    },
-    {
-      "name": "link_serial_interrupt",
-      "rom_offset": 253000,
-      "inventory_bytes": 1616,
-      "mode": "Thumb",
-      "compiler_id": "agbcc",
-      "compiler_flags": [
-        "-O2",
-        "-mthumb-interwork"
-      ],
-      "runtime_addresses": [
-        134470728
-      ],
-      "status": "attempted",
-      "user_priority": null,
-      "user_far_off": true,
-      "c_draft": "analysis/goal-20261113/irq-fresh/source.c",
-      "historical_active_effort_seconds": null,
-      "effort_status": "unrecorded",
-      "active_effort_seconds": null,
-      "search_wall_seconds": null,
-      "search_wall_time_records": [],
-      "best_candidate": null,
-      "search_best": {
-        "source": "analysis/permuter/goal-20261115-irq-failure-edge-pointer/output-2-1/source.c",
-        "source_sha256": "daabfa5810f9aef56463799c0005879d9a5b6eb137c3765b91a6c8378007e50b",
-        "receipt": "analysis/permuter/goal-20261115-irq-failure-edge-pointer/validation-2-1/result.json",
-        "receipt_sha256": "00d6b63e3fff7b8217ec5c9f4d0335395a34687a47c9a581d82719b030f362d9",
-        "job_manifest": "analysis/permuter/goal-20261115-irq-failure-edge-pointer/setup.json",
-        "job_manifest_sha256": "d97d1a3d22efe51f27452f88ca605b174579c746c43666735f7185d53d75163a",
-        "candidate_bytes": 1616,
-        "comparison_extent_bytes": 1616,
-        "full_byte_differences": 2,
-        "candidate_sha256": "12558edd1c7bfaee4f90a0d4dda760ba191bced5270869e52992742efa10dc2b",
-        "source_review": "pending",
-        "source_credit": 0,
-        "private_header_qualification": "private-provisional",
-        "compiler_id": "agbcc",
-        "compiler_flags": [
-          "-O2",
-          "-mthumb-interwork"
-        ]
-      },
-      "retained_attempt_contexts": 544,
-      "eligible_diagnostic_contexts": 0,
-      "excluded_contexts": {
-        "Explicit semantic rejection or unqualified source": 1,
-        "Missing or malformed retained input": 507,
-        "No retained assessment": 10,
-        "Stale or unqualified private header": 26
       },
       "closed_note": "Prior bounded source experiments remain nonmatches."
     },
@@ -184,13 +131,13 @@
   ],
   "scope": "Diagnostic queue only; no C ownership or runtime credit. Inventory bytes and proven comparison extents are separate.",
   "inputs": {
-    "assets/progress.json": "65662d57ba76701eb16226610b6726ea0a58d12ad77aaf13387770dcee9e9e06",
-    "assets/rom-inventory.json": "cb39d565ee0a9a9f8943e4f32a27db325bd5108f82c32acc8d407f3ec4115302",
-    "docs/COMPLETION_BLOCKERS.md": "fe8ca82dc23dfb1a480144612204a0fcf60fe68cdbf36d1dbc2bb50c60b31b54"
+    "assets/progress.json": "59309b310ebd0a1f4bd9bfc81ad02474cff1a7c0e20912a2d75b126148790709",
+    "assets/rom-inventory.json": "0138f3c9af79930d6bf74303844c80a5f3761aff838022e18bdf174923319a46",
+    "docs/COMPLETION_BLOCKERS.md": "f6ccefc574dfb475205d31c71d22bebe64120380726b7ee9d3a89310ad1ef39b"
   },
   "documented_inventory": {
-    "rows": 3,
-    "bytes": 2284
+    "rows": 2,
+    "bytes": 668
   },
   "documentation_count_current": true,
   "scan": {
@@ -199,10 +146,10 @@
       "reports/current-goal"
     ],
     "maximum_directory_depth": 3,
-    "metadata_files": 4384,
+    "metadata_files": 4458,
     "malformed_metadata": 0,
     "current_goal_receipts": 29,
-    "rejected_search_validations": 5,
+    "rejected_search_validations": 3,
     "private_files_required_for_fresh_revalidation": true,
     "historical_effort": "Not inferred from file timestamps or first/last activity.",
     "search_wall_time": "Separate from active effort; no retrospective time inferred."

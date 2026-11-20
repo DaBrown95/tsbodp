@@ -4,9 +4,10 @@
 #include "irq.h"
 /* Literal-backed word access views; complete storage ownership is provisional. */
 extern unsigned int g_link_word_03007350, g_link_last_serial_vblank;
+extern unsigned int g_link_transfer_retry_count;
 void link_serial_handshake(void);
 unsigned int link_serial_timeout(void);
-/* Original next-stage IRQ boundary remains address-only. */
+/* Installed in IRQ slot zero when the handshake completes. */
 void link_serial_interrupt(void);
 #define HANDSHAKE_RECEIVE(i) LINK_REG16(0x04000120+2*(i))
 #define HANDSHAKE_CONTROL LINK_REG16(0x04000128)

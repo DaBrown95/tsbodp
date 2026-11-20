@@ -57857,6 +57857,44 @@
       },
       "assembler_id": "binutils",
       "expected_sha256": "96788d6ad7520b3e9d3267eca0134ad10949ff79a1136070faf42004a60f9c8f"
+    },
+    {
+      "name": "link_serial_interrupt",
+      "source": "src/link/link_serial_interrupt.c",
+      "rom_offset": 253000,
+      "size": 1616,
+      "symbols": {
+        "_call_via_r0": "0x0804ccf1",
+        "g_link_setup_state": "0x03002cb0",
+        "g_link_clock_03002178": "0x03002178",
+        "g_link_flags": "0x03007334",
+        "g_event_record": "0x030072f0",
+        "g_link_received_events": "0x030072b0",
+        "g_link_transfer_retry_count": "0x03002174",
+        "g_link_word_0300734c": "0x0300734c",
+        "g_link_word_0300733c": "0x0300733c",
+        "g_link_word_03007344": "0x03007344",
+        "g_link_last_serial_vblank": "0x03002188",
+        "g_irq_context": "0x03004280",
+        "link_prepare_serial_records": "0x0803d789",
+        "link_saved_random_byte": "0x0803a51d"
+      },
+      "thumb_symbols": [
+        "_call_via_r0",
+        "link_saved_random_byte",
+        "link_prepare_serial_records"
+      ],
+      "compiler_flags": [
+        "-O2",
+        "-mthumb-interwork"
+      ],
+      "compiler_id": "agbcc",
+      "mode": "Thumb",
+      "expected_sha256": "6ec9e5a1ec58b5d7b777a40b1f51ab71f35d6ae165f1b1899813c0f325596c2e",
+      "negative_control": {
+        "before": "if (g_link_transfer_retry_count > 5)",
+        "after": "if (g_link_transfer_retry_count > 6)"
+      }
     }
   ],
   "assembly": [
