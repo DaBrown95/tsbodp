@@ -27,7 +27,7 @@ class TriageTests(unittest.TestCase):
         self.write('assets/rom-inventory.json', self.inventory)
         self.progress['input_sha256'] = {'assets/rom-inventory.json': triage.sha(self.root / 'assets/rom-inventory.json')}
         self.write('assets/progress.json', self.progress)
-        self.write('docs/COMPLETION_BLOCKERS.md', '**1 unowned rows / 12 bytes**\n')
+        self.write('docs/COMPLETION_BLOCKERS.md', '**1 unowned row / 12 bytes**\n')
         self.write('include/owner.h', 'extern int owner;\n')
 
     def write(self, name, data):
@@ -63,6 +63,11 @@ class TriageTests(unittest.TestCase):
 
     def row(self):
         return triage.build(self.root)['rows'][0]
+
+    def test_single_remaining_row_in_documentation_and_report(self):
+        report = triage.build(self.root)
+        self.assertTrue(report['documentation_count_current'])
+        self.assertIn('1 unowned inventory row / 12 bytes', triage.markdown(report))
 
     def test_full_comparison_not_inventory_estimate_controls_near_miss(self):
         self.make_candidate(size=14, extent=14, differences=2)

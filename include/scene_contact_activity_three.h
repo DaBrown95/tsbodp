@@ -57,7 +57,7 @@ struct SceneContactActivityThreeSlots {struct FrameObject *objects[16];unsigned 
 extern struct SceneContactActivityThreeSlots g_scene_contact_activity_three_slots;
 extern struct FrameVariantResource g_scene_contact_activity_three_observer_animation,g_scene_contact_activity_three_cursor_animation,g_scene_contact_activity_three_event_animation;
 void scene_contact_activity_three_step_event(struct FrameObject*),scene_contact_activity_three_step_row(struct FrameObject*);
-void scene_contact_activity_three_original_prepare_row(struct FrameObject*),scene_contact_activity_three_reset_row(struct FrameObject*);
+void scene_contact_activity_three_prepare_row(struct FrameObject*),scene_contact_activity_three_reset_row(struct FrameObject*);
 void display_clear_background_rectangle(unsigned int,int,int,int,int);
 void *heap_clear(void*,int,unsigned int);
 #include "view_math.h"

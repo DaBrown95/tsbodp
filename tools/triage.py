@@ -496,7 +496,7 @@ def build(root, previous=None):
                            excluded_contexts=dict(sorted(exclusions[off].items())),
                            closed_note=CLOSED.get(off, 'No retained attempt found in the bounded scan.' if status == 'untouched' else 'Prior bounded source experiments remain nonmatches.')))
     text = (root / inputs[2]).read_text()
-    match = re.search(r'(\d+) unowned rows\s*/\s*([\d,]+)\s+(?:estimated\s+)?bytes', text)
+    match = re.search(r'(\d+) unowned rows?\s*/\s*([\d,]+)\s+(?:estimated\s+)?bytes', text)
     documented = {'rows': int(match[1]), 'bytes': int(match[2].replace(',', ''))} if match else None
     totals = dict(rows=len(rows), inventory_bytes=sum(r['size'] for r in rows),
                   statuses={s: sum(r['status'] == s for r in output) for s in ('near-miss', 'attempted', 'untouched', 'suspected-not-C')},
@@ -547,8 +547,10 @@ def resolve_row(root, name):
 
 
 def markdown(report):
+    row_count = report['totals']['rows']
+    row_label = 'row' if row_count == 1 else 'rows'
     lines = ['# Remaining C triage', '',
-             f"{report['totals']['rows']} unowned inventory rows / {report['totals']['inventory_bytes']:,} bytes. "
+             f"{row_count} unowned inventory {row_label} / {report['totals']['inventory_bytes']:,} bytes. "
              'Scores compare complete retained extents, including missing or extra bytes; they grant no source credit.', '',
              'Regenerate with `python3 tools/triage.py`; check with `python3 tools/triage.py --check`. '
              'Private evidence may be unavailable on another checkout; recorded rows then say so. '

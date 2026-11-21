@@ -1,17 +1,26 @@
 # Remaining reconstruction and closure work
 
-The current gates verify **2,542 C functions / 321,716 C extent bytes**, plus
-**4,068 assembly bytes**. Original slices still supply 16,451,432 bytes of assets
+The current gates verify **2,543 C functions / 322,260 C extent bytes**, plus
+**4,068 assembly bytes**. Original slices still supply 16,450,888 bytes of assets
 and unconverted code. Whole-ROM equality is proven; complete source ownership
 is not. The fixed 319,640 bytes remain a historical comparison, not a complete
 code denominator.
 
 The [manifest](../config/build-us-eu.json), [inventory](../assets/rom-inventory.json)
-and generated [triage](TRIAGE.md) contain **2 unowned rows / 668 estimated
+and generated [triage](TRIAGE.md) contain **1 unowned row / 124 estimated
 bytes**. This finite worklist does not establish that all executable regions
 have been discovered. Candidate scores grant no source credit.
 
 ## Latest accepted source
+
+The [activity-three row preparation routine](../src/scene/scene_contact_activity_three_prepare_row.c)
+at `0x19640` adds **one C function / 544 extent bytes**. It selects a row
+subtype, amount, phase and available palette, then retries positions that fall
+inside an earlier row's exclusion box. All 544 bytes also match the USA revision 1
+function when linked at its own address. Reducing the maximum X coordinate
+from 224 to 223 changes one byte. Isolated mGBA calls with the game's own
+random-number and position routines reproduced the original in all 525 cases.
+The changed source produced a different result in 292 cases.
 
 The [serial interrupt handler](../src/link/link_serial_interrupt.c) at `0x3DC48`
 adds **one C function / 1,616 extent bytes**. It exchanges six halfwords per
@@ -58,8 +67,7 @@ Copy extents remain separately accounted.
 
 | Region | Consequential obstacle |
 | --- | --- |
-| Activity preparation `0x19640` (544) | Preserve geometry roles and bound reloads while recovering the native availability and output-pointer allocation. |
-| Audio master `0x49968` (124) | Two bytes remain unexplained around a reachable native NOP. Original SDK lineage does not justify an assembly exception. |
+| Audio master `0x49968` (124) | The closest C emits a byte store at offset `0x48`. The original executes a NOP. In 512 mGBA calls the candidate issued 512 writes to `0x22000E38`, and the original issued zero. The origin of that instruction remains unresolved. |
 
 Further compiler or tool work needs a concrete unfinished consumer and a
 falsifiable experiment. A worse complete candidate is useful when it reveals
@@ -91,12 +99,11 @@ diagnostics add **zero source or ownership closures**.
 Within existing source extents, historical formals, field names and event
 meanings are semantic uncertainties. Unknown code/data/padding roles and
 alternate entries require a separate ownership assessment. The census retains
-**950 owned-extent bytes without qualified independent roles**. These include
+**952 owned-extent bytes without qualified independent roles**. These include
 160 bytes in the unrooted scene-step owner, 12 bytes in the renderer, and 18
-bytes of compiler alignment in the serial interrupt handler. Current compiler-output provenance
-does not establish historical intent
-or exclude alternate entries. Neither category becomes closed merely because
-the containing source extent matches.
+bytes of compiler alignment in the serial interrupt handler. The activity row
+routine adds two independently unclassified bytes. Current compiler-output
+provenance leaves historical intent and alternate entries open.
 
 Known copies cover 19,188 distinct ROM source bytes, including data. Writer and
 incoming-target populations remain open. The twelve bytes at `0x1DB20..0x1DB2C`
