@@ -27,6 +27,67 @@ Local evidence retains the current verified build and a bounded set of useful
 failures. Historical receipts do not imply that older raw artifacts remain
 available for revalidation.
 
+## The case of the missing store
+
+Exactly one mapped routine has no source owner: the 124-byte audio
+master-volume function at `0x08049968`. Our best C matches 122 of its bytes.
+The other two are a single instruction, and we are fairly sure no C source
+ever produced it. Here is the detective story.
+
+**The suspect.** The function is `kramSetMasterVol` from
+[Krawall](https://github.com/sebknzl/krawall/tree/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0),
+Sebastian Kienzl's sound library, which the game uses for its audio. It fills
+a clipping table centred on its base address: indices −1023 to 1023 in a loop,
+then one last byte at index −1024.
+
+**The compiler trips.** Write that last store as `table[-1024] = ...` and
+[GCC 3.0.2](https://ftp.gnu.org/gnu/gcc/gcc-3.0.2/) falls over, but only when
+the compiler itself runs on a 32-bit machine. The bit offset −8192 gets
+[treated as unsigned](https://github.com/gcc-mirror/gcc/blob/releases/gcc-3.0.2/gcc/expmed.c#L233)
+before being divided by eight, so −1024 comes out as `0x1FFFFC00`. The store
+would land at `0x22000E38`, which is nowhere near the table, or near anything
+else. Our [pinned compiler](config/gcc302-hwi32-toolchain.json) reproduces
+the bug, and the same bad constant is sitting in the original ROM's literal
+pool. So far, so explicable.
+
+**The store vanishes.** The original code loads the table address, loads the
+bad constant, adds them, works out the value to write... and then does
+nothing at all:
+
+| Address | Original ROM | Our C |
+| --- | --- | --- |
+| `0x080499B0` | `mov r8, r8` | `strb r2, [r1]` |
+
+That is not how compilers behave. An optimiser that drops a store also drops
+the sums feeding it; it does not carefully compute an address and a value and
+then shrug. We went through the tools looking for anything that could plant
+that no-op. GCC 3.0.2 has
+[one no-op emitter](https://github.com/gcc-mirror/gcc/blob/releases/gcc-3.0.2/gcc/stmt.c#L653-L664),
+and it only fires in unoptimised builds. The
+[`nop` pattern](https://github.com/gcc-mirror/gcc/blob/releases/gcc-3.0.2/gcc/config/arm/arm.md#L6920-L6926)
+is where the `mov r8, r8` spelling comes from, but nothing optimised reaches
+it. The [assembler](https://ftp.gnu.org/gnu/binutils/) emits that encoding
+only for a literal `nop`, and the linker only inside interworking stubs.
+
+**The confession, sort of.** The public Krawall source
+[writes the statement as `table[-i]`](https://github.com/sebknzl/krawall/blob/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0/lib/mixer.c#L106-L107),
+where `i` happens to be 1024 once the loop ends, under a comment noting that
+`[-1024]` "makes GCC 3.0.2 generate an invalid constant". The
+[USA revision 1 ROM](config/targets/us-rev1.json) ships that version: 116
+bytes at `0x08049A4C`, no bad constant, a real store. Compile the `[-i]` form
+with our pinned compiler and flags and all 116 bytes drop out.
+
+**Our theory.** Someone spotted the stray write and, as a stopgap, blanked
+out that one instruction in the already-compiled library. The source got its
+proper fix later, in time for revision 1. The compiler bug, the no-op and the
+revision 1 match are established. Who removed the store, and how, is our
+inference: no build artefact from the time shows it, and a post-processing
+script would fit just as well.
+
+So the routine stays unowned, listed in the [triage table](docs/TRIAGE.md).
+We could make the bytes match by patching the compiler's output, but then it
+would not be a decompilation.
+
 ## Building
 
 Requires macOS, Python 3.10+ and Xcode's command line tools.
