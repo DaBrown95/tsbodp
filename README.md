@@ -124,11 +124,14 @@ SHA-1: `7038fa0e4cb8aeac9e48a0b45574db66cba39e73` (16 MiB).
 make build TARGET=us-rev1
 ```
 
-Revision 1 shares the C sources. `make port` derives its
+Revision 1 shares the C sources; code that changed between revisions sits
+under `#if TSBO_REVISION`. `make port` derives its
 [manifest](config/build-us-rev1.json) from the revision 0 one, carrying over
-only functions whose bytes differ solely in relocated addresses. The revision 1
-build currently matches with 2,542 C functions; the progress treemap covers
-revision 0 only.
+functions whose bytes differ only in relocated addresses, plus the hand
+placements in [config/port-us-rev1.json](config/port-us-rev1.json). The revision 1
+build currently matches with 2,543 C functions, including the master-volume
+routine that has no C owner in revision 0. One 216-byte routine remains
+unconverted there. The progress treemap covers revision 0 only.
 
 | Command | Purpose |
 | --- | --- |
