@@ -16,7 +16,8 @@ def validate_copy(copy, word):
         actual = [word(off) for off in copy['word_copy_literal_offsets']]
         expected = [0x08000000 + start, address, control]
     else:
-        actual = [word(off) for off in (0x1f88c, 0x1f890, 0x1f894)]
+        base = copy.get('dma_literal_offset', 0x1f88c)
+        actual = [word(base + i) for i in (0, 4, 8)]
         expected = [0x08000000 + start, address, 0x84000080]
         if size != 512:
             raise ValueError('IRQ DMA word count differs from map')

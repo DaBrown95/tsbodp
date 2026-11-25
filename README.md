@@ -1,7 +1,7 @@
 # The Sims: Bustin' Out
 
 A matching decompilation of *The Sims: Bustin' Out* for the Game Boy Advance,
-targeting the multilingual USA/Europe release.
+targeting the multilingual USA/Europe release and its USA revision 1.
 
 This is an **AI-driven experiment** to see what coding agents can do.
 Almost all code, analysis and tooling are AI-generated.
@@ -111,6 +111,24 @@ make build
 ```
 
 Output: `build/us-eu/bustin-out.gba`. The build fails if any byte differs.
+
+For revision 1, put this ROM alongside it and build with `TARGET=us-rev1`:
+
+```text
+baseroms/Sims, The - Bustin' Out (USA) (En,Fr,De,Es,It,Nl) (Rev 1).gba
+```
+
+SHA-1: `7038fa0e4cb8aeac9e48a0b45574db66cba39e73` (16 MiB).
+
+```sh
+make build TARGET=us-rev1
+```
+
+Revision 1 shares the C sources. `make port` derives its
+[manifest](config/build-us-rev1.json) from the revision 0 one, carrying over
+only functions whose bytes differ solely in relocated addresses. The revision 1
+build currently matches with 2,511 C functions; the progress treemap covers
+revision 0 only.
 
 | Command | Purpose |
 | --- | --- |

@@ -4,6 +4,7 @@
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
 import sys
@@ -12,6 +13,19 @@ from datetime import datetime, timezone
 
 
 ROOT = Path(__file__).resolve().parents[1]
+TARGETS = ("us-eu", "us-rev1")
+
+
+def target_id():
+    """Build target for pilot and full-ROM tools; inherited by worker processes."""
+    value = os.environ.get("TSBO_TARGET", "us-eu")
+    if value not in TARGETS:
+        raise ValueError(f"Unknown build target {value}")
+    return value
+
+
+def target_revision():
+    return json.loads((ROOT / "config/targets" / (target_id() + ".json")).read_text())["revision"]
 
 
 def hashes(data):
@@ -87,8 +101,8 @@ def local_path(value):
     return path if path.is_absolute() else ROOT / path
 
 
-def write_report(name, result, target_id="us-eu"):
-    path = ROOT / "reports" / target_id / (name + ".json")
+def write_report(name, result, target=None):
+    path = ROOT / "reports" / (target or target_id()) / (name + ".json")
     path.parent.mkdir(parents=True, exist_ok=True)
     result["recorded_at_utc"] = datetime.now(timezone.utc).isoformat()
     path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")

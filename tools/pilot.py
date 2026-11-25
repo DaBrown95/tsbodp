@@ -12,7 +12,7 @@ import uuid
 import struct
 
 from elftools.elf.elffile import ELFFile
-from project import ROOT, audit, compare_bytes, write_report
+from project import ROOT, audit, compare_bytes, write_report, target_id, target_revision
 from toolchain import (load_profile, verify_native, ARM_PIN, ARM_PROFILE, OLD_PIN, OLD_PROFILE,
                        GCC302_PIN, GCC302_PROFILE, GCC302_HWI32_PIN,
                        GCC302_HWI32_PROFILE, compiler_selection,
@@ -58,7 +58,7 @@ def compile_function(function, source, folder, flags, copies=None, header_overri
     linked = folder / "linked.elf"
     entries = ()
     if copies is None:
-        ram = json.loads((ROOT / 'config/ram-map-us-eu.json').read_text())
+        ram = json.loads((ROOT / f'config/ram-map-{target_id()}.json').read_text())
         copies, entries = ram['copies'], ram['entries']
     address = execution_address(function, copies, entries)
     selected = compiler_selection(function, flags)
@@ -68,7 +68,7 @@ def compile_function(function, source, folder, flags, copies=None, header_overri
     retained = retained_source(headers, header_folder)
     dependencies = folder / 'preprocessor.d'
     run(["xcrun", "clang", "--target=arm-none-eabi", "-E", "-P", "-undef",
-         "-nostdinc", "-std=gnu89", "-MD", "-MF", dependencies, "-MT", "snapshot",
+         "-nostdinc", "-std=gnu89", f"-DTSBO_REVISION={target_revision()}", "-MD", "-MF", dependencies, "-MT", "snapshot",
          "-I", header_folder, retained, "-o", preprocessed], commands)
     verify_snapshot_inputs(headers, header_folder)
     headers['preprocessor_dependencies'] = verify_preprocessor_dependencies(
@@ -212,17 +212,17 @@ def main():
     args = parser.parse_args()
     validate_jobs(args.jobs)
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
-    run_folder = ROOT / "build/pilot/runs" / run_id
+    run_folder = ROOT / "build/pilot/runs" / (run_id if target_id() == "us-eu" else f"{target_id()}-{run_id}")
     project_header_store = (run_folder / '.project-header-content'
                             if args.share_project_headers else None)
-    target = json.loads((ROOT / "config/targets/us-eu.json").read_text())
-    manifest = json.loads((ROOT / "config/build-us-eu.json").read_text())
+    target = json.loads((ROOT / f"config/targets/{target_id()}.json").read_text())
+    manifest = json.loads((ROOT / f"config/build-{target_id()}.json").read_text())
     require_negative_controls(manifest['functions'] + manifest.get('assembly', []))
     lock, profile_path = load_profile(ROOT)
     rom, identity = audit(ROOT / target["rom_path"], target)
     if not identity["accepted"]:
         return 1
-    ram = json.loads((ROOT / 'config/ram-map-us-eu.json').read_text())
+    ram = json.loads((ROOT / f'config/ram-map-{target_id()}.json').read_text())
     copies = ram['copies']
     validate_execution_layout(manifest['functions'], copies, ram['entries'])
     validate_symbol_definitions(manifest, copies, ram['entries'])
@@ -239,7 +239,7 @@ def main():
                  "--untracked-files=no"], commands).strip()
     if dirty:
         raise RuntimeError("agbcc tracked source has local changes")
-    report = {"target": "us-eu", "reference_sha256": identity["sha256"],
+    report = {"target": target_id(), "reference_sha256": identity["sha256"],
               "run_id": run_id, "output_directory": str(run_folder),
               "compiler_source_commit": commit,
               "compiler_flags": manifest["compiler_flags"], "compilation_jobs": args.jobs, "functions": [],
@@ -247,11 +247,11 @@ def main():
               "project_header_store": (str(project_header_store)
                                        if project_header_store is not None else None)}
     report["helper_sha256"] = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-                                for name in ("tools/pilot.py", "tools/project.py", "config/build-us-eu.json",
+                                for name in ("tools/pilot.py", "tools/project.py", f"config/build-{target_id()}.json",
                                              "tools/toolchain.py", "tools/source_symbols.py", "tools/source_controls.py", "config/pilot-toolchain.json",
-                                             "config/targets/us-eu.json", "include/irq.h",
+                                             f"config/targets/{target_id()}.json", "include/irq.h",
                                              "tools/source_addresses.py", "tools/source_coverage.py", "tools/ram_copies.py", "tools/header_snapshots.py", "tools/pilot_parallel_process.py", "tools/project_header_store.py",
-                                             "config/ram-map-us-eu.json")}
+                                             f"config/ram-map-{target_id()}.json")}
     report['helper_sha256'].update({str(header.relative_to(ROOT)): hashlib.sha256(header.read_bytes()).hexdigest()
                                     for header in (ROOT / 'include').rglob('*.h')})
     if profile_path:
@@ -341,7 +341,8 @@ def main():
         verified_comparison(r, controls_compiled=args.negative_control)
         for r in report['functions'])
     if args.negative_control:
-        function = manifest["functions"][0]
+        function = next(f for f in manifest["functions"]
+                        if "= value;" in (ROOT / f["source"]).read_text())
         folder = run_folder / "negative-control"
         folder.mkdir(parents=True, exist_ok=True)
         original = (ROOT / function["source"]).read_text()

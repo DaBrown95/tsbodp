@@ -3,10 +3,12 @@ ANALYSIS_PYTHON ?= toolchains/analysis-venv/bin/python
 PROGRESS_PYTHON ?= $(ANALYSIS_PYTHON)
 SHARE_PROJECT_HEADERS ?= 0
 HEADER_SNAPSHOT_FLAGS = $(if $(filter 1,$(SHARE_PROJECT_HEADERS)),--share-project-headers,)
+TARGET ?= us-eu
+export TSBO_TARGET := $(TARGET)
 TEST_PYTHON ?= $(if $(wildcard $(ANALYSIS_PYTHON)),$(ANALYSIS_PYTHON),$(PYTHON))
 .DEFAULT_GOAL := build
 
-.PHONY: setup setup-arm setup-old audit audit-all compare doctor test build pilot analyze pilot-matrix ram-map inventory progress
+.PHONY: setup setup-arm setup-old audit audit-all compare doctor test build pilot analyze pilot-matrix ram-map inventory progress port
 setup:
 	$(PYTHON) tools/setup.py
 
@@ -51,3 +53,6 @@ inventory:
 progress: build inventory
 	$(PROGRESS_PYTHON) tools/render_progress.py
 	$(PROGRESS_PYTHON) tools/triage.py
+
+port:
+	$(ANALYSIS_PYTHON) tools/port_target.py --source-target us-eu --target us-rev1

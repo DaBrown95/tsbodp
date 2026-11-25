@@ -1,0 +1,259 @@
+{
+  "target": "us-rev1",
+  "copies": [
+    {
+      "name": "audio_iwram",
+      "phase": "startup",
+      "rom_offset": 16622644,
+      "ram_address": 50331648,
+      "size": 5528,
+      "startup_literal_offset": 276,
+      "exports": "audio_iwram.bin",
+      "classification": "Derived from the us-eu map at ROM 0xfda478; see config/ram-map-us-eu.json for evidence."
+    },
+    {
+      "name": "initial_ewram",
+      "phase": "startup",
+      "rom_offset": 16628172,
+      "ram_address": 33554432,
+      "size": 10232,
+      "startup_literal_offset": 288,
+      "exports": "initial_ewram.bin",
+      "classification": "Derived from the us-eu map at ROM 0xfdba28; see config/ram-map-us-eu.json for evidence."
+    },
+    {
+      "name": "irq_dispatcher",
+      "phase": "irq_init at 0x0801f854",
+      "rom_offset": 352,
+      "ram_address": 50338704,
+      "size": 512,
+      "exports": "irq_dispatcher.bin",
+      "dma_literal_offset": 129328,
+      "classification": "Derived from the us-eu map at ROM 0x160; see config/ram-map-us-eu.json for evidence."
+    },
+    {
+      "name": "frame_draw_iwram",
+      "phase": "frame initialization at 0x0800109c",
+      "rom_offset": 47168,
+      "ram_address": 50342128,
+      "size": 284,
+      "word_copy_literal_offsets": [
+        4332,
+        4336,
+        4340
+      ],
+      "word_copy_control": 67108935,
+      "exports": "frame_draw_iwram.bin",
+      "classification": "Derived from the us-eu map at ROM 0xb840; see config/ram-map-us-eu.json for evidence."
+    },
+    {
+      "name": "frame_emit_iwram",
+      "phase": "frame initialization at 0x0800109c",
+      "rom_offset": 45288,
+      "ram_address": 50342416,
+      "size": 640,
+      "word_copy_literal_offsets": [
+        4344,
+        4348,
+        4352
+      ],
+      "word_copy_control": 67109024,
+      "exports": "frame_emit_iwram.bin",
+      "classification": "Derived from the us-eu map at ROM 0xb0e8; see config/ram-map-us-eu.json for evidence."
+    },
+    {
+      "name": "display_tile_allocator_iwram",
+      "phase": "tile allocation initialization at 0x08047724",
+      "rom_offset": 46972,
+      "ram_address": 50361216,
+      "size": 200,
+      "word_copy_literal_offsets": [
+        292884,
+        292888,
+        292892
+      ],
+      "word_copy_control": 67108914,
+      "exports": "display_tile_allocator_iwram.bin",
+      "classification": "Derived from the us-eu map at ROM 0xb77c; see config/ram-map-us-eu.json for evidence."
+    },
+    {
+      "name": "resource_tile_decoder_iwram",
+      "rom_offset": 45932,
+      "ram_address": 50345664,
+      "size": 528,
+      "word_copy_literal_offsets": [
+        92800,
+        92804,
+        92808
+      ],
+      "word_copy_control": 67108996,
+      "phase": "resource decoder initialization at 0x08016a48",
+      "exports": "resource_tile_decoder_iwram.bin",
+      "classification": "Derived from the us-eu map at ROM 0xb36c; see config/ram-map-us-eu.json for evidence."
+    },
+    {
+      "name": "resource_background_decoder_iwram",
+      "rom_offset": 748,
+      "ram_address": 50344800,
+      "size": 848,
+      "word_copy_literal_offsets": [
+        92816,
+        92820,
+        92824
+      ],
+      "word_copy_control": 67109076,
+      "phase": "resource decoder initialization at 0x08016a48",
+      "exports": "resource_background_decoder_iwram.bin",
+      "classification": "Derived from the us-eu map at ROM 0x2ec; see config/ram-map-us-eu.json for evidence."
+    },
+    {
+      "name": "frame_map_draw_iwram",
+      "rom_offset": 46436,
+      "ram_address": 50360656,
+      "size": 336,
+      "word_copy_literal_offsets": [
+        237440,
+        237444,
+        237448
+      ],
+      "word_copy_control": 67108948,
+      "phase": "map routine initialization at 0x08039e78",
+      "exports": "frame_map_draw_iwram.bin",
+      "classification": "Derived from the us-eu map at ROM 0xb564; see config/ram-map-us-eu.json for evidence."
+    },
+    {
+      "name": "frame_map_scroll_iwram",
+      "rom_offset": 46756,
+      "ram_address": 50355792,
+      "size": 228,
+      "word_copy_literal_offsets": [
+        237452,
+        237456,
+        237460
+      ],
+      "word_copy_control": 67108921,
+      "phase": "map routine initialization at 0x08039e78",
+      "exports": "frame_map_scroll_iwram.bin",
+      "classification": "Derived from the us-eu map at ROM 0xb6a4; see config/ram-map-us-eu.json for evidence."
+    }
+  ],
+  "entries": [
+    {
+      "ram_address": 50331652,
+      "mode": "ARM",
+      "evidence": "Derived from us-eu: default IRQ table index 3 at ROM 0x53564",
+      "name": "audio_timer_irq"
+    },
+    {
+      "ram_address": 50332396,
+      "mode": "ARM",
+      "pointer_rom_offset": 313656,
+      "name": "audio_start_wrapper",
+      "evidence": "Derived from us-eu: ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50331796,
+      "mode": "ARM",
+      "pointer_rom_offset": 313660,
+      "name": "audio_start",
+      "evidence": "Derived from us-eu: ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50332448,
+      "mode": "ARM",
+      "pointer_rom_offset": 313664,
+      "name": "audio_control_320",
+      "evidence": "Derived from us-eu: ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50332648,
+      "mode": "ARM",
+      "pointer_rom_offset": 313668,
+      "name": "audio_control_3e8",
+      "evidence": "Derived from us-eu: ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50332724,
+      "mode": "ARM",
+      "pointer_rom_offset": 313672,
+      "name": "audio_control_434",
+      "evidence": "Derived from us-eu: ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50332852,
+      "mode": "ARM",
+      "pointer_rom_offset": 313676,
+      "name": "audio_control_4b4",
+      "evidence": "Derived from us-eu: ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50333048,
+      "mode": "ARM",
+      "pointer_rom_offset": 313680,
+      "name": "audio_control_578",
+      "evidence": "Derived from us-eu: ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50334388,
+      "mode": "ARM",
+      "pointer_rom_offset": 302720,
+      "name": "audio_mix_ab4",
+      "evidence": "Derived from us-eu: ROM call veneer or loaded function address"
+    },
+    {
+      "ram_address": 50338704,
+      "mode": "ARM",
+      "name": "irq_dispatcher",
+      "evidence": "Derived from us-eu: DMA destination installed into IRQ vector by irq_init"
+    },
+    {
+      "ram_address": 50342128,
+      "mode": "ARM",
+      "name": "frame_draw_iwram",
+      "evidence": "Derived from us-eu: literal copy installation by 0x0800109c and typed indirect call from frame scheduler 0x08000618"
+    },
+    {
+      "ram_address": 50342416,
+      "mode": "ARM",
+      "name": "frame_emit_iwram",
+      "evidence": "Derived from us-eu: literal copy installation by 0x0800109c; typed count/object-table call from frame scheduler 0x08000618; matching C frame_dispatch_collisions at ROM 0xB0E8 establishes the complete 640-byte ARM body"
+    },
+    {
+      "ram_address": 50361216,
+      "mode": "ARM",
+      "name": "display_tile_allocator_iwram",
+      "evidence": "Derived from us-eu: source/destination/count literals at 0x47734..0x4773c in the matching installer; fixed ARM function pointer in display_allocate_tile_bytes"
+    },
+    {
+      "name": "resource_tile_decoder_iwram",
+      "ram_address": 50345664,
+      "mode": "ARM",
+      "pointer_rom_offset": 92804,
+      "evidence": "Derived from us-eu: Matching installer 0x08016a48 publishes destination 0x030036d0 to callback word 0x03003360; source/destination/control literals establish the 528-byte copy. The first 504 ROM bytes are matching C resource_decode_tile_runs; the following 24 bytes are a partial copy of separately matching C frame_stage_map_tiles; this adds no source credit or incoming-entry proof."
+    },
+    {
+      "name": "resource_background_decoder_iwram",
+      "ram_address": 50344800,
+      "mode": "ARM",
+      "pointer_rom_offset": 92820,
+      "evidence": "Derived from us-eu: Matching installer 0x08016a48 publishes destination 0x03003370 to callback word 0x030036c0; source/destination/control literals establish the 848-byte copy. The first 812 ROM bytes are source-owned assembly-origin resource_background_decoder; the following 36 bytes belong to matching C frame_schedule."
+    },
+    {
+      "name": "frame_map_draw_iwram",
+      "ram_address": 50360656,
+      "mode": "ARM",
+      "pointer_rom_offset": 237444,
+      "evidence": "Derived from us-eu: Matching installer 0x08039e78 publishes even destination 0x03007160 to callback word 0x03001fc8. Source/destination/control literals establish the 336-byte copy: 320-byte matching C frame_stage_map_tiles plus 16 source bytes of matching C frame_transfer_map_tiles. Compatible one-argument source interface uses the low byte of view_index; complete index, writer and incoming-entry populations remain open."
+    },
+    {
+      "name": "frame_map_scroll_iwram",
+      "ram_address": 50355792,
+      "mode": "ARM",
+      "pointer_rom_offset": 237456,
+      "evidence": "Derived from us-eu: Matching installer 0x08039e78 publishes destination 0x03005e60 to callback word 0x03001fcc; source/destination/control literals establish the 228-byte copy. The first 216 bytes are matching C frame_transfer_map_tiles at its RAM link address; the following 12 ROM source bytes belong to matching C display_find_tile_run. View argument is narrowed to a byte; allowed indices remain unresolved."
+    }
+  ],
+  "limitations": [
+    "Derived from config/ram-map-us-eu.json by tools/port_target.py; carries no independent evidence."
+  ]
+}
