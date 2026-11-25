@@ -1,6 +1,8 @@
 #ifndef SAVE_TRANSFER_H
 #define SAVE_TRANSFER_H
 
+#include "revision.h"
+
 /* Twelve-byte parameter rows selected by values 4 and 64; roles are static. */
 struct SaveTransferParameters {
     unsigned int byte_size;
@@ -9,11 +11,11 @@ struct SaveTransferParameters {
 };
 /* Nonstorage views of the observed RAM pointer and original constant rows. */
 #define SAVE_TRANSFER_PARAMETERS \
-    (*(const struct SaveTransferParameters **)0x030074e4)
+    (*(const struct SaveTransferParameters **)REVISION_SAVE_TRANSFER_PARAMETERS)
 #define SAVE_TRANSFER_PARAMETERS_4 \
-    ((const struct SaveTransferParameters *)0x08d7074c)
+    ((const struct SaveTransferParameters *)REVISION_SAVE_TRANSFER_ROWS)
 #define SAVE_TRANSFER_PARAMETERS_64 \
-    ((const struct SaveTransferParameters *)0x08d70758)
+    ((const struct SaveTransferParameters *)REVISION_SAVE_TRANSFER_ROWS + 1)
 
 /* Observed fixed MMIO views. DMA pointer registers themselves are volatile. */
 #define SAVE_TRANSFER_IME (*(volatile unsigned short *)0x04000208)

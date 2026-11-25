@@ -1,5 +1,6 @@
 #include "frame.h"
 #include "display_collision.h"
+#include "revision.h"
 
 /* Build the next frame's object work and delayed VBlank display queue. */
 int frame_schedule(struct FrameObjectList *list, FrameU8 update_display)
@@ -7,8 +8,8 @@ int frame_schedule(struct FrameObjectList *list, FrameU8 update_display)
     struct FrameObject *object, *next;
     FrameU32 i, layer;
     void (*dispatch_primary)(FrameU32, struct CollisionObject **) =
-        (void (*)(FrameU32, struct CollisionObject **))0x03002a20;
-    void (*dispatch_sort)(void) = (void (*)(void))0x03002900;
+        (void (*)(FrameU32, struct CollisionObject **))REVISION_FRAME_EMIT_IWRAM;
+    void (*dispatch_sort)(void) = (void (*)(void))REVISION_FRAME_DRAW_IWRAM;
     int changed = 0;
     g_frame_count = 0;
     g_frame_queue.count = 0;

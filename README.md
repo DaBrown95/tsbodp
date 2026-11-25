@@ -127,7 +127,7 @@ make build TARGET=us-rev1
 Revision 1 shares the C sources. `make port` derives its
 [manifest](config/build-us-rev1.json) from the revision 0 one, carrying over
 only functions whose bytes differ solely in relocated addresses. The revision 1
-build currently matches with 2,511 C functions; the progress treemap covers
+build currently matches with 2,528 C functions; the progress treemap covers
 revision 0 only.
 
 | Command | Purpose |

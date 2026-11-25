@@ -122,5 +122,9 @@ void scene_contact_activity_seven_step_primary(struct FrameObject *base) {
   bonus*=10;
   scene_contact_add_activity_score(bonus);
   object->actor_id=1;
+#if TSBO_REVISION == 1
+  /* Revision 1 also stops stepping the finished actor. */
+  object->on_step=0;
+#endif
  }
 }

@@ -4,6 +4,10 @@
 void frame_begin_contact_action(struct CollisionObject *owner,struct CollisionObject *other) {
  struct ContactActionView *object=(struct ContactActionView *)owner;
  struct ContactActionView *partner=(struct ContactActionView *)other;
+#if TSBO_REVISION == 1
+ /* Revision 1 marks the world on every contact; the player step clears it. */
+ g_contact_action_world.unknownd0[0x42f-0xd0]=1;
+#endif
  if(partner->id==0 && object->state==0 && partner->state==16 && (g_input_pressed[0]&1)) {
   partner->state=0;
   object->state=4;

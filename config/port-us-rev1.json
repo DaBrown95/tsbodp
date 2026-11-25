@@ -1,0 +1,70 @@
+{
+  "target": "us-rev1",
+  "revision_conditioned": [
+    "set_word_0300217c",
+    "get_word_0300217c",
+    "set_word_03002180_bit0",
+    "frame_schedule",
+    "display_allocate_tile_bytes",
+    "save_transfer_configure_4c8f4",
+    "save_transfer_dma_copy",
+    "save_transfer_read_4c9bc",
+    "save_transfer_write_core",
+    "save_transfer_compare",
+    "save_transfer_write_nowait"
+  ],
+  "extra_functions": [
+    {
+      "name": "audio_set_master_volume",
+      "rom_offset": 301644,
+      "size": 116,
+      "source": "src/audio/set_master_volume.c",
+      "symbols": {
+        "audio_patch_mix_shift": "0x03000bf0",
+        "g_audio_clip_table": "0x02001238",
+        "_call_via_r1": "0x0804cd8d"
+      },
+      "thumb_symbols": [
+        "_call_via_r1"
+      ],
+      "compiler_id": "gcc302_hwi32",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "i < 1024",
+        "after": "i < 1023"
+      }
+    }
+  ],
+  "placements": {
+    "scene_contact_activity_seven_step_primary": {
+      "rom_offset": "0x47dfc",
+      "size": 1272
+    },
+    "scene_link_catalog_draw_panel": {
+      "rom_offset": "0x21c40",
+      "size": 372
+    },
+    "frame_begin_contact_action": {
+      "rom_offset": "0x111ac",
+      "size": 92,
+      "extra_symbols": [
+        "g_contact_action_world"
+      ]
+    },
+    "display_menu_try_relation_flag": {
+      "rom_offset": "0x360fc",
+      "size": 72
+    },
+    "frame_initialize_attachment_job_12": {
+      "rom_offset": "0x34d78",
+      "size": 64
+    }
+  }
+}

@@ -133,7 +133,7 @@ def relocations(path, entry):
                        symbol['st_shndx'] == 'SHN_UNDEF')
 
 
-def compare(f, o0, o1, old, new, obj, moved):
+def compare(f, o0, o1, old, new, obj, moved, conditioned=False):
     """Check a placed extent differs only in relocation fields; solve symbols.
 
     `moved` is the change in execution address, which differs from the change
@@ -163,7 +163,9 @@ def compare(f, o0, o1, old, new, obj, moved):
         if solved.setdefault(name, new_value) != new_value:
             return None, f'relocation symbol {name} solved inconsistently'
     differing = [i for i in range(size) if not mask[i] and old[o0 + i] != new[o1 + i]]
-    if differing:
+    # Revision-conditioned sources select different constants; the pilot,
+    # not this placement check, decides whether those bytes match.
+    if differing and not conditioned:
         return None, f'{len(differing)} non-relocation bytes differ'
     return solved, None
 
@@ -187,6 +189,9 @@ def main():
     if not pilot['accepted']:
         raise ValueError('Source-target pilot run is not accepted')
     run = Path(args.pilot_run or pilot['output_directory'])
+    port_path = ROOT / f'config/port-{args.target}.json'
+    port = json.loads(port_path.read_text()) if port_path.exists() else {}
+    conditioned = set(port.get('revision_conditioned', ()))
     sources = manifest['functions'] + manifest.get('assembly', [])
     placed = place(sources, old, new)
 
@@ -251,7 +256,7 @@ def main():
                 continue
             moved = pair[1]['ram_address'] + placed[name] - pair[1]['rom_offset'] - f['ram_address']
         solved, reason = compare(f, f['rom_offset'], placed[name], old, new,
-                                 run / name / 'source.o', moved)
+                                 run / name / 'source.o', moved, name in conditioned)
         if reason:
             rejected[name] = reason
             continue
@@ -315,6 +320,34 @@ def main():
                 new[placed[name]:placed[name] + f['size']]).hexdigest()
         (out_assembly if f in manifest.get('assembly', []) else out_functions).append(item)
 
+    # Sources whose code changed in this revision: placed by hand, with
+    # symbols taken from the values solved for the rest of the target.
+    for name, offset in port.get('placements', {}).items():
+        f = next(f for f in sources if f['name'] == name)
+        if name in carried:
+            raise ValueError(f'Placed function {name} was already carried')
+        placement = offset if isinstance(offset, dict) else {'rom_offset': offset}
+        item = {**f, 'rom_offset': int(str(placement['rom_offset']), 0),
+                'size': placement.get('size', f['size']), 'symbols': {}}
+        wanted = {**f.get('symbols', {}),
+                  **{k: '0' for k in placement.get('extra_symbols', ())}}
+        for k, v in wanted.items():
+            if k in values:
+                item['symbols'][k] = f"{values[k]:#010x}"
+            elif k in definitions:
+                item['symbols'][k] = f"{definitions[k] | (int(str(v), 0) & 1):#010x}"
+            else:
+                raise ValueError(f'No {args.target} value for {k} used by {name}')
+        if 'expected_sha256' in f:
+            item['expected_sha256'] = hashlib.sha256(
+                new[item['rom_offset']:item['rom_offset'] + item['size']]).hexdigest()
+        rejected.pop(name, None)
+        out_functions.append(item)
+    # Target-only sources, e.g. a routine rebuilt differently in this revision.
+    for item in port.get('extra_functions', ()):
+        if item['name'] in carried or any(f['name'] == item['name'] for f in out_functions):
+            raise ValueError(f"Extra function {item['name']} duplicates a carried source")
+        out_functions.append(dict(item))
     new_manifest = {**manifest, 'target': args.target,
                     'functions': out_functions, 'assembly': out_assembly}
     new_ram = {'target': args.target, 'copies': copies, 'entries': entries,

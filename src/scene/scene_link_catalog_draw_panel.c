@@ -23,6 +23,11 @@ void scene_link_catalog_draw_panel(unsigned int kind)
   text=display_scene_lookup_text(440);
   tile=display_text_draw_line(194,120,(row+1)*8,text,1);
   display_text_draw_line(tile,120,(row+1)*8+12,display_scene_lookup_text(441),1);
+#if TSBO_REVISION == 0
  }else display_text_draw_line(194,120,(row+1)*8,text,1);
+#else
+ /* Revision 1 drops single-line notices by three pixels. */
+ }else display_text_draw_line(194,120,(row+1)*8+3,text,1);
+#endif
 }
 asm(".align 2,0");
