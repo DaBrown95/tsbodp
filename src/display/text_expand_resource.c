@@ -21,7 +21,13 @@ char *display_text_expand_resource(unsigned int id)
                 display_text_copy_bytes(tail - 2, replacement, length);
                 next_index = index - 2;
                 index = next_index + length;
-            } else ++index;
+            } else {
+#if TSBO_REVISION == 1
+                /* Revision 1 skips the trail byte of a two-byte character. */
+                if ((unsigned char)text[index] > 0xef) ++index;
+#endif
+                ++index;
+            }
         }
     }
     return text;

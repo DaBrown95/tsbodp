@@ -19,11 +19,21 @@ static __inline int display_text_width_inline(const char *text)
             width += display_text_measure_width((char *)display_text_substitution_field(*cursor));
         } else {
             const struct DisplayFont *font;
+#if TSBO_REVISION == 0
             if (*(volatile const unsigned char *)cursor > 0xef) {
                 ++cursor;
                 font = g_display_fonts[1];
             } else font = g_display_fonts[0];
             width += display_text_glyph_width(font, *cursor);
+#else
+            /* Revision 1 passes both bytes of a two-byte character. */
+            unsigned short code = *cursor;
+            if (code > 0xef) {
+                code = (code << 8) | *++cursor;
+                font = g_display_fonts[1];
+            } else font = g_display_fonts[0];
+            width += display_text_glyph_width(font, code);
+#endif
         }
         ++cursor;
     }

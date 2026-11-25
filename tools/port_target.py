@@ -331,8 +331,12 @@ def main():
                 'size': placement.get('size', f['size']), 'symbols': {}}
         wanted = {**f.get('symbols', {}),
                   **{k: '0' for k in placement.get('extra_symbols', ())}}
+        # Callees that no carried source calls are given explicitly.
+        explicit = placement.get('symbol_values', {})
         for k, v in wanted.items():
-            if k in values:
+            if k in explicit:
+                item['symbols'][k] = explicit[k]
+            elif k in values:
                 item['symbols'][k] = f"{values[k]:#010x}"
             elif k in definitions:
                 item['symbols'][k] = f"{definitions[k] | (int(str(v), 0) & 1):#010x}"

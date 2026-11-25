@@ -12,6 +12,14 @@ unsigned int display_text_copy_expanded(const unsigned char *source, char *desti
             ++source;
         } else {
             *destination = *source;
+#if TSBO_REVISION == 1
+            /* Revision 1 copies both bytes of a two-byte character. */
+            if (*source > 0xef) {
+                ++destination;
+                ++source;
+                *destination = *source;
+            }
+#endif
             ++destination;
             ++source;
             ++count;

@@ -57326,6 +57326,194 @@
       }
     },
     {
+      "name": "save_world_show_row_notice",
+      "source": "src/save/world_show_row_notice.c",
+      "rom_offset": 126176,
+      "size": 168,
+      "symbols": {
+        "g_actor_scene_result_id": "0x030059e0",
+        "g_actor_scene_request": "0x030059f0",
+        "display_scene_lookup_text": "0x080450e9",
+        "display_text_measure_width": "0x0801affd",
+        "display_text_measure_height": "0x0801b055",
+        "scene_submit_default_request": "0x08027e69",
+        "g_save_world_transition_rows": "0x03004120",
+        "audio_play_sequence_notification": "0x08041505",
+        "display_text_select_font": "0x0801af3d"
+      },
+      "thumb_symbols": [
+        "display_scene_lookup_text",
+        "display_text_measure_width",
+        "display_text_measure_height",
+        "scene_submit_default_request",
+        "audio_play_sequence_notification"
+      ],
+      "negative_control": {
+        "before": "flags & 0x100000",
+        "after": "flags & 0x200000"
+      }
+    },
+    {
+      "name": "save_world_show_row_flag_notice",
+      "source": "src/save/world_show_row_flag_notice.c",
+      "rom_offset": 126344,
+      "size": 136,
+      "symbols": {
+        "g_actor_scene_result_id": "0x030059e0",
+        "g_actor_scene_request": "0x030059f0",
+        "display_scene_lookup_text": "0x080450e9",
+        "display_text_measure_width": "0x0801affd",
+        "display_text_measure_height": "0x0801b055",
+        "scene_submit_default_request": "0x08027e69",
+        "g_save_world_transition_rows": "0x03004120",
+        "audio_play_sequence_notification": "0x08041505",
+        "display_text_select_font": "0x0801af3d"
+      },
+      "thumb_symbols": [
+        "display_scene_lookup_text",
+        "display_text_measure_width",
+        "display_text_measure_height",
+        "scene_submit_default_request",
+        "audio_play_sequence_notification"
+      ],
+      "negative_control": {
+        "before": "flags & 0x40000",
+        "after": "flags & 0x80000"
+      }
+    },
+    {
+      "name": "save_world_show_notice",
+      "source": "src/save/world_show_notice.c",
+      "rom_offset": 126480,
+      "size": 104,
+      "symbols": {
+        "g_actor_scene_result_id": "0x030059e0",
+        "g_actor_scene_request": "0x030059f0",
+        "display_scene_lookup_text": "0x080450e9",
+        "display_text_measure_width": "0x0801affd",
+        "display_text_measure_height": "0x0801b055",
+        "scene_submit_default_request": "0x08027e69",
+        "audio_play_animation_cue": "0x080410dd",
+        "display_text_select_font": "0x0801af3d"
+      },
+      "thumb_symbols": [
+        "display_scene_lookup_text",
+        "display_text_measure_width",
+        "display_text_measure_height",
+        "scene_submit_default_request",
+        "audio_play_animation_cue"
+      ],
+      "negative_control": {
+        "before": "audio_play_animation_cue(3)",
+        "after": "audio_play_animation_cue(4)"
+      }
+    },
+    {
+      "name": "display_text_copy_expanded",
+      "rom_offset": 110480,
+      "size": 108,
+      "source": "src/display/text_copy_expanded.c",
+      "symbols": {
+        "display_text_copy_string": "0x0804ea79",
+        "display_text_string_length": "0x0804eac5",
+        "g_display_text_fields": "0x03001a50"
+      },
+      "thumb_symbols": [
+        "display_text_copy_string",
+        "display_text_string_length"
+      ],
+      "negative_control": {
+        "before": "*source == '@'",
+        "after": "*source == '#'"
+      }
+    },
+    {
+      "name": "display_text_measure_width",
+      "rom_offset": 110588,
+      "size": 88,
+      "symbols": {
+        "g_display_fonts": "0x03001a10",
+        "display_text_glyph_width": "0x0801b495",
+        "g_display_text_fields": "0x03001a50"
+      },
+      "thumb_symbols": [
+        "display_text_glyph_width"
+      ],
+      "source": "src/display/text_measure_width.c",
+      "negative_control": {
+        "before": "display_text_width_inline(text)",
+        "after": "display_text_width_inline(text + 1)"
+      }
+    },
+    {
+      "name": "display_text_draw_line",
+      "rom_offset": 108928,
+      "size": 296,
+      "symbols": {
+        "g_display_fonts": "0x03001a10",
+        "display_text_measure_width": "0x0801affd",
+        "display_text_glyph_width": "0x0801b495",
+        "display_text_render": "0x0801aaa9",
+        "g_display_text_fields": "0x03001a50"
+      },
+      "thumb_symbols": [
+        "display_text_measure_width",
+        "display_text_glyph_width",
+        "display_text_render"
+      ],
+      "source": "src/display/text_draw_line.c",
+      "negative_control": {
+        "before": "if (style == 1)",
+        "after": "if (style == 3)"
+      }
+    },
+    {
+      "name": "display_text_draw",
+      "rom_offset": 108504,
+      "size": 424,
+      "symbols": {
+        "g_display_fonts": "0x03001a10",
+        "display_text_measure_width": "0x0801affd",
+        "display_text_glyph_width": "0x0801b495",
+        "display_text_draw_line": "0x0801a981",
+        "g_display_text_fields": "0x03001a50"
+      },
+      "thumb_symbols": [
+        "display_text_measure_width",
+        "display_text_glyph_width"
+      ],
+      "source": "src/display/text_draw.c",
+      "negative_control": {
+        "before": "if (*cursor == '\\n')",
+        "after": "if (*cursor == '\\r')"
+      }
+    },
+    {
+      "name": "display_text_expand_resource",
+      "rom_offset": 110120,
+      "size": 152,
+      "source": "src/display/text_expand_resource.c",
+      "symbols": {
+        "display_text_string_length": "0x0804eac5",
+        "display_text_find_character": "0x0804e9ed",
+        "display_text_move_bytes": "0x0804e8c9",
+        "display_text_copy_bytes": "0x0804e869",
+        "display_scene_lookup_text": "0x080450e9",
+        "g_display_text_fields": "0x03001a50"
+      },
+      "thumb_symbols": [
+        "display_text_string_length",
+        "display_text_find_character",
+        "display_text_move_bytes",
+        "display_text_copy_bytes",
+        "display_scene_lookup_text"
+      ],
+      "negative_control": {
+        "before": "display_text_find_character(text, '@')",
+        "after": "display_text_find_character(text, '#')"
+      }
+    },
+    {
       "name": "audio_set_master_volume",
       "rom_offset": 301644,
       "size": 116,
