@@ -16,13 +16,24 @@
 #include "audio_sequence_player.h"
 
 void audio_player_advance_row(void) {
+#if TSBO_REVISION == 0
     if (g_audio_player.pending_order >= 0) {
         g_audio_player.order = g_audio_player.pending_order<AUDIO_CURRENT_MODULE->numOrders?g_audio_player.pending_order:0;
         g_audio_player.pending_order = -1;
         g_audio_player.row = 0;
         audio_player_load_row();
     }
-    else if (++g_audio_player.row >= g_audio_player.pattern->rows || g_audio_player.pending_row >= 0) {
+    else
+#else
+    /* Revision 1 takes the upstream route: step back one order and force
+     * the end-of-pattern path. */
+    if (g_audio_player.pending_order >= 0) {
+        g_audio_player.order = g_audio_player.pending_order - 1;
+        g_audio_player.row = 254;
+        g_audio_player.pending_order = -1;
+    }
+#endif
+    if (++g_audio_player.row >= g_audio_player.pattern->rows || g_audio_player.pending_row >= 0) {
         int marker = 0;
         while (AUDIO_CURRENT_MODULE->orders[++g_audio_player.order] == 254 && g_audio_player.order<AUDIO_CURRENT_MODULE->numOrders)marker = 1;
         if (marker && g_audio_player_callback)g_audio_player_callback(4, 0);

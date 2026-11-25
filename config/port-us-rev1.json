@@ -123,6 +123,67 @@
         "display_text_find_character": "0x0804e9ed",
         "display_text_move_bytes": "0x0804e8c9"
       }
+    },
+    "audio_player_advance_row": {
+      "rom_offset": "0x49f08",
+      "size": 288
+    },
+    "audio_player_process_row": {
+      "rom_offset": "0x4a028",
+      "size": 1124,
+      "symbol_values": {
+        "g_audio_player_samples": "0x08d5465c",
+        "g_audio_player_instruments": "0x08b18520",
+        "g_audio_track_effects": "0x08d6f4dc",
+        "g_audio_volume_effects": "0x08d6f740"
+      }
+    },
+    "audio_instrument_release": {
+      "rom_offset": "0x4ae5c",
+      "size": 116,
+      "symbol_values": {
+        "g_audio_instrument_tracks": "0x020025b8"
+      },
+      "extra_symbols": [
+        "_call_via_r1"
+      ]
+    },
+    "audio_instrument_start": {
+      "rom_offset": "0x4ac88",
+      "size": 468,
+      "symbol_values": {
+        "g_audio_player_samples": "0x08d5465c",
+        "g_audio_linear_frequencies": "0x08d6fb00",
+        "g_audio_instrument_tracks": "0x020025b8",
+        "g_audio_instrument_generation": "0x03001594"
+      }
+    },
+    "audio_mix_channels": {
+      "rom_offset": "0xfdb07c",
+      "size": 1056,
+      "symbol_values": {
+        "audio_mix_clear": "0x03000afc",
+        "g_audio_mix_buffer": "0x03001144",
+        "audio_mix_downsample": "0x03000b38",
+        "g_audio_volume_sum_left": "0x03000b30",
+        "g_audio_volume_sum_right": "0x03000b34",
+        "g_audio_mix_functions": "0x08d6f49c",
+        "audio_mix_bias": "0x03000ab4"
+      },
+      "inline_glue_spans": [
+        {
+          "offset": 284,
+          "size": 28
+        },
+        {
+          "offset": 676,
+          "size": 28
+        }
+      ]
+    },
+    "audio_mix_frame": {
+      "rom_offset": "0xfdb49c",
+      "size": 220
     }
   }
 }

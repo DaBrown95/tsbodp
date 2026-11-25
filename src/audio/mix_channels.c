@@ -18,8 +18,14 @@
 #include "audio_bios_divide.h"
 
 // a guess how many samples still fit
+#if TSBO_REVISION == 0
 #define SAMPLEINCGUESS      ( ( (todo * (c->step >> 8)) >> 8 ) + 1 )
 #define SAMPLEINCGUESSNEG   ( (todo * (c->step >> 8)) >> 8 )
+#else
+/* Revision 1 uses the coarser upstream guess. */
+#define SAMPLEINCGUESS      ( todo * ( ( c->step >> 16 ) + 1 ) )
+#define SAMPLEINCGUESSNEG   ( todo * ( c->step >> 16 ) )
+#endif
 
 #define LOOP_NORMAL     1
 #define LOOP_BIDIR      2

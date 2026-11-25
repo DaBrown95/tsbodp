@@ -22,12 +22,18 @@ AudioInstrumentHandle audio_instrument_start( const struct AudioInstrument *ins,
         c = &g_audio_instrument_tracks[ 0 ];
         int i = 0;
 
+#if TSBO_REVISION == 0
         while(c->envelope_enabled && i<6U){i++;c++;}
         if(i>=6U){
             c=&g_audio_instrument_tracks[0];i=0;
             while(audio_sample_active_ram(c->handle) && i<6U){i++;c++;}
             if(i>=6U)return (AudioInstrumentHandle){.val=0};
         }
+#else
+        /* Revision 1 checks only sample activity, as upstream Krawall does. */
+        while(audio_sample_active_ram(c->handle) && i<6U){i++;c++;}
+        if(i>=6U)return (AudioInstrumentHandle){.val=0};
+#endif
         old.channel = i;
     }
 

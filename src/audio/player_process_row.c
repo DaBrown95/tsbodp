@@ -111,7 +111,12 @@ static inline void i_release( struct AudioPlayerTrack *c )
             c->i_vol_status = ENVSTATUS_ACTIVE_NOSUSTAIN;
 
         // this is ok here, cause w/o a volume-envelope === will stop the sample
+#if TSBO_REVISION == 0
         {
+#else
+        /* Revision 1 has the upstream guard on the panning envelope. */
+        if( c->i_pan_status ) {
+#endif
             if( c->i_pan_status == ENVSTATUS_SUSTAIN )
                 c->i_pan_status = ENVSTATUS_ACTIVE;
             else
@@ -167,6 +172,11 @@ void audio_player_process_row(void)
                     c->instrument = g_audio_player_instruments[ instrument ];
                     c->sample = g_audio_player_samples[ c->instrument->samples[ note-1 ] ];
                     c->volume = c->sample->volume;
+#if TSBO_REVISION == 1
+                    /* Revision 1 takes the sample's default panning here,
+                     * as upstream Krawall does, not at note start. */
+                    c->panning = c->sample->pan;
+#endif
 
                     setVol = true;
                     sampleSet = true;
@@ -210,7 +220,9 @@ void audio_player_process_row(void)
                         if( !sampleSet )
                             c->sample = g_audio_player_samples[ c->instrument->samples[ note ] ];
 
+#if TSBO_REVISION == 0
                         c->panning = c->sample->pan;
+#endif
                         i_init(c);
                     }
 

@@ -323,6 +323,15 @@ def main():
     # Sources whose code changed in this revision: placed by hand, with
     # symbols taken from the values solved for the rest of the target.
     for name, offset in port.get('placements', {}).items():
+        placement = offset if isinstance(offset, dict) else {'rom_offset': offset}
+        start = int(str(placement['rom_offset']), 0)
+        f = next(f for f in sources if f['name'] == name)
+        if 'ram_address' in f:
+            new_copy = copy_map[f['ram_copy']][1]
+            definitions[name] = new_copy['ram_address'] + start - new_copy['rom_offset']
+        else:
+            definitions[name] = ROM_BASE + start
+    for name, offset in port.get('placements', {}).items():
         f = next(f for f in sources if f['name'] == name)
         if name in carried:
             raise ValueError(f'Placed function {name} was already carried')
@@ -342,6 +351,11 @@ def main():
                 item['symbols'][k] = f"{definitions[k] | (int(str(v), 0) & 1):#010x}"
             else:
                 raise ValueError(f'No {args.target} value for {k} used by {name}')
+        if 'ram_address' in f:
+            new_copy = copy_map[f['ram_copy']][1]
+            item['ram_address'] = new_copy['ram_address'] + item['rom_offset'] - new_copy['rom_offset']
+        if 'inline_glue_spans' in placement:
+            item['inline_glue'] = {**f['inline_glue'], 'spans': placement['inline_glue_spans']}
         if 'expected_sha256' in f:
             item['expected_sha256'] = hashlib.sha256(
                 new[item['rom_offset']:item['rom_offset'] + item['size']]).hexdigest()

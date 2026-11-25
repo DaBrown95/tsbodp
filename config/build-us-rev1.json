@@ -57514,6 +57514,272 @@
       }
     },
     {
+      "name": "audio_player_advance_row",
+      "rom_offset": 302856,
+      "size": 288,
+      "source": "src/audio/player_advance_row.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "g_audio_player_backup": "0x02001df8",
+        "g_audio_player_volume_current": "0x02001640",
+        "g_audio_player_volume_target": "0x020025ac",
+        "g_audio_player_volume_step": "0x020025b0",
+        "g_audio_player_callback": "0x020025b4",
+        "audio_player_load_row": "0x08049e85",
+        "audio_player_stop": "0x0804bc15",
+        "audio_player_finish_jingle": "0x0804aba9",
+        "audio_player_tick": "0x0804a81d",
+        "audio_set_tick_callback": "0x08049b91",
+        "audio_set_tick_bpm": "0x08049bb9",
+        "audio_set_global_volume": "0x08049b7d",
+        "audio_update_channel_volumes": "0x08049c81",
+        "audio_sample_release": "0x03000320",
+        "display_text_copy_bytes": "0x0804e869",
+        "audio_mark_channels": "0x08049c01",
+        "audio_resume_channels": "0x08049c39",
+        "audio_stop_marked_channels": "0x08049c5d",
+        "audio_zero_bytes": "0x0804e84d",
+        "audio_period_linear": "0x0804beb5",
+        "audio_frequency_linear": "0x0804becd",
+        "audio_period_amiga": "0x0804be69",
+        "audio_frequency_amiga": "0x0804be8d",
+        "g_audio_sine": "0x08d6f790",
+        "_call_via_r0": "0x0804cd89",
+        "_call_via_r1": "0x0804cd8d",
+        "_call_via_r2": "0x0804cd91",
+        "_call_via_r3": "0x0804cd95",
+        "_call_via_r4": "0x0804cd99",
+        "_call_via_r5": "0x0804cd9d",
+        "_call_via_r6": "0x0804cda1",
+        "_call_via_r7": "0x0804cda5"
+      },
+      "thumb_symbols": [
+        "audio_player_load_row",
+        "audio_player_stop",
+        "audio_player_finish_jingle",
+        "audio_player_tick",
+        "audio_set_tick_callback",
+        "audio_set_tick_bpm",
+        "audio_set_global_volume",
+        "audio_update_channel_volumes",
+        "display_text_copy_bytes",
+        "audio_mark_channels",
+        "audio_resume_channels",
+        "audio_stop_marked_channels",
+        "audio_zero_bytes",
+        "audio_period_linear",
+        "audio_frequency_linear",
+        "audio_period_amiga",
+        "audio_frequency_amiga",
+        "_call_via_r0",
+        "_call_via_r1",
+        "_call_via_r2",
+        "_call_via_r3",
+        "_call_via_r4",
+        "_call_via_r5",
+        "_call_via_r6",
+        "_call_via_r7"
+      ],
+      "compiler_id": "gcc302",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "g_audio_player_callback(4, 0)",
+        "after": "g_audio_player_callback(3, 0)"
+      }
+    },
+    {
+      "name": "audio_player_process_row",
+      "rom_offset": 303144,
+      "size": 1124,
+      "source": "src/audio/player_process_row.c",
+      "symbols": {
+        "g_audio_player": "0x02001644",
+        "g_audio_player_samples": "0x08d5465c",
+        "g_audio_player_instruments": "0x08b18520",
+        "g_audio_track_effects": "0x08d6f4dc",
+        "g_audio_volume_effects": "0x08d6f740",
+        "audio_sample_release": "0x03000320",
+        "audio_set_sample_step": "0x030003e8",
+        "audio_set_channel_volume": "0x03000434",
+        "audio_set_channel_pan": "0x030004b4",
+        "audio_set_channel_position": "0x03000578",
+        "audio_start_sample_extended": "0x03000094",
+        "audio_player_advance_row": "0x08049f09",
+        "_call_via_r1": "0x0804cd8d",
+        "_call_via_r2": "0x0804cd91",
+        "_call_via_r4": "0x0804cd99",
+        "_call_via_r6": "0x0804cda1"
+      },
+      "thumb_symbols": [
+        "audio_player_advance_row",
+        "_call_via_r1",
+        "_call_via_r2",
+        "_call_via_r4",
+        "_call_via_r6"
+      ],
+      "compiler_id": "gcc302_hwi32",
+      "assembler_id": "binutils2101",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "instrument |= (note & 1) << 8",
+        "after": "instrument |= (note & 1) << 7"
+      }
+    },
+    {
+      "name": "audio_instrument_release",
+      "rom_offset": 306780,
+      "size": 116,
+      "source": "src/audio/instrument_release.c",
+      "symbols": {
+        "_call_via_r2": "0x0804cd91",
+        "audio_sample_release": "0x03000320",
+        "g_audio_instrument_tracks": "0x020025b8",
+        "_call_via_r1": "0x0804cd8d"
+      },
+      "thumb_symbols": [
+        "_call_via_r2"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "c->instrument_id!=i.val",
+        "after": "c->instrument_id==i.val"
+      }
+    },
+    {
+      "name": "audio_instrument_start",
+      "rom_offset": 306312,
+      "size": 468,
+      "source": "src/audio/instrument_start.c",
+      "symbols": {
+        "audio_start_sample_extended": "0x03000094",
+        "_call_via_r4": "0x0804cd99",
+        "_call_via_r7": "0x0804cda5",
+        "g_audio_player_samples": "0x08d5465c",
+        "g_audio_linear_frequencies": "0x08d6fb00",
+        "g_audio_instrument_tracks": "0x020025b8",
+        "g_audio_instrument_generation": "0x03001594",
+        "audio_sample_active_ram": "0x030005c8"
+      },
+      "thumb_symbols": [
+        "_call_via_r4",
+        "_call_via_r7"
+      ],
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-mthumb",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "assembler_id": "binutils2101",
+      "negative_control": {
+        "before": "++g_audio_instrument_generation",
+        "after": "(g_audio_instrument_generation += 2)"
+      }
+    },
+    {
+      "name": "audio_mix_channels",
+      "rom_offset": 16625788,
+      "size": 1056,
+      "ram_address": 50334792,
+      "source": "src/audio/mix_channels.c",
+      "mode": "ARM",
+      "ram_copy": "audio_iwram",
+      "compiler_id": "gcc302",
+      "symbols": {
+        "audio_mix_clear": "0x03000afc",
+        "g_audio_mix_buffer": "0x03001144",
+        "g_audio_sample_channels": "0x020008b4",
+        "audio_mix_downsample": "0x03000b38",
+        "g_audio_volume_sum_left": "0x03000b30",
+        "g_audio_volume_sum_right": "0x03000b34",
+        "g_audio_mix_functions": "0x08d6f49c",
+        "audio_mix_bias": "0x03000ab4"
+      },
+      "compiler_flags": [
+        "-O3",
+        "-marm",
+        "-mthumb-interwork",
+        "-mcpu=arm7tdmi"
+      ],
+      "negative_control": {
+        "before": "i = 32",
+        "after": "i = 31"
+      },
+      "inline_glue": {
+        "source": "include/audio_bios_divide.h",
+        "begin_prefix": "__tsbodp_glue_audio_divide_begin_",
+        "end_prefix": "__tsbodp_glue_audio_divide_end_",
+        "spans": [
+          {
+            "offset": 284,
+            "size": 28
+          },
+          {
+            "offset": 676,
+            "size": 28
+          }
+        ],
+        "negative_control": {
+          "before": "swine 0x60000",
+          "after": "swine 0x70000"
+        }
+      }
+    },
+    {
+      "name": "audio_mix_frame",
+      "rom_offset": 16626844,
+      "size": 220,
+      "ram_address": 50335848,
+      "source": "src/audio/mix_frame.c",
+      "symbols": {
+        "g_audio_tick_samples": "0x0200163e",
+        "g_audio_tick_period": "0x0200163c",
+        "g_audio_tick_callback": "0x02001638",
+        "audio_mix_channels": "0x03000c48",
+        "audio_acquire_frame_buffers": "0x080498dd"
+      },
+      "mode": "ARM",
+      "ram_copy": "audio_iwram",
+      "compiler_id": "gcc302",
+      "compiler_flags": [
+        "-O3",
+        "-marm",
+        "-mthumb-interwork",
+        "-fomit-frame-pointer",
+        "-mcpu=arm7tdmi"
+      ],
+      "thumb_symbols": [
+        "audio_acquire_frame_buffers"
+      ],
+      "negative_control": {
+        "before": "count<=remaining",
+        "after": "count<remaining"
+      }
+    },
+    {
       "name": "audio_set_master_volume",
       "rom_offset": 301644,
       "size": 116,

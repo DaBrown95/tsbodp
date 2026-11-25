@@ -78,7 +78,12 @@ static inline void i_release( struct AudioPlayerTrack *c )
             c->i_vol_status = ENVSTATUS_ACTIVE_NOSUSTAIN;
 
         // this is ok here, cause w/o a volume-envelope === will stop the sample
+#if TSBO_REVISION == 0
         {
+#else
+        /* Revision 1 has the upstream guard on the panning envelope. */
+        if( c->i_pan_status ) {
+#endif
             if( c->i_pan_status == ENVSTATUS_SUSTAIN )
                 c->i_pan_status = ENVSTATUS_ACTIVE;
             else
