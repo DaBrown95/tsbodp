@@ -35,10 +35,10 @@ generated from the other. Follow the user's instructions over this file.
   Preserve the changed-source negative controls.
 - Run `make test` for changes to analysis, build or verification tools. Add tests
   for meaningful failure cases rather than mirroring the implementation.
-- Before publishing source or map progress, run `make progress`. It rebuilds,
-  verifies, refreshes the inventory and generates the public treemap. Commit the
-  updated progress files with the corresponding work. The ROM map and treemap
-  need per-target static evidence, which only `rev0` has so far.
+- Before publishing source or map changes, run `make build-all`, then
+  `make inventory` to refresh the `rev0` ROM map, and commit the updated map
+  with the corresponding work. The ROM map needs per-target static evidence,
+  which only `rev0` has so far.
 - Run `make prune` after a verified build; it keeps only each target's latest
   verified pilot and link run. Keep local disk use small.
 - Documentation-only edits need link and diff checks, not a ROM rebuild.

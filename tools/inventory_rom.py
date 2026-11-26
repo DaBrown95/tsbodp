@@ -357,13 +357,13 @@ def require_static_evidence(paths):
     missing = [name for name in STATIC_EVIDENCE if not paths.config_file(name).is_file()]
     if missing:
         raise SystemExit(f"No ROM-map evidence for {paths.id} (missing {', '.join(missing)} "
-                         f"in {paths.relative(paths.config)}); the ROM map and treemap are "
+                         f"in {paths.relative(paths.config)}); the ROM map is "
                          "available only for targets that have it.")
 
 
 def main():
     requirement = next(line.split('==', 1)[1] for line in
-                       (ROOT/'config/python/analysis.txt').read_text().splitlines()
+                       (ROOT/'config/python-requirements.txt').read_text().splitlines()
                        if line.startswith('capstone=='))
     if capstone_version != requirement:
         raise ValueError('Capstone version differs from pinned analysis requirements')
@@ -688,7 +688,7 @@ def main():
               'source_owned_instruction_regions': source_instructions,
               'data_regions': data_regions, 'partition': partition(rows+data_regions, len(data)),
               'input_sha256': {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in
-                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'tools/indirect_evidence.py', 'tools/bounded_indirect.py', 'tools/fixed_target_proof.py', 'tools/inventory_census.py', 'tools/source_addresses.py', *(paths.relative(paths.config_file(name)) for name in STATIC_EVIDENCE), paths.relative(paths.ram_map), paths.relative(paths.manifest), 'config/python/analysis.txt', *sorted(evidence_inputs))}}
+                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'tools/indirect_evidence.py', 'tools/bounded_indirect.py', 'tools/fixed_target_proof.py', 'tools/inventory_census.py', 'tools/source_addresses.py', *(paths.relative(paths.config_file(name)) for name in STATIC_EVIDENCE), paths.relative(paths.ram_map), paths.relative(paths.manifest), 'config/python-requirements.txt', *sorted(evidence_inputs))}}
     result['inventory_schema_version'] = 2
     result['historical_mapped_extent_baseline'] = 319640
     result['code_census'] = census(scanner, strong_entries, strong_results,

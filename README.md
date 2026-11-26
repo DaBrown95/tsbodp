@@ -9,8 +9,6 @@ Almost all code, analysis and tooling are AI-generated.
 
 ## Progress
 
-![Matching progress treemap](assets/rev0/progress.png)
-
 | | `rev0` USA/Europe | `rev1` USA revision 1 |
 | --- | ---: | ---: |
 | Matching C functions | 2,543 | 2,543 |
@@ -18,10 +16,10 @@ Almost all code, analysis and tooling are AI-generated.
 | Known routines still without C | 1 (124 bytes) | 1 (216 bytes) |
 | Whole ROM identical | yes | yes |
 
-The treemap shows `rev0`. Green tiles are matching C; amber tiles are verified
-hardware glue and routines with evidence of assembly origin, counted separately
-from C. Function boundaries in the [ROM map](assets/rev0/rom-inventory.json) are
-provisional, and it does not yet establish a complete game-code denominator.
+Both builds also include 4,068 bytes of verified hardware glue and routines
+with evidence of assembly origin, counted separately from C. Function
+boundaries in the `rev0` [ROM map](assets/rev0/rom-inventory.json) are
+provisional, and it does not establish a complete game-code denominator.
 Both builds match the original ROMs, but most of each ROM is still copied from
 the original dump: assets, data and code nobody has mapped yet.
 
@@ -121,7 +119,7 @@ differs from the original.
 | --- | --- |
 | `make test` | Run the tool tests; no ROM needed. |
 | `make audit-all` | Check that both ROM dumps are the expected ones. |
-| `make progress` | Rebuild `rev0` and redraw the treemap. |
+| `make inventory` | Refresh the `rev0` ROM map. |
 | `make port TARGET=rev1` | Add new `rev0` matches to the `rev1` manifest. |
 | `make prune` | Delete old local build runs. |
 
@@ -152,8 +150,8 @@ the result like any other change.
 │   ├── rev0/           USA/Europe: identity, manifest, RAM map, ROM-map evidence
 │   ├── rev1/           USA revision 1: identity, manifest, RAM map
 │   ├── toolchains/     Pinned compiler and assembler sources
-│   └── python/         Pinned Python packages
-├── assets/rev0/        Progress image and ROM map
+│   └── python-requirements.txt
+├── assets/rev0/        ROM map
 ├── tools/              Build and analysis scripts
 ├── tests/              Tool tests
 └── docs/               Provenance notes for borrowed and assembly-origin code
@@ -183,7 +181,7 @@ publisher or Nintendo.
 
 Dependencies are installed separately under their own licences. The table lists
 their main licences; bundled components retain their upstream notices.
-Pinned versions are recorded in [config/toolchains/](config/toolchains/) and [config/python/](config/python/).
+Pinned versions are recorded in [config/toolchains/](config/toolchains/) and [config/python-requirements.txt](config/python-requirements.txt).
 The adapted audio routines, assembly-origin mixer primitives, hardware timer IRQ
 and BIOS division wrapper retain their [Krawall licence](licenses/Krawall-LGPL-2.1.txt)
 and source notices.
@@ -203,7 +201,6 @@ The independently reconstructed background decoder has documented
 | [GNU Binutils](https://ftp.gnu.org/gnu/binutils/) 2.10.1 | Selected assembler for earlier alignment behavior | GPL-2.0-or-later |
 | [Capstone](https://www.capstone-engine.org/) 5.0.7, by Nguyen Anh Quynh and contributors | Disassembly | BSD-3-Clause |
 | [pyelftools](https://github.com/eliben/pyelftools) 0.32, by Eli Bendersky and contributors | ELF inspection | Unlicense/public-domain dedication |
-| [Pillow](https://python-pillow.github.io/) 12.3.0, by Alex Clark and contributors, based on PIL | Progress images | MIT-CMU |
 | [Krawall](https://github.com/sebknzl/krawall/tree/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0), by Sebastian Kienzl | Selected audio routines and BIOS division wrapper | LGPL-2.1-or-later |
 | [mGBA](https://github.com/mgba-emu/mgba/tree/26b7884bc25a5933960f3cdcd98bac1ae14d42e2) 0.10.5 | Optional bounded runtime observations | MPL-2.0 and bundled notices |
 

@@ -71,14 +71,14 @@ def ensure_python():
         print('Creating the Python environment…', flush=True)
         venv.EnvBuilder(with_pip=True).create(folder)
     python = folder / 'bin/python'
-    requirements = [ROOT / 'config/python/analysis.txt', ROOT / 'config/python/progress.txt']
+    requirements = [ROOT / 'config/python-requirements.txt']
     expected = dict(line.strip().split('==') for p in requirements for line in p.read_text().splitlines()
                     if line.strip() and not line.startswith('#'))
     check = ('import importlib.metadata as m; expected=' + repr(expected) +
              '; assert all(m.version(k)==v for k,v in expected.items())')
     if subprocess.run([python, '-c', check], stdout=subprocess.DEVNULL,
                       stderr=subprocess.DEVNULL).returncode:
-        print('Installing pinned analysis and treemap dependencies…', flush=True)
+        print('Installing pinned analysis dependencies…', flush=True)
         run([python, '-m', 'pip', 'install', '--disable-pip-version-check',
              *[arg for p in requirements for arg in ('-r', p)]])
         run([python, '-c', check])

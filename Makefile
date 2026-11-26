@@ -1,6 +1,5 @@
 PYTHON ?= python3
 ANALYSIS_PYTHON ?= toolchains/analysis-venv/bin/python
-PROGRESS_PYTHON ?= $(ANALYSIS_PYTHON)
 TEST_PYTHON ?= $(if $(wildcard $(ANALYSIS_PYTHON)),$(ANALYSIS_PYTHON),$(PYTHON))
 SHARE_PROJECT_HEADERS ?= 0
 HEADER_SNAPSHOT_FLAGS = $(if $(filter 1,$(SHARE_PROJECT_HEADERS)),--share-project-headers,)
@@ -14,7 +13,7 @@ FROM ?= $(if $(filter rev0,$(TARGET)),rev1,rev0)
 
 .DEFAULT_GOAL := build
 .PHONY: setup setup-arm setup-old audit audit-all compare doctor test pilot pilot-matrix \
-        build build-all ram-map inventory progress port prune
+        build build-all ram-map inventory port prune
 
 setup:
 	$(PYTHON) tools/setup.py
@@ -57,9 +56,6 @@ ram-map:
 
 inventory:
 	$(ANALYSIS_PYTHON) tools/inventory_rom.py
-
-progress: build inventory
-	$(PROGRESS_PYTHON) tools/render_progress.py
 
 port:
 	$(ANALYSIS_PYTHON) tools/port_target.py --from $(FROM) --to $(TARGET)
