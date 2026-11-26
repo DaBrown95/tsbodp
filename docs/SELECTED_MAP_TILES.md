@@ -38,4 +38,4 @@ controls, full-ROM equality and whole-ROM changed-source control pass.
 This removes one known source-backlog row. It establishes no new runtime
 execution, complete callback population or executable-inventory closure.
 Serialized backing, selector/writer domains and historical interfaces remain
-separate questions; see [remaining work](COMPLETION_BLOCKERS.md).
+separate questions; see remaining work.

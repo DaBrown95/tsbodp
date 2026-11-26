@@ -1,4 +1,4 @@
-"""Private process prototype: bounded independent pilot workers, deterministic result order.
+"""Parallel pilot workers: bounded independent processes, deterministic result order.
 
 Native profile/tool verification and final report publication stay in pilot.main.
 No cache: every C/glue source, source control, inline-glue control and requested

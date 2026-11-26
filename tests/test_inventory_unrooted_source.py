@@ -110,7 +110,7 @@ class UnrootedSourceTests(unittest.TestCase):
 
     def test_actual_two_owner_declarations_have_no_implicit_root(self):
         root = Path(__file__).resolve().parents[1]
-        manifest = json.loads((root/'config/build-us-eu.json').read_text())
+        manifest = json.loads((root/'config/rev0/build.json').read_text())
         owners = [r for r in manifest['functions']
                   if r['name'] in ('display_replace_mode_control', 'display_replace_layer_control')]
         self.assertEqual([(r['rom_offset'], r['size']) for r in owners], [(0xD628, 36), (0xD64C, 36)])

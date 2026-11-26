@@ -694,7 +694,7 @@ evidence, not a runtime language-selection or save-compatibility claim.
 The named startup sequence now establishes the initial buffer's numeric
 storage range. Original RAM zeroing covers both the arena count at
 `0x03001DD0` and pointer cell at `0x030021F4`. Heap initialization then creates
-arena zero in `[0x02002800,0x02040000)` with count one. Its initial payload
+arena zero in `0x02002800,0x02040000)` with count one. Its initial payload
 capacity is 251,872 bytes; the actual 2,048-byte text-state allocation and
 following 1,024-byte buffer allocation both succeed, leaving 249,808 and
 248,768 bytes respectively. Intervening named startup leaves preserve these
@@ -721,7 +721,7 @@ The actual string/resource domain, callback epoch and other intervening
 writers remain open. These findings establish bounded storage and successful-
 copy footprints under the stated conditions; they add no C bytes, executable
 entries or global inventory closure. See the
-[open ownership question](COMPLETION_BLOCKERS.md).
+[open ownership question.
 
 The [named unlinked constructor](SCENE_LINK_ENTRY.md#named-unlinked-domain)
 provides a narrower subcase. Its non-42 kinds yield the admissible ID

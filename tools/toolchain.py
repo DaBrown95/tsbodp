@@ -7,17 +7,17 @@ import subprocess
 from pathlib import Path, PurePosixPath
 
 PROFILE = Path('toolchains/host-profile.json')
-PIN = Path('config/pilot-toolchain.json')
-ARM_PIN = Path('config/arm-toolchain.json')
+PIN = Path('config/toolchains/agbcc.json')
+ARM_PIN = Path('config/toolchains/agbcc-arm.json')
 ARM_PROFILE = Path('toolchains/arm-host-profile.json')
-OLD_PIN = Path('config/agbcc-old-toolchain.json')
+OLD_PIN = Path('config/toolchains/agbcc-old.json')
 OLD_PROFILE = Path('toolchains/agbcc-old-host-profile.json')
 OLD_BUILD = Path('toolchains/agbcc-old-build')
-GCC302_PIN = Path('config/gcc302-toolchain.json')
+GCC302_PIN = Path('config/toolchains/gcc302.json')
 GCC302_PROFILE = Path('toolchains/gcc302-host-profile.json')
-GCC302_HWI32_PIN = Path('config/gcc302-hwi32-toolchain.json')
+GCC302_HWI32_PIN = Path('config/toolchains/gcc302-hwi32.json')
 GCC302_HWI32_PROFILE = Path('toolchains/gcc302-hwi32-host-profile.json')
-BINUTILS2101_PIN = Path('config/binutils2101-toolchain.json')
+BINUTILS2101_PIN = Path('config/toolchains/binutils2101.json')
 BINUTILS2101_PROFILE = Path('toolchains/binutils2101-host-profile.json')
 
 

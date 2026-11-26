@@ -41,7 +41,7 @@ selector writes no action bytes, so no grounded LR-saving switch is invented.
 These are source and compiler findings. They do not close arbitrary definition
 indices, writable callbacks, transitive dependencies or runtime populations.
 The copied sorter now matches all 284 ARM bytes using these signed pixel halves
-and an actual ordering-test temporary. See the [remaining work](COMPLETION_BLOCKERS.md).
+and an actual ordering-test temporary. See the remaining work.
 
 The copied map drawer at ROM `0x0800B564` now has a separately verified
 [source owner](FRAME_MAP_STAGING.md). The following describes an earlier

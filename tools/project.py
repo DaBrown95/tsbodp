@@ -13,19 +13,59 @@ from datetime import datetime, timezone
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TARGETS = ("us-eu", "us-rev1")
+TARGETS = ("rev0", "rev1")
+DEFAULT_TARGET = "rev0"
 
 
 def target_id():
-    """Build target for pilot and full-ROM tools; inherited by worker processes."""
-    value = os.environ.get("TSBO_TARGET", "us-eu")
+    """Selected target (TSBO_TARGET, set by `make TARGET=...`); inherited by workers."""
+    value = os.environ.get("TSBO_TARGET", DEFAULT_TARGET)
     if value not in TARGETS:
-        raise ValueError(f"Unknown build target {value}")
+        raise ValueError(f"Unknown target {value}; expected one of {', '.join(TARGETS)}")
     return value
 
 
-def target_revision():
-    return json.loads((ROOT / "config/targets" / (target_id() + ".json")).read_text())["revision"]
+class TargetPaths:
+    """Where each target keeps its tracked configuration and local outputs.
+
+    Every target has the same layout, so no target is a special case:
+    config/<id>/ holds tracked inputs, assets/<id>/ tracked generated progress,
+    and reports/<id>/ and build/<id>/ the ignored local results.
+    """
+
+    def __init__(self, target=None):
+        self.id = target or target_id()
+        if self.id not in TARGETS:
+            raise ValueError(f"Unknown target {self.id}")
+        self.config = ROOT / "config" / self.id
+        self.target = self.config / "target.json"
+        self.manifest = self.config / "build.json"
+        self.ram_map = self.config / "ram-map.json"
+        self.assets = ROOT / "assets" / self.id
+        self.reports = ROOT / "reports" / self.id
+        self.build = ROOT / "build" / self.id
+        self.pilot_runs = self.build / "pilot"
+        self.rom_runs = self.build / "rom"
+        self.rom = self.build / "bustin-out.gba"
+
+    def config_file(self, name):
+        return self.config / name
+
+    @staticmethod
+    def relative(path):
+        return str(Path(path).relative_to(ROOT))
+
+
+def target_paths(target=None):
+    return TargetPaths(target)
+
+
+def load_target(target=None):
+    return json.loads(target_paths(target).target.read_text())
+
+
+def target_revision(target=None):
+    return load_target(target)["revision"]
 
 
 def hashes(data):
@@ -102,7 +142,7 @@ def local_path(value):
 
 
 def write_report(name, result, target=None):
-    path = ROOT / "reports" / (target or target_id()) / (name + ".json")
+    path = target_paths(target).reports / (name + ".json")
     path.parent.mkdir(parents=True, exist_ok=True)
     result["recorded_at_utc"] = datetime.now(timezone.utc).isoformat()
     path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
@@ -150,13 +190,13 @@ def main():
     sub = parser.add_subparsers(dest="command", required=True)
     for name in ("audit", "compare"):
         command = sub.add_parser(name)
-        command.add_argument("--target", choices=("us-eu", "us-rev1"), default="us-eu")
+        command.add_argument("--target", choices=TARGETS, default=target_id())
         command.add_argument("--rom", help="ROM path; relative paths use the project root")
         if name == "compare":
             command.add_argument("--built")
-    sub.add_parser("doctor").add_argument("--target", choices=("us-eu", "us-rev1"), default="us-eu")
+    sub.add_parser("doctor").add_argument("--target", choices=TARGETS, default=target_id())
     args = parser.parse_args()
-    target = json.loads((ROOT / "config/targets" / (args.target + ".json")).read_text())
+    target = load_target(args.target)
     try:
         if args.command == "doctor":
             return doctor(target)
@@ -173,7 +213,7 @@ def main():
             return 1
         if args.command == "audit":
             return 0
-        built_path = local_path(args.built or f"build/{target['id']}/bustin-out.gba")
+        built_path = local_path(args.built) if args.built else target_paths(target["id"]).rom
         if not built_path.is_file():
             write_report("compare", {"identical": False, "comparison_performed": False,
                                      "reason": "Built ROM is missing"}, target["id"])

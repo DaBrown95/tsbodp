@@ -34,8 +34,8 @@ bodies, ROM payload or extracted assets are published as inventory metadata.
 ## Results
 
 The table below is a historical survey snapshot. Current source ownership is
-recorded in the generated [progress data](../assets/progress.json) and the
-[remaining-work list](COMPLETION_BLOCKERS.md). The separately counted 4,068
+recorded in the generated [progress data](../assets/rev0/progress.json) and the
+remaining-work list. The separately counted 4,068
 assembly extent bytes include the 1,604-byte mixer family,
 140-byte timer IRQ, 140-byte startup exceptions, eight-byte BIOS wait wrapper,
 60-byte compiler register-call family, 672-byte division/remainder family and
@@ -43,7 +43,7 @@ assembly extent bytes include the 1,604-byte mixer family,
 their genuine data and alignment; it is not a C gain. Exact source and full-ROM/control gates verify these replacements.
 See [audio](AUDIO_RECONSTRUCTION.md),
 [startup](STARTUP_RECONSTRUCTION.md), [compiler assembly](RUNTIME_REGISTER_CALLS.md) and the concise
-[remaining-work list](COMPLETION_BLOCKERS.md).
+remaining-work list.
 
 The generated inventory records the current qualified static instruction union.
 Source extents include their literal pools and alignment; instruction-byte
@@ -56,7 +56,7 @@ historical comparison remain distinct, with no complete game-code denominator
 established.
 
 The authoritative current counts and interval evidence are in
-[`assets/rom-inventory.json`](../assets/rom-inventory.json), under `code_census`.
+[`assets/rev0/rom-inventory.json`](../assets/rev0/rom-inventory.json), under `code_census`.
 They distinguish qualified static instruction bytes, deliberately dual-use bytes,
 referenced literal/switch data, known data, unresolved bytes inside owned or
 estimated extents, and all remaining unresolved ROM bytes. These are instruction
@@ -1002,7 +1002,7 @@ required by this call. Their later execution or invalid-fetch behavior is not
 established, including an ARM operand with bit one set.
 
 The separate `bounded_branch_operands` proof in
-[code evidence](../config/code-evidence-us-eu.json) validates the complete owner
+[code evidence](../config/rev0/code-evidence.json) validates the complete owner
 CFG, sole sequential predecessors from byte load to capture, native arithmetic,
 flag-byte read, source/data pins and veneer. The 128-byte **read window** is not
 a declaration of sixteen callback records: its final 48 bytes already have a

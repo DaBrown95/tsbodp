@@ -7,7 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 from zoneinfo import ZoneInfo
-from project import ROOT
+from project import ROOT, target_paths
 from rom_layout import layout
 from source_coverage import inline_glue, coverage_rows
 from copy_ownership import project_copy_ownership
@@ -61,11 +61,12 @@ def source_group(function, discovered):
 
 
 def inventory():
-    manifest = json.loads((ROOT / 'config/build-us-eu.json').read_text())
-    regions = json.loads((ROOT / 'config/progress-regions-us-eu.json').read_text())
-    pilot = json.loads((ROOT / 'reports/us-eu/pilot.json').read_text())
-    build = json.loads((ROOT / 'reports/us-eu/build.json').read_text())
-    target = json.loads((ROOT / 'config/targets/us-eu.json').read_text())
+    paths = target_paths()
+    manifest = json.loads(paths.manifest.read_text())
+    regions = json.loads(paths.config_file('progress-regions.json').read_text())
+    pilot = json.loads((paths.reports / 'pilot.json').read_text())
+    build = json.loads((paths.reports / 'build.json').read_text())
+    target = json.loads(paths.target.read_text())
     if (not pilot['accepted'] or not build['accepted'] or not build['comparison']['identical']
             or not build['negative_control_rejected'] or pilot['run_id'] != build['run_id']
             or pilot['reference_sha256'] != target['sha256']
@@ -88,7 +89,7 @@ def inventory():
             or build['unconverted_bytes'] != target['size'] - total_c - total_glue
             or build['regions'] != layout(sources, target['size'])):
         raise ValueError('Source credit differs from full-ROM layout')
-    discovered = json.loads((ROOT / 'assets/rom-inventory.json').read_text())
+    discovered = json.loads((paths.assets / 'rom-inventory.json').read_text())
     from inventory_partition import partition, overlay, verify_discovery
     verify_discovery(discovered, target['size'], target['sha256'])
     for name, digest in discovered['input_sha256'].items():
@@ -97,12 +98,12 @@ def inventory():
     # Green intervals come only from compiler/build receipts, never the scanner.
     for f in exact:
         f['group'] = source_group(f, discovered['rows'])
-    ram = json.loads((ROOT / 'config/ram-map-us-eu.json').read_text())
+    ram = json.loads(paths.ram_map.read_text())
     copied_sources = project_copy_ownership(ram['copies'], exact, target['size'])
     rows = overlay(discovered['rows'], exact)
     layout(rows, target['size'])
     stamp = datetime.fromisoformat(build['recorded_at_utc'].replace('Z', '+00:00'))
-    return {'target': 'us-eu', 'reference_sha256': target['sha256'],
+    return {'target': paths.id, 'reference_sha256': target['sha256'],
             'verified_at': stamp.astimezone(ZoneInfo('Europe/London')).strftime('%d %b %Y, %H:%M %Z'),
             'compiled_c_functions': len(manifest['functions']), 'compiled_c_bytes': total_c,
             'assembly_glue_bytes': total_glue,
@@ -121,10 +122,10 @@ def inventory():
             'rows': [{k: r[k] for k in ('name', 'group', 'rom_offset', 'size', 'status')} for r in rows],
             'partition': partition([{k: r[k] for k in ('name', 'rom_offset', 'size', 'status')} for r in rows] + discovered['data_regions'], target['size']),
             'input_sha256': {name: sha(ROOT / name) for name in
-                             ('config/build-us-eu.json', 'assets/rom-inventory.json',
+                             (paths.relative(paths.manifest), paths.relative(paths.assets / 'rom-inventory.json'),
                               'tools/render_progress.py', 'tools/source_coverage.py',
-                              'tools/copy_ownership.py', 'config/ram-map-us-eu.json',
-                              'tools/inventory_partition.py', 'config/progress-requirements.txt')}}
+                              'tools/copy_ownership.py', paths.relative(paths.ram_map),
+                              'tools/inventory_partition.py', 'config/python/progress.txt')}}
 
 
 def binary_layout(items, box):
@@ -232,7 +233,7 @@ def render(data, output):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output', type=Path, default=ROOT / 'assets/progress.png')
+    parser.add_argument('--output', type=Path, default=target_paths().assets / 'progress.png')
     args = parser.parse_args()
     data = inventory()
     render(data, args.output)

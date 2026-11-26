@@ -76,7 +76,7 @@ invalid bounds. They use synthetic instructions, with no original game payload.
 
 ## Recorded result
 
-The [machine-readable summary](../config/runtime-observations-us-eu.json)
+The [machine-readable summary](../config/rev0/runtime-observations.json)
 records all 36 entry/site probes and 18 write probes, including zero-hit probes.
 The 300-frame run reached 30 probes in 5,835,926 steps and 84,028,913
 emulator ticks. Its replay was byte-identical: both 72,816-byte trace files have
@@ -300,7 +300,7 @@ populations. An invalid data-derived target is not evidence of undiscovered code
 
 ## Controlled installed tile-decoder fixture
 
-The [fixture summary](../config/runtime-tile-fixture-us-eu.json) records a
+The [fixture summary](../config/rev0/runtime-tile-fixture.json) records a
 controlled call to the tile decoder after ordinary reset and installation in
 the same pinned mGBA core. Startup reaches the installer at `0x08016A48` and
 its actual return to `0x08025C5A` after 1,955,632 instruction steps, 27 frames

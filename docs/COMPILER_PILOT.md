@@ -18,7 +18,7 @@ patched. The negative control changes the setter's C to store `value + 1` and
 is rejected after real compilation and linking.
 
 Tool source pins, native binary hashes and host preprocessor identity are in
-`config/pilot-toolchain.json`. The runner checks those pins and clean compiler
+`config/toolchains/agbcc.json`. The runner checks those pins and clean compiler
 source before compiling. It records hashes of the runner, verifier, manifests,
 sources and tools with every run. The current integration milestone is documented in
 [RAM and interrupts](RAM_AND_INTERRUPTS.md): 19 accepted C functions
@@ -27,7 +27,7 @@ and an all-byte matching partial reconstruction of the complete ROM.
 ## Local tool setup used for this pilot
 
 The analysis environment uses Python 3.13 and the packages pinned in
-`config/analysis-requirements.txt`. The native compiler was built from the pinned
+`config/python/analysis.txt`. The native compiler was built from the pinned
 pret/agbcc commit with `make -C toolchains/agbcc/gcc -j1`, without changing its
 source. That initial setup built the Thumb compiler, not agbcc's complete runtime libraries.
 
@@ -52,14 +52,14 @@ explicit C register constraints. They influence allocation without embedding
 instructions or changing compiled output. The byte bitmap, run search and
 failure value are expressed as C operations.
 
-`config/arm-toolchain.json` pins agbcc's ARM backend from the same unchanged
+`config/toolchains/agbcc-arm.json` pins agbcc's ARM backend from the same unchanged
 source revision as Thumb. `make setup` provisions it when the build manifest
 contains ARM C; `make setup-arm` verifies or provisions it directly. Its native
 host profile is separate from the existing Thumb profile. Existing changed
 binaries are rejected rather than silently enrolled.
 
 Copied functions declare both a ROM storage offset and a RAM execution address,
-with the named installation map in `config/ram-map-us-eu.json`. The pilot checks
+with the named installation map in `config/rev0/ram-map.json`. The pilot checks
 mode, alignment, copy containment, installation literals and overlapping virtual
 extents. The full linker uses the RAM address for relocations and the original
 ROM address for storage, then checks both in the final ELF. Binary conversion
@@ -182,24 +182,3 @@ Header copies fell from 344 to 48. Measured compilation time stayed approximatel
 0.39 seconds in both cases; the established benefit is reduced file/disk growth,
 not faster compilation. Tests cover unresolved includes, relative cycles, inactive
 branches, comments, line splicing, deleted headers and snapshot independence.
-
-## Checked comparison reuse
-
-[`permuter_reuse.py`](../tools/permuter_reuse.py) checks and performs one
-deterministic comparison extraction. It independently includes scalar-assignment
-RHS reads, follows old values through structured branches and loop backedges,
-and rejects unsupported types, escapes and movement. Its subset is a pure
-whole-`if` integer comparison and an ordinary dead local; switch/case, field
-observations and general random mutations are outside that qualification.
-Recheck the current AST after every transformation. This is separate from the
-upstream availability predicate and does not alter search admission or weights.
-
-Current sorter calibration reproduces the useful 284/2 source, accepted 284/0
-and one unchanged-upstream generated 284/0, with real rejecting controls. The
-guard also admits a collapse comparison, but its compiler output materializes a
-new boolean and grows to 124/104 against the 116-byte native extent. Three
-separately reviewed pending-action reuse forms remain nonmatches under their
-existing private return-type view. Source-read qualification therefore adds no
-C credit and does not establish a native value lifetime. Nineteen new regression
-tests cover the missed RHS, repeated loop reads, typedef shadows, VLA reads and
-other rejected boundaries; the maintained suite passes 402 tests.

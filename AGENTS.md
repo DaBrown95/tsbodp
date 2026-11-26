@@ -1,8 +1,10 @@
 # Project guidance
 
 This is an owner-run, AI-driven matching decompilation of *The Sims: Bustin' Out*
-for Game Boy Advance. The current target is USA/Europe revision 0; identities
-are pinned in `config/targets/`. Follow the user's instructions over this file.
+for Game Boy Advance. There are two targets, `rev0` (USA/Europe) and `rev1`
+(USA revision 1), built from shared sources. Each has its own `config/<target>/`
+folder with its pinned identity, build manifest and RAM map; neither is
+generated from the other. Follow the user's instructions over this file.
 
 ## Matching
 
@@ -26,13 +28,19 @@ are pinned in `config/targets/`. Follow the user's instructions over this file.
 
 ## Verification and progress
 
-- Use `make pilot` for the matching C loop and `make build` for full-ROM matching.
+- Use `make pilot` for the matching C loop and `make build` for full-ROM matching;
+  add `TARGET=rev1` for revision 1, or run `make build-all`. Code that differs
+  between revisions goes under `#if TSBO_REVISION`; fixed addresses go in
+  `include/revision.h`. `make port` proposes carrying new matches across.
   Preserve the changed-source negative controls.
 - Run `make test` for changes to analysis, build or verification tools. Add tests
   for meaningful failure cases rather than mirroring the implementation.
 - Before publishing source or map progress, run `make progress`. It rebuilds,
   verifies, refreshes the inventory and generates the public treemap. Commit the
-  updated progress files with the corresponding work.
+  updated progress files with the corresponding work. The ROM map and treemap
+  need per-target static evidence, which only `rev0` has so far.
+- Run `make prune` after a verified build; it keeps only each target's latest
+  verified pilot and link run. Keep local disk use small.
 - Documentation-only edits need link and diff checks, not a ROM rebuild.
 - Report verified function/byte counts. Keep source coverage, mapped extents and
   whole-ROM equality separate; never colour an unverified candidate green.
@@ -54,7 +62,8 @@ are pinned in `config/targets/`. Follow the user's instructions over this file.
 
 ## Repository and communication
 
-Keep source in `src/`, shared headers in `include/`, pins and maps in `config/`,
+Keep source in `src/`, shared headers in `include/`, per-target pins and maps
+in `config/<target>/`, tool pins in `config/toolchains/`,
 and tooling in `tools/`. `docs/` is internal AI scratch space. Reader-facing
 instructions belong in the README.
 

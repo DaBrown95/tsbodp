@@ -43,7 +43,7 @@ class SelectionTests(unittest.TestCase):
         selection = compiler_selection({'compiler_id': 'agbcc_old',
                                         'compiler_flags': ['-O2']}, ['-O2', '-mthumb-interwork'])
         self.assertEqual(selection['executable'], Path('toolchains/agbcc-old-build/old_agbcc'))
-        self.assertEqual(selection['pin'], Path('config/agbcc-old-toolchain.json'))
+        self.assertEqual(selection['pin'], Path('config/toolchains/agbcc-old.json'))
         self.assertEqual(selection['profile'], Path('toolchains/agbcc-old-host-profile.json'))
         self.assertEqual(selection['flags'], ['-O2'])
         for mode, flags in [('ARM', ['-O2']), ('Thumb', ['-O2', '-marm'])]:
@@ -76,7 +76,7 @@ class Gcc302ProvisionTests(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
         (self.root / 'toolchains').mkdir()
-        (self.root / 'config').mkdir()
+        (self.root / 'config' / 'toolchains').mkdir(parents=True)
         (self.root / 'tools').mkdir()
         self.patch = self.root / 'tools/compat.patch'
         self.patch.write_bytes(b'pinned patch')

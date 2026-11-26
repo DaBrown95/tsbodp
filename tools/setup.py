@@ -9,7 +9,7 @@ import sys
 import tempfile
 import venv
 
-from project import ROOT
+from project import ROOT, TARGETS, target_paths
 from toolchain import PIN, PROFILE, load_profile, sha, verify_native, compiler_selection, assembler_selection
 
 PENDING = Path('toolchains/setup-pending.json')
@@ -71,7 +71,7 @@ def ensure_python():
         print('Creating the Python environment…', flush=True)
         venv.EnvBuilder(with_pip=True).create(folder)
     python = folder / 'bin/python'
-    requirements = [ROOT / 'config/analysis-requirements.txt', ROOT / 'config/progress-requirements.txt']
+    requirements = [ROOT / 'config/python/analysis.txt', ROOT / 'config/python/progress.txt']
     expected = dict(line.strip().split('==') for p in requirements for line in p.read_text().splitlines()
                     if line.strip() and not line.startswith('#'))
     check = ('import importlib.metadata as m; expected=' + repr(expected) +
@@ -176,7 +176,13 @@ def main():
         temporary.write_text(json.dumps(profile, indent=2) + '\n')
         temporary.replace(ROOT / PROFILE)
     (ROOT / PENDING).unlink(missing_ok=True)
-    manifest = json.loads((ROOT / 'config/build-us-eu.json').read_text())
+    # Provision every backend that any target's manifest selects.
+    functions, flags = [], None
+    for target in TARGETS:
+        manifest = json.loads(target_paths(target).manifest.read_text())
+        functions += manifest['functions']
+        flags = manifest['compiler_flags']
+    manifest = {'functions': functions, 'compiler_flags': flags}
     selected_ids = {compiler_selection(f, manifest['compiler_flags'])['compiler_id']
                     for f in manifest['functions']}
     if 'agbcc_arm' in selected_ids:
@@ -189,7 +195,7 @@ def main():
         subprocess.run([sys.executable, ROOT / 'tools/setup_gcc302_hwi32.py'], check=True)
     if any(assembler_selection(f)['assembler_id'] == 'binutils2101' for f in manifest['functions']):
         subprocess.run([sys.executable, ROOT / 'tools/setup_binutils2101.py'], check=True)
-    print('Setup complete. Put your USA/Europe ROM in baseroms/, then run make build.')
+    print('Setup complete. Put your ROM in baseroms/, then run make build (TARGET=rev0 or rev1).')
     print('Native tool fingerprints are local; exact matching is checked on every build.')
     return 0
 

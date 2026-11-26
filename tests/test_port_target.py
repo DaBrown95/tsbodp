@@ -64,6 +64,38 @@ class CompareTests(unittest.TestCase):
         self.assertIn('section-relative', reason)
 
 
+class CarryTests(unittest.TestCase):
+    """Only functions missing from the destination are added; existing entries stay."""
+
+    def setUp(self):
+        self.source = {'functions': [
+            {'name': 'kept', 'rom_offset': 0x100, 'size': 8, 'symbols': {}},
+            {'name': 'new', 'rom_offset': 0x200, 'size': 8,
+             'symbols': {'g_word': '0x03002180', 'kept': '0x08000101'}}]}
+        self.destination = {'functions': [
+            {'name': 'kept', 'rom_offset': 0x180, 'size': 12, 'symbols': {'g_word': '0x03002170'}}]}
+
+    def carry(self, solved):
+        return port_target.carry(self.source, self.destination, {},
+                                 {'kept': 0x140, 'new': 0x240},
+                                 lambda f, offset, moved: (solved, None))
+
+    def test_new_function_is_added_and_existing_entry_is_untouched(self):
+        additions, rejected = self.carry({'g_word': 0x03002170})
+        self.assertEqual(rejected, {})
+        self.assertEqual([f['name'] for f in additions['functions']], ['new'])
+        added = additions['functions'][0]
+        self.assertEqual(added['rom_offset'], 0x240)
+        # An unreferenced alias takes the destination's own definition.
+        self.assertEqual(added['symbols'], {'g_word': '0x03002170', 'kept': '0x08000181'})
+        self.assertEqual(self.destination['functions'][0]['rom_offset'], 0x180)
+
+    def test_symbol_disagreeing_with_destination_is_rejected(self):
+        additions, rejected = self.carry({'g_word': 0x03002160})
+        self.assertEqual(additions['functions'], [])
+        self.assertIn('disagrees', rejected['new'])
+
+
 class DmaCopyTests(unittest.TestCase):
     def test_moved_dma_literals_are_checked_at_their_new_offset(self):
         copy = {'rom_offset': 0x160, 'ram_address': 0x03001b90, 'size': 512,

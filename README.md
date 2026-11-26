@@ -1,31 +1,35 @@
 # The Sims: Bustin' Out
 
-A matching decompilation of *The Sims: Bustin' Out* for the Game Boy Advance,
-targeting the multilingual USA/Europe release and its USA revision 1.
+A matching decompilation of *The Sims: Bustin' Out* for the Game Boy Advance.
+One set of C sources builds two releases byte for byte: the multilingual
+USA/Europe release (`rev0`) and its USA revision 1 (`rev1`).
 
 This is an **AI-driven experiment** to see what coding agents can do.
 Almost all code, analysis and tooling are AI-generated.
 
 ## Progress
 
-![Matching progress treemap](assets/progress.png)
+![Matching progress treemap](assets/rev0/progress.png)
 
-Green tiles are matching C. Function boundaries in the
-[ROM map](assets/rom-inventory.json) are provisional.
-Amber tiles are verified hardware glue and routines with evidence of assembly
-origin, counted separately from C.
-The build matches the original ROM, but most regions are still copied from
-the original dump.
-The ROM map separately records rooted static instructions, estimated extents,
-data and unresolved regions. It does not yet establish a complete game-code
-denominator. The historical 319,640 mapped extent bytes remain a fixed comparison.
-A source-owned extent can still lack an established incoming call; source
-ownership and reachability are separate claims.
-The [verified progress data](assets/progress.json) records source ownership for
-known RAM copies and counts overlapping ROM bytes once.
-Local evidence retains the current verified build and a bounded set of useful
-failures. Historical receipts do not imply that older raw artifacts remain
-available for revalidation.
+| | `rev0` USA/Europe | `rev1` USA revision 1 |
+| --- | ---: | ---: |
+| Matching C functions | 2,543 | 2,543 |
+| C bytes (with literal pools and alignment) | 322,260 | 322,296 |
+| Known routines still without C | 1 (124 bytes) | 1 (216 bytes) |
+| Whole ROM identical | yes | yes |
+
+The treemap shows `rev0`. Green tiles are matching C; amber tiles are verified
+hardware glue and routines with evidence of assembly origin, counted separately
+from C. Function boundaries in the [ROM map](assets/rev0/rom-inventory.json) are
+provisional, and it does not yet establish a complete game-code denominator.
+Both builds match the original ROMs, but most of each ROM is still copied from
+the original dump: assets, data and code nobody has mapped yet.
+
+The two routines without C:
+
+- **`rev0` audio master volume** (`0x08049968`): see below.
+- **`rev1` catalog entry check** (`0x08021998`): 5 bytes off. The original keeps
+  two identical "fail" endings that our compiler always merges into one.
 
 ## The case of the missing store
 
@@ -46,7 +50,7 @@ the compiler itself runs on a 32-bit machine. The bit offset −8192 gets
 [treated as unsigned](https://github.com/gcc-mirror/gcc/blob/releases/gcc-3.0.2/gcc/expmed.c#L233)
 before being divided by eight, so −1024 comes out as `0x1FFFFC00`. The store
 would land at `0x22000E38`, which is nowhere near the table, or near anything
-else. Our [pinned compiler](config/gcc302-hwi32-toolchain.json) reproduces
+else. Our [pinned compiler](config/toolchains/gcc302-hwi32.json) reproduces
 the bug, and the same bad constant is sitting in the original ROM's literal
 pool. So far, so explicable.
 
@@ -73,7 +77,7 @@ only for a literal `nop`, and the linker only inside interworking stubs.
 [writes the statement as `table[-i]`](https://github.com/sebknzl/krawall/blob/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0/lib/mixer.c#L106-L107),
 where `i` happens to be 1024 once the loop ends, under a comment noting that
 `[-1024]` "makes GCC 3.0.2 generate an invalid constant". The
-[USA revision 1 ROM](config/targets/us-rev1.json) ships that version: 116
+[USA revision 1 ROM](config/rev1/target.json) ships that version: 116
 bytes at `0x08049A4C`, no bad constant, a real store. Compile the `[-i]` form
 with our pinned compiler and flags and all 116 bytes drop out.
 
@@ -84,80 +88,75 @@ revision 1 match are established. Who removed the store, and how, is our
 inference: no build artefact from the time shows it, and a post-processing
 script would fit just as well.
 
-So the routine stays unowned, listed in the [triage table](docs/TRIAGE.md).
+So the routine stays without a C owner.
 We could make the bytes match by patching the compiler's output, but then it
 would not be a decompilation.
 
 ## Building
 
-Requires macOS, Python 3.10+ and Xcode's command line tools.
-
-Run once from the repository root:
+Requires macOS, Python 3.10+ and Xcode's command line tools. Run once from the
+repository root:
 
 ```sh
 make setup
 ```
 
-Put your USA/Europe ROM here:
+Then put one or both ROMs in `baseroms/` under these names:
 
-```text
-baseroms/Sims, The - Bustin' Out (USA, Europe) (En,Fr,De,Es,It,Nl).gba
-```
-
-SHA-1: `fb5662172fadebf4577f6f6f163741fc041c11e6` (16 MiB).
-
-```sh
-make build
-```
-
-Output: `build/us-eu/bustin-out.gba`. The build fails if any byte differs.
-
-For revision 1, put this ROM alongside it and build with `TARGET=us-rev1`:
-
-```text
-baseroms/Sims, The - Bustin' Out (USA) (En,Fr,De,Es,It,Nl) (Rev 1).gba
-```
-
-SHA-1: `7038fa0e4cb8aeac9e48a0b45574db66cba39e73` (16 MiB).
+| Target | File | SHA-1 |
+| --- | --- | --- |
+| `rev0` | `Sims, The - Bustin' Out (USA, Europe) (En,Fr,De,Es,It,Nl).gba` | `fb5662172fadebf4577f6f6f163741fc041c11e6` |
+| `rev1` | `Sims, The - Bustin' Out (USA) (En,Fr,De,Es,It,Nl) (Rev 1).gba` | `7038fa0e4cb8aeac9e48a0b45574db66cba39e73` |
 
 ```sh
-make build TARGET=us-rev1
+make build              # rev0
+make build TARGET=rev1  # rev1
+make build-all          # both
 ```
 
-Revision 1 shares the C sources; code that changed between revisions sits
-under `#if TSBO_REVISION`. `make port` derives its
-[manifest](config/build-us-rev1.json) from the revision 0 one, carrying over
-functions whose bytes differ only in relocated addresses, plus the hand
-placements in [config/port-us-rev1.json](config/port-us-rev1.json). The revision 1
-build currently matches with 2,543 C functions, including the master-volume
-routine that has no C owner in revision 0. One 216-byte routine remains
-unconverted there. The progress treemap covers revision 0 only.
+Output goes to `build/<target>/bustin-out.gba`. The build fails if any byte
+differs from the original.
 
 | Command | Purpose |
 | --- | --- |
-| `make test` | Run tests; no ROM needed. |
-| `make progress` | Rebuild and update the treemap. |
-| `make audit-all` | Check both the USA/Europe and USA revision 1 dumps. |
+| `make test` | Run the tool tests; no ROM needed. |
+| `make audit-all` | Check that both ROM dumps are the expected ones. |
+| `make progress` | Rebuild `rev0` and redraw the treemap. |
+| `make port TARGET=rev1` | Add new `rev0` matches to the `rev1` manifest. |
+| `make prune` | Delete old local build runs. |
 
-The generated [triage table](docs/TRIAGE.md) records remaining mapped rows and
-retained candidate scores. `make progress` refreshes it. Optional local search
-uses the separate search environment:
-`toolchains/search-venv/bin/python tools/permuter_setup.py --help`.
-Search output must pass the normal matching and changed-source controls before
-acceptance.
+### How the two revisions fit together
+
+Revision 1 is mostly a relink of revision 0: the same functions, shifted by a
+few bytes, plus a handful of bug fixes. So both targets compile the same files
+in [src/](src/). Code that changed between revisions sits under
+`#if TSBO_REVISION`, and fixed addresses that moved live in
+[include/revision.h](include/revision.h).
+
+Each target has its own folder in [config/](config/) holding its ROM identity
+(`target.json`), the list of functions with their addresses (`build.json`) and
+the code copied into RAM at boot (`ram-map.json`). Neither target is generated
+from the other. When a function is matched for one revision, `make port` looks
+for the same compiled bytes in the other ROM. If it finds them, differing only
+in addresses, it adds the function there. The full build then has to confirm
+the result like any other change.
 
 ## Repository
 
 ```text
 .
-├── Makefile        Build commands
-├── assets/         Progress image and ROM map
-├── config/         ROM hashes, tool versions and mapped regions
-├── include/        C headers
-├── src/            Matching C and justified assembly
-├── tools/          Build and analysis scripts
-├── tests/          Tests
-└── docs/           Internal AI scratch notes
+├── Makefile            Build commands
+├── src/                Matching C and justified assembly, shared by both targets
+├── include/            C headers, including revision.h
+├── config/
+│   ├── rev0/           USA/Europe: identity, manifest, RAM map, ROM-map evidence
+│   ├── rev1/           USA revision 1: identity, manifest, RAM map
+│   ├── toolchains/     Pinned compiler and assembler sources
+│   └── python/         Pinned Python packages
+├── assets/rev0/        Progress image and ROM map
+├── tools/              Build and analysis scripts
+├── tests/              Tool tests
+└── docs/               Internal AI scratch notes
 ```
 
 ## About
@@ -184,7 +183,7 @@ publisher or Nintendo.
 
 Dependencies are installed separately under their own licences. The table lists
 their main licences; bundled components retain their upstream notices.
-Pinned versions are recorded in [config/](config/).
+Pinned versions are recorded in [config/toolchains/](config/toolchains/) and [config/python/](config/python/).
 The adapted audio routines, assembly-origin mixer primitives, hardware timer IRQ
 and BIOS division wrapper retain their [Krawall licence](licenses/Krawall-LGPL-2.1.txt)
 and source notices.

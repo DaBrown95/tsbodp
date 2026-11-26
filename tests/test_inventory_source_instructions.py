@@ -230,8 +230,8 @@ class SourceInstructionTests(unittest.TestCase):
 
     def test_all_fifteen_manifest_controls_mutate_the_actual_annotated_NOP(self):
         root=Path(__file__).resolve().parents[1]
-        config=json.loads((root/'config/code-evidence-us-eu.json').read_text())
-        manifest=json.loads((root/'config/build-us-eu.json').read_text())
+        config=json.loads((root/'config/rev0/code-evidence.json').read_text())
+        manifest=json.loads((root/'config/rev0/build.json').read_text())
         annotations=config['source_owned_instruction_regions'];self.assertEqual(len(annotations),15)
         owners={row['name']:row for row in manifest['assembly']}
         for row in annotations:

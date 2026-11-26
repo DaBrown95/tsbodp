@@ -12,7 +12,7 @@ import struct
 from collections import defaultdict, deque
 from capstone import Cs, CS_ARCH_ARM, CS_MODE_ARM, CS_MODE_THUMB, __version__ as capstone_version
 from capstone.arm import ARM_OP_MEM, ARM_REG_PC, ARM_REG_LR, ARM_CC_AL, ARM_CC_INVALID, ARM_INS_BL, ARM_INS_B, ARM_INS_BX, ARM_INS_MOV, ARM_INS_LDR
-from project import ROOT, audit
+from project import ROOT, audit, target_paths
 from inventory_partition import partition, overlay
 from control_flow import thumb_switch, constant_result, stack_return
 from ram_copies import validate_copy
@@ -349,19 +349,33 @@ class Scanner:
             self.results[key] = self.walk(*key)
 
 
+STATIC_EVIDENCE = ('code-evidence.json', 'indirect-transfers.json', 'progress-regions.json')
+
+
+def require_static_evidence(paths):
+    """The ROM map needs per-target static evidence; only some targets have it."""
+    missing = [name for name in STATIC_EVIDENCE if not paths.config_file(name).is_file()]
+    if missing:
+        raise SystemExit(f"No ROM-map evidence for {paths.id} (missing {', '.join(missing)} "
+                         f"in {paths.relative(paths.config)}); the ROM map and treemap are "
+                         "available only for targets that have it.")
+
+
 def main():
     requirement = next(line.split('==', 1)[1] for line in
-                       (ROOT/'config/analysis-requirements.txt').read_text().splitlines()
+                       (ROOT/'config/python/analysis.txt').read_text().splitlines()
                        if line.startswith('capstone=='))
     if capstone_version != requirement:
         raise ValueError('Capstone version differs from pinned analysis requirements')
-    target = json.loads((ROOT/'config/targets/us-eu.json').read_text())
+    paths = target_paths()
+    require_static_evidence(paths)
+    target = json.loads(paths.target.read_text())
     data, identity = audit(ROOT/target['rom_path'], target)
     if not identity['accepted']:
         return 1
-    ram = json.loads((ROOT/'config/ram-map-us-eu.json').read_text())
-    bounded = json.loads((ROOT/'config/progress-regions-us-eu.json').read_text())
-    manifest = json.loads((ROOT/'config/build-us-eu.json').read_text())
+    ram = json.loads(paths.ram_map.read_text())
+    bounded = json.loads(paths.config_file('progress-regions.json').read_text())
+    manifest = json.loads(paths.manifest.read_text())
     source_code = manifest['functions'] + [r for r in manifest.get('assembly', []) if r.get('mode') != 'data']
     word = lambda off: struct.unpack_from('<I', data, off)[0]
     for copy in ram['copies']:
@@ -383,8 +397,8 @@ def main():
     root_source_code = seed_source_owners(scanner, source_code, ram['copies'], ram['entries'])
     for entry in ram['entries']:
         scanner.seed(entry['ram_address'], entry['mode'], 'audited RAM entry', entry['name'])
-    dispatch_config = json.loads((ROOT/'config/indirect-transfers-us-eu.json').read_text())
-    evidence_config = json.loads((ROOT/'config/code-evidence-us-eu.json').read_text())
+    dispatch_config = json.loads(paths.config_file('indirect-transfers.json').read_text())
+    evidence_config = json.loads(paths.config_file('code-evidence.json').read_text())
     if evidence_config['reference_sha256'] != identity['sha256']:
         raise ValueError('Static evidence targets another ROM')
     evidence_inputs = set()
@@ -644,7 +658,7 @@ def main():
     for table in observed_records:
         data_regions.append({'name': table['name'], 'rom_offset': table['rom_offset'],
                              'size': table['observed_rows']*table['record_stride'], 'status': 'mapped_data'})
-    result = {'target': 'us-eu', 'reference_sha256': identity['sha256'], 'rom_bytes': len(data),
+    result = {'target': paths.id, 'reference_sha256': identity['sha256'], 'rom_bytes': len(data),
               'complete_rom_partition': True, 'complete_code_inventory': False,
               'decoder': {'name': 'Capstone', 'version': capstone_version},
               'method': 'ARM/Thumb recursive control flow with ARM7 guards; whole-ROM aligned pointers, Thumb/ARM weak signatures; separate rooted census and estimated extents',
@@ -674,7 +688,7 @@ def main():
               'source_owned_instruction_regions': source_instructions,
               'data_regions': data_regions, 'partition': partition(rows+data_regions, len(data)),
               'input_sha256': {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in
-                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'tools/indirect_evidence.py', 'tools/bounded_indirect.py', 'tools/fixed_target_proof.py', 'tools/inventory_census.py', 'tools/source_addresses.py', 'config/code-evidence-us-eu.json', 'config/ram-map-us-eu.json', 'config/indirect-transfers-us-eu.json', 'config/progress-regions-us-eu.json', 'config/build-us-eu.json', 'config/analysis-requirements.txt', *sorted(evidence_inputs))}}
+                              ('tools/inventory_rom.py', 'tools/control_flow.py', 'tools/inventory_partition.py', 'tools/ram_copies.py', 'tools/indirect_evidence.py', 'tools/bounded_indirect.py', 'tools/fixed_target_proof.py', 'tools/inventory_census.py', 'tools/source_addresses.py', *(paths.relative(paths.config_file(name)) for name in STATIC_EVIDENCE), paths.relative(paths.ram_map), paths.relative(paths.manifest), 'config/python/analysis.txt', *sorted(evidence_inputs))}}
     result['inventory_schema_version'] = 2
     result['historical_mapped_extent_baseline'] = 319640
     result['code_census'] = census(scanner, strong_entries, strong_results,
@@ -689,7 +703,8 @@ def main():
     verify_census(result['code_census'], len(data))
     if any(result['input_sha256'][row['source']] != row['source_sha256'] for row in source_instructions):
         raise ValueError('Source instruction inputs changed during inventory')
-    out = ROOT/'assets/rom-inventory.json'
+    paths.assets.mkdir(parents=True, exist_ok=True)
+    out = paths.assets/'rom-inventory.json'
     out.write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps({k: result[k] for k in ('entry_count', 'initial_connected_entries', 'whole_rom_prologue_hits', 'sweep_seed_count', 'mapped_extent_bytes')}, indent=2))
     return 0

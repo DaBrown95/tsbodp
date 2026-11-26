@@ -25,7 +25,7 @@ class ToolchainTests(unittest.TestCase):
         self.pins = {'compiler': {'source_commit': 'fixed-public-source'},
                      'native_tool_sha256': {name: sha(self.root / name) for name in self.names},
                      'host_clang': 'original host'}
-        (self.root / PIN).parent.mkdir()
+        (self.root / PIN).parent.mkdir(parents=True, exist_ok=True)
         (self.root / PIN).write_text(json.dumps(self.pins))
         self.profile = {'source_pin_sha256': sha(self.root / PIN),
                         'native_tool_sha256': dict(self.pins['native_tool_sha256']),

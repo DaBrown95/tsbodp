@@ -37,10 +37,10 @@ alone cannot describe every runtime state. The `player.c` revision string is
 consistent with the previously investigated Krawall engine, without proving
 an exact upstream version.
 
-`config/ram-map-us-eu.json` records addresses, phases, entries, pointer evidence
+`config/rev0/ram-map.json` records addresses, phases, entries, pointer evidence
 and mutable instruction sites. `tools/map_ram.py` checks reference identity,
 startup and DMA literals and entry pointers, then emits copied images and a
-local report under `analysis/us-eu/ram/`. This directory stays ignored.
+local report under `analysis/rev0/ram/`. This directory stays ignored.
 
 ## Connected interrupt subsystem
 
@@ -129,7 +129,7 @@ The complete **16,777,216-byte** output matches the reference. At the interrupt
 milestone **16,775,680 bytes remain unconverted**, including code, header,
 assets and padding. This count
 is not a code decompilation percentage. Final output is
-`build/us-eu/bustin-out.gba`; retained runs include the linker map, script,
+`build/rev0/bustin-out.gba`; retained runs include the linker map, script,
 objects, coverage ledger and report. A real brightness-clamp source change
 from 16 to 15 must produce a same-size linked ROM with differing bytes. The
 original bounded setter negative control also remains required.

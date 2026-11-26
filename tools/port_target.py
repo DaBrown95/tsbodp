@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
-"""Derive a revision 1 build manifest and RAM map from the revision 0 sources.
+"""Carry matched functions from one target's build manifest into another's.
 
-Inputs are the two pinned reference ROMs, the revision 0 manifest and RAM map,
-and the object files of the latest accepted revision 0 pilot run. Nothing here
-grants source credit: every derived entry must still pass the normal pilot,
-whole-ROM and changed-source gates against the revision 1 reference.
+Each target keeps its own hand-maintained manifest (config/<target>/build.json)
+and RAM map; this tool only proposes additions. A function from the source
+manifest that the destination does not list yet is added when its compiled
+bytes, with relocation fields masked, occur in the destination ROM at a
+position consistent with its neighbours and differ only in relocation fields.
+Symbol values are solved from those fields and must agree with the values the
+destination already uses. Entries already in the destination are never
+changed, so revision-specific placements stay as written.
 
-A source extent is carried over when its revision 0 bytes, with relocation
-fields masked, occur in revision 1 at a position consistent with its
-neighbours. External symbol values come from the relocation fields of the
-revision 1 bytes. Extents that cannot be placed are reported, not guessed.
+Inputs are both pinned reference ROMs and the object files of the source
+target's latest accepted pilot run. Nothing here grants source credit: every
+addition must still pass the destination's pilot, whole-ROM and changed-source
+gates (`make build TARGET=<destination>`).
 """
 import argparse
 import bisect
@@ -20,7 +24,7 @@ import struct
 import sys
 from pathlib import Path
 from elftools.elf.elffile import ELFFile
-from project import ROOT, audit
+from project import ROOT, TARGETS, audit, load_target, target_paths
 
 ROM_BASE = 0x08000000
 CODE_LIMIT = 0x60000
@@ -133,7 +137,7 @@ def relocations(path, entry):
                        symbol['st_shndx'] == 'SHN_UNDEF')
 
 
-def compare(f, o0, o1, old, new, obj, moved, conditioned=False):
+def compare(f, o0, o1, old, new, obj, moved):
     """Check a placed extent differs only in relocation fields; solve symbols.
 
     `moved` is the change in execution address, which differs from the change
@@ -163,225 +167,141 @@ def compare(f, o0, o1, old, new, obj, moved, conditioned=False):
         if solved.setdefault(name, new_value) != new_value:
             return None, f'relocation symbol {name} solved inconsistently'
     differing = [i for i in range(size) if not mask[i] and old[o0 + i] != new[o1 + i]]
-    # Revision-conditioned sources select different constants; the pilot,
-    # not this placement check, decides whether those bytes match.
-    if differing and not conditioned:
+    if differing:
         return None, f'{len(differing)} non-relocation bytes differ'
     return solved, None
 
 
+def execution_address(f):
+    """Address the function runs at: its RAM copy address, else its ROM address."""
+    if 'ram_address' in f:
+        return f['ram_address']
+    return ROM_BASE + f['rom_offset']
+
+
+def carry(source, destination, copy_pairs, placed, check):
+    """Return (additions, rejected) for source functions missing from destination.
+
+    `copy_pairs` maps RAM copy names to (source copy, destination copy);
+    `placed` maps function names to destination ROM offsets; `check(f, offset,
+    moved)` returns (solved symbols, reason) as `compare` does.
+    """
+    existing = {f['name'] for f in destination['functions'] + destination.get('assembly', [])}
+    known = {}
+    for f in destination['functions'] + destination.get('assembly', []):
+        for k, v in f.get('symbols', {}).items():
+            known.setdefault(k, int(str(v), 0))
+    definitions = {f['name']: execution_address(f) + f.get('entry_offset', 0)
+                   for f in destination['functions'] + destination.get('assembly', [])
+                   if f.get('defines_symbol', True)}
+    rejected, carried = {}, {}
+    assembly = {f['name'] for f in source.get('assembly', [])}
+    candidates = [f for f in source['functions'] + source.get('assembly', [])
+                  if f['name'] not in existing]
+    for f in candidates:
+        name = f['name']
+        if name not in placed:
+            rejected[name] = 'not found in destination ROM'
+            continue
+        moved = placed[name] - f['rom_offset']
+        new_ram = None
+        if 'ram_address' in f:
+            pair = copy_pairs.get(f['ram_copy'])
+            if pair is None:
+                rejected[name] = 'destination RAM map has no matching copy'
+                continue
+            new_ram = pair[1]['ram_address'] + placed[name] - pair[1]['rom_offset']
+            moved = new_ram - f['ram_address']
+        solved, reason = check(f, placed[name], moved)
+        if reason:
+            rejected[name] = reason
+            continue
+        clash = [k for k, v in solved.items() if known.get(k, v) != v]
+        if clash:
+            rejected[name] = f'symbol {clash[0]} disagrees with the destination manifest'
+            continue
+        carried[name] = (f, solved, new_ram)
+    # Symbols solved two ways by different carried functions are unreliable.
+    values = collections.defaultdict(set)
+    for _, solved, _ in carried.values():
+        for k, v in solved.items():
+            values[k].add(v)
+    conflicts = {k for k, v in values.items() if len(v) > 1}
+    for name in [n for n, (_, solved, _) in carried.items() if conflicts & set(solved)]:
+        rejected[name] = 'shares an inconsistently solved symbol'
+        del carried[name]
+    solved_values = {**known, **{k: next(iter(v)) for k, v in values.items() if k not in conflicts}}
+    for name, (f, _, new_ram) in carried.items():
+        if f.get('defines_symbol', True):
+            address = new_ram if new_ram is not None else ROM_BASE + placed[name]
+            definitions[name] = address + f.get('entry_offset', 0)
+    additions = {'functions': [], 'assembly': []}
+    for name, (f, _, new_ram) in carried.items():
+        item = {**f, 'rom_offset': placed[name], 'symbols': {}}
+        # Unreferenced aliases cannot be solved from relocations; a known
+        # definition supplies them, otherwise they do not affect the bytes.
+        for k, v in f.get('symbols', {}).items():
+            if k in solved_values:
+                item['symbols'][k] = f"{solved_values[k]:#010x}"
+            elif k in definitions:
+                item['symbols'][k] = f"{definitions[k] | (int(str(v), 0) & 1):#010x}"
+        if 'thumb_symbols' in f:
+            item['thumb_symbols'] = [k for k in f['thumb_symbols']
+                                     if k in item['symbols'] or k in definitions]
+        if new_ram is not None:
+            item['ram_address'] = new_ram
+        additions['assembly' if name in assembly else 'functions'].append(item)
+    return additions, rejected
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source-target', default='us-eu')
-    parser.add_argument('--target', default='us-rev1')
+    parser.add_argument('--from', dest='source', default='rev0', choices=TARGETS)
+    parser.add_argument('--to', dest='destination', default='rev1', choices=TARGETS)
     parser.add_argument('--pilot-run', help='Accepted source-target pilot run directory')
-    parser.add_argument('--report', default=None)
+    parser.add_argument('--dry-run', action='store_true', help='Report without writing the manifest')
     args = parser.parse_args()
-    old_target = json.loads((ROOT / f'config/targets/{args.source_target}.json').read_text())
-    new_target = json.loads((ROOT / f'config/targets/{args.target}.json').read_text())
+    if args.source == args.destination:
+        parser.error('--from and --to must differ')
+    src, dst = target_paths(args.source), target_paths(args.destination)
+    old_target, new_target = load_target(args.source), load_target(args.destination)
     old, old_identity = audit(ROOT / old_target['rom_path'], old_target)
     new, new_identity = audit(ROOT / new_target['rom_path'], new_target)
     if not (old_identity['accepted'] and new_identity['accepted']):
         raise ValueError('Reference ROM identity check failed')
-    manifest = json.loads((ROOT / f'config/build-{args.source_target}.json').read_text())
-    ram = json.loads((ROOT / f'config/ram-map-{args.source_target}.json').read_text())
-    pilot = json.loads((ROOT / f'reports/{args.source_target}/pilot.json').read_text())
+    source = json.loads(src.manifest.read_text())
+    destination = json.loads(dst.manifest.read_text())
+    old_ram = json.loads(src.ram_map.read_text())
+    new_ram = {c['name']: c for c in json.loads(dst.ram_map.read_text())['copies']}
+    copy_pairs = {c['name']: (c, new_ram[c['name']]) for c in old_ram['copies'] if c['name'] in new_ram}
+    pilot = json.loads((src.reports / 'pilot.json').read_text())
     if not pilot['accepted']:
-        raise ValueError('Source-target pilot run is not accepted')
+        raise ValueError(f'The {args.source} pilot run is not accepted; run make pilot first')
     run = Path(args.pilot_run or pilot['output_directory'])
-    port_path = ROOT / f'config/port-{args.target}.json'
-    port = json.loads(port_path.read_text()) if port_path.exists() else {}
-    conditioned = set(port.get('revision_conditioned', ()))
-    sources = manifest['functions'] + manifest.get('assembly', [])
-    placed = place(sources, old, new)
+    placed = place(source['functions'] + source.get('assembly', []), old, new)
 
-    copy_rejected = {}
-    def translate_rom(offset):
-        """Translate a ROM offset that lies inside a carried extent."""
-        for f in sources:
-            if f['name'] in placed and f['rom_offset'] <= offset < f['rom_offset'] + f['size']:
-                return placed[f['name']] + offset - f['rom_offset']
-        return None
+    def check(f, offset, moved):
+        return compare(f, f['rom_offset'], offset, old, new, run / f['name'] / 'source.o', moved)
 
-    copies, copy_map = [], {}
-    for copy in ram['copies']:
-        item = {k: v for k, v in copy.items() if k != 'classification'}
-        if 'startup_literal_offset' in copy:
-            literals = [copy['startup_literal_offset']]
-        elif 'word_copy_literal_offsets' in copy:
-            literals = [translate_rom(o) for o in copy['word_copy_literal_offsets']]
-            if None in literals:
-                copy_rejected[copy['name']] = 'copy literals are outside placed source'
-                continue
-            item['word_copy_literal_offsets'] = literals
-        else:
-            literals = [translate_rom(copy.get('dma_literal_offset', 0x1f88c))]
-            if None in literals:
-                copy_rejected[copy['name']] = 'copy literals are outside placed source'
-                continue
-            item['dma_literal_offset'] = literals[0]
-        base = literals[0]
-        item['rom_offset'] = word(new, base) - ROM_BASE
-        item['ram_address'] = word(new, base + 4)
-        if 'startup_literal_offset' in copy:
-            item['size'] = word(new, base + 8) - item['ram_address']
-        elif 'word_copy_literal_offsets' in copy:
-            item['word_copy_control'] = word(new, literals[2])
-            item['size'] = (item['word_copy_control'] & 0x1fffff) * 4
-        item['classification'] = (f"Derived from the {args.source_target} map at "
-                                  f"ROM {copy['rom_offset']:#x}; see config/ram-map-"
-                                  f"{args.source_target}.json for evidence.")
-        copies.append(item)
-        copy_map[copy['name']] = (copy, item)
-
-    def translate_ram(address):
-        for copy, item in copy_map.values():
-            if copy['ram_address'] <= address < copy['ram_address'] + copy['size']:
-                rom = translate_rom(copy['rom_offset'] + address - copy['ram_address'])
-                if rom is not None and item['rom_offset'] <= rom < item['rom_offset'] + item['size']:
-                    return item['ram_address'] + rom - item['rom_offset']
-        return None
-
-    carried, rejected, symbols = {}, dict(copy_rejected), collections.defaultdict(set)
-    for f in sources:
-        name = f['name']
-        if name not in placed:
-            rejected[name] = 'not found in target ROM'
-            continue
-        moved = placed[name] - f['rom_offset']
-        if 'ram_address' in f:
-            pair = copy_map.get(f['ram_copy'])
-            if pair is None:
-                rejected[name] = 'RAM copy could not be derived'
-                continue
-            moved = pair[1]['ram_address'] + placed[name] - pair[1]['rom_offset'] - f['ram_address']
-        solved, reason = compare(f, f['rom_offset'], placed[name], old, new,
-                                 run / name / 'source.o', moved, name in conditioned)
-        if reason:
-            rejected[name] = reason
-            continue
-        carried[name] = solved
-        for key, value in solved.items():
-            symbols[key].add(value)
-    conflicts = {k: sorted(v) for k, v in symbols.items() if len(v) > 1}
-    for name, solved in list(carried.items()):
-        if any(k in conflicts for k in solved):
-            rejected[name] = 'shares an inconsistently solved symbol'
-            del carried[name]
-    values = {k: next(iter(v)) for k, v in symbols.items() if k not in conflicts}
-
-    entries = []
-    for entry in ram['entries']:
-        item = dict(entry)
-        item['ram_address'] = translate_ram(entry['ram_address'])
-        if 'pointer_rom_offset' in entry:
-            item['pointer_rom_offset'] = translate_rom(entry['pointer_rom_offset'])
-        if item['ram_address'] is None or item.get('pointer_rom_offset', 0) is None:
-            continue
-        item['evidence'] = f"Derived from {args.source_target}: {entry['evidence']}"
-        entries.append(item)
-
-    definitions = {}
-    for f in sources:
-        if f['name'] in carried and f.get('defines_symbol', True):
-            if 'ram_address' in f:
-                pair = copy_map[f['ram_copy']][1]
-                address = pair['ram_address'] + placed[f['name']] - pair['rom_offset']
-            else:
-                address = ROM_BASE + placed[f['name']]
-            definitions[f['name']] = address + f.get('entry_offset', 0)
-    out_functions, out_assembly = [], []
-    for f in sources:
-        name = f['name']
-        if name not in carried:
-            continue
-        item = dict(f)
-        item['rom_offset'] = placed[name]
-        # Unreferenced aliases cannot be solved from relocations; a carried
-        # definition supplies them, otherwise they do not affect the bytes.
-        item['symbols'] = {}
-        for k, v in f.get('symbols', {}).items():
-            if k in values:
-                item['symbols'][k] = f"{values[k]:#010x}"
-            elif k in definitions:
-                old_value = int(str(v), 0)
-                item['symbols'][k] = f"{definitions[k] | (old_value & 1):#010x}"
-        if 'thumb_symbols' in f:
-            item['thumb_symbols'] = [k for k in f['thumb_symbols']
-                                     if k in item['symbols'] or k in definitions]
-        if 'ram_address' in f:
-            copy, new_copy = copy_map.get(f['ram_copy'], (None, None))
-            if new_copy is None:
-                rejected[name] = 'RAM copy could not be derived'
-                continue
-            item['ram_address'] = new_copy['ram_address'] + placed[name] - new_copy['rom_offset']
-        if 'expected_sha256' in f:
-            item['expected_sha256'] = hashlib.sha256(
-                new[placed[name]:placed[name] + f['size']]).hexdigest()
-        (out_assembly if f in manifest.get('assembly', []) else out_functions).append(item)
-
-    # Sources whose code changed in this revision: placed by hand, with
-    # symbols taken from the values solved for the rest of the target.
-    for name, offset in port.get('placements', {}).items():
-        placement = offset if isinstance(offset, dict) else {'rom_offset': offset}
-        start = int(str(placement['rom_offset']), 0)
-        f = next(f for f in sources if f['name'] == name)
-        if 'ram_address' in f:
-            new_copy = copy_map[f['ram_copy']][1]
-            definitions[name] = new_copy['ram_address'] + start - new_copy['rom_offset']
-        else:
-            definitions[name] = ROM_BASE + start
-    for name, offset in port.get('placements', {}).items():
-        f = next(f for f in sources if f['name'] == name)
-        if name in carried:
-            raise ValueError(f'Placed function {name} was already carried')
-        placement = offset if isinstance(offset, dict) else {'rom_offset': offset}
-        item = {**f, 'rom_offset': int(str(placement['rom_offset']), 0),
-                'size': placement.get('size', f['size']), 'symbols': {}}
-        wanted = {**f.get('symbols', {}),
-                  **{k: '0' for k in placement.get('extra_symbols', ())}}
-        # Callees that no carried source calls are given explicitly.
-        explicit = placement.get('symbol_values', {})
-        for k, v in wanted.items():
-            if k in explicit:
-                item['symbols'][k] = explicit[k]
-            elif k in values:
-                item['symbols'][k] = f"{values[k]:#010x}"
-            elif k in definitions:
-                item['symbols'][k] = f"{definitions[k] | (int(str(v), 0) & 1):#010x}"
-            else:
-                raise ValueError(f'No {args.target} value for {k} used by {name}')
-        if 'ram_address' in f:
-            new_copy = copy_map[f['ram_copy']][1]
-            item['ram_address'] = new_copy['ram_address'] + item['rom_offset'] - new_copy['rom_offset']
-        if 'inline_glue_spans' in placement:
-            item['inline_glue'] = {**f['inline_glue'], 'spans': placement['inline_glue_spans']}
-        if 'expected_sha256' in f:
-            item['expected_sha256'] = hashlib.sha256(
-                new[item['rom_offset']:item['rom_offset'] + item['size']]).hexdigest()
-        rejected.pop(name, None)
-        out_functions.append(item)
-    # Target-only sources, e.g. a routine rebuilt differently in this revision.
-    for item in port.get('extra_functions', ()):
-        if item['name'] in carried or any(f['name'] == item['name'] for f in out_functions):
-            raise ValueError(f"Extra function {item['name']} duplicates a carried source")
-        out_functions.append(dict(item))
-    new_manifest = {**manifest, 'target': args.target,
-                    'functions': out_functions, 'assembly': out_assembly}
-    new_ram = {'target': args.target, 'copies': copies, 'entries': entries,
-               'limitations': [f'Derived from config/ram-map-{args.source_target}.json '
-                               'by tools/port_target.py; carries no independent evidence.']}
-    (ROOT / f'config/build-{args.target}.json').write_text(json.dumps(new_manifest, indent=2) + '\n')
-    (ROOT / f'config/ram-map-{args.target}.json').write_text(json.dumps(new_ram, indent=2) + '\n')
-    report = {'source_target': args.source_target, 'target': args.target,
-              'pilot_run': str(run), 'carried_functions': len(out_functions),
-              'carried_assembly': len(out_assembly), 'rejected': rejected,
-              'symbol_conflicts': {k: [hex(x) for x in v] for k, v in conflicts.items()}}
-    path = Path(args.report) if args.report else ROOT / f'reports/{args.target}/port.json'
-    path.parent.mkdir(parents=True, exist_ok=True)
+    additions, rejected = carry(source, destination, copy_pairs, placed, check)
+    for key in ('functions', 'assembly'):
+        for item in additions[key]:
+            if 'expected_sha256' in item:
+                item['expected_sha256'] = hashlib.sha256(
+                    new[item['rom_offset']:item['rom_offset'] + item['size']]).hexdigest()
+        destination[key] = destination.get(key, []) + additions[key]
+    if not args.dry_run:
+        dst.manifest.write_text(json.dumps(destination, indent=2) + '\n')
+    report = {'from': args.source, 'to': args.destination, 'pilot_run': str(run),
+              'added_functions': [f['name'] for f in additions['functions']],
+              'added_assembly': [f['name'] for f in additions['assembly']],
+              'not_carried': rejected, 'written': not args.dry_run}
+    dst.reports.mkdir(parents=True, exist_ok=True)
+    path = dst.reports / 'port.json'
     path.write_text(json.dumps(report, indent=2) + '\n')
-    print(f"Carried {len(out_functions)} C functions and {len(out_assembly)} assembly "
-          f"regions; {len(rejected)} rejected. Report: {path}")
+    print(f"Added {len(additions['functions'])} C functions and {len(additions['assembly'])} "
+          f"assembly regions to {dst.relative(dst.manifest)}; {len(rejected)} not carried. "
+          f"Report: {path}")
     return 0
 
 

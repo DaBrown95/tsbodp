@@ -1,5 +1,5 @@
 {
-  "target": "us-eu",
+  "target": "rev0",
   "copies": [
     {
       "name": "audio_iwram",
@@ -308,7 +308,7 @@
     }
   ],
   "limitations": [
-    "Static original-image installation map, supplemented by the separate bounded 300-frame mGBA boot in config/runtime-observations-us-eu.json; neither establishes a complete code/data partition.",
+    "Static original-image installation map, supplemented by the separate bounded 300-frame mGBA boot in config/rev0/runtime-observations.json; neither establishes a complete code/data partition.",
     "Not every byte within a copy or between entries is executable.",
     "Self-modifying instruction state differs after execution; keep original and runtime state distinct.",
     "No executable entry found in initial EWRAM copy; later code installation remains possible.",

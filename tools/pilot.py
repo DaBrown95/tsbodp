@@ -12,7 +12,7 @@ import uuid
 import struct
 
 from elftools.elf.elffile import ELFFile
-from project import ROOT, audit, compare_bytes, write_report, target_id, target_revision
+from project import ROOT, audit, compare_bytes, write_report, target_id, target_paths, target_revision
 from toolchain import (load_profile, verify_native, ARM_PIN, ARM_PROFILE, OLD_PIN, OLD_PROFILE,
                        GCC302_PIN, GCC302_PROFILE, GCC302_HWI32_PIN,
                        GCC302_HWI32_PROFILE, compiler_selection,
@@ -58,7 +58,7 @@ def compile_function(function, source, folder, flags, copies=None, header_overri
     linked = folder / "linked.elf"
     entries = ()
     if copies is None:
-        ram = json.loads((ROOT / f'config/ram-map-{target_id()}.json').read_text())
+        ram = json.loads(target_paths().ram_map.read_text())
         copies, entries = ram['copies'], ram['entries']
     address = execution_address(function, copies, entries)
     selected = compiler_selection(function, flags)
@@ -212,17 +212,18 @@ def main():
     args = parser.parse_args()
     validate_jobs(args.jobs)
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
-    run_folder = ROOT / "build/pilot/runs" / (run_id if target_id() == "us-eu" else f"{target_id()}-{run_id}")
+    paths = target_paths()
+    run_folder = paths.pilot_runs / run_id
     project_header_store = (run_folder / '.project-header-content'
                             if args.share_project_headers else None)
-    target = json.loads((ROOT / f"config/targets/{target_id()}.json").read_text())
-    manifest = json.loads((ROOT / f"config/build-{target_id()}.json").read_text())
+    target = json.loads(paths.target.read_text())
+    manifest = json.loads(paths.manifest.read_text())
     require_negative_controls(manifest['functions'] + manifest.get('assembly', []))
     lock, profile_path = load_profile(ROOT)
     rom, identity = audit(ROOT / target["rom_path"], target)
     if not identity["accepted"]:
         return 1
-    ram = json.loads((ROOT / f'config/ram-map-{target_id()}.json').read_text())
+    ram = json.loads(paths.ram_map.read_text())
     copies = ram['copies']
     validate_execution_layout(manifest['functions'], copies, ram['entries'])
     validate_symbol_definitions(manifest, copies, ram['entries'])
@@ -247,11 +248,11 @@ def main():
               "project_header_store": (str(project_header_store)
                                        if project_header_store is not None else None)}
     report["helper_sha256"] = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-                                for name in ("tools/pilot.py", "tools/project.py", f"config/build-{target_id()}.json",
-                                             "tools/toolchain.py", "tools/source_symbols.py", "tools/source_controls.py", "config/pilot-toolchain.json",
-                                             f"config/targets/{target_id()}.json", "include/irq.h",
+                                for name in ("tools/pilot.py", "tools/project.py", paths.relative(paths.manifest),
+                                             "tools/toolchain.py", "tools/source_symbols.py", "tools/source_controls.py", "config/toolchains/agbcc.json",
+                                             paths.relative(paths.target), "include/irq.h",
                                              "tools/source_addresses.py", "tools/source_coverage.py", "tools/ram_copies.py", "tools/header_snapshots.py", "tools/pilot_parallel_process.py", "tools/project_header_store.py",
-                                             f"config/ram-map-{target_id()}.json")}
+                                             paths.relative(paths.ram_map))}
     report['helper_sha256'].update({str(header.relative_to(ROOT)): hashlib.sha256(header.read_bytes()).hexdigest()
                                     for header in (ROOT / 'include').rglob('*.h')})
     if profile_path:
@@ -260,7 +261,7 @@ def main():
     verify_native(ROOT, lock, report['host_clang'])
     selected_ids = {compiler_selection(f, manifest['compiler_flags'])['compiler_id']
                     for f in manifest['functions']}
-    report['compiler_profiles'] = {'agbcc': {'pin': 'config/pilot-toolchain.json',
+    report['compiler_profiles'] = {'agbcc': {'pin': 'config/toolchains/agbcc.json',
                                             'compiler': lock['compiler']}}
     if 'agbcc_arm' in selected_ids:
         arm_lock, arm_profile = load_profile(ROOT, ARM_PIN, ARM_PROFILE)
@@ -304,7 +305,7 @@ def main():
         lock = {**lock, 'native_tool_sha256': {**lock['native_tool_sha256'], **gcc302_lock['native_tool_sha256']}}
         report['compiler_profiles'][compiler_id] = {'pin': str(pin), 'compiler': gcc302_lock['compiler']}
     selected_assembler_ids = {assembler_selection(f)['assembler_id'] for f in manifest['functions']}
-    report['assembler_profiles'] = {'binutils': {'pin': 'config/pilot-toolchain.json',
+    report['assembler_profiles'] = {'binutils': {'pin': 'config/toolchains/agbcc.json',
                                                 'object_abi_flags': modern_assembler_abi_flags()}}
     binutils2101_lock = None
     if 'binutils2101' in selected_assembler_ids:

@@ -5,7 +5,7 @@ The point-to-cell converter at `0x08048AF8` and inverse projector at
 Their function bodies occupy 126 and 86 bytes; each extent includes two
 alignment bytes. See the [converter](../src/frame/frame_grid_point_to_cell.c),
 [inverse](../src/frame/frame_grid_inverse_point.c) and
-[build metadata](../config/build-us-eu.json).
+[build metadata](../config/rev0/build.json).
 
 Both functions first snapshot point X/Y and registration origin X/Y. Their
 common projection computes:

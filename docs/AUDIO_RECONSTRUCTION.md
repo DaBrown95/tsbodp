@@ -1799,7 +1799,7 @@ source/control proofs distinguish instruction words from pools within the
 source extents; no broad between-entry envelope is treated as code.
 
 The sanitized separate initial-image partition is recorded in
-[`audio_initial_image_partition`](../config/code-evidence-us-eu.json), with all
+[`audio_initial_image_partition`](../config/rev0/code-evidence.json), with all
 33 physical ranges, 12 source owners, fixed storage references and upstream pin.
 It does not change the inventory algorithm or census counts. The ignored
 reproducible read-only audit is `reports/audio-copy-partition-20261016/audit.py`;

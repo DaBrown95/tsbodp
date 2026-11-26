@@ -11,13 +11,14 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
+import project
 import resolve_literals as literals
 
 BASE = literals.BASE
 
 
 def identity(data):
-    return {'id': 'us-eu', 'rom_path': 'baseroms/test.gba', 'size': len(data),
+    return {'id': 'rev0', 'rom_path': 'baseroms/test.gba', 'size': len(data),
             'sha1': hashlib.sha1(data).hexdigest(),
             'sha256': hashlib.sha256(data).hexdigest(),
             'game_code': 'ASIE', 'revision': 0}
@@ -114,7 +115,7 @@ class LiteralTests(unittest.TestCase):
 
     def test_report_distinguishes_actor_and_scene_and_never_reads_pointee(self):
         data = reference()
-        manifest = {'target': 'us-eu', 'functions': [
+        manifest = {'target': 'rev0', 'functions': [
             {'name': 'panel', 'symbols': {'g_actor': '0x03005a00', 'g_scene': '0x03004350'}}]}
         report = literals.analyze_literals(data, identity(data), [BASE+2, BASE+6],
                                           manifest=manifest, functions=['panel'])
@@ -135,7 +136,7 @@ class LiteralTests(unittest.TestCase):
     def test_names_never_clear_thumb_pointer_bits(self):
         data = bytearray(reference())
         struct.pack_into('<I', data, 8, BASE+1)
-        manifest = {'target': 'us-eu', 'functions': [{'name': 'a', 'symbols': {'entry': hex(BASE)}}]}
+        manifest = {'target': 'rev0', 'functions': [{'name': 'a', 'symbols': {'entry': hex(BASE)}}]}
         report = literals.analyze_literals(bytes(data), identity(data), [BASE+2],
                                           manifest=manifest, functions=['a'])
         self.assertEqual(report['loads'][0]['value'], BASE+1)
@@ -161,21 +162,22 @@ class CLITests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name).resolve()
-        (self.root/'config/targets').mkdir(parents=True)
+        (self.root/'config/rev0').mkdir(parents=True)
         (self.root/'baseroms').mkdir()
         (self.root/'tools').mkdir()
         for name in ('resolve_literals.py', 'project.py'):
             (self.root/'tools'/name).write_bytes((Path(literals.__file__).parent/name).read_bytes())
         self.data = reference()
         (self.root/'baseroms/test.gba').write_bytes(self.data)
-        (self.root/'config/targets/us-eu.json').write_text(json.dumps(identity(self.data)))
-        (self.root/'reports/us-eu').mkdir(parents=True)
-        self.audit = self.root/'reports/us-eu/audit.json'
+        (self.root/'config/rev0/target.json').write_text(json.dumps(identity(self.data)))
+        (self.root/'reports/rev0').mkdir(parents=True)
+        self.audit = self.root/'reports/rev0/audit.json'
         self.audit.write_text('previous audit must remain unchanged\n')
         self.output = self.root/'reports/new/literals.json'
 
     def run_cli(self, *args):
-        with patch.object(literals, 'ROOT', self.root), contextlib.redirect_stdout(io.StringIO()), \
+        with patch.object(literals, 'ROOT', self.root), patch.object(project, 'ROOT', self.root), \
+                contextlib.redirect_stdout(io.StringIO()), \
                 contextlib.redirect_stderr(io.StringIO()):
             result = literals.main([*(hex(x) if isinstance(x, int) else x for x in args),
                                     '--output', str(self.output)])
@@ -205,7 +207,7 @@ class CLITests(unittest.TestCase):
         self.assertFalse(self.output.parent.exists())
 
     def test_existing_output_is_never_overwritten(self):
-        self.output.parent.mkdir(); self.output.write_text('retained output\n')
+        self.output.parent.mkdir(parents=True, exist_ok=True); self.output.write_text('retained output\n')
         self.assertEqual(self.run_cli(BASE+2), 1)
         self.assertEqual(self.output.read_text(), 'retained output\n')
 
@@ -220,9 +222,9 @@ class CLITests(unittest.TestCase):
         self.assertFalse((outside/'out.json').exists())
 
     def test_fixed_manifest_selection_is_optional_and_pinned(self):
-        manifest = {'target': 'us-eu', 'functions': [
+        manifest = {'target': 'rev0', 'functions': [
             {'name': 'a', 'symbols': {'g_actor': '0x03005a00'}}]}
-        path = self.root/'config/build-us-eu.json'; path.write_text(json.dumps(manifest))
+        path = self.root/'config/rev0/build.json'; path.write_text(json.dumps(manifest))
         self.assertEqual(self.run_cli(BASE+2, '--function', 'a'), 0)
         report = json.loads(self.output.read_text())
         self.assertEqual(report['manifest_sha256'], hashlib.sha256(path.read_bytes()).hexdigest())

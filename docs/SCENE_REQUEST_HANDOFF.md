@@ -99,12 +99,12 @@ comment-updated palette-menu transition consumer is reverified with its control.
 The current paired build proof retains complete comparisons, controls and
 source/header contexts. Unique historical source attempts and bounded findings
 remain in ignored reports; obsolete generated payloads are retired under the
-[retention policy](LOCAL_OUTPUT_RETENTION.md). Names and callback types follow
+retention policy. Names and callback types follow
 static accesses and compiler matches; no runtime claim is made.
 
 The remaining work includes unowned scene callbacks and the original
 `0x0803D850` transfer-completion provider. The current
-[blocker list](COMPLETION_BLOCKERS.md) governs the next targets.
+blocker list governs the next targets.
 
 ## Unrooted transient and view coordinator
 

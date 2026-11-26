@@ -26,7 +26,7 @@ class OldAgbccProvisionTests(unittest.TestCase):
         self.repository = self.root / 'toolchains/agbcc'
         self.source = self.repository / 'gcc'
         self.source.mkdir(parents=True)
-        (self.root / 'config').mkdir()
+        (self.root / 'config' / 'toolchains').mkdir(parents=True)
         self.git('init', '-q')
         self.git('config', 'commit.gpgsign', 'false')
         for name, data, mode in [('Makefile', b'old: main.c\n', 0o644),

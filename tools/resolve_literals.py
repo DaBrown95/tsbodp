@@ -19,7 +19,7 @@ import struct
 import sys
 import time
 
-from project import ROOT, inspect_rom
+from project import ROOT, inspect_rom, target_paths
 
 BASE = 0x08000000
 MAX_ADDRESS = 0xffffffff
@@ -144,7 +144,8 @@ def main(argv=None):
     parser.add_argument('--output', help='Exclusive new JSON path beneath reports/')
     args = parser.parse_args(argv)
     try:
-        target_path = ROOT / 'config/targets/us-eu.json'
+        paths = target_paths()
+        target_path = paths.target
         target_bytes = target_path.read_bytes()
         target = json.loads(target_bytes)
         data = (ROOT / target['rom_path']).read_bytes()
@@ -153,7 +154,7 @@ def main(argv=None):
         if not inspect_rom(data, target)['accepted']:
             raise ValueError('Reference ROM failed its fixed target identity audit')
         if args.function:
-            manifest_bytes = (ROOT / 'config/build-us-eu.json').read_bytes()
+            manifest_bytes = paths.manifest.read_bytes()
         report = analyze_literals(data, target, args.addresses, args.mode,
                                   json.loads(manifest_bytes) if manifest_bytes else None,
                                   args.function)
@@ -163,7 +164,7 @@ def main(argv=None):
         report['helper_sha256'] = {
             name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
             for name in ('tools/resolve_literals.py', 'tools/project.py')}
-        output = Path(args.output) if args.output else Path(f'reports/us-eu/literal-loads/{time.time_ns()}.json')
+        output = Path(args.output) if args.output else paths.reports / 'literal-loads' / f'{time.time_ns()}.json'
         output = output.absolute() if output.is_absolute() else (ROOT / output).absolute()
         if (output.resolve() != output or not output.is_relative_to(ROOT / 'reports')
                 or output.suffix != '.json'):

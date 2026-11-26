@@ -49,8 +49,8 @@ class Binutils2101ProvisionTests(unittest.TestCase):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
-        for name in ('toolchains', 'config', 'tools'):
-            (self.root / name).mkdir()
+        for name in ('toolchains', 'config/toolchains', 'tools'):
+            (self.root / name).mkdir(parents=True)
         self.patch = self.root / 'tools/compat.patch'
         self.patch.write_bytes(b'pinned declaration patch')
         self.archive = self.root / 'toolchains/binutils-2.10.1.tar.gz'

@@ -3,18 +3,19 @@
 import hashlib
 import json
 import struct
-from project import ROOT, audit, write_report
+from project import ROOT, audit, target_paths, write_report
 from ram_copies import validate_copy
 
 
 def main():
-    target = json.loads((ROOT / 'config/targets/us-eu.json').read_text())
+    paths = target_paths()
+    target = json.loads(paths.target.read_text())
     rom, identity = audit(ROOT / target['rom_path'], target)
     if not identity['accepted']:
         return 1
-    mapping = json.loads((ROOT / 'config/ram-map-us-eu.json').read_text())
+    mapping = json.loads(paths.ram_map.read_text())
     word = lambda offset: struct.unpack_from('<I', rom, offset)[0]
-    folder = ROOT / 'analysis/us-eu/ram'
+    folder = ROOT / 'analysis' / paths.id / 'ram'
     folder.mkdir(parents=True, exist_ok=True)
     copies = []
     for copy in mapping['copies']:
@@ -41,14 +42,16 @@ def main():
             raise ValueError('RAM entry has ambiguous or absent mapping')
         owner = owners[0]
         entries.append({**entry, 'rom_offset': owner['rom_offset'] + address - owner['ram_address']})
-    defaults = [word(mapping['irq_default_table_rom_offset'] + i * 4) for i in range(13)]
-    if defaults[3] != 0x03000004:
-        raise ValueError('Audio IRQ entry differs')
+    defaults = None
+    if 'irq_default_table_rom_offset' in mapping:
+        defaults = [word(mapping['irq_default_table_rom_offset'] + i * 4) for i in range(13)]
+        if defaults[3] != 0x03000004:
+            raise ValueError('Audio IRQ entry differs')
     report = {**mapping, 'copies': copies, 'entries': entries, 'irq_default_entries': defaults,
               'reference_sha256': identity['sha256'], 'accepted': True,
               'helper_sha256': hashlib.sha256((ROOT / 'tools/map_ram.py').read_bytes()).hexdigest(),
               'validation_helper_sha256': hashlib.sha256((ROOT / 'tools/ram_copies.py').read_bytes()).hexdigest(),
-              'map_sha256': hashlib.sha256((ROOT / 'config/ram-map-us-eu.json').read_bytes()).hexdigest()}
+              'map_sha256': hashlib.sha256(paths.ram_map.read_bytes()).hexdigest()}
     (folder / 'map.json').write_text(json.dumps(report, indent=2) + '\n')
     write_report('ram-map', report)
     for c in copies:

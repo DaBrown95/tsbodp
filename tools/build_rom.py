@@ -7,7 +7,7 @@ from pathlib import Path
 import subprocess
 import sys
 from elftools.elf.elffile import ELFFile
-from project import ROOT, audit, compare_bytes, write_report, target_id
+from project import ROOT, audit, compare_bytes, write_report, target_id, target_paths
 from pilot import compile_function, run
 from rom_layout import layout
 from source_symbols import declarations
@@ -24,7 +24,7 @@ def link_rom(manifest, reference, pilot_folder, folder, overrides=None, copies=N
     sources = manifest['functions'] + manifest.get('assembly', [])
     entries = ()
     if copies is None:
-        ram = json.loads((ROOT / f'config/ram-map-{target_id()}.json').read_text())
+        ram = json.loads(target_paths().ram_map.read_text())
         copies, entries = ram['copies'], ram['entries']
     validate_execution_layout(manifest['functions'], copies, entries)
     validate_symbol_definitions(manifest, copies, entries)
@@ -110,18 +110,19 @@ def main():
     if args.share_project_headers:
         pilot_command.append('--share-project-headers')
     subprocess.run(pilot_command, check=True)
-    pilot = json.loads((ROOT / f'reports/{target_id()}/pilot.json').read_text())
+    paths = target_paths()
+    pilot = json.loads((paths.reports / 'pilot.json').read_text())
     if not pilot['accepted']:
         raise ValueError('Source gate failed')
-    manifest = json.loads((ROOT / f'config/build-{target_id()}.json').read_text())
-    target = json.loads((ROOT / f'config/targets/{target_id()}.json').read_text())
+    manifest = json.loads(paths.manifest.read_text())
+    target = json.loads(paths.target.read_text())
     manifest['rom_size'] = target['size']
     reference = ROOT / target['rom_path']
     rom, identity = audit(reference, target)
     if not identity['accepted']:
         raise ValueError('Reference changed')
     pilot_folder = Path(pilot['output_directory'])
-    folder = ROOT / f'build/{target_id()}/runs' / pilot['run_id']
+    folder = paths.rom_runs / pilot['run_id']
     output, regions, commands = link_rom(manifest, reference, pilot_folder, folder)
     comparison = compare_bytes(rom, output.read_bytes())
     # A same-size real source mutation must propagate through the whole-ROM link.
@@ -154,14 +155,14 @@ def main():
                                 for name in ('tools/build_rom.py', 'tools/rom_layout.py',
                                              'tools/source_addresses.py', 'tools/source_coverage.py', 'tools/toolchain.py',
                                              'tools/project_header_store.py',
-                                             f'config/ram-map-{target_id()}.json')},
+                                             paths.relative(paths.ram_map))},
               'accepted': comparison['identical'] and rejected}
     (folder / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     write_report('build', report)
     if not report['accepted']:
         return 1
     # Publish verified output only. No bytes are repaired or patched.
-    (ROOT / f'build/{target_id()}/bustin-out.gba').write_bytes(output.read_bytes())
+    paths.rom.write_bytes(output.read_bytes())
     print(f"Whole ROM: MATCH; {report['compiled_c_functions']} C functions, "
           f"{report['compiled_c_bytes_including_pools_and_alignment']} source bytes; "
           f"{report['assembly_glue_bytes']} assembly glue bytes; "
