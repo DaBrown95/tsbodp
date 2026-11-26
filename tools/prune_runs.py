@@ -2,8 +2,7 @@
 """Delete local pilot and ROM-link runs except each target's latest verified one.
 
 A full pilot run is several hundred megabytes, so old runs add up quickly. The
-run named by reports/<target>/pilot.json and build.json is kept so `make
-progress` can still check it; everything else under build/<target>/pilot and
+runs named by reports/<target>/pilot.json and build.json are kept; everything else under build/<target>/pilot and
 build/<target>/rom is removed. Nothing tracked is touched.
 """
 import argparse

@@ -349,7 +349,7 @@ class Scanner:
             self.results[key] = self.walk(*key)
 
 
-STATIC_EVIDENCE = ('code-evidence.json', 'indirect-transfers.json', 'progress-regions.json')
+STATIC_EVIDENCE = ('code-evidence.json', 'indirect-transfers.json', 'scan-seeds.json')
 
 
 def require_static_evidence(paths):
@@ -374,7 +374,7 @@ def main():
     if not identity['accepted']:
         return 1
     ram = json.loads(paths.ram_map.read_text())
-    bounded = json.loads(paths.config_file('progress-regions.json').read_text())
+    bounded = json.loads(paths.config_file('scan-seeds.json').read_text())
     manifest = json.loads(paths.manifest.read_text())
     source_code = manifest['functions'] + [r for r in manifest.get('assembly', []) if r.get('mode') != 'data']
     word = lambda off: struct.unpack_from('<I', data, off)[0]
@@ -390,7 +390,7 @@ def main():
     scanner.seed(BASE+0xc0, 'ARM', 'startup', 'ARM startup')
     scanner.seed(BASE+0xec, 'Thumb', 'startup', 'Thumb startup')
     scanner.seed(BASE+0x25c0c, 'Thumb', 'startup main pointer', 'Entry routine')
-    for row in bounded['unconverted_extents']:
+    for row in bounded['seeds']:
         scanner.seed(row.get('ram_address', BASE+row['rom_offset']),
                      row.get('mode', 'ARM' if row['name'].startswith('ARM') else 'Thumb'),
                      'bounded audit', row['name'])
@@ -628,7 +628,7 @@ def main():
             continue  # Uncorroborated pointer/prologue coincidences stay unresolved.
         rows.append(row)
     audited = []
-    for known in overlay(bounded['unconverted_extents'], root_source_code):
+    for known in overlay(bounded['seeds'], root_source_code):
         off = known['rom_offset']
         entry_off = off + known.get('entry_offset', 0)
         discovered = merged.get(entry_off, {})
@@ -703,8 +703,7 @@ def main():
     verify_census(result['code_census'], len(data))
     if any(result['input_sha256'][row['source']] != row['source_sha256'] for row in source_instructions):
         raise ValueError('Source instruction inputs changed during inventory')
-    paths.assets.mkdir(parents=True, exist_ok=True)
-    out = paths.assets/'rom-inventory.json'
+    out = paths.rom_map
     out.write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps({k: result[k] for k in ('entry_count', 'initial_connected_entries', 'whole_rom_prologue_hits', 'sweep_seed_count', 'mapped_extent_bytes')}, indent=2))
     return 0

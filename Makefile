@@ -12,17 +12,11 @@ export TSBO_TARGET := $(TARGET)
 FROM ?= $(if $(filter rev0,$(TARGET)),rev1,rev0)
 
 .DEFAULT_GOAL := build
-.PHONY: setup setup-arm setup-old audit audit-all compare doctor test pilot pilot-matrix \
+.PHONY: setup audit audit-all compare doctor test pilot pilot-matrix \
         build build-all ram-map inventory port prune
 
 setup:
 	$(PYTHON) tools/setup.py
-
-setup-arm:
-	$(PYTHON) tools/setup_arm.py
-
-setup-old:
-	$(PYTHON) tools/setup_old.py
 
 audit:
 	$(PYTHON) tools/project.py audit

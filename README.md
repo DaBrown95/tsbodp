@@ -1,8 +1,17 @@
 # The Sims: Bustin' Out
 
 A matching decompilation of *The Sims: Bustin' Out* for the Game Boy Advance.
-One set of C sources builds two releases byte for byte: the multilingual
-USA/Europe release (`rev0`) and its USA revision 1 (`rev1`).
+
+The game shipped as a compiled ROM, with no source code. This project
+rewrites its code as C that, fed through the same kind of compiler the
+developers used, produces exactly the same machine code, down to the last
+byte. "Matching" is the bar: if a single byte differs, the function does not
+count. That makes the C a faithful, checkable record of how the game works.
+
+One set of sources builds two releases of the game:
+
+- **`rev0`**: the multilingual USA/Europe release.
+- **`rev1`**: a later USA revision with a handful of bug fixes.
 
 This is an **AI-driven experiment** to see what coding agents can do.
 Almost all code, analysis and tooling are AI-generated.
@@ -16,27 +25,30 @@ source, apart from one in `rev0`, explained
 | | `rev0` USA/Europe | `rev1` USA revision 1 |
 | --- | ---: | ---: |
 | Matching C functions | 2,559 | 2,560 |
-| C bytes (with literal pools and alignment) | 322,324 | 322,576 |
+| Bytes of code from C | 322,324 | 322,576 |
 | Known routines still without C | 1 (124 bytes) | none |
 | Whole ROM identical | yes | yes |
 
-Both builds also contain 4,068 bytes of assembly, counted separately from C:
-hardware glue and library routines that were written in assembly to begin
-with. Most of each ROM is data copied from the original dump: graphics, sound,
-text and tables.
+The byte counts include the constants and padding the compiler places after
+each function. Both builds also contain 4,068 bytes of assembly, counted
+separately: hardware glue and library routines that were written in assembly
+to begin with. The rest of each ROM is data copied from the original dump:
+graphics, sound, text and tables.
+
+We also looked for code we might have missed, and a second, independent pass
+checked our work. In both ROMs:
+
+- every byte of the code area is C or assembly, apart from the cartridge
+  header, two data words and `rev0`'s master-volume routine;
+- every call and every jump into RAM lands on code we already have;
+- the data holds no more function endings than random bytes would produce.
+
+Code reached only through pointers built while the game runs could still hide
+from checks like these; only a trace of the running game could rule it out.
 
 Function names, types and boundaries are our inferences, not the original
-developers'. The `rev0` [ROM map](assets/rev0/rom-inventory.json) records the
+developers'. The `rev0` [ROM map](config/rev0/rom-map.json) records the
 evidence behind them.
-
-We also looked for code the map might have missed, and a second, independent
-pass checked our work. In both ROMs every byte of the main code area is C or
-assembly, apart from the cartridge header, two data words and `rev0`'s
-master-volume routine. Every call lands on a known function, every jump into
-RAM lands in a known copy, and the data contains no function endings beyond
-what random bytes would produce. Code reached only through pointers built at
-run time could still hide from checks like these; only a trace of the running
-game could rule it out.
 
 ## The case of the missing store
 
@@ -101,14 +113,16 @@ would not be a decompilation.
 
 ## Building
 
-Requires macOS, Python 3.10+ and Xcode's command line tools. Run once from the
-repository root:
+You need macOS, Python 3.10+ and Xcode's command line tools. Setup downloads
+and builds the pinned compilers below with Xcode's clang, which takes a while
+and about 400 MB of disk. Run it once from the repository root:
 
 ```sh
 make setup
 ```
 
-Then put one or both ROMs in `baseroms/` under these names:
+Then put one or both ROMs in `baseroms/` under these names. They are not
+included.
 
 | Target | File | SHA-1 |
 | --- | --- | --- |
@@ -121,16 +135,39 @@ make build TARGET=rev1  # rev1
 make build-all          # both
 ```
 
-Output goes to `build/<target>/bustin-out.gba`. The build fails if any byte
-differs from the original.
+A build compiles every function on its own and checks it against the original
+bytes, then links the whole ROM to `build/<target>/bustin-out.gba` and checks
+that too. As a guard against a check that passes by accident, it also edits
+one source on purpose and confirms the result is rejected. Any difference
+fails the build.
 
 | Command | Purpose |
 | --- | --- |
+| `make pilot` | Compile and check each function, without linking the ROM. |
 | `make test` | Run the tool tests; no ROM needed. |
 | `make audit-all` | Check that both ROM dumps are the expected ones. |
 | `make inventory` | Refresh the `rev0` ROM map. |
 | `make port TARGET=rev1` | Add new `rev0` matches to the `rev1` manifest. |
 | `make prune` | Delete old local build runs. |
+
+### Compilers
+
+The game was built from several codebases, so matching it takes several
+compilers. Each function's entry in `build.json` names the one it needs; most
+use the first.
+
+| Compiler | Used for | Functions |
+| --- | --- | ---: |
+| [agbcc](https://github.com/pret/agbcc), Thumb | Game code | 2,390 |
+| agbcc, older Thumb backend | Mostly the compiler's floating-point and integer runtime | 47 |
+| agbcc, ARM | Drawing and decoding routines copied into fast RAM, and two empty hooks | 8 |
+| GCC 3.0.2 | The Krawall sound library and two grid routines | 107 |
+| GCC 3.0.2, built for a 32-bit host | Krawall routines whose constants depend on that host | 7 |
+
+Some functions also need GNU Binutils 2.10.1 as their assembler, because it
+aligns code slightly differently from modern versions. All versions are pinned
+in [config/toolchains/](config/toolchains/). These choices reproduce the
+original bytes; they are not proof of what the developers ran.
 
 ### How the two revisions fit together
 
@@ -152,19 +189,38 @@ the result like any other change.
 
 ```text
 .
-├── Makefile            Build commands
-├── src/                Matching C and justified assembly, shared by both targets
+├── src/                Sources shared by both targets, one function per file
 ├── include/            C headers, including revision.h
 ├── config/
-│   ├── rev0/           USA/Europe: identity, manifest, RAM map, ROM-map evidence
+│   ├── rev0/           USA/Europe: identity, manifest, RAM map, ROM map and its evidence
 │   ├── rev1/           USA revision 1: identity, manifest, RAM map
 │   ├── toolchains/     Pinned compiler and assembler sources
 │   └── python-requirements.txt
-├── assets/rev0/        ROM map
-├── tools/              Build and analysis scripts
+├── tools/              Build and analysis scripts, plus patches for the old compilers
 ├── tests/              Tool tests
-└── docs/               Provenance notes for borrowed and assembly-origin code
+├── docs/               Provenance notes for borrowed and assembly-origin code
+├── licenses/           Licences of borrowed code
+├── Makefile            Build commands
+└── AGENTS.md           Instructions for the AI agents working on the project
 ```
+
+The folders under `src/` follow what the code does:
+
+| Folder | Contents |
+| --- | --- |
+| `frame` | Game objects: Sims and other actors, their states and jobs, the world grid, per-frame updates |
+| `scene` | Screens and game modes, such as menus and the catalogue |
+| `display` | Text, menus, palettes, tiles and other drawing |
+| `resource` | Loading and running the game's scripted resources |
+| `transition` | Fades and switching between scenes |
+| `save` | Save files and world state |
+| `audio` | The Krawall sound library and the game's sound calls |
+| `link` | Link-cable play |
+| `math`, `heap`, `counter`, `animation` | Small shared helpers |
+| `startup`, `irq`, `runtime` | Boot, interrupts and the compiler's support library |
+
+Many names still carry the ROM address where the function lives, such as
+`frame_empty_hook_1db20`, when nothing more is known about it.
 
 ## About
 
@@ -186,36 +242,44 @@ with EA's Maxis studio and published by Electronic Arts. See the
 This is an unofficial project, unaffiliated with the original developers,
 publisher or Nintendo.
 
+### Borrowed code
+
+Some sources are adapted from published code and keep their original notices:
+
+- The adapted audio routines, assembly-origin mixer primitives, hardware timer
+  IRQ and BIOS division wrapper come from Krawall and keep its
+  [LGPL licence](licenses/Krawall-LGPL-2.1.txt) and source notices.
+- The floating-point, integer and register-call runtime sources come from GNU
+  GCC and keep its notices and [GPL licence](licenses/GCC-GPL-2.0.txt),
+  including the exceptions printed in those files.
+- The adapted Newlib string routines keep their
+  [upstream notices](licenses/Newlib-COPYING.txt). They include software
+  developed by the University of California, Berkeley.
+- The background decoder was reconstructed independently; its
+  [assembly-origin evidence and version limits](docs/RESOURCE_BACKGROUND_DECODER.md)
+  are documented.
+
 ### Tools and dependencies
 
 Dependencies are installed separately under their own licences. The table lists
-their main licences; bundled components retain their upstream notices.
-Pinned versions are recorded in [config/toolchains/](config/toolchains/) and [config/python-requirements.txt](config/python-requirements.txt).
-The adapted audio routines, assembly-origin mixer primitives, hardware timer IRQ
-and BIOS division wrapper retain their [Krawall licence](licenses/Krawall-LGPL-2.1.txt)
-and source notices.
-The selected floating-point, integer and register-call runtime sources retain their GNU GCC
-notices and [GPL licence](licenses/GCC-GPL-2.0.txt), including the exceptions
-printed in those source files.
-The adapted Newlib string providers retain their [upstream notices](licenses/Newlib-COPYING.txt).
-They include software developed by the University of California, Berkeley.
-The independently reconstructed background decoder has documented
-[assembly-origin evidence and version limits](docs/RESOURCE_BACKGROUND_DECODER.md).
+their main licences; bundled components keep their upstream notices. Pinned
+versions are recorded in [config/toolchains/](config/toolchains/) and
+[config/python-requirements.txt](config/python-requirements.txt).
 
 | Dependency | Use | Licence |
 | --- | --- | --- |
-| [pret/agbcc](https://github.com/pret/agbcc/tree/da598c1d918402c42c0c0d7128ba14567f3175e9), based on GNU GCC | Matching C compiler | GPL-2.0-or-later |
-| [GNU GCC](https://ftp.gnu.org/gnu/gcc/gcc-3.0.2/) 3.0.2 | Selected ARM/Thumb matching C compiler | GPL-2.0-or-later |
+| [pret/agbcc](https://github.com/pret/agbcc/tree/da598c1d918402c42c0c0d7128ba14567f3175e9), based on GNU GCC | Main matching C compiler | GPL-2.0-or-later |
+| [GNU GCC](https://ftp.gnu.org/gnu/gcc/gcc-3.0.2/) 3.0.2 | Matching C compiler for Krawall and a few routines | GPL-2.0-or-later |
 | [GNU Binutils](https://www.gnu.org/software/binutils/) 2.43.1 | Assembler, linker and binary conversion | GPL-3.0-or-later |
-| [GNU Binutils](https://ftp.gnu.org/gnu/binutils/) 2.10.1 | Selected assembler for earlier alignment behavior | GPL-2.0-or-later |
+| [GNU Binutils](https://ftp.gnu.org/gnu/binutils/) 2.10.1 | Assembler for functions that need its older alignment | GPL-2.0-or-later |
 | [Capstone](https://www.capstone-engine.org/) 5.0.7, by Nguyen Anh Quynh and contributors | Disassembly | BSD-3-Clause |
 | [pyelftools](https://github.com/eliben/pyelftools) 0.32, by Eli Bendersky and contributors | ELF inspection | Unlicense/public-domain dedication |
 | [Krawall](https://github.com/sebknzl/krawall/tree/8d338581bf0ed0afad15b66bf5979ad4c4d15ed0), by Sebastian Kienzl | Selected audio routines and BIOS division wrapper | LGPL-2.1-or-later |
 | [mGBA](https://github.com/mgba-emu/mgba/tree/26b7884bc25a5933960f3cdcd98bac1ae14d42e2) 0.10.5 | Optional bounded runtime observations | MPL-2.0 and bundled notices |
 
-The selected historical tools use documented [host compatibility patches](tools/patches/README.md)
-under their respective upstream licences. Their selection does not establish
-the historical game's toolchain.
+The historical tools need small, documented
+[patches](tools/patches/README.md) to build on a modern Mac; these stay under
+their upstream licences.
 
 ### References and inspiration
 

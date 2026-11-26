@@ -3,8 +3,8 @@
 This is an owner-run, AI-driven matching decompilation of *The Sims: Bustin' Out*
 for Game Boy Advance. There are two targets, `rev0` (USA/Europe) and `rev1`
 (USA revision 1), built from shared sources. Each has its own `config/<target>/`
-folder with its pinned identity, build manifest and RAM map; neither is
-generated from the other. Follow the user's instructions over this file.
+folder with its pinned identity, build manifest and RAM map; `rev0` also keeps
+the ROM map and its static evidence there. Neither is generated from the other. Follow the user's instructions over this file.
 
 ## Matching
 
@@ -64,8 +64,9 @@ generated from the other. Follow the user's instructions over this file.
 
 Keep source in `src/`, shared headers in `include/`, per-target pins and maps
 in `config/<target>/`, tool pins in `config/toolchains/`,
-and tooling in `tools/`. `docs/` holds only provenance and licence records that
-sources cite (borrowed runtime code, assembly-origin and runtime evidence).
+and tooling in `tools/`. `docs/` holds only provenance records that sources
+cite (borrowed runtime code, assembly-origin and runtime evidence); licence
+texts live in `licenses/`.
 Keep working notes and failed attempts out of the repository, under the
 ignored `analysis/`. Reader-facing instructions belong in the README.
 

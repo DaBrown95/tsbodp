@@ -29,8 +29,8 @@ class TargetPaths:
     """Where each target keeps its tracked configuration and local outputs.
 
     Every target has the same layout, so no target is a special case:
-    config/<id>/ holds tracked inputs, assets/<id>/ tracked generated progress,
-    and reports/<id>/ and build/<id>/ the ignored local results.
+    config/<id>/ holds the tracked inputs and ROM map, and reports/<id>/ and
+    build/<id>/ the ignored local results.
     """
 
     def __init__(self, target=None):
@@ -41,7 +41,7 @@ class TargetPaths:
         self.target = self.config / "target.json"
         self.manifest = self.config / "build.json"
         self.ram_map = self.config / "ram-map.json"
-        self.assets = ROOT / "assets" / self.id
+        self.rom_map = self.config / "rom-map.json"
         self.reports = ROOT / "reports" / self.id
         self.build = ROOT / "build" / self.id
         self.pilot_runs = self.build / "pilot"
@@ -170,7 +170,7 @@ def doctor(target):
     result = {"python": sys.version, "python_executable": sys.executable,
               "tools": {name: shutil.which(name) for name in names},
               "compiler_status": target["compiler_status"],
-              "matching_build_configured": False}
+              "matching_build_configured": True}
     result["local_tools"] = {
         name: str(ROOT / name) if (ROOT / name).is_file() else None
         for name in ("toolchains/agbcc/gcc/agbcc", "toolchains/binutils/bin/arm-none-eabi-as",
@@ -181,7 +181,7 @@ def doctor(target):
         print(f"{name}: {path or 'not found on PATH'}")
     for name, path in result["local_tools"].items():
         print(f"{name}: {path or 'not available'}")
-    print(f"Compiler evidence: {target['compiler_status']}; run make build for the partial matching ROM reconstruction.")
+    print(f"Compilers: {target['compiler_status']}. Run make build to rebuild the ROM.")
     return 0
 
 

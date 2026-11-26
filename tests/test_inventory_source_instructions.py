@@ -19,7 +19,7 @@ class SourceInstructionTests(unittest.TestCase):
             '.global _call_via_r0\n.type _call_via_r0, %function\n.thumb_func\n'
             '_call_via_r0:\n    bx r0\n    nop\n.size _call_via_r0, .-_call_via_r0\n').encode()
         data = bytes.fromhex('0047c04600000000') if data is None else data
-        owner = dict(name='_call_via_r0', source='src/frame/call_via_r0.s',
+        owner = dict(name='_call_via_r0', source='src/runtime/call_via_r0.s',
                      rom_offset=0, size=4, kind='assembly_glue', source_kind='assembly_glue',
                      mode='Thumb', source_sha256=hashlib.sha256(source).hexdigest())
         row = dict(name='authored_nop', owner=owner['name'], source=owner['source'],

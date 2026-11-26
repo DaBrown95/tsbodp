@@ -1,7 +1,7 @@
 {
   "target": "rev0",
-  "scope": "Established code extents only; not a complete executable inventory. ROM addresses count copied RAM code once at its load address.",
-  "unconverted_extents": [
+  "scope": "Known code entry points that the ROM-map scanner starts from, in addition to the ROM entry and startup. Many now have C sources; they stay here so the scan does not depend on the build. ROM addresses count copied RAM code once at its load address.",
+  "seeds": [
     {
       "name": "ARM startup",
       "group": "Startup and runtime",

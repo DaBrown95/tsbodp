@@ -6025,7 +6025,7 @@
     },
     {
       "name": "resource_group_point_count",
-      "source": "src/frame/resource_group_point_count.c",
+      "source": "src/resource/resource_group_point_count.c",
       "rom_offset": 44896,
       "size": 24,
       "symbols": {
@@ -6039,7 +6039,7 @@
     },
     {
       "name": "resource_read_group_point",
-      "source": "src/frame/resource_read_group_point.c",
+      "source": "src/resource/resource_read_group_point.c",
       "rom_offset": 44920,
       "size": 48,
       "symbols": {
@@ -11581,7 +11581,7 @@
         "before": "group->flags|=1;",
         "after": "group->flags|=2;"
       },
-      "source": "src/frame/actor_entry_mark_scene_collection.c"
+      "source": "src/resource/actor_entries/actor_entry_mark_scene_collection.c"
     },
     {
       "name": "actor_entry_restore_scene_collection",
@@ -11599,7 +11599,7 @@
         "before": "index++",
         "after": "index+=2"
       },
-      "source": "src/frame/actor_entry_restore_scene_collection.c"
+      "source": "src/resource/actor_entries/actor_entry_restore_scene_collection.c"
     },
     {
       "name": "frame_allocate_object",
@@ -11636,7 +11636,7 @@
         "before": "effect->linked=1;",
         "after": "effect->linked=2;"
       },
-      "source": "src/frame/actor_entry_restore_collection_effect.c"
+      "source": "src/resource/actor_entries/actor_entry_restore_collection_effect.c"
     },
     {
       "name": "frame_scene_player_actor",
@@ -27512,7 +27512,7 @@
     },
     {
       "name": "actor_entry_collection_group_marked",
-      "source": "src/frame/actor_entry_collection_group_marked.c",
+      "source": "src/resource/actor_entries/actor_entry_collection_group_marked.c",
       "rom_offset": 134120,
       "size": 28,
       "symbols": {},
@@ -27639,7 +27639,7 @@
         "display_fill_background",
         "display_reset_palette_jobs"
       ],
-      "source": "src/frame/scene_audio_options_shutdown.c",
+      "source": "src/scene/scene_audio_options_shutdown.c",
       "private_predecessor": "reports/agents/frame-input/scene-phase/first-trials-1791938152448519000/scene_audio_options_shutdown/report.json",
       "negative_control": {
         "before": "transition_run_second(63,0)",
@@ -27701,7 +27701,7 @@
         "scene_audio_options_change_row",
         "scene_submit_default_request"
       ],
-      "source": "src/frame/scene_audio_options_step.c",
+      "source": "src/scene/scene_audio_options_step.c",
       "private_predecessor": "reports/agents/frame-input/scene-phase/draw-and-mask-1791938223024017000/local-mask/report.json",
       "negative_control": {
         "before": "unsigned int cancel=2",
@@ -27725,7 +27725,7 @@
         "audio_game_stop_sample",
         "audio_play_animation_cue"
       ],
-      "source": "src/frame/scene_audio_options_choose.c",
+      "source": "src/scene/scene_audio_options_choose.c",
       "private_predecessor": "reports/agents/frame-input/scene-phase/refine-small-1791938175584196000/all-four-cases/report.json",
       "negative_control": {
         "before": "resource_submit_scene(12,0,",
@@ -27754,7 +27754,7 @@
         "audio_game_stop_sample",
         "audio_play_animation_cue"
       ],
-      "source": "src/frame/scene_audio_options_change_row.c",
+      "source": "src/scene/scene_audio_options_change_row.c",
       "private_predecessor": "reports/agents/frame-input/scene-phase/refine-small-1791938175584196000/row-before-x/report.json",
       "negative_control": {
         "before": "parameter,0,3,1,",
@@ -27815,7 +27815,7 @@
         "frame_create_scene_object",
         "audio_select_sequence"
       ],
-      "source": "src/frame/scene_audio_options_initialize.c",
+      "source": "src/scene/scene_audio_options_initialize.c",
       "private_predecessor": "reports/agents/frame-input/scene-phase/central-first-1791938310436089000/scene_audio_options_initialize/report.json",
       "negative_control": {
         "before": "row<=3",
@@ -27843,7 +27843,7 @@
         "display_scene_lookup_text",
         "display_fill_background_constant_rectangle"
       ],
-      "source": "src/frame/scene_audio_options_draw_row.c",
+      "source": "src/scene/scene_audio_options_draw_row.c",
       "private_predecessor": "reports/agents/frame-input/scene-phase/finish-lifetimes-1791938446741260000/draw-constant-flags/report.json",
       "negative_control": {
         "before": "if(row==selected)color=3;",
@@ -27883,7 +27883,7 @@
         "audio_select_sequence",
         "audio_play_animation_cue"
       ],
-      "source": "src/frame/scene_audio_options_change_level.c",
+      "source": "src/scene/scene_audio_options_change_level.c",
       "private_predecessor": "reports/agents/frame-input/scene-phase/finish-lifetimes-1791938446741260000/volume-both-index-first/report.json",
       "negative_control": {
         "before": "else value*=25;",
@@ -58220,7 +58220,7 @@
     },
     {
       "name": "_call_via_r1",
-      "source": "src/frame/call_via_r1.s",
+      "source": "src/runtime/call_via_r1.s",
       "rom_offset": 314764,
       "size": 4,
       "kind": "assembly_glue",
@@ -58233,7 +58233,7 @@
     },
     {
       "name": "_call_via_r3",
-      "source": "src/frame/call_via_r3.s",
+      "source": "src/runtime/call_via_r3.s",
       "rom_offset": 314772,
       "size": 4,
       "mode": "Thumb",
@@ -58391,7 +58391,7 @@
     },
     {
       "name": "_call_via_r0",
-      "source": "src/frame/call_via_r0.s",
+      "source": "src/runtime/call_via_r0.s",
       "rom_offset": 314760,
       "size": 4,
       "kind": "assembly_glue",
@@ -58404,7 +58404,7 @@
     },
     {
       "name": "_call_via_r2",
-      "source": "src/frame/call_via_r2.s",
+      "source": "src/runtime/call_via_r2.s",
       "rom_offset": 314768,
       "size": 4,
       "kind": "assembly_glue",
@@ -58417,7 +58417,7 @@
     },
     {
       "name": "_call_via_r4",
-      "source": "src/frame/call_via_r4.s",
+      "source": "src/runtime/call_via_r4.s",
       "rom_offset": 314776,
       "size": 4,
       "kind": "assembly_glue",
@@ -58430,7 +58430,7 @@
     },
     {
       "name": "_call_via_r5",
-      "source": "src/frame/call_via_r5.s",
+      "source": "src/runtime/call_via_r5.s",
       "rom_offset": 314780,
       "size": 4,
       "kind": "assembly_glue",
@@ -58443,7 +58443,7 @@
     },
     {
       "name": "_call_via_r6",
-      "source": "src/frame/call_via_r6.s",
+      "source": "src/runtime/call_via_r6.s",
       "rom_offset": 314784,
       "size": 4,
       "kind": "assembly_glue",
@@ -58456,7 +58456,7 @@
     },
     {
       "name": "_call_via_r7",
-      "source": "src/frame/call_via_r7.s",
+      "source": "src/runtime/call_via_r7.s",
       "rom_offset": 314788,
       "size": 4,
       "kind": "assembly_glue",
@@ -58469,7 +58469,7 @@
     },
     {
       "name": "_call_via_r8",
-      "source": "src/frame/call_via_r8.s",
+      "source": "src/runtime/call_via_r8.s",
       "rom_offset": 314792,
       "size": 4,
       "kind": "assembly_glue",
@@ -58482,7 +58482,7 @@
     },
     {
       "name": "_call_via_r9",
-      "source": "src/frame/call_via_r9.s",
+      "source": "src/runtime/call_via_r9.s",
       "rom_offset": 314796,
       "size": 4,
       "kind": "assembly_glue",
@@ -58495,7 +58495,7 @@
     },
     {
       "name": "_call_via_sl",
-      "source": "src/frame/call_via_sl.s",
+      "source": "src/runtime/call_via_sl.s",
       "rom_offset": 314800,
       "size": 4,
       "kind": "assembly_glue",
@@ -58508,7 +58508,7 @@
     },
     {
       "name": "_call_via_fp",
-      "source": "src/frame/call_via_fp.s",
+      "source": "src/runtime/call_via_fp.s",
       "rom_offset": 314804,
       "size": 4,
       "kind": "assembly_glue",
@@ -58521,7 +58521,7 @@
     },
     {
       "name": "_call_via_ip",
-      "source": "src/frame/call_via_ip.s",
+      "source": "src/runtime/call_via_ip.s",
       "rom_offset": 314808,
       "size": 4,
       "kind": "assembly_glue",
@@ -58534,7 +58534,7 @@
     },
     {
       "name": "_call_via_sp",
-      "source": "src/frame/call_via_sp.s",
+      "source": "src/runtime/call_via_sp.s",
       "rom_offset": 314812,
       "size": 4,
       "kind": "assembly_glue",
@@ -58547,7 +58547,7 @@
     },
     {
       "name": "_call_via_lr",
-      "source": "src/frame/call_via_lr.s",
+      "source": "src/runtime/call_via_lr.s",
       "rom_offset": 314816,
       "size": 4,
       "kind": "assembly_glue",

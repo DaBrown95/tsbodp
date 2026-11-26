@@ -1,4 +1,4 @@
-# Copied resource decoders
+# Background decoder
 
 [`background_decoder.s`](../src/resource/background_decoder.s) rebuilds all
 812 bytes at ROM `0x080002EC..0x08000618`, also linked independently at the copied
