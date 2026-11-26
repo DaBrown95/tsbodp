@@ -11,8 +11,8 @@ Almost all code, analysis and tooling are AI-generated.
 
 | | `rev0` USA/Europe | `rev1` USA revision 1 |
 | --- | ---: | ---: |
-| Matching C functions | 2,543 | 2,544 |
-| C bytes (with literal pools and alignment) | 322,260 | 322,512 |
+| Matching C functions | 2,559 | 2,560 |
+| C bytes (with literal pools and alignment) | 322,324 | 322,576 |
 | Known routines still without C | 1 (124 bytes) | none |
 | Whole ROM identical | yes | yes |
 
@@ -21,7 +21,14 @@ with evidence of assembly origin, counted separately from C. Function
 boundaries in the `rev0` [ROM map](assets/rev0/rom-inventory.json) are
 provisional, and it does not establish a complete game-code denominator.
 Both builds match the original ROMs, but most of each ROM is still copied from
-the original dump: assets, data and code nobody has mapped yet.
+the original dump: graphics, sound, text and other data.
+
+We also swept for code the map might have missed. Every byte of the main code
+area is now C, apart from the cartridge header and the routine below. The rest
+of the ROM contains no function endings beyond what random data would produce,
+and none of its pointer-like words is a plausible pointer into code we haven't
+mapped. Code reached only through pointers built at run time could still hide
+from a static check like this.
 
 `rev1` has C for every routine mapped in `rev0`, plus its own build of the
 audio master-volume routine. That routine (`0x08049968`) is the one gap in
