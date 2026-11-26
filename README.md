@@ -156,7 +156,7 @@ the result like any other change.
 ├── assets/rev0/        Progress image and ROM map
 ├── tools/              Build and analysis scripts
 ├── tests/              Tool tests
-└── docs/               Internal AI scratch notes
+└── docs/               Provenance notes for borrowed and assembly-origin code
 ```
 
 ## About

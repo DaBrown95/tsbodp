@@ -309,7 +309,7 @@ and 7,602,758 emulator ticks. The callback word contains `0x030036D0`; all
 those bytes; the remaining 24 are the following body's copied prefix.
 
 The fixture then supplies the
-[fixed transient frame input](DISPLAY_RECONSTRUCTION.md#fixed-transient-tile-input)
+fixed transient frame input
 at `0x08FD9134`, with a 112-byte input guard and a chosen OBJ VRAM destination
 at `0x06010080`. The actual installed ARM code produces the expected 128 bytes
 in 742 instruction steps, using 64 halfword output stores and ten history reads.
@@ -337,7 +337,7 @@ ignored `analysis/tile-installed-native-fixture-20261021/`.
 
 ## Controlled serial reset-to-loader fixture
 
-A controlled fixture follows the [serial reset/load route](SAVE_STREAM.md).
+A controlled fixture follows the serial reset/load route.
 Ordinary key input reaches serial-session kind 10 / mode 0 at frame 1,047.
 At its first step, three explicitly controlled Thumb calls run the original
 world initializer, 108-byte peer-record producer and receiver. Stack, control
@@ -425,7 +425,7 @@ The corrected run rejects emulator error logs and passes the count, stack and
 prefetch checks. The fixed reference and game source are unchanged.
 
 This establishes one bounded palette data use of the
-[pointer-shaped word](WHOLE_ROM_INVENTORY.md#palette-word-resembling-an-interior-entry).
+pointer-shaped word.
 It establishes no executable consumer, prepared-R1 producer or execution at
 `0x0800E1EE`. Natural scene-eight reachability, full scene/table/backing domains,
 other consumers and alternate execution remain open. No source, instruction,
@@ -464,7 +464,7 @@ steps fixes the observer; its failed packet and repair remain private.
 For source indices 0..25, adding the actual combined prefixes gives tile IDs
 471..495 and 258..276, all inside the separately modeled 496 and 277 initialized
 groups. This closes that finite secondary-value question. The
-[animation callers](FRAME_MAP_ANIMATION.md#row-six-writer-domain) do not establish
+animation callers do not establish
 the complete index, coordinate or map domain. The separately projected eight
 fixed animation payloads and their direct-state activation chain remain
 conditional on actor/view completion and stable backing. Wider serialized

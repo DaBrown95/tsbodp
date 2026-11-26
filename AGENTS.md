@@ -64,8 +64,10 @@ generated from the other. Follow the user's instructions over this file.
 
 Keep source in `src/`, shared headers in `include/`, per-target pins and maps
 in `config/<target>/`, tool pins in `config/toolchains/`,
-and tooling in `tools/`. `docs/` is internal AI scratch space. Reader-facing
-instructions belong in the README.
+and tooling in `tools/`. `docs/` holds only provenance and licence records that
+sources cite (borrowed runtime code, assembly-origin and runtime evidence).
+Keep working notes and failed attempts out of the repository, under the
+ignored `analysis/`. Reader-facing instructions belong in the README.
 
 Keep the README lean, retain the AI experiment disclosure and no-contributions
 policy, and describe results plainly without inflated progress claims.

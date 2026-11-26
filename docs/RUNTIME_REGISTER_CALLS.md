@@ -34,7 +34,7 @@ as source-authored unrooted instructions. Exact source/native evidence and
 current object/linked Thumb mappings establish that role, while rooted CFG
 instruction and entry totals remain unchanged. The source roles preserve
 opposite-mode and data ambiguity and require no private proof files to rebuild.
-See the [inventory accounting](WHOLE_ROM_INVENTORY.md#source-owned-alignment-and-data-roles).
+See the inventory accounting.
 
 This source ownership does not close the incoming register values, complete
 caller set or writable callback populations. In particular, no caller or
