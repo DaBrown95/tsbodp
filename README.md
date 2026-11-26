@@ -11,9 +11,9 @@ Almost all code, analysis and tooling are AI-generated.
 
 | | `rev0` USA/Europe | `rev1` USA revision 1 |
 | --- | ---: | ---: |
-| Matching C functions | 2,543 | 2,543 |
-| C bytes (with literal pools and alignment) | 322,260 | 322,296 |
-| Known routines still without C | 1 (124 bytes) | 1 (216 bytes) |
+| Matching C functions | 2,543 | 2,544 |
+| C bytes (with literal pools and alignment) | 322,260 | 322,512 |
+| Known routines still without C | 1 (124 bytes) | none |
 | Whole ROM identical | yes | yes |
 
 Both builds also include 4,068 bytes of verified hardware glue and routines
@@ -23,11 +23,9 @@ provisional, and it does not establish a complete game-code denominator.
 Both builds match the original ROMs, but most of each ROM is still copied from
 the original dump: assets, data and code nobody has mapped yet.
 
-The two routines without C:
-
-- **`rev0` audio master volume** (`0x08049968`): see below.
-- **`rev1` catalog entry check** (`0x08021998`): 5 bytes off. The original keeps
-  two identical "fail" endings that our compiler always merges into one.
+`rev1` has C for every routine mapped in `rev0`, plus its own build of the
+audio master-volume routine. That routine (`0x08049968`) is the one gap in
+`rev0`; see below.
 
 ## The case of the missing store
 

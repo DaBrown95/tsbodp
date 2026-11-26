@@ -1,22 +1,30 @@
+#include "revision.h"
 #include "scene_link_catalog.h"
+#define STATE (((struct SceneLinkCatalogActor*)actor)->state)
 unsigned int scene_link_catalog_try_entry(struct FrameObject *actor,unsigned int entry)
 {
- unsigned int error;
- if(entry==141 && g_scene_id==9 && ((struct SceneLinkCatalogActor*)actor)->state==16)goto allowed;
- if(entry==255 || !frame_world_in_idle_exclusion_set(g_scene_id) || ((struct SceneLinkCatalogActor*)actor)->state!=16){error=1;goto denied;}
- if(entry<=117 || entry==125 || entry==141){
-  if(g_scene_link_catalog_world.collection->groups[g_scene_id].count>24){error=4;goto denied;}
- }else if(entry!=139 && entry-195>5)goto denied_kind;
-allowed:
- entry=1;
- goto prepared;
-denied_kind:
- error=3;
-denied:
- scene_link_catalog_draw_panel(error);
- entry=0;
-prepared:
- if(entry!=1)return 0;
+ unsigned int ok;
+#if TSBO_REVISION
+ if(entry==141){
+  if(g_scene_id==9 && STATE==16)ok=1;
+  else{scene_link_catalog_draw_panel(1);ok=0;}
+ }else
+#else
+ if(entry==141 && g_scene_id==9 && STATE==16)ok=1;
+ else
+#endif
+ if(entry==255 || !frame_world_in_idle_exclusion_set(g_scene_id) || STATE!=16){
+  scene_link_catalog_draw_panel(1);ok=0;
+ }else if(entry<=117 || entry==125
+#if !TSBO_REVISION
+  || entry==141
+#endif
+ ){
+  if(g_scene_link_catalog_world.collection->groups[g_scene_id].count>24){scene_link_catalog_draw_panel(4);ok=0;}
+  else ok=1;
+ }else if(entry==139 || entry-195<=5)ok=1;
+ else{scene_link_catalog_draw_panel(3);ok=0;}
+ if(ok!=1)return 0;
  transition_object_set_state(actor,22);
  frame_set_variant_state(actor,0);
  ((struct SceneLinkCatalogActor*)actor)->selected=1;
