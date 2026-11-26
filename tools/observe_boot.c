@@ -1,6 +1,8 @@
-/* Bounded GBA boot observation with mGBA 0.10.5.
- * Entry labels describe probe addresses, not established execution ownership.
- * See docs/RUNTIME_OBSERVATIONS.md for build steps and observation limits. */
+/* Boot the game in mGBA 0.10.5 for a given number of frames, counting how
+ * often each probe address below is executed and logging selected memory
+ * writes as JSON lines. The probe names are labels for
+ * readability; a hit shows that address ran, not which function it belongs to.
+ * See docs/RUNTIME_OBSERVATIONS.md for how to build and run it. */
 #include <mgba/flags.h>
 #include <mgba/core/core.h>
 #include <mgba/core/timing.h>
