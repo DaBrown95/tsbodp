@@ -16,4 +16,4 @@ void frame_tick_attachment_jobs_60_63(struct FrameNeedEffectState *owner)
         frame_set_animation_frame((struct FrameTickObject *)owner->object, 1);
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

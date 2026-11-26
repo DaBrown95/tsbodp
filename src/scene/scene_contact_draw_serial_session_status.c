@@ -12,10 +12,12 @@ void scene_contact_draw_serial_session_status(unsigned int index)
             g_scene_contact_serial_session.initial00 = text;
             if (g_display_scene_frame_objects[2]) {
                 if (index == 2) {
-                    frame_set_animation_commands(g_display_scene_frame_objects[2], g_scene_contact_serial_animation_commands + 2, 0);
+                    frame_set_animation_commands(g_display_scene_frame_objects[2],
+                                                 g_scene_contact_serial_animation_commands + 2, 0);
                     g_display_scene_frame_objects[2]->render_special = 0;
                 } else if (index == 3) {
-                    frame_set_animation_commands(g_display_scene_frame_objects[2], g_scene_contact_serial_animation_commands + 2, 0);
+                    frame_set_animation_commands(g_display_scene_frame_objects[2],
+                                                 g_scene_contact_serial_animation_commands + 2, 0);
                     g_display_scene_frame_objects[2]->render_special = -1;
                 }
             }

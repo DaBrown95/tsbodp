@@ -17,7 +17,8 @@ void display_scene_redraw_details(unsigned char page)
     unsigned int style;
     const struct DisplayCatalogItem *catalog;
     struct DisplaySceneRequestState *request;
-    if (page) offset = page << 2;
+    if (page)
+        offset = page << 2;
     display_scene_clear_detail_background();
     display_text_set_background_control(g_display_scrolling_layer_control0);
     display_text_select_font(3, 0, -1);
@@ -29,7 +30,8 @@ void display_scene_redraw_details(unsigned char page)
     record = catalog;
     record_offset = 0;
     for (; i <= 148; ++record, record_offset += 24, ++i) {
-        if (catalog_category(catalog, record_offset) == request->scene && record->id != 0x13d && display_scene_item_enabled(g_display_scene_item_mask, i)) {
+        if (catalog_category(catalog, record_offset) == request->scene && record->id != 0x13d &&
+            display_scene_item_enabled(g_display_scene_item_mask, i)) {
             if (ordinal == request->parameter + offset) {
                 int position = display_catalog_draw_name(1, 8, 0x5a, i, no_index, style);
                 const char *text;

@@ -17,10 +17,10 @@ struct DisplayMapState {
     unsigned char unknown_1c[0x50];
 };
 extern struct DisplayMapState g_display_map_states[4];
-extern void display_copy_map_rectangle(int, int, int, int, int,
-    const unsigned short *, int, int, int, unsigned short *);
+extern void display_copy_map_rectangle(int, int, int, int, int, const unsigned short *, int, int,
+                                       int, unsigned short *);
 
-extern void display_write_incrementing_background_map(unsigned int, int, int,
-    int, int, unsigned short);
+extern void display_write_incrementing_background_map(unsigned int, int, int, int, int,
+                                                      unsigned short);
 
 #endif

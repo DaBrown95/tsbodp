@@ -13,8 +13,8 @@ extern unsigned char g_display_menu_page_text_variants[];
 extern struct FrameObject *g_need_effect_player;
 /* Reads a halfword tile from a live row-major map; bounds are caller-owned. */
 unsigned short display_read_map_tile(const unsigned short *, int, int, int);
-void display_load_background_dma(unsigned int, const struct BackgroundResource *,
-    unsigned short, unsigned short, unsigned int, unsigned int);
+void display_load_background_dma(unsigned int, const struct BackgroundResource *, unsigned short,
+                                 unsigned short, unsigned int, unsigned int);
 struct TransitionObject;
 void transition_object_set_state(void *, unsigned char);
 void frame_set_variant_state(struct FrameObject *, unsigned char);

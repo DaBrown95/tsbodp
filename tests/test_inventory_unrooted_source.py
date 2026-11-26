@@ -1,4 +1,4 @@
-"""Owning a source extent must not manufacture its incoming CFG evidence."""
+"""Owning a source extent must not create control-flow evidence for it."""
 import copy
 import json
 import sys

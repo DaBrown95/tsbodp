@@ -11,8 +11,7 @@ void transition_join_vertical(unsigned short targets)
     REG16(0x04000048) = 0;
     REG16(0x0400004A) = 0x3F;
     {
-        volatile unsigned short *window_register
-            = (volatile unsigned short *)0x04000040;
+        volatile unsigned short *window_register = (volatile unsigned short *)0x04000040;
         *window_register = 240;
         window_register += 2;
         *window_register = top;

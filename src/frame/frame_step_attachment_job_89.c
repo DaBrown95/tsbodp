@@ -22,66 +22,66 @@ unsigned int frame_step_attachment_job_89(struct FrameNeedEffectState *owner,
     __builtin_memcpy(&needs, &job->actor->motion_storage.bytes[20], sizeof(needs));
     result = 1;
     switch ((unsigned int)job->timer) {
-    case 0:
-        frame_set_actor_direction(job->actor,
-            g_actor_reverse_directions[owner->object->unknown_12[0]]);
-        job->timer = 6;
-        if (frame_gate_attachment_game_value(owner, job, 10) == 1) {
-            frame_need_effect_try_optional(owner);
-            frame_need_effect_accumulate_optional(owner);
-            frame_request_animation((struct FrameCommandObject *)job->actor, 58);
-            audio_play_animation_cue(170);
-        } else {
-            frame_request_animation((struct FrameCommandObject *)job->actor, 5);
-            if (g_frame_interaction_settings.attachment_mode == 0)
-                audio_play_animation_cue(86);
-            else
-                audio_play_animation_cue(85);
-            job->timer = 8;
-        }
-        break;
-    case 8:
-        if (job->actor->flags & 0x400000)
-            job->timer = 1;
-        break;
-    case 6:
-        if (job->actor->flags & 0x400000) {
-            frame_request_animation((struct FrameCommandObject *)job->actor, 1);
-            frame_commit_need_effect(owner->object, 1);
-            audio_play_animation_cue(171);
-            job->timer = 7;
-            job->actor->motion_storage.motion.timer = 30;
-        }
-        break;
-    case 7:
-        if (--job->actor->motion_storage.motion.timer == 0xFFFF) {
-            frame_request_animation((struct FrameCommandObject *)job->actor, 23);
-            frame_commit_need_effect(owner->object, 2);
-            write_sample(owner, audio_play_animation_cue(20));
-            job->timer = 26;
-        }
-        break;
-    case 26:
-        frame_adjust_actor_needs(needs, 8,
-            g_frame_need_effect_definitions[owner->kind].unknown_04[31]);
-        if (job->actor->flags & 0x400000) {
+        case 0:
+            frame_set_actor_direction(job->actor,
+                                      g_actor_reverse_directions[owner->object->unknown_12[0]]);
+            job->timer = 6;
+            if (frame_gate_attachment_game_value(owner, job, 10) == 1) {
+                frame_need_effect_try_optional(owner);
+                frame_need_effect_accumulate_optional(owner);
+                frame_request_animation((struct FrameCommandObject *)job->actor, 58);
+                audio_play_animation_cue(170);
+            } else {
+                frame_request_animation((struct FrameCommandObject *)job->actor, 5);
+                if (g_frame_interaction_settings.attachment_mode == 0)
+                    audio_play_animation_cue(86);
+                else
+                    audio_play_animation_cue(85);
+                job->timer = 8;
+            }
+            break;
+        case 8:
+            if (job->actor->flags & 0x400000)
+                job->timer = 1;
+            break;
+        case 6:
+            if (job->actor->flags & 0x400000) {
+                frame_request_animation((struct FrameCommandObject *)job->actor, 1);
+                frame_commit_need_effect(owner->object, 1);
+                audio_play_animation_cue(171);
+                job->timer = 7;
+                job->actor->motion_storage.motion.timer = 30;
+            }
+            break;
+        case 7:
+            if (--job->actor->motion_storage.motion.timer == 0xFFFF) {
+                frame_request_animation((struct FrameCommandObject *)job->actor, 23);
+                frame_commit_need_effect(owner->object, 2);
+                write_sample(owner, audio_play_animation_cue(20));
+                job->timer = 26;
+            }
+            break;
+        case 26:
+            frame_adjust_actor_needs(needs, 8,
+                                     g_frame_need_effect_definitions[owner->kind].unknown_04[31]);
+            if (job->actor->flags & 0x400000) {
+                audio_game_stop_sample(read_sample(owner));
+                job->timer = 9;
+            }
+            break;
+        case 9:
             audio_game_stop_sample(read_sample(owner));
-            job->timer = 9;
-        }
-        break;
-    case 9:
-        audio_game_stop_sample(read_sample(owner));
-        if (g_frame_interaction_settings.attachment_mode == 0)
-            audio_play_animation_cue(146);
-        else
-            audio_play_animation_cue(145);
-        job->timer = 1;
-        break;
-    case 1:
-        frame_commit_need_effect(owner->object, 0);
-        frame_request_animation((struct FrameCommandObject *)job->actor, 1);
-        result = 2;
-        break;
+            if (g_frame_interaction_settings.attachment_mode == 0)
+                audio_play_animation_cue(146);
+            else
+                audio_play_animation_cue(145);
+            job->timer = 1;
+            break;
+        case 1:
+            frame_commit_need_effect(owner->object, 0);
+            frame_request_animation((struct FrameCommandObject *)job->actor, 1);
+            result = 2;
+            break;
     }
     return result;
 }

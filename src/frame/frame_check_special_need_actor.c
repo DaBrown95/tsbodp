@@ -7,4 +7,4 @@ unsigned int frame_check_special_need_actor(struct FrameNeedEffectState *owner,
         return 0;
     return 1;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

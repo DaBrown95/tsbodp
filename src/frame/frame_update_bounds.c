@@ -2,7 +2,10 @@
 void frame_update_bounds(struct FrameObject *object)
 {
     struct FramePoint position;
-    union { FrameU32 value; FrameU16 words[2]; } key;
+    union {
+        FrameU32 value;
+        FrameU16 words[2];
+    } key;
     // BUG: key is unset on lookup failure; success leaves key.value's upper half unset.
     if (object->flags & 0x10000000) {
         position.x = (short)(object->position.x >> 16);

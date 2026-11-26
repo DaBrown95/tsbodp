@@ -7,15 +7,17 @@
 #include "save_stream.h"
 #include "heap.h"
 #include "save_world_defaults.h"
-struct SceneContactSerialMessage { unsigned short text, delay; };
+struct SceneContactSerialMessage {
+    unsigned short text, delay;
+};
 struct SceneContactSerialSlotDefinition {
- unsigned char x, y, unknown02[2];
- struct FrameVariantResource resource;
+    unsigned char x, y, unknown02[2];
+    struct FrameVariantResource resource;
 };
 struct SceneContactSerialPlayerInputPrefix {
- unsigned char unknown00[7], flags07;
- unsigned short value08, value0a;
- unsigned char unknown0c[37], input_index31;
+    unsigned char unknown00[7], flags07;
+    unsigned short value08, value0a;
+    unsigned char unknown0c[37], input_index31;
 };
 extern struct SceneContactSerialMessage g_scene_contact_serial_messages[];
 extern struct SceneContactSerialSlotDefinition g_scene_contact_serial_slot_definitions[];

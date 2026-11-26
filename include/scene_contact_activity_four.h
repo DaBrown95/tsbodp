@@ -30,20 +30,18 @@ struct SceneContactActivityFourItem {
  * this 216-byte access view does not describe the complete allocation. */
 struct SceneContactActivityFourObjectFlags {
     unsigned char unknown00[0xd1];
-    unsigned char mode:2, contact_mode:2, unknown_d1_4:1;
-    unsigned char double_size:1, unknown_d1_6:2;
+    unsigned char mode : 2, contact_mode : 2, unknown_d1_4 : 1;
+    unsigned char double_size : 1, unknown_d1_6 : 2;
     unsigned char unknown_d2;
-    unsigned char unknown_d3_0:4;
-    signed char flag4:1;
-    unsigned char flag5:1, unknown_d3_6:2;
+    unsigned char unknown_d3_0 : 4;
+    signed char flag4 : 1;
+    unsigned char flag5 : 1, unknown_d3_6 : 2;
     unsigned char unknown_d4;
-    unsigned char tile_high:2, layer:2, palette:4;
+    unsigned char tile_high : 2, layer : 2, palette : 4;
 };
 
-extern const struct SceneContactActivityFourRow
-    g_scene_contact_activity_four_rows[];
-extern const struct SceneContactActivityFourItem
-    g_scene_contact_activity_four_items[];
+extern const struct SceneContactActivityFourRow g_scene_contact_activity_four_rows[];
+extern const struct SceneContactActivityFourItem g_scene_contact_activity_four_items[];
 extern const unsigned int g_scene_contact_activity_four_background1;
 extern const unsigned int g_scene_contact_activity_four_background2;
 extern const struct BackgroundResource g_scene_contact_activity_four_map1;
@@ -57,8 +55,8 @@ void scene_contact_activity_four_reset_items(void);
 void scene_contact_activity_four_load_palettes(void);
 void scene_contact_activity_four_clear_secondary(void);
 unsigned int scene_contact_activity_four_complete(void);
-struct FrameObject *scene_contact_activity_four_create_item(struct FramePoint,
-    unsigned int, unsigned int);
+struct FrameObject *scene_contact_activity_four_create_item(struct FramePoint, unsigned int,
+                                                            unsigned int);
 void scene_contact_add_activity_score(int);
 
 struct FrameTickObject;

@@ -28,14 +28,14 @@ unsigned int display_menu_primary_row_code(unsigned int input)
         register const unsigned char *entry_address asm("r1");
         register unsigned int entry asm("r0");
 
-        entries = (const unsigned char *)(g_display_menu_state.choice *
-            sizeof(*records) + (unsigned int)records);
+        entries = (const unsigned char *)(g_display_menu_state.choice * sizeof(*records) +
+                                          (unsigned int)records);
         entries += 4;
         entry_address = entries + row;
         entry = *entry_address;
         if (entry != 255 && row <= 3) {
-            const unsigned int *flags_address = (const unsigned int *)(
-                (const unsigned char *)&records[entry] + 20);
+            const unsigned int *flags_address =
+                (const unsigned int *)((const unsigned char *)&records[entry] + 20);
             if (*flags_address & 0x7e00) {
                 int bit = 6;
                 unsigned int mask = 0x200;
@@ -86,8 +86,8 @@ needs_code:
                 if (index == 5) {
                     selected = 1;
                     if (g_display_menu_state.definition == 12 ||
-                            state[32] == g_frame_actor_greetings[
-                                g_display_menu_state.definition].cue_variant) {
+                        state[32] ==
+                            g_frame_actor_greetings[g_display_menu_state.definition].cue_variant) {
                         if (result - 4 <= 1 || result == 14)
                             selected = 0;
                     }

@@ -1,4 +1,4 @@
-"""Inventory uncertainty and byte accounting survive false-code controls."""
+"""The inventory's uncertainty and byte accounting survive controls that feed it false code."""
 import sys
 import unittest
 from pathlib import Path

@@ -27,9 +27,8 @@ int frame_check_visibility(struct FrameObject *object)
             right = point.x + object->bound_x1;
             left = point.x + object->bound_x0;
         }
-        if (right >= origin.x && left <= origin.x + 240
-                && point.y + object->bound_y1 >= origin.y
-                && point.y + object->bound_y0 <= origin.y + 160) {
+        if (right >= origin.x && left <= origin.x + 240 && point.y + object->bound_y1 >= origin.y &&
+            point.y + object->bound_y0 <= origin.y + 160) {
             object->flags |= 0x1000;
             if (i == g_input_config.local_player)
                 object->flags |= 0x40000000;

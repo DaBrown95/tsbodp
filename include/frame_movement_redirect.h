@@ -8,7 +8,9 @@ struct FrameMovementRedirectDirection {
 };
 union FrameMovementNibbleSnapshot {
     unsigned int word;
-    struct { unsigned char low : 4, high : 4; } byte;
+    struct {
+        unsigned char low : 4, high : 4;
+    } byte;
 };
 extern const union FrameTerrainLine g_frame_movement_direction_lines[];
 extern unsigned int g_frame_movement_filter[2];

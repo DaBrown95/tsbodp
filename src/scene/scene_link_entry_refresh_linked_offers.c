@@ -14,8 +14,8 @@ void scene_link_entry_refresh_linked_offers(void)
     i = 0;
     if (i < g_link_received_join.metadata[0]) {
         const SceneLinkCatalogColumnByte *number_values =
-            (const SceneLinkCatalogColumnByte *)(
-                (const unsigned char *)&g_display_scene_catalog + 20);
+            (const SceneLinkCatalogColumnByte *)((const unsigned char *)&g_display_scene_catalog +
+                                                 20);
         struct SceneLinkEffectOffer *record = &g_link_entry_effect_state.records[0];
         for (; i < g_link_received_join.metadata[0]; ++i) {
             unsigned int value;
@@ -26,15 +26,14 @@ void scene_link_entry_refresh_linked_offers(void)
             } else {
                 record->count = 95;
                 __builtin_memcpy(&value,
-                    number_values + g_scene_request.scene *
-                        sizeof(struct DisplayCatalogItem), sizeof value);
-                value = (unsigned int)save_world_scale_percent(
-                    (int)value, 200);
+                                 number_values +
+                                     g_scene_request.scene * sizeof(struct DisplayCatalogItem),
+                                 sizeof value);
+                value = (unsigned int)save_world_scale_percent((int)value, 200);
             }
             value <<= 16;
             /* Four representation bytes at the actual record's +4 field. */
-            __builtin_memcpy((unsigned char *)record + 4,
-                             &value, sizeof value);
+            __builtin_memcpy((unsigned char *)record + 4, &value, sizeof value);
             record->cost = 0;
             ++record;
         }
@@ -42,10 +41,10 @@ void scene_link_entry_refresh_linked_offers(void)
     display_time_copy(&g_display_countdown, &g_scene_link_offer_countdown);
     display_fill_background_constant_rectangle(1, 9, 0, 21, 14, 0);
     display_fill_background_constant_rectangle(0, 9, 0, 21, 14, 0);
-    g_link_entry_effect_state.multiplier = (int)((unsigned int)
-        save_world_scale_percent(
-            (int)g_display_scene_catalog[g_scene_request.scene].number_value,
-            200) << 16);
+    g_link_entry_effect_state.multiplier =
+        (int)((unsigned int)save_world_scale_percent(
+                  (int)g_display_scene_catalog[g_scene_request.scene].number_value, 200)
+              << 16);
     g_link_entry_effect_state.multiplier =
         display_bios_div(g_link_entry_effect_state.multiplier, 96);
     g_link_entry_effect_state.selected = 0;

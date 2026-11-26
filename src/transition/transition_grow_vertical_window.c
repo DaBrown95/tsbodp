@@ -3,7 +3,8 @@
 
 extern void irq_wait_vblank(void);
 
-void transition_grow_vertical_window(unsigned short targets) {
+void transition_grow_vertical_window(unsigned short targets)
+{
     short position = 0;
     register volatile unsigned short *window asm("r4");
     REG16(0x04000048) = 0;

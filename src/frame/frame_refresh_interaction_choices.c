@@ -17,9 +17,9 @@ int frame_refresh_interaction_choices(void)
             i = 0;
             selection = node->unknown58 + 4;
             goto scan;
-advance:
+        advance:
             i++;
-scan:
+        scan:
             if (i <= 6) {
                 unsigned char code = choices[i];
                 if (code) {

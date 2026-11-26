@@ -27,4 +27,4 @@ unsigned int save_stream_commit_header(void)
     return result;
 }
 
-asm(".align 2,0");
+asm(".align 2, 0");

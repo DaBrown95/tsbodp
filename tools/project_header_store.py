@@ -1,8 +1,9 @@
-"""Verified per-run project-header bytes behind ordinary proof paths.
+"""Share identical project-header files between runs by hard link, after verifying them.
 
-Only the same project-relative header name and content may share an inode.
-Sources and source-local bundles remain independent copies. This store never
-reuses preprocessed source, compiler output, comparisons or acceptance results.
+Used by tools/header_snapshots.py to save disk space. Only a header with the
+same project-relative name and contents shares an inode. Sources and per-source
+bundles are always separate copies, and nothing derived from them (preprocessed
+source, compiler output, comparisons) is reused.
 """
 
 import hashlib

@@ -7,4 +7,4 @@ unsigned int frame_parameter_stage_percentage(struct FrameNeedEffectState *owner
         result = 50;
     return result;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

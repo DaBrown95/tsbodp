@@ -17,12 +17,12 @@ extern const unsigned int g_scene_background_control0;
 /* The existing word API is retained; the body consumes mode's low byte. */
 void scene_initialize_view(unsigned int, unsigned int);
 void display_fill_background(unsigned int, unsigned short);
-void display_fill_background_rectangle(unsigned int, int, int, int, int,
-    unsigned short);
+void display_fill_background_rectangle(unsigned int, int, int, int, int, unsigned short);
 const unsigned short *display_load_background_resource_dma(unsigned int,
-    const struct BackgroundResource *, unsigned short);
-const unsigned short *display_load_background_dma(unsigned int,
-    const struct BackgroundResource *, unsigned short, unsigned short,
-    unsigned int, unsigned int);
+                                                           const struct BackgroundResource *,
+                                                           unsigned short);
+const unsigned short *display_load_background_dma(unsigned int, const struct BackgroundResource *,
+                                                  unsigned short, unsigned short, unsigned int,
+                                                  unsigned int);
 
 #endif

@@ -17,7 +17,9 @@
 #define SCENE_CHOICE_PANEL_FLAGS (g_actor_scene_request.flags)
 
 /* Observed width/height bytes; this is not a claim about surrounding storage. */
-struct SceneChoicePanelSize { unsigned char width, height; };
+struct SceneChoicePanelSize {
+    unsigned char width, height;
+};
 extern struct SceneChoicePanelSize g_scene_choice_panel_size;
 /* Five observed ID slots, also cleared as a ten-byte prefix. */
 extern unsigned short g_need_effect_choice_text[5];

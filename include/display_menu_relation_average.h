@@ -8,8 +8,7 @@ struct DisplayMenuRelationAverageBand {
     int threshold;
     unsigned int unknown_04;
 };
-extern const struct DisplayMenuRelationAverageBand
-    g_display_menu_relation_average_bands[];
+extern const struct DisplayMenuRelationAverageBand g_display_menu_relation_average_bands[];
 
 /* Provisional consumed views of unrooted readers. Historical unused formals
  * and incoming roots remain unknown. Results are full words. */

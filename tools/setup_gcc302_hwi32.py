@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Provision GCC3.0.2 with 32-bit compiler integers on the native LP64 host."""
+"""Build GCC 3.0.2 with 32-bit compiler integers on a 64-bit host (see tools/patches/README.md)."""
 import json
 import subprocess
 import sys

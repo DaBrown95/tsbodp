@@ -1,4 +1,4 @@
-"""A wrong copied address, mode or count must never become a trusted RAM map."""
+"""A wrong copy address, mode or count must never become a trusted RAM map."""
 import sys
 from pathlib import Path
 import unittest

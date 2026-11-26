@@ -14,8 +14,8 @@ void display_flush_palette_queue(void)
             address = i * 8;
             source_base = (unsigned int)base + 4;
             address += source_base;
-            display_transfer_palette(*(const void **)address, entry->first,
-                                     entry->count, &g_palette_buffer_pairs[1]);
+            display_transfer_palette(*(const void **)address, entry->first, entry->count,
+                                     &g_palette_buffer_pairs[1]);
             ++entry;
             ++i;
         } while (i < g_palette_queue_count);

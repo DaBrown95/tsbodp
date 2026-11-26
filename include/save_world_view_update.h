@@ -16,7 +16,8 @@ struct BackgroundResource;
 extern const struct BackgroundResource *g_save_world_need_resources[];
 extern const unsigned short *g_save_world_summary_map;
 const unsigned short *display_load_background_resource_dma(unsigned int,
-    const struct BackgroundResource *, unsigned short);
+                                                           const struct BackgroundResource *,
+                                                           unsigned short);
 
 void save_world_show_row_notice(unsigned int);
 void save_world_show_row_flag_notice(unsigned int);

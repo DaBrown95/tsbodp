@@ -1,8 +1,8 @@
 #include "frame_need_effect_clear.h"
 #include "display_need_effect_lifecycle.h"
 
-static inline struct FrameObject *attachment_actor(
-    struct FrameActorAttachmentRecord *records, unsigned char index)
+static inline struct FrameObject *attachment_actor(struct FrameActorAttachmentRecord *records,
+                                                   unsigned char index)
 {
     unsigned int address = (unsigned int)records;
     address += index * sizeof(*records);
@@ -10,8 +10,7 @@ static inline struct FrameObject *attachment_actor(
 }
 void frame_clear_need_effect_states(void)
 {
-    struct DisplayNeedEffectStateView *state =
-        (void *)g_frame_need_effect_active_list.first;
+    struct DisplayNeedEffectStateView *state = (void *)g_frame_need_effect_active_list.first;
     while (state) {
         struct FrameNeedEffectState *next = state->next;
         unsigned char i;
@@ -29,10 +28,9 @@ void frame_clear_need_effect_states(void)
             i++;
         } while (i <= 2);
         if (g_frame_need_effect_active_list.last == (struct FrameObject *)state)
-            g_frame_need_effect_active_list.last =
-                (struct FrameObject *)state->previous;
-        frame_pool_release(&g_frame_need_effect_free_pool,
-            &g_frame_need_effect_active_list, (struct FrameObject *)state);
+            g_frame_need_effect_active_list.last = (struct FrameObject *)state->previous;
+        frame_pool_release(&g_frame_need_effect_free_pool, &g_frame_need_effect_active_list,
+                           (struct FrameObject *)state);
         state = (struct DisplayNeedEffectStateView *)next;
     }
 }

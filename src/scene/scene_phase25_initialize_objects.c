@@ -1,4 +1,4 @@
-#include "scene_phase25.h"
+#include "scene_phase_25.h"
 #include "frame_scene_player.h"
 #include "frame_actor_speed_control.h"
 #include "frame_actor_state.h"
@@ -33,12 +33,13 @@ void scene_phase25_initialize_objects(void)
     frame_acquire_palette_slot((struct FrameObject *)actor, 0);
     frame_bind_actor_group((struct FrameObject *)actor, group);
     frame_set_animation_variant((struct FrameObject *)actor, 1,
-        g_frame_actor_direction_variants_signed[actor->direction]);
+                                g_frame_actor_direction_variants_signed[actor->direction]);
     if (group->mode)
         frame_set_animation_commands((struct FrameObject *)actor,
-            g_frame_actor_commands_kind1[actor->requested_animation], 0);
+                                     g_frame_actor_commands_kind1[actor->requested_animation], 0);
     else
-        frame_set_animation_commands((struct FrameObject *)actor,
+        frame_set_animation_commands(
+            (struct FrameObject *)actor,
             g_frame_scene_player_commands_kind2[actor->requested_animation], 0);
     frame_set_part_order((struct FrameObject *)actor, 1, 4);
     frame_set_part_order((struct FrameObject *)actor, 0, 5);

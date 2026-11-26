@@ -1,4 +1,4 @@
-"""The optional HWI32 compiler keeps its own pins and rejects stale inputs."""
+"""The optional 32-bit-integer GCC 3.0.2 build keeps its own pins and rejects stale inputs."""
 import copy
 import json
 from pathlib import Path

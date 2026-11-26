@@ -12,8 +12,7 @@ unsigned int condition_refresh(unsigned int row_in, unsigned int column_in)
         if (index >= count)
             goto finished;
         {
-            register unsigned char *state asm("r2") =
-                (unsigned char *)&g_resource_game_state;
+            register unsigned char *state asm("r2") = (unsigned char *)&g_resource_game_state;
             address = column * 24;
             address += row * 144;
             address += (unsigned int)state;
@@ -37,8 +36,7 @@ unsigned int condition_refresh(unsigned int row_in, unsigned int column_in)
 
 finished:
     if (all) {
-        struct ConditionDefinition *definition =
-            g_condition_definitions[row].columns[column];
+        struct ConditionDefinition *definition = g_condition_definitions[row].columns[column];
         unsigned char kind = definition->display_kind;
         if (kind != 0xff)
             resource_set_display_kind(kind);

@@ -1,4 +1,4 @@
-"""Snapshot selection must not hide dependencies or leave mutable proof inputs."""
+"""A header snapshot must record every dependency and leave no mutable input behind."""
 import hashlib
 import json
 from pathlib import Path

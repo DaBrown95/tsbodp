@@ -8,12 +8,13 @@ void scene_link_entry_confirm_offer(void)
     audio_select_sequence(2);
     if (g_link_entry_effect_state.records[g_link_entry_effect_state.selected].kind == 42) {
         int amount;
-        actor_entry_add(g_link_entry_game_state.entries,
-            g_scene_request.scene, (unsigned char)g_scene_request.parameter,
-            (g_scene_request.parameter & 0xff00) >> 8);
+        actor_entry_add(g_link_entry_game_state.entries, g_scene_request.scene,
+                        (unsigned char)g_scene_request.parameter,
+                        (g_scene_request.parameter & 0xff00) >> 8);
         amount = (g_link_entry_effect_state.records[g_link_entry_effect_state.selected].count *
-            g_link_entry_effect_state.multiplier +
-            g_link_entry_effect_state.records[g_link_entry_effect_state.selected].cost) >> 16;
+                      g_link_entry_effect_state.multiplier +
+                  g_link_entry_effect_state.records[g_link_entry_effect_state.selected].cost) >>
+                 16;
         g_link_entry_game_state.amount -= amount;
         display_text_copy_field_zero((const char *)&g_link_entry_game_state + 16);
         audio_play_sequence_notification(60);

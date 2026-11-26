@@ -1,7 +1,8 @@
 #include "scene_contact_activity_four.h"
 
-struct FrameObject *scene_contact_activity_four_create_item(
-    struct FramePoint position, unsigned int selected, unsigned int slot)
+struct FrameObject *scene_contact_activity_four_create_item(struct FramePoint position,
+                                                            unsigned int selected,
+                                                            unsigned int slot)
 {
     struct FrameObject *object = frame_allocate_scene_object();
     unsigned int quadrant, direction;
@@ -20,16 +21,13 @@ struct FrameObject *scene_contact_activity_four_create_item(
     }
     object->flags = 1;
     frame_set_position(object, (int)((unsigned int)position.x << 16),
-        (int)((unsigned int)position.y << 16));
+                       (int)((unsigned int)position.y << 16));
     quadrant = slot & 3;
     if (quadrant == 0 || quadrant == 3)
-        frame_set_animation_record(object,
-            &g_scene_contact_activity_four_animation_a);
+        frame_set_animation_record(object, &g_scene_contact_activity_four_animation_a);
     else
-        frame_set_animation_record(object,
-            &g_scene_contact_activity_four_animation_b);
-    frame_set_animation_frame((struct FrameTickObject *)object,
-        ((unsigned char *)object)[10]);
+        frame_set_animation_record(object, &g_scene_contact_activity_four_animation_b);
+    frame_set_animation_frame((struct FrameTickObject *)object, ((unsigned char *)object)[10]);
     direction = slot >> 1;
     if (slot > 3)
         ((struct SceneContactActivityFourObjectFlags *)object)->flag4 = -1;
@@ -48,4 +46,4 @@ struct FrameObject *scene_contact_activity_four_create_item(
     return object;
 }
 
-asm(".align 2,0");
+asm(".align 2, 0");

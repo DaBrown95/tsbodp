@@ -11,7 +11,10 @@ void display_menu_apply_secondary_result(void)
                                            g_display_menu_state.definition);
     }
     row = &g_display_menu_secondary_result_rows[g_display_menu_state.definition];
-    result = (const struct DisplayMenuResult *)((unsigned int)row + g_display_menu_state.codes[g_display_scene_request_state.scene] * sizeof(*result));
+    result =
+        (const struct DisplayMenuResult
+             *)((unsigned int)row +
+                g_display_menu_state.codes[g_display_scene_request_state.scene] * sizeof(*result));
     display_menu_apply_delta(result->delta);
     display_menu_draw_secondary_result(result->text);
 }

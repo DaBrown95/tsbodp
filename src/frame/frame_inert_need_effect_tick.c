@@ -3,4 +3,4 @@
 void frame_inert_need_effect_tick(struct FrameNeedEffectState *owner)
 {
 }
-asm(".align 2,0");
+asm(".align 2, 0");

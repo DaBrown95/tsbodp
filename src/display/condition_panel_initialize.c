@@ -70,7 +70,8 @@ void condition_panel_initialize(void)
     display_load_background(3, &g_condition_panel_background3, 0, 4, 0, 0);
     display_set_background_velocity(3, 32768, 32768);
     display_load_background(2, &g_condition_panel_background2, 4, 1, 0, 0);
-    scene_view_load_selected_resource(1, 3, 1, 1, 6,
+    scene_view_load_selected_resource(
+        1, 3, 1, 1, 6,
         (const SceneViewResourceSelectionByte *)((unsigned char *)&g_condition_panel_world + 0x20));
     display_load_resource_palette(&g_condition_panel_palette0, 0);
     display_load_resource_palette(&g_condition_panel_palette7, 7);
@@ -94,7 +95,8 @@ void condition_panel_initialize(void)
     condition_panel_create_objects();
     condition_panel_draw_row_labels(g_display_scene_request_state.parameter);
     condition_panel_update_column_objects(g_display_scene_request_state.parameter);
-    condition_panel_draw_details(g_display_scene_request_state.parameter, g_display_scene_request_state.scene);
+    condition_panel_draw_details(g_display_scene_request_state.parameter,
+                                 g_display_scene_request_state.scene);
     transition_run_first(63, 0);
 }
 asm(".align 2, 0");

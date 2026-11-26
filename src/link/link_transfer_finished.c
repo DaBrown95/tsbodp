@@ -2,8 +2,7 @@
 #include "link_serial_handshake.h"
 #include "link_event_receive.h"
 
-static inline unsigned char link_wait_expired(unsigned int current,
-                                              unsigned int reference)
+static inline unsigned char link_wait_expired(unsigned int current, unsigned int reference)
 {
     if ((int)(current - reference) > 300)
         return 1;
@@ -11,8 +10,7 @@ static inline unsigned char link_wait_expired(unsigned int current,
         return 0;
 }
 
-static inline unsigned char link_elapsed_expired(int elapsed,
-                                                unsigned int threshold)
+static inline unsigned char link_elapsed_expired(int elapsed, unsigned int threshold)
 {
     if (elapsed > (int)threshold)
         return 1;

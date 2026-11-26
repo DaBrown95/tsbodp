@@ -20,8 +20,7 @@ void display_menu_apply_primary_result(void)
         const unsigned char *offset = (const unsigned char *)(code_index + (unsigned int)base);
         int value = probability;
         probability = value + *offset;
-    }
-    else if (g_display_menu_state.definition <= 14)
+    } else if (g_display_menu_state.definition <= 14)
         probability = -1;
     else {
         int value = (signed char)probability;
@@ -43,9 +42,12 @@ void display_menu_apply_primary_result(void)
             if (game->variant != g_frame_actor_greetings[menu->definition].cue_variant)
                 display_menu_try_relation_flag((unsigned char *)game + 0x30, menu->definition);
             row = &g_display_menu_primary_result_rows[menu->definition];
-            result = (const struct DisplayMenuResult *)((unsigned int)row + menu->codes[request->scene] * sizeof(*result));
+            result =
+                (const struct DisplayMenuResult *)((unsigned int)row +
+                                                   menu->codes[request->scene] * sizeof(*result));
         } else
-            result = (const struct DisplayMenuResult *)&g_display_menu_primary_special_rows[menu->definition];
+            result = (const struct DisplayMenuResult
+                          *)&g_display_menu_primary_special_rows[menu->definition];
         {
             /* This short request pointer constraint ends before result-consumer calls. */
             register struct DisplaySceneRequestState *current asm("r2") = request;
@@ -57,17 +59,16 @@ void display_menu_apply_primary_result(void)
                 selected_code = *address;
             }
             switch (selected_code) {
-            case 3:
-            case 4:
-            {
-                current->unknown_10 = 2;
-                current->unknown_14 = 45;
-                break;
-            }
-            case 5:
-                request->unknown_10 = 2;
-                request->unknown_14 = 90;
-                break;
+                case 3:
+                case 4: {
+                    current->unknown_10 = 2;
+                    current->unknown_14 = 45;
+                    break;
+                }
+                case 5:
+                    request->unknown_10 = 2;
+                    request->unknown_14 = 90;
+                    break;
             }
         }
         display_menu_apply_delta(result->delta);

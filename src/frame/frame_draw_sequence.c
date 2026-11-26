@@ -1,12 +1,14 @@
 #include "frame_render.h"
 void frame_draw_sequence(struct FrameSpriteSequence *sequence, FrameU16 frame_index,
-    FrameU8 options, struct FramePoint *origin, FrameU16 index,
-    struct FrameOam *initial, struct FrameObject *base)
+                         FrameU8 options, struct FramePoint *origin, FrameU16 index,
+                         struct FrameOam *initial, struct FrameObject *base)
 {
-    struct FrameSpriteFrame *frame = (struct FrameSpriteFrame *)
-        ((FrameU8 *)sequence + 12 + sequence->frame_offsets[frame_index]);
-    struct FrameSpritePart *part = (struct FrameSpritePart *)
-        ((FrameU8 *)frame + 10 + sequence->collider_count * 6 + sequence->attachment_count * 2);
+    struct FrameSpriteFrame *frame =
+        (struct FrameSpriteFrame *)((FrameU8 *)sequence + 12 +
+                                    sequence->frame_offsets[frame_index]);
+    struct FrameSpritePart *part =
+        (struct FrameSpritePart *)((FrameU8 *)frame + 10 + sequence->collider_count * 6 +
+                                   sequence->attachment_count * 2);
     struct FrameRenderObject *object = (struct FrameRenderObject *)base;
     int scale_x = object->scale.x, scale_y = object->scale.y;
     unsigned int count = frame->count_flags & 0x1f;

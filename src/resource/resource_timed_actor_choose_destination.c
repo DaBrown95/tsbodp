@@ -20,4 +20,4 @@ void resource_timed_actor_choose_destination(struct FrameObject *base, unsigned 
         object->destination.y = object->position.y + ((unsigned int)y << 16);
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

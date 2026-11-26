@@ -1,4 +1,7 @@
-"""Validate fixed copy-installation literals without executing the ROM."""
+"""Check the literals that describe each startup copy into RAM (source, destination, size).
+
+Used by tools/map_ram.py. It reads the ROM words and does not run the ROM.
+"""
 
 
 def validate_copy(copy, word):

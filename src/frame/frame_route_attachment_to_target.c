@@ -2,9 +2,8 @@
 #include "frame_actor_choices.h"
 #include "frame_actor_target_routes.h"
 
-void frame_route_attachment_to_target(void *context,
-                                     struct FrameActorAttachmentRecord *job,
-                                     struct FrameNeedEffectState *owner)
+void frame_route_attachment_to_target(void *context, struct FrameActorAttachmentRecord *job,
+                                      struct FrameNeedEffectState *owner)
 {
     struct FramePoint point;
     int cell;

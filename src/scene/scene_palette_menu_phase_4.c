@@ -55,4 +55,4 @@ void scene_palette_menu_phase_4(void)
         }
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

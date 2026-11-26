@@ -1,7 +1,7 @@
 #include "display_map.h"
 
-void display_write_incrementing_background_map(unsigned int index, int x, int y,
-    int width, int height, unsigned short tile)
+void display_write_incrementing_background_map(unsigned int index, int x, int y, int width,
+                                               int height, unsigned short tile)
 {
     int row;
     unsigned int record_offset;
@@ -13,8 +13,8 @@ void display_write_incrementing_background_map(unsigned int index, int x, int y,
         do {
             if (width > 0) {
                 unsigned int address = y + row;
-                struct DisplayMapState *background = (struct DisplayMapState *)
-                    ((char *)g_display_map_states + record_offset);
+                struct DisplayMapState *background =
+                    (struct DisplayMapState *)((char *)g_display_map_states + record_offset);
                 unsigned short *map;
                 unsigned int flags;
                 register unsigned int dirty __asm__("r6");

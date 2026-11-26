@@ -1,4 +1,4 @@
-#include "scene_phase25.h"
+#include "scene_phase_25.h"
 #include "scene_audio_options.h"
 #include "display_scene_lifecycle.h"
 #include "frame_actor_speed_control.h"

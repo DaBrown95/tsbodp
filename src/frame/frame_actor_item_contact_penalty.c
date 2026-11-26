@@ -2,8 +2,7 @@
 
 #define STATE ((struct FrameActorItemState *)g_scene_contact_state)
 
-void frame_actor_item_contact_penalty(struct CollisionObject *first,
-                                     struct CollisionObject *second)
+void frame_actor_item_contact_penalty(struct CollisionObject *first, struct CollisionObject *second)
 {
     struct FrameObject *object = (struct FrameObject *)first;
     struct FrameObject *other = (struct FrameObject *)second;
@@ -16,4 +15,4 @@ void frame_actor_item_contact_penalty(struct CollisionObject *first,
         frame_emit_actor_item_contact(other, 1);
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

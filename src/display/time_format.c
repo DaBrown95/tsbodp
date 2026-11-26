@@ -31,64 +31,66 @@ char *display_time_format(const struct DisplayTimeRecord *time, char *destinatio
             if (value == '@') {
                 ++format;
                 switch (*format) {
-                case 'D':
-                    if (time->day > 99)
-                        *destination++ = display_bios_remainder(
-                            display_bios_div(time->day, 100), 10) + '0';
-                    if (time->day > 9)
-                        *destination++ = display_bios_remainder(
-                            display_bios_div(time->day, 10), 10) + '0';
-                    *destination++ = display_bios_remainder(time->day, 10) + '0';
-                    if (format[1] == 'D')
-                        ++format;
-                    break;
-                case 'a':
-                    if (time->hour <= 11)
-                        *destination++ = 'a';
-                    else
-                        *destination++ = 'p';
-                    break;
-                case 'A':
-                    if (time->hour <= 11)
-                        *destination++ = 'A';
-                    else
-                        *destination++ = 'P';
-                    break;
-                case 'H': case 'h':
-                    if (ampm) {
-                        if (time->hour > 12) {
-                            if (time->hour > 21)
+                    case 'D':
+                        if (time->day > 99)
+                            *destination++ =
+                                display_bios_remainder(display_bios_div(time->day, 100), 10) + '0';
+                        if (time->day > 9)
+                            *destination++ =
+                                display_bios_remainder(display_bios_div(time->day, 10), 10) + '0';
+                        *destination++ = display_bios_remainder(time->day, 10) + '0';
+                        if (format[1] == 'D')
+                            ++format;
+                        break;
+                    case 'a':
+                        if (time->hour <= 11)
+                            *destination++ = 'a';
+                        else
+                            *destination++ = 'p';
+                        break;
+                    case 'A':
+                        if (time->hour <= 11)
+                            *destination++ = 'A';
+                        else
+                            *destination++ = 'P';
+                        break;
+                    case 'H':
+                    case 'h':
+                        if (ampm) {
+                            if (time->hour > 12) {
+                                if (time->hour > 21)
+                                    *destination++ = '1';
+                                else
+                                    *destination++ = ' ';
+                                *destination++ = display_bios_remainder(time->hour - 12, 10) + '0';
+                            } else if (time->hour > 0) {
+                                if (time->hour > 9)
+                                    *destination++ = '1';
+                                else
+                                    *destination++ = ' ';
+                                *destination++ = display_bios_remainder(time->hour, 10) + '0';
+                            } else {
                                 *destination++ = '1';
-                            else
-                                *destination++ = ' ';
-                            *destination++ = display_bios_remainder(
-                                time->hour - 12, 10) + '0';
-                        } else if (time->hour > 0) {
-                            if (time->hour > 9)
-                                *destination++ = '1';
-                            else
-                                *destination++ = ' ';
-                            *destination++ = display_bios_remainder(time->hour, 10) + '0';
+                                *destination++ = '2';
+                            }
                         } else {
-                            *destination++ = '1';
-                            *destination++ = '2';
+                            *destination++ = display_bios_div(time->hour, 10) + '0';
+                            *destination++ = display_bios_remainder(time->hour, 10) + '0';
                         }
-                    } else {
-                        *destination++ = display_bios_div(time->hour, 10) + '0';
-                        *destination++ = display_bios_remainder(time->hour, 10) + '0';
-                    }
-                    ++format;
-                    break;
-                case 'M': case 'm':
-                    *destination++ = display_bios_div(time->minute, 10) + '0';
-                    ++format;
-                    *destination++ = display_bios_remainder(time->minute, 10) + '0';
-                    break;
-                case 'S': case 's':
-                    *destination++ = display_bios_div(time->second, 10) + '0';
-                    ++format;
-                    *destination++ = display_bios_remainder(time->second, 10) + '0';
-                    break;
+                        ++format;
+                        break;
+                    case 'M':
+                    case 'm':
+                        *destination++ = display_bios_div(time->minute, 10) + '0';
+                        ++format;
+                        *destination++ = display_bios_remainder(time->minute, 10) + '0';
+                        break;
+                    case 'S':
+                    case 's':
+                        *destination++ = display_bios_div(time->second, 10) + '0';
+                        ++format;
+                        *destination++ = display_bios_remainder(time->second, 10) + '0';
+                        break;
                 }
                 if (!g_display_time_format_options.mode && text_id == 6227)
                     *destination++ = *format;

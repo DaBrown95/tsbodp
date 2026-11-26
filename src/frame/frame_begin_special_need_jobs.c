@@ -1,11 +1,9 @@
 #include "frame_special_need_jobs.h"
 
 unsigned int frame_begin_special_need_jobs(struct FrameNeedEffectState *owner,
-                                            struct FrameObject *actor,
-                                            unsigned int kind)
+                                           struct FrameObject *actor, unsigned int kind)
 {
-    struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(
-        owner, actor);
+    struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(owner, actor);
     struct FramePoint point;
     unsigned int result;
     if (!job)
@@ -20,4 +18,4 @@ unsigned int frame_begin_special_need_jobs(struct FrameNeedEffectState *owner,
     }
     return result;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

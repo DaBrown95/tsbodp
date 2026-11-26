@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""ROM-wide static entry/extent inventory; metadata only, never source credit.
+"""Build the rev0 ROM map (config/rev0/rom-map.json) by scanning the ROM for code reachable from known entry points.
 
-Recursive control flow seeds direct calls and literal function pointers. A
-whole-ROM prologue/pointer sweep adds candidates, not proven functions. Gaps
-remain explicit; instruction decoding is not proof that bytes are executable.
+Run by `make inventory`. It follows direct calls and function pointers found in
+literals; a sweep of the whole ROM for function prologues and pointers adds
+candidates that are not confirmed. Gaps stay explicit, and bytes that decode as
+instructions are not necessarily executed. The map records static evidence
+only and is separate from source coverage.
 """
 import hashlib
 import json
@@ -126,8 +128,8 @@ def source_owned_instruction_regions(data, regions, assembly_owners, read_source
         if not isinstance(row, dict):
             raise ValueError('Source instruction region must be an object')
         result.append({**row, 'status': 'source_authored_instruction'})
-    # Structural validation precedes source/byte inspection, including owner,
-    # exact bounds/alignment, source/span hashes, mode and mandatory evidence.
+    # Validate structure first (owner, exact bounds and alignment, source and
+    # span hashes, mode, required evidence) before looking at source or bytes.
     source_instruction_role_spans(result, owners, len(data))
     engine = Cs(CS_ARCH_ARM, CS_MODE_THUMB)
     registers = {**{'r'+str(i): i for i in range(10)},
@@ -472,8 +474,8 @@ def main():
             if value:
                 scanner.seed(value & ~1, 'Thumb' if value & 1 else 'ARM', 'audited dispatch entry')
     scanner.drain()
-    # Snapshot strong evidence before any pointer/prologue-only candidate seeds.
-    # The separate census never promotes those candidates or awards source credit.
+    # Snapshot the strong evidence before adding candidates found only by a
+    # pointer or prologue sweep. The census never treats those as confirmed code.
     for key in list(scanner.results):
         scanner.results[key] = scanner.walk(*key)
     scanner.drain()
@@ -484,8 +486,8 @@ def main():
         owner = next(f for f in manifest['functions'] if f['name'] == row['owner'])
         prove_fixed_target(scanner, owner, row['rom_offset'], row['target'])
     graph_count = len(scanner.entries)
-    # Inspect ALL aligned ROM words for pointers. They remain candidate evidence:
-    # integer data can resemble addresses, and callbacks are not proven reachable.
+    # Check every aligned ROM word for pointers. They are only candidates:
+    # integer data can look like an address, and the callbacks may never run.
     pointers = defaultdict(int)
     arm_pointers = defaultdict(int)
     arm_signatures = defaultdict(list)
@@ -525,8 +527,8 @@ def main():
         off = address-BASE
         if address in known_instr or off in scanner.literal_bytes:
             continue
-        # The connected main bank is grounded by control flow. Outside it require
-        # pointer corroboration; never sweep arbitrary assets into executable code.
+        # Control flow already covers the main code bank. Outside it, require a
+        # pointer to the address so that data is not swept in as code.
         if address <= main_end or pointers[address]:
             sweep_candidates.append(address)
             scanner.seed(address, 'Thumb', 'prologue candidate' if address <= main_end else 'pointer and prologue candidate')
@@ -602,7 +604,7 @@ def main():
         row['call_targets'].update(dest for dest,_ in result['calls'])
         row['unresolved_transfer_offsets'].update(scanner.physical(pc) for pc in result['unresolved_transfers'])
     # Extents are envelopes of decoded paths and local pools, clipped at the
-    # next entry. These are estimates, not a compiler-owned function-size proof.
+    # next entry. These are estimates of function size, not exact boundaries.
     starts = sorted(merged)
     rows = []
     for index, off in enumerate(starts):
@@ -619,7 +621,7 @@ def main():
         row['body_rom_start'] = min(row['instruction_offsets'])
         row['body_rom_end'] = max(row['instruction_offsets'])+1
         row['boundary_confidence'] = 'control_flow_bounded' if not row['issues'] and row['return_offsets'] and all(off <= p < end for p in row['instruction_offsets']) else 'provisional'
-        # Preserve full observations until the final ownership overlay.
+        # Keep all the evidence until source ownership is overlaid at the end.
         row['status'] = 'candidate' if any('candidate' in e for e in row['evidence']) and not any(e in row['evidence'] for e in ('direct call', 'bounded audit', 'audited RAM entry', 'audited dispatch entry', 'resolved literal transfer')) else 'mapped_code'
         row['group'] = 'Copied audio / ARM' if 0xfda478 <= off < 0xfdba28 else ('Startup / ARM' if off < 0x2a0 else f'ROM {0x0800+off//0x10000:04X}xxxx')
         for field in ('evidence', 'issues', 'call_targets', 'runtime_addresses', 'unresolved_transfer_offsets', 'return_offsets'):

@@ -8,8 +8,8 @@ void transition_expand_rectangle_outside_window(unsigned short targets)
     short left = 120, top = 80, right, bottom;
 
     {
-        register volatile unsigned short *window_register asm("r2")
-            = (volatile unsigned short *)0x04000048;
+        register volatile unsigned short *window_register asm("r2") =
+            (volatile unsigned short *)0x04000048;
         *window_register = 0;
         ++window_register;
         *window_register = 0x3F;

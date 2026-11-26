@@ -10,7 +10,10 @@ extern struct DisplayCommitContext *g_display_commit_context;
 /* Two coordinate records follow each window's commit flags. */
 union DisplayWindowFixedPoint {
     int position;
-    struct { unsigned short fraction; short integer; } halves;
+    struct {
+        unsigned short fraction;
+        short integer;
+    } halves;
 };
 struct DisplayWindowAxis {
     unsigned short flags, duration;
@@ -24,7 +27,10 @@ struct WindowState {
 extern struct WindowState g_window_states[2];
 #define DISPLAY_REG16(a) (*(volatile unsigned short *)(a))
 struct BackgroundState {
-    union { unsigned int control_word; unsigned short control; } registers;
+    union {
+        unsigned int control_word;
+        unsigned short control;
+    } registers;
     union {
         unsigned char unknown_04[4];
         const unsigned short *map_pointer;
@@ -81,7 +87,8 @@ extern struct PaletteQueueEntry g_palette_queue[18];
 extern unsigned int g_palette_queue_count;
 extern void display_commit_palette_range(struct PaletteRangeJob *);
 extern void display_commit_palette_block(struct PaletteBlockJob *);
-extern void display_transfer_palette(const void *, unsigned int, unsigned int, struct PaletteBufferPair *);
+extern void display_transfer_palette(const void *, unsigned int, unsigned int,
+                                     struct PaletteBufferPair *);
 extern void *display_copy_bytes(void *, const void *, unsigned int);
 struct DisplayPendingBlock {
     unsigned short pending;
@@ -127,14 +134,16 @@ struct BackgroundResourceCodec {
     unsigned char unknown_high : 1;
 } __attribute__((packed));
 extern void display_decode_background(const struct BackgroundResource *, const void *, int, void *);
-extern unsigned int display_load_resource_palette(const struct BackgroundResource *, unsigned short);
+extern unsigned int display_load_resource_palette(const struct BackgroundResource *,
+                                                  unsigned short);
 struct BackgroundCharacterBase {
     unsigned char unknown_low : 2;
     unsigned char character_base : 2;
     unsigned char unknown_high : 4;
 } __attribute__((packed));
 extern const unsigned short *display_load_background_resource(unsigned int,
-    const struct BackgroundResource *, unsigned short, unsigned short);
+                                                              const struct BackgroundResource *,
+                                                              unsigned short, unsigned short);
 extern unsigned int g_palette_queue_words[];
 struct DisplayTileLayout {
     unsigned char unknown_00[6];
@@ -159,12 +168,15 @@ struct DisplayTileObject {
     unsigned short bytes, first_tile;
 };
 
-struct DisplayPoint { int x, y; };
+struct DisplayPoint {
+    int x, y;
+};
 extern int display_divide(int, int);
 extern int display_matrix_sine(int), display_matrix_cosine(int);
 extern int display_fixed_multiply(short, short);
 extern int display_scroll_sine(int), display_scroll_cosine(int);
-extern void display_add_point(struct DisplayPoint *, const struct DisplayPoint *, struct DisplayPoint *);
+extern void display_add_point(struct DisplayPoint *, const struct DisplayPoint *,
+                              struct DisplayPoint *);
 extern void display_offset_background(unsigned int);
 extern const unsigned char g_display_screen_block_counts[4];
 extern void display_fill_background_tile(unsigned int, unsigned short, unsigned short);
@@ -176,10 +188,17 @@ extern unsigned int display_find_palette_block(void);
 extern void display_step_palette_block(struct PaletteBlockJob *);
 extern void display_step_palette_blocks(void);
 extern void display_reset_palette_block(struct PaletteBlockJob *);
-extern unsigned int display_create_palette_block(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, const unsigned short *);
+extern unsigned int display_create_palette_block(unsigned int, unsigned int, unsigned int,
+                                                 unsigned int, unsigned int,
+                                                 const unsigned short *);
 
-struct PaletteRangeConfigEntry { unsigned char first, count, delay, flags; };
-struct PaletteRangeConfig { unsigned short count, unknown_02; struct PaletteRangeConfigEntry entries[1]; };
+struct PaletteRangeConfigEntry {
+    unsigned char first, count, delay, flags;
+};
+struct PaletteRangeConfig {
+    unsigned short count, unknown_02;
+    struct PaletteRangeConfigEntry entries[1];
+};
 extern unsigned int g_palette_range_count, g_palette_range_enabled_mask;
 extern unsigned int display_next_palette_range(void);
 extern void display_load_palette_ranges(const struct PaletteRangeConfig *);
@@ -190,10 +209,12 @@ extern void display_sprite_dimensions(unsigned int, unsigned int, struct Display
 extern const unsigned char *display_object_tile_pixels(struct DisplayTileObject *);
 extern void display_load_palette_alternate(const void *, unsigned int, unsigned int);
 extern void display_queue_palette(const void *, unsigned int, unsigned int);
-extern void display_write_background_map(unsigned int, const unsigned short *, unsigned short, unsigned short, unsigned int, unsigned int);
+extern void display_write_background_map(unsigned int, const unsigned short *, unsigned short,
+                                         unsigned short, unsigned int, unsigned int);
 extern void display_write_constant_map_rectangle(void *, int, int, int, int, unsigned short);
 extern void display_write_map_palette_rectangle(void *, int, int, int, int, unsigned short);
 extern const unsigned short *display_load_background_resource_dma(unsigned int,
-    const struct BackgroundResource *, unsigned short);
+                                                                  const struct BackgroundResource *,
+                                                                  unsigned short);
 
 #endif /* TSBODP_DISPLAY_H */

@@ -30,10 +30,10 @@ extern unsigned char g_scene_entry_data[];
 int resource_count_selectable_actor_entries(void);
 
 /* Owned selection entries and dependencies; names remain provisional. */
-unsigned char resource_selection_has_kind_0804573c(void);
+unsigned char resource_selection_has_kind_48(void);
 void resource_remove_random_selectable_actor_entry(void);
-void resource_selection_group_ids_08045794(int *);
-unsigned int resource_selection_group_count_080456f4(void);
-unsigned int resource_selection_kind_available_0804565c(unsigned int);
+void resource_selection_group_ids(int *);
+unsigned int resource_selection_group_count(void);
+unsigned int resource_selection_kind_available(unsigned int);
 
 #endif

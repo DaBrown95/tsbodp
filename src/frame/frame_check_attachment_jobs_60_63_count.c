@@ -6,4 +6,4 @@ unsigned int frame_check_attachment_jobs_60_63_count(struct FrameNeedEffectState
         return 0;
     return 1;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

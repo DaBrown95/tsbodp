@@ -4,8 +4,7 @@ int display_menu_relation_average_code(struct DisplayMenuRelationState *state)
 {
     int average = state->values.average;
     int index = 14;
-    const struct DisplayMenuRelationAverageBand *band =
-        g_display_menu_relation_average_bands;
+    const struct DisplayMenuRelationAverageBand *band = g_display_menu_relation_average_bands;
 
     if (average < band[14].threshold) {
         band += 14;

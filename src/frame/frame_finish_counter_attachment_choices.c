@@ -3,4 +3,4 @@
 void frame_finish_counter_attachment_choices(struct FrameNeedEffectState *owner)
 {
 }
-asm(".align 2,0");
+asm(".align 2, 0");

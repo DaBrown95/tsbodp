@@ -13,10 +13,15 @@ int frame_object_near_view_11b8(struct FrameObject *object, FrameU8 view)
         register int margin asm("r6") = 100;
         register int view_x asm("r4") = origin.x;
 
-        if (point.x >= view_x - 100
-                && point.y >= origin.y - 100
-                && point.x <= ({ register int upper asm("r0") = margin + 240; view_x + upper; })
-                && point.y <= ({ register int upper asm("r0") = margin + 160; origin.y + upper; }))
+        if (point.x >= view_x - 100 && point.y >= origin.y - 100 &&
+            point.x <= ({
+                register int upper asm("r0") = margin + 240;
+                view_x + upper;
+            }) &&
+            point.y <= ({
+                register int upper asm("r0") = margin + 160;
+                origin.y + upper;
+            }))
             return 1;
     }
     return 0;

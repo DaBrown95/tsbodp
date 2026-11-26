@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Provision the separate historical GNU assembler from pinned public source."""
+"""Build GNU binutils 2.10.1, the historical assembler, from pinned public source."""
 import json
 from pathlib import Path
 import subprocess

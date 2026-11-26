@@ -1,7 +1,7 @@
 #include "display.h"
 unsigned int display_create_palette_block(unsigned int first, unsigned int count,
-    unsigned int duration, unsigned int interval, unsigned int flags,
-    const unsigned short *palette)
+                                          unsigned int duration, unsigned int interval,
+                                          unsigned int flags, const unsigned short *palette)
 {
     unsigned int index = display_find_palette_block();
     struct PaletteBlockJob *job = &g_palette_block_jobs[index];

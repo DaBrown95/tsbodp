@@ -4,5 +4,6 @@
 #include "scene_retention.h"
 void scene_stop_actor_speed_cue(void)
 {
- if(g_frame_scene_player_mode.mode==1)audio_game_stop_sample(g_frame_actor_speed_cue_handle);
+    if (g_frame_scene_player_mode.mode == 1)
+        audio_game_stop_sample(g_frame_actor_speed_cue_handle);
 }

@@ -6,20 +6,19 @@ enum FrameAttachmentJobKind45_90 {
 };
 
 unsigned int frame_dispatch_attachment_jobs_45_90(struct FrameNeedEffectState *owner,
-                                                 struct FrameObject *actor)
+                                                  struct FrameObject *actor)
 {
     unsigned int result = 1;
-    struct FrameActorAttachmentRecord *job = frame_find_actor_attachment_record(
-        owner, actor);
+    struct FrameActorAttachmentRecord *job = frame_find_actor_attachment_record(owner, actor);
     switch ((enum FrameAttachmentJobKind45_90)job->kind) {
-    case 0:
-        break;
-    case 45:
-    case 90:
-        result = frame_step_attachment_jobs_45_90(owner, job);
-        break;
-    default:
-        result = 0;
+        case 0:
+            break;
+        case 45:
+        case 90:
+            result = frame_step_attachment_jobs_45_90(owner, job);
+            break;
+        default:
+            result = 0;
     }
     return result;
 }

@@ -1,6 +1,6 @@
 #include "display.h"
 void display_write_incrementing_map_rectangle(void *map, int x, int y, int width, int height,
-                                             unsigned short tile)
+                                              unsigned short tile)
 {
     register int row __asm__("r1");
     int column, next_row;

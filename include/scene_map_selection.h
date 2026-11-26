@@ -6,14 +6,20 @@ struct FrameObjectList;
 struct BackgroundResource;
 
 /* Observed word-coordinate rows. Names and complete table storage are provisional. */
-struct SceneMapSelectionPoint { unsigned int x, y; };
+struct SceneMapSelectionPoint {
+    unsigned int x, y;
+};
 /* Only the 26-row accessed prefix is modeled; this is not a complete table bound. */
 union SceneMapSelectionPointPrefix {
     struct SceneMapSelectionPoint rows[26];
     unsigned int words[52];
 };
-struct SceneMapSelectionBounds { unsigned char left, right, top, bottom; };
-struct SceneMapSelectionLimits { unsigned int first, last; };
+struct SceneMapSelectionBounds {
+    unsigned char left, right, top, bottom;
+};
+struct SceneMapSelectionLimits {
+    unsigned int first, last;
+};
 struct SceneMapSelectionPaletteConfig {
     unsigned char resource, bank, count, unknown03;
 };
@@ -52,9 +58,9 @@ unsigned int scene_map_selection_collapse_details(void);
 void display_set_mode(unsigned short), display_show_background(unsigned int, unsigned int);
 void display_enable_layers(unsigned short);
 void display_fill_background(unsigned int, unsigned short);
-const unsigned short *display_load_background_dma(unsigned int,
-    const struct BackgroundResource *, unsigned short, unsigned short,
-    unsigned int, unsigned int);
+const unsigned short *display_load_background_dma(unsigned int, const struct BackgroundResource *,
+                                                  unsigned short, unsigned short, unsigned int,
+                                                  unsigned int);
 void display_set_background_scroll_target(unsigned int, int, int, unsigned int);
 void transition_run_first(unsigned short, unsigned int);
 void transition_run_second(unsigned short, unsigned int);

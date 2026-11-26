@@ -1,4 +1,7 @@
-"""Public source pins and immutable, machine-local native tool fingerprints."""
+"""Pin the public source and checksums of the compilers and assemblers, and fingerprint the local builds so they cannot change unnoticed.
+
+Also selects the compiler and assembler for each function.
+"""
 import hashlib
 import json
 import re

@@ -1,7 +1,7 @@
 #include "frame_need_effect_optional_jobs.h"
 
 unsigned int frame_check_optional_attachment_capacity(struct FrameNeedEffectState *owner,
-                                                        struct FrameObject *actor)
+                                                      struct FrameObject *actor)
 {
     unsigned int count = 0, i;
     struct FrameNeedEffectState *view = owner;

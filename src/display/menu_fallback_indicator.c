@@ -19,7 +19,8 @@ unsigned int display_menu_fallback_indicator(unsigned char actor)
                         return 115;
                     return 114;
                 }
-                if (actor == 13) return 116;
+                if (actor == 13)
+                    return 116;
                 return 113;
             }
             if (actor == 12) {
@@ -30,11 +31,13 @@ unsigned int display_menu_fallback_indicator(unsigned char actor)
             return 108;
         }
         if (second) {
-            if (actor == 13) return 112;
+            if (actor == 13)
+                return 112;
             return 109;
         }
     } else if (mode == 4 && (g_condition_display_bits[14] & 32)) {
-        if (actor == 15) return 118;
+        if (actor == 15)
+            return 118;
         return 117;
     }
     return 255;

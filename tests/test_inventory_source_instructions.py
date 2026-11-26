@@ -1,4 +1,4 @@
-"""Explicit assembly provenance stays separate from rooted CFG byte roles."""
+"""Assembly from the sources is counted separately from code found by control-flow scanning."""
 import copy
 import hashlib
 import json

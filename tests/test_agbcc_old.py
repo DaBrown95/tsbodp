@@ -1,4 +1,4 @@
-"""The old backend must retain verified independent source and native locks."""
+"""The old compiler backend keeps its verified source and native-tool pins."""
 import copy
 import hashlib
 import json

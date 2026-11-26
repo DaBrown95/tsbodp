@@ -1,133 +1,142 @@
-# Background decoder
+# Resource decoders
 
-[`background_decoder.s`](../src/resource/background_decoder.s) rebuilds all
-812 bytes at ROM `0x080002EC..0x08000618`, also linked independently at the copied
-execution address `0x03003370..0x0300369C`. These are 203 ARM instructions,
-with no literal pool, alignment payload or C credit. The 848-byte installation
-also copies the first 36 bytes of the following matching C frame scheduler;
-that prefix remains a separate source owner.
+The game has two decompressors that run from RAM: a background decoder
+(assembly) and a tile-run decoder (C). The game copies each into IWRAM at
+startup. This note records where the background decoder comes from and how
+both were checked.
 
-## Assembly-origin evidence
+## Background decoder
 
-The archived [author index](https://web.archive.org/web/20040212223802id_/http://www.devrs.com/gba/asmcode.php)
-identifies Jeff Frohwein's PuCrunch v1.0612 as ARM assembly for ARM/Thumb GCC.
+[`background_decoder.s`](../src/resource/background_decoder.s) is the 812
+bytes at ROM `0x080002EC..0x08000618`, also linked at its copied execution
+address `0x03003370..0x0300369C`. It is 203 ARM instructions, with no literal
+pool or alignment padding. The installer copies 848 bytes, which also covers
+the first 36 bytes of the C frame scheduler that follows; those bytes belong
+to the scheduler.
+
+### Where the assembly comes from
+
+The archived
+[author index](https://web.archive.org/web/20040212223802id_/http://www.devrs.com/gba/asmcode.php)
+lists Jeff Frohwein's PuCrunch v1.0612 as ARM assembly for ARM/Thumb GCC.
 The [author's source package](https://web.archive.org/web/20150302021803id_/http://www.devrs.com/gba/files/armpuc.zip)
-contains its whole-function ARM source, including the halfword-output variant.
-Its distinctive register protocol and algorithm order correspond across the
-entire native routine:
+contains the whole ARM routine, including a halfword-output variant. The
+game's routine matches it in register use and in the order of the algorithm
+throughout:
 
-| Native portion | Bytes | Correspondence |
+| Portion of the routine | Bytes | What corresponds |
 | --- | ---: | --- |
 | Entry and header/table setup | 72 | Output, escape widths, ranked RLE table and sentinel state |
 | Gamma and bit readers | 204 | R0 cursor, R5 value, R8 sentinel and R9 count; shared tails |
 | Escape/literal/token decisions | 108 | R11 saved escape, common literal suffix and R10 pending byte |
 | Short/long RLE | 128 | Gamma length extension and ranked byte codes below 32 |
 | LZ position decoding | 76 | Gamma distance high part, extension bits, low byte and EOF |
-| VRAM forward-copy paths | 188 | Pending-byte and distance-one cases, followed by native halfword loops |
-| Flush and return | 36 | Pending-byte flush, saved state and native optional size output |
+| VRAM forward-copy paths | 188 | Pending-byte and distance-one cases, followed by halfword loops |
+| Flush and return | 36 | Pending-byte flush, saved state and optional size output |
 
-The native private calls return a carry flag directly to conditional branches
-or ADC operations, keep packed parameters in R2 across calls, and share the
-same persistent outer register state. This is positive whole-routine assembly
-lineage evidence. It does not arise from difficulty compiling a C candidate.
+The private calls return a carry flag straight to conditional branches or ADC
+instructions, keep packed parameters in R2 across calls, and share the same
+outer register state. This is evidence that the whole routine was written in
+assembly, not that a C version was hard to match.
 
-The historical source is earlier and does not assemble to the game bytes.
-The game version uses a compact header, word input, unrolled gamma prefix,
-halfword bulk copies and an optional decoded-size output. Its exact historical
-revision remains unidentified. No explicit reuse grant was found for the ARM
-translation; that source is retained privately as evidence only. The published
-assembly was independently reconstructed from the fixed native instructions
-and dataflow, with descriptive labels and constants; upstream source text is
-not copied. Pucrunch's original algorithm is by Pasi Ojala. His later licence
-statement does not establish terms for a separate ARM translation.
+The published source is an earlier version and does not assemble to the
+game's bytes. The game's version has a compact header, word input, an
+unrolled gamma prefix, halfword bulk copies and an optional decoded-size
+output. Which revision it derives from is unknown. No licence for the ARM
+translation was found, so that source is not included here. The assembly in
+this repository was written independently from the game's instructions and
+dataflow, with descriptive labels and constants, and does not copy the
+upstream text. The Pucrunch algorithm is by Pasi Ojala; his later licence
+statement does not give terms for a separate ARM translation.
 
-## Verification and contract
+### Interface
 
-The complete positive image equals the reference at both ROM and RAM linkage
-addresses. Five separate source controls alter the gamma limit, RLE threshold,
-EOF code, copy step or decoded-size store; each assembles and rejects by one
-byte. Instructions are written as assembly operations, with no embedded ROM
-instruction data, patches or masked comparisons.
+R0 holds the compressed input, R1 the output and R2 an optional pointer for
+the decoded byte count (may be null). On return R0 holds the original
+destination; callers treat the function as returning nothing. The display
+caller passes a null R2, which its guarded epilogue and the boot observation
+support. The tile decoder's count pointer is always supplied, which is a
+different contract.
 
-Entry arguments are compressed input in R0, output in R1 and a nullable decoded
-byte-count pointer in R2. The native return restores the original destination
-into R0; existing callers use a void contract. The accepted display caller
-passes a null R2, supported by its guarded epilogue and the bounded boot entry.
-The tile decoder's count pointer is unconditional and remains distinct.
+### Checks
 
-The existing original-instruction models exercise selected compressed inputs,
-and the bounded HLE boot observes one entry. Source ownership, these finite
-observations and whole-ROM equality do not close all input bounds, malformed
-streams, writable entry assignments, copied-memory modifications or gameplay.
-The separate [tile decoder](#matching-tile-decoder) now has matching C source.
+The image equals the reference at both its ROM and RAM addresses. Five
+changed-source controls alter the gamma limit, RLE threshold, EOF code, copy
+step or decoded-size store; each assembles and is rejected by one byte. The
+source uses assembly operations only, with no embedded ROM instruction data,
+patches or masked comparisons.
 
+Models of the original instructions run selected compressed inputs, and the
+[boot observation](RUNTIME_OBSERVATIONS.md) sees one call. None of this covers
+all input bounds, malformed streams, writable entry assignments, modifications
+of the copied code or gameplay.
 
-## Startup callback writer
+### Startup callback writer
 
-For the unresolved background call at ROM `0x0800E1B8`, the callback word at
-`0x030036C0` has an additional established startup writer. The matching memory
-initializer requests a fixed-zero DMA3 fill of `0x030015B0..0x03007D00`, which
-includes that word. This establishes its pre-install zero state under the
-platform DMA contract. The matching decoder installer then copies 848 bytes to
-`0x03003370`, ending immediately before the callback word, and explicitly stores
-the even ARM entry `0x03003370` into it. The target's 812-byte source ownership
-does not itself exhaust callback writers.
+The callback word at `0x030036C0` holds the entry of the background decoder.
+The unresolved indirect call at ROM `0x0800E1B8` goes through it. Two startup
+steps write that word:
 
-The matching game entry orders memory initialization before decoder installation.
-The current qualified direct-call graph for its eleven initialization roots
-before installation covers 74 entries, has no missing entry or unresolved
-transfer, and does not reach `display_decode_background`. This supports the
-absence of a synchronous call to this site in that normal startup prefix under
-the existing decoder, ordinary-call and BIOS assumptions. IRQ entry, nonordinary
-re-entry, later aliases and writers remain open. Pre-install zero is a storage
-state, not an additional executable target; the transfer remains unresolved.
+- The memory initialiser starts a fixed-zero DMA3 fill of
+  `0x030015B0..0x03007D00`, which covers the word and so zeroes it.
+- The decoder installer then copies 848 bytes to `0x03003370`, ending just
+  before the callback word, and stores the ARM entry `0x03003370` into it.
 
+The game entry runs memory initialisation before decoder installation. The
+direct-call graph from the eleven initialisation roots before installation
+covers 74 functions, has no missing entry or unresolved transfer, and never
+reaches `display_decode_background`. So in the normal startup path nothing
+calls the decoder through this site synchronously, assuming the usual decoder,
+ordinary-call and BIOS behaviour. Interrupt entry, unusual re-entry and later
+writers to the word are not ruled out. The zero value before installation is
+just stored data, not a second call target.
 
-## Matching tile decoder
+## Tile-run decoder
 
-The [tile-run decoder](../src/resource/resource_decode_tile_runs.c) rebuilds all
-504 bytes at ROM `0x0800B36C..0x0800B564`, independently linked for execution at
-`0x030036D0..0x030038C8`. These are 126 ARM instructions, with no literal pool
-or alignment tail. The 528-byte installation also copies the first 24 bytes
-of the separately matching map drawer; it is not a
-528-byte C owner.
-ROM and copied-RAM bytes are counted once.
+The [tile-run decoder](../src/resource/resource_decode_tile_runs.c) is the 504
+bytes at ROM `0x0800B36C..0x0800B564`, linked for execution at
+`0x030036D0..0x030038C8`. It is 126 ARM instructions with no literal pool or
+alignment tail. The installer copies 528 bytes, which also includes the first
+24 bytes of the map drawer that follows; those 24 bytes belong to the map
+drawer. ROM and copied-RAM bytes are counted once.
 
-The stream has literal, repeated-byte and backward-copy runs, ending at a zero
-command. A pending byte combines with the next output byte before a halfword
-store; the final odd byte is flushed separately. The source preserves the
-native aligned halfword loops and overlapping backward-copy order. Valid
-stream, backing, alignment and destination-capacity premises remain required;
-no bounds guard or malformed-stream policy is added.
+The input is a stream of literal, repeated-byte and backward-copy runs that
+ends with a zero command. A pending byte is combined with the next output byte
+before each halfword store, and a final odd byte is flushed separately. The
+source keeps the aligned halfword loops and the overlapping backward-copy
+order. It assumes a valid stream, backing data, alignment and destination
+size, and adds no bounds checks or handling of malformed streams.
 
-One ordinary scratch variable holds the count field, then distance, then the
-odd-byte tail in their actual phases. A short R2 low-field value has one real
-producer and feeds the distance OR; the R1 length feeds the copy and repeat
-paths. This preserves the native compare, shift and OR order and the later
-register phases. The leaf's R14 byte/pair scratch values end before the saved
-return address is restored. Its R0 output cursor is the actual returned value.
-There are no inserted instructions, clobbers, extra observations or artificial
-consumers. The source experiments and full failed comparisons remain local.
+One ordinary scratch variable holds the count field, then the distance, then
+the odd-byte tail, in the phases the original uses. A short R2 low-field value
+has a single producer and feeds the distance OR, and the R1 length feeds the
+copy and repeat paths. This keeps the original's compare, shift and OR order
+and the later register phases. The R14 byte and pair scratch values in the
+leaf end before the saved return address is restored. R0, the output cursor,
+is the value returned. The source adds no instructions, clobbers, extra
+observations or artificial consumers.
 
-The canonical tile callback now returns `void *`, the advanced output cursor,
-and still writes the decoded byte count through its required third argument.
-Both shared declarations, the provider prototype and the copy caller's local
-callback type agree. All five located callers discard that return. This is
-compatible with the observed native postcondition; the historical C prototype
-is not uniquely recovered from an ignored return. The separate background
-callback remains `void`, with its nullable count pointer; the two-argument
+The tile callback returns `void *`, the advanced output cursor, and still
+writes the decoded byte count through its required third argument. Both shared
+declarations, the provider prototype and the copy caller's local callback type
+agree. All five callers ignore the return value, which fits the original's
+postcondition but does not recover the original C prototype. The background
+callback stays `void` with its optional count pointer, and the two-argument
 resource dispatchers keep their unsigned count returns.
 
-The new provider, five callers and installer pass normal and strict matching
-checks. Their genuine changed-source controls each reject by one byte. Actual
-separate definitions and layout/API checks also pass, with meaningful wrong
-signature and declaration controls. Full-ROM equality and source controls,
-these static interface checks and the earlier finite decoder models and boot
-observations remain separate evidence. This milestone adds no runtime execution
-or complete writer/input population claim.
+### Checks
 
-The broader shared-header check covers all 679 affected owners normally and
-675 strictly. Four owners reproduce their existing strict warnings under both
-old and new headers; none is counted as a strict success. Every affected owner
-has exact normal output and a rejecting source control. No declaration or
-warning suppression was added for those unrelated cases.
+The provider, the five callers and the installer match in normal and strict
+builds, and each has a changed-source control that is rejected by one byte.
+Separate definitions and layout and API checks also pass, with wrong-signature
+and wrong-declaration controls that fail as they should. The shared-header
+check covers all 679 affected sources in the normal build and 675 in the
+strict build. Four of them give the same strict warnings with the old and new
+headers, and are not counted as strict successes. Every affected source has
+exact normal output and a rejected control. No declarations or warning
+suppressions were added for those four.
+
+The [tile fixture](RUNTIME_OBSERVATIONS.md#installed-tile-decoder) runs the
+installed decoder on one input in the emulator. Matching, whole-ROM equality,
+the interface checks and those finite runs are separate evidence, and none of
+them covers the full set of inputs or writers.

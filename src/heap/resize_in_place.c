@@ -19,7 +19,8 @@ void *heap_resize_in_place(void *memory, unsigned int bytes)
         next_capacity = heap_block_bytes(block, arena);
         next_capacity += 16;
         combined = capacity + next_capacity;
-        if (block->previous_free == (struct HeapBlock *)-1 || bytes > combined) return 0;
+        if (block->previous_free == (struct HeapBlock *)-1 || bytes > combined)
+            return 0;
         if (bytes < combined) {
             struct HeapBlock *after = (void *)((unsigned char *)memory + bytes);
             heap_link_physical(block, after);

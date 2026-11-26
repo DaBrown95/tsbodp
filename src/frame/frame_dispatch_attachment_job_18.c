@@ -4,10 +4,11 @@
 unsigned int frame_dispatch_attachment_job_18(struct FrameNeedEffectState *owner,
                                               struct FrameObject *actor)
 {
-    struct FrameActorAttachmentRecord *job = frame_find_actor_attachment_record(
-        owner, actor);
+    struct FrameActorAttachmentRecord *job = frame_find_actor_attachment_record(owner, actor);
     unsigned int result;
-    if (job->kind == 18) result = frame_step_attachment_job_18(owner, job);
-    else result = 0;
+    if (job->kind == 18)
+        result = frame_step_attachment_job_18(owner, job);
+    else
+        result = 0;
     return result;
 }

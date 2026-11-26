@@ -1,8 +1,8 @@
-"""Synthetic saved-byte dispatches keep ownership separate from runtime validity.
+"""Synthetic saved-byte dispatches: which targets are reachable is kept separate from whether they are valid.
 
-The labelled Thumb program and address words are authored here without game
-bytes. Its read window deliberately includes disabled words with nonzero high
-flag bytes, ARM and Thumb C entries, and unaligned raw region-00 operands.
+The labelled Thumb program and address words are written for the test, without
+game bytes. The read window deliberately includes disabled words with non-zero
+high flag bytes, ARM and Thumb C entries, and unaligned raw region-00 operands.
 """
 import copy
 import hashlib

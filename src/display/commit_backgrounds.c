@@ -34,7 +34,7 @@ void display_commit_backgrounds(void)
                     *affine++ = value;
                     *affine = (value & reference_mask) >> 16;
                 }
-scroll:
+            scroll:
                 if (background->flags & 0x40) {
                     scroll_offset = i * 4;
                     *scroll_x = background->scroll_x >> 16;
@@ -49,7 +49,8 @@ scroll:
             }
             if ((background->flags & 0x30) == 0x30) {
                 background->flags &= ~0x20;
-                display_cpu_copy(background->tilemap_source, background->tilemap_destination, 0x400);
+                display_cpu_copy(background->tilemap_source, background->tilemap_destination,
+                                 0x400);
             }
         }
         scroll_x += 2;

@@ -3,12 +3,12 @@
 
 struct FrameObject;
 struct FrameActorNeedInput {
- struct {
-  struct FrameObject *actor;
-  unsigned short flags;
-  unsigned char unknown_06[6];
- } views[4];
- unsigned char player_count, local_player;
+    struct {
+        struct FrameObject *actor;
+        unsigned short flags;
+        unsigned char unknown_06[6];
+    } views[4];
+    unsigned char player_count, local_player;
 };
 extern struct FrameActorNeedInput g_frame_actor_need_input;
 

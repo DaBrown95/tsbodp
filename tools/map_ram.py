@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Verify copied-region addresses and export local RAM images for analysis."""
+"""Check the addresses of regions copied to RAM at startup and export the RAM images locally.
+
+Run by `make ram-map`.
+"""
 import hashlib
 import json
 import struct

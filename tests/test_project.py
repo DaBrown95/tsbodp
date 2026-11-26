@@ -1,4 +1,4 @@
-"""Negative controls for the identity and all-byte comparison gates."""
+"""Negative controls for the ROM identity and whole-byte comparison checks."""
 
 import hashlib
 import importlib.util

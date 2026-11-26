@@ -2,14 +2,13 @@
 #include "frame_actor_target_jobs.h"
 
 unsigned int frame_begin_attachment_route_4(struct FrameNeedEffectState *owner,
-                                               struct FrameObject *actor,
-                                               unsigned int kind)
+                                            struct FrameObject *actor, unsigned int kind)
 {
-    struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(
-        owner, actor);
+    struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(owner, actor);
     struct FramePoint point;
     unsigned char result;
-    if (!job) result = 0;
+    if (!job)
+        result = 0;
     else {
         job->kind = kind;
         frame_attachment_position(owner->object, 0, &point);

@@ -1,7 +1,7 @@
 #include "frame_actor_attachment_palette_jobs.h"
 
 unsigned int frame_select_attachment_palette_jobs(struct FrameNeedEffectState *owner,
-                                                   unsigned char *choices)
+                                                  unsigned char *choices)
 {
     choices[0] = 9;
     if (g_frame_interaction_settings.attachment_mode == 0)

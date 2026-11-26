@@ -8,8 +8,7 @@ struct FrameObject *condition_marker_create(unsigned char group, unsigned char s
     struct ConditionMarkerState *object = (struct ConditionMarkerState *)base;
 
     if (base) {
-        frame_set_position(base, (unsigned int)payload->x << 16,
-                           (unsigned int)payload->y << 16);
+        frame_set_position(base, (unsigned int)payload->x << 16, (unsigned int)payload->y << 16);
         object->variant = 7;
         object->state = 0;
         base->on_step = condition_marker_step;

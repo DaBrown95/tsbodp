@@ -3,7 +3,9 @@
 #include "heap.h"
 #include "frame_game_value.h"
 /* Observed clear span, not a complete storage ownership contract. */
-struct SaveWorldDefaultState { unsigned char bytes[1876]; };
+struct SaveWorldDefaultState {
+    unsigned char bytes[1876];
+};
 union ResourceGameState;
 struct ActorEntryContext;
 struct SceneContactSerialPlayerInputPrefix;
@@ -15,5 +17,5 @@ void save_world_reset_defaults(void);
 /* Provider declarations alone confer no C credit. */
 void save_world_original_reset_hook(void);
 /* Counted string copy with zero padding; returns the original destination. */
-unsigned char *runtime_copy_padded_string(unsigned char *,const unsigned char *,unsigned int);
+unsigned char *runtime_copy_padded_string(unsigned char *, const unsigned char *, unsigned int);
 #endif

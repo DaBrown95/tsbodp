@@ -1,13 +1,11 @@
 #include "resource_actor_entries.h"
 
-void actor_entry_publish_collection_group(struct ActorEntryContext *context,
-                                          unsigned int group)
+void actor_entry_publish_collection_group(struct ActorEntryContext *context, unsigned int group)
 {
     struct ActorEntryCollection **reference = &context->collection;
     unsigned int offset = group * 4 + 0x784;
     struct ActorEntryCollection *collection = *reference;
-    struct ActorEntryCollectionGroup *range =
-        (void *)((unsigned int)collection + offset);
+    struct ActorEntryCollectionGroup *range = (void *)((unsigned int)collection + offset);
     struct ActorEntryCollectionRecord *record = &collection->records[range->start];
     unsigned int left = range->count;
     if (left) {
@@ -19,8 +17,7 @@ void actor_entry_publish_collection_group(struct ActorEntryContext *context,
                 space = 1;
             if (space) {
                 if (g_display_scene_catalog[kind].category != 6)
-                    actor_entry_add(list, kind, record->entry.value1,
-                                    record->entry.value2);
+                    actor_entry_add(list, kind, record->entry.value1, record->entry.value2);
                 record++;
                 left--;
             } else

@@ -1,10 +1,10 @@
 #include "frame_optional_activation.h"
 
 unsigned int frame_begin_optional_activation_attachment_job(struct FrameNeedEffectState *owner,
-    struct FrameObject *actor, unsigned int kind)
+                                                            struct FrameObject *actor,
+                                                            unsigned int kind)
 {
-    struct FrameActorAttachmentRecord *job =
-        frame_allocate_actor_attachment_record(owner, actor);
+    struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(owner, actor);
     unsigned int result;
 
     if (!job)

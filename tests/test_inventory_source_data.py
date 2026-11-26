@@ -1,4 +1,4 @@
-"""Pinned source-data roles add no credit and cannot hide rooted execution."""
+"""Pinned source-data roles add no source coverage and cannot hide reachable code."""
 import copy
 import hashlib
 import sys
@@ -54,8 +54,8 @@ class SourceDataTests(unittest.TestCase):
         for invalid in [None, {}, [None]]:
             with self.subTest(invalid=invalid), self.assertRaises(ValueError):
                 source_owned_data_regions(data, invalid, owners, lambda owner: 'source')
-        # Inside the ROM but outside the named owner's extent: ROM bounds alone
-        # must not make an unrelated span eligible for source-owned provenance.
+        # Inside the ROM but outside the named owner's extent: being within the
+        # ROM alone must not make an unrelated span count as source-owned data.
         longer_rom = data + bytes(8)
         outside_owner = {**row, 'rom_offset': 8,
                          'region_sha256': hashlib.sha256(longer_rom[8:10]).hexdigest()}

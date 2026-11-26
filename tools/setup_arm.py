@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the separately pinned ARM backend without changing the Thumb profile."""
+"""Build the ARM-mode compiler backend, pinned separately from the Thumb backend."""
 import json
 from pathlib import Path
 import subprocess

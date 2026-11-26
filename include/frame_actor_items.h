@@ -1,7 +1,7 @@
 #ifndef FRAME_ACTOR_ITEMS_H
 #define FRAME_ACTOR_ITEMS_H
 
-#include "frame_actor_24420.h"
+#include "frame_controlled_actor.h"
 #include "frame_transient_effect.h"
 #include "frame_random.h"
 #include "display_time.h"

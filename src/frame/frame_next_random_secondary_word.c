@@ -6,8 +6,7 @@ unsigned int frame_next_random_secondary_word(void)
 
     if (--g_frame_random_secondary_remaining < 0) {
         g_frame_random_secondary_remaining = 623;
-        g_frame_random_secondary_next =
-            (unsigned int *)(g_frame_random_buffer_address + 4);
+        g_frame_random_secondary_next = (unsigned int *)(g_frame_random_buffer_address + 4);
     }
     value = *g_frame_random_secondary_next++;
     value ^= value >> 11;

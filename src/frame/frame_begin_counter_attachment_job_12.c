@@ -1,11 +1,9 @@
 #include "frame_actor_counter_attachment_job_12.h"
 
 unsigned int frame_begin_counter_attachment_job_12(struct FrameNeedEffectState *owner,
-                                           struct FrameObject *actor,
-                                           unsigned int kind)
+                                                   struct FrameObject *actor, unsigned int kind)
 {
-    struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(
-        owner, actor);
+    struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(owner, actor);
     unsigned int result;
     if (!job)
         result = 0;

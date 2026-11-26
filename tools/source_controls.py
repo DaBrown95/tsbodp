@@ -1,4 +1,8 @@
-"""Changed-source controls must make a concrete, reproducible source mutation."""
+"""Define and apply changed-source negative controls.
+
+A control is a small source edit that must make the build stop matching.
+Controls that change nothing are rejected.
+"""
 
 
 def validate_control(control):

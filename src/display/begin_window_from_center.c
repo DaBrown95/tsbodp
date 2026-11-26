@@ -19,10 +19,9 @@ void scene_choice_panel_original_window_begin(unsigned short duration)
         position[1].position = center_y;
         last_position[0].position = center_x;
         last_position[1].position = center_y;
-        horizontal = ((unsigned int)position[0].halves.integer << 8) |
-                     (unsigned int)(center_x >> 16);
-        vertical = ((unsigned int)position[1].halves.integer << 8) |
-                   (unsigned int)(center_y >> 16);
+        horizontal =
+            ((unsigned int)position[0].halves.integer << 8) | (unsigned int)(center_x >> 16);
+        vertical = ((unsigned int)position[1].halves.integer << 8) | (unsigned int)(center_y >> 16);
         DISPLAY_REG16(0x04000040) = horizontal;
         DISPLAY_REG16(0x04000044) = vertical;
     }

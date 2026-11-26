@@ -41,5 +41,4 @@ void scene_contact_initialize_serial_session(void);
 
 void scene_contact_prepare_serial_slot(unsigned int);
 
-
 #endif

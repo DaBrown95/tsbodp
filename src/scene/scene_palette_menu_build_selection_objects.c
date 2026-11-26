@@ -19,20 +19,17 @@ void scene_palette_menu_build_selection_objects(void)
         column = 0;
         for (; column < selection_row_count(row); ++column) {
             struct ScenePaletteMenuOwner *owner;
-            object = (unsigned int)
-                scene_palette_menu_create_selection_object(column,
-                    106 + column * 3, 46 + row * 20);
+            object = (unsigned int)scene_palette_menu_create_selection_object(
+                column, 106 + column * 3, 46 + row * 20);
             owner = g_scene_palette_menu_owner;
             owner->groups[row][column] = (struct FrameObject *)object;
             --owner->initial_word;
         }
     }
-    for (column = 0; column < g_scene_palette_menu_owner->initial_word;
-        ++column) {
+    for (column = 0; column < g_scene_palette_menu_owner->initial_word; ++column) {
         struct ScenePaletteMenuOwner *owner;
-        object = (unsigned int)
-            scene_palette_menu_create_selection_object(column,
-                83 + column * 3, 28);
+        object =
+            (unsigned int)scene_palette_menu_create_selection_object(column, 83 + column * 3, 28);
         owner = g_scene_palette_menu_owner;
         owner->available[column] = (struct FrameObject *)object;
     }

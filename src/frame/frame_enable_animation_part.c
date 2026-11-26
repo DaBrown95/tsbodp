@@ -1,4 +1,4 @@
-#include "frame_actor_24420.h"
+#include "frame_controlled_actor.h"
 
 void frame_enable_animation_part(struct FrameObject *base, unsigned char part)
 {

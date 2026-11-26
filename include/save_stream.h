@@ -8,7 +8,9 @@ struct SaveStreamRecord {
     unsigned int unknown00;
     union {
         struct DisplayTimeRecord time;
-        struct { unsigned char unknown04[6], unknown0a[2]; } serialized;
+        struct {
+            unsigned char unknown04[6], unknown0a[2];
+        } serialized;
     } clock_storage;
     int signed24;
     unsigned char unknown10[16], pairs[2], nibbles[6];

@@ -40,8 +40,7 @@ save_stream_prefixed_halfword(const struct SaveStreamPrefixedHalfword *prefix)
 {
     return prefix->value;
 }
-static inline unsigned char
-save_stream_prefixed_byte(const struct SaveStreamPrefixedByte *prefix)
+static inline unsigned char save_stream_prefixed_byte(const struct SaveStreamPrefixedByte *prefix)
 {
     return prefix->value;
 }

@@ -1,7 +1,6 @@
 #include "display_menu_relation_events.h"
 
-void display_menu_set_relation_delay(void *pointer, unsigned int index,
-                                     unsigned int delay)
+void display_menu_set_relation_delay(void *pointer, unsigned int index, unsigned int delay)
 {
     struct DisplayMenuRelationValues *state = pointer;
     state->records[index].flags &= ~8;

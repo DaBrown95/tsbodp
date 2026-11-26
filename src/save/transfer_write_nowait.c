@@ -7,4 +7,4 @@ unsigned short save_transfer_write_nowait(unsigned int block_word, const void *s
         return 0x8080;
     return save_transfer_write_core(block, source, 0);
 }
-asm(".align 2,0");
+asm(".align 2, 0");

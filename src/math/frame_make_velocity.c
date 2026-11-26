@@ -1,8 +1,8 @@
 #include "frame.h"
 #include "view_math.h"
 
-void frame_make_velocity(struct FramePoint *output, unsigned int flags,
-                         unsigned int direction, int speed)
+void frame_make_velocity(struct FramePoint *output, unsigned int flags, unsigned int direction,
+                         int speed)
 {
     register const int *vectors asm("r4");
     if (flags & 0x20000000)

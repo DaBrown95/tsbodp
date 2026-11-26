@@ -6,13 +6,17 @@
 
 extern unsigned short g_frame_attachment_jobs_79_80_cues[6];
 
-unsigned int frame_step_attachment_jobs_79_80(struct FrameNeedEffectState *, struct FrameActorAttachmentRecord *, unsigned char);
+unsigned int frame_step_attachment_jobs_79_80(struct FrameNeedEffectState *,
+                                              struct FrameActorAttachmentRecord *, unsigned char);
 unsigned int frame_initialize_attachment_jobs_79_80(struct FrameNeedEffectState *);
 unsigned int frame_select_attachment_jobs_79_80(struct FrameNeedEffectState *, unsigned char *);
 /* EC formal roles are inferred from the independently matched family. */
-unsigned int frame_prepare_attachment_jobs_79_80(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
-unsigned int frame_begin_attachment_jobs_79_80(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
-unsigned int frame_dispatch_attachment_jobs_79_80(struct FrameNeedEffectState *, struct FrameObject *);
+unsigned int frame_prepare_attachment_jobs_79_80(struct FrameNeedEffectState *,
+                                                 struct FrameObject *, unsigned int);
+unsigned int frame_begin_attachment_jobs_79_80(struct FrameNeedEffectState *, struct FrameObject *,
+                                               unsigned int);
+unsigned int frame_dispatch_attachment_jobs_79_80(struct FrameNeedEffectState *,
+                                                  struct FrameObject *);
 void frame_finish_attachment_jobs_79_80(struct FrameNeedEffectState *);
 
 /* Separate neighbouring entries; no installed callback role is established. */

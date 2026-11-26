@@ -23,16 +23,17 @@ struct FrameObject *frame_create_daily_flag_object(unsigned char group, unsigned
     }
     if (active == 1) {
         frame_set_position((struct FrameObject *)object,
-            (unsigned int)(unsigned int)payload->x << 16, (unsigned int)(unsigned int)payload->y << 16);
+                           (unsigned int)(unsigned int)payload->x << 16,
+                           (unsigned int)(unsigned int)payload->y << 16);
         object->flags = 0xe0415;
         object->on_step = frame_step_daily_flag_object;
         transition_object_set_state((struct FrameObject *)object, 0);
         object->variant_state = 1;
         object->owner = 0;
         frame_set_animation_record((struct FrameObject *)object,
-            &g_frame_daily_flag_animations[object->subtype]);
+                                   &g_frame_daily_flag_animations[object->subtype]);
         frame_acquire_palette_slot((struct FrameObject *)object,
-            g_frame_daily_flag_palettes[object->subtype]);
+                                   g_frame_daily_flag_palettes[object->subtype]);
         {
             unsigned char value = object->display_byte;
             value |= 12;

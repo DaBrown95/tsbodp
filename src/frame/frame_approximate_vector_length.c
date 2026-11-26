@@ -1,4 +1,4 @@
-#include "frame_actor_24420.h"
+#include "frame_controlled_actor.h"
 
 int frame_approximate_vector_length(struct FramePoint value)
 {
@@ -13,4 +13,4 @@ int frame_approximate_vector_length(struct FramePoint value)
         return result;
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

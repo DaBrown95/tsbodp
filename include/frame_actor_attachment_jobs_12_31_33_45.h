@@ -7,15 +7,15 @@
 
 unsigned int frame_step_attachment_jobs_31_33(struct FrameNeedEffectState *,
                                               struct FrameActorAttachmentRecord *);
-unsigned int frame_step_attachment_job_12_358b0(struct FrameNeedEffectState *,
-                                               struct FrameActorAttachmentRecord *);
-unsigned int frame_step_attachment_job_45_3594c(struct FrameNeedEffectState *,
-                                               struct FrameActorAttachmentRecord *);
+unsigned int frame_step_attachment_job_12_group_12_31_33_45(struct FrameNeedEffectState *,
+                                                struct FrameActorAttachmentRecord *);
+unsigned int frame_step_attachment_job_45_face_reverse_direction(struct FrameNeedEffectState *,
+                                                struct FrameActorAttachmentRecord *);
 unsigned int frame_dispatch_attachment_jobs_12_31_33_45(struct FrameNeedEffectState *,
-                                                       struct FrameObject *);
+                                                        struct FrameObject *);
 
 unsigned int frame_begin_attachment_jobs_12_31_33_45(struct FrameNeedEffectState *,
-                                                        struct FrameObject *, unsigned int);
+                                                     struct FrameObject *, unsigned int);
 
 void frame_tick_attachment_jobs_12_31_33_45(struct FrameNeedEffectState *);
 

@@ -1,4 +1,4 @@
-#include "scene_phase25.h"
+#include "scene_phase_25.h"
 #include "scene.h"
 #include "scene_map_selection.h"
 #include "display_scene_lifecycle.h"
@@ -32,7 +32,8 @@ void scene_phase25_initialize(void)
     display_show_background(2, g_scene_phase25_background_control2);
     display_load_background_dma(2, &g_scene_phase25_background2, 215, 0, 0, 0);
     display_load_palette((const unsigned char *)background + 2 +
-        (g_resource_game_state.scene.unknown_00[0x21] + 3) * 32, 48, 16);
+                             (g_resource_game_state.scene.unknown_00[0x21] + 3) * 32,
+                         48, 16);
     control = g_scene_phase25_background_control0;
     display_show_background(0, control);
     display_fill_background(0, 0);

@@ -5,4 +5,4 @@ void display_clear_text_slots(void)
     for (i = 0; i <= 5; i++)
         g_display_text_slots[i] = 0;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

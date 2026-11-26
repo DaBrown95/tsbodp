@@ -13,9 +13,9 @@ void scene_palette_menu_refresh_cursor(void)
             objects[14]->flags &= ~1U;
         }
         frame_set_position(objects[13],
-            (unsigned int)g_palette_menu_cursor_x[g_scene_request.parameter] << 16,
-            (unsigned int)g_palette_menu_cursor_y[g_scene_request.scene] << 16);
+                           (unsigned int)g_palette_menu_cursor_x[g_scene_request.parameter] << 16,
+                           (unsigned int)g_palette_menu_cursor_y[g_scene_request.scene] << 16);
     }
     audio_play_animation_cue(0);
 }
-asm(".align 2,0");
+asm(".align 2, 0");

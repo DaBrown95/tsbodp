@@ -1,7 +1,6 @@
 #include "display_time.h"
 
-unsigned int display_time_add(struct DisplayTimeRecord *time,
-                              const struct DisplayTimeRecord *delta)
+unsigned int display_time_add(struct DisplayTimeRecord *time, const struct DisplayTimeRecord *delta)
 {
     unsigned int changes = 0;
     unsigned char seconds, minutes, hours;

@@ -20,10 +20,9 @@ void condition_panel_draw_row_labels(unsigned int selected)
             style = index <= limit ? 0 : 11;
         }
         display_text_select_font(1, style, -1);
-        tile = display_text_draw_line(tile,
-            g_condition_panel_label_coordinates[index].x,
-            g_condition_panel_label_coordinates[index].y,
-            display_scene_lookup_text(6222), 0);
+        tile = display_text_draw_line(tile, g_condition_panel_label_coordinates[index].x,
+                                      g_condition_panel_label_coordinates[index].y,
+                                      display_scene_lookup_text(6222), 0);
     }
 }
 asm(".align 2, 0");

@@ -22,8 +22,8 @@ extern const struct FrameActorPaletteScenePoint g_frame_actor_palette_menu_posit
 extern const unsigned short g_frame_actor_palette_menu_extra_palette[];
 extern const unsigned int g_frame_actor_palette_menu_background;
 
-struct FrameObject *frame_create_scene_object(unsigned int, unsigned int,
-                                             unsigned int, unsigned int);
+struct FrameObject *frame_create_scene_object(unsigned int, unsigned int, unsigned int,
+                                              unsigned int);
 void display_text_copy_field_zero(const char *);
 void display_text_select_font(unsigned int, int, int);
 const char *display_scene_lookup_text(unsigned int);
@@ -38,11 +38,9 @@ void frame_step_palette_menu_choices(void);
 void frame_draw_palette_menu_row(unsigned int);
 void frame_step_palette_menu(void);
 void display_scene_refresh_item(struct FrameObject *);
-unsigned int input_step_local_vertical_pressed(unsigned int *, unsigned int,
-                                               unsigned int, unsigned char,
-                                               unsigned char);
-unsigned int input_step_local_horizontal_pressed(unsigned int *, unsigned int,
-                                                 unsigned int, unsigned char,
-                                                 unsigned char);
+unsigned int input_step_local_vertical_pressed(unsigned int *, unsigned int, unsigned int,
+                                               unsigned char, unsigned char);
+unsigned int input_step_local_horizontal_pressed(unsigned int *, unsigned int, unsigned int,
+                                                 unsigned char, unsigned char);
 
 #endif

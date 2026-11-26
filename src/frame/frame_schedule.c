@@ -25,10 +25,9 @@ int frame_schedule(struct FrameObjectList *list, FrameU8 update_display)
             next = object->previous;
             frame_step_object(object, update_display);
         }
-        if (!(g_frame_flags & 0x4000) && g_frame_dispatch_arg
-                && list == &g_frame_primary_list)
-            dispatch_primary(
-                g_frame_dispatch_arg, (struct CollisionObject **)g_frame_dispatch_scratch);
+        if (!(g_frame_flags & 0x4000) && g_frame_dispatch_arg && list == &g_frame_primary_list)
+            dispatch_primary(g_frame_dispatch_arg,
+                             (struct CollisionObject **)g_frame_dispatch_scratch);
         for (object = list->first; object; object = object->next) {
             if (object->animation_source)
                 frame_prepare_animation(object);

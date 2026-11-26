@@ -10,15 +10,21 @@ struct FrameAttachmentPaletteState {
     unsigned char selectors[3];
 };
 
-unsigned int frame_step_attachment_palette_job_9(struct FrameNeedEffectState *, struct FrameActorAttachmentRecord *);
-unsigned int frame_step_attachment_palette_jobs_8_11(struct FrameNeedEffectState *, struct FrameActorAttachmentRecord *);
-unsigned int frame_step_attachment_palette_job_10(struct FrameNeedEffectState *, struct FrameActorAttachmentRecord *);
+unsigned int frame_step_attachment_palette_job_9(struct FrameNeedEffectState *,
+                                                 struct FrameActorAttachmentRecord *);
+unsigned int frame_step_attachment_palette_jobs_8_11(struct FrameNeedEffectState *,
+                                                     struct FrameActorAttachmentRecord *);
+unsigned int frame_step_attachment_palette_job_10(struct FrameNeedEffectState *,
+                                                  struct FrameActorAttachmentRecord *);
 unsigned int frame_initialize_attachment_palette_jobs(struct FrameNeedEffectState *);
 unsigned int frame_select_attachment_palette_jobs(struct FrameNeedEffectState *, unsigned char *);
 /* EC formal roles remain inferred until its generic caller is identified. */
-unsigned int frame_prepare_attachment_palette_jobs(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
-unsigned int frame_begin_attachment_palette_jobs(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
-unsigned int frame_dispatch_attachment_palette_jobs(struct FrameNeedEffectState *, struct FrameObject *);
+unsigned int frame_prepare_attachment_palette_jobs(struct FrameNeedEffectState *,
+                                                   struct FrameObject *, unsigned int);
+unsigned int frame_begin_attachment_palette_jobs(struct FrameNeedEffectState *,
+                                                 struct FrameObject *, unsigned int);
+unsigned int frame_dispatch_attachment_palette_jobs(struct FrameNeedEffectState *,
+                                                    struct FrameObject *);
 void frame_finish_attachment_palette_jobs(struct FrameNeedEffectState *);
 
 /* Separate neighbouring entry; no installed callback role is established. */

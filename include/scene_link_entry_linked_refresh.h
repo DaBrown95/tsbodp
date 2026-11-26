@@ -9,8 +9,7 @@
 /* Character representation of a four-byte-aligned catalog number column.
  * Each used address is array base +20 +scene*24, backed by the canonical array. */
 typedef unsigned char SceneLinkCatalogColumnByteBase;
-typedef SceneLinkCatalogColumnByteBase SceneLinkCatalogColumnByte
-    __attribute__((aligned(4)));
+typedef SceneLinkCatalogColumnByteBase SceneLinkCatalogColumnByte __attribute__((aligned(4)));
 
 /* Exact existing canonical pointer-slot declaration. Keeping it narrow avoids
  * importing the scene lifecycle umbrella's unguarded frame views again. */

@@ -12,10 +12,8 @@ void scene_timed_notice_initialize(void)
     display_load_resource_palette(&g_display_menu_palette_resource, 0);
     display_text_set_background_control(control0);
     display_text_select_font(3, 9, 0);
-    tile = display_text_draw_all_lines(tile, 120, 56, 224,
-                                     display_scene_lookup_text(0), 1);
-    display_text_draw_all_lines(tile, 120, 136, 240,
-                               display_scene_lookup_text(2), 1);
+    tile = display_text_draw_all_lines(tile, 120, 56, 224, display_scene_lookup_text(0), 1);
+    display_text_draw_all_lines(tile, 120, 136, 240, display_scene_lookup_text(2), 1);
     transition_run_first(63, 1);
     audio_select_sequence(0);
     game_start_countdown_slot(0, 60);

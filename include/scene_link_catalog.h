@@ -26,8 +26,13 @@ struct SceneLinkCatalogInput {
     struct FrameObject *actor;
     unsigned char unknown04[44], player_count, local_player;
 };
-struct SceneLinkCatalogCaption { unsigned char x, y, unknown02[2]; };
-struct SceneLinkCatalogDefinition { unsigned int object_id; unsigned char unknown04[20]; };
+struct SceneLinkCatalogCaption {
+    unsigned char x, y, unknown02[2];
+};
+struct SceneLinkCatalogDefinition {
+    unsigned int object_id;
+    unsigned char unknown04[20];
+};
 extern struct SceneLinkCatalogOwners g_scene_link_catalog_owners;
 extern struct SceneLinkCatalogInput g_scene_link_catalog_input;
 extern unsigned char g_scene_link_catalog_quantity_limit;
@@ -40,8 +45,10 @@ extern const struct BackgroundResource g_scene_link_catalog_background2;
 
 void display_enable_layers(unsigned short);
 unsigned int display_load_resource_palette(const struct BackgroundResource *, unsigned short);
-void transition_run_first(unsigned short, unsigned int), transition_run_second(unsigned short, unsigned int);
-void transition_fade_black_in_record(unsigned short), transition_fade_black_out_record(unsigned short);
+void transition_run_first(unsigned short, unsigned int),
+    transition_run_second(unsigned short, unsigned int);
+void transition_fade_black_in_record(unsigned short),
+    transition_fade_black_out_record(unsigned short);
 void scene_link_catalog_initialize(void), scene_link_catalog_shutdown(void);
 unsigned int scene_link_catalog_try_entry(struct FrameObject *, unsigned int);
 void scene_link_catalog_draw_quantity(void), scene_link_catalog_draw_panel(unsigned int);

@@ -1,30 +1,32 @@
 #include "frame_special_need_jobs.h"
 
 unsigned int frame_step_special_need_job_45(struct FrameNeedEffectState *owner,
-                                           struct FrameActorAttachmentRecord *job)
+                                            struct FrameActorAttachmentRecord *job)
 {
     if (!job->running) {
         switch ((unsigned int)job->timer) {
-        case 0:
-            frame_set_actor_direction(job->actor,
-                g_actor_reverse_directions[((struct FrameActorObject *)owner->object)->direction]);
-            if (frame_need_effect_try_actor_effect(owner, job->actor) == 1)
-                job->timer = 1;
-            else {
-                ((struct FrameAttachmentJobWork *)owner)->indicator =
-                    frame_create_attachment_parameter_indicator(job->actor, 0);
-                frame_request_animation((struct FrameCommandObject *)job->actor, 45);
-                job->timer = 5;
-                ((struct FrameAttachmentJobWork *)owner)->sample = audio_play_animation_cue(19);
-            }
-            break;
-        case 5:
-            if ((unsigned char)frame_need_effect_consume_optional(owner, job,
-                    ((struct FrameAttachmentJobWork *)owner)->indicator) == 1) {
-                resource_set_triple(4, 5, 2);
-                job->timer = 1;
-            }
-            break;
+            case 0:
+                frame_set_actor_direction(
+                    job->actor,
+                    g_actor_reverse_directions[((struct FrameActorObject *)owner->object)
+                                                   ->direction]);
+                if (frame_need_effect_try_actor_effect(owner, job->actor) == 1)
+                    job->timer = 1;
+                else {
+                    ((struct FrameAttachmentJobWork *)owner)->indicator =
+                        frame_create_attachment_parameter_indicator(job->actor, 0);
+                    frame_request_animation((struct FrameCommandObject *)job->actor, 45);
+                    job->timer = 5;
+                    ((struct FrameAttachmentJobWork *)owner)->sample = audio_play_animation_cue(19);
+                }
+                break;
+            case 5:
+                if ((unsigned char)frame_need_effect_consume_optional(
+                        owner, job, ((struct FrameAttachmentJobWork *)owner)->indicator) == 1) {
+                    resource_set_triple(4, 5, 2);
+                    job->timer = 1;
+                }
+                break;
         }
     } else
         job->timer = 1;

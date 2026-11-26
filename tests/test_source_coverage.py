@@ -1,4 +1,4 @@
-"""Hardware assembly must not silently receive C coverage."""
+"""Hardware assembly must not count as C coverage."""
 import copy
 from pathlib import Path
 import sys

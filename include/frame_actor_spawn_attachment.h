@@ -8,13 +8,18 @@
 unsigned int frame_initialize_actor_spawn_attachment(struct FrameNeedEffectState *);
 unsigned int frame_select_actor_spawn_attachment(struct FrameNeedEffectState *, unsigned char *);
 /* EC formal roles remain inferred until its generic caller is identified. */
-unsigned int frame_prepare_actor_spawn_attachment(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
-unsigned int frame_begin_actor_spawn_attachment(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
-unsigned int frame_dispatch_actor_spawn_attachment(struct FrameNeedEffectState *, struct FrameObject *);
+unsigned int frame_prepare_actor_spawn_attachment(struct FrameNeedEffectState *,
+                                                  struct FrameObject *, unsigned int);
+unsigned int frame_begin_actor_spawn_attachment(struct FrameNeedEffectState *, struct FrameObject *,
+                                                unsigned int);
+unsigned int frame_dispatch_actor_spawn_attachment(struct FrameNeedEffectState *,
+                                                   struct FrameObject *);
 void frame_tick_actor_spawn_attachment(struct FrameNeedEffectState *);
-unsigned int frame_step_actor_spawn_attachment(struct FrameNeedEffectState *, struct FrameActorAttachmentRecord *);
+unsigned int frame_step_actor_spawn_attachment(struct FrameNeedEffectState *,
+                                               struct FrameActorAttachmentRecord *);
 
 /* Separate neighbouring entry; no installed callback role is established. */
-unsigned int frame_check_actor_spawn_attachment(struct FrameNeedEffectState *, struct FrameObject *);
+unsigned int frame_check_actor_spawn_attachment(struct FrameNeedEffectState *,
+                                                struct FrameObject *);
 
 #endif

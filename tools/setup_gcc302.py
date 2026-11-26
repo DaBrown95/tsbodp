@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Provision the separate public GCC3.0.2 backend from verified source."""
+"""Build GCC 3.0.2 from pinned public source as a separate compiler backend."""
 import json
 from pathlib import Path, PurePosixPath
 import subprocess

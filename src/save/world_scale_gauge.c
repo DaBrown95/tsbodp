@@ -1,7 +1,6 @@
 #include "save_world_display.h"
 
-int save_world_scale_gauge(short value, unsigned short maximum,
-                           unsigned char steps)
+int save_world_scale_gauge(short value, unsigned short maximum, unsigned char steps)
 {
     int ratio;
     int result;

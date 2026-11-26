@@ -1,7 +1,7 @@
 #include "display.h"
 void display_write_background_map(unsigned int index, const unsigned short *map,
-    unsigned short tile_offset, unsigned short palette_bank,
-    unsigned int destination_x, unsigned int destination_y)
+                                  unsigned short tile_offset, unsigned short palette_bank,
+                                  unsigned int destination_x, unsigned int destination_y)
 {
     struct BackgroundState *background = &g_background_states[index];
     const unsigned char *source = (const unsigned char *)map + 4;
@@ -11,87 +11,99 @@ void display_write_background_map(unsigned int index, const unsigned short *map,
     register unsigned int stride __asm__("r9");
     register unsigned int row __asm__("r1");
     unsigned int size;
-    if (!(((struct DisplayControlState *)((unsigned int)g_background_states - 8U))->control & 7) || index <= 1) {
+    if (!(((struct DisplayControlState *)((unsigned int)g_background_states - 8U))->control & 7) ||
+        index <= 1) {
         destination += destination_y * 32 + destination_x;
         width = map[0] < 32 ? map[0] : 32;
         height = map[1] < 32 ? map[1] : 32;
         row = height;
         flags = background->flags;
         if (row) {
-        stride = (32 - width) * 2;
-        do {
-            column = width;
-            next_row = row - 1;
-            while (column) {
-                *destination++ = *(const unsigned short *)source + (palette_bank << 12) + tile_offset;
-                source += 2;
-                --column;
-            }
-            destination = (unsigned short *)((unsigned char *)destination + stride);
-            source += (map[0] - width) * 2;
-            row = next_row;
-        } while(row);
-        }
-        if (map[0] > 32 && ((size = ((unsigned char *)&background->registers.control)[1] & 0xc0) == 0x40 || size == 0xc0)) {
-            destination += (32 - height) * 32;
-            source = (const unsigned char *)map + 4;
-            width = map[0] - 32;
-            row = height;
-            if (row) {
-            stride = (32 - width) * 2;
-            do {
-                source += 64;
-                column = width;
-                next_row = row - 1;
-                while (column) {
-                    *destination++ = *(const unsigned short *)source + (palette_bank << 12) + tile_offset;
-                    source += 2;
-                    --column;
-                }
-                destination = (unsigned short *)((unsigned char *)destination + stride);
-                row = next_row;
-            } while(row);
-            }
-        }
-        if (map[1] > 32 && ((size = ((unsigned char *)&background->registers.control)[1] & 0xc0) == 0x80 || size == 0xc0)) {
-            width = map[0] < 32 ? map[0] : 32;
-            height=map[1]; row=height-32; height=row;
-            if (row) {
             stride = (32 - width) * 2;
             do {
                 column = width;
                 next_row = row - 1;
                 while (column) {
-                    *destination++ = *(const unsigned short *)source + (palette_bank << 12) + tile_offset;
+                    *destination++ =
+                        *(const unsigned short *)source + (palette_bank << 12) + tile_offset;
                     source += 2;
                     --column;
                 }
                 destination = (unsigned short *)((unsigned char *)destination + stride);
                 source += (map[0] - width) * 2;
                 row = next_row;
-            } while(row);
+            } while (row);
+        }
+        if (map[0] > 32 &&
+            ((size = ((unsigned char *)&background->registers.control)[1] & 0xc0) == 0x40 ||
+             size == 0xc0)) {
+            destination += (32 - height) * 32;
+            source = (const unsigned char *)map + 4;
+            width = map[0] - 32;
+            row = height;
+            if (row) {
+                stride = (32 - width) * 2;
+                do {
+                    source += 64;
+                    column = width;
+                    next_row = row - 1;
+                    while (column) {
+                        *destination++ =
+                            *(const unsigned short *)source + (palette_bank << 12) + tile_offset;
+                        source += 2;
+                        --column;
+                    }
+                    destination = (unsigned short *)((unsigned char *)destination + stride);
+                    row = next_row;
+                } while (row);
             }
         }
-        if (map[0] > 32 && map[1] > 32 && (((unsigned char *)&background->registers.control)[1] & 0xc0) == 0xc0) {
+        if (map[1] > 32 &&
+            ((size = ((unsigned char *)&background->registers.control)[1] & 0xc0) == 0x80 ||
+             size == 0xc0)) {
+            width = map[0] < 32 ? map[0] : 32;
+            height = map[1];
+            row = height - 32;
+            height = row;
+            if (row) {
+                stride = (32 - width) * 2;
+                do {
+                    column = width;
+                    next_row = row - 1;
+                    while (column) {
+                        *destination++ =
+                            *(const unsigned short *)source + (palette_bank << 12) + tile_offset;
+                        source += 2;
+                        --column;
+                    }
+                    destination = (unsigned short *)((unsigned char *)destination + stride);
+                    source += (map[0] - width) * 2;
+                    row = next_row;
+                } while (row);
+            }
+        }
+        if (map[0] > 32 && map[1] > 32 &&
+            (((unsigned char *)&background->registers.control)[1] & 0xc0) == 0xc0) {
             destination += (32 - height) * 32;
             size = map[0];
             source = (const unsigned char *)map + (size * 64 + 4);
             width = size - 32;
             row = height;
             if (row) {
-            unsigned int last_stride = (32 - width) * 2;
-            do {
-                source += 64;
-                column = width;
-                next_row = row - 1;
-                while (column) {
-                    *destination++ = *(const unsigned short *)source + (palette_bank << 12) + tile_offset;
-                    source += 2;
-                    --column;
-                }
-                destination = (unsigned short *)((unsigned char *)destination + last_stride);
-                row = next_row;
-            } while(row);
+                unsigned int last_stride = (32 - width) * 2;
+                do {
+                    source += 64;
+                    column = width;
+                    next_row = row - 1;
+                    while (column) {
+                        *destination++ =
+                            *(const unsigned short *)source + (palette_bank << 12) + tile_offset;
+                        source += 2;
+                        --column;
+                    }
+                    destination = (unsigned short *)((unsigned char *)destination + last_stride);
+                    row = next_row;
+                } while (row);
             }
         }
     } else {
@@ -102,7 +114,8 @@ void display_write_background_map(unsigned int index, const unsigned short *map,
         stride = 16;
         stride <<= size_code;
         {
-            register unsigned int row_address __asm__("r0") = (unsigned int)destination + stride * destination_y;
+            register unsigned int row_address __asm__("r0") =
+                (unsigned int)destination + stride * destination_y;
             bytes = (unsigned char *)(row_address + destination_x);
         }
         row = map[1];

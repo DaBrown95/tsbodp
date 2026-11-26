@@ -7,6 +7,9 @@
 #include "scene_view_frame.h"
 
 /* Overlapping word read at world +4; complete world storage is unknown. */
-struct SceneCatalogHeadingWorld {unsigned int unknown00;int value;};
+struct SceneCatalogHeadingWorld {
+    unsigned int unknown00;
+    int value;
+};
 extern struct SceneCatalogHeadingWorld g_scene_catalog_heading_world;
 #endif

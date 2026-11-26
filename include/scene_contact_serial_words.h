@@ -17,9 +17,7 @@ extern unsigned int g_scene_contact_serial_game_word;
 extern struct SceneContactSerialNoticeStatePrefix g_scene_contact_serial_notice_state;
 
 unsigned int scene_contact_fold_serial_word(unsigned short);
-unsigned int scene_contact_dispatch_serial_notice(unsigned int,
-                                                  unsigned short *,
-                                                  unsigned short *);
+unsigned int scene_contact_dispatch_serial_notice(unsigned int, unsigned short *, unsigned short *);
 void scene_contact_reply_serial_game_word(unsigned short *, unsigned short *);
 void scene_contact_reply_serial_state_word(unsigned short *, unsigned short *);
 

@@ -45,14 +45,25 @@ struct DisplayMenuSecondaryRelationOwner {
 };
 extern struct DisplayMenuSecondaryRelationOwner g_menu_secondary_relation_owner;
 extern const unsigned char g_menu_secondary_reward_multipliers[];
-#define OFF(t,m) ((unsigned int)&((t*)0)->m)
-typedef char greeting_stride[sizeof(struct DisplayMenuSecondaryDescriptor)==44?1:-1];
-typedef char world_relation[OFF(struct DisplayMenuSecondaryWorld,relation)==16?1:-1];
-typedef char world_once[OFF(struct DisplayMenuSecondaryWorld,once_mask)==0xdc?1:-1];
-typedef char world_entries[OFF(struct DisplayMenuSecondaryWorld,secondary_entries)==0xf0?1:-1];
-typedef char world_selection[OFF(struct DisplayMenuSecondaryWorld,selection)==0x418?1:-1];
-typedef char world_reward[OFF(struct DisplayMenuSecondaryWorld,reward)==0x440?1:-1];
-typedef char secondary_descriptor_fields[(OFF(struct DisplayMenuSecondaryDescriptor,multiplier)==36&&OFF(struct DisplayMenuSecondaryDescriptor,allowed_count)==39&&OFF(struct DisplayMenuSecondaryDescriptor,allowed)==40)?1:-1];
-typedef char secondary_relation_fields[(OFF(struct DisplayMenuSecondaryRelationOwner,selected_definition)==0x409&&OFF(struct DisplayMenuSecondaryRelationOwner,reward)==0x430)?1:-1];
+#define OFF(t, m) ((unsigned int)&((t *)0)->m)
+typedef char greeting_stride[sizeof(struct DisplayMenuSecondaryDescriptor) == 44 ? 1 : -1];
+typedef char world_relation[OFF(struct DisplayMenuSecondaryWorld, relation) == 16 ? 1 : -1];
+typedef char world_once[OFF(struct DisplayMenuSecondaryWorld, once_mask) == 0xdc ? 1 : -1];
+typedef char
+    world_entries[OFF(struct DisplayMenuSecondaryWorld, secondary_entries) == 0xf0 ? 1 : -1];
+typedef char world_selection[OFF(struct DisplayMenuSecondaryWorld, selection) == 0x418 ? 1 : -1];
+typedef char world_reward[OFF(struct DisplayMenuSecondaryWorld, reward) == 0x440 ? 1 : -1];
+typedef char
+    secondary_descriptor_fields[(OFF(struct DisplayMenuSecondaryDescriptor, multiplier) == 36 &&
+                                 OFF(struct DisplayMenuSecondaryDescriptor, allowed_count) == 39 &&
+                                 OFF(struct DisplayMenuSecondaryDescriptor, allowed) == 40)
+                                    ? 1
+                                    : -1];
+typedef char
+    secondary_relation_fields[(OFF(struct DisplayMenuSecondaryRelationOwner, selected_definition) ==
+                                   0x409 &&
+                               OFF(struct DisplayMenuSecondaryRelationOwner, reward) == 0x430)
+                                  ? 1
+                                  : -1];
 #undef OFF
 #endif

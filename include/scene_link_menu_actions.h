@@ -12,7 +12,7 @@ void display_load_palette_ranges(const struct PaletteRangeConfig *);
 unsigned int audio_play_animation_cue(unsigned int);
 void scene_submit_default_request(unsigned int);
 void frame_set_position(struct FrameObject *, int, int);
-unsigned int input_step_local_vertical_pressed(unsigned int *, unsigned int,
-    unsigned int, unsigned char, unsigned char);
+unsigned int input_step_local_vertical_pressed(unsigned int *, unsigned int, unsigned int,
+                                               unsigned char, unsigned char);
 
 #endif

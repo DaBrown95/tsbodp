@@ -24,7 +24,7 @@ void display_initialize_scrolling_scene(void)
     g_display_scene_byte1 = 0;
     g_display_scene_byte0 = 0;
     display_scene_stage_0800f168();
-    display_scene_stage_0800f034(0);
+    display_populate_scrolling_scene(0);
     display_scene_redraw_details(0);
     g_display_scene_byte2 = 0;
     display_scene_stage_0800f478();

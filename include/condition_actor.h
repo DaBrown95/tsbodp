@@ -18,8 +18,8 @@ struct ConditionActorSelectionContext {
     struct ConditionActorGroup groups[13];
 };
 extern struct ConditionActorDefinition g_condition_actor_definitions[];
-void condition_record_actor_selection(struct ConditionActorSelectionContext *,
-                                     unsigned char, unsigned char, unsigned char);
+void condition_record_actor_selection(struct ConditionActorSelectionContext *, unsigned char,
+                                      unsigned char, unsigned char);
 struct ConditionCounter {
     unsigned char unknown00[3];
     signed char value;

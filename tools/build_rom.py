@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Link matching C objects and explicitly unconverted ROM gaps; never patch output."""
+"""Link the matching C objects and the unconverted ROM regions into a full ROM, then compare it with the reference.
+
+Run by `make build`. Regions not yet converted are copied from the reference
+as explicit gaps; the output is never patched afterwards.
+"""
 import argparse
 import hashlib
 import json

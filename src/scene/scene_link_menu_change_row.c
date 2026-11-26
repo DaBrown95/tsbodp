@@ -42,21 +42,20 @@ void scene_link_menu_change_row(void)
         draw_row(row, row);
     } else {
         old = g_scene_request.scene;
-        g_scene_request.scene = input_step_local_vertical_pressed(
-            &g_scene_request.scene, 0, 5, 1, g_input_config.local_player);
+        g_scene_request.scene = input_step_local_vertical_pressed(&g_scene_request.scene, 0, 5, 1,
+                                                                  g_input_config.local_player);
         draw_row(old, g_scene_request.scene);
         row = g_scene_request.scene;
         draw_row(row, row);
         {
             unsigned int position_row = g_scene_request.scene;
             if (position_row <= 5)
-                frame_set_position(g_display_scene_frame_objects[0],
-                    121 << 16, position_row * (22U << 16) + (33U << 16));
+                frame_set_position(g_display_scene_frame_objects[0], 121 << 16,
+                                   position_row * (22U << 16) + (33U << 16));
             else
-                frame_set_position(g_display_scene_frame_objects[0],
-                    121 << 16, 33 << 16);
+                frame_set_position(g_display_scene_frame_objects[0], 121 << 16, 33 << 16);
         }
     }
     audio_play_animation_cue(0);
 }
-asm(".align 2,0");
+asm(".align 2, 0");

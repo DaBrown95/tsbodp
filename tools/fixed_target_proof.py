@@ -1,7 +1,10 @@
-"""Prove a Thumb call register after caller validates ROM/source ownership.
+"""Prove that a Thumb call through a register always reaches one fixed target.
 
-Ordinary calls clobber r0-r3/ip/lr and preserve r4-r11 by the ARM ABI.
-No copied-memory immutability or arbitrary callee ABI correctness is proved.
+Used by tools/inventory_rom.py for calls made through a register veneer. It
+checks every reachable path in the calling function, using the ARM calling
+convention (calls clobber r0-r3, ip and lr and preserve r4-r11). It does not
+show that the memory the register was loaded from is never changed, or that the
+callee follows the convention.
 """
 import struct
 from collections import deque

@@ -20,4 +20,4 @@ unsigned char *resource_get_object_payload(unsigned int group, unsigned int slot
     return data + 8;
 }
 
-asm(".align 2,0");
+asm(".align 2, 0");

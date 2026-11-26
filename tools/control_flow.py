@@ -1,4 +1,9 @@
-"""Conservative ARM7 transfer recognition from instruction and table evidence."""
+"""Recognise ARM7 jumps and returns when scanning ROM code, for tools/inventory_rom.py.
+
+Handles switch tables, constant-target branches and stack returns. It is
+conservative: a jump is resolved only when both the instructions and the table
+data support it, and corrupt tables stay unresolved.
+"""
 import struct
 from capstone.arm import ARM_OP_IMM, ARM_OP_REG, ARM_OP_MEM, ARM_REG_PC
 

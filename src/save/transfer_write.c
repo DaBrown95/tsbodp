@@ -1,6 +1,6 @@
 #include "save_transfer.h"
 
-unsigned short save_transfer_write_4ccb0(unsigned int block_word, const void *source)
+unsigned short save_transfer_write_verified(unsigned int block_word, const void *source)
 {
     const void *input = source;
     unsigned short block = block_word, status;

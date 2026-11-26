@@ -2,7 +2,8 @@
 
 int frame_random_range(int first, int last)
 {
-    if (first == last) return first;
+    if (first == last)
+        return first;
     {
         int value = frame_next_random_word();
         value &= 0x7fff;

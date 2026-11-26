@@ -26,8 +26,7 @@ void condition_panel_draw_details(unsigned int row, unsigned int column)
     {
         register const unsigned int *title_source asm("r10");
         title_source = (const unsigned int *)g_condition_panel_text_ids;
-        title = *(const unsigned int *)(row * 24 + column * 4 +
-                                        (unsigned int)title_source);
+        title = *(const unsigned int *)(row * 24 + column * 4 + (unsigned int)title_source);
     }
     titles = g_condition_panel_text_ids;
     if (title) {
@@ -53,8 +52,7 @@ void condition_panel_draw_details(unsigned int row, unsigned int column)
             row_blocks = initial_row_blocks;
             if (active) {
                 display_text_select_font(3, 3, 0);
-                tile = display_text_draw_line(
-                    91, 120, 84, display_scene_lookup_text(title), 1);
+                tile = display_text_draw_line(91, 120, 84, display_scene_lookup_text(title), 1);
             }
         }
         display_text_select_font(3, 0, -1);
@@ -67,8 +65,8 @@ void condition_panel_draw_details(unsigned int row, unsigned int column)
                 tile = display_text_draw_line(
                     tile, 26, index * 12 + 96,
                     display_scene_lookup_text(
-                        *(const unsigned int *)(row * 24 + column * 4 +
-                                                (unsigned int)titles) + index + 1),
+                        *(const unsigned int *)(row * 24 + column * 4 + (unsigned int)titles) +
+                        index + 1),
                     0);
                 g_condition_panel_objects[index + 10]->flags |= 1;
                 if (*(unsigned char *)(address + 0x449))

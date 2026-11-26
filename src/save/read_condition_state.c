@@ -1,8 +1,7 @@
 #include "save_world_initialization.h"
 #include "save_condition_state.h"
 
-static inline void read_counted_flag(unsigned char *destination,
-                                     unsigned char count)
+static inline void read_counted_flag(unsigned char *destination, unsigned char count)
 {
     save_stream_read_bits(destination, count);
 }

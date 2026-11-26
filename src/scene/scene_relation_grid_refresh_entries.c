@@ -33,4 +33,4 @@ void scene_relation_grid_refresh_entries(void)
         }
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

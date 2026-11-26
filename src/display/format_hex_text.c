@@ -16,4 +16,4 @@ char *display_format_hex_text(int value, int digits, char *buffer)
     *cursor = 0;
     return start;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

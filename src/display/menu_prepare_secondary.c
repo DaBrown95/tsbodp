@@ -1,7 +1,11 @@
 #include "display_menu_secondary.h"
 
-struct MenuSecondaryCaptionPoint { signed int x:16; signed int y:16; };
-static inline void secondary_relation_caption(int relation, struct MenuSecondaryCaptionPoint position)
+struct MenuSecondaryCaptionPoint {
+    signed int x : 16;
+    signed int y : 16;
+};
+static inline void secondary_relation_caption(int relation,
+                                              struct MenuSecondaryCaptionPoint position)
 {
     const char *caption;
     display_text_select_font(0, 0, -1);
@@ -40,9 +44,11 @@ void display_menu_prepare_secondary(void)
         }
     } else if (kind - 171 > 23) {
         unsigned int i = 0;
-        unsigned int length = g_menu_secondary_descriptors[g_display_menu_state.definition].allowed_count;
+        unsigned int length =
+            g_menu_secondary_descriptors[g_display_menu_state.definition].allowed_count;
         if (i < length) {
-            const unsigned int *allowed = g_menu_secondary_descriptors[g_display_menu_state.definition].allowed;
+            const unsigned int *allowed =
+                g_menu_secondary_descriptors[g_display_menu_state.definition].allowed;
             do {
                 if (*allowed == kind)
                     accepted = 1;
@@ -74,20 +80,26 @@ void display_menu_prepare_secondary(void)
             if ((1 << index) & selected)
                 condition_update_actor(list, index, 1);
         display_menu_resolve_selected_kind(kind, count);
-        display_load_background_dma(2,
-            g_menu_secondary_descriptors[g_display_menu_state.definition].resources[4],
+        display_load_background_dma(
+            2, g_menu_secondary_descriptors[g_display_menu_state.definition].resources[4],
             1 + 182 * (g_display_menu_state.resource_shown & 1), 0, 15, 0);
         g_display_menu_state.resource_shown ^= 1;
-        audio_play_animation_cue(g_menu_secondary_descriptors[g_display_menu_state.definition].cues[4]);
+        audio_play_animation_cue(
+            g_menu_secondary_descriptors[g_display_menu_state.definition].cues[4]);
         if (is_choice) {
             display_menu_apply_delta(3);
             display_menu_adjust_relation(&g_menu_secondary_relation_owner.state,
-                                        g_menu_secondary_relation_owner.selected_definition, 3);
-            display_text_number_field_two(g_menu_secondary_reward_multipliers[g_menu_secondary_descriptors[g_display_menu_state.definition].multiplier] *
+                                         g_menu_secondary_relation_owner.selected_definition, 3);
+            display_text_number_field_two(
+                g_menu_secondary_reward_multipliers
+                    [g_menu_secondary_descriptors[g_display_menu_state.definition].multiplier] *
                 g_menu_secondary_relation_owner.reward);
-            frame_add_game_value(g_menu_secondary_reward_multipliers[g_menu_secondary_descriptors[g_display_menu_state.definition].multiplier] *
+            frame_add_game_value(
+                g_menu_secondary_reward_multipliers
+                    [g_menu_secondary_descriptors[g_display_menu_state.definition].multiplier] *
                 g_menu_secondary_relation_owner.reward);
-            display_menu_draw_scrolling_text(display_scene_lookup_text(text_id + g_display_menu_page_text_variants[2]));
+            display_menu_draw_scrolling_text(
+                display_scene_lookup_text(text_id + g_display_menu_page_text_variants[2]));
         } else {
             if (kind != 125 && kind != 142) {
                 int relation;
@@ -96,26 +108,28 @@ void display_menu_prepare_secondary(void)
                 int percent, frame;
                 position.x = 238;
                 position.y = 96;
-                display_menu_adjust_relation(&g_menu_secondary_relation_owner.state, g_display_menu_state.definition,
-                    (unsigned short)frame_random_bounded(4) + 1);
+                display_menu_adjust_relation(&g_menu_secondary_relation_owner.state,
+                                             g_display_menu_state.definition,
+                                             (unsigned short)frame_random_bounded(4) + 1);
                 display_menu_show_change(6);
                 display_menu_restore_footer();
                 display_text_set_background_control(g_display_menu_control1);
                 indicator = g_display_scene_frame_objects[0];
                 definition = g_display_menu_state.definition;
-                relation = display_menu_read_relation(&g_menu_secondary_relation_owner.state.values, definition);
+                relation = display_menu_read_relation(&g_menu_secondary_relation_owner.state.values,
+                                                      definition);
                 if (relation > 0) {
                     percent = save_world_ratio_percent(relation, 100);
                     frame = save_world_scale_percent(10, (unsigned short)percent);
                     frame_set_animation_frame((struct FrameTickObject *)indicator,
-                                               (unsigned char)(frame + 10));
+                                              (unsigned char)(frame + 10));
                 } else {
                     register int numerator asm("r0") = relation;
                     int denominator = -100;
                     percent = save_world_ratio_percent(numerator, denominator);
                     frame = save_world_scale_percent(10, (unsigned short)percent);
                     frame_set_animation_frame((struct FrameTickObject *)indicator,
-                                               (unsigned char)(10 - frame));
+                                              (unsigned char)(10 - frame));
                 }
                 secondary_relation_caption(relation, position);
                 display_text_set_background_control(g_display_menu_control0);
@@ -124,15 +138,18 @@ void display_menu_prepare_secondary(void)
         }
         display_menu_show_hint(1);
     } else {
-        display_load_background_dma(2,
-            g_menu_secondary_descriptors[g_display_menu_state.definition].resources[5],
+        display_load_background_dma(
+            2, g_menu_secondary_descriptors[g_display_menu_state.definition].resources[5],
             1 + 182 * (g_display_menu_state.resource_shown & 1), 0, 15, 0);
         g_display_menu_state.resource_shown ^= 1;
-        audio_play_animation_cue(g_menu_secondary_descriptors[g_display_menu_state.definition].cues[5]);
+        audio_play_animation_cue(
+            g_menu_secondary_descriptors[g_display_menu_state.definition].cues[5]);
         if (is_choice) {
             unsigned int actor = g_menu_secondary_relation_owner.selected_definition;
-            display_menu_adjust_relation(&g_menu_secondary_relation_owner.state, actor, frame_random_range(-1,-6));
-            display_menu_draw_scrolling_text(display_scene_lookup_text(text_id + g_display_menu_page_text_variants[3]));
+            display_menu_adjust_relation(&g_menu_secondary_relation_owner.state, actor,
+                                         frame_random_range(-1, -6));
+            display_menu_draw_scrolling_text(
+                display_scene_lookup_text(text_id + g_display_menu_page_text_variants[3]));
         } else
             display_menu_draw_scrolling_text(display_scene_lookup_text(text_id + 1));
         display_menu_show_hint(1);

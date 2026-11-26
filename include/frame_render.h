@@ -90,8 +90,8 @@ extern FrameU8 g_frame_display_channel;
 void frame_sprite_dimensions(int, int, struct FramePoint *);
 int frame_append_oam(FrameU8, struct FrameOam *);
 void frame_note_oam(int);
-void frame_draw_sequence(struct FrameSpriteSequence *, FrameU16, FrameU8,
-    struct FramePoint *, FrameU16, struct FrameOam *, struct FrameObject *);
+void frame_draw_sequence(struct FrameSpriteSequence *, FrameU16, FrameU8, struct FramePoint *,
+                         FrameU16, struct FrameOam *, struct FrameObject *);
 
 extern FrameU32 g_frame_round_bias;
 struct FrameAllocationShared {
@@ -109,6 +109,7 @@ const void *frame_object_pixels(struct FrameObject *);
 const void *frame_part_pixels(struct FrameObject *, FrameU8);
 FrameU32 frame_allocate_display(const void *, FrameU32, FrameU32);
 void frame_upload_display(struct FrameObject *, const void *);
-void frame_upload_sequence(struct FrameSpriteSequence *, const void *, FrameU16, FrameU16, FrameU16);
+void frame_upload_sequence(struct FrameSpriteSequence *, const void *, FrameU16, FrameU16,
+                           FrameU16);
 
 #endif

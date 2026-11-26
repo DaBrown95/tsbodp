@@ -25,15 +25,15 @@ struct SaveTransferParameters {
 #define SAVE_TRANSFER_DMA_CONTROL (*(volatile unsigned int *)0x040000dc)
 #define SAVE_TRANSFER_DMA_STATUS (*(volatile unsigned short *)0x040000de)
 
-unsigned short save_transfer_configure_4c8f4(unsigned short);
+unsigned short save_transfer_configure(unsigned short);
 void save_transfer_dma_copy(const void *, void *, unsigned short);
 /* The word input is explicitly narrowed to a halfword before block checking. */
-unsigned short save_transfer_read_4c9bc(unsigned int, void *);
+unsigned short save_transfer_read_block(unsigned int, void *);
 unsigned short save_transfer_write_core(unsigned int, const void *, unsigned int);
 unsigned short save_transfer_write_wait(unsigned short, const void *);
 unsigned short save_transfer_compare(unsigned int, const void *);
 unsigned short save_transfer_write_retry(unsigned int, const void *);
-unsigned short save_transfer_write_4ccb0(unsigned int, const void *);
+unsigned short save_transfer_write_verified(unsigned int, const void *);
 /* Non-waiting mode gate at 0x0804CC78; 512-byte mode returns 0x8080. */
 unsigned short save_transfer_write_nowait(unsigned int, const void *);
 

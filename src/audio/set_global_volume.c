@@ -2,6 +2,7 @@
 
 void audio_set_global_volume(unsigned int volume)
 {
-    if (volume > 255) volume = 255;
+    if (volume > 255)
+        volume = 255;
     g_audio_global_volume = volume;
 }

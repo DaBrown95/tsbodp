@@ -14,7 +14,8 @@ void condition_panel_update_column_objects(unsigned int row)
     world = &g_condition_panel_world;
     for (; index <= 5; ++index) {
         unsigned int offset = column_offset + row * 32;
-        unsigned int kind = (*(struct ConditionDefinition **)(offset + (unsigned int)columns))->unknown00;
+        unsigned int kind =
+            (*(struct ConditionDefinition **)(offset + (unsigned int)columns))->unknown00;
         if (kind == 0) {
             (*objects)->flags &= ~1;
         } else {

@@ -1,4 +1,4 @@
-"""Historical assembly is explicitly selected, pinned, and never rewritten."""
+"""The historical assembler is selected explicitly, pinned, and its output is never rewritten."""
 import copy
 import hashlib
 import io

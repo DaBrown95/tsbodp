@@ -43,8 +43,7 @@ void scene_link_catalog_build(void)
         index = 7;
         definitions = g_scene_link_catalog_definitions;
         {
-            register struct FrameObject **owner_base asm("r0") =
-                g_display_scene_frame_objects;
+            register struct FrameObject **owner_base asm("r0") = g_display_scene_frame_objects;
             entry_owner_cursor = owner_base + 8;
         }
         palette = 8;
@@ -63,8 +62,7 @@ void scene_link_catalog_build(void)
                     *entry_owner_cursor = object;
                     frame_set_variant_state(object, 58);
                 } else {
-                    register struct FrameObject *existing asm("r1") =
-                        *entry_owner_cursor;
+                    register struct FrameObject *existing asm("r1") = *entry_owner_cursor;
                     existing->flags &= clear_mask;
                 }
             } else {
@@ -84,12 +82,12 @@ void scene_link_catalog_build(void)
         struct FrameObject **caption_owner_cursor;
         index = 4;
         {
-            register struct FrameObject **owner_base asm("r0") =
-                g_display_scene_frame_objects;
+            register struct FrameObject **owner_base asm("r0") = g_display_scene_frame_objects;
             caption_owner_cursor = owner_base + 13;
         }
         do {
-            struct FrameObject *object = frame_create_scene_object(index + 52, index + 229, index + 10, 1);
+            struct FrameObject *object =
+                frame_create_scene_object(index + 52, index + 229, index + 10, 1);
             *caption_owner_cursor = object;
             frame_set_variant_state(object, 58);
             --caption_owner_cursor;

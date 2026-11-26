@@ -11,7 +11,7 @@ void scene_contact_activity_four_initialize(void)
     display_load_background(2, &g_scene_contact_activity_four_map2, 1, 0, 0, 0);
     display_load_background(3, &g_scene_contact_activity_four_map3, 780, 0, 0, 0);
     display_time_copy(&g_display_countdown,
-        &g_scene_contact_activity_four_rows[g_scene_contact_state->option].clock);
+                      &g_scene_contact_activity_four_rows[g_scene_contact_state->option].clock);
     scene_contact_activity_four_reset_items();
     g_scene_request.unknown_14 =
         g_scene_contact_activity_four_rows[g_scene_contact_state->option].interval;

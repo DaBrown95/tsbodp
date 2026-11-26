@@ -1,4 +1,4 @@
-"""Constant-flow rejection tests using synthetic ARM7 Thumb instructions."""
+"""Rejection tests for the fixed-target proof, using synthetic Thumb instructions."""
 import struct
 import sys
 import unittest

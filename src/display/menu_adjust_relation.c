@@ -1,7 +1,7 @@
 #include "display_menu_relation.h"
 
-int display_menu_adjust_relation(struct DisplayMenuRelationState *state,
-                                 unsigned int index, int delta)
+int display_menu_adjust_relation(struct DisplayMenuRelationState *state, unsigned int index,
+                                 int delta)
 {
     int previous = state->values.records[index].value;
     int value;

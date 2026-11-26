@@ -1,4 +1,4 @@
-"""Only natural linker alignment may separate glue storage from its entry."""
+"""Only natural linker alignment may separate a glue extent's storage from its entry."""
 from pathlib import Path
 import os
 import sys

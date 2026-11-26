@@ -15,8 +15,8 @@ void scene_link_entry_build_objects_original(void)
     unsigned int created;
     int i;
 
-    g_display_scene_frame_objects[0] = frame_create_scene_object(106,
-        g_display_scene_catalog[g_scene_request.scene].id, 1, 1);
+    g_display_scene_frame_objects[0] =
+        frame_create_scene_object(106, g_display_scene_catalog[g_scene_request.scene].id, 1, 1);
     created = 0;
     if (!(g_game_flags & 0x20)) {
         const struct SceneLinkEffectOffer *offer = g_link_entry_effect_state.records;
@@ -25,8 +25,7 @@ void scene_link_entry_build_objects_original(void)
         do {
             unsigned int kind = offer->kind;
             if (kind != 42) {
-                *slot++ = frame_create_scene_object(created + 107,
-                    kind + 239, created + 3, 1);
+                *slot++ = frame_create_scene_object(created + 107, kind + 239, created + 3, 1);
                 ++created;
             }
             ++offer;
@@ -42,8 +41,8 @@ void scene_link_entry_build_objects_original(void)
             g_display_scene_frame_objects[6 + i] = display_allocate_text_object(&text);
             g_display_scene_frame_objects[6 + i]->flags |= 1;
             frame_set_position(g_display_scene_frame_objects[6 + i],
-                (g_scene_link_entry_captions[i].x + 2) * 524288,
-                g_scene_link_entry_captions[i].y * 524288);
+                               (g_scene_link_entry_captions[i].x + 2) * 524288,
+                               g_scene_link_entry_captions[i].y * 524288);
         }
     } else {
         register const struct SceneLinkEntryCaption *coordinate asm("r4");
@@ -56,15 +55,13 @@ void scene_link_entry_build_objects_original(void)
                     g_display_scene_frame_objects[6 + i] = display_allocate_text_object(&text);
                     g_display_scene_frame_objects[6 + i]->flags |= 1;
                     frame_set_position(g_display_scene_frame_objects[6 + i],
-                        (coordinate->x + 2) * 524288,
-                        coordinate->y * 524288);
+                                       (coordinate->x + 2) * 524288, coordinate->y * 524288);
                 } else {
                     text = display_scene_lookup_text(0x184c);
                     g_display_scene_frame_objects[6 + i] = display_allocate_text_object(&text);
                     g_display_scene_frame_objects[6 + i]->flags |= 1;
-                    frame_set_position(g_display_scene_frame_objects[6 + i],
-                        160 * 65536,
-                        (coordinate->y * 8 - 96) * 65536);
+                    frame_set_position(g_display_scene_frame_objects[6 + i], 160 * 65536,
+                                       (coordinate->y * 8 - 96) * 65536);
                 }
                 ++coordinate;
             }

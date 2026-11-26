@@ -6,7 +6,9 @@
 #include "heap.h"
 
 /* Partial map views inferred from the allocation, cell and copied transfer paths. */
-struct FrameMapWordPair { unsigned int first, second; };
+struct FrameMapWordPair {
+    unsigned int first, second;
+};
 struct FrameMapRecord {
     const void *source;
     void *primary, *combined, *secondary;
@@ -35,7 +37,6 @@ unsigned short *frame_map_cell(unsigned int, unsigned int, unsigned int);
 void frame_write_map_cell(unsigned int, unsigned short, unsigned short, unsigned int);
 void frame_release_map_resources(void);
 unsigned short display_get_mode(void);
-
 
 void frame_set_map_sources(const void *, const void *);
 void frame_snapshot_map_vram(void);

@@ -1,4 +1,8 @@
-"""Keep source section extents, entry points and ROM storage addresses distinct."""
+"""Work out the three addresses a source needs: its extent in the ROM, its entry point and where it executes.
+
+They differ for code copied to RAM, which is linked at its RAM address while
+its bytes stay at their ROM address.
+"""
 
 ROM_BASE = 0x08000000
 

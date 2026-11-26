@@ -3,7 +3,8 @@
 unsigned int audio_sample_release(unsigned int handle)
 {
     struct AudioSampleChannel *channel = &g_audio_sample_channels[(unsigned char)handle];
-    if (channel->handle != handle) return 0;
+    if (channel->handle != handle)
+        return 0;
     if (!g_audio_sample_fade_enabled) {
         channel->active = 0;
         return 1;

@@ -29,9 +29,9 @@ extern void display_text_set_background_control(unsigned int);
 extern void display_text_initialize(void);
 extern unsigned short *display_text_map_position(unsigned short *, int, int);
 extern void display_text_fill_rows(unsigned int *, unsigned int, unsigned int);
-extern void display_text_read_rows(unsigned int *, unsigned int,
-                                   const unsigned short *, const void *);
-extern void display_text_emit_rows(const unsigned int *, unsigned int,
-                                   unsigned short *, void *, unsigned int);
+extern void display_text_read_rows(unsigned int *, unsigned int, const unsigned short *,
+                                   const void *);
+extern void display_text_emit_rows(const unsigned int *, unsigned int, unsigned short *, void *,
+                                   unsigned int);
 extern void display_text_flip_tile(void *);
 #endif

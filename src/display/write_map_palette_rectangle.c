@@ -1,6 +1,6 @@
 #include "display.h"
-void display_write_map_palette_rectangle(void *map, int x, int y, int width,
-    int height, unsigned short input_palette)
+void display_write_map_palette_rectangle(void *map, int x, int y, int width, int height,
+                                         unsigned short input_palette)
 {
     register unsigned short palette asm("r12") = input_palette;
     register int row asm("r2");

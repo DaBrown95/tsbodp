@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Delete local pilot and ROM-link runs except each target's latest verified one.
+"""Delete old local pilot and ROM-link runs, keeping each target's latest verified one.
 
-A full pilot run is several hundred megabytes, so old runs add up quickly. The
-runs named by reports/<target>/pilot.json and build.json are kept; everything else under build/<target>/pilot and
-build/<target>/rom is removed. Nothing tracked is touched.
+Run by `make prune`. A full pilot run is several hundred megabytes, so old runs
+add up quickly. The runs named by reports/<target>/pilot.json and build.json
+are kept; everything else under build/<target>/pilot and build/<target>/rom is
+removed. Tracked files are not touched.
 """
 import argparse
 import json

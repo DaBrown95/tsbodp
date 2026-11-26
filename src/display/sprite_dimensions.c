@@ -1,7 +1,7 @@
 #include "display.h"
 
 void display_sprite_dimensions(unsigned int group, unsigned int variant,
-    struct DisplayPoint *dimensions)
+                               struct DisplayPoint *dimensions)
 {
     const unsigned char *table = g_display_sprite_dimensions;
     unsigned int offset = variant * 12 + group * 48;

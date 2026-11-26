@@ -3,7 +3,7 @@
 #include "display_menu_choice.h"
 
 /* The incoming storage extends through +0x347; ActorEntryContext is only its prefix. */
-void save_world_write_region_1fecc(void *input)
+void save_world_write_actor_entries(void *input)
 {
     unsigned char *region = input;
     unsigned int group, index, remaining, collection_group;
@@ -23,12 +23,13 @@ void save_world_write_region_1fecc(void *input)
         frame_write_save_value(&list->count, 1);
         index = 0;
         next_group = group + 1;
-        if (index < list->capacity) do {
-            frame_write_save_value(&list->entries[index].kind, 1);
-            packed = (list->entries[index].unknown03 << 4) | list->entries[index].value1;
-            frame_write_save_value(&packed, 1);
-            frame_write_save_value(&list->entries[index].value2, 1);
-        } while (++index < list->capacity);
+        if (index < list->capacity)
+            do {
+                frame_write_save_value(&list->entries[index].kind, 1);
+                packed = (list->entries[index].unknown03 << 4) | list->entries[index].value1;
+                frame_write_save_value(&packed, 1);
+                frame_write_save_value(&list->entries[index].value2, 1);
+            } while (++index < list->capacity);
         group = next_group;
     } while (group < 15);
 
@@ -36,7 +37,8 @@ void save_world_write_region_1fecc(void *input)
         struct ActorEntryCollectionRecord *record;
         /* The start snapshot survives the count write and supplies the record address. */
         register unsigned int start asm("r6");
-        remaining = ((struct ActorEntryContext *)region)->collection->groups[collection_group].count;
+        remaining =
+            ((struct ActorEntryContext *)region)->collection->groups[collection_group].count;
         start = ((struct ActorEntryContext *)region)->collection->groups[collection_group].start;
         frame_write_save_value(remaining_input, 1);
         record = &((struct ActorEntryContext *)region)->collection->records[start];
@@ -52,7 +54,8 @@ void save_world_write_region_1fecc(void *input)
         }
     }
     for (collection_group = 0; collection_group < 50; ++collection_group)
-        save_stream_write_bits(&((struct ActorEntryContext *)region)->collection->groups[collection_group].flags, 1);
+        save_stream_write_bits(
+            &((struct ActorEntryContext *)region)->collection->groups[collection_group].flags, 1);
     {
         /* The real cursor and counter survive the five byte-writer calls. */
         register unsigned char *cursor asm("r4");

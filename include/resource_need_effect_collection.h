@@ -7,9 +7,8 @@ struct __attribute__((aligned(4))) ActorEntrySavedRecordBytes {
     unsigned char bytes[12];
 };
 
-void actor_entry_save_collection_record(
-    struct ActorEntryContext *, unsigned int,
-    const struct ActorEntrySavedRecordBytes *);
+void actor_entry_save_collection_record(struct ActorEntryContext *, unsigned int,
+                                        const struct ActorEntrySavedRecordBytes *);
 void scene_save_need_effect_collection(unsigned char *, unsigned int);
 
 #endif

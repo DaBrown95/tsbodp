@@ -4,12 +4,12 @@
 /* Observed IRQ-shared byte prefix at the existing input root. These are
  * compiler-specific access views, not recovered protocol declarations. */
 struct SceneContactSerialFields {
-    volatile unsigned char status:8, mode:8, state2:8, state3:8;
-    volatile unsigned char count:8, pending:8, unknown06:8, unknown07:8, flag8:8;
+    volatile unsigned char status : 8, mode : 8, state2 : 8, state3 : 8;
+    volatile unsigned char count : 8, pending : 8, unknown06 : 8, unknown07 : 8, flag8 : 8;
     unsigned int captured0c, unknown10, captured14;
     unsigned short first_parameter, second_parameter;
-    volatile unsigned short receive_remaining:16, transmit_remaining:16;
-    volatile unsigned short receive_index:16, transmit_index:16;
+    volatile unsigned short receive_remaining : 16, transmit_remaining : 16;
+    volatile unsigned short receive_index : 16, transmit_index : 16;
     void *first_buffer, *second_buffer;
 };
 
@@ -19,8 +19,7 @@ union SceneContactInputPrefix {
     struct SceneContactSerialFields fields;
 };
 
-typedef unsigned int (*SceneContactNoticeHandler)(unsigned int,
-    unsigned short *, unsigned short *);
+typedef unsigned int (*SceneContactNoticeHandler)(unsigned int, unsigned short *, unsigned short *);
 
 struct SceneContactInputSetup {
     union SceneContactInputPrefix prefix;
@@ -38,8 +37,7 @@ extern const unsigned int g_scene_contact_serial_second_word;
 void scene_contact_reset_serial_registers(void);
 unsigned int scene_contact_prepare_input_counter(void);
 unsigned int scene_contact_poll_input_status(void);
-void scene_contact_install_serial_irq(SceneContactNoticeHandler, unsigned int,
-                                     unsigned int);
+void scene_contact_install_serial_irq(SceneContactNoticeHandler, unsigned int, unsigned int);
 void scene_contact_handle_serial_irq(void);
 void scene_contact_begin_serial_notice(void);
 

@@ -1,4 +1,4 @@
-"""Strong byte unions cannot turn weak seeds or owned envelopes into code."""
+"""Strong evidence cannot turn weak seeds or owned extents into code."""
 import copy
 import json
 import sys

@@ -9,19 +9,22 @@ unsigned int scene_contact_transmit_serial_word(void)
             return 0;
         }
     } else if (g_scene_contact_input_setup.prefix.fields.unknown06 &&
-        (g_scene_contact_input_setup.prefix.fields.unknown06 <= 63 ||
-         g_scene_contact_input_setup.prefix.fields.unknown06 >
-             g_scene_contact_input_setup.prefix.fields.first_parameter)) {
+               (g_scene_contact_input_setup.prefix.fields.unknown06 <= 63 ||
+                g_scene_contact_input_setup.prefix.fields.unknown06 >
+                    g_scene_contact_input_setup.prefix.fields.first_parameter)) {
         if ((signed char)g_scene_contact_input_setup.prefix.fields.unknown06 < 0 &&
             g_scene_contact_input_setup.prefix.fields.unknown06 <=
                 g_scene_contact_input_setup.prefix.fields.second_parameter) {
             if ((unsigned char)scene_contact_emit_serial_word()) {
-            unsigned int remaining = g_scene_contact_input_setup.prefix.fields.transmit_remaining;
-            if (!remaining) {
-                g_scene_contact_input_setup.prefix.fields.status = 5;
-                g_scene_contact_input_setup.prefix.fields.unknown06 = remaining;
+                unsigned int remaining =
+                    g_scene_contact_input_setup.prefix.fields.transmit_remaining;
+                if (!remaining) {
+                    g_scene_contact_input_setup.prefix.fields.status = 5;
+                    g_scene_contact_input_setup.prefix.fields.unknown06 = remaining;
+                }
+            } else {
+                return 0;
             }
-            } else { return 0; }
         } else {
             g_scene_contact_input_setup.prefix.fields.mode = 5;
             return 0;

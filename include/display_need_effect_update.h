@@ -21,8 +21,7 @@ struct DisplayNeedEffectActorView {
 };
 struct DisplayNeedEffectActionState {
     unsigned char unknown_00[0xf0];
-    unsigned int (*begin)(struct FrameNeedEffectState *, struct FrameObject *,
-                          unsigned int);
+    unsigned int (*begin)(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
 };
 struct DisplayNeedEffectSavedObject {
     unsigned int unknown_00, flags;
@@ -34,8 +33,8 @@ struct DisplayNeedEffectAppearance {
 };
 extern struct DisplayNeedEffectAppearance g_need_effect_appearances[];
 extern unsigned char *g_need_effect_programs[][7];
-void frame_set_animation_program(struct FrameObject *, struct FrameSpriteResource *,
-                                 FrameU8 *, FrameU8);
+void frame_set_animation_program(struct FrameObject *, struct FrameSpriteResource *, FrameU8 *,
+                                 FrameU8);
 extern const unsigned char *g_need_effect_resources[];
 extern unsigned int g_need_effect_palettes[][6];
 extern const void *g_need_effect_palette_39, *g_need_effect_palette_132;
@@ -59,8 +58,8 @@ void frame_step_need_effect_attachments(struct FrameNeedEffectState *);
 void frame_stop_motion(struct FrameObject *);
 void frame_need_effect_restore_audio(struct FrameObject *);
 int actor_entry_has_space(struct ConditionActorEntries *);
-unsigned int actor_entry_add(struct ConditionActorEntries *, unsigned int,
-                             unsigned char, unsigned char);
+unsigned int actor_entry_add(struct ConditionActorEntries *, unsigned int, unsigned char,
+                             unsigned char);
 void frame_request_animation(struct FrameCommandObject *, unsigned char);
 unsigned int audio_play_animation_cue(unsigned int);
 #endif

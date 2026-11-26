@@ -67,8 +67,7 @@ void scene_contact_step(void);
 void scene_contact_refresh_value(void);
 void scene_contact_prepare_backdrop(void);
 void scene_contact_shutdown(void);
-unsigned int scene_contact_handle_input_notice(unsigned int, unsigned short *,
-                                              unsigned short *);
+unsigned int scene_contact_handle_input_notice(unsigned int, unsigned short *, unsigned short *);
 unsigned int scene_contact_test_progress(void);
 void scene_contact_mark_conditions(void);
 void scene_contact_clear_activity_objects(void);
@@ -82,9 +81,9 @@ void resource_set_triple(unsigned int, unsigned int, unsigned int);
 void display_time_step_world(const struct DisplayTimeRecord *);
 void display_show_background(unsigned int, unsigned int);
 void display_fill_background(unsigned int, unsigned short);
-const unsigned short *display_load_background(unsigned int,
-    const struct BackgroundResource *, unsigned short, unsigned short,
-    unsigned int, unsigned int);
+const unsigned short *display_load_background(unsigned int, const struct BackgroundResource *,
+                                              unsigned short, unsigned short, unsigned int,
+                                              unsigned int);
 void display_set_mode(unsigned short);
 void display_configure_tile_allocation(unsigned char);
 void transition_run_first(unsigned short, unsigned int);

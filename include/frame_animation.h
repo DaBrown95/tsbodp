@@ -10,7 +10,9 @@ struct FrameAnimationState {
     struct FrameSpriteResource *resource;
     FrameU8 *commands, *command_start;
 };
-struct __attribute__((packed, aligned(2))) FrameAnimationBounds { FrameU16 x, y; };
+struct __attribute__((packed, aligned(2))) FrameAnimationBounds {
+    FrameU16 x, y;
+};
 struct __attribute__((packed, aligned(2))) FrameAnimationFrame {
     FrameU8 count_flags, unknown_01, width, height;
     FrameU16 bytes;

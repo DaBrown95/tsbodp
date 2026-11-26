@@ -1,7 +1,7 @@
 #include "display_map.h"
 
-void display_copy_background_map_forward(unsigned int index, int width, int height,
-    int source_x, int source_y, int destination_x, int destination_y)
+void display_copy_background_map_forward(unsigned int index, int width, int height, int source_x,
+                                         int source_y, int destination_x, int destination_y)
 {
     register int rows __asm__("r2") = height;
     struct DisplayMapState *background = &g_display_map_states[index];

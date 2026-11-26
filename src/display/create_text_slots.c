@@ -15,4 +15,4 @@ unsigned int display_create_text_slots(const char **text, unsigned int first_slo
     return count;
 }
 
-asm(".align 2,0");
+asm(".align 2, 0");

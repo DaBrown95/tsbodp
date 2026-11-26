@@ -1,8 +1,9 @@
-"""A guarded byte dispatch must fail closed when its native premises change.
+"""A guarded byte dispatch is rejected when any of its premises change.
 
-Fixtures below assemble a small synthetic Thumb program, not a game function.
+The fixtures assemble a small synthetic Thumb program, not a game function.
 Its two input paths, distant dispatch block and independent table exercise the
-proof across control flow, register provenance and immutable target capture.
+check across control flow, register tracking and a table whose targets cannot
+change.
 """
 import hashlib
 import importlib.util

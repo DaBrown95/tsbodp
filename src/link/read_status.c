@@ -3,11 +3,9 @@
 unsigned int link_read_status_original(void)
 {
     /* The three slot observations share the actual complete-object base. */
-    volatile unsigned char *endpoint_bytes =
-        (volatile unsigned char *)&g_link_setup_state;
+    volatile unsigned char *endpoint_bytes = (volatile unsigned char *)&g_link_setup_state;
     register unsigned char slot_word asm("r3") = endpoint_bytes[5];
-    signed char *signed_endpoint_bytes =
-        (signed char *)&g_link_setup_state;
+    signed char *signed_endpoint_bytes = (signed char *)&g_link_setup_state;
 
     register int first_observation asm("r1");
     register int second_observation asm("r0");

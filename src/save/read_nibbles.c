@@ -19,8 +19,7 @@ void save_stream_read_nibbles(unsigned char *destination, unsigned int count)
         if (count != 0) {
             int *bit = &g_save_bit_cursor.bit_offset;
             /* The cursor word precedes the bit-position word in this view. */
-            register unsigned char **cursor asm("r5") =
-                (unsigned char **)((unsigned int)bit - 4);
+            register unsigned char **cursor asm("r5") = (unsigned char **)((unsigned int)bit - 4);
             do {
                 int next_bit;
                 if (*bit == 0) {

@@ -1,4 +1,5 @@
 #include "scene_character_transfer.h"
-void scene_pause_character_animation(void) {
- g_scene_character_transfer.flags&=0xfe;
+void scene_pause_character_animation(void)
+{
+    g_scene_character_transfer.flags &= 0xfe;
 }

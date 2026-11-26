@@ -33,8 +33,7 @@ void scene_contact_show_completion(void)
         unsigned int offset = (g_scene_contact_state->option + 1) * 2;
         offset += g_scene_contact_state->scene * 32;
         resource_address += 20;
-        text = display_scene_lookup_text(
-            *(const unsigned short *)(offset + resource_address));
+        text = display_scene_lookup_text(*(const unsigned short *)(offset + resource_address));
     }
     display_text_copy_field_zero(text);
     text = display_scene_lookup_text(0x186a);

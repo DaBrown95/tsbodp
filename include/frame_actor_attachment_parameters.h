@@ -32,21 +32,20 @@ extern unsigned int g_attachment_parameter_rates[][10];
 extern struct FrameAttachmentUiFlags g_attachment_parameter_ui[];
 
 unsigned int frame_step_variant_attachment_job(struct FrameNeedEffectState *,
-                                                struct FrameActorAttachmentRecord *);
+                                               struct FrameActorAttachmentRecord *);
 unsigned int frame_dispatch_variant_attachment_job(struct FrameNeedEffectState *,
-                                                    struct FrameObject *);
+                                                   struct FrameObject *);
 void frame_clear_attachment_need_countdown(struct FrameActorNeedState *);
 void frame_need_effect_handoff_bounds(struct FrameObject *, struct FrameNeedEffectState *,
                                       unsigned char);
-struct FrameObject *frame_create_attachment_parameter_indicator(struct FrameObject *,
-                                                                unsigned int);
+struct FrameObject *frame_create_attachment_parameter_indicator(struct FrameObject *, unsigned int);
 void frame_complete_attachment_parameter_indicator(struct FrameObject *);
 void frame_set_attachment_parameter_indicator(struct FrameObject *, unsigned char);
 void frame_attachment_parameter_indicator_tick(struct FrameObject *);
 unsigned int frame_read_parameter_percentage(const void *, unsigned int);
 /* Independently bounded level setters; incoming roots remain unknown. */
-void frame_decrement_parameter_level_unrooted_3d1bc(void *, unsigned int);
-void frame_increment_parameter_level_unrooted_3d1d8(void *, unsigned int);
+void frame_decrement_parameter_level(void *, unsigned int);
+void frame_increment_parameter_level(void *, unsigned int);
 void frame_update_attachment_parameter(void *, unsigned int, struct FrameObject *);
 /* The original unsigned division backend is distinct from signed __divsi3. */
 unsigned int frame_indicator_unsigned_divide(unsigned int, unsigned int);

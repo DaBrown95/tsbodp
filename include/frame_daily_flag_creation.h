@@ -8,10 +8,8 @@
 /* Read-only serialized payload prefix observed by factory slot 16. */
 struct FrameDailyFlagPayload {
     unsigned int id;
-    short x,
-        y;
-    unsigned char subtype,
-        index;
+    short x, y;
+    unsigned char subtype, index;
 };
 
 /* Object write view through +D5; pool allocation is established elsewhere.
@@ -19,13 +17,10 @@ struct FrameDailyFlagPayload {
  * The broader actor role still has a provisional one-argument declaration. */
 struct FrameDailyFlagSpawnObject {
     unsigned char unknown00[8];
-    unsigned short id,
-        subtype;
+    unsigned short id, subtype;
     unsigned int flags;
     unsigned char unknown10[0x4d - 0x10];
-    unsigned char state,
-        variant_state,
-        unknown4f[9];
+    unsigned char state, variant_state, unknown4f[9];
     int timer;
     unsigned char unknown5c[8];
     struct FrameObject *owner;
@@ -34,8 +29,7 @@ struct FrameDailyFlagSpawnObject {
     void (*on_step)(struct FrameObject *);
     unsigned char unknown8c[0xc8 - 0x8c];
     void (*on_interact)(struct FrameObject *, struct FrameObject *);
-    unsigned char unknowncc[9],
-        display_byte;
+    unsigned char unknowncc[9], display_byte;
 };
 
 extern const unsigned char g_frame_daily_flag_chances[];

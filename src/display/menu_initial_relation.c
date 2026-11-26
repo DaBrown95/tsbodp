@@ -1,7 +1,6 @@
 #include "display_menu_relation.h"
 
-int display_menu_initial_relation(struct DisplayMenuRelationState *state,
-                                  unsigned int index)
+int display_menu_initial_relation(struct DisplayMenuRelationState *state, unsigned int index)
 {
     const struct DisplayMenuRelationTraits *own = (const void *)((unsigned char *)state + 0x18);
     const struct DisplayMenuRelationTraits *other = &g_display_menu_relation_traits[index];

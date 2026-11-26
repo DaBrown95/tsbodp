@@ -7,10 +7,18 @@
 
 /* Partial access views. Strides and field offsets do not establish table bounds.
  * Row byte arrays express an address stride; slot offsets can exceed that stride. */
-struct DisplayMenuResultObserver { unsigned char unknown_00[0x20], variant; };
-struct DisplayMenuResult { signed char delta, text; } __attribute__((packed));
-struct DisplayMenuSecondaryResultRow { unsigned char bytes[30]; } __attribute__((packed));
-struct DisplayMenuPrimaryResultRow { unsigned char bytes[10]; } __attribute__((packed));
+struct DisplayMenuResultObserver {
+    unsigned char unknown_00[0x20], variant;
+};
+struct DisplayMenuResult {
+    signed char delta, text;
+} __attribute__((packed));
+struct DisplayMenuSecondaryResultRow {
+    unsigned char bytes[30];
+} __attribute__((packed));
+struct DisplayMenuPrimaryResultRow {
+    unsigned char bytes[10];
+} __attribute__((packed));
 struct DisplayMenuResultDescriptor {
     const unsigned short *text_ids;
     const struct BackgroundResource *resources[7];
@@ -51,24 +59,24 @@ void display_text_set_line_height(int);
 /* This caller observes a narrowed halfword from the unconverted bounded RNG. */
 unsigned short frame_random_bounded(unsigned short);
 
-static inline const struct BackgroundResource *display_menu_result_resource(
-    const struct DisplayMenuResultDescriptor *definitions, unsigned int index,
-    int offset)
+static inline const struct BackgroundResource *
+display_menu_result_resource(const struct DisplayMenuResultDescriptor *definitions,
+                             unsigned int index, int offset)
 {
     unsigned int bytes = offset + index * sizeof(*definitions);
     const unsigned char *column = (const unsigned char *)definitions + 4;
     return *(const struct BackgroundResource *const *)(bytes + (unsigned int)column);
 }
-static inline const struct BackgroundResource *display_menu_result_resource_column(
-    const struct DisplayMenuResultDescriptor *definitions, unsigned int index,
-    int offset)
+static inline const struct BackgroundResource *
+display_menu_result_resource_column(const struct DisplayMenuResultDescriptor *definitions,
+                                    unsigned int index, int offset)
 {
     unsigned int bytes = index * sizeof(*definitions);
     const unsigned char *column = (const unsigned char *)definitions + offset;
     return *(const struct BackgroundResource *const *)(bytes + (unsigned int)column);
 }
-static inline const unsigned int *display_menu_result_cues(
-    const struct DisplayMenuResultDescriptor *definitions, unsigned int index)
+static inline const unsigned int *
+display_menu_result_cues(const struct DisplayMenuResultDescriptor *definitions, unsigned int index)
 {
     unsigned int bytes = index * sizeof(*definitions);
     const unsigned char *column = (const unsigned char *)definitions + 0x20;

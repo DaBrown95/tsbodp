@@ -5,8 +5,7 @@ void frame_load_actor_group_palette(const void *data, unsigned int slot)
     unsigned short palette[16];
     const unsigned char *definition = data;
     const unsigned char *rows = (const unsigned char *)g_actor_group_palette_rows;
-    struct FrameActorGroupPaletteAnchors *ends =
-        (struct FrameActorGroupPaletteAnchors *)palette;
+    struct FrameActorGroupPaletteAnchors *ends = (struct FrameActorGroupPaletteAnchors *)palette;
 
     ends->first = g_actor_group_palette_rows[0];
     heap_copy((unsigned char *)palette + 2, rows + (definition[1] * 32 + 2), 6);

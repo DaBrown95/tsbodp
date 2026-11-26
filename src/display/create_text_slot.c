@@ -7,4 +7,4 @@ struct FrameObject *display_create_text_slot(const char **text, unsigned int slo
     object->id = slot;
     return object;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

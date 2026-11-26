@@ -15,8 +15,8 @@ void scene_link_entry_initialize(void)
         do {
             g_link_entry_effect_state.records[2].kind = frame_random_bounded(23);
         } while (g_link_entry_effect_state.records[1].kind == 31 ||
-            g_link_entry_effect_state.records[1].kind ==
-                g_link_entry_effect_state.records[2].kind);
+                 g_link_entry_effect_state.records[1].kind ==
+                     g_link_entry_effect_state.records[2].kind);
         for (;;) {
             g_link_entry_effect_state.records[3].kind = frame_random_bounded(23);
             if (g_link_entry_effect_state.records[1].kind == 31 ||
@@ -62,20 +62,19 @@ void scene_link_entry_initialize(void)
     }
     display_load_palette_alternate(g_display_menu_palette_data, 0, 16);
     if (!(g_game_flags & 0x20))
-        display_load_background(3, &g_scene_link_entry_background_unlinked,
-            0, 1, 0, 0);
+        display_load_background(3, &g_scene_link_entry_background_unlinked, 0, 1, 0, 0);
     else
-        display_load_background(3, &g_scene_link_entry_background_linked,
-            0, 1, 0, 0);
+        display_load_background(3, &g_scene_link_entry_background_linked, 0, 1, 0, 0);
     display_load_resource_palette(&g_display_menu_palette_resource, 0);
     display_load_background_resource(1, &g_scene_link_entry_background1, 1, 3);
     display_load_resource_palette(&g_scene_link_entry_palette4, 4);
     display_load_resource_palette(&g_scene_link_entry_palette5, 5);
     display_load_resource_palette(&g_scene_link_entry_palette6, 6);
     if (!(g_game_flags & 0x20)) {
-        scene_view_load_selected_resource(1, 12, 15, 19, 2,
-            (const SceneViewResourceSelectionByte *)
-            ((const unsigned char *)&g_save_world_view + 0x20));
+        scene_view_load_selected_resource(
+            1, 12, 15, 19, 2,
+            (const SceneViewResourceSelectionByte *)((const unsigned char *)&g_save_world_view +
+                                                     0x20));
         display_text_select_font(3, 0, 0);
         display_text_draw_line(35, 23, 118, display_scene_lookup_text(445), 0);
         display_text_draw_line(53, 23, 138, display_scene_lookup_text(446), 0);
@@ -87,21 +86,18 @@ void scene_link_entry_initialize(void)
             unsigned int tile_word = 19u << 16;
             for (; i < g_link_received_join.metadata[0]; ++i) {
                 if (i != g_link_received_join.identifier) {
-                    scene_view_load_selected_resource(1,
-                        g_scene_link_selection_captions[compact].x,
-                        g_scene_link_selection_captions[compact].y,
-                        tile_word >> 16,
+                    scene_view_load_selected_resource(
+                        1, g_scene_link_selection_captions[compact].x,
+                        g_scene_link_selection_captions[compact].y, tile_word >> 16,
                         g_scene_link_selection_palettes[compact],
-                        (const SceneViewResourceSelectionByte *)
-                        ((const unsigned char *)&g_link_received_join +
-                            0x54 + 8 * i));
+                        (const SceneViewResourceSelectionByte
+                             *)((const unsigned char *)&g_link_received_join + 0x54 + 8 * i));
                     ++compact;
                 } else {
-                    scene_view_load_selected_resource(1, 3, 1,
-                        tile_word >> 16, 2,
-                        (const SceneViewResourceSelectionByte *)
-                        ((const unsigned char *)&g_link_received_join +
-                            0x54 + 8 * i));
+                    scene_view_load_selected_resource(
+                        1, 3, 1, tile_word >> 16, 2,
+                        (const SceneViewResourceSelectionByte
+                             *)((const unsigned char *)&g_link_received_join + 0x54 + 8 * i));
                 }
                 tile_word += 16u << 16;
             }

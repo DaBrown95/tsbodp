@@ -13,4 +13,4 @@ void frame_tick_attachment_job_12(struct FrameNeedEffectState *owner)
             transition_object_set_state(owner->object, 1);
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

@@ -1,5 +1,6 @@
 #include "display.h"
-unsigned char display_tile_resource_codec(const struct DisplayTileLayout *layout, unsigned short index)
+unsigned char display_tile_resource_codec(const struct DisplayTileLayout *layout,
+                                          unsigned short index)
 {
     unsigned int offset = layout->record_offsets[index];
     const struct DisplayTileRecord *record;

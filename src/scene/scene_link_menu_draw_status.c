@@ -11,4 +11,4 @@ void scene_link_menu_draw_status(void)
         display_text_draw_line(425, 120, 136, display_scene_lookup_text(223), 1);
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

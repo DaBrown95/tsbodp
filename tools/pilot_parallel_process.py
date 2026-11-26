@@ -1,8 +1,8 @@
-"""Parallel pilot workers: bounded independent processes, deterministic result order.
+"""Run the pilot's compile jobs in parallel worker processes, returning results in a fixed order.
 
-Native profile/tool verification and final report publication stay in pilot.main.
-No cache: every C/glue source, source control, inline-glue control and requested
-optimization matrix member is compiled into a fresh independent directory.
+Called by tools/pilot.py. Every source, control and optimisation variant is
+compiled in its own fresh directory, with no caching. Tool verification and the
+final report stay in pilot.main.
 """
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed
 import multiprocessing

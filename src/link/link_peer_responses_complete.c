@@ -8,4 +8,4 @@ unsigned int link_peer_responses_complete(void)
         return 1;
     return 0;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

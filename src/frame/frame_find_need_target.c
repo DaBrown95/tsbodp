@@ -10,8 +10,7 @@ static inline struct FrameActorNeedState *actor_need_state(struct FrameObject *a
     return state;
 }
 
-unsigned char frame_find_need_target(struct FrameObject *actor, void **target,
-                                    unsigned int *action)
+unsigned char frame_find_need_target(struct FrameObject *actor, void **target, unsigned int *action)
 {
     unsigned char actions[7];
     unsigned char low_needs[8];

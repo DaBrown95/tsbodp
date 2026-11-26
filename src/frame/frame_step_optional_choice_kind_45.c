@@ -5,20 +5,22 @@ unsigned int frame_step_optional_choice_kind_45(struct FrameNeedEffectState *own
 {
     if (!job->running) {
         switch ((unsigned int)job->timer) {
-        case 0:
-            ((struct FrameAttachmentJobWork *)owner)->indicator =
-                frame_create_attachment_parameter_indicator(job->actor, 0);
-            frame_set_actor_direction(job->actor,
-                g_actor_reverse_directions[((struct FrameActorObject *)owner->object)->direction]);
-            frame_request_animation((struct FrameCommandObject *)job->actor, 45);
-            job->timer = 5;
-            ((struct FrameAttachmentJobWork *)owner)->sample = audio_play_animation_cue(19);
-            break;
-        case 5:
-            if ((unsigned char)frame_need_effect_consume_optional(owner, job,
-                    ((struct FrameAttachmentJobWork *)owner)->indicator) == 1)
-                job->timer = 1;
-            break;
+            case 0:
+                ((struct FrameAttachmentJobWork *)owner)->indicator =
+                    frame_create_attachment_parameter_indicator(job->actor, 0);
+                frame_set_actor_direction(
+                    job->actor,
+                    g_actor_reverse_directions[((struct FrameActorObject *)owner->object)
+                                                   ->direction]);
+                frame_request_animation((struct FrameCommandObject *)job->actor, 45);
+                job->timer = 5;
+                ((struct FrameAttachmentJobWork *)owner)->sample = audio_play_animation_cue(19);
+                break;
+            case 5:
+                if ((unsigned char)frame_need_effect_consume_optional(
+                        owner, job, ((struct FrameAttachmentJobWork *)owner)->indicator) == 1)
+                    job->timer = 1;
+                break;
         }
     } else
         job->timer = 1;

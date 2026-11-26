@@ -9,15 +9,22 @@
 /* Byte flag and word result from the matched settlement interface. */
 unsigned int frame_settle_actor_scene_counter(unsigned char);
 unsigned int frame_initialize_counter_attachment_choices(struct FrameNeedEffectState *);
-unsigned int frame_check_counter_attachment_choices(struct FrameNeedEffectState *,struct FrameObject *);
-unsigned int frame_select_counter_attachment_choices(struct FrameNeedEffectState *,unsigned char *);
+unsigned int frame_check_counter_attachment_choices(struct FrameNeedEffectState *,
+                                                    struct FrameObject *);
+unsigned int frame_select_counter_attachment_choices(struct FrameNeedEffectState *,
+                                                     unsigned char *);
 /* Unused owner/actor formal roles remain provisional. The kind is a full word. */
-unsigned int frame_prepare_counter_attachment_choices(struct FrameNeedEffectState *,struct FrameObject *,unsigned int);
-unsigned int frame_begin_counter_attachment_choices(struct FrameNeedEffectState *,struct FrameObject *,unsigned int);
-unsigned int frame_dispatch_counter_attachment_choices(struct FrameNeedEffectState *,struct FrameObject *);
+unsigned int frame_prepare_counter_attachment_choices(struct FrameNeedEffectState *,
+                                                      struct FrameObject *, unsigned int);
+unsigned int frame_begin_counter_attachment_choices(struct FrameNeedEffectState *,
+                                                    struct FrameObject *, unsigned int);
+unsigned int frame_dispatch_counter_attachment_choices(struct FrameNeedEffectState *,
+                                                       struct FrameObject *);
 void frame_finish_counter_attachment_choices(struct FrameNeedEffectState *);
-unsigned int frame_step_counter_attachment_job_19(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
-unsigned int frame_step_counter_attachment_jobs_68_69(struct FrameNeedEffectState *,struct FrameActorAttachmentRecord *);
+unsigned int frame_step_counter_attachment_job_19(struct FrameNeedEffectState *,
+                                                  struct FrameActorAttachmentRecord *);
+unsigned int frame_step_counter_attachment_jobs_68_69(struct FrameNeedEffectState *,
+                                                      struct FrameActorAttachmentRecord *);
 void frame_present_counter_attachment_choice(void);
 void frame_remove_counter_attachment_selection(void);
 #endif

@@ -9,8 +9,7 @@ static inline unsigned int group_address(unsigned int row, unsigned int column)
     return offset + base;
 }
 
-static inline unsigned int entry_address(unsigned int row, unsigned int column,
-                                         unsigned int entry)
+static inline unsigned int entry_address(unsigned int row, unsigned int column, unsigned int entry)
 {
     unsigned int base = (unsigned int)&g_resource_game_state;
     unsigned int offset = entry * 4;

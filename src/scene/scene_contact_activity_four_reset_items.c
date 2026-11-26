@@ -19,13 +19,12 @@ void scene_contact_activity_four_reset_items(void)
             frame_remove_object(STATE->first[i]);
             STATE->first[i] = 0;
         }
-        selected = frame_random_range(1,
-            g_scene_contact_activity_four_rows[g_scene_contact_state->option].count);
+        selected = frame_random_range(
+            1, g_scene_contact_activity_four_rows[g_scene_contact_state->option].count);
         STATE->selections[i] = selected;
         object = scene_contact_activity_four_create_item(position, selected, i);
         state = STATE;
         state->first[i] = object;
-        state->score +=
-            g_scene_contact_activity_four_items[object->unknown_0a].penalty;
+        state->score += g_scene_contact_activity_four_items[object->unknown_0a].penalty;
     }
 }

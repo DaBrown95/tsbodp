@@ -1,4 +1,4 @@
-"""Synthetic failure tests for private scheduling, separate from native byte proofs."""
+"""Synthetic failure tests for parallel scheduling, separate from the native byte checks."""
 from pathlib import Path
 import ast
 import copy

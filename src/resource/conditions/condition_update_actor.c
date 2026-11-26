@@ -1,7 +1,6 @@
 #include "resource_condition_entries.h"
 
-void condition_update_actor(struct ConditionActorEntries *list, int index,
-                            unsigned char compact)
+void condition_update_actor(struct ConditionActorEntries *list, int index, unsigned char compact)
 {
     if (compact) {
         int count = list->capacity - index;

@@ -1,8 +1,9 @@
 #include "display_map.h"
 
 void display_copy_map_rectangle(int width, int height, int source_x, int source_y,
-    int source_stride, const unsigned short *source, int destination_x,
-    int destination_y, int destination_stride, unsigned short *destination)
+                                int source_stride, const unsigned short *source, int destination_x,
+                                int destination_y, int destination_stride,
+                                unsigned short *destination)
 {
     int rows;
 

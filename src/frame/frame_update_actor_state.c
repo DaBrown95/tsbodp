@@ -5,10 +5,8 @@
 void frame_update_actor_state(struct FrameObject *base)
 {
     struct FrameActorObject *object = (struct FrameActorObject *)base;
-    struct FramePoint position = {
-        ((short *)&object->next_position)[1],
-        ((short *)&object->next_position)[3]
-    };
+    struct FramePoint position = {((short *)&object->next_position)[1],
+                                  ((short *)&object->next_position)[3]};
     object->oam.layer = frame_layer_at_position(position);
 }
 

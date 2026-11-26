@@ -34,15 +34,15 @@ struct SceneContactActivityFourEventState {
  * item creator's separate access view retains its existing field types. */
 struct SceneContactActivityFourEventFlags {
     unsigned char unknown00[0xd1];
-    unsigned char mode:2, contact_mode:2, unknown_d1_4:1;
-    unsigned char double_size:1, unknown_d1_6:2;
+    unsigned char mode : 2, contact_mode : 2, unknown_d1_4 : 1;
+    unsigned char double_size : 1, unknown_d1_6 : 2;
     unsigned char unknown_d2;
-    unsigned char unknown_d3_0:4;
-    signed char flag4:1;
-    unsigned char flag5:1, unknown_d3_6:2;
+    unsigned char unknown_d3_0 : 4;
+    signed char flag4 : 1;
+    unsigned char flag5 : 1, unknown_d3_6 : 2;
     unsigned char unknown_d4;
-    unsigned char tile_high:2, layer:2;
-    unsigned short palette:4;
+    unsigned char tile_high : 2, layer : 2;
+    unsigned short palette : 4;
 };
 
 extern const struct SceneContactActivityFourEventRow

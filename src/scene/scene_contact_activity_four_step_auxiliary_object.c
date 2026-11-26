@@ -39,8 +39,7 @@ void scene_contact_activity_four_step_auxiliary_object(struct FrameObject *argum
                 else
                     view->flags.flag4 = 0;
                 {
-                    register struct SceneContactAuxiliaryFlagByte
-                        *flags asm("r2");
+                    register struct SceneContactAuxiliaryFlagByte *flags asm("r2");
 
                     flags = &view->flags;
                     if (((shifted & 3) - 1) <= 1)
@@ -53,4 +52,4 @@ void scene_contact_activity_four_step_auxiliary_object(struct FrameObject *argum
     }
 }
 
-asm(".align 2,0");
+asm(".align 2, 0");

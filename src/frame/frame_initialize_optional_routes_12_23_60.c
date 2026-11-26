@@ -4,4 +4,4 @@ unsigned int frame_initialize_optional_routes_12_23_60(struct FrameNeedEffectSta
 {
     return 1;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

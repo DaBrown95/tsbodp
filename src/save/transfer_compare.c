@@ -10,7 +10,7 @@ unsigned short save_transfer_compare(unsigned int block_word, const void *source
 
     if (block >= SAVE_TRANSFER_PARAMETERS->blocks)
         return 0x80ff;
-    save_transfer_read_4c9bc(block, data);
+    save_transfer_read_block(block, data);
     cursor = data;
     i = 0;
     while (i <= 3) {

@@ -1,7 +1,6 @@
 #include "display_text_runtime.h"
 
-void *display_text_copy_bytes(void *destination, const void *source,
-                              unsigned int bytes)
+void *display_text_copy_bytes(void *destination, const void *source, unsigned int bytes)
 {
     char *out = destination;
     const char *in = source;

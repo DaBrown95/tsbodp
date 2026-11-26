@@ -9,8 +9,7 @@ struct ConditionPlayerSelection {
 extern struct SceneModeFlags g_scene_mode_flags;
 extern void condition_update_actor_context(void *);
 
-static inline unsigned int value_address(unsigned int row, unsigned int column,
-                                         unsigned int entry)
+static inline unsigned int value_address(unsigned int row, unsigned int column, unsigned int entry)
 {
     unsigned int base = (unsigned int)&g_resource_game_state;
     unsigned int offset = entry * 4;
@@ -46,8 +45,7 @@ void condition_activate_entry(unsigned int row, unsigned int column, unsigned in
         address += column * 24;
         address += row * 144;
         address += (unsigned int)state;
-        if (!*(unsigned char *)(address + 0x448) &&
-            column < g_condition_definitions[row].count &&
+        if (!*(unsigned char *)(address + 0x448) && column < g_condition_definitions[row].count &&
             entry < g_condition_definitions[row].columns[column]->count)
             *current_flags() |= 0x100000;
     }
@@ -66,8 +64,8 @@ void condition_activate_entry(unsigned int row, unsigned int column, unsigned in
         unsigned char *state = (unsigned char *)&g_resource_game_state;
         unsigned char *actor = state + 0xdc;
         void *context;
-        condition_record_actor_selection((struct ConditionActorSelectionContext *)actor,
-                                         row, column, entry);
+        condition_record_actor_selection((struct ConditionActorSelectionContext *)actor, row,
+                                         column, entry);
         context = state + 0x10;
         condition_update_actor_context(context);
         condition_finish_actor_context(context);

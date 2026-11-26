@@ -56,4 +56,4 @@ void scene_link_menu_cancel(void)
     }
     audio_play_animation_cue(2);
 }
-asm(".align 2,0");
+asm(".align 2, 0");

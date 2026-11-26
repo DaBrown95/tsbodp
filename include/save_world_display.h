@@ -33,8 +33,8 @@ int save_world_ratio_percent(int, int);
 unsigned int display_load_resource_palette(const struct BackgroundResource *, unsigned short);
 void display_load_palette_ranges(const struct PaletteRangeConfig *);
 unsigned char frame_actor_need_value(struct FrameActorNeedState *, unsigned int);
-void display_copy_background_rectangle(unsigned int, const struct DisplayStoredMap *,
-    int, int, int, int, int, int, unsigned short);
+void display_copy_background_rectangle(unsigned int, const struct DisplayStoredMap *, int, int, int,
+                                       int, int, int, unsigned short);
 /* Explicit original division provider; no new runtime edge-case claim. */
 int display_bios_div(int, int);
 #endif

@@ -10,19 +10,23 @@
 #include "frame_random.h"
 /* Same native 0x03003950 storage, interpreted through accepted access views. */
 union CatalogWorldViews {
- struct SceneCatalogTransferWorld entries;
- struct FrameActorValueWorld value;
+    struct SceneCatalogTransferWorld entries;
+    struct FrameActorValueWorld value;
 };
 extern union CatalogWorldViews g_catalog_world;
 
 /* Individually assigned words carry the observed scratch-value epochs. */
 struct CatalogWordOwner {
- unsigned int low;
- unsigned int high;
+    unsigned int low;
+    unsigned int high;
 };
-typedef char catalog_word_owner_size[(sizeof(struct CatalogWordOwner)==8)?1:-1];
-typedef char catalog_word_owner_alignment[(__alignof__(struct CatalogWordOwner)==4)?1:-1];
-typedef char catalog_word_owner_low_offset[((unsigned int)&((struct CatalogWordOwner *)0)->low==0)?1:-1];
-typedef char catalog_word_owner_high_offset[((unsigned int)&((struct CatalogWordOwner *)0)->high==4)?1:-1];
+typedef char catalog_word_owner_size[(sizeof(struct CatalogWordOwner) == 8) ? 1 : -1];
+typedef char catalog_word_owner_alignment[(__alignof__(struct CatalogWordOwner) == 4) ? 1 : -1];
+typedef char catalog_word_owner_low_offset[((unsigned int)&((struct CatalogWordOwner *)0)->low == 0)
+                                               ? 1
+                                               : -1];
+typedef char
+    catalog_word_owner_high_offset[((unsigned int)&((struct CatalogWordOwner *)0)->high == 4) ? 1
+                                                                                              : -1];
 
 #endif

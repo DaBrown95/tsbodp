@@ -2,7 +2,7 @@
 #include "save_condition_state.h"
 
 static inline unsigned int write_subfield_pair_and_next(const unsigned char *first_address,
-                                                       unsigned int second_address)
+                                                        unsigned int second_address)
 {
     save_stream_write_bits(first_address, 1);
     save_stream_write_bits((const unsigned char *)second_address, 1);
@@ -10,7 +10,7 @@ static inline unsigned int write_subfield_pair_and_next(const unsigned char *fir
     return second_address + 4;
 }
 
-void save_world_write_module_29d18(void)
+void save_world_write_condition_module(void)
 {
     unsigned int group;
     unsigned int cell;

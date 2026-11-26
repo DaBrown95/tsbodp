@@ -15,10 +15,9 @@ struct FrameObject *scene_contact_activity_four_create_primary(void)
     }
     object->flags = 1;
     frame_set_position(object, 88 << 16, 152 << 16);
-    frame_set_animation_record(object,
-        &g_scene_contact_activity_four_primary_animation);
+    frame_set_animation_record(object, &g_scene_contact_activity_four_primary_animation);
     object->on_step = scene_contact_activity_four_step_primary_object;
     return object;
 }
 
-asm(".align 2,0");
+asm(".align 2, 0");

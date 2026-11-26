@@ -1,8 +1,7 @@
 #include "display_text_raster.h"
 
 /* Render glyph columns through the shared tile-row buffer. */
-unsigned int display_text_render(unsigned int input_tile, int x, int y,
-                                const char *text)
+unsigned int display_text_render(unsigned int input_tile, int x, int y, const char *text)
 {
     unsigned int storage[64];
     const unsigned char *cursor;
@@ -51,7 +50,8 @@ unsigned int display_text_render(unsigned int input_tile, int x, int y,
         if (substituted && !*cursor) {
             cursor = resume;
             substituted = 0;
-            if (!*cursor) break;
+            if (!*cursor)
+                break;
         }
         if (!substituted && *cursor == '@') {
             ++cursor;
@@ -74,8 +74,7 @@ unsigned int display_text_render(unsigned int input_tile, int x, int y,
         }
         index = (int)glyph - font->first;
         /* Preserve the first-field reload on the bounds-check path. */
-        if (index < 0 ||
-            index > font->last - ((volatile const struct DisplayFont *)font)->first)
+        if (index < 0 || index > font->last - ((volatile const struct DisplayFont *)font)->first)
             index = 1;
         pixels = font->glyph_pixels + font->glyph_offsets[index];
         bit = 0;
@@ -85,19 +84,26 @@ unsigned int display_text_render(unsigned int input_tile, int x, int y,
             unsigned int height;
             width = previous_width - 1;
             next_cursor = cursor + 1;
-            if (previous_width == 0) break;
+            if (previous_width == 0)
+                break;
             if (g_display_text_state.wide_color == 1) {
                 unsigned char *destination = (unsigned char *)storage + y * 8 + x;
                 height = font->height;
                 for (;;) {
                     unsigned int previous_height = height;
                     height = previous_height - 1;
-                    if (previous_height == 0) break;
-                    if (bit == 8) { bit = 0; ++pixels; }
+                    if (previous_height == 0)
+                        break;
+                    if (bit == 8) {
+                        bit = 0;
+                        ++pixels;
+                    }
                     glyph = (*pixels >> bit) & 3;
                     if (glyph) {
-                        if (g_display_text_state.pixel_mode == 0) color = glyph;
-                        else if (g_display_text_state.pixel_mode == 1) color = 0;
+                        if (g_display_text_state.pixel_mode == 0)
+                            color = glyph;
+                        else if (g_display_text_state.pixel_mode == 1)
+                            color = 0;
                         *destination = color + palette;
                     }
                     destination += 8;
@@ -111,13 +117,19 @@ unsigned int display_text_render(unsigned int input_tile, int x, int y,
                     unsigned int previous_height = height;
                     unsigned int value;
                     height = previous_height - 1;
-                    if (previous_height == 0) break;
+                    if (previous_height == 0)
+                        break;
                     odd = x & 1;
-                    if (bit == 8) { bit = 0; ++pixels; }
+                    if (bit == 8) {
+                        bit = 0;
+                        ++pixels;
+                    }
                     value = (*pixels >> bit) & 3;
                     if (value) {
-                        if (g_display_text_state.pixel_mode == 0) color = value;
-                        else if (g_display_text_state.pixel_mode == 1) color = 0;
+                        if (g_display_text_state.pixel_mode == 0)
+                            color = value;
+                        else if (g_display_text_state.pixel_mode == 1)
+                            color = 0;
                         if (!odd) {
                             unsigned int retained = *destination & 0xf0;
                             unsigned int sum = color + palette;

@@ -44,9 +44,9 @@ extern const void *const g_need_effect_departure_palette_slot[];
 void display_set_mode(unsigned short);
 void display_configure_tile_allocation(unsigned char);
 void display_show_background(unsigned int, unsigned int);
-const unsigned short *display_load_background(unsigned int,
-    const struct BackgroundResource *, unsigned short, unsigned short,
-    unsigned int, unsigned int);
+const unsigned short *display_load_background(unsigned int, const struct BackgroundResource *,
+                                              unsigned short, unsigned short, unsigned int,
+                                              unsigned int);
 void frame_define_palette_slot(unsigned int, const void *const *);
 void transition_run_first(unsigned short, unsigned int);
 void scene_need_effect_departure_initialize(void);

@@ -12,4 +12,4 @@ void scene_text_bank_apply_selection(void)
         resource_submit_scene(g_scene_previous_request.unknown_00, 1,
                               g_scene_previous_request.scene);
 }
-asm(".align 2,0");
+asm(".align 2, 0");

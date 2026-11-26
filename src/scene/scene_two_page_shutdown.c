@@ -7,4 +7,4 @@ void scene_two_page_shutdown(void)
 }
 
 /* Original two zero alignment bytes, outside the eighteen-byte C body. */
-asm(".align 2,0");
+asm(".align 2, 0");

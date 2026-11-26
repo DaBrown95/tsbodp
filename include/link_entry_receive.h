@@ -19,6 +19,6 @@ struct LinkEntryGameState {
     struct ConditionActorEntries *entries;
 };
 extern struct LinkEntryGameState g_link_entry_game_state;
-unsigned int actor_entry_add(struct ConditionActorEntries *, unsigned int,
-                            unsigned char, unsigned char);
+unsigned int actor_entry_add(struct ConditionActorEntries *, unsigned int, unsigned char,
+                             unsigned char);
 #endif

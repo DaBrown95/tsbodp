@@ -1,8 +1,7 @@
 #include "save_transfer.h"
 
-unsigned short save_transfer_write_core(unsigned int block_word,
-                                       const void *source,
-                                       unsigned int wait_word)
+unsigned short save_transfer_write_core(unsigned int block_word, const void *source,
+                                        unsigned int wait_word)
 {
     unsigned short serial[82];
     volatile unsigned short completed, previous, current;
@@ -39,8 +38,7 @@ unsigned short save_transfer_write_core(unsigned int block_word,
     }
     *cursor-- = 0;
     *cursor = 1;
-    save_transfer_dma_copy(serial, (void *)0x0d000000,
-                           SAVE_TRANSFER_PARAMETERS->address_bits + 67);
+    save_transfer_dma_copy(serial, (void *)0x0d000000, SAVE_TRANSFER_PARAMETERS->address_bits + 67);
 
     status = 0;
     completed = 0;

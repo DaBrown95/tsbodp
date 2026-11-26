@@ -1,4 +1,4 @@
-"""Calibrate the optional mGBA observer with original, synthetic test code."""
+"""Calibrate the optional mGBA boot observer with synthetic test code."""
 import json
 from pathlib import Path
 import struct

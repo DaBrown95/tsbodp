@@ -17,9 +17,18 @@ unsigned char frame_clear_pending_actions(unsigned int category)
         match = 0;
 
         switch (choice) {
-        case 1: if (stored == 2) match = 1; break;
-        case 2: if (stored == 1) match = 1; break;
-        case 3: if (stored == 3) match = 1; break;
+            case 1:
+                if (stored == 2)
+                    match = 1;
+                break;
+            case 2:
+                if (stored == 1)
+                    match = 1;
+                break;
+            case 3:
+                if (stored == 3)
+                    match = 1;
+                break;
         }
         if (match) {
             node->category = 0;
@@ -38,18 +47,32 @@ unsigned char frame_clear_pending_actions(unsigned int category)
                 ((struct ActorEntryContext *)g_scene_entry_data)->collection->groups[world].start;
             unsigned int i;
             for (i = first; i < first + count; i++) {
-                stored =
-                    ((struct ActorEntryContext *)g_scene_entry_data)->collection->records[i].entry.value1;
+                stored = ((struct ActorEntryContext *)g_scene_entry_data)
+                             ->collection->records[i]
+                             .entry.value1;
                 match = 0;
 
                 switch (choice) {
-                case 1: if (stored == 2) match = 1; break;
-                case 2: if (stored == 1) match = 1; break;
-                case 3: if (stored == 3) match = 1; break;
+                    case 1:
+                        if (stored == 2)
+                            match = 1;
+                        break;
+                    case 2:
+                        if (stored == 1)
+                            match = 1;
+                        break;
+                    case 3:
+                        if (stored == 3)
+                            match = 1;
+                        break;
                 }
                 if (match) {
-                    ((struct ActorEntryContext *)g_scene_entry_data)->collection->records[i].entry.value1 = 0;
-                    ((struct ActorEntryContext *)g_scene_entry_data)->collection->records[i].entry.value2 = 0;
+                    ((struct ActorEntryContext *)g_scene_entry_data)
+                        ->collection->records[i]
+                        .entry.value1 = 0;
+                    ((struct ActorEntryContext *)g_scene_entry_data)
+                        ->collection->records[i]
+                        .entry.value2 = 0;
                     result = 1;
                 }
             }

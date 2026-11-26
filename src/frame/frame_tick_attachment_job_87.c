@@ -4,4 +4,4 @@
 void frame_tick_attachment_job_87(struct FrameNeedEffectState *owner)
 {
 }
-asm(".align 2,0");
+asm(".align 2, 0");

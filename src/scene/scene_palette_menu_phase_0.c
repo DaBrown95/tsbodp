@@ -12,8 +12,7 @@ void scene_palette_menu_phase_0(void)
         unsigned int timer = g_scene_request.unknown_14;
         if (timer == 30) {
             struct FrameObject **objects;
-            display_set_window_rectangle(1, 0, 160 * 65536, 240 * 65536,
-                                         160 * 65536);
+            display_set_window_rectangle(1, 0, 160 * 65536, 240 * 65536, 160 * 65536);
             display_configure_window(1, 63, 60);
             display_set_background_scroll_target(1, 0, 0, 15);
             display_set_background_scroll_target(0, 0, 0, 15);
@@ -45,8 +44,9 @@ void scene_palette_menu_phase_0(void)
             frame_set_variant_state(objects[12], 56);
             objects[15]->id = 135;
             {
-                struct PaletteTimerCell *destination = (struct PaletteTimerCell *)
-                    &((struct FrameActorObject *)objects[15])->need_timer;
+                struct PaletteTimerCell *destination =
+                    (struct PaletteTimerCell *)&((struct FrameActorObject *)objects[15])
+                        ->need_timer;
                 destination->value = (timer = 15);
             }
             frame_set_variant_state(objects[15], 56);
@@ -82,4 +82,4 @@ void scene_palette_menu_phase_0(void)
     }
 }
 
-asm(".align 2,0");
+asm(".align 2, 0");

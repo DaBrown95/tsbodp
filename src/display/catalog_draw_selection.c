@@ -13,25 +13,28 @@ void display_catalog_draw_selection(void)
         unsigned int index = g_display_scene_request_state.scene - 5;
         if (types[g_display_scene_request_state.scene - 5].unknown_00[0] != 255) {
             display_catalog_draw_name(166, 120, 96,
-                types[g_display_scene_request_state.scene - 5].unknown_00[0], index, 1);
+                                      types[g_display_scene_request_state.scene - 5].unknown_00[0],
+                                      index, 1);
             display_text_select_font(1, 0, -1);
-            display_catalog_draw_details(226, 8, 112, 224,
-                types[g_display_scene_request_state.scene - 5].unknown_00[0], index, 0);
+            display_catalog_draw_details(
+                226, 8, 112, 224, types[g_display_scene_request_state.scene - 5].unknown_00[0],
+                index, 0);
         }
-        if ((unsigned char)(types[g_display_scene_request_state.scene - 5].unknown_00[0] + 0x55) <= 0x17) {
+        if ((unsigned char)(types[g_display_scene_request_state.scene - 5].unknown_00[0] + 0x55) <=
+            0x17) {
             /* A separate observed byte beyond the partial context view. */
             unsigned int address = (unsigned int)catalog;
             unsigned int label = *(unsigned char *)(address + 0x41a);
             display_text_copy_field_zero(display_scene_lookup_text(label + 0x1789));
-            display_text_draw_line(476, 120, 144,
-                                  display_scene_lookup_text(298), 1);
+            display_text_draw_line(476, 120, 144, display_scene_lookup_text(298), 1);
         }
     } else {
         const char *text = display_scene_lookup_text(g_display_scene_request_state.scene + 504);
         display_text_draw_line(166, 120, 96, text, 1);
         display_text_select_font(1, 0, -1);
-        display_text_draw_all_lines(226, 8, 112, 224,
-            display_scene_lookup_text(g_display_scene_request_state.scene + 795), 0);
+        display_text_draw_all_lines(
+            226, 8, 112, 224, display_scene_lookup_text(g_display_scene_request_state.scene + 795),
+            0);
     }
 }
 asm(".align 2, 0");

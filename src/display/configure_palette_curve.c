@@ -26,8 +26,7 @@ void display_configure_palette_curve(unsigned int incoming_parameter)
                 int increment = (short)step;
                 limit = endpoint;
                 do {
-                    unsigned char *destination = (unsigned char *)(
-                        index + (unsigned int)output);
+                    unsigned char *destination = (unsigned char *)(index + (unsigned int)output);
                     int current = (short)accumulator;
                     *destination = current >> 8;
                     current += increment;
@@ -47,8 +46,7 @@ void display_configure_palette_curve(unsigned int incoming_parameter)
             unsigned char *output = g_palette_curve_values;
             int increment = (short)step;
             do {
-                unsigned char *destination = (unsigned char *)(
-                    index + (unsigned int)output);
+                unsigned char *destination = (unsigned char *)(index + (unsigned int)output);
                 int current = (short)accumulator;
                 *destination = current >> 8;
                 current += increment;

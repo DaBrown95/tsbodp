@@ -4,8 +4,7 @@ void frame_update_need7_from_effects(void)
 {
     struct FrameActorNeedState *needs =
         (struct FrameActorNeedState *)g_frame_actor_local_need_state;
-    if (frame_world_in_idle_exclusion_set(g_frame_world_id) == 1 ||
-        g_frame_world_id == 28) {
+    if (frame_world_in_idle_exclusion_set(g_frame_world_id) == 1 || g_frame_world_id == 28) {
         unsigned char count;
         unsigned char target = frame_need_effect_average(&count);
         unsigned char current = frame_actor_need_value(needs, 7);

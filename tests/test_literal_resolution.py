@@ -1,4 +1,4 @@
-"""Explicit literal addresses must not turn data roots into guessed names/CFG."""
+"""Explicit literal addresses must not turn data into guessed names or control flow."""
 import contextlib
 import hashlib
 import io

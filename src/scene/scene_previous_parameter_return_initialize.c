@@ -12,8 +12,7 @@ void scene_previous_parameter_return_initialize(void)
     display_configure_tile_allocation(0);
     display_enable_layers(4096);
     display_show_background(3, g_scene_previous_parameter_return_control3);
-    display_load_background(3,
-        &g_scene_previous_parameter_return_background3, 0, 0, 0, 0);
+    display_load_background(3, &g_scene_previous_parameter_return_background3, 0, 0, 0, 0);
     control = g_scene_previous_parameter_return_control0;
     display_show_background(0, control);
     display_fill_background(0, 0);
@@ -28,4 +27,4 @@ void scene_previous_parameter_return_initialize(void)
     transition_run_first(63, 0);
     audio_play_sequence_notification(54);
 }
-asm(".align 2,0");
+asm(".align 2, 0");

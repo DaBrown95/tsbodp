@@ -8,7 +8,8 @@ void *heap_move(void *memory, const void *source, unsigned int bytes)
         unsigned char *destination = memory;
         unsigned int i;
         if (((unsigned int)memory & 3) || ((unsigned int)source & 3)) {
-            for (i = 0; i < bytes; ++i) destination[i] = src[i];
+            for (i = 0; i < bytes; ++i)
+                destination[i] = src[i];
         } else {
             unsigned int words = bytes >> 2;
             unsigned int trailing;

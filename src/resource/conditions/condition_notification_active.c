@@ -4,8 +4,7 @@
 
 unsigned char condition_notification_active(unsigned int kind)
 {
-    if (g_scene_request.unknown_00 != 15 ||
-        g_display_menu_state.definition != kind)
+    if (g_scene_request.unknown_00 != 15 || g_display_menu_state.definition != kind)
         return 0;
     return 1;
 }

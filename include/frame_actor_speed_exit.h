@@ -3,13 +3,18 @@
 #include "frame_actor_scene.h"
 #include "frame_actor_speed_control.h"
 /* Only the exit callback's observed fields are named in these views. */
-struct FrameActorExitPalette { unsigned char unknown00[0x42d], palette; };
-struct FrameSpeedExitSceneResult { unsigned char unknown00[12]; int result; };
+struct FrameActorExitPalette {
+    unsigned char unknown00[0x42d], palette;
+};
+struct FrameSpeedExitSceneResult {
+    unsigned char unknown00[12];
+    int result;
+};
 struct CollisionObject;
 struct FrameSpeedExitCallbacks {
- unsigned char unknown00[0xc8];
- unsigned int scratch;
- void (*on_interact)(struct CollisionObject *, struct CollisionObject *);
+    unsigned char unknown00[0xc8];
+    unsigned int scratch;
+    void (*on_interact)(struct CollisionObject *, struct CollisionObject *);
 };
 extern unsigned char g_frame_actor_exit_variants[];
 extern struct FrameVariantResource g_frame_actor_exit_resources[];

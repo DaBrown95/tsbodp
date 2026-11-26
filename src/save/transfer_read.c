@@ -1,6 +1,6 @@
 #include "save_transfer.h"
 
-unsigned short save_transfer_read_4c9bc(unsigned int block_word, void *destination)
+unsigned short save_transfer_read_block(unsigned int block_word, void *destination)
 {
     unsigned short serial[68];
     unsigned char i, j;
@@ -23,8 +23,7 @@ unsigned short save_transfer_read_4c9bc(unsigned int block_word, void *destinati
     }
     *cursor-- = 1;
     *cursor = 1;
-    save_transfer_dma_copy(serial, (void *)0x0d000000,
-                           SAVE_TRANSFER_PARAMETERS->address_bits + 3);
+    save_transfer_dma_copy(serial, (void *)0x0d000000, SAVE_TRANSFER_PARAMETERS->address_bits + 3);
     save_transfer_dma_copy((const void *)0x0d000000, serial, 68);
     cursor = serial + 4;
     output += 3;

@@ -21,12 +21,14 @@ unsigned int scene_contact_receive_serial_word(unsigned int word)
     } else {
         command = word & 0xFF;
         if (!g_scene_contact_input_setup.prefix.fields.unknown06) {
-            if (command > 63 && command <= g_scene_contact_input_setup.prefix.fields.first_parameter) {
+            if (command > 63 &&
+                command <= g_scene_contact_input_setup.prefix.fields.first_parameter) {
                 g_scene_contact_input_setup.prefix.fields.receive_index = 0;
                 g_scene_contact_input_setup.prefix.fields.receive_remaining = (word >> 8) & 0xFF;
                 if (!g_scene_contact_input_setup.prefix.fields.receive_remaining) {
                     receive_bytes = 0;
-                    g_scene_contact_input_setup.handler(command, &receive_bytes,
+                    g_scene_contact_input_setup.handler(
+                        command, &receive_bytes,
                         g_scene_contact_input_setup.prefix.fields.first_buffer);
                     g_scene_contact_input_setup.prefix.fields.status = 4;
                 } else {
@@ -34,17 +36,22 @@ unsigned int scene_contact_receive_serial_word(unsigned int word)
                     g_scene_contact_input_setup.prefix.fields.unknown06 = command;
                 }
                 SCENE_CONTACT_SERIAL_REG32(0x04000154) =
-                    (scene_contact_fold_serial_word(g_scene_contact_input_setup.prefix.fields.receive_remaining) << 24) |
+                    (scene_contact_fold_serial_word(
+                         g_scene_contact_input_setup.prefix.fields.receive_remaining)
+                     << 24) |
                     (g_scene_contact_input_setup.prefix.fields.receive_remaining << 8) | command;
-            } else if (command > 127 && command <= g_scene_contact_input_setup.prefix.fields.second_parameter) {
+            } else if (command > 127 &&
+                       command <= g_scene_contact_input_setup.prefix.fields.second_parameter) {
                 g_scene_contact_input_setup.prefix.fields.status = 3;
                 g_scene_contact_input_setup.prefix.fields.unknown06 = command;
-                g_scene_contact_input_setup.handler(command, &send_bytes,
-                    g_scene_contact_input_setup.prefix.fields.second_buffer);
+                g_scene_contact_input_setup.handler(
+                    command, &send_bytes, g_scene_contact_input_setup.prefix.fields.second_buffer);
                 g_scene_contact_input_setup.prefix.fields.transmit_index = 0;
                 g_scene_contact_input_setup.prefix.fields.transmit_remaining = (send_bytes + 1) / 2;
                 SCENE_CONTACT_SERIAL_REG32(0x04000154) =
-                    (scene_contact_fold_serial_word(g_scene_contact_input_setup.prefix.fields.transmit_remaining) << 24) |
+                    (scene_contact_fold_serial_word(
+                         g_scene_contact_input_setup.prefix.fields.transmit_remaining)
+                     << 24) |
                     (g_scene_contact_input_setup.prefix.fields.transmit_remaining << 8) | command;
             }
         } else if (g_scene_contact_input_setup.prefix.fields.unknown06 > 63 &&
@@ -53,7 +60,8 @@ unsigned int scene_contact_receive_serial_word(unsigned int word)
             if (command == 0x60) {
                 if ((unsigned char)scene_contact_store_serial_word(word)) {
                     if (!g_scene_contact_input_setup.prefix.fields.receive_remaining) {
-                        complete_bytes = g_scene_contact_input_setup.prefix.fields.receive_index * 2;
+                        complete_bytes =
+                            g_scene_contact_input_setup.prefix.fields.receive_index * 2;
                         g_scene_contact_input_setup.handler(
                             g_scene_contact_input_setup.prefix.fields.unknown06, &complete_bytes,
                             g_scene_contact_input_setup.prefix.fields.first_buffer);

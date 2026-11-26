@@ -1,6 +1,6 @@
 #include "display.h"
-void display_transfer_palette(const void *input_, unsigned int first_,
-    unsigned int count_, struct PaletteBufferPair *pair_)
+void display_transfer_palette(const void *input_, unsigned int first_, unsigned int count_,
+                              struct PaletteBufferPair *pair_)
 {
     const void *input = input_;
     unsigned int first = first_;

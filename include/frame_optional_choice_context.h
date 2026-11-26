@@ -16,17 +16,17 @@ struct FrameOptionalChoiceContextState {
 unsigned char frame_object_has_zero_id(struct FrameObject *);
 unsigned int frame_initialize_optional_choice_context(struct FrameNeedEffectState *);
 unsigned int frame_optional_choice_context_available(struct FrameNeedEffectState *,
-                                                      struct FrameObject *);
+                                                     struct FrameObject *);
 unsigned int frame_select_optional_choice_attachment_kind(struct FrameNeedEffectState *,
-                                                           unsigned char *);
+                                                          unsigned char *);
 /* The modeled 41/45 kind switch reproduces the saved argument across the
  * byte-result predicate call. Historical cases and EC delivery remain inferred. */
 unsigned int frame_check_optional_choice_attachment_kind(struct FrameNeedEffectState *,
-                                                          struct FrameObject *, unsigned int);
-unsigned int frame_begin_optional_choice_attachment_job(struct FrameNeedEffectState *,
                                                          struct FrameObject *, unsigned int);
+unsigned int frame_begin_optional_choice_attachment_job(struct FrameNeedEffectState *,
+                                                        struct FrameObject *, unsigned int);
 unsigned int frame_dispatch_optional_choice_attachment_job(struct FrameNeedEffectState *,
-                                                            struct FrameObject *);
+                                                           struct FrameObject *);
 unsigned int frame_step_optional_choice_kind_45(struct FrameNeedEffectState *,
                                                 struct FrameActorAttachmentRecord *);
 void frame_optional_choice_context_tick(struct FrameNeedEffectState *);

@@ -22,14 +22,17 @@ void frame_apply_update(struct FrameApplyObject *object, FrameU8 ready)
                 {
                     int group = object->shared_group;
                     FrameU32 base = (FrameU32)FRAME_SHARED;
-                    shared = (struct FrameAllocationShared *)
-                        (group * sizeof(struct FrameAllocationShared) + base);
+                    shared =
+                        (struct FrameAllocationShared *)(group *
+                                                             sizeof(struct FrameAllocationShared) +
+                                                         base);
                 }
                 if (!((shared->resource == object->resource && shared->counts[0] &&
-                     shared->frame == object->frame) ||
-                    FRAME_SHARED[object->shared_group].epoch == g_frame_allocation_epoch)) {
+                       shared->frame == object->frame) ||
+                      FRAME_SHARED[object->shared_group].epoch == g_frame_allocation_epoch)) {
                     if (object->index != 0xffff) {
-                        frame_free_display_range(object->index, object->bytes, object->double_tile_size);
+                        frame_free_display_range(object->index, object->bytes,
+                                                 object->double_tile_size);
                         object->index |= 0xffff;
                     } else {
                         FRAME_SHARED[object->shared_group].counts[slot]++;
@@ -51,8 +54,10 @@ void frame_apply_update(struct FrameApplyObject *object, FrameU8 ready)
                 {
                     int group = object->shared_group;
                     FrameU32 base = (FrameU32)FRAME_SHARED;
-                    shared = (struct FrameAllocationShared *)
-                        (group * sizeof(struct FrameAllocationShared) + base);
+                    shared =
+                        (struct FrameAllocationShared *)(group *
+                                                             sizeof(struct FrameAllocationShared) +
+                                                         base);
                 }
                 if (!shared->counts[slot]) {
                     index = frame_allocate_display(0, bytes, 0);
@@ -65,9 +70,11 @@ void frame_apply_update(struct FrameApplyObject *object, FrameU8 ready)
                 if (slot != object->previous_frame && object->index != 0xffff) {
                     FRAME_SHARED[object->shared_group].counts[object->previous_frame]--;
                     if (!FRAME_SHARED[object->shared_group].counts[object->previous_frame]) {
-                        frame_free_display_range(object->index, object->bytes, object->double_tile_size);
+                        frame_free_display_range(object->index, object->bytes,
+                                                 object->double_tile_size);
                         object->index |= 0xffff;
-                        FRAME_SHARED[object->shared_group].indices[object->previous_frame] |= 0xffff;
+                        FRAME_SHARED[object->shared_group].indices[object->previous_frame] |=
+                            0xffff;
                     }
                 }
             }
@@ -84,7 +91,7 @@ void frame_apply_update(struct FrameApplyObject *object, FrameU8 ready)
                         part_bytes = dimensions.x * dimensions.y;
                         if (object->parts[i].index != 0xffff)
                             frame_free_display_range(object->parts[i].index, object->parts[i].bytes,
-                                object->double_tile_size);
+                                                     object->double_tile_size);
                         part_index = frame_allocate_display(0, part_bytes, 0);
                         if (part_index != 0xffff) {
                             object->parts[i].index = part_index;
@@ -130,7 +137,8 @@ void frame_apply_update(struct FrameApplyObject *object, FrameU8 ready)
                             frame = object->frame;
                         }
                         frame_upload_sequence(object->parts[i].variants[group][variant].sequence,
-                            pixels, object->parts[i].index, frame, object->parts[i].bytes);
+                                              pixels, object->parts[i].index, frame,
+                                              object->parts[i].bytes);
                     }
                 }
             } else {

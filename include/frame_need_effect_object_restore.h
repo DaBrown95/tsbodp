@@ -15,8 +15,8 @@ struct FrameNeedEffectRestoreObject {
 
 /* These signatures repeat the existing canonical provider declarations. */
 struct FrameSceneSavedEffect;
-struct FrameObject *frame_create_option_object(unsigned int, unsigned char,
-                                              unsigned char, short, short);
+struct FrameObject *frame_create_option_object(unsigned int, unsigned char, unsigned char, short,
+                                               short);
 struct FrameSceneSavedEffect *frame_spawn_saved_scene_effect(int, int);
 void transition_object_set_state(void *, unsigned char);
 

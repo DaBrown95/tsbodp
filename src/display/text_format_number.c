@@ -1,13 +1,15 @@
 #include "display_text_fields.h"
 
-#define WRITE_DECIMAL_PLACE(place, grouped) do { \
-    if (value > (place) - 1 || digit != -1) { \
-        digit = value / (place); \
-        value %= (place); \
-        *cursor++ = digit + '0'; \
-        if (grouped) *cursor++ = g_display_text_number_separator; \
-    } \
-} while (0)
+#define WRITE_DECIMAL_PLACE(place, grouped)                  \
+    do {                                                     \
+        if (value > (place) - 1 || digit != -1) {            \
+            digit = value / (place);                         \
+            value %= (place);                                \
+            *cursor++ = digit + '0';                         \
+            if (grouped)                                     \
+                *cursor++ = g_display_text_number_separator; \
+        }                                                    \
+    } while (0)
 
 char *display_text_format_number(int input_value, char *destination)
 {

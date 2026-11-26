@@ -21,7 +21,7 @@ void scene_contact_activity_zero_initialize(void)
     frame_initialize_transient_definition(0, 0, &g_activity_zero_transient0);
     STATE->flags |= 32;
     {
-        struct FrameObject *primary = frame_create_actor_24420(g_activity_zero_start, 14);
+        struct FrameObject *primary = frame_controlled_actor_create(g_activity_zero_start, 14);
         struct FrameScenePlayerSlot *slots = g_frame_scene_player_slots;
         STATE->primary = primary;
         slots[0].object = primary;
@@ -46,4 +46,4 @@ void scene_contact_activity_zero_initialize(void)
         ((struct FrameOptionObject *)object)->time0 = 120;
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

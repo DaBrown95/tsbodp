@@ -11,7 +11,8 @@ int display_text_load_string(unsigned int id, char *output, unsigned int input_c
     /* Revision 1 tracks two-byte characters and stops on a zero code. */
     unsigned int code = 0, pending = 0;
 #endif
-    if (!g_display_text_resource) return 1;
+    if (!g_display_text_resource)
+        return 1;
     source = g_display_text_resource + g_display_text_offsets[id];
     count = 0;
     bit = 0;
@@ -19,8 +20,10 @@ int display_text_load_string(unsigned int id, char *output, unsigned int input_c
     do {
         unsigned int node = 256;
         do {
-            if ((bits >> bit) & 1) node = g_display_text_nodes[node - 256].one;
-            else node = g_display_text_nodes[node - 256].zero;
+            if ((bits >> bit) & 1)
+                node = g_display_text_nodes[node - 256].one;
+            else
+                node = g_display_text_nodes[node - 256].zero;
             ++bit;
             if (bit == 8) {
                 bit = 0;
@@ -29,20 +32,21 @@ int display_text_load_string(unsigned int id, char *output, unsigned int input_c
         } while (node > 255);
         destination[count++] = node;
 #if TSBO_REVISION == 0
-        if (!destination[count - 1]) return 0;
+        if (!destination[count - 1])
+            return 0;
     } while (count != capacity);
     return 2;
 #else
         if ((unsigned char)node > 0xef && !pending) {
             code = (unsigned char)node << 8;
             pending = 1;
-        }
-        else if (pending) {
+        } else if (pending) {
             code |= (unsigned char)node;
             pending = 0;
-        }
-        else code = (unsigned char)node;
-        if (destination[count - 1] && count == capacity) return 2;
+        } else
+            code = (unsigned char)node;
+        if (destination[count - 1] && count == capacity)
+            return 2;
     } while (code);
     return 0;
 #endif

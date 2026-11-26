@@ -17,10 +17,9 @@ extern const unsigned int g_attachment_job_87_parameter_indices[6];
 
 unsigned int frame_step_attachment_job_87(struct FrameNeedEffectState *,
                                           struct FrameActorAttachmentRecord *);
-unsigned int frame_begin_attachment_job_87(struct FrameNeedEffectState *,
-                                           struct FrameObject *, unsigned int);
-unsigned int frame_dispatch_attachment_job_87(struct FrameNeedEffectState *,
-                                              struct FrameObject *);
+unsigned int frame_begin_attachment_job_87(struct FrameNeedEffectState *, struct FrameObject *,
+                                           unsigned int);
+unsigned int frame_dispatch_attachment_job_87(struct FrameNeedEffectState *, struct FrameObject *);
 
 /* Row 87's initializer and F8 tick consume no argument value.
  * Additional historical unused formals remain unresolved. */

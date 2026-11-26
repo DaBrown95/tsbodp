@@ -50,33 +50,39 @@ void scene_link_menu_accept(void)
         }
     } else {
         switch (g_scene_request.scene) {
-        case 0: scene_submit_default_request(22); break;
-        case 1: scene_submit_default_request(18); break;
-        case 2: scene_submit_default_request(24); break;
-        case 4:
-            g_scene_link_menu_selector_word = 11;
-            resource_submit_scene(7, 1, 0);
-            break;
-        case 3:
-            resource_submit_scene(6, 0, g_scene_request.unknown_00);
-            break;
-        case 5:
-            g_scene_request.unknown_10 = 1;
-            g_scene_request.parameter = 1;
-            display_fill_background_constant_rectangle(2, 2, 3, 28, 24, 0);
-            display_hide_background(1);
-            g_display_scene_frame_objects[0]->flags &= ~1;
-            display_text_select_font(1, 0, 0);
-            display_text_draw_line(1, 120, 28, display_scene_lookup_text(219), 1);
-            {
-                unsigned int row = g_scene_request.parameter;
-                draw_row(row, row);
-            }
-            draw_row(0, g_scene_request.parameter);
-            display_load_palette_ranges(&g_display_menu_palette_ranges);
-            break;
+            case 0:
+                scene_submit_default_request(22);
+                break;
+            case 1:
+                scene_submit_default_request(18);
+                break;
+            case 2:
+                scene_submit_default_request(24);
+                break;
+            case 4:
+                g_scene_link_menu_selector_word = 11;
+                resource_submit_scene(7, 1, 0);
+                break;
+            case 3:
+                resource_submit_scene(6, 0, g_scene_request.unknown_00);
+                break;
+            case 5:
+                g_scene_request.unknown_10 = 1;
+                g_scene_request.parameter = 1;
+                display_fill_background_constant_rectangle(2, 2, 3, 28, 24, 0);
+                display_hide_background(1);
+                g_display_scene_frame_objects[0]->flags &= ~1;
+                display_text_select_font(1, 0, 0);
+                display_text_draw_line(1, 120, 28, display_scene_lookup_text(219), 1);
+                {
+                    unsigned int row = g_scene_request.parameter;
+                    draw_row(row, row);
+                }
+                draw_row(0, g_scene_request.parameter);
+                display_load_palette_ranges(&g_display_menu_palette_ranges);
+                break;
         }
     }
     audio_play_animation_cue(1);
 }
-asm(".align 2,0");
+asm(".align 2, 0");

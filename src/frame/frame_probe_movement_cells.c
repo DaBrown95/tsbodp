@@ -32,10 +32,8 @@ void frame_probe_movement_cells(struct FrameObject *object, void *registration)
             register unsigned int next_cell asm("r2") = cell.index;
 
             if ((current_cell & mask) != (next_cell & mask)) {
-                unsigned int occupancy = frame_grid_occupancy(
-                    registration, (const int *)&cell);
-                unsigned int terrain = frame_grid_terrain(
-                    registration, (const int *)&cell);
+                unsigned int occupancy = frame_grid_occupancy(registration, (const int *)&cell);
+                unsigned int terrain = frame_grid_terrain(registration, (const int *)&cell);
                 unsigned int masked = occupancy & 0x2d;
                 unsigned int occupied = (-masked | masked) >> 31;
                 unsigned int marked = (occupancy >> 4) & 1;

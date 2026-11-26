@@ -1,7 +1,6 @@
 #include "save_world_view_update.h"
 
-static inline unsigned int transition_row_ready(unsigned int index,
-                                                unsigned int eight_index)
+static inline unsigned int transition_row_ready(unsigned int index, unsigned int eight_index)
 {
     struct SaveWorldTransitionRow *table;
     unsigned int offset;
@@ -25,7 +24,8 @@ void scene_update_view(unsigned int index)
         address += 4;
         flags = (unsigned int *)(offset + address);
     }
-    if (*flags & 0x400000) save_world_refresh_row_palette(index);
+    if (*flags & 0x400000)
+        save_world_refresh_row_palette(index);
     if (*flags & 2) {
         *flags &= ~2u;
         display_fill_background_constant_rectangle(0, 25, 1, 6, 1, 0x2169);
@@ -147,29 +147,29 @@ void scene_update_view(unsigned int index)
     {
         if (index == g_scene_primary_views.current_view && !(g_game_flags & 0x100000)) {
             switch (transition_row_ready(index, transition_eight_index)) {
-            case 1:
-                if ((g_input_pressed[index] & 0x200) &&
-                    (g_scene_primary_views.slots[index].object->state == 16 ||
-                     g_scene_primary_views.slots[index].object->state == 27))
-                    save_world_begin_transition(index);
-                save_world_update_row_gauges();
-                break;
-            case 0:
-                if ((g_input_pressed[index] & 0x200) &&
-                    (g_scene_primary_views.slots[index].object->state == 16 ||
-                     g_scene_primary_views.slots[index].object->state == 27)) {
-                    save_world_finish_transition(index, 0);
-                    audio_play_animation_cue(12);
-                }
-                break;
+                case 1:
+                    if ((g_input_pressed[index] & 0x200) &&
+                        (g_scene_primary_views.slots[index].object->state == 16 ||
+                         g_scene_primary_views.slots[index].object->state == 27))
+                        save_world_begin_transition(index);
+                    save_world_update_row_gauges();
+                    break;
+                case 0:
+                    if ((g_input_pressed[index] & 0x200) &&
+                        (g_scene_primary_views.slots[index].object->state == 16 ||
+                         g_scene_primary_views.slots[index].object->state == 27)) {
+                        save_world_finish_transition(index, 0);
+                        audio_play_animation_cue(12);
+                    }
+                    break;
             }
         }
     }
     {
-        unsigned char average = frame_actor_need_average(
-            (struct FrameActorNeedState *)g_frame_actor_local_need_state);
+        unsigned char average =
+            frame_actor_need_average((struct FrameActorNeedState *)g_frame_actor_local_need_state);
         unsigned int gauge = save_world_scale_gauge(average, 100, 7);
-        g_save_world_summary_map = display_load_background_resource_dma(
-            0, g_save_world_need_resources[gauge], 492);
+        g_save_world_summary_map =
+            display_load_background_resource_dma(0, g_save_world_need_resources[gauge], 492);
     }
 }

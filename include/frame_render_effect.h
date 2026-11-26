@@ -11,8 +11,12 @@ struct FrameRenderEffect {
     struct FramePoint origin;
     union {
         struct FramePoint fixed;
-        struct { unsigned short fraction_x; short x;
-                 unsigned short fraction_y; short y; } pixel;
+        struct {
+            unsigned short fraction_x;
+            short x;
+            unsigned short fraction_y;
+            short y;
+        } pixel;
     } position;
     struct FramePoint velocity;
     union {

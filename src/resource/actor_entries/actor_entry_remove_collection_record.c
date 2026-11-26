@@ -1,14 +1,12 @@
 #include "resource_actor_entries.h"
 
-static inline unsigned int actor_entry_collection_count(
-    struct ActorEntryCollection **reference)
+static inline unsigned int actor_entry_collection_count(struct ActorEntryCollection **reference)
 {
     register struct ActorEntryCollection *collection asm("r0") = *reference;
     return collection->count;
 }
 
-void actor_entry_remove_collection_record(struct ActorEntryContext *context,
-                                          unsigned int group,
+void actor_entry_remove_collection_record(struct ActorEntryContext *context, unsigned int group,
                                           unsigned int selected)
 {
     struct ActorEntryCollection **reference = &context->collection;
@@ -19,15 +17,14 @@ void actor_entry_remove_collection_record(struct ActorEntryContext *context,
     goto check_record;
     do {
         unsigned int collection = (unsigned int)*reference;
-        struct ActorEntryCollectionRecord *destination =
-            (void *)(collection + index * 12);
+        struct ActorEntryCollectionRecord *destination = (void *)(collection + index * 12);
         struct ActorEntryCollectionRecord *source;
         index++;
         source = (void *)(collection + index * 12);
         destination = (void *)((unsigned int)destination + 4);
         source = (void *)((unsigned int)source + 4);
         *destination = *source;
-check_record:;
+    check_record:;
     } while (index < actor_entry_collection_count(reference));
     {
         struct ActorEntryCollection **clear_reference = &context->collection;

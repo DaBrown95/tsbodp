@@ -1,4 +1,8 @@
-"""Pure interval accounting; discovery never grants matching-source credit."""
+"""Split the ROM into disjoint extents, marking every byte not accounted for as unresolved.
+
+Pure interval arithmetic used by tools/inventory_rom.py. Finding a function
+here does not mean it has matching C source.
+"""
 
 def partition(rows, size):
     """A complete, disjoint ROM accounting, including every unresolved byte."""

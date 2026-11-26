@@ -1,15 +1,18 @@
-# Bounded boot observations
+# Emulator observations
 
-These emulator observations supplement static reconstruction evidence. They do
-not establish all executable regions, all indirect targets, hardware behavior,
-or complete source ownership. The separate static inventory census retains
-`runtime_observations: 0`: that field describes the census's inputs, not the
-absence of this independent experiment.
+These notes record what the game does when run in the mGBA emulator, to
+support the static reconstruction. They are a small number of finite
+experiments. They do not show which regions are executable, what every
+indirect call can reach, how real hardware behaves, or that any code is fully
+accounted for. The static inventory census reports `runtime_observations: 0`
+because it does not read these results; that does not mean no observations
+exist.
 
-The target remains USA/Europe revision 0, SHA-256
+The target is USA/Europe revision 0, SHA-256
 `92ead9ff9467dbc23780e768278fe2e4bf7a0708447a0785770c129a5dbdb06e`.
-The ROM, native emulator library and raw trace payloads remain local and ignored.
-Only the harness, reproducibility instructions and bounded summary are public.
+The ROM, the built emulator library and the raw traces stay on the local
+machine and are not published. The repository holds the harness, the recipe
+below and the summaries.
 
 ## Emulator recipe
 
@@ -74,557 +77,459 @@ before running. The harness accepts bounded runs up to 3,600 frames and
 the wrong-watch control, pre-entry register timing, missing ROM rejection and
 invalid bounds. They use synthetic instructions, with no original game payload.
 
-## Recorded result
+## Boot observation
 
 The [machine-readable summary](../config/rev0/runtime-observations.json)
-records all 36 entry/site probes and 18 write probes, including zero-hit probes.
-The 300-frame run reached 30 probes in 5,835,926 steps and 84,028,913
-emulator ticks. Its replay was byte-identical: both 72,816-byte trace files have
-SHA-256 `5422e126c328ce26917aa7553cc51c86e9fc42863527a7416879a11564907630`.
-The wrong-watch trace has SHA-256
-`c0a2b1b44c94921ec8cf7fb12a5d98ab8fb836b9b7f0ecd9a8f0a986478121e5`.
-It reports zero watched writes and the same entry counts, final registers,
-frames, steps and ticks. All three runs report zero fatal, error, warning,
-stub and game-error log messages.
+records all 36 entry and call-site probes and 18 write probes, including those
+that were never hit. A 300-frame run with no keys held reaches 30 of the
+probes in 5,835,926 steps and 84,028,913 emulator ticks. A second run gives
+byte-identical output: both traces are 72,816 bytes with SHA-256
+`5422e126c328ce26917aa7553cc51c86e9fc42863527a7416879a11564907630`. A control
+run that watches the wrong addresses (SHA-256
+`c0a2b1b44c94921ec8cf7fb12a5d98ab8fb836b9b7f0ecd9a8f0a986478121e5`) reports
+no watched writes and the same entry counts, final registers, frames, steps
+and ticks. None of the three runs logs a fatal error, error, warning, stub
+call or game error.
 
-Renderer and finalizer entry counters each reached 810, the copied sorter 135,
-background decoder one and copied tile allocator six. These arrivals connect
-the remaining reconstruction work to this boot path. A separate calibrated
-RAM-field follow-up records strip mode for all 810 renderer arrivals, across
-six objects, with zero shared-part arrivals. Extending no-input boot to 3,600
-frames records 10,710 arrivals of the same strip-only form. A bounded Start/A
-path reaches non-strip direct-sequence objects but still no shared-part path.
-The original 300-frame trace is byte-identical after the extra field observations
-are removed. The six zero-hit entry probes include the selected left-mixer and
-bias-fill entries, collision and tile decoding, and both map kernels; no
-unreachability conclusion follows.
+The renderer and its finalizer are each entered 810 times, the copied sorter
+135 times, the background decoder once and the copied tile allocator six
+times. The six probes that were never hit include the left-mixer and
+bias-fill entries, collision and tile decoding, and both map kernels. A probe
+that is not hit in this run does not mean its code is unreachable.
 
-A separate source-directed key route accepts the language selection, enters a
-nonempty name, and opens the appearance preview. It reaches shared rendering at
-frame 1,180 without changing game code or memory. Dynamic watches then follow
-four part-flag bytes and four variant-pointer words on object `0x0200D0A0`
-through 128 renderer calls. Every window closes after the native return at
-`0x08002940` retires to the saved caller with restored stack and CPU mode.
-No watched writes or nested IRQ-dispatcher/audio-IRQ entries occur in these
-windows. Replay is byte-identical (252,102 bytes, SHA-256
-`04f4174c41701798224682737ab345d548474f9de84d150e360ec6700b438a3a`);
-displaced watches preserve final CPU, timing, entry counts and field snapshots.
-Authored fixtures independently catch byte and word writes inside and outside
-the window, using typed after-step readbacks.
+The renderer entry shows how the game's objects are drawn:
 
-One source-supported Right press in the same preview supplies an actual-game
-positive control. At frame 1,243 the accepted setter at `0x08001464` updates the
-same object's part-zero pointer from `0x08D70CE0` to `0x08D70CE4`, and part one
-from `0x08D70CF0` to `0x08D70D18`. Both writes occur outside rendering. That run
-also completes 128 validated calls without selected-field writes or observed
-nested IRQ entries inside them. These finite observations establish reachable
-shared rendering and live watches, but do not justify `volatile`, explain the
-third pointer reload, or close other writers, interrupt schedules or gameplay
-paths. Unique private harnesses, calibration and route/control receipts remain
-under ignored `analysis/renderer-shared-navigation/`; the public no-input
-harness and its recorded 300-frame result are unchanged.
+- During the 300-frame boot, all 810 renderer entries are in strip mode, across
+  six objects, and none uses the shared-part path. Running 3,600 frames with
+  no input gives 10,710 entries, again strip-only. A short Start/A sequence
+  reaches objects that use direct sequences, still without the shared-part path.
+- A source-directed key route accepts the language, enters a name and opens the
+  appearance preview. It reaches shared rendering at frame 1,180 without
+  changing game code or memory. Watches on four part-flag bytes and four
+  variant-pointer words of the object at `0x0200D0A0` follow 128 renderer
+  calls. Each window ends when the return at `0x08002940` goes back to the
+  saved caller with stack and CPU mode restored. No watched writes and no
+  nested IRQ-dispatcher or audio-IRQ entries occur in them. A replay is
+  identical (252,102 bytes, SHA-256
+  `04f4174c41701798224682737ab345d548474f9de84d150e360ec6700b438a3a`).
+- A Right press in the same preview is a positive control. At frame 1,243 the
+  setter at `0x08001464` changes the object's part-zero pointer from
+  `0x08D70CE0` to `0x08D70CE4` and part one from `0x08D70CF0` to `0x08D70D18`,
+  both outside rendering. Another 128 calls complete with no writes to the
+  watched fields and no nested IRQ entries. These runs show that shared
+  rendering is reachable and that the watches work. They do not justify
+  `volatile`, explain the third pointer reload, or rule out other writers,
+  interrupt timing or gameplay paths.
 
-The two master-volume calls received `128` and `0x40080`, followed by converter
-patch arguments five and four. Readbacks from all four watched instruction
-pairs retained `0xE7DCA2CA` / `0xE7DCB2CB` after shift five, then changed to
-`0xE7DCA24A` / `0xE7DCB24B` after shift four. The IRQ word at `0x0300004C`
-changed from `0xE59F0034` to `0xE12FFF1E` (`BX LR`). Its first entry sample
-contains the old instruction; seven later samples contain the replacement.
-There were 67 total tail arrivals: the first and 66 later arrivals. Only the
-first eight have individual instruction/register samples.
+### Audio and interrupt code
 
-The corrected converter entry at `0x03000B38` has 268 arrivals. Each of its
-eight known writable instruction-word sites has 18,492 arrivals. All eight
-retained samples at each site contain the shift-four words
-`0xE7DCA24A` / `0xE7DCB24B`; converter-entry snapshots also retain all four
-word pairs in that state. These are arrivals before instructions execute.
-The old `0x03000AB4` probe was mislabeled as conversion: the source entry is
-`mixBias`. Its zero-hit counter is preserved with the corrected label. The
-new probes preserve every prior address's hit count, all watched final words
-and final machine state; no complete input/state domain is claimed.
+The two master-volume calls receive `128` and `0x40080`, followed by converter
+patch arguments five and four. Readbacks at the four watched instruction
+pairs hold `0xE7DCA2CA` and `0xE7DCB2CB` after shift five, then
+`0xE7DCA24A` and `0xE7DCB24B` after shift four. The IRQ word at `0x0300004C`
+changes from `0xE59F0034` to `0xE12FFF1E` (`BX LR`). The first sample taken
+at entry shows the old instruction and the seven later samples the
+replacement. The tail is entered 67 times, but only the first eight have
+individual instruction and register samples.
 
-Both arrivals at `0x080499B0` show the Thumb NOP halfword `0x46C0`; the trace's
-32-bit snapshot also includes the following halfword. No store at that NOP
-site was executed. The clipping endpoint word finishes at `0x80808000`, whose
-low byte is zero; the exact-byte probe does not cover other byte writes within
-that word. Selected resource/map callback publications and IRQ-vector writes
-are recorded, without a claim that these are all writers or possible targets.
+The converter entry at `0x03000B38` is entered 268 times. Each of its eight
+writable instruction-word sites is reached 18,492 times, and every retained
+sample at each site holds the shift-four words. These are arrivals before the
+instruction runs. The probe at `0x03000AB4` was once labelled as conversion;
+the entry is `mixBias`, and its zero hit count is kept under the corrected
+label.
 
-The pending-display initializer is reached once. The VCount callback, its
-indirect-call site at `0x08046E6E` and default no-op at `0x08047080` each have
-270 arrivals. The first eight retained call-site samples carry Thumb target
-`0x08047081` in `r2` and argument addresses `0x03002258` / `0x0300225C` in
-`r0` / `r1`; the no-op entry samples retain those arguments. The first staged
-and queued callback words have three and four hooked writes, respectively,
-and both finish at that default target. Only those first callback words were
-watched. Other rows, publications, count bounds and target populations remain
-unresolved. Adding these probes preserved the previous counters and complete
-final machine state; obsolete trace payloads were retired after replay/control
-verification, while the unique older harness draft was retained locally.
+Both arrivals at `0x080499B0` show the Thumb NOP halfword `0x46C0`, and no
+store runs at that site. The clipping endpoint word ends at `0x80808000`,
+whose low byte is zero. The probe is exact-byte, so it does not cover other
+byte writes within that word. Writes that publish resource and map callbacks
+and IRQ vectors are recorded, but they are not claimed to be all the writers
+or all the possible targets.
 
-## Natural request-byte route, 23 October 2026
+### Pending-display queue
 
-A bounded new-game route now connects one writable scene-kind byte to its
-native consumer. It uses normal keys only, the fixed ROM, HLE BIOS and RTC zero.
-After the existing language/name/appearance route, 25 Right presses reduce the
-selector budget from 25 to zero and leave row counts `[10,10,5,0,0]`; two Down
-presses change rows. Every sampled selector state preserves budget plus row
-counts equal to 25. Confirmation and the phase-25 A inputs then reach primary
-gameplay.
+The pending-display initialiser is reached once. The VCount callback, its
+indirect-call site at `0x08046E6E` and the default no-op at `0x08047080` each
+have 270 arrivals. The first eight samples at the call site carry the Thumb
+target `0x08047081` in `r2` and the argument addresses `0x03002258` and
+`0x0300225C` in `r0` and `r1`. The first staged and queued callback words
+have three and four hooked writes and both end at that default target. Only
+those first words were watched.
 
-At frame 2,003, probes immediately before and after `0x0801B63C` record
-`STRB R0,[R1]` with `R0=14`, `R1=0x0300408F`, and byte readback changing from
-zero to 14. At frame 2,471, guarded Start input reaches `0x080260EE`: the
-before-load address is `0x0300408F`, and the following probe retains `R0=14`.
-The default-request entry receives 14 with `LR=0x080260F5`; the actual submitter
-then receives `(14,0,0)`. The scene handoff reaches row 14's begin callback at
-`0x0801D1D0` with active kind 14 and previous kind 1. Observation stops at
-that entry, before its first instruction; completed menu setup is not claimed.
+A later observer watches all 23 callback-shaped words (eleven staged and
+twelve queued), using 92 byte-address watches, through all 128 selected
+renderer returns, which end at frame 1,433 after 43,437,271 steps and
+402,438,870 ticks. No callback is injected and no game code or register is
+patched. All 1,454 hooked writes have typed readbacks. The last queued word,
+at `0x030023C0`, overlaps the tile bitmap and has 1,387 hits, 740 changes and
+eight groups of CPU and DMA writer contexts; its bitmap values are not
+execution targets. The contexts distinguish the queue reset, the fixed bitmap
+fill, the commit's word AND and the mark-allocated byte OR. The immediate-release
+path at `0x08047A34` is not reached on this route.
 
-The endpoint is frame 2,489, after 96,192,151 steps and 699,070,957 emulator
-ticks, within the fixed 3,600-frame / 100-million-step bound. The cold replay is
-byte-identical: each trace is 332,579 bytes, SHA-256
-`cdc01cd1360142102040385e909c1ef8fc059d24bad793be298478b87801c1bf`.
-Displacing the inherited write watches preserves the entry counts, sampled
-route and final CPU/timing state while producing zero watched writes. All three
-runs have empty stderr and zero fatal, error, warning, stub and game-error logs.
-The calibrated entry/register timing and renderer classifier are reused.
-Sources, commands and full traces remain in ignored
-`analysis/scene-request-natural-route-20261023/`.
+All 1,403 call-site arrivals are counted. Eight samples and 1,395 counted
+duplicates carry index zero, the default target `0x08047081` and the argument
+addresses above. One startup BL reaches the register-call veneer, and its BX
+then reaches the default target with the expected arguments, return address,
+stack and Thumb state. These show arrival at a point, before the target
+instruction runs, and do not show that every later call returned or what other
+targets are possible.
 
-This establishes one initialization-to-load-to-target route. Frame samples are
-not a complete byte-write watch. Other writers and aliases, saved-state inputs,
-arbitrary scene-kind bounds and other gameplay paths remain open. No new code
-entry, mapped extent or matching C coverage follows.
+#### Row-shift fixture
 
-## Pending-display storage follow-up
+A fixture boots the ROM normally and pauses at `0x08025CA6`, just after the
+pending-display initialiser returns. It checks the twelve queued rows, eleven
+staged rows, count one and the default callback `0x08047081`. It then calls
+the game's own flush, insertion and VCount functions, setting only arguments
+and return linkage and leaving game code and queue data alone. No natural
+caller of the insertion function is known.
 
-The latest canonical private observer watches all 23 syntactic callback-shaped
-words: eleven staged words and twelve queued words, using 92 byte-address
-watches. It completes all 128 selected renderer returns at frame 1,433, after
-43,437,271 observer steps and 402,438,870 ticks. No callback was injected and no
-game code or register was patched.
+After a flush, inserting line 2 and flushing, inserting line 1 again selects
+index one. Each insertion calls `heap_move(0x03002324, 0x03002314, 144)`, which
+loads and stores 36 words. The helper's backward trailing-byte decrement leaves
+an offset of minus one. On the second shift, the load at `0x08027816` uses bus
+address `0x03002323`, so the aligned word `0x08047081` is rotated right by 24
+bits into `0x04708108`. The store at `0x08027818` then writes that value to
+the queued callback word at `0x03002330`.
 
-All 1,454 hooked writes have typed after-step readbacks. Across the watched
-words, 30 write-detail records were emitted, 735 alias details were coalesced
-and 689 unchanged writes were counted without repeated detail. No output was
-dropped. The final queued callback-shaped word at `0x030023C0` aliases the tile
-bitmap: it has 1,387 hits/readbacks, 740 changes and eight CPU/DMA writer-context
-groups. Its arbitrary bitmap values are not execution targets. The canonical
-contexts distinguish queued reset, fixed bitmap fill, commit's word AND and
-mark-allocated byte OR; the DMA PC is context, not a CPU store address. The
-statically supported immediate-release context at raw PC `0x08047A34` was not
-observed on this route.
+The next flush copies the malformed callback to `0x03002280`. Two controlled
+VCount calls run the valid default callback and advance the flag to two. A
+third loads the target at `0x08046E6C`, giving `r2=0x04708108`,
+`r0=0x03002278` and `r1=0x0300227C`. Execution stops at `0x08046E6E`, before
+the indirect BL, so the malformed target never runs. The count stays one
+throughout and is not consulted.
 
-All 1,403 call-site arrivals were counted. Eight retained tuples and 1,395
-counted duplicates carry index zero, default target `0x08047081` and argument
-addresses `0x03002258` / `0x0300225C`. One startup BL reached the register-call
-veneer, then its BX reached the default target with the expected arguments,
-return address, stack and Thumb state. These are point-arrival witnesses; the
-target instruction had not retired at the target witness. They do not establish
-that every later call retired or close the incoming target population.
-
-The actual 128 writer-guard checks passed. Thirteen further commands passed:
-log-overflow, authored 516-store fixture and displaced-fixture controls, a
-missing-ROM failure, seven invalid-bound failures, a cold real replay and a
-displaced-watch real route. The fixture retains the corrected frame-one endpoint,
-515 alias changes, typed STM/word/byte/halfword values and unchanged nearby
-storage. The cold replay is byte-identical to the 75,721-byte normal trace.
-Displaced watches report zero hooks/readbacks while preserving the complete
-execution endpoint, final CPU state, route counters, filtered transfer protocol
-and all 23 logical final words. Seven reporter mutations were rejected after
-both real comparisons passed. Warning/error counters remain zero;
-informational/debug counts are retained separately.
-
-The earlier trace's output-cap failure at frame 1,257 and 39/128 returns remains
-historical evidence: it explicitly dropped one changed-write detail. Its strict
-all-log-levels-zero reporting issue and later unknown-writer stops are also
-preserved locally. The successful successor coalesces detail without losing
-write/readback accounting. These observations add no C credit or static-census
-input and close no arbitrary writer, alias, queue-count, callback-index or target
-domain. Other paths and gameplay remain open.
-
-## Controlled pending-row copy and consumption
-
-A private mGBA 0.10.5 fixture boots the fixed ROM normally and pauses at
-`0x08025CA6`, immediately after the native pending-display initializer returns.
-The twelve queued rows, eleven staged rows, count one and default callback
-`0x08047081` are checked before any controlled call. The fixture calls the
-native flush, insertion and VCount APIs, preserving event processing, interrupt
-control and deadlines. It writes caller arguments and return linkage, without
-patching game code or queue data. No natural incoming insertion caller is known.
-
-After an initial flush, insertion of line 2 and a flush, insertion of line 1
-again selects index one. Both calls supply auxiliary zero and the ROM's default
-callback. Each invokes `heap_move(0x03002324, 0x03002314, 144)` and retires 36
-word loads and 36 word stores. The helper's backward trailing-byte decrement
-leaves an offset of minus one. On the second shift, the load at `0x08027816`
-uses bus address `0x03002323`: the aligned word `0x08047081` rotates right by
-24 bits to `0x04708108`. The store at `0x08027818` uses `0x03002333` and writes
-that value to aligned queued callback word `0x03002330`. Retired-instruction
-checks and readbacks establish both accesses. The shifted line 2 becomes 512.
-
-The native flush copies the malformed callback to `0x03002280`. Two controlled
-VCount calls retire the valid default callback and advance the flag to two.
-A third retires the target load at `0x08046E6C`, yielding `r2=0x04708108`,
-`r0=0x03002278` and `r1=0x0300227C`. Execution stops at `0x08046E6E`, before the
-indirect BL; the malformed target is never executed. Count stays one throughout
-and is not consulted by that traversal. Line 512 is also malformed: this is
-direct native API consumption, not proof of a naturally scheduled scanline IRQ.
-
-| Fresh-core case | Retired copy loads/stores | Retired default callbacks | Endpoint |
+| Case (fresh emulator) | Copy loads/stores | Default callbacks run | Endpoint |
 | --- | --- | --- | --- |
 | Baseline | 0 / 0 | 1 | Flag wraps to zero. |
 | One insertion | 36 / 36 | 2 | Flag wraps to zero. |
 | Two insertions | 72 / 72 | 2 | Third target loaded; stopped before BL. |
 
-Each case has a byte-identical cold replay. A separate authored calibration and
-its replay verify aligned `0x12345678`, low-address-bits-three load
-`0x34567812`, aligned-down store and surrounding guards in 24 CPU steps.
-A one-step budget control stops after insertion's initial stack push,
-with all row bytes unchanged; it does not claim a completed callee return.
-All nine runtime commands pass with zero warning/error logs. Complete calls
-preserve SP, callee-saved registers, control bits and four fixed guard spans;
-the stopped callback frame is checked separately. Observation records retired
-instruction state without memory hooks.
+Each case replays identically. The double-insertion run ends at frame 29,
+after 2,124,986 steps and 8,168,013 ticks; its 11,047-byte trace has SHA-256
+`0dd51137e639947c21582295ed3e96cdd3c93e5ef41cd309f27baa240b701657`. A
+hand-written calibration checks that an aligned load of `0x12345678` at
+low address bits three gives `0x34567812`. A one-step budget stops after the
+insertion's first stack push with every row byte unchanged. The result is
+one conditional case where a write to the queue becomes a loaded callback
+target. It does not show that the call is valid in the real game, that the
+queue is ever scheduled this way, or what the other writers and targets are.
+A malformed data-derived target is not evidence of undiscovered code.
 
-The double-insertion endpoint is frame 29, 2,124,986 steps and 8,168,013
-ticks. Its 11,047-byte trace has SHA-256
-`0dd51137e639947c21582295ed3e96cdd3c93e5ef41cd309f27baa240b701657`.
-Sources, frozen inputs, commands, calibration and full replays are retained in
-ignored `analysis/pending-row-shift-native-fixture-20261023/`.
-This establishes one conditional native writer-to-target-load counterexample
-to callback preservation. It adds no C credit or executable entry and does not
-close caller validity, natural scheduling, other writers, backing or target
-populations. An invalid data-derived target is not evidence of undiscovered code.
+## New-game routes
 
-## Controlled installed tile-decoder fixture
+All routes below use normal key input, the unmodified ROM, the replacement BIOS
+and a fixed RTC of zero.
 
-The [fixture summary](../config/rev0/runtime-tile-fixture.json) records a
-controlled call to the tile decoder after ordinary reset and installation in
-the same pinned mGBA core. Startup reaches the installer at `0x08016A48` and
-its actual return to `0x08025C5A` after 1,955,632 instruction steps, 27 frames
-and 7,602,758 emulator ticks. The callback word contains `0x030036D0`; all
-528 installed bytes equal their fixed ROM source. The decoder occupies 504 of
-those bytes; the remaining 24 are the following body's copied prefix.
+### Scene request byte
 
-The fixture then supplies the
-fixed transient frame input
-at `0x08FD9134`, with a 112-byte input guard and a chosen OBJ VRAM destination
-at `0x06010080`. The actual installed ARM code produces the expected 128 bytes
-in 742 instruction steps, using 64 halfword output stores and ten history reads.
-All five backward-copy load sites execute after the bytes they read have been
-written. Output, count, stack and code guards pass, and the stack and preserved
-registers are restored on return. The output hash equals the earlier model's.
+After the language, name and appearance route, 25 Right presses reduce the
+selector budget from 25 to zero and leave row counts `[10,10,5,0,0]`; two Down
+presses change rows. Every sampled state keeps budget plus row counts at 25.
+Confirming and then the phase-25 A inputs reach primary gameplay.
 
-Twenty before/after parser samples cover five visits to the compare, shift,
-OR and conditional-add positions. Live RAM and prefetched instructions retain
-the original CMP/LSR/ORR order. The five lengths are three; distances are
-4, 9, 38, 76 and 72. The extended-repeat condition is false on this input.
-An authored four-byte literal control passes; missing-terminator, one-step
-budget and odd-output-pointer controls are rejected by the fixture's guards.
-These rejections do not establish native malformed-input safety.
+At frame 2,003, `STRB R0,[R1]` at `0x0801B63C` stores `R0=14` to `0x0300408F`,
+and the byte changes from zero to 14. At frame 2,471, guarded Start input
+reaches `0x080260EE`, which loads from `0x0300408F` and keeps `R0=14`. The
+default-request entry receives 14 with `LR=0x080260F5`, and the submitter then
+receives `(14,0,0)`. The scene handoff reaches row 14's begin callback at
+`0x0801D1D0` with active kind 14 and previous kind 1. Observation stops at
+that entry, before its first instruction, so completed menu setup is not
+claimed.
 
-The whole observation repeats identically from a fresh emulator core. Its cases
-share one paused core with explicit CPU/data setup between calls. During each
-call, IRQ/FIQ are masked and timing events are suspended; the private EWRAM
-stack/count and chosen VRAM span do not observe the game's allocator. Natural
-scene execution and other input, callback, code-writer, IRQ/DMA and gameplay
-domains remain open. The 504-byte C candidate still differs by eleven bytes
-and gains no credit.
-Private source, expected data, freezes, commands and observations remain under
-ignored `analysis/tile-installed-native-fixture-20261021/`.
+The run ends at frame 2,489 after 96,192,151 steps and 699,070,957 ticks,
+within the 3,600-frame and 100-million-step limits. A cold replay is
+identical: each trace is 332,579 bytes with SHA-256
+`cdc01cd1360142102040385e909c1ef8fc059d24bad793be298478b87801c1bf`. Moving
+the write watches elsewhere keeps the entry counts, route and final CPU and
+timing state, and records no writes. All three runs have empty stderr and no
+fatal, error, warning, stub or game-error logs.
 
-## Controlled serial reset-to-loader fixture
+This is one route from the initialising store through the load to the
+consumer. Frame samples are not a complete watch of byte writes, so other
+writers, aliases, saved-state inputs, the range of scene kinds and other
+gameplay paths are unchecked.
 
-A controlled fixture follows the serial reset/load route.
-Ordinary key input reaches serial-session kind 10 / mode 0 at frame 1,047.
-At its first step, three explicitly controlled Thumb calls run the original
-world initializer, 108-byte peer-record producer and receiver. Stack, control
-mode and preserved registers are checked on return. The peer payload stays
-unchanged; the receiving identity word is authored as one while the peer word
-is zero. The native receiver supplies phase two and countdown 45. This is
-controlled delivery after natural screen navigation, not a demonstrated
-multiplayer exchange.
+### Terrain redirection in scene six
 
-The real session, transport, save and actor allocations pass their backing
-checks. Native initialization supplies the 162 actor slots and empty fifty-group
-collection. The resulting save uses 831 bytes. All 2,040 native buffer bytes
-match after slot-three write/read, with checksum zero, validity set and slot
-three selected. The full buffer hash is
-`778f4363d9ec9730979d8c331d082aa3cf2bdd63a3960bb832f5b50650918c8a`.
-No host replacement supplies the media readback.
-
-Physical store hooks account for aligned byte, halfword, word and multiple
-stores, IWRAM mirrors and DMA, forwarding the original operations unchanged.
-Typed reads occur after the underlying store, rather than trusting the STM
-watchpoint shim. Seven authored ARM/Thumb calibration operations cover an
-unaligned word, decrementing multiple store, DMA, mirrored byte and unaligned
-halfword. A displaced-region control records zero writes with identical CPU
-state and timing.
-
-From receiver return through loader byte-load retirement, the fixture observes
-one physical selector write: the native clear's `STMIA` at `0x08027A8A` writes
-zero to the word containing `0x03004111`. The original `LDRB` at `0x0801B78C`
-then retires at `0x0801B78E` with R1 equal to zero. The run ends at frame 1,269
-after 40,302,530 total instruction steps. IRQs and timing remain active, with
-241 watched dispatcher-entry arrivals and 27 audio-handler arrivals. Callback
-snapshots describe arrivals, not retired-call counts.
-
-Cold replay is byte-identical. Displaced watches retain the same execution
-endpoint and record no writes. A separate positive control seeds the selector
-with 90 immediately before the actual clearing STM; its typed readback is zero
-and the execution endpoint is unchanged. No emulated instruction can consume
-that atomic calibration sentinel. No fatal, error, warning, stub or game-error
-logs occur. Private source, commands, complete observations, controls and two
-independent reviews remain under ignored
-`analysis/loader-selector-serial-native-fixture-20261021/`.
-
-This closes the named observation for one controlled input and callback/backing
-state. Other loader routes, writers, aliases, IRQ and backing populations,
-natural peer delivery and handheld behavior remain open. Emulator/HLE limits
-still apply. The loader's 548 / 17 source mismatch is unchanged; this observation
-adds no C, instruction, mapped-extent or inventory-count credit.
-
-## Controlled palette-word data-copy fixture
-
-A named native-call fixture checks whether ROM word `0x08088B14`, containing
-`0x0800E1EF`, is consumed as palette data. After a fresh emulator reset, authored
-IWRAM scene globals select scene eight and period three. The palette pair points
-to a private aligned 512-byte EWRAM staging buffer at `0x02020000` and destination
-`0x05000000`; the private EWRAM stack begins at `0x0203F000`. Calls run in Thumb
-SYSTEM mode with IRQ/FIQ masked and timing events suspended. No game instruction
-or callback is written. This setup does not run natural scene initialization.
-
-The original selector at `0x08026794` returns `0x08088964` after 23 instructions.
-The original palette loader at `0x080116F8` calls the transfer and byte-copy
-bodies with count 256, producing 128 word loads and stores. After 694 instructions
-in this second call, execution stops at `0x080119EE`, before the DMA register
-sequence, with SP `0x0203EFE4`. All 512 staging bytes equal the source palette.
-At `0x08027AF0`, the native LDM reads the word at `0x08088B14` into R0;
-post-instruction observation records `0x0800E1EF`. The following STM at `0x08027AF2` stores that
-value at `0x020201B0`. The observer checks actual retired-load state and stored
-memory, without relying on the multiple-store watchpoint shim.
-
-The contrasting period-two selection copies a different palette and never
-reads the selected word. Count 216 copies 432 bytes and stops immediately before
-it; count 218 copies 436 bytes and includes it once. A one-instruction budget
-control stops before the copy. Recorded results and instruction-address/opcode
-hashes agree on fresh-core replay for all five cases; this is not a retained
-full-machine snapshot.
-Expected copied prefixes, surrounding guards and the original source word are
-checked; the emulator's DMA register shadow stays unchanged. DMA source and
-destination registers are write-only, so bus reads of them are not used as
-state evidence. No palette DMA or displayed-image result is claimed.
-
-The first fixture run rejected before the copy: its second call cleared the
-Thumb flag while the emulator was already in Thumb mode, producing an invalid
-prefetch setup. Explicit mode/flag consistency fixes that setup; the failed
-source, executable, outputs and diagnostic remain in the private evidence.
-The corrected run rejects emulator error logs and passes the count, stack and
-prefetch checks. The fixed reference and game source are unchanged.
-
-This establishes one bounded palette data use of the
-pointer-shaped word.
-It establishes no executable consumer, prepared-R1 producer or execution at
-`0x0800E1EE`. Natural scene-eight reachability, full scene/table/backing domains,
-other consumers and alternate execution remain open. No source, instruction,
-mapped-extent or inventory-count credit is added; generated assets and the
-current paired matching proof remain unchanged.
-
-## Controlled row-six secondary decoding
-
-A bounded mGBA 0.10.5 fixture executes the original dispatcher at `0x08016978`,
-its SWI-11 wrapper at `0x0804C8DC` and the delta pass at `0x08016B78` for the
-two named row-six secondary streams, `0x08DBFF38` and `0x08DC0D00`. These use
-codec nine: BIOS LZ77 followed by the native halfword delta operation. The
-replacement BIOS provides the HLE service; this is not retail BIOS or hardware
-execution. Synthetic EWRAM output and separate system/supervisor stacks are
-disjoint. The game path starts and returns with IRQ/FIQ masked; the unchanged
-BIOS stub temporarily clears F in its system/supervisor phases. Timing events
-remain suspended, IRQ/FIQ modes are excluded and execution is restricted to
-the named game bodies and actual small BIOS service/stall/return path.
-No game code or callback is changed.
-
-Both calls return 56 bytes naturally, after 1,001 and 1,163 CPU steps. Each
-output byte is initialized before inspection; all LZ77 history reads and native
-delta reads use initialized bytes. Each delta pass makes 27 halfword stores.
-The resulting header is `(26, 1)` for both streams. Their 26 data halfwords
-range from zero to 24 and zero to 18 respectively. Source bytes, output/stack
-guards, stack restoration and the inspected I/O state remain intact.
-
-Authored literal-only raw and delta calibrations distinguish the codec flag
-and check exact expected output. A one-instruction budget stops before decoding;
-a wrong-mode case rejects before execution. All six cases reproduce their
-results and rolling instruction/opcode checksums on fresh-core replay, without emulator
-errors. The first run caught an observer-attribution error: a fixture opcode
-inspection was counted as a game load. Restricting that accounting to execution
-steps fixes the observer; its failed packet and repair remain private.
-
-For source indices 0..25, adding the actual combined prefixes gives tile IDs
-471..495 and 258..276, all inside the separately modeled 496 and 277 initialized
-groups. This closes that finite secondary-value question. The
-animation callers do not establish
-the complete index, coordinate or map domain. The separately projected eight
-fixed animation payloads and their direct-state activation chain remain
-conditional on actor/view completion and stable backing. Wider serialized
-populations, live heap/backing, installation context, other writers and natural
-scene execution remain open. No C, instruction, mapped-extent or inventory-count
-credit follows, and no unchanged full matching build is required.
-
-## Natural scene-six terrain redirection
-
-A bounded continuation of the natural new-game route asks why holding Left
-also changes the player's Y coordinate. The fixed reference runs with blank
-in-memory save state, fixed RTC and the same replacement BIOS and pregame keys.
+This route asks why holding Left also changes the player's Y coordinate. The
+run uses blank in-memory save state, a fixed RTC and the same BIOS and keys.
 No game memory, code, random result or saved state is injected. The first idle
-point is `(286.3115234375,285.2626953125)`, rather than the earlier nominal
-spawn point. The initial scene program moves the player toward `(284,283)`;
-its state-13 completion test permits the observed residual within three pixels
-on each axis.
-This agreement does not uniquely identify every earlier position store.
+point is `(286.3115234375,285.2626953125)`, not the nominal spawn point. The
+initial scene program moves the player toward `(284,283)`, and the state-13
+completion test allows a residual within three pixels on each axis.
 
 The approach holds Down for 86 sampled frames, then Left for ten. Read-only
-probes cover the same live actor during native frames 2558–2566, before and
-after velocity integration, terrain response, offset acceptance and later
-frame stages. The observation-only replay preserves all 1,427 earlier JSON
-records exactly, including step counts, after removing only the new probe
-records, summary and entry-counter rows. It records 26 snapshots with zero
-dropped records or invalid spans. Actual input is Left, input disabling is
-zero, direction is six, response is three and velocity is `(-3,0)`.
+probes watch the live actor in native frames 2558 to 2566, before and after
+velocity integration, terrain response, offset acceptance and later frame
+stages. The replay with probes keeps all 1,427 earlier JSON records exactly
+(including step counts) once the new probe records, summary and
+entry-counter rows are removed, and records 26 snapshots with no dropped
+records or invalid spans. The input is Left, input disabling is zero,
+direction is six, response is three and velocity is `(-3,0)`.
 
-At native frame 2563, terrain contact three resets the integrated Left proposal
-and accepts offset `(0,-2)`. At frame 2565, contact 15 accepts `(-2,-1)`.
-The changed proposed points are observed after redirection and terrain
-collection, before global collision and optional animation preparation.
-Earlier contact-zero samples preserve the ordinary Left proposal. Thus these
-two deflections occur in the
-[terrain response](../src/frame/frame_apply_movement_contact.c) and
-[redirect worker](../src/frame/frame_redirect_movement.c).
-Equal post-collection and pre-commit points establish no net later change;
-they do not exclude intervening writes that cancel.
+At native frame 2563, terrain contact three resets the integrated Left
+proposal and accepts offset `(0,-2)`. At frame 2565, contact 15 accepts
+`(-2,-1)`. These changes to the proposed points are seen after redirection
+and terrain collection and before global collision and optional animation
+preparation. Earlier contact-zero samples keep the ordinary Left proposal. So
+the two deflections happen in the [terrain response](../src/frame/frame_apply_movement_contact.c)
+and the [redirect worker](../src/frame/frame_redirect_movement.c). Equal points
+after collection and before commit show no net change later, though they do
+not exclude writes in between that cancel out.
 
-A separate continuation keeps the same keys and extends only the observer's
-vertical stop band to `378..452`, the first portal object's own Y extent.
-Its first 1,450 records, including all early probes, match the earlier replay
-exactly through its last frame-2566 point. After 86
-Down and 158 Left samples, it stops at frame 2714 at
-`(87.3115234375,377.2626953125)`, without a portal request or scene-one arrival.
-There are no later terrain probes after frame 2566, so the later motion has no
-unique writer attribution. The object's extent is not a necessary or sufficient
-player-contact domain. This closes one finite approach, without proving portal
-absence or inaccessibility. No separate replay or displaced-watch control is
-claimed for this longer continuation. Both executions report zero fatal,
-error, warning, stub and game-error messages.
+A longer run with the same keys extends the vertical stop band to `378..452`,
+the first portal object's own Y extent. Its first 1,450 records match the
+earlier replay exactly through the last frame-2566 point. After 86 Down and
+158 Left samples it stops at frame 2714 at `(87.3115234375,377.2626953125)`,
+with no portal request and no arrival at scene one. There are no terrain
+probes after frame 2566, so the later motion cannot be attributed to a writer.
+The object's extent is not the real contact area, so this run does not show the
+portal is absent or unreachable. This longer run has no replay or
+displaced-watch control. Both runs report no fatal, error, warning, stub or
+game-error messages.
 
-An initial static map query independently reproduces all four observed
-contacts and their filter values; the contacts are zero, zero, three and 15.
-The unchanged calibrated decoder model decodes the 1,044-byte primary type map
-and reuses the two earlier pattern
+A static query of the initial map reproduces all four observed contacts and
+their filter values (zero, zero, three and 15). The calibrated decoder model
+decodes the 1,044-byte primary type map and reuses the two earlier pattern
 streams in memory. All 520 initial block indices are in `0..142` and fit the
-2,576-byte pattern backing. The separate 56-byte BIOS run-length stream is
-deferred; it is not input to that decoder. Of 75 integer Down-then-Left
-polylines ending at X16 and Y378..452, none has both legs clear of terrain
-contact. These integer-center tests use the small movement footprint and stop
-each segment at its first contact. They do not simulate fixed-point movement,
-redirection or object collisions.
-The portal uses the same world-coordinate space, but overlap also depends on
-the player's separate active collision box. Animation can change the live
-type map, and the initial query closes neither those writers nor actual
-allocation/backing and installation history.
+2,576-byte pattern backing. A separate 56-byte BIOS run-length stream is not
+input to that decoder. Of 75 integer Down-then-Left polylines ending at X16
+and Y378..452, none has both legs clear of terrain contact. These tests use
+integer centres and the small movement footprint, stopping at the first
+contact, and do not simulate fixed-point movement, redirection or object
+collisions. Overlap with the portal also depends on the player's collision
+box, which is separate. Animation can change the live type map, and the
+static query does not cover those writers, the real allocation or the
+installation history.
 
-The static portal chain toward scene zero remains conditional on actual
-traversal. These observations neither reach the scene-zero selector nor close
-live collision-map writers, actor/owner history or executable-target
-populations. Matching source, inventory and mapped-extent counts are unchanged.
+The static portal chain toward scene zero depends on the player actually
+traversing it. These runs do not reach the scene-zero selector.
 
-## Meaning of an observation
+### Selected resource-program list
 
-Hardware breakpoint checks run after one emulator step and compare the next
+On the new-game route the command call at `0x0800AE0C` sees an installed
+program list. While preparing root `0x08D76254`, the program-group builder
+receives the selected pack `0x08D7680C` and writes a 176-byte program image
+starting at `0x020272DC`. Rebuilding its six groups from the ROM reproduces
+every installed byte. The pack pointer is seen at the builder call, separate
+from the earlier observation of the selection byte.
+
+Group zero holds only its terminator. Group one consumes commands 16, 14 and
+zero, with byte steps 12, 8 and 4, and its records equal the installed bytes.
+The two callback operands name the [view-motion handler](../src/resource/commands/resource_command_start_view_motion.c)
+at `0x08011E41` and the [resource selector](../src/resource/commands/resource_command_select_resource.c)
+at `0x08012189`, and both return. Observation stops before the group's first
+epilogue instruction at frame 2,033, after 80,856,202 steps.
+
+The replay is identical. Probes moved elsewhere record no hits and keep the
+CPU and timing endpoint, and the added installer probes keep the earlier
+records, operands, steps and navigation. Six observer failure commands and
+six corrupted-observation and source-pin controls are rejected. Equal bytes
+at installation and at use do not rule out writes in between, show the
+allocation is live, give the table capacity or cover later programs.
+
+### Delayed view activation
+
+Continuing the same key sequence, command 16's view effect leads to mode-one
+activation at `0x0800E604`. At frame 2,169 the arguments are object group zero
+and program group four, and the group-enabled helper excludes object spawning
+in this call. At the interpreter's first record, the loaded root is
+`R2=0x020272DC` and the cursor is `R5=0x0202732C`, at offset 80.
+
+Group four consumes commands 24, 11 and zero, with byte steps 16, 8 and 4. The
+operands name the [object-interval handler](../src/resource/commands/resource_command_start_object_interval.c)
+at `0x08012349` and the [delay handler](../src/resource/commands/resource_command_start_delay.c)
+at `0x0801211D`, and both return. All of the 176-byte image matches the
+builder output and eight observed points in the program image. The activation
+returns to `0x0800E608` with no open interpreter frame after 85,906,412
+steps. The replay is identical, probes moved elsewhere keep the keys,
+navigation and endpoint with no events recorded, and six argument failures and
+twelve derived observation and source-pin failures are rejected. Equal images
+at single points do not rule out writes in between, show the allocation is
+live, or cover the full range of selectors and later delivery.
+
+## Controlled fixtures
+
+These fixtures call individual game functions with chosen inputs on a paused
+emulator, rather than playing through the game. Each case starts from a fresh
+core and replays identically.
+
+### Installed tile decoder
+
+The [fixture summary](../config/rev0/runtime-tile-fixture.json) records a call
+to the tile decoder after normal reset and installation. Startup reaches the
+installer at `0x08016A48` and its return to `0x08025C5A` after 1,955,632
+steps, 27 frames and 7,602,758 ticks. The callback word holds `0x030036D0`
+and all 528 installed bytes equal their ROM source: 504 for the decoder and
+24 for the copied start of the following function.
+
+The fixture supplies a fixed frame input at `0x08FD9134` (with a 112-byte
+guard) and an OBJ VRAM destination at `0x06010080`. The installed ARM code
+produces the expected 128 bytes in 742 steps, with 64 halfword stores and ten
+history reads. All five backward-copy load sites run after the bytes they read
+have been written. Output, count, stack and code guards pass, and the stack
+and preserved registers are restored. The output hash equals that of an
+earlier model.
+
+Twenty parser samples cover five visits to the compare, shift, OR and
+conditional-add positions. Live RAM and prefetched instructions keep the
+original CMP, LSR, ORR order. The five lengths are three, the distances are 4,
+9, 38, 76 and 72, and the extended-repeat condition is false on this input.
+A hand-written four-byte literal case passes, and the missing-terminator,
+one-step-budget and odd-output-pointer cases are rejected by the fixture's
+guards. Those rejections do not show how the original code behaves on
+malformed input.
+
+During each call, IRQ and FIQ are masked and timing events are suspended, and
+the private EWRAM stack and count and the chosen VRAM span do not involve the
+game's allocator. Natural scene execution and other inputs, callbacks, code
+writers, IRQ and DMA, and gameplay are not covered. The 504-byte C version
+differs from the ROM by eleven bytes.
+
+### Serial reset to loader
+
+Normal key input reaches serial-session kind 10, mode 0, at frame 1,047. At
+its first step, three controlled Thumb calls run the original world
+initialiser, the 108-byte peer-record producer and the receiver. Stack,
+control mode and preserved registers are checked on return. The peer payload is
+unchanged, the receiving identity word is set to one and the peer word is
+zero. The receiver supplies phase two and countdown 45. This is a controlled
+delivery after real screen navigation, not a multiplayer exchange.
+
+The real session, transport, save and actor allocations pass their backing
+checks. Initialisation supplies the 162 actor slots and an empty fifty-group
+collection, and the resulting save is 831 bytes. After a slot-three write and
+read, all 2,040 buffer bytes match, with checksum zero, validity set and slot
+three selected. The full buffer hash is
+`778f4363d9ec9730979d8c331d082aa3cf2bdd63a3960bb832f5b50650918c8a`. No host
+code supplies the media readback.
+
+Store hooks cover aligned byte, halfword, word and multiple stores, IWRAM
+mirrors and DMA, and pass the original operations through unchanged. Values
+are read back after the underlying store, rather than trusting the STM
+watchpoint shim. Seven hand-written ARM and Thumb calibration operations
+cover an unaligned word, a decrementing multiple store, DMA, a mirrored byte
+and an unaligned halfword. A control with the watched region moved records no
+writes and identical CPU state and timing.
+
+From the receiver's return to the loader's byte load, the only write to the
+selector is the clear's `STMIA` at `0x08027A8A`, which writes zero to the word
+holding `0x03004111`. The `LDRB` at `0x0801B78C` then retires at `0x0801B78E`
+with R1 zero. The run ends at frame 1,269 after 40,302,530 steps, with IRQs
+and timing active, 241 dispatcher-entry arrivals and 27 audio-handler
+arrivals. A control that seeds the selector with 90 just before the clearing
+STM reads back zero with the same endpoint. No fatal, error, warning, stub or
+game-error logs occur.
+
+This covers one controlled input and one callback and backing state. Other
+loader routes, writers, aliases, IRQ and backing populations, real peer
+delivery and handheld behaviour are not covered. The loader's 548-byte
+function still differs from the ROM in 17 bytes.
+
+### Palette word as data
+
+This fixture checks whether the ROM word `0x08088B14`, which holds
+`0x0800E1EF`, is read as palette data. After a fresh reset, hand-written IWRAM
+scene globals select scene eight and period three. The palette pair points to a
+private aligned 512-byte EWRAM buffer at `0x02020000` and the destination
+`0x05000000`; the private EWRAM stack starts at `0x0203F000`. Calls run in
+Thumb system mode with IRQ and FIQ masked and timing suspended. No game
+instruction or callback is written and natural scene initialisation does not run.
+
+The selector at `0x08026794` returns `0x08088964` after 23 instructions. The
+palette loader at `0x080116F8` calls the transfer and byte-copy bodies with
+count 256, giving 128 word loads and stores. After 694 instructions in the
+second call, execution stops at `0x080119EE`, before the DMA register
+sequence, with SP `0x0203EFE4`. All 512 staging bytes equal the source
+palette. At `0x08027AF0` the LDM reads the word at `0x08088B14` into R0, and
+the state after the instruction holds `0x0800E1EF`. The STM at `0x08027AF2`
+stores it at `0x020201B0`. The observer checks the retired load and the stored
+memory directly.
+
+The period-two selection copies a different palette and never reads the
+word. Count 216 copies 432 bytes and stops just before it, and count 218
+copies 436 bytes and includes it once. A one-instruction budget stops before
+the copy. All five cases agree on instruction-address and opcode hashes on a
+fresh-core replay. Expected copied prefixes, surrounding guards and the source
+word are checked. The DMA source and destination registers are write-only, so
+reads of them are not used as evidence, and no palette DMA or displayed image
+is claimed.
+
+The first fixture run was rejected before the copy because the second call
+cleared the Thumb flag while the emulator was already in Thumb mode, which
+gave an invalid prefetch setup. Setting the mode and flag consistently fixed
+this, and the corrected run rejects emulator error logs and passes the count,
+stack and prefetch checks.
+
+The result is one case where the word is used as palette data. It does not show
+that the word is code, where R1 is prepared, or that anything runs at
+`0x0800E1EE`. It does not cover natural scene-eight reachability, the full
+scene, table and backing ranges, other readers or other execution.
+
+### Row-six secondary decoding
+
+This fixture runs the game's dispatcher at `0x08016978`, its SWI 11 wrapper at
+`0x0804C8DC` and the delta pass at `0x08016B78` on the two row-six secondary
+streams at `0x08DBFF38` and `0x08DC0D00`. They use codec nine: BIOS LZ77
+followed by the game's halfword delta pass. The replacement BIOS provides the
+HLE service, so this is not retail BIOS or hardware. Synthetic EWRAM output and
+separate system and supervisor stacks do not overlap. The game path starts and
+returns with IRQ and FIQ masked, and the BIOS stub clears F briefly during its
+system and supervisor phases. Timing events stay suspended, IRQ and FIQ modes
+are excluded and execution is limited to the game functions and the small
+BIOS service, stall and return path. No game code or callback is changed.
+
+Both calls return 56 bytes after 1,001 and 1,163 steps. Each output byte is
+initialised before it is inspected, and all LZ77 history reads and delta reads
+use initialised bytes. Each delta pass makes 27 halfword stores. Both headers
+are `(26, 1)`, with 26 data halfwords ranging from zero to 24 and from zero to
+18. Source bytes, output and stack guards, stack restoration and the
+inspected I/O state stay intact.
+
+Hand-written literal-only raw and delta cases tell the codec flag apart and
+check exact output. A one-instruction budget stops before decoding, and a
+wrong-mode case is rejected before execution. All six cases reproduce their
+results and rolling instruction and opcode checksums on a fresh-core replay,
+with no emulator errors. The first run exposed an error in the observer: a
+fixture opcode inspection was counted as a game load. Counting only
+execution steps fixed it.
+
+For source indices 0 to 25, adding the actual combined prefixes gives tile IDs
+471 to 495 and 258 to 276, all inside the separately modelled 496 and 277
+initialised groups. This settles the question for those secondary values. The
+animation callers do not establish the full range of index, coordinate or map.
+The eight fixed animation payloads and their activation chain depend on actor
+and view completion and stable backing. Wider serialised data, the live heap
+and backing, installation context, other writers and natural scene execution
+are not covered.
+
+## What an observation means
+
+Breakpoint checks run after one emulator step and compare the next
 instruction address with the probe: raw PC minus four in ARM mode or minus two
-in Thumb mode. They record arrival before that instruction executes. A separate
-initial check handles a probe already at the initial PC. An interrupt can
-intervene before the next instruction; arrival does not itself prove that
-instruction retired.
+in Thumb mode. They record arrival before that instruction runs. A separate
+initial check handles a probe at the initial PC. An interrupt can intervene
+before the next instruction, so arrival alone does not show the instruction
+retired.
 
-Write watchpoints run before the underlying hooked store. Single stores expose
-their proposed value, but mGBA 0.10.5's multiple-store shim supplies zero for
-every word. A recorded shim value therefore cannot establish an STM payload.
-End-of-step readback records the word after that step; repeated writes during
-one step can share the same final readback.
+Write watchpoints run before the underlying store. Single stores show their
+proposed value, but mGBA 0.10.5's multiple-store shim supplies zero for every
+word, so a recorded shim value cannot show an STM payload. The readback at the
+end of the step records the word after that step, and repeated writes during
+one step can share one readback.
 
-DMA word and halfword stores pass through these hooks. The CPU PC in a DMA
-callback is context, not the address of a CPU store. Direct host memory changes,
-including some HLE reset `memset` operations, bypass the hooks. Watchpoint
-comparisons also group bytes within an access width, so shifting a word probe
-by one to three bytes is not an independent negative control. Unmapped reads
-have no stored word and must not be interpreted as successful writes.
+DMA word and halfword stores pass through these hooks, and the CPU PC in a
+DMA callback is context, not the address of a CPU store. Direct host memory
+changes, including some HLE reset `memset` operations, bypass the hooks.
+Watchpoints group bytes within an access width, so shifting a word probe by
+one to three bytes is not an independent negative control. Unmapped reads have
+no stored word and must not be read as successful writes.
 
-The run uses mGBA's replacement BIOS with startup skipped, fixed RTC and no
-held keys. HLE services and timing do not reproduce every retail BIOS detail.
-Probe hits and a finite no-input boot cannot identify complete callback domains,
-jump-table targets, later gameplay paths, or every modified code location.
-Per-probe output limits preserve bounded examples; total hit counters remain
-separate from the retained event samples. No trace result adds matching C credit.
-
-## Selected resource-program list, 2 November 2026
-
-The natural new-game route now supplies an actual installed program-list epoch
-at the command call `0x0800AE0C`. While preparing root
-`0x08D76254`, the native program-group builder receives selected pack
-`0x08D7680C`, then writes a 176-byte program image beginning at
-`0x020272DC`. Reconstructing its six groups from the fixed ROM matches every
-installed byte. The selected-pack pointer is observed at the builder call;
-the earlier selection-byte observation is kept separate.
-
-Group zero contains only its terminator. Group one consumes commands 16, 14
-and zero, with native byte steps 12, 8 and 4. Its consumed records equal the
-corresponding installed bytes. The two actual callback operands name the
-already matching [view-motion handler](../src/resource/commands/resource_command_start_view_motion.c)
-at `0x08011E41` and [resource selector](../src/resource/commands/resource_command_select_resource.c)
-at `0x08012189`. Both callbacks return. Observation stops before the group's
-first epilogue instruction at frame 2,033, after 80,856,202 observer steps.
-
-The cold replay is byte-identical. Displaced probes record no hits
-and preserve the CPU and timing endpoint; the added installer probes also
-preserve the earlier record, operand, step and navigation observations. Six
-observer failure commands and six corrupted-observation/source-pin controls
-are rejected. The observer uses the retained normal-key route. Commands,
-observers, traces and the source-owner checks remain under ignored
-`analysis/resource-program-selected-list-capture-20261102/`.
-
-This resolves one selecting epoch and its finite operand image. It adds no C,
-source owner, qualified entry or global callback-domain closure. Equal bytes
-at installation and consumption do not establish absent intervening writers,
-allocation liveness, table capacity or later program domains. The 97 callback
-and 21 dispatch observations remain open at their broader scope.
-
-## Delayed view activation, 2 November 2026
-
-A bounded continuation of the retained key sequence joins command 16's view
-effect to the actual mode-one activation at `0x0800E604`. At frame 2,169 the
-arguments are object group zero and program group four. The exact group-enabled
-helper excludes object spawning in this call. At the interpreter's first record,
-the native loaded root is `R2=0x020272DC` and the cursor is
-`R5=0x0202732C`, at offset 80. This is observed separately from the program-cell
-snapshot at function entry.
-
-Group four consumes commands 24, 11 and zero, with byte steps 16, 8 and 4.
-The actual operands name the already matching
-[object-interval handler](../src/resource/commands/resource_command_start_object_interval.c)
-at `0x08012349` and [delay handler](../src/resource/commands/resource_command_start_delay.c)
-at `0x0801211D`. Both return. Every byte of the reconstructed 176-byte image
-matches the builder output and eight observed program-image points. The paired
-activation returns to `0x0800E608` with no open interpreter frame, after
-85,906,412 observer steps.
-
-Replay is byte-identical. Displaced probes preserve the keys, navigation and
-CPU/timing endpoint while recording no scoped events. Six observer argument
-failures and twelve derived observation/source-pin failures are rejected.
-Artifacts remain under ignored
-`analysis/resource-view-mode1-delayed-consumer-capture-20261102/`.
-
-This qualifies one initializer, delayed selector and program-consumption epoch
-against existing source owners. It adds no C, source owner, qualified entry or
-global domain closure. Equal point images do not establish absent intervening
-writers, allocation liveness, complete selector domains or later delivery.
+The runs use mGBA's replacement BIOS with startup skipped, a fixed RTC and no
+held keys unless a route says otherwise. HLE services and timing do not
+reproduce every retail BIOS detail. Probe hits and a finite boot cannot
+establish the full set of callbacks, jump-table targets, later gameplay paths
+or modified code locations. Per-probe output limits keep a bounded number of
+examples, and total hit counters are kept apart from the retained samples.
+None of these observations adds matching C or changes the static census.

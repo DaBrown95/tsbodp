@@ -23,8 +23,8 @@ union TargetCellView {
     } axes;
 };
 
-static __inline unsigned int target_axes_allowed(
-    struct FrameActorTargetCellOwner *owner, unsigned int candidate_word)
+static __inline unsigned int target_axes_allowed(struct FrameActorTargetCellOwner *owner,
+                                                 unsigned int candidate_word)
 {
     unsigned int allowed = 0;
     unsigned int limit = frame_actor_owner_cell_count(owner, 1), j;
@@ -44,16 +44,16 @@ static __inline unsigned int target_axes_allowed(
             if (coordinate != shifted)
                 continue;
         }
-permitted:
+    permitted:
         allowed = 1;
         break;
     }
     return allowed;
 }
 
-unsigned char frame_find_target_cell(
-    void *context, struct FrameObject *actor, struct FrameObject *target,
-    int *output, unsigned char restrict_axes)
+unsigned char frame_find_target_cell(void *context, struct FrameObject *actor,
+                                     struct FrameObject *target, int *output,
+                                     unsigned char restrict_axes)
 {
     struct FrameActorTargetCellOwner *owner = ((struct FrameActionTargetOwner *)target)->owner;
     struct FramePoint point;

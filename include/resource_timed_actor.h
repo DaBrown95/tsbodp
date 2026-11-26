@@ -9,7 +9,9 @@
 #include "view_math.h"
 
 /* Twelve bytes copied as one record; individual word meanings are unknown. */
-struct ResourceTimedWork { unsigned int words[3]; };
+struct ResourceTimedWork {
+    unsigned int words[3];
+};
 /* Partial object view through its observed OAM fields, not its allocation size. */
 struct ResourceTimedActor {
     struct FrameObject *next, *previous;

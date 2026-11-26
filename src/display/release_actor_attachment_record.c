@@ -1,11 +1,12 @@
 #include "display_actor_interaction.h"
 
-static inline struct FrameActorAttachmentRecord *attachment_record(
-    struct FrameNeedEffectState *owner, struct FrameObject *actor)
+static inline struct FrameActorAttachmentRecord *
+attachment_record(struct FrameNeedEffectState *owner, struct FrameObject *actor)
 {
     unsigned char i;
     for (i = 0; i < 3; i++)
-        if (owner->records[i].actor == actor) return &owner->records[i];
+        if (owner->records[i].actor == actor)
+            return &owner->records[i];
     return 0;
 }
 unsigned char frame_release_actor_attachment_record(struct FrameNeedEffectState *owner,
@@ -17,7 +18,8 @@ unsigned char frame_release_actor_attachment_record(struct FrameNeedEffectState 
         record->actor = 0;
         record->timer = 94;
         result = 1;
-    } else result = 0;
+    } else
+        result = 0;
     return result;
 }
 asm(".align 2, 0");

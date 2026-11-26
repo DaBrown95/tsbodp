@@ -38,8 +38,7 @@ void scene_link_entry_step_linked_offers(void)
             }
         }
         {
-            struct SceneLinkEffectOffer *offer =
-                quantity_offer(g_link_received_join.identifier);
+            struct SceneLinkEffectOffer *offer = quantity_offer(g_link_received_join.identifier);
             int count = offer->count;
             int next_count = count + change;
             int multiplier = g_link_entry_effect_state.multiplier;

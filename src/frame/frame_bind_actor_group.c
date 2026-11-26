@@ -11,14 +11,12 @@ void frame_bind_actor_group(struct FrameObject *base, const void *data)
 
     frame_set_part_variants(base, 0, g_actor_group_part0_tables[definition[0]],
                             object->oam.palette);
-    frame_set_part_variants(base, 1,
-                            g_actor_group_part1_tables[definition[0]][definition[2]],
+    frame_set_part_variants(base, 1, g_actor_group_part1_tables[definition[0]][definition[2]],
                             object->oam.palette);
     variants = g_actor_group_part2_tables[definition[0]];
     palette_map = g_actor_group_part2_palette;
     animation = ((struct FrameActorGroupAnimationView *)object)->animation;
-    palette = *(const unsigned char *)((unsigned int)animation +
-                                      (unsigned int)palette_map);
+    palette = *(const unsigned char *)((unsigned int)animation + (unsigned int)palette_map);
     if (palette == 254)
         palette = ((const struct FrameActorGroupGameView *)&g_resource_game_state)->palette;
     {

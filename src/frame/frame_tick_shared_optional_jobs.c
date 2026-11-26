@@ -2,4 +2,4 @@
 void frame_tick_shared_optional_jobs(struct FrameNeedEffectState *owner)
 {
 }
-asm(".align 2,0");
+asm(".align 2, 0");

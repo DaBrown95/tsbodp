@@ -24,7 +24,8 @@ char *display_text_expand_resource(unsigned int id)
             } else {
 #if TSBO_REVISION == 1
                 /* Revision 1 skips the trail byte of a two-byte character. */
-                if ((unsigned char)text[index] > 0xef) ++index;
+                if ((unsigned char)text[index] > 0xef)
+                    ++index;
 #endif
                 ++index;
             }

@@ -2,16 +2,14 @@
 
 struct FrameObject *resource_create_scene_selector(unsigned char group, unsigned char slot)
 {
-    struct ResourceSceneSelectorPayload *payload =
-        (void *)resource_get_object_payload(group, slot);
+    struct ResourceSceneSelectorPayload *payload = (void *)resource_get_object_payload(group, slot);
     struct ResourceSceneSelector *object;
     unsigned int special = 0;
-    if (g_scene_id == 2 && payload->selector == 13 &&
-            !(g_save_stream_state.header.words[6] & 2))
+    if (g_scene_id == 2 && payload->selector == 13 && !(g_save_stream_state.header.words[6] & 2))
         return 0;
     object = (void *)frame_allocate_scene_object();
-    frame_set_position((struct FrameObject *)object,
-        (unsigned int)payload->x << 16, (unsigned int)payload->y << 16);
+    frame_set_position((struct FrameObject *)object, (unsigned int)payload->x << 16,
+                       (unsigned int)payload->y << 16);
     object->id = payload->id;
     object->subtype = payload->subtype;
     object->flags = 0x000a0404;

@@ -1,10 +1,11 @@
-# Double conversion runtime source evidence
+# Double conversion runtime
 
-This connected conversion path is adapted from
+The four routines below convert between doubles and integers and compare two
+doubles. They are adapted from
 [`libgcc/fp-bit-base.c` and `libgcc/libgcc2.c`](https://github.com/pret/agbcc/tree/da598c1d918402c42c0c0d7128ba14567f3175e9/libgcc)
 at the pinned agbcc revision. The original copyright notices, GPL terms and
-linking exceptions remain in the adapted sources. The complete GPL text is in
-`licenses/GCC-GPL-2.0.txt`; these borrowed files retain their upstream licence.
+linking exceptions stay in the adapted sources. The complete GPL text is in
+`licenses/GCC-GPL-2.0.txt`, and these files keep their upstream licence.
 
 | Entry | ROM offset | Complete extent |
 | --- | --- | --- |
@@ -13,78 +14,78 @@ linking exceptions remain in the adapted sources. The complete GPL text is in
 | `__floatsidf` | `0x4DC28` | 124 |
 | `__fixdfsi` | `0x4DCA4` | 116 |
 
-The four extents total 384 bytes. Both normal and strict-declaration builds use
-the separately pinned old Thumb backend and the upstream Makefile's `-O2`.
-Every complete extent, including literal pools and alignment, matches the fixed
-reference at its original address; all four actual changed-source controls
-reject in both modes. The signed conversion's 116-byte extent includes the
-original two-byte zero tail through `0x4DD18`. The shorter 114-byte inventory
-entry omitted that tail. Explicit zero alignment follows the upstream libgcc
-Makefile; no instruction bodies, output patches or instruction glue are added.
-This source/compiler correspondence does not uniquely identify the game's
-historical toolchain.
+The four extents total 384 bytes. They are built with the separately pinned
+old Thumb backend and the `-O2` that the upstream Makefile uses, in both the
+normal and strict-declaration builds. Each extent, including literal pools and
+alignment, matches the reference at its original address, and each
+changed-source control is rejected in both modes. Alignment is written
+explicitly, as in the upstream libgcc Makefile. No instruction bodies, output
+patches or instruction glue are used. That the upstream source and compiler
+produce these bytes does not identify the game's own toolchain.
 
-The new `runtime_conversion.h` declares only these four exports and imports the
-existing runtime types. The existing floating-point and integer headers are
-unchanged. Actual target-compiler checks cover sixteen mode, width, alignment
-and offset facts and the four complete function definitions. Five incompatible
-input/result declarations reject. Omitting the real unpack declaration leaves
-the legacy signed-conversion bytes identical but causes strict compilation to
-reject, demonstrating that byte equality alone does not establish a valid API.
+`__fixdfsi` is 116 bytes because it includes the original two-byte zero tail
+up to `0x4DD18`.
 
-DF arguments and returns use the old mixed-word ABI: the high word is in R0
-and the low word in R1. Signed and unsigned integer results are 32 bits. The
-unpacked record and integer helper conventions remain those described in
-`RUNTIME_FLOATING_POINT.md`; no host floating-point layout is assumed.
+`runtime_conversion.h` declares only these four exports and uses the existing
+runtime types; the floating-point and integer headers are unchanged. Checks
+with the target compiler cover sixteen facts about mode, width, alignment and
+offset, and the four function definitions. Five incompatible input or result
+declarations are rejected. Leaving out the real unpack declaration keeps the
+signed conversion's bytes identical but makes strict compilation fail, so
+byte equality alone does not show an API is valid.
 
-## Source adaptations and domains
+Doubles are passed and returned in the old mixed-word convention: high word in
+R0, low word in R1. Signed and unsigned integer results are 32 bits. The
+unpacked record and integer helpers follow
+[RUNTIME_FLOATING_POINT.md](RUNTIME_FLOATING_POINT.md). No host floating-point
+layout is assumed.
 
-The signed conversion and greater-or-equal wrapper retain the selected upstream
-function bodies and their class checks. The wrapper returns a signed comparison
-result, including -1 for unordered input; it is not a Boolean result. The
-double-to-signed routine returns zero for zero and NaN, saturates infinities or
+## Differences from upstream and input domains
+
+`__floatsidf` and `__fixdfsi` keep the selected upstream bodies. `__gedf2`
+returns a signed comparison result, including -1 for unordered input, not a
+Boolean. `__fixdfsi` returns zero for zero and NaN, saturates infinities and
 large exponents, and otherwise truncates using the unpacked fraction.
 
-The unsigned conversion retains its branch condition, signed casts and low
-branch. Only its final high-branch bias subtraction is unsigned. The upstream
-signed subtraction overflows for the intended upper unsigned range; the
-unsigned expression has identical native bytes and performs defined modular
-subtraction. The unchanged upstream predecessor and its raw matching output
-remain separate evidence.
+`__fixunsdfsi` keeps its branch condition, signed casts and low branch. Only
+the final bias subtraction in the high branch is unsigned: the upstream signed
+subtraction overflows for the upper part of the unsigned range, while the
+unsigned expression compiles to the same bytes and is defined modular
+arithmetic.
 
-For an ordinary defined-source unsigned-conversion case, the relevant DF-to-SI
-cast must have a representable truncated integral part. This includes some
-negative fractions just below INT_MIN: -2147483648.5 truncates to INT_MIN,
-whereas -2147483649 does not. A negative low-branch input such as -1.5 returns
-unsigned `0xFFFFFFFF`, rather than a zero clamp. Nonfinite and out-of-cast-domain
-unsigned-conversion observations remain native-only diagnostics.
+For `__fixunsdfsi` to be well defined, its double-to-signed cast must have a
+representable truncated integral part. That includes some negative fractions
+just below INT_MIN: -2147483648.5 truncates to INT_MIN, but -2147483649 does
+not. A negative low-branch input such as -1.5 returns `0xFFFFFFFF`, not zero.
+Behaviour outside the cast's domain (infinities, NaN, out-of-range values) was
+only seen in the original code, not defined by the source.
 
-The integer-to-double zero branch leaves the unpacked fraction unwritten before
-calling the existing packer, whose source reads that field before class
-dispatch. Zero therefore remains a seeded native-only case. No initialization
-or guards have been invented. INT_MIN takes the explicit constant-return path;
-other nonzero signed inputs initialize and normalize the required fraction.
+In `__floatsidf`, a zero input leaves the unpacked fraction unwritten before
+the packer reads it. This is the original behaviour, and no initialisation or
+guard has been added. INT_MIN takes an explicit constant-return path. Other
+non-zero inputs initialise and normalise the fraction.
 
-## Bounded verification
+## Checks run
 
-The source model checks 649 base cases: 628 defined-source cases and 21 separate
-native-only cases. Three defined cases exercise the negative cast-formal edge.
-Original and compiled bodies execute with three stack seeds, giving 3,894
-base executions. All four actual source controls have defined witnesses, with
-334 defined-case divergences; four additional unsigned-control differences
-belong only to the native-only domain. Eight deliberately wrong models reject.
+A source model checks 649 cases: 628 where the source defines the result and
+21 that only the original code reaches. Three of the defined cases are at the
+negative cast edge. The original and compiled bodies each run with three stack
+seeds, for 3,894 runs. Each of the four changed-source controls diverges on
+defined cases (334 in total), plus four more in the original-only cases.
+Eight deliberately wrong models are rejected.
 
-Twelve separate sequential actual-entry compositions include eleven defined
-nonzero cases and one native-only zero case, with 216 entry executions. These
-are not added to the base-case count. Seven existing runtime providers are
-supplied statically; six are actually called by the retained cases. The checks
-execute nested bodies without opaque helper hooks or external-ROM pool rescue.
-They reject executed truncated literal pools, missing actual providers,
-incorrect DF return words, callee-save/stack failures and domain relabeling.
+Twelve further sequences call the actual entries in turn (eleven defined
+non-zero cases and one zero case that only the original reaches), for 216
+entry executions, counted separately from the 649 base cases. Seven existing
+runtime routines are supplied, and six of them are called by these sequences.
+The checks run the nested bodies with no stand-in helpers, and reject
+truncated literal pools, missing providers, wrong return words, callee-save or
+stack errors, and mislabelled domains.
 
-The four new definitions have eight provider-symbol imports. Five existing
-consumer definitions have ten metadata bindings to integer-to-double and
-double-to-unsigned conversion; their accepted extents total 2,372 bytes. Those
-counts describe this bounded binding audit, not a complete runtime caller
-inventory. Matching bytes, bounded source-model execution,
-whole-ROM equality and gameplay correctness remain separate claims.
+The four definitions import eight provider symbols. Five existing callers
+bind ten times to the integer-to-double and double-to-unsigned conversions;
+their extents total 2,372 bytes. This is a count of those bindings, not a
+complete list of callers.
+
+Matching bytes, the source model, whole-ROM equality and correct gameplay
+behaviour are separate claims, and only the first three are checked here.

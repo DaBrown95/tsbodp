@@ -33,9 +33,8 @@ unsigned int frame_random_refill(void)
     {
         int remaining;
         for (remaining = 227; remaining; --remaining) {
-            *out++ = *tap++ ^
-                (((previous & 0x80000000) | (current & 0x7fffffff)) >> 1) ^
-                ((current & 1) ? 0x9908b0df : 0);
+            *out++ = *tap++ ^ (((previous & 0x80000000) | (current & 0x7fffffff)) >> 1) ^
+                     ((current & 1) ? 0x9908b0df : 0);
             previous = current;
             current = *ahead++;
         }
@@ -44,9 +43,8 @@ unsigned int frame_random_refill(void)
     {
         int remaining;
         for (remaining = 396; remaining; --remaining) {
-            *out++ = *tap++ ^
-                (((previous & 0x80000000) | (current & 0x7fffffff)) >> 1) ^
-                ((current & 1) ? 0x9908b0df : 0);
+            *out++ = *tap++ ^ (((previous & 0x80000000) | (current & 0x7fffffff)) >> 1) ^
+                     ((current & 1) ? 0x9908b0df : 0);
             previous = current;
             current = *ahead++;
         }
@@ -57,7 +55,8 @@ unsigned int frame_random_refill(void)
         unsigned int mixed = current & 0x7fffffff;
         mixed = (mixed | high) >> 1;
         *out = *tap ^ mixed;
-        if (current & 1) *out ^= 0x9908b0df;
+        if (current & 1)
+            *out ^= 0x9908b0df;
     }
     current ^= current >> 11;
     current ^= (current << 7) & 0x9d2c5680;

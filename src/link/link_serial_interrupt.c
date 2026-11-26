@@ -186,8 +186,7 @@ void link_serial_interrupt(void)
 
             /* Check each record with its checksum word temporarily cleared. */
             records_valid = 1;
-            for (completed_peer = 0; completed_peer < g_link_setup_state.active;
-                 ++completed_peer) {
+            for (completed_peer = 0; completed_peer < g_link_setup_state.active; ++completed_peer) {
                 struct EventRecord *checksum_record =
                     g_link_setup_state.first_records[completed_peer];
                 int total;
@@ -198,8 +197,7 @@ void link_serial_interrupt(void)
                 checksum = (short)checksum_record->storage.fields.reserved;
                 checksum_record->storage.fields.reserved = transfer.sum;
                 bytes = (const unsigned char *)checksum_record;
-                for (checksum_byte = 0; checksum_byte < sizeof(*checksum_record);
-                     ++checksum_byte)
+                for (checksum_byte = 0; checksum_byte < sizeof(*checksum_record); ++checksum_byte)
                     transfer.sum += bytes[checksum_byte];
                 transfer.sum += (short)link_saved_random_byte();
                 checksum_record->storage.fields.reserved = checksum;

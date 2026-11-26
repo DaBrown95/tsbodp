@@ -1,7 +1,7 @@
 #include "frame_actor_items.h"
 
 void frame_actor_item_contact_relation(struct CollisionObject *first,
-                                      struct CollisionObject *second)
+                                       struct CollisionObject *second)
 {
     struct FrameObject *object = (struct FrameObject *)first;
     struct FrameObject *other = (struct FrameObject *)second;
@@ -14,4 +14,4 @@ void frame_actor_item_contact_relation(struct CollisionObject *first,
         frame_emit_actor_item_contact(other, 0);
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

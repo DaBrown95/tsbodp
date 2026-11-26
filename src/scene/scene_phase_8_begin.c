@@ -3,4 +3,4 @@
 void scene_phase_8_begin(void)
 {
 }
-asm(".align 2,0");
+asm(".align 2, 0");

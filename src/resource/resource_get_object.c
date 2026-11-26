@@ -10,8 +10,8 @@ struct FrameObject *resource_get_object(unsigned int group, unsigned int slot)
     if (!group_id && slot_id > 0xFE) {
         unsigned char view = 0xFF - slot_id;
         struct TransitionViewContext *context = &g_transition_view_context;
-        data = (unsigned char *)((unsigned int)view * sizeof(struct TransitionViewSlot)
-                                + (unsigned int)context);
+        data = (unsigned char *)((unsigned int)view * sizeof(struct TransitionViewSlot) +
+                                 (unsigned int)context);
     } else {
         unsigned int offset;
         unsigned short *offsets;

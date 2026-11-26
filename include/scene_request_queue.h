@@ -9,7 +9,9 @@
 /* Three 24-byte request views; names follow the observed copy order. */
 extern struct SceneRequest g_scene_previous_request, g_scene_queued_request;
 typedef void (*ScenePhaseCallback)(void);
-struct ScenePhaseCallbacks { ScenePhaseCallback begin, step, end; };
+struct ScenePhaseCallbacks {
+    ScenePhaseCallback begin, step, end;
+};
 extern const struct ScenePhaseCallbacks g_scene_phase_callbacks[];
 extern unsigned int g_game_flags, g_frame_allocation_epoch;
 

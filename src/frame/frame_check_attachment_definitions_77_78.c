@@ -1,6 +1,7 @@
 #include "frame_attachment_definitions_77_78.h"
 
-unsigned int frame_check_attachment_definitions_77_78(struct FrameNeedEffectState *owner, struct FrameObject *actor)
+unsigned int frame_check_attachment_definitions_77_78(struct FrameNeedEffectState *owner,
+                                                      struct FrameObject *actor)
 {
     if (frame_count_actor_attachments(actor) && owner->unknown_60[0] == 1)
         return 0;

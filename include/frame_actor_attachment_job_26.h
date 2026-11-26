@@ -8,11 +8,14 @@
 unsigned int frame_initialize_attachment_job_26(struct FrameNeedEffectState *);
 unsigned int frame_select_attachment_job_26(struct FrameNeedEffectState *, unsigned char *);
 /* EC formal roles remain inferred until its generic caller is identified. */
-unsigned int frame_prepare_attachment_job_26(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
-unsigned int frame_begin_attachment_job_26(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+unsigned int frame_prepare_attachment_job_26(struct FrameNeedEffectState *, struct FrameObject *,
+                                             unsigned int);
+unsigned int frame_begin_attachment_job_26(struct FrameNeedEffectState *, struct FrameObject *,
+                                           unsigned int);
 unsigned int frame_dispatch_attachment_job_26(struct FrameNeedEffectState *, struct FrameObject *);
 void frame_finish_attachment_job_26(struct FrameNeedEffectState *);
-unsigned int frame_step_attachment_job_26(struct FrameNeedEffectState *, struct FrameActorAttachmentRecord *);
+unsigned int frame_step_attachment_job_26(struct FrameNeedEffectState *,
+                                          struct FrameActorAttachmentRecord *);
 
 /* Separate neighbouring entry; no installed callback role is established. */
 unsigned int frame_check_attachment_job_26(struct FrameNeedEffectState *, struct FrameObject *);

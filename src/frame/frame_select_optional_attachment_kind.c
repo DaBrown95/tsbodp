@@ -1,7 +1,7 @@
 #include "frame_need_effect_optional_jobs.h"
 
 unsigned int frame_select_optional_attachment_kind(struct FrameNeedEffectState *owner,
-                                                    unsigned char *out)
+                                                   unsigned char *out)
 {
     if (!(unsigned char)frame_need_effect_optional_one_ready(owner))
         *out = 29;

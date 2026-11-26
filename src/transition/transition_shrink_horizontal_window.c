@@ -3,7 +3,8 @@
 
 extern void irq_wait_vblank(void);
 
-void transition_shrink_horizontal_window(unsigned short targets) {
+void transition_shrink_horizontal_window(unsigned short targets)
+{
     short position = 240;
     unsigned short zero;
     /* The real window pointer remains live across the waits. */

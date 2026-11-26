@@ -1,4 +1,9 @@
-"""Validate static table/producer evidence without granting source credit."""
+"""Check callback tables and the code that fills them, for tools/inventory_rom.py.
+
+Confirms that the table entries read from the ROM are valid addresses and that
+the writing code is current, so the entries can be treated as call targets.
+Matching entries do not show that a table is complete.
+"""
 import hashlib
 import struct
 

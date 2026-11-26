@@ -1,6 +1,7 @@
 #include "resource_decode.h"
 
-void resource_decode_delta(void *destination, unsigned int bytes) {
+void resource_decode_delta(void *destination, unsigned int bytes)
+{
     unsigned int index = 1;
     bytes >>= 1;
     if (index < bytes) {

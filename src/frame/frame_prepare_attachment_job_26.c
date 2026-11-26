@@ -2,13 +2,12 @@
 #include "frame_actor_attachment_job_26.h"
 
 unsigned int frame_prepare_attachment_job_26(struct FrameNeedEffectState *owner,
-                                            struct FrameObject *actor,
-                                            unsigned int kind)
+                                             struct FrameObject *actor, unsigned int kind)
 {
     switch (kind) {
-    case 26:
-        return 1;
-    default:
-        return 1;
+        case 26:
+            return 1;
+        default:
+            return 1;
     }
 }

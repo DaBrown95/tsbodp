@@ -12,9 +12,11 @@ unsigned char save_stream_validate_header(void)
     do {
         sum += *source++;
     } while (--count > 0);
-    if (sum != 0) return 0;
+    if (sum != 0)
+        return 0;
     for (byte = 0; byte < 8; ++byte)
-        if (g_save_stream_state.header.bytes[byte] != g_save_header_template[byte]) return 0;
+        if (g_save_stream_state.header.bytes[byte] != g_save_header_template[byte])
+            return 0;
     return 1;
 }
 asm(".align 2, 0");

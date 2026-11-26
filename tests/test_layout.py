@@ -1,4 +1,4 @@
-"""Ensure source extents cannot overlap or hide unconverted bytes."""
+"""Source extents cannot overlap or hide unconverted bytes."""
 import importlib.util
 from pathlib import Path
 import unittest

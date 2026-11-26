@@ -31,20 +31,20 @@ extern struct FrameAttachmentChance g_frame_attachment_chances[];
 /* Only this storage's first word is interpreted as an actor pointer. */
 extern struct FrameObject *g_need_effect_player;
 unsigned char frame_gate_attachment_game_value(struct FrameNeedEffectState *,
-                                                struct FrameActorAttachmentRecord *, int);
-unsigned int frame_begin_variant_attachment_job(struct FrameNeedEffectState *,
-                                                   struct FrameObject *, unsigned int);
-unsigned int frame_begin_attachment_job_73(struct FrameNeedEffectState *,
-                                            struct FrameObject *, unsigned int);
+                                               struct FrameActorAttachmentRecord *, int);
+unsigned int frame_begin_variant_attachment_job(struct FrameNeedEffectState *, struct FrameObject *,
+                                                unsigned int);
+unsigned int frame_begin_attachment_job_73(struct FrameNeedEffectState *, struct FrameObject *,
+                                           unsigned int);
 unsigned int frame_step_attachment_job_73(struct FrameNeedEffectState *,
-                                           struct FrameActorAttachmentRecord *);
-unsigned int frame_dispatch_attachment_job_73(struct FrameNeedEffectState *,
-                                               struct FrameObject *);
+                                          struct FrameActorAttachmentRecord *);
+unsigned int frame_dispatch_attachment_job_73(struct FrameNeedEffectState *, struct FrameObject *);
 /* Actual observed rows35/36 definition callbacks for kind73. */
 unsigned int frame_initialize_attachment_job_73(struct FrameNeedEffectState *);
 unsigned int frame_select_attachment_job_73(struct FrameNeedEffectState *, unsigned char *);
 /* EC formal roles remain inferred until its generic caller is identified. */
-unsigned int frame_prepare_attachment_job_73(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+unsigned int frame_prepare_attachment_job_73(struct FrameNeedEffectState *, struct FrameObject *,
+                                             unsigned int);
 void frame_finish_attachment_job_73(struct FrameNeedEffectState *);
 
 /* Separate neighbouring entries; no installed callback role is established. */

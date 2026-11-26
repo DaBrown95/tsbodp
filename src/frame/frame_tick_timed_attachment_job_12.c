@@ -3,4 +3,4 @@
 void frame_tick_timed_attachment_job_12(struct FrameNeedEffectState *owner)
 {
 }
-asm(".align 2,0");
+asm(".align 2, 0");

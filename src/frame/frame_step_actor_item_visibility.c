@@ -9,4 +9,4 @@ void frame_step_actor_item_visibility(struct FrameObject *object)
     }
     ((struct FrameActorObject *)object)->pending_updates = 0;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

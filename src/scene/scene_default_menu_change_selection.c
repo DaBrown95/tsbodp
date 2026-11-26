@@ -1,7 +1,9 @@
 #include "scene_default_menu.h"
 
 /* The first member is a text tile word; the second is a vertical position. */
-struct DefaultMenuTextPosition { unsigned int tile, y; };
+struct DefaultMenuTextPosition {
+    unsigned int tile, y;
+};
 
 static inline void select_row_font(int value)
 {
@@ -24,11 +26,13 @@ void scene_default_menu_change_selection(void)
     const char *text;
 
     {
-        union { unsigned int row; const char *text; } working;
+        union {
+            unsigned int row;
+            const char *text;
+        } working;
 
         working.row = g_scene_request.scene;
-        input_step_vertical_pressed(&g_scene_request.scene, 0, 3, 1,
-                                    g_input_config.local_player);
+        input_step_vertical_pressed(&g_scene_request.scene, 0, 3, 1, g_input_config.local_player);
         while (!g_scene_default_menu_options[g_scene_request.scene])
             input_step_vertical_pressed(&g_scene_request.scene, 0, 3, 1,
                                         g_input_config.local_player);

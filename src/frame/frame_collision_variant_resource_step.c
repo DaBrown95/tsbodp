@@ -6,11 +6,12 @@ void frame_collision_variant_resource_step(struct FrameObject *object)
     struct FrameCollisionVariantView *view = (void *)object;
 
     switch (view->state) {
-    case 0: break;
-    case 1:
-        if (!(object->flags & 0x1000))
-            object->flags = (object->flags & ~1) | 2;
-        break;
+        case 0:
+            break;
+        case 1:
+            if (!(object->flags & 0x1000))
+                object->flags = (object->flags & ~1) | 2;
+            break;
     }
     view->pending_updates = 0;
 }

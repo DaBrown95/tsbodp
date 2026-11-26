@@ -59,8 +59,7 @@ void scene_contact_activity_three_original_draw_event(struct FrameObject *base)
 
             if (orientation > orientation_limit) {
                 int step;
-                end_y = (int)(((unsigned int)raster_end_y << 22) -
-                              ((unsigned int)current_y << 6));
+                end_y = (int)(((unsigned int)raster_end_y << 22) - ((unsigned int)current_y << 6));
                 LINE->horizontal = 1;
                 step = (end_y / difference_x) >> 6;
                 if (step < 0)
@@ -69,8 +68,8 @@ void scene_contact_activity_three_original_draw_event(struct FrameObject *base)
                 end_y = slope;
                 if (current_y < 0) {
                     LINE->origin.x = (unsigned int)current_x +
-                        ((unsigned int)end_y << 2) *
-                        (unsigned int)((int)(0u - (unsigned int)current_y) >> 16);
+                                     ((unsigned int)end_y << 2) *
+                                         (unsigned int)((int)(0u - (unsigned int)current_y) >> 16);
                     current_y = 0;
                     LINE->origin.y = current_y;
                 }
@@ -84,8 +83,7 @@ void scene_contact_activity_three_original_draw_event(struct FrameObject *base)
                 vertical_step = (unsigned int)slope << 2;
                 LINE->step.x = vertical_step;
                 if (start_y < 0) {
-                    register unsigned int vertical_offset asm("r0") =
-                        0u - (unsigned int)start_y;
+                    register unsigned int vertical_offset asm("r0") = 0u - (unsigned int)start_y;
                     vertical_offset <<= 16;
                     LINE->origin.x = (unsigned int)end_x + vertical_offset * vertical_step;
                     LINE->origin.y = end_y;

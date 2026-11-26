@@ -41,4 +41,4 @@ void scene_palette_menu_build_entry_objects(void)
         g_scene_request.scene = 3;
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

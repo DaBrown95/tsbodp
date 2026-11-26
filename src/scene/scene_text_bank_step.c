@@ -27,4 +27,4 @@ void scene_text_bank_step(void)
         }
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

@@ -2,33 +2,34 @@
 #define TSBODP_EVENT_RECORD_H
 /* Eight-byte payload ABI and twelve-byte record inferred from callers/callee.
  * Kind selects the fields read; the byte view keeps the parameter representation. */
-struct EventNoPayload {};
+struct EventNoPayload {
+};
 union EventPayloadStorage {
- struct EventNoPayload no_payload;
- /* Active word initializes the low four bytes; the remaining union
+    struct EventNoPayload no_payload;
+    /* Active word initializes the low four bytes; the remaining union
   * representation is unspecified and is not read by event kinds1/2. */
- unsigned int word;
- unsigned char bytes[8];
+    unsigned int word;
+    unsigned char bytes[8];
 };
 struct EventPayload {
- union EventPayloadStorage storage;
+    union EventPayloadStorage storage;
 } __attribute__((aligned(4)));
 union EventData {
- unsigned int word;
- unsigned int words[2];
- unsigned short halfwords[4];
- unsigned char bytes[8];
- struct EventPayload argument;
+    unsigned int word;
+    unsigned int words[2];
+    unsigned short halfwords[4];
+    unsigned char bytes[8];
+    struct EventPayload argument;
 };
 struct EventRecord {
- union {
-  struct {
-   unsigned char kind, sequence;
-   unsigned short reserved;
-   union EventData payload;
-  } fields;
-  unsigned short halfwords[6];
- } storage;
+    union {
+        struct {
+            unsigned char kind, sequence;
+            unsigned short reserved;
+            union EventData payload;
+        } fields;
+        unsigned short halfwords[6];
+    } storage;
 };
 extern unsigned char g_event_sequence;
 extern struct EventRecord g_event_record;

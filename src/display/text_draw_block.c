@@ -1,7 +1,7 @@
 #include "display_text_raster.h"
 
-unsigned int display_text_draw_block(unsigned int tile, int x, int y, int width,
-                                    int height, const char **text, unsigned int style)
+unsigned int display_text_draw_block(unsigned int tile, int x, int y, int width, int height,
+                                     const char **text, unsigned int style)
 {
     unsigned int limit = 0x7fffffff;
     while (**text && height >= g_display_text_state.line_height) {

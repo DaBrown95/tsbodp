@@ -1,4 +1,7 @@
-"""Pure layout validation, independent of a ROM or toolchain."""
+"""Check that source extents lie inside the ROM, do not overlap and do not hide unconverted bytes.
+
+Needs neither a ROM nor a toolchain.
+"""
 
 def layout(functions, size):
     ordered = sorted(functions, key=lambda f: f['rom_offset'])

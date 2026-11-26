@@ -1,7 +1,7 @@
 #include "frame_render_effect.h"
 #include "frame_transient_effect.h"
 
-void frame_reset_effect_lists_unrooted_30f70(void)
+void frame_reset_effect_lists(void)
 {
     int group = 0;
     register unsigned int work asm("r0") = (unsigned int)g_frame_transient_definitions;

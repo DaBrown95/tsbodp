@@ -8,9 +8,9 @@
  * The nested byte at +D3 has its own alignment-one representation; this view
  * does not establish complete storage or original declarations. */
 struct __attribute__((packed, aligned(1))) SceneContactAuxiliaryFlagByte {
-    unsigned char unknown_0:4;
-    signed char flag4:1;
-    unsigned char flag5:1, unknown_6:2;
+    unsigned char unknown_0 : 4;
+    signed char flag4 : 1;
+    unsigned char flag5 : 1, unknown_6 : 2;
 };
 struct SceneContactAuxiliaryFlagPrefix {
     unsigned char unknown00[211];

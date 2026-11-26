@@ -8,8 +8,7 @@ void condition_panel_create_objects(void)
     {
         struct FrameObject **objects;
         register struct FrameObject *created asm("r0");
-        created = frame_create_scene_object(
-            g_display_scene_request_state.scene + 82, 10, 1, 1);
+        created = frame_create_scene_object(g_display_scene_request_state.scene + 82, 10, 1, 1);
         objects = g_condition_panel_objects;
         objects[8] = created;
         objects[6] = frame_create_scene_object(93, 236, 7, 1);

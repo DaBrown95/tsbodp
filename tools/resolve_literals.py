@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Resolve word literals at explicitly supplied ARM7 ROM instruction addresses.
+"""Look up the word that a ROM load instruction reads, at addresses you supply.
 
 Example: python tools/resolve_literals.py 0x08000100 0x08000102 --mode Thumb
-Optional --function names select provisional symbol bindings from the fixed
-build manifest. Reports are exclusive new JSON files beneath reports/.
+Optional --function names use symbol labels from the fixed build manifest.
+Reports are written as new JSON files under reports/.
 
-Only Thumb-1 LDR Rt,[PC,#imm] and aligned ARM immediate, preindexed, non-writeback
-word LDR are supported. Thumb uses (address+4)&~3; ARM uses address+8. No scan,
-RAM-copy mapping, Thumb-2, unaligned ARM word rotation, pointed-to-memory read,
-execution/condition evaluation, function boundary or source/type proof occurs.
-Caller-supplied addresses may be data. Symbol names never affect decoded values.
+Supports Thumb LDR Rt,[PC,#imm] and aligned ARM word LDR with an immediate,
+pre-indexed offset and no writeback. Thumb uses (address+4)&~3; ARM uses
+address+8. It does not scan, map RAM copies, handle Thumb-2 or unaligned ARM
+word rotation, read the memory a literal points to, evaluate conditions, find
+function boundaries or check types. The addresses you give may be data, and
+symbol names never change the decoded values.
 """
 import argparse
 import hashlib

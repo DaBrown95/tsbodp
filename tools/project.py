@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Read-only ROM inspection and strict comparison; standard library only."""
+"""Inspect and compare ROMs: check a ROM's identity against config/<target>/target.json and compare bytes strictly.
+
+Provides the `audit`, `compare` and `doctor` commands (`make audit`,
+`make compare`, `make doctor`). Standard library only.
+"""
 
 import argparse
 import hashlib

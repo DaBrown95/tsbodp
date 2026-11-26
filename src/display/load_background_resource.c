@@ -1,7 +1,8 @@
 #include "display.h"
 const unsigned short *display_load_background_resource(unsigned int index,
-    const struct BackgroundResource *resource, unsigned short tile_offset,
-    unsigned short palette_offset)
+                                                       const struct BackgroundResource *resource,
+                                                       unsigned short tile_offset,
+                                                       unsigned short palette_offset)
 {
     const unsigned char *data;
     const unsigned short *dimensions = 0;
@@ -27,8 +28,9 @@ const unsigned short *display_load_background_resource(unsigned int index,
                 elements /= 2;
             data = (const unsigned char *)dimensions + (elements * 2 + 4);
         }
-        destination = (void *)(0x06000000 +
-            (((const struct BackgroundCharacterBase *)background)->character_base << 14));
+        destination =
+            (void *)(0x06000000 +
+                     (((const struct BackgroundCharacterBase *)background)->character_base << 14));
         if (!(resource->flags & 0x80))
             destination = (unsigned char *)destination + (tile_offset << 5);
         else

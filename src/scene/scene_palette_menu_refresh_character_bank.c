@@ -20,4 +20,4 @@ void scene_palette_menu_refresh_character_bank(void)
         object->id = 134;
     frame_set_variant_state(g_frame_actor_palette_menu_objects[12], 58);
 }
-asm(".align 2,0");
+asm(".align 2, 0");

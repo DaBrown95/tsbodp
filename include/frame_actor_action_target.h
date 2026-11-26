@@ -5,17 +5,21 @@
 struct FrameObject;
 struct FrameNeedEffectState;
 struct FrameActionSearchNode {
- struct FrameActionSearchNode *next;
- unsigned char unknown04[4];unsigned int kind;
- unsigned char unknown0c[0x48];void *target;
- unsigned char unknown58[0x8c];
- unsigned int (*check)(struct FrameNeedEffectState *,struct FrameObject *);
- unsigned int (*actions)(struct FrameNeedEffectState *,unsigned char *);
+    struct FrameActionSearchNode *next;
+    unsigned char unknown04[4];
+    unsigned int kind;
+    unsigned char unknown0c[0x48];
+    void *target;
+    unsigned char unknown58[0x8c];
+    unsigned int (*check)(struct FrameNeedEffectState *, struct FrameObject *);
+    unsigned int (*actions)(struct FrameNeedEffectState *, unsigned char *);
 };
-struct FrameActionSearchDescriptor {unsigned char unknown00[34],enabled,unknown23;};
+struct FrameActionSearchDescriptor {
+    unsigned char unknown00[34], enabled, unknown23;
+};
 struct FramePendingAction;
 extern struct FramePendingAction *g_frame_pending_action_head;
 extern struct FrameActionSearchDescriptor g_frame_action_search_descriptors[];
-void *scene_fill_bytes(void *,int,unsigned int);
+void *scene_fill_bytes(void *, int, unsigned int);
 
 #endif

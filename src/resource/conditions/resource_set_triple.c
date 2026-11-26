@@ -8,8 +8,7 @@ struct ConditionSelection {
 extern struct SceneModeFlags g_scene_mode_flags;
 extern unsigned char condition_notification_active(unsigned int);
 
-static inline unsigned int value_address(unsigned int row, unsigned int column,
-                                         unsigned int entry)
+static inline unsigned int value_address(unsigned int row, unsigned int column, unsigned int entry)
 {
     unsigned int base = (unsigned int)&g_resource_game_state;
     unsigned int offset = entry * 4;
@@ -55,10 +54,15 @@ void resource_set_triple(unsigned int row, unsigned int column, unsigned int ent
         *(unsigned char *)offset = complete;
         all = complete;
     }
-    for (index = 0; index < g_condition_definitions[row].columns[column]->count;
-         index++) {
-        if (!(unsigned char)condition_group_active(row, column)) { all = 0; break; }
-        if (!(unsigned char)condition_is_complete(row, column, index)) { all = 0; break; }
+    for (index = 0; index < g_condition_definitions[row].columns[column]->count; index++) {
+        if (!(unsigned char)condition_group_active(row, column)) {
+            all = 0;
+            break;
+        }
+        if (!(unsigned char)condition_is_complete(row, column, index)) {
+            all = 0;
+            break;
+        }
     }
     if (column < g_condition_definitions[row].count &&
         entry < g_condition_definitions[row].columns[column]->count) {
@@ -72,13 +76,13 @@ void resource_set_triple(unsigned int row, unsigned int column, unsigned int ent
             *current_flags() |= 0x80000;
         }
         {
-            unsigned int address =
-                (unsigned int)g_condition_definitions[row].columns[column];
+            unsigned int address = (unsigned int)g_condition_definitions[row].columns[column];
             unsigned char kind;
             address += 4;
             address += entry;
             kind = *(unsigned char *)address;
-            if (kind != 0xff) resource_set_display_kind(kind);
+            if (kind != 0xff)
+                resource_set_display_kind(kind);
         }
         condition_refresh(row, column);
     }

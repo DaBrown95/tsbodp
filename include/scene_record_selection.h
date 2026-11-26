@@ -14,12 +14,12 @@
 /* The original phase-seven initializer allocates sixteen zeroed bytes.
  * These roles apply to that allocation; names remain provisional. */
 struct SceneRecordSelectionState {
- unsigned int return_phase;
- unsigned char occupied[4], enabled[4], unknown_0c[4];
+    unsigned int return_phase;
+    unsigned char occupied[4], enabled[4], unknown_0c[4];
 };
 extern const unsigned char *g_frame_actor_palette_scene_resource;
 #define SCENE_RECORD_SELECTION_STATE \
- ((struct SceneRecordSelectionState *)(void *)g_frame_actor_palette_scene_resource)
+    ((struct SceneRecordSelectionState *)(void *)g_frame_actor_palette_scene_resource)
 
 extern struct FrameObject *g_condition_panel_objects[15];
 extern unsigned int g_scene_link_menu_selector_word;
@@ -46,9 +46,8 @@ void display_reset_palette_jobs(void);
 void display_scene_retire_object_slot(unsigned int);
 void frame_create_palette_scene_actor(unsigned int);
 void scene_submit_default_request(unsigned int);
-InputU32 input_step_horizontal_pressed(InputU32 *, InputU32, InputU32,
-                                      InputU8, InputU8);
-unsigned int input_step_local_vertical_pressed(unsigned int *, unsigned int,
-    unsigned int, unsigned char, unsigned char);
+InputU32 input_step_horizontal_pressed(InputU32 *, InputU32, InputU32, InputU8, InputU8);
+unsigned int input_step_local_vertical_pressed(unsigned int *, unsigned int, unsigned int,
+                                               unsigned char, unsigned char);
 
 #endif

@@ -1,8 +1,8 @@
 #include "display_menu_relation.h"
 #include "resource_conditions.h"
 
-int display_menu_write_relation(struct DisplayMenuRelationState *state,
-                                unsigned int index, int value)
+int display_menu_write_relation(struct DisplayMenuRelationState *state, unsigned int index,
+                                int value)
 {
     state->values.records[index].value = value;
     display_menu_refresh_relation(&state->values);

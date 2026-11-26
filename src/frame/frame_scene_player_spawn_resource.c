@@ -9,11 +9,10 @@ struct ResourceSpawnArena {
     struct FrameScenePlayerSpawnResource records[1];
 };
 
-struct FrameScenePlayerSpawnResource *
-frame_scene_player_spawn_resource(unsigned char group, unsigned char slot)
+struct FrameScenePlayerSpawnResource *frame_scene_player_spawn_resource(unsigned char group,
+                                                                        unsigned char slot)
 {
-    struct FrameScenePlayerSpawnResource *result =
-        g_frame_scene_player_spawn_defaults + slot;
+    struct FrameScenePlayerSpawnResource *result = g_frame_scene_player_spawn_defaults + slot;
     unsigned char index = 0;
     struct ResourceSpawnArena *input = (struct ResourceSpawnArena *)g_resource_arena;
     unsigned int initial_count = input->count;
@@ -23,8 +22,7 @@ frame_scene_player_spawn_resource(unsigned char group, unsigned char slot)
         unsigned short count = initial_count;
         do {
             unsigned int record_offset = index * 8;
-            struct ResourceSpawnArena *view =
-                (struct ResourceSpawnArena *)(arena + record_offset);
+            struct ResourceSpawnArena *view = (struct ResourceSpawnArena *)(arena + record_offset);
             if (view->records[0].group == group && view->records[0].slot == slot) {
                 result = (struct FrameScenePlayerSpawnResource *)(arena + (record_offset + 4));
                 break;
@@ -34,4 +32,4 @@ frame_scene_player_spawn_resource(unsigned char group, unsigned char slot)
     }
     return result;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

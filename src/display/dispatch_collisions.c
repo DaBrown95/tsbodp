@@ -78,10 +78,14 @@ void frame_dispatch_collisions(U32 count, struct CollisionObject **objects)
                             packed = (U32)packed << 8;
                             b_left = b_x + (packed >> 24);
                         }
-                        if (a_right < b_left) goto next_bound;
-                        if (a_left > b_right) goto next_bound;
-                        if (a_top > b_bottom) goto next_bound;
-                        if (a_bottom < b_top) goto next_bound;
+                        if (a_right < b_left)
+                            goto next_bound;
+                        if (a_left > b_right)
+                            goto next_bound;
+                        if (a_top > b_bottom)
+                            goto next_bound;
+                        if (a_bottom < b_top)
+                            goto next_bound;
                         {
                             CollisionCallback callback = a->on_collision[first_bound];
                             if (callback && !notified) {
@@ -93,19 +97,18 @@ void frame_dispatch_collisions(U32 count, struct CollisionObject **objects)
                                 callback(b, a);
                         }
                     }
-next_bound:
-                    {
-                        U32 flags = a->flags;
-                        if (!(flags & 4)) {
-                            a_flags = flags;
-                            break;
-                        }
+                next_bound: {
+                    U32 flags = a->flags;
+                    if (!(flags & 4)) {
                         a_flags = flags;
-                        if (!(b->flags & 4) || (a_flags & 0x400))
-                            break;
+                        break;
                     }
+                    a_flags = flags;
+                    if (!(b->flags & 4) || (a_flags & 0x400))
+                        break;
                 }
-next_second:
+                }
+            next_second:
                 if (!(a_flags & 4))
                     break;
             }

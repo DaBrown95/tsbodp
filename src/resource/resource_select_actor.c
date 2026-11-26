@@ -4,14 +4,13 @@
 unsigned char resource_select_actor(unsigned int scene, unsigned int actor)
 {
     if (resource_actor_selection_available(scene, actor)) {
-        int relation = display_menu_read_relation(
-            &g_resource_selection_relation_view.values, 13);
+        int relation = display_menu_read_relation(&g_resource_selection_relation_view.values, 13);
         if (relation == -128)
             relation = 0;
         relation += 100;
         relation /= 2;
         if (frame_random_range(0, relation) <= 2) {
-            if (resource_selection_has_kind_0804573c()) {
+            if (resource_selection_has_kind_48()) {
                 g_resource_selection_relation_view.selection_requested = 1;
                 return 4;
             } else {

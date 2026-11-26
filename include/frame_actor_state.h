@@ -7,19 +7,23 @@ struct FramePoint;
 
 /* Selector-specific work fields. Other actor views overlap these addresses. */
 struct FrameActorStateWork {
- unsigned char unknown_00[84];
- unsigned int movement_status;
- int timer;
- unsigned char unknown_5c[8];
- unsigned char waypoint_group, waypoint_index, wait_units, unknown_67;
- unsigned int cue_handle;
+    unsigned char unknown_00[84];
+    unsigned int movement_status;
+    int timer;
+    unsigned char unknown_5c[8];
+    unsigned char waypoint_group, waypoint_index, wait_units, unknown_67;
+    unsigned int cue_handle;
 };
 
 unsigned char resource_group_point_count(unsigned char);
-struct FrameActorGroupPoint { short x, y; unsigned char unknown_04[4]; };
+struct FrameActorGroupPoint {
+    short x, y;
+    unsigned char unknown_04[4];
+};
 extern unsigned char *g_actor_point_group_data;
 struct FramePoint resource_read_group_point(unsigned char, unsigned char);
-unsigned char frame_begin_actor_route(struct FrameObject *, struct FramePoint *, unsigned int *, unsigned int, unsigned char);
+unsigned char frame_begin_actor_route(struct FrameObject *, struct FramePoint *, unsigned int *,
+                                      unsigned int, unsigned char);
 void frame_cancel_actor_route(struct FrameObject *);
 unsigned char frame_find_need_target(struct FrameObject *, void **, unsigned int *);
 unsigned char frame_actor_use_target(void *, struct FrameObject *, unsigned char);
@@ -27,9 +31,17 @@ unsigned char frame_find_scene_target(int *, int *);
 /* Further state views retain unspecified bytes and selector-specific roles. */
 union ResourceGameState;
 extern union ResourceGameState g_resource_game_state;
-struct FrameActorClockState { unsigned char unknown_00[10], clock; };
-struct FrameActorContactWork { unsigned char unknown_00[172]; unsigned short contact; };
-struct FrameActorGridCell { unsigned char unknown_00[196]; int cell; };
+struct FrameActorClockState {
+    unsigned char unknown_00[10], clock;
+};
+struct FrameActorContactWork {
+    unsigned char unknown_00[172];
+    unsigned short contact;
+};
+struct FrameActorGridCell {
+    unsigned char unknown_00[196];
+    int cell;
+};
 extern unsigned char g_actor_wander_directions[], g_actor_reverse_directions[];
 unsigned char frame_actor_choose_walk_direction(struct FrameObject *);
 void frame_actor_refresh_terrain(struct FrameObject *);
@@ -48,9 +60,15 @@ void frame_add_points(const struct FramePoint *, const struct FramePoint *, stru
 void frame_point_to_integer(const struct FramePoint *, struct FramePoint *);
 void frame_point_to_fixed(const struct FramePoint *, struct FramePoint *);
 /* Availability compares the low halfword; the upper half remains unspecified. */
-struct FrameActorPackedCell { unsigned short index, unknown; };
-struct FrameActorPackedCellView { unsigned char unknown[196]; struct FrameActorPackedCell cell; };
-unsigned char frame_grid_point_to_cell(void *, const struct FramePoint *, struct FrameActorPackedCell *);
+struct FrameActorPackedCell {
+    unsigned short index, unknown;
+};
+struct FrameActorPackedCellView {
+    unsigned char unknown[196];
+    struct FrameActorPackedCell cell;
+};
+unsigned char frame_grid_point_to_cell(void *, const struct FramePoint *,
+                                       struct FrameActorPackedCell *);
 
 /* Selector-derived names; the handlers' gameplay roles remain provisional. */
 void frame_run_actor_state(struct FrameObject *);

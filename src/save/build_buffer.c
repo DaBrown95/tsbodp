@@ -35,4 +35,4 @@ void save_stream_build_buffer(void)
         *checksum = -save_stream_checksum(buffer, span);
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Compile source candidates, link at ROM addresses, and compare entire extents."""
+"""Compile each C candidate, link it at its ROM address and compare its whole extent with the reference.
+
+Run by `make pilot`, which also runs the changed-source negative controls.
+"""
 
 import argparse
 import hashlib

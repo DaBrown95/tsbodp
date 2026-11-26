@@ -19,8 +19,8 @@ extern const unsigned char g_display_menu_indicator_choices[];
 extern const unsigned char g_display_menu_need_parameters[];
 extern unsigned char g_frame_actor_local_need_state[];
 void display_menu_populate_primary_rows(void);
-void display_copy_background_rectangle(unsigned int, const struct DisplayStoredMap *,
-    int, int, int, int, int, int, unsigned short);
+void display_copy_background_rectangle(unsigned int, const struct DisplayStoredMap *, int, int, int,
+                                       int, int, int, unsigned short);
 /* Unconverted dependencies; widths and pointer roles follow these callers. */
 void display_menu_restore_choice(void);
 void display_menu_show_hint(unsigned char);

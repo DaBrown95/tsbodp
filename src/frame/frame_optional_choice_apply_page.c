@@ -1,7 +1,6 @@
 #include "frame_optional_choice_apply.h"
 
-void frame_optional_choice_apply_page(unsigned char index,
-                                      struct FrameActorAttachmentRecord *job)
+void frame_optional_choice_apply_page(unsigned char index, struct FrameActorAttachmentRecord *job)
 {
     unsigned int value;
     unsigned char first, last;

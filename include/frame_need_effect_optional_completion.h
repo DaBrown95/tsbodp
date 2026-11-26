@@ -9,12 +9,12 @@ unsigned int frame_need_effect_consume_optional_three(struct FrameNeedEffectStat
 unsigned char frame_need_effect_optional_percentage(struct FrameNeedEffectState *);
 
 /* The first argument of the parameter step is unused in the observed body. */
-unsigned int frame_need_effect_step_parameter(struct FrameNeedEffectState *, void *,
-                                              unsigned int, struct FrameObject *);
+unsigned int frame_need_effect_step_parameter(struct FrameNeedEffectState *, void *, unsigned int,
+                                              struct FrameObject *);
 unsigned int frame_step_optional_parameter_attachment_job(struct FrameNeedEffectState *,
                                                           struct FrameActorAttachmentRecord *);
 unsigned int frame_step_optional_attachment_kind_7(struct FrameNeedEffectState *,
-                                                  struct FrameActorAttachmentRecord *);
+                                                   struct FrameActorAttachmentRecord *);
 unsigned int frame_select_optional_parameter_attachment_kind(struct FrameNeedEffectState *,
                                                              unsigned char *);
 unsigned int frame_check_optional_parameter_attachment_kind(struct FrameNeedEffectState *,

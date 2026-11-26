@@ -1,5 +1,6 @@
 #include "input.h"
-InputU32 input_step_horizontal_held(InputU32 *value, InputU32 minimum, InputU32 maximum, InputU8 wrap, InputU8 player)
+InputU32 input_step_horizontal_held(InputU32 *value, InputU32 minimum, InputU32 maximum,
+                                    InputU8 wrap, InputU8 player)
 {
     if (g_input_current[player] & 32) {
         if (*value <= minimum) {

@@ -15,11 +15,11 @@ void frame_emit_actor_item_contact(struct FrameObject *object, unsigned char pos
         effect->enabled = 1;
         effect->countdown = 8;
         effect->unknown34 = 0;
-        effect->direction = g_frame_transient_extended_directions[
-            ((struct FrameActorObject *)object)->direction];
+        effect->direction =
+            g_frame_transient_extended_directions[((struct FrameActorObject *)object)->direction];
         effect->rate = 65536;
         effect->mode = 2;
         effect->flags |= 0x35082;
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

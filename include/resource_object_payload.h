@@ -4,7 +4,7 @@
 struct FrameSceneSavedEffect;
 
 unsigned char *resource_get_object_payload(unsigned int, unsigned int);
-struct FrameSceneSavedEffect *frame_create_scene_saved_resource_effect(
-    unsigned char, unsigned char);
+struct FrameSceneSavedEffect *frame_create_scene_saved_resource_effect(unsigned char,
+                                                                       unsigned char);
 
 #endif

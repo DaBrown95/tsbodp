@@ -14,11 +14,9 @@ struct FrameSpawnPointResourcePayload {
     unsigned char subtype, direction;
 };
 
-struct FrameObject *frame_create_scene_target_resource(
-    unsigned char, unsigned char);
+struct FrameObject *frame_create_scene_target_resource(unsigned char, unsigned char);
 void frame_scene_target_resource_step(struct FrameObject *);
-struct FrameObject *frame_create_spawn_point_resource(
-    unsigned char, unsigned char);
+struct FrameObject *frame_create_spawn_point_resource(unsigned char, unsigned char);
 void frame_spawn_point_resource_step(struct FrameObject *);
 
 #endif

@@ -1,4 +1,8 @@
-"""Explicit external function modes for source links; data is never inferred."""
+"""Generate the assembler declarations for external symbols that sources link against.
+
+Each function is declared as Thumb or ARM explicitly; data symbols are never
+guessed.
+"""
 
 LEGACY_THUMB = {'irq_noop', 'frame_update', '_call_via_r0'}
 

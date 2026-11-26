@@ -52,7 +52,10 @@ void resource_scene_selector_interact_alternate(struct FrameObject *, struct Fra
 union ResourceSelectorClock {
     struct DisplayTimeRecord record;
     unsigned int words[2];
-    struct { unsigned int day : 16, hour : 8, minute : 8; unsigned int tail; } fields;
+    struct {
+        unsigned int day : 16, hour : 8, minute : 8;
+        unsigned int tail;
+    } fields;
 };
 /* Same world root as the clock and scene-player views; roles remain provisional. */
 struct ResourceSelectorWorld {
@@ -61,7 +64,9 @@ struct ResourceSelectorWorld {
     unsigned char unknown10[0x41e], mode42e, flag42f;
     unsigned char unknown430[0x318], selected_actor;
 };
-struct ResourceSelectorNotice { unsigned char unknown00, mode, kind, unknown03, active; };
+struct ResourceSelectorNotice {
+    unsigned char unknown00, mode, kind, unknown03, active;
+};
 extern const struct DisplayTimeRecord g_resource_selector_clock;
 extern struct FrameObject *g_frame_scene_active_actor;
 extern struct ResourceSelectorWorld g_resource_selector_world;

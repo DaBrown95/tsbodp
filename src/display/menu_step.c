@@ -14,7 +14,7 @@ void display_menu_step(void)
     if (phase == 0) {
         if (g_input_pressed[g_input_config.local_player] & 0xf0) {
             input_step_vertical_pressed(&g_scene_request.scene, 0, 4, 0,
-                g_input_config.local_player);
+                                        g_input_config.local_player);
             while (g_display_menu_state.codes[g_scene_request.scene] == 29)
                 --g_scene_request.scene;
             if (g_scene_request.scene == 4 ||
@@ -26,9 +26,12 @@ void display_menu_step(void)
                 g_display_scene_frame_objects[5]->flags &= ~1u;
             else
                 g_display_scene_frame_objects[5]->flags |= 1;
-            display_set_background_scroll_target(0, 0,
-                (int)(((double)(int)g_display_menu_state.positions[g_scene_request.scene]
-                    + -116.0) * 65536.0), 5);
+            display_set_background_scroll_target(
+                0, 0,
+                (int)(((double)(int)g_display_menu_state.positions[g_scene_request.scene] +
+                       -116.0) *
+                      65536.0),
+                5);
             display_menu_draw_lines();
         }
         if (g_input_pressed[g_input_config.local_player] & 1) {
@@ -41,10 +44,9 @@ void display_menu_step(void)
         if (g_input_current[g_input_config.local_player] & 0xf0) {
             if (g_display_menu_state.repeat_delay == 0) {
                 g_display_menu_state.repeat_delay = 4;
-                input_step_vertical_held(&g_scene_request.scene, 0,
-                    g_scene_request.parameter, 0, g_input_config.local_player);
-                display_set_background_scroll_target(0, 0,
-                    (g_scene_request.scene * 3) << 18, 5);
+                input_step_vertical_held(&g_scene_request.scene, 0, g_scene_request.parameter, 0,
+                                         g_input_config.local_player);
+                display_set_background_scroll_target(0, 0, (g_scene_request.scene * 3) << 18, 5);
                 if (g_scene_request.scene == 0 || g_scene_request.parameter == 0)
                     g_display_scene_frame_objects[3]->flags &= ~1u;
                 else

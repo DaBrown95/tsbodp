@@ -13,7 +13,8 @@ void frame_stage_map_tiles(unsigned int view)
             int columns = record->width - x;
             register int available_rows asm("r3") = record->height - y;
             int rows;
-            if (columns > 10) columns = 10;
+            if (columns > 10)
+                columns = 10;
             rows = available_rows < 7 ? available_rows : 7;
             for (; rows > 0; rows--) {
                 register int count asm("r0") = columns;
@@ -24,10 +25,11 @@ void frame_stage_map_tiles(unsigned int view)
                     register const struct FrameMapWordPair *source asm("r3");
                     struct FrameMapWordPair *row_slot;
                     primary += 2;
-                    tile = *(const unsigned short *)
-                        ((const unsigned char *)primary + cell_byte_offset);
-                    source = (const struct FrameMapWordPair *)
-                        ((const unsigned char *)record->combined + 4 + (tile << 5));
+                    tile = *(const unsigned short *)((const unsigned char *)primary +
+                                                     cell_byte_offset);
+                    source =
+                        (const struct FrameMapWordPair *)((const unsigned char *)record->combined +
+                                                          4 + (tile << 5));
                     {
                         register struct FrameMapWordPair loaded asm("r1") = *source++;
                         register unsigned int first asm("r1") = loaded.first;

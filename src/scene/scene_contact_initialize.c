@@ -46,8 +46,7 @@ void scene_contact_initialize(void)
         unsigned int offset = g_scene_contact_state->option * 2;
         offset += g_scene_contact_state->scene * 32;
         resource_address += 20;
-        text = display_scene_lookup_text(
-            *(const unsigned short *)(offset + resource_address));
+        text = display_scene_lookup_text(*(const unsigned short *)(offset + resource_address));
     }
     tile = display_text_draw_line(tile, 120, 24, text, 1);
     display_text_select_font(2, 3, -1);
@@ -64,4 +63,4 @@ void scene_contact_initialize(void)
 }
 
 /* The original section ends with two zero alignment bytes. */
-asm(".align 2,0");
+asm(".align 2, 0");

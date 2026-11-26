@@ -1,16 +1,14 @@
 #include "display_need_effect_choices.h"
 
 /* The scan's title lookup uses a short offset/result register view. */
-static inline unsigned int read_title(struct DisplayNeedEffectActionText *table,
-                                     unsigned int code)
+static inline unsigned int read_title(struct DisplayNeedEffectActionText *table, unsigned int code)
 {
     register unsigned int offset asm("r0") = code << 2;
-    return ((struct DisplayNeedEffectActionText *)
-            (offset + (unsigned int)table))->text;
+    return ((struct DisplayNeedEffectActionText *)(offset + (unsigned int)table))->text;
 }
 
-static inline unsigned short read_action_title(
-    struct DisplayNeedEffectActionText *input, unsigned int code)
+static inline unsigned short read_action_title(struct DisplayNeedEffectActionText *input,
+                                               unsigned int code)
 {
     register struct DisplayNeedEffectActionText *record asm("r0") = input;
     record += code;
@@ -25,8 +23,7 @@ static inline unsigned short game_flag(void)
 
 unsigned char frame_need_effect_build_choices(struct FrameObject *base)
 {
-    struct FrameNeedEffectState *state =
-        ((struct FrameNeedEffectObject *)base)->effect_state;
+    struct FrameNeedEffectState *state = ((struct FrameNeedEffectObject *)base)->effect_state;
     unsigned int (**callback)(struct FrameNeedEffectState *, unsigned char *) =
         &((struct DisplayNeedEffectChoiceCallback *)state)->actions;
     register unsigned char *choices asm("r5") =
@@ -43,11 +40,10 @@ unsigned char frame_need_effect_build_choices(struct FrameObject *base)
     i = 0;
     secondary_choices = choices;
     {
-        register struct DisplayNeedEffectActionText *table asm("r3") =
-            g_need_effect_action_text;
+        register struct DisplayNeedEffectActionText *table asm("r3") = g_need_effect_action_text;
         {
             register unsigned int code asm("r2");
-scan:
+        scan:
             code = choices[i];
             if (!code)
                 goto scanned;
@@ -63,13 +59,12 @@ scan:
             i = (unsigned char)(i + 1);
             if (i <= 6)
                 goto scan;
-scanned:;
+        scanned:;
         }
     }
     if (frame_need_effect_enabled(base) == 1 && i <= 6 &&
         frame_need_effect_attachment_count(state) == 0 && state->optional != 3 &&
-        state->kind != 133 && state->kind != 135 &&
-        state->kind != 146 && state->kind != 147) {
+        state->kind != 133 && state->kind != 135 && state->kind != 146 && state->kind != 147) {
         unsigned int offset, destination;
         {
             register unsigned int code asm("r2") = 40;
@@ -86,8 +81,7 @@ scanned:;
     }
     if (frame_world_in_idle_exclusion_set(g_frame_world_id) == 1 && i <= 6 &&
         frame_need_effect_attachment_count(state) == 0 && state->optional != 3 &&
-        state->kind != 133 && state->kind != 135 &&
-        state->kind != 146 && state->kind != 147) {
+        state->kind != 133 && state->kind != 135 && state->kind != 146 && state->kind != 147) {
         unsigned int offset, destination;
         {
             register unsigned int code asm("r2") = 34;

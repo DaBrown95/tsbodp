@@ -5,81 +5,103 @@
 #include "background_animation.h"
 #include "link_state.h"
 
-void scene_initialize(void) {
- volatile unsigned short zero;
- int index;
- g_scene_id = g_scene_request.scene;
- if (g_link_flags & 0x8000) {
-  scene_stage_0803e3a8();
-  g_transition_view_context.count = 1;
-  g_transition_view_context.current_view = 0;
-  if (!(g_link_flags & 0x80000)) g_scene_mode_flags.flags |= 0x800000;
-  g_link_flags &= ~0x8000;
-  g_link_flags &= ~0x80000;
- }
- zero = 0;
- display_cpu_copy((const void *)&zero, (void *)0x06010000, 0x01004000);
- { unsigned short *end=g_scene_palette_indices,*p; unsigned short val=0; p=end+3; do { *p--=val; } while((int)p>=(int)end); }
- g_game_flags &= ~8;
- set_vblank_callback(scene_vblank_callback);
- display_set_mode(0);
- display_enable_layers(0x1000);
- display_configure_tile_allocation(0);
- display_show_background(0,g_scene_background_control0);
- display_show_background(1,g_scene_background_control1);
- display_show_background(2,g_scene_background_control2);
- if (g_scene_request.mode==4 || g_scene_request.mode==6 || g_scene_request.mode==5 || g_scene_request.mode==7) {
-  if(g_scene_request.mode==4 || g_scene_request.mode==7) {
-   int mode=(g_scene_request.mode==4 && g_scene_id==6) ? 6 : 0;
-   { unsigned char *end=g_scene_mode_bytes,*p; p=end+3; do { *p--=mode; } while((int)p>=(int)end); }
-  }
-  scene_prepare_load();
-  frame_reset_object_palette_slots();
-  g_scene_request.mode=0;
- }
- g_scene_context.period=display_time_period((const struct DisplayTimeRecord *)g_scene_world_state);
- display_load_palette(scene_palette_source(),0,256);
- g_palette_range_enabled_mask=0;
- frame_load_scene_map_resources(g_scene_id);
- if(!g_scene_request.mode) {
-  g_scene_world_state[0x736]=0;
-  frame_reset_scene_actor_schedule();
-  frame_initialize_scene_actors(g_scene_id);
-  scene_stage_08037444();
-  if((g_scene_context.flags&1) && g_scene_id<=14) background_animation_load(1);
- } else if(g_scene_request.mode==2) {
-  display_reset_tile_allocation();
-  if(!(g_game_flags&0x40000)) frame_restore_primary_objects();
-  else scene_clear_shared_display();
-  frame_enable_primary_object_flags(128);
-  frame_reset_primary_display_indices();
-  scene_copy_palette_alternate(g_scene_context.palette,0,256);
-  background_animation_load(g_background_animation.transfer_enabled);
-  scene_resume_actor_speed_cue();
- }
- if(!(g_audio_control.flags&8))
-  audio_select_sequence(scene_audio_for_period(g_scene_context.period));
- scene_initialize_objects(g_scene_entry_data,g_scene_id);
- scene_initialize_transient_slots();
- if(g_scene_palette_range_configs[g_scene_id].resource)
-  display_load_palette_ranges(g_scene_palette_range_configs[g_scene_id].resource);
- g_game_flags &= ~0x100000;
- if((g_game_flags&0x40020)!=0x40020) {
-  for(index=0;index<g_transition_view_context.count;index++) {
-   scene_initialize_view(index,0);
-   scene_update_view(index);
-  }
-  for(index=0;index<g_transition_view_context.count;index++) {
-   scene_show_view(index);
-   transition_step_view(index);
-  }
- } else {
-  scene_initialize_view(g_transition_view_context.current_view,1);
-  scene_update_view(g_transition_view_context.current_view);
- }
- if((g_game_flags&0x40020)==0x40020) transition_fade_black_in_record(0x3F);
- else transition_run_first(0x3F,0);
- background_animation_configure_alpha();
- g_game_flags &= ~0x40000;
- g_scene_request.mode=0;
+void scene_initialize(void)
+{
+    volatile unsigned short zero;
+    int index;
+    g_scene_id = g_scene_request.scene;
+    if (g_link_flags & 0x8000) {
+        scene_link_reset_setup_state();
+        g_transition_view_context.count = 1;
+        g_transition_view_context.current_view = 0;
+        if (!(g_link_flags & 0x80000))
+            g_scene_mode_flags.flags |= 0x800000;
+        g_link_flags &= ~0x8000;
+        g_link_flags &= ~0x80000;
+    }
+    zero = 0;
+    display_cpu_copy((const void *)&zero, (void *)0x06010000, 0x01004000);
+    {
+        unsigned short *end = g_scene_palette_indices, *p;
+        unsigned short val = 0;
+        p = end + 3;
+        do {
+            *p-- = val;
+        } while ((int)p >= (int)end);
+    }
+    g_game_flags &= ~8;
+    set_vblank_callback(scene_vblank_callback);
+    display_set_mode(0);
+    display_enable_layers(0x1000);
+    display_configure_tile_allocation(0);
+    display_show_background(0, g_scene_background_control0);
+    display_show_background(1, g_scene_background_control1);
+    display_show_background(2, g_scene_background_control2);
+    if (g_scene_request.mode == 4 || g_scene_request.mode == 6 || g_scene_request.mode == 5 ||
+        g_scene_request.mode == 7) {
+        if (g_scene_request.mode == 4 || g_scene_request.mode == 7) {
+            int mode = (g_scene_request.mode == 4 && g_scene_id == 6) ? 6 : 0;
+            {
+                unsigned char *end = g_scene_mode_bytes, *p;
+                p = end + 3;
+                do {
+                    *p-- = mode;
+                } while ((int)p >= (int)end);
+            }
+        }
+        scene_prepare_load();
+        frame_reset_object_palette_slots();
+        g_scene_request.mode = 0;
+    }
+    g_scene_context.period =
+        display_time_period((const struct DisplayTimeRecord *)g_scene_world_state);
+    display_load_palette(scene_palette_source(), 0, 256);
+    g_palette_range_enabled_mask = 0;
+    frame_load_scene_map_resources(g_scene_id);
+    if (!g_scene_request.mode) {
+        g_scene_world_state[0x736] = 0;
+        frame_reset_scene_actor_schedule();
+        frame_initialize_scene_actors(g_scene_id);
+        scene_stage_08037444();
+        if ((g_scene_context.flags & 1) && g_scene_id <= 14)
+            background_animation_load(1);
+    } else if (g_scene_request.mode == 2) {
+        display_reset_tile_allocation();
+        if (!(g_game_flags & 0x40000))
+            frame_restore_primary_objects();
+        else
+            scene_clear_shared_display();
+        frame_enable_primary_object_flags(128);
+        frame_reset_primary_display_indices();
+        scene_copy_palette_alternate(g_scene_context.palette, 0, 256);
+        background_animation_load(g_background_animation.transfer_enabled);
+        scene_resume_actor_speed_cue();
+    }
+    if (!(g_audio_control.flags & 8))
+        audio_select_sequence(scene_audio_for_period(g_scene_context.period));
+    scene_initialize_objects(g_scene_entry_data, g_scene_id);
+    scene_initialize_transient_slots();
+    if (g_scene_palette_range_configs[g_scene_id].resource)
+        display_load_palette_ranges(g_scene_palette_range_configs[g_scene_id].resource);
+    g_game_flags &= ~0x100000;
+    if ((g_game_flags & 0x40020) != 0x40020) {
+        for (index = 0; index < g_transition_view_context.count; index++) {
+            scene_initialize_view(index, 0);
+            scene_update_view(index);
+        }
+        for (index = 0; index < g_transition_view_context.count; index++) {
+            scene_show_view(index);
+            transition_step_view(index);
+        }
+    } else {
+        scene_initialize_view(g_transition_view_context.current_view, 1);
+        scene_update_view(g_transition_view_context.current_view);
+    }
+    if ((g_game_flags & 0x40020) == 0x40020)
+        transition_fade_black_in_record(0x3F);
+    else
+        transition_run_first(0x3F, 0);
+    background_animation_configure_alpha();
+    g_game_flags &= ~0x40000;
+    g_scene_request.mode = 0;
 }

@@ -1,4 +1,4 @@
-"""Guarded dispatches must be proven; corrupt tables must stay unresolved."""
+"""Guarded dispatches must be proven; corrupt tables stay unresolved."""
 import struct
 import sys
 import unittest

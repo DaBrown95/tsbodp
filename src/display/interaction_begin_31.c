@@ -1,13 +1,13 @@
 #include "display_actor_interaction.h"
 
 unsigned int frame_interaction_begin_31(struct FrameNeedEffectState *owner,
-                                         struct FrameObject *object, unsigned int kind)
+                                        struct FrameObject *object, unsigned int kind)
 {
-    struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(
-        owner, object);
+    struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(owner, object);
     struct FramePoint point;
     unsigned char result;
-    if (!job) result = 0;
+    if (!job)
+        result = 0;
     else {
         job->kind = kind;
         frame_attachment_position(owner->object, 2, &point);

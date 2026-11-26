@@ -15,8 +15,8 @@ void scene_link_entry_build_linked_objects(void)
     const char *text;
     int i;
 
-    g_display_scene_frame_objects[0] = frame_create_scene_object(106,
-        g_display_scene_catalog[g_scene_request.scene].id, 1, 1);
+    g_display_scene_frame_objects[0] =
+        frame_create_scene_object(106, g_display_scene_catalog[g_scene_request.scene].id, 1, 1);
     frame_set_variant_state(g_display_scene_frame_objects[0], 11);
     frame_set_position(g_display_scene_frame_objects[0], 44 * 65536, 103 * 65536);
     g_display_scene_frame_objects[10] = frame_create_scene_object(112, 238, 7, 3);
@@ -34,15 +34,14 @@ void scene_link_entry_build_linked_objects(void)
             g_display_scene_frame_objects[6 + i] = display_allocate_text_object(&text);
             g_display_scene_frame_objects[6 + i]->flags |= 1;
             frame_set_position(g_display_scene_frame_objects[6 + i],
-                (g_scene_link_entry_captions[i].x + 2) * 524288,
-                g_scene_link_entry_captions[i].y * 524288);
+                               (g_scene_link_entry_captions[i].x + 2) * 524288,
+                               g_scene_link_entry_captions[i].y * 524288);
         } else {
             text = display_scene_lookup_text(0x184c);
             g_display_scene_frame_objects[6 + i] = display_allocate_text_object(&text);
             g_display_scene_frame_objects[6 + i]->flags |= 1;
-            frame_set_position(g_display_scene_frame_objects[6 + i],
-                160 * 65536,
-                (g_scene_link_entry_captions[i].y * 8 - 96) * 65536);
+            frame_set_position(g_display_scene_frame_objects[6 + i], 160 * 65536,
+                               (g_scene_link_entry_captions[i].y * 8 - 96) * 65536);
         }
     }
     display_text_set_background_control(g_scene_link_entry_text_control);

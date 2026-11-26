@@ -7,8 +7,8 @@ struct DisplayBackgroundMapDimensions {
 extern const struct DisplayBackgroundMapDimensions g_display_background_map_dimensions[4];
 
 /* No incoming caller is established; these are the three observed arguments. */
-void display_read_background_dimensions_unrooted_d9d4(unsigned int index,
-    unsigned short *width, unsigned short *height)
+void display_read_background_dimensions(unsigned int index, unsigned short *width,
+                                                      unsigned short *height)
 {
     const struct DisplayBackgroundMapDimensions *dimensions = g_display_background_map_dimensions;
     const unsigned char *system = (const unsigned char *)&g_display_background_system;

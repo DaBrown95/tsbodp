@@ -24,26 +24,30 @@ void save_stream_read_actor_entries(void *input)
         frame_load_save_value(&list->count, 1);
         index = 0;
         next_group = group + 1;
-        if (index < list->capacity) do {
-            frame_load_save_value(&list->entries[index].kind, 1);
-            frame_load_save_value(&packed, 1);
-            list->entries[index].unknown03 = packed >> 4;
-            list->entries[index].value1 = packed << 4;
-            list->entries[index].value1 >>= 4;
-            frame_load_save_value(&list->entries[index].value2, 1);
-        } while (++index < list->capacity);
+        if (index < list->capacity)
+            do {
+                frame_load_save_value(&list->entries[index].kind, 1);
+                frame_load_save_value(&packed, 1);
+                list->entries[index].unknown03 = packed >> 4;
+                list->entries[index].value1 = packed << 4;
+                list->entries[index].value1 >>= 4;
+                frame_load_save_value(&list->entries[index].value2, 1);
+            } while (++index < list->capacity);
         group = next_group;
     } while (group < 15);
 
-    heap_clear(((struct ActorEntryContext *)region)->collection, 0, sizeof(*((struct ActorEntryContext *)region)->collection));
+    heap_clear(((struct ActorEntryContext *)region)->collection, 0,
+               sizeof(*((struct ActorEntryContext *)region)->collection));
     remaining = 0;
     for (collection_group = 0; collection_group < 50; ++collection_group) {
         struct ActorEntryCollectionRecord *record;
         /* This second count snapshot ends before the record-reader calls. */
         register unsigned int start asm("r6");
         frame_load_save_value(remaining_input, 1);
-        ((struct ActorEntryContext *)region)->collection->groups[collection_group].count = remaining;
-        ((struct ActorEntryContext *)region)->collection->groups[collection_group].start = ((struct ActorEntryContext *)region)->collection->count;
+        ((struct ActorEntryContext *)region)->collection->groups[collection_group].count =
+            remaining;
+        ((struct ActorEntryContext *)region)->collection->groups[collection_group].start =
+            ((struct ActorEntryContext *)region)->collection->count;
         start = ((struct ActorEntryContext *)region)->collection->count;
         ((struct ActorEntryContext *)region)->collection->count = start + remaining;
         record = &((struct ActorEntryContext *)region)->collection->records[start];
@@ -60,7 +64,8 @@ void save_stream_read_actor_entries(void *input)
         }
     }
     for (collection_group = 0; collection_group < 50; ++collection_group)
-        save_stream_read_bits(&((struct ActorEntryContext *)region)->collection->groups[collection_group].flags, 1);
+        save_stream_read_bits(
+            &((struct ActorEntryContext *)region)->collection->groups[collection_group].flags, 1);
     {
         /* The late cursor and counter survive the five byte-reader calls. */
         register unsigned char *cursor asm("r4");

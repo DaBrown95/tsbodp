@@ -1,8 +1,7 @@
 #include "display.h"
 #include "display_palette_lifecycle.h"
 
-void display_disable_palette_range(unsigned int incoming_index,
-    unsigned int incoming_restore)
+void display_disable_palette_range(unsigned int incoming_index, unsigned int incoming_restore)
 {
     unsigned char index = incoming_index, restore = incoming_restore;
     struct PaletteRangeJob *job = &g_palette_range_jobs[index];

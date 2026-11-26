@@ -1,13 +1,11 @@
 #include "display_text_runtime.h"
 
-void *display_text_move_bytes(void *destination, const void *source,
-                              unsigned int bytes)
+void *display_text_move_bytes(void *destination, const void *source, unsigned int bytes)
 {
     char *out = destination;
     const char *in = source;
 
-    if ((unsigned int)in < (unsigned int)out &&
-        (unsigned int)out < (unsigned int)in + bytes) {
+    if ((unsigned int)in < (unsigned int)out && (unsigned int)out < (unsigned int)in + bytes) {
         in += bytes;
         out += bytes;
         while (bytes--)

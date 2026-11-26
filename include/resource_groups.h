@@ -3,12 +3,15 @@
 /* Offset-indexed resource groups and command records inferred from their walkers. */
 #include "frame.h"
 struct ResourceObjectEntry {
- struct FrameObject *object;
- unsigned int unknown_04;
- unsigned short factory;
+    struct FrameObject *object;
+    unsigned int unknown_04;
+    unsigned short factory;
 };
 /* Variable-length serialized commands have a word selector and byte arguments. */
-struct ResourceProgramRecord { unsigned int command; unsigned char parameters[0]; };
+struct ResourceProgramRecord {
+    unsigned int command;
+    unsigned char parameters[0];
+};
 typedef struct FrameObject *(*ResourceObjectFactory)(unsigned char, unsigned char);
 typedef void (*ResourceProgramHandler)(struct ResourceProgramRecord *);
 extern unsigned char *g_resource_object_data, *g_resource_program_data;
@@ -21,8 +24,8 @@ extern void resource_object_before_step(struct FrameObject *);
 extern unsigned char resource_group_is_enabled(unsigned char);
 extern void resource_spawn_group(unsigned char);
 extern void resource_execute_group(unsigned char);
-extern void resource_activate_groups(unsigned char,unsigned char);
-extern struct FrameObject *resource_get_object(unsigned int,unsigned int);
-extern void resource_set_object(struct FrameObject *,unsigned char,unsigned char);
+extern void resource_activate_groups(unsigned char, unsigned char);
+extern struct FrameObject *resource_get_object(unsigned int, unsigned int);
+extern void resource_set_object(struct FrameObject *, unsigned char, unsigned char);
 extern unsigned short resource_group_object_count(unsigned char);
 #endif

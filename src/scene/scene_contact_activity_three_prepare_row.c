@@ -206,8 +206,7 @@ void scene_contact_activity_three_prepare_row(struct FrameObject *base)
             register short done asm("r1");
             int observed_count;
 
-            register struct SceneContactActivityThreeObject *count_owner asm("r1") =
-                (void *)owner;
+            register struct SceneContactActivityThreeObject *count_owner asm("r1") = (void *)owner;
             observed_count = count_owner->id;
 
             if (observed_count) {

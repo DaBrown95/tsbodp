@@ -1,10 +1,8 @@
 #include "frame_actor_attachment_jobs_45_90.h"
 unsigned int frame_begin_attachment_jobs_45_90(struct FrameNeedEffectState *owner,
-                                              struct FrameObject *actor,
-                                              unsigned int kind)
+                                               struct FrameObject *actor, unsigned int kind)
 {
-    struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(
-        owner, actor);
+    struct FrameActorAttachmentRecord *job = frame_allocate_actor_attachment_record(owner, actor);
     unsigned int result;
     if (!job)
         result = 0;
@@ -14,4 +12,4 @@ unsigned int frame_begin_attachment_jobs_45_90(struct FrameNeedEffectState *owne
     }
     return result;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

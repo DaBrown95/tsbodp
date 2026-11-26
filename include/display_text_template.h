@@ -10,6 +10,6 @@ struct DisplayTextTemplateEntry {
 
 /* Word arguments are narrowed to sixteen bits; the result is the final tile. */
 unsigned int display_text_draw_template(unsigned int, unsigned int,
-                                       const struct DisplayTextTemplateEntry *);
+                                        const struct DisplayTextTemplateEntry *);
 
 #endif

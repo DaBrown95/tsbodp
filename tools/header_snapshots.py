@@ -1,4 +1,7 @@
-"""Retain bounded source bundles and their project-header dependencies."""
+"""Copy a source file and the project headers it includes into a run directory, so a build uses a frozen set of inputs.
+
+Used by tools/pilot.py and tools/build_rom.py when header snapshots are enabled.
+"""
 
 import hashlib
 import json
@@ -168,9 +171,9 @@ def snapshot_headers(source, destination, include_root, *, project_header_store=
                 pending.append((dependency, project[dependency]))
             else:
                 add_local(dependency)
-    # Closure resolution identifies the exact original source/local files before
-    # an object can be reused. Only this proof's project-header root may receive
-    # links; source-inputs remains independent ordinary copies below.
+    # Resolve the exact original source and local files before an object can be
+    # reused. Only this run's project-header root may receive hard links; the
+    # source inputs below stay as separate ordinary copies.
     store = (None if store_path is None else
              ProjectHeaderStore(store_path, include_root, destination, [source, *local]))
     digests = {}

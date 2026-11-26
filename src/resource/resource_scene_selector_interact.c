@@ -24,7 +24,8 @@ void resource_scene_selector_interact(struct FrameObject *base, struct FrameObje
     if (selector_view(base)->state == 0) {
         /* Both bound values are consumed before any call. */
         register unsigned int needs_input asm("r1") = selector_needs_input(selector_view(base));
-        if (selector_view(target)->id == 0 && (selector_view(target)->state == 16 || selector_view(target)->state == 27)) {
+        if (selector_view(target)->id == 0 &&
+            (selector_view(target)->state == 16 || selector_view(target)->state == 27)) {
             allowed = 1;
             if (needs_input) {
                 unsigned short *keys = g_input_pressed;
@@ -44,7 +45,8 @@ void resource_scene_selector_interact(struct FrameObject *base, struct FrameObje
                             allowed = 0;
                             selector_view(target)->state = 0;
                             selector_view(base)->state = 4;
-                            selector_view(base)->indicator = (struct FrameObject *)selector_view(target);
+                            selector_view(base)->indicator =
+                                (struct FrameObject *)selector_view(target);
                         }
                     } else {
                         int hour = g_resource_selector_world.clock.hour;
@@ -52,7 +54,8 @@ void resource_scene_selector_interact(struct FrameObject *base, struct FrameObje
                             allowed = 0;
                             selector_view(target)->state = 0;
                             selector_view(base)->state = 4;
-                            selector_view(base)->indicator = (struct FrameObject *)selector_view(target);
+                            selector_view(base)->indicator =
+                                (struct FrameObject *)selector_view(target);
                         }
                     }
                 }
@@ -70,7 +73,7 @@ void resource_scene_selector_interact(struct FrameObject *base, struct FrameObje
                         frame_stop_motion((struct FrameObject *)selector_view(target));
                         transition_object_set_state((struct FrameObject *)selector_view(target), 0);
                     }
-subtype_five:
+                subtype_five:
                     if (selector_view(base)->subtype == 5) {
                         audio_play_animation_cue(47);
                         frame_set_variant_state((struct FrameObject *)selector_view(base), 11);
@@ -86,7 +89,8 @@ subtype_five:
     goto finished;
 submit_scene:
     g_scene_mode_bytes[0] = selector_view(base)->parameter;
-    g_resource_selector_world.selected_actor = resource_select_actor(g_scene_id, selector_view(base)->selector);
+    g_resource_selector_world.selected_actor =
+        resource_select_actor(g_scene_id, selector_view(base)->selector);
     resource_submit_scene(1, 0, selector_view(base)->selector);
 finished:
     return;

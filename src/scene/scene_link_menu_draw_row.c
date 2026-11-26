@@ -28,4 +28,4 @@ void scene_link_menu_draw_row(unsigned int row, unsigned int selected)
         display_text_draw_line(tile, 120, y, text, 1);
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

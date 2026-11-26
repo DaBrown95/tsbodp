@@ -1,6 +1,6 @@
 #include "display.h"
-void display_write_constant_map_rectangle(void *map, int x, int y, int width,
-    int height, unsigned short tile)
+void display_write_constant_map_rectangle(void *map, int x, int y, int width, int height,
+                                          unsigned short tile)
 {
     int row, column;
     unsigned short *destination;

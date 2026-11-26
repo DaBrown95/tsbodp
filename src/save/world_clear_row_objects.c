@@ -13,8 +13,8 @@ void save_world_clear_row_objects(void)
         objects_address = (unsigned int)table;
         objects_address += 16;
         if (*(struct FrameObject **)(slot_offset + objects_address))
-            save_world_release_row_object((struct SaveWorldTransitionRow *)
-                (row_offset + (unsigned int)table), index);
+            save_world_release_row_object(
+                (struct SaveWorldTransitionRow *)(row_offset + (unsigned int)table), index);
         ++index;
     } while (index <= 7);
 }

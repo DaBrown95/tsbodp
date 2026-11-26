@@ -18,7 +18,8 @@ void audio_initialize_hardware(int enabled)
     AUDIO_REG32(0x40000c0) = 0x040000A0;
     AUDIO_REG32(0x40000cc) = 0x040000A4;
     AUDIO_REG16(0x40000c6) = 0xB640;
-    if ((unsigned char)enabled) AUDIO_REG16(0x40000d2) = AUDIO_REG16(0x40000c6);
+    if ((unsigned char)enabled)
+        AUDIO_REG16(0x40000d2) = AUDIO_REG16(0x40000c6);
     AUDIO_REG16(0x04000104) = 0xFBCD;
     AUDIO_REG16(0x04000106) = 0xC4;
     AUDIO_REG16(0x04000100) = 0xFC00;

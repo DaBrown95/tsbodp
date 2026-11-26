@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Provision pinned public tools on macOS; never download game content."""
+"""Download and build the pinned public tools (compilers, assembler and so on) on macOS.
+
+Run by `make setup`. It never downloads game content.
+"""
 import json
 import os
 from pathlib import Path

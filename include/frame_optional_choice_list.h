@@ -8,7 +8,7 @@
 /* One-byte compiler view for the observed read/OR-255/store initialization.
  * The writer visits 24 entries; the allocation and wider capacity are unknown. */
 struct FrameOptionalChoiceValue {
-    unsigned char value:8;
+    unsigned char value : 8;
 } __attribute__((packed));
 extern struct FrameOptionalChoiceValue g_optional_choice_values[];
 
@@ -26,8 +26,8 @@ extern struct FrameOptionalChoiceWorldState g_optional_choice_world;
 extern const unsigned char g_optional_choice_stage_values[];
 extern const unsigned char *g_frame_scene_actor_world_tables[];
 
-unsigned char frame_optional_choice_classify(unsigned int, unsigned int *,
-                                             unsigned char *, unsigned char *);
+unsigned char frame_optional_choice_classify(unsigned int, unsigned int *, unsigned char *,
+                                             unsigned char *);
 unsigned char frame_optional_choice_build_available(void);
 
 /* Connected page builder; arbitrary page values and wider capacity are unknown. */

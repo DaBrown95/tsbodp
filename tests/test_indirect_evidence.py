@@ -1,4 +1,4 @@
-"""Reject false table closure, stale producers and misassigned callback columns."""
+"""Reject tables wrongly treated as complete, stale producers and misassigned callback columns."""
 import hashlib
 import importlib.util
 import struct

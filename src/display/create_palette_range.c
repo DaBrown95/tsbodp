@@ -2,7 +2,7 @@
 #include "display_palette_lifecycle.h"
 
 unsigned int display_create_palette_range(unsigned int first, unsigned int count,
-    unsigned int interval, unsigned int flags)
+                                          unsigned int interval, unsigned int flags)
 {
     unsigned int index = display_next_palette_range();
     struct PaletteRangeJob *job = &g_palette_range_jobs[index];

@@ -1,5 +1,6 @@
 #include "input.h"
-InputU32 input_step_local_vertical_pressed(InputU32 *value, InputU32 minimum, InputU32 maximum, InputU8 wrap, InputU8 player)
+InputU32 input_step_local_vertical_pressed(InputU32 *value, InputU32 minimum, InputU32 maximum,
+                                           InputU8 wrap, InputU8 player)
 {
     if (g_input_local_pressed[player] & 64) {
         if (*value <= minimum) {

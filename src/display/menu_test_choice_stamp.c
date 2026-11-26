@@ -6,7 +6,7 @@ static inline signed char choice_current_minute(const struct DisplayTimeRecord *
 }
 
 unsigned char display_menu_test_choice_stamp(struct DisplayMenuSelectionState *record,
-                                            const struct DisplayTimeRecord *current)
+                                             const struct DisplayTimeRecord *current)
 {
     record->enabled = 0;
     if (record->stamp.day == current->day) {

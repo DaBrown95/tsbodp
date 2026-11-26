@@ -10,7 +10,7 @@ void save_stream_serialize_game_state(void)
     frame_write_save_value(&world->clock, 6);
     frame_write_save_value(&world->unknown04, 3);
     save_stream_write_world_record((struct SaveStreamWorldRecord *)world->unknown10);
-    save_world_write_region_1fecc(world->unknowndc);
+    save_world_write_actor_entries(world->unknowndc);
     selection = g_save_selection_prefix;
     frame_write_save_value(selection, 1);
     frame_write_save_value(selection + 1, 2);
@@ -25,7 +25,7 @@ void save_stream_serialize_game_state(void)
     frame_write_save_value(&world->byte726, 1);
     frame_write_save_value(&world->byte72e, 1);
     frame_write_save_value(&g_save_world_event, 1);
-    save_world_write_module_29d18();
+    save_world_write_condition_module();
     save_stream_write_nibble_state();
     save_stream_write_world_fields();
     save_stream_write_auxiliary_fields();

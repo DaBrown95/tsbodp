@@ -1,9 +1,11 @@
-"""Validate bounded indirect calls without closing other table consumers.
+"""Check indirect calls through a bounded table or a saved byte, for the ROM map.
 
-The on-row grammar bounds a guarded byte to ten callback records. The saved-byte
-grammar instead enumerates every captured byte and its ROM-loaded branch
-operand. That separate ownership fact does not establish valid table capacity,
-saved-state invariants or runtime safety.
+Used by tools/inventory_rom.py to decide which targets an indirect call can
+reach. It accepts two forms: a guarded byte that indexes at most ten callback
+records, and a saved byte whose every possible value is listed together with
+the branch operand loaded from ROM. Passing shows which targets are reachable.
+It does not show that the table is the right size, that the saved state is
+valid or that the call is safe at runtime.
 """
 import hashlib
 import struct
@@ -418,7 +420,7 @@ def validate_saved_volume_operands(row, scanner, functions, source_hash):
         _require(address % (2 if mode == 'Thumb' else 4) == 0,
                  'game ROM operand is misaligned for its instruction mode')
         # The three cartridge waitstate windows alias the same 32-MiB bus.
-        # Do not treat physical(None) as proof that an alias is non-game.
+        # A physical() result of None does not show that an alias is not game data.
         physical = (address - BASE) % 0x02000000
         canonical = BASE + physical
         _require(physical < len(scanner.data)

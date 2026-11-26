@@ -10,9 +10,7 @@ void save_stream_read_world_fields(void)
     frame_load_save_value(last - 2, 1);
     frame_load_save_value(&first, 2);
     frame_load_save_value(&second, 2);
-    ((union SaveStreamHalfwordField *)(last - 10))->word =
-        (unsigned int)first << 16;
-    ((union SaveStreamHalfwordField *)(last - 6))->word =
-        (unsigned int)second << 16;
+    ((union SaveStreamHalfwordField *)(last - 10))->word = (unsigned int)first << 16;
+    ((union SaveStreamHalfwordField *)(last - 6))->word = (unsigned int)second << 16;
 }
 asm(".align 2, 0");

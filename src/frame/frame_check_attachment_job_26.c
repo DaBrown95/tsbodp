@@ -2,7 +2,7 @@
 #include "frame_actor_attachment_job_26.h"
 
 unsigned int frame_check_attachment_job_26(struct FrameNeedEffectState *owner,
-                                          struct FrameObject *actor)
+                                           struct FrameObject *actor)
 {
     if (frame_count_actor_attachments(actor) && owner->unknown_60[0] == 1)
         return 0;

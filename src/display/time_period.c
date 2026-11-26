@@ -10,7 +10,8 @@ unsigned int display_time_period(const struct DisplayTimeRecord *time)
             period = 1;
             if (hour > 16) {
                 period = 3;
-                if (hour <= 19) period = 2;
+                if (hour <= 19)
+                    period = 2;
             }
         }
     }

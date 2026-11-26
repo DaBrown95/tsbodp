@@ -1,8 +1,7 @@
 #include "condition_actor.h"
 
 void condition_record_actor_selection(struct ConditionActorSelectionContext *state,
-                                     unsigned char row, unsigned char column,
-                                     unsigned char entry)
+                                      unsigned char row, unsigned char column, unsigned char entry)
 {
     unsigned int group, index;
     for (group = 0; group <= 12; group++) {

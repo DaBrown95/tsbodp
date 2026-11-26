@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the upstream old Thumb backend in a separate verified source copy."""
+"""Build the old Thumb compiler (agbcc_old) from its pinned upstream source, in a separate verified copy."""
 import json
 import os
 import stat

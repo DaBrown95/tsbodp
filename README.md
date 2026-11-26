@@ -219,8 +219,13 @@ The folders under `src/` follow what the code does:
 | `math`, `heap`, `counter`, `animation` | Small shared helpers |
 | `startup`, `irq`, `runtime` | Boot, interrupts and the compiler's support library |
 
-Many names still carry the ROM address where the function lives, such as
-`frame_empty_hook_1db20`, when nothing more is known about it.
+Numbers in names such as `frame_step_attachment_job_45` or
+`frame_actor_state_16` are IDs from the game's own data tables. A few
+functions are identical copies, such as empty hooks; those keep the ROM
+address where each one lives, as in `frame_empty_hook_1db20`.
+
+Our own C follows the committed [`.clang-format`](.clang-format). Code
+borrowed from Krawall, GCC and Newlib keeps its upstream style.
 
 ## About
 

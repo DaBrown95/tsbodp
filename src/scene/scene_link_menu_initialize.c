@@ -38,4 +38,4 @@ void scene_link_menu_initialize(void)
         scene_link_menu_draw_status();
     transition_run_first(63, 0);
 }
-asm(".align 2,0");
+asm(".align 2, 0");

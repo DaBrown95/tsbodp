@@ -27,8 +27,7 @@ static inline unsigned char *selected_entry_start(unsigned int row_offset,
     return (unsigned char *)selected_start;
 }
 
-static inline unsigned int state_address(unsigned int row_offset,
-                                         unsigned int column_offset)
+static inline unsigned int state_address(unsigned int row_offset, unsigned int column_offset)
 {
     unsigned int base = (unsigned int)&g_resource_game_state;
     return column_offset + row_offset + base;

@@ -16,4 +16,4 @@ unsigned int frame_initialize_attachment_job_12(struct FrameNeedEffectState *own
 #endif
     return 1;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

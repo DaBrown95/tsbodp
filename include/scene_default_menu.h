@@ -25,10 +25,8 @@ extern const struct BackgroundResource g_scene_default_menu_background2;
 extern const struct BackgroundResource g_scene_default_menu_slot_background;
 extern const struct BackgroundResource g_scene_default_menu_detail_background;
 extern const struct BackgroundResource g_scene_default_menu_palette;
-extern const struct BackgroundResource *const
-    g_scene_default_menu_text_backgrounds[];
-extern const struct BackgroundResource *const
-    g_scene_default_menu_slot_text_backgrounds[];
+extern const struct BackgroundResource *const g_scene_default_menu_text_backgrounds[];
+extern const struct BackgroundResource *const g_scene_default_menu_slot_text_backgrounds[];
 extern const struct PaletteRangeConfig g_scene_default_menu_palette_ranges;
 
 void scene_default_menu_initialize(void), scene_default_menu_step(void);
@@ -40,20 +38,20 @@ void scene_default_menu_enter_slots(void), scene_default_menu_accept(void);
 /* Connected menu and endpoint declarations; numeric scene-stage naming remains provisional. */
 void scene_default_menu_change_selection(void);
 void link_initialize_endpoint(void);
-void scene_stage_0803e3a8(void);
+void scene_link_reset_setup_state(void);
 
 void display_configure_tile_allocation(unsigned char);
 void display_configure_background(unsigned int, unsigned int);
 unsigned int display_text_selected_bank(void);
-const unsigned short *display_load_background_dma(unsigned int,
-    const struct BackgroundResource *, unsigned short, unsigned short,
-    unsigned int, unsigned int);
+const unsigned short *display_load_background_dma(unsigned int, const struct BackgroundResource *,
+                                                  unsigned short, unsigned short, unsigned int,
+                                                  unsigned int);
 void display_enable_background(unsigned int), display_hide_background(unsigned int);
 void display_load_palette_ranges(const struct PaletteRangeConfig *);
 void transition_fade_black_out_refresh_twice(unsigned short);
 void scene_submit_default_request(unsigned int);
-unsigned int input_step_vertical_pressed(unsigned int *, unsigned int,
-    unsigned int, unsigned char, unsigned char);
+unsigned int input_step_vertical_pressed(unsigned int *, unsigned int, unsigned int, unsigned char,
+                                         unsigned char);
 void frame_set_position(struct FrameObject *, int, int);
 
 #endif

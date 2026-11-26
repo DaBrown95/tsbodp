@@ -8,8 +8,7 @@ static inline unsigned int scene_initialized_row_index(unsigned int index)
     return value;
 }
 
-static inline unsigned int *scene_initialized_row_flags(unsigned int base,
-    unsigned int offset)
+static inline unsigned int *scene_initialized_row_flags(unsigned int base, unsigned int offset)
 {
     unsigned int address;
     address = base;
@@ -24,7 +23,8 @@ void scene_initialize_view(unsigned int index, unsigned int mode)
     unsigned int eight_index;
     saved_index = index;
     limited_mode = (unsigned char)mode;
-    if (!limited_mode) save_world_refresh_row_palette(saved_index);
+    if (!limited_mode)
+        save_world_refresh_row_palette(saved_index);
     {
         unsigned int selection_address = (unsigned int)&g_scene_primary_views;
         selection_address += 0x31;
@@ -44,15 +44,17 @@ void scene_initialize_view(unsigned int index, unsigned int mode)
                 ++i;
             } while (i <= 7);
             display_fill_background(0, 0);
-            scene_view_load_selected_resource(0, 0, 16, 368, 0,
-                (const SceneViewResourceSelectionByte *)((unsigned char *)&g_save_world_init_state + 0x20));
+            scene_view_load_selected_resource(
+                0, 0, 16, 368, 0,
+                (const SceneViewResourceSelectionByte *)((unsigned char *)&g_save_world_init_state +
+                                                         0x20));
             scene_view_load_fixed_resource(0, 428, 2);
             map = display_load_background_resource_dma(0, &g_save_world_view_background_a, 54);
             g_save_world_gauge_map = (const struct DisplayStoredMap *)map;
-            g_save_world_transition_map = display_load_background_resource_dma(
-                0, &g_save_world_row_palette_a, 1);
-            g_save_world_summary_map = display_load_background_resource_dma(
-                0, &g_save_world_view_background_c, 492);
+            g_save_world_transition_map =
+                display_load_background_resource_dma(0, &g_save_world_row_palette_a, 1);
+            g_save_world_summary_map =
+                display_load_background_resource_dma(0, &g_save_world_view_background_c, 492);
             display_fill_background_rectangle(0, 0, 15, 4, 1, 0x11ec);
             display_fill_background_rectangle(0, 4, 16, 1, 4, 0x11f0);
             display_load_background_resource_dma(0, &g_save_world_view_background_d, 437);

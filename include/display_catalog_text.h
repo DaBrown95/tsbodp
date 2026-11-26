@@ -22,8 +22,7 @@ extern const struct DisplayCatalogItem g_display_scene_catalog[];
 extern char *g_display_text_buffer;
 extern const char *display_scene_lookup_text(unsigned int);
 extern int display_text_measure_width(const char *);
-extern int display_catalog_draw_name(unsigned int, int, int,
-                                     unsigned int, int, unsigned int);
-extern void display_catalog_draw_details(unsigned int, int, int, int,
-                                         unsigned int, int, unsigned int);
+extern int display_catalog_draw_name(unsigned int, int, int, unsigned int, int, unsigned int);
+extern void display_catalog_draw_details(unsigned int, int, int, int, unsigned int, int,
+                                         unsigned int);
 #endif

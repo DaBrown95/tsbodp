@@ -12,4 +12,4 @@ char *display_append_text_resource(char *buffer, unsigned int id)
     }
     return 0;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

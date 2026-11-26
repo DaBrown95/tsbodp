@@ -9,4 +9,4 @@ void scene_text_bank_shutdown(void)
     display_clear_text_slots();
     display_reset();
 }
-asm(".align 2,0");
+asm(".align 2, 0");

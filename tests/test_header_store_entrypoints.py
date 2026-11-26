@@ -1,4 +1,4 @@
-"""The full-build opt-in must reach the fresh pilot without becoming default."""
+"""The full-build option for the header store reaches the fresh pilot without becoming the default."""
 import contextlib
 import io
 from pathlib import Path

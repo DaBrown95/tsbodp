@@ -1,13 +1,11 @@
 #include "resource_actor_entries.h"
 
-void actor_entry_clear_collection_group(struct ActorEntryContext *context,
-                                        unsigned int group)
+void actor_entry_clear_collection_group(struct ActorEntryContext *context, unsigned int group)
 {
     struct ActorEntryCollection **reference = &context->collection;
     struct ActorEntryCollectionGroup *range = &(*reference)->groups[group];
     if (range->count) {
-        struct ActorEntryCollectionRecord *first =
-            &(*reference)->records[range->start];
+        struct ActorEntryCollectionRecord *first = &(*reference)->records[range->start];
         unsigned int removed = range->count;
         unsigned int remaining = (*reference)->count - range->start - removed;
         unsigned int index;

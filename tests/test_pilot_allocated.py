@@ -1,4 +1,4 @@
-"""Native C candidates must not hide allocated storage outside their text."""
+"""A C candidate must not place allocated storage outside its own text."""
 from pathlib import Path
 import shutil
 import sys

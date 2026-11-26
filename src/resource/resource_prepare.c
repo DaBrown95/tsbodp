@@ -25,14 +25,11 @@ void resource_prepare(const unsigned char *original)
         cursor = input + header[4];
         selected = cursor;
     }
-    cursor = resource_copy_arena_header(
-        (const struct ResourceArenaHeader *)input, selected);
+    cursor = resource_copy_arena_header((const struct ResourceArenaHeader *)input, selected);
     g_resource_object_data = (unsigned char *)cursor;
-    cursor = resource_build_object_groups(
-        base, selected, (unsigned char *)cursor);
+    cursor = resource_build_object_groups(base, selected, (unsigned char *)cursor);
     g_resource_word_data = (unsigned char *)cursor;
-    cursor = resource_build_word_groups(
-        base, selected, (unsigned char *)cursor);
+    cursor = resource_build_word_groups(base, selected, (unsigned char *)cursor);
     g_resource_program_data = (unsigned char *)cursor;
     resource_build_program_groups(base, selected, (unsigned char *)cursor);
 }

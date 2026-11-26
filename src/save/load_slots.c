@@ -8,7 +8,8 @@ void save_stream_load_slots(void)
         int retry = 0;
         do {
             save_stream_read_slot(slot);
-            if ((unsigned char)save_stream_validate_slot(slot)) break;
+            if ((unsigned char)save_stream_validate_slot(slot))
+                break;
         } while (retry-- > 0);
         if (g_save_stream_state.valid[slot]) {
             g_save_stream_state.cursor = g_save_stream_state.buffer;

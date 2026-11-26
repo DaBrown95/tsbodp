@@ -1,4 +1,4 @@
-"""Selected compilers are pinned independently and unknown tools are rejected."""
+"""Each compiler is pinned independently and unknown tools are rejected."""
 import copy
 import hashlib
 import io

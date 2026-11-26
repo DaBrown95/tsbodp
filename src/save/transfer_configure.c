@@ -1,6 +1,6 @@
 #include "save_transfer.h"
 
-unsigned short save_transfer_configure_4c8f4(unsigned short size)
+unsigned short save_transfer_configure(unsigned short size)
 {
     unsigned short status = 0;
     if (size == 4)

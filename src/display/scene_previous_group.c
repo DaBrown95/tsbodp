@@ -8,7 +8,7 @@ unsigned char display_scene_previous_group(void)
     --g_display_scene_request_state.scene;
     if (!g_display_scene_request_state.scene && g_display_scene_objects[0]->id == 0xb1)
         g_display_scene_objects[2]->flags &= ~1;
-    display_scene_stage_0800f034(0);
+    display_populate_scrolling_scene(0);
     g_display_scene_byte2 = 0;
     display_scene_stage_0800f478();
     display_scene_redraw_details(0);

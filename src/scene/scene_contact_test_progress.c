@@ -6,9 +6,11 @@ unsigned int scene_contact_test_progress(void)
         unsigned int first, second, scene, option, threshold_first, threshold_second;
         const struct SceneContactRequirement *requirements;
         first = frame_read_signed_parameter(&g_scene_contact_parameter_storage,
-            g_scene_contact_resources[g_scene_contact_state->scene].fields.requirements->first_parameter);
+                                            g_scene_contact_resources[g_scene_contact_state->scene]
+                                                .fields.requirements->first_parameter);
         second = frame_read_signed_parameter(&g_scene_contact_parameter_storage,
-            g_scene_contact_resources[g_scene_contact_state->scene].fields.requirements->second_parameter);
+                                             g_scene_contact_resources[g_scene_contact_state->scene]
+                                                 .fields.requirements->second_parameter);
         scene = g_scene_contact_state->scene;
         requirements = g_scene_contact_resources[scene].fields.requirements;
         option = g_scene_contact_state->option;

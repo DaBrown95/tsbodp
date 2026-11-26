@@ -17,7 +17,7 @@ void scene_contact_load_primary_resources(unsigned int index)
     resource_decode_alternate(FIELD(tiles0), (void *)0x06000000);
     resource_decode_alternate(FIELD(tiles1), (void *)0x06008000);
     frame_set_map_sources(&g_scene_contact_initial_background_control1,
-                         &g_scene_contact_activity_background_control1);
+                          &g_scene_contact_activity_background_control1);
     display_load_palette(FIELD(palette), 0, 256);
     frame_load_map_resources(0, FIELD(map0), FIELD(secondary0));
     frame_load_map_resources(1, FIELD(map1), FIELD(secondary1));

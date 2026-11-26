@@ -36,8 +36,8 @@ void frame_compose_actor_group_alternate_palette(const void *, void *);
 void frame_load_actor_group_alternate_palette(const void *, unsigned int);
 void frame_load_actor_palette_pair(void);
 
-void frame_set_part_variants(struct FrameObject *, unsigned char,
-                             struct FrameSpriteVariant **, unsigned int);
+void frame_set_part_variants(struct FrameObject *, unsigned char, struct FrameSpriteVariant **,
+                             unsigned int);
 void frame_clear_part_variants(struct FrameObject *, unsigned char);
 
 #endif

@@ -1,7 +1,6 @@
 #include "frame_optional_choice_apply.h"
 
-void frame_optional_choice_apply(unsigned char kind,
-                                 struct FrameActorAttachmentRecord *job)
+void frame_optional_choice_apply(unsigned char kind, struct FrameActorAttachmentRecord *job)
 {
     int cost = g_optional_choice_costs[g_optional_choice_world.stage][kind];
 

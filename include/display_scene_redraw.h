@@ -13,7 +13,8 @@ struct DisplaySceneTextState {
 extern struct DisplaySceneTextState g_display_scene_text_state;
 extern const unsigned int g_display_scene_group_text_ids[6];
 struct FrameObject;
-extern struct FrameObject *frame_create_scene_object(unsigned int, unsigned int, unsigned int, unsigned int);
+extern struct FrameObject *frame_create_scene_object(unsigned int, unsigned int, unsigned int,
+                                                     unsigned int);
 extern const char *display_scene_lookup_text(unsigned int);
 extern struct DisplaySceneOwner *display_scene_stage_080282d4(unsigned int, const char **);
 struct TransitionObject;

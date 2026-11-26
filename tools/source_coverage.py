@@ -1,4 +1,7 @@
-"""Separate compiled C from explicitly marked inline hardware glue."""
+"""Separate compiled C from inline hardware assembly ("glue") marked in C sources.
+
+Byte counts then credit C only for compiled code.
+"""
 import re
 
 

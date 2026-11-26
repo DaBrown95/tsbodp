@@ -1,15 +1,13 @@
 #include "frame.h"
 #include "frame_actor_grid.h"
 
-static inline int path_cell_at_offset(struct FrameGridSearchState *state,
-                                     int byte_offset)
+static inline int path_cell_at_offset(struct FrameGridSearchState *state, int byte_offset)
 {
     int *cells = state->cells;
     return *(int *)(byte_offset + (unsigned int)cells);
 }
 
-unsigned char frame_copy_grid_path(struct FramePoint *output,
-                                  unsigned int unused)
+unsigned char frame_copy_grid_path(struct FramePoint *output, unsigned int unused)
 {
     int count = g_frame_grid_search.count;
     if (count) {

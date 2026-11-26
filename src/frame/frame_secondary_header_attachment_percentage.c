@@ -8,4 +8,4 @@ unsigned char frame_secondary_header_attachment_percentage(struct FrameNeedEffec
     return result;
 }
 /* Native two zero alignment bytes before the next entry. */
-asm(".align 2,0");
+asm(".align 2, 0");

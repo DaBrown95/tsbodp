@@ -1,4 +1,4 @@
-"""A stale or no-op mutation must not masquerade as a negative control."""
+"""A stale or no-op mutation must not pass as a negative control."""
 import sys
 from pathlib import Path
 import unittest

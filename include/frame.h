@@ -131,7 +131,8 @@ extern FrameU32 g_frame_flags, g_frame_count;
 extern struct FrameObjectList g_frame_primary_list;
 /* Object count passed to the copied ARM collision dispatcher. */
 extern FrameU32 g_frame_dispatch_arg;
-extern unsigned char g_frame_dispatch_primary[], g_frame_dispatch_sort[], g_frame_dispatch_scratch[];
+extern unsigned char g_frame_dispatch_primary[], g_frame_dispatch_sort[],
+    g_frame_dispatch_scratch[];
 extern struct FrameObject *g_frame_objects[];
 void frame_step_object(struct FrameObject *, FrameU8);
 void frame_prepare_animation(struct FrameObject *);

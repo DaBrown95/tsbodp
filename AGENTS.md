@@ -15,6 +15,8 @@ the ROM map and its static evidence there. Neither is generated from the other. 
   fabricated code or embedded original instruction bodies in claimed matches.
 - Keep unconverted ROM regions explicit and local. Whole-ROM equality does not
   mean the whole game has been decompiled.
+- Format project-owned C with the committed `.clang-format`; borrowed code keeps
+  its upstream style. Reformatting must keep each changed-source control applicable.
 - Treat inferred names, types and function boundaries as provisional. Distinguish
   static findings, compiler matches and runtime/gameplay evidence.
 - Matching C may retain an original bug when the function reliably matches with

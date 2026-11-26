@@ -17,22 +17,21 @@ unsigned int frame_step_optional_animation_attachment_job(struct FrameNeedEffect
 /* Row-one definition callbacks select and dispatch attachment kinds 29/45.
  * The parameter predicate returns a word; its caller observes the low byte. */
 unsigned int frame_need_effect_optional_one_ready(struct FrameNeedEffectState *);
-unsigned int frame_select_optional_attachment_kind(struct FrameNeedEffectState *,
-                                                   unsigned char *);
+unsigned int frame_select_optional_attachment_kind(struct FrameNeedEffectState *, unsigned char *);
 unsigned int frame_begin_optional_attachment_job(struct FrameNeedEffectState *,
                                                  struct FrameObject *, unsigned int);
 unsigned int frame_dispatch_optional_attachment_job(struct FrameNeedEffectState *,
                                                     struct FrameObject *);
 unsigned int frame_check_optional_attachment_capacity(struct FrameNeedEffectState *,
-                                                       struct FrameObject *);
-
+                                                      struct FrameObject *);
 
 /* EC action switch; formal roles remain inferred until its consumer is identified. */
-unsigned int frame_prepare_optional_attachment_kinds_92_97(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
-
+unsigned int frame_prepare_optional_attachment_kinds_92_97(struct FrameNeedEffectState *,
+                                                           struct FrameObject *, unsigned int);
 
 /* EC action switches; unused formal roles remain inferred. */
-unsigned int frame_prepare_optional_attachment_kind(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+unsigned int frame_prepare_optional_attachment_kind(struct FrameNeedEffectState *,
+                                                    struct FrameObject *, unsigned int);
 
 /* Observed row-one definition entry and per-frame state callback. */
 unsigned int frame_initialize_optional_attachment_jobs(struct FrameNeedEffectState *);

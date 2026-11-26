@@ -33,7 +33,8 @@ void scene_contact_activity_four_step(void)
                 unsigned short first_id;
                 first = state->first[i];
                 first_id = first->unknown_0a;
-                if (first_id == second->unknown_0a) continue;
+                if (first_id == second->unknown_0a)
+                    continue;
                 id = first_id;
             } else {
                 id = state->first[i]->unknown_0a;

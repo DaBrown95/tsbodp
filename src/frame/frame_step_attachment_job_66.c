@@ -12,18 +12,17 @@ unsigned int frame_step_attachment_job_66(struct FrameNeedEffectState *owner,
     if (job->running == 1)
         job->timer = 1;
     switch ((unsigned int)job->timer) {
-    case 0:
-        frame_set_actor_direction(job->actor,
-            g_actor_reverse_directions[owner->object->unknown_12[0]]);
-        frame_request_animation((struct FrameCommandObject *)job->actor, 58);
-        job->timer = 7;
-        break;
-    case 7:
-        if (job->actor->flags & 0x400000)
-            job->timer = 1;
-        break;
-    case 1:
-        {
+        case 0:
+            frame_set_actor_direction(job->actor,
+                                      g_actor_reverse_directions[owner->object->unknown_12[0]]);
+            frame_request_animation((struct FrameCommandObject *)job->actor, 58);
+            job->timer = 7;
+            break;
+        case 7:
+            if (job->actor->flags & 0x400000)
+                job->timer = 1;
+            break;
+        case 1: {
             unsigned int added;
             if (*(short *)&owner->parameter > 0x4FFF)
                 added = (unsigned char)actor_entry_add(read_collection(), 144, 0, 0);
@@ -38,10 +37,10 @@ unsigned int frame_step_attachment_job_66(struct FrameNeedEffectState *owner,
                 owner->parameter = 0;
             }
         }
-        frame_commit_need_effect(owner->object, 0);
-        frame_request_animation((struct FrameCommandObject *)job->actor, 1);
-        result = 2;
-        break;
+            frame_commit_need_effect(owner->object, 0);
+            frame_request_animation((struct FrameCommandObject *)job->actor, 1);
+            result = 2;
+            break;
     }
     return result;
 }

@@ -14,7 +14,9 @@ struct LinkReceivedJoin {
     unsigned int values[4];
     unsigned char unknown14[100], metadata[4], entry_index;
 };
-struct LinkReceivedPair { struct EventPayload first, second; };
+struct LinkReceivedPair {
+    struct EventPayload first, second;
+};
 extern struct EventRecord g_link_received_events[];
 extern unsigned int g_link_received_words[];
 extern unsigned char g_link_received_sequence[], g_link_peer_count;

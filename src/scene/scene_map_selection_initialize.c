@@ -21,17 +21,29 @@ void scene_map_selection_initialize(void)
     display_fill_background(3, 0);
     display_load_background_dma(3, &g_scene_map_selection_background3, 238, 0, 0, 0);
     display_set_background_position(3, 0, 0x100000);
-    display_load_palette((const unsigned char *)&g_scene_map_selection_background0+2, 0, 256);
+    display_load_palette((const unsigned char *)&g_scene_map_selection_background0 + 2, 0, 256);
     display_load_palette_alternate(g_display_menu_palette_data, 0, 16);
     g_scene_map_selection_hovered = 255;
     g_scene_map_selection_mode = 0;
-    if ((g_save_stream_state.header.words[6]&2) && (unsigned char)condition_is_active(3, 0, 0))g_scene_map_selection_mode = 3;
-    else if (g_save_stream_state.header.words[6]&2)g_scene_map_selection_mode = 2;
-    else if ((unsigned char)condition_is_active(3, 0, 0))g_scene_map_selection_mode = 1;
+    if ((g_save_stream_state.header.words[6] & 2) && (unsigned char)condition_is_active(3, 0, 0))
+        g_scene_map_selection_mode = 3;
+    else if (g_save_stream_state.header.words[6] & 2)
+        g_scene_map_selection_mode = 2;
+    else if ((unsigned char)condition_is_active(3, 0, 0))
+        g_scene_map_selection_mode = 1;
     scene_map_selection_initialize_objects();
-    display_set_background_scroll_target(0, g_display_background_system.backgrounds[0].position_x+(g_scene_map_selection_origin_x<<16), g_display_background_system.backgrounds[0].position_y, 1);
-    display_set_background_scroll_target(1, g_display_background_system.backgrounds[1].position_x+(g_scene_map_selection_origin_x<<16), g_display_background_system.backgrounds[1].position_y, 1);
-    display_set_background_scroll_target(2, g_display_background_system.backgrounds[2].position_x+(g_scene_map_selection_origin_x<<16), g_display_background_system.backgrounds[2].position_y, 1);
+    display_set_background_scroll_target(0,
+                                         g_display_background_system.backgrounds[0].position_x +
+                                             (g_scene_map_selection_origin_x << 16),
+                                         g_display_background_system.backgrounds[0].position_y, 1);
+    display_set_background_scroll_target(1,
+                                         g_display_background_system.backgrounds[1].position_x +
+                                             (g_scene_map_selection_origin_x << 16),
+                                         g_display_background_system.backgrounds[1].position_y, 1);
+    display_set_background_scroll_target(2,
+                                         g_display_background_system.backgrounds[2].position_x +
+                                             (g_scene_map_selection_origin_x << 16),
+                                         g_display_background_system.backgrounds[2].position_y, 1);
     transition_run_first(63, 0);
 }
 

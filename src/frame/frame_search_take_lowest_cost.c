@@ -1,7 +1,6 @@
 #include "frame_search_cost.h"
 
-unsigned int frame_search_take_lowest_cost(struct FrameSearchRecord *output,
-                                         unsigned int queue)
+unsigned int frame_search_take_lowest_cost(struct FrameSearchRecord *output, unsigned int queue)
 {
     struct FrameSearchNode *best = g_frame_search_queues[queue].first;
     struct FrameSearchNode *node = best->next;

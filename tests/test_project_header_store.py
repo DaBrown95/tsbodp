@@ -1,4 +1,4 @@
-"""Project-header inode sharing must preserve CPP identity and verification."""
+"""Header hard-linking must preserve preprocessing results and verification."""
 from pathlib import Path
 import errno, hashlib, json, multiprocessing, os, shutil, stat, sys, tempfile, unittest, subprocess
 from unittest.mock import patch

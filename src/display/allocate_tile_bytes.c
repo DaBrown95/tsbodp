@@ -1,11 +1,12 @@
 #include "display.h"
 #include "revision.h"
-unsigned int display_allocate_tile_bytes(struct DisplayTileResource *resource,
-                                        unsigned int bytes, unsigned int small_tiles)
+unsigned int display_allocate_tile_bytes(struct DisplayTileResource *resource, unsigned int bytes,
+                                         unsigned int small_tiles)
 {
     unsigned int count, result;
     unsigned int (*allocator)(unsigned int *, unsigned int, unsigned int);
-    allocator = (unsigned int (*)(unsigned int *, unsigned int, unsigned int))REVISION_TILE_ALLOCATOR_IWRAM;
+    allocator =
+        (unsigned int (*)(unsigned int *, unsigned int, unsigned int))REVISION_TILE_ALLOCATOR_IWRAM;
     if (!small_tiles) {
         count = bytes >> 6;
         result = allocator(g_display_allocated_tiles, count, 0);

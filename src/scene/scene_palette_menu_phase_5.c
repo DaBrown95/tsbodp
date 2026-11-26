@@ -20,4 +20,4 @@ void scene_palette_menu_phase_5(void)
         audio_play_animation_cue(12);
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

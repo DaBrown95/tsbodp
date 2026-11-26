@@ -10,14 +10,14 @@ enum FrameOptionalAttachmentKind12_45_59 {
     FRAME_OPTIONAL_ATTACHMENT_KIND_59 = 59
 };
 
-unsigned int frame_step_optional_attachment_kind_12_45fb4(struct FrameNeedEffectState *,
-                                                        struct FrameActorAttachmentRecord *);
-unsigned int frame_step_optional_attachment_kind_45_46050(struct FrameNeedEffectState *,
-                                                        struct FrameActorAttachmentRecord *);
+unsigned int frame_step_optional_attachment_kind_12_face_reverse_direction(struct FrameNeedEffectState *,
+                                                          struct FrameActorAttachmentRecord *);
+unsigned int frame_step_optional_attachment_kind_45_without_actor_effect(struct FrameNeedEffectState *,
+                                                          struct FrameActorAttachmentRecord *);
 unsigned int frame_step_optional_attachment_kind_59(struct FrameNeedEffectState *,
-                                                   struct FrameActorAttachmentRecord *);
+                                                    struct FrameActorAttachmentRecord *);
 unsigned int frame_dispatch_optional_attachment_kinds_12_45_59(struct FrameNeedEffectState *,
-                                                              struct FrameObject *);
+                                                               struct FrameObject *);
 
 /* The initializer's unused owner/word result are chosen roles; its caller
  * ignores that result. F8 is called through the existing void(state) contract. */

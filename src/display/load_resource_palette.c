@@ -1,7 +1,7 @@
 #include "display.h"
 extern void display_load_palette(const void *, unsigned int, unsigned int);
 unsigned int display_load_resource_palette(const struct BackgroundResource *resource,
-                                          unsigned short extra_bank)
+                                           unsigned short extra_bank)
 {
     const unsigned char *source = (const unsigned char *)resource + 2;
     unsigned int bytes;

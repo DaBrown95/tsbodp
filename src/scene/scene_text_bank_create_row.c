@@ -17,4 +17,4 @@ void scene_text_bank_create_row(unsigned int row)
     frame_set_centered_integer_position(g_display_text_slots[row], 120,
                                         (short)(row * 16 + 32 + offset));
 }
-asm(".align 2,0");
+asm(".align 2, 0");

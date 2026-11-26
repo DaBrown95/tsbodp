@@ -9,7 +9,6 @@ void display_remove_pending_row(unsigned short line)
     while (DISPLAY_PENDING_ROWS.queued[index].line != line)
         ++index;
     bytes = (11 - index) * sizeof(struct DisplayPendingRow);
-    heap_move(&DISPLAY_PENDING_ROWS.queued[index],
-        &DISPLAY_PENDING_ROWS.queued[index + 1], bytes);
+    heap_move(&DISPLAY_PENDING_ROWS.queued[index], &DISPLAY_PENDING_ROWS.queued[index + 1], bytes);
     DISPLAY_PENDING_ROWS.pending = 1;
 }

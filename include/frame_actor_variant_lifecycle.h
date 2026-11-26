@@ -9,10 +9,9 @@
  * the adjacent parameter-rate storage; no seventh semantic variant is implied.
  * EC's unused formal roles remain provisional; its body returns one. */
 unsigned int frame_initialize_variant_attachment_job(struct FrameNeedEffectState *);
-unsigned int frame_select_attachment_route_variant(struct FrameNeedEffectState *,
-                                                  unsigned char *);
+unsigned int frame_select_attachment_route_variant(struct FrameNeedEffectState *, unsigned char *);
 unsigned int frame_prepare_variant_attachment_job(struct FrameNeedEffectState *,
-                                                 struct FrameObject *, unsigned int);
+                                                  struct FrameObject *, unsigned int);
 void frame_finish_variant_attachment_job(struct FrameNeedEffectState *);
 
 #endif

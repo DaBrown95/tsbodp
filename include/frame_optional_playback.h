@@ -21,7 +21,7 @@ extern const unsigned short g_optional_playback_cues_other[];
 unsigned int frame_initialize_optional_playback_context(struct FrameNeedEffectState *);
 /* No incoming reference is established for this adjoining availability API. */
 unsigned int frame_optional_playback_context_available(struct FrameNeedEffectState *,
-                                                        struct FrameObject *);
+                                                       struct FrameObject *);
 unsigned int frame_select_optional_playback_attachment_kind(struct FrameNeedEffectState *,
                                                             unsigned char *);
 /* Original eight-byte constant-return provider; its LR preservation remains
@@ -38,18 +38,20 @@ void frame_optional_playback_select_sequence(struct FrameNeedEffectState *);
 unsigned int frame_step_optional_playback_job_45(struct FrameNeedEffectState *,
                                                  struct FrameActorAttachmentRecord *);
 unsigned int frame_step_optional_playback_job_1_6(struct FrameNeedEffectState *,
-                                                  struct FrameActorAttachmentRecord *, unsigned int);
+                                                  struct FrameActorAttachmentRecord *,
+                                                  unsigned int);
 unsigned int frame_step_optional_playback_job_56_57(struct FrameNeedEffectState *,
-                                                    struct FrameActorAttachmentRecord *, unsigned int);
+                                                    struct FrameActorAttachmentRecord *,
+                                                    unsigned int);
 unsigned int frame_step_optional_playback_job_62(struct FrameNeedEffectState *,
                                                  struct FrameActorAttachmentRecord *);
 
-unsigned char frame_begin_actor_route(struct FrameObject *, struct FramePoint *,
-                                      unsigned int *, unsigned int, unsigned char);
+unsigned char frame_begin_actor_route(struct FrameObject *, struct FramePoint *, unsigned int *,
+                                      unsigned int, unsigned char);
 void frame_commit_need_effect(struct FrameObject *, unsigned int);
 
-
 /* EC action switches; unused formal roles remain inferred. */
-unsigned int frame_prepare_optional_playback_attachment_kind(struct FrameNeedEffectState *, struct FrameObject *, unsigned int);
+unsigned int frame_prepare_optional_playback_attachment_kind(struct FrameNeedEffectState *,
+                                                             struct FrameObject *, unsigned int);
 
 #endif

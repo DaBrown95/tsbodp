@@ -6,12 +6,12 @@
 
 /* Serialized 24-byte records; animation callers consume the low byte. */
 struct FrameActorNeedAction {
- FrameU8 variant_state, unknown_01[3];
- FrameU32 animation;
- int indicator;
- FrameU16 frames;
- FrameU8 unknown_0e[2];
- FrameU32 cue_nonzero_variant, cue_zero_variant;
+    FrameU8 variant_state, unknown_01[3];
+    FrameU32 animation;
+    int indicator;
+    FrameU16 frames;
+    FrameU8 unknown_0e[2];
+    FrameU32 cue_nonzero_variant, cue_zero_variant;
 };
 extern struct FrameActorNeedAction g_frame_actor_need_actions[8];
 FrameU8 frame_need_action_forbidden(FrameU32);

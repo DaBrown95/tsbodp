@@ -1,11 +1,13 @@
 #include "display.h"
-static inline void *character_destination(const struct BackgroundCharacterBase *base) {
+static inline void *character_destination(const struct BackgroundCharacterBase *base)
+{
     register const struct BackgroundCharacterBase *pointer asm("r1") = base;
     register unsigned int offset asm("r0") = pointer->character_base << 14;
     return (void *)(offset + 0x06000000);
 }
-const unsigned short *display_load_background_resource_dma(unsigned int index,
-    const struct BackgroundResource *resource, unsigned short tile_offset)
+const unsigned short *
+display_load_background_resource_dma(unsigned int index, const struct BackgroundResource *resource,
+                                     unsigned short tile_offset)
 {
     const unsigned char *data;
     const unsigned short *dimensions = 0;

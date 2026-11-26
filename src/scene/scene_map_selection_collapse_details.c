@@ -11,7 +11,8 @@ unsigned int scene_map_selection_collapse_details(void)
         /* The wide offset preserves the native R2 lifetime with the pinned
          * compiler. Its low word is the scroll-duration field's byte offset. */
         register unsigned long long duration_offset asm("r2") =
-            (unsigned int)((unsigned char *)&g_display_background_system.backgrounds[3].scroll_duration -
+            (unsigned int)((unsigned char *)&g_display_background_system.backgrounds[3]
+                               .scroll_duration -
                            (unsigned char *)&g_display_background_system);
         register unsigned short *duration_address asm("r0") =
             (unsigned short *)(base_address + (unsigned int)duration_offset);

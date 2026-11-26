@@ -24,4 +24,4 @@ void scene_text_bank_initialize(void)
     else
         transition_run_first(63, 0);
 }
-asm(".align 2,0");
+asm(".align 2, 0");

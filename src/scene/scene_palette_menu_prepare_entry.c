@@ -16,4 +16,4 @@ void scene_palette_menu_prepare_entry(void)
     scene_palette_menu_build_entry_objects();
 }
 
-asm(".align 2,0");
+asm(".align 2, 0");

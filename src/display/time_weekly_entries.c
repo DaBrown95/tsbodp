@@ -18,51 +18,51 @@ void display_time_weekly_entries(struct ActorEntryContext *input)
                 register struct ConditionActorEntry *entry asm("r1");
                 {
                     register struct ConditionActorEntries *initial asm("r0") =
-                        *(struct ConditionActorEntries *volatile *)
-                            &context->secondary;
+                        *(struct ConditionActorEntries *volatile *)&context->secondary;
                     list = initial;
                 }
                 {
                     register unsigned char capacity asm("r0") = list->capacity;
-                    if (index >= capacity) goto exhausted;
+                    if (index >= capacity)
+                        goto exhausted;
                 }
                 entry = list->entries;
                 goto inspect;
-next:
+            next:
                 ++index;
                 {
                     register unsigned char capacity asm("r0") = list->capacity;
-                    if (index >= capacity) goto exhausted;
+                    if (index >= capacity)
+                        goto exhausted;
                 }
                 {
-                    register struct ConditionActorEntry *base asm("r0") =
-                        list->entries;
+                    register struct ConditionActorEntry *base asm("r0") = list->entries;
                     entry = (struct ConditionActorEntry *)(index * sizeof(*entry));
-                    entry = (struct ConditionActorEntry *)
-                        ((unsigned int)entry + (unsigned int)base);
+                    entry =
+                        (struct ConditionActorEntry *)((unsigned int)entry + (unsigned int)base);
                 }
-inspect:
-                {
-                    register unsigned char kind asm("r0") = entry->kind;
-                    if (kind != 125) goto next;
-                }
+            inspect: {
+                register unsigned char kind asm("r0") = entry->kind;
+                if (kind != 125)
+                    goto next;
+            }
                 {
                     register unsigned char value asm("r0") = entry->value1;
-                    if (value != bit) goto next;
+                    if (value != bit)
+                        goto next;
                 }
-exhausted:
-                {
-                    register unsigned char capacity asm("r2") = list->capacity;
-                    if (index == capacity) {
-                        register unsigned int mask asm("r1") = one;
-                        register unsigned char value asm("r0");
-                        mask <<= bit;
-                        value = context->unknown00[9];
-                        value &= ~mask;
-                        context->unknown00[9] = value;
-                        break;
-                    }
+            exhausted: {
+                register unsigned char capacity asm("r2") = list->capacity;
+                if (index == capacity) {
+                    register unsigned int mask asm("r1") = one;
+                    register unsigned char value asm("r0");
+                    mask <<= bit;
+                    value = context->unknown00[9];
+                    value &= ~mask;
+                    context->unknown00[9] = value;
+                    break;
                 }
+            }
             }
         }
     }

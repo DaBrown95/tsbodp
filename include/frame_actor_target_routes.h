@@ -13,7 +13,7 @@ unsigned char frame_find_attachment_neighbor(void *, struct FrameObject *, unsig
 void frame_route_attachment_to_target(void *, struct FrameActorAttachmentRecord *,
                                       struct FrameNeedEffectState *);
 /* The address-derived name preserves an unresolved effect-definition role. */
-unsigned int frame_interaction_step_16c68(struct FrameNeedEffectState *,
-                                         struct FrameActorAttachmentRecord *);
+unsigned int frame_step_attachment_job_49(struct FrameNeedEffectState *,
+                                          struct FrameActorAttachmentRecord *);
 
 #endif

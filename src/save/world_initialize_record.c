@@ -7,7 +7,6 @@ void save_world_initialize_record(void *pointer)
         save_world_empty_hook_3d170((unsigned char *)pointer + 0x88);
     }
     save_world_initialize_relations((struct DisplayMenuRelationState *)pointer);
-    frame_reset_actor_needs((struct FrameActorNeedState *)
-                            ((unsigned char *)pointer + 0xa0));
+    frame_reset_actor_needs((struct FrameActorNeedState *)((unsigned char *)pointer + 0xa0));
 }
 asm(".align 2, 0");

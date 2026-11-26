@@ -1,7 +1,6 @@
 #include "display_menu_pages.h"
 
-unsigned short display_read_map_tile(const unsigned short *tiles, int x, int y,
-                                     int width)
+unsigned short display_read_map_tile(const unsigned short *tiles, int x, int y, int width)
 {
     register const unsigned short *entry asm("r4") = tiles;
     {

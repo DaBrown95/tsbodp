@@ -1,4 +1,8 @@
-"""Static byte unions from pre-weak snapshots; no I/O, decoding or credit."""
+"""Count every ROM byte by role (code, referenced data, unclassified) from the entries and regions the inventory found.
+
+Pure computation used by tools/inventory_rom.py: it reads no files and decodes
+no instructions, and it does not count source coverage.
+"""
 from collections import Counter, defaultdict
 import hashlib
 import re

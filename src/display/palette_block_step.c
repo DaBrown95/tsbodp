@@ -5,10 +5,9 @@ union __attribute__((packed, aligned(2))) PaletteHalfwordInput {
     unsigned short word;
 };
 
-typedef char palette_halfword_input_size[
-    (sizeof(union PaletteHalfwordInput) == 2) ? 1 : -1];
-typedef char palette_halfword_input_alignment[
-    (__alignof__(union PaletteHalfwordInput) == 2) ? 1 : -1];
+typedef char palette_halfword_input_size[(sizeof(union PaletteHalfwordInput) == 2) ? 1 : -1];
+typedef char
+    palette_halfword_input_alignment[(__alignof__(union PaletteHalfwordInput) == 2) ? 1 : -1];
 
 void display_step_palette_block(struct PaletteBlockJob *job)
 {
@@ -60,8 +59,8 @@ void display_step_palette_block(struct PaletteBlockJob *job)
         count = job->count;
         if (count) {
             do {
-                union PaletteHalfwordInput current_color = { *output };
-                union PaletteHalfwordInput target_color = { *target };
+                union PaletteHalfwordInput current_color = {*output};
+                union PaletteHalfwordInput target_color = {*target};
 
                 if (current_color.word != target_color.word) {
                     unsigned short red = current_color.word & 0x001f;
@@ -72,13 +71,10 @@ void display_step_palette_block(struct PaletteBlockJob *job)
 
                     red += display_divide(red_delta, remaining);
                     green = (current_color.word & 0x03e0) >> 5;
-                    green += display_divide(
-                        ((target_color.word & 0x03e0) >> 5) - green, remaining);
+                    green += display_divide(((target_color.word & 0x03e0) >> 5) - green, remaining);
                     blue = (current_color.word & 0x7c00) >> 10;
-                    blue += display_divide(
-                        ((target_color.word & 0x7c00) >> 10) - blue, remaining);
-                    *output = (red & 0x001f) | ((green << 5) & 0x03e0) |
-                        ((blue << 10) & 0x7c00);
+                    blue += display_divide(((target_color.word & 0x7c00) >> 10) - blue, remaining);
+                    *output = (red & 0x001f) | ((green << 5) & 0x03e0) | ((blue << 10) & 0x7c00);
                 }
 
                 ++output;

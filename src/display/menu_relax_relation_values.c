@@ -8,8 +8,7 @@ void display_menu_relax_relation_values(struct DisplayMenuRelationValues *values
     unsigned char *cursor = (unsigned char *)values;
     for (; index <= 23; ++index) {
         unsigned int positive;
-        if (*(signed char *)(cursor + 9) == sentinel ||
-            *(signed char *)(cursor + 9) == 0)
+        if (*(signed char *)(cursor + 9) == sentinel || *(signed char *)(cursor + 9) == 0)
             goto next;
         if (*(signed char *)(cursor + 9) > 0) {
             positive = 1;
@@ -21,7 +20,7 @@ void display_menu_relax_relation_values(struct DisplayMenuRelationValues *values
         if ((*(signed char *)(cursor + 9) > 0 && positive == 0) ||
             (*(signed char *)(cursor + 9) < 0 && positive == 1))
             *(signed char *)(cursor + 9) = 0;
-next:
+    next:
         cursor += sizeof(struct DisplayMenuRelationRecord);
     }
 }

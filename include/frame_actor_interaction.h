@@ -5,22 +5,38 @@
 struct FrameObject;
 /* Partial option and local need views from selector22. Helper roles are provisional. */
 struct FrameActorInteractionWork {
- unsigned char unknown_00[0x64]; struct FrameObject *effect;
- unsigned char mode,unknown_69[3]; unsigned int option_index;
+    unsigned char unknown_00[0x64];
+    struct FrameObject *effect;
+    unsigned char mode, unknown_69[3];
+    unsigned int option_index;
 };
-struct FrameInteractionOption { unsigned char id,field1,field2,field3; };
-struct FrameInteractionOptionList { unsigned int unknown00; struct FrameInteractionOption *entries; };
-struct FrameInteractionWorld { unsigned char unknown00[0xf0]; struct FrameInteractionOptionList *options; };
+struct FrameInteractionOption {
+    unsigned char id, field1, field2, field3;
+};
+struct FrameInteractionOptionList {
+    unsigned int unknown00;
+    struct FrameInteractionOption *entries;
+};
+struct FrameInteractionWorld {
+    unsigned char unknown00[0xf0];
+    struct FrameInteractionOptionList *options;
+};
 struct FrameInteractionNeedWorld {
- unsigned char unknown00[0x40];
- struct FrameInteractionOptionList *options; unsigned char unknown44[0x348]; unsigned char selected_world;
+    unsigned char unknown00[0x40];
+    struct FrameInteractionOptionList *options;
+    unsigned char unknown44[0x348];
+    unsigned char selected_world;
 };
 extern struct FrameInteractionNeedWorld g_frame_actor_local_need_state;
-struct FrameInteractionDefinition { unsigned char unknown00[12]; unsigned int special; unsigned char unknown10[8]; };
+struct FrameInteractionDefinition {
+    unsigned char unknown00[12];
+    unsigned int special;
+    unsigned char unknown10[8];
+};
 extern struct FrameInteractionDefinition g_frame_interaction_definitions[];
 extern unsigned char g_frame_interaction_directions[];
 unsigned char input_direction(unsigned char);
-struct FrameObject *frame_spawn_need_effect(int,int,int,int,int);
-void frame_enable_object_flags(struct FrameObject *,unsigned int);
+struct FrameObject *frame_spawn_need_effect(int, int, int, int, int);
+void frame_enable_object_flags(struct FrameObject *, unsigned int);
 void frame_note_interaction_condition(unsigned int);
 #endif

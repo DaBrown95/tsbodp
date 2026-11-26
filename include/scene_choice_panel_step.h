@@ -15,6 +15,6 @@
 #define SCENE_CHOICE_PANEL_REQUESTED_KIND (g_scene_link_catalog_world.requested_kind)
 
 void scene_choice_panel_step(void);
-InputU32 input_step_vertical_pressed(InputU32 *,InputU32,InputU32,InputU8,InputU8);
+InputU32 input_step_vertical_pressed(InputU32 *, InputU32, InputU32, InputU8, InputU8);
 void scene_submit_default_request(unsigned int);
 #endif

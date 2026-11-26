@@ -29,12 +29,14 @@ void display_step_backgrounds(void)
                     int delta = background->target_x;
                     current = background->position_x;
                     delta -= current;
-                    current += display_divide(delta, *(volatile unsigned short *)&background->scroll_duration);
+                    current += display_divide(
+                        delta, *(volatile unsigned short *)&background->scroll_duration);
                     background->position_x = current;
                     delta = background->target_y;
                     current = background->position_y;
                     delta -= current;
-                    current += display_divide(delta, *(volatile unsigned short *)&background->scroll_duration);
+                    current += display_divide(
+                        delta, *(volatile unsigned short *)&background->scroll_duration);
                     background->position_y = current;
                 }
                 background->scroll_duration = duration - 1;
@@ -75,7 +77,8 @@ void display_step_backgrounds(void)
             background->pa = display_fixed_multiply((short)display_matrix_cosine(angle), scale);
             background->pb = display_fixed_multiply((short)display_matrix_sine(angle), scale);
             background->pc = display_fixed_multiply((short)-display_matrix_sine(angle), scale);
-            *(pd_destination = &background->pd) = display_fixed_multiply((short)display_matrix_cosine(angle), scale);
+            *(pd_destination = &background->pd) =
+                display_fixed_multiply((short)display_matrix_cosine(angle), scale);
             scaled = (short)background->pa * 120;
             reference = 0x7800;
             reference -= scaled;

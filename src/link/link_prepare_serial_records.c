@@ -18,8 +18,7 @@ static inline unsigned short serial_record_checksum(struct EventRecord *record)
     return -sum;
 }
 
-void link_prepare_serial_records(struct EventRecord *record,
-                                struct EventRecord *received)
+void link_prepare_serial_records(struct EventRecord *record, struct EventRecord *received)
 {
     int peer;
     register struct EventRecord *received_records asm("r6") = received;
@@ -38,8 +37,9 @@ void link_prepare_serial_records(struct EventRecord *record,
                 unsigned int byte_offset = (unsigned int)peer * sizeof(*received_records);
                 int next_peer = peer - 1;
                 const unsigned short *from = banks[peer]->storage.halfwords;
-                unsigned short *to = ((struct EventRecord *)
-                    ((unsigned int)received_records + byte_offset))->storage.halfwords;
+                unsigned short *to =
+                    ((struct EventRecord *)((unsigned int)received_records + byte_offset))
+                        ->storage.halfwords;
                 int remaining;
                 for (remaining = 5; remaining >= 0; --remaining)
                     *to++ = *from++;
@@ -68,4 +68,4 @@ void link_prepare_serial_records(struct EventRecord *record,
     g_link_flags &= ~0x40048u;
     g_link_flags |= 0x210;
 }
-asm(".align 2,0");
+asm(".align 2, 0");

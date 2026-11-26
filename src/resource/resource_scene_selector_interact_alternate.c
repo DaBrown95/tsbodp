@@ -12,7 +12,8 @@ struct ResourceSelectorCoordinates {
     unsigned short unknown1c;
     short y;
 };
-void resource_scene_selector_interact_alternate(struct FrameObject *base, struct FrameObject *target)
+void resource_scene_selector_interact_alternate(struct FrameObject *base,
+                                                struct FrameObject *target)
 {
     struct ResourceSceneSelector *object = (void *)base;
     struct ResourceSceneSelector *other = (void *)target;
@@ -31,8 +32,9 @@ void resource_scene_selector_interact_alternate(struct FrameObject *base, struct
         }
         if (is_player && facing) {
             struct ResourceSelectorCoordinates *coordinates = (void *)object;
-            resource_scene_selector_activate_player(g_frame_scene_active_actor,
-                coordinates->x, coordinates->y, (unsigned short)(object->oam.layer - 1));
+            resource_scene_selector_activate_player(g_frame_scene_active_actor, coordinates->x,
+                                                    coordinates->y,
+                                                    (unsigned short)(object->oam.layer - 1));
             object->countdown = 3;
             if (pressed) {
                 transition_object_set_state((struct FrameObject *)object, 18);

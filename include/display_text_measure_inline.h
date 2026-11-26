@@ -5,7 +5,8 @@
 static __inline int display_text_height_inline(const char *text)
 {
     int height = 0;
-    if (*text) height = g_display_fonts[0]->height;
+    if (*text)
+        height = g_display_fonts[0]->height;
     return height;
 }
 
@@ -23,7 +24,8 @@ static __inline int display_text_width_inline(const char *text)
             if (*(volatile const unsigned char *)cursor > 0xef) {
                 ++cursor;
                 font = g_display_fonts[1];
-            } else font = g_display_fonts[0];
+            } else
+                font = g_display_fonts[0];
             width += display_text_glyph_width(font, *cursor);
 #else
             /* Revision 1 passes both bytes of a two-byte character. */
@@ -31,7 +33,8 @@ static __inline int display_text_width_inline(const char *text)
             if (code > 0xef) {
                 code = (code << 8) | *++cursor;
                 font = g_display_fonts[1];
-            } else font = g_display_fonts[0];
+            } else
+                font = g_display_fonts[0];
             width += display_text_glyph_width(font, code);
 #endif
         }

@@ -54,10 +54,10 @@ unsigned int scene_contact_activity_three_raster_line_slot(unsigned int index)
         }
         if (LINE->origin.y == 0) {
             unsigned int shifted_position_x = (unsigned int)object->position.x + 4 * 65536u;
-            object->position.x = shifted_position_x +
-                (unsigned int)(remainder - 6) * (unsigned int)LINE->step.x;
+            object->position.x =
+                shifted_position_x + (unsigned int)(remainder - 6) * (unsigned int)LINE->step.x;
             object->position.y = (unsigned int)object->position.y +
-                (unsigned int)(remainder - 6) * (unsigned int)LINE->step.y;
+                                 (unsigned int)(remainder - 6) * (unsigned int)LINE->step.y;
         }
         ++LINE->count;
         object->next_position.word.x = object->position.x;

@@ -7,8 +7,8 @@ void transition_expand_horizontal(unsigned short targets)
 {
     short left = 120, right;
     register volatile unsigned short *window asm("r4");
-    register volatile unsigned short *window_register asm("r2")
-        = (volatile unsigned short *)0x04000048;
+    register volatile unsigned short *window_register asm("r2") =
+        (volatile unsigned short *)0x04000048;
 
     /* The cursor finishes before waiting; the window remains live across waits. */
     *window_register = 0;

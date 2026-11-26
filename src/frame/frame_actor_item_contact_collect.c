@@ -2,8 +2,7 @@
 
 #define STATE ((struct FrameActorItemState *)g_scene_contact_state)
 
-void frame_actor_item_contact_collect(struct CollisionObject *first,
-                                     struct CollisionObject *second)
+void frame_actor_item_contact_collect(struct CollisionObject *first, struct CollisionObject *second)
 {
     struct FrameObject *object = (struct FrameObject *)first;
     struct FrameObject *other = (struct FrameObject *)second;
@@ -18,10 +17,10 @@ void frame_actor_item_contact_collect(struct CollisionObject *first,
         if (STATE->collected_count == 100) {
             STATE->flags |= 1;
             scene_contact_add_activity_score(g_display_countdown.minute *
-                g_frame_actor_item_options[STATE->option].reward);
+                                             g_frame_actor_item_options[STATE->option].reward);
         }
         audio_play_animation_cue(182);
         frame_emit_actor_item_contact(other, 1);
     }
 }
-asm(".align 2,0");
+asm(".align 2, 0");

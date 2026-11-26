@@ -1,4 +1,4 @@
-"""A new callback must retain its declared Thumb mode without classifying data."""
+"""A new callback keeps its declared Thumb mode, and data symbols are not classified as functions."""
 import sys
 from pathlib import Path
 import unittest
