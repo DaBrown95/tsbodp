@@ -7,7 +7,11 @@ USA/Europe release (`rev0`) and its USA revision 1 (`rev1`).
 This is an **AI-driven experiment** to see what coding agents can do.
 Almost all code, analysis and tooling are AI-generated.
 
-## Progress
+## Status
+
+Both ROMs rebuild byte for byte. Every routine we have found has a matching
+source, apart from one in `rev0`, explained
+[below](#the-case-of-the-missing-store).
 
 | | `rev0` USA/Europe | `rev1` USA revision 1 |
 | --- | ---: | ---: |
@@ -16,23 +20,23 @@ Almost all code, analysis and tooling are AI-generated.
 | Known routines still without C | 1 (124 bytes) | none |
 | Whole ROM identical | yes | yes |
 
-Both builds also include 4,068 bytes of verified hardware glue and routines
-with evidence of assembly origin, counted separately from C. Function
-boundaries in the `rev0` [ROM map](assets/rev0/rom-inventory.json) are
-provisional, and it does not establish a complete game-code denominator.
-Both builds match the original ROMs, but most of each ROM is still copied from
-the original dump: graphics, sound, text and other data.
+Both builds also contain 4,068 bytes of assembly, counted separately from C:
+hardware glue and library routines that were written in assembly to begin
+with. Most of each ROM is data copied from the original dump: graphics, sound,
+text and tables.
 
-We also swept for code the map might have missed. Every byte of the main code
-area is now C, apart from the cartridge header and the routine below. The rest
-of the ROM contains no function endings beyond what random data would produce,
-and none of its pointer-like words is a plausible pointer into code we haven't
-mapped. Code reached only through pointers built at run time could still hide
-from a static check like this.
+Function names, types and boundaries are our inferences, not the original
+developers'. The `rev0` [ROM map](assets/rev0/rom-inventory.json) records the
+evidence behind them.
 
-`rev1` has C for every routine mapped in `rev0`, plus its own build of the
-audio master-volume routine. That routine (`0x08049968`) is the one gap in
-`rev0`; see below.
+We also looked for code the map might have missed, and a second, independent
+pass checked our work. In both ROMs every byte of the main code area is C or
+assembly, apart from the cartridge header, two data words and `rev0`'s
+master-volume routine. Every call lands on a known function, every jump into
+RAM lands in a known copy, and the data contains no function endings beyond
+what random bytes would produce. Code reached only through pointers built at
+run time could still hide from checks like these; only a trace of the running
+game could rule it out.
 
 ## The case of the missing store
 

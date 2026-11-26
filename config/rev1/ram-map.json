@@ -145,6 +145,13 @@
       "name": "audio_timer_irq"
     },
     {
+      "ram_address": 50335848,
+      "mode": "ARM",
+      "pointer_rom_offset": 313652,
+      "name": "audio_frame",
+      "evidence": "Same entry as revision 0: ROM call veneer or loaded function address"
+    },
+    {
       "ram_address": 50332396,
       "mode": "ARM",
       "pointer_rom_offset": 313656,
@@ -201,6 +208,13 @@
       "evidence": "Same entry as revision 0: ROM call veneer or loaded function address"
     },
     {
+      "ram_address": 50334704,
+      "mode": "ARM",
+      "pointer_rom_offset": 301748,
+      "name": "audio_set_shift",
+      "evidence": "Same entry as revision 0: ROM call veneer or loaded function address"
+    },
+    {
       "ram_address": 50338704,
       "mode": "ARM",
       "name": "irq_dispatcher",
@@ -251,6 +265,13 @@
       "mode": "ARM",
       "pointer_rom_offset": 237456,
       "evidence": "Same entry as revision 0: Matching installer 0x08039e78 publishes destination 0x03005e60 to callback word 0x03001fcc; source/destination/control literals establish the 228-byte copy. The first 216 bytes are matching C frame_transfer_map_tiles at its RAM link address; the following 12 ROM source bytes belong to matching C display_find_tile_run. View argument is narrowed to a byte; allowed indices remain unresolved."
+    },
+    {
+      "ram_address": 50333128,
+      "mode": "ARM",
+      "pointer_rom_offset": 306392,
+      "name": "audio_sample_active_ram",
+      "evidence": "Same entry as revision 0: the standalone instrument starter loads this ARM address and calls it through r7."
     }
   ],
   "limitations": [

@@ -43,9 +43,7 @@ the proportional scene counter, actor state 27 and menu scrolling text. Their
 eight current bindings to add/subtract/multiply all agree with these entries;
 the five accepted consumer extents total 2,372 bytes. This finite binding audit
 is not a complete runtime caller inventory. The remaining double-comparison
-wrappers are covered below. The [single-precision family and cross-precision
-conversions](RUNTIME_SINGLE_PRECISION.md) now have separate source ownership.
-The connected conversion subset is documented in [RUNTIME_CONVERSIONS.md](RUNTIME_CONVERSIONS.md).
+wrappers are covered below. The connected conversion subset is documented in [RUNTIME_CONVERSIONS.md](RUNTIME_CONVERSIONS.md).
 
 ## Types and ABI
 
